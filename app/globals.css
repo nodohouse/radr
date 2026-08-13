@@ -1,26 +1,331 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f3f0ea;
+  --bg-muted: #ebe7df;
+  --bg-elevated: #faf8f4;
+  --bone: #f3f0ea;
+  --ink: #121212;
+  --ink-muted: #6a6660;
+  --line: rgba(18, 18, 18, 0.12);
+  --signal: #00ff66;
+  --accent: #00ff66;
+  --accent-soft: rgba(0, 255, 102, 0.12);
+  --danger: #a33b1a;
+  --resolved: #1f6b4a;
+  --surface: #ffffff;
+  --surface-dark: #0c0c0c;
+  --ctl-muted: #7a756c;
+  --ctl-line: #2a2a2a;
+  --ctl-text: #f3f0ea;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.prep-display {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.font-800 {
+  font-weight: 800;
+}
+
+.prep-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.prep-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.prep-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.prep-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0.65rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 650;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.prep-btn-primary {
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.prep-btn-primary:hover {
+  background: #2a2a2a;
+}
+
+.prep-btn-secondary {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.prep-btn-secondary:hover {
+  background: var(--accent-soft);
+}
+
+.prep-btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink-muted);
+}
+
+.prep-btn-ghost:hover {
+  color: var(--ink);
+  border-color: rgba(18, 18, 18, 0.22);
+}
+
+.prep-btn-camera {
+  width: 100%;
+}
+
+.prep-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.prep-btn:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+.prep-empty {
+  padding: 2rem 1.5rem;
+}
+
+.prep-app {
+  display: grid;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+@media (min-width: 900px) {
+  .prep-app {
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+}
+
+.prep-nav-desktop {
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem 1.25rem;
+  border-right: 1px solid var(--line);
+  background: var(--bg-elevated);
+}
+
+@media (min-width: 900px) {
+  .prep-nav-desktop {
+    display: flex;
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+  }
+}
+
+.prep-nav-mobile {
+  position: fixed;
+  z-index: 40;
+  inset: auto 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.15rem;
+  padding: 0.4rem 0.4rem calc(0.4rem + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: var(--bg-elevated);
+}
+
+@media (min-width: 900px) {
+  .prep-nav-mobile {
+    display: none;
+  }
+}
+
+.prep-nav-link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+
+.prep-nav-link[data-active="true"] {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.prep-nav-mobile .prep-nav-link {
+  justify-content: center;
+  padding: 0.45rem 0.2rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+}
+
+.prep-main {
+  padding: 1.5rem 1.25rem 6rem;
+  max-width: 52rem;
+}
+
+@media (min-width: 900px) {
+  .prep-main {
+    padding: 2rem 2rem 3rem;
+  }
+}
+
+.prep-dropzone {
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+
+.prep-dropzone[data-active="true"] {
+  border-color: var(--signal);
+  background: var(--accent-soft);
+}
+
+.prep-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.prep-page-eyebrow {
+  margin: 0 0 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.prep-page-title {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.85rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.prep-page-desc {
+  margin: 0.55rem 0 0;
+  max-width: 36rem;
+  color: var(--ink-muted);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.prep-page-actions {
+  flex-shrink: 0;
+}
+
+.prep-source-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.prep-source-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.prep-status-live,
+.prep-status-building {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.prep-status-live {
+  color: var(--resolved);
+}
+
+.prep-status-building {
+  color: var(--ink-muted);
 }
