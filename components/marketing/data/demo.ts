@@ -1,3 +1,5 @@
+import { BRAND } from "../config/brand";
+
 /** ONE coherent demo operation — powers the entire homepage. */
 
 export const DEMO = {
@@ -6,6 +8,23 @@ export const DEMO = {
   periodLabel: "30 DAYS",
   final: 176_740,
   signalCount: 4,
+  /** Illustrative demo — never claim as live customer ROI */
+  illustrative: true,
+} as const;
+
+/**
+ * Transparent value methodology for the shared demo.
+ * Do not sum nightly / monthly / annual figures without labels.
+ */
+export const VALUE = {
+  annualizedExposure: 172_460,
+  recoverableNow: 4_280,
+  totalOnRadr: 176_740,
+  annualizedLabel: "Annualized exposure",
+  recoverableLabel: "Recoverable now",
+  totalLabel: "Value on RADR",
+  methodNote:
+    "Illustrative demo · annualized exposure + recoverable now = value on RADR",
 } as const;
 
 export type ChannelId = "buy" | "recover" | "labor" | "sell";
@@ -92,7 +111,7 @@ export const SIGNALS: readonly DemoSignal[] = [
     channelLabel: "LABOR",
     euros: 11_840,
     amount: "€11,840",
-    period: " / month",
+    period: " / year",
     title: "Scheduled above demand",
     tag: "Avoidable",
     action: "Review tonight's schedule →",
@@ -103,7 +122,7 @@ export const SIGNALS: readonly DemoSignal[] = [
       detail: "Staffing vs demand",
       should: { label: "Needed", value: "11" },
       actual: { label: "Scheduled", value: "14" },
-      unitDelta: "3 people · €840 / night",
+      unitDelta: "△ 3 · €840 / night",
     },
   },
   {
@@ -132,8 +151,7 @@ export const SIGNALS: readonly DemoSignal[] = [
 /** Cumulative totals after each signal (same order as SIGNALS) */
 export const RUNNING_TOTALS = SIGNALS.map((s) => s.runningTotal);
 
-export const RADR_MISSION =
-  "RADR watches your operation 24/7 and finds the money you're losing, missing or leaving behind.";
+export const RADR_MISSION = BRAND.mission;
 
 /** @deprecated use SIGNALS — kept as alias for gradual migration */
 export const HERO_SIGNALS = SIGNALS;

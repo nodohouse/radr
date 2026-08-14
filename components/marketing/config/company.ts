@@ -5,9 +5,10 @@
 export const COMPANY = {
   brandName: "RADR",
   slogan: "Nothing off the RADR.",
-  tagline: "Continuous margin intelligence.",
+  tagline: "Margin intelligence",
   beachhead: "Built first for hospitality.",
   category: "Margin intelligence",
+  vision: "Every complex operation on RADR.",
   domain: "radrup.com",
   siteUrl: "https://radrup.com",
   /** Public contact inbox — leave empty until live */

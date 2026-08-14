@@ -95,10 +95,13 @@ function ActionPanel() {
       <h3>Review supplier charge</h3>
       <p className="rx-delta-panel-meta">Evidence ready</p>
       <ul className="rx-delta-evidence">
-        <li>Contract</li>
-        <li>Invoice</li>
+        <li>Contract.pdf</li>
+        <li>Invoice #48291</li>
         <li>Purchase history</li>
+        <li>Supplier statement</li>
       </ul>
+      <p className="rx-delta-panel-meta">Assigned · Procurement Manager</p>
+      <p className="rx-delta-panel-meta">New → Assigned → In review</p>
       <p className="rx-delta-cta-line">Review finding →</p>
     </article>
   );

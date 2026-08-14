@@ -22,8 +22,9 @@ export function FeatureCompare() {
         <p className="prep-kicker">Compare</p>
         <h2 className="px-section-title">At a glance</h2>
         <div className="px-legend">
-          <span data-s="live">✓ Live / included</span>
-          <span data-s="building">Building</span>
+          <span data-s="live">Available now</span>
+          <span data-s="early">Early access</span>
+          <span data-s="next">Coming next</span>
           <span data-s="not">— Not included</span>
         </div>
 

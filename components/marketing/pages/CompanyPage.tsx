@@ -40,7 +40,7 @@ const BELIEFS = [
   },
   {
     n: "04",
-    title: "The system should get smarter.",
+    title: "Don't fix the same thing twice.",
     body: "Every resolution should become a control.",
   },
   {
@@ -59,36 +59,35 @@ export function CompanyPage() {
           <div className="rx-shell rx-page-hero-inner">
             <p className="rx-kicker">Company</p>
             <h1 className="rx-page-title">
-              The problem is
+              Too much money
               <br />
-              bigger than
+              disappears
               <br />
-              one industry.
+              between systems.
             </h1>
             <p className="rx-lead-inv rx-lead-short">
-              Complex businesses run across dozens of systems.
+              Complex operations run across dozens of systems, teams and
+              decisions.
               <br />
               <br />
-              Procurement knows one thing. Finance knows another. Operations,
-              labor and revenue each see a different piece.
+              Nobody sees all of it.
               <br />
               <br />
-              The money disappears between them.
+              RADR exists to watch the difference.
             </p>
           </div>
         </section>
 
         <section className="rx-co-section" data-nav-theme="dark">
           <div className="rx-shell">
-            <p className="rx-kicker">The difference</p>
+            <p className="rx-kicker">The gap</p>
             <h2 className="rx-display rx-display-sm">
-              RADR was built to
+              The money disappears
               <br />
-              watch the gap.
+              between systems.
             </h2>
             <p className="rx-lead-inv rx-lead-short">
-              RADR continuously compares what happened with what should have
-              happened — then finds the financial and operational delta.
+              RADR watches the gaps.
             </p>
             <ul className="rx-co-systems">
               {SYSTEMS.map((s) => (
@@ -146,9 +145,9 @@ export function CompanyPage() {
               noticing something looked wrong.
             </p>
             <p className="rx-lead-inv">
-              Now AI can continuously compare what happened with what should have
-              happened. RADR turns that into an always-on margin intelligence
-              layer.
+              Now software can continuously compare what happened with what
+              should have happened. RADR turns that into an always-on margin
+              intelligence layer.
             </p>
           </div>
         </section>

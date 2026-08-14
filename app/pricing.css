@@ -662,6 +662,8 @@
   color: #1f6b4a;
 }
 
+.px-legend [data-s="early"],
+.px-legend [data-s="next"],
 .px-legend [data-s="building"] {
   color: var(--v3-signal);
 }
@@ -741,6 +743,8 @@
   font-size: 1rem;
 }
 
+.px-cell[data-s="early"],
+.px-cell[data-s="next"],
 .px-cell[data-s="building"] {
   color: var(--v3-signal);
   text-transform: uppercase;

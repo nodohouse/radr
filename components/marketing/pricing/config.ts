@@ -34,7 +34,7 @@ export const pricingConfig = {
   billingLive: false,
 } as const;
 
-export type StatusTag = "live" | "building" | "not";
+export type StatusTag = "live" | "early" | "next" | "not";
 
 export type CompareRow = {
   feature: string;
@@ -43,18 +43,19 @@ export type CompareRow = {
   scale: StatusTag;
 };
 
-/** Short comparison — max ~10 rows. */
+/** Short comparison — honest availability. */
 export const compareRows: CompareRow[] = [
   { feature: "Locations", free: "live", control: "live", scale: "live" },
   { feature: "Evidence upload", free: "live", control: "live", scale: "live" },
   { feature: "Private storage", free: "live", control: "live", scale: "live" },
-  { feature: "Basic checks", free: "building", control: "building", scale: "building" },
-  { feature: "Cases / decisions", free: "not", control: "building", scale: "building" },
-  { feature: "Money owed tracking", free: "not", control: "building", scale: "building" },
-  { feature: "Procurement control", free: "not", control: "building", scale: "building" },
-  { feature: "Payout reconciliation", free: "not", control: "building", scale: "building" },
-  { feature: "Controls library", free: "not", control: "building", scale: "building" },
-  { feature: "Multi-location", free: "not", control: "not", scale: "building" },
+  { feature: "File ingestion", free: "live", control: "live", scale: "live" },
+  { feature: "Basic margin checks", free: "early", control: "early", scale: "early" },
+  { feature: "Cases / decisions", free: "not", control: "early", scale: "early" },
+  { feature: "Money owed tracking", free: "not", control: "early", scale: "early" },
+  { feature: "Procurement control", free: "not", control: "next", scale: "next" },
+  { feature: "Payout reconciliation", free: "not", control: "next", scale: "next" },
+  { feature: "Controls library", free: "not", control: "next", scale: "next" },
+  { feature: "Multi-location control room", free: "not", control: "not", scale: "next" },
 ];
 
 export const faqItems = [
@@ -71,8 +72,8 @@ export const faqItems = [
     a: "No. RADR flags mismatches for human review. It does not move money or contact suppliers without you.",
   },
   {
-    q: "Are delivery-platform checks live?",
-    a: "Building. Control will reconcile payouts from statements / uploads. Direct Uber Eats / Deliveroo APIs are not claimed today.",
+    q: "What is available now vs coming next?",
+    a: "Available now: document upload, private storage, organization isolation, and early margin checks. Cases, money-owed tracking, procurement control and payout reconciliation expand as Early Access / Coming Next — we do not sell unfinished capability as live.",
   },
   {
     q: "Can I use RADR across multiple locations?",
@@ -176,7 +177,8 @@ export function formatEuro(n: number): string {
 }
 
 export function statusLabel(s: StatusTag): string {
-  if (s === "live") return "✓";
-  if (s === "building") return "Building";
+  if (s === "live") return "Available now";
+  if (s === "early") return "Early access";
+  if (s === "next") return "Coming next";
   return "—";
 }

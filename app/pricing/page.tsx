@@ -33,7 +33,8 @@ export default function PricingPage() {
             on RADR.
           </h1>
           <p className="px-hero-lead">
-            RADR scales with the size and complexity of your operation.
+            Start with what RADR can monitor today. Expand coverage as you
+            connect more of the operation.
           </p>
           {free.noCardRequired ? (
             <p className="prep-tag">No credit card required.</p>

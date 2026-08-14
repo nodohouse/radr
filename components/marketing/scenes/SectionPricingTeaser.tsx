@@ -11,7 +11,8 @@ export function SectionPricingTeaser() {
           on RADR.
         </h2>
         <p className="rx-lead rx-lead-short">
-          See what RADR would find — then decide.
+          Start with what RADR can monitor today. Expand as you connect more of
+          the operation.
         </p>
         <div className="rx-ctas">
           <Link href="/pricing" className="rx-btn rx-btn-ink">

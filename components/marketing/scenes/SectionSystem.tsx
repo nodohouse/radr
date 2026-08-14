@@ -1,16 +1,13 @@
+import {
+  INGEST_CHANNELS,
+  PIPELINE,
+  STACK_SOURCES,
+} from "../config/architecture";
 import { RadrWordmark } from "../RadrWordmark";
 
-const nodes = [
-  "PMS",
-  "POS",
-  "Procurement",
-  "Workforce",
-  "Accounting",
-  "Payments",
-  "Delivery",
-  "Revenue",
-] as const;
-
+/**
+ * Architecture — don't replace your stack; put it on RADR.
+ */
 export function SectionSystem() {
   return (
     <section
@@ -22,10 +19,13 @@ export function SectionSystem() {
         <div>
           <p className="rx-kicker">Architecture</p>
           <h2 className="rx-display rx-display-sm">
-            Your stack.
+            Don&apos;t replace
             <br />
-            On RADR.
+            your stack.
           </h2>
+          <p className="rx-display rx-display-xs rx-system-sub">
+            Put it on RADR.
+          </p>
           <p className="rx-lead-inv rx-lead-short">
             RADR watches the economics between the systems you already run —
             then turns differences into verified value.
@@ -33,16 +33,33 @@ export function SectionSystem() {
         </div>
         <div className="rx-system-board">
           <ul>
-            {nodes.map((n) => (
+            {STACK_SOURCES.map((n) => (
               <li key={n}>{n}</li>
             ))}
           </ul>
           <div className="rx-system-hub">
             <RadrWordmark size="md" />
-            <p>Detect · Explain · Act · Learn · Verify</p>
+            <ol className="rx-system-pipe">
+              {PIPELINE.map((p) => (
+                <li key={p}>{p}</li>
+              ))}
+            </ol>
             <strong className="rx-system-hub-out">Verified value</strong>
           </div>
         </div>
+
+        <ul className="rx-system-ingest" aria-label="Ingestion status">
+          {INGEST_CHANNELS.filter((c) => c.status !== "PLANNED")
+            .concat(INGEST_CHANNELS.filter((c) => c.status === "PLANNED").slice(0, 2))
+            .map((c) => (
+              <li key={c.id}>
+                <strong>{c.title}</strong>
+                <em data-status={c.status.toLowerCase().replace(" ", "-")}>
+                  {c.status}
+                </em>
+              </li>
+            ))}
+        </ul>
       </div>
     </section>
   );

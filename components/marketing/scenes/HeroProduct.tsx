@@ -79,15 +79,13 @@ export function HeroProduct() {
           <MissionTypewriter className="rx-hero-type" />
           <div className="rx-ctas">
             <a href="#coverage" className="rx-btn rx-btn-primary">
-              Watch RADR find money <span aria-hidden="true">→</span>
+              See what RADR finds <span aria-hidden="true">→</span>
             </a>
-            <a href="/solutions" className="rx-btn rx-btn-ghost">
-              Solutions
+            <a href="/how" className="rx-btn rx-btn-ghost">
+              How it works
             </a>
           </div>
-          <p className="rx-hero-beachhead">
-            Built first for complex hospitality operations.
-          </p>
+          <p className="rx-hero-beachhead">Built first for hospitality.</p>
         </div>
 
         <aside
