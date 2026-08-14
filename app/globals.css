@@ -8,9 +8,9 @@
   --ink: #121212;
   --ink-muted: #6a6660;
   --line: rgba(18, 18, 18, 0.12);
-  --signal: #00ff66;
-  --accent: #00ff66;
-  --accent-soft: rgba(0, 255, 102, 0.12);
+  --signal: #00f56a;
+  --accent: #00f56a;
+  --accent-soft: rgba(0, 245, 106, 0.12);
   --danger: #a33b1a;
   --resolved: #1f6b4a;
   --surface: #ffffff;
@@ -37,10 +37,14 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: #050705;
   color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+body:has(.prep-app) {
+  background: var(--bg);
 }
 
 a {

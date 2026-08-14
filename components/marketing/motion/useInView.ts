@@ -10,21 +10,36 @@ type Options = {
 };
 
 export function useInView<T extends HTMLElement = HTMLDivElement>({
-  threshold = 0.35,
+  threshold = 0.28,
   once = true,
-  rootMargin = "0px",
+  rootMargin = "0px 0px -8% 0px",
 }: Options = {}) {
   const ref = useRef<T | null>(null);
   const reduced = usePrefersReducedMotion();
-  const [inView, setInView] = useState(reduced);
+  const [inView, setInView] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     if (reduced) {
       setInView(true);
       return;
     }
     const node = ref.current;
     if (!node) return;
+
+    // Fail-safe: if already in viewport on mount, fire immediately
+    const rect = node.getBoundingClientRect();
+    const vh = window.innerHeight || 1;
+    if (rect.top < vh * 0.85 && rect.bottom > vh * 0.1) {
+      setInView(true);
+      if (once) return;
+    }
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry) return;
@@ -39,7 +54,7 @@ export function useInView<T extends HTMLElement = HTMLDivElement>({
     );
     io.observe(node);
     return () => io.disconnect();
-  }, [reduced, once, threshold, rootMargin]);
+  }, [mounted, reduced, once, threshold, rootMargin]);
 
-  return { ref, inView, reduced };
+  return { ref, inView: reduced || inView, reduced, mounted };
 }

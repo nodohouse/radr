@@ -32,11 +32,9 @@ export function SignupForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div>
-        <label className="prep-label" htmlFor="name">
-          Name
-        </label>
+    <form onSubmit={onSubmit} className="rx-auth-form" noValidate>
+      <div className="rx-auth-field">
+        <label htmlFor="name">Name</label>
         <input
           id="name"
           name="name"
@@ -44,26 +42,20 @@ export function SignupForm() {
           autoComplete="name"
           required
           maxLength={80}
-          className="prep-input"
         />
       </div>
-      <div>
-        <label className="prep-label" htmlFor="email">
-          Email
-        </label>
+      <div className="rx-auth-field">
+        <label htmlFor="email">Work email</label>
         <input
           id="email"
           name="email"
           type="email"
           autoComplete="email"
           required
-          className="prep-input"
         />
       </div>
-      <div>
-        <label className="prep-label" htmlFor="password">
-          Password
-        </label>
+      <div className="rx-auth-field">
+        <label htmlFor="password">Password</label>
         <input
           id="password"
           name="password"
@@ -71,19 +63,20 @@ export function SignupForm() {
           autoComplete="new-password"
           required
           minLength={10}
-          className="prep-input"
         />
-        <p className="mt-1 text-xs text-[var(--ink-muted)]">At least 10 characters.</p>
+        <p className="rx-auth-hint">At least 10 characters.</p>
       </div>
-      {error ? <p className="text-sm text-[var(--danger)]">{error}</p> : null}
-      <button type="submit" className="prep-btn prep-btn-primary w-full" disabled={pending}>
-        {pending ? "Creating…" : "Create account"}
+      {error ? (
+        <p className="rx-auth-error" role="alert">
+          <strong>Signal not confirmed</strong>
+          {error}
+        </p>
+      ) : null}
+      <button type="submit" className="rx-auth-submit" disabled={pending}>
+        {pending ? "Creating…" : <>Create access <span aria-hidden="true">→</span></>}
       </button>
-      <p className="text-center text-sm text-[var(--ink-muted)]">
-        Already have an account?{" "}
-        <Link href="/login" className="underline underline-offset-2">
-          Log in
-        </Link>
+      <p className="rx-auth-foot">
+        Already have access? <Link href="/login">Sign in →</Link>
       </p>
     </form>
   );

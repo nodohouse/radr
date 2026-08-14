@@ -1,28 +1,29 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
-import { RadrLogo } from "@/components/marketing/RadrLogo";
+import { DeltaGlyph } from "@/components/marketing/primitives/DeltaGlyph";
+
+export const metadata: Metadata = {
+  title: "Signal lost",
+  description: "This page is off the RADR.",
+};
 
 export default function NotFound() {
   return (
     <div className="radr">
-      <SiteNav variant="pricing" />
-      <main className="radr-section">
-        <div className="radr-shell">
-          <p className="radr-kicker">404</p>
-          <RadrLogo size="md" as="p" />
-          <h1 className="radr-h2" style={{ marginTop: "1rem" }}>
-            Off the RADR.
-          </h1>
-          <p className="radr-lead">That page isn&apos;t here. The rest of RADR still is.</p>
-          <div className="radr-ctas">
-            <Link href="/" className="radr-btn radr-btn-primary">
-              Back home <span aria-hidden="true">→</span>
-            </Link>
-            <Link href="/pricing" className="radr-btn radr-btn-ghost-dark">
-              Pricing
-            </Link>
+      <SiteNav />
+      <main className="rx-404" data-nav-theme="dark">
+        <div className="rx-shell rx-404-inner">
+          <p className="rx-kicker">404</p>
+          <div className="rx-404-glyph" aria-hidden="true">
+            <DeltaGlyph size={88} living active />
           </div>
+          <h1 className="rx-404-title">Signal lost.</h1>
+          <p className="rx-404-lead">This page is off the RADR.</p>
+          <Link href="/" className="rx-btn rx-btn-primary">
+            Return home <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </main>
       <SiteFooter />

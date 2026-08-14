@@ -1,25 +1,27 @@
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
-import { HeroRadar } from "@/components/marketing/scenes/HeroRadar";
+import { HeroProduct } from "@/components/marketing/scenes/HeroProduct";
+import { SectionCoverage } from "@/components/marketing/scenes/SectionCoverage";
 import { SectionDelta } from "@/components/marketing/scenes/SectionDelta";
 import { SectionFinal } from "@/components/marketing/scenes/SectionFinal";
-import { SectionLoop } from "@/components/marketing/scenes/SectionLoop";
+import { SectionHow } from "@/components/marketing/scenes/SectionHow";
+import { SectionOutcome } from "@/components/marketing/scenes/SectionOutcome";
 import { SectionPricingTeaser } from "@/components/marketing/scenes/SectionPricingTeaser";
-import { SectionSignals } from "@/components/marketing/scenes/SectionSignals";
 import { SectionSystem } from "@/components/marketing/scenes/SectionSystem";
-import { SectionTerritories } from "@/components/marketing/scenes/SectionTerritories";
-import { SectionVerifiedValue } from "@/components/marketing/scenes/SectionVerifiedValue";
 
+/**
+ * One narrative, one dataset (€176,740 from 4 signals).
+ * Hero → △ → territories → how → outcome → systems → pricing → CTA
+ */
 export default function Home() {
   return (
     <div className="radr">
       <SiteNav />
-      <HeroRadar />
+      <HeroProduct />
       <SectionDelta />
-      <SectionTerritories />
-      <SectionSignals />
-      <SectionVerifiedValue />
-      <SectionLoop />
+      <SectionCoverage />
+      <SectionHow />
+      <SectionOutcome />
       <SectionSystem />
       <SectionPricingTeaser />
       <SectionFinal />

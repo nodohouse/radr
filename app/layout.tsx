@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import { IBM_Plex_Mono, Manrope, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import "./radr.css";
 
-const body = Space_Grotesk({
+const display = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const body = Source_Sans_3({
+  subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
@@ -17,34 +22,49 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const display = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "RADR — Nothing off the RADR.",
+  metadataBase: new URL("https://radrup.com"),
+  title: {
+    default: "RADR — Continuous Margin Intelligence",
+    template: "%s · RADR",
+  },
   description:
-    "RADR watches your operation 24/7 and finds the money you're losing, missing or leaving behind.",
+    "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality — designed for complex operations.",
   applicationName: "RADR",
+  authors: [{ name: "RADR" }],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://radrup.com",
+    siteName: "RADR",
+    title: "RADR — Continuous Margin Intelligence",
+    description:
+      "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RADR — Continuous Margin Intelligence",
+    description:
+      "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0a0a0b",
+  themeColor: "#070807",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${body.variable} ${mono.variable} ${display.variable}`}>
+      <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
         {children}
       </body>
     </html>

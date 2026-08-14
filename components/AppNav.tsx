@@ -27,7 +27,7 @@ export function AppNav() {
             <RadrLogo size="lg" />
           </Link>
           <p className="mt-2 text-xs uppercase tracking-[0.14em] text-[var(--ink-muted)]">
-            Margin intelligence.
+            Continuous margin intelligence.
           </p>
         </div>
         <nav className="flex flex-col gap-1" aria-label="Product">

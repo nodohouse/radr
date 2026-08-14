@@ -2,28 +2,20 @@ import Link from "next/link";
 
 export function SectionPricingTeaser() {
   return (
-    <section
-      className="radr-section radr-section-dark"
-      id="pricing-teaser"
-      data-nav-theme="dark"
-    >
-      <div className="radr-shell radr-pricing-teaser">
-        <p className="radr-cat">Pricing</p>
-        <h2 className="radr-h2">
+    <section className="rx-section rx-section-tight rx-light" id="pricing-teaser">
+      <div className="rx-shell" style={{ maxWidth: "36rem" }}>
+        <p className="rx-kicker rx-ink">Pricing</p>
+        <h2 className="rx-display rx-display-sm">
           Put your operation
           <br />
           on RADR.
         </h2>
-        <p className="radr-lead-inv">
-          Built for operators who want to know where the money is going — before
-          it&apos;s gone.
+        <p className="rx-lead rx-lead-short">
+          See what RADR would find — then decide.
         </p>
-        <div className="radr-ctas">
-          <Link href="/pricing" className="radr-btn radr-btn-primary">
-            View pricing{" "}
-            <span className="radr-btn-arrow" aria-hidden="true">
-              →
-            </span>
+        <div className="rx-ctas">
+          <Link href="/pricing" className="rx-btn rx-btn-ink">
+            View pricing <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

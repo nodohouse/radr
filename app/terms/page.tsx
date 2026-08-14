@@ -1,56 +1,135 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteFooter } from "@/components/marketing/SiteFooter";
-import { SiteNav } from "@/components/marketing/SiteNav";
+import {
+  LegalPageShell,
+  LegalPending,
+  LegalSection,
+} from "@/components/marketing/LegalPageShell";
+import {
+  COMPANY,
+  displayOrPending,
+  hasValue,
+  isLegalEntityComplete,
+} from "@/components/marketing/config/company";
+
+export const metadata: Metadata = {
+  title: "Terms of Use — RADR",
+  description:
+    "Website terms of use for radrup.com — illustrative demos, IP, liability limits, and contact.",
+};
 
 export default function TermsPage() {
+  const showDevWarn =
+    process.env.NODE_ENV === "development" && !isLegalEntityComplete();
+
   return (
-    <div>
-      <SiteNav />
-      <main className="site-wrap py-12 sm:py-16">
-        <p className="site-kicker">Legal</p>
-        <h1 className="site-editorial mt-3 text-4xl sm:text-5xl">Terms</h1>
-        <p className="mt-4 max-w-2xl text-[var(--ink-muted)]">
-          Placeholder terms page. Not a binding agreement. Legal entity details
-          and counsel review are required before this becomes enforceable.
+    <LegalPageShell
+      kicker="Legal / Terms"
+      title="Terms of Use"
+      lead="These are website-level terms for visiting radrup.com and related marketing pages. They are not a customer SaaS subscription agreement. Entity-specific clauses require counsel confirmation."
+      updated={COMPANY.termsUpdated || undefined}
+    >
+      {showDevWarn ? (
+        <LegalPending>
+          <strong>Development notice:</strong> governing-law and entity fields
+          in <code>company.ts</code> are incomplete.
+        </LegalPending>
+      ) : null}
+
+      <LegalSection title="1. Website use">
+        <p>
+          By using this website you agree to these terms. If you do not agree,
+          do not use the site.
         </p>
+        <p>
+          The site provides information about {COMPANY.brandName} — continuous
+          margin intelligence — and may link to product sign-in or signup flows.
+          Hospitality is the first market where we demonstrate the product.
+        </p>
+      </LegalSection>
 
-        <div className="mt-10 max-w-2xl space-y-6 text-sm leading-relaxed">
-          <section className="space-y-2">
-            <h2 className="text-lg font-semibold">Early access</h2>
-            <p className="text-[var(--ink-muted)]">
-              RADR is under active development. Creating an account does not
-              automatically create a paid subscription. Billing checkout is not
-              implemented yet.
-            </p>
-          </section>
+      <LegalSection title="2. Intellectual property">
+        <p>
+          The {COMPANY.brandName} name, wordmark, △ mark, copy, design, and
+          other site content are owned by the operating entity (or used under
+          license) and are protected by applicable IP laws. You may not copy,
+          scrape, or reuse branding or content for commercial purposes without
+          permission.
+        </p>
+      </LegalSection>
 
-          <section className="space-y-2">
-            <h2 className="text-lg font-semibold">Your responsibility</h2>
-            <p className="text-[var(--ink-muted)]">
-              RADR is designed to help restaurants review documents. Final
-              business decisions remain with the restaurant.
-            </p>
-          </section>
+      <LegalSection title="3. Information accuracy">
+        <p>
+          We aim to keep information accurate and current, but the site may
+          contain errors or outdated details. Features described may be in
+          development.
+        </p>
+      </LegalSection>
 
-          <section className="space-y-2 rounded-none border border-dashed border-[var(--warn)] bg-[#fff8f0] p-4">
-            <h2 className="text-lg font-semibold text-[var(--warn)]">
-              Missing factual / legal items
-            </h2>
-            <ul className="list-disc space-y-1 pl-5 text-[var(--ink-muted)]">
-              <li>Legal entity name and registered address — TODO</li>
-              <li>Governing law / venue — TODO</li>
-              <li>Limitation of liability language — TODO</li>
-              <li>Acceptable use / prohibited content — TODO</li>
-              <li>Service availability commitments — TODO</li>
-            </ul>
-          </section>
+      <LegalSection title="4. Demo and illustrative values">
+        <p>
+          Product demos, example findings, and monetary figures shown on the
+          marketing site (for example sample deltas and annual exposures) are{" "}
+          <strong>illustrative</strong>. They are not a promise of results for
+          your operation.
+        </p>
+      </LegalSection>
 
-          <Link href="/privacy" className="prep-btn prep-btn-ghost">
-            Privacy →
-          </Link>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
+      <LegalSection title="5. No financial guarantee">
+        <p>
+          {COMPANY.brandName} does not guarantee cost savings, recoveries, or
+          revenue outcomes. Business decisions remain yours.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="6. External links">
+        <p>
+          The site may link to third-party sites (including social profiles when
+          published). We are not responsible for third-party content or
+          practices.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="7. Liability">
+        <p>
+          To the fullest extent permitted by law, {COMPANY.brandName} and its
+          operators are not liable for indirect, incidental, or consequential
+          damages arising from use of this website. Nothing in these terms
+          excludes liability that cannot be excluded under applicable law.
+        </p>
+        <LegalPending>
+          Detailed limitation-of-liability language — pending counsel review.
+        </LegalPending>
+      </LegalSection>
+
+      <LegalSection title="8. Governing law">
+        <p>
+          Governing law: {displayOrPending(COMPANY.governingLaw)}.
+          <br />
+          Dispute venue: {displayOrPending(COMPANY.disputeVenue)}.
+        </p>
+        <LegalPending>
+          Governing law and venue — pending company / counsel confirmation.
+        </LegalPending>
+      </LegalSection>
+
+      <LegalSection title="9. Contact">
+        <p>
+          Questions about these terms:{" "}
+          {hasValue(COMPANY.email) ? (
+            <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+          ) : (
+            <>
+              <Link href="/contact">Contact</Link>
+            </>
+          )}
+          .
+        </p>
+        <p>
+          Related: <Link href="/privacy">Privacy Policy</Link> ·{" "}
+          <Link href="/imprint">Imprint</Link>
+        </p>
+      </LegalSection>
+    </LegalPageShell>
   );
 }

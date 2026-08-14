@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePrefersReducedMotion } from "./motion/usePrefersReducedMotion";
 
 export const RADR_MISSION =
@@ -11,42 +11,40 @@ type Props = {
   delay?: number;
   speed?: number;
   className?: string;
-  /** Soft looping typewriter (hero) */
   loop?: boolean;
-  onFirstComplete?: () => void;
+  holdMs?: number;
 };
 
-type Phase = "wait" | "type" | "hold" | "fade" | "gap";
-
+/**
+ * Full sentence always in sr-only (SEO + a11y).
+ * Visible line SSR-renders the complete sentence, then animates via mask/retype.
+ * Never hydrates as an empty cursor-only line.
+ */
 export function Typewriter({
   text = RADR_MISSION,
-  delay = 500,
-  speed = 27,
+  delay = 600,
+  speed = 26,
   className = "",
   loop = true,
-  onFirstComplete,
+  holdMs = 3500,
 }: Props) {
   const reduced = usePrefersReducedMotion();
-  const onFirstRef = useRef(onFirstComplete);
-  onFirstRef.current = onFirstComplete;
-  const firstDone = useRef(false);
-
-  const [shown, setShown] = useState(reduced ? text : "");
-  const [phase, setPhase] = useState<Phase>(reduced ? "hold" : "wait");
-  const [status, setStatus] = useState("ONLINE");
+  // SSR + first paint: full sentence visible
+  const [chars, setChars] = useState(text.length);
+  const [phase, setPhase] = useState<"type" | "hold" | "fade" | "gap">("hold");
+  const [armed, setArmed] = useState(false);
 
   useEffect(() => {
+    setArmed(true);
     if (reduced) {
-      if (!firstDone.current) {
-        firstDone.current = true;
-        onFirstRef.current?.();
-      }
+      setChars(text.length);
+      setPhase("hold");
       return;
     }
 
     let cancelled = false;
-    let timer: number | undefined;
-    let i = 0;
+    let timer = 0;
+    let i = text.length;
 
     const pauseAt = new Set([
       text.indexOf("24/7") + 4,
@@ -55,12 +53,8 @@ export function Typewriter({
       text.indexOf("missing") + 7,
     ]);
 
-    const clear = () => {
-      if (timer) window.clearTimeout(timer);
-    };
-
     const schedule = (fn: () => void, ms: number) => {
-      clear();
+      window.clearTimeout(timer);
       timer = window.setTimeout(() => {
         if (!cancelled) fn();
       }, ms);
@@ -68,65 +62,54 @@ export function Typewriter({
 
     const startType = () => {
       i = 0;
-      setShown("");
+      setChars(0);
       setPhase("type");
-      setStatus("ONLINE");
       step();
     };
 
     const step = () => {
       i += 1;
-      const next = text.slice(0, i);
-      setShown(next);
-
+      setChars(i);
       if (i >= text.length) {
         setPhase("hold");
-        setStatus("SCANNING");
-        if (!firstDone.current) {
-          firstDone.current = true;
-          onFirstRef.current?.();
-        }
         if (!loop) return;
         schedule(() => {
           setPhase("fade");
           schedule(() => {
-            setShown("");
             setPhase("gap");
-            schedule(startType, 800);
-          }, 420);
-        }, 3000);
+            schedule(startType, 700);
+          }, 480);
+        }, holdMs);
         return;
       }
-
       const pause = pauseAt.has(i) ? 140 : 0;
       schedule(step, speed + pause);
     };
 
+    // Hold the SSR full sentence briefly, then begin the live loop
     schedule(startType, delay);
 
     return () => {
       cancelled = true;
-      clear();
+      window.clearTimeout(timer);
     };
-  }, [delay, loop, reduced, speed, text]);
+  }, [delay, holdMs, loop, reduced, speed, text]);
+
+  const visible = phase === "fade" || phase === "gap" ? text : text.slice(0, chars);
+  const showCursor =
+    armed && !reduced && phase !== "fade" && phase !== "gap";
 
   return (
-    <div
-      className={`radr-type ${className}`.trim()}
-      data-phase={phase}
-    >
-      <p className="radr-type-label">
-        <span className="radr-type-dot" />
-        RADR / {status}
+    <div className={`rx-type ${className}`.trim()} data-phase={phase}>
+      <p className="sr-only">{text}</p>
+      <p className="rx-type-status" aria-hidden="true">
+        <span className="rx-live-dot" />
+        RADR / ONLINE
       </p>
-      <p className="radr-type-line" aria-live="polite">
-        <span className="radr-type-text">{shown}</span>
-        {phase !== "fade" && phase !== "gap" ? (
-          <span
-            className="radr-type-cursor"
-            data-blink={phase === "hold" ? "true" : "false"}
-            aria-hidden="true"
-          >
+      <p className="rx-type-line" aria-hidden="true">
+        <span className="rx-type-text">{visible}</span>
+        {showCursor ? (
+          <span className="rx-type-cursor" data-hold={phase === "hold"}>
             █
           </span>
         ) : null}

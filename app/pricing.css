@@ -214,7 +214,6 @@
 
 @media (min-width: 980px) {
   .px-tier[data-tier="control"] {
-    transform: scale(1.02);
     z-index: 1;
   }
 }

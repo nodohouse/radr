@@ -6,72 +6,76 @@ import { useEffect, useState } from "react";
 import { RadrWordmark } from "./RadrWordmark";
 
 const links = [
-  { href: "/#product", id: "product", label: "Product" },
-  { href: "/#how", id: "how", label: "How it works" },
-  { href: "/#coverage", id: "coverage", label: "Solutions" },
-  { href: "/pricing", id: "pricing", label: "Pricing" },
-  { href: "/security", id: "company", label: "Company" },
+  { href: "/#product", id: "product", label: "Product", match: "/" },
+  { href: "/how", id: "how", label: "How it works", match: "/how" },
+  { href: "/solutions", id: "solutions", label: "Solutions", match: "/solutions" },
+  { href: "/pricing", id: "pricing", label: "Pricing", match: "/pricing" },
+  { href: "/company", id: "company", label: "Company", match: "/company" },
 ] as const;
 
-type Props = {
-  variant?: "home" | "pricing";
-};
+type Props = { variant?: "home" | "pricing" };
 
 export function SiteNav({ variant }: Props) {
   const pathname = usePathname();
-  const isPricing = variant === "pricing" || pathname === "/pricing";
-  const isCompany = pathname === "/security";
-  const isMarketingSub = isPricing || isCompany;
+  const isHome = pathname === "/";
+
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">(
-    isMarketingSub ? "light" : "dark",
-  );
-  const [activeId, setActiveId] = useState(
-    isCompany ? "company" : isPricing ? "pricing" : "product",
-  );
+  const [scrolled, setScrolled] = useState(false);
+  const [activeId, setActiveId] = useState("product");
 
   useEffect(() => {
-    if (isCompany) {
-      setTheme("light");
+    let raf = 0;
+    const measure = () => {
+      raf = 0;
+      setScrolled(window.scrollY > 16);
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(measure);
+    };
+    measure();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      if (raf) window.cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (pathname.startsWith("/how")) {
+      setActiveId("how");
+      return;
+    }
+    if (pathname.startsWith("/solutions")) {
+      setActiveId("solutions");
+      return;
+    }
+    if (pathname.startsWith("/company") || pathname.startsWith("/security") || pathname.startsWith("/contact")) {
       setActiveId("company");
       return;
     }
-    if (isPricing) {
-      setTheme("light");
+    if (variant === "pricing" || pathname === "/pricing") {
       setActiveId("pricing");
       return;
     }
+
+    if (!isHome) {
+      setActiveId("product");
+      return;
+    }
+
     const ids = [
       "product",
-      "mission",
       "difference",
       "coverage",
-      "signals",
-      "group",
       "how",
+      "group",
       "system",
       "pricing-teaser",
     ];
     const nodes = ids
       .map((id) => document.getElementById(id))
       .filter((n): n is HTMLElement => Boolean(n));
-
-    const themeIo = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          const dark = e.target.getAttribute("data-nav-theme") === "dark";
-          const sectionDark =
-            e.target.classList.contains("radr-hero") ||
-            e.target.classList.contains("radr-section-dark") ||
-            e.target.classList.contains("radr-section-ink") ||
-            e.target.classList.contains("radr-mission") ||
-            e.target.classList.contains("radr-final");
-          setTheme(dark || sectionDark ? "dark" : "light");
-        }
-      },
-      { rootMargin: "-40% 0px -50% 0px", threshold: 0.01 },
-    );
 
     const activeIo = new IntersectionObserver(
       (entries) => {
@@ -82,73 +86,61 @@ export function SiteNav({ variant }: Props) {
         }
         const id = best?.target.id;
         if (!id) return;
-        if (
-          id === "product" ||
-          id === "mission" ||
-          id === "difference" ||
-          id === "signals"
-        ) {
-          setActiveId("product");
-        } else if (id === "how" || id === "system") {
-          setActiveId("how");
-        } else if (id === "coverage" || id === "group") {
-          setActiveId("coverage");
-        } else if (id === "pricing-teaser") {
-          setActiveId("pricing");
-        }
+        if (id === "product" || id === "difference") setActiveId("product");
+        else if (id === "how") setActiveId("how");
+        else if (id === "coverage" || id === "group" || id === "system") {
+          setActiveId("solutions");
+        } else if (id === "pricing-teaser") setActiveId("pricing");
       },
-      { rootMargin: "-25% 0px -55% 0px", threshold: [0.15] },
+      { rootMargin: "-28% 0px -55% 0px", threshold: [0.12] },
     );
 
-    document
-      .querySelectorAll(
-        "[data-nav-theme], .radr-hero, .radr-section-dark, .radr-section-ink, .radr-final, .radr-section, .radr-mission",
-      )
-      .forEach((n) => themeIo.observe(n));
     nodes.forEach((n) => activeIo.observe(n));
+    return () => activeIo.disconnect();
+  }, [pathname, variant, isHome]);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
-      themeIo.disconnect();
-      activeIo.disconnect();
+      document.body.style.overflow = "";
     };
-  }, [isCompany, isPricing]);
+  }, [open]);
 
   return (
-    <header className="radr-nav" data-theme={theme}>
-      <div className="radr-nav-inner">
-        <Link href="/" aria-label="RADR home" className="radr-nav-brand">
+    <header
+      className="rx-nav"
+      data-theme="dark"
+      data-scrolled={scrolled ? "true" : "false"}
+    >
+      <div className="rx-nav-bar">
+        <Link href="/" className="rx-nav-brand" aria-label="RADR home">
           <RadrWordmark size="nav" />
         </Link>
-        <nav className="radr-nav-links" aria-label="Primary">
-          {links.map((link) => (
+        <nav className="rx-nav-center" aria-label="Primary">
+          {links.map((l) => (
             <Link
-              key={link.href}
-              href={link.href}
-              className="radr-nav-link"
-              data-active={activeId === link.id ? "true" : "false"}
+              key={l.href}
+              href={l.href}
+              className="rx-nav-link"
+              data-active={activeId === l.id ? "true" : "false"}
               onClick={() => setOpen(false)}
             >
-              {link.label}
+              {l.label}
             </Link>
           ))}
         </nav>
-        <div className="radr-nav-actions">
-          <Link href="/login" className="radr-nav-login">
+        <div className="rx-nav-right">
+          <Link href="/login" className="rx-nav-signin">
             Sign in
           </Link>
-          <Link href="/signup" className="radr-nav-cta">
-            See RADR{" "}
-            <span className="radr-nav-cta-arrow" aria-hidden="true">
-              →
-            </span>
-            <span className="radr-nav-cta-delta" aria-hidden="true">
-              △
-            </span>
+          <Link href="/signup" className="rx-nav-cta">
+            See RADR <span aria-hidden="true">→</span>
           </Link>
           <button
             type="button"
-            className="radr-nav-menu"
+            className="rx-nav-menu"
             aria-expanded={open}
-            aria-controls="radr-mobile-nav"
+            aria-controls="rx-drawer"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? "Close" : "Menu"}
@@ -156,13 +148,14 @@ export function SiteNav({ variant }: Props) {
         </div>
       </div>
       <div
-        id="radr-mobile-nav"
-        className="radr-nav-drawer"
+        id="rx-drawer"
+        className="rx-nav-drawer"
+        hidden={!open}
         data-open={open ? "true" : "false"}
       >
-        {links.map((link) => (
-          <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
-            {link.label}
+        {links.map((l) => (
+          <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
+            {l.label}
           </Link>
         ))}
         <Link href="/login" onClick={() => setOpen(false)}>

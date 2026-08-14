@@ -7,48 +7,55 @@ import { usePrefersReducedMotion } from "./motion/usePrefersReducedMotion";
 export type RadarFinding = {
   id: string;
   amount: string;
+  euros: number;
   title: string;
   tag?: string;
   x: number;
   y: number;
 };
 
-const DEMO: RadarFinding[] = [
+export const HERO_DEMO_FINDINGS: RadarFinding[] = [
   {
     id: "1",
     amount: "€18,620",
+    euros: 18_620,
     title: "Supplier credit never received",
     tag: "Recoverable",
-    x: 66,
-    y: 34,
+    x: 68,
+    y: 32,
   },
   {
     id: "2",
     amount: "€4,280",
+    euros: 4_280,
     title: "Duplicate invoice",
     tag: "Overpaid",
-    x: 30,
-    y: 56,
+    x: 28,
+    y: 58,
   },
   {
     id: "3",
     amount: "€142k / yr",
+    euros: 142_000,
     title: "Pricing opportunity",
     tag: "Missed revenue",
-    x: 72,
-    y: 64,
+    x: 74,
+    y: 66,
   },
   {
     id: "4",
     amount: "€11,840 / mo",
+    euros: 11_840,
     title: "Labor above demand",
     tag: "Avoidable",
-    x: 28,
-    y: 28,
+    x: 30,
+    y: 26,
   },
 ];
 
-type Phase = "ping" | "delta" | "value" | "hold" | "fade";
+export const HERO_TOTAL_STEPS = [18_620, 22_900, 164_900, 176_740] as const;
+
+type Phase = "ping" | "delta" | "value" | "detail" | "hold" | "fade";
 
 type Active = {
   finding: RadarFinding;
@@ -56,34 +63,31 @@ type Active = {
   key: number;
 };
 
-type Ghost = {
-  id: string;
-  x: number;
-  y: number;
-  stamp: number;
-};
+type Ghost = { id: string; x: number; y: number; stamp: number };
 
 type Props = {
   findings?: RadarFinding[];
   status?: string;
   className?: string;
   locked?: RadarFinding | null;
-  /** Delay first money ping until typewriter / choreography is ready */
   armSignals?: boolean;
+  onDetect?: (finding: RadarFinding, index: number) => void;
 };
 
 export function Radar({
-  findings = DEMO,
+  findings = HERO_DEMO_FINDINGS,
   status = "Scanning 24/7",
   className = "",
   locked = null,
   armSignals = true,
+  onDetect,
 }: Props) {
   const reduced = usePrefersReducedMotion();
   const [active, setActive] = useState<Active[]>([]);
   const [ghosts, setGhosts] = useState<Ghost[]>([]);
-  const [cycle, setCycle] = useState(0);
   const stampRef = useRef(0);
+  const onDetectRef = useRef(onDetect);
+  onDetectRef.current = onDetect;
 
   useEffect(() => {
     if (locked) {
@@ -100,6 +104,7 @@ export function Radar({
           key: i,
         })),
       );
+      findings.forEach((f, i) => onDetectRef.current?.(f, i));
       return;
     }
 
@@ -115,24 +120,22 @@ export function Radar({
     const run = () => {
       if (cancelled) return;
       const finding = findings[i % findings.length]!;
+      const detectIndex = i % findings.length;
       stampRef.current += 1;
       const key = stampRef.current;
-      setCycle((c) => c + 1);
 
       setActive((prev) => {
         const aging = prev.map((a) => ({ ...a, phase: "fade" as Phase }));
-        const kept = aging.slice(-1);
-        return [...kept, { finding, phase: "ping" as Phase, key }];
+        return [...aging.slice(-1), { finding, phase: "ping" as Phase, key }];
       });
       setGhosts((g) => {
-        const stamped: Ghost = {
+        const stamped = {
           id: finding.id,
           x: finding.x,
           y: finding.y,
           stamp: key,
         };
-        // One ghost per finding id — avoids duplicate React keys on cycle
-        return [...g.filter((x) => x.id !== finding.id), stamped].slice(-6);
+        return [...g.filter((x) => x.id !== finding.id), stamped].slice(-5);
       });
 
       timers.push(
@@ -143,17 +146,28 @@ export function Radar({
                 a.key === key ? { ...a, phase: "delta" } : a,
               ),
             );
-        }, 220),
+        }, 180),
+      );
+      timers.push(
+        window.setTimeout(() => {
+          if (cancelled) return;
+          setActive((prev) =>
+            prev.map((a) =>
+              a.key === key ? { ...a, phase: "value" } : a,
+            ),
+          );
+          onDetectRef.current?.(finding, detectIndex);
+        }, 380),
       );
       timers.push(
         window.setTimeout(() => {
           if (!cancelled)
             setActive((prev) =>
               prev.map((a) =>
-                a.key === key ? { ...a, phase: "value" } : a,
+                a.key === key ? { ...a, phase: "detail" } : a,
               ),
             );
-        }, 420),
+        }, 560),
       );
       timers.push(
         window.setTimeout(() => {
@@ -163,20 +177,18 @@ export function Radar({
                 a.key === key ? { ...a, phase: "hold" } : a,
               ),
             );
-        }, 700),
+        }, 780),
       );
       timers.push(
         window.setTimeout(() => {
           if (cancelled) return;
           i += 1;
           run();
-        }, 2800),
+        }, 3200),
       );
     };
 
-    // First money ping ~0.6s after arm — visitor must see money immediately
-    timers.push(window.setTimeout(run, 600));
-
+    timers.push(window.setTimeout(run, 400));
     return () => {
       cancelled = true;
       timers.forEach((t) => window.clearTimeout(t));
@@ -184,32 +196,29 @@ export function Radar({
   }, [findings, locked, reduced, armSignals]);
 
   return (
-    <div
-      className={`radr-radar ${className}`.trim()}
-      aria-hidden="true"
-      data-cycle={cycle}
-    >
-      <div className="radr-radar-stage">
-        <svg className="radr-radar-geo" viewBox="0 0 200 200">
-          <circle cx="100" cy="100" r="28" />
-          <circle cx="100" cy="100" r="52" />
-          <circle cx="100" cy="100" r="76" />
-          <circle cx="100" cy="100" r="96" />
-          <line x1="100" y1="2" x2="100" y2="198" />
-          <line x1="2" y1="100" x2="198" y2="100" />
-          <line x1="28" y1="28" x2="172" y2="172" />
-          <line x1="172" y1="28" x2="28" y2="172" />
-          <circle cx="100" cy="100" r="2" className="radr-radar-origin" />
+    <div className={`rx-radar ${className}`.trim()} aria-hidden="true">
+      <div className="rx-radar-stage">
+        <svg className="rx-radar-geo" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="32" />
+          <circle cx="100" cy="100" r="58" />
+          <circle cx="100" cy="100" r="84" />
+          <circle cx="100" cy="100" r="98" />
+          <line x1="100" y1="4" x2="100" y2="196" />
+          <line x1="4" y1="100" x2="196" y2="100" />
+          {/* sparse tick marks */}
+          <line x1="100" y1="14" x2="100" y2="20" />
+          <line x1="100" y1="180" x2="100" y2="186" />
+          <line x1="14" y1="100" x2="20" y2="100" />
+          <line x1="180" y1="100" x2="186" y2="100" />
+          <circle cx="100" cy="100" r="1.6" className="rx-radar-origin" />
         </svg>
-
-        <div className="radr-radar-sweep" />
-
-        <p className="radr-radar-status">{status}</p>
+        <div className="rx-radar-sweep" />
+        <p className="rx-radar-status">{status}</p>
 
         {ghosts.map((g) => (
           <i
             key={g.stamp}
-            className="radr-radar-ghost"
+            className="rx-radar-ghost"
             style={{ left: `${g.x}%`, top: `${g.y}%` }}
           />
         ))}
@@ -217,19 +226,19 @@ export function Radar({
         {active.map(({ finding, phase, key }) => (
           <div
             key={key}
-            className="radr-radar-signal"
+            className="rx-radar-signal"
             data-phase={phase}
             style={{ left: `${finding.x}%`, top: `${finding.y}%` }}
           >
-            <i className="radr-radar-ping" />
-            <div className="radr-radar-callout">
-              <span className="radr-radar-tri">
+            <i className="rx-radar-ping" />
+            <div className="rx-radar-callout">
+              <span className="rx-radar-tri">
                 <DeltaOutline />
               </span>
-              <span className="radr-radar-amt radr-money">{finding.amount}</span>
-              <span className="radr-radar-title">{finding.title}</span>
+              <span className="rx-radar-amt">{finding.amount}</span>
+              <span className="rx-radar-title">{finding.title}</span>
               {finding.tag ? (
-                <span className="radr-radar-tag">{finding.tag}</span>
+                <span className="rx-radar-tag">{finding.tag}</span>
               ) : null}
             </div>
           </div>

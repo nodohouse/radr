@@ -11,11 +11,12 @@ export function ResetPasswordForm() {
   const token = searchParams.get("token") ?? "";
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [showPw, setShowPw] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!token) {
-      setError("Missing reset token");
+      setError("This reset link is missing or expired.");
       return;
     }
     setPending(true);
@@ -39,29 +40,50 @@ export function ResetPasswordForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div>
-        <label className="prep-label" htmlFor="password">
-          New password
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autoComplete="new-password"
-          required
-          minLength={10}
-          className="prep-input"
-        />
+    <form onSubmit={onSubmit} className="rx-auth-form" noValidate>
+      {!token ? (
+        <p className="rx-auth-error" role="alert">
+          <strong>Signal expired</strong>
+          This reset link is missing or no longer valid.
+        </p>
+      ) : null}
+      <div className="rx-auth-field">
+        <label htmlFor="password">New password</label>
+        <div className="rx-auth-pw">
+          <input
+            id="password"
+            name="password"
+            type={showPw ? "text" : "password"}
+            autoComplete="new-password"
+            required
+            minLength={10}
+            placeholder="At least 10 characters"
+          />
+          <button
+            type="button"
+            className="rx-auth-pw-toggle"
+            onClick={() => setShowPw((v) => !v)}
+            aria-label={showPw ? "Hide password" : "Show password"}
+          >
+            {showPw ? "Hide" : "Show"}
+          </button>
+        </div>
       </div>
-      {error ? <p className="text-sm text-[var(--danger)]">{error}</p> : null}
-      <button type="submit" className="prep-btn prep-btn-primary w-full" disabled={pending || !token}>
-        {pending ? "Saving…" : "Update password"}
+      {error ? (
+        <p className="rx-auth-error" role="alert">
+          <strong>Signal not confirmed</strong>
+          {error}
+        </p>
+      ) : null}
+      <button
+        type="submit"
+        className="rx-auth-submit"
+        disabled={pending || !token}
+      >
+        {pending ? "Saving…" : <>Update password <span aria-hidden="true">→</span></>}
       </button>
-      <p className="text-center text-sm text-[var(--ink-muted)]">
-        <Link href="/login" className="underline underline-offset-2">
-          Back to login
-        </Link>
+      <p className="rx-auth-foot">
+        <Link href="/login">Back to sign in →</Link>
       </p>
     </form>
   );

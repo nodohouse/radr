@@ -32,44 +32,43 @@ export function ForgotPasswordForm() {
 
   if (done) {
     return (
-      <div className="space-y-3 text-sm leading-relaxed text-[var(--ink-muted)]">
+      <div className="rx-auth-confirm">
+        <p className="rx-auth-confirm-kicker">Reset signal sent</p>
+        <h2>Check your inbox.</h2>
         <p>
           If an account exists for that email, a reset link has been issued.
         </p>
-        <p>
-          In local development without an email provider, check the server
-          console for the reset URL.
-        </p>
-        <Link href="/login" className="underline underline-offset-2">
-          Back to login
+        <Link href="/login" className="rx-auth-inline">
+          Back to sign in →
         </Link>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div>
-        <label className="prep-label" htmlFor="email">
-          Email
-        </label>
+    <form onSubmit={onSubmit} className="rx-auth-form" noValidate>
+      <div className="rx-auth-field">
+        <label htmlFor="email">Work email</label>
         <input
           id="email"
           name="email"
           type="email"
           autoComplete="email"
           required
-          className="prep-input"
+          placeholder="you@company.com"
         />
       </div>
-      {error ? <p className="text-sm text-[var(--danger)]">{error}</p> : null}
-      <button type="submit" className="prep-btn prep-btn-primary w-full" disabled={pending}>
-        {pending ? "Sending…" : "Send reset link"}
+      {error ? (
+        <p className="rx-auth-error" role="alert">
+          <strong>Signal not confirmed</strong>
+          {error}
+        </p>
+      ) : null}
+      <button type="submit" className="rx-auth-submit" disabled={pending}>
+        {pending ? "Sending…" : <>Send reset link <span aria-hidden="true">→</span></>}
       </button>
-      <p className="text-center text-sm text-[var(--ink-muted)]">
-        <Link href="/login" className="underline underline-offset-2">
-          Back to login
-        </Link>
+      <p className="rx-auth-foot">
+        <Link href="/login">Back to sign in →</Link>
       </p>
     </form>
   );

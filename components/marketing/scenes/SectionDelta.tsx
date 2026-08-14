@@ -1,151 +1,364 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { DeltaOutline } from "../DeltaOutline";
-import { useInView } from "../motion/useInView";
+import { signalByChannel } from "../data/demo";
+import { useReducedMotionSafe } from "../motion/useReducedMotionSafe";
+import { useScrollStage } from "../motion/useScrollStage";
+import { DeltaGlyph } from "../primitives/DeltaGlyph";
 
-const FINDS = [
-  { label: "€84", at: 0.12 },
-  { label: "€420", at: 0.28 },
-  { label: "€1,240", at: 0.48 },
-  { label: "€18,620", at: 0.68 },
-  { label: "€142k", at: 0.86 },
-] as const;
+const STAGE_COUNT = 8;
+const STORY_VH = 200;
 
-const TOTALS = [84, 504, 1744, 20364, 162364, 4_200_000] as const;
+type Buy = ReturnType<typeof signalByChannel>;
 
-function formatEuro(n: number) {
-  if (n >= 1_000_000) return `€${(n / 1_000_000).toFixed(1)}M`;
-  return `€${n.toLocaleString("en-IE")}`;
+function DetectBlock({
+  buy,
+  showCompare,
+  showUnit,
+  showAnnual,
+  ping,
+}: {
+  buy: Buy;
+  showCompare: boolean;
+  showUnit: boolean;
+  showAnnual: boolean;
+  ping: boolean;
+}) {
+  return (
+    <>
+      <div className="rx-delta-compare" data-on={showCompare ? "true" : "false"}>
+        <div className="rx-delta-src" data-on={showCompare ? "true" : "false"}>
+          <span>Contract price</span>
+          <strong className="rx-money">{buy.source.should.value}</strong>
+        </div>
+        <div
+          className="rx-delta-bridge"
+          data-on={showUnit ? "true" : "false"}
+          data-ping={ping ? "true" : "false"}
+        >
+          <i />
+        </div>
+        <div
+          className="rx-delta-src"
+          data-on={showCompare ? "true" : "false"}
+          data-flag={showUnit ? "true" : "false"}
+        >
+          <span>Invoice price</span>
+          <strong className="rx-money">{buy.source.actual.value}</strong>
+        </div>
+      </div>
+      <p className="rx-delta-unit" data-on={showUnit ? "true" : "false"}>
+        <span className="rx-tri">△</span>{" "}
+        <strong className="rx-money">{buy.source.unitDelta}</strong>
+      </p>
+      <p className="rx-delta-annual" data-on={showAnnual ? "true" : "false"}>
+        <span className="rx-tri">△</span>{" "}
+        <strong className="rx-money">
+          {buy.amount}
+          {buy.period}
+        </strong>
+      </p>
+    </>
+  );
 }
 
+function FindingPanel({ buy }: { buy: Buy }) {
+  return (
+    <article className="rx-delta-panel">
+      <header>
+        <span>RADR / Finding 001</span>
+        <span>Status · Actionable</span>
+      </header>
+      <h3>{buy.title}</h3>
+      <p>
+        You paid {buy.source.actual.value}. Your contract says{" "}
+        {buy.source.should.value}.
+      </p>
+      <p className="rx-delta-panel-unit">
+        <span className="rx-tri">△</span> {buy.source.unitDelta}
+      </p>
+      <div className="rx-delta-panel-row">
+        <em>Annual exposure</em>
+        <strong className="rx-money">{buy.amount}</strong>
+      </div>
+    </article>
+  );
+}
+
+function ActionPanel() {
+  return (
+    <article className="rx-delta-panel">
+      <header>
+        <span>Recommended action</span>
+        <span>ACT</span>
+      </header>
+      <h3>Review supplier charge</h3>
+      <p className="rx-delta-panel-meta">Evidence ready</p>
+      <ul className="rx-delta-evidence">
+        <li>Contract</li>
+        <li>Invoice</li>
+        <li>Purchase history</li>
+      </ul>
+      <p className="rx-delta-cta-line">Review finding →</p>
+    </article>
+  );
+}
+
+function ControlPanel() {
+  return (
+    <article className="rx-delta-panel">
+      <header>
+        <span>Action taken</span>
+        <span>LEARN</span>
+      </header>
+      <p className="rx-delta-panel-meta">Supplier contacted.</p>
+      <p className="rx-delta-panel-meta">Pricing corrected.</p>
+      <div className="rx-delta-control">
+        <em>Control created</em>
+        <strong>
+          Invoice price
+          <br />
+          must match
+          <br />
+          contract price
+        </strong>
+        <p>RADR will flag the next mismatch automatically.</p>
+      </div>
+    </article>
+  );
+}
+
+function VerifyBlock({ buy }: { buy: Buy }) {
+  return (
+    <>
+      <article className="rx-delta-panel rx-delta-panel--verified">
+        <header>
+          <span>Recovery</span>
+          <span>✓ VERIFIED</span>
+        </header>
+        <div className="rx-delta-compare rx-delta-compare--verify">
+          <div className="rx-delta-src" data-on="true">
+            <span>Expected recovery</span>
+            <strong className="rx-money">{buy.amount}</strong>
+          </div>
+          <div className="rx-delta-src" data-on="true" data-flag="true">
+            <span>Recovered</span>
+            <strong className="rx-money">{buy.amount}</strong>
+          </div>
+        </div>
+        <p className="rx-delta-verified-mark">✓ Verified value</p>
+        <p className="rx-delta-annual" data-on="true">
+          <strong className="rx-money">{buy.amount}</strong>
+        </p>
+        <p className="rx-delta-panel-meta">Added to RADR total.</p>
+      </article>
+      <div className="rx-delta-close">
+        <p className="rx-kicker">The RADR loop</p>
+        <h3>
+          Find it.
+          <br />
+          Fix it.
+          <br />
+          Keep it fixed.
+        </h3>
+        <p className="rx-delta-close-lines">
+          RADR finds the gap.
+          <br />
+          Shows you what it&apos;s worth.
+          <br />
+          And what to do next.
+        </p>
+        <p className="rx-delta-close-lines">And checks that it got fixed.</p>
+      </div>
+    </>
+  );
+}
+
+function Carry({ buy, on }: { buy: Buy; on: boolean }) {
+  return (
+    <a
+      href="/solutions#sol-buy"
+      className="rx-delta-carry"
+      data-on={on ? "true" : "false"}
+    >
+      <span className="rx-delta-carry-meta">Signal 01 · BUY · continues</span>
+      <span className="rx-delta-carry-amt">
+        <span className="rx-tri">△</span> {buy.amount}
+        {buy.period}
+      </span>
+      <span className="rx-delta-carry-go">Open finding →</span>
+    </a>
+  );
+}
+
+/**
+ * △ instrument — detect → explain → act → learn → verify.
+ * Sticky scroll on desktop; linear stack on mobile. Same visual language.
+ */
 export function SectionDelta() {
-  const { ref, inView, reduced } = useInView<HTMLElement>({ threshold: 0.25 });
-  const [demo, setDemo] = useState(0);
-  const [findIdx, setFindIdx] = useState(-1);
-  const [totalIdx, setTotalIdx] = useState(0);
-  const [verified, setVerified] = useState(false);
+  const buy = signalByChannel("buy");
+  const reduced = useReducedMotionSafe();
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
-    if (!inView) return;
-    if (reduced) {
-      setDemo(3);
-      setFindIdx(FINDS.length - 1);
-      setTotalIdx(TOTALS.length - 1);
-      setVerified(true);
-      return;
-    }
-    setDemo(0);
-    setFindIdx(-1);
-    setTotalIdx(0);
-    setVerified(false);
+    const mq = window.matchMedia("(max-width: 900px)");
+    const u = () => setMobile(mq.matches);
+    u();
+    mq.addEventListener("change", u);
+    return () => mq.removeEventListener("change", u);
+  }, []);
 
-    const timers = [
-      window.setTimeout(() => setDemo(1), 500),
-      window.setTimeout(() => setDemo(2), 1200),
-      window.setTimeout(() => setDemo(3), 1900),
-    ];
+  const desktop = !mobile && !reduced;
+  const { rootRef, index } = useScrollStage(STAGE_COUNT, desktop);
+  const scene = desktop ? index : 0;
 
-    FINDS.forEach((f, i) => {
-      timers.push(
-        window.setTimeout(() => {
-          setFindIdx(i);
-          setTotalIdx(i);
-        }, 2800 + f.at * 3200),
-      );
-    });
+  const label =
+    scene >= 7
+      ? "Delta / Verified"
+      : scene >= 6
+        ? "Delta / Learning"
+        : scene >= 5
+          ? "Delta / Action"
+          : scene >= 4
+            ? "Delta / Finding"
+            : "Delta / Active";
 
-    timers.push(
-      window.setTimeout(() => {
-        setTotalIdx(TOTALS.length - 1);
-        setVerified(true);
-      }, 7200),
+  const compact = desktop && scene >= 4;
+
+  if (!desktop) {
+    return (
+      <section className="rx-delta-inst" id="difference" data-nav-theme="dark">
+        <div className="rx-delta-atm" aria-hidden="true">
+          <div className="rx-delta-grid" />
+          <div className="rx-delta-arcs" />
+        </div>
+        <div className="rx-shell rx-delta-inst-inner">
+          <p className="rx-delta-label" data-on="true">
+            <span className="rx-live-dot" /> Delta / Active
+          </p>
+          <h2 className="rx-delta-title" data-on="true">
+            △ is the
+            <br />
+            difference.
+          </h2>
+          <div className="rx-delta-stage">
+            <div className="rx-delta-frame" data-on="true">
+              <DeltaGlyph size={160} className="rx-delta-frame-glyph" />
+            </div>
+            <DetectBlock
+              buy={buy}
+              showCompare
+              showUnit
+              showAnnual
+              ping={false}
+            />
+            <FindingPanel buy={buy} />
+            <ActionPanel />
+            <ControlPanel />
+            <VerifyBlock buy={buy} />
+          </div>
+          <Carry buy={buy} on />
+        </div>
+      </section>
     );
-
-    return () => timers.forEach((t) => window.clearTimeout(t));
-  }, [inView, reduced]);
-
-  const activeFind = findIdx >= 0 ? FINDS[findIdx] : null;
-  const total = TOTALS[Math.min(totalIdx, TOTALS.length - 1)]!;
+  }
 
   return (
     <section
-      className="radr-section radr-section-light"
+      className="rx-delta-inst"
       id="difference"
-      ref={ref}
+      ref={rootRef}
+      data-nav-theme="dark"
+      data-scene={scene}
+      data-compact={compact ? "true" : "false"}
+      style={{ height: `${STORY_VH}vh` }}
     >
-      <div className="radr-shell">
-        <p className="radr-cat radr-cat-ink">The delta</p>
-        <h2 className="radr-h2">
-          △ is the
-          <br />
-          difference.
-        </h2>
-        <p className="radr-lead">
-          Between what happened and what should have happened.
-        </p>
-
-        <div className="radr-delta-example" data-phase={demo}>
-          <div className="radr-delta-pair">
-            <div className="radr-delta-col">
-              <span>You agreed to pay</span>
-              <strong className="radr-money">€31.20</strong>
-            </div>
-            <div
-              className="radr-delta-col"
-              data-shift={demo >= 1 ? "true" : "false"}
-            >
-              <span>But you paid</span>
-              <strong className="radr-money">€34.80</strong>
-            </div>
-          </div>
-          <div
-            className="radr-delta-bridge"
-            data-on={demo >= 2 ? "true" : "false"}
-            aria-hidden="true"
-          />
-          <div
-            className="radr-delta-result"
-            data-on={demo >= 2 ? "true" : "false"}
-          >
-            <span className="radr-tri">△</span>
-            <strong className="radr-money">€3.60</strong>
-            <em>/ case</em>
-          </div>
-          <p data-on={demo >= 3 ? "true" : "false"}>
-            Across thousands of transactions, small deltas become serious money.
-          </p>
+      <div className="rx-delta-pin">
+        <div className="rx-delta-atm" aria-hidden="true">
+          <div className="rx-delta-grid" />
+          <div className="rx-delta-arcs" />
+          <div className="rx-delta-specks" />
+          <span className="rx-delta-coord rx-delta-coord--tl">48.21 N</span>
+          <span className="rx-delta-coord rx-delta-coord--tr">SCAN 02</span>
+          <span className="rx-delta-coord rx-delta-coord--bl">Δ · BUY</span>
+          <span className="rx-delta-coord rx-delta-coord--br">18 LOC</span>
         </div>
 
-        <div
-          className="radr-delta-accumulate"
-          data-on={inView ? "true" : "false"}
-        >
-          <div className="radr-delta-stage">
-            <DeltaOutline
-              className="radr-delta-giant"
-              animate={!reduced && inView}
-              tone="ink"
+        <div className="rx-shell rx-delta-inst-inner">
+          <p className="rx-delta-label" data-on="true">
+            <span
+              className="rx-live-dot"
+              data-dim={scene < 3 ? "true" : "false"}
             />
-            {activeFind ? (
-              <span
-                key={activeFind.label}
-                className="radr-delta-find"
-                data-on="true"
-              >
-                {activeFind.label}
-              </span>
-            ) : null}
+            {label}
+          </p>
+
+          <h2
+            className="rx-delta-title"
+            data-on="true"
+            data-quiet={compact ? "true" : "false"}
+          >
+            △ is the
+            <br />
+            difference.
+          </h2>
+
+          <div className="rx-delta-stage">
             <div
-              className="radr-delta-center"
-              data-verified={verified ? "true" : "false"}
+              className="rx-delta-frame"
+              data-on={scene >= 1 ? "true" : "false"}
+              data-scan={scene >= 1 && scene <= 2 ? "true" : "false"}
+              data-compact={compact ? "true" : "false"}
+              data-verified={scene >= 7 ? "true" : "false"}
             >
-              <span className="radr-tri">△</span>
-              <strong className="radr-money">{formatEuro(total)}</strong>
-              {verified ? <em>Verified value</em> : <em>Accumulating</em>}
-              <small>Illustrative example</small>
+              <DeltaGlyph
+                living={scene >= 2 && scene < 7}
+                active={scene >= 1}
+                verified={scene >= 7}
+                size={compact ? 96 : 168}
+                className="rx-delta-frame-glyph"
+              />
+              <div className="rx-delta-scanline" aria-hidden="true" />
             </div>
+
+            {scene <= 3 ? (
+              <div className="rx-delta-scene" data-on="true">
+                <DetectBlock
+                  buy={buy}
+                  showCompare={scene >= 1}
+                  showUnit={scene >= 2}
+                  showAnnual={scene >= 3}
+                  ping={scene === 2}
+                />
+              </div>
+            ) : null}
+
+            {scene === 4 ? (
+              <div className="rx-delta-scene" data-on="true">
+                <FindingPanel buy={buy} />
+              </div>
+            ) : null}
+
+            {scene === 5 ? (
+              <div className="rx-delta-scene" data-on="true">
+                <ActionPanel />
+              </div>
+            ) : null}
+
+            {scene === 6 ? (
+              <div className="rx-delta-scene" data-on="true">
+                <ControlPanel />
+              </div>
+            ) : null}
+
+            {scene >= 7 ? (
+              <div className="rx-delta-scene" data-on="true">
+                <VerifyBlock buy={buy} />
+              </div>
+            ) : null}
           </div>
+
+          <Carry buy={buy} on={scene >= 7} />
         </div>
       </div>
     </section>

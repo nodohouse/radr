@@ -1,5 +1,4 @@
-import { IntegrationNode } from "../IntegrationNode";
-import { RadrLogo } from "../RadrLogo";
+import { RadrWordmark } from "../RadrWordmark";
 
 const nodes = [
   "PMS",
@@ -9,32 +8,39 @@ const nodes = [
   "Accounting",
   "Payments",
   "Delivery",
-  "Revenue Management",
+  "Revenue",
 ] as const;
 
 export function SectionSystem() {
   return (
-    <section className="radr-section radr-section-light" id="system">
-      <div className="radr-shell">
-        <p className="radr-cat radr-cat-ink">System</p>
-        <h2 className="radr-h2">
-          Don&apos;t replace
-          <br />
-          your stack.
-        </h2>
-        <div className="radr-system">
-          <div className="radr-system-hub" aria-label="Connected systems">
+    <section
+      className="rx-section rx-section-tight rx-dark"
+      id="system"
+      data-nav-theme="dark"
+    >
+      <div className="rx-shell rx-system">
+        <div>
+          <p className="rx-kicker">Architecture</p>
+          <h2 className="rx-display rx-display-sm">
+            Your stack.
+            <br />
+            On RADR.
+          </h2>
+          <p className="rx-lead-inv rx-lead-short">
+            RADR watches the economics between the systems you already run —
+            then turns differences into verified value.
+          </p>
+        </div>
+        <div className="rx-system-board">
+          <ul>
             {nodes.map((n) => (
-              <IntegrationNode key={n}>{n}</IntegrationNode>
+              <li key={n}>{n}</li>
             ))}
-          </div>
-          <div className="radr-system-center">
-            <RadrLogo size="md" />
-            <p>
-              RADR connects fragmented operational and financial systems — then
-              watches the economics between them.
-            </p>
-            <p className="line">Don&apos;t replace your stack. Put it on RADR.</p>
+          </ul>
+          <div className="rx-system-hub">
+            <RadrWordmark size="md" />
+            <p>Detect · Explain · Act · Learn · Verify</p>
+            <strong className="rx-system-hub-out">Verified value</strong>
           </div>
         </div>
       </div>
