@@ -124,10 +124,21 @@ Role tabs are not cosmetic: GM on the same seed sees floor + brief; CFO sees P&L
 
 All sand/mint, readable ink (`#161412` / `#3f3b36` — not faint text on dark).
 
-- **Decisions** — story cards: action · € · because · Why + Futures.
-- **Catalog / My Center** — Buy · Sell · Labor · Recover (+ Value / Memory). Role “For you” emphasis. Readable cards.
+- **Decisions** — dense queue rows (not a sparse 2×2 card grid): action · € · because · Why + Futures. Full-width contrast on sand.
+- **Catalog / My Center** — Buy · Sell · Labor · Recover (+ Value / Memory). Role “For you” emphasis. Readable sand/mint story cards (action · € · because · CTA).
 - **Value** — embeds Shift Pulse + win/loss + ladder.
 - **Memory** — tried → observed → verified → next time. Feeds autopilot confidence.
+
+## Tear-down of the live scatter
+
+The current Vercel lab (`service.png` / `recover.png` / `catalog.png` / `decisions.png`) is the thing we **do not copy**:
+
+1. **Pulse is not KPI chips + a sparkline.** The hero is one full-width time-series (IN / OUT / Net / Forecast) with area fills, a euro Y-axis, and D-id turbulence — not a five-tile number wall.
+2. **Recover is not another equal stack.** `?seed=recover` lands **CFO**. The AP path lives in the Decision band; win/loss + Recover/Buy pins sit under that role lens.
+3. **Catalog is story cards**, not faint tiles: action · € · because · CTA on sand/mint.
+4. **Decisions is a dense queue**, not four skinny cards in a field of whitespace.
+
+GM ≠ CFO on the same seed. Floor strip is GM-only. CFO sees money in/out + Recover.
 
 ## Ban
 

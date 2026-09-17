@@ -1,7 +1,7 @@
 "use client";
 
 import { formatEuro } from "@/lib/lab/format";
-import { getPulseModel, pulseNowPoint } from "@/lib/lab/pulse";
+import { getPulseModel } from "@/lib/lab/pulse";
 import { useLab } from "@/lib/lab/store";
 import type { PulseModel, TurbulenceMark } from "@/lib/lab/types";
 
@@ -11,9 +11,16 @@ type Props = {
 };
 
 export function ShiftPulseGraph({ compact = false, model: forced }: Props) {
-  const { state, setPulseWindow, setSeed, goCenter } = useLab();
+  const { state, nav, setPulseWindow, setSeed, goCenter } = useLab();
   const model = forced ?? getPulseModel(state.seed, state.pulseWindow);
-  const now = pulseNowPoint(model);
+  const title =
+    model.seed === "recover" || nav.role === "cfo"
+      ? "Money in / out"
+      : model.industry === "hotel"
+        ? "How arrivals are tracking"
+        : nav.role === "clevel"
+          ? "Pulse summary"
+          : "How the shift is tracking";
   const openMark = (mark: TurbulenceMark) => {
     const seed = mark.displayId.startsWith("D-33")
       ? "hotel"
@@ -25,8 +32,8 @@ export function ShiftPulseGraph({ compact = false, model: forced }: Props) {
   };
 
   const W = 920;
-  const H = compact ? 176 : 268;
-  const pad = { l: 44, r: 16, t: 16, b: 28 };
+  const H = compact ? 176 : 292;
+  const pad = { l: 58, r: 18, t: 18, b: 30 };
   const innerW = W - pad.l - pad.r;
   const innerH = H - pad.t - pad.b;
   const xs = model.points.map((p) => p.minutes);
@@ -44,6 +51,20 @@ export function ShiftPulseGraph({ compact = false, model: forced }: Props) {
       .map((p, i) => `${i === 0 ? "M" : "L"} ${xOf(p.minutes).toFixed(1)} ${yOf(p[key]).toFixed(1)}`)
       .join(" ");
 
+  const area = (key: "inEuro" | "outEuro") => {
+    const top = model.points
+      .map((p, i) => `${i === 0 ? "M" : "L"} ${xOf(p.minutes).toFixed(1)} ${yOf(p[key]).toFixed(1)}`)
+      .join(" ");
+    const last = model.points.at(-1)!;
+    const first = model.points[0]!;
+    return `${top} L ${xOf(last.minutes).toFixed(1)} ${yOf(0).toFixed(1)} L ${xOf(first.minutes).toFixed(1)} ${yOf(0).toFixed(1)} Z`;
+  };
+
+  const yTicks = [0, 0.33, 0.66, 1].map((g) => ({
+    y: pad.t + innerH * (1 - g),
+    label: formatEuro(Math.round(maxY * g)),
+  }));
+
   const actualPts = model.points.filter((p) => p.minutes <= model.actualThroughMinutes);
   const nowX = xOf(model.actualThroughMinutes);
 
@@ -52,9 +73,7 @@ export function ShiftPulseGraph({ compact = false, model: forced }: Props) {
       <header className="lab-pulse-head">
         <div>
           <p className="lab-k">Shift Pulse · {model.windowLabel}</p>
-          <h2 className="lab-pulse-title">
-            {model.industry === "hotel" ? "How arrivals are tracking" : "How the shift is tracking"}
-          </h2>
+          <h2 className="lab-pulse-title">{title}</h2>
           <p className="lab-pulse-sub">{model.netBecause}</p>
         </div>
         <div className="lab-pulse-head-right">
@@ -88,16 +107,16 @@ export function ShiftPulseGraph({ compact = false, model: forced }: Props) {
       <div className="lab-pulse-chart">
         <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Shift Pulse time series">
           <title>Shift Pulse</title>
-          {[0.25, 0.5, 0.75, 1].map((g) => (
-            <line
-              key={g}
-              x1={pad.l}
-              x2={W - pad.r}
-              y1={pad.t + innerH * (1 - g)}
-              y2={pad.t + innerH * (1 - g)}
-              className="lab-pulse-grid"
-            />
+          {yTicks.map((tick) => (
+            <g key={tick.y}>
+              <line x1={pad.l} x2={W - pad.r} y1={tick.y} y2={tick.y} className="lab-pulse-grid" />
+              <text x={pad.l - 6} y={tick.y + 3} className="lab-pulse-y">
+                {tick.label}
+              </text>
+            </g>
           ))}
+          <path d={area("inEuro")} className="lab-pulse-in-fill" />
+          <path d={area("outEuro")} className="lab-pulse-out-fill" />
           <path d={line("forecastEuro")} className="lab-pulse-forecast" />
           <path d={line("inEuro")} className="lab-pulse-in" />
           <path d={line("outEuro")} className="lab-pulse-out" />
@@ -116,6 +135,9 @@ export function ShiftPulseGraph({ compact = false, model: forced }: Props) {
             return (
               <g key={mark.id} className="lab-pulse-mark" data-severity={mark.severity}>
                 <polygon points={`${x},${y - 14} ${x + 8},${y} ${x - 8},${y}`} />
+                <text x={x + 10} y={y - 16} className="lab-pulse-mark-label">
+                  {mark.displayId}
+                </text>
               </g>
             );
           })}

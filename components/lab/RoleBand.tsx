@@ -9,7 +9,7 @@ import { useLab } from "@/lib/lab/store";
 export function RoleBand() {
   const { nav, state, setCenterView, setSeed, goCatalog } = useLab();
   const lens = ROLE_LENSES[nav.role];
-  const pins = pinsFor(nav.pinnedIds);
+  const pins = pinsFor(nav.pinnedIds).slice(0, 4);
   const floor = state.seed === "hotel" ? HOTEL_FLOOR : SERVICE_FLOOR;
 
   return (
@@ -29,9 +29,9 @@ export function RoleBand() {
               </button>
             ) : null}
           </header>
-          <div className="lab-floor-row">
+          <div className="lab-floor-strip" role="list">
             {floor.map((n) => (
-              <article key={n.id} className="lab-floor-card" data-hot={n.hot || undefined}>
+              <article key={n.id} className="lab-floor-item" data-hot={n.hot || undefined} role="listitem">
                 <em>{n.label}</em>
                 <strong>{n.value}</strong>
                 <p>because {n.because}</p>
@@ -47,6 +47,11 @@ export function RoleBand() {
             <div>
               <p className="lab-k">Win / loss</p>
               <h2>Where we protected · where we leak</h2>
+              {nav.role === "cfo" ? (
+                <p className="lab-role-cue">
+                  Recover sits in the Decision band — this strip is the ladder, not another hero.
+                </p>
+              ) : null}
             </div>
           </header>
           <div className="lab-winloss">
@@ -96,7 +101,7 @@ export function RoleBand() {
       <div className="lab-pins">
         <header className="lab-section-head">
           <div>
-            <p className="lab-k">My modules</p>
+            <p className="lab-k">Below the fold</p>
             <h2>
               {nav.role === "gm" ? "Sell + Labor pins" : nav.role === "cfo" ? "Recover + Buy pins" : "Material pins"}
             </h2>
@@ -105,20 +110,22 @@ export function RoleBand() {
             Edit in Catalog
           </button>
         </header>
-        <div className="lab-pin-row">
+        <ul className="lab-pin-list">
           {pins.map((m) => (
-            <Link key={m.id} href={m.href} className="lab-pin">
-              <em>
-                {m.displayId} · {m.category}
-              </em>
-              <strong>{m.title}</strong>
-              <span data-grade={m.grade}>
-                {m.euro > 0 ? formatEuro(m.euro) : m.euroLabel} · {m.grade}
-              </span>
-              <p>because {m.because}</p>
-            </Link>
+            <li key={m.id}>
+              <Link href={m.href} className="lab-pin-row-item">
+                <em>
+                  {m.displayId} · {m.category}
+                </em>
+                <strong>{m.title}</strong>
+                <span data-grade={m.grade}>
+                  {m.euro > 0 ? formatEuro(m.euro) : m.euroLabel} · {m.grade}
+                </span>
+                <p>because {m.because}</p>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

@@ -99,10 +99,14 @@ export function LabProvider({ children }: { children: ReactNode }) {
     pulseWindow: "shift",
     operatorContext: "none",
   }));
-  const [role, setRoleState] = useState<RoleId>("gm");
-  const [pinnedIds, setPinnedIds] = useState<string[]>(() => [...ROLE_PRESETS.gm]);
+  const [role, setRoleState] = useState<RoleId>(() => (seedParam === "recover" ? "cfo" : "gm"));
+  const [pinnedIds, setPinnedIds] = useState<string[]>(() => [
+    ...ROLE_PRESETS[seedParam === "recover" ? "cfo" : "gm"],
+  ]);
   const [centerView, setCenterView] = useState<"ops" | "brief">("ops");
-  const [briefPacket, setBriefPacket] = useState<BriefPacketId>("foh");
+  const [briefPacket, setBriefPacket] = useState<BriefPacketId>(() =>
+    defaultBriefForRole(seedParam === "recover" ? "cfo" : "gm"),
+  );
   const [myView, setMyView] = useState<"board" | "catalog">("catalog");
   const [valueBand, setValueBandState] = useState<LabNav["valueBand"]>(
     () => (params?.get("band") as LabNav["valueBand"]) || "verified",
@@ -124,6 +128,11 @@ export function LabProvider({ children }: { children: ReactNode }) {
             whyStep: 0,
           },
     );
+    if (seedParam === "recover") {
+      setRoleState("cfo");
+      setPinnedIds([...ROLE_PRESETS.cfo]);
+      setBriefPacket(defaultBriefForRole("cfo"));
+    }
   }, [seedParam]);
 
   const route = routeFromPath(pathname);
@@ -144,6 +153,12 @@ export function LabProvider({ children }: { children: ReactNode }) {
     surface,
   };
 
+  const applyRole = useCallback((nextRole: RoleId) => {
+    setRoleState(nextRole);
+    setPinnedIds([...ROLE_PRESETS[nextRole]]);
+    setBriefPacket(defaultBriefForRole(nextRole));
+  }, []);
+
   const setSeed = useCallback(
     (seed: SeedId) => {
       setState((s) => ({
@@ -154,24 +169,32 @@ export function LabProvider({ children }: { children: ReactNode }) {
         whyStep: 0,
         operatorContext: "none",
       }));
+      applyRole(seed === "recover" ? "cfo" : "gm");
       setCenterView("ops");
       router.replace(`/app/lab/control-center?seed=${seed}`, { scroll: false });
     },
-    [router],
+    [applyRole, router],
   );
 
   const setRole = useCallback(
     (next: RoleId) => {
-      setRoleState(next);
-      setPinnedIds([...ROLE_PRESETS[next]]);
-      setBriefPacket(defaultBriefForRole(next));
+      applyRole(next);
       setCenterView("ops");
       const lens = ROLE_LENSES[next];
       if (pathname.includes("/lab/control-center") && state.seed !== "hotel") {
-        setSeed(lens.defaultSeed);
+        const seed = lens.defaultSeed;
+        setState((s) => ({
+          ...s,
+          seed,
+          mode: "live",
+          selectedFuture: "wait_12",
+          whyStep: 0,
+          operatorContext: "none",
+        }));
+        router.replace(`/app/lab/control-center?seed=${seed}`, { scroll: false });
       }
     },
-    [pathname, setSeed, state.seed],
+    [applyRole, pathname, router, state.seed],
   );
 
   const setMode = useCallback((mode: DecisionMode) => {

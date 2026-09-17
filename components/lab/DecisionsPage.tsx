@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { formatEuro } from "@/lib/lab/format";
 import { queueForRole } from "@/lib/lab/decisions";
 import { ROLE_LENSES } from "@/lib/lab/roles";
 import { useLab } from "@/lib/lab/store";
-import { StoryCard } from "./StoryCard";
 
 export function DecisionsPage() {
   const { nav, setSeed, goCenter } = useLab();
@@ -15,7 +15,7 @@ export function DecisionsPage() {
   );
 
   return (
-    <div className="lab-viewport">
+    <div className="lab-viewport lab-viewport-queue">
       <header className="lab-surf-head">
         <div>
           <p className="lab-k">Decisions</p>
@@ -35,25 +35,36 @@ export function DecisionsPage() {
           </button>
         </div>
       </header>
-      <ul className="lab-story-grid">
+      <ul className="lab-queue">
         {rows.map((row) => (
           <li key={row.id}>
-            <StoryCard
-              displayId={row.displayId}
-              title={row.title}
-              euro={row.euro}
-              grade={row.grade}
-              because={row.because}
-              clock={row.clock}
-              wedge={row.wedge}
-              cta="Why + Futures"
-              onCta={() => {
-                if (row.seed) {
-                  setSeed(row.seed);
-                  goCenter(row.seed);
-                }
-              }}
-            />
+            <article className="lab-queue-row" data-wedge={row.wedge}>
+              <div className="lab-queue-id">
+                <em>{row.displayId}</em>
+                <span>{row.wedge}</span>
+              </div>
+              <div className="lab-queue-body">
+                <h3>{row.title}</h3>
+                <p className="lab-queue-because">because {row.because}</p>
+                <p className="lab-queue-clock">{row.clock}</p>
+              </div>
+              <p className="lab-queue-euro" data-grade={row.grade}>
+                <strong>{formatEuro(row.euro)}</strong>
+                <span>{row.grade}</span>
+              </p>
+              <button
+                type="button"
+                className="lab-story-cta"
+                onClick={() => {
+                  if (row.seed) {
+                    setSeed(row.seed);
+                    goCenter(row.seed);
+                  }
+                }}
+              >
+                Why + Futures
+              </button>
+            </article>
           </li>
         ))}
       </ul>

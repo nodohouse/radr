@@ -153,4 +153,38 @@ describe("lab routes and light surface", () => {
     expect(css).not.toContain("#050705");
     expect(css).not.toContain("--lab-mineral:#070c09");
   });
+
+  it("tears down the live scatter: graph hero, CFO recover, dense queue, story cards", () => {
+    const pulse = read("components/lab/ShiftPulseGraph.tsx");
+    const store = read("lib/lab/store.tsx");
+    const decisions = read("components/lab/DecisionsPage.tsx");
+    const catalog = read("components/lab/CatalogPage.tsx");
+    const css = read("app/lab.css");
+    const role = read("components/lab/RoleBand.tsx");
+
+    expect(pulse).toContain("lab-pulse-in-fill");
+    expect(pulse).toContain("lab-pulse-y");
+    expect(pulse).not.toContain("lab-kpi");
+    expect(pulse).not.toContain("sparkline");
+
+    expect(store).toContain('seedParam === "recover" ? "cfo"');
+    expect(store).toContain('seed === "recover" ? "cfo"');
+    expect(role).toContain("Recover sits in the Decision band");
+    expect(role).toContain("lab-floor-strip");
+    expect(role).toContain("lab-pin-list");
+
+    expect(decisions).toContain("lab-queue");
+    expect(decisions).toContain("lab-queue-because");
+    expect(decisions).not.toContain("StoryCard");
+
+    expect(catalog).toContain("StoryCard");
+    expect(catalog).toContain("lab-story-grid-dense");
+    expect(catalog).toContain("because={m.because}");
+
+    expect(css).toContain(".lab-queue-row");
+    expect(css).toContain(".lab-floor-strip");
+    expect(css).toContain(".lab-pin-list");
+    expect(css).toContain(".lab-pulse-in-fill");
+    expect(css).toContain(".lab-story-grid-dense");
+  });
 });

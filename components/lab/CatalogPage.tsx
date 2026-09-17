@@ -51,7 +51,7 @@ export function CatalogPage() {
       </div>
 
       {nav.myView === "board" ? (
-        <div className="lab-story-grid">
+        <div className="lab-story-grid lab-story-grid-dense">
           {pinned.length === 0 ? (
             <p className="lab-empty">
               Nothing pinned. Open Catalog or pick a role preset — CFO loads Recover + Buy + Verified.
@@ -84,7 +84,7 @@ export function CatalogPage() {
               {cat}
               {emphasis.has(cat) ? <span className="lab-cat-badge">For you</span> : null}
             </h2>
-            <div className="lab-story-grid">
+            <div className="lab-story-grid lab-story-grid-dense">
               {MODULES.filter((m) => m.category === cat).map((m) => (
                 <StoryCard
                   key={m.id}
