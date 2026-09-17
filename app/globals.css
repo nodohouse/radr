@@ -43,7 +43,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body:has(.prep-app) {
+body:has(.prep-app),
+body:has(.lab-app) {
   background: var(--bg);
 }
 
