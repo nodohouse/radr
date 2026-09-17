@@ -25,7 +25,7 @@ export function ShiftPulseGraph({ compact = false, model: forced }: Props) {
   };
 
   const W = 920;
-  const H = compact ? 168 : 248;
+  const H = compact ? 176 : 268;
   const pad = { l: 44, r: 16, t: 16, b: 28 };
   const innerW = W - pad.l - pad.r;
   const innerH = H - pad.t - pad.b;
@@ -107,8 +107,12 @@ export function ShiftPulseGraph({ compact = false, model: forced }: Props) {
             <circle key={p.t} cx={xOf(p.minutes)} cy={yOf(p.netEuro)} r="4.5" className="lab-pulse-now-dot" />
           ))}
           {model.turbulence.map((mark) => {
+            const nearest =
+              model.points.reduce((best, p) =>
+                Math.abs(p.minutes - mark.minutes) < Math.abs(best.minutes - mark.minutes) ? p : best,
+              );
             const x = xOf(mark.minutes);
-            const y = yOf(now.netEuro);
+            const y = yOf(nearest.netEuro);
             return (
               <g key={mark.id} className="lab-pulse-mark" data-severity={mark.severity}>
                 <polygon points={`${x},${y - 14} ${x + 8},${y} ${x - 8},${y}`} />

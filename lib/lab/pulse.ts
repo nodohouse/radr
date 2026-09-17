@@ -230,7 +230,12 @@ export function getPulseModel(seed: SeedId, window: PulseWindow = "shift"): Puls
       netBecause: "AP variance open · credit memo not posted",
       forecastCloseEuro: 35800,
       forecastBecause: "14-night POS close vs AP · €273 variance stays Expected until CM posts",
-      series: RESTAURANT_SERIES,
+      series: [
+        { id: "in", label: "Money IN · POS close", direction: "in", color: "#00b96b" },
+        { id: "out", label: "Money OUT · AP + variance", direction: "out", color: "#c45a4a" },
+        { id: "net", label: "Net contribution", direction: "net", color: "#121212" },
+        { id: "forecast", label: "Forecast / tracking", direction: "forecast", color: "#00c853" },
+      ],
       points: RECOVER_SHIFT,
       actualThroughMinutes: 17,
       turbulence: RECOVER_TURBULENCE,

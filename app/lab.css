@@ -302,7 +302,7 @@ body:has(.lab-app) {
   justify-content: space-between;
   align-items: flex-end;
   gap: 1rem;
-  padding: 1.1rem 1.25rem 1rem;
+  padding: 0.7rem 1.25rem 0.65rem;
   background: linear-gradient(180deg, #e8f7ef, #f3f0ea);
   border-bottom: 1px solid rgba(0, 200, 83, 0.12);
   flex-wrap: wrap;
@@ -950,8 +950,18 @@ body:has(.lab-app) {
 .lab-pin-row,
 .lab-story-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 0.65rem;
+  grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+  gap: 0.7rem;
+}
+
+.lab-viewport .lab-story-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+  .lab-viewport .lab-story-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .lab-floor-card,
@@ -959,9 +969,11 @@ body:has(.lab-app) {
 .lab-theme,
 .lab-pin,
 .lab-story {
-  padding: 0.85rem 0.9rem 0.95rem;
+  padding: 0.95rem 1rem 1.05rem;
   color: inherit;
   text-decoration: none;
+  background: #fffdf8;
+  border-color: rgba(22, 20, 18, 0.16);
 }
 
 .lab-floor-card[data-hot],
@@ -1146,6 +1158,7 @@ body:has(.lab-app) {
   margin: 0.2rem 0 0;
   font-size: clamp(1.7rem, 3vw, 2.3rem);
   letter-spacing: -0.04em;
+  color: #161412;
 }
 
 .lab-surf-sub,
