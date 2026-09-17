@@ -1375,7 +1375,7 @@ body:has(.lab-app) {
 }
 
 .lab-viewport-queue {
-  max-width: 58rem;
+  max-width: none;
 }
 
 .lab-queue {

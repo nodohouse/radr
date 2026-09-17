@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Suspense, useEffect, useRef, useState } from "react";
+import { DECISION_QUEUE } from "@/lib/lab/decisions";
 import { PROPERTY } from "@/lib/lab/ids";
 import { HEALTH, ROLE_LENSES } from "@/lib/lab/roles";
 import { LabProvider, useLab } from "@/lib/lab/store";
@@ -64,7 +65,7 @@ function Rail() {
                   {m.mark}
                 </span>
                 <span className="lab-rail-label">{m.label}</span>
-                {m.id === "decisions" ? <span className="lab-rail-badge">5</span> : null}
+                {m.id === "decisions" ? <span className="lab-rail-badge">{DECISION_QUEUE.length}</span> : null}
               </Link>
             </li>
           );
