@@ -229,8 +229,9 @@ html:has(.lab-os) body {
   margin: 0.15rem 0 0;
   font-family: var(--font-display), sans-serif;
   font-weight: 750;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  word-spacing: 0.04em;
+  line-height: 1.12;
 }
 
 .lab-h1 { font-size: clamp(1.7rem, 3vw, 2.35rem); }
@@ -310,13 +311,17 @@ html:has(.lab-os) body {
 
 .lab-metric[data-tone="in"] { background: var(--mint); }
 .lab-metric[data-tone="out"] { background: #f8ebe6; }
-.lab-metric[data-tone="net"] { background: #111; color: #f3efe6; }
-.lab-metric[data-tone="net"] .lab-because { color: rgba(243, 239, 230, 0.72); }
-.lab-metric[data-tone="net"] .lab-because::before { color: rgba(243, 239, 230, 0.45); }
-.lab-metric[data-tone="net"] .lab-grade { color: var(--acid); }
+.lab-metric[data-tone="net"] {
+  background: var(--mint-2);
+  color: var(--ink);
+  border-color: rgba(6, 122, 66, 0.22);
+}
+.lab-metric[data-tone="net"] .lab-because { color: var(--mute); }
+.lab-metric[data-tone="net"] .lab-because::before { color: #8a8378; }
+.lab-metric[data-tone="net"] .lab-grade { color: var(--green-ink); }
 
 .lab-metric-k { margin: 0; font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mute); }
-.lab-metric[data-tone="net"] .lab-metric-k { color: rgba(243, 239, 230, 0.65); }
+.lab-metric[data-tone="net"] .lab-metric-k { color: var(--green-ink); }
 .lab-metric-v { margin: 0.15rem 0 0; font-size: 1.25rem; }
 
 .lab-decision-grid {
@@ -340,8 +345,9 @@ html:has(.lab-os) body {
 .lab-hero h2 {
   margin: 0.25rem 0 0;
   font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-  letter-spacing: -0.04em;
-  line-height: 0.98;
+  letter-spacing: -0.025em;
+  word-spacing: 0.06em;
+  line-height: 1.02;
 }
 
 .lab-hero-sub { margin: 0.45rem 0 0; color: var(--mute); max-width: 36rem; }
@@ -446,12 +452,13 @@ html:has(.lab-os) body {
   margin-top: 0.85rem;
   padding: 0.75rem 0.85rem;
   border-radius: 12px;
-  background: #111;
-  color: #f3efe6;
+  background: var(--mint-2);
+  color: var(--ink);
+  border: 1px solid rgba(6, 122, 66, 0.22);
 }
 
-.lab-receipt p { margin: 0.2rem 0 0; color: rgba(243, 239, 230, 0.75); font-size: 0.86rem; }
-.lab-receipt strong { color: var(--acid); }
+.lab-receipt p { margin: 0.2rem 0 0; color: var(--mute); font-size: 0.86rem; }
+.lab-receipt strong { color: var(--green-ink); }
 
 .lab-futures {
   padding: 1rem 1.05rem 1.15rem;

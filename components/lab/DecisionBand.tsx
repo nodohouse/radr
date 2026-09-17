@@ -94,7 +94,7 @@ export function DecisionBand({
 
           {receipt && receipt.decisionId === decision.id ? (
             <div className="lab-receipt">
-              <p className="lab-kicker" style={{ color: "#00f56a" }}>
+              <p className="lab-kicker" style={{ color: "#067a42" }}>
                 Execution receipt
               </p>
               <p>

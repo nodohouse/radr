@@ -29,6 +29,10 @@ function yOf(v: number, min: number, max: number, top: number, height: number) {
   return top + height - t * height;
 }
 
+function xOf(i: number, count: number, padX: number, width: number) {
+  return padX + (i / Math.max(1, count - 1)) * width;
+}
+
 function pathOf(
   points: PulsePoint[],
   pick: (p: PulsePoint) => number,
@@ -38,10 +42,13 @@ function pathOf(
   width: number,
   top: number,
   height: number,
+  until = points.length - 1,
 ) {
+  const last = Math.min(until, points.length - 1);
   return points
+    .slice(0, last + 1)
     .map((p, i) => {
-      const x = padX + (i / Math.max(1, points.length - 1)) * width;
+      const x = xOf(i, points.length, padX, width);
       const y = yOf(pick(p), min, max, top, height);
       return `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`;
     })
@@ -58,14 +65,17 @@ export function ShiftPulseGraph({ pulse, window, onWindow, onTurbulence, mode }:
   const padTop = 18;
   const height = 210;
   const width = 860;
-  const nowIdx = drawn.findIndex((p) => p.label === "now") ;
-  const actual = nowIdx >= 0 ? drawn.slice(0, nowIdx + 1) : drawn.filter((p) => p.net || p.in);
-  const forecastPts = drawn;
+  const markedNow = drawn.findIndex(
+    (p) => p.label === "now" || p.t === "now" || p.t === "today",
+  );
+  const lastLive = drawn.reduce((acc, p, i) => (p.in || p.net ? i : acc), 0);
+  const endLive = markedNow >= 0 ? markedNow : lastLive;
+  const nowX = xOf(endLive, drawn.length, padX, width);
 
-  const inPath = pathOf(actual, (p) => p.in, min, max, padX, width, padTop, height);
-  const outPath = pathOf(actual, (p) => p.out, min, max, padX, width, padTop, height);
-  const netPath = pathOf(actual, (p) => p.net, min, max, padX, width, padTop, height);
-  const fcPath = pathOf(forecastPts, (p) => p.forecast, min, max, padX, width, padTop, height);
+  const inPath = pathOf(drawn, (p) => p.in, min, max, padX, width, padTop, height, endLive);
+  const outPath = pathOf(drawn, (p) => p.out, min, max, padX, width, padTop, height, endLive);
+  const netPath = pathOf(drawn, (p) => p.net, min, max, padX, width, padTop, height, endLive);
+  const fcPath = pathOf(drawn, (p) => p.forecast, min, max, padX, width, padTop, height);
 
   const metrics =
     mode === "summary"
@@ -119,14 +129,25 @@ export function ShiftPulseGraph({ pulse, window, onWindow, onTurbulence, mode }:
               stroke="rgba(26,24,20,0.08)"
             />
           ))}
-          <path d={`${inPath} L${padX + width} ${padTop + height} L${padX} ${padTop + height} Z`} fill="url(#pulseIn)" />
+          <path
+            d={`${inPath} L${nowX.toFixed(1)} ${padTop + height} L${padX} ${padTop + height} Z`}
+            fill="url(#pulseIn)"
+          />
           <path d={fcPath} fill="none" stroke="#6a8f7a" strokeWidth="2" strokeDasharray="7 6" />
           <path d={inPath} fill="none" stroke="#0a8f4a" strokeWidth="2.4" />
           <path d={outPath} fill="none" stroke="#c45a4a" strokeWidth="2.2" />
           <path d={netPath} fill="none" stroke="#1a1814" strokeWidth="3.1" />
+          <line
+            x1={nowX}
+            x2={nowX}
+            y1={padTop}
+            y2={padTop + height}
+            stroke="rgba(26,24,20,0.22)"
+            strokeDasharray="3 5"
+          />
 
           {drawn.map((p, i) => {
-            const x = padX + (i / Math.max(1, drawn.length - 1)) * width;
+            const x = xOf(i, drawn.length, padX, width);
             return (
               <text
                 key={p.t}
@@ -143,9 +164,9 @@ export function ShiftPulseGraph({ pulse, window, onWindow, onTurbulence, mode }:
 
           {pulse.turbulence.map((m) => {
             const idx = drawn.findIndex((p) => p.t === m.t || p.label === m.t);
-            const i = idx >= 0 ? idx : Math.max(0, actual.length - 1);
-            const x = padX + (i / Math.max(1, drawn.length - 1)) * width;
-            const y = yOf(actual[Math.min(i, actual.length - 1)]?.net ?? 0, min, max, padTop, height);
+            const i = idx >= 0 ? idx : endLive;
+            const x = xOf(i, drawn.length, padX, width);
+            const y = yOf(drawn[Math.min(i, endLive)]?.net ?? 0, min, max, padTop, height);
             const on = hover === m.id;
             return (
               <g key={m.id}>
