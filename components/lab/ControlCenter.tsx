@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { CATALOG, getDecision } from "@/lib/lab/world";
-import { BecauseMoney } from "./BecauseMoney";
+import { getDecision } from "@/lib/lab/world";
 import { DecisionBand } from "./DecisionBand";
 import { RoleBand } from "./RoleBand";
 import { RightRail } from "./RightRail";
@@ -18,7 +16,6 @@ export function ControlCenter() {
     window,
     focusId,
     briefRole,
-    pins,
     receipt,
     setWindow,
     setFocus,
@@ -44,7 +41,6 @@ export function ControlCenter() {
 
   if (!decision) return null;
 
-  const pinMods = CATALOG.filter((m) => pins.includes(m.id));
   const needs = world.decisions.filter((d) => d.status === "needs_you");
 
   return (
@@ -91,37 +87,6 @@ export function ControlCenter() {
               showDelta={world.brief.phase === "mid" || Boolean(world.pulse.turbulence.length)}
             />
           ) : null}
-
-          <section className="lab-band lab-band-quiet" aria-labelledby="pins-title">
-            <div className="lab-band-head">
-              <div>
-                <p className="lab-kicker">Below the fold · {lens.demoPath}</p>
-                <h2 id="pins-title" className="lab-h lab-h2">
-                  My modules
-                </h2>
-              </div>
-              <Link className="lab-btn" href="/app/lab/my-center">
-                My Center
-              </Link>
-            </div>
-            <div className="lab-pins">
-              {pinMods.map((m) => (
-                <Link key={m.id} href={m.href} className="lab-pin">
-                  <p className="lab-pin-id">
-                    {m.displayId ?? m.category} · {m.category}
-                  </p>
-                  <p className="lab-h" style={{ fontSize: "1.05rem" }}>
-                    {m.title}
-                  </p>
-                  {m.euro ? (
-                    <BecauseMoney euro={m.euro} grade={m.grade === "Playbook" ? "Expected" : m.grade} because={m.because} />
-                  ) : (
-                    <p className="lab-because">{m.because}</p>
-                  )}
-                </Link>
-              ))}
-            </div>
-          </section>
         </div>
         <RightRail
           world={world}

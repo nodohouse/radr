@@ -593,6 +593,37 @@ html:has(.lab-os) body {
   gap: 0.9rem;
 }
 
+.lab-story-grid-lg {
+  gap: 1.05rem;
+}
+
+.lab-story-grid-lg .lab-card {
+  min-height: 16rem;
+}
+
+.lab-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.lab-protocol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.95rem;
+}
+
+.lab-protocol-cell {
+  padding: 0.8rem 0.85rem;
+  border-radius: 12px;
+  background: var(--sand);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.lab-protocol-cell p { margin: 0.2rem 0 0; }
+
 .lab-story-cell {
   display: flex;
   flex-direction: column;
@@ -634,15 +665,31 @@ html:has(.lab-os) body {
   margin: 0.9rem 0 0;
   padding: 0;
   list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lab-memory-links .lab-card {
+  min-height: 0;
+  padding: 0.7rem 0.8rem;
+  box-shadow: none;
 }
 
 .lab-card {
   display: block;
-  padding: 1.05rem 1.1rem;
+  padding: 1.15rem 1.2rem 1.2rem;
   border-radius: 16px;
   background: var(--card);
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
+}
+
+.lab-card[data-wash="sand"] {
+  background: linear-gradient(180deg, #faf6ee 0%, var(--card) 58%);
+}
+
+.lab-card[data-wash="mint"] {
+  background: linear-gradient(180deg, #eef8f2 0%, var(--card) 58%);
 }
 
 .lab-card:hover { border-color: rgba(0, 200, 90, 0.35); }
@@ -686,7 +733,8 @@ html:has(.lab-os) body {
   .lab-aside { position: static; padding: 0; }
   .lab-decision-grid { grid-template-columns: 1fr; }
   .lab-hero { border-right: 0; border-bottom: 1px solid var(--line); }
-  .lab-story-grid { grid-template-columns: 1fr; }
+  .lab-story-grid,
+  .lab-board { grid-template-columns: 1fr; }
   .lab-pulse-strip { grid-template-columns: 1fr; }
 }
 

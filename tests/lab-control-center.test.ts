@@ -157,6 +157,12 @@ describe("brand + light canvas", () => {
     const css = read("app/lab.css");
     expect(css).toContain("46vh");
     expect(css).toContain("lab-story-grid");
+    expect(css).toContain("lab-board");
     expect(css).toContain("repeat(2, minmax(0, 1fr))");
+    expect(css).toContain("repeat(3, minmax(0, 1fr))");
+    expect(read("components/lab/CatalogPage.tsx")).toContain("lab-board");
+    expect(read("components/lab/MyCenterPage.tsx")).toContain("lab-story-grid-lg");
+    expect(read("components/lab/MemoryPage.tsx")).toContain("lab-protocol");
+    expect(read("components/lab/ValuePage.tsx")).toContain("ShiftPulseGraph");
   });
 });

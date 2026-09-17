@@ -13,6 +13,7 @@ type Props = {
   lineage?: string;
   demo?: boolean;
   clock?: string;
+  wash?: "sand" | "mint";
 };
 
 export function StoryCard({
@@ -26,11 +27,12 @@ export function StoryCard({
   lineage,
   demo,
   clock,
+  wash = "sand",
 }: Props) {
   return (
-    <Link href={href} className="lab-card">
+    <Link href={href} className="lab-card" data-wash={wash}>
       <p className="lab-kicker">{kicker}</p>
-      <h2 className="lab-h" style={{ fontSize: "1.35rem", marginTop: "0.25rem" }}>
+      <h2 className="lab-h" style={{ fontSize: "1.45rem", marginTop: "0.25rem" }}>
         {title}
       </h2>
       {euro != null && grade ? (

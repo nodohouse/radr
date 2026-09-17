@@ -19,7 +19,7 @@ export function DecisionsPage() {
           </p>
         </div>
       </div>
-      <div className="lab-story-grid">
+      <div className="lab-story-grid lab-story-grid-lg">
         {needs.map((d) => (
           <StoryCard
             key={d.id}
@@ -33,6 +33,7 @@ export function DecisionsPage() {
             demo={d.demo}
             clock={d.clock}
             cta="Why + Futures"
+            wash="mint"
           />
         ))}
       </div>
@@ -41,7 +42,7 @@ export function DecisionsPage() {
           <h2 className="lab-story-section-h" style={{ marginTop: "1.6rem" }}>
             Handling / sealed
           </h2>
-          <div className="lab-story-grid">
+          <div className="lab-board">
             {rest.map((d) => (
               <StoryCard
                 key={d.id}
@@ -54,6 +55,7 @@ export function DecisionsPage() {
                 lineage={d.lineage}
                 clock={d.clock}
                 cta="Open"
+                wash="sand"
               />
             ))}
           </div>

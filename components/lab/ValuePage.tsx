@@ -31,7 +31,7 @@ export function ValuePage() {
         onTurbulence={(m) => setFocus(m.decisionId)}
       />
 
-      <div className="lab-story-grid" style={{ marginTop: "1rem" }}>
+      <div className="lab-story-grid lab-story-grid-lg" style={{ marginTop: "1rem" }}>
         {world.winLoss.map((row) => (
           <StoryCard
             key={row.id}
@@ -43,6 +43,7 @@ export function ValuePage() {
             because={row.money.because}
             lineage={row.money.lineage}
             cta={row.money.grade === "Verified" ? "Open ledger" : "Open Recover · Trace"}
+            wash={row.money.grade === "Verified" ? "mint" : "sand"}
           />
         ))}
       </div>
@@ -54,9 +55,13 @@ export function ValuePage() {
             <h2 className="lab-h lab-h2">Identified → Expected → Observed → Attributed → Verified</h2>
           </div>
         </div>
-        <div className="lab-story-grid" style={{ padding: "0 1.1rem 1.15rem" }}>
+        <div className="lab-board" style={{ padding: "0 1.1rem 1.15rem" }}>
           {VALUE_ROWS.map((row) => (
-            <article key={row.id} className="lab-card">
+            <article
+              key={row.id}
+              className="lab-card"
+              data-wash={row.money.grade === "Verified" ? "mint" : "sand"}
+            >
               <p className="lab-kicker">
                 {row.displayId} · {row.stage}
               </p>

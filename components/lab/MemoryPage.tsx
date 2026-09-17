@@ -16,11 +16,12 @@ export function MemoryPage() {
           </p>
         </div>
       </div>
-      <div className="lab-story-grid">
+
+      <div className="lab-story-grid lab-story-grid-lg">
         {MEMORY_STORIES.map((s) => (
-          <article key={s.id} className="lab-card">
+          <article key={s.id} className="lab-card" data-wash="mint">
             <p className="lab-kicker">Playbook</p>
-            <h2 className="lab-h" style={{ fontSize: "1.45rem" }}>
+            <h2 className="lab-h" style={{ fontSize: "1.7rem" }}>
               {s.title}
             </h2>
             <p className="lab-euro" data-grade={s.grade}>
@@ -29,24 +30,28 @@ export function MemoryPage() {
                 {s.grade}
               </span>
             </p>
-            <ol className="lab-memory-steps">
-              <li>
-                <strong>Tried</strong> — {s.tried}
-              </li>
-              <li>
-                <strong>Observed</strong> — {s.observed}
-              </li>
-              <li>
-                <strong>Verified</strong> — {s.verified}
-              </li>
-              <li>
-                <strong>Next time</strong> — {s.nextTime}
-              </li>
-            </ol>
+            <div className="lab-protocol">
+              <div className="lab-protocol-cell">
+                <p className="lab-kicker">Tried</p>
+                <p>{s.tried}</p>
+              </div>
+              <div className="lab-protocol-cell">
+                <p className="lab-kicker">Observed</p>
+                <p>{s.observed}</p>
+              </div>
+              <div className="lab-protocol-cell">
+                <p className="lab-kicker">Verified</p>
+                <p>{s.verified}</p>
+              </div>
+              <div className="lab-protocol-cell">
+                <p className="lab-kicker">Next time</p>
+                <p>{s.nextTime}</p>
+              </div>
+            </div>
             <ul className="lab-memory-links">
               {s.links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href}>
+                  <Link href={l.href} className="lab-card" data-wash="sand">
                     <span style={{ fontWeight: 700 }}>{l.label}</span>
                     <span className="lab-because">{l.because}</span>
                   </Link>

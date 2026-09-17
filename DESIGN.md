@@ -23,8 +23,9 @@ This lab is the composed operating system. It is not a stacked 8/4 dashboard.
 - **Pulse** is the only hero number surface. One chart, one legend, turbulence triangles.
 - **Decision** is the only interrupt. One active Decision. Futures or Autopilot status — not both as equals.
 - **Role** changes the third band. GM / CFO / C-level are not cosmetic chips.
-- Catalog, modules, activity collapse below or live on secondary routes that **fill the canvas** (2-column story cards — no left-narrow / right-blank).
+- Catalog, modules, activity live on secondary routes that **fill the canvas**: Catalog is a 3-column sand/mint story board; My Center / Decisions / Memory / Value are 2-column large story cards — no left-narrow / right-blank.
 - Right rail stays thin: decide-by, health, recent. Pulse is full-bleed above it.
+- Center is three bands only. Pins live on My Center, not stacked under Pulse.
 
 Ban: equal-weight stacks, Pulse-as-chips, same UI for GM and CFO, vanity KPIs, faint text on dark, letter-R logo.
 
