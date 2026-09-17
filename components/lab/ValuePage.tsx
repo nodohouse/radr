@@ -10,26 +10,28 @@ export function ValuePage() {
   const { world, window, setWindow, setFocus, lens } = useLab();
 
   return (
-    <div className="lab-page">
-      <p className="lab-kicker">{world.serviceLabel} · money truth</p>
-      <h1 className="lab-h lab-h1">Expected stays Expected until Trace seals</h1>
-      <p className="lab-lead">
-        {lens.role === "cfo"
-          ? "In / out / forecast on Pulse. Recover is the leak. Verified is lineage."
-          : "Pulse + win/loss. Demo math is never Verified."}
-      </p>
-
-      <div style={{ marginTop: "1.1rem" }}>
-        <ShiftPulseGraph
-          pulse={world.pulse}
-          window={window}
-          onWindow={setWindow}
-          mode={lens.pulseMode}
-          onTurbulence={(m) => setFocus(m.decisionId)}
-        />
+    <div className="lab-page lab-page-fill">
+      <div className="lab-page-head">
+        <div>
+          <p className="lab-kicker">{world.serviceLabel} · money truth</p>
+          <h1 className="lab-h lab-h1">Expected stays Expected until Trace seals</h1>
+          <p className="lab-lead">
+            {lens.role === "cfo"
+              ? "Pulse in / out / forecast. Recover is the leak. Verified is lineage."
+              : "Shift Pulse + win/loss. Demo math is never Verified."}
+          </p>
+        </div>
       </div>
 
-      <div className="lab-role-grid" style={{ padding: "1rem 0" }}>
+      <ShiftPulseGraph
+        pulse={world.pulse}
+        window={window}
+        onWindow={setWindow}
+        mode={lens.pulseMode}
+        onTurbulence={(m) => setFocus(m.decisionId)}
+      />
+
+      <div className="lab-story-grid" style={{ marginTop: "1rem" }}>
         {world.winLoss.map((row) => (
           <StoryCard
             key={row.id}
@@ -45,14 +47,14 @@ export function ValuePage() {
         ))}
       </div>
 
-      <section className="lab-band" style={{ marginTop: "0.4rem" }}>
+      <section className="lab-band" style={{ marginTop: "1rem" }}>
         <div className="lab-band-head">
           <div>
             <p className="lab-kicker">Ladder</p>
             <h2 className="lab-h lab-h2">Identified → Expected → Observed → Attributed → Verified</h2>
           </div>
         </div>
-        <div className="lab-cards" style={{ padding: "0 1.1rem 1.15rem" }}>
+        <div className="lab-story-grid" style={{ padding: "0 1.1rem 1.15rem" }}>
           {VALUE_ROWS.map((row) => (
             <article key={row.id} className="lab-card">
               <p className="lab-kicker">

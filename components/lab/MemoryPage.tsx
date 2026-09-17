@@ -6,13 +6,17 @@ import Link from "next/link";
 
 export function MemoryPage() {
   return (
-    <div className="lab-page">
-      <p className="lab-kicker">Learning stories</p>
-      <h1 className="lab-h lab-h1">Tried → observed → verified → next time</h1>
-      <p className="lab-lead">
-        Memory feeds Autopilot confidence. It does not mint Verified euros.
-      </p>
-      <div className="lab-cards" style={{ marginTop: "1.2rem" }}>
+    <div className="lab-page lab-page-fill">
+      <div className="lab-page-head">
+        <div>
+          <p className="lab-kicker">Learning stories</p>
+          <h1 className="lab-h lab-h1">Tried → observed → verified → next time</h1>
+          <p className="lab-lead">
+            Memory feeds Autopilot confidence. It does not mint Verified euros.
+          </p>
+        </div>
+      </div>
+      <div className="lab-story-grid">
         {MEMORY_STORIES.map((s) => (
           <article key={s.id} className="lab-card">
             <p className="lab-kicker">Playbook</p>
@@ -25,7 +29,7 @@ export function MemoryPage() {
                 {s.grade}
               </span>
             </p>
-            <ol style={{ margin: "0.8rem 0 0", paddingLeft: "1.1rem" }}>
+            <ol className="lab-memory-steps">
               <li>
                 <strong>Tried</strong> — {s.tried}
               </li>
@@ -39,9 +43,9 @@ export function MemoryPage() {
                 <strong>Next time</strong> — {s.nextTime}
               </li>
             </ol>
-            <ul style={{ margin: "0.9rem 0 0", padding: 0, listStyle: "none" }}>
+            <ul className="lab-memory-links">
               {s.links.map((l) => (
-                <li key={l.href} className="lab-brief-item">
+                <li key={l.href}>
                   <Link href={l.href}>
                     <span style={{ fontWeight: 700 }}>{l.label}</span>
                     <span className="lab-because">{l.because}</span>

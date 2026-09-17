@@ -9,13 +9,17 @@ export function DecisionsPage() {
   const rest = world.decisions.filter((d) => d.status !== "needs_you");
 
   return (
-    <div className="lab-page">
-      <p className="lab-kicker">{lens.label} lens · {world.serviceLabel}</p>
-      <h1 className="lab-h lab-h1">{needs.length} need you</h1>
-      <p className="lab-lead">
-        Action · € · because · CTA. Approve / choose / exception only — Autopilot handles the rest.
-      </p>
-      <div className="lab-cards" style={{ marginTop: "1.2rem" }}>
+    <div className="lab-page lab-page-fill">
+      <div className="lab-page-head">
+        <div>
+          <p className="lab-kicker">{lens.label} lens · {world.serviceLabel}</p>
+          <h1 className="lab-h lab-h1">{needs.length} need you</h1>
+          <p className="lab-lead">
+            Action · € · because · CTA. Approve / choose / exception only — Autopilot handles the rest.
+          </p>
+        </div>
+      </div>
+      <div className="lab-story-grid">
         {needs.map((d) => (
           <StoryCard
             key={d.id}
@@ -34,10 +38,10 @@ export function DecisionsPage() {
       </div>
       {rest.length ? (
         <>
-          <h2 className="lab-h lab-h2" style={{ marginTop: "2rem" }}>
+          <h2 className="lab-story-section-h" style={{ marginTop: "1.6rem" }}>
             Handling / sealed
           </h2>
-          <div className="lab-cards" style={{ marginTop: "0.8rem" }}>
+          <div className="lab-story-grid">
             {rest.map((d) => (
               <StoryCard
                 key={d.id}

@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { CatalogPage } from "@/components/lab/CatalogPage";
 
-export default function CatalogAliasPage() {
-  redirect("/app/lab/my-center");
+export default function LabCatalogPage() {
+  return <CatalogPage />;
 }

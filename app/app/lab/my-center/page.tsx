@@ -1,5 +1,5 @@
-import { CatalogPage } from "@/components/lab/CatalogPage";
+import { MyCenterPage } from "@/components/lab/MyCenterPage";
 
-export default function MyCenterPage() {
-  return <CatalogPage />;
+export default function LabMyCenterPage() {
+  return <MyCenterPage />;
 }

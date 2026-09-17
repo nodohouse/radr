@@ -48,97 +48,87 @@ export function ControlCenter() {
   const needs = world.decisions.filter((d) => d.status === "needs_you");
 
   return (
-    <div className="lab-workspace">
-      <div className="lab-bands">
-        <div className="lab-band-head" style={{ paddingLeft: 0, paddingRight: 0 }}>
-          <div>
-            <p className="lab-kicker">{lens.demoPath}</p>
-            <h1 className="lab-h lab-h1">{lens.title}</h1>
-            <p className="lab-lead">{lens.subtitle}</p>
-          </div>
-          <p className="lab-kicker">
-            {needs.length} need you · Buy · Sell · Labor · Recover
-          </p>
-        </div>
+    <div className="lab-os-stack">
+      <p className="sr-only">
+        {lens.demoPath}. {needs.length} need you. {lens.subtitle}
+      </p>
+      <ShiftPulseGraph
+        pulse={world.pulse}
+        window={window}
+        onWindow={setWindow}
+        mode={lens.pulseMode}
+        onTurbulence={(m) => {
+          setFocus(m.decisionId);
+          document.getElementById("decision-title")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      />
 
-        <ShiftPulseGraph
-          pulse={world.pulse}
-          window={window}
-          onWindow={setWindow}
-          mode={lens.pulseMode}
-          onTurbulence={(m) => {
-            setFocus(m.decisionId);
-            document.getElementById("decision-title")?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
-        />
+      <div className="lab-workspace">
+        <div className="lab-bands">
+          <DecisionBand
+            decision={decision}
+            selectedFuture={future || decision.recommendedFuture}
+            onFuture={setFuture}
+            receipt={receipt}
+            onStage={() => stageDecision(decision.id, future || decision.recommendedFuture)}
+            onApprove={() => approveDecision(decision.id, future || decision.recommendedFuture)}
+          />
 
-        <DecisionBand
-          decision={decision}
-          selectedFuture={future || decision.recommendedFuture}
-          onFuture={setFuture}
-          receipt={receipt}
-          onStage={() => stageDecision(decision.id, future || decision.recommendedFuture)}
-          onApprove={() => approveDecision(decision.id, future || decision.recommendedFuture)}
-        />
+          <RoleBand
+            world={world}
+            lens={lens}
+            onOpenBrief={(packet) => {
+              setBriefRole(packet);
+              setShowBrief(true);
+            }}
+          />
 
-        <RoleBand
-          world={world}
-          lens={lens}
-          onOpenBrief={(packet) => {
-            setBriefRole(packet);
-            setShowBrief(true);
-          }}
-        />
-
-        {showBrief || lens.role !== "clevel" ? (
-          showBrief ? (
+          {showBrief ? (
             <ServiceBrief
               brief={world.brief}
               packet={briefRole}
               onPacket={setBriefRole}
               showDelta={world.brief.phase === "mid" || Boolean(world.pulse.turbulence.length)}
             />
-          ) : null
-        ) : null}
+          ) : null}
 
-        <section className="lab-band" aria-labelledby="pins-title">
-          <div className="lab-band-head">
-            <div>
-              <p className="lab-kicker">Below the fold</p>
-              <h2 id="pins-title" className="lab-h lab-h2">
-                My modules
-              </h2>
-              <p className="lab-lead">Pins follow the role lens. Catalog lives on its own page.</p>
-            </div>
-            <Link className="lab-btn" href="/app/lab/my-center">
-              Edit in Catalog
-            </Link>
-          </div>
-          <div className="lab-pins">
-            {pinMods.map((m) => (
-              <Link key={m.id} href={m.href} className="lab-pin">
-                <p className="lab-pin-id">
-                  {m.displayId ?? m.category} · {m.category}
-                </p>
-                <p className="lab-h" style={{ fontSize: "1.05rem" }}>
-                  {m.title}
-                </p>
-                {m.euro ? (
-                  <BecauseMoney euro={m.euro} grade={m.grade === "Playbook" ? "Expected" : m.grade} because={m.because} />
-                ) : (
-                  <p className="lab-because">{m.because}</p>
-                )}
-                {m.clock ? <p className="lab-clock">{m.clock}</p> : null}
+          <section className="lab-band lab-band-quiet" aria-labelledby="pins-title">
+            <div className="lab-band-head">
+              <div>
+                <p className="lab-kicker">Below the fold · {lens.demoPath}</p>
+                <h2 id="pins-title" className="lab-h lab-h2">
+                  My modules
+                </h2>
+              </div>
+              <Link className="lab-btn" href="/app/lab/my-center">
+                My Center
               </Link>
-            ))}
-          </div>
-        </section>
+            </div>
+            <div className="lab-pins">
+              {pinMods.map((m) => (
+                <Link key={m.id} href={m.href} className="lab-pin">
+                  <p className="lab-pin-id">
+                    {m.displayId ?? m.category} · {m.category}
+                  </p>
+                  <p className="lab-h" style={{ fontSize: "1.05rem" }}>
+                    {m.title}
+                  </p>
+                  {m.euro ? (
+                    <BecauseMoney euro={m.euro} grade={m.grade === "Playbook" ? "Expected" : m.grade} because={m.because} />
+                  ) : (
+                    <p className="lab-because">{m.because}</p>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </section>
+        </div>
+        <RightRail
+          world={world}
+          decision={decision}
+          recent={world.decisions.filter((d) => d.status !== "verified").slice(0, 3)}
+        />
       </div>
-      <RightRail
-        world={world}
-        decision={decision}
-        recent={world.decisions.filter((d) => d.status !== "verified").slice(0, 4)}
-      />
     </div>
   );
 }

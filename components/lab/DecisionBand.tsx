@@ -104,17 +104,6 @@ export function DecisionBand({
             </div>
           ) : null}
 
-          <ul style={{ margin: "1rem 0 0", padding: 0, listStyle: "none" }}>
-            {decision.actuators.map((a) => (
-              <li key={a.title} className="lab-brief-item">
-                <p className="lab-kicker">
-                  {a.system} · {a.policy === "demo" ? "demo / policy" : a.policy === "auto" ? "policy auto" : "confirm"}
-                </p>
-                <p style={{ margin: "0.15rem 0 0", fontWeight: 700 }}>{a.title}</p>
-                <p className="lab-because">{a.detail}</p>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <aside className="lab-futures">

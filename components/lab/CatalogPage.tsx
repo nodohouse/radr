@@ -12,52 +12,49 @@ export function CatalogPage() {
   const lens = ROLE_LENSES[role];
 
   return (
-    <div className="lab-page">
-      <p className="lab-kicker">Catalog · My Center</p>
-      <h1 className="lab-h lab-h1">Money-moving decisions first</h1>
-      <p className="lab-lead">
-        Pin what you watch. Every € has a because. {lens.demoPath}
-      </p>
-      <div className="lab-cat-grid" style={{ marginTop: "1.3rem" }}>
-        {ORDER.map((cat) => {
-          const mods = CATALOG.filter((m) => m.category === cat);
-          if (!mods.length) return null;
-          const emphasize = lens.catalogEmphasis.includes(cat);
-          return (
-            <section key={cat} className="lab-cat-col">
-              <h2 style={{ color: emphasize ? "#067a42" : undefined }}>
-                {cat}
-                {emphasize ? " · this lens" : ""}
-              </h2>
-              <div className="lab-cards">
-                {mods.map((m) => (
-                  <div key={m.id}>
-                    <StoryCard
-                      href={m.href}
-                      kicker={`${m.displayId ?? m.category} · ${m.category}`}
-                      title={m.title}
-                      euro={m.euro || undefined}
-                      grade={m.grade === "Playbook" ? "Expected" : m.grade}
-                      because={m.because}
-                      clock={m.clock}
-                      cta={m.blurb}
-                    />
-                    <button
-                      type="button"
-                      className="lab-btn"
-                      data-on={pins.includes(m.id)}
-                      onClick={() => togglePin(m.id)}
-                      style={{ marginTop: "0.45rem" }}
-                    >
-                      {pins.includes(m.id) ? "Pinned" : "Pin to Center"}
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </section>
-          );
-        })}
+    <div className="lab-page lab-page-fill">
+      <div className="lab-page-head">
+        <div>
+          <p className="lab-kicker">Catalog · Buy · Sell · Labor · Recover</p>
+          <h1 className="lab-h lab-h1">Readable story cards</h1>
+          <p className="lab-lead">
+            Action · € · because · CTA. {lens.demoPath}. Lens emphasis: {lens.catalogEmphasis.join(" · ")}.
+          </p>
+        </div>
       </div>
+
+      {ORDER.map((cat) => {
+        const mods = CATALOG.filter((m) => m.category === cat);
+        if (!mods.length) return null;
+        const emphasize = lens.catalogEmphasis.includes(cat);
+        return (
+          <section key={cat} className="lab-story-section">
+            <h2 className="lab-story-section-h" data-on={emphasize}>
+              {cat}
+              {emphasize ? " · this lens" : ""}
+            </h2>
+            <div className="lab-story-grid">
+              {mods.map((m) => (
+                <div key={m.id} className="lab-story-cell">
+                  <StoryCard
+                    href={m.href}
+                    kicker={`${m.displayId ?? m.category} · ${m.category}`}
+                    title={m.title}
+                    euro={m.euro || undefined}
+                    grade={m.grade === "Playbook" ? "Expected" : m.grade}
+                    because={m.because}
+                    clock={m.clock}
+                    cta={m.blurb}
+                  />
+                  <button type="button" className="lab-btn" onClick={() => togglePin(m.id)}>
+                    {pins.includes(m.id) ? "Pinned" : "Pin to My Center"}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }

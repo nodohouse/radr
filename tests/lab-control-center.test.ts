@@ -24,6 +24,7 @@ describe("Control Center lab routes", () => {
       "app/app/lab/decisions/page.tsx",
       "app/app/lab/decisions/[id]/page.tsx",
       "app/app/lab/my-center/page.tsx",
+      "app/app/lab/catalog/page.tsx",
       "app/app/lab/value/page.tsx",
       "app/app/lab/memory/page.tsx",
       "app/app/lab/service/page.tsx",
@@ -41,7 +42,7 @@ describe("Control Center lab routes", () => {
       "Value",
       "Memory",
     ]);
-    expect(LAB_NAV.find((n) => n.id === "catalog")?.href).toBe("/app/lab/my-center");
+    expect(LAB_NAV.find((n) => n.id === "catalog")?.href).toBe("/app/lab/catalog");
   });
 });
 
@@ -152,5 +153,10 @@ describe("brand + light canvas", () => {
     expect(board).toContain("ShiftPulseGraph");
     expect(board).toContain("DecisionBand");
     expect(board).toContain("RoleBand");
+    expect(board).toContain("lab-os-stack");
+    const css = read("app/lab.css");
+    expect(css).toContain("46vh");
+    expect(css).toContain("lab-story-grid");
+    expect(css).toContain("repeat(2, minmax(0, 1fr))");
   });
 });

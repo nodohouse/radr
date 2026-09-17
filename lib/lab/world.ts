@@ -1716,7 +1716,7 @@ export function worldFor(seed: LabSeed): LabWorld {
 export const LAB_NAV = [
   { id: "center", label: "Center", href: "/app/lab/control-center" },
   { id: "decisions", label: "Decisions", href: "/app/lab/decisions" },
-  { id: "catalog", label: "Catalog", href: "/app/lab/my-center" },
+  { id: "catalog", label: "Catalog", href: "/app/lab/catalog" },
   { id: "value", label: "Value", href: "/app/lab/value?band=verified" },
   { id: "memory", label: "Memory", href: "/app/lab/memory?scope=playbook" },
 ] as const;

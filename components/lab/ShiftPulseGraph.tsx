@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { labEuro } from "@/lib/lab/format";
-import type { PulsePoint, PulseWindow, ShiftPulse, TurbulenceMarker } from "@/lib/lab/types";
+import type { PulseMetric, PulsePoint, PulseWindow, ShiftPulse, TurbulenceMarker } from "@/lib/lab/types";
 import { BecauseMoney } from "./BecauseMoney";
 
 type Props = {
@@ -61,10 +61,10 @@ export function ShiftPulseGraph({ pulse, window, onWindow, onTurbulence, mode }:
   const drawn = useMemo(() => visiblePoints(points), [points]);
   const { min, max } = useMemo(() => scale(drawn), [drawn]);
 
-  const padX = 36;
-  const padTop = 18;
-  const height = 210;
-  const width = 860;
+  const padX = 28;
+  const padTop = 16;
+  const height = 300;
+  const width = 980;
   const markedNow = drawn.findIndex(
     (p) => p.label === "now" || p.t === "now" || p.t === "today",
   );
@@ -77,12 +77,22 @@ export function ShiftPulseGraph({ pulse, window, onWindow, onTurbulence, mode }:
   const netPath = pathOf(drawn, (p) => p.net, min, max, padX, width, padTop, height, endLive);
   const fcPath = pathOf(drawn, (p) => p.forecast, min, max, padX, width, padTop, height);
 
-  const metrics =
-    mode === "summary"
-      ? pulse.metrics.filter((m) => m.tone === "net" || m.tone === "in")
-      : mode === "pnl"
-        ? pulse.metrics
-        : pulse.metrics;
+  const metrics: PulseMetric[] = (() => {
+    const inn = pulse.metrics.filter((m) => m.tone === "in");
+    const out = pulse.metrics.filter((m) => m.tone === "out");
+    const net = pulse.metrics.filter((m) => m.tone === "net");
+    const outRoll: PulseMetric | undefined = out.length
+      ? {
+          id: "out-roll",
+          label: "Money out",
+          euro: out.reduce((s, m) => s + m.euro, 0),
+          because: out.map((m) => m.because).join(" · "),
+          tone: "out",
+        }
+      : undefined;
+    if (mode === "summary") return [...inn.slice(0, 1), ...net.slice(0, 1)];
+    return [inn[0], outRoll, net[0]].filter((m): m is PulseMetric => Boolean(m));
+  })();
 
   return (
     <section className="lab-band lab-band-mint" aria-labelledby="pulse-title">
@@ -208,7 +218,7 @@ export function ShiftPulseGraph({ pulse, window, onWindow, onTurbulence, mode }:
         <span>△ Turbulence → Decision</span>
       </div>
 
-      <div className="lab-pulse-metrics">
+      <div className="lab-pulse-strip" aria-label="Pulse in / out / net">
         {metrics.map((m) => (
           <article key={m.id} className="lab-metric" data-tone={m.tone}>
             <p className="lab-metric-k">{m.label}</p>
