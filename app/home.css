@@ -13063,19 +13063,34 @@ html:has(.radr-home) body {
   margin: 0 0 0.75rem;
 }
 
-/* Recover-first homepage (GTM D0) */
-.rx-he-recover {
-  padding: 4.5rem 0 3.5rem;
+/* Recover / Margin homepage (GTM) */
+.rx-home-spine {
   background: #f7faf8;
+}
+.rx-he-recover > .rx-shell {
+  width: 100%;
+}
+.rx-he-recover {
+  padding: clamp(5.5rem, 10vh, 7rem) 0 clamp(3.5rem, 6vh, 4.5rem);
+  background: #f7faf8;
+  min-height: 0;
+  display: block;
 }
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 2.5rem;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: center;
+  width: 100%;
+}
+.rx-he-recover-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 34rem;
 }
 .rx-he-recover-kicker {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.85rem;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -13084,199 +13099,147 @@ html:has(.radr-home) body {
 }
 .rx-he-recover-title {
   margin: 0;
-  font-size: clamp(2rem, 4.5vw, 3.15rem);
+  font-size: clamp(2rem, 4.2vw, 3rem);
   font-weight: 700;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.04em;
   line-height: 1.08;
   color: #0a0d0b;
-  max-width: 14ch;
+  max-width: 18ch;
 }
 .rx-he-recover-sub {
   margin: 1rem 0 0;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 560;
+  line-height: 1.4;
   color: #0a0d0b;
+  max-width: 34rem;
 }
 .rx-he-recover-support {
   margin: 0.65rem 0 0;
-  font-size: 1rem;
-  line-height: 1.45;
+  font-size: 0.98rem;
+  line-height: 1.5;
   color: #4a524e;
-  max-width: 36rem;
+  max-width: 34rem;
 }
 .rx-he-recover .rx-he-ctas {
-  margin-top: 1.5rem;
+  margin-top: 1.6rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
 }
-.rx-he-recover-card {
-  background: #fff;
-  border: 1px solid rgba(10, 13, 11, 0.08);
-  border-radius: 18px;
-  box-shadow: 0 12px 32px rgba(10, 13, 11, 0.07);
-  padding: 1.25rem 1.35rem 1.4rem;
-}
-.rx-he-recover-card-k {
-  margin: 0;
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #067a42;
-  font-family: var(--font-mono, "IBM Plex Mono", monospace);
-  font-weight: 650;
-}
-.rx-he-recover-card-id {
-  margin: 0.35rem 0 0;
-  font-size: 0.75rem;
-  color: #626a65;
-  font-family: var(--font-mono, "IBM Plex Mono", monospace);
-}
-.rx-he-recover-card-title {
-  margin: 0.45rem 0 0;
-  font-size: 1.35rem;
-  font-weight: 680;
-  letter-spacing: -0.03em;
-  color: #0a0d0b;
-}
-.rx-he-recover-card-euro {
-  margin: 0.55rem 0 0;
-  display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
-}
-.rx-he-recover-card-euro strong {
-  font-size: 1.85rem;
-  letter-spacing: -0.04em;
-  color: #0a0d0b;
-}
-.rx-he-recover-card-euro span[data-grade="Verified"] {
-  font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #067a42;
-  font-weight: 650;
-}
-.rx-he-recover-card-because {
-  margin: 0.45rem 0 0;
-  font-size: 0.85rem;
-  color: #4a524e;
-  line-height: 1.4;
-}
-.rx-he-recover-chain {
-  margin: 1rem 0 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-.rx-he-recover-chain li {
-  padding: 0.45rem 0.6rem;
-  background: #f7faf8;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  color: #0a0d0b;
-  border: 1px solid rgba(10, 13, 11, 0.06);
-}
-.rx-he-recover-card-note {
-  margin: 0.85rem 0 0;
-  font-size: 0.72rem;
-  color: #626a65;
-}
+
+/* Body sections — shared shell grid */
 .rx-rec-sec {
-  padding: 3.25rem 0;
+  padding: clamp(3rem, 7vh, 4.5rem) 0;
   background: #f7faf8;
   color: #0a0d0b;
 }
 .rx-rec-sec-band {
   background: #eef6f1;
 }
-.rx-rec-narrow {
+.rx-rec-block {
   max-width: 40rem;
 }
 .rx-rec-k {
-  margin: 0;
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  margin: 0 0 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #626a65;
   font-family: var(--font-mono, "IBM Plex Mono", monospace);
 }
 .rx-rec-h {
-  margin: 0.4rem 0 0;
-  font-size: clamp(1.55rem, 2.8vw, 2.1rem);
+  margin: 0;
+  font-size: clamp(1.55rem, 2.8vw, 2.15rem);
   font-weight: 680;
   letter-spacing: -0.035em;
+  line-height: 1.15;
   color: #0a0d0b;
 }
 .rx-rec-p {
-  margin: 0.75rem 0 0;
+  margin: 0.85rem 0 0;
   font-size: 1.05rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #4a524e;
 }
 .rx-rec-steps {
-  margin: 1.25rem 0 0;
+  margin: 1.35rem 0 0;
   padding: 0;
   list-style: none;
-  counter-reset: step;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 0.85rem;
+  counter-reset: recstep;
 }
 .rx-rec-steps li {
-  counter-increment: step;
+  counter-increment: recstep;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  column-gap: 0.85rem;
+  row-gap: 0.2rem;
   padding: 1rem 1.1rem;
   background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.07);
   border-radius: 14px;
-  border: 1px solid rgba(10, 13, 11, 0.08);
-  display: grid;
-  gap: 0.25rem;
 }
 .rx-rec-steps li::before {
-  content: counter(step);
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  color: #067a42;
+  content: counter(recstep);
+  grid-row: 1 / span 2;
+  align-self: start;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #0a0d0b;
+  color: #f7faf8;
+  font-size: 0.72rem;
   font-family: var(--font-mono, "IBM Plex Mono", monospace);
-  font-weight: 650;
 }
 .rx-rec-steps strong {
-  font-size: 1.05rem;
+  grid-column: 2;
+  font-size: 1rem;
   color: #0a0d0b;
 }
 .rx-rec-steps span {
-  font-size: 0.9rem;
+  grid-column: 2;
+  font-size: 0.95rem;
+  line-height: 1.45;
   color: #4a524e;
-  line-height: 1.4;
 }
 .rx-rec-stop {
-  margin: 1rem 0 0;
-  font-size: 0.9rem;
-  font-weight: 560;
+  margin: 1.1rem 0 0;
+  font-size: 0.95rem;
   color: #067a42;
+  font-weight: 560;
 }
 .rx-rec-list,
 .rx-rec-foils {
-  margin: 1rem 0 1.25rem;
-  padding-left: 1.1rem;
+  margin: 1.1rem 0 1.35rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+.rx-rec-list li,
+.rx-rec-foils li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.08);
+  font-size: 1.02rem;
   color: #0a0d0b;
-  line-height: 1.55;
+  line-height: 1.4;
 }
 .rx-rec-foils li {
-  margin-bottom: 0.35rem;
-  font-weight: 560;
+  font-weight: 520;
 }
 .rx-rec-vision {
-  background: #fff;
-  border: 1px solid rgba(10, 13, 11, 0.08);
+  border: 1px solid rgba(10, 13, 11, 0.1);
   border-radius: 14px;
-  padding: 1rem 1.15rem;
+  background: #fff;
+  padding: 0.85rem 1.1rem;
 }
 .rx-rec-vision summary {
   cursor: pointer;
-  font-weight: 650;
+  font-weight: 600;
   color: #0a0d0b;
   list-style: none;
 }
@@ -13284,21 +13247,78 @@ html:has(.radr-home) body {
   display: none;
 }
 .rx-rec-vision summary::after {
-  content: " +";
-  color: #00b96b;
+  content: "+";
+  float: right;
+  color: #626a65;
 }
 .rx-rec-vision[open] summary::after {
-  content: " −";
+  content: "–";
 }
 .rx-rec-vision p {
-  margin: 0.75rem 0 0;
-  font-size: 0.95rem;
+  margin: 0.75rem 0 0.25rem;
   color: #4a524e;
   line-height: 1.5;
 }
-.rx-rec-footer-cta {
-  padding-bottom: 4.5rem;
+
+/* Brand close — Nothing / off the / R A D R */
+.rx-rec-brand {
+  padding: clamp(4rem, 10vh, 6.5rem) 0;
+  border-top: 1px solid rgba(10, 13, 11, 0.06);
 }
+.rx-rec-brand-frame {
+  display: grid;
+  grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+.rx-notr {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  color: #0a0d0b;
+}
+.rx-notr-line {
+  display: block;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.rx-notr-stack {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.45rem;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+.rx-notr-stack span {
+  display: block;
+}
+.rx-rec-brand-copy {
+  max-width: 34rem;
+  padding-top: 0.35rem;
+}
+.rx-rec-brand-copy .rx-he-ctas {
+  margin-top: 1.35rem;
+}
+
+@media (max-width: 900px) {
+  .rx-he-recover {
+    min-height: 0;
+    align-items: stretch;
+  }
+  .rx-he-recover-frame,
+  .rx-rec-brand-frame {
+    grid-template-columns: 1fr;
+  }
+  .rx-he-recover-title {
+    max-width: none;
+  }
+}
+
 .lab-obj-because,
 .lab-obj-lineage-because {
   margin: 0.35rem 0 0;
