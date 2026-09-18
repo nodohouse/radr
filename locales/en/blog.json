@@ -460,7 +460,7 @@
             "The recover path we sell is deliberately short.",
             "Start from an invoice line — not a dashboard tile. Compare contract evidence (price, qty, UOM). Raise a finding when the invoice exceeds contract and the credit has not been applied.",
             "Then match a credit memo to the invoice or payment. Only when that apply lands do we call the euro Verified — Verified equals applied cash, not an estimate.",
-            "Stop there. One recovery. Value Trace. Done. No labor tour. No second general ledger. No overnight Autopilot pitch on day one."
+            "Stop there. One recovery. Value Trace. Done. No labor tour. No second general ledger. No overnight Autopilot pitch on the sales path."
           ]
         },
         {

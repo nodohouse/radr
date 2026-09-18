@@ -30,7 +30,7 @@ export type MarginStory = {
 export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
   id: "credit-not-applied",
   kicker: "Margin Recovery · Finance",
-  displayId: "D-4102 · Berlin Mitte",
+  displayId: "D-4102 · Berlin Mitte · Demo",
   variance: "Contract price variance",
   because:
     "Invoice €7.45/L vs contract €6.80/L · 420 L — €273 exposed",
@@ -47,7 +47,7 @@ export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
     { id: "wait", label: "Wait" },
   ],
   traceHref: "/app/lab/control-center?seed=recover",
-  traceLabel: "See a Verified Trace →",
+  traceLabel: "See a Verified Recovery →",
 };
 
 export const STORY_TWO_SITE_GAP: MarginStory = {
@@ -69,7 +69,7 @@ export const STORY_TWO_SITE_GAP: MarginStory = {
     { id: "wait", label: "Wait" },
   ],
   traceHref: "/app/lab/control-center?seed=margin-response",
-  traceLabel: "See a Verified Trace →",
+  traceLabel: "See a Verified Recovery →",
 };
 
 const STORIES = [STORY_CREDIT_NOT_APPLIED, STORY_TWO_SITE_GAP] as const;
@@ -179,8 +179,7 @@ export function MarginResponseCard({ stories = STORIES }: Props) {
       </NextLink>
 
       <p className="rx-mrc-note">
-        Expected until the credit is applied. Verified when Finance can match it
-        back.
+        Illustrative demo. Expected until the credit is applied.
       </p>
     </aside>
   );

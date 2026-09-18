@@ -10,7 +10,7 @@
   "seeRadr": "Start a 14-day recovery pilot",
   "contactSales": "Start a 14-day recovery pilot",
   "getStarted": "Start a 14-day recovery pilot",
-  "bookDemo": "See a Verified Trace",
+  "bookDemo": "See a Verified Recovery",
   "seeInAction": "Start a 14-day recovery pilot",
   "menu": "Menu",
   "close": "Close",
@@ -266,9 +266,9 @@
     "platform": {
       "title": "Platform",
       "featured": {
-        "title": "See a Verified Trace",
+        "title": "See a Verified Recovery",
         "desc": "One Margin Recovery Decision — from leak to verified euro.",
-        "cta": "See a Verified Trace"
+        "cta": "See a Verified Recovery"
       },
       "columns": {
         "decide": {

@@ -1,11 +1,11 @@
 {
   "metaTitle": "Pricing — RADR",
-  "metaDescription": "Margin Recovery Pilot, Core, and Control. 14-day discovery / action window with open-case verification. Prove recoverable margin on the stack you already run.",
+  "metaDescription": "Margin Recovery Pilot, Core, and Control. 14 days to find and action recoverable margin on the systems you already run.",
   "kicker": "Pricing",
   "heroTitleLine1": "Start with recoverable margin.",
   "heroTitleLine2": "Then expand the Decision layer.",
   "heroLead": "Pilot Margin Recovery first. Expand to broader Decision coverage when the economics hold.",
-  "heroSupport": "One defined financial scope. Prove Verified Value. Then grow.",
+  "heroSupport": "One defined recovery scope. Prove Verified Value. Then grow.",
   "how": {
     "kicker": "How pricing works",
     "title": "Price follows the operating surface.",
@@ -28,19 +28,19 @@
   "pilot": {
     "kicker": "Margin Recovery Pilot",
     "verb": "Prove",
-    "title": "14 days to find and stage recovery.",
-    "lead": "Uncover recoverable margin and prepare action. RADR keeps tracing open cases until value is applied or the case is closed.",
-    "body": "One group or 2–3 locations. Supplier invoices, contracts, POS / menu where needed, AP evidence where available. Includes historical open credits / disputes / rebates when available — using evidence you already have.",
+    "title": "Start with one recovery scope.",
+    "lead": "14 days to find and action recoverable margin. Open cases stay on RADR until the value is applied or the case is closed.",
+    "body": "2–3 locations. Supplier invoices, contracts, POS / menu where relevant, AP evidence where available.",
     "priceLabel": "Margin Recovery Pilot",
     "priceSub": "Scoped with you",
     "cta": "Start a 14-day recovery pilot",
     "points": [
-      "One defined financial scope",
+      "One defined recovery scope",
       "2–3 locations",
-      "Invoice / contract connection",
+      "Supplier invoice / contract analysis",
       "14-day discovery / action window",
       "Open-case verification tail",
-      "Evidence package · recovery Trace · Verified Value"
+      "Evidence package · recovery tracking · Verified Value"
     ]
   },
   "core": {
@@ -51,7 +51,7 @@
     "priceLabel": "Priced by location + operating scope",
     "cta": "Discuss Core",
     "features": [
-      "Operating connections and normalized model",
+      "Operating connections",
       "Cross-system Decisions and Decision Trace",
       "Futures — Early Access",
       "Verified Value",
@@ -156,39 +156,39 @@
   },
   "faq": {
     "kicker": "FAQ",
-    "title": "Buying questions",
+    "title": "Straight answers",
     "items": [
+      {
+        "q": "What if a supplier takes longer than 14 days?",
+        "a": "RADR keeps the case open until it resolves or is closed."
+      },
+      {
+        "q": "Do we have to replace our accounting or procurement stack?",
+        "a": "No. RADR is designed to work across the systems already in use."
+      },
+      {
+        "q": "Does RADR send disputes automatically?",
+        "a": "Not unless explicitly permitted by policy. Material external actions can remain approval-gated."
+      },
+      {
+        "q": "How does RADR define Verified Value?",
+        "a": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice."
+      },
       {
         "q": "How is RADR priced?",
         "a": "Pricing depends on locations, operating scope and the level of Decision responsibility RADR takes on."
       },
       {
-        "q": "Do you charge per user?",
-        "a": "RADR is priced around the operation it covers, not the number of people who need access. Exact access and governance are scoped with the deployment."
-      },
-      {
-        "q": "Do you charge per Decision?",
-        "a": "No. RADR is designed to continuously watch the operating surface within the agreed scope. We do not want teams deciding whether an issue is worth a credit to investigate."
-      },
-      {
-        "q": "Is there a free plan?",
-        "a": "RADR is deployed against real operating data and designed to influence economically material Decisions. We begin with paid scoped deployments rather than a free self-serve tier."
-      },
-      {
-        "q": "Can we start with one location?",
-        "a": "Yes. This is the preferred starting point for many deployments — often as a paid Pilot on one defined economic problem."
+        "q": "Can we start with one recovery scope?",
+        "a": "Yes. The Margin Recovery Pilot is the preferred starting point — often 2–3 locations on a defined financial problem."
       },
       {
         "q": "Do we need all our systems connected first?",
-        "a": "No. Start with what you have. RADR expands as more systems and context come online."
+        "a": "No. Start with invoices, contracts, and AP evidence where available. Expand as more systems come online."
       },
       {
         "q": "Can we expand later?",
-        "a": "Yes. RADR is designed to expand from one operating problem to locations and portfolios."
-      },
-      {
-        "q": "Can we start with only one economic territory?",
-        "a": "Yes. Deployments can begin focused on BUY, LABOR, SELL or RECOVER — but RADR’s operating model is cross-domain by design. Value often comes from the relationships between territories."
+        "a": "Yes. Recovery is where RADR starts. The same Decision system can extend into broader operating Decisions."
       },
       {
         "q": "Do you offer enterprise terms?",
@@ -196,10 +196,10 @@
       }
     ]
   },
-  "ready": "Put one operating problem on RADR.",
+  "ready": "Start with one recovery scope.",
   "readyLead": "Tell us what you run, where margin disappears, and which systems hold the evidence. We will scope the right place to start.",
-  "readyCta": "Talk to RADR",
-  "readySecondary": "See how RADR decides",
-  "contactSales": "Talk to RADR",
-  "bookDemo": "See how RADR decides"
+  "readyCta": "Start a 14-day recovery pilot",
+  "readySecondary": "See a Verified Recovery",
+  "contactSales": "Start a 14-day recovery pilot",
+  "bookDemo": "See a Verified Recovery"
 }

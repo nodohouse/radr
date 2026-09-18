@@ -13320,6 +13320,33 @@ html:has(.radr-home) body {
   line-height: 1.45;
   color: #0a0d0b;
 }
+.rx-rec-checks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0.35rem 1rem;
+}
+.rx-rec-faq {
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 1.15rem;
+}
+.rx-rec-faq dt {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: #0a0d0b;
+}
+.rx-rec-faq dd {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #4a524e;
+}
+.rx-rec-sec-band .rx-btn,
+.rx-rec-sec .rx-btn {
+  margin-top: 1.35rem;
+}
 
 /* Brand close — Nothing / off the / R A D R */
 .rx-rec-brand {
