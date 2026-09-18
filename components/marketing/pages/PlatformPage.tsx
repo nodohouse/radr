@@ -9,7 +9,6 @@ import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { PublicFooter, PublicNavbar } from "../PublicShell";
 import { PlatformDecisionTheater } from "./PlatformDecisionTheater";
-import { FloorMoment } from "../kinetic/FloorMoment";
 import { CTAS } from "@/lib/marketing/brand";
 import "@/app/product-chapters.css";
 import "@/app/editorial.css";
@@ -44,8 +43,8 @@ export function PlatformPage() {
               From first signal to lasting memory.
             </h1>
             <p>
-              D-1911 travels from signal to Floor to Verified to Memory — one
-              object, every stage.
+              Restaurant · Hotel · Serviced apartment — same Decision object,
+              every stage.
             </p>
             <nav className="rx-plat-arch" aria-label="Platform architecture">
               {ARCH.map((a, i) => (
@@ -60,23 +59,12 @@ export function PlatformPage() {
 
         <PlatformDecisionTheater />
 
-        <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
-          <div className="rx-shell">
-            <FloorMoment compact />
-            <p style={{ marginTop: "1rem" }}>
-              <NextLink href="/product/floor" className="rx-btn rx-btn-ghost">
-                RADR Floor <span aria-hidden="true">→</span>
-              </NextLink>
-            </p>
-          </div>
-        </section>
-
         <section className="rx-plat-close" data-nav-theme="light">
           <div className="rx-shell">
             <h2 className="rx-rec-h">Start where the economics are clearest.</h2>
             <p className="rx-rec-p">
               Recovery Pilot on Supplier/AP and/or Reconciliation — then expand
-              the same Decision layer to Floor, Futures, and Memory.
+              the same Decision layer across hospitality operations.
             </p>
             <div className="rx-he-ctas">
               <Link

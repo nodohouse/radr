@@ -29,7 +29,7 @@ export function FloorPage() {
           <div className="rx-shell">
             <FloorChapters />
             <div className="rx-he-ctas" style={{ marginTop: "2.5rem" }}>
-              <NextLink href="/product/platform" className="rx-btn rx-btn-ghost">
+              <NextLink href="/product" className="rx-btn rx-btn-ghost">
                 Platform <span aria-hidden="true">→</span>
               </NextLink>
               <Link
