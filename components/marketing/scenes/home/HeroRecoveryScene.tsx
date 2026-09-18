@@ -50,7 +50,7 @@ export function HeroRecoveryScene() {
       setBeat("verified");
       return;
     }
-    let start = performance.now();
+    const start = performance.now();
     let raf = 0;
     const tick = (now: number) => {
       const t = (now - start) % LOOP_MS;
