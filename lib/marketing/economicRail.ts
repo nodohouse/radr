@@ -45,6 +45,8 @@ export const HOME_RAIL: EconomicRailItem[] = [
   },
   {
     id: "orphan",
+    // Gross night at risk · CANON_ORPHAN.exposureEuro (€164). Pass brief cited €184;
+    // keep fixture so Home / Platform / Value stay coherent.
     euro: money(CANON_ORPHAN.exposureEuro),
     label: "Night at risk",
     meta: "Serviced · D-3104",

@@ -110,7 +110,7 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
       },
       phone: {
         role: "Ops",
-        badge: "At risk",
+        badge: "Value at risk",
         title: "Unit 24 · 1-night gap",
         body: "72h recovery window · direct recovery staged",
         meta: d.displayId,
