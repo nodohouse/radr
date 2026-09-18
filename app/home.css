@@ -13076,11 +13076,13 @@ html:has(.radr-home) body {
   min-height: 0;
   display: block;
 }
-/* Left stacked lockup + money · right Decision proof */
+/* Balanced composition: stacked lockup + Decision card as one centered pair */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(2rem, 5vw, 3.5rem);
+  grid-template-columns: minmax(0, 24rem) minmax(0, 27rem);
+  justify-content: center;
+  column-gap: clamp(1.75rem, 4vw, 3rem);
+  row-gap: 2rem;
   align-items: center;
   width: 100%;
 }
@@ -13088,12 +13090,13 @@ html:has(.radr-home) body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 34rem;
+  max-width: none;
+  width: 100%;
 }
 .rx-he-recover-proof {
   width: 100%;
-  max-width: 28rem;
-  justify-self: end;
+  max-width: none;
+  justify-self: stretch;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
@@ -13104,11 +13107,11 @@ html:has(.radr-home) body {
   font-family: var(--font-mono, "IBM Plex Mono", monospace);
 }
 .rx-he-recover-title {
-  margin: 1.15rem 0 0;
-  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  margin: 1rem 0 0;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
   font-weight: 680;
   letter-spacing: -0.035em;
-  line-height: 1.15;
+  line-height: 1.18;
   color: #0a0d0b;
   max-width: 22ch;
 }
@@ -13121,14 +13124,14 @@ html:has(.radr-home) body {
   max-width: 34rem;
 }
 .rx-he-recover-support {
-  margin: 0.7rem 0 0;
-  font-size: 0.98rem;
+  margin: 0.65rem 0 0;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: #4a524e;
-  max-width: 32rem;
+  max-width: 28rem;
 }
 .rx-he-recover .rx-he-ctas {
-  margin-top: 1.55rem;
+  margin-top: 1.35rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
@@ -13291,15 +13294,15 @@ html:has(.radr-home) body {
   color: #0a0d0b;
 }
 
-/* Screenshot stack: NOTHING / OFF THE / R△DR — dominant left column */
+/* Screenshot stack — dominant but proportional to Decision card */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
   gap: 0;
-  font-size: clamp(3.25rem, 7.2vw, 6.75rem);
+  font-size: clamp(2.55rem, 4.8vw, 4.5rem);
   font-weight: 760;
   letter-spacing: -0.055em;
-  line-height: 0.88;
-  max-width: 9.5ch;
+  line-height: 0.9;
+  max-width: none;
 }
 .rx-notr--display .rx-notr-line {
   font-size: 1em;
@@ -13360,6 +13363,7 @@ html:has(.radr-home) body {
   .rx-he-recover-frame,
   .rx-rec-brand-frame {
     grid-template-columns: 1fr;
+    justify-content: stretch;
   }
   .rx-he-recover-proof {
     max-width: none;
@@ -13370,8 +13374,7 @@ html:has(.radr-home) body {
   }
   .rx-notr--display,
   .rx-he-h0.rx-notr--display {
-    font-size: clamp(3rem, 15vw, 4.75rem);
-    max-width: none;
+    font-size: clamp(2.75rem, 12vw, 4rem);
   }
 }
 
