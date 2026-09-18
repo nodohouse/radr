@@ -2,7 +2,7 @@
 
 /**
  * Recover → Prevent → Optimize → Autopilot
- * One evolving operating state — not four equal cards.
+ * One evolving scene — same leak object transforms.
  */
 
 import { useState } from "react";
@@ -47,6 +47,36 @@ export function ProgressionLadder({
             <em>{titles[step.stage]}</em>
           </button>
         ))}
+      </div>
+
+      <div className="rx-prog-scene" data-stage={active} aria-hidden="true">
+        <div className="rx-prog-scene-obj">
+          <span>
+            {active === "RECOVER"
+              ? "Leak · €273 exposed"
+              : active === "PREVENT"
+                ? "Same pattern · caught earlier"
+                : active === "OPTIMIZE"
+                  ? "Compare responses"
+                  : "Trusted response · within policy"}
+          </span>
+          <div className="rx-euro-chip" data-sealed={active === "AUTOPILOT" ? "true" : undefined}>
+            <strong>€273</strong>
+            <em>{active === "AUTOPILOT" ? "auto" : "in play"}</em>
+          </div>
+        </div>
+        <div className="rx-prog-forks">
+          <i />
+          <i data-rec="true" />
+          <i />
+        </div>
+        <div className="rx-prog-auto">
+          <span data-on={active === "AUTOPILOT" ? undefined : "true"}>Suggest</span>
+          <span data-on="true">Stage</span>
+          <span data-on={active === "AUTOPILOT" ? "true" : undefined}>
+            Auto within policy
+          </span>
+        </div>
       </div>
 
       <article className="rx-prog-panel" data-stage={active}>

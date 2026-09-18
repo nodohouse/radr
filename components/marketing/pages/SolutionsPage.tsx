@@ -18,7 +18,8 @@ import {
 } from "@/lib/radr/intelligence";
 import type { CanonDecision } from "@/lib/radr/decision/demo/canonical";
 import { useTranslations } from "next-intl";
-import { ValueLeakMap } from "@/components/marketing/scenes/home/ValueLeakMap";
+import { StickyStory } from "@/components/marketing/kinetic/StickyStory";
+import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual";
 import type { ProblemFamily } from "@/lib/radr/problemFamilies";
 import { IntelFuturesFork } from "./IntelFuturesFork";
 import { ValueLeaksNarratives } from "./ValueLeaksNarratives";
@@ -26,6 +27,7 @@ import "@/app/econ.css";
 import "@/app/home.css";
 import "@/app/intelligence.css";
 import "@/app/motion.css";
+import "@/app/kinetic.css";
 
 const LENS_ORDER: TerritoryRouteId[] = ["buy", "labor", "sell", "recover"];
 
@@ -453,36 +455,24 @@ function SolutionsLeakMap() {
     "PROCUREMENT",
     "PERISHABLE_REVENUE",
   ];
-  const labels = Object.fromEntries(
-    familyKeys.map((id) => [id, t(`families.${id}.label`)]),
-  ) as Record<ProblemFamily, string>;
-  const leaks = Object.fromEntries(
-    familyKeys.map((id) => [id, t(`families.${id}.leaks`)]),
-  ) as Record<ProblemFamily, string>;
-  const does = Object.fromEntries(
-    familyKeys.map((id) => [id, t(`families.${id}.does`)]),
-  ) as Record<ProblemFamily, string>;
-  const verifies = Object.fromEntries(
-    familyKeys.map((id) => [id, t(`families.${id}.verifies`)]),
-  ) as Record<ProblemFamily, string>;
+  const chapters = familyKeys.map((id) => ({
+    id,
+    kicker: t(`families.${id}.label`),
+    title: t(`families.${id}.label`),
+    body: `${t(`families.${id}.leaks`)} ${t(`families.${id}.does`)}`,
+    meta: t(`families.${id}.verifies`),
+  }));
 
   return (
     <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
       <div className="rx-shell">
-        <ValueLeakMap
+        <StickyStory
           kicker={t("families.kicker")}
           title={t("families.title")}
           lead={t("families.lead")}
-          labels={labels}
-          leaks={leaks}
-          does={does}
-          verifies={verifies}
-          whatLeaks={t("families.whatLeaks")}
-          whatDoes={t("families.whatDoes")}
-          whatVerifies={t("families.whatVerifies")}
-          maturityPilot={t("families.maturityPilot")}
-          maturityExpansion={t("families.maturityExpansion")}
-          maturityPlanned={t("families.maturityPlanned")}
+          chapters={chapters}
+          vhPerChapter={65}
+          renderVisual={(i) => <LeakClassVisual family={familyKeys[i]!} />}
         />
       </div>
     </section>

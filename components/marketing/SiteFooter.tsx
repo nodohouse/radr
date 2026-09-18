@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { COMPANY } from "./config/company";
 import { RadrWordmark } from "./RadrWordmark";
 import { SocialIcons } from "./SocialIcons";
+import "@/app/kinetic.css";
 
 /** Quiet global footer — one company, one story. */
 export function SiteFooter() {
@@ -73,7 +74,7 @@ export function SiteFooter() {
                 className="rx-footer-mark"
               />
             </Link>
-            <p className="rx-footer-slogan">{tc("slogan")}</p>
+            <p className="rx-footer-slogan rx-footer-scan">{tc("slogan")}</p>
           </div>
 
           <div className="rx-footer-cols">

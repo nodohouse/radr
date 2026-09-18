@@ -7,10 +7,12 @@ import { FeatureCompare } from "@/components/marketing/pricing/FeatureCompare";
 import { PricingExpansion } from "@/components/marketing/pricing/PricingExpansion";
 import { PricingFaq } from "@/components/marketing/pricing/PricingFaq";
 import { PricingHowWorks } from "@/components/marketing/pricing/PricingHowWorks";
+import { PricingResponsibilityTrack } from "@/components/marketing/pricing/PricingResponsibilityTrack";
 import { PricingTiers } from "@/components/marketing/pricing/PricingTiers";
 import { pricingConfig } from "@/components/marketing/pricing/config";
 import { buildAlternatesForLocale } from "@/i18n/seo";
 import "@/app/pricing.css";
+import "@/app/kinetic.css";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -53,6 +55,7 @@ export default async function PricingPage({ params }: Props) {
         </section>
 
         <PricingHowWorks />
+        <PricingResponsibilityTrack />
         <PricingTiers />
         <FeatureCompare defaultCollapsed />
         <PricingExpansion />

@@ -1,11 +1,14 @@
 "use client";
 
 /**
- * Where value leaks — five narrative sections.
- * Intelligence classes, not modules.
+ * Where value leaks — five narrative sections with unique kinetic visuals.
  */
 
 import { PROBLEM_FAMILY_DEFS, type ProblemFamily } from "@/lib/radr/problemFamilies";
+import { EconomicRail } from "@/components/marketing/kinetic/EconomicRail";
+import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual";
+import { LEAK_MARQUEE } from "@/lib/marketing/economicRail";
+import "@/app/kinetic.css";
 
 type Section = {
   id: string;
@@ -60,13 +63,7 @@ const SECTIONS: Section[] = [
     family: "COST_VARIANCE",
     anchor: "cost-variance",
     headline: "Food cost moved. Why?",
-    loss: [
-      "Supplier price",
-      "Yield",
-      "Waste",
-      "Menu mix",
-      "Sales mix",
-    ],
+    loss: ["Supplier price", "Yield", "Waste", "Menu mix", "Sales mix"],
     euro: "Food cost +2.3 pts",
     sees: [
       "Driver decomposition",
@@ -116,7 +113,14 @@ const SECTIONS: Section[] = [
 export function ValueLeaksNarratives() {
   return (
     <div className="rx-vl-narratives">
-      {SECTIONS.map((s) => {
+      <EconomicRail
+        items={LEAK_MARQUEE}
+        durationSec={40}
+        variant="compact"
+        ariaLabel="Where value leaks examples"
+      />
+
+      {SECTIONS.map((s, i) => {
         const maturity = PROBLEM_FAMILY_DEFS[s.family].maturity;
         return (
           <section
@@ -138,34 +142,42 @@ export function ValueLeaksNarratives() {
                 <p className="rx-vl-punch">{s.punch}</p>
               </header>
 
-              <div className="rx-vl-grid">
-                <article>
-                  <p className="rx-intel-class-k">The loss</p>
-                  <ul>
-                    {s.loss.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                  {s.euro ? <p className="rx-intel-class-euro">{s.euro}</p> : null}
-                </article>
-                <article>
-                  <p className="rx-intel-class-k">What RADR sees</p>
-                  <ul>
-                    {s.sees.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                </article>
-                <article>
-                  <p className="rx-intel-class-k">The Decision</p>
-                  <p>{s.decision}</p>
-                </article>
-                <article>
-                  <p className="rx-intel-class-k">What can be verified</p>
-                  <p>{s.verified}</p>
-                </article>
+              <div className="rx-vl-kinetic">
+                <LeakClassVisual family={s.family} />
+                <div className="rx-vl-grid">
+                  <article>
+                    <p className="rx-intel-class-k">The loss</p>
+                    <ul>
+                      {s.loss.map((l) => (
+                        <li key={l}>{l}</li>
+                      ))}
+                    </ul>
+                    {s.euro ? (
+                      <p className="rx-intel-class-euro">{s.euro}</p>
+                    ) : null}
+                  </article>
+                  <article>
+                    <p className="rx-intel-class-k">What RADR sees</p>
+                    <ul>
+                      {s.sees.map((l) => (
+                        <li key={l}>{l}</li>
+                      ))}
+                    </ul>
+                  </article>
+                  <article>
+                    <p className="rx-intel-class-k">The Decision</p>
+                    <p>{s.decision}</p>
+                  </article>
+                  <article>
+                    <p className="rx-intel-class-k">What can be verified</p>
+                    <p>{s.verified}</p>
+                  </article>
+                </div>
               </div>
             </div>
+            {i < SECTIONS.length - 1 ? (
+              <div className="rx-vl-sep" aria-hidden="true" />
+            ) : null}
           </section>
         );
       })}

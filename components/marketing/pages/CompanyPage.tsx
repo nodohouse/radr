@@ -10,6 +10,7 @@ import { SiteNav } from "../SiteNav";
 import { useInView } from "@/components/marketing/motion/useInView";
 import { CTAS } from "@/lib/marketing/brand";
 import "@/app/company.css";
+import "@/app/kinetic.css";
 
 const BELIEFS = [
   {
@@ -139,6 +140,40 @@ export function CompanyPage() {
           </div>
         </section>
 
+        <section className="rx-co-states" data-nav-theme="light" aria-label="Founder thesis">
+          {[
+            "I wanted to open a restaurant.",
+            "The software wasn’t the problem.",
+            "The decisions between the systems were.",
+            "RADR came from that gap.",
+          ].map((line, i) => (
+            <div key={line} className="rx-co-state">
+              <div className="rx-shell">
+                <CoReveal delay={i * 40}>
+                  <p>{line}</p>
+                </CoReveal>
+              </div>
+            </div>
+          ))}
+        </section>
+
+        <div className="rx-co-hosp-strip" aria-hidden="true">
+          {(
+            [
+              ["/demo/facilities/berlin-dining.jpg", "Dining room"],
+              ["/demo/facilities/berlin-bar.jpg", "Service"],
+              ["/demo/facilities/canal-deluxe-king.jpg", "Hotel"],
+              ["/demo/facilities/lisbon-studio.jpg", "Apartments"],
+              ["/demo/facilities/lisbon-onebed.jpg", "Front desk"],
+            ] as const
+          ).map(([src, cap]) => (
+            <figure key={cap}>
+              <Image src={src} alt="" fill sizes="42vw" />
+              <figcaption>{cap}</figcaption>
+            </figure>
+          ))}
+        </div>
+
         <section className="rx-co2-environments" data-nav-theme="light">
           <div className="rx-shell">
             <CoReveal>
@@ -201,6 +236,15 @@ export function CompanyPage() {
               <p className="rx-co2-why-now-sub">
                 That is the Decision Gap RADR is built for.
               </p>
+              <div className="rx-co-gap-diagram" aria-hidden="true">
+                <span>POS</span>
+                <span>Reservations</span>
+                <span>Labor</span>
+                <span>Inventory</span>
+                <span>Accounting</span>
+                <em>Decision Gap</em>
+                <strong>RADR</strong>
+              </div>
               <div className="rx-co2-gtm-bridge">
                 <p className="rx-intel-k">Where we start</p>
                 <h3>Prove the economics first.</h3>
