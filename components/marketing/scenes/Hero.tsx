@@ -7,8 +7,9 @@ import { MarginResponseCard } from "@/components/marketing/scenes/home/MarginRes
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 
 /**
- * Left ~40%: NOTHING OFF THE R△DR
- * Right ~60%: money line + Decision card (product context)
+ * Screenshot composition exact:
+ * LEFT — all text (H0 stack + money + foils + CTAs)
+ * RIGHT — product only (Decision card)
  */
 export function Hero() {
   const t = useTranslations("homepage.hero");
@@ -22,11 +23,8 @@ export function Hero() {
     >
       <div className="rx-shell">
         <div className="rx-he-recover-frame">
-          <div className="rx-he-recover-brand">
+          <div className="rx-he-recover-copy">
             <NothingOffTheRadr size="display" className="rx-he-h0" />
-          </div>
-
-          <div className="rx-he-recover-product">
             <h1 className="rx-he-recover-title">{t("title")}</h1>
             <p className="rx-he-recover-support">{t("support")}</p>
             <div className="rx-he-ctas">
@@ -43,9 +41,10 @@ export function Hero() {
                 {t("ctaSecondary")}
               </NextLink>
             </div>
-            <div className="rx-he-recover-proof">
-              <MarginResponseCard />
-            </div>
+          </div>
+
+          <div className="rx-he-recover-product">
+            <MarginResponseCard />
           </div>
         </div>
       </div>

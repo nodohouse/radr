@@ -13073,32 +13073,30 @@ html:has(.radr-home) body {
   min-height: 0;
   display: block;
 }
-/* Left ~40% brand lockup · right ~60% product context */
+/* Screenshot split: all text left · product right */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
   column-gap: clamp(2rem, 4.5vw, 3.5rem);
   row-gap: 2rem;
   align-items: center;
   width: 100%;
 }
-.rx-he-recover-brand {
-  width: 100%;
-  max-width: none;
-  padding-top: 0;
-  container-type: inline-size;
-  container-name: he-brand;
-}
-.rx-he-recover-product {
+.rx-he-recover-copy {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
-  max-width: 36rem;
+  max-width: 28rem;
+}
+.rx-he-recover-product {
+  width: 100%;
+  max-width: none;
   justify-self: stretch;
 }
-.rx-he-recover-proof {
+.rx-he-recover-product .rx-mrc {
   width: 100%;
-  margin-top: 1.35rem;
+  min-height: 28rem;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
@@ -13109,13 +13107,13 @@ html:has(.radr-home) body {
   font-family: var(--font-mono, "IBM Plex Mono", monospace);
 }
 .rx-he-recover-title {
-  margin: 0;
-  font-size: clamp(1.4rem, 2.35vw, 1.95rem);
+  margin: 1.15rem 0 0;
+  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
   font-weight: 680;
   letter-spacing: -0.035em;
-  line-height: 1.18;
+  line-height: 1.2;
   color: #0a0d0b;
-  max-width: 26ch;
+  max-width: 24ch;
 }
 .rx-he-recover-sub {
   margin: 1rem 0 0;
@@ -13126,14 +13124,14 @@ html:has(.radr-home) body {
   max-width: 34rem;
 }
 .rx-he-recover-support {
-  margin: 0.65rem 0 0;
-  font-size: 0.95rem;
+  margin: 0.7rem 0 0;
+  font-size: 0.98rem;
   line-height: 1.5;
   color: #4a524e;
-  max-width: 30rem;
+  max-width: 28rem;
 }
 .rx-he-recover .rx-he-ctas {
-  margin-top: 1.25rem;
+  margin-top: 1.45rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
@@ -13296,18 +13294,16 @@ html:has(.radr-home) body {
   color: #0a0d0b;
 }
 
-/* Left-rail stacked lockup — fill ~40% column (cqi tracks brand rail) */
+/* Left-rail stacked lockup — screenshot energy */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
   gap: 0;
   width: 100%;
   max-width: none;
-  /* vw fallback, then cqi so NOTHING fills the brand rail */
-  font-size: clamp(2.85rem, 5.8vw, 6.75rem);
-  font-size: clamp(2.85rem, 21cqi, 6.75rem);
+  font-size: clamp(2.75rem, 5.5vw, 5.25rem);
   font-weight: 780;
   letter-spacing: -0.062em;
-  line-height: 0.86;
+  line-height: 0.88;
 }
 .rx-notr--display .rx-notr-line {
   font-size: 1em;
@@ -13318,7 +13314,7 @@ html:has(.radr-home) body {
 }
 .rx-notr--display .rx-notr-wm {
   display: flex;
-  margin-top: 0.01em;
+  margin-top: 0.02em;
   font-size: 1em !important;
   font-weight: inherit !important;
   letter-spacing: inherit !important;
@@ -13379,12 +13375,15 @@ html:has(.radr-home) body {
     grid-template-columns: 1fr;
     align-items: start;
   }
-  .rx-he-recover-brand {
+  .rx-he-recover-copy {
     max-width: none;
   }
   .rx-he-recover-product {
     max-width: none;
     justify-self: stretch;
+  }
+  .rx-he-recover-product .rx-mrc {
+    min-height: 0;
   }
   .rx-he-recover-title {
     max-width: none;
