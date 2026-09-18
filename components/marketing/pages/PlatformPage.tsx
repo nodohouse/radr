@@ -6,6 +6,7 @@ import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { SiteFooter } from "../SiteFooter";
 import { SiteNav } from "../SiteNav";
+import { PlatformSignature } from "./PlatformSignature";
 import {
   CANON_ORPHAN,
   CANON_OTA,
@@ -23,6 +24,7 @@ import { CTAS } from "@/lib/marketing/brand";
 import "@/app/product-chapters.css";
 import "@/app/editorial.css";
 import "@/app/econ.css";
+import "@/app/home.css";
 
 const STAGES = [
   "CONNECT",
@@ -202,6 +204,8 @@ export function PlatformPage() {
             </ol>
           </div>
         </section>
+
+        <PlatformSignature />
 
         <section className="rx-plat-live-body" data-nav-theme="light">
           <div className="rx-shell">

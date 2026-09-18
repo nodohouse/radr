@@ -5,17 +5,12 @@ import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { Suspense } from "react";
-import { MarginResponseCard } from "@/components/marketing/scenes/home/MarginResponseCard";
-import { HeroRadrPhone } from "@/components/marketing/scenes/home/HeroRadrPhone";
+import { HeroRecoveryScene } from "@/components/marketing/scenes/home/HeroRecoveryScene";
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 
 /**
- * LEFT — brand + money + CTAs
- * RIGHT — Decision card + overlapping mobile push story
- *
- * Hero A/B: default A. Internal B via ?hero=b
- * A: Recover the value your operation is losing.
- * B: Find where hospitality loses money. Recover it. Prove it.
+ * Signature hero — brand + recovery thesis + living D-4102 scene.
+ * A/B: default A. Internal B via ?hero=b
  */
 function HeroInner() {
   const t = useTranslations("homepage.hero");
@@ -25,7 +20,7 @@ function HeroInner() {
 
   return (
     <section
-      className="rx-he rx-he-light rx-he-recover rx-he-margin"
+      className="rx-he rx-he-light rx-he-recover rx-he-margin rx-he-sig"
       id="product"
       data-nav-theme="light"
       data-hero-variant={useB ? "b" : "a"}
@@ -54,10 +49,7 @@ function HeroInner() {
           </div>
 
           <div className="rx-he-recover-product">
-            <div className="rx-he-product-stage">
-              <MarginResponseCard />
-              <HeroRadrPhone />
-            </div>
+            <HeroRecoveryScene />
           </div>
         </div>
       </div>

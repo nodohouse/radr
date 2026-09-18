@@ -4,13 +4,14 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { Hero } from "@/components/marketing/scenes/Hero";
-import { ProblemFamiliesRail } from "@/components/marketing/scenes/home/ProblemFamiliesRail";
-import { PROGRESSION } from "@/lib/radr/problemFamilies";
-import type { ProblemFamily } from "@/lib/radr/problemFamilies";
+import { ValueLeakMap } from "@/components/marketing/scenes/home/ValueLeakMap";
+import { RecoveryStoryObject } from "@/components/marketing/scenes/home/RecoveryStoryObject";
+import { ProgressionLadder } from "@/components/marketing/scenes/home/ProgressionLadder";
+import type { ProblemFamily, ProgressionStage } from "@/lib/radr/problemFamilies";
 
 /**
- * Homepage — recover value that fragmented hospitality operations lose.
- * Hero → five leaks → one story → how RADR thinks → recover→prevent →
+ * Homepage — category-defining recovery story.
+ * Hero → leak map → recovery object → how RADR thinks → progression →
  * stack → pilot → platform → FAQ → close.
  */
 export function HomepageSpine() {
@@ -37,13 +38,26 @@ export function HomepageSpine() {
     familyKeys.map((id) => [id, t(`families.${id}.verifies`)]),
   ) as Record<ProblemFamily, string>;
 
+  const progTitles = {
+    RECOVER: t("progression.RECOVER.title"),
+    PREVENT: t("progression.PREVENT.title"),
+    OPTIMIZE: t("progression.OPTIMIZE.title"),
+    AUTOPILOT: t("progression.AUTOPILOT.title"),
+  } as Record<ProgressionStage, string>;
+  const progBodies = {
+    RECOVER: t("progression.RECOVER.body"),
+    PREVENT: t("progression.PREVENT.body"),
+    OPTIMIZE: t("progression.OPTIMIZE.body"),
+    AUTOPILOT: t("progression.AUTOPILOT.body"),
+  } as Record<ProgressionStage, string>;
+
   return (
     <div className="rx-home-spine">
       <Hero />
 
       <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
-          <ProblemFamiliesRail
+          <ValueLeakMap
             kicker={t("families.kicker")}
             title={t("families.title")}
             lead={t("families.lead")}
@@ -63,56 +77,11 @@ export function HomepageSpine() {
 
       <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
-          <div className="rx-rec-block rx-rec-story">
-            <p className="rx-rec-k">{t("story.kicker")}</p>
-            <h2 className="rx-rec-h">{t("story.title")}</h2>
-            <p className="rx-rec-p">{t("story.lead")}</p>
-
-            <div className="rx-rec-story-flow">
-              <article className="rx-rec-beat">
-                <p className="rx-rec-beat-k">{t("story.leakK")}</p>
-                <ul className="rx-rec-beat-facts">
-                  <li>{t("story.leakInvoice")}</li>
-                  <li>{t("story.leakContract")}</li>
-                  <li>{t("story.leakQty")}</li>
-                </ul>
-                <p className="rx-rec-beat-euro">{t("story.leakEuro")}</p>
-              </article>
-
-              <article className="rx-rec-beat">
-                <p className="rx-rec-beat-k">{t("story.checksK")}</p>
-                <ul className="rx-rec-beat-facts rx-rec-checks">
-                  <li>{t("story.c1")}</li>
-                  <li>{t("story.c2")}</li>
-                  <li>{t("story.c3")}</li>
-                  <li>{t("story.c4")}</li>
-                  <li>{t("story.c5")}</li>
-                </ul>
-              </article>
-
-              <article className="rx-rec-beat">
-                <p className="rx-rec-beat-k">{t("story.decisionK")}</p>
-                <h3 className="rx-rec-beat-h">{t("story.decisionTitle")}</h3>
-                <p className="rx-rec-beat-p">{t("story.decisionBecause")}</p>
-              </article>
-
-              <article className="rx-rec-beat">
-                <p className="rx-rec-beat-k">{t("story.actionK")}</p>
-                <p className="rx-rec-beat-p">{t("story.actionBody")}</p>
-              </article>
-
-              <article className="rx-rec-beat">
-                <p className="rx-rec-beat-k">{t("story.outcomeK")}</p>
-                <p className="rx-rec-beat-p">{t("story.outcomeBody")}</p>
-              </article>
-
-              <article className="rx-rec-beat rx-rec-beat-verified">
-                <p className="rx-rec-beat-k">{t("story.verifiedK")}</p>
-                <p className="rx-rec-beat-euro">{t("story.verifiedEuro")}</p>
-                <p className="rx-rec-beat-p">{t("story.verifiedBody")}</p>
-              </article>
-            </div>
-          </div>
+          <RecoveryStoryObject
+            kicker={t("story.kicker")}
+            title={t("story.title")}
+            lead={t("story.lead")}
+          />
         </div>
       </section>
 
@@ -138,19 +107,13 @@ export function HomepageSpine() {
 
       <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
-          <div className="rx-rec-block">
-            <p className="rx-rec-k">{t("progression.kicker")}</p>
-            <h2 className="rx-rec-h">{t("progression.title")}</h2>
-            <p className="rx-rec-p">{t("progression.lead")}</p>
-            <ol className="rx-rec-progress">
-              {PROGRESSION.map((step) => (
-                <li key={step.stage}>
-                  <strong>{t(`progression.${step.stage}.title`)}</strong>
-                  <span>{t(`progression.${step.stage}.body`)}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <ProgressionLadder
+            kicker={t("progression.kicker")}
+            title={t("progression.title")}
+            lead={t("progression.lead")}
+            titles={progTitles}
+            bodies={progBodies}
+          />
         </div>
       </section>
 

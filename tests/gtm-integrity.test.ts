@@ -193,21 +193,21 @@ describe("recover seed + brief scope", () => {
 });
 
 describe("mobile phone states stay role-actionable", () => {
-  it("HeroRadrPhone states cover urgent · brief · shift · recover", async () => {
+  it("RadrPhone exports CFO recover · GM perishable · Verified", async () => {
     const src = await import("fs").then((fs) =>
       fs.promises.readFile(
         new URL(
-          "../components/marketing/scenes/home/HeroRadrPhone.tsx",
+          "../components/marketing/scenes/home/RadrPhone.tsx",
           import.meta.url,
         ).pathname,
         "utf8",
       ),
     );
-    expect(src).toContain('id: "cfo"');
-    expect(src).toContain('id: "gm"');
+    expect(src).toContain("PHONE_CFO_RECOVER");
+    expect(src).toContain("PHONE_GM_PERISHABLE");
+    expect(src).toContain("PHONE_VERIFIED");
     expect(src).toContain("€273");
     expect(src).toContain("€184");
-    expect(src).toContain("CFO");
     expect(src).not.toContain("build an agent");
   });
 });

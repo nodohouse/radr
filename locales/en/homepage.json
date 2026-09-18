@@ -1620,7 +1620,7 @@
   },
   "recover": {
     "families": {
-      "kicker": "Intelligence classes · not modules",
+      "kicker": "Value leak map",
       "title": "The money doesn't disappear in one place.",
       "lead": "RADR finds value that is leaking, stuck, missed, or about to disappear. You interact with Decisions and Verified outcomes — problem class is context.",
       "whatLeaks": "What leaks",
@@ -1691,9 +1691,9 @@
       "kicker": "How RADR thinks",
       "title": "You don't teach RADR what to look for.",
       "flow": "Signal → Evidence → Decision → Action → Outcome → Verified",
-      "lead": "RADR already understands hospitality economics — contract variance, settlement mismatch, no-shows, yield problems, room-night expiry.",
-      "diff": "It connects the evidence, compares the responses, and measures what happened.",
-      "close": "No custom skill required to know what a supplier credit should look like — or what counts as Verified.",
+      "lead": "RADR already understands the economic patterns that matter in hospitality: contract variance, settlement mismatch, yield loss, price dispersion, no-show exposure, room-night expiry.",
+      "diff": "It connects the evidence, compares the responses, and follows the outcome.",
+      "close": "No custom agent required to know what a supplier credit should look like — or what counts as Verified.",
       "examples": [
         "Credit issued. Never applied.",
         "Three locations. Three prices.",
@@ -1708,15 +1708,15 @@
       "lead": "Recover → Prevent → Optimize → Autopilot.",
       "RECOVER": {
         "title": "Recover",
-        "body": "Find and recover existing leakage."
+        "body": "Find the value already lost."
       },
       "PREVENT": {
         "title": "Prevent",
-        "body": "Detect conditions before value expires."
+        "body": "Catch the condition before the value expires."
       },
       "OPTIMIZE": {
         "title": "Optimize",
-        "body": "Choose the best response across competing constraints."
+        "body": "Choose the strongest response across tradeoffs."
       },
       "AUTOPILOT": {
         "title": "Autopilot",
