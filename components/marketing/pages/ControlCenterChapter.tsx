@@ -17,10 +17,12 @@ import {
   canonScenario,
 } from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
+import { SilenceField } from "@/components/marketing/kinetic/SilenceField";
 import { CTAS } from "@/lib/marketing/brand";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
+import "@/app/kinetic.css";
 
 const PORTFOLIO = [
   {
@@ -155,14 +157,15 @@ export function ControlCenterChapter() {
               <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
                 The most important thing RADR removes is noise.
               </h1>
+              <SilenceField
+                signalsLabel={`${FINDING_FUNNEL.signals.toLocaleString("en-US")} signals observed · most suppressed`}
+                needsYou={BRIEF_ATTENTION.needsYou}
+              />
               <p
                 className="rx-cc-silence-need"
-                data-on={phase === "field" ? "true" : "false"}
+                data-on={phase === "silence" ? "true" : "false"}
+                style={{ marginTop: "1rem" }}
               >
-                <strong>{FINDING_FUNNEL.signals.toLocaleString("en-US")}</strong>
-                <span>SIGNALS OBSERVED · MOST SUPPRESSED</span>
-              </p>
-              <p className="rx-cc-silence-need" data-on={phase === "silence" ? "true" : "false"}>
                 <strong>{BRIEF_ATTENTION.needsYou}</strong>
                 <span>
                   {needsYouLabel(BRIEF_ATTENTION.needsYou)} · EVERYTHING ELSE

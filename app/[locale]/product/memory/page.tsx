@@ -79,6 +79,11 @@ export default async function MemoryPage({ params }: Props) {
                 {CANON_OTA.learning.playbookTo.toUpperCase()}
               </span>
             </div>
+            <div className="rx-mem-page-auto">
+              <em>Playbook v3</em>
+              <strong>Auto-stage now allowed</strong>
+              <span>Within policy · material send still asks</span>
+            </div>
           </div>
 
           <div className="rx-shell">

@@ -74,10 +74,18 @@ export function ContactForm({
   const interestFromPlan = planToInterest(activePlan);
 
   const [interest, setInterest] = useState(interestFromPlan);
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     setInterest(interestFromPlan);
   }, [interestFromPlan]);
+
+  const roleHints =
+    role === "finance" || role === "owner"
+      ? ["Recovery / Reconciliation", "Multi-location economics", "Verified Value"]
+      : role === "gm" || role === "ops"
+        ? ["Operations", "Perishable revenue", "Decisions / Floor"]
+        : [];
 
   const formKey = useMemo(
     () => activePlan ?? "general",
@@ -128,7 +136,13 @@ export function ContactForm({
       <div className="rx-contact-row">
         <div className="rx-contact-field">
           <label htmlFor="contact-role">{t("role")}</label>
-          <select id="contact-role" name="role" defaultValue="" required>
+          <select
+            id="contact-role"
+            name="role"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            required
+          >
             <option value="" disabled>
               {t("select")}
             </option>
@@ -138,6 +152,13 @@ export function ContactForm({
               </option>
             ))}
           </select>
+          {roleHints.length > 0 ? (
+            <ul className="rx-contact-hints" aria-live="polite">
+              {roleHints.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
+          ) : null}
         </div>
 
         <div className="rx-contact-field">

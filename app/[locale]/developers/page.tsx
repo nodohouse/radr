@@ -57,7 +57,10 @@ export default async function DevelopersPage({ params }: Props) {
         <div className="rx-dev-hero-grid">
           <div className="rx-dev-hero-copy">
             <p className="rx-dev-badge" style={{ marginBottom: "0.75rem" }}>
-              {t("badge.sandboxComing")}
+              TECHNICAL PREVIEW · SANDBOX NOT LIVE
+            </p>
+            <p className="rx-pilot-note" style={{ marginBottom: "0.85rem" }}>
+              Proposed API design. Handlers are not production-live.
             </p>
             <h1 className="rx-page-title rx-dev-hero-title">
               {t("heroTitleLine1")}

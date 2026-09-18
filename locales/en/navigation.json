@@ -284,6 +284,10 @@
               "label": "Decisions",
               "desc": "One primary Decision at a time."
             },
+            "floor": {
+              "label": "RADR Floor",
+              "desc": "Decision layer reaches FOH — not a POS."
+            },
             "value": {
               "label": "Value",
               "desc": "Identified → Verified lifecycle."

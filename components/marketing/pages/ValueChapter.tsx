@@ -23,8 +23,10 @@ import {
 } from "@/lib/radr/decision/demo/canonical";
 import { demoValueUnderRadr } from "@/lib/radr/decision/economics";
 import { CTAS } from "@/lib/marketing/brand";
+import { ValueTrace } from "@/components/marketing/kinetic/ValueTrace";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
+import "@/app/kinetic.css";
 
 const STREAM = [
   { id: "D-1911", kind: "protected", amt: CANON_PEAK.actualProtectedEuro },
@@ -99,7 +101,56 @@ export function ValueChapter() {
 
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
-            <div className="rx-value-filters" role="tablist">
+            <ValueTrace
+              disclosure="DEMO · ILLUSTRATIVE · not customer results"
+              stages={[
+                {
+                  id: "exposure",
+                  label: "Exposure",
+                  euro: money(CANON_SUPPLIER.exposureEuro),
+                  detail: CANON_SUPPLIER.title,
+                },
+                {
+                  id: "expected",
+                  label: "Expected",
+                  euro: money(CANON_SUPPLIER.expectedProtectedEuro),
+                  detail: "Modeled outcome of the chosen response",
+                },
+                {
+                  id: "observed",
+                  label: "Observed",
+                  euro: money(
+                    CANON_SUPPLIER.observedContributionEuro ??
+                      CANON_SUPPLIER.actualProtectedEuro,
+                  ),
+                  detail: "What reality returned",
+                },
+                {
+                  id: "attributed",
+                  label: "Attributed",
+                  euro: money(verifiedEuro(CANON_SUPPLIER)),
+                  detail: `${CANON_SUPPLIER.displayId} · ${CANON_SUPPLIER.attributionStrength.replaceAll("_", " ")}`,
+                },
+                {
+                  id: "verified",
+                  label: "Verified",
+                  euro: money(verifiedEuro(CANON_SUPPLIER)),
+                  detail: "Claim only what you can prove",
+                },
+              ]}
+            />
+
+            <div className="rx-value-ledger" style={{ marginTop: "2rem" }}>
+              <strong className="rx-econ-verified">
+                {money(value.verifiedEuro)}
+              </strong>
+              <span>TOTAL VERIFIED VALUE · DEMO PORTFOLIO · ILLUSTRATIVE</span>
+              <p className="rx-pilot-note" style={{ marginTop: "0.5rem" }}>
+                Illustrative demo portfolio — not customer results.
+              </p>
+            </div>
+
+            <div className="rx-value-filters" role="tablist" style={{ marginTop: "1.5rem" }}>
               <button
                 type="button"
                 data-on={filter === "all" ? "true" : "false"}
@@ -143,101 +194,52 @@ export function ValueChapter() {
               Selected verified Decisions (sample) — not a sum of the rollup.
             </p>
 
-            <div className="rx-value-ledger">
-              <strong className="rx-econ-verified">
-                {money(value.verifiedEuro)}
-              </strong>
-              <span>TOTAL VERIFIED VALUE · DEMO PORTFOLIO · ILLUSTRATIVE</span>
-            </div>
-
             {proof && chosen ? (
-              <div className="rx-value-proof">
-                <p className="rx-ch-kicker">
-                  {proof.displayId} · Proof trail ·{" "}
-                  {money(verifiedEuro(proof))} verified {proof.verifiedKind}
-                  {proof.verifiedIncrementalEuro != null
-                    ? ` · incremental vs take-now (observed net ${money(proof.observedContributionEuro ?? proof.actualProtectedEuro)})`
-                    : ""}
-                </p>
-                <ol className="rx-value-investigation">
-                  <li>
-                    <em>Exposure</em>
-                    <strong>{money(proof.exposureEuro)}</strong>
-                    <p>{proof.title}</p>
-                  </li>
-                  <li>
-                    <em>No-action baseline</em>
-                    <strong>{counterfactual?.title ?? "Do nothing"}</strong>
-                    <p>
-                      {counterfactual?.note ?? proof.learning.playbookFrom}
-                    </p>
-                  </li>
-                  <li>
-                    <em>Expected</em>
-                    <strong>{money(proof.expectedProtectedEuro)}</strong>
-                    <p>Modeled outcome of the chosen response</p>
-                  </li>
-                  <li>
-                    <em>Observed</em>
-                    <strong>
-                      {money(
-                        proof.observedContributionEuro ??
-                          proof.actualProtectedEuro,
-                      )}
-                    </strong>
-                    <p>What reality returned</p>
-                  </li>
-                  <li>
-                    <em>Verified</em>
-                    <strong>{money(verifiedEuro(proof))}</strong>
-                    <p>
-                      {proof.attributionStrength.replaceAll("_", " ")} · claim
-                      only what you can prove
-                    </p>
-                  </li>
-                  <li>
-                    <em>RADR response</em>
-                    <strong>{chosen.title}</strong>
-                    <p>{chosen.note}</p>
-                  </li>
-                  <li>
-                    <em>Variance</em>
-                    <strong>{formatCanonVariance(proof)}</strong>
-                    <p>Observed vs expected · not scenario fill forecast.</p>
-                  </li>
-                  <li>
-                    <em>Attribution</em>
-                    <strong>
-                      {proof.attributionStrength.replaceAll("_", " ")}
-                    </strong>
-                    <p>Claim only what you can prove.</p>
-                  </li>
-                  <li>
-                    <em>Verification sources</em>
-                    <ul className="rx-value-sources">
-                      {proof.verificationSources.map((s) => (
-                        <li key={s}>{s}</li>
-                      ))}
-                    </ul>
-                  </li>
-                  <li>
-                    <em>What RADR learned</em>
-                    <strong>{proof.learning.playbookTo}</strong>
-                    <p>{proof.learning.lesson}</p>
-                  </li>
-                  <li>
-                    <em>Evidence</em>
-                    <ul className="rx-value-evidence">
-                      {proof.evidence.map((e) => (
-                        <li key={e.label}>
-                          <span>{e.label}</span>
-                          <b>{e.value}</b>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                </ol>
-              </div>
+              <details className="rx-value-proof-details">
+                <summary>
+                  {proof.displayId} · Proof trail · {money(verifiedEuro(proof))}{" "}
+                  verified {proof.verifiedKind}
+                </summary>
+                <div className="rx-value-proof">
+                  <ol className="rx-value-investigation">
+                    <li>
+                      <em>Exposure</em>
+                      <strong>{money(proof.exposureEuro)}</strong>
+                      <p>{proof.title}</p>
+                    </li>
+                    <li>
+                      <em>Expected</em>
+                      <strong>{money(proof.expectedProtectedEuro)}</strong>
+                      <p>Modeled outcome of the chosen response</p>
+                    </li>
+                    <li>
+                      <em>Observed</em>
+                      <strong>
+                        {money(
+                          proof.observedContributionEuro ??
+                            proof.actualProtectedEuro,
+                        )}
+                      </strong>
+                      <p>What reality returned</p>
+                    </li>
+                    <li>
+                      <em>Verified</em>
+                      <strong>{money(verifiedEuro(proof))}</strong>
+                      <p>
+                        {proof.attributionStrength.replaceAll("_", " ")} · claim
+                        only what you can prove
+                      </p>
+                    </li>
+                    <li>
+                      <em>Variance</em>
+                      <strong>{formatCanonVariance(proof)}</strong>
+                      <p>
+                        Counterfactual: {counterfactual?.title ?? "Do nothing"}
+                      </p>
+                    </li>
+                  </ol>
+                </div>
+              </details>
             ) : null}
 
             <div className="rx-ch-ctas">

@@ -21,6 +21,7 @@ import { CTAS } from "@/lib/marketing/brand";
 import "@/app/product-chapters.css";
 import "@/app/home.css";
 import "@/app/econ.css";
+import "@/app/kinetic.css";
 
 const PATH_BY_ID: Record<string, { d: string; band: number }> = {
   fut_orphan_discount: {
@@ -43,6 +44,37 @@ const END_LABEL: Record<string, string> = {
   fut_orphan_wait: "Wait 24h · direct",
 };
 
+const TIME_MARKS = [
+  {
+    id: "72h",
+    label: "72H",
+    actions: "All paths open",
+    net: "Full recoverability",
+    risk: "Low urgency",
+  },
+  {
+    id: "48h",
+    label: "48H",
+    actions: "Discount still viable",
+    net: "Recoverability narrowing",
+    risk: "Channel pressure rising",
+  },
+  {
+    id: "24h",
+    label: "24H",
+    actions: "OTA release costly",
+    net: "Direct window critical",
+    risk: "High opportunity cost",
+  },
+  {
+    id: "checkin",
+    label: "CHECK-IN",
+    actions: "Night nearly fixed",
+    net: "Residual only",
+    risk: "Irreversible soon",
+  },
+] as const;
+
 /**
  * Futures page — temporal field, not scenario rows.
  */
@@ -50,6 +82,8 @@ export function FuturesChapter() {
   const bundle = useMemo(() => buildOrphanFutures(), []);
   const [selected, setSelected] = useState(bundle.recommendedScenarioId);
   const [why, setWhy] = useState(false);
+  const [timeIdx, setTimeIdx] = useState(1);
+  const time = TIME_MARKS[timeIdx]!;
   const pick =
     bundle.scenarios.find((s) => s.id === selected) ?? bundle.scenarios[0]!;
   const recommended = bundle.scenarios.find((s) => s.recommended)!;
@@ -109,6 +143,33 @@ export function FuturesChapter() {
                 ) : null}
               </p>
             </header>
+
+            <div className="rx-fut-time-scrub" role="group" aria-label="Time to check-in">
+              {TIME_MARKS.map((m, i) => (
+                <button
+                  key={m.id}
+                  type="button"
+                  data-on={timeIdx === i ? "true" : undefined}
+                  onClick={() => setTimeIdx(i)}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+            <dl className="rx-fut-time-meta">
+              <div>
+                <dt>Available actions</dt>
+                <dd>{time.actions}</dd>
+              </div>
+              <div>
+                <dt>Expected net</dt>
+                <dd>{time.net}</dd>
+              </div>
+              <div>
+                <dt>Risk</dt>
+                <dd>{time.risk}</dd>
+              </div>
+            </dl>
 
             <div className="rx-fut-field-canvas">
               <div className="rx-fut-field-axis" aria-hidden="true">

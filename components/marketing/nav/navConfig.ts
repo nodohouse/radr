@@ -29,6 +29,7 @@ export const PLATFORM_COLUMNS: PlatformColumn[] = [
     items: [
       { href: "/product/control-center", key: "controlCenter" },
       { href: "/product/decisions", key: "decisions" },
+      { href: "/product/floor", key: "floor" },
       { href: "/product/value", key: "value" },
       { href: "/product/memory", key: "memorySurface" },
     ],

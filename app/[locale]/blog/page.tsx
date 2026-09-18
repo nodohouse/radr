@@ -7,6 +7,7 @@ import { BLOG_POSTS, type BlogPostMeta } from "@/lib/marketing/blog";
 import { TextSep } from "@/components/TextSep";
 import { buildAlternatesForLocale } from "@/i18n/seo";
 import "../../home.css";
+import "../../kinetic.css";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -18,13 +19,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    keywords: [
-      "unapplied vendor credits restaurants",
-      "supplier credit memo multi-unit",
-      "recover money on your stack",
-      "restaurant AP credit recovery",
-      "RADR",
-    ],
     alternates: buildAlternatesForLocale(locale, "/blog"),
     openGraph: {
       type: "website",
@@ -32,13 +26,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `https://radrup.com/${locale}/blog`,
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
   };
 }
+
+type SectionId = "recover" | "decisions" | "value" | "operations" | "field";
+
+function sectionFor(post: BlogPostMeta): SectionId {
+  if (post.territory === "RECOVER") return "recover";
+  if (post.territory === "VALUE") return "value";
+  if (post.territory === "BUY" || post.territory === "LABOR" || post.territory === "SELL")
+    return "operations";
+  if (post.key === "whyWeExist" || post.key === "marginIntelligence") return "decisions";
+  return "field";
+}
+
+const SECTION_LABEL: Record<SectionId, string> = {
+  recover: "Recover",
+  decisions: "Decisions",
+  value: "Value",
+  operations: "Operations",
+  field: "Field notes",
+};
 
 function PostCard({
   post,
@@ -91,14 +99,23 @@ export default async function BlogIndexPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("blog");
-  const [featured, ...rest] = BLOG_POSTS;
+  const featured =
+    BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
+  const rest = BLOG_POSTS.filter((p) => p.slug !== featured?.slug);
+
+  const sections: SectionId[] = [
+    "recover",
+    "decisions",
+    "value",
+    "operations",
+    "field",
+  ];
 
   return (
     <div className="radr radr-home">
       <SiteNav />
       <main className="rx-res">
         <section className="rx-res-hero" data-nav-theme="light">
-          <div className="rx-res-hero-glow" aria-hidden="true" />
           <div className="rx-shell">
             <p className="rx-kicker">{t("kicker")}</p>
             <h1 className="rx-display rx-res-title">{t("title")}</h1>
@@ -120,29 +137,43 @@ export default async function BlogIndexPage({ params }: Props) {
               />
             ) : null}
 
-            <ul className="rx-res-grid">
-              {rest.map((post) => {
-                const tags = t.raw(`posts.${post.key}.tags`) as string[];
-                return (
-                  <li key={post.slug}>
-                    <PostCard
-                      post={post}
-                      title={t(`posts.${post.key}.title`)}
-                      excerpt={t(`posts.${post.key}.excerpt`)}
-                      tags={tags}
-                      readLabel={t("read")}
-                      minRead={t("minRead", { minutes: post.readingMinutes })}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
+            {sections.map((sec) => {
+              const posts = rest.filter((p) => sectionFor(p) === sec);
+              if (posts.length === 0) return null;
+              return (
+                <div key={sec} className="rx-res-section">
+                  <h2 className="rx-res-section-title">{SECTION_LABEL[sec]}</h2>
+                  <ul className="rx-res-grid">
+                    {posts.map((post) => {
+                      const tags = t.raw(`posts.${post.key}.tags`) as string[];
+                      return (
+                        <li key={post.slug}>
+                          <PostCard
+                            post={post}
+                            title={t(`posts.${post.key}.title`)}
+                            excerpt={t(`posts.${post.key}.excerpt`)}
+                            tags={tags}
+                            readLabel={t("read")}
+                            minRead={t("minRead", {
+                              minutes: post.readingMinutes,
+                            })}
+                          />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
 
             <div className="rx-res-cta-band">
-              <Link href="/contact?intent=recover-pilot" className="rx-btn rx-btn-primary">
+              <Link
+                href="/contact?intent=recovery-pilot"
+                className="rx-btn rx-btn-primary"
+              >
                 {t("ctaPilot")} <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/solutions/recover" className="rx-btn rx-btn-ghost">
+              <Link href="/solutions" className="rx-btn rx-btn-ghost">
                 {t("ctaRecover")}
               </Link>
             </div>

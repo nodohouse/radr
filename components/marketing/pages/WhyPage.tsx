@@ -11,7 +11,6 @@ import {
   CANON_ORPHAN,
   CANON_PEAK,
   CANON_SUPPLIER,
-  canonChosen,
   verifiedEuro,
 } from "@/lib/radr/decision/demo/canonical";
 import { money } from "@/data/demo";
@@ -126,8 +125,6 @@ const OBJECTIONS = [
     a: "RADR stores the baseline, selected response, observed outcome, counterfactual and verification method. Expected value and Verified Value are never treated as the same thing.",
   },
 ] as const;
-
-const otaPick = canonChosen(CANON_OTA);
 
 function MarketStat({ id }: { id: MarketSourceId }) {
   const s = MARKET_SOURCES[id];
@@ -317,24 +314,23 @@ export function WhyPage() {
               One Decision.
             </p>
 
-            <ul className="rx-why-frags">
-              {FRAGMENTS.map((f) => (
-                <li key={f.label} data-tone={f.tone}>
-                  <em>{f.label}</em>
-                  <strong>{f.value}</strong>
-                  <span className="rx-why-frag-action">→ {f.action}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="rx-why-resolve">
-              <p className="rx-why-resolve-kicker">
-                RADR resolves · {CANON_OTA.displayId} · DEMO · ILLUSTRATIVE
-              </p>
-              <p className="rx-why-resolve-single">
-                <strong>Hold 4 premium rooms direct</strong>
-                <span>{otaPick.note}</span>
-              </p>
+            <div className="rx-why-converge" aria-label="Signals converging into one Decision">
+              <ul className="rx-why-vectors">
+                {FRAGMENTS.map((f) => (
+                  <li key={f.label} data-tone={f.tone}>
+                    <em>{f.label}</em>
+                    <strong>{f.value}</strong>
+                    <span>{f.action}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="rx-why-converge-core">
+                <i aria-hidden="true" />
+                <strong>{CANON_OTA.displayId}</strong>
+                <em>One Decision</em>
+                <p>Hold 4 premium rooms direct</p>
+                <span>DEMO · ILLUSTRATIVE</span>
+              </div>
             </div>
           </div>
         </section>

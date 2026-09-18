@@ -6,6 +6,8 @@ import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
 import { contactEmail } from "@/components/marketing/config/company";
 import { buildAlternatesForLocale } from "@/i18n/seo";
+import "../../kinetic.css";
+import "../../home.css";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -21,6 +23,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: buildAlternatesForLocale(locale, "/contact"),
   };
 }
+
+const LOOKS_FOR = [
+  "Supplier / AP variance",
+  "Reconciliation gaps",
+  "Cost variance drivers",
+  "Procurement dispersion",
+  "Perishable revenue clocks",
+] as const;
 
 export default async function ContactPage({ params, searchParams }: Props) {
   const { locale } = await params;
@@ -50,16 +60,30 @@ export default async function ContactPage({ params, searchParams }: Props) {
         </section>
 
         <section className="rx-contact rx-contact--mineral" data-nav-theme="light">
-          <div className="rx-shell rx-contact-inner">
-            <Suspense fallback={null}>
-              <ContactForm selectedPlan={selectedPlan} />
-            </Suspense>
-            {inbox ? (
-              <p className="rx-contact-alt">
-                {t("preferEmail")}{" "}
-                <a href={`mailto:${inbox}`}>{inbox}</a>
+          <div className="rx-shell rx-contact-split">
+            <aside className="rx-contact-rail">
+              <p className="rx-rec-k">What RADR looks for</p>
+              <ul>
+                {LOOKS_FOR.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+              <p className="rx-rec-muted" style={{ marginTop: "1rem", fontSize: "0.9rem" }}>
+                Recovery remains the commercial entry. Tell us where the
+                economics are clearest.
               </p>
-            ) : null}
+            </aside>
+            <div>
+              <Suspense fallback={null}>
+                <ContactForm selectedPlan={selectedPlan} />
+              </Suspense>
+              {inbox ? (
+                <p className="rx-contact-alt">
+                  {t("preferEmail")}{" "}
+                  <a href={`mailto:${inbox}`}>{inbox}</a>
+                </p>
+              ) : null}
+            </div>
           </div>
         </section>
       </main>

@@ -69,6 +69,18 @@ const PREVIEWS: Record<string, PreviewModel> = {
     ],
     cta: "Open Control Center",
   },
+  floor: {
+    kicker: "RADR Floor",
+    title: "Table 12 · VIP · allergy",
+    metric: "FOH",
+    metricLabel: "role projection",
+    rows: [
+      { label: "Recommend", value: "Feature ribeye" },
+      { label: "Avoid", value: "Tuna Tataki · cold station" },
+      { label: "Not a POS", value: "Context only" },
+    ],
+    cta: "Explore RADR Floor",
+  },
   futures: {
     kicker: "Futures",
     title: "Play it forward",

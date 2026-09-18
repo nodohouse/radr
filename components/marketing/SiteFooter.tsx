@@ -18,6 +18,7 @@ export function SiteFooter() {
     { href: "/product/control-center" as const, label: t("controlCenter") },
     { href: "/product/decisions" as const, label: "Decisions" },
     { href: "/product/futures" as const, label: "Futures" },
+    { href: "/product/floor" as const, label: "RADR Floor" },
     { href: "/product/value" as const, label: "Verified Value" },
     { href: "/product/memory" as const, label: "Operating Memory" },
   ];

@@ -13,6 +13,7 @@ import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual"
 import { PatternCapabilityStrip } from "@/components/marketing/kinetic/PatternCapabilityStrip";
 import { ConnectionBand } from "@/components/marketing/kinetic/ConnectionBand";
 import { PilotTimeline } from "@/components/marketing/kinetic/PilotTimeline";
+import { FloorMoment } from "@/components/marketing/kinetic/FloorMoment";
 import { HOME_RAIL } from "@/lib/marketing/economicRail";
 import type { ProblemFamily, ProgressionStage } from "@/lib/radr/problemFamilies";
 import "@/app/kinetic.css";
@@ -146,7 +147,20 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec" data-nav-theme="light">
+      <KineticInterstitial from="Same Decision" to="Different projection" tone="verified" />
+
+      <section className="rx-rec-sec" data-nav-theme="light" id="floor">
+        <div className="rx-shell">
+          <FloorMoment />
+          <p className="rx-rec-p" style={{ marginTop: "1.25rem" }}>
+            <Link href="/product/floor" className="rx-btn rx-btn-ghost">
+              Explore RADR Floor <span aria-hidden="true">→</span>
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
           <PilotTimeline
             kicker={t("pilot.kicker")}
