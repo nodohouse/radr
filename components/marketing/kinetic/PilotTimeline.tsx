@@ -13,7 +13,6 @@ type Props = {
   scope: string;
   opts: string[];
   cta: string;
-  ctaHref: "/contact" | string;
 };
 
 const DAYS = [
@@ -32,7 +31,6 @@ export function PilotTimeline({
   opts,
   cta,
 }: Props) {
-  void ctaHref;
   return (
     <div className="rx-pilot-tl">
       <p className="rx-rec-k">{kicker}</p>
@@ -58,7 +56,7 @@ export function PilotTimeline({
       </p>
 
       <Link
-        href={"/contact?intent=recovery-pilot"}
+        href="/contact?intent=recovery-pilot"
         className="rx-btn rx-btn-primary"
       >
         {cta} <span aria-hidden="true">→</span>

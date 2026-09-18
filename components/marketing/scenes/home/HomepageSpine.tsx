@@ -158,7 +158,6 @@ export function HomepageSpine() {
             scope={t("pilot.scope")}
             opts={[t("pilot.opt1"), t("pilot.opt2"), t("pilot.opt3")]}
             cta={t("pilot.cta")}
-            ctaHref="/contact?intent=recovery-pilot"
           />
         </div>
       </section>
