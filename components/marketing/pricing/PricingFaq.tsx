@@ -1,18 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { faqItems } from "./config";
+import { useTranslations } from "next-intl";
 
 export function PricingFaq() {
+  const t = useTranslations("pricing.faq");
   const [open, setOpen] = useState<number | null>(null);
+  const items = t.raw("items") as Array<{ q: string; a: string }>;
 
   return (
-    <section className="px-faq" id="faq">
-      <div className="prep-shell">
-        <p className="prep-kicker">FAQ</p>
-        <h2 className="px-section-title">Questions</h2>
+    <section className="px-faq" id="faq" data-nav-theme="light">
+      <div className="rx-shell">
+        <header className="px-section-head">
+          <p className="rx-kicker">{t("kicker")}</p>
+          <h2 className="px-section-title">{t("title")}</h2>
+        </header>
         <div className="px-faq-list">
-          {faqItems.map((item, i) => {
+          {items.map((item, i) => {
             const isOpen = open === i;
             return (
               <div

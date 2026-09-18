@@ -23,7 +23,7 @@ type Props = {
   pingKey?: string;
 };
 
-/** Precision radar — quiet geometry, signal-forward. Pauses offscreen. */
+/** Precision radar: quiet geometry, signal-forward. Pauses offscreen. */
 export function RadarScanner({
   className = "",
   armed = true,
@@ -98,7 +98,7 @@ export function RadarScanner({
 
         <p className="rx-radar-live">
           <span className="rx-live-dot" data-on={spin ? "true" : "false"} />
-          RADR / LIVE
+          RADR / DEMO
         </p>
 
         {visible.map((f, i) => {
@@ -114,17 +114,6 @@ export function RadarScanner({
               style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
             >
               <i className="rx-radar-ping" />
-              {on ? (
-                <div className="rx-radar-callout">
-                  <em className="rx-tri">△</em>
-                  <strong className="rx-money">
-                    {f.amount}
-                    {f.period}
-                  </strong>
-                  <span>{f.title}</span>
-                  <b>{f.tag}</b>
-                </div>
-              ) : null}
             </div>
           );
         })}

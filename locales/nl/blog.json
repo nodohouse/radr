@@ -1,0 +1,494 @@
+{
+  "metaTitle": "Recover money on your stack — field notes",
+  "metaDescription": "Field notes on recovering supplier credits on the stack you already run. For Finance and Purchasing in multi-unit FSR and fast-casual.",
+  "kicker": "Recover",
+  "title": "Recover money on your stack — field notes",
+  "lead": "Practical writing for Finance and Purchasing. Credits flagged but never cashed — and how to match Trace to the books.",
+  "read": "Lezen",
+  "minRead": "{minutes} min lezen",
+  "related": "Meer lezen",
+  "byline": "RADR Editorial",
+  "backToBlog": "Alle artikelen",
+  "posts": {
+    "whyWeExist": {
+      "metaTitle": "The Decision Gap — why RADR exists",
+      "metaDescription": "Hospitality digitized records before it digitized judgment. The Decision Gap is where economically important Decisions happen between systems — and why RADR exists.",
+      "title": "The Decision Gap: why RADR exists",
+      "excerpt": "Hospitality does not need more software to manage. It needs better judgment across the systems it already runs — before perishable value expires.",
+      "tags": [
+        "Company",
+        "Decision Gap",
+        "Hospitality",
+        "Why RADR"
+      ],
+      "sections": [
+        {
+          "heading": "Hospitality deserves better judgment, not more software",
+          "paragraphs": [
+            "Hospitality is one of the oldest crafts in commerce and one of the hardest businesses to run well. The guest experience is intensely human. The economics behind it are brutal, time-sensitive, and spread across systems that were never designed to talk to each other.",
+            "A dinner service, a hotel night, a turnover in a serviced apartment — each is a chain of small decisions. What gets bought. Who gets scheduled. What gets sold at what price. What gets recovered when the path breaks. Alone, each decision looks operational. Together they set contribution.",
+            "For years the industry’s answer to complexity has been more software: another POS module, another labor tool, another channel manager, another BI dashboard, another spreadsheet ritual after the month closes. The stack grew. The judgment problem did not shrink.",
+            "RADR exists because of that gap — between what systems record and what the operation decides while the outcome can still change."
+          ]
+        },
+        {
+          "heading": "Name the gap",
+          "paragraphs": [
+            "We call it the Decision Gap.",
+            "Hospitality digitized its records before it digitized its judgment. PMS knows rooms. POS knows sales. Reservations know demand. Labor systems know schedules. Procurement knows purchases. Accounting eventually knows the P&L.",
+            "None of those systems, alone, answer the questions that actually move margin tonight: What changed? What matters? What is likely if we do nothing? Which response wins? How sure are we? What should we prepare now? What happened after we acted? Was the value verified? What should we remember?",
+            "That sequence is not a dashboard refresh. It is a decision loop. Hospitality has spent a generation building systems of record. It has not built a durable system of decision.",
+            "The Decision Gap is where money quietly leaves: not always as a dramatic failure, often as a series of reasonable local choices that compound into a worse global outcome."
+          ]
+        },
+        {
+          "heading": "The market is large. Profitability is not the default.",
+          "paragraphs": [
+            "Context matters, and it should stay honest.",
+            "According to the National Restaurant Association’s 2026 State of the Restaurant Industry, U.S. restaurant and foodservice sales are projected around $1.55 trillion — and 42% of surveyed operators said their restaurants were not profitable in 2025. Scale without contribution is not success. It is pressure with nicer lighting.",
+            "On the lodging side, the American Hotel & Lodging Association’s 2026 State of the Industry expects U.S. hotel guest spending around $805 billion, while noting GOPPAR still roughly 90% of 2019 levels with rising operating expenses as a primary factor. Demand can recover while margin stays thin.",
+            "These figures are industry context, not a RADR revenue claim. They describe the operating climate RADR was built for: high velocity, high labor intensity, perishable inventory, and stacks that record more than they decide."
+          ]
+        },
+        {
+          "heading": "Operators are drowning in data work, not insight",
+          "paragraphs": [
+            "A 2026 Hotel Operations Index (Otelier with Agilysys and Sage) reported that 27% of surveyed hotel owners and operators spend more than eleven hours per week consolidating or reconciling data. Ninety-one percent still use some manual reporting. Only 11% report a fully integrated stack.",
+            "That is not an intelligence problem first. It is an attention tax. Hours spent stitching exports are hours not spent on the guest, the team, or the few decisions that actually change the night.",
+            "When finance finally closes the books, the story is often already finished. The orphan night expired. The peak collision was seated badly. The supplier variance aged past leverage. The credit was promised and never matched.",
+            "Hospitality does not primarily lose money because people are careless. It loses money because the truth arrives after the window to act has closed."
+          ]
+        },
+        {
+          "heading": "Where the money actually moves",
+          "paragraphs": [
+            "Margin in hospitality does not live in one report. It moves through economic lenses that cut across systems.",
+            "BUY: purchases connected to usage, yield, inventory, menu output and contribution — not invoice mismatch alone.",
+            "LABOR: capacity against demand and throughput — not headcount theater.",
+            "SELL: rate, mix, channel cost, collisions between demand and real capacity.",
+            "RECOVER: expected value whose intended path was interrupted — cancelled inventory, credits, failed payments, orphan nights — with an Economic Clock that changes recoverability over time.",
+            "These are not four products. They are lenses over one operating model. The value often sits in the relationships between them."
+          ]
+        },
+        {
+          "heading": "Perishable value has a clock",
+          "paragraphs": [
+            "Unlike many industries, hospitality sells time-bound capacity. A table tonight. A room night. A spa slot. A terrace cover. A labor hour already paid.",
+            "Once the night ends empty, no dashboard can recover it. Once peak is mishandled, the contribution path that existed at 18:40 is gone by 21:00.",
+            "Traditional BI explains yesterday. It is weak at protecting tonight. Revenue tools optimize rates in their domain. They do not reconcile supplier economics, labor reality, and guest experience into one Decision with evidence and a cost of doing nothing.",
+            "RADR treats time as first-class: when a Decision becomes available, when it expires, what is lost by waiting."
+          ]
+        },
+        {
+          "heading": "Why ‘another AI copilot’ is the wrong answer",
+          "paragraphs": [
+            "Generic copilots summarize. They chat. They generate task lists. Hospitality does not primarily need more words on top of fragmented systems.",
+            "Operators need structured Decisions: what is happening, what is at stake, what RADR has already prepared, what needs a human, what happens next, and why — with sources, freshness, and confidence that stay humble about causation.",
+            "We prefer language like historically followed by, expected, and associated with unless the evidence supports stronger claims. We do not invent Verified Value without an evidence chain. We do not pretend to write into PMS or POS when we have not.",
+            "That restraint is commercial and ethical. Trust is the product surface as much as the interface is."
+          ]
+        },
+        {
+          "heading": "What RADR is — and what it refuses to become",
+          "paragraphs": [
+            "RADR is the adaptive decision system for hospitality, built around verified decision intelligence: the decision layer above POS, PMS, labor, accounting, channels, and the rest of the stack.",
+            "Systems record the operation. RADR connects evidence, understands operating state, plays Futures forward, helps Decide, Verifies outcomes, and Remembers what happened.",
+            "RADR is not a restaurant management platform, a hotel PMS, an RMS, a scheduling system, a BI dashboard, a finance dashboard, a reservation platform, or a generic AI assistant with hospitality stickers.",
+            "If the job belongs to a system of record, we integrate. We do not rebuild. RADR owns cross-system understanding, decisioning, Futures, Prepared Actions, Verified Value, and Operating Memory.",
+            "Success is not time spent in the product. Success is human attention returned and economic outcomes that can be shown. Read more on Why RADR."
+          ]
+        },
+        {
+          "heading": "The loop we build around",
+          "paragraphs": [
+            "Every serious capability plugs into one customer loop: Connect → Understand → Futures → Decide → Verify → Remember.",
+            "Connect brings operating evidence in. Understand normalizes and relates it into operating state. Futures evaluates forks before the night decides for you. Decide produces an auditable Decision, not a chat tip. Verify asks what happened after. Remember compounds Operating Memory so the next similar night starts smarter.",
+            "That is enough architecture for a public thesis. The rest is product honesty: Technical Preview stays labeled; material actions stay under human approval."
+          ]
+        },
+        {
+          "heading": "Why we started here",
+          "paragraphs": [
+            "RADR began with a simple observation from the floor: the people closest to the guest were making consequential economic choices with incomplete cross-system truth, while the systems that held pieces of that truth stayed silent until after service.",
+            "One restaurant made the question unavoidable. Boutique hotels and serviced apartments showed the same judgment problem under different clocks — room nights, channel mix, turnover, housekeeping, orphan inventory.",
+            "Same category. Same Decision Gap. One core: one operating model, Decisions, and attention ranked by what actually needs a human — not three forked products wearing different logos."
+          ]
+        },
+        {
+          "heading": "The promise we will keep",
+          "paragraphs": [
+            "We will not claim autonomous execution ahead of product truth. We will not sell unfinished capability as live. We will mark Early Access and Technical Preview honestly. We will not invent causation for narrative comfort.",
+            "We will keep building the decision layer hospitality has been missing: evidence in, judgment out, outcomes verified, memory retained.",
+            "Hospitality provides the humanity. Systems record the operation. RADR exists so the Decisions in between get better — in time, with proof, and without asking teams to become data warehouses in human form."
+          ]
+        },
+        {
+          "heading": "If you want to go further",
+          "paragraphs": [
+            "Read Why RADR for the Decision Gap thesis, Platform for Connect → Remember, and the product demo for how a Decision plays from signal to verified outcome — illustrative, labeled, and honest about what is demo versus live.",
+            "The industry does not need another login. It needs better judgment on the operating surface it already pays to run."
+          ]
+        }
+      ]
+    },
+    "marginIntelligence": {
+      "metaTitle": "What operating judgment means in hospitality",
+      "metaDescription": "Operating judgment connects POS, labor, suppliers and finance so operators see Decisions in time — not after the month closes. How RADR frames evidence, Futures and Verified Value.",
+      "title": "What operating judgment means in hospitality",
+      "excerpt": "Dashboards show what happened. Operating judgment shows what is exposed now, which Futures matter, and whether value was verified after reality.",
+      "tags": [
+        "Economics",
+        "Hospitality",
+        "Decisions"
+      ],
+      "sections": [
+        {
+          "heading": "The problem dashboards never solved",
+          "paragraphs": [
+            "Most hospitality groups already have reports. POS exports. Labor dashboards. Invoice folders. A weekly P&L that arrives after the damage is done.",
+            "None of that tells an operator, in the moment, that kitchen load and inbound covers collide, that a purchase changed contribution, or that a recovery path is still open on the Economic Clock.",
+            "Operating judgment is the layer that connects those systems and reasons continuously: expected versus actual, evidence versus noise, Decision versus outcome."
+          ]
+        },
+        {
+          "heading": "Four lenses — one operating model",
+          "paragraphs": [
+            "RADR organizes hospitality economics into four lenses: BUY, LABOR, SELL and RECOVER — not four separate products.",
+            "BUY connects purchase to contribution. LABOR prices capacity against throughput. SELL values demand against real capacity and channel cost. RECOVER watches expected value whose path was interrupted.",
+            "The point is one operating model that finance and operations can share without translating twelve exports into a board pack. See Intelligence for how the lenses work together."
+          ]
+        },
+        {
+          "heading": "Evidence, Decision, Verified Value",
+          "paragraphs": [
+            "A Finding without evidence is an opinion. A recommendation is not value. An expected outcome is not value. Verified Value is what can be defended after reality — observed contribution against a defined baseline, with attribution strength.",
+            "That loop is what separates decision intelligence from BI. BI answers what happened last month. RADR asks what is exposed tonight, which Future wins, and whether the change verified."
+          ]
+        },
+        {
+          "heading": "Who it is for",
+          "paragraphs": [
+            "Independent operators need clarity without a data team. Multi-location groups need comparable Decisions across sites. Finance needs recoverable truth, not optimistic slides.",
+            "If your stack already runs the business, you do not need another dashboard. You need a decision layer that sits on the systems you already trust."
+          ]
+        }
+      ]
+    },
+    "multiLocation": {
+      "metaTitle": "Multi-location hospitality control without another dashboard",
+      "metaDescription": "How multi-location restaurants, hotels and groups compare sites on Decision exposure and Verified Value — not vanity KPIs.",
+      "title": "Multi-location control without another dashboard",
+      "excerpt": "Groups do not fail from lack of data. They fail when every site reports differently and Decisions surface too late to change the night.",
+      "tags": [
+        "Groups",
+        "Locations",
+        "Operations"
+      ],
+      "sections": [
+        {
+          "heading": "Same brand, different truths",
+          "paragraphs": [
+            "A ten-site group often runs ten versions of truth. One GM lives in the POS. Another lives in the schedule tool. Finance lives in the ledger. The weekly call becomes a translation exercise.",
+            "Multi-location control starts with a shared operating language: the same lenses, the same Decision shape, the same definition of Verified Value across every site."
+          ]
+        },
+        {
+          "heading": "Compare exposure, not vanity",
+          "paragraphs": [
+            "Ranking locations by revenue alone hides the story. Similar revenue can mean very different profit. A busy site can still destroy throughput. A quiet site can still overpay relative to contribution.",
+            "Useful comparison ranks material money at risk, pace versus plan, and Decisions that need a human. Operators see peers. Finance sees portfolio heat."
+          ]
+        },
+        {
+          "heading": "One chart, then investigate",
+          "paragraphs": [
+            "Group leadership needs one strong operating view: how we are doing versus plan, what changed, what needs attention.",
+            "From there, drill into a day, a location, a Decision. Progressive disclosure beats a wall of KPI cards. The Control Center pattern stays simple: what needs you, what RADR is handling, what was verified since last check."
+          ]
+        },
+        {
+          "heading": "What groups actually gain",
+          "paragraphs": [
+            "Faster exception handling across sites. Comparable BUY and LABOR signals without forcing every GM into the same report ritual. A finance-ready trail from Decision to Verified Value.",
+            "That is multi-location operating judgment: not more charts — one decision layer that travels with the brand."
+          ]
+        }
+      ]
+    },
+    "recovery": {
+      "metaTitle": "RECOVER: when expected value’s path is interrupted",
+      "metaDescription": "RECOVER is expected value whose intended path was interrupted — cancelled inventory, credits, orphan nights — with an Economic Clock that changes what to do now.",
+      "title": "RECOVER: interrupted value has a clock",
+      "excerpt": "RECOVER is not only credits and refunds. It is expected value whose intended path broke — and recoverability changes with time.",
+      "tags": [
+        "RECOVER",
+        "Economic Clock",
+        "Verified Value"
+      ],
+      "sections": [
+        {
+          "heading": "Broader than open money loops",
+          "paragraphs": [
+            "Credits, refunds and comps matter. They are not the whole territory.",
+            "RECOVER means expected value whose intended path was interrupted: a cancelled table, a cancelled room, an orphan night, a supplier credit, a failed payment, a missing refund, an uncollected deposit, reopened inventory, a rebate, a claim.",
+            "Each case starts from a path that was supposed to convert — then didn’t. See RECOVER Intelligence for how the lens works across verticals."
+          ]
+        },
+        {
+          "heading": "The Economic Clock",
+          "paragraphs": [
+            "Recoverability changes with time. Early after a cancellation, re-sell economics differ from the last hours before the night dies empty.",
+            "Sometimes the strongest RECOVER Decision is Wait. An empty serviced-apartment night looks like fill-now. RADR may wait 24 hours when direct-demand probability and channel economics historically beat an early discount path.",
+            "Obvious action is not always best action. Futures exist so Wait can win with evidence."
+          ]
+        },
+        {
+          "heading": "From Finding to Verified recovery",
+          "paragraphs": [
+            "A Finding names the interrupted path, the exposure, and the clock. A Decision chooses among Futures: chase, reprice, hold, wait, or accept.",
+            "Verified recovered is value reclaimed after the expected path was interrupted — observed and attributable, not a raised credit that never collected.",
+            "Without that trail, teams celebrate motion. With it, recovery becomes a managed economic process."
+          ]
+        },
+        {
+          "heading": "Why operators care",
+          "paragraphs": [
+            "Every unrecovered euro is margin the operation already earned once — or inventory it already paid to make available. Continuous RECOVER keeps that money on the radar until the outcome is real."
+          ]
+        }
+      ]
+    },
+    "understaffed": {
+      "metaTitle": "LABOR: capacity intelligence, not headcount optimization",
+      "metaDescription": "The apparent staffing problem may not be the real bottleneck. LABOR is capacity intelligence — throughput, load and demand — not add-FOH theater.",
+      "title": "LABOR: the staffing problem may not be the bottleneck",
+      "excerpt": "FOH pressure rises. The obvious move is add staff. RADR asks whether kitchen load and throughput say that more FOH makes the night worse.",
+      "tags": [
+        "LABOR",
+        "Capacity",
+        "Decisions"
+      ],
+      "sections": [
+        {
+          "heading": "Apparent problem, real bottleneck",
+          "paragraphs": [
+            "Hospitality does not lose money only at month-end. It loses money when demand arrives and the system cannot convert it into contribution.",
+            "FOH pressure rising looks like understaffing. The obvious move is add agency labor. That is often the wrong Decision.",
+            "If kitchen is already at 94% modeled load, more FOH accelerates order injection, increases ticket time, and worsens throughput. The floor feels busier. Contribution can fall. See LABOR Intelligence."
+          ]
+        },
+        {
+          "heading": "What capacity intelligence sees",
+          "paragraphs": [
+            "LABOR reconciles demand signals with real capacity: reservations and walk-ins, POS pace, KDS ticket time, scheduled and clocked hours, cross-trained flexibility.",
+            "The Finding is not a vibe. It is a relationship: floor pressure versus kitchen load versus contribution per minute of capacity.",
+            "Headcount optimization asks how many people. Capacity intelligence asks where the bottleneck is and what Decision protects throughput."
+          ]
+        },
+        {
+          "heading": "Decision: not always add labor",
+          "paragraphs": [
+            "Futures may include: do not add agency labor yet; move capacity; throttle lower-value demand temporarily; protect a seating wave; accept exposure with eyes open.",
+            "Prepared Actions carry the chosen path to approval. Verified Value asks whether the night’s contribution path was protected after reality — not whether a roster row changed.",
+            "A recommendation is not value. An expected outcome is not value. Value is verified after the service window."
+          ]
+        },
+        {
+          "heading": "Why finance should care",
+          "paragraphs": [
+            "Labor percent alone hides peak failures. A site can hit labor targets for the week and still burn Friday dinner by adding the wrong capacity.",
+            "Pricing the service window in contribution terms aligns ops and finance on the same Decision object."
+          ]
+        }
+      ]
+    },
+    "supplierVariance": {
+      "metaTitle": "BUY: the invoice was the clue — the margin leak was the problem",
+      "metaDescription": "BUY connects contract, PO, invoice, delivery, usage, yield, inventory and menu contribution. The Decision is not only dispute invoice — it is what the purchase did to economics.",
+      "title": "BUY: the invoice was the clue",
+      "excerpt": "Contract vs invoice is the clue. The Decision asks what the purchase actually did to contribution — usage, yield, selling price, and menu economics included.",
+      "tags": [
+        "BUY",
+        "Contribution",
+        "Procurement"
+      ],
+      "sections": [
+        {
+          "heading": "The clue is not the whole problem",
+          "paragraphs": [
+            "Contract: €6.80/L. Invoice: €7.45/L. Delivery: 420L. Invoice exposure: €273.",
+            "That discrepancy is real — and incomplete. Old BUY framing stopped at dispute the invoice. Current BUY continues.",
+            "Usage +4%. Selling price unchanged. Contribution −13.2%. The purchase changed the economics of the operation, not only the AP line. See BUY Intelligence."
+          ]
+        },
+        {
+          "heading": "What BUY connects",
+          "paragraphs": [
+            "Contract → PO → invoice → delivery → usage → yield → inventory → menu / output → contribution.",
+            "Sources are practical: agreements, purchase orders, invoices, receiving notes, inventory movements, recipe and menu economics, POS volume.",
+            "Core BUY question: what did this purchase actually do to the economics of the operation?"
+          ]
+        },
+        {
+          "heading": "The Decision is rarely ‘dispute only’",
+          "paragraphs": [
+            "Futures may include: recover supplier variance; hold future exception; investigate usage / yield; do not automatically reprice the menu until normalized input economics are understood.",
+            "Repricing on a noisy invoice without yield clarity can destroy contribution twice — once on input, once on demand response.",
+            "Prepared Actions attach evidence. Verified recovered or protected lands only after observed outcomes — not when a credit request is drafted."
+          ]
+        },
+        {
+          "heading": "Finance and ops, same number",
+          "paragraphs": [
+            "Ops feels delivery and usage. Finance feels the invoice. BUY puts both on the same Decision before the month ends blind.",
+            "Invoice exposure stays labeled as exposure. Contribution impact stays modeled until verified."
+          ]
+        }
+      ]
+    },
+    "verifiedValue": {
+      "metaTitle": "Verified Value: recommendations are not value",
+      "metaDescription": "Strict Verified Value semantics for CFOs: Exposure, Expected, Observed, Verified protected / recovered / created / avoided. Value is verified after reality.",
+      "title": "Verified Value: after reality, not before",
+      "excerpt": "A recommendation is not value. An expected outcome is not value. Value is verified after reality — with conservative attribution.",
+      "tags": [
+        "Verified Value",
+        "Finance",
+        "Economics"
+      ],
+      "sections": [
+        {
+          "heading": "Strict definitions",
+          "paragraphs": [
+            "EXPOSURE — value likely to be lost if current trajectory continues.",
+            "EXPECTED CONTRIBUTION — modeled net contribution under a scenario. EXPECTED PROTECTED — modeled value preserved against a defined baseline.",
+            "OBSERVED CONTRIBUTION — what actually occurred.",
+            "VERIFIED PROTECTED — value conservatively attributable to preventing a modeled loss. VERIFIED RECOVERED — value reclaimed after the expected value path was interrupted. VERIFIED CREATED — incremental value above baseline. VERIFIED AVOIDED — cost or loss prevented.",
+            "Protected value is not ‘an action taken.’ Action is Prepared Action or execution. Value is what reality shows, then attribution can defend."
+          ]
+        },
+        {
+          "heading": "Why dashboards inflate",
+          "paragraphs": [
+            "Without this discipline, teams count alerts as savings and expected euros as cash. Identified piles up. Nobody asks whether anyone acted, or whether the action worked.",
+            "Verified Value is the CFO gate: potential stays separate until observed proof lands. See Verified Value in product for the ledger shape."
+          ]
+        },
+        {
+          "heading": "Core principle",
+          "paragraphs": [
+            "A recommendation is not value. An expected outcome is not value. Value is verified after reality.",
+            "RADR shows ranges, freshness, sample and attribution strength. Causal humility stays: associated with and historically followed by unless stronger evidence exists."
+          ]
+        },
+        {
+          "heading": "Shared economic truth",
+          "paragraphs": [
+            "Operators need tonight’s exposure. Finance needs an audit-ready trail. Leadership needs portfolio totals that survive scrutiny.",
+            "When all three read the same Verified Value number, the argument shifts from whose report is right to which Decision to run next."
+          ]
+        }
+      ]
+    },
+    "askRadr": {
+      "metaTitle": "Ask RADR: natural language over operating evidence",
+      "metaDescription": "Ask RADR turns operator intent into tool-grounded answers over operating evidence. The LLM does not invent operational numbers — Decision architecture is the product.",
+      "title": "Ask RADR: natural language over operating evidence",
+      "excerpt": "Operators should not hunt dashboards. Ask RADR answers from tools and data — calculation, explanation, evidence, and approved action where permitted.",
+      "tags": [
+        "Ask RADR",
+        "Evidence",
+        "Operators"
+      ],
+      "sections": [
+        {
+          "heading": "Interface, not invention",
+          "paragraphs": [
+            "Operators should not hunt twelve systems to answer one money question. Finance should not rebuild the answer in a spreadsheet every Monday.",
+            "Ask RADR is natural-language access to operating evidence. Architecture: operator intent → RADR tools / data → calculation → explanation → evidence → approved action where permitted.",
+            "The LLM does not invent operational numbers. Backend systems and normalized operating state are the source of truth. Natural language is the interface. Decision architecture is the product."
+          ]
+        },
+        {
+          "heading": "What a good answer looks like",
+          "paragraphs": [
+            "Ask where contribution is exposed tonight. Get location, amount, lens, evidence and the next Prepared Action — or a Decision already waiting.",
+            "Not a paragraph of model poetry. A grounded shape: why RADR believes this, how confidence was scored, what is observed versus estimated."
+          ]
+        },
+        {
+          "heading": "Usable on the floor",
+          "paragraphs": [
+            "Continuous judgment only matters if someone can use it during service, not only in a board pack.",
+            "Ask RADR is the conversational surface for that: less hunting, more deciding, same Connect → Remember loop underneath. Technical Preview honesty still applies — demo and live stay labeled."
+          ]
+        }
+      ]
+    },
+    "creditsFlagged": {
+      "metaTitle": "Credits flagged but never cashed: recover money on your stack",
+      "metaDescription": "Your AP tools can flag supplier credits. Cash still leaks. How multi-unit restaurants recover money on the stack they already run.",
+      "title": "Credits flagged but never cashed: recover money on your stack",
+      "excerpt": "AP tools flag supplier credits every week. Finance still chases memos that never hit the books. How multi-unit FSR and fast-casual cash credits on the stack they already run.",
+      "tags": [
+        "unapplied vendor credits restaurants",
+        "supplier credit memo multi-unit",
+        "recover money on your stack",
+        "RECOVER"
+      ],
+      "sections": [
+        {
+          "heading": "The credit is on the screen. The cash is not.",
+          "paragraphs": [
+            "Every multi-unit restaurant finance team knows the pattern. The AP tool flags a supplier credit. Someone screenshots it. Someone adds it to a follow-up list. Weeks later the same variance is still aging — or worse, the next purchase order fires at the wrong unit price again.",
+            "The stack did its job: it recorded a credit. The operation still leaked cash. That gap — between flagged and cashed — is where Recover lives.",
+            "RADR does not ask you to rip out Restaurant365, Nory, Craftable, or Toast. It sits above the stack you already run and helps Finance and Purchasing turn an expected credit into a Trace finance can match to the books."
+          ]
+        },
+        {
+          "heading": "Why credits stall in multi-unit FSR and fast-casual",
+          "paragraphs": [
+            "At ~8–30 locations, AP volume is high enough that exceptions are constant and low enough that a dedicated recover squad is rare. Credits scatter across vendors, sites, and aging buckets. Partial applies hide inside payments. Contract price and invoice price disagree by cents that compound across liters and cases.",
+            "BI dashboards can count open credits. They rarely carry a book-matchable chain: which invoice line, what evidence, which credit memo, what it applied to, and which euro actually landed.",
+            "Without that chain, “recoverable” stays a hope. Finance cannot defend a Verified euro to the GL."
+          ]
+        },
+        {
+          "heading": "One honest path: invoice → finding → credit matched → Trace",
+          "paragraphs": [
+            "The recover path we sell is deliberately short.",
+            "Start from an invoice line — not a dashboard tile. Compare contract or GRN evidence (price, qty, UOM). Raise a finding such as recover.ap.credit_expected_unapplied when the stack expects a credit that has not been cashed.",
+            "Then match a credit memo to the invoice or payment and keep a document reference. Only when that apply lands do we call the euro Verified — and Verified equals applied_amount, not an estimate.",
+            "Stop there. One credit. Trace. Done. No labor tour. No second general ledger. No overnight autopilot pitch on the sales path."
+          ]
+        },
+        {
+          "heading": "Expected vs Verified — the Finance kill test",
+          "paragraphs": [
+            "Expected is fine. It means RADR believes a credit should exist, with a because-line in operator English.",
+            "Verified is stricter. It requires a sealed Trace: invoice and line IDs, evidence, finding, credit memo, applied_to, doc_ref, applied_amount, sealed_at. If a buyer cannot match that chain in AP, the badge should not say Verified.",
+            "Fake Verified is worse than another BI chart. Our rule: LLMs explain; systems calculate. Sealed Trace seals money."
+          ]
+        },
+        {
+          "heading": "Who this is for on day zero",
+          "paragraphs": [
+            "ICP for Recover D0: multi-unit full-service or fast-casual groups roughly 8–30 locations, with Finance or Purchasing as sponsor. Hotels are a separate path — not the restaurant AP pitch.",
+            "Success on a 14-day pilot is simple: Verified recoveries Finance can match to AP, on the stack you already run, with a clean exit. No rip-replace commitment."
+          ]
+        },
+        {
+          "heading": "Start a 14-day recover pilot",
+          "paragraphs": [
+            "If credits keep showing up on screen and never as cash, that is the commercial D0.",
+            "See one sealed credit → Trace on the Recover lab seed, or start a 14-day recover pilot with Finance / Purchasing. Clean exit. No second GL.",
+            "Later — below the fold, not the lead — Hospitality Autopilot may cover overnight briefs and weather. Today we cash credits."
+          ]
+        }
+      ]
+    }
+  },
+  "updatedLabel": "Updated {date}",
+  "ctaPilot": "Start a 14-day recover pilot",
+  "ctaRecover": "See Recover"
+}

@@ -1,0 +1,202 @@
+{
+  "metaTitle": "Pricing — RADR",
+  "metaDescription": "RADR pricing scales with operating scope and Decision responsibility. Paid Pilot, Core, and Control.",
+  "kicker": "Pricing",
+  "heroTitleLine1": "Priced to the operation.",
+  "heroTitleLine2": "Not the seat.",
+  "heroLead": "RADR pricing scales with the operating scope it covers and the level of decision responsibility it takes on.",
+  "heroSupport": "Start with one defined operating scope. Prove the economics. Then expand.",
+  "how": {
+    "kicker": "How pricing works",
+    "title": "Price follows the operating surface.",
+    "lead": "Not seats. Not tokens. Not per-Decision credits."
+  },
+  "dimensions": {
+    "locations": {
+      "title": "Locations",
+      "body": "How much of the operation RADR covers."
+    },
+    "scope": {
+      "title": "Operating scope",
+      "body": "The operational complexity RADR is responsible for understanding."
+    },
+    "responsibility": {
+      "title": "Decision responsibility",
+      "body": "Whether RADR recommends, prepares, or governs."
+    }
+  },
+  "pilot": {
+    "kicker": "Paid Pilot",
+    "verb": "Prove",
+    "title": "Start with one Decision.",
+    "lead": "You do not need to transform the entire operation on day one.",
+    "body": "Start with one location, a defined set of systems and one economic problem worth solving. RADR connects the evidence, surfaces Decisions and verifies what happens next. If the economics hold, expand.",
+    "priceLabel": "Paid Pilot",
+    "priceSub": "Scoped with you",
+    "cta": "Talk to us about a Pilot",
+    "points": [
+      "One location",
+      "Defined systems",
+      "Defined economic problem",
+      "Measurable outcome"
+    ]
+  },
+  "core": {
+    "name": "RADR Core",
+    "verb": "Decide + Verify",
+    "line": "The decision system for individual hospitality operations and growing teams.",
+    "audience": "Connect the operation. Make better Decisions. Verify what changed.",
+    "priceLabel": "Priced by location + operating scope",
+    "cta": "Discuss Core",
+    "features": [
+      "Operating connections and normalized model",
+      "Cross-system Decisions and Decision Trace",
+      "Futures — Early Access",
+      "Verified Value",
+      "Operating Memory — Early Access"
+    ]
+  },
+  "control": {
+    "name": "RADR Control",
+    "verb": "Govern + Scale",
+    "line": "Run Decision workflows across locations without losing local context.",
+    "audience": "Coordinate, approve and learn across the group.",
+    "priceLabel": "Portfolio / group pricing",
+    "cta": "Discuss Control",
+    "features": [
+      "Everything in RADR Core",
+      "Prepared Actions and approval workflows",
+      "Multi-location governance",
+      "Portfolio Verified Value",
+      "Advanced controls and implementation"
+    ]
+  },
+  "enterprise": {
+    "kicker": "Need enterprise controls?",
+    "body": "For larger groups we can scope SSO / SAML, custom RBAC, warehouse connections, custom APIs, security review, data policies, custom onboarding, dedicated support, SLA and multi-entity deployment.",
+    "cta": "Talk to us"
+  },
+  "packagesNote": "Core and Control are scoped to your operation.",
+  "expansion": {
+    "kicker": "How expansion works",
+    "title": "Prove. Deploy. Scale.",
+    "steps": {
+      "prove": {
+        "label": "Prove",
+        "title": "One operating problem.",
+        "body": "A paid Pilot on one location, defined systems, and a measurable outcome."
+      },
+      "deploy": {
+        "label": "Deploy",
+        "title": "Make RADR part of one operation.",
+        "body": "Core connects the stack, decides what matters, and verifies what changed."
+      },
+      "scale": {
+        "label": "Scale",
+        "title": "Govern Decisions across locations.",
+        "body": "Control prepares, approves, and learns across the group."
+      }
+    }
+  },
+  "compare": {
+    "kicker": "Responsibility",
+    "title": "What changes as RADR takes on more.",
+    "expand": "Show comparison",
+    "collapse": "Hide comparison",
+    "legend": {
+      "yes": "Included",
+      "early": "Early access",
+      "selected": "Selected scope",
+      "pilot": "Pilot scope",
+      "no": "Not in package"
+    },
+    "status": {
+      "yes": "Yes",
+      "early": "Early access",
+      "selected": "Selected",
+      "pilot": "Pilot scope",
+      "no": "—"
+    },
+    "columns": {
+      "feature": "Capability",
+      "pilot": "Pilot",
+      "core": "Core",
+      "control": "Control"
+    },
+    "groups": {
+      "scope": "Operating scope",
+      "intelligence": "Intelligence",
+      "proof": "Proof",
+      "action": "Action",
+      "scale": "Scale"
+    },
+    "planAria": "Package",
+    "rows": [
+      "Defined economic problem",
+      "Location(s)",
+      "Group / portfolio",
+      "Connected operating data",
+      "Cross-system Decisions",
+      "Operator context",
+      "Futures",
+      "Decision Trace",
+      "Verified Value",
+      "Operating Memory",
+      "Recommendations",
+      "Prepared Actions",
+      "Approval workflows",
+      "Multi-location governance",
+      "Group playbooks",
+      "Portfolio value view",
+      "Advanced controls"
+    ]
+  },
+  "faq": {
+    "kicker": "FAQ",
+    "title": "Buying questions",
+    "items": [
+      {
+        "q": "How is RADR priced?",
+        "a": "Pricing depends on locations, operating scope and the level of Decision responsibility RADR takes on."
+      },
+      {
+        "q": "Do you charge per user?",
+        "a": "RADR is priced around the operation it covers, not the number of people who need access. Exact access and governance are scoped with the deployment."
+      },
+      {
+        "q": "Do you charge per Decision?",
+        "a": "No. RADR is designed to continuously watch the operating surface within the agreed scope. We do not want teams deciding whether an issue is worth a credit to investigate."
+      },
+      {
+        "q": "Is there a free plan?",
+        "a": "RADR is deployed against real operating data and designed to influence economically material Decisions. We begin with paid scoped deployments rather than a free self-serve tier."
+      },
+      {
+        "q": "Can we start with one location?",
+        "a": "Yes. This is the preferred starting point for many deployments — often as a paid Pilot on one defined economic problem."
+      },
+      {
+        "q": "Do we need all our systems connected first?",
+        "a": "No. Start with what you have. RADR expands as more systems and context come online."
+      },
+      {
+        "q": "Can we expand later?",
+        "a": "Yes. RADR is designed to expand from one operating problem to locations and portfolios."
+      },
+      {
+        "q": "Can we start with only one economic territory?",
+        "a": "Yes. Deployments can begin focused on BUY, LABOR, SELL or RECOVER — but RADR’s operating model is cross-domain by design. Value often comes from the relationships between territories."
+      },
+      {
+        "q": "Do you offer enterprise terms?",
+        "a": "Yes. Larger groups can scope advanced controls, security, custom integrations, SLA and multi-entity deployment under Control."
+      }
+    ]
+  },
+  "ready": "Put one operating problem on RADR.",
+  "readyLead": "Tell us what you run, where margin disappears, and which systems hold the evidence. We will scope the right place to start.",
+  "readyCta": "Talk to RADR",
+  "readySecondary": "See how RADR decides",
+  "contactSales": "Talk to RADR",
+  "bookDemo": "See how RADR decides"
+}

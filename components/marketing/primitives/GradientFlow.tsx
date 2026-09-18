@@ -3,7 +3,7 @@ type Props = {
   variant?: "edge" | "field" | "footer";
 };
 
-/** Static atmospheric field — no continuous transform animation. */
+/** Static atmospheric field: no continuous transform animation. */
 export function GradientFlow({ className = "", variant = "field" }: Props) {
   return (
     <div

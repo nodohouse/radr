@@ -1,0 +1,26 @@
+{
+  "brand": "RADR",
+  "slogan": "Nada fuera del RADR.",
+  "tagline": "The adaptive decision system for hospitality.",
+  "territories": {
+    "BUY": "BUY",
+    "LABOR": "LABOR",
+    "SELL": "SELL",
+    "RECOVER": "RECOVER"
+  },
+  "askRadr": "Ask RADR",
+  "verifiedValue": "Verified Value",
+  "controlCenter": "Control Center",
+  "morningBrief": "Morning Brief",
+  "simulatedExample": "Ejemplo simulado",
+  "productPreview": "Vista previa del producto",
+  "seeRadr": "Ver RADR",
+  "seeRadrInAction": "Ver RADR en acción",
+  "exploreProduct": "Explorar el producto",
+  "requestAccess": "Solicitar acceso",
+  "signIn": "Iniciar sesión",
+  "mainSite": "Sitio principal",
+  "language": "Idioma",
+  "languageMenu": "Elegir idioma",
+  "copyright": "© {year} RADR"
+}

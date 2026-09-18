@@ -1,0 +1,457 @@
+{
+  "metaTitle": "Developers — RADR Technical Preview",
+  "metaDescription": "Technical preview: events, files and systems become Decisions. Sandbox access is not live yet.",
+  "brandLabel": "Developers",
+  "heroTitle": "Give RADR operating truth.",
+  "heroTitleLine1": "Give RADR",
+  "heroTitleLine2": "operating truth.",
+  "heroLead": "Technical preview. Start with files, APIs, systems or your warehouse. RADR normalizes the operating state and turns it into Decisions.",
+  "getStarted": "Get started",
+  "apiReference": "API reference",
+  "status": "Status",
+  "nav": {
+    "getStarted": "Get started",
+    "overview": "Overview",
+    "quickstart": "Quickstart",
+    "platform": "Platform",
+    "integrations": "Integrations",
+    "api": "API",
+    "webhooks": "Webhooks",
+    "dataModel": "Data model",
+    "authentication": "Authentication",
+    "errors": "Errors",
+    "build": "Build",
+    "customConnector": "Custom connector",
+    "csv": "CSV import",
+    "warehouse": "Database / warehouse",
+    "examples": "Examples",
+    "reference": "Reference",
+    "security": "Security",
+    "trust": "Trust center",
+    "contact": "Contact"
+  },
+  "codeNote": "Code samples, API paths and schema fields stay in English.",
+  "copy": "Copy",
+  "copied": "Copied",
+  "badge": {
+    "designPreview": "Technical preview",
+    "sandboxComing": "Technical preview · sandbox not live"
+  },
+  "hub": {
+    "metaTitle": "Developers — RADR",
+    "metaDescription": "Give RADR operating truth. Events, files and systems become decisions.",
+    "flowAria": "Data flow overview",
+    "flowDecorNote": "Illustrative source names only — not connection or integration status.",
+    "lifecycleStrip": {
+      "aria": "RADR decision pipeline",
+      "steps": {
+        "event": {
+          "label": "EVENT",
+          "hint": "Operating signals from POS, PMS, labor, channels, and files enter normalized intake."
+        },
+        "state": {
+          "label": "STATE",
+          "hint": "Events reconcile into the Operating Model — one cross-system view of what is true now."
+        },
+        "decision": {
+          "label": "DECISION",
+          "hint": "A Finding becomes a Decision only when material, evidenced, time-relevant, actionable, and able to change the outcome."
+        },
+        "outcome": {
+          "label": "OUTCOME",
+          "hint": "Prepared Actions and human choices resolve into observable results — ready to verify."
+        },
+        "memory": {
+          "label": "MEMORY",
+          "hint": "Verified outcomes and overrides feed Operating Memory so the next decision is better informed."
+        },
+        "finding": {
+          "label": "FINDING",
+          "hint": "A detected relationship, anomaly, exposure, opportunity or pattern — not yet a Decision."
+        }
+      }
+    },
+    "flowOut": [
+      "Events",
+      "Operating state",
+      "Findings",
+      "Decisions",
+      "Futures",
+      "Actions",
+      "Outcomes",
+      "Verified Value",
+      "Memory"
+    ],
+    "entryAria": "Developer entry points",
+    "entry": {
+      "integrations": {
+        "label": "Integrations",
+        "meta": "REST · Webhook · Partner",
+        "desc": "Connect the systems your operation already uses.",
+        "cta": "Browse integrations"
+      },
+      "api": {
+        "label": "API",
+        "meta": "Read · Write · Ingest",
+        "desc": "Read and write normalized RADR data.",
+        "cta": "Explore API"
+      },
+      "webhooks": {
+        "label": "Webhooks",
+        "meta": "Events · Signatures",
+        "desc": "React to operational events as they happen.",
+        "cta": "Explore webhooks"
+      },
+      "build": {
+        "label": "Build your own",
+        "meta": "API · CSV · Warehouse",
+        "desc": "Bring APIs, files, warehouses and custom sources.",
+        "cta": "Build a connector"
+      }
+    },
+    "quickstartKicker": "Quickstart",
+    "quickstartTitle": "Connect your first source",
+    "quickstartSteps": [
+      "Create sandbox API key",
+      "Add a location",
+      "Send operating event",
+      "Generate Finding",
+      "Create Decision when action is required",
+      "Subscribe to Decision / Outcome webhooks (PROPOSED)"
+    ],
+    "quickstartFine": "Sandbox key creation is not live yet. Use the proposed API design and demo reservation adapter while the platform ships.",
+    "startQuickstart": "Start quickstart",
+    "proposedApi": "Proposed API",
+    "archKicker": "Architecture",
+    "archTitle": "One operating model.",
+    "archBand": [
+      {
+        "span": "Operating events",
+        "em": "Ingest"
+      },
+      {
+        "span": "Operating model",
+        "em": "Normalize"
+      },
+      {
+        "span": "Findings",
+        "em": "Detect"
+      },
+      {
+        "span": "Decisions",
+        "em": "Decide"
+      },
+      {
+        "span": "Scenarios",
+        "em": "Futures"
+      },
+      {
+        "span": "Actions",
+        "em": "Prepare"
+      },
+      {
+        "span": "Outcomes",
+        "em": "Observe"
+      },
+      {
+        "span": "Verified Value",
+        "em": "Prove"
+      },
+      {
+        "span": "Learning",
+        "em": "Update"
+      }
+    ],
+    "catalogKicker": "Catalog",
+    "catalogTitle": "Integrations",
+    "catalogLead": "Status is honest. Available means a RADR path exists today. Partner access means the provider must approve before we can implement.",
+    "matrixKicker": "Reference",
+    "matrixTitle": "Capability matrix",
+    "matrixFine": "Verified capability targets only, not a claim that RADR has shipped the adapter.",
+    "capabilityFamiliesKicker": "Hospitality verticals",
+    "capabilityFamiliesTitle": "Capability families (conceptual)",
+    "capabilityFamiliesLead": "Hotel, aparthotel, and restaurant integrations target different entity bundles. Families describe design intent — catalog status stays honest about what is shipped.",
+    "capabilityFamilies": [
+      {
+        "vertical": "Hotel",
+        "systems": "PMS · channel manager · housekeeping · payments",
+        "entities": "Room inventory, reservations, rate plans, channel mix, settlements"
+      },
+      {
+        "vertical": "Aparthotel / STR",
+        "systems": "Unit PMS · channel sync · turnover · direct booking",
+        "entities": "Unit nights, orphan gaps, multi-night stays, cleaning state"
+      },
+      {
+        "vertical": "Restaurant / F&B",
+        "systems": "POS · reservations · labor · suppliers · delivery",
+        "entities": "Covers, menu mix, kitchen load, invoices, payouts"
+      }
+    ],
+    "providerCol": "Provider",
+    "securityKicker": "Security",
+    "securityTitle": "Developer security",
+    "securityBullets": [
+      "Secrets stay server-side, never in the browser or NEXT_PUBLIC_*.",
+      "Provider credentials are designed to be encrypted at rest.",
+      "Webhooks require signature verification per official docs.",
+      "Tenant access is permission-bound.",
+      "API keys will support rotation and revocation when shipped."
+    ],
+    "securityCert": "No SOC 2, ISO 27001, or PCI certification claims are made here.",
+    "dataMinTitle": "Data minimization",
+    "dataMinBody": "Prefer reservation ID, party size, time, status, table, and channel; not guest name, phone, email, or private notes.",
+    "customKicker": "Custom",
+    "customTitle": "Can't find your system?",
+    "customLead": "If it exposes usable data through an API, webhook, export or secure data connection, RADR can likely be designed to ingest it.",
+    "buildConnector": "Build a connector",
+    "sendDocs": "Send API documentation",
+    "talkRadr": "Talk to RADR",
+    "previewKicker": "Preview",
+    "previewTitle": "API · design preview",
+    "previewFine": "Placeholder host only. Public /v1 handlers are proposed, not production-live.",
+    "fullApi": "Full API reference →"
+  },
+  "api": {
+    "metaTitle": "API · Developers",
+    "metaDescription": "Proposed RADR public API design preview. Not production-live until handlers ship.",
+    "kicker": "API",
+    "title": "RADR API",
+    "lead": "Versioned REST design for locations, operational entities, findings and ingest. Endpoints are proposed until authenticated handlers ship.",
+    "authTitle": "Authentication",
+    "authBody": "Server-to-server bearer key. Never put keys in NEXT_PUBLIC_*.",
+    "exampleTitle": "Quick example",
+    "resourcesTitle": "Resources",
+    "resources": [
+      "Locations",
+      "Reservations",
+      "Orders",
+      "Labor",
+      "Invoices",
+      "Forecasts",
+      "Findings",
+      "Actions",
+      "Verified Value",
+      "Ingest (reservations / orders / labor / invoices)"
+    ],
+    "specFine": "Spec and docs paths stay in English.",
+    "errorsTitle": "Errors",
+    "dataModelTitle": "Data model",
+    "dataModelBody": "Money as amountMinor + currency. Every record carries provenance.",
+    "webhooksLink": "Webhooks →",
+    "connectorLink": "Custom connector →",
+    "advancedIngestTitle": "Advanced ingestion",
+    "advancedIngestBody": "Generic event ingestion is the lower-level architecture. Typed domain methods are the approachable Quickstart path — they are not a competing product model."
+  },
+  "webhooks": {
+    "metaTitle": "Webhooks · Developers",
+    "metaDescription": "Inbound provider webhooks and proposed RADR outbound events.",
+    "kicker": "Webhooks",
+    "title": "Webhooks",
+    "lead": "Inbound provider events and outbound RADR intelligence events, always with signature verification and idempotency.",
+    "inboundTitle": "Inbound",
+    "inboundSteps": [
+      "Provider → RADR webhook endpoint",
+      "Verify signature (official provider docs; raw body when required)",
+      "Idempotency key / event id",
+      "Acknowledge quickly",
+      "Queue → normalize → domain recalculation"
+    ],
+    "inboundFine": "Never invent a universal signature scheme. Never parse JSON before verification if the provider needs the raw body.",
+    "outboundTitle": "Outbound events (proposed)",
+    "outboundFine": "Proposed schema for Technical Preview — not live delivery. Event names may change before GA.",
+    "apiLink": "API reference →",
+    "overviewLink": "Overview →",
+    "outboundProposed": "Proposed schema — not live webhook delivery."
+  },
+  "connectors": {
+    "metaTitle": "Custom connectors · Developers",
+    "metaDescription": "Build your own RADR connector via API, webhook, CSV, SFTP, warehouse or custom adapter.",
+    "kicker": "Build",
+    "title": "Build a connector",
+    "lead": "If your system exposes usable operational data, RADR can be designed to normalize it into the operating model.",
+    "pathsTitle": "Supported paths",
+    "paths": [
+      "REST API",
+      "Webhooks",
+      "CSV / JSON / NDJSON",
+      "SFTP drops",
+      "Database / warehouse (least-privilege)",
+      "Custom adapter"
+    ],
+    "needsTitle": "What RADR needs",
+    "needs": [
+      "Location identifiers",
+      "Timestamps (with timezone)",
+      "Currency",
+      "Stable source record IDs",
+      "Operational entities (not unnecessary guest PII)"
+    ],
+    "contractTitle": "CSV / file mapping",
+    "contractRecommended": "Recommended fields stay in English schema docs.",
+    "warehouseTitle": "Database / warehouse",
+    "warehouseBody": "Scoped custom implementation when needed. Authentication depends on the source — database credentials, service account, OAuth, warehouse role, access key, or signed credentials. Not one universal API_TOKEN. Prefer read-only access, restricted views, shares, or scheduled exports.",
+    "adaptersTitle": "Adapter interfaces",
+    "adaptersBody": "Implement category adapters under the integrations adapters directory. See the adding-an-integration developer guide.",
+    "sendDocs": "Send API documentation",
+    "ingestPreview": "Ingest API preview"
+  },
+  "quickstart": {
+    "metaTitle": "Quickstart · Developers",
+    "metaDescription": "Connect your first source to RADR. Sandbox key creation coming.",
+    "kicker": "Quickstart",
+    "title": "Connect your first source",
+    "proposedApi": "Proposed API",
+    "steps": [
+      {
+        "title": "Create a sandbox API key",
+        "body": "Not live yet. Keys will be hashed server-side when shipped."
+      },
+      {
+        "title": "Add a location",
+        "body": "Bind ingest to a tenant location with timezone + currency."
+      },
+      {
+        "title": "Send reservations or orders",
+        "body": "Start with the typed SDK (for example radr.reservations.create). It maps onto generic event ingestion."
+      },
+      {
+        "title": "Verify normalized data",
+        "body": "Check provenance and source IDs, not just UI numbers."
+      },
+      {
+        "title": "Start receiving findings",
+        "body": "Intelligence requires evidence + operating context."
+      }
+    ],
+    "browse": "Browse integrations",
+    "apiPreview": "API design preview",
+    "buildConnector": "Build a connector",
+    "typedMapsNote": "Under the hood, typed SDK methods map to RADR’s generic ingestion / event layer.",
+    "advancedIngestionLink": "Advanced ingestion →"
+  },
+  "provider": {
+    "crumb": "Integrations",
+    "status": "Status",
+    "accessType": "Access type",
+    "lastReviewed": "Last reviewed",
+    "regions": "Regions",
+    "officialDocs": "Official documentation:",
+    "noDocs": "Official documentation URL not listed. Confirm before implementation.",
+    "accessTitle": "Access requirement",
+    "ingestTitle": "What RADR can ingest",
+    "ingestFine": "Capabilities reflect reviewed provider potential, not a claim that RADR has shipped this adapter unless status is Available.",
+    "authTitle": "Authentication",
+    "authFine": "Placeholders only. Secrets stay server-side, never in frontend or NEXT_PUBLIC_* variables.",
+    "mappingTitle": "Provider data → RADR",
+    "colProvider": "Provider",
+    "colRadr": "RADR",
+    "syncTitle": "Sync method",
+    "syncFine": "Do not invent polling intervals; take limits from official docs at implementation time.",
+    "implTitle": "Implementation guide",
+    "implDemo": "Reference adapter path stays in English.",
+    "implPending": "Not Available or Beta yet. RADR will not publish working provider call examples until this integration reaches Available or Beta with confirmed documentation and access.",
+    "notesTitle": "Notes",
+    "allIntegrations": "← All integrations",
+    "buildConnector": "Build a connector →",
+    "fallbackTitle": "Integration",
+    "implAvailable": "This integration path is Available. Use present-tense setup for the entities listed above. Limitations stay in the notes — do not invent live provider calls beyond documented access.",
+    "internalDocs": "RADR docs:",
+    "ingestFineAvailable": "Entities listed here work on this Available path today. Limitations stay in the notes.",
+    "implDemoBody": "RADR Demo Reservations is a RADR-provided reference data source for testing and demonstration. Use it to generate reservation events, test normalized reservation ingestion, exercise Findings / Decisions, and validate developer flows without third-party provider access. Synthetic/reference data — not a production reservation platform.",
+    "implCustom": "Scoped custom implementation. No generic plug-and-play adapter is currently provided. Deployment is scoped based on the customer’s systems, data model and security requirements.",
+    "implPlanned": "Planned — not implemented yet. Do not treat placeholders as a working integration path."
+  },
+  "catalog": {
+    "searchLabel": "Search integrations",
+    "searchPlaceholder": "Search integrations…",
+    "category": "Category",
+    "status": "Status",
+    "capability": "Capability",
+    "region": "Region",
+    "all": "All",
+    "legendSummary": "Status legend",
+    "yourSysKicker": "Custom connector",
+    "yourSysTitle": "Your system",
+    "yourSysMeta": "REST API · Webhook · CSV · SFTP · Warehouse · Custom adapter",
+    "yourSysNote": "If your system exposes usable operational data, RADR can be designed to normalize it into the RADR operating model.",
+    "buildConnector": "Build a connector →",
+    "count": "{count, plural, one {# integration} other {# integrations}}",
+    "empty": "No integrations match. Try clearing filters or",
+    "emptyLink": "build a custom connector",
+    "viewIntegration": "View integration →"
+  },
+  "labels": {
+    "status": {
+      "available": "Available",
+      "beta": "Beta",
+      "building": "Building",
+      "planned": "Planned",
+      "custom": "Scoped custom implementation",
+      "partner_access": "Partner access"
+    },
+    "category": {
+      "pos": "POS",
+      "reservations": "Reservations",
+      "pms": "Hotel PMS",
+      "channels": "Channel / distribution",
+      "aparthotel": "Aparthotel / STR PMS",
+      "labor": "Labor",
+      "accounting": "Accounting",
+      "payments": "Payments",
+      "delivery": "Delivery",
+      "purchasing": "Purchasing",
+      "banking": "Banking",
+      "external-signals": "External signals",
+      "custom": "Custom"
+    },
+    "entity": {
+      "locations": "Locations",
+      "orders": "Orders",
+      "reservations": "Reservations",
+      "waitlist": "Waitlist",
+      "tables": "Tables",
+      "labor": "Labor",
+      "invoices": "Invoices",
+      "payments": "Payments",
+      "payouts": "Payouts",
+      "forecasts": "Forecasts",
+      "weather": "Weather",
+      "events": "Events",
+      "files": "Files"
+    },
+    "region": {
+      "global": "Global",
+      "eu": "EU",
+      "uk": "UK",
+      "us": "US",
+      "ca": "Canada",
+      "other": "Other"
+    },
+    "legend": {
+      "available": "A RADR path exists today.",
+      "beta": "Limited / early path.",
+      "partner_access": "Provider approval required before implementation.",
+      "building": "In active design or implementation.",
+      "planned": "On the roadmap; not started.",
+      "custom": "Bring your own connector."
+    }
+  },
+  "overview": {},
+  "architecture": {
+    "findingTitle": "Finding",
+    "findingBody": "A Finding is a detected relationship, anomaly, exposure, opportunity or pattern. A Finding becomes a Decision only when it is material, time-relevant, sufficiently evidenced, actionable, and capable of changing the outcome.",
+    "pipeline": [
+      "EVENT",
+      "NORMALIZED OPERATING STATE",
+      "FINDING",
+      "DECISION",
+      "SCENARIO / FUTURES",
+      "ACTION",
+      "OUTCOME",
+      "VERIFIED VALUE",
+      "MEMORY"
+    ],
+    "ingestNote": "High-level typed SDK calls such as radr.reservations.create(...) map onto the generic event ingestion layer radr.events.ingest(...). Quickstart uses the typed path; advanced docs show the generic event API."
+  }
+}

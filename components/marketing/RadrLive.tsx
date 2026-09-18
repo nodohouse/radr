@@ -3,7 +3,7 @@ type Props = {
   locations?: number;
 };
 
-/** Demo status — not live customer telemetry */
+/** Demo status: not live customer telemetry */
 export function RadrLive({ className = "", locations = 18 }: Props) {
   return (
     <div className={`radr-live ${className}`.trim()} aria-hidden="true">

@@ -1,13 +1,13 @@
 type Props = {
   className?: string;
-  /** Travelling laser along the perimeter — large brand moments only */
+  /** Travelling laser along the perimeter: large brand moments only */
   animate?: boolean;
   /** ink on light sections, signal on dark */
   tone?: "signal" | "ink";
 };
 
 /**
- * Soft outline △ — rounded joins, transparent interior.
+ * Soft outline △: rounded joins, transparent interior.
  * Custom letterform energy, not a warning glyph.
  */
 export function DeltaOutline({

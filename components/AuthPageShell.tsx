@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { AuthSignalPreview } from "@/components/AuthSignalPreview";
-import { RadrWordmark } from "@/components/marketing/RadrWordmark";
+import { RADRLogo } from "@/components/radr/RADRLogo";
 
 type Props = {
   title: string;
@@ -12,7 +11,7 @@ type Props = {
 };
 
 /**
- * Auth front door — product atmosphere + form.
+ * Auth front door: quiet product identity + form.
  * No Google CTA (not implemented).
  */
 export function AuthPageShell({
@@ -28,19 +27,24 @@ export function AuthPageShell({
           <aside className="rx-auth-stage" aria-hidden="true">
             <div className="rx-auth-stage-atm" />
             <Link href="/" className="rx-auth-stage-mark" tabIndex={-1}>
-              <RadrWordmark size="nav" />
+              <RADRLogo size="nav" variant="luminous" surface="dark" />
             </Link>
             <div className="rx-auth-stage-copy">
-              <p className="rx-kicker">Margin intelligence</p>
+              <p className="rx-kicker">The adaptive decision system</p>
               <h2 className="rx-auth-stage-title">
-                Nothing off
+                Operating judgment
                 <br />
-                the RADR.
+                for hospitality.
               </h2>
-              <AuthSignalPreview />
+              <ul className="rx-auth-territories">
+                <li>BUY</li>
+                <li>LABOR</li>
+                <li>SELL</li>
+                <li>RECOVER</li>
+              </ul>
             </div>
             <p className="rx-auth-stage-note">
-              Built first for complex hospitality operations.
+              Connect · Understand · Detect · Explain · Act · Control · Verify
             </p>
           </aside>
         ) : null}
@@ -48,11 +52,15 @@ export function AuthPageShell({
         <main className="rx-auth-panel">
           {!showcase ? (
             <Link href="/" className="rx-auth-panel-mark" aria-label="RADR home">
-              <RadrWordmark size="nav" />
+              <RADRLogo size="nav" variant="luminous" surface="dark" />
             </Link>
           ) : (
-            <Link href="/" className="rx-auth-panel-mark rx-auth-panel-mark--mobile" aria-label="RADR home">
-              <RadrWordmark size="nav" />
+            <Link
+              href="/"
+              className="rx-auth-panel-mark rx-auth-panel-mark--mobile"
+              aria-label="RADR home"
+            >
+              <RADRLogo size="nav" variant="luminous" surface="dark" />
             </Link>
           )}
           <header className="rx-auth-header">

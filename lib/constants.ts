@@ -17,6 +17,18 @@ export type AllowedMimeType = (typeof ALLOWED_MIME_TYPES)[number];
 export const FEATURE_DOCUMENT_CHECKING =
   process.env.FEATURE_DOCUMENT_CHECKING === "true";
 
+/**
+ * Live Shift economic pulse.
+ * Client-visible: NEXT_PUBLIC_FEATURE_LIVE_SHIFT
+ * Default: on in DEMO/SANDBOX; off in LIVE unless feeds are ready.
+ */
+export const FEATURE_LIVE_SHIFT =
+  process.env.NEXT_PUBLIC_FEATURE_LIVE_SHIFT !== "false";
+
+/** Set true only when real POS/payments event feeds are wired for LIVE. */
+export const LIVE_SHIFT_FEEDS_READY =
+  process.env.NEXT_PUBLIC_LIVE_SHIFT_FEEDS === "true";
+
 /** Countries shown in onboarding (ISO 3166-1 alpha-2). Expand later. */
 export const ONBOARDING_COUNTRIES = [
   { code: "NL", name: "Netherlands", currency: "EUR", timezone: "Europe/Amsterdam" },

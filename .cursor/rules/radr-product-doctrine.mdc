@@ -1,0 +1,156 @@
+---
+description: RADR category + product doctrine — Verified Decision Intelligence; attention scarce; loop-first; never a PMS/RMS/BI clone
+alwaysApply: true
+---
+
+# RADR product doctrine
+
+This overrides normal SaaS dashboard conventions and category gravity toward PMS / RMS / BI / scheduling clones.
+
+## Category
+
+**RADR = Verified Decision Intelligence for Hospitality.**
+
+Internal: **the decision layer above the hospitality stack.**
+
+Systems of record stay systems of record (POS, PMS, reservations, labor, accounting, suppliers, delivery, channels). RADR sits **above** them.
+
+RADR answers:
+
+WHAT CHANGED? · WHAT MATTERS? · WHAT IS LIKELY? · COST OF DOING NOTHING? · OPTIONS? · BEST OPTION? · HOW SURE? · WHAT NOW? · CAN RADR PREPARE/EXECUTE? · WHAT HAPPENED AFTER? · WAS VALUE VERIFIED? · THEN LEARN.
+
+External language (prefer proven, not inflated):
+
+- Your systems record the operation. RADR understands it.
+- What to do next — with evidence, economics, and verification.
+- Not: more software to manage.
+
+## North star
+
+Success is **human attention returned** and **verified economic outcomes**.
+
+Final product questions:
+
+1. **How much work did RADR remove?**
+2. **Which decisions did RADR make better / faster / with proof?**
+
+Not: how much information did RADR show? Not DAU / session time / Finding count.
+
+## The RADR loop
+
+Every major capability plugs into:
+
+**OBSERVE → UNDERSTAND → PREDICT → SIMULATE → DECIDE → PREPARE → ACT → VERIFY → LEARN**
+
+Compatible with existing code stages (DETECT / QUANTIFY / APPROVE). Do not invent parallel loops or parallel Finding/Signal/Value models.
+
+Disconnected features that do not improve observe / predict / decide / act / verify / learn are suspect.
+
+## What RADR is not
+
+Do **not** turn RADR into another:
+
+restaurant management platform · hotel PMS · RMS · scheduling system · BI dashboard · finance dashboard · reservation platform · generic AI copilot
+
+Competitor avoidance: if the job belongs to POS/PMS/RMS/scheduling/accounting/CRM/reservations — **integrate**, do not rebuild, unless a minimal control surface is required for a decision.
+
+RADR owns: cross-system understanding · decisioning · simulation · attention · action orchestration · verified outcomes · learning.
+
+## Attention intelligence
+
+Core concept: **ATTENTION** (scarce).
+
+Classify signals into:
+
+**NEEDS YOU** · **RADR IS HANDLING** · **WATCHING** · **HANDLED** · **NO ACTION**
+
+Evaluate with: safety · guest impact · financial impact · deadline · operational impact · confidence · reversibility · required authority.
+
+**Attention budget:** never surface five mediocre insights when two material decisions exist. Rank ruthlessly.
+
+Default Control Center = **decision cockpit**, not a dashboard:
+
+- N things need you
+- RADR is handling (optional rollup)
+- Watching (quiet)
+- Verified since last check
+
+Signature UX: **Since your last check** · silence when healthy · do not invent insights to look busy.
+
+## Work absorption hierarchy
+
+For every Finding / Decision, prefer:
+
+1. **HANDLE** — resolve safely within policy and capability
+2. **PREPARE** — carry work to approval only
+3. **ASK** — one clear decision with economics and default
+4. **INFORM** — only when none of the above is possible
+
+Never default to: INFORM → RECOMMEND → CREATE TASK.
+
+## Decision objects
+
+Material recommendations become structured **Decisions** (auditable), not chatty AI tips.
+
+Decision UI answers: **WHAT? · SO WHAT? · NOW WHAT? · WHY? · WHAT IF?**
+
+Always model **cost of doing nothing**. Show confidence / range / freshness. Never blur:
+
+**OBSERVED · ESTIMATED · PREDICTED · RECOMMENDED · VERIFIED**
+
+## Time & perishable value
+
+Time is first-class: `availableFrom` · `expiresAt` · `decisionDeadline` · `valueDecay`.
+
+Signature concept: **PerishableValueOpportunity** (table, room night, orphan night, terrace, spa slot, labor hour, etc.).
+
+## Autonomy ladder (earn trust)
+
+0 Observe → 1 Recommend → 2 Prepare → 3 Approve → 4 Automate with rules → 5 Autonomous low-risk only
+
+Autonomy is **per decision type**. Never fake execution. Operator override is learning signal (optional, low friction).
+
+## Trust
+
+Every material recommendation supports: why RADR believes this · sources · freshness · sample · drivers · confidence · range · assumptions.
+
+Causal humility: prefer “associated with / historically followed by” unless evidence supports causation.
+
+## UI language
+
+Prefer: RADR handled · Prepared for approval · Waiting on … · Pending verification · Verified · No action required · Handled automatically · Ready when you are · RADR is watching · Resolved
+
+Avoid unless human must act: Task created · Recommended action · Suggested next step · You should · Consider · We recommend · Action item
+
+Patterns: **WHAT RADR ALREADY DID** · **WHAT RADR NEEDS FROM YOU** (tiny) · **Since your last check**
+
+## Product information hierarchy (when something needs a human)
+
+1. STATUS — what is happening now?
+2. VALUE — what is at stake / cost of doing nothing?
+3. RADR — what has RADR already done?
+4. HUMAN — does anything need me?
+5. NEXT — what happens now?
+6. EVIDENCE — why (progressive disclosure)
+
+## Feature must-have tests
+
+1. Does this help observe / predict / decide / act / verify / learn?
+2. Would an operator miss this if RADR disappeared (reconcile systems, catch leakage, re-run a workflow)?
+3. Is this primarily another category’s job? → integrate.
+
+If they could just look at another dashboard elsewhere — weak. Deprioritize.
+
+## Metrics (optimize)
+
+human decisions avoided · decision time reduced · value recovered / protected / created / avoided · prediction accuracy · action adoption · false alerts · time-to-action · Verified Value · attention saved
+
+Not: DAU, time-in-app, dashboard views, Finding count, notification vanity.
+
+## Verticals
+
+Restaurant / F&B · Boutique hotel · Serviced apartments / professional vacation rental map into **one** RADR Core (Operating Twin + Decisions + Attention). Do not fork three intelligence architectures.
+
+## Marketing honesty
+
+Communicate decision intelligence and work removal. Never claim autonomous execution ahead of product truth. Never claim Verified Value without evidence chain.

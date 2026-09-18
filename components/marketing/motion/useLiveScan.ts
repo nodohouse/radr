@@ -36,7 +36,7 @@ export type LiveScanState = {
 
 /**
  * Hero live-scan sequencer.
- * Discrete beats only — no 60fps React updates.
+ * Discrete beats only: no 60fps React updates.
  * Meters lock at demo totals; post-lock cycles cosmetic signals.
  */
 export function useLiveScan(armed: boolean): LiveScanState {
@@ -63,8 +63,8 @@ export function useLiveScan(armed: boolean): LiveScanState {
       ? {
           id: "m-done",
           kind: "complete",
-          kicker: "Demo scan",
-          headline: "Scan complete",
+          kicker: "Demo complete",
+          headline: "Value on RADR",
           body: `Value identified at demo lock`,
         }
       : null,

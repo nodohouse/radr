@@ -1,32 +1,62 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteFooter } from "@/components/marketing/SiteFooter";
-import { SiteNav } from "@/components/marketing/SiteNav";
-import { DeltaGlyph } from "@/components/marketing/primitives/DeltaGlyph";
 
+/**
+ * Root 404 fallback (English, no next-intl provider).
+ * Localized 404: app/[locale]/not-found.tsx
+ */
 export const metadata: Metadata = {
-  title: "Signal lost",
-  description: "This page is off the RADR.",
+  title: "Nothing here · RADR",
+  description: "Nothing here on the RADR.",
 };
 
 export default function NotFound() {
   return (
-    <div className="radr">
-      <SiteNav />
-      <main className="rx-404" data-nav-theme="dark">
-        <div className="rx-shell rx-404-inner">
-          <p className="rx-kicker">404</p>
-          <div className="rx-404-glyph" aria-hidden="true">
-            <DeltaGlyph size={88} living active />
-          </div>
-          <h1 className="rx-404-title">Signal lost.</h1>
-          <p className="rx-404-lead">This page is off the RADR.</p>
-          <Link href="/" className="rx-btn rx-btn-primary">
-            Return home <span aria-hidden="true">→</span>
+    <html lang="en">
+      <body
+        style={{
+          margin: 0,
+          minHeight: "100vh",
+          background: "#070807",
+          color: "#f5f2eb",
+          fontFamily:
+            "var(--font-body), Source Sans 3, system-ui, sans-serif",
+          display: "grid",
+          placeItems: "center",
+          padding: "2rem",
+        }}
+      >
+        <main style={{ textAlign: "center", maxWidth: "28rem" }}>
+          <p
+            style={{
+              margin: "0 0 0.75rem",
+              fontFamily: "IBM Plex Mono, monospace",
+              fontSize: "0.65rem",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "rgba(245,242,235,0.45)",
+            }}
+          >
+            Nothing here on the RADR
+          </p>
+          <h1 style={{ margin: "0 0 0.5rem", fontSize: "1.75rem" }}>
+            Signal lost.
+          </h1>
+          <p style={{ margin: "0 0 1.5rem", color: "rgba(245,242,235,0.7)" }}>
+            This page is off the map.
+          </p>
+          <Link
+            href="/en"
+            style={{
+              color: "#00f56a",
+              textDecoration: "none",
+              fontSize: "0.95rem",
+            }}
+          >
+            Return home →
           </Link>
-        </div>
-      </main>
-      <SiteFooter />
-    </div>
+        </main>
+      </body>
+    </html>
   );
 }

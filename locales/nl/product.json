@@ -1,0 +1,366 @@
+{
+  "metaTitle": "Platform",
+  "metaDescription": "The decision layer above your hospitality stack: Decision Cockpit, Findings, Ask RADR, Prepared Actions and Verified Value.",
+  "heroTitleLine1": "The decision layer.",
+  "heroTitleLine2": "Every system underneath.",
+  "heroTitle": "The decision layer. Every system underneath.",
+  "heroLead": "Your systems record the operation. RADR understands it — attention first, Prepared Actions next, Verified Value when it lands.",
+  "openDemo": "See RADR in action",
+  "howItWorks": "Hoe het werkt",
+  "comingSoon": "Diepere producttekst is gelokaliseerd. Open de demo voor de volledige ervaring.",
+  "connectKicker": "Waarom systemen verbinden",
+  "connectTitle": "Niet nog een dashboard per systeem.",
+  "connectLead": "RADR verbindt de systemen die uw restaurant al draaien, zodat het de economie ertussen begrijpt: POS, reserveringen, labor, facturen, payouts en de kalender die vraag vormgeeft.",
+  "insideKicker": "In RADR",
+  "mapTitle": "Productkaart",
+  "mapLead": "Browse every surface in the Decision Cockpit.",
+  "connect": {
+    "systemsLabel": "Systemen",
+    "intelligenceLabel": "Decision intelligence",
+    "pipeline": {
+      "ingest": "Vinden wat ertoe doet",
+      "normalize": "Bepalen wat het waard is",
+      "understand": "Voorbereiden wat volgt",
+      "compare": "Het resultaat verifiëren"
+    },
+    "outcomes": {
+      "detect": "Vinden wat ertoe doet",
+      "act": "Bepalen wat het waard is",
+      "control": "Voorbereiden wat volgt",
+      "verify": "Het resultaat verifiëren"
+    },
+    "connectionsLink": "Dataverbindingen →",
+    "developersLink": "Integraties verkennen →"
+  },
+  "featuresKicker": "Hoe RADR werkt",
+  "featuresTitle": "Van signaal naar geverifieerd resultaat.",
+  "featuresLead": "Vier plekken waar operators terugkomen wanneer geld beweegt.",
+  "features": {
+    "performance": {
+      "label": "Observe",
+      "title": "Performance",
+      "body": "Omzet, marge en labor over tijd: actual tegen forecast en plan, zodat u weet waar de week naartoe gaat voordat die sluit.",
+      "metric": "Operating margin"
+    },
+    "findings": {
+      "label": "Detect",
+      "title": "Findings",
+      "body": "Materiële geldkansen, gerangschikt. Elke finding opent met bewijs, de juiste persoon en de waarde die speelt."
+    },
+    "reconciliation": {
+      "label": "Prepare",
+      "title": "Reconciliation",
+      "body": "Match verwacht geld met wat landde over payouts, facturen en credits: en sluit het gat met de volgende stap.",
+      "expected": "Verwacht",
+      "landed": "Geland",
+      "gap": "€2,1k gap te sluiten"
+    },
+    "verifiedValue": {
+      "label": "Verify",
+      "title": "Verified Value",
+      "body": "Volg identified  to  protected  to  verified. Claim alleen wat de operatie echt heeft vastgelegd.",
+      "metric": "Verified deze maand",
+      "steps": {
+        "identified": "Identified",
+        "protected": "Protected",
+        "verified": "Verified"
+      }
+    }
+  },
+  "closeKicker": "Begin hier",
+  "closeTitle": "Zie RADR op uw economie.",
+  "closeLead": "Open de live demo, of praat met sales over uw locaties en stack.",
+  "scene": {
+    "liveDemo": "Live demo",
+    "onCourse": "Op koers",
+    "today": "Vandaag",
+    "tonight": "Vanavond",
+    "next7": "Komende 7 dagen",
+    "whereValue": "Waar waarde zit",
+    "group": "Groep",
+    "locations": "{count} locaties",
+    "revenue": "Omzet",
+    "operatingMargin": "Bedrijfsmarge",
+    "vsLastWednesday": "vs vorige woensdag",
+    "vsForecast": "vs forecast",
+    "coversBooked": "Geboekte covers",
+    "expectedOccupancy": "Verwachte bezetting",
+    "expectedRevenue": "Verwachte omzet",
+    "revenueToday": "Omzet vandaag",
+    "openControlCenter": "Open de demo Control Center →"
+  },
+  "operatingModel": {
+    "kicker": "Product · Data",
+    "title": "Operating model",
+    "lead": "RADR brengt gefragmenteerde operationele data samen in één gemeenschappelijk model, zodat verwacht en werkelijk vergelijkbaar zijn.",
+    "entitiesTitle": "Entiteiten die RADR begrijpt",
+    "normTitle": "Normalisatievoorbeeld",
+    "normLead": "Verschillende bronlabels leiden tot één commerciële waarheid.",
+    "aliases": "Aliassen",
+    "canonical": "Canoniek",
+    "howLink": "Volledige How it works →",
+    "entities": {
+      "Supplier": "Leverancier",
+      "Item": "Artikel",
+      "Location": "Locatie",
+      "Date": "Datum",
+      "Employee": "Medewerker",
+      "Shift": "Dienst",
+      "Channel": "Kanaal",
+      "Invoice": "Factuur",
+      "Contract": "Contract",
+      "Rate": "Tarief",
+      "Transaction": "Transactie",
+      "Credit": "Credit",
+      "Payout": "Uitbetaling",
+      "Menu item": "Menuitem",
+      "Room type": "Kamertype",
+      "Booking": "Boeking",
+      "Revenue": "Omzet",
+      "Labor cost": "Personeelskosten"
+    }
+  },
+  "connections": {
+    "kicker": "Product · Data",
+    "title": "Connections",
+    "lead": "Hoe data RADR binnenkomt. Status is eerlijk: LIVE, EARLY ACCESS of PLANNED.",
+    "colChannel": "Kanaal",
+    "colCovers": "Dekking",
+    "colStatus": "Status",
+    "developersLink": "Developers · integraties →",
+    "howLink": "Hoe ingestie in de architectuur past →",
+    "status": {
+      "LIVE": "LIVE",
+      "EARLY ACCESS": "EARLY ACCESS",
+      "PLANNED": "PLANNED"
+    },
+    "channels": {
+      "files": {
+        "title": "Bestanden",
+        "body": "CSV, Excel, PDF, contracten, facturen, overzichten en roosters."
+      },
+      "manual": {
+        "title": "Handmatige invoer",
+        "body": "Doelen, commerciële voorwaarden, regels, budgetten en goedgekeurde waarden."
+      },
+      "native": {
+        "title": "Native integraties",
+        "body": "API’s naar PMS, POS, inkoop, workforce, boekhouding, betalingen, delivery en revenue management."
+      },
+      "sftp": {
+        "title": "Veilige exports",
+        "body": "Geplande exports / SFTP waar ondersteund."
+      },
+      "email": {
+        "title": "E-mail",
+        "body": "Doorgestuurde operationele documenten waar ondersteund."
+      },
+      "warehouse": {
+        "title": "Warehouse / database",
+        "body": "Alleen-lezen gestructureerde datakoppelingen waar ondersteund."
+      }
+    }
+  },
+  "lookKicker": "Live look",
+  "lookTitle": "The Decision Cockpit, in one operating picture.",
+  "architecture": {
+    "kicker": "Platform",
+    "heroLine1": "The decision layer.",
+    "heroLine2": "Every system underneath.",
+    "lead": "Your operation leaves signals. RADR turns them into decisions",
+    "contact": "Demo boeken",
+    "flowLabel": "How RADR sits on your stack",
+    "flow": {
+      "sources": "Sources",
+      "radr": "RADR",
+      "findings": "Findings",
+      "actions": "Actions",
+      "value": "Verified Value"
+    },
+    "chaptersTitle": "Explore",
+    "chapters": {
+      "controlCenter": {
+        "title": "Decision Cockpit",
+        "desc": "What needs you. What RADR is handling. Verified since last check."
+      },
+      "findings": {
+        "title": "Findings",
+        "desc": "Money with evidence."
+      },
+      "ask": {
+        "title": "Ask RADR",
+        "desc": "Ask the operation."
+      },
+      "actions": {
+        "title": "Prepared Actions",
+        "desc": "Ready for approval."
+      },
+      "value": {
+        "title": "Verified Value",
+        "desc": "Proven outcomes."
+      },
+      "forecast": {
+        "title": "Forecast",
+        "desc": "What the week is heading toward."
+      }
+    },
+    "linkConnections": "Connections →",
+    "linkModel": "Operating model →",
+    "linkHow": "How it works →",
+    "systemsLabel": "Systems",
+    "outcomesLabel": "Outcomes"
+  },
+  "chapters": {
+    "controlCenter": {
+      "metaTitle": "Decision Cockpit",
+      "metaDescription": "See what needs you, what RADR is handling, and verified value since your last check.",
+      "kicker": "Platform · Decision Cockpit",
+      "title": "Attention first. Not another inbox.",
+      "lead": "The few things that need you. RADR handles the rest. Verified value since your last check.",
+      "cta": "See RADR in action",
+      "ctaSecondary": "Demo boeken",
+      "briefTitle": "Since your last check",
+      "briefLead": "Exposure that still needs judgment, decisions ready for approval, and value already verified.",
+      "frameLabel": "Decision Cockpit preview",
+      "exposedLabel": "currently exposed",
+      "decisionsLabel": "ready for approval",
+      "verifiedSinceLabel": "verified since last check",
+      "cards": {
+        "labor": {
+          "title": "Peak service understaffed"
+        },
+        "buy": {
+          "title": "Supplier invoice above contract"
+        },
+        "recover": {
+          "title": "Cancellation recovered"
+        }
+      },
+      "linkFindings": "Findings →",
+      "linkActions": "Prepared Actions →",
+      "linkArchitecture": "Platform architecture →"
+    },
+    "findings": {
+      "metaTitle": "Findings",
+      "metaDescription": "Material money opportunities across BUY, LABOR, SELL and RECOVER, with evidence and a Prepared Action.",
+      "kicker": "Platform · Findings",
+      "title": "Material money. Evidence attached.",
+      "lead": "Een operationele kloof met economie, bewijs en een voorbereide volgende stap.",
+      "cta": "See RADR in action",
+      "ctaSecondary": "Prepared Actions →",
+      "anatomyTitle": "Four domains. One anatomy.",
+      "anatomyLead": "Every Finding carries value at stake, why RADR believes it, and a Prepared Action. Not a vague recommendation.",
+      "evidenceLabel": "Evidence",
+      "preparedLabel": "Prepared Action",
+      "doctrineNote": "RADR prefers HANDLE → PREPARE → ASK → INFORM. Marketing never claims execution ahead of product truth.",
+      "linkControl": "Control Center →",
+      "linkAsk": "Ask RADR →",
+      "linkArchitecture": "Platform architecture →"
+    },
+    "ask": {
+      "metaTitle": "Ask RADR",
+      "metaDescription": "Ask the operation in plain language. Get evidence, money at stake, and a Prepared Action where possible.",
+      "kicker": "Platform · Ask RADR",
+      "title": "Ask the operation.",
+      "lead": "Serieuze vragen. Antwoorden met bewijs, economie en volgende stap.",
+      "cta": "See RADR in action",
+      "ctaSecondary": "Demo boeken",
+      "panelTitle": "Not a chatbot. An operating surface.",
+      "panelLead": "Questions resolve into Findings, money, and Prepared Actions, grounded in your connected systems.",
+      "promptsLabel": "Example questions",
+      "frameLabel": "Ask RADR answer preview",
+      "chrome": "Ask RADR",
+      "questionLabel": "You asked",
+      "answerLead": "Peak staffing is currently your highest priority.",
+      "answerBody": "At {location}, expected peak demand exceeds scheduled FOH capacity between {peakStart} and {peakEnd}.",
+      "atRisk": "currently at risk",
+      "preparedLabel": "Prepared Action",
+      "honestyNote": "Ask RADR uses the same Findings and Prepared Actions as Control Center. It does not invent autonomy.",
+      "linkFindings": "Findings →",
+      "linkActions": "Prepared Actions →",
+      "linkArchitecture": "Platform architecture →"
+    },
+    "actions": {
+      "metaTitle": "Prepared Actions",
+      "metaDescription": "RADR finishes investigation and preparation so operators approve with economics, evidence, and a clear default.",
+      "kicker": "Platform · Actions",
+      "title": "Work finished before you arrive.",
+      "lead": "Bewijs, economie, owner, status, klaar voor jouw oordeel.",
+      "cta": "See RADR in action",
+      "ctaSecondary": "Demo boeken",
+      "boardTitle": "Owner. Status. Value. Evidence.",
+      "boardLead": "Each item shows what RADR already did and what still needs a human.",
+      "items": {
+        "buy": {
+          "owner": "Finance · supplier claim"
+        },
+        "labor": {
+          "owner": "Manager · staffing change"
+        },
+        "sell": {
+          "owner": "Manager · terrace response"
+        },
+        "recover": {
+          "owner": "RADR · recovery verified"
+        }
+      },
+      "governanceNote": "Prepared for approval. External execution happens only through supported systems and organization policy.",
+      "linkFindings": "Findings →",
+      "linkValue": "Verified Value →",
+      "linkArchitecture": "Platform architecture →"
+    },
+    "value": {
+      "metaTitle": "Verified Value",
+      "metaDescription": "Track identified opportunity through observed outcome. RADR only claims what the operation can prove.",
+      "kicker": "Platform · Verified Value",
+      "title": "Claim only what you can prove.",
+      "lead": "Waargenomen economisch resultaat. Potentieel blijft apart tot er bewijs is.",
+      "cta": "See RADR in action",
+      "ctaSecondary": "Demo boeken",
+      "proofTitle": "From potential to verified.",
+      "proofLead": "One recovery example from the illustrative Berlin demo world.",
+      "totalLabel": "Verified Value",
+      "totalDetail": "{label} at {location}",
+      "chainLabel": "Verification chain",
+      "chain": {
+        "potential": {
+          "label": "Potential",
+          "detail": "Estimated recovery after cancellation"
+        },
+        "action": {
+          "label": "Action",
+          "value": "Replacement booking accepted",
+          "detail": "Waitlist offer seated"
+        },
+        "observed": {
+          "label": "Observed",
+          "detail": "POS transaction closed"
+        },
+        "verified": {
+          "label": "Verified",
+          "detail": "Claims observed revenue, not the estimate"
+        }
+      },
+      "restraint": "RADR does not take credit for what it cannot prove.",
+      "linkActions": "Prepared Actions →",
+      "linkControl": "Control Center →",
+      "linkArchitecture": "Platform architecture →"
+    },
+    "forecast": {
+      "metaTitle": "Forecast",
+      "metaDescription": "See expected demand, revenue and margin, then open the live forecast surface in the Control Center demo.",
+      "kicker": "Platform · Forecast",
+      "title": "Know what is coming.",
+      "lead": "Baseline demand and the drivers that move it. Open the demo forecast to see how RADR reads the week ahead. Illustrative data, not live predictions for your venues.",
+      "cta": "See RADR in action",
+      "ctaSecondary": "Demo boeken",
+      "boardTitle": "Show, don’t explain.",
+      "boardLead": "Three operating gaps RADR watches as the week unfolds.",
+      "demoNote": "The forecast demo uses illustrative data. It does not claim autonomous execution.",
+      "demoLink": "Open /app/forecast →",
+      "linkActions": "Prepared Actions →",
+      "linkControl": "Control Center →",
+      "linkArchitecture": "Platform architecture →"
+    }
+  }
+}

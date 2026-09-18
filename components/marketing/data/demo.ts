@@ -1,14 +1,14 @@
 import { BRAND } from "../config/brand";
 
-/** ONE coherent demo operation — powers the entire homepage. */
+/** ONE coherent demo operation: powers the entire homepage. */
 
 export const DEMO = {
-  locations: 18,
-  period: "30-day scan",
+  locations: 12,
+  period: "30-day demo",
   periodLabel: "30 DAYS",
   final: 176_740,
   signalCount: 4,
-  /** Illustrative demo — never claim as live customer ROI */
+  /** Illustrative demo: never claim as live customer ROI */
   illustrative: true,
 } as const;
 
@@ -153,7 +153,7 @@ export const RUNNING_TOTALS = SIGNALS.map((s) => s.runningTotal);
 
 export const RADR_MISSION = BRAND.mission;
 
-/** @deprecated use SIGNALS — kept as alias for gradual migration */
+/** @deprecated use SIGNALS: kept as alias for gradual migration */
 export const HERO_SIGNALS = SIGNALS;
 export const HERO_TOTALS = RUNNING_TOTALS;
 export const HERO_FINAL = DEMO.final;

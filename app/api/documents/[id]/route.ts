@@ -51,7 +51,7 @@ export async function GET(_request: Request, { params }: Params) {
     });
   } catch (error) {
     if (error instanceof AuthzError) {
-      return NextResponse.json({ error: error.message }, { status: error.status });
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
     console.error("[prep] document download failed");
     return NextResponse.json({ error: "Download failed" }, { status: 500 });
@@ -67,7 +67,14 @@ export async function DELETE(_request: Request, { params }: Params) {
   const { id } = await params;
 
   try {
-    const { document } = await requireDocumentAccess(session.user.id, id);
+    const { document, membership } = await requireDocumentAccess(
+      session.user.id,
+      id,
+    );
+
+    if (!["OWNER", "ADMIN"].includes(membership.role)) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
 
     await db.delete(documents).where(eq(documents.id, id));
     await deletePrivateObject(document.storagePath);
@@ -84,7 +91,10 @@ export async function DELETE(_request: Request, { params }: Params) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     if (error instanceof AuthzError) {
-      return NextResponse.json({ error: error.message }, { status: error.status });
+      return NextResponse.json(
+        { error: "Not found" },
+        { status: 404 },
+      );
     }
     console.error("[prep] document delete failed");
     return NextResponse.json({ error: "Delete failed" }, { status: 500 });

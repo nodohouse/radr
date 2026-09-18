@@ -7,7 +7,7 @@ type Props = {
   signal: LiveSignal;
 };
 
-/** Hover detail — what happened / should / △ / impact / action. */
+/** Hover detail: what happened / should / △ / impact / action. */
 export function LiveSignalDetail({ signal }: Props) {
   const impact =
     signal.annualizedAdd > 0

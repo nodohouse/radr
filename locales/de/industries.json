@@ -1,0 +1,54 @@
+{
+  "metaTitle": "Industries — RADR",
+  "metaDescription": "One decision engine. Different hospitality operations — restaurants, hotels, serviced apartments and groups.",
+  "kicker": "Industries",
+  "heroTitleLine1": "One decision engine.",
+  "heroTitleLine2": "Different hospitality operations.",
+  "heroLead": "The economics differ. The decision loop does not.",
+  "ctaTitle": "See RADR on your economics.",
+  "ctaLead": "Open the live demo, or talk to RADR about your locations and stack.",
+  "ctaDemo": "See how RADR decides",
+  "storiesLabel": "Decision story",
+  "problemLabel": "The problem",
+  "decisionsLabel": "Decisions RADR owns",
+  "workRemovedLabel": "Work removed",
+  "exampleLabel": "One example",
+  "stories": {
+    "restaurants": {
+      "problem": "More covers can make you less money. Food cost, labor, kitchen throughput, delivery, table turns and guest experience collide during service — demand without contribution is not success.",
+      "decisions": "Protect contribution on high-volume items. Staff to booking pace. Challenge invoice lines. Recover late cancellations.",
+      "workRemoved": "Daily brief prep, labor-versus-demand checks, supplier variance review, cancellation recovery preparation.",
+      "example": "D-1911 · Berlin Mitte: Empty tables ≠ capacity. €620 vs seat-now. Wait 12 min. €590 verified protected."
+    },
+    "hotels": {
+      "problem": "Fuller does not always mean more profitable. Occupancy and RevPAR can look healthy while contribution deteriorates underneath — channel mix, rate, and readiness rarely sit in one Decision.",
+      "decisions": "Hold direct vs release OTA. Price remaining inventory to pace. Recover cancelled room nights. Align housekeeping to turnover.",
+      "workRemoved": "Daily operating brief, rate anomaly review, OTA commission checks, housekeeping demand reconciliation.",
+      "example": "89% occupancy. OTA share +11 pts. €4,200 contribution drag. RADR Futures: hold direct vs release OTA — then verify."
+    },
+    "bars": {
+      "problem": "Bars & cafés live inside Restaurants & F&B — daypart, waste and weather still follow the same decision loop.",
+      "decisions": "Staff and stage inventory to weather and daypart. Challenge supplier price books.",
+      "workRemoved": "Labor-versus-daypart review, supplier price checks, stock-risk monitoring.",
+      "example": "Warm dry afternoon historically lifts terrace demand — RADR prepares staffing and high-velocity SKUs against the indoor baseline."
+    },
+    "groups": {
+      "problem": "Similar revenue. Different profit. Leadership sees locations. They do not always see why similar ADR produces different GOP — labor, channel, supplier, housekeeping and F&B diverge underneath.",
+      "decisions": "Decompose portfolio variance into drivers. Replicate winning playbooks. Act on location exceptions with evidence.",
+      "workRemoved": "Location report compilation, manual ranking, variance investigation, weekly operating summaries.",
+      "example": "Amsterdam Zuid outperforms De Pijp by €4,200 in a week. RADR decomposes covers, spend, mix, discounts and labor — then prepares the next decisions."
+    },
+    "finance": {
+      "problem": "Finance & operations is a role, not an industry. RADR separates identified, expected, observed and verified value for every Decision.",
+      "decisions": "Match invoices to contracts. Chase recoverable credits. Audit Verified Value with proof.",
+      "workRemoved": "Invoice-to-contract matching, credit chase preparation, verified value tracking.",
+      "example": "See Verified Value — claim only what you can prove."
+    },
+    "apartments": {
+      "problem": "Filling the night can be the wrong Decision. Unit-night economics depend on LOS, turnover, cleaning, channel cost, maintenance and future demand — not simply occupancy.",
+      "decisions": "Wait, discount, direct first, or OTA first — with net contribution attached.",
+      "workRemoved": "Manual gap review, channel release guesswork, post-hoc fill analysis.",
+      "example": "Empty Tuesday · 17 comparable orphan gaps · 64% historical fill · €164 net opportunity — modeled before release."
+    }
+  }
+}

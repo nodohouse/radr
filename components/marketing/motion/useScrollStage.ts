@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Stage index from a tall sticky section — rAF-throttled, one getBoundingClientRect per frame max.
+ * Stage index from a tall sticky section: rAF-throttled, one getBoundingClientRect per frame max.
  */
 export function useScrollStage(
   stageCount: number,

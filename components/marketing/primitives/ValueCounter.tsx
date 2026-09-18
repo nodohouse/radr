@@ -14,7 +14,7 @@ type Props = {
 };
 
 /**
- * Animates visual number. Single visible node — no duplicate € readout.
+ * Animates visual number. Single visible node: no duplicate € readout.
  */
 export function ValueCounter({
   value,

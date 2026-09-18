@@ -1,0 +1,165 @@
+openapi: 3.1.0
+info:
+  title: RADR Public API
+  version: 0.1.0-proposed
+  description: |
+    PROPOSED / BETA specification. Endpoints are not production-live until
+    authenticated handlers ship. Use https://api.example.invalid in examples only.
+  x-status: proposed
+servers:
+  - url: https://api.example.invalid/v1
+    description: Placeholder; not a real RADR host
+security:
+  - BearerAuth: []
+paths:
+  /locations:
+    get:
+      summary: List locations
+      operationId: listLocations
+      x-status: proposed
+      responses:
+        "200":
+          description: Location list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Location"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /locations/{id}:
+    get:
+      summary: Get location
+      operationId: getLocation
+      x-status: proposed
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Location
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Location"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /findings:
+    get:
+      summary: List findings
+      operationId: listFindings
+      x-status: proposed
+      responses:
+        "200":
+          description: Findings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Finding"
+  /ingest/reservations:
+    post:
+      summary: Ingest reservations
+      operationId: ingestReservations
+      x-status: proposed
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReservationIngest"
+      responses:
+        "202":
+          description: Accepted for processing
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "422":
+          $ref: "#/components/responses/ValidationError"
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: RADR_API_KEY
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+    NotFound:
+      description: Resource not found
+    ValidationError:
+      description: Schema validation failed
+  schemas:
+    Money:
+      type: object
+      required: [amountMinor, currency]
+      properties:
+        amountMinor:
+          type: integer
+        currency:
+          type: string
+          example: EUR
+    Location:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        timezone:
+          type: string
+        currency:
+          type: string
+    Finding:
+      type: object
+      properties:
+        id:
+          type: string
+        territory:
+          type: string
+          enum: [BUY, LABOR, SELL, RECOVER]
+        impact:
+          $ref: "#/components/schemas/Money"
+        status:
+          type: string
+    ReservationIngest:
+      type: object
+      required:
+        - location_external_id
+        - reservation_id
+        - service_time
+        - party_size
+        - status
+      properties:
+        location_external_id:
+          type: string
+        reservation_id:
+          type: string
+        service_time:
+          type: string
+          format: date-time
+        party_size:
+          type: integer
+          minimum: 1
+        status:
+          type: string
+        currency:
+          type: string

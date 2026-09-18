@@ -1,0 +1,162 @@
+/* Shared economic number language — AT RISK / EXPECTED / VERIFIED / DECIDE BY */
+
+.rx-econ-risk,
+.rx-econ-expected,
+.rx-econ-verified,
+.rx-econ-deadline {
+  font-variant-numeric: tabular-nums;
+}
+
+.rx-econ-risk {
+  color: #0a0d0b;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.rx-econ-risk em,
+[data-econ="risk"] em {
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.55rem;
+  font-style: normal;
+  letter-spacing: 0.12em;
+  color: #8a6a2a;
+}
+
+.rx-econ-expected {
+  color: #3f4642;
+  font-weight: 600;
+}
+
+.rx-econ-verified {
+  color: #00a85a;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.rx-econ-verified em,
+[data-econ="verified"] em {
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.55rem;
+  font-style: normal;
+  letter-spacing: 0.12em;
+  color: #00a85a;
+}
+
+.rx-econ-deadline {
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #56615b;
+}
+
+/* Photo + intelligence overlay */
+.rx-photo-overlay {
+  position: relative;
+  margin: 0;
+  min-height: 22rem;
+  border-radius: 18px;
+  overflow: clip;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+}
+
+.rx-photo-overlay-media {
+  position: absolute;
+  inset: 0;
+}
+
+.rx-photo-overlay-img {
+  object-fit: cover;
+  filter: saturate(0.72) contrast(1.05);
+  transform: scale(1.02);
+}
+
+.rx-photo-overlay-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(8, 16, 12, 0.55) 0%, rgba(8, 16, 12, 0.15) 55%, transparent 80%),
+    linear-gradient(0deg, rgba(8, 16, 12, 0.45), transparent 50%);
+}
+
+.rx-photo-overlay-card {
+  position: relative;
+  z-index: 1;
+  margin: auto 1.1rem 1.1rem;
+  margin-top: 8rem;
+  max-width: 18rem;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  box-shadow: 0 22px 40px -28px rgba(4, 20, 12, 0.45);
+}
+
+.rx-photo-overlay-kicker {
+  margin: 0;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00a85a;
+  font-weight: 600;
+}
+
+.rx-photo-overlay-title {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: #0a0d0b;
+}
+
+.rx-photo-overlay-card ul {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.rx-photo-overlay-card li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.rx-photo-overlay-card li strong {
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.rx-photo-overlay-card li span {
+  font-size: 0.72rem;
+  color: #56615b;
+}
+
+.rx-photo-overlay-card li[data-tone="risk"] strong {
+  color: #0a0d0b;
+}
+
+.rx-photo-overlay-card li[data-tone="verified"] strong {
+  color: #00a85a;
+}
+
+.rx-photo-overlay-card li[data-tone="mute"] strong {
+  color: #56615b;
+  font-size: 0.92rem;
+  font-weight: 560;
+}
+
+@media (max-width: 640px) {
+  .rx-photo-overlay {
+    min-height: 18rem;
+  }
+
+  .rx-photo-overlay-card {
+    margin-top: 5.5rem;
+    max-width: none;
+  }
+}

@@ -39,11 +39,11 @@ export function MissionTypewriter({
     let i = text.length;
 
     const pauseAt = new Set([
-      text.indexOf("24/7") + 4,
       text.indexOf("money") + 5,
       text.indexOf("losing,") + 7,
       text.indexOf("missing") + 7,
-    ]);
+      text.indexOf("behind") + 6,
+    ].filter((n) => n > 4));
 
     const schedule = (fn: () => void, ms: number) => {
       window.clearTimeout(timer);
@@ -86,15 +86,11 @@ export function MissionTypewriter({
   return (
     <div className={`rx-type ${className}`.trim()} data-phase={phase}>
       <p className="sr-only">{text}</p>
-      <p className="rx-type-status" aria-hidden="true">
-        <span className="rx-live-dot" />
-        RADR / LIVE
-      </p>
       <p className="rx-type-line" aria-hidden="true">
         <span className="rx-type-text">{visible}</span>
-        {phase !== "fade" && !reduced ? (
-          <span className="rx-type-cursor" data-hold={phase === "hold"}>
-            █
+        {phase === "type" && !reduced ? (
+          <span className="rx-type-cursor" data-hold="false">
+            |
           </span>
         ) : null}
       </p>

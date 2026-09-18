@@ -13,7 +13,7 @@ export const SOCIAL_LINKS = {
   linkedin: process.env.NEXT_PUBLIC_RADR_LINKEDIN_URL?.trim() || "",
   /** TODO: real Instagram profile URL */
   instagram: process.env.NEXT_PUBLIC_RADR_INSTAGRAM_URL?.trim() || "",
-  /** Optional — only render when set */
+  /** Optional: only render when set */
   x: process.env.NEXT_PUBLIC_RADR_X_URL?.trim() || "",
 } as const;
 
@@ -37,7 +37,7 @@ const META: Record<
   x: { label: "X", alwaysShow: false },
 };
 
-/** Networks to render in the footer (LinkedIn + Instagram always). */
+/** Footer socials: always-show networks + any optional network with a real URL. */
 export function footerSocialLinks(): SocialLinkItem[] {
   return (Object.keys(SOCIAL_LINKS) as SocialNetwork[])
     .map((id) => ({
@@ -51,7 +51,7 @@ export function footerSocialLinks(): SocialLinkItem[] {
 
 /** @deprecated use footerSocialLinks */
 export function activeSocialLinks(): SocialLinkItem[] {
-  return footerSocialLinks().filter((i) => i.href.length > 0);
+  return footerSocialLinks();
 }
 
 export function hasAnySocialLinks(): boolean {
