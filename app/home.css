@@ -13077,7 +13077,6 @@ html:has(.radr-home) body {
   display: flex;
   flex-direction: column;
   gap: clamp(1.5rem, 3vw, 2.5rem);
-  width: 100%;
 }
 /* Below H0: money left · Decision card right */
 .rx-he-recover-frame {
