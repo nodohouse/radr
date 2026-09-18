@@ -7,8 +7,7 @@ import { MarginResponseCard } from "@/components/marketing/scenes/home/MarginRes
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 
 /**
- * Screenshot lockup + money page, balanced in shell gutters:
- * Stacked H0 → money H1 → CTAs | Decision card
+ * Full-bleed H0 above money + Decision card.
  */
 export function Hero() {
   const t = useTranslations("homepage.hero");
@@ -20,10 +19,11 @@ export function Hero() {
       data-nav-theme="light"
       aria-label={t("ariaLabel")}
     >
-      <div className="rx-shell">
+      <div className="rx-shell rx-he-recover-shell">
+        <NothingOffTheRadr size="display" className="rx-he-h0" />
+
         <div className="rx-he-recover-frame">
           <div className="rx-he-recover-copy">
-            <NothingOffTheRadr size="display" className="rx-he-h0" />
             <h1 className="rx-he-recover-title">{t("title")}</h1>
             <p className="rx-he-recover-support">{t("support")}</p>
 

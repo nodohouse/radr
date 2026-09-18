@@ -4,15 +4,12 @@ import { RadrWordmark } from "@/components/radr/RadrWordmark";
 
 type Props = {
   className?: string;
-  /** display = stacked hero H0 · close = brand band */
+  /** display = full-bleed hero H0 · close = brand band */
   size?: "display" | "close";
 };
 
 /**
- * Brand lockup from screenshot energy:
- * NOTHING
- * OFF THE
- * R△DR
+ * Brand lockup: NOTHING OFF THE R△DR
  * Green △ replaces the A — never letter-R as the mark.
  */
 export function NothingOffTheRadr({

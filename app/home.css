@@ -13073,28 +13073,33 @@ html:has(.radr-home) body {
   min-height: 0;
   display: block;
 }
-/* Stack + card as one tight pair, centered in the shell */
-.rx-he-recover-frame {
+.rx-he-recover-shell {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  column-gap: clamp(1.75rem, 3vw, 2.5rem);
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
+}
+/* Below H0: money left · Decision card right */
+.rx-he-recover-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(1.75rem, 3.5vw, 2.75rem);
   row-gap: 2rem;
+  align-items: start;
   width: 100%;
 }
 .rx-he-recover-copy {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex: 1 1 22rem;
-  max-width: 26rem;
+  justify-content: flex-start;
+  max-width: 32rem;
   width: 100%;
+  padding-top: 0.15rem;
 }
 .rx-he-recover-proof {
-  flex: 1 1 22rem;
-  max-width: 26rem;
   width: 100%;
+  max-width: 28rem;
+  justify-self: end;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
@@ -13105,11 +13110,11 @@ html:has(.radr-home) body {
   font-family: var(--font-mono, "IBM Plex Mono", monospace);
 }
 .rx-he-recover-title {
-  margin: 0.95rem 0 0;
-  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
   font-weight: 680;
   letter-spacing: -0.035em;
-  line-height: 1.2;
+  line-height: 1.18;
   color: #0a0d0b;
   max-width: 24ch;
 }
@@ -13122,14 +13127,14 @@ html:has(.radr-home) body {
   max-width: 34rem;
 }
 .rx-he-recover-support {
-  margin: 0.6rem 0 0;
+  margin: 0.65rem 0 0;
   font-size: 0.95rem;
   line-height: 1.5;
   color: #4a524e;
-  max-width: 28rem;
+  max-width: 30rem;
 }
 .rx-he-recover .rx-he-ctas {
-  margin-top: 1.25rem;
+  margin-top: 1.35rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
@@ -13281,22 +13286,24 @@ html:has(.radr-home) body {
 .rx-notr {
   margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.28em;
+  row-gap: 0.02em;
   color: #0a0d0b;
   width: 100%;
 }
 .rx-notr-line {
-  display: block;
+  display: inline;
   text-transform: uppercase;
   color: #0a0d0b;
+  white-space: nowrap;
 }
 
-/* Screenshot stack — bold, sized to the Decision card */
+/* Full-bleed cinematic H0 — spans shell width above the split */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
-  gap: 0;
-  font-size: clamp(2.2rem, 3.4vw, 3.25rem);
+  font-size: clamp(4.5rem, 9vw, 8rem);
   font-weight: 760;
   letter-spacing: -0.055em;
   line-height: 0.9;
@@ -13309,8 +13316,7 @@ html:has(.radr-home) body {
   line-height: inherit;
 }
 .rx-notr--display .rx-notr-wm {
-  display: block;
-  margin-top: 0.02em;
+  display: inline-flex;
   font-size: 1em !important;
   font-weight: inherit !important;
   letter-spacing: inherit !important;
@@ -13320,8 +13326,11 @@ html:has(.radr-home) body {
   font-weight: inherit;
 }
 
-/* Brand-close band — quiet lockup */
+/* Brand-close band — quiet stacked lockup */
 .rx-notr--close {
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   gap: 0.08rem;
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
   font-weight: 650;
@@ -13330,6 +13339,7 @@ html:has(.radr-home) body {
   max-width: 16rem;
 }
 .rx-notr--close .rx-notr-line {
+  display: block;
   font-size: 0.72em;
   font-weight: 650;
   letter-spacing: 0.1em;
@@ -13371,7 +13381,7 @@ html:has(.radr-home) body {
   }
   .rx-notr--display,
   .rx-he-h0.rx-notr--display {
-    font-size: clamp(2.5rem, 11vw, 3.5rem);
+    font-size: clamp(2.75rem, 12vw, 4.25rem);
   }
 }
 
