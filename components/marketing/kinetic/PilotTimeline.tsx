@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Pilot timeline — typical process, not promised results.
+ * Pilot timeline — illustrative process, not promised calendar results.
  */
 
 import { Link } from "@/i18n/navigation";
@@ -11,40 +11,27 @@ type Props = {
   title: string;
   lead: string;
   scope: string;
-  opts: string[];
   cta: string;
 };
 
-const DAYS = [
+const STEPS = [
   { day: "Day 1", label: "Connect evidence" },
-  { day: "Day 3", label: "First anomalies" },
-  { day: "Day 5", label: "First prepared cases" },
-  { day: "Day 14", label: "Recovery review" },
-  { day: "Open", label: "Cases until resolved" },
+  { day: "First pass", label: "Anomalies surface" },
+  { day: "Review", label: "RADR builds cases" },
+  { day: "Action", label: "Finance approves" },
+  { day: "Open cases", label: "Tracked until resolved" },
 ] as const;
 
-export function PilotTimeline({
-  kicker,
-  title,
-  lead,
-  scope,
-  opts,
-  cta,
-}: Props) {
+export function PilotTimeline({ kicker, title, lead, scope, cta }: Props) {
   return (
     <div className="rx-pilot-tl">
       <p className="rx-rec-k">{kicker}</p>
       <h2 className="rx-rec-h">{title}</h2>
       <p className="rx-rec-p">{lead}</p>
-      <p className="rx-rec-p">{scope}</p>
-      <ul className="rx-rec-list">
-        {opts.map((o) => (
-          <li key={o}>{o}</li>
-        ))}
-      </ul>
+      <p className="rx-rec-p rx-rec-muted">{scope}</p>
 
-      <ol className="rx-pilot-days" aria-label="Typical pilot process">
-        {DAYS.map((d) => (
+      <ol className="rx-pilot-days" aria-label="Illustrative pilot process">
+        {STEPS.map((d) => (
           <li key={d.day}>
             <em>{d.day}</em>
             <strong>{d.label}</strong>

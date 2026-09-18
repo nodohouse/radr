@@ -471,7 +471,9 @@ function SolutionsLeakMap() {
           lead={t("families.lead")}
           chapters={chapters}
           vhPerChapter={65}
-          renderVisual={(i) => <LeakClassVisual family={familyKeys[i]!} />}
+          renderVisual={(i) => (
+            <LeakClassVisual key={familyKeys[i]} family={familyKeys[i]!} />
+          )}
         />
       </div>
     </section>
@@ -482,25 +484,23 @@ function LensIntro() {
   return (
     <section className="rx-intel-lenses-intro" id="lenses" data-nav-theme="light">
       <div className="rx-shell">
-        <p className="rx-intel-k">How RADR interprets the operation</p>
+        <p className="rx-intel-k">Also how RADR reads the operation</p>
         <h2 className="rx-intel-classes-title">BUY · LABOR · SELL · RECOVER</h2>
         <p className="rx-intel-classes-lead">
-          Economic lenses across Decisions — not primary product modules.
+          Economic lenses across Decisions — not product modules. Depth lives
+          under each lens when you need it.
         </p>
-        <ul className="rx-intel-lens-grid">
-          {LENS_ORDER.map((id) => {
-            const { code, path } = TERRITORY_ROUTE[id];
-            const def = TERRITORY_DEFINITIONS[code];
-            return (
-              <li key={id}>
-                <Link href={path} className="rx-intel-lens-card">
-                  <em>{code}</em>
-                  <strong>{def.definition}</strong>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="rx-intel-lenses" role="navigation" aria-label="Economic lenses">
+          {LENS_ORDER.map((id) => (
+            <Link
+              key={id}
+              href={TERRITORY_ROUTE[id].path}
+              className="rx-intel-lens"
+            >
+              {TERRITORY_ROUTE[id].code}
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

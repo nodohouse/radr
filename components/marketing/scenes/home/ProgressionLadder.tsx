@@ -137,11 +137,11 @@ export function ProgressionLadder({
               <em>{scene.grade}</em>
             </div>
           </div>
-          <ul className="rx-prog-scene-lines">
+          <div className="rx-prog-scene-chips">
             {scene.lines.map((l) => (
-              <li key={l}>{l}</li>
+              <span key={l}>{l}</span>
             ))}
-          </ul>
+          </div>
           {active === "OPTIMIZE" ? (
             <div className="rx-prog-forks" style={{ display: "flex" }}>
               <i />

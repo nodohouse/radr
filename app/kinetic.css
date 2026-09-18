@@ -1608,6 +1608,20 @@
   border-radius: 50%;
   background: #00a85a;
 }
+.rx-prog-scene-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+.rx-prog-scene-chips span {
+  font-size: 0.78rem;
+  color: #3f4642;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+}
 .rx-sticky-visual {
   min-height: 26rem !important;
 }
@@ -1629,4 +1643,157 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .rx-pdt-memory-ribbon span { animation: none !important; }
+}
+
+/* —— Intensify: euro journey chip —— */
+.rx-euro-chip-hero {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  margin: 0.85rem 0 1.25rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 13, 11, 0.12);
+  background: #fff;
+  animation: rx-sticky-in var(--rx-m-scene) var(--rx-ease);
+}
+.rx-euro-chip-hero strong {
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  color: var(--rx-tone-exposure, #b45309);
+}
+.rx-euro-chip-hero em {
+  font-style: normal;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-euro-chip-hero[data-sealed="true"] {
+  border-color: rgba(0, 168, 90, 0.45);
+  background: #e1fbea;
+}
+.rx-euro-chip-hero[data-sealed="true"] strong {
+  color: var(--rx-tone-verified, #00a85a);
+}
+
+/* —— Expand track —— */
+.rx-rec-expand-scene {
+  max-width: 42rem;
+}
+.rx-rec-expand-track {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 1.35rem 0 1.5rem;
+}
+.rx-rec-expand-track span {
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  background: #fff;
+  color: #626a65;
+}
+.rx-rec-expand-track span[data-on="true"] {
+  background: #0a0d0b;
+  color: #fff;
+  border-color: #0a0d0b;
+}
+.rx-rec-expand-track span[data-tone="verified"] {
+  border-color: rgba(0, 168, 90, 0.4);
+  color: #00a85a;
+  background: #e1fbea;
+}
+.rx-rec-expand-track i {
+  width: 1.1rem;
+  height: 1px;
+  background: rgba(10, 13, 11, 0.18);
+}
+
+/* —— Value leaks visual-first —— */
+.rx-vl-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: stretch;
+}
+.rx-vl-stage .rx-lcv {
+  min-height: 24rem;
+  border-radius: 18px;
+  background:
+    radial-gradient(55% 45% at 80% 10%, rgba(0, 217, 120, 0.08), transparent 70%),
+    #fff;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  padding: clamp(1.1rem, 2.4vw, 1.75rem);
+  box-shadow: 0 18px 48px -36px rgba(10, 13, 11, 0.35);
+}
+.rx-vl-caption {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+  align-content: center;
+}
+.rx-vl-caption div {
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.08);
+}
+.rx-vl-caption div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.rx-vl-caption dt {
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+  margin-bottom: 0.3rem;
+}
+.rx-vl-caption dd {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: #0a0d0b;
+}
+.rx-vl-sep {
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0;
+  border: 0;
+  opacity: 0.85;
+}
+
+.rx-connband-out {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+.rx-connband-out span {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  color: #4a524e;
+}
+.rx-connband-out span[data-tone="verified"] {
+  border-color: rgba(0, 168, 90, 0.4);
+  color: #00a85a;
+  background: #e1fbea;
+}
+
+@media (max-width: 900px) {
+  .rx-vl-stage {
+    grid-template-columns: 1fr;
+  }
+  .rx-vl-stage .rx-lcv {
+    min-height: 18rem;
+  }
 }

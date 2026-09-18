@@ -81,7 +81,7 @@ export function HomepageSpine() {
             chapters={leakChapters}
             vhPerChapter={70}
             renderVisual={(i) => (
-              <LeakClassVisual family={LEAK_ORDER[i]!} />
+              <LeakClassVisual key={LEAK_ORDER[i]} family={LEAK_ORDER[i]!} />
             )}
           />
         </div>
@@ -153,19 +153,30 @@ export function HomepageSpine() {
             title={t("pilot.title")}
             lead={t("pilot.lead")}
             scope={t("pilot.scope")}
-            opts={[t("pilot.opt1"), t("pilot.opt2"), t("pilot.opt3")]}
             cta={t("pilot.cta")}
           />
         </div>
       </section>
 
+      <KineticInterstitial from="Recover first" to="Then expand" tone="verified" />
+
       <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
-          <div className="rx-rec-block">
+          <div className="rx-rec-expand-scene">
             <p className="rx-rec-k">{t("expansion.kicker")}</p>
             <h2 className="rx-rec-h">{t("expansion.title")}</h2>
             <p className="rx-rec-p">{t("expansion.lead")}</p>
-            <p className="rx-rec-p">{t("expansion.body")}</p>
+            <div className="rx-rec-expand-track" aria-hidden="true">
+              <span data-on="true">Recover</span>
+              <i />
+              <span>Cost variance</span>
+              <i />
+              <span>Procurement</span>
+              <i />
+              <span>Perishable</span>
+              <i />
+              <span data-tone="verified">Memory</span>
+            </div>
             <Link href="/product" className="rx-btn rx-btn-ghost">
               {t("expansion.cta")} <span aria-hidden="true">→</span>
             </Link>

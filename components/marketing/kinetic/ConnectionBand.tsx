@@ -7,10 +7,9 @@
 const NODES = [
   { id: "inv", label: "Invoices", status: "Demo" },
   { id: "ctr", label: "Contracts", status: "Demo" },
-  { id: "ap", label: "AP", status: "Building" },
   { id: "pos", label: "POS", status: "Planned" },
+  { id: "ap", label: "AP", status: "Building" },
   { id: "proc", label: "Procurement", status: "Planned" },
-  { id: "res", label: "Reservations", status: "Planned" },
   { id: "pay", label: "Payments", status: "Planned" },
 ] as const;
 
@@ -44,8 +43,11 @@ export function ConnectionBand({ kicker, title, lead, body, note }: Props) {
         </div>
         <div className="rx-connband-core">
           <strong>RADR</strong>
-          <span>Decision</span>
-          <span data-tone="verified">Verified</span>
+          <div className="rx-connband-out">
+            <span>Decision</span>
+            <span>Action</span>
+            <span data-tone="verified">Verified</span>
+          </div>
         </div>
       </div>
       <p className="rx-rec-p rx-rec-muted">{note}</p>

@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Living D-4102 recovery object — €273 survives the journey.
- * Scroll-linked stages when sticky; clickable scrubber always.
+ * Living €273 object — same value travels the recovery path.
+ * Scroll-linked when sticky; scrubber always.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -10,44 +10,37 @@ import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefer
 
 const STAGES = [
   {
-    id: "leak",
-    label: "Leak",
+    id: "exposed",
+    label: "Exposed",
     body: "Invoice €7.45/L · Contract €6.80/L · 420 L",
     euro: "€273",
-    grade: "exposed",
+    grade: "EXPOSED",
   },
   {
-    id: "evidence",
-    label: "Evidence",
+    id: "review",
+    label: "Under review",
     body: "Contract clear · qty matched · UOM matched · prior history checked",
     euro: "€273",
-    grade: "under review",
+    grade: "UNDER REVIEW",
   },
   {
-    id: "decision",
-    label: "Decision",
-    body: "Dispute the variance. Do not reprice the menu yet.",
+    id: "dispute",
+    label: "Dispute prepared",
+    body: "Evidence package staged for Finance. Do not reprice the menu yet.",
     euro: "€273",
-    grade: "Expected",
+    grade: "DISPUTE PREPARED",
   },
   {
-    id: "action",
-    label: "Action",
-    body: "Evidence package prepared for Finance approval.",
+    id: "credit",
+    label: "Credit memo",
+    body: "Credit memo CM-44102 issued against INV-88421.",
     euro: "€273",
-    grade: "Expected",
-  },
-  {
-    id: "outcome",
-    label: "Outcome",
-    body: "Credit memo CM-44102 issued.",
-    euro: "€273",
-    grade: "credit issued",
+    grade: "CREDIT MEMO ISSUED",
   },
   {
     id: "verified",
     label: "Verified",
-    body: "Matched to original invoice INV-88421.",
+    body: "Matched to original invoice. Value closed in AP.",
     euro: "€273",
     grade: "VERIFIED",
   },
@@ -92,11 +85,24 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
     };
   }, [reduced]);
 
+  const scrollTo = (i: number) => {
+    setIdx(i);
+    const el = rootRef.current;
+    if (!el || reduced) return;
+    const total = el.offsetHeight - window.innerHeight * 0.45;
+    const y =
+      el.getBoundingClientRect().top +
+      window.scrollY +
+      (i / STAGES.length) * Math.max(1, total) +
+      4;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
+
   return (
     <div
       ref={rootRef}
       className="rx-rso rx-euro-journey"
-      style={reduced ? undefined : { minHeight: `${STAGES.length * 55}vh` }}
+      style={reduced ? undefined : { minHeight: `${STAGES.length * 58}vh` }}
     >
       <div className="rx-rso-pin">
         <p className="rx-rec-k">{kicker}</p>
@@ -104,15 +110,20 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
         <p className="rx-rec-p">{lead}</p>
 
         <div
-          className="rx-euro-chip"
+          className="rx-euro-chip rx-euro-chip-hero"
           data-sealed={sealed ? "true" : undefined}
           data-stage={stage.id}
+          key={stage.id}
         >
           <strong>{stage.euro}</strong>
           <em>{stage.grade}</em>
         </div>
 
-        <div className="rx-rso-object" data-stage={stage.id} data-sealed={sealed ? "true" : undefined}>
+        <div
+          className="rx-rso-object"
+          data-stage={stage.id}
+          data-sealed={sealed ? "true" : undefined}
+        >
           <div className="rx-rso-papers" aria-hidden="true">
             <div className="rx-rso-paper" data-kind="invoice">
               <em>INV-88421</em>
@@ -122,7 +133,7 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
               <em>CTR-OIL-2026</em>
               <strong>€6.80/L</strong>
             </div>
-            {idx >= 4 ? (
+            {idx >= 3 ? (
               <div className="rx-rso-paper" data-kind="credit">
                 <em>CM-44102</em>
                 <strong>€273</strong>
@@ -145,7 +156,7 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
               aria-selected={i === idx}
               data-on={i === idx ? "true" : undefined}
               data-past={i < idx ? "true" : undefined}
-              onClick={() => setIdx(i)}
+              onClick={() => scrollTo(i)}
             >
               {s.label}
             </button>
