@@ -194,8 +194,11 @@ export function ValueChapter() {
             {proof && chosen ? (
               <details className="rx-value-proof-details">
                 <summary>
-                  {proof.displayId} · Proof trail · {money(verifiedEuro(proof))}{" "}
-                  verified {proof.verifiedKind}
+                  {proof.displayId} ·{" "}
+                  {proof.actualProtectedEuro === 0 &&
+                  proof.expectedProtectedEuro === 0
+                    ? "OPEN · not yet verified"
+                    : `Proof trail · ${money(verifiedEuro(proof))} verified ${proof.verifiedKind}`}
                 </summary>
                 <div className="rx-value-proof">
                   <ol className="rx-value-investigation">

@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * Homepage — reduced hospitality story.
+ * Hero → rail → leak map → one Decision → roles → progression → start → FAQ.
+ * No scroll traps. No Floor page clone.
+ */
+
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
@@ -7,13 +13,10 @@ import { Hero } from "@/components/marketing/scenes/Hero";
 import { RecoveryStoryObject } from "@/components/marketing/scenes/home/RecoveryStoryObject";
 import { ProgressionLadder } from "@/components/marketing/scenes/home/ProgressionLadder";
 import { EconomicRail } from "@/components/marketing/kinetic/EconomicRail";
-import { StickyStory } from "@/components/marketing/kinetic/StickyStory";
-import { KineticInterstitial } from "@/components/marketing/kinetic/KineticInterstitial";
-import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual";
-import { PatternCapabilityStrip } from "@/components/marketing/kinetic/PatternCapabilityStrip";
+import { LeakMapPanel } from "@/components/marketing/kinetic/LeakMapPanel";
+import { RoleProjectionStrip } from "@/components/marketing/kinetic/RoleProjectionStrip";
 import { ConnectionBand } from "@/components/marketing/kinetic/ConnectionBand";
 import { PilotTimeline } from "@/components/marketing/kinetic/PilotTimeline";
-import { FloorMoment } from "@/components/marketing/kinetic/FloorMoment";
 import { HOME_RAIL } from "@/lib/marketing/economicRail";
 import type { ProblemFamily, ProgressionStage } from "@/lib/radr/problemFamilies";
 import "@/app/kinetic.css";
@@ -26,17 +29,9 @@ const LEAK_ORDER: ProblemFamily[] = [
   "PERISHABLE_REVENUE",
 ];
 
-/**
- * Homepage — kinetic recovery story.
- * Hero → data rail → sticky leaks → recovery → patterns → progression →
- * stack → pilot → platform → FAQ → close.
- */
 export function HomepageSpine() {
   const t = useTranslations("homepage.recover");
 
-  const labels = Object.fromEntries(
-    LEAK_ORDER.map((id) => [id, t(`families.${id}.label`)]),
-  ) as Record<ProblemFamily, string>;
   const leaks = Object.fromEntries(
     LEAK_ORDER.map((id) => [id, t(`families.${id}.leaks`)]),
   ) as Record<ProblemFamily, string>;
@@ -57,21 +52,6 @@ export function HomepageSpine() {
     AUTOPILOT: t("progression.AUTOPILOT.body"),
   } as Record<ProgressionStage, string>;
 
-  const leakChapters = LEAK_ORDER.map((id) => ({
-    id,
-    kicker: labels[id],
-    title: labels[id],
-    body: leaks[id],
-    meta: verifies[id],
-  }));
-
-  const famLead = t("families.lead");
-  const storyLead = t("story.lead");
-  const thinksLead = t("thinks.lead");
-  const thinksDiff = t("thinks.diff");
-  const thinksClose = t("thinks.close");
-  const progLead = t("progression.lead");
-
   return (
     <div className="rx-home-spine">
       <Hero />
@@ -82,65 +62,42 @@ export function HomepageSpine() {
 
       <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
-          <StickyStory
+          <LeakMapPanel
             kicker={t("families.kicker")}
             title={t("families.title")}
-            lead={famLead || undefined}
-            chapters={leakChapters}
-            vhPerChapter={70}
-            renderVisual={(i) => (
-              <LeakClassVisual key={LEAK_ORDER[i]} family={LEAK_ORDER[i]!} />
-            )}
+            bodies={leaks}
+            metas={verifies}
           />
         </div>
       </section>
-
-      <KineticInterstitial from="Credit issued" to="Not applied" tone="exposure" />
 
       <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
           <RecoveryStoryObject
             kicker={t("story.kicker")}
             title={t("story.title")}
-            lead={storyLead}
+            lead=""
           />
         </div>
       </section>
-
-      <KineticInterstitial
-        from="Expected €9,814"
-        to="Actual €9,521"
-        tone="exposure"
-      />
 
       <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
-          <PatternCapabilityStrip
-            kicker={t("thinks.kicker")}
-            title={t("thinks.title")}
-            lead={thinksLead}
-            flow={t("thinks.flow")}
-            diff={thinksDiff}
-            close={thinksClose}
-          />
+          <RoleProjectionStrip />
         </div>
       </section>
-
-      <KineticInterstitial from="Food cost +2.3pts" to="Why?" tone="urgent" />
 
       <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
           <ProgressionLadder
             kicker={t("progression.kicker")}
             title={t("progression.title")}
-            lead={progLead}
+            lead=""
             titles={progTitles}
             bodies={progBodies}
           />
         </div>
       </section>
-
-      <KineticInterstitial from="Room cancelled" to="19h left" tone="urgent" />
 
       <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
@@ -148,59 +105,17 @@ export function HomepageSpine() {
             kicker={t("stack.kicker")}
             title={t("stack.title")}
             lead={t("stack.lead")}
-            body={t("stack.body")}
+            body=""
             note={t("stack.statesNote")}
           />
-        </div>
-      </section>
-
-      <KineticInterstitial from="Same Decision" to="Different projection" tone="verified" />
-
-      <section className="rx-rec-sec" data-nav-theme="light" id="floor">
-        <div className="rx-shell">
-          <FloorMoment />
-          <p className="rx-rec-p" style={{ marginTop: "1.25rem" }}>
-            <Link href="/product/floor" className="rx-btn rx-btn-ghost">
-              Explore RADR Floor <span aria-hidden="true">→</span>
-            </Link>
-          </p>
-        </div>
-      </section>
-
-      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
-        <div className="rx-shell">
-          <PilotTimeline
-            kicker={t("pilot.kicker")}
-            title={t("pilot.title")}
-            lead={t("pilot.lead")}
-            scope={t("pilot.scope")}
-            cta={t("pilot.cta")}
-          />
-        </div>
-      </section>
-
-      <KineticInterstitial from="Recover first" to="Then expand" tone="verified" />
-
-      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
-        <div className="rx-shell">
-          <div className="rx-rec-expand-scene">
-            <p className="rx-rec-k">{t("expansion.kicker")}</p>
-            <h2 className="rx-rec-h">{t("expansion.title")}</h2>
-            <p className="rx-rec-p">{t("expansion.lead")}</p>
-            <div className="rx-rec-expand-track" aria-hidden="true">
-              <span data-on="true">Recover</span>
-              <i />
-              <span>Cost variance</span>
-              <i />
-              <span>Procurement</span>
-              <i />
-              <span>Perishable</span>
-              <i />
-              <span data-tone="verified">Memory</span>
-            </div>
-            <Link href="/product" className="rx-btn rx-btn-ghost">
-              {t("expansion.cta")} <span aria-hidden="true">→</span>
-            </Link>
+          <div style={{ marginTop: "2rem" }}>
+            <PilotTimeline
+              kicker={t("pilot.kicker")}
+              title={t("pilot.title")}
+              lead={t("pilot.lead")}
+              scope={t("pilot.scope")}
+              cta={t("pilot.cta")}
+            />
           </div>
         </div>
       </section>

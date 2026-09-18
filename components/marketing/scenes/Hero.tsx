@@ -5,13 +5,10 @@ import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { Suspense } from "react";
-import { HeroRecoveryScene } from "@/components/marketing/scenes/home/HeroRecoveryScene";
+import { HeroHospitalityScene } from "@/components/marketing/scenes/home/HeroHospitalityScene";
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
+import { HospitalityEyebrow } from "@/components/marketing/kinetic/HospitalityContextSwitch";
 
-/**
- * Signature hero — brand + recovery thesis + living D-4102 scene.
- * A/B: default A. Internal B via ?hero=b
- */
 function HeroInner() {
   const t = useTranslations("homepage.hero");
   const params = useSearchParams();
@@ -29,6 +26,7 @@ function HeroInner() {
       <div className="rx-shell">
         <div className="rx-he-recover-frame">
           <div className="rx-he-recover-copy">
+            <HospitalityEyebrow />
             <NothingOffTheRadr size="display" className="rx-he-h0" />
             <h1 className="rx-he-recover-title">{title}</h1>
             <p className="rx-he-recover-support">{t("support")}</p>
@@ -49,7 +47,7 @@ function HeroInner() {
           </div>
 
           <div className="rx-he-recover-product">
-            <HeroRecoveryScene />
+            <HeroHospitalityScene />
           </div>
         </div>
       </div>
@@ -77,6 +75,7 @@ function HeroFallback() {
       <div className="rx-shell">
         <div className="rx-he-recover-frame">
           <div className="rx-he-recover-copy">
+            <HospitalityEyebrow />
             <NothingOffTheRadr size="display" className="rx-he-h0" />
             <h1 className="rx-he-recover-title">{t("title")}</h1>
             <p className="rx-he-recover-support">{t("support")}</p>

@@ -2620,3 +2620,231 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Hospitality context switch ── */
+.rx-hcx {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 1.25rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  background: rgba(10, 13, 11, 0.04);
+  border: 1px solid rgba(10, 13, 11, 0.06);
+}
+.rx-hcx[data-size="compact"] { margin-bottom: 1rem; }
+.rx-hcx button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+  transition: color 180ms ease, background 180ms ease;
+}
+.rx-hcx button[data-on="true"] {
+  background: #fff;
+  color: #0a0d0b;
+  box-shadow: 0 1px 2px rgba(10, 13, 11, 0.06);
+}
+.rx-hcx-eyebrow {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #626a65;
+  line-height: 1.5;
+}
+
+/* ── Hero hospitality scene ── */
+.rx-hrs-hosp {
+  display: grid;
+  gap: 1rem;
+}
+.rx-hrs-hosp .rx-hrs-desktop {
+  padding: 1.25rem 1.35rem;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+}
+.rx-hrs-floor-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #00a85a;
+  text-decoration: none;
+}
+.rx-hrs-floor-link:hover { text-decoration: underline; }
+
+/* ── Leak map panel (home) ── */
+.rx-leak-panel {
+  max-width: 56rem;
+}
+.rx-leak-panel-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1.25rem 0 1rem;
+}
+.rx-leak-panel-nav button {
+  appearance: none;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #626a65;
+  cursor: pointer;
+}
+.rx-leak-panel-nav button[data-on="true"] {
+  border-color: rgba(0, 168, 90, 0.45);
+  color: #00a85a;
+  background: #e1fbea;
+}
+.rx-leak-panel-stage {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.5rem;
+  align-items: center;
+  min-height: 420px;
+  max-height: 720px;
+  padding: 1.25rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff, #f7faf8);
+  border: 1px solid rgba(10, 13, 11, 0.07);
+}
+.rx-leak-panel-copy h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+.rx-leak-panel-copy p {
+  margin: 0 0 0.65rem;
+  color: #3f4642;
+  line-height: 1.45;
+}
+
+/* ── Role strip ── */
+.rx-role-strip {
+  display: grid;
+  gap: 1.25rem;
+}
+.rx-role-strip .rx-btn { justify-self: start; }
+
+/* ── Hospitality Value Atlas ── */
+.rx-atlas-sec { padding-block: 3.5rem; }
+.rx-atlas-problems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0 1.25rem;
+}
+.rx-atlas-problems button {
+  appearance: none;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #626a65;
+  cursor: pointer;
+}
+.rx-atlas-problems button[data-on="true"] {
+  border-color: rgba(0, 168, 90, 0.45);
+  color: #00a85a;
+  background: #e1fbea;
+}
+.rx-atlas-stage {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.75rem;
+  align-items: center;
+  min-height: 480px;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+}
+.rx-atlas-punch {
+  margin: 0 0 0.85rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  color: #0a0d0b;
+  line-height: 1.3;
+}
+.rx-atlas-decision {
+  margin: 0 0 0.55rem;
+  color: #3f4642;
+  line-height: 1.45;
+}
+.rx-atlas-verify {
+  margin: 0;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: #00a85a;
+}
+
+.rx-pdt-skip {
+  margin: 0.75rem 0 0;
+  text-align: right;
+}
+.rx-pdt-skip button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-pdt-skip button:hover { color: #0a0d0b; }
+
+.rx-floor-why-lead {
+  margin: 0 0 1rem;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+
+.rx-co-tax {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-co-tax li {
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+
+@media (max-width: 900px) {
+  .rx-leak-panel-stage,
+  .rx-atlas-stage {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    max-height: none;
+  }
+}

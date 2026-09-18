@@ -16,8 +16,8 @@ const NODES = [
 type Props = {
   kicker: string;
   title: string;
-  lead: string;
-  body: string;
+  lead?: string;
+  body?: string;
   note: string;
 };
 
@@ -26,8 +26,8 @@ export function ConnectionBand({ kicker, title, lead, body, note }: Props) {
     <div className="rx-connband">
       <p className="rx-rec-k">{kicker}</p>
       <h2 className="rx-rec-h">{title}</h2>
-      <p className="rx-rec-p">{lead}</p>
-      <p className="rx-rec-p">{body}</p>
+      {lead ? <p className="rx-rec-p">{lead}</p> : null}
+      {body ? <p className="rx-rec-p">{body}</p> : null}
 
       <div className="rx-connband-flow" aria-label="Systems into RADR">
         <div className="rx-connband-sources">

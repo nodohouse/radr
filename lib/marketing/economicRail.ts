@@ -1,9 +1,19 @@
 /**
  * Shared economic data for kinetic rails / marquees.
  * Illustrative — not customer results.
+ * Mixes hospitality verticals; euros from canonical fixtures only.
  */
 
-export type EconomicTone = "exposure" | "verified" | "neutral" | "urgent";
+import type { EconomicTone } from "./economicRailTypes";
+import {
+  CANON_OTA,
+  CANON_ORPHAN,
+  CANON_PEAK,
+  CANON_SUPPLIER,
+} from "@/lib/radr/decision/demo/canonical";
+import { formatDecisionMoney } from "@/lib/radr/decision/core";
+
+export type { EconomicTone };
 
 export type EconomicRailItem = {
   id: string;
@@ -14,12 +24,38 @@ export type EconomicRailItem = {
   detail?: string;
 };
 
+const money = formatDecisionMoney;
+
 export const HOME_RAIL: EconomicRailItem[] = [
   {
+    id: "peak",
+    euro: money(CANON_PEAK.expectedProtectedEuro),
+    label: "Peak capacity",
+    meta: "Restaurant · D-1911",
+    tone: "urgent",
+    detail: "Berlin Mitte · wait 12 vs seat-now",
+  },
+  {
+    id: "premium",
+    euro: money(CANON_OTA.exposureEuro),
+    label: "Premium inventory",
+    meta: "Hotel · D-2201",
+    tone: "exposure",
+    detail: "Canal House · hold 4 premium direct",
+  },
+  {
+    id: "orphan",
+    euro: money(CANON_ORPHAN.exposureEuro),
+    label: "Night at risk",
+    meta: "Serviced · D-3104",
+    tone: "urgent",
+    detail: "Chiado · orphan night · recovery window",
+  },
+  {
     id: "d4102",
-    euro: "€273",
+    euro: money(CANON_SUPPLIER.exposureEuro),
     label: "Contract variance",
-    meta: "D-4102",
+    meta: "Finance · D-4102",
     tone: "exposure",
     detail: "Invoice €7.45/L · Contract €6.80/L · 420 L",
   },
@@ -27,86 +63,54 @@ export const HOME_RAIL: EconomicRailItem[] = [
     id: "settle",
     euro: "€293",
     label: "Settlement gap",
-    meta: "Pending",
+    meta: "Reconciliation",
     tone: "exposure",
     detail: "Expected €9,814 · Actual €9,521",
   },
   {
-    id: "food",
-    euro: "+2.3pts",
-    label: "Food cost",
-    meta: "Drivers",
-    tone: "urgent",
-    detail: "Price · yield · waste · mix",
-  },
-  {
-    id: "procure",
-    euro: "3×",
-    label: "Locations · 3 prices",
-    meta: "SKU",
-    tone: "neutral",
-    detail: "Berlin · Amsterdam · Lisbon — normalize before leverage",
-  },
-  {
-    id: "room",
-    euro: "€184",
-    label: "Room-night at risk",
-    meta: "19h left",
-    tone: "urgent",
-    detail: "Cancelled · recovery window open",
-  },
-  {
-    id: "credit",
-    euro: "€273",
-    label: "Credit issued · not applied",
-    meta: "AP",
-    tone: "exposure",
-    detail: "CM issued — never matched to the invoice",
-  },
-  {
-    id: "noshow",
-    euro: "47m",
-    label: "No-show · time left",
-    meta: "Recover",
-    tone: "urgent",
-    detail: "Perishable inventory still recoverable",
-  },
-  {
-    id: "rebate",
-    euro: "—",
-    label: "Rebate earned · not posted",
-    meta: "AP",
-    tone: "exposure",
-    detail: "Earned rebate missing from the ledger",
-  },
-  {
-    id: "delivery",
-    euro: "+11%",
-    label: "Delivery fees",
-    meta: "Leak",
-    tone: "neutral",
-    detail: "Fee movement without contribution check",
-  },
-  {
     id: "verified",
-    euro: "€590",
+    euro: money(CANON_PEAK.actualProtectedEuro),
     label: "Verified",
-    meta: "Service",
+    meta: "D-1911",
     tone: "verified",
     detail: "Illustrative Verified outcome · matched evidence",
   },
 ];
 
 export const LEAK_MARQUEE: EconomicRailItem[] = [
-  { id: "m1", euro: "—", label: "Unapplied credit", tone: "exposure" },
-  { id: "m2", euro: "—", label: "Price dispersion", tone: "neutral" },
-  { id: "m3", euro: "€293", label: "Settlement gap", tone: "exposure" },
-  { id: "m4", euro: "—", label: "Yield loss", tone: "urgent" },
-  { id: "m5", euro: "€184", label: "Cancelled room", tone: "urgent" },
-  { id: "m6", euro: "—", label: "Missed rebate", tone: "exposure" },
-  { id: "m7", euro: "—", label: "Duplicate charge", tone: "exposure" },
-  { id: "m8", euro: "—", label: "No-show", tone: "urgent" },
-  { id: "m9", euro: "—", label: "Refund mismatch", tone: "exposure" },
+  { id: "uc", euro: "—", label: "Unapplied credit", tone: "exposure" },
+  { id: "dup", euro: "—", label: "Duplicate charge", tone: "exposure" },
+  { id: "sg", euro: "€293", label: "Settlement gap", tone: "exposure" },
+  { id: "yl", euro: "—", label: "Yield loss", tone: "urgent" },
+  { id: "rb", euro: "—", label: "Missed rebate", tone: "exposure" },
+  { id: "ns", euro: "—", label: "No-show", tone: "urgent" },
+  { id: "cx", euro: "—", label: "Room cancellation", tone: "urgent" },
+  { id: "pd", euro: "—", label: "Price dispersion", tone: "neutral" },
+  { id: "rf", euro: "—", label: "Refund mismatch", tone: "exposure" },
+];
+
+export const PRICING_PROOF_RAIL: EconomicRailItem[] = [
+  {
+    id: "v1",
+    euro: money(CANON_PEAK.actualProtectedEuro),
+    label: "Verified · D-1911",
+    meta: "DEMO",
+    tone: "verified",
+  },
+  {
+    id: "v2",
+    euro: money(CANON_OTA.actualProtectedEuro),
+    label: "Verified · D-2201",
+    meta: "DEMO",
+    tone: "verified",
+  },
+  {
+    id: "v3",
+    euro: money(CANON_SUPPLIER.exposureEuro),
+    label: "Expected · D-4102",
+    meta: "Open",
+    tone: "exposure",
+  },
 ];
 
 export const PATTERN_STRIP = [
@@ -118,36 +122,5 @@ export const PATTERN_STRIP = [
   "Room-night expiry",
   "Unapplied credit",
   "Rebate gap",
-  "Delivery fee leakage",
+  "Refund mismatch",
 ] as const;
-
-export const PRICING_PROOF_RAIL: EconomicRailItem[] = [
-  {
-    id: "p1",
-    euro: "€273",
-    label: "Supplier recovery",
-    meta: "Illustrative",
-    tone: "verified",
-  },
-  {
-    id: "p2",
-    euro: "€293",
-    label: "Reconciled",
-    meta: "Illustrative",
-    tone: "verified",
-  },
-  {
-    id: "p3",
-    euro: "€184",
-    label: "Perishable value",
-    meta: "Illustrative",
-    tone: "verified",
-  },
-  {
-    id: "p4",
-    euro: "€590",
-    label: "Verified service outcome",
-    meta: "Illustrative",
-    tone: "verified",
-  },
-];

@@ -218,6 +218,12 @@ export function CompanyPage() {
                     Same judgment problem. Different floors, channels, and
                     clocks.
                   </p>
+                  <ul className="rx-co-tax" aria-label="Hospitality environments">
+                    <li>Restaurants &amp; F&amp;B</li>
+                    <li>Hotels &amp; Resorts</li>
+                    <li>Serviced Apartments</li>
+                    <li>Groups</li>
+                  </ul>
                 </div>
               </div>
             </CoReveal>

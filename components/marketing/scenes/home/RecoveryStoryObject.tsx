@@ -102,7 +102,7 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
     <div
       ref={rootRef}
       className="rx-rso rx-euro-journey"
-      style={reduced ? undefined : { minHeight: `${STAGES.length * 58}vh` }}
+      style={reduced ? undefined : { minHeight: "160vh" }}
     >
       <div className="rx-rso-pin">
         <p className="rx-rec-k">{kicker}</p>

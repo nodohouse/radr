@@ -102,7 +102,7 @@ export function ProgressionLadder({
     <div
       ref={rootRef}
       className="rx-prog rx-prog-evolving"
-      style={reduced ? undefined : { minHeight: `${PROGRESSION.length * 70}vh` }}
+      style={reduced ? undefined : { minHeight: "160vh" }}
     >
       <div className="rx-prog-pin">
         <p className="rx-rec-k">{kicker}</p>

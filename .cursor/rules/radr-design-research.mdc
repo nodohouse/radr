@@ -52,6 +52,19 @@ Radar may illuminate them softly; click opens depth — no giant floating panels
 One strong operating chart: real axes, crosshair tip, click → day investigation.
 Actual > forecast > plan visual weight. Finding markers = quiet green dots.
 
+## Scroll belongs to the user
+
+Components may **react** to scroll. Components may **never capture** it.
+
+Banned on public marketing surfaces:
+- wheel interception / scroll-jacking
+- mandatory horizontal scrolling
+- five consecutive 100vh sticky states
+- forced scroll-snap sequences
+- oversized sticky dwell (keep narrative sticky ≤ ~150–180vh total when essential)
+
+Visitor can always scroll past. Prefer click/hover controls over scroll traps.
+
 ## Final rule
 
 Do not add more. Replace weak UI with better UI. Every component must justify its existence.

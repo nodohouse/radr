@@ -35,7 +35,7 @@ export function StickyStory({
   kicker,
   title,
   lead,
-  vhPerChapter = 85,
+  vhPerChapter = 45,
   className = "",
   id,
 }: Props) {

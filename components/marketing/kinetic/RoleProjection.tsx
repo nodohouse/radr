@@ -20,14 +20,14 @@ export const DEFAULT_ROLE_CARDS: RoleCard[] = [
   {
     id: "cfo",
     role: "CFO",
-    kicker: "Economics",
-    headline: "€590 protected · D-1911",
+    kicker: "Finance",
+    headline: "€273 supplier recovery",
     lines: [
-      "Expected €620 · observed €590",
-      "Variance −€30 · −4.8%",
-      "Verified after service",
+      "D-4102 · contract vs invoice",
+      "Dispute staged · credit path open",
+      "Not yet verified",
     ],
-    tone: "verified",
+    tone: "exposure",
   },
   {
     id: "gm",
@@ -43,13 +43,13 @@ export const DEFAULT_ROLE_CARDS: RoleCard[] = [
   },
   {
     id: "foh",
-    role: "FOH",
+    role: "Frontline",
     kicker: "RADR Floor",
-    headline: "Hold T12 · VIP 18:50",
+    headline: "VIP · Table 12 · Allergy · Brief",
     lines: [
       "Nut allergy on file",
       "Mention Ribeye · cold station 92%",
-      "No group economics on Floor",
+      "FOH brief updated",
     ],
     tone: "neutral",
   },

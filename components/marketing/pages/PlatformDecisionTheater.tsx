@@ -1,13 +1,22 @@
 "use client";
 
 /**
- * Flagship Platform — one Decision (D-1911) persists through every stage.
- * Signal → Understanding → Futures → Recommend → Approve → Floor → Observe → Verify → Memory.
+ * Flagship Platform — one Decision persists through every stage.
+ * Vertical switch proves: different operations, same RADR engine.
+ * Scroll may update stage. Click may update stage. Visitor can scroll past.
+ * No scroll capture. Runway capped (~180vh).
  */
 
 import { useEffect, useRef, useState } from "react";
 import { EconomicRail } from "@/components/marketing/kinetic/EconomicRail";
+import { HospitalityContextSwitch } from "@/components/marketing/kinetic/HospitalityContextSwitch";
 import { HOME_RAIL } from "@/lib/marketing/economicRail";
+import {
+  decisionForVertical,
+  platformEconomics,
+  platformSceneFor,
+  type HospitalityVertical,
+} from "@/lib/marketing/hospitalityContext";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 import "@/app/kinetic.css";
 
@@ -17,7 +26,6 @@ const LIFE = [
   "Futures",
   "Recommended",
   "Approved",
-  "Floor",
   "Observed",
   "Verified",
   "Learned",
@@ -25,83 +33,31 @@ const LIFE = [
 
 type Life = (typeof LIFE)[number];
 
-const DEC = {
-  id: "D-1911",
-  property: "Berlin Mitte",
-  title: "Peak capacity collision",
-  exposure: "€620",
-  expected: "€620",
-  observed: "€590",
-  verified: "€590",
-  variance: "−€30 · −4.8%",
-} as const;
-
-const SIGNALS = [
-  { k: "Floor occ.", v: "78%", note: "walk-ins waiting" },
-  { k: "Kitchen", v: "92%", note: "KDS pressure" },
-  { k: "Inbound", v: "38", note: "covers" },
-  { k: "Delivery", v: "Open", note: "throttle candidate" },
-  { k: "Tables free", v: "2", note: "not free capacity" },
-  { k: "Deadline", v: "18:53", note: "decision window" },
-] as const;
-
-const FUTURES = [
-  {
-    id: "seat",
-    title: "Seat now",
-    euro: "€0",
-    note: "Fills fast · burns second turn",
-    rec: false,
-  },
-  {
-    id: "wait",
-    title: "Wait 12 minutes",
-    euro: "€620",
-    note: "Protect contribution · reversible",
-    rec: true,
-  },
-  {
-    id: "hard",
-    title: "Hard stop",
-    euro: "€180",
-    note: "Safer · leaves money on table",
-    rec: false,
-  },
-] as const;
-
-const EURO_BY_STAGE: Record<Life, { euro: string; grade: string }> = {
-  Detected: { euro: DEC.exposure, grade: "EXPOSED" },
-  Understood: { euro: DEC.exposure, grade: "EXPOSED" },
-  Futures: { euro: DEC.expected, grade: "PATHS OPEN" },
-  Recommended: { euro: DEC.expected, grade: "EXPECTED" },
-  Approved: { euro: DEC.expected, grade: "PREPARED" },
-  Floor: { euro: DEC.expected, grade: "IN SERVICE" },
-  Observed: { euro: DEC.observed, grade: "OBSERVED" },
-  Verified: { euro: DEC.verified, grade: "VERIFIED" },
-  Learned: { euro: DEC.verified, grade: "IN MEMORY" },
-};
-
-const HEAD_BY_STAGE: Record<Life, string> = {
-  Detected: "Signals converging",
-  Understood: "Empty tables ≠ capacity",
-  Futures: "Three paths",
-  Recommended: "Wait 12 minutes",
-  Approved: "Prepared for the floor",
-  Floor: "FOH · hold T12 · VIP inbound",
-  Observed: "€590 observed",
-  Verified: "€590 protected",
-  Learned: "Playbook joins D-1911",
-};
-
 export function PlatformDecisionTheater() {
   const reduced = usePrefersReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
+  const [vertical, setVertical] = useState<HospitalityVertical>("restaurant");
   const [life, setLife] = useState(0);
   const [future, setFuture] = useState(1);
   const [trust, setTrust] = useState(1);
+
+  const decision = decisionForVertical(vertical);
+  const econ = platformEconomics(decision);
+  const scene = platformSceneFor(vertical);
   const stage = LIFE[life]!;
-  const sealed = life >= 7;
-  const chip = EURO_BY_STAGE[stage];
+  const sealed = life >= 6;
+
+  const chipByStage: Record<Life, { euro: string; grade: string }> = {
+    Detected: { euro: econ.exposure, grade: "EXPOSED" },
+    Understood: { euro: econ.exposure, grade: "EXPOSED" },
+    Futures: { euro: econ.expected, grade: "PATHS OPEN" },
+    Recommended: { euro: econ.expected, grade: "EXPECTED" },
+    Approved: { euro: econ.expected, grade: "PREPARED" },
+    Observed: { euro: econ.observed, grade: "OBSERVED" },
+    Verified: { euro: econ.verified, grade: "VERIFIED" },
+    Learned: { euro: econ.verified, grade: "IN MEMORY" },
+  };
+  const chip = chipByStage[stage];
 
   useEffect(() => {
     if (reduced) return;
@@ -131,8 +87,16 @@ export function PlatformDecisionTheater() {
   }, [reduced]);
 
   useEffect(() => {
-    if (stage === "Futures" || stage === "Recommended") setFuture(1);
-  }, [stage]);
+    setFuture(scene.futures.findIndex((f) => f.rec));
+    setLife(0);
+  }, [vertical]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (stage === "Futures" || stage === "Recommended") {
+      const rec = scene.futures.findIndex((f) => f.rec);
+      if (rec >= 0) setFuture(rec);
+    }
+  }, [stage, scene.futures]);
 
   const scrollToStage = (i: number) => {
     setLife(i);
@@ -151,7 +115,7 @@ export function PlatformDecisionTheater() {
     <div className="rx-pdt">
       <EconomicRail
         items={HOME_RAIL.filter((x) =>
-          ["d4102", "settle", "room", "verified"].includes(x.id),
+          ["peak", "premium", "orphan", "d4102", "verified"].includes(x.id),
         )}
         durationSec={44}
         variant="compact"
@@ -161,13 +125,19 @@ export function PlatformDecisionTheater() {
       <div
         ref={rootRef}
         className="rx-pdt-runway"
-        style={reduced ? { minHeight: "auto" } : { minHeight: "560vh" }}
+        style={reduced ? { minHeight: "auto" } : { minHeight: "180vh" }}
       >
         <div className="rx-pdt-pin">
           <div className="rx-shell">
             <header className="rx-pdt-head">
-              <p className="rx-rec-k">One Decision · {DEC.id}</p>
-              <h2 className="rx-rec-h">Same object. Every stage.</h2>
+              <p className="rx-rec-k">One Decision · same engine</p>
+              <h2 className="rx-rec-h">Different operations. Same RADR.</h2>
+              <HospitalityContextSwitch
+                value={vertical}
+                onChange={setVertical}
+                size="compact"
+                ariaLabel="Platform hospitality environment"
+              />
             </header>
 
             <div
@@ -194,18 +164,19 @@ export function PlatformDecisionTheater() {
               className="rx-pdt-object"
               data-stage={stage}
               data-sealed={sealed ? "true" : undefined}
+              data-vertical={vertical}
             >
               <header className="rx-pdt-object-head">
                 <div>
                   <em>
-                    {DEC.id} · {DEC.property} · Restaurant · DEMO
+                    {econ.id} · {econ.property} · {econ.verticalLabel} · DEMO
                   </em>
-                  <h3>{HEAD_BY_STAGE[stage]}</h3>
+                  <h3>{scene.heads[stage]}</h3>
                 </div>
                 <div
                   className="rx-euro-chip"
                   data-sealed={sealed ? "true" : undefined}
-                  key={`${stage}-${chip.euro}`}
+                  key={`${vertical}-${stage}-${chip.euro}`}
                 >
                   <strong>{chip.euro}</strong>
                   <em>{chip.grade}</em>
@@ -214,12 +185,20 @@ export function PlatformDecisionTheater() {
 
               <StageBody
                 stage={stage}
+                scene={scene}
+                econ={econ}
                 future={future}
                 setFuture={setFuture}
                 trust={trust}
                 setTrust={setTrust}
               />
             </article>
+
+            <p className="rx-pdt-skip">
+              <button type="button" onClick={() => scrollToStage(LIFE.length - 1)}>
+                Skip to verified
+              </button>
+            </p>
           </div>
         </div>
       </div>
@@ -229,12 +208,16 @@ export function PlatformDecisionTheater() {
 
 function StageBody({
   stage,
+  scene,
+  econ,
   future,
   setFuture,
   trust,
   setTrust,
 }: {
   stage: Life;
+  scene: ReturnType<typeof platformSceneFor>;
+  econ: ReturnType<typeof platformEconomics>;
   future: number;
   setFuture: (n: number) => void;
   trust: number;
@@ -244,7 +227,7 @@ function StageBody({
     return (
       <div className="rx-pdt-stage">
         <ul className="rx-pdt-signals">
-          {SIGNALS.map((s) => (
+          {scene.signals.map((s) => (
             <li key={s.k}>
               <em>{s.k}</em>
               <strong>{s.v}</strong>
@@ -260,16 +243,20 @@ function StageBody({
     return (
       <div className="rx-pdt-stage">
         <div className="rx-pdt-graph" aria-hidden="true">
-          <span>Reservations</span>
-          <i />
-          <span>KDS</span>
-          <i />
-          <span>Delivery</span>
-          <i />
-          <span>Menu econ</span>
-          <i />
-          <span data-hot="true">Table turns</span>
+          {scene.understand.nodes.flatMap((n, i) => {
+            const node = (
+              <span
+                key={n}
+                data-hot={n === scene.understand.hot ? "true" : undefined}
+              >
+                {n}
+              </span>
+            );
+            if (i >= scene.understand.nodes.length - 1) return [node];
+            return [node, <i key={`${n}-sep`} />];
+          })}
         </div>
+        <p className="rx-pdt-note">{scene.understand.line}</p>
       </div>
     );
   }
@@ -278,7 +265,7 @@ function StageBody({
     return (
       <div className="rx-pdt-stage">
         <div className="rx-pdt-futures">
-          {FUTURES.map((f, i) => (
+          {scene.futures.map((f, i) => (
             <button
               key={f.id}
               type="button"
@@ -306,39 +293,20 @@ function StageBody({
     return (
       <div className="rx-pdt-stage">
         <ul className="rx-pdt-actions">
-          <li>
-            <em>Floor</em>
-            <strong>Hold 2 tables · 12 minutes</strong>
-          </li>
-          <li>
-            <em>Delivery</em>
-            <strong>Throttle until 18:54</strong>
-          </li>
-          <li>
-            <em>Menu</em>
-            <strong>Feature fast dish</strong>
-          </li>
+          {scene.actions.map((a) => (
+            <li key={a.em}>
+              <em>{a.em}</em>
+              <strong>{a.strong}</strong>
+            </li>
+          ))}
         </ul>
-      </div>
-    );
-  }
-
-  if (stage === "Floor") {
-    return (
-      <div className="rx-pdt-stage">
-        <div className="rx-pdt-floor-proj">
-          <div>
-            <em>GM</em>
-            <strong>Wait 12 · €620 at stake</strong>
-          </div>
-          <div data-hot="true">
-            <em>FOH</em>
-            <strong>Hold T12 · VIP 18:50 · allergy note</strong>
-          </div>
-          <div>
-            <em>Kitchen</em>
-            <strong>Cold station 92% · feature fast dish</strong>
-          </div>
+        <div className="rx-pdt-floor-proj" style={{ marginTop: "1rem" }}>
+          {scene.roles.map((r) => (
+            <div key={r.em} data-hot={r.hot ? "true" : undefined}>
+              <em>{r.em}</em>
+              <strong>{r.strong}</strong>
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -350,14 +318,14 @@ function StageBody({
         <div className="rx-pdt-overlay">
           <div>
             <em>Expected</em>
-            <strong>{DEC.expected}</strong>
+            <strong>{econ.expected}</strong>
           </div>
           <div data-hot="true">
             <em>Observed</em>
-            <strong>{DEC.observed}</strong>
+            <strong>{econ.observed}</strong>
           </div>
         </div>
-        <p className="rx-pdt-note">{DEC.variance}</p>
+        <p className="rx-pdt-note">{econ.variance}</p>
       </div>
     );
   }
@@ -366,21 +334,23 @@ function StageBody({
     return (
       <div className="rx-pdt-stage">
         <ol className="rx-pdt-value">
-          {(["Exposure", "Expected", "Observed", "Attributed", "Verified"] as const).map(
-            (v, i) => (
-              <li
-                key={v}
-                data-on={i === 4 ? "true" : undefined}
-                data-done={i < 4 ? "true" : undefined}
-              >
-                {v}
-              </li>
-            ),
-          )}
+          {(
+            ["Exposure", "Expected", "Observed", "Attributed", "Verified"] as const
+          ).map((v, i) => (
+            <li
+              key={v}
+              data-on={i === 4 ? "true" : undefined}
+              data-done={i < 4 ? "true" : undefined}
+            >
+              {v}
+            </li>
+          ))}
         </ol>
         <div className="rx-euro-chip" data-sealed="true">
-          <strong>{DEC.verified}</strong>
-          <em>Protected · {DEC.id}</em>
+          <strong>{econ.verified}</strong>
+          <em>
+            {econ.id} · {econ.variance}
+          </em>
         </div>
       </div>
     );
@@ -391,11 +361,11 @@ function StageBody({
       <div className="rx-pdt-memory-stats">
         <div>
           <strong>18</strong>
-          <span>similar nights</span>
+          <span>similar cases</span>
         </div>
         <div>
           <strong>12</strong>
-          <span>wait held</span>
+          <span>path held</span>
         </div>
         <div data-hot>
           <strong>v3</strong>
