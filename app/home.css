@@ -13302,6 +13302,11 @@ html:has(.radr-home) body {
 /* Full-bleed cinematic H0 — spans shell width above the split */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
   font-size: clamp(4.5rem, 9vw, 8rem);
   font-weight: 760;
   letter-spacing: -0.055em;
@@ -13381,6 +13386,9 @@ html:has(.radr-home) body {
   .rx-notr--display,
   .rx-he-h0.rx-notr--display {
     font-size: clamp(2.75rem, 12vw, 4.25rem);
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    column-gap: 0.28em;
   }
 }
 
