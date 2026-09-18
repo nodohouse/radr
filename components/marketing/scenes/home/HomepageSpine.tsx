@@ -100,7 +100,7 @@ export function HomepageSpine() {
 
       <section className="rx-rec-sec rx-rec-brand" data-nav-theme="light">
         <div className="rx-shell rx-rec-brand-frame">
-          <NothingOffTheRadr />
+          <NothingOffTheRadr size="close" />
           <div className="rx-rec-brand-copy">
             <h2 className="rx-rec-h">{t("footer.title")}</h2>
             <p className="rx-rec-p">{t("footer.body")}</p>

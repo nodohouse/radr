@@ -13067,27 +13067,40 @@ html:has(.radr-home) body {
 .rx-home-spine {
   background: #f7faf8;
 }
-.rx-he-recover > .rx-shell {
+.rx-he-recover > .rx-shell,
+.rx-he-recover-shell {
   width: 100%;
 }
 .rx-he-recover {
-  padding: clamp(5.5rem, 10vh, 7rem) 0 clamp(3.5rem, 6vh, 4.5rem);
+  padding: clamp(5.25rem, 9vh, 6.75rem) 0 clamp(3.5rem, 6vh, 4.75rem);
   background: #f7faf8;
   min-height: 0;
   display: block;
 }
+.rx-he-recover-shell {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+/* Full-width poster H0, then money + proof */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.9fr);
   gap: clamp(1.75rem, 4vw, 3rem);
-  align-items: center;
+  align-items: start;
   width: 100%;
 }
 .rx-he-recover-copy {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  max-width: 34rem;
+  justify-content: flex-start;
+  max-width: 36rem;
+  padding-top: 0.15rem;
+}
+.rx-he-recover-proof {
+  width: 100%;
+  max-width: 26rem;
+  justify-self: end;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
@@ -13099,12 +13112,12 @@ html:has(.radr-home) body {
 }
 .rx-he-recover-title {
   margin: 0;
-  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-size: clamp(1.45rem, 3.1vw, 2.85rem);
   font-weight: 700;
   letter-spacing: -0.04em;
-  line-height: 1.08;
+  line-height: 1.1;
   color: #0a0d0b;
-  max-width: 18ch;
+  max-width: 22ch;
 }
 .rx-he-recover-sub {
   margin: 1rem 0 0;
@@ -13115,7 +13128,7 @@ html:has(.radr-home) body {
   max-width: 34rem;
 }
 .rx-he-recover-support {
-  margin: 0.65rem 0 0;
+  margin: 0.75rem 0 0;
   font-size: 0.98rem;
   line-height: 1.5;
   color: #4a524e;
@@ -13274,36 +13287,75 @@ html:has(.radr-home) body {
 .rx-notr {
   margin: 0;
   display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.28em;
+  row-gap: 0.02em;
+  color: #0a0d0b;
+  width: 100%;
+}
+.rx-notr-prefix {
+  display: inline;
+  text-transform: uppercase;
+  color: #0a0d0b;
+}
+.rx-notr-w {
+  white-space: nowrap;
+}
+
+/* Cinematic H0 — poster-scale; dwarfs money H1 */
+.rx-notr--display,
+.rx-he-h0.rx-notr--display {
+  font-size: clamp(3.5rem, 8.4vw, 7.5rem);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  max-width: none;
+}
+.rx-notr--display .rx-notr-prefix {
+  font-size: 1em;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+.rx-notr--display .rx-notr-wm {
+  font-size: 1em !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+}
+.rx-notr--display .rx-notr-wm .radr-wm-letter {
+  font-weight: inherit;
+}
+
+/* Brand-close band — quiet lockup, not poster */
+.rx-notr--close {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.2rem;
-  color: #0a0d0b;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  max-width: 16rem;
 }
-.rx-notr-prefix {
-  display: block;
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+.rx-notr--close .rx-notr-prefix {
+  font-size: 0.72em;
   font-weight: 650;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   line-height: 1.2;
-  color: #0a0d0b;
 }
-.rx-notr--display .rx-notr-prefix {
-  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-  letter-spacing: 0.14em;
+.rx-notr--close .rx-notr-wm {
+  font-size: 1.55em !important;
+  font-weight: 760 !important;
+  letter-spacing: -0.055em !important;
 }
-.rx-notr--display .rx-notr-wm {
-  margin-top: 0.15rem;
-}
+
 .rx-he-h0 {
-  margin: 0 0 1.1rem;
-}
-.rx-he-margin .rx-he-recover-copy {
-  max-width: 38rem;
+  margin: 0;
 }
 .rx-he-margin .rx-he-recover-title {
-  max-width: 22ch;
-  font-size: clamp(1.85rem, 3.6vw, 2.65rem);
+  max-width: 24ch;
 }
 .rx-rec-brand-copy {
   max-width: 34rem;
@@ -13322,8 +13374,31 @@ html:has(.radr-home) body {
   .rx-rec-brand-frame {
     grid-template-columns: 1fr;
   }
+  .rx-he-recover-proof {
+    max-width: none;
+    justify-self: stretch;
+  }
   .rx-he-recover-title {
     max-width: none;
+  }
+  /* Mobile: NOTHING / OFF THE R△DR */
+  .rx-notr--display {
+    font-size: clamp(2.75rem, 14vw, 4.25rem);
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 0.05em;
+  }
+  .rx-notr--display .rx-notr-prefix {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 0.02em;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .rx-notr--display {
+    font-size: clamp(3.25rem, 7vw, 5.5rem);
   }
 }
 

@@ -4,7 +4,7 @@ import { RadrWordmark } from "@/components/radr/RadrWordmark";
 
 type Props = {
   className?: string;
-  /** display = hero H0 · close = brand band */
+  /** display = cinematic hero H0 · close = brand band */
   size?: "display" | "close";
 };
 
@@ -21,7 +21,10 @@ export function NothingOffTheRadr({
       className={`rx-notr rx-notr--${size} ${className}`.trim()}
       aria-label="Nothing off the RADR"
     >
-      <span className="rx-notr-prefix">Nothing off the</span>
+      <span className="rx-notr-prefix" aria-hidden="true">
+        <span className="rx-notr-w">Nothing</span>{" "}
+        <span className="rx-notr-w">off the</span>
+      </span>
       <RadrWordmark
         size={size === "display" ? "headline" : "lg"}
         surface="light"
