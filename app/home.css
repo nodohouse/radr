@@ -13078,11 +13078,11 @@ html:has(.radr-home) body {
   flex-direction: column;
   gap: clamp(1.5rem, 3vw, 2.5rem);
 }
-/* Below H0: money left · Decision card right */
+/* Below H0: money left · Decision card right — shared shell edges */
 .rx-he-recover-frame {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: clamp(1.75rem, 3.5vw, 2.75rem);
+  column-gap: clamp(1.5rem, 3vw, 2.25rem);
   row-gap: 2rem;
   align-items: start;
   width: 100%;
@@ -13091,14 +13091,14 @@ html:has(.radr-home) body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  max-width: 32rem;
+  max-width: 30rem;
   width: 100%;
-  padding-top: 0.15rem;
+  padding-top: 0.1rem;
 }
 .rx-he-recover-proof {
   width: 100%;
-  max-width: 28rem;
-  justify-self: end;
+  max-width: none;
+  justify-self: stretch;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
@@ -13299,7 +13299,7 @@ html:has(.radr-home) body {
   white-space: nowrap;
 }
 
-/* Full-bleed cinematic H0 — spans shell width above the split */
+/* Full-bleed H0 above the split — fits the shell (no overflow past gutters) */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
   display: flex;
@@ -13307,24 +13307,28 @@ html:has(.radr-home) body {
   justify-content: space-between;
   align-items: baseline;
   width: 100%;
-  font-size: clamp(4.5rem, 9vw, 8rem);
+  max-width: 100%;
+  box-sizing: border-box;
+  /* Cap so NOTHING + OFF THE + R△DR never spill past shell right */
+  font-size: clamp(3.5rem, 6.5vw, 6rem);
   font-weight: 760;
   letter-spacing: -0.055em;
   line-height: 0.9;
-  max-width: none;
-}
-.rx-notr--display .rx-notr-line {
-  font-size: 1em;
-  font-weight: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
 }
 .rx-notr--display .rx-notr-wm {
   display: inline-flex;
+  flex-shrink: 0;
   font-size: 1em !important;
   font-weight: inherit !important;
   letter-spacing: inherit !important;
   line-height: inherit !important;
+}
+.rx-notr--display .rx-notr-line {
+  flex-shrink: 0;
+  font-size: 1em;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
 }
 .rx-notr--display .rx-notr-wm .radr-wm-letter {
   font-weight: inherit;
@@ -13385,7 +13389,7 @@ html:has(.radr-home) body {
   }
   .rx-notr--display,
   .rx-he-h0.rx-notr--display {
-    font-size: clamp(2.75rem, 12vw, 4.25rem);
+    font-size: clamp(2.5rem, 11vw, 3.75rem);
     flex-wrap: wrap;
     justify-content: flex-start;
     column-gap: 0.28em;
