@@ -70,7 +70,7 @@ const STORIES: Record<MemoryScope, Story> = {
     title: "Friday peak capacity protocol",
     tried: "Feature-swap-first outperformed rush-order",
     observed: "12 comparable services · kitchen cool-down after hold",
-    verified: "3 verified improvements · Trace on tuna shortfall sealed",
+    verified: "3 verified improvements · tuna shortfall matched on ledger",
     next: "Tonight: open Brief → FOH hold + Chef cold-station",
     euro: "€620",
     grade: "Expected",

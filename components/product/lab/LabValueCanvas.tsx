@@ -149,7 +149,7 @@ function TraceTheater({ t }: { t: TraceLineage }) {
         </div>
         {t.sealedAt ? (
           <div>
-            <dt>sealed_at</dt>
+            <dt>Verified at</dt>
             <dd>{t.sealedAt}</dd>
           </div>
         ) : null}
@@ -314,7 +314,7 @@ export function LabValueCanvas() {
             </div>
             <p className="lab-value-law">
               {isFinanceSeed(state.seed)
-                ? "Sales demo = one card → Trace → stop."
+                ? "One recovery · matched to the original invoice."
                 : "No Trace = no Verified on that line."}
             </p>
           </>
@@ -375,7 +375,7 @@ function ValueStream({
             money: formatDecisionMoney(agg.verifiedTotal),
             label: "Verified Value",
             grade: "Verified" as const,
-            because: "Trace sealed · book-matchable",
+            because: "Matched on ledger · Verified",
             ids: agg.decisionIdsVerified,
           };
 
@@ -457,7 +457,7 @@ function ValueStream({
                           note: verified.note || "Ledger-matched",
                           because:
                             verified.note ||
-                            "Ledger-matched · Trace sealed",
+                            "Ledger-matched · Verified",
                         }}
                       />
                     ) : (

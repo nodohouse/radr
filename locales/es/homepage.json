@@ -1671,12 +1671,19 @@
       "kicker": "Your stack",
       "title": "Keep the systems you already run",
       "lead": "RADR works across the financial and operating systems already inside your business.",
-      "body": "You do not need to replace your accounting, POS, procurement, forecasting, or scheduling stack to start recovering margin."
+      "body": "You do not need to replace your accounting, POS, procurement, forecasting, or scheduling stack to start recovering margin.",
+      "integrationsK": "Connections",
+      "i1": "Invoices · Demo",
+      "i2": "Contracts · Demo",
+      "i3": "AP / accounting · Building",
+      "i4": "POS / menu · Planned",
+      "i5": "Procurement · Planned",
+      "statesNote": "States: Available · Demo · Partner access · Building · Planned."
     },
     "pilot": {
       "kicker": "Margin Recovery Pilot",
-      "title": "Start with one recovery scope",
-      "lead": "14 days to find and action recoverable margin. Open cases stay on RADR until the value is applied or the case is closed.",
+      "title": "14 days to find and action recoverable margin",
+      "lead": "Open cases stay on RADR until the value is applied or the case is closed.",
       "i1": "2–3 locations",
       "i2": "Supplier invoices and contracts",
       "i3": "AP / accounting evidence where available",
@@ -1691,8 +1698,8 @@
     },
     "expansion": {
       "kicker": "What comes next",
-      "title": "Recovery is where RADR starts",
-      "lead": "The same Decision system can extend into margin response, menu economics, capacity, service — and eventually policy-based Autopilot.",
+      "title": "Recover the leak. Then improve the Decision.",
+      "lead": "The same Decision system extends into margin response, menu economics, capacity, and service.",
       "body": "One system learns from what actually happened.",
       "cta": "Explore the Platform"
     },
@@ -1709,6 +1716,7 @@
       "a4": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice."
     },
     "footer": {
+      "brand": "Nothing off the RADR.",
       "title": "Ready when you are",
       "body": "Start recovering margin on the stack you already run.",
       "cta": "Start a 14-day recovery pilot",

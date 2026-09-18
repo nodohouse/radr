@@ -4,12 +4,12 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { MarginResponseCard } from "@/components/marketing/scenes/home/MarginResponseCard";
+import { HeroRadrPhone } from "@/components/marketing/scenes/home/HeroRadrPhone";
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 
 /**
- * Classic aesthetic split:
- * LEFT — all text (stacked H0 + money + foils + CTAs)
- * RIGHT — Decision card only
+ * LEFT — brand + money + CTAs
+ * RIGHT — Decision card + overlapping mobile push story
  */
 export function Hero() {
   const t = useTranslations("homepage.hero");
@@ -44,7 +44,10 @@ export function Hero() {
           </div>
 
           <div className="rx-he-recover-product">
-            <MarginResponseCard />
+            <div className="rx-he-product-stage">
+              <MarginResponseCard />
+              <HeroRadrPhone />
+            </div>
           </div>
         </div>
       </div>

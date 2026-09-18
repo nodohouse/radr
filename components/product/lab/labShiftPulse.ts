@@ -263,7 +263,7 @@ export const RECOVER_MARKERS: TurbulenceMarker[] = [
   {
     id: "mk_ap",
     at: 3,
-    label: "AP credit sealed",
+    label: "AP credit verified",
     severity: "watch",
     euro: 273,
     grade: "Verified",
@@ -279,7 +279,7 @@ export const RECOVER_MARKERS: TurbulenceMarker[] = [
     severity: "watch",
     euro: 273,
     grade: "Verified",
-    because: "Next PO blocked until sealed credit path reviewed",
+    because: "Next PO blocked until verified credit path reviewed",
     decisionId: DECISION_IDS.supplier,
     displayId: "D-4102",
     seed: "recover",
@@ -312,7 +312,7 @@ export const RECOVER_PULSE: ShiftPulseModel = {
     },
     {
       id: "variance",
-      label: "Recover sealed",
+      label: "Recovered",
       value: "€273 Verified",
       direction: "in",
       because: "Credit memo applied · €273 recovered",

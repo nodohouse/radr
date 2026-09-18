@@ -72,7 +72,7 @@ const HEROES: QueueItem[] = [
     title: "AP CREDIT APPLIED",
     euro: "€273",
     grade: "Verified",
-    clock: "Sealed · Trace → stop",
+    clock: "Verified · matched to invoice",
     because: "INV-88421 line matched CM-44102 applied to the same invoice",
     wedge: "RECOVER",
     href: LAB_SEEDS.recover.path,

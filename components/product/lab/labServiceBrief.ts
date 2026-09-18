@@ -243,7 +243,7 @@ const RECOVER_BRIEF: ServiceBriefModel = {
       items: [
         {
           id: "g_r1",
-          check: "AP credit sealed",
+          check: "AP credit verified",
           detail: "D-4102 · €273 Verified recovered",
           because: "Credit memo applied · matched to original invoice",
           when: "Sealed",

@@ -323,7 +323,7 @@ export function LabCenterCanvas() {
                           >
                             {state.seed === "margin-response"
                               ? "Trace · INV-88421 · INV-88502 · Expected"
-                              : "Trace · INV-88421 · CM-44102 sealed"}
+                              : "Trace · INV-88421 · CM-44102 · Verified"}
                           </button>
                         ) : null}
                       </>
@@ -441,7 +441,7 @@ export function LabCenterCanvas() {
                           <strong>
                             {formatDecisionMoney(agg.verifiedTotal)} Verified
                           </strong>
-                          <p>because tuna shortfall Trace sealed on ledger</p>
+                          <p>because tuna shortfall matched on the ledger</p>
                           <button
                             type="button"
                             onClick={() => goValue("verified")}
@@ -453,8 +453,7 @@ export function LabCenterCanvas() {
                           <em>Leaking</em>
                           <strong>€273 Expected</strong>
                           <p>
-                            because INV-88421 above contract — open Recover to
-                            seal
+                            because INV-88421 above contract — open Recover
                           </p>
                           <button
                             type="button"

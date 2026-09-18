@@ -1,6 +1,6 @@
 /**
  * Lab Control Center — shared operating state.
- * Seeds: service (Wait-12) · recover (credit sealed) · margin-response (two-site Expected)
+ * Seeds: service (Wait-12) · recover (credit verified) · margin-response (two-site Expected)
  */
 
 import { CANON_PEAK, CANON_SUPPLIER } from "@/lib/radr/decision/demo/canonical";
@@ -152,9 +152,9 @@ function deriveRecover(state: LabState): LabDerived {
   const f = state.selectedFuture;
   // Recover demo default: credit applied → Verified
   let contribution = 273;
-  let decisionLabel = "AP CREDIT APPLIED";
+  let decisionLabel = "SUPPLIER CREDIT APPLIED";
   let decisionSub =
-    "€273 recovered and matched to the original invoice";
+    "€273 Verified recovered · matched to invoice INV-88421";
   let moneyGrade: "Expected" | "Verified" = "Verified";
   let moneyMeta = "Verified recovered";
   const recommended: LabFuture = "wait_12";
@@ -176,9 +176,9 @@ function deriveRecover(state: LabState): LabDerived {
   const project = state.mode === "futures" || state.mode === "approved";
   if (!project && f !== "wait_12") {
     contribution = 273;
-    decisionLabel = "AP CREDIT APPLIED";
+    decisionLabel = "SUPPLIER CREDIT APPLIED";
     decisionSub =
-      "€273 recovered and matched to the original invoice";
+      "€273 Verified recovered · matched to invoice INV-88421";
     moneyGrade = "Verified";
     moneyMeta = "Verified recovered";
   }

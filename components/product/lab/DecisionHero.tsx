@@ -77,7 +77,7 @@ function LineageBlock({ t, onOpenTrace }: { t: TraceLineage; onOpenTrace: () => 
   return (
     <div className="lab-obj-lineage" data-sealed={sealed ? "true" : undefined}>
       <p className="lab-obj-lineage-k">
-        {sealed ? "Sealed Trace · book-matchable" : "Lineage · Expected until sealed"}
+        {sealed ? "Verified · matched to books" : "Evidence · Expected until applied"}
       </p>
       <p className="lab-obj-lineage-because">because {t.because}</p>
       {t.chain ? (
@@ -105,7 +105,7 @@ function LineageBlock({ t, onOpenTrace }: { t: TraceLineage; onOpenTrace: () => 
         </ul>
       )}
       <button type="button" className="lab-obj-ghost" onClick={onOpenTrace}>
-        Open full Trace →
+        Open Trace
       </button>
     </div>
   );
@@ -278,13 +278,15 @@ export function DecisionHero(props: Props) {
           </div>
         </div>
         <div className="lab-obj-ticket" aria-hidden="true">
-          <strong>{trace.sealed ? "SEALED" : "EXPECTED"}</strong>
-          <em>{trace.sealed ? "Trace → stop" : `Decide by ${deadlineLabel}`}</em>
+          <strong>{trace.sealed ? "VERIFIED" : "EXPECTED"}</strong>
+          <em>{trace.sealed ? "Matched to invoice" : `Decide by ${deadlineLabel}`}</em>
         </div>
 
         <div className="lab-obj-dossier-face">
           <div className="lab-obj-top">
-            <p className="lab-obj-attn">{trace.sealed ? "Verified" : "Margin Response"}</p>
+            <p className="lab-obj-attn">
+              {trace.sealed ? "Supplier credit applied" : "Margin Response"}
+            </p>
             <p className="lab-obj-id">{displayId}</p>
           </div>
           <h1 className="lab-obj-title">{label}</h1>
@@ -308,7 +310,7 @@ export function DecisionHero(props: Props) {
           ) : null}
 
           <div className="lab-obj-deadline" data-pulse="cool">
-            <span>{trace.sealed ? "Sales path" : "Finance clock"}</span>
+            <span>{trace.sealed ? "Finance verified" : "Finance clock"}</span>
             <strong>{deadlineLabel}</strong>
             <em>{clockLabel}</em>
           </div>

@@ -1,7 +1,7 @@
 /**
  * Book-matchable Trace lineage for LAB.
  * No Trace → no Verified grade on that line.
- * Sales demo (recover): ONE sealed AP credit → Trace → stop.
+ * Recover seed: one applied AP credit → Value Trace → Verified recovered.
  */
 
 export type MoneyGrade = "Expected" | "Verified" | "Unverified";
@@ -53,8 +53,8 @@ export const TRACE_PEAK_EXPECTED: TraceLineage = {
     { label: "Second-turn completion count", done: false },
     { label: "Delivery settlement adjustment (if throttled)", done: false },
   ],
-  note: "Not Verified Value — no ledger match yet.",
-  because: "Modeled contribution if Wait-12 holds — not cash until Trace seals after service",
+  note: "Expected until contribution matches after service.",
+  because: "Modeled contribution if Wait-12 holds — not cash until verified after service",
 };
 
 /**
@@ -129,10 +129,10 @@ export const TRACE_SUPPLIER_VERIFIED: TraceLineage = {
   because: "INV-88421 line variance matched CM-44102 applied to the same invoice",
 };
 
-/** @deprecated use TRACE_SUPPLIER_VERIFIED for sales Recover seed */
+/** @deprecated alias — recover seed uses Verified Trace */
 export const TRACE_SUPPLIER_EXPECTED = TRACE_SUPPLIER_VERIFIED;
 
-/** Example Verified line — tuna (not Recover sales path). */
+/** Example Verified line — tuna (not the Recover flagship). */
 export const TRACE_TUNA_VERIFIED: TraceLineage = {
   decisionId: "dec_tuna_berlin",
   displayId: "D-1842",
@@ -169,7 +169,7 @@ export function traceForDecision(id: string): TraceLineage | null {
 
 /**
  * Two sites · same supplier · different unit price.
- * Expected only — incomplete seal (no applied credit yet). Sales discovery fixture.
+ * Expected only — incomplete until credit is applied.
  */
 export const TRACE_TWO_SITE_EXPECTED: TraceLineage = {
   decisionId: "dec_two_site_oil",
@@ -218,7 +218,7 @@ export const TRACE_TWO_SITE_EXPECTED: TraceLineage = {
     { label: "Credit memo applied", done: false },
     { label: "Verified € recovered", done: false },
   ],
-  note: "Sales demo fixture · Expected only until sealed. One card → Trace → stop.",
+  note: "Expected until the credit is applied. One recovery → Verified.",
   because:
     "Bluefin oil €7.45/L at Mitte vs €6.80/L at Prenzlauer Berg on the same contract week",
 };

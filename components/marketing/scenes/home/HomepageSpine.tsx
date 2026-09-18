@@ -114,6 +114,15 @@ export function HomepageSpine() {
             <h2 className="rx-rec-h">{t("stack.title")}</h2>
             <p className="rx-rec-p">{t("stack.lead")}</p>
             <p className="rx-rec-p">{t("stack.body")}</p>
+            <p className="rx-rec-k rx-rec-deliver-k">{t("stack.integrationsK")}</p>
+            <ul className="rx-rec-finds">
+              <li>{t("stack.i1")}</li>
+              <li>{t("stack.i2")}</li>
+              <li>{t("stack.i3")}</li>
+              <li>{t("stack.i4")}</li>
+              <li>{t("stack.i5")}</li>
+            </ul>
+            <p className="rx-rec-p rx-rec-muted">{t("stack.statesNote")}</p>
           </div>
         </div>
       </section>
@@ -192,6 +201,7 @@ export function HomepageSpine() {
       <section className="rx-rec-sec rx-rec-brand" data-nav-theme="light">
         <div className="rx-shell">
           <div className="rx-rec-brand-copy">
+            <p className="rx-rec-brand-line">{t("footer.brand")}</p>
             <h2 className="rx-rec-h">{t("footer.title")}</h2>
             <p className="rx-rec-p">{t("footer.body")}</p>
             <div className="rx-he-ctas">

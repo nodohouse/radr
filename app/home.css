@@ -13441,6 +13441,15 @@ html:has(.radr-home) body {
   max-width: min(52rem, 100%);
   padding-top: 0.35rem;
 }
+.rx-rec-brand-line {
+  margin: 0 0 0.85rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0a0d0b;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
 .rx-rec-brand-copy .rx-rec-h {
   max-width: none;
 }
@@ -13540,6 +13549,175 @@ html:has(.radr-home) body {
 .rx-res-cta-band{display:flex;flex-wrap:wrap;gap:.65rem;margin:2.5rem 0 1rem;padding-top:1.5rem;border-top:1px solid rgba(10,13,11,.08)}
 
 /* Margin Response Decision card (Round 2 hero) */
+.rx-he-product-stage {
+  position: relative;
+  width: 100%;
+  padding-right: clamp(0rem, 4vw, 2.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.rx-he-product-stage .rx-mrc {
+  position: relative;
+  z-index: 1;
+}
+.rx-he-phone {
+  position: absolute;
+  right: -0.35rem;
+  bottom: -0.35rem;
+  z-index: 2;
+  width: clamp(9.75rem, 18vw, 12.25rem);
+  pointer-events: none;
+}
+.rx-he-phone-bezel {
+  background: #0a0d0b;
+  border-radius: 1.35rem;
+  padding: 0.38rem;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 22px 48px rgba(10, 13, 11, 0.22),
+    0 4px 12px rgba(10, 13, 11, 0.12);
+}
+.rx-he-phone-notch {
+  position: absolute;
+  top: 0.55rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.4rem;
+  height: 0.28rem;
+  border-radius: 999px;
+  background: #1a1f1c;
+  z-index: 2;
+}
+.rx-he-phone-screen {
+  position: relative;
+  background: linear-gradient(180deg, #f7faf8 0%, #eef5f1 100%);
+  border-radius: 1.05rem;
+  min-height: 16.5rem;
+  padding: 1.15rem 0.7rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  overflow: hidden;
+}
+.rx-he-phone-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.15rem;
+}
+.rx-he-phone-brand {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0a0d0b;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-he-phone-time {
+  font-size: 0.58rem;
+  color: #626a65;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-he-phone-card {
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 12px;
+  padding: 0.7rem 0.7rem 0.75rem;
+  box-shadow: 0 8px 20px rgba(10, 13, 11, 0.06);
+  animation: rx-he-phone-in 0.45s ease;
+}
+@keyframes rx-he-phone-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rx-he-phone-card {
+    animation: none;
+  }
+}
+.rx-he-phone-badge {
+  margin: 0;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #067a42;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-weight: 650;
+}
+.rx-he-phone[data-tone="urgent"] .rx-he-phone-badge {
+  color: #b45309;
+}
+.rx-he-phone-title {
+  margin: 0.3rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: #0a0d0b;
+}
+.rx-he-phone-body {
+  margin: 0.35rem 0 0;
+  font-size: 0.62rem;
+  line-height: 1.4;
+  color: #4a524e;
+}
+.rx-he-phone-meta {
+  margin: 0.4rem 0 0;
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: #0a0d0b;
+  letter-spacing: -0.01em;
+}
+.rx-he-phone-actions {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.rx-he-phone-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.28rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 13, 11, 0.12);
+  background: #fff;
+  color: #0a0d0b;
+  font-size: 0.52rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+.rx-he-phone-btn-primary {
+  background: #00d978;
+  border-color: #00d978;
+  color: #0a0d0b;
+}
+.rx-he-phone-foot {
+  margin: auto 0 0;
+  font-size: 0.48rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #626a65;
+  text-align: center;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+@media (max-width: 900px) {
+  .rx-he-product-stage {
+    padding-right: 0;
+    padding-bottom: 3.5rem;
+  }
+  .rx-he-phone {
+    right: 0.5rem;
+    bottom: -0.5rem;
+    width: 10.5rem;
+  }
+}
+
 .rx-mrc {
   background: #fff;
   border: 1px solid rgba(10, 13, 11, 0.08);

@@ -97,3 +97,77 @@ describe("autopilot orthogonal to verified lifecycle", () => {
     expect(m.receipt).toBeUndefined();
   });
 });
+
+describe("pulse → Decision refs", () => {
+  it("recover markers point at supplier Decision", async () => {
+    const { RECOVER_MARKERS } = await import(
+      "@/components/product/lab/labShiftPulse"
+    );
+    for (const m of RECOVER_MARKERS) {
+      expect(m.decisionId).toBe(DECISION_IDS.supplier);
+      expect(m.displayId).toBe("D-4102");
+      expect(m.grade === "Verified" || m.grade === "Expected").toBe(true);
+    }
+  });
+
+  it("restaurant turbulence markers reference peak Decision", async () => {
+    const { RESTAURANT_MARKERS } = await import(
+      "@/components/product/lab/labShiftPulse"
+    );
+    expect(RESTAURANT_MARKERS.length).toBeGreaterThan(0);
+    for (const m of RESTAURANT_MARKERS) {
+      expect(m.decisionId).toBeTruthy();
+      expect(m.because.length).toBeGreaterThan(8);
+    }
+  });
+});
+
+describe("recover seed + brief scope", () => {
+  it("recover seed defaults to Verified €273 supplier credit", async () => {
+    const { deriveLab } = await import("@/components/product/lab/labState");
+    const d = deriveLab({
+      seed: "recover",
+      mode: "live",
+      selectedFuture: "wait_12",
+      approved: false,
+      operatorVip: false,
+    } as never);
+    expect(d.contribution).toBe(273);
+    expect(d.moneyGrade).toBe("Verified");
+    expect(d.decisionLabel).toMatch(/SUPPLIER CREDIT APPLIED/i);
+  });
+
+  it("service brief packets are role-scoped", async () => {
+    const { briefForSeed, defaultPacketForRole } = await import(
+      "@/components/product/lab/labServiceBrief"
+    );
+    const service = briefForSeed("service");
+    expect(service.packets.foh).toBeTruthy();
+    expect(service.packets.chef).toBeTruthy();
+    expect(service.packets.gm).toBeTruthy();
+    const recover = briefForSeed("recover");
+    expect(recover.packets.cfo).toBeTruthy();
+    expect(defaultPacketForRole("cfo")).toBe("cfo");
+    expect(defaultPacketForRole("gm")).toBe("gm");
+  });
+});
+
+describe("mobile phone states stay role-actionable", () => {
+  it("HeroRadrPhone states cover urgent · brief · shift · recover", async () => {
+    const src = await import("fs").then((fs) =>
+      fs.promises.readFile(
+        new URL(
+          "../components/marketing/scenes/home/HeroRadrPhone.tsx",
+          import.meta.url,
+        ).pathname,
+        "utf8",
+      ),
+    );
+    expect(src).toContain('id: "urgent"');
+    expect(src).toContain('id: "foh"');
+    expect(src).toContain('id: "shift"');
+    expect(src).toContain('id: "recover"');
+    expect(src).toContain("Approve");
+    expect(src).toContain("€273");
+  });
+});
