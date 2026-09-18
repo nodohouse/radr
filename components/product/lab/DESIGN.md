@@ -2,15 +2,15 @@
 
 Sand/mint · acid green · triangle mark. **Three bands**, not a scatter of equal widgets.
 
-## Recover sales seed (GTM D0 → Round 2)
+## Recover sales seed
 
-`?seed=recover` = credit-not-applied **sealed** · `?seed=margin-response` = two-site gap **Expected**
+`?seed=recover` = credit applied · Verified recovered · `?seed=margin-response` = two-site gap · Expected
 
-- Sales demo = **one Decision card → Trace → stop**
-- Fixtures: `TRACE_SUPPLIER_VERIFIED` · `TRACE_TWO_SITE_EXPECTED` · README: `RECOVER_SEED.md`
-- Verified € = applied_amount only when sealed
+- Demo = **one Decision → Value Trace → Verified**
+- Fixtures: `TRACE_SUPPLIER_VERIFIED` · `TRACE_TWO_SITE_EXPECTED` · `RECOVER_SEED.md`
+- Verified € only when credit is applied and Finance can match it
 - No Wait-12 / labor / GL / hotel on this path
-- Homepage hero = Margin Response Decision card (Expected + Futures + REC + Trace)
+- Homepage hero = Margin Recovery Decision card (Expected + Futures + Trace)
 
 ## Composition (Center)
 
@@ -19,7 +19,7 @@ Sand/mint · acid green · triangle mark. **Three bands**, not a scatter of equa
 3. **Role band** — GM: who’s coming / Brief · CFO: win-loss + Recover · C-level: themes  
 4. **Below fold** — My modules pins only  
 
-Right rail stays thin: decide-by · autopilot level · Verified · health · pins.
+Right rail stays thin: decide-by · autopilot permission · Verified Value · health · pins.
 
 Catalog / activity live on secondary routes — not competing on Center.
 
@@ -45,17 +45,20 @@ Source: `labShiftPulse.ts` · UI: `ShiftPulse.tsx`.
 | **CFO** | P&L graph | Recover hero + Autopilot | Win/loss + Trace | Recover+Buy · recover |
 | **C-level** | summary | Top decision | 3 money themes | Verified themes |
 
+Verified totals use `roleViewForLabRole` → GM / CFO / COO scope via `verifiedValueCanon`.
+
 Not cosmetic chips — whole composition changes.
 
-## Autopilot ladder
+## Autopilot ladder (permission — orthogonal to Verified)
 
 1. **Suggest** — recommend · human decides  
-2. **Stage** — Confirm prepare · no SoR write  
-3. **Auto within policy** — after enough similar Verified  
-4. **Verified** — € sealed on Trace  
+2. **Stage** — prepare · no SoR write yet  
+3. **Auto within policy** — low-risk only  
 
-UI: “RADR will…” vs “Needs you” · policy chips (auto / ask / demo) · execution receipt → Observed → Verified.  
-Memory: “Seen 12 similar Fridays · auto-stage allowed.”  
+Lifecycle (separate): **Executed → Observed → Verified**
+
+UI: “RADR will…” vs “Needs you” · policy chips (auto / ask / demo) · lifecycle receipt.  
+Never call Verified an Autopilot level.  
 Demo actuators labeled demo — never fake Verified money.
 
 Source: `labAutopilot.ts` · UI: `AutopilotStatus.tsx`.

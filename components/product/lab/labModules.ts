@@ -160,7 +160,7 @@ export const ROLE_PRESETS: Record<
   cfo: {
     label: "CFO",
     moduleIds: ["mod_supplier", "mod_buy_oil", "mod_tuna_v", "mod_value_ladder"],
-    note: "Recover + Buy · Verified Value",
+    note: "Pins · recover focus",
   },
   clevel: {
     label: "C-level",

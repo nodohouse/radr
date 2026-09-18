@@ -56,6 +56,13 @@ describe("verified value canon", () => {
     expect(roleViewForLabRole("cfo")).toBe("cfo");
     expect(roleViewForLabRole("clevel")).toBe("coo");
     expect(ROLE_PRESETS.cfo.note.toLowerCase()).not.toContain("ladder");
+    // Center and Value must agree: clevel uses portfolio (coo), not Berlin-only (gm)
+    expect(canonicalVerifiedTotal(roleViewForLabRole("clevel"))).toBe(
+      canonicalVerifiedTotal("coo"),
+    );
+    expect(canonicalVerifiedTotal(roleViewForLabRole("clevel"))).not.toBe(
+      canonicalVerifiedTotal("gm"),
+    );
   });
 });
 

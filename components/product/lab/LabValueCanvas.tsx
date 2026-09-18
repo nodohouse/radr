@@ -12,8 +12,8 @@ import {
 import { displayDecisionId, DECISION_IDS } from "@/lib/radr/decision/ids";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
+import { roleViewForLabRole } from "@/lib/radr/product/verifiedValueCanon";
 import { formatPrimaryMetric } from "@/lib/radr/product/primaryMetric";
-import type { RoleView } from "@/lib/product/types";
 import { useLab, type ValueBand } from "./LabContext";
 import { ShiftPulse } from "./ShiftPulse";
 import {
@@ -55,15 +55,9 @@ const FLOW: {
   {
     id: "verified",
     label: "Verified",
-    because: "Ledger-matched Trace · book fields sealed",
+    because: "Matched on ledger · Verified Value",
   },
 ];
-
-function roleView(role: string): RoleView {
-  if (role === "cfo") return "cfo";
-  if (role === "clevel") return "coo";
-  return "gm";
-}
 
 function TraceTheater({ t }: { t: TraceLineage }) {
   if (!t.hasTrace && t.grade === "Verified") {
@@ -185,7 +179,7 @@ export function LabValueCanvas() {
     getDecisionStoreSnapshot,
   );
   const agg = useMemo(
-    () => deriveValueAggregate(roleView(nav.role)),
+    () => deriveValueAggregate(roleViewForLabRole(nav.role)),
     [snap, nav.role],
   );
 
@@ -208,7 +202,7 @@ export function LabValueCanvas() {
             <p className="lab-surf-k">Value</p>
             <h1 className="lab-surf-title">Tonight / 24h · money truth</h1>
             <p className="lab-surf-sub">
-              {lens.subtitle} · Expected stays Expected until Trace seals
+              {lens.subtitle} · Expected until value is applied
             </p>
           </div>
         </header>

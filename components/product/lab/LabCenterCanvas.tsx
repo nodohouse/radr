@@ -16,6 +16,7 @@ import {
 } from "@/lib/radr/decision/store";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
+import { roleViewForLabRole } from "@/lib/radr/product/verifiedValueCanon";
 import { DecisionHero } from "./DecisionHero";
 import { ShiftPulse } from "./ShiftPulse";
 import { ServiceBrief } from "./ServiceBrief";
@@ -114,7 +115,7 @@ export function LabCenterCanvas() {
     getDecisionStoreSnapshot,
   );
   const agg = useMemo(
-    () => deriveValueAggregate(nav.role === "cfo" ? "cfo" : "gm"),
+    () => deriveValueAggregate(roleViewForLabRole(nav.role)),
     [snap, nav.role],
   );
 
@@ -146,9 +147,7 @@ export function LabCenterCanvas() {
       <div className="lab-board-band lab-board-band-slim">
         <div>
           <h1 className="lab-board-title">{lens.title}</h1>
-          <p className="lab-board-sub">
-            {lens.subtitle} · {ROLE_PRESETS[nav.role].note}
-          </p>
+          <p className="lab-board-sub">{lens.subtitle}</p>
           <p className="lab-board-demo">{lens.demoPath}</p>
         </div>
         <div className="lab-board-band-actions">
