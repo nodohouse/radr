@@ -1,29 +1,28 @@
 "use client";
 
 /**
- * SilenceField — Control Center signature.
- * Thousands of structured signal traces compress to material Decisions.
- * Not decorative particles.
+ * SilenceField — structured system traces fade; material Decisions remain.
  */
 
 import { useEffect, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 
-const ROWS = Array.from({ length: 48 }, (_, i) => {
-  const kinds = [
-    "POS tip delta",
-    "Labor clock drift",
-    "Channel mix tick",
-    "Occupancy pulse",
-    "Invoice line match",
-    "Menu mix shift",
-    "Housekeeping ready",
-    "Pickup ahead",
+const SYSTEMS = ["POS", "Reservations", "Invoices", "Payments", "Labor", "Inventory"] as const;
+
+const ROWS = Array.from({ length: 42 }, (_, i) => {
+  const sys = SYSTEMS[i % SYSTEMS.length]!;
+  const ticks = [
+    "line match",
+    "clock drift",
+    "mix tick",
+    "pulse",
+    "delta",
+    "ready",
   ] as const;
   return {
     id: i,
-    label: kinds[i % kinds.length]!,
-    muted: i % 7 !== 0 && i % 11 !== 0,
+    label: `${sys} · ${ticks[i % ticks.length]}`,
+    keep: i === 3 || i === 17,
   };
 });
 
@@ -55,18 +54,24 @@ export function SilenceField({
         {ROWS.map((r) => (
           <span
             key={r.id}
-            data-muted={r.muted ? "true" : undefined}
-            data-keep={!r.muted && (r.id === 0 || r.id === 22) ? "true" : undefined}
+            data-muted={!r.keep ? "true" : undefined}
+            data-keep={r.keep ? "true" : undefined}
           >
             {r.label}
           </span>
         ))}
       </div>
       <div className="rx-silence-final">
-        <p className="rx-silence-suppressed" data-on={phase === "field" ? "true" : undefined}>
+        <p
+          className="rx-silence-suppressed"
+          data-on={phase === "field" ? "true" : undefined}
+        >
           {signalsLabel}
         </p>
-        <p className="rx-silence-need" data-on={phase === "silence" ? "true" : undefined}>
+        <p
+          className="rx-silence-need"
+          data-on={phase === "silence" ? "true" : undefined}
+        >
           <strong>{needsYou}</strong>
           <span>
             {needsYou === 1 ? "thing needs you" : "things need you"} · everything

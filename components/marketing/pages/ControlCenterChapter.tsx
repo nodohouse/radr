@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * Control Center — compression into silence.
+ * Structured system traces fade; material Decisions remain.
+ */
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
@@ -13,9 +18,7 @@ import {
   CANON_PEAK,
   CANON_ORPHAN,
 } from "@/data/demo";
-import {
-  canonScenario,
-} from "@/lib/radr/decision/demo/canonical";
+import { canonScenario } from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { SilenceField } from "@/components/marketing/kinetic/SilenceField";
 import { CTAS } from "@/lib/marketing/brand";
@@ -41,7 +44,7 @@ const PORTFOLIO = [
     status: "needs-you",
     headline: "Needs you",
     line: `${money(CANON_PEAK.exposureEuro)} contribution vs seat-now`,
-    meta: `${CANON_PEAK.displayId} · peak capacity collision · decide before 18:53`,
+    meta: `${CANON_PEAK.displayId} · peak capacity · decide before 18:53`,
     src: "/demo/facilities/berlin-dining.jpg",
     pos: "50% 42%",
   },
@@ -51,7 +54,7 @@ const PORTFOLIO = [
     status: "watching",
     headline: "Watching",
     line: "Within playbook · no action",
-    meta: `${CANON_ORPHAN.displayId} · ${CANON_ORPHAN.property} · orphan gap open`,
+    meta: `${CANON_ORPHAN.displayId} · ${CANON_ORPHAN.property}`,
     src: "/demo/facilities/lisbon-studio.jpg",
     pos: "52% 48%",
   },
@@ -72,17 +75,17 @@ const ROLES = [
     label: "GM",
     lens: "portfolio",
     line: `${BRIEF_ATTENTION.needsYou} things need you · Lisbon stays quiet`,
-    meta: "Amsterdam channel · Berlin peak capacity — judgment only",
+    meta: "Amsterdam channel · Berlin peak — judgment only",
     src: "/demo/facilities/canal-deluxe-king.jpg",
     exposure: CANON_OTA.exposureEuro,
-    decision: `${CANON_OTA.displayId} · ${CANON_OTA.title}`,
+    decision: `${CANON_PEAK.displayId} · ${CANON_PEAK.title}`,
   },
   {
     id: "cfo",
     label: "CFO",
     lens: "economics",
-    line: `Hold ${formatDecisionMoney(otaHold.expectedContributionEuro ?? 0)} vs release ${formatDecisionMoney(otaRelease.expectedContributionEuro ?? 0)} on Amsterdam`,
-    meta: `Berlin: wait ${waitExpected} vs seat ${seatExpected} expected`,
+    line: `Hold ${formatDecisionMoney(otaHold.expectedContributionEuro ?? 0)} vs release ${formatDecisionMoney(otaRelease.expectedContributionEuro ?? 0)}`,
+    meta: `Berlin: wait ${waitExpected} vs seat ${seatExpected}`,
     src: "/demo/facilities/canal-suite.jpg",
     exposure: CANON_OTA.exposureEuro + CANON_PEAK.exposureEuro,
     decision: "Portfolio exposure · 2 judgments",
@@ -91,27 +94,18 @@ const ROLES = [
     id: "coo",
     label: "COO",
     lens: "pattern",
-    line: `3rd OTA intervention at Canal House · ${CANON_PEAK.structural!.incidents}th peak collision in Berlin`,
-    meta: `${CANON_PEAK.structural!.recommendation} · Lisbon stays inside orphan playbook`,
+    line: `${CANON_PEAK.structural!.incidents}th peak collision in Berlin`,
+    meta: `${CANON_PEAK.structural!.recommendation} · Lisbon inside playbook`,
     src: "/demo/facilities/berlin-terrace.jpg",
     exposure: CANON_PEAK.structural!.cumulativeExposureEuro,
-    decision: "Recurring patterns · not one alert firehose",
+    decision: "Recurring patterns · not an alert firehose",
   },
 ] as const;
-
-const PULSES = Array.from({ length: 64 }, (_, i) => ({
-  id: i,
-  x: (i * 41) % 100,
-  y: (i * 67) % 100,
-}));
 
 function needsYouLabel(n: number): string {
   return n === 1 ? "THING NEEDS YOU" : "THINGS NEED YOU";
 }
 
-/**
- * Control Center — compression into silence.
- */
 export function ControlCenterChapter() {
   const [role, setRole] = useState<(typeof ROLES)[number]["id"]>("gm");
   const [phase, setPhase] = useState<"field" | "silence">("field");
@@ -134,7 +128,7 @@ export function ControlCenterChapter() {
       <main className="rx-ch-main">
         <section className="rx-cc-silence-hero" data-nav-theme="dark">
           <Image
-            src="/demo/facilities/canal-deluxe-king.jpg"
+            src="/demo/facilities/berlin-dining.jpg"
             alt=""
             fill
             priority
@@ -148,11 +142,6 @@ export function ControlCenterChapter() {
             data-phase={phase}
             aria-label="Attention compression"
           >
-            <div className="rx-cc-silence-pulses" aria-hidden="true">
-              {PULSES.map((p) => (
-                <i key={p.id} style={{ left: `${p.x}%`, top: `${p.y}%` }} />
-              ))}
-            </div>
             <div className="rx-shell rx-cc-silence-final">
               <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
                 The most important thing RADR removes is noise.
@@ -171,18 +160,6 @@ export function ControlCenterChapter() {
                   {needsYouLabel(BRIEF_ATTENTION.needsYou)} · EVERYTHING ELSE
                   WITHIN EXPECTATIONS
                 </span>
-              </p>
-              <p
-                style={{
-                  margin: "1.25rem 0 0",
-                  maxWidth: "28rem",
-                  fontSize: "0.92rem",
-                  color: "rgba(247,250,248,0.55)",
-                  lineHeight: 1.45,
-                }}
-              >
-                RADR does not win by showing you more. It wins by knowing what
-                deserves your attention.
               </p>
             </div>
           </div>
@@ -266,7 +243,7 @@ export function ControlCenterChapter() {
             </article>
 
             <div className="rx-ch-ctas">
-              <NextLink href="/product/control-center" className="rx-btn rx-btn-primary">
+              <NextLink href="/app" className="rx-btn rx-btn-primary">
                 {CTAS.openBrief} <span aria-hidden="true">→</span>
               </NextLink>
               <NextLink href="/contact" className="rx-btn rx-btn-ghost">

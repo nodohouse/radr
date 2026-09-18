@@ -6,12 +6,13 @@ import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
 import { CTAS } from "@/lib/marketing/brand";
 import {
-  CANON_OTA,
+  CANON_PEAK,
   canonScenario,
 } from "@/lib/radr/decision/demo/canonical";
 import { buildAlternatesForLocale } from "@/i18n/seo";
 import "../../../product-chapters.css";
 import "../../../econ.css";
+import "../../../kinetic.css";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -28,8 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function MemoryPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const withoutMemory = canonScenario(CANON_OTA, "do_nothing");
-  const withMemory = canonScenario(CANON_OTA, "hold_72h");
+  const withMemory = canonScenario(CANON_PEAK, "wait_12");
 
   return (
     <div className="radr rx-ch rx-ch-light">
@@ -37,22 +37,17 @@ export default async function MemoryPage({ params }: Props) {
       <main className="rx-ch-main">
         <section className="rx-mem-page" data-nav-theme="light">
           <div className="rx-shell">
-            <p className="rx-ch-kicker">Platform · Operating Memory</p>
+            <p className="rx-ch-kicker">Platform · Operating Memory · D-1911</p>
             <h1 className="rx-ch-title">
               The operation should not
               <br />
               have to learn the same lesson twice.
             </h1>
-            <p className="rx-plat10-lead" style={{ marginTop: "1rem", maxWidth: "36rem" }}>
-              One manager&apos;s good judgment can become location memory, then a
-              verified playbook, then group intelligence — when context is
-              sufficiently comparable. Not blind transfer.
-            </p>
           </div>
 
           <div className="rx-mem-page-stage">
             <Image
-              src="/demo/facilities/canal-suite.jpg"
+              src="/demo/facilities/berlin-dining.jpg"
               alt=""
               fill
               sizes="100vw"
@@ -62,56 +57,30 @@ export default async function MemoryPage({ params }: Props) {
             <div className="rx-mem-page-veil" />
 
             <div className="rx-mem-page-ghost" data-n="1">
-              <em>Without memory</em>
-              <span>{withoutMemory?.title ?? "Release to OTA now"}</span>
+              <em>Ghost</em>
+              <span>Seat now · burned second turn</span>
             </div>
             <div className="rx-mem-page-ghost" data-n="2">
-              <em>Same conditions</em>
-              <span>
-                {CANON_OTA.property} · 89% · OTA +11 pts · 4 premium open
-              </span>
+              <em>Ghost</em>
+              <span>Kitchen 92% · 38 inbound · wait held</span>
             </div>
             <div className="rx-mem-page-now">
-              <em>With memory · event-weekend playbook</em>
-              <strong>{withMemory?.title ?? "Hold premium direct 72h"}</strong>
-              <p>{CANON_OTA.learning.lesson}</p>
-              <span className="rx-mem-page-playbook">
-                {CANON_OTA.learning.playbookTo.toUpperCase()}
-              </span>
+              <em>Converged · D-1911</em>
+              <strong>{withMemory?.title ?? "Wait 12 minutes"}</strong>
+              <p>{CANON_PEAK.learning.lesson}</p>
+              <span className="rx-mem-page-playbook">PLAYBOOK V3</span>
             </div>
             <div className="rx-mem-page-auto">
               <em>Playbook v3</em>
               <strong>Auto-stage now allowed</strong>
-              <span>Within policy · material send still asks</span>
+              <span>18 similar nights · forecast error 14.2% → 6.8%</span>
             </div>
           </div>
 
           <div className="rx-shell">
-            <div className="rx-mem-compare">
-              <div className="rx-mem-compare-col" data-side="cold">
-                <em>Without memory</em>
-                <strong>{withoutMemory?.title}</strong>
-                <p>{withoutMemory?.note}</p>
-              </div>
-              <div className="rx-mem-compare-col" data-side="warm">
-                <em>With memory</em>
-                <strong>{withMemory?.title}</strong>
-                <p>{withMemory?.note}</p>
-              </div>
-            </div>
-            <p className="rx-plat10-muted" style={{ marginTop: "1.25rem" }}>
-              Illustrative memory context · DEMO — 18 similar event nights · 6
-              early OTA · 12 direct holds
-            </p>
-            <div className="rx-learn-forecast">
-              <span>Forecast error</span>
-              <strong>14.2% → 6.8%</strong>
-              <em>Illustrative · DEMO</em>
-            </div>
-            <p className="rx-plat10-playbook-tag">PATTERN RESOLVED</p>
             <div className="rx-ch-ctas">
-              <NextLink href="/app" className="rx-btn rx-btn-primary">
-                See what RADR learned <span aria-hidden="true">→</span>
+              <NextLink href="/product" className="rx-btn rx-btn-primary">
+                See D-1911 on Platform <span aria-hidden="true">→</span>
               </NextLink>
               <NextLink href="/contact" className="rx-btn rx-btn-ghost">
                 {CTAS.primarySales}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
@@ -51,6 +51,7 @@ const TIME_MARKS = [
     actions: "All paths open",
     net: "Full recoverability",
     risk: "Low urgency",
+    open: ["fut_orphan_discount", "fut_orphan_ota", "fut_orphan_wait"] as const,
   },
   {
     id: "48h",
@@ -58,6 +59,7 @@ const TIME_MARKS = [
     actions: "Discount still viable",
     net: "Recoverability narrowing",
     risk: "Channel pressure rising",
+    open: ["fut_orphan_discount", "fut_orphan_ota", "fut_orphan_wait"] as const,
   },
   {
     id: "24h",
@@ -65,6 +67,7 @@ const TIME_MARKS = [
     actions: "OTA release costly",
     net: "Direct window critical",
     risk: "High opportunity cost",
+    open: ["fut_orphan_ota", "fut_orphan_wait"] as const,
   },
   {
     id: "checkin",
@@ -72,6 +75,7 @@ const TIME_MARKS = [
     actions: "Night nearly fixed",
     net: "Residual only",
     risk: "Irreversible soon",
+    open: ["fut_orphan_wait"] as const,
   },
 ] as const;
 
@@ -84,6 +88,17 @@ export function FuturesChapter() {
   const [why, setWhy] = useState(false);
   const [timeIdx, setTimeIdx] = useState(1);
   const time = TIME_MARKS[timeIdx]!;
+  const openSet = useMemo(() => new Set<string>(time.open), [time.open]);
+
+  useEffect(() => {
+    if (!openSet.has(selected)) {
+      const fallback = openSet.has(bundle.recommendedScenarioId)
+        ? bundle.recommendedScenarioId
+        : time.open[time.open.length - 1]!;
+      setSelected(fallback);
+    }
+  }, [openSet, selected, bundle.recommendedScenarioId, time.open]);
+
   const pick =
     bundle.scenarios.find((s) => s.id === selected) ?? bundle.scenarios[0]!;
   const recommended = bundle.scenarios.find((s) => s.recommended)!;
@@ -191,13 +206,15 @@ export function FuturesChapter() {
                 {paths.map((p) => {
                   const on = p.id === selected;
                   const rec = p.id === bundle.recommendedScenarioId;
+                  const gone = !openSet.has(p.id);
                   return (
-                    <g key={String(p.id)}>
+                    <g key={String(p.id)} data-gone={gone ? "true" : undefined}>
                       <path
                         className="rx-fut-band"
                         d={p.d}
                         data-on={on ? "true" : "false"}
                         data-rec={rec ? "true" : undefined}
+                        data-gone={gone ? "true" : undefined}
                         style={{ strokeWidth: p.band }}
                       />
                       <path
@@ -205,35 +222,43 @@ export function FuturesChapter() {
                         d={p.d}
                         data-on={on ? "true" : "false"}
                         data-rec={rec ? "true" : undefined}
+                        data-gone={gone ? "true" : undefined}
                       />
                     </g>
                   );
                 })}
               </svg>
               <ul className="rx-fut-field-ends">
-                {bundle.scenarios.map((s) => (
-                  <li key={s.id}>
+                {bundle.scenarios.map((s) => {
+                  const gone = !openSet.has(s.id);
+                  return (
+                  <li key={s.id} data-gone={gone ? "true" : undefined}>
                     <button
                       type="button"
                       data-on={selected === s.id ? "true" : "false"}
                       data-rec={s.recommended ? "true" : undefined}
                       data-base={s.isNoAction ? "true" : undefined}
+                      data-gone={gone ? "true" : undefined}
+                      disabled={gone}
                       onClick={() => setSelected(s.id)}
                     >
                       <em>
-                        {s.recommended
-                          ? "RADR plan"
-                          : (END_LABEL[s.id] ?? s.label)}
+                        {gone
+                          ? "Expired"
+                          : s.recommended
+                            ? "RADR plan"
+                            : (END_LABEL[s.id] ?? s.label)}
                       </em>
                       <strong>
                         {formatDecisionMoney(s.expectedContribution)}
-                        {s.id === maxEv.id && notMaxPick ? (
+                        {s.id === maxEv.id && notMaxPick && !gone ? (
                           <small> · max €</small>
                         ) : null}
                       </strong>
                     </button>
                   </li>
-                ))}
+                  );
+                })}
               </ul>
             </div>
 

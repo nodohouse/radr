@@ -44,9 +44,8 @@ export function PlatformPage() {
               From first signal to lasting memory.
             </h1>
             <p>
-              Systems record what happened. RADR determines what matters, what
-              the alternatives are, what should happen next, and whether the
-              outcome was worth it.
+              D-1911 travels from signal to Floor to Verified to Memory — one
+              object, every stage.
             </p>
             <nav className="rx-plat-arch" aria-label="Platform architecture">
               {ARCH.map((a, i) => (

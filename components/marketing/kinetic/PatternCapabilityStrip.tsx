@@ -39,8 +39,8 @@ export function PatternCapabilityStrip({
       <p className="rx-rec-k">{kicker}</p>
       <h2 className="rx-rec-h">{title}</h2>
       <p className="rx-rec-path">{flow}</p>
-      <p className="rx-rec-p">{lead}</p>
-      <p className="rx-rec-diff">{diff}</p>
+      {lead ? <p className="rx-rec-p">{lead}</p> : null}
+      {diff ? <p className="rx-rec-diff">{diff}</p> : null}
 
       <div className="rx-pat-rail-wrap">
         <EconomicRail
@@ -56,7 +56,7 @@ export function PatternCapabilityStrip({
           <span key={p}>{p}</span>
         ))}
       </div>
-      <p className="rx-rec-p">{close}</p>
+      {close ? <p className="rx-rec-p">{close}</p> : null}
     </div>
   );
 }

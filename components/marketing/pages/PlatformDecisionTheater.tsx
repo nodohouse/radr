@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Flagship Platform experience — one Decision object evolves through stages.
- * Sticky + scrubber. Motion = causality only.
+ * Flagship Platform — one Decision (D-1911) persists through every stage.
+ * Signal → Understanding → Futures → Recommend → Approve → Floor → Observe → Verify → Memory.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -17,6 +17,7 @@ const LIFE = [
   "Futures",
   "Recommended",
   "Approved",
+  "Floor",
   "Observed",
   "Verified",
   "Learned",
@@ -24,54 +25,73 @@ const LIFE = [
 
 type Life = (typeof LIFE)[number];
 
+const DEC = {
+  id: "D-1911",
+  property: "Berlin Mitte",
+  title: "Peak capacity collision",
+  exposure: "€620",
+  expected: "€620",
+  observed: "€590",
+  verified: "€590",
+  variance: "−€30 · −4.8%",
+} as const;
+
 const SIGNALS = [
-  { k: "Occupancy", v: "89%", note: "event weekend" },
-  { k: "OTA", v: "+11 pts", note: "channel mix" },
-  { k: "Premium open", v: "4", note: "keys" },
-  { k: "Direct pickup", v: "Ahead", note: "vs OTA" },
-  { k: "Hist. fill", v: "73%", note: "direct" },
-  { k: "Housekeeping", v: "Ready", note: "premium" },
+  { k: "Floor occ.", v: "78%", note: "walk-ins waiting" },
+  { k: "Kitchen", v: "92%", note: "KDS pressure" },
+  { k: "Inbound", v: "38", note: "covers" },
+  { k: "Delivery", v: "Open", note: "throttle candidate" },
+  { k: "Tables free", v: "2", note: "not free capacity" },
+  { k: "Deadline", v: "18:53", note: "decision window" },
 ] as const;
 
 const FUTURES = [
   {
-    id: "ota",
-    title: "Open to OTA",
-    euro: "€412",
-    note: "Higher occupancy · weaker contribution",
+    id: "seat",
+    title: "Seat now",
+    euro: "€0",
+    note: "Fills fast · burns second turn",
     rec: false,
   },
   {
-    id: "hold",
-    title: "Hold direct",
+    id: "wait",
+    title: "Wait 12 minutes",
     euro: "€620",
-    note: "Protect premium · reversible",
+    note: "Protect contribution · reversible",
     rec: true,
   },
   {
-    id: "mix",
-    title: "Mixed release",
-    euro: "€480",
-    note: "Partial OTA · residual direct risk",
+    id: "hard",
+    title: "Hard stop",
+    euro: "€180",
+    note: "Safer · leaves money on table",
     rec: false,
   },
 ] as const;
 
-const VALUE = [
-  "Identified",
-  "Expected",
-  "Observed",
-  "Attributed",
-  "Verified",
-] as const;
+const EURO_BY_STAGE: Record<Life, { euro: string; grade: string }> = {
+  Detected: { euro: DEC.exposure, grade: "EXPOSED" },
+  Understood: { euro: DEC.exposure, grade: "EXPOSED" },
+  Futures: { euro: DEC.expected, grade: "PATHS OPEN" },
+  Recommended: { euro: DEC.expected, grade: "EXPECTED" },
+  Approved: { euro: DEC.expected, grade: "PREPARED" },
+  Floor: { euro: DEC.expected, grade: "IN SERVICE" },
+  Observed: { euro: DEC.observed, grade: "OBSERVED" },
+  Verified: { euro: DEC.verified, grade: "VERIFIED" },
+  Learned: { euro: DEC.verified, grade: "IN MEMORY" },
+};
 
-const MEMORY = [
-  "Fri 18:42",
-  "Fri 18:47",
-  "Sat 19:02",
-  "Thu 19:11",
-  "Fri 18:39",
-] as const;
+const HEAD_BY_STAGE: Record<Life, string> = {
+  Detected: "Signals converging",
+  Understood: "Empty tables ≠ capacity",
+  Futures: "Three paths",
+  Recommended: "Wait 12 minutes",
+  Approved: "Prepared for the floor",
+  Floor: "FOH · hold T12 · VIP inbound",
+  Observed: "€590 observed",
+  Verified: "€590 protected",
+  Learned: "Playbook joins D-1911",
+};
 
 export function PlatformDecisionTheater() {
   const reduced = usePrefersReducedMotion();
@@ -79,9 +99,9 @@ export function PlatformDecisionTheater() {
   const [life, setLife] = useState(0);
   const [future, setFuture] = useState(1);
   const [trust, setTrust] = useState(1);
-  const [revoked, setRevoked] = useState(false);
   const stage = LIFE[life]!;
-  const sealed = life >= 6;
+  const sealed = life >= 7;
+  const chip = EURO_BY_STAGE[stage];
 
   useEffect(() => {
     if (reduced) return;
@@ -141,15 +161,13 @@ export function PlatformDecisionTheater() {
       <div
         ref={rootRef}
         className="rx-pdt-runway"
-        style={reduced ? { minHeight: "auto" } : { minHeight: "520vh" }}
+        style={reduced ? { minHeight: "auto" } : { minHeight: "560vh" }}
       >
         <div className="rx-pdt-pin">
           <div className="rx-shell">
             <header className="rx-pdt-head">
-              <p className="rx-rec-k">One Decision</p>
-              <h2 className="rx-rec-h">
-                From first signal to lasting memory.
-              </h2>
+              <p className="rx-rec-k">One Decision · {DEC.id}</p>
+              <h2 className="rx-rec-h">Same object. Every stage.</h2>
             </header>
 
             <div
@@ -179,31 +197,18 @@ export function PlatformDecisionTheater() {
             >
               <header className="rx-pdt-object-head">
                 <div>
-                  <em>D-2201 · Berlin Canal · Hotel</em>
-                  <h3>
-                    {stage === "Detected"
-                      ? "Signals converging"
-                      : stage === "Understood"
-                        ? "Relationship forms"
-                        : stage === "Futures"
-                          ? "Paths diverge"
-                          : stage === "Recommended"
-                            ? "Hold direct"
-                            : stage === "Approved"
-                              ? "Prepared for the block"
-                              : stage === "Observed"
-                                ? "Actual overlays Expected"
-                                : stage === "Verified"
-                                  ? "€620 Verified"
-                                  : "Playbook learns"}
-                  </h3>
+                  <em>
+                    {DEC.id} · {DEC.property} · Restaurant · DEMO
+                  </em>
+                  <h3>{HEAD_BY_STAGE[stage]}</h3>
                 </div>
                 <div
                   className="rx-euro-chip"
                   data-sealed={sealed ? "true" : undefined}
+                  key={`${stage}-${chip.euro}`}
                 >
-                  <strong>{sealed ? "€620" : "€620"}</strong>
-                  <em>{sealed ? "Verified" : "Expected"}</em>
+                  <strong>{chip.euro}</strong>
+                  <em>{chip.grade}</em>
                 </div>
               </header>
 
@@ -213,8 +218,6 @@ export function PlatformDecisionTheater() {
                 setFuture={setFuture}
                 trust={trust}
                 setTrust={setTrust}
-                revoked={revoked}
-                setRevoked={setRevoked}
               />
             </article>
           </div>
@@ -230,21 +233,16 @@ function StageBody({
   setFuture,
   trust,
   setTrust,
-  revoked,
-  setRevoked,
 }: {
   stage: Life;
   future: number;
   setFuture: (n: number) => void;
   trust: number;
   setTrust: (n: number) => void;
-  revoked: boolean;
-  setRevoked: (v: boolean) => void;
 }) {
   if (stage === "Detected") {
     return (
       <div className="rx-pdt-stage">
-        <p className="rx-pdt-stage-k">Raw signals · Decision not formed</p>
         <ul className="rx-pdt-signals">
           {SIGNALS.map((s) => (
             <li key={s.k}>
@@ -261,21 +259,17 @@ function StageBody({
   if (stage === "Understood") {
     return (
       <div className="rx-pdt-stage">
-        <p className="rx-pdt-stage-k">Connections form</p>
         <div className="rx-pdt-graph" aria-hidden="true">
-          <span>Premium inventory</span>
+          <span>Reservations</span>
           <i />
-          <span>Channel economics</span>
+          <span>KDS</span>
           <i />
-          <span>Pickup</span>
+          <span>Delivery</span>
           <i />
-          <span>Housekeeping</span>
+          <span>Menu econ</span>
           <i />
-          <span data-hot="true">Event demand</span>
+          <span data-hot="true">Table turns</span>
         </div>
-        <p className="rx-pdt-note">
-          Occupancy looks healthy. Contribution path does not.
-        </p>
       </div>
     );
   }
@@ -283,11 +277,6 @@ function StageBody({
   if (stage === "Futures" || stage === "Recommended") {
     return (
       <div className="rx-pdt-stage">
-        <p className="rx-pdt-stage-k">
-          {stage === "Futures"
-            ? "Same baseline · different paths"
-            : "RADR default highlighted"}
-        </p>
         <div className="rx-pdt-futures">
           {FUTURES.map((f, i) => (
             <button
@@ -309,11 +298,6 @@ function StageBody({
             </button>
           ))}
         </div>
-        {stage === "Recommended" ? (
-          <p className="rx-pdt-note">
-            Expected €620 · range €480–€690 · uncertainty: direct fill timing.
-          </p>
-        ) : null}
       </div>
     );
   }
@@ -321,21 +305,41 @@ function StageBody({
   if (stage === "Approved") {
     return (
       <div className="rx-pdt-stage">
-        <p className="rx-pdt-stage-k">Prepared actions attached</p>
         <ul className="rx-pdt-actions">
           <li>
-            <em>Channel</em>
-            <strong>Hold 4 premium · direct path</strong>
+            <em>Floor</em>
+            <strong>Hold 2 tables · 12 minutes</strong>
           </li>
           <li>
-            <em>Housekeeping</em>
-            <strong>Priority ready by 15:00</strong>
+            <em>Delivery</em>
+            <strong>Throttle until 18:54</strong>
           </li>
           <li>
-            <em>Revenue</em>
-            <strong>Suppress OTA release for block</strong>
+            <em>Menu</em>
+            <strong>Feature fast dish</strong>
           </li>
         </ul>
+      </div>
+    );
+  }
+
+  if (stage === "Floor") {
+    return (
+      <div className="rx-pdt-stage">
+        <div className="rx-pdt-floor-proj">
+          <div>
+            <em>GM</em>
+            <strong>Wait 12 · €620 at stake</strong>
+          </div>
+          <div data-hot="true">
+            <em>FOH</em>
+            <strong>Hold T12 · VIP 18:50 · allergy note</strong>
+          </div>
+          <div>
+            <em>Kitchen</em>
+            <strong>Cold station 92% · feature fast dish</strong>
+          </div>
+        </div>
       </div>
     );
   }
@@ -343,20 +347,17 @@ function StageBody({
   if (stage === "Observed") {
     return (
       <div className="rx-pdt-stage">
-        <p className="rx-pdt-stage-k">Actual overlays Expected</p>
         <div className="rx-pdt-overlay">
           <div>
             <em>Expected</em>
-            <strong>€620</strong>
+            <strong>{DEC.expected}</strong>
           </div>
           <div data-hot="true">
             <em>Observed</em>
-            <strong>€598</strong>
+            <strong>{DEC.observed}</strong>
           </div>
         </div>
-        <p className="rx-pdt-note">
-          3 of 4 premium filled direct · 1 late walk-in at negotiated rate.
-        </p>
+        <p className="rx-pdt-note">{DEC.variance}</p>
       </div>
     );
   }
@@ -364,17 +365,22 @@ function StageBody({
   if (stage === "Verified") {
     return (
       <div className="rx-pdt-stage">
-        <p className="rx-pdt-stage-k">Follow the euro home</p>
         <ol className="rx-pdt-value">
-          {VALUE.map((v, i) => (
-            <li key={v} data-on={i === 4 ? "true" : undefined} data-done={i < 4 ? "true" : undefined}>
-              {v}
-            </li>
-          ))}
+          {(["Exposure", "Expected", "Observed", "Attributed", "Verified"] as const).map(
+            (v, i) => (
+              <li
+                key={v}
+                data-on={i === 4 ? "true" : undefined}
+                data-done={i < 4 ? "true" : undefined}
+              >
+                {v}
+              </li>
+            ),
+          )}
         </ol>
         <div className="rx-euro-chip" data-sealed="true">
-          <strong>€598</strong>
-          <em>Verified · attributed to D-2201</em>
+          <strong>{DEC.verified}</strong>
+          <em>Protected · {DEC.id}</em>
         </div>
       </div>
     );
@@ -382,59 +388,36 @@ function StageBody({
 
   return (
     <div className="rx-pdt-stage">
-      <p className="rx-pdt-stage-k">Memory joins the Decision</p>
-      <div className="rx-pdt-memory-ribbon" aria-hidden="true">
-        {[...MEMORY, ...MEMORY].map((t, i) => (
-          <span key={`${t}-${i}`}>{t}</span>
-        ))}
-      </div>
       <div className="rx-pdt-memory-stats">
         <div>
-          <strong>12</strong>
-          <span>comparable</span>
+          <strong>18</strong>
+          <span>similar nights</span>
         </div>
         <div>
-          <strong>4</strong>
-          <span>interventions</span>
+          <strong>12</strong>
+          <span>wait held</span>
         </div>
         <div data-hot>
-          <strong>3</strong>
-          <span>Verified favorable</span>
+          <strong>v3</strong>
+          <span>playbook</span>
         </div>
       </div>
-      <p className="rx-pdt-note">Playbook updated · Autopilot trust shifts</p>
-      <div
-        className="rx-psig-trust-row"
-        data-revoked={revoked ? "true" : undefined}
-      >
+      <div className="rx-psig-trust-row">
         {(["Suggest", "Stage", "Auto within policy"] as const).map((label, i) => (
           <span
             key={label}
-            data-on={!revoked && trust === i ? "true" : undefined}
+            data-on={trust === i ? "true" : undefined}
             role="button"
             tabIndex={0}
-            onClick={() => {
-              setTrust(i);
-              setRevoked(false);
-            }}
+            onClick={() => setTrust(i)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                setTrust(i);
-                setRevoked(false);
-              }
+              if (e.key === "Enter" || e.key === " ") setTrust(i);
             }}
           >
             {label}
           </span>
         ))}
       </div>
-      <button
-        type="button"
-        className="rx-erail-dismiss"
-        onClick={() => setRevoked(true)}
-      >
-        Confidence drops → step trust back
-      </button>
     </div>
   );
 }

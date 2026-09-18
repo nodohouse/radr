@@ -107,7 +107,7 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
       <div className="rx-rso-pin">
         <p className="rx-rec-k">{kicker}</p>
         <h2 className="rx-rec-h">{title}</h2>
-        <p className="rx-rec-p">{lead}</p>
+        {lead ? <p className="rx-rec-p">{lead}</p> : null}
 
         <div
           className="rx-euro-chip rx-euro-chip-hero"

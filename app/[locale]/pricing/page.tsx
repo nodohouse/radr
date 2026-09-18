@@ -4,9 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { SiteFooter as PublicFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav as PublicNavbar } from "@/components/marketing/SiteNav";
 import { FeatureCompare } from "@/components/marketing/pricing/FeatureCompare";
-import { PricingExpansion } from "@/components/marketing/pricing/PricingExpansion";
 import { PricingFaq } from "@/components/marketing/pricing/PricingFaq";
-import { PricingHowWorks } from "@/components/marketing/pricing/PricingHowWorks";
 import { PricingResponsibilityTrack } from "@/components/marketing/pricing/PricingResponsibilityTrack";
 import { PricingTiers } from "@/components/marketing/pricing/PricingTiers";
 import { pricingConfig } from "@/components/marketing/pricing/config";
@@ -54,11 +52,9 @@ export default async function PricingPage({ params }: Props) {
           </div>
         </section>
 
-        <PricingHowWorks />
         <PricingResponsibilityTrack />
         <PricingTiers />
         <FeatureCompare defaultCollapsed />
-        <PricingExpansion />
         <PricingFaq />
 
         <section className="px-final" data-nav-theme="light">

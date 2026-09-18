@@ -107,35 +107,35 @@ export function ValueChapter() {
                 {
                   id: "exposure",
                   label: "Exposure",
-                  euro: money(CANON_SUPPLIER.exposureEuro),
-                  detail: CANON_SUPPLIER.title,
+                  euro: money(CANON_PEAK.exposureEuro),
+                  detail: CANON_PEAK.title,
                 },
                 {
                   id: "expected",
                   label: "Expected",
-                  euro: money(CANON_SUPPLIER.expectedProtectedEuro),
-                  detail: "Modeled outcome of the chosen response",
+                  euro: money(CANON_PEAK.expectedProtectedEuro),
+                  detail: "Wait 12 minutes · modeled protected contribution",
                 },
                 {
                   id: "observed",
                   label: "Observed",
                   euro: money(
-                    CANON_SUPPLIER.observedContributionEuro ??
-                      CANON_SUPPLIER.actualProtectedEuro,
+                    CANON_PEAK.observedContributionEuro ??
+                      CANON_PEAK.actualProtectedEuro,
                   ),
                   detail: "What reality returned",
                 },
                 {
                   id: "attributed",
                   label: "Attributed",
-                  euro: money(verifiedEuro(CANON_SUPPLIER)),
-                  detail: `${CANON_SUPPLIER.displayId} · ${CANON_SUPPLIER.attributionStrength.replaceAll("_", " ")}`,
+                  euro: money(verifiedEuro(CANON_PEAK)),
+                  detail: `${CANON_PEAK.displayId} · ${formatCanonVariance(CANON_PEAK)}`,
                 },
                 {
                   id: "verified",
                   label: "Verified",
-                  euro: money(verifiedEuro(CANON_SUPPLIER)),
-                  detail: "Claim only what you can prove",
+                  euro: money(verifiedEuro(CANON_PEAK)),
+                  detail: "Protected · claim only what you can prove",
                 },
               ]}
             />
@@ -144,10 +144,7 @@ export function ValueChapter() {
               <strong className="rx-econ-verified">
                 {money(value.verifiedEuro)}
               </strong>
-              <span>TOTAL VERIFIED VALUE · DEMO PORTFOLIO · ILLUSTRATIVE</span>
-              <p className="rx-pilot-note" style={{ marginTop: "0.5rem" }}>
-                Illustrative demo portfolio — not customer results.
-              </p>
+              <span>ILLUSTRATIVE DEMO PORTFOLIO · NOT CUSTOMER RESULTS</span>
             </div>
 
             <div className="rx-value-filters" role="tablist" style={{ marginTop: "1.5rem" }}>

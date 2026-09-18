@@ -1,8 +1,7 @@
 "use client";
 
 /**
- * Where value leaks — each class = unique visual language.
- * Caption strip only. No repeating four-box template.
+ * Where value leaks — visual carries the story. One conclusion line.
  */
 
 import { PROBLEM_FAMILY_DEFS, type ProblemFamily } from "@/lib/radr/problemFamilies";
@@ -17,9 +16,7 @@ type Section = {
   anchor: string;
   headline: string;
   punch: string;
-  loss: string;
-  decision: string;
-  verified: string;
+  conclusion: string;
 };
 
 const SECTIONS: Section[] = [
@@ -29,9 +26,7 @@ const SECTIONS: Section[] = [
     anchor: "supplier-ap",
     headline: "Supplier / AP",
     punch: "Credit issued. Never applied.",
-    loss: "Contract €6.80 · Invoice €7.45 · 420 L → €273 exposed",
-    decision: "Dispute the variance. Do not reprice the menu yet.",
-    verified: "Credit matched to the original invoice in AP.",
+    conclusion: "Dispute the variance. Verify the credit against the original invoice.",
   },
   {
     id: "recon",
@@ -39,39 +34,31 @@ const SECTIONS: Section[] = [
     anchor: "reconciliation",
     headline: "Reconciliation",
     punch: "Settlement received. Still €293 short.",
-    loss: "Expected €9,814 · Actual €9,521 · streams diverge",
-    decision: "Open reconciliation Decision — not “ask your data.”",
-    verified: "Settlement / journal correction matched across sources.",
+    conclusion: "Open a reconciliation Decision — not another export.",
   },
   {
     id: "cost",
     family: "COST_VARIANCE",
     anchor: "cost-variance",
     headline: "Food cost moved. Why?",
-    punch: "Food cost rose. Supplier inflation wasn’t the main reason.",
-    loss: "+2.3 pts decomposes into supplier · yield · waste · mix",
-    decision: "Fix yield + menu mix before raising price.",
-    verified: "Cost movement explained · corrective outcome observed.",
+    punch: "Supplier inflation wasn’t the main driver.",
+    conclusion: "Fix yield + menu mix before raising price.",
   },
   {
     id: "proc",
     family: "PROCUREMENT",
     anchor: "procurement",
     headline: "Three locations. Three prices.",
-    punch: "Three locations. Three prices. One Decision.",
-    loss: "Berlin €7.45 · Amsterdam €6.80 · Lisbon €6.62",
-    decision: "Consolidate on the normalized rate — not the loudest local quote.",
-    verified: "Negotiated rate or volume tier applied and matched.",
+    punch: "Normalize. Then negotiate.",
+    conclusion: "Consolidate on the normalized rate — not the loudest local quote.",
   },
   {
     id: "perish",
     family: "PERISHABLE_REVENUE",
     anchor: "perishable",
     headline: "This value expires.",
-    punch: "Room cancelled. 19 hours left to recover it.",
-    loss: "Economic clock: 19h → 12h → 6h → 2h",
-    decision: "Recover contribution before the night dies.",
-    verified: "Recovered contribution matched after close.",
+    punch: "Room cancelled. 19 hours left.",
+    conclusion: "Recover contribution before the night dies.",
   },
 ];
 
@@ -108,22 +95,9 @@ export function ValueLeaksNarratives() {
                 <p className="rx-vl-punch">{s.punch}</p>
               </header>
 
-              <div className="rx-vl-stage">
+              <div className="rx-vl-stage rx-vl-stage-solo">
                 <LeakClassVisual family={s.family} />
-                <dl className="rx-vl-caption">
-                  <div>
-                    <dt>Loss</dt>
-                    <dd>{s.loss}</dd>
-                  </div>
-                  <div>
-                    <dt>Decision</dt>
-                    <dd>{s.decision}</dd>
-                  </div>
-                  <div>
-                    <dt>Verified</dt>
-                    <dd>{s.verified}</dd>
-                  </div>
-                </dl>
+                <p className="rx-vl-conclusion">{s.conclusion}</p>
               </div>
             </div>
             {i < SECTIONS.length - 1 ? (

@@ -65,6 +65,13 @@ export function HomepageSpine() {
     meta: verifies[id],
   }));
 
+  const famLead = t("families.lead");
+  const storyLead = t("story.lead");
+  const thinksLead = t("thinks.lead");
+  const thinksDiff = t("thinks.diff");
+  const thinksClose = t("thinks.close");
+  const progLead = t("progression.lead");
+
   return (
     <div className="rx-home-spine">
       <Hero />
@@ -78,7 +85,7 @@ export function HomepageSpine() {
           <StickyStory
             kicker={t("families.kicker")}
             title={t("families.title")}
-            lead={t("families.lead")}
+            lead={famLead || undefined}
             chapters={leakChapters}
             vhPerChapter={70}
             renderVisual={(i) => (
@@ -95,7 +102,7 @@ export function HomepageSpine() {
           <RecoveryStoryObject
             kicker={t("story.kicker")}
             title={t("story.title")}
-            lead={t("story.lead")}
+            lead={storyLead}
           />
         </div>
       </section>
@@ -111,10 +118,10 @@ export function HomepageSpine() {
           <PatternCapabilityStrip
             kicker={t("thinks.kicker")}
             title={t("thinks.title")}
-            lead={t("thinks.lead")}
+            lead={thinksLead}
             flow={t("thinks.flow")}
-            diff={t("thinks.diff")}
-            close={t("thinks.close")}
+            diff={thinksDiff}
+            close={thinksClose}
           />
         </div>
       </section>
@@ -126,7 +133,7 @@ export function HomepageSpine() {
           <ProgressionLadder
             kicker={t("progression.kicker")}
             title={t("progression.title")}
-            lead={t("progression.lead")}
+            lead={progLead}
             titles={progTitles}
             bodies={progBodies}
           />

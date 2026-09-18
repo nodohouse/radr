@@ -1622,7 +1622,7 @@
     "families": {
       "kicker": "Value leak map",
       "title": "The money doesn't disappear in one place.",
-      "lead": "RADR finds value that is leaking, stuck, missed, or about to disappear. You interact with Decisions and Verified outcomes — problem class is context.",
+      "lead": "",
       "whatLeaks": "What leaks",
       "whatDoes": "What RADR does",
       "whatVerifies": "What can be verified",
@@ -1630,40 +1630,40 @@
       "maturityExpansion": "Expansion",
       "SUPPLIER_AP": {
         "label": "Supplier / AP",
-        "leaks": "Contract leakage, missing credits, rebates, duplicate charges, UOM and quantity mismatch.",
+        "leaks": "Contract vs invoice. Credits that never land.",
         "does": "Detects → prepares evidence → tracks settlement → verifies recovered value.",
-        "verifies": "Credit or settlement matched to the original invoice."
+        "verifies": "Credit matched to the original invoice."
       },
       "RECONCILIATION": {
         "label": "Reconciliation",
-        "leaks": "POS, processors, delivery platforms, refunds, tips, and accounting that refuse to close.",
+        "leaks": "Expected and actual settlement refuse to close.",
         "does": "Detects mismatch → explains source disagreement → prepares correction → verifies closure.",
-        "verifies": "Settlement or journal correction matched across sources."
+        "verifies": "Correction matched across sources."
       },
       "COST_VARIANCE": {
         "label": "Cost variance",
-        "leaks": "Food cost moves without a clear driver — price, waste, yield, mix, substitution.",
+        "leaks": "Food cost moves. Drivers are not the loudest ones.",
         "does": "Ranks drivers · separates signal from noise · recommends the right lever before repricing.",
-        "verifies": "Cost movement explained and corrective outcome observed."
+        "verifies": "Cost movement explained."
       },
       "PROCUREMENT": {
         "label": "Procurement",
-        "leaks": "Same SKU, different prices across locations — missed tiers and consolidation opportunity.",
+        "leaks": "Same SKU. Different prices. Unexplained dispersion.",
         "does": "Surfaces dispersion → negotiation leverage → group-rate Decision.",
-        "verifies": "Negotiated rate, credit, or volume tier applied and matched."
+        "verifies": "Negotiated rate applied and matched."
       },
       "PERISHABLE_REVENUE": {
         "label": "Perishable revenue",
-        "leaks": "Cancellations, no-shows, late releases, orphan nights — value about to expire.",
+        "leaks": "Value about to expire.",
         "does": "Capacity at risk → time remaining → recovery action → observe → verify contribution.",
-        "verifies": "Recovered contribution matched after service or night close."
+        "verifies": "Recovered contribution matched after close."
       },
       "maturityPlanned": "Planned"
     },
     "story": {
       "kicker": "One complete recovery",
       "title": "One leak. One Decision. One traceable outcome.",
-      "lead": "€273 recovered and matched to the original invoice.",
+      "lead": "",
       "leakK": "The leak",
       "leakInvoice": "Invoice €7.45 / L",
       "leakContract": "Contract €6.80 / L",
@@ -1691,9 +1691,9 @@
       "kicker": "How RADR thinks",
       "title": "You don't teach RADR what to look for.",
       "flow": "Signal → Evidence → Decision → Action → Outcome → Verified",
-      "lead": "RADR already understands the economic patterns that matter in hospitality: contract variance, settlement mismatch, yield loss, price dispersion, no-show exposure, room-night expiry.",
-      "diff": "It connects the evidence, compares the responses, and follows the outcome.",
-      "close": "No custom agent required to know what a supplier credit should look like — or what counts as Verified.",
+      "lead": "",
+      "diff": "",
+      "close": "",
       "examples": [
         "Credit issued. Never applied.",
         "Three locations. Three prices.",
@@ -1705,7 +1705,7 @@
     "progression": {
       "kicker": "The path",
       "title": "First recover it. Then stop losing it.",
-      "lead": "Recover → Prevent → Optimize → Autopilot.",
+      "lead": "",
       "RECOVER": {
         "title": "Recover",
         "body": "Find the value already lost."
