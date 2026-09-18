@@ -2665,15 +2665,31 @@
 /* ── Hero hospitality scene ── */
 .rx-hrs-hosp {
   display: grid;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "switch switch"
+    "desk phone"
+    "floor floor";
+  gap: 0.85rem 1rem;
+  align-items: start;
 }
+.rx-hrs-hosp .rx-hcx { grid-area: switch; margin-bottom: 0; }
 .rx-hrs-hosp .rx-hrs-desktop {
-  padding: 1.25rem 1.35rem;
+  grid-area: desk;
+  padding: 1.1rem 1.2rem;
   border-radius: 16px;
   background: #fff;
   border: 1px solid rgba(10, 13, 11, 0.08);
+  min-height: 0;
+  box-shadow: 0 18px 40px rgba(10, 13, 11, 0.06);
+}
+.rx-hrs-hosp .rx-hrs-phone,
+.rx-hrs-hosp .rx-phone {
+  grid-area: phone;
+  align-self: end;
 }
 .rx-hrs-floor-link {
+  grid-area: floor;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -2682,6 +2698,19 @@
   text-decoration: none;
 }
 .rx-hrs-floor-link:hover { text-decoration: underline; }
+
+@media (max-width: 900px) {
+  .rx-hrs-hosp {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "switch"
+      "phone"
+      "desk"
+      "floor";
+    justify-items: center;
+  }
+  .rx-hrs-hosp .rx-hrs-desktop { width: 100%; }
+}
 
 /* ── Leak map panel (home) ── */
 .rx-leak-panel {
