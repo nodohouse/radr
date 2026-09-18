@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { Hero } from "@/components/marketing/scenes/Hero";
-import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 
 /**
  * Margin Recovery homepage — customer-facing story.
@@ -191,8 +190,7 @@ export function HomepageSpine() {
       </section>
 
       <section className="rx-rec-sec rx-rec-brand" data-nav-theme="light">
-        <div className="rx-shell rx-rec-brand-frame">
-          <NothingOffTheRadr size="close" />
+        <div className="rx-shell">
           <div className="rx-rec-brand-copy">
             <h2 className="rx-rec-h">{t("footer.title")}</h2>
             <p className="rx-rec-p">{t("footer.body")}</p>
