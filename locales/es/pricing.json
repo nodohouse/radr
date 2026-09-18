@@ -1,11 +1,11 @@
 {
   "metaTitle": "Pricing — RADR",
-  "metaDescription": "Margin Recovery Pilot, Core, and Control. 14 days to find and action recoverable margin on the systems you already run.",
+  "metaDescription": "Recovery Pilot, Core, and Control. Start with Supplier/AP or Reconciliation. Prove Verified Value. Then expand.",
   "kicker": "Pricing",
-  "heroTitleLine1": "Start with recoverable margin.",
+  "heroTitleLine1": "Start with recoverable value.",
   "heroTitleLine2": "Then expand the Decision layer.",
-  "heroLead": "Pilot Margin Recovery first. Expand to broader Decision coverage when the economics hold.",
-  "heroSupport": "One defined recovery scope. Prove Verified Value. Then grow.",
+  "heroLead": "Pilot one or two problem families first. Expand when the economics hold.",
+  "heroSupport": "Supplier/AP · Reconciliation · then broader Decision coverage.",
   "how": {
     "kicker": "How pricing works",
     "title": "Price follows the operating surface.",
@@ -26,21 +26,21 @@
     }
   },
   "pilot": {
-    "kicker": "Margin Recovery Pilot",
+    "kicker": "Recovery Pilot",
     "verb": "Prove",
-    "title": "Start with one recovery scope.",
-    "lead": "14 days to find and action recoverable margin. Open cases stay on RADR until the value is applied or the case is closed.",
-    "body": "2–3 locations. Supplier invoices, contracts, POS / menu where relevant, AP evidence where available.",
-    "priceLabel": "Margin Recovery Pilot",
+    "title": "Start with one or two problem families.",
+    "lead": "14 days to find and action recoverable value. Open cases stay on RADR until resolved, verified, or closed.",
+    "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
+    "priceLabel": "Recovery Pilot",
     "priceSub": "Scoped with you",
     "cta": "Start a recovery pilot",
     "points": [
-      "One defined recovery scope",
+      "Supplier / AP · Reconciliation · or both",
       "2–3 locations",
-      "Supplier invoice / contract analysis",
       "14-day discovery / action window",
       "Open-case verification tail",
-      "Evidence package · recovery tracking · Verified Value"
+      "Evidence packages · recovery tracking",
+      "Verified Value trace"
     ]
   },
   "core": {
@@ -51,8 +51,8 @@
     "priceLabel": "Priced by location + operating scope",
     "cta": "Discuss Core",
     "features": [
-      "Operating connections",
-      "Cross-system Decisions and Decision Trace",
+      "Cross-system Decisions",
+      "Problem families beyond the pilot",
       "Futures — Early Access",
       "Verified Value",
       "Operating Memory — Early Access"
@@ -198,8 +198,8 @@
   },
   "ready": "Start with one recovery scope.",
   "readyLead": "Tell us what you run, where margin disappears, and which systems hold the evidence. We will scope the right place to start.",
-  "readyCta": "Start a 14-day recovery pilot",
+  "readyCta": "Start a recovery pilot",
   "readySecondary": "See a Verified Recovery",
-  "contactSales": "Start a 14-day recovery pilot",
+  "contactSales": "Start a recovery pilot",
   "bookDemo": "See a Verified Recovery"
 }

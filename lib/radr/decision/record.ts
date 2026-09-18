@@ -235,6 +235,16 @@ export type DecisionRecord = {
   modelVersion: string;
   demoLabel?: string;
 
+  /** Opinionated problem family — not a free-form agent skill. */
+  problemFamily?: import("@/lib/radr/problemFamilies").ProblemFamily;
+  economicState?: import("@/lib/radr/problemFamilies").EconomicValueState;
+  timeToExpiry?: string;
+  recoverability?: "high" | "medium" | "low" | "none";
+  verificationPath?: string[];
+  requiredEvidence?: string[];
+  allowedActions?: string[];
+  alwaysAskActions?: string[];
+
   createdAt: string;
   updatedAt: string;
 };

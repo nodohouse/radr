@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Premium iPhone product story — RADR in the operator's pocket.
- * Rotating role-specific push states. Not a mini dashboard.
+ * Premium iPhone product story — the right economic action reaches the right person.
+ * Rotating role-specific push states. Not a mini dashboard. Not scheduling.
  */
 
 import { useEffect, useState } from "react";
@@ -20,42 +20,42 @@ type PhoneState = {
 
 const STATES: PhoneState[] = [
   {
-    id: "urgent",
-    badge: "Urgent",
-    title: "Wait 12 minutes",
-    body: "Kitchen pressure is projected to spike at 19:00.",
-    meta: "Expected impact · +€620",
+    id: "recover",
+    badge: "Recover",
+    title: "€273 supplier variance",
+    body: "Evidence package ready for Finance.",
+    meta: "Always ask before sending",
+    primary: "Review",
+    secondary: "Approve draft",
+    tone: "recover",
+  },
+  {
+    id: "noshow",
+    badge: "No-show",
+    title: "€184 value at risk",
+    body: "Cancellation created recoverable capacity before peak.",
+    meta: "Waitlist recovery prepared",
     primary: "Approve",
     secondary: "View why",
     tone: "urgent",
   },
   {
     id: "foh",
-    badge: "FOH brief",
-    title: "Brief updated",
-    body: "VIP party of 6 · seat by 18:50. Table 12 · nut allergy.",
-    meta: "Hold next walk-in until 18:54",
-    primary: "Open brief",
+    badge: "FOH",
+    title: "Table 12 released",
+    body: "Offer to waitlist guest prepared.",
+    meta: "Seat by 18:50",
+    primary: "Confirm",
     tone: "brief",
   },
   {
-    id: "shift",
-    badge: "Shift update",
-    title: "1 open FOH shift",
-    body: "Push sent to eligible staff.",
-    meta: "2 responses pending",
-    primary: "View coverage",
+    id: "chef",
+    badge: "Kitchen",
+    title: "Yield variance",
+    body: "Check prep batch 3 — driver of tonight’s food-cost move.",
+    meta: "Cost variance · not inflation alone",
+    primary: "Open brief",
     tone: "shift",
-  },
-  {
-    id: "recover",
-    badge: "Recover",
-    title: "€273 supplier variance",
-    body: "Evidence package prepared for Finance approval.",
-    meta: "Always ask before sending",
-    primary: "Review",
-    secondary: "Approve draft",
-    tone: "recover",
   },
 ];
 
@@ -73,7 +73,7 @@ export function HeroRadrPhone() {
   return (
     <aside
       className="rx-he-phone"
-      aria-label="RADR mobile — push, approve, brief"
+      aria-label="RADR mobile — recover, approve, brief"
       data-tone={state.tone}
     >
       <div className="rx-he-phone-bezel">

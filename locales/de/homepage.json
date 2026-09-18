@@ -1,35 +1,35 @@
 {
   "hero": {
-    "kicker": "Margin Recovery",
-    "title": "Find the margin you’re losing — and prove you got it back",
-    "sub": "RADR finds supplier and margin leakage across the systems you already run, helps you choose the strongest response, and follows the value until Finance can verify what actually came back.",
-    "support": "RADR finds supplier and margin leakage across the systems you already run, helps you choose the strongest response, and follows the value until Finance can verify what actually came back.",
-    "ctaPrimary": "Start a 14-day recovery pilot",
-    "ctaSecondary": "See a Verified Recovery",
-    "ariaLabel": "Nothing off the RADR — Find the margin you’re losing — and prove you got it back",
+    "kicker": "Value recovery",
+    "title": "Recover the value your operation is losing.",
+    "sub": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
+    "support": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
+    "ctaPrimary": "Start a recovery pilot",
+    "ctaSecondary": "See how RADR recovers value",
+    "ariaLabel": "Nothing off the RADR — Recover the value your operation is losing",
     "card": {
-      "aria": "Margin Recovery Decision card",
-      "kicker": "Margin Recovery · Finance",
+      "aria": "Supplier recovery Decision card",
+      "kicker": "Supplier / AP · Finance",
       "id": "D-4102 · Berlin Mitte · Demo",
       "title": "Contract price variance",
       "euro": "€273",
-      "grade": "Expected",
-      "because": "Invoice €7.45/L vs contract €6.80/L · 420 L — €273 exposed",
+      "grade": "Verified",
+      "because": "Invoice €7.45/L vs contract €6.80/L · 420 L — credit applied and matched",
       "step1": "Absorb",
       "step2": "Dispute",
       "step3": "Renegotiate",
       "step4": "Switch supplier",
       "step5": "See recovery →",
-      "note": "Illustrative demo. Expected until the credit is applied."
+      "note": "Illustrative demo. Verified when Finance can match the credit to the original invoice."
     },
-    "titleLine1": "Recover money on the stack you already run",
+    "titleLine1": "Recover the value your operation is losing.",
     "titleLine2Prefix": "",
-    "promise": "RADR finds supplier and margin leakage across the systems you already run, helps you choose the strongest response, and follows the value until Finance can verify what actually came back.",
+    "promise": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
     "lead": "Keep the systems you already run.",
     "verticals": {
       "aria": "ICP",
       "hint": "",
-      "note": "For Finance & Purchasing · multi-unit FSR / fast-casual",
+      "note": "For Finance and operators · multi-location hospitality",
       "restaurant": "Restaurants",
       "hotel": "Hotels",
       "apartments": "Aparthotels"
@@ -1618,54 +1618,101 @@
     }
   },
   "recover": {
+    "families": {
+      "kicker": "Where value leaks",
+      "title": "The money doesn't disappear in one place.",
+      "lead": "RADR finds value that is leaking, stuck, missed, or about to disappear.",
+      "whatLeaks": "What leaks",
+      "whatDoes": "What RADR does",
+      "whatVerifies": "What can be verified",
+      "maturityPilot": "Pilot-ready",
+      "maturityExpansion": "Expansion",
+      "SUPPLIER_AP": {
+        "label": "Supplier / AP",
+        "leaks": "Contract leakage, missing credits, rebates, duplicate charges, UOM and quantity mismatch.",
+        "does": "Detects → prepares evidence → tracks settlement → verifies recovered value.",
+        "verifies": "Credit or settlement matched to the original invoice."
+      },
+      "RECONCILIATION": {
+        "label": "Reconciliation",
+        "leaks": "POS, processors, delivery platforms, refunds, tips, and accounting that refuse to close.",
+        "does": "Detects mismatch → explains source disagreement → prepares correction → verifies closure.",
+        "verifies": "Settlement or journal correction matched across sources."
+      },
+      "COST_VARIANCE": {
+        "label": "Cost variance",
+        "leaks": "Food cost moves without a clear driver — price, waste, yield, mix, substitution.",
+        "does": "Ranks drivers · separates signal from noise · recommends the right lever before repricing.",
+        "verifies": "Cost movement explained and corrective outcome observed."
+      },
+      "PROCUREMENT": {
+        "label": "Procurement",
+        "leaks": "Same SKU, different prices across locations — missed tiers and consolidation opportunity.",
+        "does": "Surfaces dispersion → negotiation leverage → group-rate Decision.",
+        "verifies": "Negotiated rate, credit, or volume tier applied and matched."
+      },
+      "PERISHABLE_REVENUE": {
+        "label": "Perishable revenue",
+        "leaks": "Cancellations, no-shows, late releases, orphan nights — value about to expire.",
+        "does": "Capacity at risk → time remaining → recovery action → observe → verify contribution.",
+        "verifies": "Recovered contribution matched after service or night close."
+      }
+    },
     "story": {
-      "kicker": "Illustrative demo",
+      "kicker": "One complete recovery",
       "title": "One leak. One Decision. One traceable outcome.",
       "lead": "€273 recovered and matched to the original invoice.",
       "leakK": "The leak",
-      "leakInvoice": "Supplier invoice €7.45 / L",
+      "leakInvoice": "Invoice €7.45 / L",
       "leakContract": "Contract €6.80 / L",
       "leakQty": "Quantity 420 L",
       "leakEuro": "€273 exposed",
       "checksK": "RADR checks",
-      "c1": "Contract price",
-      "c2": "Quantity",
-      "c3": "UOM",
+      "c1": "Contract",
+      "c2": "UOM",
+      "c3": "Quantity",
       "c4": "Prior invoices",
       "c5": "Credit history",
       "c6": "Menu exposure",
       "decisionK": "The Decision",
       "decisionTitle": "Dispute the variance",
-      "decisionBecause": "Do not reprice the menu yet. The contract is clear — and there is no evidence the cost increase should pass to guests.",
+      "decisionBecause": "Do not reprice the menu yet. The contract is clear — and the evidence does not support passing the cost to guests.",
       "actionK": "The action",
-      "actionBody": "RADR prepares the evidence package.",
+      "actionBody": "Evidence package prepared.",
       "outcomeK": "The outcome",
       "outcomeBody": "Credit memo issued.",
       "verifiedK": "Verified",
       "verifiedEuro": "€273 recovered",
-      "verifiedBody": "Matched back to the original invoice."
+      "verifiedBody": "Matched to the original invoice."
     },
-    "finds": {
-      "kicker": "What RADR finds",
-      "title": "Margin leaks in more places than price",
-      "lead": "Start with supplier and margin recovery.",
-      "i1": "Contract variance",
-      "i2": "Unapplied credit",
-      "i3": "Missing rebate",
-      "i4": "Duplicate charge",
-      "i5": "Freight / surcharge outside terms",
-      "i6": "Pack / UOM mismatch",
-      "i7": "Quantity mismatch",
-      "i8": "Cross-location price dispersion",
-      "i9": "Missed purchasing tier",
-      "i10": "Outstanding credit memo"
+    "thinks": {
+      "kicker": "How RADR thinks",
+      "title": "You don't teach RADR what to look for.",
+      "flow": "Signal → Evidence → Decision → Action → Outcome → Verified",
+      "lead": "RADR already understands hospitality economics — contract variance, settlement mismatch, no-shows, yield problems, room-night expiry.",
+      "diff": "It connects the evidence, compares the responses, and measures what happened.",
+      "close": "No custom skill required to know what a supplier credit should look like — or what counts as Verified."
     },
-    "loop": {
-      "kicker": "Why it matters",
-      "title": "Seeing the leak isn’t the same as getting it back",
-      "lead": "Most systems can tell you something changed.",
-      "body": "RADR follows the Decision all the way through — find, understand, decide, prepare, follow, verify.",
-      "close": "RADR compares the evidence, chooses the strongest response, prepares the action, and keeps following the case until the economic outcome is known."
+    "progression": {
+      "kicker": "The path",
+      "title": "First recover it. Then stop losing it.",
+      "lead": "Recover → Prevent → Optimize → Autopilot.",
+      "RECOVER": {
+        "title": "Recover",
+        "body": "Find and recover existing leakage."
+      },
+      "PREVENT": {
+        "title": "Prevent",
+        "body": "Detect conditions before value expires."
+      },
+      "OPTIMIZE": {
+        "title": "Optimize",
+        "body": "Choose the best response across competing constraints."
+      },
+      "AUTOPILOT": {
+        "title": "Autopilot",
+        "body": "Execute trusted patterns inside policy."
+      }
     },
     "stack": {
       "kicker": "Your stack",
@@ -1681,25 +1728,25 @@
       "statesNote": "States: Available · Demo · Partner access · Building · Planned."
     },
     "pilot": {
-      "kicker": "Margin Recovery Pilot",
-      "title": "14 days to find and action recoverable margin",
-      "lead": "Open cases stay on RADR until the value is applied or the case is closed.",
-      "i1": "2–3 locations",
-      "i2": "Supplier invoices and contracts",
-      "i3": "AP / accounting evidence where available",
-      "i4": "POS / menu data where relevant",
+      "kicker": "Recovery Pilot",
+      "title": "14 days to find and action recoverable value",
+      "lead": "Open cases remain on RADR until resolved, verified, or closed.",
+      "scope": "Start with one or two problem families — not all five at once.",
+      "opt1": "Supplier / AP",
+      "opt2": "Reconciliation",
+      "opt3": "Supplier / AP + Reconciliation",
       "deliverK": "What you get",
       "d1": "Recovery opportunities found",
       "d2": "Evidence packages prepared",
       "d3": "Cases actioned",
       "d4": "Value pending",
       "d5": "Value verified",
-      "cta": "Start a 14-day recovery pilot"
+      "cta": "Start a recovery pilot"
     },
     "expansion": {
-      "kicker": "What comes next",
-      "title": "Recover the leak. Then improve the Decision.",
-      "lead": "The same Decision system extends into margin response, menu economics, capacity, and service.",
+      "kicker": "Platform",
+      "title": "Recover first. Then expand the Decision system.",
+      "lead": "The same Decision layer extends into cost variance, procurement leverage, and perishable revenue.",
       "body": "One system learns from what actually happened.",
       "cta": "Explore the Platform"
     },
@@ -1709,18 +1756,18 @@
       "q1": "What if a supplier takes longer than 14 days?",
       "a1": "RADR keeps the case open until it resolves or is closed.",
       "q2": "Do we have to replace our accounting or procurement stack?",
-      "a2": "No. RADR is designed to work across the systems already in use.",
+      "a2": "No. RADR works across the systems already in use.",
       "q3": "Does RADR send disputes automatically?",
-      "a3": "Not unless explicitly permitted by policy. Material external actions can remain approval-gated.",
+      "a3": "Not unless explicitly permitted by policy. Material external actions stay approval-gated.",
       "q4": "How does RADR define Verified Value?",
       "a4": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice."
     },
     "footer": {
       "brand": "Nothing off the RADR.",
       "title": "Ready when you are",
-      "body": "Start recovering margin on the stack you already run.",
-      "cta": "Start a 14-day recovery pilot",
-      "secondary": "See a Verified Recovery"
+      "body": "Start recovering value on the stack you already run.",
+      "cta": "Start a recovery pilot",
+      "secondary": "See how RADR recovers value"
     }
   }
 }

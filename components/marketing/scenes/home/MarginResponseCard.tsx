@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Margin Recovery Decision card — hero visual.
- * Expected until credit applied; Verified only when Finance can match it back.
+ * Recovery Decision card — hero visual.
+ * Expected until credit applied; Verified only when Finance can match it.
  */
 
 import { useEffect, useState } from "react";
@@ -21,15 +21,17 @@ export type MarginStory = {
   variance: string;
   because: string;
   euro: string;
-  grade: "Expected";
+  grade: "Expected" | "Verified";
   futures: MarginFuture[];
   traceHref: string;
   traceLabel: string;
+  note: string;
+  tabLabel: string;
 };
 
 export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
   id: "credit-not-applied",
-  kicker: "Margin Recovery · Finance",
+  kicker: "Supplier / AP · Finance",
   displayId: "D-4102 · Berlin Mitte · Demo",
   variance: "Contract price variance",
   because:
@@ -42,34 +44,34 @@ export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
     { id: "renegotiate", label: "Renegotiate" },
     { id: "switch", label: "Switch supplier" },
     { id: "reprice", label: "Reprice item" },
-    { id: "rebalance", label: "Rebalance category" },
-    { id: "promote", label: "Promote substitute" },
     { id: "wait", label: "Wait" },
   ],
   traceHref: "/app/lab/control-center?seed=recover",
-  traceLabel: "See a Verified Recovery →",
+  traceLabel: "See verified recovery →",
+  note: "Illustrative demo. Expected until the credit is applied.",
+  tabLabel: "Supplier variance",
 };
 
 export const STORY_TWO_SITE_GAP: MarginStory = {
   id: "two-site-price-gap",
-  kicker: "Margin Recovery · Finance",
+  kicker: "Procurement · Finance",
   displayId: "D-4108 · Mitte × Prenzlauer Berg",
   variance: "Cross-location price dispersion",
   because:
-    "Same SKU · Mitte €7.45/L vs Prenzlauer Berg €6.80/L on the same contract week — €410 exposed",
+    "Same olive oil · Mitte €7.45/L vs Prenzlauer Berg €6.80/L — negotiate group rate",
   euro: "€410",
   grade: "Expected",
   futures: [
     { id: "absorb", label: "Absorb" },
     { id: "dispute", label: "Dispute", rec: true },
-    { id: "renegotiate", label: "Renegotiate" },
+    { id: "renegotiate", label: "Group rate" },
     { id: "switch", label: "Switch supplier" },
-    { id: "reprice", label: "Reprice item" },
-    { id: "rebalance", label: "Rebalance category" },
     { id: "wait", label: "Wait" },
   ],
   traceHref: "/app/lab/control-center?seed=margin-response",
-  traceLabel: "See a Verified Recovery →",
+  traceLabel: "Open Decision →",
+  note: "Illustrative demo. Expected until negotiated rate or credit applies.",
+  tabLabel: "Price dispersion",
 };
 
 const STORIES = [STORY_CREDIT_NOT_APPLIED, STORY_TWO_SITE_GAP] as const;
@@ -77,7 +79,6 @@ const STORIES = [STORY_CREDIT_NOT_APPLIED, STORY_TWO_SITE_GAP] as const;
 type Phase = "options" | "recommend" | "trace";
 
 type Props = {
-  /** Max 2 stories — carousel, not a 24-tile gallery */
   stories?: readonly MarginStory[];
 };
 
@@ -107,10 +108,10 @@ export function MarginResponseCard({ stories = STORIES }: Props) {
     <aside
       className="rx-mrc"
       data-phase={phase}
-      aria-label={`${story.variance} · Margin Response Decision`}
+      aria-label={`${story.variance} · Recovery Decision`}
     >
       {stories.length > 1 ? (
-        <div className="rx-mrc-tabs" role="tablist" aria-label="Finance seeds">
+        <div className="rx-mrc-tabs" role="tablist" aria-label="Recovery stories">
           {stories.map((s, i) => (
             <button
               key={s.id}
@@ -120,7 +121,7 @@ export function MarginResponseCard({ stories = STORIES }: Props) {
               data-on={i === storyIdx ? "true" : undefined}
               onClick={() => setStoryIdx(i)}
             >
-              {s.id === "credit-not-applied" ? "Credit not applied" : "Two-site price"}
+              {s.tabLabel}
             </button>
           ))}
         </div>
@@ -161,11 +162,11 @@ export function MarginResponseCard({ stories = STORIES }: Props) {
       <button
         type="button"
         className="rx-mrc-euro"
-        data-grade="Expected"
+        data-grade={story.grade}
         data-pulse={phase !== "options" ? "true" : undefined}
       >
         <strong>{story.euro}</strong>
-        <span>Expected</span>
+        <span>{story.grade}</span>
       </button>
 
       <p className="rx-mrc-because">{story.because}</p>
@@ -178,9 +179,7 @@ export function MarginResponseCard({ stories = STORIES }: Props) {
         {story.traceLabel}
       </NextLink>
 
-      <p className="rx-mrc-note">
-        Illustrative demo. Expected until the credit is applied.
-      </p>
+      <p className="rx-mrc-note">{story.note}</p>
     </aside>
   );
 }

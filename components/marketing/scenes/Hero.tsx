@@ -29,7 +29,7 @@ export function Hero() {
             <p className="rx-he-recover-support">{t("support")}</p>
             <div className="rx-he-ctas">
               <Link
-                href="/contact?intent=margin-recovery-pilot"
+                href="/contact?intent=recovery-pilot"
                 className="rx-btn rx-btn-primary"
               >
                 {t("ctaPrimary")} <span aria-hidden="true">→</span>

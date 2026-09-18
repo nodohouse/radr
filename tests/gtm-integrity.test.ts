@@ -15,6 +15,45 @@ import {
 import { autopilotForSeed, AUTOPILOT_LADDER } from "@/components/product/lab/labAutopilot";
 import { ROLE_PRESETS } from "@/components/product/lab/labModules";
 
+describe("problem families domain", () => {
+  it("defines five families with Recover progression stages", async () => {
+    const {
+      PROBLEM_FAMILIES,
+      PROBLEM_FAMILY_DEFS,
+      pilotFamilies,
+      PROGRESSION,
+    } = await import("@/lib/radr/problemFamilies");
+    expect(PROBLEM_FAMILIES).toEqual([
+      "SUPPLIER_AP",
+      "RECONCILIATION",
+      "COST_VARIANCE",
+      "PROCUREMENT",
+      "PERISHABLE_REVENUE",
+    ]);
+    expect(pilotFamilies().map((d) => d.id)).toEqual([
+      "SUPPLIER_AP",
+      "RECONCILIATION",
+    ]);
+    expect(PROGRESSION.map((p) => p.stage)).toEqual([
+      "RECOVER",
+      "PREVENT",
+      "OPTIMIZE",
+      "AUTOPILOT",
+    ]);
+    expect(PROBLEM_FAMILY_DEFS.SUPPLIER_AP.verifies.toLowerCase()).toContain(
+      "matched",
+    );
+  });
+
+  it("supplier Decision record carries SUPPLIER_AP problemFamily", () => {
+    const r = getDecisionRecord(DECISION_IDS.supplier)!;
+    expect(r.problemFamily).toBe("SUPPLIER_AP");
+    expect(r.economicState).toBe("VERIFIED");
+    expect(r.verificationPath).toEqual(["supplier_credit", "ap_match"]);
+    expect(r.alwaysAskActions).toContain("send_dispute");
+  });
+});
+
 describe("verified value canon", () => {
   it("every role aggregate equals sum of verified records in scope", () => {
     for (const role of ["gm", "cfo", "coo"] as const) {
@@ -163,11 +202,10 @@ describe("mobile phone states stay role-actionable", () => {
         "utf8",
       ),
     );
-    expect(src).toContain('id: "urgent"');
-    expect(src).toContain('id: "foh"');
-    expect(src).toContain('id: "shift"');
     expect(src).toContain('id: "recover"');
-    expect(src).toContain("Approve");
+    expect(src).toContain('id: "noshow"');
     expect(src).toContain("€273");
+    expect(src).toContain("€184");
+    expect(src).not.toContain("build an agent");
   });
 });

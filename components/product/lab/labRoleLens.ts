@@ -41,7 +41,7 @@ export const ROLE_LENSES: Record<CenterRole, RoleLens> = {
   gm: {
     role: "gm",
     title: "Control Center",
-    subtitle: "Ops tonight · who’s coming · what to hold",
+    subtitle: "Operational leakage · perishable revenue · Brief",
     demoPath: "GM night-of · Wait-12 + FOH brief",
     kpis: ["expected_tonight", "needs_you", "active_exposure", "verified"],
     showPulse: true,
@@ -57,8 +57,8 @@ export const ROLE_LENSES: Record<CenterRole, RoleLens> = {
   cfo: {
     role: "cfo",
     title: "Control Center",
-    subtitle: "Money in / out · Recover + Buy · Verified Value",
-    demoPath: "CFO Monday morning · AP credit + Trace",
+    subtitle: "Value leaking · in recovery · Verified · open exceptions",
+    demoPath: "CFO · Supplier/AP + Reconciliation",
     kpis: ["revenue_in", "money_out", "recover_exposure", "verified"],
     showPulse: true,
     pulseMode: "pnl",
@@ -73,7 +73,7 @@ export const ROLE_LENSES: Record<CenterRole, RoleLens> = {
   clevel: {
     role: "clevel",
     title: "Control Center",
-    subtitle: "Portfolio · Identified → Expected → Verified",
+    subtitle: "Top leak themes · recovered vs at-risk · exceptions",
     demoPath: "C-level · three money themes",
     kpis: ["identified", "expected_ladder", "verified_ladder", "needs_you"],
     showPulse: true,

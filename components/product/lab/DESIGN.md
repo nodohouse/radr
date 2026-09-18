@@ -1,103 +1,78 @@
-# LAB Control Center — composed operating system
+# LAB Control Center — economic operating product
 
-Sand/mint · acid green · triangle mark. **Three bands**, not a scatter of equal widgets.
+Sand/mint · acid green · triangle mark.
 
-## Laws
+## Company thesis
 
-1. **Control Center three-band law** — Shift Pulse · Decision · Role. Right rail thin. Pins below fold.
-2. **Shift Pulse** — one coherent money-in / money-out / net + forecast graph. Turbulence → Decision.
-3. **Role lenses** — GM / CFO / C-level recompose the Center; not cosmetic chips.
-4. **Autopilot permission** — Suggest → Stage → Auto within policy. Never “Verified = level 4”.
-5. **Lifecycle** — Prepared → Approved → Executed → Observed → Verified. Orthogonal to Autopilot.
-6. **Service Brief** — role packets (Chef / FOH / GM / CFO) · mid-service delta, not full regenerate.
-7. **Mobile** — push-first, role-specific, actionable. Not a mini desktop dashboard.
-8. **Notification policy** — only when why this person · why now · what they can do.
-9. **Value semantics** — Expected ≠ Verified. Verified total = sum of verified records in scope.
-10. **Light mode** — sand / ivory · mint · acid green semantic · triangle only · no letter R · no dark boards.
-11. **Homepage iPhone story** — desktop Decision card + overlapping phone (urgent / FOH / shift / recover).
+RADR recovers value that hospitality businesses lose through fragmented operations.
 
-## Recover seed
+**RECOVER → PREVENT → OPTIMIZE → AUTOPILOT**
 
-`?seed=recover` = credit applied · Verified recovered · `?seed=margin-response` = two-site gap · Expected
+Not a build-your-own-agent product. Not a chatbot. Not a dashboard generator.
 
-- Demo = **one Decision → Value Trace → Verified**
-- Fixtures: `TRACE_SUPPLIER_VERIFIED` · `TRACE_TWO_SITE_EXPECTED` · `RECOVER_SEED.md`
-- Verified € only when credit is applied and Finance can match it
-- Human primary copy; schema IDs behind Open Trace
-- Homepage hero = Margin Recovery Decision card + mobile push story
+RADR already knows: where hospitality loses money · what evidence matters · what Decisions are plausible · what actions are allowed · what counts as Verified.
 
-## Composition (Center)
+## Five problem families
 
-1. **Shift Pulse (HERO GRAPH)** — full-width live time-series  
-2. **Decision band** — Needs-you hero + Futures **or** Autopilot status  
-3. **Role band** — GM: who’s coming / Brief · CFO: win-loss + Recover · C-level: themes  
-4. **Below fold** — My modules pins only  
+| Family | Stage | Pilot |
+| --- | --- | --- |
+| `SUPPLIER_AP` | Recover | Yes |
+| `RECONCILIATION` | Recover | Yes |
+| `COST_VARIANCE` | Prevent | Expansion |
+| `PROCUREMENT` | Optimize | Expansion |
+| `PERISHABLE_REVENUE` | Recover / live ops | Expansion |
 
-Right rail: decide-by · autopilot permission · Verified Value · health · pins.
+Source: `lib/radr/problemFamilies.ts`
 
-## Shift Pulse schemas
+Each family has: signals · evidence · Decision types · actions · verification logic.
 
-| Industry | In | Out | Extra |
-| --- | --- | --- | --- |
-| Restaurant | Covers / seated contribution | Delivery take · cancels · comps/voids | Pace vs expected close |
-| Hotel | Arrivals · room revenue · upgrades | Cancels · no-shows · OTA tax | Orphan-night · pickup |
-| Recover (CFO) | Revenue 14d | AP + tax | Variance markers |
+## Value states (visual)
 
-Observed left of NOW · forecast right of NOW. Turbulence markers: because · D-id · € · Expected/Verified · Open Decision.
+| State | Color |
+| --- | --- |
+| IDENTIFIED | neutral / amber |
+| EXPECTED | soft blue / amber |
+| OBSERVED | graphite |
+| VERIFIED | acid green |
 
-Source: `labShiftPulse.ts` · UI: `ShiftPulse.tsx`.
+Expected ≠ Verified. Verified total = sum of verified records in scope.
+
+## Decision schema additions
+
+`problemFamily` · `economicState` · `timeToExpiry` · `recoverability` · `verificationPath` · `requiredEvidence` · `allowedActions` · `alwaysAskActions`
+
+## Control Center three-band law
+
+1. **Shift Pulse** — value in / out / at risk / recovered · turbulence → Decision  
+2. **Decision band** — Needs you or RADR is handling · Futures · Autopilot permission  
+3. **Role band** — GM ops leakage · CFO recoveries · C-level themes  
+
+Questions answered: Where is value leaking? What is about to expire? What needs me? What is RADR handling? What was verified?
 
 ## Role lenses
 
-| Role | Pulse | Decision | Role band | Pins / seed |
-| --- | --- | --- | --- | --- |
-| **GM** | ops graph | Needs-you + Futures | Who’s coming + FOH Brief | Sell+Labor · service |
-| **CFO** | P&L graph | Recover hero + Autopilot | Win/loss + Trace | Recover+Buy · recover |
-| **C-level** | summary | Top decision | 3 money themes | Verified themes |
+| Role | Focus |
+| --- | --- |
+| GM | Operational leakage · perishable revenue · Brief · Needs you |
+| CFO | Supplier/AP · Reconciliation · recoveries · Verified Value · open exceptions |
+| C-level | Top leak themes · recovered vs at-risk · exceptions |
 
-Verified totals: `roleViewForLabRole` → `verifiedValueCanon` (GM / CFO / COO scopes). Label THIS DECISION vs LOCATION vs GROUP when showing multiple totals.
+## Autopilot
 
-## Autopilot permission (≠ Verified)
+Permission: Suggest → Stage → Auto within policy  
+Lifecycle: Prepared → Approved → Executed → Observed → Verified  
+Never conflate Autopilot level with Verified.
 
-1. **Suggest** — recommend · human decides  
-2. **Stage** — prepare · no SoR write yet  
-3. **Auto within policy** — low-risk only  
+## Mobile
 
-Lifecycle: **Executed → Observed → Verified**
+Push-first · role-specific · actionable. Decision / approval / brief / exception / verification. Not a scheduling suite.
 
-Recover policy: auto detect / evidence / draft · **always ask** before send dispute, alter payable, accept settlement, change contract, post entries.
+## Light mode
 
-Source: `labAutopilot.ts` · UI: `AutopilotStatus.tsx`.
+Sand / ivory · mint · acid green semantic · triangle only · no letter R · no dark boards.
 
-## Service Brief
+## Homepage
 
-Packets: Chef · FOH · GM · CFO · ~90m checklist. Mid-service delta when Pulse turbulence or Needs-you. Ops ↔ Brief toggle.
+Hero pain → five problem families → one recovery story → how RADR thinks → Recover→Prevent → stack → pilot → platform.
 
-## Mobile role projections
-
-Same Decision · different recipient. GM economics · Floor hold · Kitchen feature · CFO recover approval. No sensitive € to every employee.
-
-Homepage: `HeroRadrPhone` states — urgent · FOH brief · shift coverage · recover approval.
-
-## Secondary pages
-
-Decisions · Catalog · Value · Memory — full sand/mint, story cards (action · € · because · CTA). Value embeds Pulse + win/loss. Memory explains Autopilot trust. No near-black boards.
-
-## Contrast checklist
-
-- [ ] Center = 3 bands; Pulse is the largest visual  
-- [ ] Catalog readable on white cards  
-- [ ] Expected dashed amber · Verified solid green  
-- [ ] Every € has because  
-- [ ] Triangle logo only — never letter R  
-- [ ] Phone does not cover critical desktop Decision UI  
-
-## Seeds / demos
-
-- `?seed=service` — GM night-of: graph → Wait-12 → Brief  
-- `?seed=recover` — CFO Monday: in/out/forecast → Recover → Verified  
-- Hotel toggle — arrivals Pulse variant  
-
-## Banned
-
-equal-weight stacks · tiny Pulse chips as hero · same UI for GM/CFO · vanity KPIs · unreadable Catalog · fake Verified · letter R · Autopilot labeled Verified · conflicting Verified totals without scope labels.
+Banned public language: competitor callouts · feature parity · day one · sealed Trace · wedge · strategy-deck voice.
