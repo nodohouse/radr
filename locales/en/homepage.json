@@ -1,12 +1,13 @@
 {
   "hero": {
     "kicker": "Margin & Recovery Intelligence · Finance / Purchasing · FSR / FC ~8–30 locs",
+    "h0": "Nothing off the RADR",
     "title": "Find the margin you’re losing — and prove you got it back",
     "sub": "Across suppliers, menus and ops — tell you what to do — verify you got it back.",
-    "support": "Not another dashboard. Not a rip-replace OS. Not a second GL. Invoice + contract + POS/menu — max 2–3 sources.",
+    "support": "Not another dashboard. Not a rip-replace OS. Not a second GL.",
     "ctaPrimary": "Start a 14-day margin recovery pilot",
     "ctaSecondary": "See one variance → Trace",
-    "ariaLabel": "Find the margin you’re losing — and prove you got it back",
+    "ariaLabel": "Nothing off the RADR — Find the margin you’re losing — and prove you got it back",
     "card": {
       "aria": "Margin Response Decision card",
       "kicker": "Margin Response · Finance",
@@ -636,8 +637,8 @@
     "title": "Systems record. RADR decides.",
     "lead": "Humans provide the hospitality.",
     "line": "One location. One operating problem. One decision layer.",
-    "ctaPrimary": "See how RADR decides",
-    "ctaSecondary": "Book a demo"
+    "ctaPrimary": "Start a 14-day margin recovery pilot",
+    "ctaSecondary": "See one variance → Trace"
   },
   "loop": {
     "kicker": "How RADR works",

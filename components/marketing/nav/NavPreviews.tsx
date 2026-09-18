@@ -41,7 +41,7 @@ const PREVIEWS: Record<string, PreviewModel> = {
         value: `${money(CANON_ORPHAN.exposureEuro)} · ${CANON_ORPHAN.displayId}`,
       },
     ],
-    cta: "See how RADR decides",
+    cta: "See one variance → Trace",
   },
   decisions: {
     kicker: "Decision",

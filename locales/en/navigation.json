@@ -7,11 +7,11 @@
   "pricing": "Pricing",
   "company": "Company",
   "signIn": "Login",
-  "seeRadr": "Start a 14-day margin recovery pilot",
-  "contactSales": "Start a 14-day margin recovery pilot",
-  "getStarted": "Start a 14-day margin recovery pilot",
+  "seeRadr": "Start a 14-day pilot",
+  "contactSales": "Start a 14-day pilot",
+  "getStarted": "Start a 14-day pilot",
   "bookDemo": "See one variance → Trace",
-  "seeInAction": "Start a 14-day margin recovery pilot",
+  "seeInAction": "Start a 14-day pilot",
   "menu": "Menu",
   "close": "Close",
   "footerProduct": "Platform",
@@ -266,9 +266,9 @@
     "platform": {
       "title": "Platform",
       "featured": {
-        "title": "See how RADR decides",
-        "desc": "One Decision. From exposure to verified outcome.",
-        "cta": "See how RADR decides"
+        "title": "See one variance → Trace",
+        "desc": "One Margin Response Decision. Expected until Trace seals.",
+        "cta": "See one variance → Trace"
       },
       "columns": {
         "decide": {

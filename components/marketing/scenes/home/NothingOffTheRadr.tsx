@@ -1,23 +1,33 @@
 "use client";
 
+import { RadrWordmark } from "@/components/radr/RadrWordmark";
+
+type Props = {
+  className?: string;
+  /** display = hero H0 · close = brand band */
+  size?: "display" | "close";
+};
+
 /**
- * Signature brand close — stacked "Nothing off the RADR."
- * Lives on the homepage spine; not a footer afterthought.
+ * Brand lockup: NOTHING OFF THE R△DR
+ * Green △ replaces the A — never letter-R as the mark.
  */
-export function NothingOffTheRadr({ className = "" }: { className?: string }) {
+export function NothingOffTheRadr({
+  className = "",
+  size = "display",
+}: Props) {
   return (
     <p
-      className={`rx-notr ${className}`.trim()}
+      className={`rx-notr rx-notr--${size} ${className}`.trim()}
       aria-label="Nothing off the RADR"
     >
-      <span className="rx-notr-line">Nothing</span>
-      <span className="rx-notr-line">off the</span>
-      <span className="rx-notr-stack" aria-hidden="true">
-        <span>R</span>
-        <span>A</span>
-        <span>D</span>
-        <span>R</span>
-      </span>
+      <span className="rx-notr-prefix">Nothing off the</span>
+      <RadrWordmark
+        size={size === "display" ? "headline" : "lg"}
+        surface="light"
+        variant="plain"
+        className="rx-notr-wm"
+      />
     </p>
   );
 }

@@ -4,10 +4,11 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { MarginResponseCard } from "@/components/marketing/scenes/home/MarginResponseCard";
+import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 
 /**
- * Margin & Recovery Intelligence hero — Round 2.
- * One Decision card (not Control Center soup). Sprinkle below fold only.
+ * Brand stack hero:
+ * H0 NOTHING OFF THE R△DR → H1 Monday money → CTAs → Decision card
  */
 export function Hero() {
   const t = useTranslations("homepage.hero");
@@ -17,12 +18,12 @@ export function Hero() {
       className="rx-he rx-he-light rx-he-recover rx-he-margin"
       id="product"
       data-nav-theme="light"
+      aria-label={t("ariaLabel")}
     >
       <div className="rx-shell rx-he-recover-frame">
         <div className="rx-he-recover-copy">
-          <p className="rx-he-recover-kicker">{t("kicker")}</p>
+          <NothingOffTheRadr size="display" className="rx-he-h0" />
           <h1 className="rx-he-recover-title">{t("title")}</h1>
-          <p className="rx-he-recover-sub">{t("sub")}</p>
           <p className="rx-he-recover-support">{t("support")}</p>
 
           <div className="rx-he-ctas">

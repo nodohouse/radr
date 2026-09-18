@@ -1,12 +1,12 @@
 {
   "hero": {
     "kicker": "For Finance & Purchasing · multi-unit FSR / fast-casual",
-    "title": "Recover money on the stack you already run",
+    "title": "Find the margin you’re losing — and prove you got it back",
     "sub": "Clean exit. No rip-replace. No second GL.",
-    "support": "Your AP tools flag credits. RADR helps you cash them — with Trace you can match to the books.",
-    "ctaPrimary": "Start a 14-day recover pilot",
-    "ctaSecondary": "See one credit → Trace",
-    "ariaLabel": "Recover money on the stack you already run",
+    "support": "Not another dashboard. Not a rip-replace OS. Not a second GL.",
+    "ctaPrimary": "Start a 14-day margin recovery pilot",
+    "ctaSecondary": "See one variance → Trace",
+    "ariaLabel": "Nothing off the RADR — Find the margin you’re losing — and prove you got it back",
     "card": {
       "aria": "One AP credit with sealed Trace",
       "kicker": "Sales demo · one credit",
@@ -133,7 +133,8 @@
           "action": "Supplier claim · prepared for approval"
         }
       }
-    }
+    },
+    "h0": "Nothing off the RADR"
   },
   "control": {
     "kicker": "Control Center",
