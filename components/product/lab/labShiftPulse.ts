@@ -4,6 +4,7 @@
  */
 
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
+import { formatCanonicalVerified } from "@/lib/radr/product/verifiedValueCanon";
 import type { LabSeed } from "./labState";
 
 export type PulseIndustry = "restaurant" | "hotel";
@@ -266,7 +267,7 @@ export const RECOVER_MARKERS: TurbulenceMarker[] = [
     severity: "watch",
     euro: 273,
     grade: "Verified",
-    because: "CM-44102 applied_to INV-88421 · sealed Trace · stop",
+    because: "Credit memo applied · matched to original invoice",
     decisionId: DECISION_IDS.supplier,
     displayId: "D-4102",
     seed: "recover",
@@ -290,9 +291,9 @@ export const RECOVER_PULSE: ShiftPulseModel = {
   windowLabel: "Rolling 14d · money truth",
   netEuro: 35800,
   netGrade: "Verified",
-  netBecause: "One sealed AP credit · verified ladder banked",
+  netBecause: "One recovered credit · Verified Value banked",
   paceLabel: "−€1,200 vs plan",
-  paceBecause: "Prior window before CM-44102 sealed",
+  paceBecause: "Prior window before credit applied",
   expectedClose: "€39,100 Expected",
   metrics: [
     {
@@ -314,14 +315,14 @@ export const RECOVER_PULSE: ShiftPulseModel = {
       label: "Recover sealed",
       value: "€273 Verified",
       direction: "in",
-      because: "CM-44102 applied_amount · sealed Trace",
+      because: "Credit memo applied · €273 recovered",
     },
     {
       id: "verified",
       label: "Verified",
-      value: "€2,830",
+      value: formatCanonicalVerified("cfo"),
       direction: "net",
-      because: "Ledger-matched · Trace sealed",
+      because: "Sum of Verified records in CFO scope",
     },
   ],
   markers: RECOVER_MARKERS,

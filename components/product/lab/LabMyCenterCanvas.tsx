@@ -147,7 +147,7 @@ export function LabMyCenterCanvas() {
           {board.length === 0 ? (
             <p className="lab-my-empty">
               Nothing pinned. Open Catalog or pick a role preset — CFO loads
-              Recover + Buy + Verified.
+              Recover + Buy · Verified Value.
             </p>
           ) : (
             board.map((m) => (

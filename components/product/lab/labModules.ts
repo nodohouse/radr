@@ -3,6 +3,7 @@
  */
 
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
+import { canonicalVerifiedTotal } from "@/lib/radr/product/verifiedValueCanon";
 
 export type ModuleCategory =
   | "BUY"
@@ -80,11 +81,11 @@ export const LAB_MODULE_CATALOG: LabModule[] = [
     displayId: "D-4102",
     title: "AP CREDIT APPLIED",
     euro: 273,
-    euroLabel: "Verified · applied_amount",
-    clock: "Sealed · Trace → stop",
+    euroLabel: "Verified recovered",
+    clock: "Matched to invoice",
     grade: "Verified",
-    because: "INV-88421 line matched CM-44102 applied to the same invoice",
-    blurb: "Sales demo · one credit → Trace → stop. Finance can match AP.",
+    because: "Credit memo applied · matched to the original invoice",
+    blurb: "€273 recovered and matched to the original invoice.",
     href: "/app/lab/control-center?seed=recover",
   },
   {
@@ -94,11 +95,11 @@ export const LAB_MODULE_CATALOG: LabModule[] = [
     displayId: "D-4102",
     title: "HOLD ABOVE-CONTRACT PO",
     euro: 273,
-    euroLabel: "Same Trace · sealed",
+    euroLabel: "Same recovery",
     clock: "This week",
     grade: "Verified",
-    because: "Next PO blocked until sealed credit path reviewed",
-    blurb: "Linked to sealed Recover Trace — not a separate estimate.",
+    because: "Next PO blocked until credit path reviewed",
+    blurb: "Linked to the same recovery — not a separate estimate.",
     href: "/app/lab/control-center?seed=recover",
   },
   {
@@ -121,12 +122,12 @@ export const LAB_MODULE_CATALOG: LabModule[] = [
     decisionId: DECISION_IDS.peak,
     displayId: "LEDGER",
     title: "VERIFIED VALUE LADDER",
-    euro: 2830,
+    euro: canonicalVerifiedTotal("cfo"),
     euroLabel: "Verified total",
     clock: "Since last check",
     grade: "Verified",
     because: "Identified → Expected → Observed → Attributed → Verified",
-    blurb: "Portfolio ladder — connection across Decisions, not a lone total.",
+    blurb: "Portfolio total = sum of Verified records in CFO scope.",
     href: "/app/lab/value?band=verified",
   },
   {
@@ -159,7 +160,7 @@ export const ROLE_PRESETS: Record<
   cfo: {
     label: "CFO",
     moduleIds: ["mod_supplier", "mod_buy_oil", "mod_tuna_v", "mod_value_ladder"],
-    note: "Recover + Buy · Verified ladder",
+    note: "Recover + Buy · Verified Value",
   },
   clevel: {
     label: "C-level",

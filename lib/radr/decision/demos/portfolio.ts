@@ -222,6 +222,15 @@ export function buildSupplierDecisionRecord(
     expectedGuestImpact: "None",
     expectedOperationalImpact: c.prepared,
     exposedContribution: c.exposureEuro,
+    ...(status === "VERIFIED" || status === "LEARNED"
+      ? {
+          verifiedValue: {
+            amount: c.exposureEuro,
+            kind: "recovered" as const,
+            note: "Credit memo applied · matched to original invoice / AP record · DEMO",
+          },
+        }
+      : {}),
     confidence: {
       forecast: "HIGH",
       data: "HIGH",

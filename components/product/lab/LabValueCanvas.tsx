@@ -221,15 +221,15 @@ export function LabValueCanvas() {
               <em>Where we leak</em>
               <strong>€410 Expected</strong>
               <p>
-                because two-site unit price gap · no seal until CM + doc_ref
+                because two-site unit price gap · Expected until credit applies
               </p>
             </article>
           ) : state.seed === "recover" ? (
             <article className="lab-winloss-card" data-kind="win">
-              <em>Where we protected</em>
+              <em>Where we recovered</em>
               <strong>€273 Verified</strong>
               <p>
-                because CM-44102 applied_to INV-88421 · sealed Trace · stop
+                because credit memo applied · matched to original invoice
               </p>
             </article>
           ) : (
@@ -239,14 +239,16 @@ export function LabValueCanvas() {
                 <strong>
                   {formatDecisionMoney(agg.verifiedTotal)} Verified
                 </strong>
-                <p>because tuna shortfall + prior closes matched on ledger</p>
+                <p>because Verified records in current scope</p>
               </article>
               <article className="lab-winloss-card" data-kind="loss">
                 <em>Where we leak</em>
-                <strong>€273 Expected</strong>
-                <p>because INV-88421 above contract — open Recover to seal</p>
-                <button type="button" onClick={() => setSeed("recover")}>
-                  Open Recover · Trace
+                <strong>€410 Expected</strong>
+                <p>
+                  because cross-location price dispersion — open Recover
+                </p>
+                <button type="button" onClick={() => setSeed("margin-response")}>
+                  Open Margin Recovery
                 </button>
               </article>
             </>

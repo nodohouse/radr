@@ -443,39 +443,39 @@
           "paragraphs": [
             "Every multi-unit restaurant finance team knows the pattern. The AP tool flags a supplier credit. Someone screenshots it. Someone adds it to a follow-up list. Weeks later the same variance is still aging — or worse, the next purchase order fires at the wrong unit price again.",
             "The stack did its job: it recorded a credit. The operation still leaked cash. That gap — between flagged and cashed — is where Recover lives.",
-            "RADR does not ask you to rip out Restaurant365, Nory, Craftable, or Toast. It sits above the stack you already run and helps Finance and Purchasing turn an expected credit into a Trace finance can match to the books."
+            "RADR does not ask you to rip out forecasting, scheduling, accounting, ordering, POS, or procurement. It sits across the systems you already run and helps Finance and Purchasing turn an expected credit into a recovery Finance can match to the books."
           ]
         },
         {
-          "heading": "Why credits stall in multi-unit FSR and fast-casual",
+          "heading": "Why credits stall in multi-location hospitality",
           "paragraphs": [
-            "At ~8–30 locations, AP volume is high enough that exceptions are constant and low enough that a dedicated recover squad is rare. Credits scatter across vendors, sites, and aging buckets. Partial applies hide inside payments. Contract price and invoice price disagree by cents that compound across liters and cases.",
+            "At multi-location groups, AP volume is high enough that exceptions are constant and low enough that a dedicated recover squad is rare. Credits scatter across vendors, sites, and aging buckets. Partial applies hide inside payments. Contract price and invoice price disagree by cents that compound across liters and cases.",
             "BI dashboards can count open credits. They rarely carry a book-matchable chain: which invoice line, what evidence, which credit memo, what it applied to, and which euro actually landed.",
             "Without that chain, “recoverable” stays a hope. Finance cannot defend a Verified euro to the GL."
           ]
         },
         {
-          "heading": "One honest path: invoice → finding → credit matched → Trace",
+          "heading": "One honest path: invoice → finding → credit matched → Verified",
           "paragraphs": [
             "The recover path we sell is deliberately short.",
-            "Start from an invoice line — not a dashboard tile. Compare contract or GRN evidence (price, qty, UOM). Raise a finding such as recover.ap.credit_expected_unapplied when the stack expects a credit that has not been cashed.",
-            "Then match a credit memo to the invoice or payment and keep a document reference. Only when that apply lands do we call the euro Verified — and Verified equals applied_amount, not an estimate.",
-            "Stop there. One credit. Trace. Done. No labor tour. No second general ledger. No overnight autopilot pitch on the sales path."
+            "Start from an invoice line — not a dashboard tile. Compare contract evidence (price, qty, UOM). Raise a finding when the invoice exceeds contract and the credit has not been applied.",
+            "Then match a credit memo to the invoice or payment. Only when that apply lands do we call the euro Verified — Verified equals applied cash, not an estimate.",
+            "Stop there. One recovery. Value Trace. Done. No labor tour. No second general ledger. No overnight Autopilot pitch on day one."
           ]
         },
         {
           "heading": "Expected vs Verified — the Finance kill test",
           "paragraphs": [
             "Expected is fine. It means RADR believes a credit should exist, with a because-line in operator English.",
-            "Verified is stricter. It requires a sealed Trace: invoice and line IDs, evidence, finding, credit memo, applied_to, doc_ref, applied_amount, sealed_at. If a buyer cannot match that chain in AP, the badge should not say Verified.",
-            "Fake Verified is worse than another BI chart. Our rule: LLMs explain; systems calculate. Sealed Trace seals money."
+            "Verified is stricter. It requires a complete Trace: invoice and line, evidence, finding, credit memo, apply to the original invoice, AP match. If a buyer cannot match that chain in AP, the badge should not say Verified.",
+            "Fake Verified is worse than another BI chart. Our rule: systems calculate; humans approve financial commitments."
           ]
         },
         {
           "heading": "Who this is for on day zero",
           "paragraphs": [
-            "ICP for Recover D0: multi-unit full-service or fast-casual groups roughly 8–30 locations, with Finance or Purchasing as sponsor. Hotels are a separate path — not the restaurant AP pitch.",
-            "Success on a 14-day pilot is simple: Verified recoveries Finance can match to AP, on the stack you already run, with a clean exit. No rip-replace commitment."
+            "ICP for Margin Recovery: multi-location hospitality groups, with CFO / COO / Finance or Procurement as sponsor — not a line-level GM buying a new operating system.",
+            "A 14-day pilot uncovers recoverable margin and prepares action. RADR keeps tracing open cases until value is applied or the case is closed. Clean exit. No rip-replace commitment."
           ]
         },
         {

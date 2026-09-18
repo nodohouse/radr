@@ -1,11 +1,11 @@
 {
   "metaTitle": "Pricing — RADR",
-  "metaDescription": "RADR pricing scales with operating scope and Decision responsibility. Paid Pilot, Core, and Control.",
+  "metaDescription": "Margin Recovery Pilot, Core, and Control. 14-day discovery / action window with open-case verification. Prove recoverable margin on the stack you already run.",
   "kicker": "Pricing",
-  "heroTitleLine1": "Priced to the operation.",
-  "heroTitleLine2": "Not the seat.",
-  "heroLead": "RADR pricing scales with the operating scope it covers and the level of decision responsibility it takes on.",
-  "heroSupport": "Start with one defined operating scope. Prove the economics. Then expand.",
+  "heroTitleLine1": "Start with recoverable margin.",
+  "heroTitleLine2": "Then expand the Decision layer.",
+  "heroLead": "Pilot Margin Recovery first. Expand to broader Decision coverage when the economics hold.",
+  "heroSupport": "One defined financial scope. Prove Verified Value. Then grow.",
   "how": {
     "kicker": "How pricing works",
     "title": "Price follows the operating surface.",
@@ -26,25 +26,27 @@
     }
   },
   "pilot": {
-    "kicker": "Paid Pilot",
+    "kicker": "Margin Recovery Pilot",
     "verb": "Prove",
-    "title": "Start with one Decision.",
-    "lead": "You do not need to transform the entire operation on day one.",
-    "body": "Start with one location, a defined set of systems and one economic problem worth solving. RADR connects the evidence, surfaces Decisions and verifies what happens next. If the economics hold, expand.",
-    "priceLabel": "Paid Pilot",
+    "title": "14 days to find and stage recovery.",
+    "lead": "Uncover recoverable margin and prepare action. RADR keeps tracing open cases until value is applied or the case is closed.",
+    "body": "One group or 2–3 locations. Supplier invoices, contracts, POS / menu where needed, AP evidence where available. Includes historical open credits / disputes / rebates when available — using evidence you already have.",
+    "priceLabel": "Margin Recovery Pilot",
     "priceSub": "Scoped with you",
-    "cta": "Talk to us about a Pilot",
+    "cta": "Start a 14-day recovery pilot",
     "points": [
-      "One location",
-      "Defined systems",
-      "Defined economic problem",
-      "Measurable outcome"
+      "One defined financial scope",
+      "2–3 locations",
+      "Invoice / contract connection",
+      "14-day discovery / action window",
+      "Open-case verification tail",
+      "Evidence package · recovery Trace · Verified Value"
     ]
   },
   "core": {
     "name": "RADR Core",
     "verb": "Decide + Verify",
-    "line": "The decision system for individual hospitality operations and growing teams.",
+    "line": "Broader Decision coverage once recovery is proven.",
     "audience": "Connect the operation. Make better Decisions. Verify what changed.",
     "priceLabel": "Priced by location + operating scope",
     "cta": "Discuss Core",
@@ -59,7 +61,7 @@
   "control": {
     "name": "RADR Control",
     "verb": "Govern + Scale",
-    "line": "Run Decision workflows across locations without losing local context.",
+    "line": "Multi-location governance, Autopilot policy, and enterprise controls.",
     "audience": "Coordinate, approve and learn across the group.",
     "priceLabel": "Portfolio / group pricing",
     "cta": "Discuss Control",
@@ -67,6 +69,7 @@
       "Everything in RADR Core",
       "Prepared Actions and approval workflows",
       "Multi-location governance",
+      "Autopilot within policy",
       "Portfolio Verified Value",
       "Advanced controls and implementation"
     ]

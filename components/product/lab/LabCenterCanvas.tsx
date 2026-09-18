@@ -50,7 +50,7 @@ const RECOVER_PATHS: {
   note: string;
 }[] = [
   { id: "seat_now", title: "Leave unapplied", euro: "€0", note: "Cash never lands" },
-  { id: "wait_12", title: "Trace sealed", euro: "€273", note: "Applied · Verified · stop" },
+  { id: "wait_12", title: "Apply credit", euro: "€273", note: "Verified recovered" },
   { id: "hard_stop", title: "Reprice menu", euro: "—", note: "Wrong lever" },
 ];
 
@@ -416,8 +416,8 @@ export function LabCenterCanvas() {
                         <em>Leaking</em>
                         <strong>€410 Expected</strong>
                         <p>
-                          because two-site unit price gap · seal with CM +
-                          doc_ref
+                          because two-site unit price gap · Expected until
+                          credit applies
                         </p>
                         <button type="button" onClick={() => goValue("trace")}>
                           Open Trace
@@ -425,13 +425,14 @@ export function LabCenterCanvas() {
                       </article>
                     ) : state.seed === "recover" ? (
                       <article className="lab-winloss-card" data-kind="win">
-                        <em>Protected</em>
+                        <em>Recovered</em>
                         <strong>€273 Verified</strong>
                         <p>
-                          because CM-44102 applied_to INV-88421 · sealed Trace
+                          because credit memo applied · matched to original
+                          invoice
                         </p>
                         <button type="button" onClick={() => goValue("trace")}>
-                          Open Trace · stop
+                          Open Value Trace
                         </button>
                       </article>
                     ) : (
@@ -528,9 +529,9 @@ export function LabCenterCanvas() {
               <p className="lab-aside-health">1 degraded · 1 stale</p>
               <p className="lab-aside-health-note">
                 {state.seed === "margin-response"
-                  ? "€410 Expected — seal only with CM + doc_ref."
+                  ? "€410 Expected — Verified only when the credit is applied."
                   : recover
-                    ? "€273 Verified = applied_amount · sealed Trace book-matchable."
+                    ? "€273 Verified recovered — matched to the original invoice."
                     : "€ claim grade unchanged — still Expected until verified."}
               </p>
             </div>

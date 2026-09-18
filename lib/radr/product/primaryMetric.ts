@@ -106,6 +106,16 @@ export function primaryMetricOf(r: DecisionRecord): MetricPresentation | null {
       };
     }
     case DECISION_IDS.supplier:
+      if (verified != null) {
+        return {
+          type: "VERIFIED_RECOVERED",
+          value: verified,
+          currency: "EUR",
+          label: ECONOMIC_METRIC_LABEL.VERIFIED_RECOVERED,
+          scopeLabel: "Matched to original invoice",
+          horizonLabel: "",
+        };
+      }
       return {
         type: "SUPPLIER_VARIANCE",
         value: CANON_SUPPLIER.exposureEuro,

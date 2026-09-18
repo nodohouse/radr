@@ -1,53 +1,43 @@
-# One-pager — Margin & Recovery Intelligence
+# Margin Recovery — one pager
 
-**Monday SKU:** Margin & Recovery Intelligence  
-**Not:** Adaptive Decision System · AI ops OS · second GL · Nory/R365 clone
+**Wedge:** Find the margin you’re losing — and prove you got it back.
+
+**Not:** Adaptive Decision System as the first sentence · AI ops OS · second GL
 
 ## Promise
 
-**Find the margin you’re losing — and prove you got it back.**
+RADR finds supplier / margin leakage already hiding across the systems they run,
+recommends the strongest response, prepares the action, and follows the value
+until Finance can verify what actually came back.
 
-Across suppliers, menus and ops — tell you what to do — verify you got it back.
+## Keep your operating stack
 
-## Who
+RADR sits across the systems you already use.
+You do not need to replace forecasting, scheduling, accounting, ordering, POS, or procurement
+to prove RADR’s first euro.
 
-Finance / Purchasing sponsor · multi-unit FSR / fast-casual ~8–30 locations.  
-Hotels = separate path (not homepage hero).
+## What RADR finds (tight family)
 
-## How (D0)
-
-- **Sources (max 2–3):** invoice + contract + POS or menu/recipe  
-- **One Decision card:** variance · 5–8 Futures · one REC · € Expected · Trace  
-- **Eng law:** systems calculate variance % and € Expected; LLM ranks/explains Futures  
-- **Verified €** only after sealed Trace (applied credit / observed outcome + doc_ref)
-
-## Hero seeds (Finance-owned)
-
-1. Credit issued, never applied  
-2. Two sites, same supplier, different unit price  
-
-Coke = teaching only. Discovery = *their* wound first.
+Contract price variance · Unapplied supplier credit · Missing rebate · Duplicate charge ·
+Freight / surcharge outside terms · UOM / pack-size mismatch · Quantity mismatch ·
+Cross-location price dispersion · Missed purchasing tier · Outstanding credit memo
 
 ## Pilot
 
-**14-day margin recovery pilot** · 2–3 sites · 2–3 feeds · clean exit  
-Success = Verified recoveries Finance can match to AP.
+**14 days to uncover recoverable margin and prepare action.**
+RADR keeps tracing open cases until the value is applied or the case is closed.
 
-## Foils
+Scope: one group or 2–3 locations  
+Inputs: invoices · contracts · POS/menu where needed · AP evidence where available  
+Deliverables: opportunities found · evidence packages · cases actioned · value pending · value verified
 
-| vs | Position |
-|----|----------|
-| **Nory** | Don’t replace forecasting / scheduling / ordering on day one |
-| **R365** | Not a second GL / full back-office |
-| **Dashboards** | Not another dashboard. Not a rip-replace OS. |
+## Verified
 
-## Sprinkle (roadmap — below fold only)
+Verified = sufficient downstream evidence that the economic value actually occurred
+(credit applied, payment offset, ledger match).
 
-Weather · nearby events · Instagram/social · cancel→team push · overnight GM brief  
+## Expansion
 
-**Only after first Verified €.** Never primary CTA. Never seal Verified off forecasts alone.
+Margin Recovery → Margin Response → Menu economics → Capacity / service Decisions → Autopilot
 
-## CTA
-
-Primary: Start a 14-day margin recovery pilot  
-Secondary: See one variance → Trace
+Platform category remains: Adaptive Decision System for Hospitality.

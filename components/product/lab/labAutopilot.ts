@@ -1,11 +1,15 @@
 /**
- * Autopilot ladder — progressive trust per decision type.
- * Suggest → Stage → Auto within policy → Verified.
+ * Autopilot permission ladder — orthogonal to Decision lifecycle.
+ *
+ * Permission: Suggest → Stage → Auto within policy
+ * Lifecycle (separate): Executed → Observed → Verified
+ *
+ * Never call Verified an Autopilot level.
  */
 
 import type { LabSeed } from "./labState";
 
-export type AutopilotLevel = 1 | 2 | 3 | 4;
+export type AutopilotLevel = 1 | 2 | 3;
 
 export type PolicyAction = {
   id: string;
@@ -22,8 +26,9 @@ export type AutopilotModel = {
   because: string;
   memoryNote: string;
   policy: PolicyAction[];
+  /** Lifecycle receipt — not Autopilot levels. */
   receipt?: {
-    staged: string;
+    executed: string;
     observed: string;
     verified: string;
   };
@@ -35,38 +40,56 @@ export function autopilotForSeed(
 ): AutopilotModel {
   if (seed === "recover") {
     return {
-      level: 4,
-      levelLabel: "4 · Verified",
+      level: 2,
+      levelLabel: "Stage",
       interrupt: "watching",
-      headline: "RADR sealed one credit — Trace matches AP",
+      headline: "RADR may prepare the supplier dispute",
       because:
-        "Verified €273 = CM-44102 applied_amount on INV-88421 · sealed Trace",
+        "RADR found a €273 contract variance. Evidence package is ready.",
       memoryNote:
-        "Sales demo = one card → Trace → stop. Draft next credit request only.",
+        "Always ask before sending a dispute, changing a payable, or accepting settlement.",
       policy: [
         {
-          id: "draft_cm",
-          label: "Draft credit request",
-          mode: "ask",
-          note: "Ask · prepare for Finance approval",
+          id: "detect",
+          label: "Detect variance",
+          mode: "auto",
+          note: "Auto · invoice vs contract",
         },
         {
-          id: "short_pay",
-          label: "Auto short-pay",
-          mode: "ask",
-          note: "Never auto · always ask",
+          id: "evidence",
+          label: "Assemble evidence",
+          mode: "auto",
+          note: "Auto · prepare package",
         },
         {
-          id: "remit",
-          label: "Auto-remit",
+          id: "draft",
+          label: "Draft dispute",
+          mode: "auto",
+          note: "Auto · stage for approval",
+        },
+        {
+          id: "send",
+          label: "Send AP dispute",
           mode: "ask",
-          note: "Never auto · always ask",
+          note: "Always ask before sending",
+        },
+        {
+          id: "payable",
+          label: "Change payable / post journal",
+          mode: "ask",
+          note: "Always ask · financial commitment",
+        },
+        {
+          id: "settle",
+          label: "Accept settlement",
+          mode: "ask",
+          note: "Always ask",
         },
       ],
       receipt: {
-        staged: "Credit request drafted (historical)",
-        observed: "CM-44102 posted in AP",
-        verified: "€273 sealed · Trace book-matchable",
+        executed: "Supplier dispute approved and sent",
+        observed: "Credit memo issued by supplier",
+        verified: "€273 recovered · matched to original invoice",
       },
     };
   }
@@ -74,33 +97,39 @@ export function autopilotForSeed(
   if (seed === "margin-response") {
     return {
       level: approved ? 2 : 1,
-      levelLabel: approved ? "2 · Stage" : "1 · Suggest",
+      levelLabel: approved ? "Stage" : "Suggest",
       interrupt: approved ? "radr_will" : "needs_you",
       headline: approved
-        ? "RADR prepared two-site price dispute"
-        : "Needs you · two-site unit price gap",
+        ? "RADR prepared the two-site price dispute"
+        : "Needs you · cross-location price dispersion",
       because:
-        "€410 Expected · Mitte €7.45/L vs Prenzlauer Berg €6.80/L — no seal yet",
+        "€410 exposed · Mitte €7.45/L vs Prenzlauer Berg €6.80/L — Expected until credit applies",
       memoryNote:
-        "Sales demo = one card → Trace → stop. Expected until CM + doc_ref.",
+        "Always ask before sending a dispute or changing payables.",
       policy: [
         {
-          id: "draft_cm",
-          label: "Draft credit / price correction",
-          mode: "ask",
-          note: "Ask · prepare for Finance approval",
+          id: "detect",
+          label: "Detect price dispersion",
+          mode: "auto",
+          note: "Auto · compare sites",
         },
         {
-          id: "short_pay",
-          label: "Auto short-pay",
-          mode: "ask",
-          note: "Never auto · always ask",
+          id: "evidence",
+          label: "Assemble evidence",
+          mode: "auto",
+          note: "Auto · prepare package",
         },
         {
-          id: "remit",
-          label: "Auto-remit",
+          id: "draft",
+          label: "Draft dispute",
           mode: "ask",
-          note: "Never auto · always ask",
+          note: "Ask · Finance approval",
+        },
+        {
+          id: "send",
+          label: "Send dispute",
+          mode: "ask",
+          note: "Always ask before sending",
         },
       ],
     };
@@ -108,7 +137,7 @@ export function autopilotForSeed(
 
   return {
     level: approved ? 2 : 1,
-    levelLabel: approved ? "2 · Stage" : "1 · Suggest",
+    levelLabel: approved ? "Stage" : "Suggest",
     interrupt: approved ? "radr_will" : "needs_you",
     headline: approved
       ? "RADR will hold walk-ins + throttle delivery"
@@ -116,7 +145,8 @@ export function autopilotForSeed(
     because: approved
       ? "Staged within policy · €620 Expected until verified after service"
       : "Interrupt — first compressed Friday this month at this kitchen %",
-    memoryNote: "Seen 12 similar Fridays · auto-stage allowed after Confirm prepare",
+    memoryNote:
+      "Seen 12 similar Fridays · auto-stage allowed after Confirm prepare",
     policy: [
       {
         id: "throttle",
@@ -145,9 +175,9 @@ export function autopilotForSeed(
     ],
     receipt: approved
       ? {
-          staged: "Hold · throttle · feature path prepared",
+          executed: "Hold · throttle · feature path prepared",
           observed: "After service close",
-          verified: "€620 seals when contribution matches Trace",
+          verified: "€620 when contribution matches the Trace",
         }
       : undefined,
   };
@@ -159,7 +189,6 @@ export const AUTOPILOT_LADDER: {
   blurb: string;
 }[] = [
   { level: 1, label: "Suggest", blurb: "Recommend · human decides" },
-  { level: 2, label: "Stage", blurb: "Confirm prepare · no SoR write" },
-  { level: 3, label: "Auto", blurb: "Within policy after Verified peers" },
-  { level: 4, label: "Verified", blurb: "€ sealed on Trace" },
+  { level: 2, label: "Stage", blurb: "Prepare · no SoR write yet" },
+  { level: 3, label: "Auto", blurb: "Within policy only" },
 ];

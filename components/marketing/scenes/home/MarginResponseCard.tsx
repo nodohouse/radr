@@ -1,9 +1,8 @@
 "use client";
 
 /**
- * Margin Response Decision card — hero visual bar.
- * Grammar: variance · 5–8 Futures · one REC · € Expected · because · Trace
- * Not a Control Center screenshot. Verified only after sealed Trace (lab).
+ * Margin Recovery Decision card — hero visual.
+ * Expected until credit applied; Verified only when Finance can match it back.
  */
 
 import { useEffect, useState } from "react";
@@ -30,11 +29,11 @@ export type MarginStory = {
 
 export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
   id: "credit-not-applied",
-  kicker: "Margin Response · Finance",
+  kicker: "Margin Recovery · Finance",
   displayId: "D-4102 · Berlin Mitte",
-  variance: "Credit issued, never applied",
+  variance: "Contract price variance",
   because:
-    "because INV-88421 line oil 420 L billed €7.45/L vs contract €6.80/L — CM not cashed to books",
+    "Invoice €7.45/L vs contract €6.80/L · 420 L — €273 exposed",
   euro: "€273",
   grade: "Expected",
   futures: [
@@ -48,16 +47,16 @@ export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
     { id: "wait", label: "Wait" },
   ],
   traceHref: "/app/lab/control-center?seed=recover",
-  traceLabel: "Open Trace →",
+  traceLabel: "See a Verified Trace →",
 };
 
 export const STORY_TWO_SITE_GAP: MarginStory = {
   id: "two-site-price-gap",
-  kicker: "Margin Response · Finance",
+  kicker: "Margin Recovery · Finance",
   displayId: "D-4108 · Mitte × Prenzlauer Berg",
-  variance: "Two sites, same supplier, different unit price",
+  variance: "Cross-location price dispersion",
   because:
-    "because Bluefin oil €7.45/L at Mitte vs €6.80/L at Prenzlauer Berg on the same contract week",
+    "Same SKU · Mitte €7.45/L vs Prenzlauer Berg €6.80/L on the same contract week — €410 exposed",
   euro: "€410",
   grade: "Expected",
   futures: [
@@ -70,7 +69,7 @@ export const STORY_TWO_SITE_GAP: MarginStory = {
     { id: "wait", label: "Wait" },
   ],
   traceHref: "/app/lab/control-center?seed=margin-response",
-  traceLabel: "Open Trace →",
+  traceLabel: "See a Verified Trace →",
 };
 
 const STORIES = [STORY_CREDIT_NOT_APPLIED, STORY_TWO_SITE_GAP] as const;
@@ -180,7 +179,8 @@ export function MarginResponseCard({ stories = STORIES }: Props) {
       </NextLink>
 
       <p className="rx-mrc-note">
-        Expected until sealed Trace. Verified € only with applied credit + doc_ref.
+        Expected until the credit is applied. Verified when Finance can match it
+        back.
       </p>
     </aside>
   );

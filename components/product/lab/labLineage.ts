@@ -58,9 +58,9 @@ export const TRACE_PEAK_EXPECTED: TraceLineage = {
 };
 
 /**
- * SALES DEMO — one AP-matched credit with sealed chain.
- * invoice_line → evidence → finding → credit_memo applied + doc_ref → Verified € = applied_amount.
- * Path: ?seed=recover → Trace → stop. No labor / GL / Wait-12 on this seed.
+ * Recover demo — one AP-matched credit with a complete Value Trace.
+ * Invoice → evidence → finding → credit applied → Verified recovered.
+ * Path: ?seed=recover → Value Trace. No labor / GL / Wait-12 on this seed.
  */
 export const TRACE_SUPPLIER_VERIFIED: TraceLineage = {
   decisionId: "dec_supplier_berlin",
@@ -72,13 +72,13 @@ export const TRACE_SUPPLIER_VERIFIED: TraceLineage = {
   sealedAt: "2026-09-17T14:22:00Z",
   sourceSystem: "AP · Contract · Invoice · Credit memo",
   documentRefs: [
-    { label: "invoice_id", value: "INV-88421" },
-    { label: "invoice_line_id", value: "INV-88421-L03 · frying oil 420 L" },
-    { label: "credit_memo_id", value: "CM-44102" },
-    { label: "applied_to", value: "INV-88421" },
-    { label: "doc_ref", value: "AP-POST-991" },
-    { label: "vendor", value: "Bluefin Berlin · site Berlin Mitte" },
-    { label: "aging", value: "11 days · opened 06 Sep" },
+    { label: "Invoice", value: "INV-88421" },
+    { label: "Invoice line", value: "INV-88421-L03 · frying oil 420 L" },
+    { label: "Credit memo", value: "CM-44102" },
+    { label: "Applied to", value: "INV-88421" },
+    { label: "AP posting", value: "AP-POST-991" },
+    { label: "Vendor", value: "Bluefin Berlin · site Berlin Mitte" },
+    { label: "Aging", value: "11 days · opened 06 Sep" },
   ],
   chain: [
     {
@@ -90,42 +90,42 @@ export const TRACE_SUPPLIER_VERIFIED: TraceLineage = {
     {
       id: "evidence",
       label: "Evidence",
-      value: "Contract CTR-OIL-2026 €6.80/L · Δ €0.65/L · optional GRN DN-39104",
+      value: "Contract CTR-OIL-2026 €6.80/L · Δ €0.65/L",
       because: "Price delta is the recoverable amount — qty and UOM matched",
     },
     {
       id: "finding",
       label: "Finding",
-      value: "recover.ap.credit_expected_unapplied",
-      because: "Credit was expected on the stack but not yet cashed to books",
+      value: "Contract price variance · €273 exposed",
+      because: "Invoice exceeds contract · credit not yet applied",
     },
     {
       id: "credit_memo",
       label: "Credit memo",
-      value: "CM-44102 · €273 applied_amount",
+      value: "CM-44102 · €273 applied",
       because: "Supplier issued credit equal to the line variance",
     },
     {
       id: "applied",
       label: "Applied",
-      value: "applied_to INV-88421 · doc_ref AP-POST-991",
+      value: "Applied to INV-88421 · AP-POST-991",
       because: "Finance can match this post to the same invoice in AP",
     },
     {
       id: "verified",
       label: "Verified €",
-      value: "€273 = applied_amount · sealed_at 2026-09-17",
+      value: "€273 recovered · matched 2026-09-17",
       because: "Verified euro equals applied cash — not an estimate",
     },
   ],
-  window: "Recover · sealed 17 Sep · Berlin Mitte",
+  window: "Recover · verified 17 Sep · Berlin Mitte",
   matchChecklist: [
     { label: "Match INV-88421 line L03 variance in AP", done: true },
     { label: "Credit memo CM-44102 posted to supplier ledger", done: true },
-    { label: "applied_to INV-88421 · doc_ref AP-POST-991", done: true },
-    { label: "Verified €273 = applied_amount", done: true },
+    { label: "Applied to INV-88421 · AP-POST-991", done: true },
+    { label: "Verified €273 recovered", done: true },
   ],
-  note: "Sales demo = this one credit → Trace → stop.",
+  note: "One recovery: leak → decision → action → credit → Verified.",
   because: "INV-88421 line variance matched CM-44102 applied to the same invoice",
 };
 
@@ -215,8 +215,8 @@ export const TRACE_TWO_SITE_EXPECTED: TraceLineage = {
   matchChecklist: [
     { label: "Match both invoices to CTR-OIL-2026", done: true },
     { label: "Confirm same SKU / UOM across sites", done: true },
-    { label: "Credit memo applied + doc_ref", done: false },
-    { label: "Verified € = applied_amount", done: false },
+    { label: "Credit memo applied", done: false },
+    { label: "Verified € recovered", done: false },
   ],
   note: "Sales demo fixture · Expected only until sealed. One card → Trace → stop.",
   because:

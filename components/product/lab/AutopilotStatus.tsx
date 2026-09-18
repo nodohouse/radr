@@ -51,11 +51,11 @@ export function AutopilotStatus({ model }: { model: AutopilotModel }) {
 
       {model.receipt ? (
         <div className="lab-auto-receipt">
-          <p className="lab-auto-policy-k">Execution receipt</p>
+          <p className="lab-auto-policy-k">Lifecycle</p>
           <ol>
             <li>
-              <em>Staged</em>
-              <span>{model.receipt.staged}</span>
+              <em>Executed</em>
+              <span>{model.receipt.executed}</span>
             </li>
             <li>
               <em>Observed</em>

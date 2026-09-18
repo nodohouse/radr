@@ -1,39 +1,31 @@
-# LAB Margin & Recovery seeds — sales demo
+# Recover seed — Margin Recovery demo
 
-## Law
+`?seed=recover` on Control Center.
 
-**Sales demo = one Decision card → Trace → stop.**
+## Promise
 
-- No labor tour · no GL chrome · no Wait-12 / hotel on this path
-- Verified € only when sealed Trace chain exists
-- Incomplete chain → **Expected** only (no fake Verified)
-- Autopilot: draft credit request OK · never auto short-pay / auto-remit
-- Max 2–3 sources: invoice + contract + (POS or menu/recipe)
+Find margin leakage → choose the response → prepare the action → follow the money → prove what came back.
 
-## Seeds
+## Value grades
 
-| Seed | Path | Story | Grade |
-|------|------|-------|-------|
-| `recover` | `?seed=recover` | Credit issued, never applied (D-4102) | **Verified** when sealed |
-| `margin-response` | `?seed=margin-response` | Two sites, same supplier, different unit price (D-4108) | **Expected** until seal |
+- **Expected** — recoverable amount identified; credit not yet applied
+- **Verified** — sufficient downstream evidence that value actually occurred (credit applied, payment offset, ledger match)
 
-## Fixtures
+## Autopilot (permission) ≠ Verified (lifecycle)
 
-### credit-not-applied — `TRACE_SUPPLIER_VERIFIED`
+Autopilot: Suggest → Stage → Auto within policy
 
-`invoice_id` + `invoice_line_id(s)`
-→ evidence → finding `recover.ap.credit_expected_unapplied`
-→ `credit_memo_id` → `applied_to` + `doc_ref`
-→ `verified_€` = `applied_amount` → `sealed_at`
+Always ask before: send dispute · change payable · post journal · accept settlement · change supplier contract
 
-INV-88421-L03 · CM-44102 · AP-POST-991 · €273
+Lifecycle: Executed → Observed → Verified
 
-### two-site-price-gap — `TRACE_TWO_SITE_EXPECTED`
+## Trace chain
 
-INV-88421 (Mitte €7.45/L) · INV-88502 (Prenzlauer Berg €6.80/L) · CTR-OIL-2026  
-Finding: `recover.ap.two_site_unit_price_gap` · €410 **Expected** (no CM apply yet)
+Invoice → contract / baseline → variance → Decision → action → credit / outcome → AP match → Verified Value
 
-## Buyer kill test
+Example: INV-88421 → CTR-OIL-2026 → €273 → Dispute → CM-44102 → AP-POST-991 → €273 Verified recovered
 
-If UI shows Verified € without a Trace path Finance can match to AP → ship block.  
-Coke / teaching demos only — discovery leads with *their* variance first.
+## Pilot commercial logic
+
+14 days to uncover recoverable margin and prepare action.
+RADR keeps tracing open cases until value is applied or the case is closed.

@@ -5,6 +5,7 @@
 
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
 import type { LabSeed } from "./labState";
+import { canonicalVerifiedTotal, formatCanonicalVerified } from "@/lib/radr/product/verifiedValueCanon";
 
 export type BriefPacket = "chef" | "foh" | "gm" | "cfo";
 
@@ -184,7 +185,7 @@ const SERVICE_BRIEF: ServiceBriefModel = {
       packet: "cfo",
       title: "CFO packet",
       horizon: "14d · money & risk",
-      lead: "Recover + Buy exposures — not the floor map.",
+      lead: "Recover and Buy exposures — not the floor map.",
       items: [
         {
           id: "cf1",
@@ -214,13 +215,13 @@ const SERVICE_BRIEF: ServiceBriefModel = {
         },
         {
           id: "cf3",
-          check: "Verified ladder",
-          detail: "€2,830 Verified · Trace sealed on tuna shortfall",
-          because: "POS close + stock adjustment matched",
+          check: "Verified Value",
+          detail: `${formatCanonicalVerified("cfo")} Verified in CFO scope`,
+          because: "Sum of Verified Decision records",
           when: "Since last check",
-          euro: 2830,
+          euro: canonicalVerifiedTotal("cfo"),
           grade: "Verified",
-          displayId: "D-1842",
+          displayId: "LEDGER",
           status: "done",
         },
       ],
@@ -232,7 +233,7 @@ const RECOVER_BRIEF: ServiceBriefModel = {
   phase: "pre",
   phaseLabel: "Monday morning · recover focus",
   deltaNote:
-    "Sales demo · one sealed AP credit → Trace → stop · Finance can match",
+    "One recovered credit · matched to invoice · Finance can verify",
   packets: {
     chef: SERVICE_BRIEF.packets.chef,
     foh: SERVICE_BRIEF.packets.foh,
@@ -243,8 +244,8 @@ const RECOVER_BRIEF: ServiceBriefModel = {
         {
           id: "g_r1",
           check: "AP credit sealed",
-          detail: "D-4102 · €273 Verified · Trace → stop",
-          because: "CM-44102 applied_to INV-88421 · sealed",
+          detail: "D-4102 · €273 Verified recovered",
+          because: "Credit memo applied · matched to original invoice",
           when: "Sealed",
           euro: 273,
           grade: "Verified",
@@ -259,14 +260,14 @@ const RECOVER_BRIEF: ServiceBriefModel = {
     cfo: {
       packet: "cfo",
       title: "CFO packet",
-      horizon: "Sealed Trace · stop",
-      lead: "One credit. Match to AP. Stop.",
+      horizon: "Verified recovery",
+      lead: "One credit. Matched to AP. Verified.",
       items: [
         {
           id: "cf1",
           check: "AP credit applied",
           detail: "INV-88421 · CM-44102 · €273 Verified",
-          because: "applied_amount · sealed Trace · book-matchable",
+          because: "€273 recovered and matched to the original invoice",
           when: "Sealed",
           euro: 273,
           grade: "Verified",
@@ -290,9 +291,9 @@ const RECOVER_BRIEF: ServiceBriefModel = {
         },
         {
           id: "cf3",
-          check: "Open Trace · stop",
-          detail: "invoice_line → evidence → finding → CM → Verified",
-          because: "Sales demo ends at sealed Trace",
+          check: "Open Value Trace",
+          detail: "Invoice → contract → decision → credit → Verified",
+          because: "Follow the money end to end",
           when: "Now",
           euro: 273,
           grade: "Verified",

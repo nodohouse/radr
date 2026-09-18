@@ -1,31 +1,31 @@
 {
   "hero": {
-    "kicker": "For Finance & Purchasing · multi-unit FSR / fast-casual",
+    "kicker": "Margin Recovery · Finance / Procurement · multi-location hospitality",
     "title": "Find the margin you’re losing — and prove you got it back",
-    "sub": "Clean exit. No rip-replace. No second GL.",
-    "support": "Not another dashboard. Not a rip-replace OS. Not a second GL.",
-    "ctaPrimary": "Start a 14-day margin recovery pilot",
-    "ctaSecondary": "See one variance → Trace",
+    "sub": "RADR traces supplier and margin leakage across the systems you already run, compares the available responses, and follows the value until Finance can verify what came back.",
+    "support": "RADR traces supplier and margin leakage across the systems you already run, compares the available responses, and follows the value until Finance can verify what came back.",
+    "ctaPrimary": "Start a 14-day recovery pilot",
+    "ctaSecondary": "See a Verified Trace",
     "ariaLabel": "Nothing off the RADR — Find the margin you’re losing — and prove you got it back",
     "card": {
-      "aria": "One AP credit with sealed Trace",
-      "kicker": "Sales demo · one credit",
+      "aria": "Margin Recovery Decision card",
+      "kicker": "Margin Recovery · Finance",
       "id": "D-4102 · Berlin Mitte",
-      "title": "AP credit applied",
+      "title": "Contract price variance",
       "euro": "€273",
-      "grade": "Verified",
-      "because": "because INV-88421 line variance matched CM-44102 applied to the same invoice",
-      "step1": "Invoice INV-88421 · line oil 420 L",
-      "step2": "Evidence · contract €6.80/L vs invoice €7.45/L",
-      "step3": "Finding · recover.ap.credit_expected_unapplied",
-      "step4": "Credit memo CM-44102 applied · doc_ref AP-POST-991",
-      "step5": "Verified €273 = applied_amount · sealed",
-      "note": "Verified only with sealed Trace. Expected is fine without a seal."
+      "grade": "Expected",
+      "because": "Invoice €7.45/L vs contract €6.80/L · 420 L — €273 exposed",
+      "step1": "Absorb",
+      "step2": "Dispute",
+      "step3": "Renegotiate",
+      "step4": "Switch supplier",
+      "step5": "Open Trace →",
+      "note": "Expected until the credit is applied. Verified when Finance can match it back."
     },
     "titleLine1": "Recover money on the stack you already run",
     "titleLine2Prefix": "",
-    "promise": "Your AP tools flag credits. RADR helps you cash them — with Trace you can match to the books.",
-    "lead": "Clean exit. No rip-replace. No second GL.",
+    "promise": "RADR traces supplier and margin leakage across the systems you already run, compares the available responses, and follows the value until Finance can verify what came back.",
+    "lead": "Keep your operating stack. RADR sits across the systems you already use.",
     "verticals": {
       "aria": "ICP",
       "hint": "",
@@ -1618,47 +1618,91 @@
     }
   },
   "recover": {
-    "problem": {
-      "kicker": "The problem",
-      "title": "Credits on screen, never cash",
-      "body": "AP tools flag supplier credits every week. Finance still chases aging memos, partial applies, and variances that never hit the books. The stack records the credit. Cash still leaks."
+    "story": {
+      "kicker": "One recovery",
+      "title": "From leak to Verified €273",
+      "lead": "A CFO should see the whole loop in one story — not assemble it from five sections.",
+      "leakK": "The leak",
+      "leakInvoice": "Invoice €7.45/L",
+      "leakContract": "Contract €6.80/L",
+      "leakQty": "Quantity 420 L",
+      "leakEuro": "€273 exposed",
+      "decisionK": "The decision",
+      "decisionTitle": "Dispute + trace credit",
+      "decisionBecause": "Contract price is clear. Quantity and UOM match. No reason to reprice the menu yet.",
+      "actionK": "The action",
+      "actionBody": "Evidence package prepared. Supplier dispute staged for approval.",
+      "outcomeK": "The outcome",
+      "outcomeBody": "Credit memo issued.",
+      "verifiedK": "Verified",
+      "verifiedEuro": "€273 recovered",
+      "verifiedBody": "Matched back to the original invoice and AP record."
+    },
+    "finds": {
+      "kicker": "What RADR finds",
+      "title": "A tight family of supplier and margin leakage",
+      "lead": "Focused on finance pain — not every hospitality problem on day one.",
+      "i1": "Contract price variance",
+      "i2": "Unapplied supplier credit",
+      "i3": "Missing rebate",
+      "i4": "Duplicate charge",
+      "i5": "Freight / surcharge outside terms",
+      "i6": "UOM / pack-size mismatch",
+      "i7": "Quantity mismatch",
+      "i8": "Cross-location price dispersion",
+      "i9": "Missed purchasing tier",
+      "i10": "Outstanding credit memo"
     },
     "how": {
-      "kicker": "How it works",
-      "title": "Invoice → finding → credit matched → Trace",
-      "s1t": "Invoice + evidence",
-      "s1d": "Line variance vs contract / GRN — qty, price, or UOM.",
-      "s2t": "Finding + action",
-      "s2d": "recover.ap.credit_expected_unapplied · draft credit request for approval.",
-      "s3t": "Credit matched → Trace → stop",
-      "s3d": "credit_memo applied to invoice or payment · Verified € = applied_amount when sealed.",
-      "stop": "One credit. Trace you can match to AP. Stop. No labor tour. No second GL."
+      "kicker": "How RADR works",
+      "title": "Connect → Find → Decide → Recover → Verify",
+      "s1t": "Connect",
+      "s1d": "Supplier invoices, contracts, and POS / menu where needed — plus AP evidence when available.",
+      "s2t": "Find",
+      "s2d": "Surface recoverable margin already hiding across the systems you run.",
+      "s3t": "Decide",
+      "s3d": "Compare responses — dispute, negotiate, switch, absorb, reprice, rebalance, wait — and pick the strongest path.",
+      "s4t": "Recover",
+      "s4d": "Prepare the evidence package and stage the action for approval.",
+      "s5t": "Verify",
+      "s5d": "Follow open cases until value is applied — or the case is closed. Verified only when Finance can match what came back."
+    },
+    "stack": {
+      "kicker": "Keep your operating stack",
+      "title": "RADR sits across the systems you already use",
+      "lead": "You do not need to replace forecasting, scheduling, accounting, ordering, POS, or procurement to prove RADR’s first euro.",
+      "body": "Systems record the operation. RADR finds the leak, prepares the response, and proves the recovery."
     },
     "pilot": {
-      "kicker": "14-day recover pilot",
-      "title": "2–3 sites. Clean exit.",
-      "i1": "14 days on the stack you already run",
-      "i2": "2–3 locations · Finance / Purchasing sponsor",
-      "i3": "Success = Verified recoveries finance can match to AP",
-      "i4": "Clean exit. No rip-replace commitment.",
-      "cta": "Start a 14-day recover pilot"
+      "kicker": "Margin Recovery Pilot",
+      "title": "14 days to uncover recoverable margin and prepare action",
+      "lead": "RADR keeps tracing open cases until the value is applied or the case is closed.",
+      "i1": "Scope: one group or 2–3 locations",
+      "i2": "Inputs: supplier invoices, contracts, POS / menu where needed, AP evidence where available",
+      "i3": "14-day discovery / action window — not a promise that every euro settles in 14 days",
+      "i4": "Verification continues for open recovery cases after the window",
+      "i5": "Includes current invoices and historical open credits / disputes / rebates when available",
+      "deliverK": "Pilot deliverables",
+      "d1": "Recovery opportunities found",
+      "d2": "Evidence packages prepared",
+      "d3": "Cases actioned",
+      "d4": "Value pending",
+      "d5": "Value verified",
+      "note": "No minimum euro result unless contractually agreed. Illustrative demo figures are labeled as such.",
+      "cta": "Start a 14-day recovery pilot"
     },
-    "foils": {
-      "kicker": "What RADR is not",
-      "title": "Stay on your stack",
-      "f1": "Not a second GL",
-      "f2": "Not another dashboard",
-      "f3": "Not a rip-replace OS for R365 / Nory / Craftable / Toast"
-    },
-    "vision": {
-      "summary": "Later: Hospitality Autopilot",
-      "body": "Overnight briefs, events, and weather — a roadmap vision below the fold. Not the D0 commercial wedge. Today we cash credits on the stack you already run."
+    "expansion": {
+      "kicker": "Platform expansion",
+      "title": "Recovery is the first Decision RADR solves",
+      "lead": "The Adaptive Decision System for Hospitality stays the long-term category — bought through a wedge Finance can prove.",
+      "path": "Margin Recovery → Margin Response → Menu economics → Capacity / service Decisions → Autopilot",
+      "body": "Once leakage is identified, Margin Response can weigh dispute, negotiate, switch, absorb, reprice, rebalance, change bundle, or wait — without making that the first thing every prospect must understand."
     },
     "footer": {
-      "title": "Recover money on the stack you already run",
-      "body": "Start a 14-day recover pilot. Clean exit.",
-      "cta": "Start a 14-day recover pilot",
-      "secondary": "See one credit → Trace"
+      "title": "Find the margin you’re losing — and prove you got it back",
+      "body": "We find margin leakage. We help you choose the response. We prepare the action. We follow the money. We prove what came back.",
+      "cta": "Start a 14-day recovery pilot",
+      "secondary": "See a Verified Trace"
     }
   }
 }

@@ -119,12 +119,12 @@ function LabTopBar() {
                   {twoSite ? (
                     <>
                       <strong>Expected · Two-site gap</strong> — €410 Expected
-                      until CM + doc_ref seals.
+                      until the credit is applied.
                     </>
                   ) : (
                     <>
-                      <strong>Sealed · Trace</strong> — €273 Verified =
-                      CM-44102 applied_amount · book-matchable.
+                      <strong>Verified recovered</strong> — €273 matched to the
+                      original invoice.
                     </>
                   )}
                 </p>

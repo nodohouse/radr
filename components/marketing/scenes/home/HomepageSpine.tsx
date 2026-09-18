@@ -7,8 +7,8 @@ import { Hero } from "@/components/marketing/scenes/Hero";
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 
 /**
- * Margin & Recovery homepage spine.
- * Shared left edge across hero copy + body sections.
+ * Margin Recovery homepage spine — CFO wedge in 60 seconds.
+ * Flow: Hero → one recovery → what we find → how → keep stack → pilot → expansion → CTA.
  */
 export function HomepageSpine() {
   const t = useTranslations("homepage.recover");
@@ -19,15 +19,71 @@ export function HomepageSpine() {
 
       <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
-          <div className="rx-rec-block">
-            <p className="rx-rec-k">{t("problem.kicker")}</p>
-            <h2 className="rx-rec-h">{t("problem.title")}</h2>
-            <p className="rx-rec-p">{t("problem.body")}</p>
+          <div className="rx-rec-block rx-rec-story">
+            <p className="rx-rec-k">{t("story.kicker")}</p>
+            <h2 className="rx-rec-h">{t("story.title")}</h2>
+            <p className="rx-rec-p">{t("story.lead")}</p>
+
+            <div className="rx-rec-story-flow">
+              <article className="rx-rec-beat">
+                <p className="rx-rec-beat-k">{t("story.leakK")}</p>
+                <ul className="rx-rec-beat-facts">
+                  <li>{t("story.leakInvoice")}</li>
+                  <li>{t("story.leakContract")}</li>
+                  <li>{t("story.leakQty")}</li>
+                </ul>
+                <p className="rx-rec-beat-euro">{t("story.leakEuro")}</p>
+              </article>
+
+              <article className="rx-rec-beat">
+                <p className="rx-rec-beat-k">{t("story.decisionK")}</p>
+                <h3 className="rx-rec-beat-h">{t("story.decisionTitle")}</h3>
+                <p className="rx-rec-beat-p">{t("story.decisionBecause")}</p>
+              </article>
+
+              <article className="rx-rec-beat">
+                <p className="rx-rec-beat-k">{t("story.actionK")}</p>
+                <p className="rx-rec-beat-p">{t("story.actionBody")}</p>
+              </article>
+
+              <article className="rx-rec-beat">
+                <p className="rx-rec-beat-k">{t("story.outcomeK")}</p>
+                <p className="rx-rec-beat-p">{t("story.outcomeBody")}</p>
+              </article>
+
+              <article className="rx-rec-beat rx-rec-beat-verified">
+                <p className="rx-rec-beat-k">{t("story.verifiedK")}</p>
+                <p className="rx-rec-beat-euro">{t("story.verifiedEuro")}</p>
+                <p className="rx-rec-beat-p">{t("story.verifiedBody")}</p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
+        <div className="rx-shell">
+          <div className="rx-rec-block">
+            <p className="rx-rec-k">{t("finds.kicker")}</p>
+            <h2 className="rx-rec-h">{t("finds.title")}</h2>
+            <p className="rx-rec-p">{t("finds.lead")}</p>
+            <ul className="rx-rec-finds">
+              <li>{t("finds.i1")}</li>
+              <li>{t("finds.i2")}</li>
+              <li>{t("finds.i3")}</li>
+              <li>{t("finds.i4")}</li>
+              <li>{t("finds.i5")}</li>
+              <li>{t("finds.i6")}</li>
+              <li>{t("finds.i7")}</li>
+              <li>{t("finds.i8")}</li>
+              <li>{t("finds.i9")}</li>
+              <li>{t("finds.i10")}</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
           <div className="rx-rec-block">
             <p className="rx-rec-k">{t("how.kicker")}</p>
@@ -45,8 +101,26 @@ export function HomepageSpine() {
                 <strong>{t("how.s3t")}</strong>
                 <span>{t("how.s3d")}</span>
               </li>
+              <li>
+                <strong>{t("how.s4t")}</strong>
+                <span>{t("how.s4d")}</span>
+              </li>
+              <li>
+                <strong>{t("how.s5t")}</strong>
+                <span>{t("how.s5d")}</span>
+              </li>
             </ol>
-            <p className="rx-rec-stop">{t("how.stop")}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
+        <div className="rx-shell">
+          <div className="rx-rec-block">
+            <p className="rx-rec-k">{t("stack.kicker")}</p>
+            <h2 className="rx-rec-h">{t("stack.title")}</h2>
+            <p className="rx-rec-p">{t("stack.lead")}</p>
+            <p className="rx-rec-p">{t("stack.body")}</p>
           </div>
         </div>
       </section>
@@ -56,12 +130,23 @@ export function HomepageSpine() {
           <div className="rx-rec-block">
             <p className="rx-rec-k">{t("pilot.kicker")}</p>
             <h2 className="rx-rec-h">{t("pilot.title")}</h2>
+            <p className="rx-rec-p">{t("pilot.lead")}</p>
             <ul className="rx-rec-list">
               <li>{t("pilot.i1")}</li>
               <li>{t("pilot.i2")}</li>
               <li>{t("pilot.i3")}</li>
               <li>{t("pilot.i4")}</li>
+              <li>{t("pilot.i5")}</li>
             </ul>
+            <p className="rx-rec-k rx-rec-deliver-k">{t("pilot.deliverK")}</p>
+            <ul className="rx-rec-list">
+              <li>{t("pilot.d1")}</li>
+              <li>{t("pilot.d2")}</li>
+              <li>{t("pilot.d3")}</li>
+              <li>{t("pilot.d4")}</li>
+              <li>{t("pilot.d5")}</li>
+            </ul>
+            <p className="rx-rec-note">{t("pilot.note")}</p>
             <Link
               href="/contact?intent=margin-recovery-pilot"
               className="rx-btn rx-btn-primary"
@@ -75,25 +160,11 @@ export function HomepageSpine() {
       <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
           <div className="rx-rec-block">
-            <p className="rx-rec-k">{t("foils.kicker")}</p>
-            <h2 className="rx-rec-h">{t("foils.title")}</h2>
-            <ul className="rx-rec-foils">
-              <li>{t("foils.f1")}</li>
-              <li>{t("foils.f2")}</li>
-              <li>{t("foils.f3")}</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="rx-rec-sec" data-nav-theme="light">
-        <div className="rx-shell">
-          <div className="rx-rec-block">
-            <p className="rx-rec-k">{t("vision.kicker")}</p>
-            <details className="rx-rec-vision">
-              <summary>{t("vision.summary")}</summary>
-              <p>{t("vision.body")}</p>
-            </details>
+            <p className="rx-rec-k">{t("expansion.kicker")}</p>
+            <h2 className="rx-rec-h">{t("expansion.title")}</h2>
+            <p className="rx-rec-p">{t("expansion.lead")}</p>
+            <p className="rx-rec-path">{t("expansion.path")}</p>
+            <p className="rx-rec-p">{t("expansion.body")}</p>
           </div>
         </div>
       </section>

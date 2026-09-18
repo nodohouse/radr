@@ -57,7 +57,7 @@ const RECOVER_FUTURES: {
   note: string;
 }[] = [
   { id: "seat_now", title: "Leave unapplied", euro: "€0", note: "Cash never lands" },
-  { id: "wait_12", title: "Trace sealed", euro: "€273", note: "Applied · Verified · REC" },
+  { id: "wait_12", title: "Apply credit", euro: "€273", note: "Verified recovered" },
   { id: "hard_stop", title: "Reprice menu", euro: "—", note: "Wrong lever" },
 ];
 
@@ -176,7 +176,7 @@ export function DecisionHero(props: Props) {
         <p className="lab-obj-note">
           Staged only — not written to systems of record. Verifies when{" "}
           {isFinanceSeed(seed)
-            ? "credit memo posts + doc_ref seals"
+            ? "the credit is applied and Finance can match it"
             : "contribution matches after service"}
           .
         </p>
@@ -322,7 +322,7 @@ export function DecisionHero(props: Props) {
           <div className="lab-obj-approve-zone">
             {trace.sealed ? (
               <button type="button" className="lab-obj-approve" onClick={onOpenTrace}>
-                Open Trace · stop
+                Open Value Trace
               </button>
             ) : !confirm ? (
               <button type="button" className="lab-obj-approve" onClick={() => setConfirm(true)}>
@@ -332,7 +332,8 @@ export function DecisionHero(props: Props) {
               <div className="lab-obj-confirm" role="alertdialog" aria-label="Confirm">
                 <p>
                   Prepare AP dispute · hold PO.{" "}
-                  <strong>€{contribution} remains Expected</strong> until sealed Trace.
+                  <strong>€{contribution} remains Expected</strong> until the
+                  credit is applied.
                 </p>
                 <div className="lab-obj-confirm-row">
                   <button

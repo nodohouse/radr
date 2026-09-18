@@ -87,7 +87,9 @@ describe("Role scope integrity", () => {
       scoped.filter((r) => r.status === "AWAITING_APPROVAL").length,
     );
     expect(urgent.some((r) => r.id === DECISION_IDS.peak)).toBe(true);
-    expect(review.some((r) => r.id === DECISION_IDS.supplier)).toBe(true);
+    // D-4102 is Verified recovered — not in needs_you. Margin Response stays open.
+    expect(review.some((r) => r.id === DECISION_IDS.marginCoke)).toBe(true);
+    expect(scoped.some((r) => r.id === DECISION_IDS.supplier)).toBe(true);
   });
 
   it("Ask RADR for GM does not name Amsterdam Decisions", () => {
@@ -134,13 +136,14 @@ describe("Economic semantics", () => {
     expect(r.verifiedValue?.amount).toBe(40);
   });
 
-  it("D-4102 shows supplier variance exposed €273", () => {
+  it("D-4102 shows supplier variance recovered €273 when Verified", () => {
     const r = getDecisionRecord(DECISION_IDS.supplier)!;
     const m = primaryMetricOf(r)!;
-    expect(m.type).toBe("SUPPLIER_VARIANCE");
+    expect(r.status).toBe("VERIFIED");
+    expect(r.verifiedValue?.amount).toBe(273);
+    expect(m.type).toBe("VERIFIED_RECOVERED");
     expect(m.value).toBe(273);
     expect(CANON_SUPPLIER.exposureEuro).toBe(273);
-    expect(m.scopeLabel.toLowerCase()).toContain("invoice");
   });
 
   it("D-6671 potential recovered is €184 everywhere", () => {
@@ -236,8 +239,8 @@ describe("Economic semantics", () => {
     );
     expect(a.activeExposure + a.activeOpportunity).toBe(expected);
     expect(a.activeExposure).toBe(expected); // GM needs_you are exposure-class
-    // 620 peak + 273 supplier + 168 margin response (not 796 monthly absorb)
-    expect(a.activeExposure).toBe(620 + 273 + 168);
+    // Peak 620 + margin Coke 168 (supplier D-4102 is Verified recovered — not active exposure)
+    expect(a.activeExposure).toBe(620 + 168);
     expect(a.decisionIdsActiveExposure).not.toContain(DECISION_IDS.tableRecover);
     const pending = scoped.filter((r) => recordAttention(r) === "handling");
     const pendingSum = pending.reduce(

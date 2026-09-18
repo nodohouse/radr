@@ -1,3 +1,4 @@
+import { canonicalVerifiedTotal } from "@/lib/radr/product/verifiedValueCanon";
 /**
  * Role lenses — whole Center composition, not cosmetic chips.
  */
@@ -56,7 +57,7 @@ export const ROLE_LENSES: Record<CenterRole, RoleLens> = {
   cfo: {
     role: "cfo",
     title: "Control Center",
-    subtitle: "Money in / out · Recover + Buy · Verified ladder",
+    subtitle: "Money in / out · Recover + Buy · Verified Value",
     demoPath: "CFO Monday morning · AP credit + Trace",
     kpis: ["revenue_in", "money_out", "recover_exposure", "verified"],
     showPulse: true,
@@ -119,9 +120,9 @@ export const CLEVEL_THEMES: MoneyTheme[] = [
   {
     id: "t3",
     title: "Verified protection banked",
-    euro: 2830,
+    euro: canonicalVerifiedTotal("coo"),
     grade: "Verified",
-    because: "Ledger-matched tuna shortfall + prior closes",
+    because: "Sum of Verified records in portfolio scope",
     wedge: "VALUE",
     href: "/app/lab/value?band=verified",
   },

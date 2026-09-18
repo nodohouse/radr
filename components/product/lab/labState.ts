@@ -96,7 +96,7 @@ function deriveTwoSite(state: LabState): LabDerived {
   let decisionSub =
     "Bluefin oil · Mitte €7.45/L vs Prenzlauer Berg €6.80/L · Expected";
   const moneyGrade: "Expected" | "Verified" = "Expected";
-  const moneyMeta = "No seal · Expected until CM + doc_ref";
+  const moneyMeta = "Expected until credit is applied";
   const recommended: LabFuture = "wait_12";
 
   if (f === "seat_now") {
@@ -137,7 +137,7 @@ function deriveTwoSite(state: LabState): LabDerived {
       {
         system: "Trace",
         title: "Open Expected lineage",
-        detail: "Incomplete until credit_memo applied + doc_ref",
+        detail: "Incomplete until credit memo is applied",
       },
       {
         system: "Policy",
@@ -150,13 +150,13 @@ function deriveTwoSite(state: LabState): LabDerived {
 
 function deriveRecover(state: LabState): LabDerived {
   const f = state.selectedFuture;
-  // Sales demo default: sealed Verified credit → Trace → stop
+  // Recover demo default: credit applied → Verified
   let contribution = 273;
   let decisionLabel = "AP CREDIT APPLIED";
   let decisionSub =
-    "INV-88421 · CM-44102 applied · Trace sealed · Finance can match AP";
+    "€273 recovered and matched to the original invoice";
   let moneyGrade: "Expected" | "Verified" = "Verified";
-  let moneyMeta = "applied_amount · sealed Trace";
+  let moneyMeta = "Verified recovered";
   const recommended: LabFuture = "wait_12";
 
   if (f === "seat_now") {
@@ -164,13 +164,13 @@ function deriveRecover(state: LabState): LabDerived {
     decisionLabel = "LEAVE UNAPPLIED";
     decisionSub = "Credit stays on screen · cash never lands";
     moneyGrade = "Expected";
-    moneyMeta = "No seal · not Verified";
+    moneyMeta = "Expected · not Verified";
   } else if (f === "hard_stop") {
     contribution = 0;
     decisionLabel = "REPRICE MENU NOW";
-    decisionSub = "Does not resolve AP credit · wrong lever";
+    decisionSub = "Does not resolve the credit · wrong lever";
     moneyGrade = "Expected";
-    moneyMeta = "Not a Recover Trace";
+    moneyMeta = "Not a recovery Trace";
   }
 
   const project = state.mode === "futures" || state.mode === "approved";
@@ -178,9 +178,9 @@ function deriveRecover(state: LabState): LabDerived {
     contribution = 273;
     decisionLabel = "AP CREDIT APPLIED";
     decisionSub =
-      "INV-88421 · CM-44102 applied · Trace sealed · Finance can match AP";
+      "€273 recovered and matched to the original invoice";
     moneyGrade = "Verified";
-    moneyMeta = "applied_amount · sealed Trace";
+    moneyMeta = "Verified recovered";
   }
 
   return {
@@ -198,25 +198,25 @@ function deriveRecover(state: LabState): LabDerived {
     recommended,
     decisionId: CANON_SUPPLIER.id,
     displayId: CANON_SUPPLIER.displayId,
-    deadlineLabel: "Sealed",
-    clockLabel: "Trace → stop",
+    deadlineLabel: "Applied",
+    clockLabel: "Value Trace open",
     moneyGrade,
     moneyMeta,
     actions: [
       {
         system: "AP",
         title: "Credit memo applied",
-        detail: "CM-44102 · applied_to INV-88421 · doc_ref AP-POST-991",
+        detail: "Matched to the original invoice",
       },
       {
         system: "Trace",
-        title: "Open sealed lineage",
-        detail: "invoice_line → evidence → finding → CM → Verified €273",
+        title: "Open Value Trace",
+        detail: "Invoice → contract → decision → credit → Verified €273",
       },
       {
         system: "Policy",
-        title: "Draft next credit request",
-        detail: "Ask · never auto short-pay / auto-remit",
+        title: "Draft next dispute",
+        detail: "Ask before sending · never auto-settle",
       },
     ],
   };

@@ -62,7 +62,7 @@ function seedPortfolio(): Record<string, DecisionRecord> {
     [DECISION_IDS.tableRecover]: buildTableRecoverDecisionRecord("APPROVED"),
     [DECISION_IDS.ota]: buildVerifiedOta(),
     [DECISION_IDS.orphan]: buildVerifiedOrphan(),
-    [DECISION_IDS.supplier]: buildSupplierDecisionRecord("AWAITING_APPROVAL"),
+    [DECISION_IDS.supplier]: buildSupplierDecisionRecord("VERIFIED"),
     [DECISION_IDS.playbook]: buildPlaybookDecisionRecord("SIMULATED"),
     [DECISION_IDS.tuna]: buildArchivedTuna(),
     /** Intelligence depth — learned, not urgent clutter. */

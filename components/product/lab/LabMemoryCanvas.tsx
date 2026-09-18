@@ -7,6 +7,7 @@
 
 import { DECISION_IDS, displayDecisionId } from "@/lib/radr/decision/ids";
 import { useLab, type MemoryScope } from "./LabContext";
+import { formatCanonicalVerified } from "@/lib/radr/product/verifiedValueCanon";
 
 const CHAIN: { id: MemoryScope; n: string; label: string }[] = [
   { id: "comparable", n: "12", label: "Comparable nights" },
@@ -61,7 +62,7 @@ const STORIES: Record<MemoryScope, Story> = {
     observed: "Second turns held · comps did not spike",
     verified: "€ matched against seat-now baselines on ledger",
     next: "Promote path into Playbook v3 default",
-    euro: "€2,830",
+    euro: formatCanonicalVerified("gm"),
     grade: "Verified",
   },
   playbook: {
