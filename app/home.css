@@ -13068,55 +13068,67 @@ html:has(.radr-home) body {
   background: #f7faf8;
 }
 .rx-he-recover {
-  padding: clamp(5.5rem, 10vh, 7rem) 0 clamp(3.5rem, 6vh, 4.75rem);
-  background: #f7faf8;
+  position: relative;
+  padding: clamp(5.25rem, 9vh, 6.75rem) 0 clamp(3.25rem, 6vh, 4.5rem);
+  background:
+    radial-gradient(48% 55% at 12% 18%, rgba(0, 217, 120, 0.09), transparent 58%),
+    radial-gradient(42% 48% at 88% 72%, rgba(180, 220, 205, 0.22), transparent 62%),
+    #f7faf8;
   min-height: 0;
   display: block;
+  overflow: hidden;
 }
-/* All text left · product card right */
+/* All text left · product card right — one composition */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
-  column-gap: clamp(2rem, 5vw, 3.75rem);
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+  column-gap: clamp(2.25rem, 5.5vw, 4rem);
   row-gap: 2.25rem;
-  align-items: center;
+  align-items: start;
   width: 100%;
 }
 .rx-he-recover-copy {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  max-width: 26rem;
+  max-width: 28rem;
+  padding-top: 0.35rem;
 }
 .rx-he-recover-product {
   width: 100%;
   max-width: none;
   justify-self: stretch;
+  padding-top: 0.15rem;
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;
   min-height: 26rem;
   border-radius: 20px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 22px 56px rgba(10, 13, 11, 0.08);
 }
 .rx-he-recover-title {
-  margin: 1.25rem 0 0;
-  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  margin: 1.65rem 0 0;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(10, 13, 11, 0.08);
+  font-size: clamp(1.28rem, 2.1vw, 1.62rem);
   font-weight: 650;
-  letter-spacing: -0.03em;
-  line-height: 1.25;
+  letter-spacing: -0.035em;
+  line-height: 1.22;
   color: #0a0d0b;
-  max-width: 22ch;
+  max-width: 18ch;
 }
 .rx-he-recover-support {
-  margin: 0.7rem 0 0;
+  margin: 0.75rem 0 0;
   font-size: 0.95rem;
   line-height: 1.5;
   color: #4a524e;
   max-width: 28rem;
 }
 .rx-he-recover .rx-he-ctas {
-  margin-top: 1.5rem;
+  margin-top: 1.65rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
@@ -13279,15 +13291,16 @@ html:has(.radr-home) body {
   color: #0a0d0b;
 }
 
-/* Stacked left lockup — brand screenshot energy */
+/* Stacked left lockup — brand as the left column */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
   gap: 0;
   width: 100%;
-  font-size: clamp(3rem, 5.8vw, 5.5rem);
+  max-width: 100%;
+  font-size: clamp(2.85rem, 5.2vw, 4.85rem);
   font-weight: 780;
-  letter-spacing: -0.06em;
-  line-height: 0.88;
+  letter-spacing: -0.055em;
+  line-height: 0.86;
 }
 .rx-notr--display .rx-notr-line {
   font-size: 1em;
