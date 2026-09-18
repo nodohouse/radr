@@ -95,8 +95,8 @@ function deriveTwoSite(state: LabState): LabDerived {
   let decisionLabel = "TWO-SITE UNIT PRICE GAP";
   let decisionSub =
     "Bluefin oil · Mitte €7.45/L vs Prenzlauer Berg €6.80/L · Expected";
-  let moneyGrade: "Expected" | "Verified" = "Expected";
-  let moneyMeta = "No seal · Expected until CM + doc_ref";
+  const moneyGrade: "Expected" | "Verified" = "Expected";
+  const moneyMeta = "No seal · Expected until CM + doc_ref";
   const recommended: LabFuture = "wait_12";
 
   if (f === "seat_now") {
