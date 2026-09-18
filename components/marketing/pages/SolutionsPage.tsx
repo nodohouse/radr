@@ -7,8 +7,6 @@ import { SiteFooter } from "../SiteFooter";
 import { SiteNav } from "../SiteNav";
 import { money, CANON_OTA } from "@/data/demo";
 import {
-  INTELLIGENCE_CROSS_DOMAIN,
-  OPERATING_STATE_BESTSELLER,
   OPERATING_STATES,
   TERRITORY_ROUTE,
   narrativeFor,
@@ -16,12 +14,13 @@ import {
 } from "@/data/demo/intelligence";
 import {
   HONESTY_LABEL,
-  INTELLIGENCE_PRINCIPLE,
   TERRITORY_DEFINITIONS,
 } from "@/lib/radr/intelligence";
 import type { CanonDecision } from "@/lib/radr/decision/demo/canonical";
+import { useTranslations } from "next-intl";
+import { ValueLeakMap } from "@/components/marketing/scenes/home/ValueLeakMap";
+import type { ProblemFamily } from "@/lib/radr/problemFamilies";
 import { IntelFuturesFork } from "./IntelFuturesFork";
-import { IntelProblemClasses } from "./IntelProblemClasses";
 import { ValueLeaksNarratives } from "./ValueLeaksNarratives";
 import "@/app/econ.css";
 import "@/app/home.css";
@@ -445,108 +444,46 @@ function LensStory({ routeId }: { routeId: TerritoryRouteId }) {
   );
 }
 
-function CrossDomainHero() {
-  const d = INTELLIGENCE_CROSS_DOMAIN;
-  const state = OPERATING_STATE_BESTSELLER;
-  const n = narrativeFor(d);
-  const [forward, setForward] = useState(false);
-  const [ranked, setRanked] = useState(false);
+function SolutionsLeakMap() {
+  const t = useTranslations("homepage.recover");
+  const familyKeys: ProblemFamily[] = [
+    "SUPPLIER_AP",
+    "RECONCILIATION",
+    "COST_VARIANCE",
+    "PROCUREMENT",
+    "PERISHABLE_REVENUE",
+  ];
+  const labels = Object.fromEntries(
+    familyKeys.map((id) => [id, t(`families.${id}.label`)]),
+  ) as Record<ProblemFamily, string>;
+  const leaks = Object.fromEntries(
+    familyKeys.map((id) => [id, t(`families.${id}.leaks`)]),
+  ) as Record<ProblemFamily, string>;
+  const does = Object.fromEntries(
+    familyKeys.map((id) => [id, t(`families.${id}.does`)]),
+  ) as Record<ProblemFamily, string>;
+  const verifies = Object.fromEntries(
+    familyKeys.map((id) => [id, t(`families.${id}.verifies`)]),
+  ) as Record<ProblemFamily, string>;
 
   return (
-    <section
-      className="rx-intel-cross-hero"
-      data-nav-theme="dark"
-      data-resting={ranked ? "true" : "false"}
-    >
+    <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
       <div className="rx-shell">
-        <p className="rx-intel-k">
-          {d.territories.join(" · ")}
-          <span>
-            {d.displayId} · {HONESTY_LABEL[d.honesty]}
-          </span>
-        </p>
-        <p className="rx-intel-looks">Looks healthy.</p>
-        <h2 className="rx-intel-cross-title">
-          Bestseller
-          <em>#1</em>
-        </h2>
-
-        {!ranked ? (
-          <>
-            <ul className="rx-intel-signals">
-              <li>
-                <em>BUY</em>
-                <strong>+8%</strong>
-                <span>Input cost</span>
-              </li>
-              <li>
-                <em>LABOR</em>
-                <strong>+21%</strong>
-                <span>Kitchen time</span>
-              </li>
-              <li>
-                <em>SELL</em>
-                <strong>+4 min</strong>
-                <span>Ticket delay</span>
-              </li>
-              <li data-hot="true">
-                <em>RESULT</em>
-                <strong>−18%</strong>
-                <span>Contrib. / min</span>
-              </li>
-            </ul>
-
-            <p className="rx-intel-punch">
-              Your bestseller is costing you during peak.
-            </p>
-            <p className="rx-intel-state rx-intel-state-quiet">
-              {state.stateSentence}
-            </p>
-
-            <div className="rx-intel-obvious-inline">
-              <em>The obvious move</em>
-              <strong>{n.obvious}</strong>
-            </div>
-          </>
-        ) : null}
-
-        {!forward ? (
-          <div className="rx-intel-continue">
-            <button
-              type="button"
-              className="rx-btn rx-btn-primary"
-              onClick={() => setForward(true)}
-            >
-              Play it forward
-            </button>
-            <p className="rx-intel-continue-hint">
-              Options vs do nothing · then the Decision
-            </p>
-          </div>
-        ) : !ranked ? (
-          <IntelFuturesFork
-            decision={d}
-            exposureLabel="PEAK EXPOSURE"
-            compact
-            onRanked={() => setRanked(true)}
-          />
-        ) : (
-          <DecisionClimax decision={d} dark />
-        )}
-      </div>
-    </section>
-  );
-}
-
-function Breath() {
-  return (
-    <section className="rx-intel-breath" data-nav-theme="light">
-      <div className="rx-shell rx-intel-breath-shell">
-        <p className="rx-intel-breath-line">
-          Connect what changed.
-          <span> Play the options forward.</span>
-          <span> Verify what happened.</span>
-        </p>
+        <ValueLeakMap
+          kicker={t("families.kicker")}
+          title={t("families.title")}
+          lead={t("families.lead")}
+          labels={labels}
+          leaks={leaks}
+          does={does}
+          verifies={verifies}
+          whatLeaks={t("families.whatLeaks")}
+          whatDoes={t("families.whatDoes")}
+          whatVerifies={t("families.whatVerifies")}
+          maturityPilot={t("families.maturityPilot")}
+          maturityExpansion={t("families.maturityExpansion")}
+          maturityPlanned={t("families.maturityPlanned")}
+        />
       </div>
     </section>
   );
@@ -559,10 +496,8 @@ function LensIntro() {
         <p className="rx-intel-k">How RADR interprets the operation</p>
         <h2 className="rx-intel-classes-title">BUY · LABOR · SELL · RECOVER</h2>
         <p className="rx-intel-classes-lead">
-          Economic lenses over the same Decision model — demoted below the value
-          loss story. Not the first thing prospects see.
+          Economic lenses across Decisions — not primary product modules.
         </p>
-        <p className="rx-intel-principle">{INTELLIGENCE_PRINCIPLE}</p>
         <ul className="rx-intel-lens-grid">
           {LENS_ORDER.map((id) => {
             const { code, path } = TERRITORY_ROUTE[id];
@@ -583,8 +518,7 @@ function LensIntro() {
 }
 
 /**
- * Intelligence — where RADR looks for value.
- * Landing: problem classes → how RADR thinks → lenses demoted.
+ * Where value leaks — five intelligence classes, then lenses demoted.
  * Lens routes keep BUY / LABOR / SELL / RECOVER depth.
  */
 export function SolutionsPage({
@@ -599,7 +533,7 @@ export function SolutionsPage({
         <section className="rx-intel-hero" data-nav-theme="light">
           <div className="rx-intel-hero-atm" aria-hidden="true" />
           <div className="rx-shell rx-intel-hero-inner">
-            <p className="rx-intel-category">Intelligence · illustrative</p>
+            <p className="rx-intel-category">Where value leaks</p>
             {lens ? (
               <>
                 <h1 className="rx-intel-title">
@@ -638,14 +572,8 @@ export function SolutionsPage({
                   Where hospitality loses value.
                 </h1>
                 <p className="rx-intel-lead">
-                  <span className="rx-intel-lead-stack">
-                    RADR looks for value that is leaking, stuck, misallocated,
-                    or about to expire.
-                  </span>
-                  <span className="rx-intel-lead-follow">
-                    You don’t teach RADR what to look for. It already knows the
-                    evidence, Decisions, and what counts as Verified.
-                  </span>
+                  RADR looks for value that is leaking, stuck, misallocated, or
+                  about to expire.
                 </p>
               </>
             )}
@@ -660,9 +588,8 @@ export function SolutionsPage({
           </section>
         ) : (
           <>
-            <IntelProblemClasses />
+            <SolutionsLeakMap />
             <ValueLeaksNarratives />
-            <Breath />
             <LensIntro />
           </>
         )}
@@ -674,7 +601,7 @@ export function SolutionsPage({
                 href="/app/lab/control-center?seed=recover"
                 className="rx-btn rx-btn-primary"
               >
-                See a recovery Decision <span aria-hidden="true">→</span>
+                See a Verified Recovery <span aria-hidden="true">→</span>
               </NextLink>
               <Link
                 href="/contact?intent=recovery-pilot"

@@ -1,18 +1,18 @@
 /**
  * Canonical marketing brand / category / CTA vocabulary.
- * Monday SKU = Margin & Recovery Intelligence (Round 2).
+ * Public thesis: value recovery → Adaptive Decision System.
  */
 
 export const CATEGORY = {
-  /** Primary public category — Margin & Recovery D0 */
-  primary: "Find the margin you’re losing — and prove you got it back.",
+  /** Primary public category */
+  primary: "Verified Decision Intelligence for hospitality.",
   /** Secondary descriptor */
-  secondary: "Margin & Recovery Intelligence.",
+  secondary: "The decision layer above the hospitality stack.",
   /** Technical / enterprise supporting concept */
   systemOfRecord: "A system of decision record for hospitality.",
   /** Product position */
   decisionLayer: "The decision layer across the hospitality operation.",
-  slogan: "Find the margin you’re losing — and prove you got it back.",
+  slogan: "Nothing off the RADR.",
   /**
    * Named category gap — use on /why (major) and lightly on /product.
    * Not the homepage lead.
@@ -23,10 +23,10 @@ export const CATEGORY = {
 } as const;
 
 export const CTAS = {
-  primaryProduct: "Start a 14-day margin recovery pilot",
-  primaryProductHref: "/contact?intent=margin-recovery-pilot",
-  primarySales: "Start a 14-day margin recovery pilot",
-  secondaryProduct: "See one variance → Trace",
+  primaryProduct: "Start a recovery pilot",
+  primaryProductHref: "/contact?intent=recovery-pilot",
+  primarySales: "Start a recovery pilot",
+  secondaryProduct: "See a Verified Recovery",
   secondaryProductHref: "/app/lab/control-center?seed=recover",
   enterprise: "Talk to RADR",
   openTrace: "Open Trace",
@@ -83,7 +83,7 @@ export const ACTION_STATES_PUBLIC = [
 ] as const;
 
 export const SITE_META = {
-  siteTitle: "RADR — Margin & Recovery Intelligence",
+  siteTitle: "RADR — Verified Decision Intelligence",
   ogDefault:
-    "Find the margin you’re losing — and prove you got it back. Auditable recovery on the stack you already run.",
+    "Recover the value your operation is losing — and prove you got it back.",
 } as const;

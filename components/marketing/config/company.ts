@@ -5,7 +5,7 @@
 export const COMPANY = {
   brandName: "RADR",
   slogan: "Nothing off the RADR.",
-  tagline: "Find the margin you’re losing — and prove you got it back.",
+  tagline: "Nothing off the RADR.",
   beachhead: "Built for hospitality.",
   category: "Adaptive Decision System",
   vision: "Every complex operation on RADR.",

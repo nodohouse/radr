@@ -2,16 +2,73 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { pricingConfig } from "./config";
 
+/**
+ * One commercial progression: Recover → Decide → Govern.
+ * Not three equal SaaS feature cards.
+ */
 export async function PricingTiers() {
   const t = await getTranslations("pricing");
   const coreFeatures = t.raw("core.features") as string[];
   const controlFeatures = t.raw("control.features") as string[];
+  const pilotPoints = t.raw("pilot.points") as string[];
 
   return (
     <section className="px-tiers" id="plans" data-nav-theme="light">
       <div className="rx-shell">
-        <div className="px-tier-grid" data-count="2">
-          <article className="px-tier" data-tier="core" data-commercial="true">
+        <header className="px-section-head px-section-head--center">
+          <p className="rx-kicker">{t("progression.kicker")}</p>
+          <h2 className="px-section-title">{t("progression.title")}</h2>
+          <p className="px-section-lead">{t("progression.lead")}</p>
+          <ol className="px-prog-rail" aria-label="Commercial progression">
+            <li>
+              <em>{t("progression.recover")}</em>
+            </li>
+            <li aria-hidden="true">→</li>
+            <li>
+              <em>{t("progression.decide")}</em>
+            </li>
+            <li aria-hidden="true">→</li>
+            <li>
+              <em>{t("progression.govern")}</em>
+            </li>
+          </ol>
+        </header>
+
+        <div className="px-tier-grid" data-count="3" data-progression="true">
+          <article className="px-tier" data-tier="pilot" data-step="recover">
+            <header className="px-tier-head">
+              <div className="px-tier-title-row">
+                <p className="rx-kicker">{t("pilot.kicker")}</p>
+                <span className="px-tier-desig">{t("pilot.verb")}</span>
+              </div>
+              <p className="px-tier-line">{t("pilot.title")}</p>
+              <p className="px-tier-audience">{t("pilot.body")}</p>
+            </header>
+            <div className="px-tier-price-block">
+              <p className="px-tier-price-label">{t("pilot.priceLabel")}</p>
+              <p className="px-pilot-price-sub">{t("pilot.priceSub")}</p>
+            </div>
+            <ul className="px-tier-list">
+              {pilotPoints.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <div className="px-tier-foot">
+              <Link
+                href={pricingConfig.pilot.cta.href}
+                className="rx-btn rx-btn-primary"
+              >
+                {t("pilot.cta")} <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </article>
+
+          <article
+            className="px-tier"
+            data-tier="core"
+            data-step="decide"
+            data-commercial="true"
+          >
             <header className="px-tier-head">
               <div className="px-tier-title-row">
                 <p className="rx-kicker">{t("core.name")}</p>
@@ -31,14 +88,19 @@ export async function PricingTiers() {
             <div className="px-tier-foot">
               <Link
                 href={pricingConfig.core.cta.href}
-                className="rx-btn rx-btn-primary"
+                className="rx-btn rx-btn-ghost"
               >
                 {t("core.cta")} <span aria-hidden="true">→</span>
               </Link>
             </div>
           </article>
 
-          <article className="px-tier" data-tier="control" data-depth="true">
+          <article
+            className="px-tier"
+            data-tier="control"
+            data-step="govern"
+            data-depth="true"
+          >
             <header className="px-tier-head">
               <div className="px-tier-title-row">
                 <p className="rx-kicker">{t("control.name")}</p>

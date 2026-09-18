@@ -7,7 +7,6 @@ import { FeatureCompare } from "@/components/marketing/pricing/FeatureCompare";
 import { PricingExpansion } from "@/components/marketing/pricing/PricingExpansion";
 import { PricingFaq } from "@/components/marketing/pricing/PricingFaq";
 import { PricingHowWorks } from "@/components/marketing/pricing/PricingHowWorks";
-import { PricingPilot } from "@/components/marketing/pricing/PricingPilot";
 import { PricingTiers } from "@/components/marketing/pricing/PricingTiers";
 import { pricingConfig } from "@/components/marketing/pricing/config";
 import { buildAlternatesForLocale } from "@/i18n/seo";
@@ -40,7 +39,7 @@ export default async function PricingPage({ params }: Props) {
     <div className="radr px-page">
       <SiteNav variant="pricing" />
       <main>
-        <section className="px-hero" data-nav-theme="dark">
+        <section className="px-hero" data-nav-theme="light">
           <div className="px-hero-glow" aria-hidden="true" />
           <div className="rx-shell px-hero-inner">
             <p className="rx-kicker">{t("kicker")}</p>
@@ -54,7 +53,6 @@ export default async function PricingPage({ params }: Props) {
         </section>
 
         <PricingHowWorks />
-        <PricingPilot />
         <PricingTiers />
         <FeatureCompare defaultCollapsed />
         <PricingExpansion />

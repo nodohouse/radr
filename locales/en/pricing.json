@@ -58,10 +58,18 @@
       "Operating Memory — Early Access"
     ]
   },
+  "progression": {
+    "kicker": "How to start",
+    "title": "Recover → Decide → Govern.",
+    "lead": "Increasing responsibility — not feature bundles.",
+    "recover": "Recover",
+    "decide": "Decide",
+    "govern": "Govern"
+  },
   "control": {
     "name": "RADR Control",
-    "verb": "Govern + Scale",
-    "line": "Multi-location governance, Autopilot policy, and enterprise controls.",
+    "verb": "Govern",
+    "line": "Govern trusted Decisions across locations.",
     "audience": "Coordinate, approve and learn across the group.",
     "priceLabel": "Portfolio / group pricing",
     "cta": "Discuss Control",
@@ -82,7 +90,7 @@
   "packagesNote": "Core and Control are scoped to your operation.",
   "expansion": {
     "kicker": "How expansion works",
-    "title": "Recover → Decide → Scale.",
+    "title": "Recover → Decide → Govern.",
     "steps": {
       "prove": {
         "label": "Recover",
@@ -95,8 +103,8 @@
         "body": "Core connects the stack, decides what matters, and verifies what changed."
       },
       "scale": {
-        "label": "Scale",
-        "title": "Govern Decisions across locations.",
+        "label": "Govern",
+        "title": "Govern trusted Decisions across locations.",
         "body": "Control prepares, approves, and learns across the group."
       }
     }
@@ -128,10 +136,10 @@
     },
     "groups": {
       "scope": "Operating scope",
-      "intelligence": "Intelligence",
+      "intelligence": "Decisions",
       "proof": "Proof",
       "action": "Action",
-      "scale": "Scale"
+      "scale": "Govern"
     },
     "planAria": "Package",
     "rows": [

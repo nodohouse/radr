@@ -187,19 +187,19 @@ PREVIEWS.overview = PREVIEWS.decision;
 
 const INTEL_SCENES = [
   {
-    vertical: "Restaurant",
+    vertical: "Supplier / AP",
     src: "/demo/facilities/berlin-dining.jpg",
-    line: `${money(CANON_PEAK.exposureEuro)} · ${CANON_PEAK.displayId}`,
+    line: "€273 exposed · credit never applied",
   },
   {
-    vertical: "Hotel",
+    vertical: "Reconciliation",
     src: "/demo/facilities/canal-deluxe-king.jpg",
-    line: `${money(CANON_OTA.exposureEuro)} · ${CANON_OTA.displayId}`,
+    line: "€293 unexplained · settlement short",
   },
   {
-    vertical: "Aparthotel",
+    vertical: "Perishable",
     src: "/demo/facilities/lisbon-onebed.jpg",
-    line: `${money(CANON_ORPHAN.exposureEuro)} · ${CANON_ORPHAN.displayId}`,
+    line: "19h left · room at risk",
   },
 ] as const;
 
@@ -257,12 +257,12 @@ export function PlatformLivePreview({ itemKey }: { itemKey: string }) {
   );
 }
 
-/** Intelligence nav — equal-weight facility scenes, not one vertical. */
+/** Where value leaks — economic classes, not territories-as-product. */
 export function IntelligenceLivePreview() {
   return (
     <div className="rx-np-live rx-np-live-intel" aria-hidden="true">
-      <p className="rx-np-live-kicker">Intelligence</p>
-      <p className="rx-np-live-title">Territories across the house</p>
+      <p className="rx-np-live-kicker">Where value leaks</p>
+      <p className="rx-np-live-title">Five places hospitality loses money</p>
       <ul className="rx-np-intel-scenes">
         {INTEL_SCENES.map((scene) => (
           <li key={scene.vertical}>
@@ -281,7 +281,7 @@ export function IntelligenceLivePreview() {
         ))}
       </ul>
       <span className="rx-np-live-cta">
-        Open Intelligence <span aria-hidden="true">→</span>
+        Open Where value leaks <span aria-hidden="true">→</span>
       </span>
     </div>
   );
