@@ -13067,8 +13067,7 @@ html:has(.radr-home) body {
 .rx-home-spine {
   background: #f7faf8;
 }
-.rx-he-recover > .rx-shell,
-.rx-he-recover-shell {
+.rx-he-recover > .rx-shell {
   width: 100%;
 }
 .rx-he-recover {
@@ -13077,29 +13076,23 @@ html:has(.radr-home) body {
   min-height: 0;
   display: block;
 }
-.rx-he-recover-shell {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.75rem, 3.5vw, 2.75rem);
-}
-/* Full-width poster H0, then money + proof */
+/* Left stacked lockup + money · right Decision proof */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.9fr);
-  gap: clamp(1.75rem, 4vw, 3rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
   width: 100%;
 }
 .rx-he-recover-copy {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  max-width: 36rem;
-  padding-top: 0.15rem;
+  justify-content: center;
+  max-width: 34rem;
 }
 .rx-he-recover-proof {
   width: 100%;
-  max-width: 26rem;
+  max-width: 28rem;
   justify-self: end;
 }
 .rx-he-recover-kicker {
@@ -13111,11 +13104,11 @@ html:has(.radr-home) body {
   font-family: var(--font-mono, "IBM Plex Mono", monospace);
 }
 .rx-he-recover-title {
-  margin: 0;
-  font-size: clamp(1.45rem, 3.1vw, 2.85rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
+  margin: 1.15rem 0 0;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-weight: 680;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
   color: #0a0d0b;
   max-width: 22ch;
 }
@@ -13128,14 +13121,14 @@ html:has(.radr-home) body {
   max-width: 34rem;
 }
 .rx-he-recover-support {
-  margin: 0.75rem 0 0;
+  margin: 0.7rem 0 0;
   font-size: 0.98rem;
   line-height: 1.5;
   color: #4a524e;
-  max-width: 34rem;
+  max-width: 32rem;
 }
 .rx-he-recover .rx-he-ctas {
-  margin-top: 1.6rem;
+  margin-top: 1.55rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
@@ -13287,38 +13280,36 @@ html:has(.radr-home) body {
 .rx-notr {
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: 0.28em;
-  row-gap: 0.02em;
+  flex-direction: column;
+  align-items: flex-start;
   color: #0a0d0b;
   width: 100%;
 }
-.rx-notr-prefix {
-  display: inline;
+.rx-notr-line {
+  display: block;
   text-transform: uppercase;
   color: #0a0d0b;
 }
-.rx-notr-w {
-  white-space: nowrap;
-}
 
-/* Cinematic H0 — poster-scale; dwarfs money H1 */
+/* Screenshot stack: NOTHING / OFF THE / R△DR — dominant left column */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
-  font-size: clamp(3.5rem, 8.4vw, 7.5rem);
+  gap: 0;
+  font-size: clamp(3.25rem, 7.2vw, 6.75rem);
   font-weight: 760;
   letter-spacing: -0.055em;
-  line-height: 0.9;
-  max-width: none;
+  line-height: 0.88;
+  max-width: 9.5ch;
 }
-.rx-notr--display .rx-notr-prefix {
+.rx-notr--display .rx-notr-line {
   font-size: 1em;
   font-weight: inherit;
   letter-spacing: inherit;
   line-height: inherit;
 }
 .rx-notr--display .rx-notr-wm {
+  display: block;
+  margin-top: 0.02em;
   font-size: 1em !important;
   font-weight: inherit !important;
   letter-spacing: inherit !important;
@@ -13328,24 +13319,23 @@ html:has(.radr-home) body {
   font-weight: inherit;
 }
 
-/* Brand-close band — quiet lockup, not poster */
+/* Brand-close band — quiet lockup */
 .rx-notr--close {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.2rem;
+  gap: 0.08rem;
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
   font-weight: 650;
   letter-spacing: -0.03em;
   line-height: 1.05;
   max-width: 16rem;
 }
-.rx-notr--close .rx-notr-prefix {
+.rx-notr--close .rx-notr-line {
   font-size: 0.72em;
   font-weight: 650;
-  letter-spacing: 0.12em;
-  line-height: 1.2;
+  letter-spacing: 0.1em;
+  line-height: 1.15;
 }
 .rx-notr--close .rx-notr-wm {
+  margin-top: 0.2rem;
   font-size: 1.55em !important;
   font-weight: 760 !important;
   letter-spacing: -0.055em !important;
@@ -13353,9 +13343,6 @@ html:has(.radr-home) body {
 
 .rx-he-h0 {
   margin: 0;
-}
-.rx-he-margin .rx-he-recover-title {
-  max-width: 24ch;
 }
 .rx-rec-brand-copy {
   max-width: 34rem;
@@ -13381,24 +13368,10 @@ html:has(.radr-home) body {
   .rx-he-recover-title {
     max-width: none;
   }
-  /* Mobile: NOTHING / OFF THE R△DR */
-  .rx-notr--display {
-    font-size: clamp(2.75rem, 14vw, 4.25rem);
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 0.05em;
-  }
-  .rx-notr--display .rx-notr-prefix {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: 0.02em;
-  }
-}
-
-@media (min-width: 901px) and (max-width: 1100px) {
-  .rx-notr--display {
-    font-size: clamp(3.25rem, 7vw, 5.5rem);
+  .rx-notr--display,
+  .rx-he-h0.rx-notr--display {
+    font-size: clamp(3rem, 15vw, 4.75rem);
+    max-width: none;
   }
 }
 

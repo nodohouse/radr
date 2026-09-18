@@ -4,12 +4,15 @@ import { RadrWordmark } from "@/components/radr/RadrWordmark";
 
 type Props = {
   className?: string;
-  /** display = cinematic hero H0 · close = brand band */
+  /** display = stacked hero H0 · close = brand band */
   size?: "display" | "close";
 };
 
 /**
- * Brand lockup: NOTHING OFF THE R△DR
+ * Brand lockup from screenshot energy:
+ * NOTHING
+ * OFF THE
+ * R△DR
  * Green △ replaces the A — never letter-R as the mark.
  */
 export function NothingOffTheRadr({
@@ -21,9 +24,11 @@ export function NothingOffTheRadr({
       className={`rx-notr rx-notr--${size} ${className}`.trim()}
       aria-label="Nothing off the RADR"
     >
-      <span className="rx-notr-prefix" aria-hidden="true">
-        <span className="rx-notr-w">Nothing</span>{" "}
-        <span className="rx-notr-w">off the</span>
+      <span className="rx-notr-line" aria-hidden="true">
+        Nothing
+      </span>
+      <span className="rx-notr-line" aria-hidden="true">
+        Off the
       </span>
       <RadrWordmark
         size={size === "display" ? "headline" : "lg"}
