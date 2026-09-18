@@ -13073,21 +13073,27 @@ html:has(.radr-home) body {
   min-height: 0;
   display: block;
 }
-/* Screenshot split: all text left · product right */
+.rx-he-recover-shell {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+/* Below H0: money left · Decision card right */
 .rx-he-recover-frame {
   display: grid;
   grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
   column-gap: clamp(2rem, 4.5vw, 3.5rem);
   row-gap: 2rem;
-  align-items: center;
+  align-items: start;
   width: 100%;
 }
 .rx-he-recover-copy {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: 28rem;
+  padding-top: 0.15rem;
 }
 .rx-he-recover-product {
   width: 100%;
@@ -13096,7 +13102,7 @@ html:has(.radr-home) body {
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;
-  min-height: 28rem;
+  min-height: 26rem;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
@@ -13107,8 +13113,8 @@ html:has(.radr-home) body {
   font-family: var(--font-mono, "IBM Plex Mono", monospace);
 }
 .rx-he-recover-title {
-  margin: 1.15rem 0 0;
-  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+  margin: 0;
+  font-size: clamp(1.3rem, 2.15vw, 1.75rem);
   font-weight: 680;
   letter-spacing: -0.035em;
   line-height: 1.2;
@@ -13283,38 +13289,47 @@ html:has(.radr-home) body {
 .rx-notr {
   margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.28em;
+  row-gap: 0.02em;
   color: #0a0d0b;
   width: 100%;
 }
 .rx-notr-line {
-  display: block;
+  display: inline;
   text-transform: uppercase;
   color: #0a0d0b;
+  white-space: nowrap;
 }
 
-/* Left-rail stacked lockup — screenshot energy */
+/* Full-bleed cinematic H0 — above the split; dwarfs money H1 */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
-  gap: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
   width: 100%;
-  max-width: none;
-  font-size: clamp(2.75rem, 5.5vw, 5.25rem);
+  max-width: 100%;
+  box-sizing: border-box;
+  /* Poster scale; second clamp keeps space-between inside shell gutters */
+  font-size: clamp(4.5rem, 9vw, 8rem);
+  font-size: clamp(4.5rem, min(9vw, 6.5rem), 6.5rem);
   font-weight: 780;
-  letter-spacing: -0.062em;
-  line-height: 0.88;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
 }
 .rx-notr--display .rx-notr-line {
+  flex-shrink: 0;
   font-size: 1em;
   font-weight: inherit;
   letter-spacing: inherit;
   line-height: inherit;
-  white-space: nowrap;
 }
 .rx-notr--display .rx-notr-wm {
-  display: flex;
-  margin-top: 0.02em;
+  display: inline-flex;
+  flex-shrink: 0;
   font-size: 1em !important;
   font-weight: inherit !important;
   letter-spacing: inherit !important;
@@ -13333,6 +13348,9 @@ html:has(.radr-home) body {
 
 /* Brand-close band — quiet stacked lockup */
 .rx-notr--close {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
   gap: 0.08rem;
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
   font-weight: 650;
@@ -13390,7 +13408,10 @@ html:has(.radr-home) body {
   }
   .rx-notr--display,
   .rx-he-h0.rx-notr--display {
-    font-size: clamp(2.85rem, 14vw, 4.25rem);
+    font-size: clamp(2.75rem, 12vw, 4rem);
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    column-gap: 0.28em;
   }
 }
 

@@ -7,9 +7,8 @@ import { MarginResponseCard } from "@/components/marketing/scenes/home/MarginRes
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 
 /**
- * Screenshot composition exact:
- * LEFT — all text (H0 stack + money + foils + CTAs)
- * RIGHT — product only (Decision card)
+ * Design lock:
+ * H0 full-bleed poster above · left money copy · right Decision card only
  */
 export function Hero() {
   const t = useTranslations("homepage.hero");
@@ -22,29 +21,32 @@ export function Hero() {
       aria-label={t("ariaLabel")}
     >
       <div className="rx-shell">
-        <div className="rx-he-recover-frame">
-          <div className="rx-he-recover-copy">
-            <NothingOffTheRadr size="display" className="rx-he-h0" />
-            <h1 className="rx-he-recover-title">{t("title")}</h1>
-            <p className="rx-he-recover-support">{t("support")}</p>
-            <div className="rx-he-ctas">
-              <Link
-                href="/contact?intent=margin-recovery-pilot"
-                className="rx-btn rx-btn-primary"
-              >
-                {t("ctaPrimary")} <span aria-hidden="true">→</span>
-              </Link>
-              <NextLink
-                href="/app/lab/control-center?seed=recover"
-                className="rx-btn rx-btn-ghost"
-              >
-                {t("ctaSecondary")}
-              </NextLink>
-            </div>
-          </div>
+        <div className="rx-he-recover-shell">
+          <NothingOffTheRadr size="display" className="rx-he-h0" />
 
-          <div className="rx-he-recover-product">
-            <MarginResponseCard />
+          <div className="rx-he-recover-frame">
+            <div className="rx-he-recover-copy">
+              <h1 className="rx-he-recover-title">{t("title")}</h1>
+              <p className="rx-he-recover-support">{t("support")}</p>
+              <div className="rx-he-ctas">
+                <Link
+                  href="/contact?intent=margin-recovery-pilot"
+                  className="rx-btn rx-btn-primary"
+                >
+                  {t("ctaPrimary")} <span aria-hidden="true">→</span>
+                </Link>
+                <NextLink
+                  href="/app/lab/control-center?seed=recover"
+                  className="rx-btn rx-btn-ghost"
+                >
+                  {t("ctaSecondary")}
+                </NextLink>
+              </div>
+            </div>
+
+            <div className="rx-he-recover-product">
+              <MarginResponseCard />
+            </div>
           </div>
         </div>
       </div>
