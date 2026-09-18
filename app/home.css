@@ -13073,26 +13073,28 @@ html:has(.radr-home) body {
   min-height: 0;
   display: block;
 }
-/* Stack + card as one centered pair inside the shell */
+/* Stack + card as one tight pair, centered in the shell */
 .rx-he-recover-frame {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: clamp(1.75rem, 3.5vw, 2.75rem);
-  row-gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
+  column-gap: clamp(1.75rem, 3vw, 2.5rem);
+  row-gap: 2rem;
   width: 100%;
 }
 .rx-he-recover-copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 28rem;
+  flex: 1 1 22rem;
+  max-width: 26rem;
   width: 100%;
 }
 .rx-he-recover-proof {
+  flex: 1 1 22rem;
+  max-width: 26rem;
   width: 100%;
-  max-width: 28rem;
-  justify-self: end;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
@@ -13290,11 +13292,11 @@ html:has(.radr-home) body {
   color: #0a0d0b;
 }
 
-/* Screenshot stack — bold, but sized to sit with the Decision card */
+/* Screenshot stack — bold, sized to the Decision card */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
   gap: 0;
-  font-size: clamp(2.35rem, 3.8vw, 3.55rem);
+  font-size: clamp(2.2rem, 3.4vw, 3.25rem);
   font-weight: 760;
   letter-spacing: -0.055em;
   line-height: 0.9;
