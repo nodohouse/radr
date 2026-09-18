@@ -13067,20 +13067,18 @@ html:has(.radr-home) body {
 .rx-home-spine {
   background: #f7faf8;
 }
-.rx-he-recover > .rx-shell {
-  width: 100%;
-}
 .rx-he-recover {
   padding: clamp(5.25rem, 9vh, 6.75rem) 0 clamp(3.5rem, 6vh, 4.75rem);
   background: #f7faf8;
   min-height: 0;
   display: block;
 }
-/* Two equal columns in the shell — stack left, card fills right (no dead center void) */
+/* Stack + card as one centered pair inside the shell */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: clamp(1.5rem, 3.5vw, 2.75rem);
+  grid-template-columns: minmax(0, 26rem) minmax(0, 28rem);
+  justify-content: center;
+  column-gap: clamp(1.75rem, 3.5vw, 2.75rem);
   row-gap: 2rem;
   align-items: center;
   width: 100%;
@@ -13089,13 +13087,13 @@ html:has(.radr-home) body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 28rem;
+  max-width: none;
   width: 100%;
 }
 .rx-he-recover-proof {
   width: 100%;
-  max-width: 30rem;
-  justify-self: end;
+  max-width: none;
+  justify-self: stretch;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
