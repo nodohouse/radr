@@ -18,7 +18,10 @@ import {
   CANON_PEAK,
   CANON_ORPHAN,
 } from "@/data/demo";
-import { canonScenario } from "@/lib/radr/decision/demo/canonical";
+import {
+  canonScenario,
+  CANON_SUPPLIER,
+} from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { SilenceField } from "@/components/marketing/kinetic/SilenceField";
 import { CTAS } from "@/lib/marketing/brand";
@@ -72,33 +75,33 @@ const seatExpected = formatDecisionMoney(
 const ROLES = [
   {
     id: "gm",
-    label: "GM",
+    label: "Restaurant GM",
     lens: "portfolio",
-    line: `${BRIEF_ATTENTION.needsYou} things need you · Lisbon stays quiet`,
-    meta: "Amsterdam channel · Berlin peak — judgment only",
-    src: "/demo/facilities/canal-deluxe-king.jpg",
-    exposure: CANON_OTA.exposureEuro,
+    line: `${BRIEF_ATTENTION.needsYou} things need you · peak collision tonight`,
+    meta: `Berlin · wait ${waitExpected} vs seat ${seatExpected}`,
+    src: "/demo/facilities/berlin-terrace.jpg",
+    exposure: CANON_PEAK.exposureEuro,
     decision: `${CANON_PEAK.displayId} · ${CANON_PEAK.title}`,
   },
   {
-    id: "cfo",
-    label: "CFO",
-    lens: "economics",
+    id: "hotel",
+    label: "Hotel GM",
+    lens: "pattern",
     line: `Hold ${formatDecisionMoney(otaHold.expectedContributionEuro ?? 0)} vs release ${formatDecisionMoney(otaRelease.expectedContributionEuro ?? 0)}`,
-    meta: `Berlin: wait ${waitExpected} vs seat ${seatExpected}`,
-    src: "/demo/facilities/canal-suite.jpg",
-    exposure: CANON_OTA.exposureEuro + CANON_PEAK.exposureEuro,
-    decision: "Portfolio exposure · 2 judgments",
+    meta: "Canal House · premium inventory · 72h",
+    src: "/demo/facilities/canal-deluxe-king.jpg",
+    exposure: CANON_OTA.exposureEuro,
+    decision: `${CANON_OTA.displayId} · ${CANON_OTA.title}`,
   },
   {
-    id: "coo",
-    label: "COO",
-    lens: "pattern",
-    line: `${CANON_PEAK.structural!.incidents}th peak collision in Berlin`,
-    meta: `${CANON_PEAK.structural!.recommendation} · Lisbon inside playbook`,
-    src: "/demo/facilities/berlin-terrace.jpg",
-    exposure: CANON_PEAK.structural!.cumulativeExposureEuro,
-    decision: "Recurring patterns · not an alert firehose",
+    id: "cfo",
+    label: "Group CFO",
+    lens: "economics",
+    line: `Portfolio · ${BRIEF_ATTENTION.needsYou} judgments across environments`,
+    meta: `Berlin peak + Amsterdam channel · ${formatDecisionMoney(CANON_SUPPLIER.exposureEuro)} supplier open`,
+    src: "/demo/facilities/canal-suite.jpg",
+    exposure: CANON_OTA.exposureEuro + CANON_PEAK.exposureEuro,
+    decision: "Group exposure · same Decision engine",
   },
 ] as const;
 
