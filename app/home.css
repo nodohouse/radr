@@ -14154,3 +14154,109 @@ html:has(.radr-home) body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* —— Platform light hero —— */
+.rx-plat-live-hero-light {
+  position: relative;
+  min-height: auto;
+  padding: 7rem 0 3.5rem;
+  background: #f7faf8;
+}
+.rx-plat-live-hero-light .rx-plat-live-hero-copy {
+  position: relative;
+  max-width: 40rem;
+  color: #0a0d0b;
+}
+.rx-plat-live-hero-light .rx-cinema-kicker {
+  color: #00a85a;
+}
+.rx-plat-live-hero-light h1 {
+  color: #0a0d0b;
+}
+.rx-plat-live-hero-light p {
+  color: #626a65;
+}
+.rx-plat-lifecycle {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.rx-plat-lifecycle li {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  padding: 0.4rem 0.65rem;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  border-radius: 999px;
+  background: #fff;
+  color: #0a0d0b;
+}
+
+/* —— Value leaks narratives —— */
+.rx-vl-section {
+  padding: 3.25rem 0;
+  border-top: 1px solid rgba(10, 13, 11, 0.06);
+}
+.rx-vl-head h2 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  letter-spacing: -0.03em;
+  color: #0a0d0b;
+}
+.rx-vl-punch {
+  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #0a0d0b;
+  max-width: 32rem;
+}
+.rx-vl-grid {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 800px) {
+  .rx-vl-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem 1.4rem;
+  }
+}
+.rx-vl-grid article {
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.07);
+  border-radius: 14px;
+  padding: 1.05rem 1.15rem;
+}
+.rx-vl-grid ul {
+  margin: 0;
+  padding-left: 1.05rem;
+  line-height: 1.5;
+  color: #0a0d0b;
+}
+.rx-vl-grid p {
+  margin: 0;
+  line-height: 1.45;
+  color: #0a0d0b;
+}
+
+/* Footer light coherence */
+.rx-footer[data-nav-theme="light"] {
+  background: #f3f6f4;
+  color: #0a0d0b;
+}
+.rx-footer[data-nav-theme="light"] .rx-footer-slogan,
+.rx-footer[data-nav-theme="light"] .rx-footer-col-title,
+.rx-footer[data-nav-theme="light"] a {
+  color: #0a0d0b;
+}
+.rx-footer[data-nav-theme="light"] a:hover {
+  color: #00a85a;
+}
+.rx-footer[data-nav-theme="light"] .rx-footer-copy,
+.rx-footer[data-nav-theme="light"] .rx-footer-domain {
+  color: #626a65;
+}

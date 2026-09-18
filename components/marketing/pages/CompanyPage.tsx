@@ -201,6 +201,20 @@ export function CompanyPage() {
               <p className="rx-co2-why-now-sub">
                 That is the Decision Gap RADR is built for.
               </p>
+              <div className="rx-co2-gtm-bridge">
+                <p className="rx-intel-k">Where we start</p>
+                <h3>Prove the economics first.</h3>
+                <p>
+                  The first place RADR starts is where the economics can be
+                  proven: value that is leaking, stuck, or about to expire.
+                </p>
+                <p>
+                  <strong>Recovery is the beginning, not the limit.</strong>
+                </p>
+                <Link href="/solutions" className="rx-btn rx-btn-ghost">
+                  Where value leaks <span aria-hidden="true">→</span>
+                </Link>
+              </div>
             </CoReveal>
           </div>
         </section>

@@ -1,21 +1,21 @@
 {
   "product": "Platform",
-  "solutions": "Decision Domains",
+  "solutions": "Where value leaks",
   "industries": "Industrias",
   "how": "How it works",
   "pricing": "Pricing",
   "company": "Company",
   "signIn": "Login",
-  "seeRadr": "Start a 14-day recovery pilot",
-  "contactSales": "Start a 14-day recovery pilot",
-  "getStarted": "Start a 14-day recovery pilot",
+  "seeRadr": "Start a recovery pilot",
+  "contactSales": "Start a recovery pilot",
+  "getStarted": "Start a recovery pilot",
   "bookDemo": "See a Verified Recovery",
-  "seeInAction": "Start a 14-day recovery pilot",
+  "seeInAction": "Start a recovery pilot",
   "menu": "Menu",
   "close": "Close",
   "footerProduct": "Platform",
   "footerCompany": "Company",
-  "footerLegal": "Legal",
+  "footerLegal": "Trust",
   "footerFollow": "Follow",
   "why": "Why RADR",
   "approach": "Our approach",
@@ -54,84 +54,62 @@
       }
     },
     "solutions": {
-      "title": "Intelligence",
-      "lead": "Economic territories. One decision lifecycle.",
+      "title": "Where value leaks",
+      "lead": "Economic intelligence classes — not modules.",
       "columns": {
+        "classes": "Where value leaks",
+        "deeper": "Deeper",
         "territories": "Territories",
         "operation": "Industries",
         "priority": "Territories"
       },
-      "territories": {
+      "classes": {
+        "supplier": {
+          "label": "Supplier / AP",
+          "desc": "Contract leakage · credits · rebates"
+        },
+        "reconciliation": {
+          "label": "Reconciliation",
+          "desc": "Settlements · refunds · payment mismatch"
+        },
+        "cost": {
+          "label": "Cost variance",
+          "desc": "Food cost · waste · yield · mix"
+        },
+        "procurement": {
+          "label": "Procurement",
+          "desc": "Price dispersion · tiers · leverage"
+        },
+        "perishable": {
+          "label": "Perishable revenue",
+          "desc": "Cancellations · no-shows · rooms · tables"
+        }
+      },
+      "deeper": {
+        "lenses": {
+          "label": "How RADR interprets the operation",
+          "desc": "BUY · LABOR · SELL · RECOVER — lenses over the same Decision model."
+        }
+      },
+      "exploreAll": "Explore where value leaks",
+      "priority": {
         "buy": {
-          "title": "Controlar gasto",
-          "desc": "Precios de proveedor, compras y fugas de factura."
+          "label": "BUY",
+          "desc": "Know what inputs really cost the operation."
         },
         "labor": {
-          "title": "Staff a demanda",
-          "desc": "Detectar pronto falta de personal y waste de labor."
+          "label": "LABOR",
+          "desc": "Put capacity where demand will actually hit."
         },
         "sell": {
-          "title": "Proteger cada venta",
-          "desc": "Huecos de precio, menú, canal y promo."
+          "label": "SELL",
+          "desc": "Choose the demand that creates the strongest contribution."
         },
         "recover": {
-          "title": "Cobrar lo debido",
-          "desc": "Créditos, fees, comisiones y pagos."
+          "label": "RECOVER",
+          "desc": "Reclaim value before it disappears."
         }
       },
-      "builtFor": {
-        "operations": {
-          "label": "Operadores",
-          "desc": "Correr el floor con claridad financiera."
-        },
-        "groups": {
-          "label": "Group ops",
-          "desc": "Comparar locales y controlar el portafolio."
-        },
-        "cfo": {
-          "label": "Finance",
-          "desc": "Una verdad entre el floor y el P&L."
-        }
-      },
-      "industries": {
-        "restaurants": {
-          "label": "Restaurantes",
-          "desc": "Cubiertos, ritmo de reservas, labor, menú y facturas de proveedores."
-        },
-        "hotels": {
-          "label": "Hoteles",
-          "desc": "Ocupación, ADR, RevPAR, canales y housekeeping."
-        },
-        "bars": {
-          "label": "Bares y cafés",
-          "desc": "Ventas por daypart, desperdicio, clima y ticket medio."
-        },
-        "destination": {
-          "label": "Hospitalidad de destino",
-          "desc": "Resorts, clubes privados y grupos de venues."
-        }
-      },
-      "size": {
-        "independent": {
-          "label": "Independiente",
-          "desc": "Un local. Disciplina de grupo."
-        },
-        "multiLocation": {
-          "label": "Multi-local",
-          "desc": "Escalar control de margen entre sitios."
-        },
-        "enterprise": {
-          "label": "Enterprise",
-          "desc": "Inteligencia de portafolio y gobierno."
-        }
-      },
-      "featured": {
-        "title": "Economic territories",
-        "desc": "BUY · LABOR · SELL · RECOVER — same Decision lifecycle as the homepage.",
-        "cta": "Open Intelligence",
-        "label": "Open Intelligence"
-      },
-      "industriesLink": "Por modelo operativo",
       "operation": {
         "independent": {
           "label": "Restaurants & F&B"
@@ -146,25 +124,24 @@
           "label": "Multi-location Groups"
         }
       },
-      "priority": {
+      "territories": {
         "buy": {
-          "label": "BUY",
-          "desc": "Spend · suppliers · waste · contracts"
+          "title": "BUY",
+          "desc": "Know what inputs really cost the operation."
         },
         "labor": {
-          "label": "LABOR",
-          "desc": "Demand · staffing · overtime"
+          "title": "LABOR",
+          "desc": "Put capacity where demand will actually hit."
         },
         "sell": {
-          "label": "SELL",
-          "desc": "Pricing · mix · channels · capacity"
+          "title": "SELL",
+          "desc": "Choose the demand that creates the strongest contribution."
         },
         "recover": {
-          "label": "RECOVER",
-          "desc": "Credits · cancellations · orphan inventory"
+          "title": "RECOVER",
+          "desc": "Reclaim value before it disappears."
         }
-      },
-      "exploreAll": "Open Intelligence"
+      }
     },
     "how": {
       "title": "How it works",
@@ -264,60 +241,75 @@
     "platform": {
       "title": "Platform",
       "featured": {
-        "title": "See one variance → Trace",
-        "desc": "One Margin Response Decision. Expected until Trace seals.",
-        "cta": "See one variance → Trace"
+        "title": "See a Verified Recovery",
+        "desc": "One Margin Recovery Decision — from leak to verified euro.",
+        "cta": "See a Verified Recovery"
       },
       "columns": {
-        "decide": {
-          "title": "Decide",
+        "how": {
+          "title": "How RADR works",
           "items": {
-            "overview": {
-              "label": "Overview",
-              "desc": "Fewer bad decisions. Made faster."
+            "decision": {
+              "label": "Decision",
+              "desc": "Persistent object from signal to memory."
+            },
+            "futures": {
+              "label": "Futures",
+              "desc": "Compare responses before you commit."
+            },
+            "actions": {
+              "label": "Prepared Actions",
+              "desc": "Ready for approval — not fake writes."
+            },
+            "verifiedValue": {
+              "label": "Verified Value",
+              "desc": "Matched economic outcomes."
+            },
+            "memory": {
+              "label": "Operating Memory",
+              "desc": "What worked becomes next Friday."
+            }
+          }
+        },
+        "surfaces": {
+          "title": "Operating surfaces",
+          "items": {
+            "controlCenter": {
+              "label": "Control Center",
+              "desc": "What needs you · what RADR handles."
             },
             "decisions": {
               "label": "Decisions",
-              "desc": "Value protected before expiry."
+              "desc": "One primary Decision at a time."
             },
-            "controlCenter": {
-              "label": "Control Center",
-              "desc": "Less management attention."
+            "value": {
+              "label": "Value",
+              "desc": "Identified → Verified lifecycle."
             },
-            "futures": {
-              "label": "RADR Futures",
-              "desc": "Avoid the wrong intervention."
+            "memorySurface": {
+              "label": "Memory",
+              "desc": "Patterns that earn Autopilot."
             }
           }
         },
-        "prove": {
-          "title": "Prove",
+        "trust": {
+          "title": "Trust",
           "items": {
-            "verifiedValue": {
-              "label": "Verified Value",
-              "desc": "Auditable ROI."
-            }
-          }
-        },
-        "act": {
-          "title": "Act",
-          "items": {
-            "actions": {
-              "label": "Prepared Actions",
-              "desc": "Shorter execution delay."
-            }
-          }
-        },
-        "learn": {
-          "title": "Learn",
-          "items": {
-            "memory": {
-              "label": "Operating Memory",
-              "desc": "Better decisions over time."
+            "autopilot": {
+              "label": "Autopilot",
+              "desc": "Suggest → Stage → Auto within policy."
             },
-            "developers": {
-              "label": "Developers",
-              "desc": "Events → decisions → verified outcomes."
+            "policies": {
+              "label": "Policies",
+              "desc": "Always-ask for material commitments."
+            },
+            "evidence": {
+              "label": "Evidence",
+              "desc": "Sources, freshness, confidence."
+            },
+            "verification": {
+              "label": "Verification",
+              "desc": "No Verified without a Trace."
             }
           }
         }
@@ -442,5 +434,6 @@
   "platform": "Platform",
   "resources": "Recursos",
   "controlCenter": "Control Center",
-  "blog": "Blog"
+  "blog": "Blog",
+  "footerValueLeaks": "Where value leaks"
 }

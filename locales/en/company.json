@@ -365,5 +365,11 @@
         "body": "Files, APIs, or a mature stack — RADR meets you there."
       }
     ]
+  },
+  "gtmBridge": {
+    "kicker": "Where we start",
+    "title": "Prove the economics first.",
+    "body": "The first place RADR starts is where the economics can be proven: value that is leaking, stuck, or about to expire.",
+    "close": "Recovery is the beginning, not the limit."
   }
 }

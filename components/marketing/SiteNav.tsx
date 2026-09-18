@@ -17,8 +17,8 @@ import { RadrDelta } from "@/components/radr/RadrDelta";
 import {
   COMPANY_LINKS,
   PLATFORM_COLUMNS,
-  SOLUTIONS_BY_OPERATION,
-  SOLUTIONS_BY_PRIORITY,
+  VALUE_LEAK_CLASSES,
+  VALUE_LEAK_DEEPER,
 } from "./nav/navConfig";
 import {
   CompanyPanel,
@@ -321,7 +321,7 @@ export function SiteNav({ variant }: Props) {
           >
             {t("bookDemo")}
           </NextLink>
-          <Link href="/contact?intent=margin-recovery-pilot" className="rx-nav-cta">
+          <Link href="/contact?intent=recovery-pilot" className="rx-nav-cta">
             {t("seeInAction")}
           </Link>
           <button
@@ -449,22 +449,22 @@ export function SiteNav({ variant }: Props) {
           }
           onNavigate={() => setDrawerOpen(false)}
         >
-          {SOLUTIONS_BY_OPERATION.map((l) => (
+          {VALUE_LEAK_CLASSES.map((l) => (
             <Link
               key={l.key}
               href={l.href}
               onClick={() => setDrawerOpen(false)}
             >
-              {t(`panels.solutions.operation.${l.key}.label`)}
+              {t(`panels.solutions.classes.${l.key}.label`)}
             </Link>
           ))}
-          {SOLUTIONS_BY_PRIORITY.map((l) => (
+          {VALUE_LEAK_DEEPER.map((l) => (
             <Link
               key={l.key}
               href={l.href}
               onClick={() => setDrawerOpen(false)}
             >
-              {t(`panels.solutions.priority.${l.key}.label`)}
+              {t(`panels.solutions.deeper.${l.key}.label`)}
             </Link>
           ))}
         </MobileAccordion>
@@ -501,7 +501,7 @@ export function SiteNav({ variant }: Props) {
           {t("bookDemo")}
         </Link>
         <Link
-          href="/contact?intent=margin-recovery-pilot"
+          href="/contact?intent=recovery-pilot"
           className="rx-nav-drawer-cta"
           onClick={() => setDrawerOpen(false)}
         >

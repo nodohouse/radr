@@ -9,8 +9,8 @@ import {
   COMPANY_LINKS,
   PLATFORM_COLUMNS,
   PLATFORM_DEFAULT_PREVIEW,
-  SOLUTIONS_BY_OPERATION,
-  SOLUTIONS_BY_PRIORITY,
+  VALUE_LEAK_CLASSES,
+  VALUE_LEAK_DEEPER,
   platformHrefForItem,
 } from "./navConfig";
 import { IntelligenceLivePreview, PlatformLivePreview } from "./NavPreviews";
@@ -30,7 +30,7 @@ export function DropGroup({
   );
 }
 
-/** Platform: curated map + live contextual preview. */
+/** Platform: how RADR works · surfaces · trust. */
 export function PlatformPanel({
   onNavigate,
   theme = "light",
@@ -102,7 +102,7 @@ export function ProductPanel(props: {
   return <PlatformPanel {...props} />;
 }
 
-/** Intelligence: territories + operating models. */
+/** Where value leaks — five intelligence classes + demoted lenses. */
 export function SolutionsPanel({
   onNavigate,
   theme = "light",
@@ -116,8 +116,8 @@ export function SolutionsPanel({
     <div className="rx-np rx-np-solutions" data-theme={theme}>
       <div className="rx-np-solutions-body">
         <div className="rx-np-solutions-cols">
-          <DropGroup title={t("columns.priority")}>
-            {SOLUTIONS_BY_PRIORITY.map((item) => (
+          <DropGroup title={t("columns.classes")}>
+            {VALUE_LEAK_CLASSES.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
@@ -125,14 +125,14 @@ export function SolutionsPanel({
                 onClick={onNavigate}
               >
                 <span className="rx-np-item-signal" aria-hidden="true" />
-                <strong>{t(`priority.${item.key}.label`)}</strong>
-                <span>{t(`priority.${item.key}.desc`)}</span>
+                <strong>{t(`classes.${item.key}.label`)}</strong>
+                <span>{t(`classes.${item.key}.desc`)}</span>
               </Link>
             ))}
           </DropGroup>
 
-          <DropGroup title={t("columns.operation")}>
-            {SOLUTIONS_BY_OPERATION.map((item) => (
+          <DropGroup title={t("columns.deeper")}>
+            {VALUE_LEAK_DEEPER.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
@@ -140,7 +140,8 @@ export function SolutionsPanel({
                 onClick={onNavigate}
               >
                 <span className="rx-np-item-signal" aria-hidden="true" />
-                <strong>{t(`operation.${item.key}.label`)}</strong>
+                <strong>{t(`deeper.${item.key}.label`)}</strong>
+                <span>{t(`deeper.${item.key}.desc`)}</span>
               </Link>
             ))}
           </DropGroup>
@@ -160,7 +161,7 @@ export function SolutionsPanel({
   );
 }
 
-/** Company: small editorial list. */
+/** Company: compact editorial list. */
 export function CompanyPanel({
   onNavigate,
   theme = "light",

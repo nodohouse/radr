@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "Platform — RADR",
     description:
-      "One decision. Everything behind it — from operating truth to verified outcome.",
+      "One Decision. From first signal to lasting memory. Systems record what happened — RADR decides what matters and proves what came back.",
     alternates: buildAlternatesForLocale(locale, "/product"),
   };
 }

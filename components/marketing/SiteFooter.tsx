@@ -5,9 +5,8 @@ import { Link } from "@/i18n/navigation";
 import { COMPANY } from "./config/company";
 import { RadrWordmark } from "./RadrWordmark";
 import { SocialIcons } from "./SocialIcons";
-import { CATEGORY } from "@/lib/marketing/brand";
 
-/** Quiet global footer — one company, one category. */
+/** Quiet global footer — one company, one story. */
 export function SiteFooter() {
   const t = useTranslations("navigation");
   const tc = useTranslations("common");
@@ -15,29 +14,28 @@ export function SiteFooter() {
 
   const PLATFORM = [
     { href: "/product" as const, label: t("product") },
-    { href: "/product/decisions" as const, label: "Decisions" },
     { href: "/product/control-center" as const, label: t("controlCenter") },
-    { href: "/product/futures" as const, label: "RADR Futures" },
-    { href: "/product/actions" as const, label: "Prepared Actions" },
-    { href: "/product/value" as const, label: tc("verifiedValue") },
+    { href: "/product/decisions" as const, label: "Decisions" },
+    { href: "/product/futures" as const, label: "Futures" },
+    { href: "/product/value" as const, label: "Verified Value" },
     { href: "/product/memory" as const, label: "Operating Memory" },
   ];
 
-  const INTELLIGENCE = [
+  const VALUE_LEAKS = [
     { href: "/solutions" as const, label: t("solutions") },
-    { href: "/solutions/buy" as const, label: "BUY" },
-    { href: "/solutions/labor" as const, label: "LABOR" },
-    { href: "/solutions/sell" as const, label: "SELL" },
-    { href: "/solutions/recover" as const, label: "RECOVER" },
-    { href: "/industries" as const, label: t("industries") },
+    { href: "/solutions#supplier-ap" as const, label: "Supplier / AP" },
+    { href: "/solutions#reconciliation" as const, label: "Reconciliation" },
+    { href: "/solutions#cost-variance" as const, label: "Cost variance" },
+    { href: "/solutions#procurement" as const, label: "Procurement" },
+    { href: "/solutions#perishable" as const, label: "Perishable revenue" },
   ];
 
   const COMPANY_LINKS = [
     { href: "/company" as const, label: t("about") },
     { href: "/why" as const, label: t("why") },
     { href: "/blog" as const, label: t("blog") },
-    { href: "/contact" as const, label: t("contact") },
     { href: "/developers" as const, label: t("developers") },
+    { href: "/contact" as const, label: t("contact") },
   ];
 
   const TRUST_LEGAL = [
@@ -49,13 +47,17 @@ export function SiteFooter() {
 
   const COLUMNS = [
     { key: "platform", title: t("footerProduct"), items: PLATFORM },
-    { key: "intelligence", title: t("solutions"), items: INTELLIGENCE },
+    {
+      key: "leaks",
+      title: t("footerValueLeaks"),
+      items: VALUE_LEAKS,
+    },
     { key: "company", title: t("footerCompany"), items: COMPANY_LINKS },
     { key: "trust", title: t("footerLegal"), items: TRUST_LEGAL },
   ] as const;
 
   return (
-    <footer className="rx-footer" data-nav-theme="dark">
+    <footer className="rx-footer" data-nav-theme="light">
       <div className="rx-footer-bg" aria-hidden="true">
         <div className="rx-footer-atm" />
       </div>
@@ -67,12 +69,11 @@ export function SiteFooter() {
               <RadrWordmark
                 size="footer"
                 variant="plain"
-                surface="dark"
+                surface="light"
                 className="rx-footer-mark"
               />
             </Link>
             <p className="rx-footer-slogan">{tc("slogan")}</p>
-            <p className="rx-footer-tag">{CATEGORY.primary}</p>
           </div>
 
           <div className="rx-footer-cols">

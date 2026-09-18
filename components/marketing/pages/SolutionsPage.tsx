@@ -22,6 +22,7 @@ import {
 import type { CanonDecision } from "@/lib/radr/decision/demo/canonical";
 import { IntelFuturesFork } from "./IntelFuturesFork";
 import { IntelProblemClasses } from "./IntelProblemClasses";
+import { ValueLeaksNarratives } from "./ValueLeaksNarratives";
 import "@/app/econ.css";
 import "@/app/home.css";
 import "@/app/intelligence.css";
@@ -553,13 +554,13 @@ function Breath() {
 
 function LensIntro() {
   return (
-    <section className="rx-intel-lenses-intro" data-nav-theme="light">
+    <section className="rx-intel-lenses-intro" id="lenses" data-nav-theme="light">
       <div className="rx-shell">
         <p className="rx-intel-k">How RADR interprets the operation</p>
         <h2 className="rx-intel-classes-title">BUY · LABOR · SELL · RECOVER</h2>
         <p className="rx-intel-classes-lead">
-          Economic lenses over the same Decision model — not the first thing you
-          sell. Deeper architecture once the value-loss story is clear.
+          Economic lenses over the same Decision model — demoted below the value
+          loss story. Not the first thing prospects see.
         </p>
         <p className="rx-intel-principle">{INTELLIGENCE_PRINCIPLE}</p>
         <ul className="rx-intel-lens-grid">
@@ -634,12 +635,12 @@ export function SolutionsPage({
             ) : (
               <>
                 <h1 className="rx-intel-title">
-                  Where RADR looks for value.
+                  Where hospitality loses value.
                 </h1>
                 <p className="rx-intel-lead">
                   <span className="rx-intel-lead-stack">
-                    RADR continuously looks for value that is leaking, stuck,
-                    misallocated, or about to expire.
+                    RADR looks for value that is leaking, stuck, misallocated,
+                    or about to expire.
                   </span>
                   <span className="rx-intel-lead-follow">
                     You don’t teach RADR what to look for. It already knows the
@@ -660,6 +661,7 @@ export function SolutionsPage({
         ) : (
           <>
             <IntelProblemClasses />
+            <ValueLeaksNarratives />
             <Breath />
             <LensIntro />
           </>

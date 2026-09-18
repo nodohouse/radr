@@ -173,32 +173,33 @@ export function PlatformPage() {
     <div className="radr rx-ch rx-ch-light">
       <SiteNav />
       <main className="rx-plat-live">
-        <section className="rx-plat-live-hero" data-nav-theme="dark">
-          <Image
-            src={env.heroImg}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="rx-plat-live-hero-img"
-            style={{ objectPosition: env.heroPos }}
-            key={env.heroImg}
-          />
-          <div className="rx-plat-live-hero-veil" />
+        <section className="rx-plat-live-hero rx-plat-live-hero-light" data-nav-theme="light">
           <div className="rx-shell rx-plat-live-hero-copy">
-            <p className="rx-cinema-kicker" style={{ color: "#00d978" }}>
-              Platform
-            </p>
+            <p className="rx-cinema-kicker">Platform</p>
             <h1>
               One Decision.
               <br />
               From first signal to lasting memory.
             </h1>
             <p>
-              Systems of record answer what is true. RADR closes the Decision
-              Gap — what matters, what if we do nothing, which response wins,
-              what happened, and what to remember.
+              Systems record what happened. RADR determines what matters, what
+              the alternatives are, what should happen next, and whether the
+              outcome was worth it.
             </p>
+            <ol className="rx-plat-lifecycle" aria-label="Decision lifecycle">
+              {[
+                "Detected",
+                "Understood",
+                "Futures",
+                "Recommended",
+                "Approved",
+                "Observed",
+                "Verified",
+                "Learned",
+              ].map((s) => (
+                <li key={s}>{s}</li>
+              ))}
+            </ol>
           </div>
         </section>
 

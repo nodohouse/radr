@@ -1,5 +1,6 @@
 /**
- * Marketing navigation — Platform = Decision lifecycle surfaces.
+ * Marketing navigation — Platform architecture + Where value leaks.
+ * Problem classes are NOT primary products.
  */
 
 export type DropLink = {
@@ -8,38 +9,42 @@ export type DropLink = {
 };
 
 export type PlatformColumn = {
-  key: "decide" | "prove" | "act" | "learn";
+  key: "how" | "surfaces" | "trust";
   items: DropLink[];
 };
 
 export const PLATFORM_COLUMNS: PlatformColumn[] = [
   {
-    key: "decide",
+    key: "how",
     items: [
-      { href: "/product", key: "overview" },
-      { href: "/product/decisions", key: "decisions" },
-      { href: "/product/control-center", key: "controlCenter" },
+      { href: "/product", key: "decision" },
       { href: "/product/futures", key: "futures" },
+      { href: "/product/actions", key: "actions" },
+      { href: "/product/value", key: "verifiedValue" },
+      { href: "/product/memory", key: "memory" },
     ],
   },
   {
-    key: "prove",
-    items: [{ href: "/product/value", key: "verifiedValue" }],
-  },
-  {
-    key: "act",
-    items: [{ href: "/product/actions", key: "actions" }],
-  },
-  {
-    key: "learn",
+    key: "surfaces",
     items: [
-      { href: "/product/memory", key: "memory" },
-      { href: "/developers", key: "developers" },
+      { href: "/product/control-center", key: "controlCenter" },
+      { href: "/product/decisions", key: "decisions" },
+      { href: "/product/value", key: "value" },
+      { href: "/product/memory", key: "memorySurface" },
+    ],
+  },
+  {
+    key: "trust",
+    items: [
+      { href: "/product#autopilot", key: "autopilot" },
+      { href: "/security", key: "policies" },
+      { href: "/product#evidence", key: "evidence" },
+      { href: "/product/value", key: "verification" },
     ],
   },
 ];
 
-export const PLATFORM_DEFAULT_PREVIEW = "decisions" as const;
+export const PLATFORM_DEFAULT_PREVIEW = "decision" as const;
 
 export const PRODUCT_LINKS: DropLink[] = PLATFORM_COLUMNS.flatMap((c) => c.items);
 
@@ -60,6 +65,20 @@ export function platformHrefForItem(itemKey: string): string {
   return "/product";
 }
 
+/** Five economic intelligence classes — context, not modules. */
+export const VALUE_LEAK_CLASSES: DropLink[] = [
+  { href: "/solutions#supplier-ap", key: "supplier" },
+  { href: "/solutions#reconciliation", key: "reconciliation" },
+  { href: "/solutions#cost-variance", key: "cost" },
+  { href: "/solutions#procurement", key: "procurement" },
+  { href: "/solutions#perishable", key: "perishable" },
+];
+
+export const VALUE_LEAK_DEEPER: DropLink[] = [
+  { href: "/solutions#lenses", key: "lenses" },
+];
+
+/** @deprecated — demoted lenses; keep for deep links */
 export const SOLUTIONS_BY_PRIORITY: DropLink[] = [
   { href: "/solutions/buy", key: "buy" },
   { href: "/solutions/labor", key: "labor" },

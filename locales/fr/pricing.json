@@ -2,10 +2,10 @@
   "metaTitle": "Pricing — RADR",
   "metaDescription": "Recovery Pilot, Core, and Control. Start with Supplier/AP or Reconciliation. Prove Verified Value. Then expand.",
   "kicker": "Pricing",
-  "heroTitleLine1": "Start with recoverable value.",
-  "heroTitleLine2": "Then expand the Decision layer.",
-  "heroLead": "Pilot one or two problem families first. Expand when the economics hold.",
-  "heroSupport": "Supplier/AP · Reconciliation · then broader Decision coverage.",
+  "heroTitleLine1": "Start where the value is clearest.",
+  "heroTitleLine2": "",
+  "heroLead": "Begin with one defined recovery scope. Expand as RADR proves the economics.",
+  "heroSupport": "Choose Supplier / AP, Reconciliation, or both.",
   "how": {
     "kicker": "How pricing works",
     "title": "Price follows the operating surface.",
@@ -26,19 +26,19 @@
     }
   },
   "pilot": {
-    "kicker": "Margin Recovery Pilot",
+    "kicker": "Recovery Pilot",
     "verb": "Prove",
-    "title": "Start with one or two problem families.",
+    "title": "Choose your first recovery scope.",
     "lead": "14 days to find and action recoverable value. Open cases stay on RADR until resolved, verified, or closed.",
     "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
-    "priceLabel": "Margin Recovery Pilot",
+    "priceLabel": "Recovery Pilot",
     "priceSub": "Scoped with you",
     "cta": "Start a recovery pilot",
     "points": [
       "Supplier / AP · Reconciliation · or both",
       "2–3 locations",
       "14-day discovery / action window",
-      "Open-case verification tail",
+      "Open cases until resolved, verified, or closed",
       "Evidence packages · recovery tracking",
       "Verified Value trace"
     ]
@@ -46,13 +46,13 @@
   "core": {
     "name": "RADR Core",
     "verb": "Decide + Verify",
-    "line": "Broader Decision coverage once recovery is proven.",
+    "line": "Expand from recovery into recurring Decisions across the operation.",
     "audience": "Connect the operation. Make better Decisions. Verify what changed.",
     "priceLabel": "Priced by location + operating scope",
     "cta": "Discuss Core",
     "features": [
       "Cross-system Decisions",
-      "Problem families beyond the pilot",
+      "Broader operating coverage",
       "Futures — Early Access",
       "Verified Value",
       "Operating Memory — Early Access"

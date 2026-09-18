@@ -157,6 +157,34 @@ const PREVIEWS: Record<string, PreviewModel> = {
   },
 };
 
+// Aliases for new Platform mega-menu keys
+PREVIEWS.decision = PREVIEWS.decisions;
+PREVIEWS.value = PREVIEWS.verifiedValue;
+PREVIEWS.memorySurface = PREVIEWS.memory;
+PREVIEWS.autopilot = {
+  kicker: "Autopilot",
+  title: "Earned trust — not magic",
+  rows: [
+    { label: "Suggest", value: "Recommend · human decides" },
+    { label: "Stage", value: "Prepare · no SoR write yet" },
+    { label: "Auto", value: "Within policy only" },
+  ],
+  cta: "See Autopilot",
+};
+PREVIEWS.policies = PREVIEWS.security;
+PREVIEWS.evidence = {
+  kicker: "Evidence",
+  title: "Sources · freshness · confidence",
+  rows: [
+    { label: "Observed", value: "Contract · invoice · qty" },
+    { label: "Estimated", value: "Range · sample" },
+  ],
+  cta: "Open evidence",
+};
+PREVIEWS.verification = PREVIEWS.verifiedValue;
+PREVIEWS.overview = PREVIEWS.decision;
+
+
 const INTEL_SCENES = [
   {
     vertical: "Restaurant",
