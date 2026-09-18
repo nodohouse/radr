@@ -13069,7 +13069,8 @@ html:has(.radr-home) body {
 }
 .rx-he-recover {
   position: relative;
-  padding: clamp(5.25rem, 9vh, 6.75rem) 0 clamp(3.25rem, 6vh, 4.5rem);
+  padding: calc(var(--nav-h, 4.75rem) + clamp(1.75rem, 4vh, 2.75rem)) 0
+    clamp(3.25rem, 6vh, 4.5rem);
   background:
     radial-gradient(48% 55% at 12% 18%, rgba(0, 217, 120, 0.09), transparent 58%),
     radial-gradient(42% 48% at 88% 72%, rgba(180, 220, 205, 0.22), transparent 62%),
