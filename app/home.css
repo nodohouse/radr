@@ -13076,27 +13076,29 @@ html:has(.radr-home) body {
 /* Left ~40% brand lockup · right ~60% product context */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
-  column-gap: clamp(1.75rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  column-gap: clamp(2rem, 4.5vw, 3.5rem);
   row-gap: 2rem;
-  align-items: start;
+  align-items: center;
   width: 100%;
 }
 .rx-he-recover-brand {
   width: 100%;
-  max-width: 22rem;
-  padding-top: 0.15rem;
+  max-width: none;
+  padding-top: 0;
+  container-type: inline-size;
+  container-name: he-brand;
 }
 .rx-he-recover-product {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 34rem;
-  justify-self: end;
+  max-width: 36rem;
+  justify-self: stretch;
 }
 .rx-he-recover-proof {
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1.35rem;
 }
 .rx-he-recover-kicker {
   margin: 0 0 0.85rem;
@@ -13108,12 +13110,12 @@ html:has(.radr-home) body {
 }
 .rx-he-recover-title {
   margin: 0;
-  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-size: clamp(1.4rem, 2.35vw, 1.95rem);
   font-weight: 680;
   letter-spacing: -0.035em;
   line-height: 1.18;
   color: #0a0d0b;
-  max-width: 24ch;
+  max-width: 26ch;
 }
 .rx-he-recover-sub {
   margin: 1rem 0 0;
@@ -13294,25 +13296,29 @@ html:has(.radr-home) body {
   color: #0a0d0b;
 }
 
-/* Left-rail stacked lockup — ~40% column */
+/* Left-rail stacked lockup — fill ~40% column (cqi tracks brand rail) */
 .rx-notr--display,
 .rx-he-h0.rx-notr--display {
   gap: 0;
-  font-size: clamp(2.75rem, 5.2vw, 4.75rem);
-  font-weight: 760;
-  letter-spacing: -0.055em;
-  line-height: 0.9;
+  width: 100%;
   max-width: none;
+  /* vw fallback, then cqi so NOTHING fills the brand rail */
+  font-size: clamp(2.85rem, 5.8vw, 6.75rem);
+  font-size: clamp(2.85rem, 21cqi, 6.75rem);
+  font-weight: 780;
+  letter-spacing: -0.062em;
+  line-height: 0.86;
 }
 .rx-notr--display .rx-notr-line {
   font-size: 1em;
   font-weight: inherit;
   letter-spacing: inherit;
   line-height: inherit;
+  white-space: nowrap;
 }
 .rx-notr--display .rx-notr-wm {
-  display: block;
-  margin-top: 0.02em;
+  display: flex;
+  margin-top: 0.01em;
   font-size: 1em !important;
   font-weight: inherit !important;
   letter-spacing: inherit !important;
@@ -13320,6 +13326,13 @@ html:has(.radr-home) body {
 }
 .rx-notr--display .rx-notr-wm .radr-wm-letter {
   font-weight: inherit;
+}
+.rx-notr--display .rx-notr-wm .radr-wm-a {
+  width: 0.88em;
+  height: 0.9em;
+  margin: 0 0.1em;
+  transform: translateY(0.02em);
+  color: #00d978;
 }
 
 /* Brand-close band — quiet stacked lockup */
@@ -13364,6 +13377,7 @@ html:has(.radr-home) body {
   .rx-he-recover-frame,
   .rx-rec-brand-frame {
     grid-template-columns: 1fr;
+    align-items: start;
   }
   .rx-he-recover-brand {
     max-width: none;
@@ -13377,7 +13391,7 @@ html:has(.radr-home) body {
   }
   .rx-notr--display,
   .rx-he-h0.rx-notr--display {
-    font-size: clamp(2.75rem, 13vw, 4rem);
+    font-size: clamp(2.85rem, 14vw, 4.25rem);
   }
 }
 
