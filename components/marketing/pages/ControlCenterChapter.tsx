@@ -154,6 +154,12 @@ export function ControlCenterChapter() {
                 needsYou={BRIEF_ATTENTION.needsYou}
               />
               <p
+                className="rx-pilot-note"
+                style={{ color: "rgba(247,250,248,0.65)", marginTop: "0.75rem" }}
+              >
+                DEMO · ILLUSTRATIVE · not customer results
+              </p>
+              <p
                 className="rx-cc-silence-need"
                 data-on={phase === "silence" ? "true" : "false"}
                 style={{ marginTop: "1rem" }}

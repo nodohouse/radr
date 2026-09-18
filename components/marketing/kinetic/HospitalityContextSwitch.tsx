@@ -50,7 +50,7 @@ export function HospitalityEyebrow({ className = "" }: { className?: string }) {
   return (
     <p className={`rx-hcx-eyebrow ${className}`.trim()}>
       Restaurants &amp; F&amp;B · Hotels &amp; Resorts · Serviced Apartments ·
-      Groups
+      Multi-location groups
     </p>
   );
 }

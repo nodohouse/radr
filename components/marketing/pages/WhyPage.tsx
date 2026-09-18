@@ -16,14 +16,15 @@ import {
 import { money } from "@/data/demo";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import {
-  MARKET_SOURCES,
-  WHY_NOW_STATS,
-  type MarketSourceId,
-} from "@/data/market/sources";
+  RESEARCH_FACTS,
+  WHY_NOW_RESEARCH,
+  type ResearchFactId,
+} from "@/data/research/researchFacts";
 import { useInView } from "@/components/marketing/motion/useInView";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import "@/app/product-chapters.css";
 import "@/app/motion.css";
+import "@/app/kinetic.css";
 
 const FRAGMENTS = [
   { label: "PMS", value: "Nearly full", action: "Sell remaining", tone: "screen" },
@@ -126,15 +127,17 @@ const OBJECTIONS = [
   },
 ] as const;
 
-function MarketStat({ id }: { id: MarketSourceId }) {
-  const s = MARKET_SOURCES[id];
+function MarketStat({ id }: { id: ResearchFactId }) {
+  const s = RESEARCH_FACTS[id];
   return (
     <li className="rx-why-stat">
-      <strong>{s.value}</strong>
+      <strong>{s.metric}</strong>
       <span className="rx-why-stat-label">{s.displayLabel}</span>
-      <p>{s.context}</p>
+      <p>
+        {s.metric} {s.statement}
+      </p>
       <span className="rx-why-stat-meta">
-        {s.population} · {s.period}
+        {s.population} · {s.publicationDate}
       </span>
       <a
         className="rx-why-stat-src"
@@ -142,8 +145,8 @@ function MarketStat({ id }: { id: MarketSourceId }) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Source · {s.sourceName}
-        <em>{s.sourceTitle}</em>
+        Source · {s.publisher}
+        <em>{s.report}</em>
       </a>
     </li>
   );
@@ -458,7 +461,7 @@ export function WhyPage() {
               systems and Decisions.
             </p>
             <ul className="rx-why-stats">
-              {WHY_NOW_STATS.map((id) => (
+              {WHY_NOW_RESEARCH.map((id) => (
                 <MarketStat key={id} id={id} />
               ))}
             </ul>

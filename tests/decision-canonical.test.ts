@@ -94,11 +94,20 @@ describe("Canonical hotel and apartment", () => {
   it("keeps OTA and orphan IDs stable with believable variance", () => {
     expect(CANON_OTA.displayId).toBe("D-2201");
     expect(CANON_OTA.property).toBe("Canal House · Amsterdam");
+    expect(CANON_OTA.property).not.toMatch(/Berlin/i);
+    expect(CANON_OTA.exposureEuro).toBe(4200);
     expect(CANON_OTA.expectedProtectedEuro).toBe(3100);
     expect(CANON_OTA.actualProtectedEuro).toBe(2960);
     expect(CANON_OTA.verifiedKind).toBe("protected");
     expect(CANON_OTA.unitEconomics?.otaPath.expectedContribution).toBe(306);
     expect(CANON_OTA.unitEconomics?.directPath.expectedContribution).toBe(429);
+    // Per-room economics must not be confused with 72h block totals
+    expect(CANON_OTA.unitEconomics!.otaPath.expectedContribution).not.toBe(
+      CANON_OTA.expectedProtectedEuro,
+    );
+    expect(CANON_OTA.unitEconomics!.directPath.expectedContribution * 4).not.toBe(
+      CANON_OTA.expectedProtectedEuro,
+    );
     expect(CANON_ORPHAN.displayId).toBe("D-3104");
     expect(CANON_ORPHAN.property).toBe("Chiado Collective · Lisbon");
     expect(CANON_ORPHAN.property).not.toMatch(/Barcelona/i);

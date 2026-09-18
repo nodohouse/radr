@@ -3,6 +3,7 @@
 /**
  * Hero hospitality scene — one desktop + one phone.
  * Vertical switch changes Decision + context. Default = Restaurant Floor.
+ * Within restaurant, phone slowly alternates VIP brief ↔ service recommend.
  */
 
 import { useEffect, useState } from "react";
@@ -12,6 +13,7 @@ import {
 } from "@/components/marketing/kinetic/HospitalityContextSwitch";
 import {
   heroSceneFor,
+  restaurantFloorSecondaryPhone,
   type HospitalityVertical,
 } from "@/lib/marketing/hospitalityContext";
 import {
@@ -30,6 +32,7 @@ export function HeroHospitalityScene() {
   const reduced = usePrefersReducedMotion();
   const [vertical, setVertical] = useState<HospitalityVertical>("restaurant");
   const [paused, setPaused] = useState(false);
+  const [floorAlt, setFloorAlt] = useState(false);
   const scene = heroSceneFor(vertical);
 
   useEffect(() => {
@@ -39,19 +42,32 @@ export function HeroHospitalityScene() {
         const i = ROTATE.indexOf(prev);
         return ROTATE[(i + 1) % ROTATE.length]!;
       });
-    }, 6000);
+    }, 6500);
     return () => window.clearInterval(id);
   }, [reduced, paused]);
 
+  useEffect(() => {
+    if (reduced || paused || vertical !== "restaurant") return;
+    const id = window.setInterval(() => {
+      setFloorAlt((v) => !v);
+    }, 5500);
+    return () => window.clearInterval(id);
+  }, [reduced, paused, vertical]);
+
+  const phoneModel =
+    vertical === "restaurant" && floorAlt
+      ? restaurantFloorSecondaryPhone()
+      : scene.phone;
+
   const phone: RadrPhoneState = {
-    id: scene.vertical,
-    role: scene.phone.role,
-    badge: scene.phone.badge,
-    title: scene.phone.title,
-    body: scene.phone.body,
-    meta: scene.phone.meta,
-    primary: scene.phone.primary,
-    tone: scene.phone.tone,
+    id: `${scene.vertical}-${floorAlt ? "alt" : "main"}`,
+    role: phoneModel.role,
+    badge: phoneModel.badge,
+    title: phoneModel.title,
+    body: phoneModel.body,
+    meta: phoneModel.meta,
+    primary: phoneModel.primary,
+    tone: phoneModel.tone,
   };
 
   return (
@@ -65,6 +81,7 @@ export function HeroHospitalityScene() {
         value={vertical}
         onChange={(v) => {
           setPaused(true);
+          setFloorAlt(false);
           setVertical(v);
         }}
         size="hero"

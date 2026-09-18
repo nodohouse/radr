@@ -1,9 +1,8 @@
 "use client";
 
 /**
- * Homepage — reduced hospitality story.
- * Hero → rail → leak map → one Decision → roles → progression → start → FAQ.
- * No scroll traps. No Floor page clone.
+ * Homepage — research-backed hospitality story.
+ * Hero → rail → connect → research → leaks → Decision → roles → progression → pilot → FAQ.
  */
 
 import { useTranslations } from "next-intl";
@@ -15,7 +14,8 @@ import { ProgressionLadder } from "@/components/marketing/scenes/home/Progressio
 import { EconomicRail } from "@/components/marketing/kinetic/EconomicRail";
 import { LeakMapPanel } from "@/components/marketing/kinetic/LeakMapPanel";
 import { RoleProjectionStrip } from "@/components/marketing/kinetic/RoleProjectionStrip";
-import { ConnectionBand } from "@/components/marketing/kinetic/ConnectionBand";
+import { ConnectionOriginSection } from "@/components/marketing/kinetic/ConnectionOriginSection";
+import { ResearchEvidenceStrip } from "@/components/marketing/kinetic/ResearchEvidenceStrip";
 import { PilotTimeline } from "@/components/marketing/kinetic/PilotTimeline";
 import { HOME_RAIL } from "@/lib/marketing/economicRail";
 import type { ProblemFamily, ProgressionStage } from "@/lib/radr/problemFamilies";
@@ -60,7 +60,19 @@ export function HomepageSpine() {
         <EconomicRail items={HOME_RAIL} durationSec={52} />
       </section>
 
+      <section className="rx-rec-sec" data-nav-theme="light">
+        <div className="rx-shell">
+          <ConnectionOriginSection />
+        </div>
+      </section>
+
       <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
+        <div className="rx-shell">
+          <ResearchEvidenceStrip />
+        </div>
+      </section>
+
+      <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
           <LeakMapPanel
             kicker={t("families.kicker")}
@@ -71,7 +83,7 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
           <RecoveryStoryObject
             kicker={t("story.kicker")}
@@ -81,13 +93,13 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
+      <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
           <RoleProjectionStrip />
         </div>
       </section>
 
-      <section className="rx-rec-sec" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
           <ProgressionLadder
             kicker={t("progression.kicker")}
@@ -99,24 +111,15 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
+      <section className="rx-rec-sec" data-nav-theme="light">
         <div className="rx-shell">
-          <ConnectionBand
-            kicker={t("stack.kicker")}
-            title={t("stack.title")}
-            lead={t("stack.lead")}
-            body=""
-            note={t("stack.statesNote")}
+          <PilotTimeline
+            kicker={t("pilot.kicker")}
+            title={t("pilot.title")}
+            lead={t("pilot.lead")}
+            scope={t("pilot.scope")}
+            cta={t("pilot.cta")}
           />
-          <div style={{ marginTop: "2rem" }}>
-            <PilotTimeline
-              kicker={t("pilot.kicker")}
-              title={t("pilot.title")}
-              lead={t("pilot.lead")}
-              scope={t("pilot.scope")}
-              cta={t("pilot.cta")}
-            />
-          </div>
         </div>
       </section>
 
@@ -137,10 +140,6 @@ export function HomepageSpine() {
               <div>
                 <dt>{t("faq.q3")}</dt>
                 <dd>{t("faq.a3")}</dd>
-              </div>
-              <div>
-                <dt>{t("faq.q4")}</dt>
-                <dd>{t("faq.a4")}</dd>
               </div>
             </dl>
           </div>

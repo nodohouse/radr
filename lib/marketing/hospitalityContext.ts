@@ -137,10 +137,23 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
       badge: "RADR Floor",
       title: "VIP reservation updated",
       body: "Party of 6 · 18:50 · Table 12 · nut allergy · returning guest",
-      meta: "FOH brief updated",
+      meta: "18:42 · Dinner · FOH brief updated",
       primary: "Open brief",
       tone: "brief",
     },
+  };
+}
+
+/** Secondary restaurant Floor phone — service intelligence */
+export function restaurantFloorSecondaryPhone(): HeroSceneModel["phone"] {
+  return {
+    role: "FOH",
+    badge: "Service",
+    title: "Recommend Ribeye",
+    body: "Cold station 92% · Table 7 · 4 guests · guest preference + lower constrained load",
+    meta: "18:42 · Dinner",
+    primary: "Open brief",
+    tone: "brief",
   };
 }
 

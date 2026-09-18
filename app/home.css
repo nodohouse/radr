@@ -13079,11 +13079,11 @@ html:has(.radr-home) body {
   display: block;
   overflow: hidden;
 }
-/* All text left · product card right — one composition */
+/* All text left · product card right — product commands the right side */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr);
-  column-gap: clamp(2rem, 4.5vw, 3.5rem);
+  grid-template-columns: minmax(0, 0.43fr) minmax(0, 0.57fr);
+  column-gap: clamp(1.5rem, 3.5vw, 2.75rem);
   row-gap: 2.25rem;
   align-items: start;
   width: 100%;
@@ -13100,7 +13100,8 @@ html:has(.radr-home) body {
   width: 100%;
   max-width: none;
   justify-self: stretch;
-  padding-top: 0.15rem;
+  padding-top: 2.5rem;
+  margin-bottom: -2.5rem;
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;
