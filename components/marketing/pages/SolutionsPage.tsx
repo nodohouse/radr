@@ -15,15 +15,13 @@ import {
   type TerritoryRouteId,
 } from "@/data/demo/intelligence";
 import {
-  CUSTOMER_LOOP,
   HONESTY_LABEL,
   INTELLIGENCE_PRINCIPLE,
   TERRITORY_DEFINITIONS,
 } from "@/lib/radr/intelligence";
-import { CTAS } from "@/lib/marketing/brand";
 import type { CanonDecision } from "@/lib/radr/decision/demo/canonical";
 import { IntelFuturesFork } from "./IntelFuturesFork";
-import { IntelOperatingGraph } from "./IntelOperatingGraph";
+import { IntelProblemClasses } from "./IntelProblemClasses";
 import "@/app/econ.css";
 import "@/app/home.css";
 import "@/app/intelligence.css";
@@ -557,7 +555,12 @@ function LensIntro() {
   return (
     <section className="rx-intel-lenses-intro" data-nav-theme="light">
       <div className="rx-shell">
-        <p className="rx-intel-k">Four lenses</p>
+        <p className="rx-intel-k">How RADR interprets the operation</p>
+        <h2 className="rx-intel-classes-title">BUY · LABOR · SELL · RECOVER</h2>
+        <p className="rx-intel-classes-lead">
+          Economic lenses over the same Decision model — not the first thing you
+          sell. Deeper architecture once the value-loss story is clear.
+        </p>
         <p className="rx-intel-principle">{INTELLIGENCE_PRINCIPLE}</p>
         <ul className="rx-intel-lens-grid">
           {LENS_ORDER.map((id) => {
@@ -579,9 +582,9 @@ function LensIntro() {
 }
 
 /**
- * Intelligence — one composition, progressive depth.
- * Landing: law → breath → one story → lenses.
- * Every story rests on a Decision — not input metrics.
+ * Intelligence — where RADR looks for value.
+ * Landing: problem classes → how RADR thinks → lenses demoted.
+ * Lens routes keep BUY / LABOR / SELL / RECOVER depth.
  */
 export function SolutionsPage({
   lens,
@@ -595,33 +598,19 @@ export function SolutionsPage({
         <section className="rx-intel-hero" data-nav-theme="light">
           <div className="rx-intel-hero-atm" aria-hidden="true" />
           <div className="rx-shell rx-intel-hero-inner">
-            <p className="rx-intel-category">
-              Intelligence · DEMO · ILLUSTRATIVE
-            </p>
-            <h1 className="rx-intel-title">
-              The number is not the intelligence.
-              <br />
-              The connection is.
-            </h1>
-            <p className="rx-intel-lead">
-              <span className="rx-intel-lead-stack">
-                Four economic lenses.
-                <br />
-                One hospitality operating model.
-              </span>
-              <span className="rx-intel-lead-follow">
-                Your systems see individual facts. RADR connects the relationship
-                that changes the Decision.
-              </span>
-            </p>
-            {!lens ? (
-              <ol className="rx-intel-seq" aria-label="How RADR decides">
-                {CUSTOMER_LOOP.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-            ) : (
+            <p className="rx-intel-category">Intelligence · illustrative</p>
+            {lens ? (
               <>
+                <h1 className="rx-intel-title">
+                  {TERRITORY_ROUTE[lens].code}
+                  <br />
+                  <span style={{ fontWeight: 500, fontSize: "0.55em" }}>
+                    Economic lens
+                  </span>
+                </h1>
+                <p className="rx-intel-lead">
+                  {TERRITORY_DEFINITIONS[TERRITORY_ROUTE[lens].code].definition}
+                </p>
                 <div
                   className="rx-intel-lenses"
                   role="tablist"
@@ -641,8 +630,21 @@ export function SolutionsPage({
                     </Link>
                   ))}
                 </div>
-                <p className="rx-intel-lens-def">
-                  {TERRITORY_DEFINITIONS[TERRITORY_ROUTE[lens].code].definition}
+              </>
+            ) : (
+              <>
+                <h1 className="rx-intel-title">
+                  Where RADR looks for value.
+                </h1>
+                <p className="rx-intel-lead">
+                  <span className="rx-intel-lead-stack">
+                    RADR continuously looks for value that is leaking, stuck,
+                    misallocated, or about to expire.
+                  </span>
+                  <span className="rx-intel-lead-follow">
+                    You don’t teach RADR what to look for. It already knows the
+                    evidence, Decisions, and what counts as Verified.
+                  </span>
                 </p>
               </>
             )}
@@ -657,9 +659,8 @@ export function SolutionsPage({
           </section>
         ) : (
           <>
+            <IntelProblemClasses />
             <Breath />
-            <CrossDomainHero />
-            <IntelOperatingGraph />
             <LensIntro />
           </>
         )}
@@ -667,11 +668,17 @@ export function SolutionsPage({
         <section className="rx-intel-cta" data-nav-theme="light">
           <div className="rx-shell">
             <div className="rx-ctas">
-              <NextLink href="/demo" className="rx-btn rx-btn-primary">
-                {CTAS.primaryProduct} <span aria-hidden="true">→</span>
+              <NextLink
+                href="/app/lab/control-center?seed=recover"
+                className="rx-btn rx-btn-primary"
+              >
+                See a recovery Decision <span aria-hidden="true">→</span>
               </NextLink>
-              <Link href="/contact" className="rx-btn rx-btn-ghost">
-                {CTAS.primarySales}
+              <Link
+                href="/contact?intent=recovery-pilot"
+                className="rx-btn rx-btn-ghost"
+              >
+                Start a recovery pilot
               </Link>
             </div>
           </div>

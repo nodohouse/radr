@@ -39,8 +39,8 @@ const FLOW: {
   },
   {
     id: "expected",
-    label: "Expected",
-    because: "Modeled if Decision path holds — not cash",
+    label: "In recovery",
+    because: "Decision prepared · value not yet on the books",
   },
   {
     id: "observed",
@@ -200,9 +200,9 @@ export function LabValueCanvas() {
         <header className="lab-surf-head">
           <div>
             <p className="lab-surf-k">Value</p>
-            <h1 className="lab-surf-title">Tonight / 24h · money truth</h1>
+            <h1 className="lab-surf-title">Identified → Verified</h1>
             <p className="lab-surf-sub">
-              {lens.subtitle} · Expected until value is applied
+              {lens.subtitle} · never one collapsed savings number
             </p>
           </div>
         </header>

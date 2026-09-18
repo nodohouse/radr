@@ -14034,3 +14034,123 @@ html:has(.radr-home) body {
   font-size: 0.8rem;
   color: #626a65;
 }
+
+/* —— Intelligence problem classes —— */
+.rx-intel-classes {
+  padding: 3.5rem 0 2.5rem;
+}
+.rx-intel-classes-title {
+  margin: 0.35rem 0 0.65rem;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: -0.03em;
+  color: #0a0d0b;
+  max-width: 28rem;
+}
+.rx-intel-classes-lead {
+  margin: 0 0 0.5rem;
+  max-width: 36rem;
+  color: #626a65;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+.rx-intel-class-story {
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 16px;
+  padding: 1.35rem 1.45rem 1.5rem;
+  box-shadow: 0 12px 36px rgba(10, 13, 11, 0.04);
+  margin-top: 0.25rem;
+}
+.rx-intel-class-story header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.rx-intel-class-story h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+.rx-intel-class-story header p {
+  margin: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  color: #00a85a;
+}
+.rx-intel-class-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 720px) {
+  .rx-intel-class-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.rx-intel-class-k {
+  margin: 0 0 0.45rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-intel-class-grid ul,
+.rx-intel-class-grid ol {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #0a0d0b;
+  line-height: 1.5;
+}
+.rx-intel-class-euro {
+  margin: 0.75rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 650;
+  color: #0a0d0b;
+  letter-spacing: -0.02em;
+}
+.rx-intel-class-punch {
+  margin: 1.25rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(10, 13, 11, 0.08);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #0a0d0b;
+}
+.rx-rec-punch {
+  list-style: none;
+  margin: 1.1rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+  max-width: 36rem;
+}
+.rx-rec-punch li {
+  padding: 0.65rem 0.85rem;
+  background: #fff;
+  border-left: 3px solid #00d978;
+  border-radius: 0 10px 10px 0;
+  font-size: 0.95rem;
+  color: #0a0d0b;
+  letter-spacing: -0.01em;
+}
+.rx-he-phone-role {
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00a85a;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.lab-winloss-cfo {
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 900px) {
+  .lab-winloss-cfo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

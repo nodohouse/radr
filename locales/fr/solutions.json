@@ -3,8 +3,8 @@
   "metaDescription": "Five hospitality problem families: Supplier/AP, Reconciliation, Cost variance, Procurement, Perishable revenue. Signal → Decision → Verified.",
   "kicker": "Intelligence",
   "heroTitleLine1": "Where RADR looks for value.",
-  "heroTitleLine2": "Not another reporting layer.",
-  "heroLead": "RADR already knows where hospitality loses money — and what evidence, Decisions, and verification look like for each problem family.",
+  "heroTitleLine2": "",
+  "heroLead": "RADR continuously looks for value that is leaking, stuck, misallocated, or about to expire.",
   "jump": {
     "operators": "Restaurants",
     "groups": "Groupes",

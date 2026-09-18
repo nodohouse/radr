@@ -14,17 +14,22 @@ RADR already knows: where hospitality loses money · what evidence matters · wh
 
 ## Five problem families
 
-| Family | Stage | Pilot |
+| Family | Stage | Maturity |
 | --- | --- | --- |
-| `SUPPLIER_AP` | Recover | Yes |
-| `RECONCILIATION` | Recover | Yes |
+| `SUPPLIER_AP` | Recover | Pilot-ready |
+| `RECONCILIATION` | Recover | Pilot-ready |
 | `COST_VARIANCE` | Prevent | Expansion |
 | `PROCUREMENT` | Optimize | Expansion |
-| `PERISHABLE_REVENUE` | Recover / live ops | Expansion |
+| `PERISHABLE_REVENUE` | Recover / live ops | Planned |
+
+**These are intelligence classes — not modules, not primary nav, not five dashboards.**
+
+Customer interacts with: Decisions · Value · Evidence · Actions · Outcomes.
+Problem family is context on the Decision.
+
+BUY / LABOR / SELL / RECOVER remain economic lenses — demoted under “How RADR interprets the operation.”
 
 Source: `lib/radr/problemFamilies.ts`
-
-Each family has: signals · evidence · Decision types · actions · verification logic.
 
 ## Value states (visual)
 

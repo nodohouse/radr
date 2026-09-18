@@ -26,12 +26,12 @@
     }
   },
   "pilot": {
-    "kicker": "Recovery Pilot",
+    "kicker": "Margin Recovery Pilot",
     "verb": "Prove",
     "title": "Start with one or two problem families.",
     "lead": "14 days to find and action recoverable value. Open cases stay on RADR until resolved, verified, or closed.",
     "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
-    "priceLabel": "Recovery Pilot",
+    "priceLabel": "Margin Recovery Pilot",
     "priceSub": "Scoped with you",
     "cta": "Start a recovery pilot",
     "points": [
@@ -82,16 +82,16 @@
   "packagesNote": "Core and Control are scoped to your operation.",
   "expansion": {
     "kicker": "How expansion works",
-    "title": "Prove. Deploy. Scale.",
+    "title": "Recover → Decide → Scale.",
     "steps": {
       "prove": {
-        "label": "Prove",
-        "title": "One operating problem.",
-        "body": "A paid Pilot on one location, defined systems, and a measurable outcome."
+        "label": "Recover",
+        "title": "Recover value first.",
+        "body": "A Recovery Pilot on Supplier/AP and/or Reconciliation — measurable Verified outcomes."
       },
       "deploy": {
-        "label": "Deploy",
-        "title": "Make RADR part of one operation.",
+        "label": "Decide",
+        "title": "Make RADR part of the Decision layer.",
         "body": "Core connects the stack, decides what matters, and verifies what changed."
       },
       "scale": {

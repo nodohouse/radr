@@ -25,6 +25,7 @@ type Props = {
   whatVerifies: string;
   maturityPilot: string;
   maturityExpansion: string;
+  maturityPlanned: string;
 };
 
 export function ProblemFamiliesRail({
@@ -40,6 +41,7 @@ export function ProblemFamiliesRail({
   whatVerifies,
   maturityPilot,
   maturityExpansion,
+  maturityPlanned,
 }: Props) {
   const [active, setActive] = useState<ProblemFamily>("SUPPLIER_AP");
   const def = PROBLEM_FAMILY_DEFS[active];
@@ -49,6 +51,9 @@ export function ProblemFamiliesRail({
       <p className="rx-rec-k">{kicker}</p>
       <h2 className="rx-rec-h">{title}</h2>
       <p className="rx-rec-p">{lead}</p>
+      <p className="rx-rec-note">
+        Context for Decisions — not five products in the nav.
+      </p>
 
       <div className="rx-pf-rail" role="tablist" aria-label={title}>
         {PROBLEM_FAMILIES.map((id) => (
@@ -63,11 +68,13 @@ export function ProblemFamiliesRail({
             onClick={() => setActive(id)}
           >
             <em>{labels[id]}</em>
-            <span>
-              {PROBLEM_FAMILY_DEFS[id].maturity === "pilot"
-                ? maturityPilot
-                : maturityExpansion}
-            </span>
+                <span>
+                  {PROBLEM_FAMILY_DEFS[id].maturity === "pilot"
+                    ? maturityPilot
+                    : PROBLEM_FAMILY_DEFS[id].maturity === "planned"
+                      ? maturityPlanned
+                      : maturityExpansion}
+                </span>
           </button>
         ))}
       </div>

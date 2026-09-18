@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Memory — playbooks as learning stories.
- * Tried → observed → verified → next time. Not a dark archive.
+ * Memory — recovery patterns that earn Autopilot trust.
+ * Not a dark archive.
  */
 
 import { DECISION_IDS, displayDecisionId } from "@/lib/radr/decision/ids";
@@ -10,11 +10,11 @@ import { useLab, type MemoryScope } from "./LabContext";
 import { formatCanonicalVerified } from "@/lib/radr/product/verifiedValueCanon";
 
 const CHAIN: { id: MemoryScope; n: string; label: string }[] = [
-  { id: "comparable", n: "12", label: "Comparable nights" },
-  { id: "patterns", n: "5", label: "Patterns" },
+  { id: "comparable", n: "12", label: "What we saw" },
+  { id: "patterns", n: "5", label: "What repeats" },
   { id: "interventions", n: "4", label: "What we tried" },
-  { id: "verified", n: "3", label: "Verified" },
-  { id: "playbook", n: "v3", label: "Next time" },
+  { id: "verified", n: "3", label: "What verified" },
+  { id: "playbook", n: "v3", label: "What changes next" },
 ];
 
 type Story = {
@@ -30,48 +30,48 @@ type Story = {
 
 const STORIES: Record<MemoryScope, Story> = {
   comparable: {
-    kicker: "12 comparable Friday services",
-    title: "Friday peak capacity",
-    tried: "Feature-swap-first vs rush-order across matching Fridays",
-    observed: "Kitchen minutes recovered when signature mix de-emphasized",
-    verified: "3 nights Verified contribution protected vs seat-now baseline",
-    next: "Default Wait-12 + feature path before adding labor",
-    euro: "€620",
-    grade: "Expected",
+    kicker: "What we saw",
+    title: "Repeat supplier leakage",
+    tried: "Bluefin oil variance across 12 invoice windows",
+    observed: "Same contract · same UOM · credit often issued then unapplied",
+    verified: "€273 matched when RADR tracked CM → AP apply",
+    next: "Auto-stage dispute package · always ask before send",
+    euro: "€273",
+    grade: "Verified",
   },
   patterns: {
-    kicker: "5 patterns",
-    title: "Kitchen constraint before seats",
-    tried: "Occupancy-led seating vs kitchen-led hold",
-    observed: "Occupancy alone misleads when kitchen ≥90%",
-    verified: "Pattern held across 5 compressed inbound windows",
-    next: "Surface kitchen % on Needs-you before floor density",
+    kicker: "What repeats",
+    title: "Reconciliation + procurement patterns",
+    tried: "Settlement shorts vs delivery platforms · cross-site oil prices",
+    observed: "Refund treatment + promo funding explain most €293 gaps",
+    verified: "Pattern held across 5 close windows · 3 sites",
+    next: "Surface settlement mismatch as Decision — not a spreadsheet",
   },
   interventions: {
-    kicker: "4 interventions",
-    title: "Hold · throttle · feature · protect",
-    tried: "Prepared action set reused — not a new task list each Friday",
-    observed: "Operators approved Wait-12 faster when Futures showed €",
-    verified: "Adoption up · false alerts down on matching services",
-    next: "Keep Approve → Confirm prepare; never fake SoR writes",
+    kicker: "What we tried",
+    title: "Recovery actions that work",
+    tried: "Dispute · hold PO · waitlist recovery · yield fix before reprice",
+    observed: "Finance approved faster when evidence pack was complete",
+    verified: "Adoption up · false AP alerts down",
+    next: "Promote Stage permission where outcomes verified 3×",
   },
   verified: {
-    kicker: "3 verified improvements",
-    title: "Contribution protected at peak",
-    tried: "Wait-12 + delivery throttle on comparable peaks",
-    observed: "Second turns held · comps did not spike",
-    verified: "€ matched against seat-now baselines on ledger",
-    next: "Promote path into Playbook v3 default",
-    euro: formatCanonicalVerified("gm"),
+    kicker: "What verified",
+    title: "Verified Value banked",
+    tried: "Supplier credit path + peak Wait-12 on comparable services",
+    observed: "Credits matched · contribution protected vs seat-now",
+    verified: "Ledger-matched Verified in current scope",
+    next: "Eligible for Autopilot Stage — not Auto send",
+    euro: formatCanonicalVerified("cfo"),
     grade: "Verified",
   },
   playbook: {
-    kicker: "Playbook v3",
-    title: "Friday peak capacity protocol",
-    tried: "Feature-swap-first outperformed rush-order",
-    observed: "12 comparable services · kitchen cool-down after hold",
-    verified: "3 verified improvements · tuna shortfall matched on ledger",
-    next: "Tonight: open Brief → FOH hold + Chef cold-station",
+    kicker: "What changes next time",
+    title: "Autopilot trust progression",
+    tried: "Suggest → Stage → Auto within policy from Memory",
+    observed: "Downgrade when evidence stale · pattern differs · risk rises",
+    verified: "3 verified improvements · D-4102 credit path matched on books",
+    next: "CFO: open exceptions first · GM: perishable risk + Brief",
     euro: "€620",
     grade: "Expected",
   },
@@ -88,9 +88,9 @@ export function LabMemoryCanvas() {
         <header className="lab-surf-head">
           <div>
             <p className="lab-surf-k">Memory</p>
-            <h1 className="lab-surf-title">Learning stories</h1>
+            <h1 className="lab-surf-title">What earns Autopilot</h1>
             <p className="lab-surf-sub">
-              What we tried → observed → verified → next time
+              Repeat leaks · successful recoveries · trust progression
             </p>
           </div>
         </header>
@@ -107,15 +107,15 @@ export function LabMemoryCanvas() {
               <strong>{step.n}</strong>
               <span>{step.label}</span>
               {i < CHAIN.length - 1 ? (
-                <em className="lab-memory-arrow" aria-hidden="true">
+                <span className="lab-memory-arrow" aria-hidden="true">
                   →
-                </em>
+                </span>
               ) : null}
             </button>
           ))}
         </div>
 
-        <article className="lab-memory-story">
+        <article className="lab-memory-story" data-grade={story.grade}>
           <p className="lab-memory-kicker">{story.kicker}</p>
           <h2 className="lab-memory-title">{story.title}</h2>
           {story.euro ? (
@@ -124,8 +124,7 @@ export function LabMemoryCanvas() {
               <span>{story.grade}</span>
             </p>
           ) : null}
-
-          <ol className="lab-memory-beats">
+          <ul className="lab-memory-beats">
             <li>
               <em>Tried</em>
               <p>{story.tried}</p>
@@ -139,45 +138,25 @@ export function LabMemoryCanvas() {
               <p>{story.verified}</p>
             </li>
             <li>
-              <em>Next time</em>
+              <em>Next</em>
               <p>{story.next}</p>
             </li>
-          </ol>
+          </ul>
+          <div className="lab-memory-actions">
+            <button
+              type="button"
+              onClick={() => {
+                setSeed("recover");
+                goDecision(DECISION_IDS.supplier);
+              }}
+            >
+              Open {displayDecisionId(DECISION_IDS.supplier)}
+            </button>
+            <button type="button" onClick={() => setCenterView("brief")}>
+              Open Brief
+            </button>
+          </div>
         </article>
-
-        <div className="lab-memory-traj">
-          <p className="lab-memory-kicker">Open related Decisions</p>
-          <button
-            type="button"
-            className="lab-memory-learn"
-            onClick={() => goDecision(DECISION_IDS.menuPeak, "why")}
-          >
-            <em>{displayDecisionId(DECISION_IDS.menuPeak)}</em>
-            <strong>BUY × LABOR × SELL · peak signature</strong>
-            <span>because cold-station minutes burn at peak</span>
-          </button>
-          <button
-            type="button"
-            className="lab-memory-learn"
-            onClick={() => setSeed("service")}
-          >
-            <em>{displayDecisionId(DECISION_IDS.peak)}</em>
-            <strong>Wait-12 path · Friday capacity</strong>
-            <span>because kitchen constraint before seats</span>
-          </button>
-          <button
-            type="button"
-            className="lab-memory-learn"
-            onClick={() => {
-              setCenterView("brief");
-              setSeed("service");
-            }}
-          >
-            <em>BRIEF</em>
-            <strong>Open FOH / Chef packet</strong>
-            <span>because protocol beats dashboard dump</span>
-          </button>
-        </div>
       </div>
     </div>
   );

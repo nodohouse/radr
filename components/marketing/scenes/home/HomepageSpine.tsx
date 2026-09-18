@@ -56,6 +56,7 @@ export function HomepageSpine() {
             whatVerifies={t("families.whatVerifies")}
             maturityPilot={t("families.maturityPilot")}
             maturityExpansion={t("families.maturityExpansion")}
+            maturityPlanned={t("families.maturityPlanned")}
           />
         </div>
       </section>
@@ -123,6 +124,13 @@ export function HomepageSpine() {
             <p className="rx-rec-path">{t("thinks.flow")}</p>
             <p className="rx-rec-p">{t("thinks.lead")}</p>
             <p className="rx-rec-diff">{t("thinks.diff")}</p>
+            <ul className="rx-rec-punch">
+              <li>{t("thinks.examples.0")}</li>
+              <li>{t("thinks.examples.1")}</li>
+              <li>{t("thinks.examples.2")}</li>
+              <li>{t("thinks.examples.3")}</li>
+              <li>{t("thinks.examples.4")}</li>
+            </ul>
             <p className="rx-rec-p">{t("thinks.close")}</p>
           </div>
         </div>

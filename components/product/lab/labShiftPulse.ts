@@ -4,7 +4,6 @@
  */
 
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
-import { formatCanonicalVerified } from "@/lib/radr/product/verifiedValueCanon";
 import type { LabSeed } from "./labState";
 
 export type PulseIndustry = "restaurant" | "hotel";
@@ -123,30 +122,30 @@ export const RESTAURANT_PULSE: ShiftPulseModel = {
   metrics: [
     {
       id: "covers_in",
-      label: "Money in",
+      label: "Value in",
       value: "€3,120",
       direction: "in",
       because: "56 covers seated · second turns still ahead",
     },
     {
       id: "money_out",
-      label: "Money out",
+      label: "Value out",
       value: "€620",
       direction: "out",
       because: "Delivery take · cancels · comps running",
     },
     {
-      id: "net",
-      label: "Net now",
-      value: "€2,500",
-      direction: "net",
-      because: "Expected until close — not Verified",
+      id: "at_risk",
+      label: "Value at risk",
+      value: "€620 Expected",
+      direction: "pace",
+      because: "Peak compression · Wait-12 still open",
     },
     {
       id: "pace",
       label: "Vs forecast",
       value: "−€140",
-      direction: "pace",
+      direction: "net",
       because: "Tracking under plan without Wait-12",
     },
   ],
@@ -297,32 +296,32 @@ export const RECOVER_PULSE: ShiftPulseModel = {
   expectedClose: "€39,100 Expected",
   metrics: [
     {
-      id: "rev_in",
-      label: "Revenue in",
+      id: "value_in",
+      label: "Value in",
       value: "€48.2k",
       direction: "in",
       because: "POS close · last 14 nights",
     },
     {
-      id: "ap_out",
-      label: "Money out",
+      id: "value_out",
+      label: "Value out",
       value: "€12.4k",
       direction: "out",
       because: "AP · delivery tax · comps",
     },
     {
-      id: "variance",
-      label: "Recovered",
-      value: "€273 Verified",
-      direction: "in",
-      because: "Credit memo applied · €273 recovered",
+      id: "at_risk",
+      label: "Value at risk",
+      value: "€410 Expected",
+      direction: "pace",
+      because: "Open supplier / settlement exceptions still open",
     },
     {
-      id: "verified",
-      label: "Verified",
-      value: formatCanonicalVerified("cfo"),
-      direction: "net",
-      because: "Sum of Verified records in CFO scope",
+      id: "recovered",
+      label: "Value recovered",
+      value: "€273 Verified",
+      direction: "in",
+      because: "Credit memo applied · matched to invoice",
     },
   ],
   markers: RECOVER_MARKERS,

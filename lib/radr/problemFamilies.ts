@@ -38,8 +38,8 @@ export type ProblemFamilyDef = {
   does: string;
   /** What can be verified */
   verifies: string;
-  /** Pilot-ready now vs expansion */
-  maturity: "pilot" | "expansion";
+  /** Pilot-ready now · expansion · planned */
+  maturity: "pilot" | "expansion" | "planned";
   exampleSignals: string[];
 };
 
@@ -121,7 +121,7 @@ export const PROBLEM_FAMILY_DEFS: Record<ProblemFamily, ProblemFamilyDef> = {
       "Cancellations, no-shows, late releases, orphan nights, unused deposits — value about to expire.",
     does: "Capacity at risk → time remaining → recovery action → observe → verify contribution.",
     verifies: "Recovered contribution matched after service / night close.",
-    maturity: "expansion",
+    maturity: "planned",
     exampleSignals: [
       "cancel cluster",
       "no-show",

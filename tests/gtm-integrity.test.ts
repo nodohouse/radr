@@ -34,6 +34,7 @@ describe("problem families domain", () => {
       "SUPPLIER_AP",
       "RECONCILIATION",
     ]);
+    expect(PROBLEM_FAMILY_DEFS.PERISHABLE_REVENUE.maturity).toBe("planned");
     expect(PROGRESSION.map((p) => p.stage)).toEqual([
       "RECOVER",
       "PREVENT",
@@ -202,10 +203,11 @@ describe("mobile phone states stay role-actionable", () => {
         "utf8",
       ),
     );
-    expect(src).toContain('id: "recover"');
-    expect(src).toContain('id: "noshow"');
+    expect(src).toContain('id: "cfo"');
+    expect(src).toContain('id: "gm"');
     expect(src).toContain("€273");
     expect(src).toContain("€184");
+    expect(src).toContain("CFO");
     expect(src).not.toContain("build an agent");
   });
 });

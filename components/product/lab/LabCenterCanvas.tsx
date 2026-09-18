@@ -380,24 +380,24 @@ export function LabCenterCanvas() {
                   </div>
                   <div className="lab-floor-row">
                     <div className="lab-floor-card">
-                      <em>Arriving</em>
-                      <strong>4 covers · 20m</strong>
-                      <p>because density compresses — hold walk-ins first</p>
+                      <em>At risk</em>
+                      <strong>€184 · T14 cancel</strong>
+                      <p>because perishable capacity before peak — waitlist ready</p>
                     </div>
                     <div className="lab-floor-card">
-                      <em>Returning</em>
-                      <strong>2 regulars</strong>
-                      <p>because honor tables after Wait-12 resume 18:54</p>
+                      <em>Service pressure</em>
+                      <strong>Kitchen 92%</strong>
+                      <p>because inbound + delivery — Wait-12 still open</p>
                     </div>
                     <div className="lab-floor-card">
                       <em>VIP / allergy</em>
                       <strong>VIP 6 · T12 nut</strong>
-                      <p>because must sit 18:50 — on Decision context</p>
+                      <p>because must sit 18:50 — needs context, not AP detail</p>
                     </div>
                     <div className="lab-floor-card" data-hot>
-                      <em>Turn-risk</em>
-                      <strong>T4 · T7 · T11</strong>
-                      <p>because linked to D-1911 · €620 Expected</p>
+                      <em>Needs you</em>
+                      <strong>D-1911 · €620</strong>
+                      <p>because Decision needs GM context — open Brief</p>
                     </div>
                   </div>
                 </>
@@ -405,65 +405,77 @@ export function LabCenterCanvas() {
 
               {lens.showWinLoss ? (
                 <>
-                  <p className="lab-board-section-k">Win / loss</p>
+                  <p className="lab-board-section-k">CFO · money truth</p>
                   <h2 className="lab-board-section-t">
-                    Where we protected · where we leak
+                    Leaking · in recovery · verified · exceptions
                   </h2>
-                  <div className="lab-winloss">
-                    {state.seed === "margin-response" ? (
-                      <article className="lab-winloss-card" data-kind="loss">
-                        <em>Leaking</em>
-                        <strong>€410 Expected</strong>
-                        <p>
-                          because two-site unit price gap · Expected until
-                          credit applies
-                        </p>
-                        <button type="button" onClick={() => goValue("trace")}>
-                          Open Trace
-                        </button>
-                      </article>
-                    ) : state.seed === "recover" ? (
-                      <article className="lab-winloss-card" data-kind="win">
-                        <em>Recovered</em>
-                        <strong>€273 Verified</strong>
-                        <p>
-                          because credit memo applied · matched to original
-                          invoice
-                        </p>
-                        <button type="button" onClick={() => goValue("trace")}>
-                          Open Value Trace
-                        </button>
-                      </article>
-                    ) : (
-                      <>
-                        <article className="lab-winloss-card" data-kind="win">
-                          <em>Protected</em>
-                          <strong>
-                            {formatDecisionMoney(agg.verifiedTotal)} Verified
-                          </strong>
-                          <p>because tuna shortfall matched on the ledger</p>
-                          <button
-                            type="button"
-                            onClick={() => goValue("verified")}
-                          >
-                            Open Trace
-                          </button>
-                        </article>
-                        <article className="lab-winloss-card" data-kind="loss">
-                          <em>Leaking</em>
-                          <strong>€273 Expected</strong>
-                          <p>
-                            because INV-88421 above contract — open Recover
-                          </p>
-                          <button
-                            type="button"
-                            onClick={() => setSeed("recover")}
-                          >
-                            Open Recover
-                          </button>
-                        </article>
-                      </>
-                    )}
+                  <div className="lab-winloss lab-winloss-cfo">
+                    <article className="lab-winloss-card" data-kind="loss">
+                      <em>Value leaking</em>
+                      <strong>
+                        {state.seed === "margin-response"
+                          ? "€410 Expected"
+                          : "€293 Expected"}
+                      </strong>
+                      <p>
+                        {state.seed === "margin-response"
+                          ? "because two-site unit price gap · Expected until credit applies"
+                          : "because settlement short + open supplier exceptions"}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setSeed(
+                            state.seed === "margin-response"
+                              ? "margin-response"
+                              : "recover",
+                          )
+                        }
+                      >
+                        Open Decision
+                      </button>
+                    </article>
+                    <article className="lab-winloss-card" data-kind="loss">
+                      <em>Value in recovery</em>
+                      <strong>€273 Expected → Verified path</strong>
+                      <p>
+                        because evidence package prepared · credit tracking open
+                      </p>
+                      <button type="button" onClick={() => goValue("active")}>
+                        Open recovery
+                      </button>
+                    </article>
+                    <article className="lab-winloss-card" data-kind="win">
+                      <em>Value verified</em>
+                      <strong>
+                        {formatDecisionMoney(agg.verifiedTotal)} Verified
+                      </strong>
+                      <p>
+                        because sum of Verified records in CFO scope — matched
+                        evidence
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => goValue("verified")}
+                      >
+                        Open Trace
+                      </button>
+                    </article>
+                    <article className="lab-winloss-card" data-kind="loss">
+                      <em>Open exceptions</em>
+                      <strong>
+                        {state.seed === "recover" ? "1 Verified · 0 open" : "2 open"}
+                      </strong>
+                      <p>
+                        because{" "}
+                        {state.seed === "recover"
+                          ? "D-4102 credit matched · no open AP dispute"
+                          : "supplier variance + settlement mismatch still need Finance"}
+                      </p>
+                      <button type="button" onClick={() => goValue("pending")}>
+                        Review exceptions
+                      </button>
+                    </article>
                   </div>
                 </>
               ) : null}

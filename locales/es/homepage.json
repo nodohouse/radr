@@ -134,7 +134,8 @@
         }
       }
     },
-    "h0": "Nothing off the RADR"
+    "h0": "Nothing off the RADR",
+    "titleVariantB": "Find where hospitality loses money. Recover it. Prove it."
   },
   "control": {
     "kicker": "Control Center",
@@ -1619,9 +1620,9 @@
   },
   "recover": {
     "families": {
-      "kicker": "Where value leaks",
+      "kicker": "Intelligence classes · not modules",
       "title": "The money doesn't disappear in one place.",
-      "lead": "RADR finds value that is leaking, stuck, missed, or about to disappear.",
+      "lead": "RADR finds value that is leaking, stuck, missed, or about to disappear. You interact with Decisions and Verified outcomes — problem class is context.",
       "whatLeaks": "What leaks",
       "whatDoes": "What RADR does",
       "whatVerifies": "What can be verified",
@@ -1656,7 +1657,8 @@
         "leaks": "Cancellations, no-shows, late releases, orphan nights — value about to expire.",
         "does": "Capacity at risk → time remaining → recovery action → observe → verify contribution.",
         "verifies": "Recovered contribution matched after service or night close."
-      }
+      },
+      "maturityPlanned": "Planned"
     },
     "story": {
       "kicker": "One complete recovery",
@@ -1691,7 +1693,14 @@
       "flow": "Signal → Evidence → Decision → Action → Outcome → Verified",
       "lead": "RADR already understands hospitality economics — contract variance, settlement mismatch, no-shows, yield problems, room-night expiry.",
       "diff": "It connects the evidence, compares the responses, and measures what happened.",
-      "close": "No custom skill required to know what a supplier credit should look like — or what counts as Verified."
+      "close": "No custom skill required to know what a supplier credit should look like — or what counts as Verified.",
+      "examples": [
+        "Credit issued. Never applied.",
+        "Three locations. Three prices.",
+        "Settlement received. Still €293 short.",
+        "Food cost rose. Supplier inflation wasn’t the main reason.",
+        "Room cancelled. 19 hours left to recover it."
+      ]
     },
     "progression": {
       "kicker": "The path",
@@ -1731,7 +1740,7 @@
       "kicker": "Recovery Pilot",
       "title": "14 days to find and action recoverable value",
       "lead": "Open cases remain on RADR until resolved, verified, or closed.",
-      "scope": "Start with one or two problem families — not all five at once.",
+      "scope": "Start where the economics are clearest.",
       "opt1": "Supplier / AP",
       "opt2": "Reconciliation",
       "opt3": "Supplier / AP + Reconciliation",
