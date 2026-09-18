@@ -6,16 +6,18 @@
  */
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import type { LabFuture } from "./labState";
+import type { LabFuture, LabSeed } from "./labState";
+import { isFinanceSeed } from "./labState";
 import {
   TRACE_PEAK_EXPECTED,
   TRACE_SUPPLIER_EXPECTED,
+  TRACE_TWO_SITE_EXPECTED,
   type TraceLineage,
 } from "./labLineage";
 
 type Props = {
   mode: "live" | "why" | "futures" | "context" | "approved";
-  seed: "service" | "recover";
+  seed: LabSeed;
   displayId: string;
   label: string;
   sub: string;
@@ -57,6 +59,17 @@ const RECOVER_FUTURES: {
   { id: "seat_now", title: "Leave unapplied", euro: "€0", note: "Cash never lands" },
   { id: "wait_12", title: "Trace sealed", euro: "€273", note: "Applied · Verified · REC" },
   { id: "hard_stop", title: "Reprice menu", euro: "—", note: "Wrong lever" },
+];
+
+const TWO_SITE_FUTURES: {
+  id: LabFuture;
+  title: string;
+  euro: string;
+  note: string;
+}[] = [
+  { id: "seat_now", title: "Absorb", euro: "€0", note: "Cash never lands" },
+  { id: "wait_12", title: "Dispute gap", euro: "€410", note: "REC · Expected" },
+  { id: "hard_stop", title: "Switch supplier", euro: "—", note: "Wrong first lever" },
 ];
 
 function LineageBlock({ t, onOpenTrace }: { t: TraceLineage; onOpenTrace: () => void }) {
@@ -126,9 +139,18 @@ export function DecisionHero(props: Props) {
   const [confirm, setConfirm] = useState(false);
   const [lineageOpen, setLineageOpen] = useState(false);
   const confirmBtnRef = useRef<HTMLButtonElement>(null);
-  const futures = seed === "recover" ? RECOVER_FUTURES : SERVICE_FUTURES;
+  const futures =
+    seed === "margin-response"
+      ? TWO_SITE_FUTURES
+      : seed === "recover"
+        ? RECOVER_FUTURES
+        : SERVICE_FUTURES;
   const trace =
-    seed === "recover" ? TRACE_SUPPLIER_EXPECTED : TRACE_PEAK_EXPECTED;
+    seed === "margin-response"
+      ? TRACE_TWO_SITE_EXPECTED
+      : seed === "recover"
+        ? TRACE_SUPPLIER_EXPECTED
+        : TRACE_PEAK_EXPECTED;
 
   useEffect(() => {
     if (!confirm) return;
@@ -153,7 +175,10 @@ export function DecisionHero(props: Props) {
         </p>
         <p className="lab-obj-note">
           Staged only — not written to systems of record. Verifies when{" "}
-          {seed === "recover" ? "credit memo posts" : "contribution matches after service"}.
+          {isFinanceSeed(seed)
+            ? "credit memo posts + doc_ref seals"
+            : "contribution matches after service"}
+          .
         </p>
         <button type="button" className="lab-obj-ghost" onClick={onLive}>
           ← Live
@@ -239,26 +264,27 @@ export function DecisionHero(props: Props) {
   }
 
   /* —— Live objects —— */
-  if (seed === "recover") {
+  if (isFinanceSeed(seed)) {
     const grade = trace.sealed && trace.grade === "Verified" ? "verified" : "expected";
+    const isTwoSite = seed === "margin-response";
     return (
       <aside className="lab-obj lab-obj-dossier" data-kind="recover" data-mode={mode}>
         <div className="lab-obj-dossier-stack" aria-hidden="true">
           <div className="lab-obj-paper lab-obj-paper-back" />
           <div className="lab-obj-paper lab-obj-paper-invoice">
-            <span>INV-88421</span>
+            <span>{isTwoSite ? "INV-88421 · INV-88502" : "INV-88421"}</span>
             <span>Bluefin Berlin</span>
-            <span>€7.45/L · 420 L</span>
+            <span>{isTwoSite ? "€7.45 vs €6.80/L" : "€7.45/L · 420 L"}</span>
           </div>
         </div>
         <div className="lab-obj-ticket" aria-hidden="true">
-          <strong>{trace.sealed ? "SEALED" : "11 DAYS"}</strong>
+          <strong>{trace.sealed ? "SEALED" : "EXPECTED"}</strong>
           <em>{trace.sealed ? "Trace → stop" : `Decide by ${deadlineLabel}`}</em>
         </div>
 
         <div className="lab-obj-dossier-face">
           <div className="lab-obj-top">
-            <p className="lab-obj-attn">{trace.sealed ? "Verified" : "Recover"}</p>
+            <p className="lab-obj-attn">{trace.sealed ? "Verified" : "Margin Response"}</p>
             <p className="lab-obj-id">{displayId}</p>
           </div>
           <h1 className="lab-obj-title">{label}</h1>
@@ -277,12 +303,12 @@ export function DecisionHero(props: Props) {
           </button>
           <p className="lab-obj-because">because {trace.because}</p>
 
-          {lineageOpen || trace.sealed ? (
+          {lineageOpen || trace.sealed || isTwoSite ? (
             <LineageBlock t={trace} onOpenTrace={onOpenTrace} />
           ) : null}
 
           <div className="lab-obj-deadline" data-pulse="cool">
-            <span>{trace.sealed ? "Sales path" : "Recover clock"}</span>
+            <span>{trace.sealed ? "Sales path" : "Finance clock"}</span>
             <strong>{deadlineLabel}</strong>
             <em>{clockLabel}</em>
           </div>
@@ -300,13 +326,13 @@ export function DecisionHero(props: Props) {
               </button>
             ) : !confirm ? (
               <button type="button" className="lab-obj-approve" onClick={() => setConfirm(true)}>
-                Approve dispute
+                {isTwoSite ? "Prepare dispute" : "Approve dispute"}
               </button>
             ) : (
               <div className="lab-obj-confirm" role="alertdialog" aria-label="Confirm">
                 <p>
-                  Prepare AP dispute · hold PO · yield check.{" "}
-                  <strong>€{contribution} remains Expected</strong> until CM posts.
+                  Prepare AP dispute · hold PO.{" "}
+                  <strong>€{contribution} remains Expected</strong> until sealed Trace.
                 </p>
                 <div className="lab-obj-confirm-row">
                   <button

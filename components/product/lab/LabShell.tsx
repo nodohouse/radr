@@ -4,14 +4,15 @@ import { Suspense, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { LabProvider, useLab } from "./LabContext";
 import { LabModeRail } from "./LabModeRail";
-import { LAB_CANON } from "./labState";
+import { LAB_CANON, isFinanceSeed } from "./labState";
 import { LAB_SEEDS } from "./labLineage";
 import { ROLE_PRESETS, type CenterRole } from "./labModules";
 
 function LabTopBar() {
   const { nav, state, setSurface, setSeed, setRole, setIndustry } = useLab();
   const [healthOpen, setHealthOpen] = useState(false);
-  const recover = state.seed === "recover";
+  const recover = isFinanceSeed(state.seed);
+  const twoSite = state.seed === "margin-response";
 
   return (
     <header className="lab-topbar">
@@ -19,14 +20,16 @@ function LabTopBar() {
         <span className="lab-topbar-loc">{LAB_CANON.property}</span>
         <span className="lab-topbar-sep">/</span>
         <span>
-          {recover
-            ? "Recover"
-            : nav.industry === "hotel"
-              ? "Arrivals"
-              : "Dinner service"}
+          {twoSite
+            ? "Margin Response"
+            : recover
+              ? "Recover"
+              : nav.industry === "hotel"
+                ? "Arrivals"
+                : "Dinner service"}
         </span>
         <span className="lab-topbar-time">
-          {recover ? "11d" : LAB_CANON.now}
+          {twoSite ? "Expected" : recover ? "Sealed" : LAB_CANON.now}
         </span>
         <span className="lab-topbar-live">Live</span>
       </div>
@@ -56,10 +59,17 @@ function LabTopBar() {
           </Link>
           <Link
             href={LAB_SEEDS.recover.path}
-            data-on={recover ? "true" : undefined}
+            data-on={state.seed === "recover" ? "true" : undefined}
             onClick={() => setSeed("recover")}
           >
-            Recover
+            Credit
+          </Link>
+          <Link
+            href={LAB_SEEDS.marginResponse.path}
+            data-on={twoSite ? "true" : undefined}
+            onClick={() => setSeed("margin-response")}
+          >
+            Two-site
           </Link>
         </div>
         <div className="lab-topbar-seeds" role="tablist" aria-label="Industry">
@@ -102,12 +112,21 @@ function LabTopBar() {
             {recover ? (
               <>
                 <p>
-                  <strong>Degraded · AP sync</strong> — lag ~2h. INV-88421
-                  still matches last good pull.
+                  <strong>Degraded · AP sync</strong> — lag ~2h. Invoices still
+                  match last good pull.
                 </p>
                 <p>
-                  <strong>Sealed · Trace</strong> — €273 Verified = CM-44102
-                  applied_amount · book-matchable.
+                  {twoSite ? (
+                    <>
+                      <strong>Expected · Two-site gap</strong> — €410 Expected
+                      until CM + doc_ref seals.
+                    </>
+                  ) : (
+                    <>
+                      <strong>Sealed · Trace</strong> — €273 Verified =
+                      CM-44102 applied_amount · book-matchable.
+                    </>
+                  )}
                 </p>
               </>
             ) : (

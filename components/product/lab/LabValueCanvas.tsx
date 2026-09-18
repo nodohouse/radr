@@ -19,10 +19,12 @@ import { ShiftPulse } from "./ShiftPulse";
 import {
   TRACE_PEAK_EXPECTED,
   TRACE_SUPPLIER_EXPECTED,
+  TRACE_TWO_SITE_EXPECTED,
   TRACE_TUNA_VERIFIED,
   traceForDecision,
   type TraceLineage,
 } from "./labLineage";
+import { isFinanceSeed, type LabSeed } from "./labState";
 import { ROLE_LENSES } from "./labRoleLens";
 
 const FLOW: {
@@ -214,7 +216,15 @@ export function LabValueCanvas() {
         <ShiftPulse mode={nav.role === "cfo" ? "pnl" : "ops"} />
 
         <div className="lab-winloss lab-winloss-value">
-          {state.seed === "recover" ? (
+          {state.seed === "margin-response" ? (
+            <article className="lab-winloss-card" data-kind="loss">
+              <em>Where we leak</em>
+              <strong>€410 Expected</strong>
+              <p>
+                because two-site unit price gap · no seal until CM + doc_ref
+              </p>
+            </article>
+          ) : state.seed === "recover" ? (
             <article className="lab-winloss-card" data-kind="win">
               <em>Where we protected</em>
               <strong>€273 Verified</strong>
@@ -294,7 +304,9 @@ export function LabValueCanvas() {
         {band === "trace" ? (
           <>
             <div className="lab-trace-grid">
-              {state.seed === "recover" ? (
+              {state.seed === "margin-response" ? (
+                <TraceTheater t={TRACE_TWO_SITE_EXPECTED} />
+              ) : state.seed === "recover" ? (
                 <TraceTheater t={TRACE_SUPPLIER_EXPECTED} />
               ) : (
                 <>
@@ -305,8 +317,8 @@ export function LabValueCanvas() {
               )}
             </div>
             <p className="lab-value-law">
-              {state.seed === "recover"
-                ? "Sales demo = this one credit → Trace → stop."
+              {isFinanceSeed(state.seed)
+                ? "Sales demo = one card → Trace → stop."
                 : "No Trace = no Verified on that line."}
             </p>
           </>
@@ -341,7 +353,7 @@ function ValueStream({
   openId: string | null;
   setOpenId: (id: string | null) => void;
   goDecision: (id?: string, mode?: "live" | "why") => void;
-  setSeed: (s: "service" | "recover") => void;
+  setSeed: (s: LabSeed) => void;
 }) {
   const primary =
     band === "active"

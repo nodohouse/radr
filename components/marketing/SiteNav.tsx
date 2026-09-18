@@ -321,7 +321,7 @@ export function SiteNav({ variant }: Props) {
           >
             {t("bookDemo")}
           </NextLink>
-          <Link href="/contact?intent=recover-pilot" className="rx-nav-cta">
+          <Link href="/contact?intent=margin-recovery-pilot" className="rx-nav-cta">
             {t("seeInAction")}
           </Link>
           <button
@@ -501,7 +501,7 @@ export function SiteNav({ variant }: Props) {
           {t("bookDemo")}
         </Link>
         <Link
-          href="/contact?intent=recover-pilot"
+          href="/contact?intent=margin-recovery-pilot"
           className="rx-nav-drawer-cta"
           onClick={() => setDrawerOpen(false)}
         >

@@ -2,15 +2,15 @@
 
 Sand/mint · acid green · triangle mark. **Three bands**, not a scatter of equal widgets.
 
-## Recover sales seed (GTM D0)
+## Recover sales seed (GTM D0 → Round 2)
 
-`?seed=recover` = **one sealed AP credit → Trace → stop**.
+`?seed=recover` = credit-not-applied **sealed** · `?seed=margin-response` = two-site gap **Expected**
 
-- Fixture: `TRACE_SUPPLIER_VERIFIED` · README: `RECOVER_SEED.md`
-- Verified € = `applied_amount` only when sealed
-- No Wait-12 / labor / GL on this path
-- Autopilot: draft credit request OK · never auto short-pay / auto-remit
-- Homepage secondary CTA opens this seed only
+- Sales demo = **one Decision card → Trace → stop**
+- Fixtures: `TRACE_SUPPLIER_VERIFIED` · `TRACE_TWO_SITE_EXPECTED` · README: `RECOVER_SEED.md`
+- Verified € = applied_amount only when sealed
+- No Wait-12 / labor / GL / hotel on this path
+- Homepage hero = Margin Response Decision card (Expected + Futures + REC + Trace)
 
 ## Composition (Center)
 

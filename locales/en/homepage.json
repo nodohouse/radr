@@ -1,31 +1,31 @@
 {
   "hero": {
-    "kicker": "For Finance & Purchasing · multi-unit FSR / fast-casual",
-    "title": "Recover money on the stack you already run",
-    "sub": "Clean exit. No rip-replace. No second GL.",
-    "support": "Your AP tools flag credits. RADR helps you cash them — with Trace you can match to the books.",
-    "ctaPrimary": "Start a 14-day recover pilot",
-    "ctaSecondary": "See one credit → Trace",
-    "ariaLabel": "Recover money on the stack you already run",
+    "kicker": "Margin & Recovery Intelligence · Finance / Purchasing · FSR / FC ~8–30 locs",
+    "title": "Find the margin you’re losing — and prove you got it back",
+    "sub": "Across suppliers, menus and ops — tell you what to do — verify you got it back.",
+    "support": "Not another dashboard. Not a rip-replace OS. Not a second GL. Invoice + contract + POS/menu — max 2–3 sources.",
+    "ctaPrimary": "Start a 14-day margin recovery pilot",
+    "ctaSecondary": "See one variance → Trace",
+    "ariaLabel": "Find the margin you’re losing — and prove you got it back",
     "card": {
-      "aria": "One AP credit with sealed Trace",
-      "kicker": "Sales demo · one credit",
+      "aria": "Margin Response Decision card",
+      "kicker": "Margin Response · Finance",
       "id": "D-4102 · Berlin Mitte",
-      "title": "AP credit applied",
+      "title": "Credit issued, never applied",
       "euro": "€273",
-      "grade": "Verified",
-      "because": "because INV-88421 line variance matched CM-44102 applied to the same invoice",
-      "step1": "Invoice INV-88421 · line oil 420 L",
-      "step2": "Evidence · contract €6.80/L vs invoice €7.45/L",
-      "step3": "Finding · recover.ap.credit_expected_unapplied",
-      "step4": "Credit memo CM-44102 applied · doc_ref AP-POST-991",
-      "step5": "Verified €273 = applied_amount · sealed",
-      "note": "Verified only with sealed Trace. Expected is fine without a seal."
+      "grade": "Expected",
+      "because": "because INV-88421 line oil billed above contract — CM not cashed to books",
+      "step1": "Absorb",
+      "step2": "Dispute · REC",
+      "step3": "Renegotiate",
+      "step4": "Switch supplier",
+      "step5": "Open Trace →",
+      "note": "Expected until sealed Trace. Verified € only with applied credit + doc_ref."
     },
-    "titleLine1": "Recover money on the stack you already run",
+    "titleLine1": "Find the margin you’re losing — and prove you got it back",
     "titleLine2Prefix": "",
-    "promise": "Your AP tools flag credits. RADR helps you cash them — with Trace you can match to the books.",
-    "lead": "Clean exit. No rip-replace. No second GL.",
+    "promise": "Across suppliers, menus and ops — tell you what to do — verify you got it back.",
+    "lead": "Not another dashboard. Not a rip-replace OS. Not a second GL.",
     "verticals": {
       "aria": "ICP",
       "hint": "",
@@ -1619,45 +1619,45 @@
   "recover": {
     "problem": {
       "kicker": "The problem",
-      "title": "Credits on screen, never cash",
-      "body": "AP tools flag supplier credits every week. Finance still chases aging memos, partial applies, and variances that never hit the books. The stack records the credit. Cash still leaks."
+      "title": "On screen, never cash",
+      "body": "AP tools flag credits and variances every week. Finance still chases memos that never hit the books. The stack records the leak. Cash still leaves. Margin & Recovery Intelligence finds the wound — and proves you got it back."
     },
     "how": {
       "kicker": "How it works",
-      "title": "Invoice → finding → credit matched → Trace",
-      "s1t": "Invoice + evidence",
-      "s1d": "Line variance vs contract / GRN — qty, price, or UOM.",
-      "s2t": "Finding + action",
-      "s2d": "recover.ap.credit_expected_unapplied · draft credit request for approval.",
-      "s3t": "Credit matched → Trace → stop",
-      "s3d": "credit_memo applied to invoice or payment · Verified € = applied_amount when sealed.",
-      "stop": "One credit. Trace you can match to AP. Stop. No labor tour. No second GL."
+      "title": "Variance → Futures → Trace → Verified",
+      "s1t": "Connect 2–3 sources",
+      "s1d": "Invoice + contract + POS or menu/recipe. Systems calculate the variance.",
+      "s2t": "One Decision card",
+      "s2d": "5–8 Futures · one REC · € Expected · because-line. LLM ranks; systems calculate.",
+      "s3t": "Trace → Verified → stop",
+      "s3d": "Sealed chain only: applied credit / observed outcome + doc_ref. Never Verified off weather alone.",
+      "stop": "One card. Trace Finance can match. Stop. Better at auditable recovery — not Nory/R365 feature parity."
     },
     "pilot": {
-      "kicker": "14-day recover pilot",
-      "title": "2–3 sites. Clean exit.",
+      "kicker": "14-day margin recovery pilot",
+      "title": "2–3 sites · 2–3 feeds · clean exit",
       "i1": "14 days on the stack you already run",
-      "i2": "2–3 locations · Finance / Purchasing sponsor",
+      "i2": "2–3 locations · Finance / Purchasing sponsor · invoice + contract + POS/menu",
       "i3": "Success = Verified recoveries finance can match to AP",
-      "i4": "Clean exit. No rip-replace commitment.",
-      "cta": "Start a 14-day recover pilot"
+      "i4": "Clean exit. No rip-replace. Don’t replace forecasting/scheduling/ordering on day one.",
+      "cta": "Start a 14-day margin recovery pilot"
     },
     "foils": {
       "kicker": "What RADR is not",
-      "title": "Stay on your stack",
-      "f1": "Not a second GL",
-      "f2": "Not another dashboard",
-      "f3": "Not a rip-replace OS for R365 / Nory / Craftable / Toast"
+      "title": "Auditable recovery — not feature parity",
+      "f1": "vs Nory — don’t replace forecasting / scheduling / ordering on day one",
+      "f2": "vs R365 — not a second GL / full back-office",
+      "f3": "Not another dashboard. Not a rip-replace OS."
     },
     "vision": {
       "summary": "Later: Hospitality Autopilot",
-      "body": "Overnight briefs, events, and weather — a roadmap vision below the fold. Not the D0 commercial wedge. Today we cash credits on the stack you already run."
+      "body": "Weather, nearby events, Instagram/social, cancel→team push, overnight GM briefs — Phase 2+ after first Verified €. Sprinkle only. Never the Monday SKU lead."
     },
     "footer": {
-      "title": "Recover money on the stack you already run",
-      "body": "Start a 14-day recover pilot. Clean exit.",
-      "cta": "Start a 14-day recover pilot",
-      "secondary": "See one credit → Trace"
+      "title": "Find the margin you’re losing — and prove you got it back",
+      "body": "Start a 14-day margin recovery pilot. Clean exit.",
+      "cta": "Start a 14-day margin recovery pilot",
+      "secondary": "See one variance → Trace"
     }
   }
 }

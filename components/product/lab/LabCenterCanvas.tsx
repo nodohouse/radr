@@ -22,6 +22,7 @@ import { ServiceBrief } from "./ServiceBrief";
 import { AutopilotStatus } from "./AutopilotStatus";
 import { useLab } from "./LabContext";
 import { LAB_SEEDS } from "./labLineage";
+import { isFinanceSeed } from "./labState";
 import {
   ROLE_PRESETS,
   modulesByIds,
@@ -51,6 +52,17 @@ const RECOVER_PATHS: {
   { id: "seat_now", title: "Leave unapplied", euro: "€0", note: "Cash never lands" },
   { id: "wait_12", title: "Trace sealed", euro: "€273", note: "Applied · Verified · stop" },
   { id: "hard_stop", title: "Reprice menu", euro: "—", note: "Wrong lever" },
+];
+
+const TWO_SITE_PATHS: {
+  id: LabFuture;
+  title: string;
+  euro: string;
+  note: string;
+}[] = [
+  { id: "seat_now", title: "Absorb", euro: "€0", note: "Cash never lands" },
+  { id: "wait_12", title: "Dispute gap", euro: "€410", note: "REC · Expected" },
+  { id: "hard_stop", title: "Switch supplier", euro: "—", note: "Wrong first lever" },
 ];
 
 function FavCard({ m }: { m: LabModule }) {
@@ -86,8 +98,13 @@ export function LabCenterCanvas() {
   } = useLab();
   const reduced = useReducedMotionSafe();
   const lens = ROLE_LENSES[nav.role];
-  const recover = state.seed === "recover";
-  const paths = recover ? RECOVER_PATHS : SERVICE_PATHS;
+  const recover = isFinanceSeed(state.seed);
+  const paths =
+    state.seed === "margin-response"
+      ? TWO_SITE_PATHS
+      : recover
+        ? RECOVER_PATHS
+        : SERVICE_PATHS;
   const approved = state.mode === "approved";
   const auto = autopilotForSeed(state.seed, approved);
 
@@ -305,7 +322,9 @@ export function LabCenterCanvas() {
                             className="lab-board-trace-link"
                             onClick={() => goValue("trace")}
                           >
-                            Trace · INV-88421 · CM-44102 sealed
+                            {state.seed === "margin-response"
+                              ? "Trace · INV-88421 · INV-88502 · Expected"
+                              : "Trace · INV-88421 · CM-44102 sealed"}
                           </button>
                         ) : null}
                       </>
@@ -392,17 +411,26 @@ export function LabCenterCanvas() {
                     Where we protected · where we leak
                   </h2>
                   <div className="lab-winloss">
-                    {recover ? (
+                    {state.seed === "margin-response" ? (
+                      <article className="lab-winloss-card" data-kind="loss">
+                        <em>Leaking</em>
+                        <strong>€410 Expected</strong>
+                        <p>
+                          because two-site unit price gap · seal with CM +
+                          doc_ref
+                        </p>
+                        <button type="button" onClick={() => goValue("trace")}>
+                          Open Trace
+                        </button>
+                      </article>
+                    ) : state.seed === "recover" ? (
                       <article className="lab-winloss-card" data-kind="win">
                         <em>Protected</em>
                         <strong>€273 Verified</strong>
                         <p>
                           because CM-44102 applied_to INV-88421 · sealed Trace
                         </p>
-                        <button
-                          type="button"
-                          onClick={() => goValue("trace")}
-                        >
+                        <button type="button" onClick={() => goValue("trace")}>
                           Open Trace · stop
                         </button>
                       </article>
@@ -499,9 +527,11 @@ export function LabCenterCanvas() {
               <em>Data health</em>
               <p className="lab-aside-health">1 degraded · 1 stale</p>
               <p className="lab-aside-health-note">
-                {recover
-                  ? "€273 Verified = applied_amount · sealed Trace book-matchable."
-                  : "€ claim grade unchanged — still Expected until verified."}
+                {state.seed === "margin-response"
+                  ? "€410 Expected — seal only with CM + doc_ref."
+                  : recover
+                    ? "€273 Verified = applied_amount · sealed Trace book-matchable."
+                    : "€ claim grade unchanged — still Expected until verified."}
               </p>
             </div>
             <div className="lab-aside-card">

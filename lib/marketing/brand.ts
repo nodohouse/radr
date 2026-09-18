@@ -1,18 +1,18 @@
 /**
  * Canonical marketing brand / category / CTA vocabulary.
- * One company. One hierarchy. All marketing surfaces should import from here.
+ * Monday SKU = Margin & Recovery Intelligence (Round 2).
  */
 
 export const CATEGORY = {
-  /** Primary public category — Recover D0 */
-  primary: "Recover money on the stack you already run.",
+  /** Primary public category — Margin & Recovery D0 */
+  primary: "Find the margin you’re losing — and prove you got it back.",
   /** Secondary descriptor */
-  secondary: "Verified Decision Intelligence.",
+  secondary: "Margin & Recovery Intelligence.",
   /** Technical / enterprise supporting concept */
   systemOfRecord: "A system of decision record for hospitality.",
   /** Product position */
   decisionLayer: "The decision layer across the hospitality operation.",
-  slogan: "Recover money on the stack you already run.",
+  slogan: "Find the margin you’re losing — and prove you got it back.",
   /**
    * Named category gap — use on /why (major) and lightly on /product.
    * Not the homepage lead.
@@ -23,14 +23,13 @@ export const CATEGORY = {
 } as const;
 
 export const CTAS = {
-  primaryProduct: "Start a 14-day recover pilot",
-  /** Recover pilot — contact with intent */
-  primaryProductHref: "/contact?intent=recover-pilot",
-  primarySales: "Start a 14-day recover pilot",
-  secondaryProduct: "See one credit → Trace",
+  primaryProduct: "Start a 14-day margin recovery pilot",
+  primaryProductHref: "/contact?intent=margin-recovery-pilot",
+  primarySales: "Start a 14-day margin recovery pilot",
+  secondaryProduct: "See one variance → Trace",
   secondaryProductHref: "/app/lab/control-center?seed=recover",
   enterprise: "Talk to RADR",
-  openTrace: "Open Decision Trace",
+  openTrace: "Open Trace",
   compareFutures: "Compare Futures",
   seeVerified: "See Verified Value",
   openBrief: "Open Control Center",
@@ -84,7 +83,7 @@ export const ACTION_STATES_PUBLIC = [
 ] as const;
 
 export const SITE_META = {
-  siteTitle: "RADR — Recover money on the stack you already run",
+  siteTitle: "RADR — Margin & Recovery Intelligence",
   ogDefault:
-    "Your AP tools flag credits. RADR helps you cash them — with Trace finance can match to the books.",
+    "Find the margin you’re losing — and prove you got it back. Auditable recovery on the stack you already run.",
 } as const;

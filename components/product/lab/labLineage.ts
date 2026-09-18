@@ -160,10 +160,68 @@ export function traceForDecision(id: string): TraceLineage | null {
     return TRACE_PEAK_EXPECTED;
   if (id === TRACE_SUPPLIER_VERIFIED.decisionId || id === "d-4102")
     return TRACE_SUPPLIER_VERIFIED;
+  if (id === TRACE_TWO_SITE_EXPECTED.decisionId || id === "d-4108")
+    return TRACE_TWO_SITE_EXPECTED;
   if (id === TRACE_TUNA_VERIFIED.decisionId || id === "d-1842")
     return TRACE_TUNA_VERIFIED;
   return null;
 }
+
+/**
+ * Two sites · same supplier · different unit price.
+ * Expected only — incomplete seal (no applied credit yet). Sales discovery fixture.
+ */
+export const TRACE_TWO_SITE_EXPECTED: TraceLineage = {
+  decisionId: "dec_two_site_oil",
+  displayId: "D-4108",
+  amountEuro: 410,
+  grade: "Expected",
+  hasTrace: true,
+  sealed: false,
+  sourceSystem: "AP · Contract · Multi-site invoice",
+  documentRefs: [
+    { label: "invoice_id · Mitte", value: "INV-88421" },
+    { label: "invoice_id · Prenzlauer Berg", value: "INV-88502" },
+    { label: "contract", value: "CTR-OIL-2026 €6.80/L" },
+    { label: "vendor", value: "Bluefin Berlin · 2 sites" },
+  ],
+  chain: [
+    {
+      id: "invoice_a",
+      label: "Invoice · Mitte",
+      value: "INV-88421 · oil €7.45/L",
+      because: "Site A billed above contracted unit price",
+    },
+    {
+      id: "invoice_b",
+      label: "Invoice · Prenzlauer Berg",
+      value: "INV-88502 · oil €6.80/L",
+      because: "Site B matches contract on the same week",
+    },
+    {
+      id: "evidence",
+      label: "Evidence",
+      value: "Same vendor · same SKU · Δ €0.65/L · ~630 L gap week",
+      because: "Systems calculate the multi-site unit-price variance",
+    },
+    {
+      id: "finding",
+      label: "Finding",
+      value: "recover.ap.two_site_unit_price_gap",
+      because: "Finance-owned wound — not a GM night-of decision",
+    },
+  ],
+  window: "Recover · Expected · 2 sites",
+  matchChecklist: [
+    { label: "Match both invoices to CTR-OIL-2026", done: true },
+    { label: "Confirm same SKU / UOM across sites", done: true },
+    { label: "Credit memo applied + doc_ref", done: false },
+    { label: "Verified € = applied_amount", done: false },
+  ],
+  note: "Sales demo fixture · Expected only until sealed. One card → Trace → stop.",
+  because:
+    "Bluefin oil €7.45/L at Mitte vs €6.80/L at Prenzlauer Berg on the same contract week",
+};
 
 export const LAB_SEEDS = {
   service: {
@@ -173,7 +231,12 @@ export const LAB_SEEDS = {
   },
   recover: {
     id: "recover" as const,
-    label: "Recover · one credit → Trace",
+    label: "Recover · credit → Trace",
     path: "/app/lab/control-center?seed=recover",
+  },
+  marginResponse: {
+    id: "margin-response" as const,
+    label: "Margin Response · two-site gap",
+    path: "/app/lab/control-center?seed=margin-response",
   },
 };

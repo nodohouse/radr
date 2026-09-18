@@ -42,7 +42,7 @@ export function autopilotForSeed(
       because:
         "Verified €273 = CM-44102 applied_amount on INV-88421 · sealed Trace",
       memoryNote:
-        "Sales demo = this one credit → Trace → stop. Draft next credit request only.",
+        "Sales demo = one card → Trace → stop. Draft next credit request only.",
       policy: [
         {
           id: "draft_cm",
@@ -68,6 +68,41 @@ export function autopilotForSeed(
         observed: "CM-44102 posted in AP",
         verified: "€273 sealed · Trace book-matchable",
       },
+    };
+  }
+
+  if (seed === "margin-response") {
+    return {
+      level: approved ? 2 : 1,
+      levelLabel: approved ? "2 · Stage" : "1 · Suggest",
+      interrupt: approved ? "radr_will" : "needs_you",
+      headline: approved
+        ? "RADR prepared two-site price dispute"
+        : "Needs you · two-site unit price gap",
+      because:
+        "€410 Expected · Mitte €7.45/L vs Prenzlauer Berg €6.80/L — no seal yet",
+      memoryNote:
+        "Sales demo = one card → Trace → stop. Expected until CM + doc_ref.",
+      policy: [
+        {
+          id: "draft_cm",
+          label: "Draft credit / price correction",
+          mode: "ask",
+          note: "Ask · prepare for Finance approval",
+        },
+        {
+          id: "short_pay",
+          label: "Auto short-pay",
+          mode: "ask",
+          note: "Never auto · always ask",
+        },
+        {
+          id: "remit",
+          label: "Auto-remit",
+          mode: "ask",
+          note: "Never auto · always ask",
+        },
+      ],
     };
   }
 

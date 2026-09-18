@@ -48,7 +48,7 @@ export type ShiftPulseModel = {
   industry: PulseIndustry;
   windowLabel: string;
   netEuro: number;
-  netGrade: "Expected";
+  netGrade: "Expected" | "Verified";
   netBecause: string;
   paceLabel: string;
   paceBecause: string;
@@ -336,7 +336,7 @@ export function pulseForContext(
   seed: LabSeed,
   industry: PulseIndustry = "restaurant",
 ): ShiftPulseModel {
-  if (seed === "recover") return RECOVER_PULSE;
+  if (seed === "recover" || seed === "margin-response") return RECOVER_PULSE;
   if (industry === "hotel") return HOTEL_PULSE;
   return RESTAURANT_PULSE;
 }

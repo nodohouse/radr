@@ -19,6 +19,8 @@ import { DECISION_IDS } from "@/lib/radr/decision/ids";
 import {
   deriveLab,
   LAB_INITIAL,
+  isFinanceSeed,
+  parseLabSeed,
   type LabFuture,
   type LabMode,
   type LabNode,
@@ -125,9 +127,10 @@ export function LabProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const search = useSearchParams();
   const seedParam = search?.get("seed");
+  const initialSeed = parseLabSeed(seedParam);
   const [state, setState] = useState<LabState>(() => ({
     ...LAB_INITIAL,
-    seed: seedParam === "recover" ? "recover" : "service",
+    seed: initialSeed,
   }));
   const [surface, setSurface] = useState<DockSurface>("core");
   const [valueBand, setValueBandState] = useState<ValueBand>(
@@ -137,34 +140,39 @@ export function LabProvider({ children }: { children: ReactNode }) {
     () => (search?.get("scope") as MemoryScope) || "comparable",
   );
   const [role, setRoleState] = useState<CenterRole>(() =>
-    seedParam === "recover" ? "cfo" : "gm",
+    isFinanceSeed(initialSeed) ? "cfo" : "gm",
   );
   const [pinnedIds, setPinnedIds] = useState<string[]>(() => [
-    ...(seedParam === "recover"
+    ...(isFinanceSeed(initialSeed)
       ? ROLE_PRESETS.cfo.moduleIds
       : ROLE_PRESETS.gm.moduleIds),
   ]);
   const [myView, setMyViewState] = useState<MyView>("board");
   const [centerView, setCenterViewState] = useState<CenterView>("ops");
   const [briefPacket, setBriefPacketState] = useState<BriefPacket>(() =>
-    seedParam === "recover" ? ROLE_LENSES.cfo.defaultBriefPacket : "foh",
+    isFinanceSeed(initialSeed) ? ROLE_LENSES.cfo.defaultBriefPacket : "foh",
   );
   const [industry, setIndustryState] = useState<PulseIndustry>("restaurant");
 
   useEffect(() => {
-    if (seedParam === "recover" || seedParam === "service") {
+    if (
+      seedParam === "recover" ||
+      seedParam === "margin-response" ||
+      seedParam === "service"
+    ) {
+      const next = parseLabSeed(seedParam);
       setState((s) =>
-        s.seed === seedParam
+        s.seed === next
           ? s
           : {
               ...s,
-              seed: seedParam,
+              seed: next,
               mode: "live",
               selectedFuture: "wait_12",
               whyStep: 0,
             },
       );
-      if (seedParam === "recover") {
+      if (isFinanceSeed(next)) {
         setRoleState("cfo");
         setPinnedIds([...ROLE_PRESETS.cfo.moduleIds]);
         setBriefPacketState(ROLE_LENSES.cfo.defaultBriefPacket);

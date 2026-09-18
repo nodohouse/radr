@@ -13357,3 +13357,177 @@ html:has(.radr-home) body {
 }
 
 .rx-res-cta-band{display:flex;flex-wrap:wrap;gap:.65rem;margin:2.5rem 0 1rem;padding-top:1.5rem;border-top:1px solid rgba(10,13,11,.08)}
+
+/* Margin Response Decision card (Round 2 hero) */
+.rx-mrc {
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 16px;
+  padding: 1.25rem 1.35rem 1.4rem;
+  box-shadow: 0 18px 48px rgba(10, 13, 11, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 28rem;
+}
+.rx-mrc-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
+}
+.rx-mrc-tabs button {
+  flex: 1;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  background: #f7faf8;
+  color: #626a65;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.5rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-mrc-tabs button[data-on="true"] {
+  background: #0a0d0b;
+  color: #f7faf8;
+  border-color: #0a0d0b;
+}
+.rx-mrc-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+.rx-mrc-k {
+  margin: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #067a42;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-mrc-id {
+  margin: 0;
+  font-size: 0.68rem;
+  color: #626a65;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-mrc-variance {
+  margin: 0.15rem 0 0.35rem;
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #0a0d0b;
+  line-height: 1.2;
+}
+.rx-mrc-futures-k {
+  margin: 0.35rem 0 0;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #626a65;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-mrc-futures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.rx-mrc-chip {
+  border: 1px solid rgba(10, 13, 11, 0.12);
+  background: #f7faf8;
+  color: #0a0d0b;
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.rx-mrc-chip em {
+  font-style: normal;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: #067a42;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-mrc-chip[data-on="true"] {
+  background: #0a0d0b;
+  color: #f7faf8;
+  border-color: #0a0d0b;
+  transform: translateY(-1px);
+}
+.rx-mrc-chip[data-on="true"] em {
+  color: #00d978;
+}
+.rx-mrc-chip[data-rec="true"]:not([data-on="true"]) {
+  border-color: rgba(0, 185, 107, 0.45);
+}
+.rx-mrc[data-phase="recommend"] .rx-mrc-chip[data-rec="true"],
+.rx-mrc[data-phase="trace"] .rx-mrc-chip[data-rec="true"] {
+  box-shadow: 0 0 0 2px rgba(0, 185, 107, 0.25);
+}
+.rx-mrc-euro {
+  margin-top: 0.55rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: default;
+}
+.rx-mrc-euro strong {
+  font-size: 1.85rem;
+  letter-spacing: -0.04em;
+  color: #0a0d0b;
+}
+.rx-mrc-euro span {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #626a65;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+}
+.rx-mrc-euro[data-pulse="true"] strong {
+  color: #0a0d0b;
+}
+.rx-mrc-because {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #4a524e;
+  line-height: 1.45;
+}
+.rx-mrc-trace {
+  margin-top: 0.35rem;
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  background: #00b96b;
+  color: #0a0d0b;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.rx-mrc-trace[data-on="true"] {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+.rx-mrc-note {
+  margin: 0.25rem 0 0;
+  font-size: 0.68rem;
+  color: #626a65;
+  line-height: 1.4;
+}
+@media (max-width: 900px) {
+  .rx-he-recover-frame {
+    grid-template-columns: 1fr;
+  }
+}

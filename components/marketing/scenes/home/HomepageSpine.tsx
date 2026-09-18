@@ -56,7 +56,7 @@ export function HomepageSpine() {
             <li>{t("pilot.i3")}</li>
             <li>{t("pilot.i4")}</li>
           </ul>
-          <Link href="/contact?intent=recover-pilot" className="rx-btn rx-btn-primary">
+          <Link href="/contact?intent=margin-recovery-pilot" className="rx-btn rx-btn-primary">
             {t("pilot.cta")} <span aria-hidden="true">→</span>
           </Link>
         </div>
@@ -88,7 +88,7 @@ export function HomepageSpine() {
           <h2 className="rx-rec-h">{t("footer.title")}</h2>
           <p className="rx-rec-p">{t("footer.body")}</p>
           <div className="rx-he-ctas">
-            <Link href="/contact?intent=recover-pilot" className="rx-btn rx-btn-primary">
+            <Link href="/contact?intent=margin-recovery-pilot" className="rx-btn rx-btn-primary">
               {t("footer.cta")} <span aria-hidden="true">→</span>
             </Link>
             <NextLink

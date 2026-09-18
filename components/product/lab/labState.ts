@@ -1,6 +1,6 @@
 /**
  * Lab Control Center — shared operating state.
- * Seeds: service (Wait-12) · recover (AP credit D-4102)
+ * Seeds: service (Wait-12) · recover (credit sealed) · margin-response (two-site Expected)
  */
 
 import { CANON_PEAK, CANON_SUPPLIER } from "@/lib/radr/decision/demo/canonical";
@@ -11,7 +11,7 @@ import {
 
 export type LabMode = "live" | "why" | "futures" | "context" | "approved";
 export type LabFuture = "seat_now" | "wait_12" | "hard_stop";
-export type LabSeed = "service" | "recover";
+export type LabSeed = "service" | "recover" | "margin-response";
 export type LabNode =
   | "floor"
   | "kitchen"
@@ -23,6 +23,18 @@ export type LabNode =
   | "econ"
   | "deadline"
   | null;
+
+export function isFinanceSeed(seed: LabSeed): boolean {
+  return seed === "recover" || seed === "margin-response";
+}
+
+export function parseLabSeed(
+  param: string | null | undefined,
+): LabSeed {
+  if (param === "recover") return "recover";
+  if (param === "margin-response") return "margin-response";
+  return "service";
+}
 
 export type LabState = {
   mode: LabMode;
@@ -70,7 +82,70 @@ export function deriveLab(state: LabState): LabDerived {
   if (state.seed === "recover") {
     return deriveRecover(state);
   }
+  if (state.seed === "margin-response") {
+    return deriveTwoSite(state);
+  }
   return deriveService(state);
+}
+
+/** Two-site unit price gap — Expected only until sealed. */
+function deriveTwoSite(state: LabState): LabDerived {
+  const f = state.selectedFuture;
+  let contribution = 410;
+  let decisionLabel = "TWO-SITE UNIT PRICE GAP";
+  let decisionSub =
+    "Bluefin oil · Mitte €7.45/L vs Prenzlauer Berg €6.80/L · Expected";
+  let moneyGrade: "Expected" | "Verified" = "Expected";
+  let moneyMeta = "No seal · Expected until CM + doc_ref";
+  const recommended: LabFuture = "wait_12";
+
+  if (f === "seat_now") {
+    contribution = 0;
+    decisionLabel = "ABSORB THE GAP";
+    decisionSub = "Variance stays on screen · cash never recovers";
+  } else if (f === "hard_stop") {
+    contribution = 0;
+    decisionLabel = "SWITCH SUPPLIER NOW";
+    decisionSub = "Wrong first lever — settle the price gap first";
+  }
+
+  return {
+    seed: "margin-response",
+    floorPct: 78,
+    kitchenPct: 92,
+    ticketMin: 14,
+    turnRisk: 9,
+    contribution,
+    inbound: 38,
+    walkins: 2,
+    deliveryPct: 31,
+    decisionLabel,
+    decisionSub,
+    recommended,
+    decisionId: "dec_two_site_oil",
+    displayId: "D-4108",
+    deadlineLabel: "This week",
+    clockLabel: "Expected · Trace",
+    moneyGrade,
+    moneyMeta,
+    actions: [
+      {
+        system: "AP",
+        title: "Match both invoices to contract",
+        detail: "INV-88421 · INV-88502 · CTR-OIL-2026",
+      },
+      {
+        system: "Trace",
+        title: "Open Expected lineage",
+        detail: "Incomplete until credit_memo applied + doc_ref",
+      },
+      {
+        system: "Policy",
+        title: "Draft credit / price correction",
+        detail: "Ask · never auto short-pay / auto-remit",
+      },
+    ],
+  };
 }
 
 function deriveRecover(state: LabState): LabDerived {
