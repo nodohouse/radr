@@ -20,28 +20,33 @@ type Props = {
 export function HospitalityContextSwitch({
   value,
   onChange,
-  ariaLabel = "Hospitality environment",
+  ariaLabel = "Example operating environments",
   size = "hero",
 }: Props) {
   return (
-    <div
-      className="rx-hcx"
-      data-size={size}
-      role="tablist"
-      aria-label={ariaLabel}
-    >
-      {HOSPITALITY_VERTICALS.map((v) => (
-        <button
-          key={v.id}
-          type="button"
-          role="tab"
-          aria-selected={value === v.id}
-          data-on={value === v.id ? "true" : undefined}
-          onClick={() => onChange(v.id)}
-        >
-          {size === "compact" ? v.short : v.label}
-        </button>
-      ))}
+    <div className="rx-hcx-wrap">
+      {size === "hero" ? (
+        <p className="rx-hcx-examples">Example operating environments</p>
+      ) : null}
+      <div
+        className="rx-hcx"
+        data-size={size}
+        role="tablist"
+        aria-label={ariaLabel}
+      >
+        {HOSPITALITY_VERTICALS.map((v) => (
+          <button
+            key={v.id}
+            type="button"
+            role="tab"
+            aria-selected={value === v.id}
+            data-on={value === v.id ? "true" : undefined}
+            onClick={() => onChange(v.id)}
+          >
+            {size === "compact" ? v.short : v.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -49,8 +54,11 @@ export function HospitalityContextSwitch({
 export function HospitalityEyebrow({ className = "" }: { className?: string }) {
   return (
     <p className={`rx-hcx-eyebrow ${className}`.trim()}>
-      Restaurants &amp; F&amp;B · Hotels &amp; Resorts · Serviced Apartments ·
-      Multi-location groups
+      Built across hospitality
+      <span>
+        Restaurants &amp; F&amp;B · Hotels &amp; Resorts · Serviced apartments ·
+        Multi-location groups · and more
+      </span>
     </p>
   );
 }

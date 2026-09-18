@@ -47,6 +47,7 @@ const HOME_PROVIDER_IDS = [
   "uber-eats",
   "mews",
   "apaleo",
+  "oracle-opera-cloud",
   "siteminder",
   "booking-connectivity",
   "guesty",
@@ -60,6 +61,24 @@ const HOME_PROVIDER_IDS = [
   "byod-warehouse",
 ] as const;
 
+/** ~12–14 names on the map at once */
+export const SIGNAL_MAP_VISIBLE_IDS = [
+  "toast",
+  "lightspeed-restaurant",
+  "square",
+  "opentable",
+  "mews",
+  "apaleo",
+  "oracle-opera-cloud",
+  "siteminder",
+  "guesty",
+  "hostaway",
+  "xero",
+  "stripe",
+  "mollie",
+  "files-csv",
+] as const;
+
 export type HomeConnectionGroup = {
   id: string;
   label: string;
@@ -69,7 +88,7 @@ export type HomeConnectionGroup = {
 export const HOME_CONNECTION_GROUPS: HomeConnectionGroup[] = [
   {
     id: "restaurant",
-    label: "Restaurant",
+    label: "Restaurants & F&B",
     providerIds: [
       "toast",
       "lightspeed-restaurant",
@@ -82,25 +101,44 @@ export const HOME_CONNECTION_GROUPS: HomeConnectionGroup[] = [
   },
   {
     id: "hotel",
-    label: "Hotel",
-    providerIds: ["mews", "apaleo", "siteminder", "booking-connectivity"],
+    label: "Hotels & Resorts",
+    providerIds: [
+      "mews",
+      "apaleo",
+      "oracle-opera-cloud",
+      "siteminder",
+      "booking-connectivity",
+    ],
   },
   {
     id: "serviced",
-    label: "Serviced apartment",
+    label: "Serviced / extended stay",
     providerIds: ["guesty", "hostaway", "hospitable"],
   },
   {
     id: "finance",
     label: "Finance",
-    providerIds: ["xero", "quickbooks-online", "files-csv"],
+    providerIds: ["xero", "quickbooks-online"],
   },
   {
     id: "payments",
     label: "Payments",
     providerIds: ["stripe", "mollie"],
   },
+  {
+    id: "custom",
+    label: "Custom data",
+    providerIds: ["files-csv", "byod-warehouse"],
+  },
 ];
+
+export const SIGNAL_MAP_OUTPUTS = [
+  "Decisions",
+  "Futures",
+  "Actions",
+  "Verified Value",
+  "Memory",
+] as const;
 
 export function providerById(id: string): IntegrationProvider | undefined {
   return INTEGRATION_PROVIDERS.find((p) => p.id === id);
@@ -115,3 +153,20 @@ export function homeConnectionProviders(): IntegrationProvider[] {
 export function statusLabel(p: IntegrationProvider): string {
   return INTEGRATION_STATUS_LABEL[p.status];
 }
+
+export function connectionMethodLabel(p: IntegrationProvider): string {
+  if (p.accessType === "FILE_EXPORT") return "CSV / Document";
+  if (p.id === "byod-warehouse") return "Warehouse";
+  if (p.authMethods.includes("sftp")) return "SFTP";
+  if (p.accessType === "CUSTOM") return "Custom connector";
+  if (p.webhookSupport && (p.accessType === "PUBLIC_API" || p.accessType === "PARTNER_API")) {
+    return "REST API / Webhook";
+  }
+  if (p.accessType === "WEBHOOK") return "Webhook";
+  if (p.accessType === "PUBLIC_API" || p.accessType === "PARTNER_API") {
+    return "REST API / OAuth";
+  }
+  return "REST API / OAuth";
+}
+
+export const CATALOG_COUNT = INTEGRATION_PROVIDERS.length;

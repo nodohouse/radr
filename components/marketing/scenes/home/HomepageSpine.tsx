@@ -57,17 +57,17 @@ export function HomepageSpine() {
       <Hero />
 
       <section className="rx-rec-rail-sec" data-nav-theme="light" aria-label="Economic signals">
-        <EconomicRail items={HOME_RAIL} durationSec={52} />
+        <EconomicRail items={HOME_RAIL} durationSec={64} variant="signature" />
       </section>
 
-      <section className="rx-rec-sec" data-nav-theme="light">
-        <div className="rx-shell">
+      <section className="rx-rec-sec rx-rec-sec-ivory" data-nav-theme="light">
+        <div className="rx-shell-wide">
           <ConnectionOriginSection />
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
-        <div className="rx-shell">
+      <section className="rx-rec-sec" data-nav-theme="light">
+        <div className="rx-shell-wide">
           <ResearchEvidenceStrip />
         </div>
       </section>

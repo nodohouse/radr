@@ -14,7 +14,7 @@ type Props = {
   /** CSS duration for one loop; higher = slower */
   durationSec?: number;
   direction?: "ltr" | "rtl";
-  variant?: "editorial" | "compact" | "proof";
+  variant?: "editorial" | "compact" | "proof" | "signature";
   ariaLabel?: string;
   className?: string;
 };
@@ -47,16 +47,16 @@ export function EconomicRail({
       data-paused={paused || reduced || active ? "true" : undefined}
       data-reduced={reduced ? "true" : undefined}
       aria-label={ariaLabel}
+      style={
+        reduced
+          ? undefined
+          : ({
+              ["--erail-duration" as string]: `${durationSec}s`,
+            } as CSSProperties)
+      }
     >
       <div
         className="rx-erail-track"
-        style={
-          reduced
-            ? undefined
-            : ({
-                ["--erail-duration" as string]: `${durationSec}s`,
-              } as CSSProperties)
-        }
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => {
           setPaused(false);

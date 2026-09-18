@@ -20,9 +20,10 @@ export type HospitalityVertical =
 export const HOSPITALITY_TAXONOMY = [
   "Restaurants & F&B",
   "Hotels & Resorts",
-  "Serviced Apartments",
-  "Groups",
+  "Serviced apartments",
 ] as const;
+
+export const HOSPITALITY_SCOPE = "Single location → multi-location group" as const;
 
 export const HOSPITALITY_VERTICALS: {
   id: HospitalityVertical;
@@ -148,7 +149,7 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
 export function restaurantFloorSecondaryPhone(): HeroSceneModel["phone"] {
   return {
     role: "FOH",
-    badge: "Service",
+    badge: "Service update",
     title: "Recommend Ribeye",
     body: "Cold station 92% · Table 7 · 4 guests · guest preference + lower constrained load",
     meta: "18:42 · Dinner",

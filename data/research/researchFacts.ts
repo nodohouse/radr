@@ -244,9 +244,9 @@ export function researchFact(id: ResearchFactId): ResearchFact {
 
 /** Home evidence moment — max 4 facts */
 export const HOME_RESEARCH_FACTS: ResearchFactId[] = [
+  "nraExpenseRise2019to2026",
   "otelierManualReporting2026",
   "otelierReconcileHours2026",
-  "nraExpenseRise2019to2026",
   "hotrecWorkforceGap2026",
 ];
 

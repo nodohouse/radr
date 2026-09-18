@@ -17,6 +17,8 @@ import { CANON_OTA } from "@/lib/radr/decision/demo/canonical";
 import {
   homeConnectionProviders,
   HOME_CONNECTION_GROUPS,
+  SIGNAL_MAP_VISIBLE_IDS,
+  providerById,
 } from "@/lib/marketing/homeConnections";
 
 describe("researchFacts", () => {
@@ -62,6 +64,14 @@ describe("home connection preview", () => {
       for (const id of g.providerIds) {
         expect(providers.some((p) => p.id === id)).toBe(true);
       }
+    }
+  });
+
+  it("signal map shows a subset of catalog providers", () => {
+    expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeGreaterThanOrEqual(10);
+    expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeLessThanOrEqual(14);
+    for (const id of SIGNAL_MAP_VISIBLE_IDS) {
+      expect(providerById(id)?.id).toBe(id);
     }
   });
 });

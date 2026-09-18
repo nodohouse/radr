@@ -13079,29 +13079,31 @@ html:has(.radr-home) body {
   display: block;
   overflow: hidden;
 }
-/* All text left · product card right — product commands the right side */
+/* Copy left · product commands the right, bleeding toward the viewport edge */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 0.43fr) minmax(0, 0.57fr);
-  column-gap: clamp(1.5rem, 3.5vw, 2.75rem);
+  grid-template-columns: minmax(0, 0.41fr) minmax(0, 0.59fr);
+  column-gap: clamp(1.25rem, 3vw, 2.25rem);
   row-gap: 2.25rem;
   align-items: start;
-  width: 100%;
+  width: calc(100% + clamp(2.5rem, 5.5vw, 4.75rem));
+  max-width: none;
 }
 .rx-he-recover-copy {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  max-width: 34rem;
+  max-width: 32rem;
   padding-top: 0.35rem;
 }
 .rx-he-recover-product {
   width: 100%;
   max-width: none;
   justify-self: stretch;
-  padding-top: 2.5rem;
-  margin-bottom: -2.5rem;
+  padding-top: 2.75rem;
+  margin-bottom: -3.25rem;
+  margin-right: clamp(-3.25rem, -5.5vw, -1.75rem);
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;
@@ -13144,6 +13146,13 @@ html:has(.radr-home) body {
 }
 .rx-rec-sec-band {
   background: #eef6f1;
+}
+.rx-rec-sec-ivory {
+  background: #f3eee6;
+}
+.rx-rec-rail-sec {
+  padding: 0;
+  background: #00d978;
 }
 .rx-rec-block {
   max-width: 40rem;
@@ -13470,6 +13479,8 @@ html:has(.radr-home) body {
   .rx-rec-brand-frame {
     grid-template-columns: 1fr;
     align-items: start;
+    width: 100%;
+    margin-right: 0;
   }
   .rx-he-recover-copy {
     max-width: none;
@@ -13477,6 +13488,9 @@ html:has(.radr-home) body {
   .rx-he-recover-product {
     max-width: none;
     justify-self: stretch;
+    margin-right: 0;
+    padding-top: 0.5rem;
+    margin-bottom: 0;
   }
   .rx-he-recover-product .rx-mrc {
     min-height: 0;
@@ -13889,6 +13903,7 @@ html:has(.radr-home) body {
 @media (max-width: 900px) {
   .rx-he-recover-frame {
     grid-template-columns: 1fr;
+    width: 100%;
   }
 }
 
