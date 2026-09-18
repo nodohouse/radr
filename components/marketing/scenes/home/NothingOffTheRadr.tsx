@@ -4,12 +4,12 @@ import { RadrWordmark } from "@/components/radr/RadrWordmark";
 
 type Props = {
   className?: string;
-  /** display = full-bleed poster H0 · close = brand band */
+  /** display = left-column stacked H0 · close = brand band */
   size?: "display" | "close";
 };
 
 /**
- * Brand lockup: NOTHING OFF THE R△DR
+ * Brand lockup: NOTHING / OFF THE / R△DR
  * Green △ replaces the A — never letter-R as the mark.
  */
 export function NothingOffTheRadr({
