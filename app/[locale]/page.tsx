@@ -1,5 +1,5 @@
-import { SiteFooter } from "@/components/marketing/SiteFooter";
-import { SiteNav } from "@/components/marketing/SiteNav";
+import { SiteFooter as PublicFooter } from "@/components/marketing/SiteFooter";
+import { SiteNav as PublicNavbar } from "@/components/marketing/SiteNav";
 import { HomepageSpine } from "@/components/marketing/scenes/home/HomepageSpine";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
@@ -30,11 +30,11 @@ export default async function Home({ params }: Props) {
 
   return (
     <div className="radr radr-home radr-editorial radr-launch">
-      <SiteNav />
+      <PublicNavbar />
       <main>
         <HomepageSpine />
       </main>
-      <SiteFooter />
+      <PublicFooter />
     </div>
   );
 }

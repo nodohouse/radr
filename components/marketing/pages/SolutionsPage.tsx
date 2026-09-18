@@ -3,8 +3,6 @@
 import { useState } from "react";
 import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
-import { SiteFooter } from "../SiteFooter";
-import { SiteNav } from "../SiteNav";
 import { money, CANON_OTA } from "@/data/demo";
 import {
   OPERATING_STATES,
@@ -21,6 +19,7 @@ import { useTranslations } from "next-intl";
 import { StickyStory } from "@/components/marketing/kinetic/StickyStory";
 import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual";
 import type { ProblemFamily } from "@/lib/radr/problemFamilies";
+import { PublicFooter, PublicNavbar } from "../PublicShell";
 import { IntelFuturesFork } from "./IntelFuturesFork";
 import { ValueLeaksNarratives } from "./ValueLeaksNarratives";
 import "@/app/econ.css";
@@ -518,7 +517,7 @@ export function SolutionsPage({
 } = {}) {
   return (
     <div className="radr radr-mineral radr-home rx-intel">
-      <SiteNav />
+      <PublicNavbar />
       <main>
         <section className="rx-intel-hero" data-nav-theme="light">
           <div className="rx-intel-hero-atm" aria-hidden="true" />
@@ -603,7 +602,7 @@ export function SolutionsPage({
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <PublicFooter />
     </div>
   );
 }

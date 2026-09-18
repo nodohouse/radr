@@ -39,9 +39,6 @@ export function HomepageSpine() {
   const leaks = Object.fromEntries(
     LEAK_ORDER.map((id) => [id, t(`families.${id}.leaks`)]),
   ) as Record<ProblemFamily, string>;
-  const does = Object.fromEntries(
-    LEAK_ORDER.map((id) => [id, t(`families.${id}.does`)]),
-  ) as Record<ProblemFamily, string>;
   const verifies = Object.fromEntries(
     LEAK_ORDER.map((id) => [id, t(`families.${id}.verifies`)]),
   ) as Record<ProblemFamily, string>;
@@ -63,7 +60,7 @@ export function HomepageSpine() {
     id,
     kicker: labels[id],
     title: labels[id],
-    body: `${leaks[id]} ${does[id]}`,
+    body: leaks[id],
     meta: verifies[id],
   }));
 

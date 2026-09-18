@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { SiteFooter } from "@/components/marketing/SiteFooter";
-import { SiteNav } from "@/components/marketing/SiteNav";
+import { SiteFooter as PublicFooter } from "@/components/marketing/SiteFooter";
+import { SiteNav as PublicNavbar } from "@/components/marketing/SiteNav";
 import { FeatureCompare } from "@/components/marketing/pricing/FeatureCompare";
 import { PricingExpansion } from "@/components/marketing/pricing/PricingExpansion";
 import { PricingFaq } from "@/components/marketing/pricing/PricingFaq";
@@ -39,7 +39,7 @@ export default async function PricingPage({ params }: Props) {
 
   return (
     <div className="radr px-page">
-      <SiteNav variant="pricing" />
+      <PublicNavbar variant="pricing" />
       <main>
         <section className="px-hero" data-nav-theme="light">
           <div className="px-hero-glow" aria-hidden="true" />
@@ -82,7 +82,7 @@ export default async function PricingPage({ params }: Props) {
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <PublicFooter />
     </div>
   );
 }

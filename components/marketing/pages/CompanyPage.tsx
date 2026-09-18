@@ -5,8 +5,7 @@ import Image from "next/image";
 import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { motion, useReducedMotion } from "motion/react";
-import { SiteFooter } from "../SiteFooter";
-import { SiteNav } from "../SiteNav";
+import { PublicFooter, PublicNavbar } from "../PublicShell";
 import { useInView } from "@/components/marketing/motion/useInView";
 import { CTAS } from "@/lib/marketing/brand";
 import "@/app/company.css";
@@ -65,7 +64,7 @@ export function CompanyPage() {
 
   return (
     <div className="radr radr-mineral rx-co2">
-      <SiteNav />
+      <PublicNavbar />
       <main>
         <section className="rx-co2-photo-hero" data-nav-theme="dark">
           <motion.div
@@ -342,7 +341,7 @@ export function CompanyPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
+      <PublicFooter />
     </div>
   );
 }
