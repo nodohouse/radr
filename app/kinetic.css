@@ -4868,9 +4868,3 @@
   text-align: left;
   max-width: 36rem;
 }
-.rx-intake--calm .rx-intake-chip {
-  background: #fff;
-}
-.rx-intake--calm .rx-intake-chip[data-on="true"] {
-  background: #f7f4ed;
-}
