@@ -118,8 +118,14 @@ export function ValueChapter() {
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
             <p className="rx-ch-kicker">
-              {ECON_D4102.displayId} · sealed recovery · DEMO
+              Historical · {ECON_D4102.displayId} · sealed recovery · DEMO
             </p>
+            <div className="rx-rso-hero-num" style={{ marginBottom: "2rem" }}>
+              <strong className="rx-pub-num" data-tone="verified">
+                {euro(ECON_D4102.verified)}
+              </strong>
+              <em>Verified recovery</em>
+            </div>
             <DecisionObject
               displayId={ECON_D4102.displayId}
               title="Contract vs invoice · contribution compression"
@@ -147,8 +153,15 @@ export function ValueChapter() {
               </p>
             </DecisionObject>
 
-            <p className="rx-ch-kicker" style={{ marginTop: "2.5rem" }}>
-              {MONEY_D1911_EXPECTED.displayId} · peak capacity · DEMO
+            <p className="rx-ch-kicker" style={{ marginTop: "3.5rem" }}>
+              Decision ledger · sample · DEMO
+            </p>
+            <p className="rx-value-stream-note" style={{ marginBottom: "1rem" }}>
+              Secondary Decisions as a precise ledger — including zero or open
+              cases. Not a rollup.
+            </p>
+            <p className="rx-ch-kicker">
+              {MONEY_D1911_EXPECTED.displayId} · historical peak · DEMO
             </p>
             <ValueTrace
               disclosure="DEMO · ILLUSTRATIVE · not customer results"

@@ -36,11 +36,13 @@ import { formatDecisionMoney } from "@/lib/radr/decision/core";
 export type PublicDecisionEconomics = {
   displayId: string;
   decision: CanonDecision;
+  temporalMode: "historical";
   identified: number;
   exposed: number;
   expected: number;
   recoverable: number;
   observed: number;
+  attributed: number;
   verified: number;
   /** Primary public euro for sealed demos (verified when > 0, else expected/exposed). */
   primary: number;
@@ -66,11 +68,13 @@ function fromCanon(
   return {
     displayId: d.displayId,
     decision: d,
+    temporalMode: "historical",
     identified: exposed,
     exposed,
     expected,
     recoverable: expected,
     observed,
+    attributed: verified,
     verified,
     primary: verified > 0 ? verified : expected > 0 ? expected : exposed,
     money,

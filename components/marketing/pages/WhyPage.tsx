@@ -186,7 +186,7 @@ function DecisionLifecycle() {
   return (
     <div className="rx-why-life">
       <p className="rx-why-life-id">
-        {CANON_OTA.displayId} · {CANON_OTA.property} · DEMO · ILLUSTRATIVE
+        Historical replay · {CANON_OTA.displayId} · {CANON_OTA.property} · DEMO
       </p>
 
       <div className="rx-why-life-object" key={current.id} data-stage={current.id}>
@@ -197,7 +197,9 @@ function DecisionLifecycle() {
           </span>
         </div>
         <strong>{CANON_OTA.displayId}</strong>
-        <p className="rx-why-life-persist">Same Decision · still open</p>
+        <p className="rx-why-life-persist">
+          Same Decision · historical replay
+        </p>
         <ul>
           {current.lines.map((line) => (
             <li key={line}>{line}</li>

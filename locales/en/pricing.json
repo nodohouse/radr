@@ -28,26 +28,25 @@
   "pilot": {
     "kicker": "Start",
     "verb": "Prove",
-    "title": "Start where the value is clearest.",
-    "lead": "14 days to find and action recoverable value. Open cases stay on RADR until resolved, verified, or closed.",
+    "title": "Recovery Pilot",
+    "lead": "Prove the economics. 14 days to find and action recoverable value.",
     "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
-    "priceLabel": "Recovery Pilot",
-    "priceSub": "Scoped with you",
+    "priceLabel": "Scoped with you",
+    "priceSub": "Open cases until resolved, verified, or closed",
     "cta": "Start a recovery pilot",
     "points": [
       "Supplier / AP · Reconciliation · or both",
       "2–3 locations",
       "14-day discovery / action window",
-      "Open cases until resolved, verified, or closed",
-      "Evidence packages · recovery tracking",
-      "Verified Value trace"
+      "Evidence packages · Verified Value trace",
+      "You can stop after the pilot"
     ]
   },
   "core": {
     "name": "Expand",
-    "verb": "Decide + Verify",
-    "line": "Expand from recovery into recurring Decisions across the operation.",
-    "audience": "Connect the operation. Make better Decisions. Verify what changed.",
+    "verb": "RADR",
+    "line": "More Decision classes. More locations. More systems. Operating Memory.",
+    "audience": "One product — RADR — across the operation.",
     "priceLabel": "Priced by location + operating scope",
     "cta": "Discuss Expand",
     "features": [
@@ -59,18 +58,18 @@
     ]
   },
   "progression": {
-    "kicker": "One brand · RADR",
+    "kicker": "One company · one product · RADR",
     "title": "Start → Expand → Enterprise.",
-    "lead": "Pricing scales with the operating scope RADR takes on.",
+    "lead": "How do I start? What does the pilot measure? How does pricing scale?",
     "recover": "Start",
     "decide": "Expand",
     "govern": "Enterprise"
   },
   "control": {
     "name": "Enterprise",
-    "verb": "Govern",
-    "line": "Govern trusted Decisions across locations.",
-    "audience": "Coordinate, approve and learn across the group.",
+    "verb": "Group scale",
+    "line": "Policies. Approvals. Governance. Custom integrations. Enterprise controls.",
+    "audience": "RADR at group scale across locations.",
     "priceLabel": "Portfolio / group pricing",
     "cta": "Discuss Enterprise",
     "features": [

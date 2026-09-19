@@ -8,9 +8,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import { EconomicRail } from "@/components/marketing/kinetic/EconomicRail";
 import { HospitalityContextSwitch } from "@/components/marketing/kinetic/HospitalityContextSwitch";
-import { HOME_RAIL } from "@/lib/marketing/economicRail";
 import {
   decisionForVertical,
   platformEconomics,
@@ -19,6 +17,7 @@ import {
 } from "@/lib/marketing/hospitalityContext";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const LIFE = [
   "Detected",
@@ -113,15 +112,6 @@ export function PlatformDecisionTheater() {
 
   return (
     <div className="rx-pdt">
-      <EconomicRail
-        items={HOME_RAIL.filter((x) =>
-          ["peak", "premium", "orphan", "d4102", "verified"].includes(x.id),
-        )}
-        durationSec={44}
-        variant="compact"
-        ariaLabel="Platform economic signals"
-      />
-
       <div
         ref={rootRef}
         className="rx-pdt-runway"
@@ -130,8 +120,10 @@ export function PlatformDecisionTheater() {
         <div className="rx-pdt-pin">
           <div className="rx-shell">
             <header className="rx-pdt-head">
-              <p className="rx-rec-k">One Decision · same engine</p>
-              <h2 className="rx-rec-h">Different operations. Same RADR.</h2>
+              <p className="rx-rec-k">
+                Historical replay · {decision.displayId} · DEMO
+              </p>
+              <h2 className="rx-rec-h">One Decision. Same engine.</h2>
               <HospitalityContextSwitch
                 value={vertical}
                 onChange={setVertical}

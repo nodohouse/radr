@@ -24,7 +24,6 @@ describe("integration capability map", () => {
     expect(HOME_RESTING_PROVIDER_IDS.length).toBeGreaterThanOrEqual(14);
     expect(HOME_RESTING_PROVIDER_IDS.length).toBeLessThanOrEqual(20);
     for (const id of HOME_RESTING_PROVIDER_IDS) {
-      if (id === "google-stack") continue;
       expect(providerById(id)?.id).toBe(id);
     }
   });

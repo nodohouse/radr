@@ -1,158 +1,83 @@
 "use client";
 
 /**
- * Control Center — compression into silence.
- * Structured system traces fade; material Decisions remain.
+ * Control Center — Needs you / handling / within expectations.
+ * LIVE open Decisions only in Needs You. No sealed D-4102.
  */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NextLink from "next/link";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
+import { euro } from "@/lib/marketing/publicDecisionEconomics";
 import {
-  BRIEF_ATTENTION,
-  money,
-  CANON_OTA,
-  CANON_PEAK,
-  CANON_ORPHAN,
-} from "@/data/demo";
-import {
-  canonScenario,
-} from "@/lib/radr/decision/demo/canonical";
-import { formatDecisionMoney } from "@/lib/radr/decision/core";
-import { euro, ECON_D1911, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
+  LIVE_D7021,
+  LIVE_D7022,
+  MORNING_BRIEF_LIVE,
+  ROUTINE_SIGNALS_SUPPRESSED,
+} from "@/lib/marketing/publicLiveDecisions";
 import { SilenceField } from "@/components/marketing/kinetic/SilenceField";
+import { AttentionBrief } from "@/components/marketing/primitives/AttentionBrief";
 import { CTAS } from "@/lib/marketing/brand";
 import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
-import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
 import "@/app/kinetic.css";
 import "@/app/radr-public.css";
 
-const PORTFOLIO = [
-  {
-    id: "ams",
-    site: "Amsterdam",
-    status: "needs-you",
-    headline: "Needs you",
-    line: `${money(CANON_OTA.exposureEuro)} channel exposure`,
-    meta: `${CANON_OTA.displayId} · hold premium direct · not OTA dump`,
-  },
-  {
-    id: "ber",
-    site: "Berlin",
-    status: "needs-you",
-    headline: "Needs you",
-    line: `${euro(ECON_D1911.expected)} expected incremental vs seat-now`,
-    meta: `${ECON_D1911.displayId} · peak capacity · decide before 18:53`,
-  },
-  {
-    id: "lis",
-    site: "Lisbon",
-    status: "watching",
-    headline: "Watching",
-    line: "Within playbook · no action",
-    meta: `${CANON_ORPHAN.displayId} · ${CANON_ORPHAN.property}`,
-  },
-] as const;
-
-const otaHold = canonScenario(CANON_OTA, "hold_72h")!;
-const otaRelease = canonScenario(CANON_OTA, "do_nothing")!;
-const waitExpected = formatDecisionMoney(
-  canonScenario(CANON_PEAK, "wait_12")!.expectedContributionEuro ?? 0,
-);
-const seatExpected = formatDecisionMoney(
-  canonScenario(CANON_PEAK, "seat_now")!.expectedContributionEuro ?? 0,
-);
-
 const ROLES = [
-  {
-    id: "gm",
-    label: "Restaurant GM",
-    lens: "portfolio",
-    line: `${BRIEF_ATTENTION.needsYou} things need you · peak collision tonight`,
-    meta: `Berlin · wait ${waitExpected} vs seat ${seatExpected}`,
-    exposure: CANON_PEAK.exposureEuro,
-    decision: `${CANON_PEAK.displayId} · ${CANON_PEAK.title}`,
-  },
-  {
-    id: "hotel",
-    label: "Hotel GM",
-    lens: "pattern",
-    line: `Hold ${formatDecisionMoney(otaHold.expectedContributionEuro ?? 0)} vs release ${formatDecisionMoney(otaRelease.expectedContributionEuro ?? 0)}`,
-    meta: "Canal House · premium inventory · 72h",
-    exposure: CANON_OTA.exposureEuro,
-    decision: `${CANON_OTA.displayId} · ${CANON_OTA.title}`,
-  },
   {
     id: "cfo",
     label: "Group CFO",
-    lens: "economics",
-    line: `Portfolio · ${BRIEF_ATTENTION.needsYou} judgments across environments`,
-    meta: `Berlin peak + Amsterdam channel · ${euro(ECON_D4102.verified)} supplier verified`,
-    exposure: CANON_OTA.exposureEuro + CANON_PEAK.expectedProtectedEuro,
-    decision: "Group exposure · same Decision engine",
+    line: `${LIVE_D7021.displayId} · ${euro(LIVE_D7021.economics.exposed)} unexplained`,
+    meta: `${LIVE_D7021.location} · ${LIVE_D7021.classLabel}`,
+  },
+  {
+    id: "ops",
+    label: "Ops",
+    line: `${LIVE_D7022.displayId} · ${euro(LIVE_D7022.economics.exposed)} at risk`,
+    meta: `${LIVE_D7022.location} · ${LIVE_D7022.classLabel}`,
+  },
+  {
+    id: "gm",
+    label: "GM",
+    line: `${MORNING_BRIEF_LIVE.length} things need you · everything else within expectations`,
+    meta: "Same brief · role lens",
   },
 ] as const;
 
-function needsYouLabel(n: number): string {
-  return n === 1 ? "THING NEEDS YOU" : "THINGS NEED YOU";
-}
-
 export function ControlCenterChapter() {
-  const [role, setRole] = useState<(typeof ROLES)[number]["id"]>("gm");
-  const [phase, setPhase] = useState<"field" | "silence">("field");
+  const [role, setRole] = useState<(typeof ROLES)[number]["id"]>("cfo");
   const active = ROLES.find((r) => r.id === role) ?? ROLES[0]!;
-  const reduced = useReducedMotionSafe();
-
-  useEffect(() => {
-    if (reduced) {
-      setPhase("silence");
-      return;
-    }
-    setPhase("field");
-    const t = window.setTimeout(() => setPhase("silence"), 1800);
-    return () => window.clearTimeout(t);
-  }, [reduced, role]);
 
   return (
     <div className="radr rx-ch rx-ch-light">
       <SiteNav />
       <main className="rx-ch-main">
-        <section className="rx-cc-silence-hero rx-cc-silence-hero-solid" data-nav-theme="dark">
-          <div
-            className="rx-cc-silence-field"
-            data-phase={phase}
-            aria-label="Attention compression"
-          >
+        <section
+          className="rx-cc-silence-hero rx-cc-silence-hero-solid"
+          data-nav-theme="dark"
+        >
+          <div className="rx-cc-silence-field" data-phase="silence">
             <div className="rx-shell rx-cc-silence-final">
-            <p className="rx-ch-kicker" style={{ color: "#00d978" }}>
-              Control Center · {capabilityBadge("controlCenter")}
-            </p>
-            <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
+              <p className="rx-ch-kicker" style={{ color: "#00d978" }}>
+                Control Center · {capabilityBadge("controlCenter")}
+              </p>
+              <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
                 The most important thing RADR removes is noise.
               </h1>
               <SilenceField
-                signalsLabel="Routine signals suppressed"
-                needsYou={BRIEF_ATTENTION.needsYou}
+                signalsLabel={`${ROUTINE_SIGNALS_SUPPRESSED} routine changes suppressed`}
+                needsYou={MORNING_BRIEF_LIVE.length}
               />
               <p
                 className="rx-pilot-note"
-                style={{ color: "rgba(247,250,248,0.78)", marginTop: "0.75rem" }}
+                style={{
+                  color: "rgba(247,250,248,0.78)",
+                  marginTop: "0.75rem",
+                }}
               >
                 DEMO · ILLUSTRATIVE · not customer results
-              </p>
-              <p
-                className="rx-cc-silence-need"
-                data-on={phase === "silence" ? "true" : "false"}
-                style={{ marginTop: "1rem" }}
-              >
-                <strong>{BRIEF_ATTENTION.needsYou}</strong>
-                <span>
-                  {needsYouLabel(BRIEF_ATTENTION.needsYou)} · EVERYTHING ELSE
-                  WITHIN EXPECTATIONS
-                </span>
               </p>
             </div>
           </div>
@@ -160,34 +85,41 @@ export function ControlCenterChapter() {
 
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
-            <p className="rx-ch-kicker">
-              Control Center · {capabilityBadge("controlCenter")} · Shift Pulse →
-              primary Decision → role lens
-            </p>
-            <div
-              className="rx-cc-portfolio rx-cc-portfolio--quiet"
-              aria-label="Shift Pulse · portfolio brief"
-              style={{ marginBottom: "2.5rem" }}
-            >
-              {PORTFOLIO.map((p) => (
-                <article
-                  key={p.id}
-                  className="rx-cc-portfolio-card"
-                  data-site={p.id}
-                  data-status={p.status}
-                >
-                  <div className="rx-cc-portfolio-copy">
-                    <em>{p.headline}</em>
-                    <strong>
-                      {p.site} · {p.line}
-                    </strong>
-                    <span>{p.meta}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <p className="rx-hcc-greet">Good morning.</p>
+            <AttentionBrief count={MORNING_BRIEF_LIVE.length} />
 
-            <p className="rx-ch-kicker">Primary Decision · role lens</p>
+            <ul className="rx-hcc-rows" style={{ marginTop: "1.5rem" }}>
+              {MORNING_BRIEF_LIVE.map((d) => (
+                <li key={d.displayId}>
+                  <div className="rx-hcc-row-meta">
+                    <em>
+                      {d.location} · {d.classLabel}
+                    </em>
+                    <span className="rx-hcc-id">{d.displayId}</span>
+                  </div>
+                  <p className="rx-hcc-euro">
+                    <strong>{euro(d.economics.exposed)}</strong>
+                    <span>
+                      {d.state === "investigate" ? "unexplained" : "at risk"}
+                    </span>
+                  </p>
+                  <p className="rx-hcc-line">{d.line}</p>
+                  <p className="rx-hcc-detail">{d.detail}</p>
+                  <NextLink href={d.ctaHref} className="rx-hcc-cta">
+                    {d.cta} <span aria-hidden="true">→</span>
+                  </NextLink>
+                </li>
+              ))}
+            </ul>
+
+            <p className="rx-hcc-quiet" style={{ marginTop: "1.25rem" }}>
+              Routine signals suppressed · {ROUTINE_SIGNALS_SUPPRESSED} routine
+              changes suppressed
+            </p>
+
+            <p className="rx-ch-kicker" style={{ marginTop: "3rem" }}>
+              Role lens · same LIVE brief
+            </p>
             <div className="rx-plat-stage-rail" role="tablist">
               {ROLES.map((r) => (
                 <button
@@ -203,17 +135,11 @@ export function ControlCenterChapter() {
               ))}
             </div>
 
-            <article className="rx-cc-lens rx-cc-lens-solid" data-lens={active.lens} key={active.id}>
+            <article className="rx-cc-lens rx-cc-lens-solid" key={active.id}>
               <div className="rx-cc-lens-copy">
-                <em>
-                  {active.label} lens · {active.lens}
-                </em>
+                <em>{active.label} lens</em>
                 <strong>{active.line}</strong>
                 <span>{active.meta}</span>
-                <p>
-                  <strong className="rx-econ-risk">{money(active.exposure)}</strong>
-                  <span> · {active.decision}</span>
-                </p>
               </div>
             </article>
 

@@ -354,11 +354,125 @@
   padding-top: 0.25rem;
 }
 
-.rx-hcc-quiet {
-  margin-top: 1rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid rgba(10, 13, 11, 0.06);
+.rx-rso--editorial {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: var(--rx-sec-y-tight, 3rem) 0;
+}
+
+.rx-rso-proof {
+  margin-top: 2.5rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.rx-rso-hero-num {
+  margin: 1.25rem 0 2rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.rx-rso-hero-num em {
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rx-verified, #00a85a);
+}
+
+.rx-rso-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(10, 13, 11, 0.08);
+}
+
+.rx-rso-grid p {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--rx-ink, #0a0d0b);
+}
+
+@media (max-width: 640px) {
+  .rx-rso-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Data Origin — gallery, not architecture diagram */
+.rx-intake--calm .rx-intake-chips--flat {
+  gap: 1.1rem 1.6rem;
+  max-width: 42rem;
+}
+
+.rx-intake--calm .rx-intake-chip {
+  opacity: 0.42;
+  filter: grayscale(0.35);
+  transition:
+    opacity 220ms ease,
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+.rx-intake--calm .rx-intake-chip:hover,
+.rx-intake--calm .rx-intake-chip:focus-visible,
+.rx-intake--calm .rx-intake-chip[data-on="true"] {
+  opacity: 1;
+  filter: none;
+  background: transparent;
+  border-color: transparent;
+  transform: translateY(-1px);
+}
+
+.rx-intake--calm:has(.rx-intake-chip[data-on="true"]) .rx-intake-chip:not([data-on="true"]) {
+  opacity: 0.22;
+}
+
+.rx-intake--calm .rx-intake-delta {
+  transition: color 240ms ease, transform 240ms ease;
+}
+
+.rx-intake--calm:has(.rx-intake-chip[data-on="true"]) .rx-intake-delta,
+.rx-intake--calm:has(.rx-cap-card) .rx-intake-delta {
+  color: var(--rx-verified, #00a85a);
+}
+
+.rx-intake--calm .rx-intake-primitives {
+  gap: 0.85rem;
+}
+
+.rx-intake--calm .rx-intake-primitives li {
   font-size: 0.82rem;
-  letter-spacing: 0.02em;
-  color: var(--rx-mute);
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+  transition: opacity 220ms ease, color 220ms ease;
+}
+
+.rx-intake--calm .rx-intake-primitives li:first-child {
+  font-size: 1.05rem;
+  opacity: 0.92;
+  letter-spacing: 0.06em;
+}
+
+.rx-intake--calm:has(.rx-intake-chip[data-on="true"]) .rx-intake-primitives li:first-child,
+.rx-intake--calm:has(.rx-cap-card) .rx-intake-primitives li:first-child {
+  color: var(--rx-verified, #00a85a);
+  opacity: 1;
+}
+
+.rx-intake--calm .rx-cap-card {
+  max-width: 22rem;
+  padding: 0.85rem 0;
+  border: none;
+  border-top: 1px solid rgba(10, 13, 11, 0.1);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.rx-rec-sec {
+  padding-block: var(--rx-sec-y, clamp(4.5rem, 9vw, 7.5rem));
 }

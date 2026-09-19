@@ -12,7 +12,6 @@ import {
   useId,
   useRef,
   useState,
-  type KeyboardEvent,
 } from "react";
 import { Link } from "@/i18n/navigation";
 import { ProviderWordmark } from "@/components/marketing/kinetic/ProviderWordmark";
@@ -25,7 +24,6 @@ import {
   accessStatusLabel,
   capabilityStoryFor,
   categoryLabel,
-  GOOGLE_STACK_IDS,
   type CapabilityStory,
 } from "@/lib/integrations/capabilityStory";
 import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
@@ -38,11 +36,7 @@ const OUTPUTS = [
   "Memory",
 ] as const;
 
-type ActiveTarget =
-  | { kind: "provider"; id: string }
-  | { kind: "google-stack" }
-  | { kind: "google-child"; id: string }
-  | null;
+type ActiveTarget = { kind: "provider"; id: string } | null;
 
 export function ConnectionOriginSection() {
   const [active, setActive] = useState<ActiveTarget>(null);
@@ -65,9 +59,7 @@ export function ConnectionOriginSection() {
   }, [close]);
 
   const popoverProvider =
-    active?.kind === "provider" || active?.kind === "google-child"
-      ? providerById(active.id)
-      : null;
+    active?.kind === "provider" ? providerById(active.id) : null;
   const popoverStory = popoverProvider
     ? capabilityStoryFor(popoverProvider.id)
     : null;
@@ -80,7 +72,7 @@ export function ConnectionOriginSection() {
           Source systems become Decisions.
         </h2>
         <p className="rx-intake-lead">
-          Representative connections only. Detail on hover. Full catalog in
+          Representative connections. Detail on focus. Full catalog in
           Developers.
         </p>
       </header>
@@ -91,19 +83,6 @@ export function ConnectionOriginSection() {
           <p className="rx-intake-layer-k">Source systems</p>
           <ul className="rx-intake-chips rx-intake-chips--flat">
             {HOME_RESTING_PROVIDER_IDS.map((id) => {
-              if (id === "google-stack") {
-                return (
-                  <li key="google-stack">
-                    <GoogleStackChip
-                      open={
-                        active?.kind === "google-stack" ||
-                        active?.kind === "google-child"
-                      }
-                      onOpen={() => setActive({ kind: "google-stack" })}
-                    />
-                  </li>
-                );
-              }
               const p = providerById(id);
               if (!p) return null;
               return (
@@ -120,15 +99,10 @@ export function ConnectionOriginSection() {
             })}
           </ul>
 
-          {(popoverProvider && popoverStory) ||
-          active?.kind === "google-stack" ? (
+          {popoverProvider && popoverStory ? (
             <CapabilityCard
               provider={popoverProvider}
               story={popoverStory}
-              googleExpanded={active?.kind === "google-stack"}
-              onSelectGoogleChild={(id) =>
-                setActive({ kind: "google-child", id })
-              }
               onClose={close}
             />
           ) : null}
@@ -153,7 +127,7 @@ export function ConnectionOriginSection() {
               </svg>
             </span>
             <p>RADR</p>
-            <em>Decision layer</em>
+            <em>Compression</em>
           </div>
         </div>
 
@@ -163,7 +137,7 @@ export function ConnectionOriginSection() {
 
         {/* LAYER 3 — outputs */}
         <div className="rx-intake-layer rx-intake-layer--out">
-          <p className="rx-intake-layer-k">Decision formed</p>
+          <p className="rx-intake-layer-k">Outputs</p>
           <ul className="rx-intake-primitives" aria-label="RADR outputs">
             {OUTPUTS.map((o) => (
               <li key={o}>{o}</li>
@@ -211,95 +185,18 @@ function ProviderChip({
   );
 }
 
-function GoogleStackChip({
-  open,
-  onOpen,
-}: {
-  open: boolean;
-  onOpen: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      className="rx-intake-chip rx-intake-chip-google"
-      aria-expanded={open}
-      aria-label="Google: Business Profile, Analytics, Search Console, Maps Routes. Show details."
-      data-on={open ? "true" : undefined}
-      onMouseEnter={onOpen}
-      onFocus={onOpen}
-      onClick={onOpen}
-    >
-      <ProviderWordmark id="google-stack" name="Google" />
-    </button>
-  );
-}
-
 function CapabilityCard({
   provider,
   story,
-  googleExpanded,
-  onSelectGoogleChild,
   onClose,
 }: {
   provider: IntegrationProvider | null | undefined;
   story: CapabilityStory | null | undefined;
-  googleExpanded: boolean;
-  onSelectGoogleChild: (id: string) => void;
+  googleExpanded?: boolean;
+  onSelectGoogleChild?: (id: string) => void;
   onClose: () => void;
 }) {
   const titleId = useId();
-
-  if (googleExpanded && !provider) {
-    return (
-      <div className="rx-cap-card" role="dialog" aria-labelledby={titleId}>
-        <button
-          type="button"
-          className="rx-cap-pop-close"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          ×
-        </button>
-        <header className="rx-cap-pop-head">
-          <ProviderWordmark id="google-stack" name="Google" />
-          <div>
-            <h3 id={titleId}>Google</h3>
-            <p>
-              Separate products · customer authorization required
-              <em>External data</em>
-            </p>
-          </div>
-        </header>
-        <ul className="rx-cap-pop-google">
-          {GOOGLE_STACK_IDS.map((id) => {
-            const p = providerById(id);
-            if (!p) return null;
-            return (
-              <li key={id}>
-                <button
-                  type="button"
-                  onClick={() => onSelectGoogleChild(id)}
-                  onKeyDown={(e: KeyboardEvent<HTMLButtonElement>) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      onSelectGoogleChild(id);
-                    }
-                  }}
-                >
-                  <strong>{p.name}</strong>
-                  <span>{accessStatusLabel(p)}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-        <p className="rx-cap-pop-caveat">
-          Does not include Popular Times or live footfall. Places / Routes are
-          contextual sources only.
-        </p>
-      </div>
-    );
-  }
 
   if (!provider || !story) return null;
 

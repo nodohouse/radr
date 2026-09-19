@@ -6153,6 +6153,24 @@ html:has(.rx-ch-light) body {
   border-color: rgba(0, 168, 90, 0.4);
   background: rgba(225, 251, 234, 0.55);
 }
+.rx-mem-calibrate li[data-band] {
+  position: relative;
+}
+.rx-mem-band {
+  display: block;
+  margin-top: 0.55rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: rgba(10, 13, 11, 0.12);
+}
+.rx-mem-calibrate li[data-band="wide"] .rx-mem-band {
+  width: 92%;
+  background: rgba(10, 13, 11, 0.16);
+}
+.rx-mem-calibrate li[data-band="tight"] .rx-mem-band {
+  width: 38%;
+  background: rgba(0, 168, 90, 0.45);
+}
 .rx-leak-anchor-target {
   scroll-margin-top: 6rem;
   height: 0;

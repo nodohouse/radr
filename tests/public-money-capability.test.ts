@@ -57,6 +57,24 @@ describe("public money fixtures", () => {
     expect(MONEY_D4102_VERIFIED.amount).toBe(sealed);
     expect(ECON_D4102.verified).toBe(sealed);
     expect(ECON_D4102.primary).toBe(sealed);
+    expect(ECON_D4102.temporalMode).toBe("historical");
+  });
+
+  it("LIVE Needs You IDs are open — never sealed D-4102", async () => {
+    const { MORNING_BRIEF_LIVE, LIVE_D7021, LIVE_D7022 } = await import(
+      "@/lib/marketing/publicLiveDecisions"
+    );
+    expect(MORNING_BRIEF_LIVE.map((d) => d.displayId)).toEqual([
+      "D-7021",
+      "D-7022",
+    ]);
+    expect(LIVE_D7021.economics.verified).toBe(0);
+    expect(LIVE_D7022.economics.verified).toBe(0);
+    expect(LIVE_D7021.temporalMode).toBe("live");
+    expect(LIVE_D7022.temporalMode).toBe("live");
+    expect(MORNING_BRIEF_LIVE.some((d) => d.displayId === "D-4102")).toBe(
+      false,
+    );
   });
 
   it("D-3104 keeps expected / observed / verified distinct", () => {

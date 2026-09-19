@@ -36,7 +36,9 @@ export default async function MemoryPage({ params }: Props) {
       <main className="rx-ch-main">
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
-            <p className="rx-ch-kicker">Platform · Operating Memory · D-1911</p>
+            <p className="rx-ch-kicker">
+              Platform · Operating Memory · Historical · D-1911
+            </p>
             <h1 className="rx-ch-title">
               Night 01 to Night 18.
               <br />
@@ -44,27 +46,29 @@ export default async function MemoryPage({ params }: Props) {
             </h1>
             <p className="rx-ch-lead" style={{ marginTop: "1rem", maxWidth: "36rem" }}>
               The operation should not have to learn the same lesson twice.
-              Memory is the forecast tightening across similar services.
+              Uncertainty narrows. The playbook earns trust.
             </p>
           </div>
 
           <div className="rx-mem-page-stage rx-mem-page-stage-solid">
-            <ol className="rx-mem-history" aria-label="Night calibration">
-              <li>
+            <ol className="rx-mem-history rx-mem-calibrate" aria-label="Night calibration">
+              <li data-band="wide">
                 <em>Night 01</em>
-                <strong>Forecast error 14.2%</strong>
+                <strong>14.2% forecast error</strong>
+                <span className="rx-mem-band" aria-hidden="true" />
               </li>
               <li>
-                <em>Nights 02–17</em>
+                <em>Night 05</em>
                 <strong>Wait held · kitchen protected</strong>
               </li>
               <li>
-                <em>Night 18</em>
-                <strong>Forecast error 6.8%</strong>
+                <em>Night 12</em>
+                <strong>Pattern consolidating</strong>
               </li>
-              <li>
-                <em>Verified</em>
-                <strong>{withMemory?.title ?? "Wait 12 minutes"}</strong>
+              <li data-band="tight">
+                <em>Night 18</em>
+                <strong>6.8% forecast error</strong>
+                <span className="rx-mem-band" aria-hidden="true" />
               </li>
               <li data-on="true">
                 <em>Playbook v3</em>
@@ -72,7 +76,7 @@ export default async function MemoryPage({ params }: Props) {
               </li>
             </ol>
             <div className="rx-mem-page-now">
-              <em>Converged · D-1911</em>
+              <em>Converged · Historical · D-1911</em>
               <strong>{withMemory?.title ?? "Wait 12 minutes"}</strong>
               <p>{CANON_PEAK.learning.lesson}</p>
               <span className="rx-mem-page-playbook">PLAYBOOK V3</span>

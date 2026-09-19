@@ -51,13 +51,13 @@ export const HOME_RESTING_PROVIDER_IDS = [
   "apaleo",
   "oracle-opera-cloud",
   "xero",
+  "netsuite",
   "adyen",
   "stripe",
   "uber-eats",
   "booking-connectivity",
   "open-meteo",
   "predicthq",
-  "google-stack",
   "files-csv",
 ] as const;
 

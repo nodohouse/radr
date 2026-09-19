@@ -23,6 +23,10 @@ export const DECISION_IDS = {
   tunaStructural: "dec_tuna_structural_berlin",
   labor: "dec_labor_berlin",
   supplier: "dec_supplier_berlin",
+  /** LIVE open supplier variance — marketing Needs You only. Not D-4102. */
+  supplierOpen: "dec_supplier_open_ams",
+  /** LIVE open settlement gap — marketing Needs You only. */
+  settlement: "dec_settlement_berlin",
   playbook: "dec_playbook_group",
   created: "dec_created_terrace",
 } as const;
@@ -43,6 +47,8 @@ export const DECISION_DISPLAY_IDS: Record<string, string> = {
   [DECISION_IDS.marginCoke]: "D-7501",
   [DECISION_IDS.labor]: "D-1920",
   [DECISION_IDS.supplier]: "D-4102",
+  [DECISION_IDS.supplierOpen]: "D-7022",
+  [DECISION_IDS.settlement]: "D-7021",
   [DECISION_IDS.playbook]: "D-5208",
   [DECISION_IDS.created]: "D-4410",
   [DECISION_IDS.tableRecover]: "D-6671",
