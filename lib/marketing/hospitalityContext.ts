@@ -135,10 +135,10 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
     },
     phone: {
       role: "FOH",
-      badge: "RADR Floor",
-      title: "VIP reservation updated",
-      body: "Party of 6 · 18:50 · Table 12 · nut allergy · returning guest",
-      meta: "18:42 · Dinner · FOH brief updated",
+      badge: "FOH brief",
+      title: "VIP · Table 12",
+      body: "Nut allergy · Party of 6 · 18:50",
+      meta: "18:42 · Dinner",
       primary: "Open brief",
       tone: "brief",
     },
@@ -149,11 +149,11 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
 export function restaurantFloorSecondaryPhone(): HeroSceneModel["phone"] {
   return {
     role: "FOH",
-    badge: "Service update",
+    badge: "Shift update",
     title: "Recommend Ribeye",
-    body: "Cold station 92% · Table 7 · 4 guests · guest preference + lower constrained load",
+    body: "Cold station 92% · Table 7",
     meta: "18:42 · Dinner",
-    primary: "Open brief",
+    primary: "Got it",
     tone: "brief",
   };
 }
@@ -163,10 +163,10 @@ export function restaurantRecoverPhone(): HeroSceneModel["phone"] {
   return {
     role: "Finance",
     badge: "Recover",
-    title: "Approve €273 credit path",
-    body: "Contract variance · Orchard invoice · evidence package ready",
-    meta: "D-4102 · Awaiting approval",
-    primary: "Review case",
+    title: "€273 credit path",
+    body: "Evidence package ready",
+    meta: "D-4102 · Approve",
+    primary: "Approve",
     tone: "recover",
   };
 }
@@ -176,10 +176,10 @@ export function restaurantUrgentPhone(): HeroSceneModel["phone"] {
   return {
     role: "GM",
     badge: "Needs you",
-    title: "Peak capacity · decide by 18:45",
-    body: "€620 at stake · wait 12 vs seat-now · default prepared",
+    title: "Wait 12 minutes",
+    body: "+€620 expected · kitchen spike at 19:00",
     meta: "D-1911 · Dinner",
-    primary: "Open Decision",
+    primary: "Approve",
     tone: "urgent",
   };
 }

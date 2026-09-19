@@ -46,7 +46,7 @@ export function HeroHospitalityScene() {
         const i = ROTATE.indexOf(prev);
         return ROTATE[(i + 1) % ROTATE.length]!;
       });
-    }, 6500);
+    }, 8000);
     return () => window.clearInterval(id);
   }, [reduced, paused]);
 
@@ -54,7 +54,7 @@ export function HeroHospitalityScene() {
     if (reduced || paused || vertical !== "restaurant") return;
     const id = window.setInterval(() => {
       setFloorPhone((v) => ((v + 1) % 4) as FloorPhone);
-    }, 4800);
+    }, 7000);
     return () => window.clearInterval(id);
   }, [reduced, paused, vertical]);
 

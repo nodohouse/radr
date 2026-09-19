@@ -13099,8 +13099,8 @@ html:has(.radr-home) body {
   padding-top: 0.15rem;
 }
 .rx-he-recover-product {
-  width: min(100%, 34rem);
-  max-width: 34rem;
+  width: min(100%, 40rem);
+  max-width: 40rem;
   justify-self: end;
   padding-top: 1.15rem;
   margin-bottom: -2.5rem;
@@ -13131,7 +13131,7 @@ html:has(.radr-home) body {
   margin: 0.65rem 0 0;
   font-size: 0.95rem;
   line-height: 1.55;
-  color: #4a524e;
+  color: #3f4642;
   max-width: 58ch;
 }
 .rx-he-recover .rx-he-ctas {
@@ -13184,7 +13184,7 @@ html:has(.radr-home) body {
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #626a65;
+  color: #3f4642;
   font-family: var(--font-mono, "IBM Plex Mono", monospace);
 }
 .rx-rec-h {
@@ -13199,7 +13199,7 @@ html:has(.radr-home) body {
   margin: 0.85rem 0 0;
   font-size: 1.05rem;
   line-height: 1.55;
-  color: #4a524e;
+  color: #3f4642;
 }
 .rx-rec-steps {
   margin: 1.35rem 0 0;
@@ -13693,21 +13693,21 @@ html:has(.radr-home) body {
 }
 .rx-he-phone-title {
   margin: 0.3rem 0 0;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.2;
   color: #0a0d0b;
 }
 .rx-he-phone-body {
-  margin: 0.35rem 0 0;
-  font-size: 0.62rem;
-  line-height: 1.4;
-  color: #4a524e;
+  margin: 0.4rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #3f4642;
 }
 .rx-he-phone-meta {
-  margin: 0.4rem 0 0;
-  font-size: 0.58rem;
+  margin: 0.45rem 0 0;
+  font-size: 0.65rem;
   font-weight: 600;
   color: #0a0d0b;
   letter-spacing: -0.01em;
@@ -14382,9 +14382,10 @@ html:has(.radr-home) body {
 }
 .rx-hrs-title {
   margin: 0.2rem 0 0;
-  font-size: 1.35rem;
+  font-size: clamp(1.35rem, 1.8vw, 1.55rem);
   letter-spacing: -0.025em;
   color: #0a0d0b;
+  line-height: 1.2;
 }
 .rx-hrs-euro {
   appearance: none;
@@ -14395,9 +14396,10 @@ html:has(.radr-home) body {
   display: flex;
   align-items: baseline;
   gap: 0.55rem;
+  margin-top: 0.55rem;
 }
 .rx-hrs-euro strong {
-  font-size: 2rem;
+  font-size: clamp(2rem, 2.6vw, 2.45rem);
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
   color: #0a0d0b;
@@ -14417,10 +14419,12 @@ html:has(.radr-home) body {
   color: #00a85a;
 }
 .rx-hrs-because {
-  margin: 0;
-  color: #626a65;
-  line-height: 1.45;
-  font-size: 0.92rem;
+  margin: 0.55rem 0 0;
+  color: #0a0d0b;
+  line-height: 1.4;
+  font-size: 1.05rem;
+  font-weight: 550;
+  letter-spacing: -0.015em;
 }
 .rx-hrs-path {
   display: flex;
@@ -14452,9 +14456,10 @@ html:has(.radr-home) body {
   text-decoration: none;
 }
 .rx-hrs-note {
-  margin: 0;
-  font-size: 0.72rem;
-  color: #626a65;
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  color: #3f4642;
+  line-height: 1.4;
 }
 .rx-hrs .rx-he-phone {
   position: absolute;
