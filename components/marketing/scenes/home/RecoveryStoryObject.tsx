@@ -7,11 +7,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
+import { CANON_SUPPLIER } from "@/lib/radr/decision/demo/canonical";
+
+const EUR = `€${CANON_SUPPLIER.exposureEuro.toLocaleString("en-US")}`;
 
 const STAGES = [
   { id: "contract", label: "Contract", line: "€6.80/L", grade: "CONTRACT" },
   { id: "invoice", label: "Invoice", line: "€7.45/L", grade: "INVOICE" },
-  { id: "exposed", label: "Exposure", line: "€273", grade: "EXPOSURE" },
+  { id: "exposed", label: "Variance", line: EUR, grade: "VARIANCE FOUND" },
   {
     id: "dispute",
     label: "Decision",
@@ -21,14 +24,14 @@ const STAGES = [
   {
     id: "credit",
     label: "Credit memo",
-    line: "€273",
-    grade: "CREDIT MEMO",
+    line: EUR,
+    grade: "CREDIT APPLIED",
   },
   {
     id: "verified",
     label: "Verified",
-    line: "€273 RECOVERED",
-    grade: "VERIFIED",
+    line: `${EUR} RECOVERED`,
+    grade: "VERIFIED VALUE",
   },
 ] as const;
 

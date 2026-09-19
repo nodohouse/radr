@@ -15026,3 +15026,121 @@ html:has(.radr-home) body {
 .rx-res-pub .rx-res-card-meta {
   color: #5a625d;
 }
+
+/* —— Hero verified recovery ladder (ROI-first) —— */
+.rx-hvr {
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 18px;
+  padding: 1.35rem 1.4rem 1.25rem;
+  box-shadow: 0 22px 56px rgba(10, 13, 11, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 22rem;
+}
+.rx-hvr-head {
+  display: grid;
+  gap: 0.2rem;
+}
+.rx-hvr-eye {
+  margin: 0;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00a85a;
+}
+.rx-hvr-place {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #626a65;
+}
+.rx-hvr-ladder {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+.rx-hvr-ladder li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 10px;
+  opacity: 0.28;
+  transform: translateY(2px);
+  transition:
+    opacity 0.35s ease,
+    background 0.35s ease,
+    transform 0.35s ease;
+}
+.rx-hvr-ladder li[data-on="true"] {
+  opacity: 1;
+  transform: none;
+}
+.rx-hvr-ladder li[data-active="true"] {
+  background: #f7f4ed;
+}
+.rx-hvr-ladder li[data-seal="true"] {
+  background: rgba(0, 217, 120, 0.1);
+  outline: 1px solid rgba(0, 168, 90, 0.28);
+}
+.rx-hvr-ladder em {
+  font-style: normal;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-hvr-ladder strong {
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: #0a0d0b;
+  text-align: right;
+}
+.rx-hvr-ladder li[data-seal="true"] strong {
+  color: #007a42;
+}
+.rx-hvr-arrow {
+  grid-column: 1 / -1;
+  justify-self: center;
+  font-size: 0.7rem;
+  line-height: 1;
+  color: rgba(10, 13, 11, 0.22);
+  padding-bottom: 0.05rem;
+}
+.rx-hvr-ladder li[data-on="true"] .rx-hvr-arrow {
+  color: rgba(0, 168, 90, 0.45);
+}
+.rx-hvr-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0a0d0b;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.2);
+  width: fit-content;
+}
+.rx-hvr-cta:hover {
+  border-bottom-color: #00a85a;
+  color: #007a42;
+}
+.rx-hvr-note {
+  margin: 0;
+  font-size: 0.68rem;
+  color: #626a65;
+}
+@media (max-width: 900px) {
+  .rx-hvr {
+    min-height: 0;
+  }
+}

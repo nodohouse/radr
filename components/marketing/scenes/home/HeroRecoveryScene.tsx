@@ -1,153 +1,109 @@
 "use client";
 
 /**
- * Signature hero product scene — D-4102 recovery choreography.
- * Invoice → contract → Decision → phone → credit → Verified.
- * Product logic is the motion. ~8s loop. Reduced-motion safe.
+ * Hero product moment — complete D-4102 micro-recovery.
+ * ROI-first vertical ladder. Reduced-motion shows sealed state.
  */
 
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
-import {
-  PHONE_CFO_RECOVER,
-  PHONE_VERIFIED,
-  RadrPhone,
-} from "@/components/marketing/scenes/home/RadrPhone";
+import { CANON_SUPPLIER } from "@/lib/radr/decision/demo/canonical";
+import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 
-type Beat =
-  | "invoice"
-  | "contract"
-  | "decision"
-  | "phone"
-  | "credit"
-  | "verified";
+const VARIANCE = CANON_SUPPLIER.exposureEuro;
+const EUR = `€${VARIANCE.toLocaleString("en-US")}`;
 
-const BEATS: { id: Beat; ms: number; label: string }[] = [
-  { id: "invoice", ms: 0, label: "Invoice" },
-  { id: "contract", ms: 1400, label: "Contract" },
-  { id: "decision", ms: 2800, label: "Decision" },
-  { id: "phone", ms: 4200, label: "Review" },
-  { id: "credit", ms: 5600, label: "Credit" },
-  { id: "verified", ms: 7200, label: "Verified" },
-];
+const STEPS = [
+  { id: "contract", kicker: "Contract", value: "€6.80 / L" },
+  { id: "invoice", kicker: "Invoice", value: "€7.45 / L" },
+  { id: "variance", kicker: "Variance found", value: EUR },
+  { id: "decision", kicker: "Decision", value: "Dispute variance" },
+  { id: "credit", kicker: "Credit applied", value: EUR },
+  { id: "verified", kicker: "Verified Value", value: `${EUR} recovered` },
+] as const;
 
-const LOOP_MS = 9000;
+const STEP_MS = 850;
+const HOLD_MS = 2800;
+const LAST = STEPS.length - 1;
 
 export function HeroRecoveryScene() {
-  const [beat, setBeat] = useState<Beat>("invoice");
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const onChange = () => setReduced(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+  const reduced = usePrefersReducedMotion();
+  const [active, setActive] = useState(reduced ? LAST : 0);
 
   useEffect(() => {
     if (reduced) {
-      setBeat("verified");
+      setActive(LAST);
       return;
     }
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const t = (now - start) % LOOP_MS;
-      let current: Beat = "invoice";
-      for (const b of BEATS) {
-        if (t >= b.ms) current = b.id;
-      }
-      setBeat(current);
-      raf = window.requestAnimationFrame(tick);
+
+    let step = 0;
+    let timer = 0;
+    setActive(0);
+
+    const schedule = (fn: () => void, ms: number) => {
+      timer = window.setTimeout(fn, ms);
     };
-    raf = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(raf);
+
+    const advance = () => {
+      if (step < LAST) {
+        step += 1;
+        setActive(step);
+        schedule(advance, step === LAST ? HOLD_MS : STEP_MS);
+        return;
+      }
+      step = 0;
+      setActive(0);
+      schedule(advance, STEP_MS);
+    };
+
+    schedule(advance, STEP_MS);
+    return () => window.clearTimeout(timer);
   }, [reduced]);
 
-  const grade =
-    beat === "verified" || beat === "credit" ? "Verified" : "Expected";
-  const euro = beat === "verified" ? "€273 recovered" : "€273 exposed";
-  const phone =
-    beat === "verified" || beat === "credit"
-      ? PHONE_VERIFIED
-      : PHONE_CFO_RECOVER;
+  const sealed = active >= LAST;
 
   return (
-    <div className="rx-hrs" data-beat={beat} aria-label="D-4102 recovery scene">
-      <div className="rx-hrs-desktop">
-        <header className="rx-hrs-head">
-          <p className="rx-hrs-k">Supplier / AP · Finance</p>
-          <p className="rx-hrs-id">D-4102 · Berlin Mitte · Demo</p>
-        </header>
-
-        <div className="rx-hrs-docs" aria-hidden="true">
-          <div className="rx-hrs-doc" data-doc="invoice" data-on={beat !== "invoice" ? "true" : "pulse"}>
-            <em>Invoice</em>
-            <strong>€7.45 / L</strong>
-            <span>INV-88421 · 420 L</span>
-          </div>
-          <div
-            className="rx-hrs-doc"
-            data-doc="contract"
-            data-on={
-              beat === "invoice"
-                ? undefined
-                : beat === "contract"
-                  ? "pulse"
-                  : "true"
-            }
-          >
-            <em>Contract</em>
-            <strong>€6.80 / L</strong>
-            <span>CTR-OIL-2026</span>
-          </div>
-        </div>
-
-        <h2 className="rx-hrs-title">Contract price variance</h2>
-
-        <button
-          type="button"
-          className="rx-hrs-euro"
-          data-grade={grade}
-          data-seal={beat === "verified" ? "true" : undefined}
-        >
-          <strong>{euro.split(" ")[0]}</strong>
-          <span>{grade}</span>
-        </button>
-
-        <p className="rx-hrs-because">
-          {beat === "verified"
-            ? "Credit memo CM-44102 matched to INV-88421"
-            : beat === "credit"
-              ? "Credit memo issued · applying to original invoice"
-              : beat === "phone" || beat === "decision"
-                ? "Dispute the variance · do not reprice menu yet"
-                : "Invoice above contract · €273 exposed"}
+    <aside
+      className="rx-hvr"
+      data-sealed={sealed ? "true" : undefined}
+      aria-label={`Verified recovery ${CANON_SUPPLIER.displayId}`}
+    >
+      <header className="rx-hvr-head">
+        <p className="rx-hvr-eye">
+          Verified recovery · {CANON_SUPPLIER.displayId}
         </p>
+        <p className="rx-hvr-place">
+          {CANON_SUPPLIER.property} · Supplier / AP
+        </p>
+      </header>
 
-        <div className="rx-hrs-path" aria-hidden="true">
-          {BEATS.map((b) => (
-            <span key={b.id} data-on={beat === b.id ? "true" : undefined}>
-              {b.label}
-            </span>
-          ))}
-        </div>
+      <ol className="rx-hvr-ladder">
+        {STEPS.map((s, i) => (
+          <li
+            key={s.id}
+            data-on={i <= active ? "true" : undefined}
+            data-active={i === active ? "true" : undefined}
+            data-seal={s.id === "verified" && sealed ? "true" : undefined}
+          >
+            <em>{s.kicker}</em>
+            <strong>{s.value}</strong>
+            {i < LAST ? (
+              <span className="rx-hvr-arrow" aria-hidden="true">
+                ↓
+              </span>
+            ) : null}
+          </li>
+        ))}
+      </ol>
 
-        <NextLink
-          href="/app/lab/control-center?seed=recover"
-          className="rx-hrs-cta"
-        >
-          {beat === "verified" ? "Open Verified Trace →" : "See a Verified Recovery →"}
-        </NextLink>
-
-        <p className="rx-hrs-note">Illustrative demo · not customer results</p>
-      </div>
-
-      <RadrPhone
-        state={phone}
-        highlight={beat === "phone" || beat === "verified"}
-      />
-    </div>
+      <NextLink
+        href="/app/lab/control-center?seed=recover"
+        className="rx-hvr-cta"
+      >
+        {sealed ? "Open verified trace" : "See a verified recovery"}{" "}
+        <span aria-hidden="true">→</span>
+      </NextLink>
+      <p className="rx-hvr-note">Illustrative demo · not customer results</p>
+    </aside>
   );
 }

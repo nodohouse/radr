@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Homepage — research-backed hospitality story.
- * Hero → rail → connect → research → leaks → Decision → roles → progression → pilot → FAQ.
+ * Homepage — ROI first, product second, architecture third.
+ * Hero → rail → leaks → Decision → roles → progression → research → Data Origin → pilot → FAQ.
  */
 
 import { useTranslations } from "next-intl";
@@ -60,16 +60,6 @@ export function HomepageSpine() {
         <EconomicRail items={HOME_RAIL} durationSec={64} variant="signature" />
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-ivory" data-nav-theme="light">
-        <div className="rx-shell-wide">
-          <ConnectionOriginSection />
-        </div>
-      </section>
-
-      <section className="rx-rec-sec rx-rec-sec-quiet rx-rec-sec-evidence" data-nav-theme="light">
-        <ResearchEvidenceStrip />
-      </section>
-
       <section className="rx-rec-sec rx-rec-sec-interactive" data-nav-theme="light">
         <div className="rx-shell">
           <LeakMapPanel
@@ -106,6 +96,16 @@ export function HomepageSpine() {
             titles={progTitles}
             bodies={progBodies}
           />
+        </div>
+      </section>
+
+      <section className="rx-rec-sec rx-rec-sec-quiet rx-rec-sec-evidence" data-nav-theme="light">
+        <ResearchEvidenceStrip />
+      </section>
+
+      <section className="rx-rec-sec rx-rec-sec-ivory" data-nav-theme="light">
+        <div className="rx-shell-wide">
+          <ConnectionOriginSection />
         </div>
       </section>
 

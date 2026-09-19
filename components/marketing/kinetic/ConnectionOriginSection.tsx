@@ -77,16 +77,16 @@ export function ConnectionOriginSection() {
       <header className="rx-intake-head">
         <p className="rx-rec-k">Data origin</p>
         <h2 className="rx-intake-h">
-          Your systems already hold the evidence.
-          <span>RADR connects it into Decisions.</span>
+          Evidence enters from the systems you already run.
+          <span>RADR turns it into Decisions.</span>
         </h2>
         <p className="rx-intake-lead">
-          Operational, financial and contextual signals into one Decision layer —
-          so value no single system can see alone becomes actionable.
+          After the economics are clear — how source systems feed the Decision
+          layer. Representative connections only. Full catalog in Developers.
         </p>
         <p className="rx-intake-honesty">
-          Representative systems. Connection availability varies. First pilots
-          start with secure exports and documents. APIs later where useful.
+          Connection availability varies. First pilots start with secure exports
+          and documents. APIs later where useful.
         </p>
       </header>
 

@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { Suspense } from "react";
-import { HeroHospitalityScene } from "@/components/marketing/scenes/home/HeroHospitalityScene";
+import { HeroRecoveryScene } from "@/components/marketing/scenes/home/HeroRecoveryScene";
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 import { HospitalityEyebrow } from "@/components/marketing/kinetic/HospitalityContextSwitch";
 
@@ -47,7 +47,7 @@ function HeroInner() {
           </div>
 
           <div className="rx-he-recover-product">
-            <HeroHospitalityScene />
+            <HeroRecoveryScene />
           </div>
         </div>
       </div>
