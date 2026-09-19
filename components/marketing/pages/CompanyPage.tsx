@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * Company — editorial hospitality emotion.
+ * Unique imagery only. Solid panels for readability. No fabricated documentary.
+ */
+
 import type { ReactNode } from "react";
 import Image from "next/image";
 import NextLink from "next/link";
@@ -8,23 +13,22 @@ import { motion, useReducedMotion } from "motion/react";
 import { PublicFooter, PublicNavbar } from "../PublicShell";
 import { useInView } from "@/components/marketing/motion/useInView";
 import { CTAS } from "@/lib/marketing/brand";
+import { marketingImage } from "@/lib/marketing/publicImagery";
 import "@/app/company.css";
 import "@/app/kinetic.css";
 
 const BELIEFS = [
-  {
-    n: "01",
-    title: "Humans provide the hospitality.",
-  },
-  {
-    n: "02",
-    title: "Claim only what you can prove.",
-  },
-  {
-    n: "03",
-    title: "The operation should learn.",
-  },
+  { n: "01", title: "Humans provide the hospitality." },
+  { n: "02", title: "Claim only what you can prove." },
+  { n: "03", title: "The operation should learn." },
 ] as const;
+
+const ENVS = [
+  { id: "companyRestaurant" as const, label: "Restaurants & F&B" },
+  { id: "companyHotel" as const, label: "Hotels & Resorts" },
+  { id: "companyApartments" as const, label: "Serviced apartments" },
+  { id: "companyGroup" as const, label: "Groups" },
+];
 
 function CoReveal({
   children,
@@ -55,27 +59,30 @@ function CoReveal({
   );
 }
 
-/**
- * Company — editorial hospitality emotion.
- * Hero photo → founder → why now → beliefs → close.
- */
 export function CompanyPage() {
+  const hero = marketingImage("companyHero");
+  const founder = marketingImage("companyFounderStory");
+
   return (
     <div className="radr radr-mineral rx-co2">
       <PublicNavbar />
       <main>
-        <section className="rx-co2-photo-hero rx-co2-photo-hero-split" data-nav-theme="light">
+        <section
+          className="rx-co2-photo-hero rx-co2-photo-hero-split"
+          data-nav-theme="light"
+        >
           <div className="rx-shell rx-co2-photo-hero-grid">
             <div className="rx-co2-photo-hero-frame">
               <Image
-                src="/demo/facilities/berlin-dining.jpg"
-                alt="Active restaurant dining room during service"
-                width={1152}
-                height={864}
+                src={hero.src}
+                alt={hero.alt}
+                width={hero.nativeWidth}
+                height={hero.nativeHeight}
                 priority
-                sizes="(max-width: 900px) 92vw, 520px"
+                sizes={`(max-width: 900px) 92vw, ${hero.cssMax}px`}
                 quality={90}
                 className="rx-co2-photo-hero-img"
+                style={{ objectPosition: `${hero.focalX} ${hero.focalY}` }}
               />
             </div>
             <div className="rx-co2-photo-hero-copy">
@@ -91,11 +98,14 @@ export function CompanyPage() {
             <CoReveal className="rx-co2-founder-photo-wrap">
               <div className="rx-co2-founder-photo">
                 <Image
-                  src="/demo/facilities/berlin-bar.jpg"
-                  alt=""
+                  src={founder.src}
+                  alt={founder.alt}
                   fill
-                  sizes="(max-width: 900px) 100vw, 48vw"
+                  sizes={`(max-width: 900px) 92vw, ${founder.cssMax}px`}
                   className="rx-co2-founder-img"
+                  style={{
+                    objectPosition: `${founder.focalX} ${founder.focalY}`,
+                  }}
                 />
               </div>
             </CoReveal>
@@ -116,10 +126,10 @@ export function CompanyPage() {
               </p>
               <p className="rx-co2-founder-bio">
                 Hospitality already had software for sales, reservations,
-                staffing, inventory, purchasing, payments and accounting. What it
-                did not have was a system for the decisions between them — the
-                ones that determine whether revenue becomes contribution, and
-                whether anyone can prove afterward that the call worked.
+                staffing, inventory, purchasing, payments and accounting. What
+                it did not have was a system for the decisions between them —
+                the ones that determine whether revenue becomes contribution,
+                and whether anyone can prove afterward that the call worked.
               </p>
               <p className="rx-co2-founder-bio">
                 RADR is that Decision layer.
@@ -128,91 +138,42 @@ export function CompanyPage() {
           </div>
         </section>
 
-        <section className="rx-co-states" data-nav-theme="light" aria-label="Founder thesis">
-          {[
-            "The software wasn’t the problem.",
-            "The decisions between the systems were.",
-          ].map((line, i) => (
-            <div key={line} className="rx-co-state">
-              <div className="rx-shell">
-                <CoReveal delay={i * 40}>
-                  <p>{line}</p>
-                </CoReveal>
-              </div>
-            </div>
-          ))}
-        </section>
-
-        <div className="rx-co-hosp-strip" aria-hidden="true">
-          {(
-            [
-              ["/demo/facilities/berlin-dining.jpg", "Dining room"],
-              ["/demo/facilities/berlin-bar.jpg", "Service"],
-              ["/demo/facilities/canal-deluxe-king.jpg", "Hotel"],
-              ["/demo/facilities/lisbon-studio.jpg", "Apartments"],
-              ["/demo/facilities/lisbon-onebed.jpg", "Front desk"],
-            ] as const
-          ).map(([src, cap]) => (
-            <figure key={cap}>
-              <Image src={src} alt="" fill sizes="42vw" />
-              <figcaption>{cap}</figcaption>
-            </figure>
-          ))}
-        </div>
-
-        <section className="rx-co2-environments" data-nav-theme="light">
+        <section
+          className="rx-co2-environments"
+          data-nav-theme="light"
+        >
           <div className="rx-shell">
             <CoReveal>
-              <div className="rx-co2-env-grid">
-                <ul className="rx-co2-env-photos" aria-hidden="true">
-                  <li>
-                    <Image
-                      src="/demo/facilities/berlin-dining.jpg"
-                      alt=""
-                      fill
-                      sizes="(max-width: 900px) 33vw, 12rem"
-                      className="rx-co2-env-img"
-                    />
-                  </li>
-                  <li>
-                    <Image
-                      src="/demo/facilities/canal-deluxe-king.jpg"
-                      alt=""
-                      fill
-                      sizes="(max-width: 900px) 33vw, 12rem"
-                      className="rx-co2-env-img"
-                    />
-                  </li>
-                  <li>
-                    <Image
-                      src="/demo/facilities/lisbon-studio.jpg"
-                      alt=""
-                      fill
-                      sizes="(max-width: 900px) 33vw, 12rem"
-                      className="rx-co2-env-img"
-                    />
-                  </li>
-                </ul>
-                <div className="rx-co2-env-copy">
-                  <p className="rx-co2-env-kicker">Where it landed</p>
-                  <p className="rx-co2-env-lead">
-                    The restaurant dream stayed personal. The work opened to
-                    every hospitality environment where small decisions become
-                    economic outcomes — dining rooms, full hotels, serviced
-                    apartments with nights that expire.
-                  </p>
-                  <p className="rx-co2-env-note">
-                    Same judgment problem. Different floors, channels, and
-                    clocks.
-                  </p>
-                  <ul className="rx-co-tax" aria-label="Hospitality environments">
-                    <li>Restaurants &amp; F&amp;B</li>
-                    <li>Hotels &amp; Resorts</li>
-                    <li>Serviced Apartments</li>
-                    <li>Groups</li>
-                  </ul>
-                </div>
-              </div>
+              <p className="rx-co2-env-kicker">Where it landed</p>
+              <p className="rx-co2-env-lead">
+                The restaurant dream stayed personal. The work opened to every
+                hospitality environment where small decisions become economic
+                outcomes.
+              </p>
+              <ul className="rx-co2-env-unique" aria-label="Hospitality environments">
+                {ENVS.map((env) => {
+                  const img = marketingImage(env.id);
+                  return (
+                    <li key={env.id}>
+                      <figure>
+                        <Image
+                          src={img.src}
+                          alt={img.alt}
+                          width={img.nativeWidth}
+                          height={img.nativeHeight}
+                          sizes={`(max-width: 700px) 45vw, ${img.cssMax}px`}
+                          style={{
+                            objectPosition: `${img.focalX} ${img.focalY}`,
+                          }}
+                          loading="lazy"
+                          quality={85}
+                        />
+                        <figcaption>{env.label}</figcaption>
+                      </figure>
+                    </li>
+                  );
+                })}
+              </ul>
             </CoReveal>
           </div>
         </section>
@@ -221,12 +182,12 @@ export function CompanyPage() {
           <div className="rx-shell">
             <CoReveal>
               <p className="rx-co2-why-now-h">
-                Hospitality has more software than ever.
-                <br />
-                The decisions are still human, fragmented, and hard to verify.
+                That is the Decision Gap RADR is built for.
               </p>
               <p className="rx-co2-why-now-sub">
-                That is the Decision Gap RADR is built for.
+                Systems of record store facts. RADR stores judgment — and starts
+                where economics can be proven: value that is leaking, stuck, or
+                about to expire.
               </p>
               <div className="rx-co-gap-diagram" aria-hidden="true">
                 <span>POS</span>
@@ -238,15 +199,6 @@ export function CompanyPage() {
                 <strong>RADR</strong>
               </div>
               <div className="rx-co2-gtm-bridge">
-                <p className="rx-intel-k">Where we start</p>
-                <h3>Prove the economics first.</h3>
-                <p>
-                  The first place RADR starts is where the economics can be
-                  proven: value that is leaking, stuck, or about to expire.
-                </p>
-                <p>
-                  <strong>Recovery is the beginning, not the limit.</strong>
-                </p>
                 <Link href="/solutions" className="rx-btn rx-btn-ghost">
                   Where value leaks <span aria-hidden="true">→</span>
                 </Link>
@@ -270,7 +222,11 @@ export function CompanyPage() {
           </div>
         </section>
 
-        <section className="rx-co2-essay" data-nav-theme="light" id="why-we-exist">
+        <section
+          className="rx-co2-essay"
+          data-nav-theme="light"
+          id="why-we-exist"
+        >
           <div className="rx-shell">
             <CoReveal>
               <p className="rx-kicker">From the company</p>
@@ -282,7 +238,7 @@ export function CompanyPage() {
               </p>
               <div className="rx-co2-essay-card">
                 <p className="rx-co2-essay-meta">
-                  <span>18 min read</span>
+                  <span>14 min read</span>
                   <span aria-hidden="true">·</span>
                   <time dateTime="2026-09-17">2026-09-17</time>
                 </p>
@@ -290,9 +246,8 @@ export function CompanyPage() {
                   The Decision Gap: why RADR exists
                 </h3>
                 <p className="rx-co2-essay-card-body">
-                  Hospitality has more software than ever. Profitability is not
-                  the default. Operators spend hours reconciling data while
-                  perishable value expires. This is the gap RADR is built for.
+                  Hospitality digitized records before it digitized judgment.
+                  This is the gap RADR is built for.
                 </p>
                 <div className="rx-ctas rx-co2-essay-ctas">
                   <Link
@@ -317,10 +272,6 @@ export function CompanyPage() {
                 One restaurant started the question.
                 <br />
                 Hospitality became the answer.
-              </p>
-              <p className="rx-co2-close-q">
-                RADR exists to help hospitality operations see what matters, act
-                while the outcome can still change, and learn from what happened.
               </p>
               <div className="rx-ctas rx-co2-hero-ctas">
                 <NextLink href="/demo" className="rx-btn rx-btn-primary">

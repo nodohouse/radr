@@ -8,9 +8,8 @@ import { BLOG_POSTS, type BlogPostMeta } from "@/lib/marketing/blog";
 import { TextSep } from "@/components/TextSep";
 import { buildAlternatesForLocale } from "@/i18n/seo";
 import {
-  BLOG_HERO_IMAGE,
-  FACILITY_NATIVE,
-  PUBLIC_IMAGES,
+  BLOG_HERO_BY_SLUG,
+  marketingImage,
 } from "@/lib/marketing/publicImagery";
 import "../../home.css";
 import "../../kinetic.css";
@@ -59,17 +58,17 @@ function pillarLabel(post: BlogPostMeta): string {
 }
 
 function PostMedia({ slug, featured = false }: { slug: string; featured?: boolean }) {
-  const map = BLOG_HERO_IMAGE[slug];
-  if (!map) return null;
-  const img = PUBLIC_IMAGES[map.imageId];
+  const id = BLOG_HERO_BY_SLUG[slug];
+  if (!id) return null;
+  const img = marketingImage(id);
   const max = featured ? Math.min(img.cssMax, 520) : Math.min(img.cssMax, 360);
   return (
-    <figure className="rx-res-card-media" data-panel={map.panel}>
+    <figure className="rx-res-card-media">
       <Image
         src={img.src}
         alt={img.alt}
-        width={FACILITY_NATIVE.w}
-        height={FACILITY_NATIVE.h}
+        width={img.nativeWidth}
+        height={img.nativeHeight}
         sizes={`(max-width: 700px) 92vw, ${max}px`}
         style={{ objectPosition: `${img.focalX} ${img.focalY}` }}
         loading={featured ? "eager" : "lazy"}
@@ -99,7 +98,6 @@ function PostCard({
       href={`/blog/${post.slug}`}
       className={featured ? "rx-res-card rx-res-card--feature" : "rx-res-card"}
       data-terr={post.territory}
-      data-size={featured ? "feature" : "story"}
     >
       <PostMedia slug={post.slug} featured={featured} />
       <div className="rx-res-card-copy">

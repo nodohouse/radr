@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import NextLink from "next/link";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
@@ -121,20 +120,7 @@ export function FuturesChapter() {
     <div className="radr rx-ch rx-ch-light">
       <SiteNav />
       <main className="rx-ch-main">
-        <section className="rx-fut-field-scene" data-nav-theme="dark">
-          <div className="rx-fut-field-media" aria-hidden="true">
-            <Image
-              src="/demo/facilities/lisbon-onebed.jpg"
-              alt=""
-              fill
-              sizes="100vw"
-              className="rx-fut-field-img"
-              style={{ objectPosition: "50% 42%" }}
-              priority
-            />
-            <div className="rx-fut-field-veil" />
-          </div>
-
+        <section className="rx-fut-field-scene rx-fut-field-scene-solid" data-nav-theme="dark">
           <div className="rx-shell rx-fut-field-inner">
             <header className="rx-cinema-head rx-cinema-head-on-dark">
               <p className="rx-cinema-kicker">

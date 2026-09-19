@@ -9,9 +9,8 @@ import { BLOG_POSTS, getBlogPost } from "@/lib/marketing/blog";
 import { TextSep } from "@/components/TextSep";
 import { buildAlternatesForLocale } from "@/i18n/seo";
 import {
-  BLOG_HERO_IMAGE,
-  FACILITY_NATIVE,
-  PUBLIC_IMAGES,
+  BLOG_HERO_BY_SLUG,
+  marketingImage,
 } from "@/lib/marketing/publicImagery";
 import "../../../home.css";
 import "../../../kinetic.css";
@@ -35,8 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = t(`posts.${post.key}.metaTitle`);
   const description = t(`posts.${post.key}.metaDescription`);
   const path = `/blog/${slug}`;
-  const hero = BLOG_HERO_IMAGE[slug];
-  const ogImage = hero ? PUBLIC_IMAGES[hero.imageId].src : undefined;
+  const heroMapId = BLOG_HERO_BY_SLUG[slug];
+  const ogImage = heroMapId ? marketingImage(heroMapId).src : undefined;
   return {
     title,
     description,
@@ -83,8 +82,8 @@ export default async function BlogPostPage({ params }: Props) {
   const title = t(`posts.${post.key}.title`);
   const description = t(`posts.${post.key}.metaDescription`);
   const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
-  const heroMap = BLOG_HERO_IMAGE[slug];
-  const hero = heroMap ? PUBLIC_IMAGES[heroMap.imageId] : null;
+  const heroMap = BLOG_HERO_BY_SLUG[slug];
+  const hero = heroMap ? marketingImage(heroMap) : null;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -148,17 +147,14 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           {hero ? (
-            <figure
-              className="rx-res-article-hero"
-              data-panel={heroMap?.panel}
-            >
+            <figure className="rx-res-article-hero">
               <div className="rx-res-article-hero-frame">
                 <Image
                   src={hero.src}
                   alt={hero.alt}
-                  width={FACILITY_NATIVE.w}
-                  height={FACILITY_NATIVE.h}
-                  sizes="(max-width: 900px) 92vw, 520px"
+                  width={hero.nativeWidth}
+                  height={hero.nativeHeight}
+                  sizes={`(max-width: 900px) 92vw, ${hero.cssMax}px`}
                   style={{
                     objectPosition: `${hero.focalX} ${hero.focalY}`,
                   }}
@@ -166,7 +162,7 @@ export default async function BlogPostPage({ params }: Props) {
                   quality={90}
                 />
               </div>
-              <figcaption>{hero.credit}</figcaption>
+              <figcaption>{hero.credit ?? hero.topic}</figcaption>
             </figure>
           ) : null}
 

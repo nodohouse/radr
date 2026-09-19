@@ -93,27 +93,27 @@ function FloorNow() {
       <header className="rx-floor-companion-head">
         <div>
           <em>NOW</em>
-          <strong>19:04</strong>
-        </div>
-        <div>
-          <em>Table 12</em>
-          <strong>VIP · returning guest</strong>
+          <strong>18:42</strong>
         </div>
         <div data-hot="true">
-          <em>Cold station</em>
-          <strong>92%</strong>
+          <em>Table 12</em>
+          <strong>VIP · TABLE 12</strong>
+        </div>
+        <div>
+          <em>Hold</em>
+          <strong>Do not release</strong>
         </div>
       </header>
 
       <div className="rx-floor-companion-table">
-        <em>Table 12</em>
-        <strong>Nut allergy · party of 6 · 18:50</strong>
-        <span>Last visit: Ribeye + Malbec</span>
+        <em>FOH brief</em>
+        <strong>Nut allergy on file</strong>
+        <span>Seat by 18:50 · party of 6 · returning guest</span>
       </div>
 
       <div className="rx-floor-action">
-        <em>RADR guidance</em>
-        <strong>MENTION RIBEYE</strong>
+        <em>Instruction</em>
+        <strong>SEAT BY 18:50 · ALLERGY BRIEF OPEN</strong>
       </div>
     </div>
   );
@@ -122,36 +122,34 @@ function FloorNow() {
 function FloorWhy() {
   return (
     <div className="rx-floor-companion" aria-label="Why">
-      <p className="rx-floor-why-lead">Evidence → guidance</p>
+      <p className="rx-floor-why-lead">Guest · kitchen · timing</p>
 
       <div className="rx-floor-causality" aria-label="Reasoning">
         <span>Reservation</span>
         <i>+</i>
-        <span>Kitchen</span>
+        <span data-hot>Allergy</span>
         <i>+</i>
-        <span data-hot>Guest</span>
-        <i>+</i>
-        <span>Menu</span>
+        <span>Cold station 92%</span>
         <i>→</i>
-        <strong>Mention Ribeye</strong>
+        <strong>Hold table · brief FOH</strong>
       </div>
 
       <ul className="rx-floor-loop-metrics">
         <li>
-          <em>Guest preference</em>
-          <strong>Last: Ribeye</strong>
+          <em>Guest</em>
+          <strong>VIP · nut allergy</strong>
         </li>
         <li>
-          <em>Menu contribution</em>
-          <strong>Higher vs lean</strong>
+          <em>Deadline</em>
+          <strong>Seat by 18:50</strong>
         </li>
         <li>
-          <em>Current capacity</em>
-          <strong>Cold station 92%</strong>
+          <em>Capacity</em>
+          <strong>Cold station pressure</strong>
         </li>
         <li>
           <em>Constraint</em>
-          <strong>Nut allergy on file</strong>
+          <strong>Do not release Table 12</strong>
         </li>
       </ul>
     </div>
@@ -164,30 +162,30 @@ function FloorLearn() {
       <header className="rx-floor-companion-head">
         <div data-hot="true">
           <em>Outcome</em>
-          <strong>Recommendation followed</strong>
+          <strong>Brief followed</strong>
         </div>
         <div>
           <em>Table 12</em>
-          <strong>Guest substituted successfully</strong>
+          <strong>Seated on time · allergy honored</strong>
         </div>
       </header>
 
       <ul className="rx-floor-loop-metrics">
         <li>
-          <em>Kitchen pressure</em>
-          <strong>Did not materially rise</strong>
+          <em>Service</em>
+          <strong>No allergy incident</strong>
         </li>
         <li>
           <em>Turn</em>
           <strong>Within expectation</strong>
         </li>
         <li>
-          <em>Guest</em>
-          <strong>Substitution successful</strong>
+          <em>FOH</em>
+          <strong>Brief acknowledged</strong>
         </li>
         <li>
           <em>Memory</em>
-          <strong>Pattern added</strong>
+          <strong>VIP allergy pattern retained</strong>
         </li>
       </ul>
 

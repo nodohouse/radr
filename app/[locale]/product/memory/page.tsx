@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import NextLink from "next/link";
 import { setRequestLocale } from "next-intl/server";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
@@ -35,7 +34,7 @@ export default async function MemoryPage({ params }: Props) {
     <div className="radr rx-ch rx-ch-light">
       <SiteNav />
       <main className="rx-ch-main">
-        <section className="rx-mem-page" data-nav-theme="light">
+        <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
             <p className="rx-ch-kicker">Platform · Operating Memory · D-1911</p>
             <h1 className="rx-ch-title">
@@ -45,35 +44,34 @@ export default async function MemoryPage({ params }: Props) {
             </h1>
           </div>
 
-          <div className="rx-mem-page-stage">
-            <Image
-              src="/demo/facilities/berlin-dining.jpg"
-              alt=""
-              fill
-              sizes="100vw"
-              className="rx-mem-page-img"
-              style={{ objectPosition: "55% 45%" }}
-            />
-            <div className="rx-mem-page-veil" />
-
-            <div className="rx-mem-page-ghost" data-n="1">
-              <em>Ghost</em>
-              <span>Seat now · burned second turn</span>
-            </div>
-            <div className="rx-mem-page-ghost" data-n="2">
-              <em>Ghost</em>
-              <span>Kitchen 92% · 38 inbound · wait held</span>
-            </div>
+          <div className="rx-mem-page-stage rx-mem-page-stage-solid">
+            <ol className="rx-mem-history" aria-label="Learning history">
+              <li>
+                <em>Past services</em>
+                <strong>18 similar nights</strong>
+              </li>
+              <li>
+                <em>Pattern</em>
+                <strong>Forecast error 14.2% → 6.8%</strong>
+              </li>
+              <li>
+                <em>Interventions</em>
+                <strong>Wait held · kitchen protected</strong>
+              </li>
+              <li>
+                <em>Verified</em>
+                <strong>{withMemory?.title ?? "Wait 12 minutes"}</strong>
+              </li>
+              <li data-on="true">
+                <em>Playbook v3</em>
+                <strong>Auto-stage now allowed</strong>
+              </li>
+            </ol>
             <div className="rx-mem-page-now">
               <em>Converged · D-1911</em>
               <strong>{withMemory?.title ?? "Wait 12 minutes"}</strong>
               <p>{CANON_PEAK.learning.lesson}</p>
               <span className="rx-mem-page-playbook">PLAYBOOK V3</span>
-            </div>
-            <div className="rx-mem-page-auto">
-              <em>Playbook v3</em>
-              <strong>Auto-stage now allowed</strong>
-              <span>18 similar nights · forecast error 14.2% → 6.8%</span>
             </div>
           </div>
 

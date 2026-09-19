@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import NextLink from "next/link";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
@@ -74,20 +73,10 @@ export function ValueChapter() {
     <div className="radr rx-ch rx-ch-light">
       <SiteNav />
       <main className="rx-ch-main">
-        <section className="rx-value-cinema" data-nav-theme="dark">
-          <Image
-            src="/demo/facilities/canal-deluxe-king.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="rx-value-cinema-img"
-            style={{ objectPosition: "55% 35%" }}
-          />
-          <div className="rx-value-cinema-veil" />
+        <section className="rx-value-cinema rx-value-cinema-solid" data-nav-theme="dark">
           <div className="rx-shell rx-value-cinema-copy">
             <p className="rx-ch-kicker" style={{ color: "#00d978" }}>
-              Verified Value · DEMO PORTFOLIO · ILLUSTRATIVE
+              Verified Value · ILLUSTRATIVE DEMO PORTFOLIO
             </p>
             <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
               A recommendation is not value.
@@ -96,6 +85,9 @@ export function ValueChapter() {
               <br />
               Value is verified after reality.
             </h1>
+            <p className="rx-pilot-note" style={{ color: "rgba(247,250,248,0.78)" }}>
+              Selected sample · not customer results
+            </p>
           </div>
         </section>
 

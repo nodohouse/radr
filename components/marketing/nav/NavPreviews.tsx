@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { platformHrefForItem } from "./navConfig";
 import {
   BRIEF_ATTENTION,
@@ -200,17 +199,14 @@ PREVIEWS.overview = PREVIEWS.decision;
 const INTEL_SCENES = [
   {
     vertical: "Supplier / AP",
-    src: "/demo/facilities/berlin-dining.jpg",
     line: "€273 exposed · credit never applied",
   },
   {
     vertical: "Reconciliation",
-    src: "/demo/facilities/canal-deluxe-king.jpg",
     line: "€293 unexplained · settlement short",
   },
   {
     vertical: "Perishable",
-    src: "/demo/facilities/lisbon-onebed.jpg",
     line: "19h left · room at risk",
   },
 ] as const;
@@ -278,15 +274,6 @@ export function IntelligenceLivePreview() {
       <ul className="rx-np-intel-scenes">
         {INTEL_SCENES.map((scene) => (
           <li key={scene.vertical}>
-            <div className="rx-np-intel-scene">
-              <Image
-                src={scene.src}
-                alt=""
-                fill
-                sizes="120px"
-                className="rx-np-intel-scene-img"
-              />
-            </div>
             <span className="rx-np-intel-scene-label">{scene.vertical}</span>
             <strong className="rx-np-intel-scene-line">{scene.line}</strong>
           </li>

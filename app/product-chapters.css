@@ -6070,3 +6070,76 @@ html:has(.rx-ch-light) body {
 .rx-plat-live-hero-copy h1 {
   max-width: min(28ch, 100%);
 }
+
+.rx-cc-silence-hero-solid {
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(0, 217, 120, 0.12), transparent 55%),
+    #0a0d0b;
+  min-height: min(72vh, 36rem);
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem 0 3rem;
+}
+.rx-cc-lens-solid {
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem;
+}
+.rx-value-cinema-solid {
+  background:
+    radial-gradient(55% 50% at 80% 10%, rgba(0, 217, 120, 0.14), transparent 55%),
+    #0a0d0b;
+  padding: 5rem 0 4rem;
+}
+.rx-fut-field-scene-solid {
+  background: #0a0d0b;
+  padding: 4.5rem 0 3.5rem;
+}
+.rx-mem-page-stage-solid {
+  position: relative;
+  margin: 2rem auto;
+  max-width: 56rem;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+  background: #f7faf8;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 20px;
+}
+.rx-mem-history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+.rx-mem-history li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+}
+.rx-mem-history em {
+  font-style: normal;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3f4642;
+}
+.rx-mem-history strong {
+  color: #0a0d0b;
+  font-size: 0.95rem;
+}
+.rx-mem-history li[data-on="true"] {
+  border-color: rgba(0, 168, 90, 0.4);
+  background: rgba(225, 251, 234, 0.55);
+}
+.rx-leak-anchor-target {
+  scroll-margin-top: 6rem;
+  height: 0;
+}

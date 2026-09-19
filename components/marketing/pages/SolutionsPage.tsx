@@ -462,9 +462,20 @@ function SolutionsLeakMap() {
     meta: t(`families.${id}.verifies`),
   }));
 
+  const ANCHOR: Record<ProblemFamily, string> = {
+    SUPPLIER_AP: "supplier-ap",
+    RECONCILIATION: "reconciliation",
+    COST_VARIANCE: "cost-variance",
+    PROCUREMENT: "procurement",
+    PERISHABLE_REVENUE: "perishable",
+  };
+
   return (
     <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
       <div className="rx-shell">
+        {familyKeys.map((id, i) => (
+          <div key={id} id={ANCHOR[id]} className="rx-leak-anchor-target" />
+        ))}
         <StickyStory
           kicker={t("families.kicker")}
           title={t("families.title")}

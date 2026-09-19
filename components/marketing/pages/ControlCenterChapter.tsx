@@ -6,7 +6,6 @@
  */
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import NextLink from "next/link";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
@@ -38,8 +37,6 @@ const PORTFOLIO = [
     headline: "Needs you",
     line: `${money(CANON_OTA.exposureEuro)} channel exposure`,
     meta: `${CANON_OTA.displayId} · hold premium direct · not OTA dump`,
-    src: "/demo/facilities/canal-deluxe-king.jpg",
-    pos: "58% 38%",
   },
   {
     id: "ber",
@@ -48,8 +45,6 @@ const PORTFOLIO = [
     headline: "Needs you",
     line: `${money(CANON_PEAK.exposureEuro)} contribution vs seat-now`,
     meta: `${CANON_PEAK.displayId} · peak capacity · decide before 18:53`,
-    src: "/demo/facilities/berlin-dining.jpg",
-    pos: "50% 42%",
   },
   {
     id: "lis",
@@ -58,8 +53,6 @@ const PORTFOLIO = [
     headline: "Watching",
     line: "Within playbook · no action",
     meta: `${CANON_ORPHAN.displayId} · ${CANON_ORPHAN.property}`,
-    src: "/demo/facilities/lisbon-studio.jpg",
-    pos: "52% 48%",
   },
 ] as const;
 
@@ -79,7 +72,6 @@ const ROLES = [
     lens: "portfolio",
     line: `${BRIEF_ATTENTION.needsYou} things need you · peak collision tonight`,
     meta: `Berlin · wait ${waitExpected} vs seat ${seatExpected}`,
-    src: "/demo/facilities/berlin-terrace.jpg",
     exposure: CANON_PEAK.exposureEuro,
     decision: `${CANON_PEAK.displayId} · ${CANON_PEAK.title}`,
   },
@@ -89,7 +81,6 @@ const ROLES = [
     lens: "pattern",
     line: `Hold ${formatDecisionMoney(otaHold.expectedContributionEuro ?? 0)} vs release ${formatDecisionMoney(otaRelease.expectedContributionEuro ?? 0)}`,
     meta: "Canal House · premium inventory · 72h",
-    src: "/demo/facilities/canal-deluxe-king.jpg",
     exposure: CANON_OTA.exposureEuro,
     decision: `${CANON_OTA.displayId} · ${CANON_OTA.title}`,
   },
@@ -99,7 +90,6 @@ const ROLES = [
     lens: "economics",
     line: `Portfolio · ${BRIEF_ATTENTION.needsYou} judgments across environments`,
     meta: `Berlin peak + Amsterdam channel · ${formatDecisionMoney(CANON_SUPPLIER.exposureEuro)} supplier open`,
-    src: "/demo/facilities/canal-suite.jpg",
     exposure: CANON_OTA.exposureEuro + CANON_PEAK.exposureEuro,
     decision: "Group exposure · same Decision engine",
   },
@@ -129,17 +119,7 @@ export function ControlCenterChapter() {
     <div className="radr rx-ch rx-ch-light">
       <SiteNav />
       <main className="rx-ch-main">
-        <section className="rx-cc-silence-hero" data-nav-theme="dark">
-          <Image
-            src="/demo/facilities/berlin-dining.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="rx-cc-silence-img"
-            style={{ objectPosition: "55% 40%" }}
-          />
-          <div className="rx-cc-silence-veil" />
+        <section className="rx-cc-silence-hero rx-cc-silence-hero-solid" data-nav-theme="dark">
           <div
             className="rx-cc-silence-field"
             data-phase={phase}
@@ -155,7 +135,7 @@ export function ControlCenterChapter() {
               />
               <p
                 className="rx-pilot-note"
-                style={{ color: "rgba(247,250,248,0.65)", marginTop: "0.75rem" }}
+                style={{ color: "rgba(247,250,248,0.78)", marginTop: "0.75rem" }}
               >
                 DEMO · ILLUSTRATIVE · not customer results
               </p>
@@ -191,15 +171,6 @@ export function ControlCenterChapter() {
                   data-site={p.id}
                   data-status={p.status}
                 >
-                  <div className="rx-cc-portfolio-thumb" aria-hidden="true">
-                    <Image
-                      src={p.src}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 40vw, 180px"
-                      style={{ objectFit: "cover", objectPosition: p.pos }}
-                    />
-                  </div>
                   <div className="rx-cc-portfolio-copy">
                     <em>{p.headline}</em>
                     <strong>
@@ -227,17 +198,7 @@ export function ControlCenterChapter() {
               ))}
             </div>
 
-            <article className="rx-cc-lens" data-lens={active.lens} key={active.id}>
-              <div className="rx-cc-lens-photo">
-                <Image
-                  src={active.src}
-                  alt=""
-                  fill
-                  sizes="(max-width: 800px) 100vw, 48vw"
-                  style={{ objectFit: "cover", objectPosition: "50% 40%" }}
-                />
-                <div className="rx-cc-lens-ring" />
-              </div>
+            <article className="rx-cc-lens rx-cc-lens-solid" data-lens={active.lens} key={active.id}>
               <div className="rx-cc-lens-copy">
                 <em>
                   {active.label} lens · {active.lens}

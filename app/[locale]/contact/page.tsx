@@ -51,11 +51,12 @@ export default async function ContactPage({ params, searchParams }: Props) {
           <div className="rx-shell rx-page-hero-inner">
             <p className="rx-kicker">{t("contactTitle")}</p>
             <h1 className="rx-page-title">
-              {t("contactHeroTitleLine1")}
-              <br />
-              {t("contactHeroTitleLine2")}
+              Start a recovery pilot
             </h1>
-            <p className="rx-lead rx-lead-short">{t("contactHeroLead")}</p>
+            <p className="rx-lead rx-lead-short">
+              Supplier/AP, Reconciliation, or both — where the economics are
+              clearest.
+            </p>
           </div>
         </section>
 

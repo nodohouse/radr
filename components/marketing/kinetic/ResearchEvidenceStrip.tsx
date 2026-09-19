@@ -2,7 +2,7 @@
 
 /**
  * Editorial evidence — magazine breakout spreads.
- * Facility masters 1152×864 → image stays ≤520 CSS px; panel fills the rest.
+ * Images from exclusive MARKETING_IMAGES registry.
  */
 
 import Image from "next/image";
@@ -12,16 +12,15 @@ import {
   type ResearchFactId,
 } from "@/data/research/researchFacts";
 import {
-  FACILITY_NATIVE,
-  PUBLIC_IMAGES,
-  type PublicImageId,
+  marketingImage,
+  type MarketingImageId,
 } from "@/lib/marketing/publicImagery";
 
 type Proof = {
   id: ResearchFactId;
   spread: "a" | "b" | "c";
   chapter: string;
-  imageId: PublicImageId;
+  imageId: MarketingImageId;
   quote?: string;
   note?: string;
 };
@@ -31,21 +30,21 @@ const PROOFS: Proof[] = [
     id: "nraSmallRestaurantMargin2023",
     spread: "a",
     chapter: "01 · Restaurant economics",
-    imageId: "berlin-dining",
+    imageId: "homeRestaurantEconomics",
     quote: "The average small business restaurant runs on a 3-5% margin.",
   },
   {
     id: "nraFoodCostChallenge2023",
     spread: "b",
     chapter: "02 · Food cost pressure",
-    imageId: "berlin-bar",
+    imageId: "homeFoodPressure",
     note: "When food costs move inside a thin-margin business, small discrepancies stop being small.",
   },
   {
     id: "starfleetHotelIntegration2025",
     spread: "c",
     chapter: "03 · Hotel system fragmentation",
-    imageId: "canal-deluxe-king",
+    imageId: "homeHotelFragmentation",
     quote: "Only 24% of hotels report full integration of their core systems.",
   },
 ];
@@ -76,7 +75,7 @@ export function ResearchEvidenceStrip({
         {PROOFS.map((p) => {
           const f = researchFact(p.id);
           const year = f.publicationDate.slice(0, 4);
-          const img = PUBLIC_IMAGES[p.imageId];
+          const img = marketingImage(p.imageId);
           return (
             <li
               key={p.id}
@@ -91,8 +90,8 @@ export function ResearchEvidenceStrip({
                 <Image
                   src={img.src}
                   alt={img.alt}
-                  width={FACILITY_NATIVE.w}
-                  height={FACILITY_NATIVE.h}
+                  width={img.nativeWidth}
+                  height={img.nativeHeight}
                   sizes={`(max-width: 700px) 92vw, ${img.cssMax}px`}
                   style={{
                     objectPosition: `${img.focalX} ${img.focalY}`,
@@ -101,7 +100,7 @@ export function ResearchEvidenceStrip({
                   quality={90}
                 />
                 <figcaption>
-                  <span>{img.credit}</span>
+                  <span>{img.credit ?? img.topic}</span>
                 </figcaption>
               </figure>
               <div className="rx-ev-body">

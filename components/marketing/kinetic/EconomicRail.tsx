@@ -36,7 +36,7 @@ export function EconomicRail({
     setActive((prev) => (prev?.id === item.id ? null : item));
   }, []);
 
-  // Duplicate for seamless loop
+  // Duplicate for seamless loop — clone is decorative only
   const loop = [...items, ...items];
 
   return (
@@ -63,25 +63,35 @@ export function EconomicRail({
           if (!active) setActive(null);
         }}
       >
-        {loop.map((item, i) => (
-          <button
-            key={`${uid}-${item.id}-${i}`}
-            type="button"
-            className="rx-erail-item"
-            data-tone={item.tone ?? "neutral"}
-            data-on={active?.id === item.id ? "true" : undefined}
-            aria-pressed={active?.id === item.id}
-            onClick={() => onSelect(item)}
-            onFocus={() => setPaused(true)}
-          >
-            <strong className="rx-erail-euro">{item.euro}</strong>
-            <span className="rx-erail-label">{item.label}</span>
-            {item.meta ? <em className="rx-erail-meta">{item.meta}</em> : null}
-            <span className="rx-erail-dot" aria-hidden="true">
-              ·
-            </span>
-          </button>
-        ))}
+        {loop.map((item, i) => {
+          const isClone = i >= items.length;
+          return (
+            <button
+              key={`${uid}-${item.id}-${i}`}
+              type="button"
+              className="rx-erail-item"
+              data-tone={item.tone ?? "neutral"}
+              data-on={!isClone && active?.id === item.id ? "true" : undefined}
+              aria-pressed={!isClone && active?.id === item.id}
+              aria-hidden={isClone ? true : undefined}
+              tabIndex={isClone ? -1 : 0}
+              onClick={() => {
+                if (isClone) return;
+                onSelect(item);
+              }}
+              onFocus={() => {
+                if (!isClone) setPaused(true);
+              }}
+            >
+              <strong className="rx-erail-euro">{item.euro}</strong>
+              <span className="rx-erail-label">{item.label}</span>
+              {item.meta ? <em className="rx-erail-meta">{item.meta}</em> : null}
+              <span className="rx-erail-dot" aria-hidden="true">
+                ·
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {active?.detail ? (
