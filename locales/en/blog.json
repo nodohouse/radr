@@ -163,7 +163,7 @@
           "heading": "Evidence, Decision, Verified Value",
           "paragraphs": [
             "A Finding without evidence is an opinion. A recommendation is not value. An expected outcome is not value. Verified Value is what can be defended after reality — observed contribution against a defined baseline, with attribution strength.",
-            "That loop is what separates decision intelligence from BI. BI answers what happened last month. RADR asks what is exposed tonight, which Future wins, and whether the change verified."
+            "That loop is what separates decision intelligence from BI. BI often describes or surfaces state — including real-time state. RADR is designed around a persistent Decision-to-outcome loop: what is exposed now, which Future wins, and whether the change verified."
           ]
         },
         {
@@ -254,7 +254,7 @@
         {
           "heading": "Why operators care",
           "paragraphs": [
-            "Every unrecovered euro is margin the operation already earned once — or inventory it already paid to make available. Continuous RECOVER keeps that money on the radar until the outcome is real."
+            "Every unrecovered euro is interrupted value — value the operation had a plausible path to realize or recover. Continuous RECOVER keeps that money on the radar until the outcome is real."
           ]
         }
       ]
@@ -459,7 +459,7 @@
           "paragraphs": [
             "The recover path we sell is deliberately short.",
             "Start from an invoice line — not a dashboard tile. Compare contract evidence (price, qty, UOM). Raise a finding when the invoice exceeds contract and the credit has not been applied.",
-            "Then match a credit memo to the invoice or payment. Only when that apply lands do we call the euro Verified — Verified equals applied cash, not an estimate.",
+            "Then match a credit memo to the invoice or payment. Only when that apply lands do we call the euro Verified — Verified means verified economic recovery (credit applied and matched), not an estimate and not a claim that cash always moved unless the settlement evidence shows it.",
             "The first recovery should stay simple: identify the variance, prepare the evidence, follow the credit, and verify when it lands."
           ]
         },

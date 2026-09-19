@@ -7,7 +7,7 @@ export const COMPANY = {
   slogan: "Nothing off the RADR.",
   tagline: "Nothing off the RADR.",
   beachhead: "Built for hospitality.",
-  category: "Adaptive Decision System",
+  category: "The decision layer for hospitality",
   vision: "Every complex operation on RADR.",
   domain: "radrup.com",
   siteUrl: "https://radrup.com",

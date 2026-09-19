@@ -5,6 +5,7 @@
  */
 
 import { Link } from "@/i18n/navigation";
+import { PILOT_SUCCESS_MEASURES } from "@/lib/marketing/brand";
 
 type Props = {
   kicker: string;
@@ -30,6 +31,13 @@ export function PilotTimeline({ kicker, title, lead, scope, cta }: Props) {
       {lead ? <p className="rx-rec-p">{lead}</p> : null}
       {scope ? <p className="rx-rec-p rx-rec-muted">{scope}</p> : null}
 
+      <p className="rx-rec-p" style={{ marginTop: "1rem", maxWidth: "42rem" }}>
+        The first pilot does not require a large API project. Start with secure
+        exports and documents — invoices, contracts, credit memos, payments,
+        supplier statements, CSV / accounting exports. Connect APIs later where
+        useful.
+      </p>
+
       <ol className="rx-pilot-flow" aria-label="Illustrative pilot path">
         {STEPS.map((d, i) => (
           <li key={d.label}>
@@ -44,9 +52,30 @@ export function PilotTimeline({ kicker, title, lead, scope, cta }: Props) {
         ))}
       </ol>
 
+      <div className="rx-pilot-success" style={{ marginTop: "1.75rem" }}>
+        <p className="rx-rec-k">What a successful pilot measures</p>
+        <ul
+          style={{
+            listStyle: "disc",
+            paddingLeft: "1.25rem",
+            maxWidth: "36rem",
+          }}
+        >
+          {PILOT_SUCCESS_MEASURES.map((m) => (
+            <li key={m} style={{ marginBottom: "0.35rem" }}>
+              {m}
+            </li>
+          ))}
+        </ul>
+        <p className="rx-pilot-note" style={{ marginTop: "0.75rem" }}>
+          No promised minimum recovery.
+        </p>
+      </div>
+
       <Link
         href="/contact?intent=recovery-pilot"
         className="rx-btn rx-btn-primary"
+        style={{ marginTop: "1.25rem" }}
       >
         {cta} <span aria-hidden="true">→</span>
       </Link>

@@ -9,20 +9,20 @@ import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefer
 
 const SYSTEMS = ["POS", "Reservations", "Invoices", "Payments", "Labor", "Inventory"] as const;
 
-const ROWS = Array.from({ length: 42 }, (_, i) => {
+/** One semantic set — visual clones are aria-hidden only */
+const SEMANTIC = SYSTEMS.map((sys, i) => ({
+  id: `sem-${i}`,
+  label: `${sys} · signal`,
+  keep: i === 0 || i === 3,
+}));
+
+const CLONES = Array.from({ length: 36 }, (_, i) => {
   const sys = SYSTEMS[i % SYSTEMS.length]!;
-  const ticks = [
-    "line match",
-    "clock drift",
-    "mix tick",
-    "pulse",
-    "delta",
-    "ready",
-  ] as const;
+  const ticks = ["line match", "clock drift", "mix tick", "pulse", "delta", "ready"] as const;
   return {
-    id: i,
+    id: `clone-${i}`,
     label: `${sys} · ${ticks[i % ticks.length]}`,
-    keep: i === 3 || i === 17,
+    keep: false,
   };
 });
 
@@ -50,8 +50,8 @@ export function SilenceField({
 
   return (
     <div className="rx-silence" data-phase={phase}>
-      <div className="rx-silence-rows" aria-hidden="true">
-        {ROWS.map((r) => (
+      <div className="rx-silence-rows" aria-hidden="true" role="presentation">
+        {CLONES.map((r) => (
           <span
             key={r.id}
             data-muted={!r.keep ? "true" : undefined}
@@ -61,6 +61,11 @@ export function SilenceField({
           </span>
         ))}
       </div>
+      <ul className="rx-silence-semantic visually-hidden">
+        {SEMANTIC.map((r) => (
+          <li key={r.id}>{r.label}</li>
+        ))}
+      </ul>
       <div className="rx-silence-final">
         <p
           className="rx-silence-suppressed"

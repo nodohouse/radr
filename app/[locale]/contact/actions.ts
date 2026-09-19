@@ -27,6 +27,11 @@ export async function submitContactInquiry(
   _prev: ContactResult | null,
   formData: FormData,
 ): Promise<ContactResult> {
+  const website = String(formData.get("website") ?? "").trim();
+  if (website) {
+    return { ok: false, error: "Please complete the required fields before submitting." };
+  }
+
   const planRaw = String(formData.get("plan") ?? "").trim();
   const plan =
     planRaw === "pilot" || planRaw === "core" || planRaw === "control"

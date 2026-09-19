@@ -139,6 +139,14 @@ export function HomepageSpine() {
                 <dt>{t("faq.q3")}</dt>
                 <dd>{t("faq.a3")}</dd>
               </div>
+              <div>
+                <dt>{t("faq.q4")}</dt>
+                <dd>{t("faq.a4")}</dd>
+              </div>
+              <div>
+                <dt>{t("faq.q5")}</dt>
+                <dd>{t("faq.a5")}</dd>
+              </div>
             </dl>
           </div>
         </div>

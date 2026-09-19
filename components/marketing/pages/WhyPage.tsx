@@ -304,7 +304,8 @@ export function WhyPage() {
               It has a decision problem.
             </h1>
             <p className="rx-ch-lead" style={{ marginTop: "1rem" }}>
-              Hospitality digitized its records before it digitized its judgment.
+              {CATEGORY.primary} Systems of record store facts. RADR stores
+              judgment.
             </p>
           </div>
         </section>

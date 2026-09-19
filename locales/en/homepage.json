@@ -1769,7 +1769,9 @@
       "q3": "Does RADR send disputes automatically?",
       "a3": "Not unless explicitly permitted by policy. Material external actions stay approval-gated.",
       "q4": "How does RADR define Verified Value?",
-      "a4": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice."
+      "a4": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice.",
+      "q5": "What does a successful recovery pilot measure?",
+      "a5": "Economically material findings, evidence Finance accepts, cases actioned, verified outcomes where settlement completes, time saved, and time to first Decision. No promised minimum recovery."
     },
     "footer": {
       "brand": "Nothing off the RADR.",

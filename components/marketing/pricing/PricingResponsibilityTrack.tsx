@@ -1,12 +1,12 @@
 "use client";
 
 /**
- * Pricing responsibility track — Recover → Decide → Govern as one expanding system.
+ * Pricing responsibility track — Recover → Decide → Govern.
+ * No demo money ticker — commercial seriousness.
  */
 
 import { useState } from "react";
-import { EconomicRail } from "@/components/marketing/kinetic/EconomicRail";
-import { PRICING_PROOF_RAIL } from "@/lib/marketing/economicRail";
+import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
 import "@/app/kinetic.css";
 
 const STAGES = [
@@ -14,19 +14,22 @@ const STAGES = [
     id: "recover",
     label: "Recover",
     name: "Recovery Pilot",
-    body: "One recovery scope. Supplier/AP, Reconciliation, or both. Cases, evidence, verification.",
+    body: "One recovery scope. Supplier/AP, Reconciliation, or both. Cases, evidence, verification. File-first — secure exports before a large API project.",
+    status: "early_access" as const,
   },
   {
     id: "decide",
     label: "Decide",
     name: "RADR Core",
     body: "More systems. Recurring Decisions. Futures. Memory. Verified Value across the operation.",
+    status: "demo" as const,
   },
   {
     id: "govern",
     label: "Govern",
     name: "RADR Control",
-    body: "Multi-location. Policy. Approval. Autopilot within policy. Portfolio Verified Value.",
+    body: "Multi-location. Policy. Approval. Autopilot within policy (planned). Portfolio Verified Value.",
+    status: "planned" as const,
   },
 ] as const;
 
@@ -39,15 +42,23 @@ export function PricingResponsibilityTrack() {
 
   return (
     <div className="px-resp-track">
-      <EconomicRail
-        items={PRICING_PROOF_RAIL}
-        durationSec={36}
-        variant="proof"
-        ariaLabel="Illustrative Verified outcomes"
-      />
+      <div className="rx-shell">
+        <p className="rx-rec-k">Commercial structure</p>
+        <h2 className="rx-rec-h" style={{ maxWidth: "28rem" }}>
+          Recover → Decide → Govern
+        </h2>
+        <p className="rx-rec-p" style={{ maxWidth: "40rem" }}>
+          Pricing follows the operating scope RADR takes on — not fictional
+          portfolio totals. Built for multi-location hospitality / F&amp;B groups
+          with Finance, COO, or Procurement as sponsor.
+        </p>
 
-      <div className="rx-shell" style={{ marginTop: "1.75rem" }}>
-        <div className="px-resp-stages" role="tablist" aria-label="Responsibility">
+        <div
+          className="px-resp-stages"
+          role="tablist"
+          aria-label="Responsibility"
+          style={{ marginTop: "1.75rem" }}
+        >
           {STAGES.map((s, i) => (
             <button
               key={s.id}
@@ -58,7 +69,9 @@ export function PricingResponsibilityTrack() {
               data-on={stage === i ? "true" : undefined}
               onClick={() => setStage(i)}
             >
-              <em>{s.label}</em>
+              <em>
+                {s.label} · {capabilityBadge(s.id === "recover" ? "recoveryPilot" : s.id === "decide" ? "decisions" : "autopilot")}
+              </em>
               <strong>{s.name}</strong>
               <p>{s.body}</p>
             </button>
@@ -88,8 +101,8 @@ export function PricingResponsibilityTrack() {
             ))}
           </div>
           <p className="rx-pilot-note" style={{ marginTop: "0.75rem" }}>
-            Pricing follows the operating scope RADR takes on — locations,
-            systems, and Decision coverage.
+            Autopilot within policy: {capabilityBadge("autopilot")} — not
+            production autonomous execution.
           </p>
           <p className="rx-rec-p" style={{ marginTop: "0.5rem" }}>
             Now: <strong>{active.name}</strong> · {SCOPE_LABELS[scope]}

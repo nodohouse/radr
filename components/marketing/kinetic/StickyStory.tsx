@@ -5,7 +5,7 @@
  * No scroll-jacking. Reduced-motion collapses to stacked.
  */
 
-import type { ReactNode, RefObject } from "react";
+import { useEffect, type ReactNode, type RefObject } from "react";
 import { useScrollStage } from "@/components/marketing/motion/useScrollStage";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 
@@ -27,6 +27,8 @@ type Props = {
   vhPerChapter?: number;
   className?: string;
   id?: string;
+  /** Keep URL hash in sync with active chapter (deep links) */
+  syncHash?: boolean;
 };
 
 export function StickyStory({
@@ -38,6 +40,7 @@ export function StickyStory({
   vhPerChapter = 45,
   className = "",
   id,
+  syncHash = false,
 }: Props) {
   const reduced = usePrefersReducedMotion();
   const { rootRef, index, setIndex } = useScrollStage(
@@ -45,6 +48,55 @@ export function StickyStory({
     !reduced && chapters.length > 1,
   );
   const active = chapters[Math.min(index, chapters.length - 1)]!;
+
+  useEffect(() => {
+    if (!syncHash) return;
+    function applyHash() {
+      const raw = window.location.hash.replace(/^#/, "");
+      if (!raw) return;
+      const i = chapters.findIndex((c) => c.id === raw);
+      if (i < 0) return;
+      setIndex(i);
+      const el = rootRef.current;
+      if (!el) return;
+      const total = Math.max(1, el.offsetHeight - window.innerHeight);
+      const y =
+        el.getBoundingClientRect().top +
+        window.scrollY +
+        (i / chapters.length) * total +
+        8;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
+  }, [syncHash, chapters, setIndex, rootRef]);
+
+  useEffect(() => {
+    if (!syncHash || reduced) return;
+    const idHash = chapters[index]?.id;
+    if (!idHash) return;
+    const next = `#${idHash}`;
+    if (window.location.hash !== next) {
+      window.history.replaceState(null, "", next);
+    }
+  }, [syncHash, reduced, index, chapters]);
+
+  function jumpTo(i: number) {
+    setIndex(i);
+    const el = rootRef.current;
+    if (!el) return;
+    const total = Math.max(1, el.offsetHeight - window.innerHeight);
+    const y =
+      el.getBoundingClientRect().top +
+      window.scrollY +
+      (i / chapters.length) * total +
+      8;
+    window.scrollTo({ top: y, behavior: "smooth" });
+    if (syncHash && chapters[i]) {
+      window.history.replaceState(null, "", `#${chapters[i]!.id}`);
+    }
+  }
 
   if (reduced) {
     return (
@@ -58,7 +110,12 @@ export function StickyStory({
         )}
         <div className="rx-sticky-stack">
           {chapters.map((ch, i) => (
-            <article key={ch.id} className="rx-sticky-card" id={ch.id}>
+            <article
+              key={ch.id}
+              className="rx-sticky-card"
+              id={ch.id}
+              tabIndex={-1}
+            >
               <div className="rx-sticky-visual">{renderVisual(i, ch)}</div>
               <div className="rx-sticky-copy">
                 {ch.kicker ? <p className="rx-rec-k">{ch.kicker}</p> : null}
@@ -102,25 +159,19 @@ export function StickyStory({
                   type="button"
                   data-on={i === index ? "true" : undefined}
                   data-past={i < index ? "true" : undefined}
-                  onClick={() => {
-                    setIndex(i);
-                    const el = rootRef.current;
-                    if (!el) return;
-                    const total = el.offsetHeight - window.innerHeight;
-                    const y =
-                      el.getBoundingClientRect().top +
-                      window.scrollY +
-                      (i / chapters.length) * total +
-                      8;
-                    window.scrollTo({ top: y, behavior: "smooth" });
-                  }}
+                  onClick={() => jumpTo(i)}
                 >
                   {ch.kicker ?? ch.title}
                 </button>
               ))}
             </nav>
 
-            <article className="rx-sticky-panel" key={active.id}>
+            <article
+              className="rx-sticky-panel"
+              key={active.id}
+              id={active.id}
+              tabIndex={-1}
+            >
               {active.kicker ? (
                 <p className="rx-rec-k">{active.kicker}</p>
               ) : null}

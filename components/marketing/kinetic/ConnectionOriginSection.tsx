@@ -9,7 +9,6 @@ import { useState } from "react";
 import NextLink from "next/link";
 import { ProviderWordmark } from "@/components/marketing/kinetic/ProviderWordmark";
 import {
-  CATALOG_COUNT,
   HOME_CONNECTION_GROUPS,
   SIGNAL_MAP_VISIBLE_IDS,
   connectionMethodLabel,
@@ -17,6 +16,8 @@ import {
   statusLabel,
 } from "@/lib/marketing/homeConnections";
 import type { IntegrationProvider } from "@/lib/integrations/registry";
+import { CTAS } from "@/lib/marketing/brand";
+import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
 
 const VISIBLE = new Set<string>(SIGNAL_MAP_VISIBLE_IDS);
 
@@ -69,6 +70,12 @@ export function ConnectionOriginSection() {
           RADR brings financial and operational evidence from the systems already
           in use into one decision-ready operating state — so value leaks can be
           found, acted on and verified.
+        </p>
+        <p className="rx-intake-honesty">
+          Representative systems. Connection availability varies. First pilots
+          start with secure exports and documents — invoices, contracts, credit
+          memos, payments, supplier statements, CSV / accounting exports. APIs
+          later where useful.
         </p>
       </header>
 
@@ -124,7 +131,7 @@ export function ConnectionOriginSection() {
               </svg>
             </span>
             <p className="rx-intake-core-name">RADR</p>
-            <p className="rx-intake-core-k">Economic decision layer</p>
+            <p className="rx-intake-core-k">Decision layer</p>
           </div>
         </div>
 
@@ -164,8 +171,11 @@ export function ConnectionOriginSection() {
       ) : null}
 
       <NextLink href="/developers#integrations" className="rx-intake-more">
-        Explore {CATALOG_COUNT} connection paths{" "}
+        {CTAS.viewConnectionStatus}{" "}
         <span aria-hidden="true">→</span>
+        <em className="rx-intake-more-status">
+          Files / CSV · {capabilityBadge("filesCsv")}
+        </em>
       </NextLink>
     </div>
   );

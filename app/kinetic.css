@@ -4363,3 +4363,37 @@
 .rx-intake-chip[data-provider-brand="opentable"] { --rx-brand: #da3743; }
 .rx-intake-chip[data-provider-brand="mollie"] { --rx-brand: #000; }
 .rx-intake-chip[data-provider-brand="lightspeed"] { --rx-brand: #e5002b; }
+
+/* Integration honesty */
+.rx-intake-honesty {
+  margin: 0.85rem 0 0;
+  max-width: 42rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #3a403c;
+}
+.rx-intake-more {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+.rx-intake-more-status {
+  font-style: normal;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

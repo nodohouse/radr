@@ -65,23 +65,34 @@ export function EconomicRail({
       >
         {loop.map((item, i) => {
           const isClone = i >= items.length;
+          if (isClone) {
+            return (
+              <span
+                key={`${uid}-${item.id}-${i}`}
+                className="rx-erail-item"
+                data-tone={item.tone ?? "neutral"}
+                aria-hidden="true"
+                role="presentation"
+              >
+                <strong className="rx-erail-euro">{item.euro}</strong>
+                <span className="rx-erail-label">{item.label}</span>
+                {item.meta ? <em className="rx-erail-meta">{item.meta}</em> : null}
+                <span className="rx-erail-dot" aria-hidden="true">
+                  ·
+                </span>
+              </span>
+            );
+          }
           return (
             <button
               key={`${uid}-${item.id}-${i}`}
               type="button"
               className="rx-erail-item"
               data-tone={item.tone ?? "neutral"}
-              data-on={!isClone && active?.id === item.id ? "true" : undefined}
-              aria-pressed={!isClone && active?.id === item.id}
-              aria-hidden={isClone ? true : undefined}
-              tabIndex={isClone ? -1 : 0}
-              onClick={() => {
-                if (isClone) return;
-                onSelect(item);
-              }}
-              onFocus={() => {
-                if (!isClone) setPaused(true);
-              }}
+              data-on={active?.id === item.id ? "true" : undefined}
+              aria-pressed={active?.id === item.id}
+              onClick={() => onSelect(item)}
+              onFocus={() => setPaused(true)}
             >
               <strong className="rx-erail-euro">{item.euro}</strong>
               <span className="rx-erail-label">{item.label}</span>

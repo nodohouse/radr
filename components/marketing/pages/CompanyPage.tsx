@@ -7,7 +7,6 @@
 
 import type { ReactNode } from "react";
 import Image from "next/image";
-import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { PublicFooter, PublicNavbar } from "../PublicShell";
@@ -40,16 +39,22 @@ function CoReveal({
   delay?: number;
 }) {
   const reduced = useReducedMotion();
-  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.12 });
 
+  // Readability P0: never leave body copy at opacity 0 if IO misses.
+  // Animate only as enhancement once in view.
   return (
     <motion.div
       ref={ref}
       className={`rx-co2-reveal ${className}`.trim()}
-      initial={reduced ? false : { opacity: 0, y: 14 }}
-      animate={inView || reduced ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+      initial={false}
+      animate={
+        reduced || inView
+          ? { opacity: 1, y: 0 }
+          : { opacity: 1, y: 8 }
+      }
       transition={{
-        duration: 0.65,
+        duration: 0.45,
         delay: reduced ? 0 : delay / 1000,
         ease: [0.22, 1, 0.36, 1],
       }}
@@ -182,12 +187,12 @@ export function CompanyPage() {
           <div className="rx-shell">
             <CoReveal>
               <p className="rx-co2-why-now-h">
-                That is the Decision Gap RADR is built for.
+                Systems of record store facts. RADR stores judgment.
               </p>
               <p className="rx-co2-why-now-sub">
-                Systems of record store facts. RADR stores judgment — and starts
-                where economics can be proven: value that is leaking, stuck, or
-                about to expire.
+                Commercial entry is margin recovery and reconciliation — where
+                economics can be proven first. The Decision Gap is the longer
+                reason the product exists.
               </p>
               <div className="rx-co-gap-diagram" aria-hidden="true">
                 <span>POS</span>
@@ -274,11 +279,14 @@ export function CompanyPage() {
                 Hospitality became the answer.
               </p>
               <div className="rx-ctas rx-co2-hero-ctas">
-                <NextLink href="/demo" className="rx-btn rx-btn-primary">
+                <Link
+                  href="/contact?intent=recovery-pilot"
+                  className="rx-btn rx-btn-primary"
+                >
                   {CTAS.primaryProduct} <span aria-hidden="true">→</span>
-                </NextLink>
-                <Link href="/contact" className="rx-btn rx-btn-ghost">
-                  {CTAS.primarySales}
+                </Link>
+                <Link href="/why" className="rx-btn rx-btn-ghost">
+                  Why RADR
                 </Link>
               </div>
             </CoReveal>

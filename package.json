@@ -17,7 +17,8 @@
     "check:coherence": "node scripts/check-coherence.mjs",
     "qa:product-routes": "node scripts/qa-product-routes.mjs",
     "db:migrate": "tsx scripts/migrate.ts",
-    "mockups:export": "node scripts/export-mockups.mjs"
+    "mockups:export": "node scripts/export-mockups.mjs",
+    "qa:visual": "playwright test tests/e2e/public-visual-qa.spec.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1106.0",

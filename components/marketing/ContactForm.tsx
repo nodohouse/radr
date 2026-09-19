@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useActionState, useEffect, useMemo, useState } from "react";
+import { Link } from "@/i18n/navigation";
 import {
   submitContactInquiry,
   type ContactResult,
@@ -250,6 +251,33 @@ export function ContactForm({
       >
         {pending ? t("sending") : t("submit")}
       </button>
+
+      <p className="rx-contact-privacy" style={{ marginTop: "1rem", fontSize: "0.85rem", maxWidth: "36rem" }}>
+        By submitting, you agree that RADR may use your business contact details
+        to respond to this request. See <Link href="/privacy">Privacy</Link>.
+      </p>
+
+      {/* Honeypot — hidden from accessibility tree */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-10000px",
+          top: "auto",
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+        }}
+      >
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
     </form>
   );
 }

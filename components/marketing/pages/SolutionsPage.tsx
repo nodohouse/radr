@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { money, CANON_OTA } from "@/data/demo";
@@ -29,6 +29,32 @@ import "@/app/motion.css";
 import "@/app/kinetic.css";
 
 const LENS_ORDER: TerritoryRouteId[] = ["buy", "labor", "sell", "recover"];
+
+const LEAK_ANCHORS: Record<ProblemFamily, string> = {
+  SUPPLIER_AP: "supplier-ap",
+  RECONCILIATION: "reconciliation",
+  COST_VARIANCE: "cost-variance",
+  PROCUREMENT: "procurement",
+  PERISHABLE_REVENUE: "perishable",
+};
+
+/** Scroll / focus leak section from URL hash on load and hashchange. */
+function LeakHashFocus({ anchors }: { anchors: string[] }) {
+  useEffect(() => {
+    function go() {
+      const raw = window.location.hash.replace(/^#/, "");
+      if (!raw || !anchors.includes(raw)) return;
+      const el = document.getElementById(raw);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (el instanceof HTMLElement) el.focus({ preventScroll: true });
+    }
+    go();
+    window.addEventListener("hashchange", go);
+    return () => window.removeEventListener("hashchange", go);
+  }, [anchors]);
+  return null;
+}
 
 function EvidencePanel({ decision }: { decision: CanonDecision }) {
   const [open, setOpen] = useState(false);
@@ -455,33 +481,24 @@ function SolutionsLeakMap() {
     "PERISHABLE_REVENUE",
   ];
   const chapters = familyKeys.map((id) => ({
-    id,
+    id: LEAK_ANCHORS[id],
     kicker: t(`families.${id}.label`),
     title: t(`families.${id}.label`),
     body: `${t(`families.${id}.leaks`)} ${t(`families.${id}.does`)}`,
     meta: t(`families.${id}.verifies`),
   }));
 
-  const ANCHOR: Record<ProblemFamily, string> = {
-    SUPPLIER_AP: "supplier-ap",
-    RECONCILIATION: "reconciliation",
-    COST_VARIANCE: "cost-variance",
-    PROCUREMENT: "procurement",
-    PERISHABLE_REVENUE: "perishable",
-  };
-
   return (
     <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
       <div className="rx-shell">
-        {familyKeys.map((id, i) => (
-          <div key={id} id={ANCHOR[id]} className="rx-leak-anchor-target" />
-        ))}
+        <LeakHashFocus anchors={Object.values(LEAK_ANCHORS)} />
         <StickyStory
           kicker={t("families.kicker")}
           title={t("families.title")}
           lead={t("families.lead")}
           chapters={chapters}
           vhPerChapter={65}
+          syncHash
           renderVisual={(i) => (
             <LeakClassVisual key={familyKeys[i]} family={familyKeys[i]!} />
           )}

@@ -20,8 +20,14 @@ import {
   verifiedEuro,
   type CanonDecision,
 } from "@/lib/radr/decision/demo/canonical";
-import { demoValueUnderRadr } from "@/lib/radr/decision/economics";
 import { CTAS } from "@/lib/marketing/brand";
+import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
+import {
+  MONEY_D1911_EXPECTED,
+  MONEY_D1911_OBSERVED,
+  MONEY_D1911_VERIFIED,
+  formatPublicMoney,
+} from "@/lib/marketing/publicMoney";
 import { ValueTrace } from "@/components/marketing/kinetic/ValueTrace";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
@@ -33,11 +39,16 @@ const STREAM = [
   {
     id: "D-3104",
     kind: "recovered",
-    amt: CANON_ORPHAN.verifiedIncrementalEuro ?? CANON_ORPHAN.actualProtectedEuro,
+    amt:
+      CANON_ORPHAN.verifiedIncrementalEuro ?? CANON_ORPHAN.actualProtectedEuro,
   },
   { id: "D-5208", kind: "avoided", amt: CANON_PLAYBOOK.actualProtectedEuro },
   { id: "D-1920", kind: "protected", amt: CANON_LABOR.actualProtectedEuro },
-  { id: "D-4102", kind: "recovered", amt: CANON_SUPPLIER.actualProtectedEuro },
+  {
+    id: "D-4102",
+    kind: "closed",
+    amt: verifiedEuro(CANON_SUPPLIER),
+  },
   { id: "D-4410", kind: "created", amt: CANON_CREATED.actualProtectedEuro },
   { id: "D-6671", kind: "recovered", amt: CANON_TABLE.actualProtectedEuro },
 ] as const;
@@ -54,10 +65,9 @@ const PROOF_BY_DISPLAY: Record<string, CanonDecision> = {
 };
 
 /**
- * Verified Value — provenance stream into a ledger, not KPI boxes.
+ * Verified Value — one traceable Decision first. No vanity portfolio total.
  */
 export function ValueChapter() {
-  const value = demoValueUnderRadr();
   const [filter, setFilter] = useState<"all" | "protected">("all");
   const [openId, setOpenId] = useState<string>("D-1911");
   const visible =
@@ -65,18 +75,21 @@ export function ValueChapter() {
   const proof = PROOF_BY_DISPLAY[openId];
   const chosen = proof ? canonChosen(proof) : null;
   const counterfactual = proof
-    ? proof.scenarios.find((s) => s.isNoAction) ??
-      canonScenario(proof, proof.scenarios[1]?.id ?? "")
+    ? (proof.scenarios.find((s) => s.isNoAction) ??
+      canonScenario(proof, proof.scenarios[1]?.id ?? ""))
     : null;
 
   return (
     <div className="radr rx-ch rx-ch-light">
       <SiteNav />
       <main className="rx-ch-main">
-        <section className="rx-value-cinema rx-value-cinema-solid" data-nav-theme="dark">
+        <section
+          className="rx-value-cinema rx-value-cinema-solid"
+          data-nav-theme="dark"
+        >
           <div className="rx-shell rx-value-cinema-copy">
             <p className="rx-ch-kicker" style={{ color: "#00d978" }}>
-              Verified Value · ILLUSTRATIVE DEMO PORTFOLIO
+              Verified Value · {capabilityBadge("verifiedValue")}
             </p>
             <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
               A recommendation is not value.
@@ -85,61 +98,55 @@ export function ValueChapter() {
               <br />
               Value is verified after reality.
             </h1>
-            <p className="rx-pilot-note" style={{ color: "rgba(247,250,248,0.78)" }}>
-              Selected sample · not customer results
+            <p
+              className="rx-pilot-note"
+              style={{ color: "rgba(247,250,248,0.78)" }}
+            >
+              One Decision. Traceable. Not a synthetic portfolio total.
             </p>
           </div>
         </section>
 
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
+            <p className="rx-ch-kicker">
+              {MONEY_D1911_EXPECTED.displayId} · peak capacity · DEMO
+            </p>
             <ValueTrace
               disclosure="DEMO · ILLUSTRATIVE · not customer results"
               stages={[
                 {
-                  id: "exposure",
-                  label: "Exposure",
-                  euro: money(CANON_PEAK.exposureEuro),
-                  detail: CANON_PEAK.title,
-                },
-                {
                   id: "expected",
                   label: "Expected",
-                  euro: money(CANON_PEAK.expectedProtectedEuro),
-                  detail: "Wait 12 minutes · modeled protected contribution",
+                  euro: formatPublicMoney(MONEY_D1911_EXPECTED),
+                  detail: MONEY_D1911_EXPECTED.label,
                 },
                 {
                   id: "observed",
                   label: "Observed",
-                  euro: money(
-                    CANON_PEAK.observedContributionEuro ??
-                      CANON_PEAK.actualProtectedEuro,
-                  ),
-                  detail: "What reality returned",
+                  euro: formatPublicMoney(MONEY_D1911_OBSERVED),
+                  detail: MONEY_D1911_OBSERVED.label,
                 },
                 {
                   id: "attributed",
-                  label: "Attributed",
-                  euro: money(verifiedEuro(CANON_PEAK)),
-                  detail: `${CANON_PEAK.displayId} · ${formatCanonVariance(CANON_PEAK)}`,
+                  label: "Strongly attributed",
+                  euro: formatPublicMoney(MONEY_D1911_VERIFIED),
+                  detail: "Same amount · attribution strength applied",
                 },
                 {
                   id: "verified",
-                  label: "Verified",
-                  euro: money(verifiedEuro(CANON_PEAK)),
-                  detail: "Protected · claim only what you can prove",
+                  label: "Verified protected",
+                  euro: formatPublicMoney(MONEY_D1911_VERIFIED),
+                  detail: MONEY_D1911_VERIFIED.label,
                 },
               ]}
             />
 
-            <div className="rx-value-ledger" style={{ marginTop: "2rem" }}>
-              <strong className="rx-econ-verified">
-                {money(value.verifiedEuro)}
-              </strong>
-              <span>ILLUSTRATIVE DEMO PORTFOLIO · NOT CUSTOMER RESULTS</span>
-            </div>
-
-            <div className="rx-value-filters" role="tablist" style={{ marginTop: "1.5rem" }}>
+            <div
+              className="rx-value-filters"
+              role="tablist"
+              style={{ marginTop: "2rem" }}
+            >
               <button
                 type="button"
                 data-on={filter === "all" ? "true" : "false"}
@@ -148,7 +155,7 @@ export function ValueChapter() {
                   setOpenId("D-1911");
                 }}
               >
-                All
+                Sample Decisions
               </button>
               <button
                 type="button"
@@ -158,11 +165,14 @@ export function ValueChapter() {
                   setOpenId("D-1911");
                 }}
               >
-                Protected
+                Protected only
               </button>
             </div>
 
-            <ul className="rx-value-stream" aria-label="Selected verified Decisions">
+            <ul
+              className="rx-value-stream"
+              aria-label="Selected sample Decisions"
+            >
               {visible.map((s) => (
                 <li key={s.id}>
                   <button
@@ -173,29 +183,44 @@ export function ValueChapter() {
                     data-on={s.id === openId && proof ? "true" : undefined}
                   >
                     <em>{s.id}</em>
-                    <strong>{money(s.amt)}</strong>
-                    <span>{s.kind}</span>
+                    <strong>
+                      {s.kind === "closed" && s.amt === 0
+                        ? "€0"
+                        : money(s.amt)}
+                    </strong>
+                    <span>
+                      {s.kind === "closed"
+                        ? "CLOSED · NO VERIFIED RECOVERY"
+                        : s.kind}
+                    </span>
                   </button>
                 </li>
               ))}
             </ul>
             <p className="rx-value-stream-note">
-              Selected verified Decisions (sample) — not a sum of the rollup.
+              Selected sample Decisions — not a rollup. Zero-recovery cases stay
+              labeled when they close without verified value.
             </p>
 
             {proof && chosen ? (
-              <details className="rx-value-proof-details">
+              <details
+                className="rx-value-proof-details"
+                open={openId === "D-1911"}
+              >
                 <summary>
                   {proof.displayId} ·{" "}
-                  {proof.actualProtectedEuro === 0 &&
+                  {verifiedEuro(proof) === 0 &&
                   proof.expectedProtectedEuro === 0
-                    ? "OPEN · not yet verified"
-                    : `Proof trail · ${money(verifiedEuro(proof))} verified ${proof.verifiedKind}`}
+                    ? "CLOSED · NO VERIFIED RECOVERY"
+                    : proof.actualProtectedEuro === 0 &&
+                        proof.expectedProtectedEuro === 0
+                      ? "OPEN · not yet verified"
+                      : `Proof trail · ${money(verifiedEuro(proof))} verified ${proof.verifiedKind}`}
                 </summary>
                 <div className="rx-value-proof">
                   <ol className="rx-value-investigation">
                     <li>
-                      <em>Exposure</em>
+                      <em>Exposure / variance</em>
                       <strong>{money(proof.exposureEuro)}</strong>
                       <p>{proof.title}</p>
                     </li>

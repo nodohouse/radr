@@ -1,6 +1,6 @@
 /**
  * Locked RADR brand building blocks.
- * Hierarchy: Adaptive Decision System > Verified Decision Intelligence > System of Decision Record.
+ * Hierarchy: Decision layer (customer) · System of Decision Record (investor).
  * Prefer importing from `@/lib/marketing/brand` for new surfaces.
  */
 import { CATEGORY, LIFECYCLE_PUBLIC } from "@/lib/marketing/brand";
@@ -9,7 +9,7 @@ export const BRAND = {
   name: "RADR",
   wordmark: "R△DR",
   /** Primary public category */
-  category: "Adaptive Decision System",
+  category: CATEGORY.primary,
   /** Locked category line under wordmark / footer */
   tagline: CATEGORY.primary,
   /** Secondary descriptor */
@@ -17,7 +17,7 @@ export const BRAND = {
   /** Product position */
   layer: CATEGORY.decisionLayer,
   /** Technical / enterprise */
-  systemOfRecord: CATEGORY.systemOfRecord,
+  systemOfRecord: CATEGORY.systemOfDecisionRecord,
   ambition: "Hospitality decision intelligence",
   promise: CATEGORY.slogan,
   coreIdea: "△ is the difference.",
@@ -32,7 +32,7 @@ export const BRAND = {
     "Learn.",
   ] as const,
   definition:
-    "RADR is the adaptive decision system for hospitality. It finds the operating decisions that change the P&L — simulates options, verifies outcomes, and learns.",
+    "RADR is the decision layer for hospitality. It finds the operating decisions that change the P&L — simulates options, verifies outcomes, and learns.",
   plainValue:
     "Your operation is making decisions every minute. RADR finds the ones that change the P&L.",
   explanation:

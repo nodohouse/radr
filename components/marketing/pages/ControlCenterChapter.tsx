@@ -24,6 +24,7 @@ import {
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { SilenceField } from "@/components/marketing/kinetic/SilenceField";
 import { CTAS } from "@/lib/marketing/brand";
+import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
@@ -126,7 +127,10 @@ export function ControlCenterChapter() {
             aria-label="Attention compression"
           >
             <div className="rx-shell rx-cc-silence-final">
-              <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
+            <p className="rx-ch-kicker" style={{ color: "#00d978" }}>
+              Control Center · {capabilityBadge("controlCenter")}
+            </p>
+            <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
                 The most important thing RADR removes is noise.
               </h1>
               <SilenceField
@@ -157,11 +161,12 @@ export function ControlCenterChapter() {
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
             <p className="rx-ch-kicker">
-              Group brief · Since your last check · DEMO · ILLUSTRATIVE
+              Control Center · {capabilityBadge("controlCenter")} · Shift Pulse →
+              primary Decision → role lens
             </p>
             <div
               className="rx-cc-portfolio"
-              aria-label="Portfolio spatial brief"
+              aria-label="Shift Pulse · portfolio brief"
               style={{ marginBottom: "2.5rem" }}
             >
               {PORTFOLIO.map((p) => (
@@ -182,7 +187,7 @@ export function ControlCenterChapter() {
               ))}
             </div>
 
-            <p className="rx-ch-kicker">Same portfolio · different lens</p>
+            <p className="rx-ch-kicker">Primary Decision · role lens</p>
             <div className="rx-plat-stage-rail" role="tablist">
               {ROLES.map((r) => (
                 <button

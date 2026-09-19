@@ -70,11 +70,15 @@ export const DEPRECATED_PUBLIC_TERMS = [
 
 /**
  * Allowed as supporting descriptor only — never as the primary public category.
- * Primary remains Adaptive Decision System.
+ * Primary: The decision layer for hospitality.
+ * Investor: System of Decision Record for hospitality.
  */
 export const SECONDARY_ONLY = [
   "Verified Decision Intelligence",
+  "Adaptive Decision System",
   "decision intelligence",
   "margin intelligence",
   "operating judgment",
+  "Economic Decision Layer",
+  "Decision Infrastructure",
 ] as const;
