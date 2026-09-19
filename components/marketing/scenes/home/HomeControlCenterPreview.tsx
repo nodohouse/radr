@@ -64,8 +64,7 @@ export function HomeControlCenterPreview() {
             </p>
             <p className="rx-hcc-line">Unexplained settlement gap.</p>
             <p className="rx-hcc-detail">
-              Refunds explain €{SETTLEMENT_REFUNDS_EXPLAINED}. €
-              {SETTLEMENT_GAP_EURO} remains unmatched.
+              {`Refunds explain €${SETTLEMENT_REFUNDS_EXPLAINED}. €${SETTLEMENT_GAP_EURO} remains unmatched.`}
             </p>
             <Link href={VALUE_LEAK_HREF.reconciliation} className="rx-hcc-cta">
               Investigate <span aria-hidden="true">→</span>
