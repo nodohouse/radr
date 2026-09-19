@@ -134,7 +134,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         watchingCount: 1,
         contextLine: "Dinner · peak capacity collision · 18:42",
         critical: {
-          image: "/demo/facilities/berlin-dining.jpg",
+          image: "",
           imageAlt: "Dining room with empty tables and waiting walk-ins",
           domain: "Capacity",
           insight:
@@ -190,7 +190,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           ],
         },
         critical: {
-          image: "/marketing/dish-truffle-pasta.png",
+          image: "",
           imageAlt: "Peak table at stake after a cancellation",
           domain: "Sell",
           insight: "Table 8 just cancelled — 4 covers free before peak.",
@@ -274,7 +274,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           ],
         },
         critical: {
-          image: "/marketing/dish-tuna-tataki.png",
+          image: "",
           imageAlt: "Tuna Tataki",
           domain: "Buy · Learn",
           insight: "The same tuna shortfall twice this week.",
@@ -326,9 +326,9 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         needsCount: 1,
         handlingCount: 2,
         watchingCount: 1,
-        heroImage: "/marketing/hero-hotel-brief.png",
+        heroImage: "",
         critical: {
-          image: "/marketing/hotel-ota-soldout.png",
+          image: "",
           imageAlt: "Boutique hotel room",
           domain: "Channel mix",
           insight: "You’re nearly sold out —\nbut giving too much away to OTAs.",
@@ -358,7 +358,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           cta: "Approve plan",
         },
         altCritical: {
-          image: "/marketing/hero-hotel-brief.png",
+          image: "",
           imageAlt: "Hotel corridor readiness",
           domain: "Guest operations",
           insight: "Two arrivals will beat their rooms.",
@@ -399,7 +399,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         needsCount: 0,
         handlingCount: 2,
         watchingCount: 2,
-        heroImage: "/marketing/hero-hotel-brief.png",
+        heroImage: "",
         pulse: {
           amount: 11200,
           amountLabel: "room revenue today",
@@ -427,7 +427,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         needsCount: 0,
         handlingCount: 0,
         watchingCount: 0,
-        heroImage: "/marketing/hotel-direct-mix.png",
+        heroImage: "",
         pulse: {
           amount: 19240,
           amountLabel: "room contribution today",
@@ -460,7 +460,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         needsCount: 1,
         handlingCount: 0,
         watchingCount: 1,
-        heroImage: "/marketing/hero-hotel-brief.png",
+        heroImage: "",
         pulse: {
           amount: 86400,
           amountLabel: "week room contribution",
@@ -473,7 +473,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           ],
         },
         critical: {
-          image: "/marketing/hotel-direct-mix.png",
+          image: "",
           imageAlt: "Direct booking room",
           domain: "Channel mix · Learn",
           insight: "Weekend demand is strong —\nbut OTA share is climbing again.",
@@ -523,10 +523,10 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         needsCount: 1,
         handlingCount: 2,
         watchingCount: 1,
-        heroImage: "/marketing/hero-apt-brief.png",
+        heroImage: "",
         contextLine: "Today · 84 units · 78% occupancy · 1 gap night · 72h out",
         critical: {
-          image: "/marketing/apt-orphan-gap.png",
+          image: "",
           imageAlt: "Empty apartment night",
           domain: "Availability",
           insight: "Unit 24 has a one-night gap.",
@@ -573,7 +573,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         needsCount: 0,
         handlingCount: 2,
         watchingCount: 1,
-        heroImage: "/marketing/apt-occupied.png",
+        heroImage: "",
         pulse: {
           amount: 2860,
           amountLabel: "unit revenue today",
@@ -601,7 +601,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         needsCount: 0,
         handlingCount: 0,
         watchingCount: 0,
-        heroImage: "/marketing/apt-occupied.png",
+        heroImage: "",
         pulse: {
           amount: 4280,
           amountLabel: "unit contribution today",
@@ -634,7 +634,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         needsCount: 1,
         handlingCount: 0,
         watchingCount: 1,
-        heroImage: "/marketing/hero-apt-brief.png",
+        heroImage: "",
         pulse: {
           amount: 28600,
           amountLabel: "week unit contribution",
@@ -647,7 +647,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           ],
         },
         critical: {
-          image: "/marketing/apt-orphan-gap.png",
+          image: "",
           imageAlt: "Orphan night gap",
           domain: "Availability · Learn",
           insight: "The same orphan Tuesday keeps returning.",

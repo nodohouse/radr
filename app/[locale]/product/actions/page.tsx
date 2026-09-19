@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import NextLink from "next/link";
 import { setRequestLocale } from "next-intl/server";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
@@ -32,7 +31,7 @@ const FAN_OUT = [
 ] as const;
 
 /**
- * Prepared Actions — two clocks racing. No timestamp tables.
+ * Prepared Actions — two clocks racing. Product-led (no hospitality photography).
  */
 export default async function ActionsPage({ params }: Props) {
   const { locale } = await params;
@@ -46,17 +45,10 @@ export default async function ActionsPage({ params }: Props) {
     <div className="radr rx-ch rx-ch-light">
       <SiteNav />
       <main className="rx-ch-main">
-        <section className="rx-act-cinema" data-nav-theme="dark">
-          <Image
-            src="/demo/facilities/canal-classic-queen.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="rx-act-cinema-img"
-            style={{ objectPosition: "50% 42%" }}
-          />
-          <div className="rx-act-cinema-veil" />
+        <section
+          className="rx-act-cinema rx-act-cinema--product"
+          data-nav-theme="dark"
+        >
           <div className="rx-shell rx-act-cinema-copy">
             <p className="rx-ch-kicker" style={{ color: "#00d978" }}>
               Prepared Actions
@@ -99,7 +91,10 @@ export default async function ActionsPage({ params }: Props) {
             <div className="rx-act-race-visual">
               <div className="rx-act-race-track" data-tone="manual">
                 <em>Manual</em>
-                <div className="rx-act-race-bar" style={{ ["--pct" as string]: "100%" }}>
+                <div
+                  className="rx-act-race-bar"
+                  style={{ ["--pct" as string]: "100%" }}
+                >
                   <span />
                 </div>
                 <strong>28 min</strong>
@@ -107,7 +102,10 @@ export default async function ActionsPage({ params }: Props) {
               </div>
               <div className="rx-act-race-track" data-tone="radr">
                 <em>RADR</em>
-                <div className="rx-act-race-bar" style={{ ["--pct" as string]: "14%" }}>
+                <div
+                  className="rx-act-race-bar"
+                  style={{ ["--pct" as string]: "14%" }}
+                >
                   <span />
                 </div>
                 <strong>4 min</strong>

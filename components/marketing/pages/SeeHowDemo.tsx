@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import NextLink from "next/link";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
@@ -27,7 +26,6 @@ const WORLDS: Record<
   {
     label: string;
     canon: CanonDecision;
-    image: string;
     unit: string;
     constraint: string;
   }
@@ -35,21 +33,18 @@ const WORLDS: Record<
   hotel: {
     label: "Hotel",
     canon: CANON_OTA,
-    image: "/demo/facilities/canal-deluxe-king.jpg",
     unit: "Room night",
     constraint: "Brand rate · channel contract · housekeeping readiness",
   },
   restaurant: {
     label: "Restaurant",
     canon: CANON_PEAK,
-    image: "/demo/facilities/berlin-dining.jpg",
     unit: "Service / covers",
     constraint: "Inbound covers · kitchen capacity · delivery · table turns",
   },
   aparthotel: {
     label: "Aparthotel",
     canon: CANON_ORPHAN,
-    image: "/demo/facilities/lisbon-onebed.jpg",
     unit: "Unit night",
     constraint: "Min profitable rate · cleaning · next-stay turnover",
   },
@@ -57,6 +52,7 @@ const WORLDS: Record<
 
 /**
  * Public interactive demo — no login. Matches the marketing promise.
+ * Product-led: Decision object as the visual — no hospitality photography.
  */
 export function SeeHowDemo() {
   const [vertical, setVertical] = useState<Vertical>("hotel");
@@ -110,16 +106,10 @@ export function SeeHowDemo() {
 
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell rx-demo-grid">
-            <div className="rx-demo-scene">
-              <Image
-                src={world.image}
-                alt=""
-                fill
-                sizes="(max-width: 900px) 100vw, 55vw"
-                className="rx-demo-scene-img"
-                style={{ objectPosition: "50% 42%" }}
-              />
-              <div className="rx-demo-scene-veil" />
+            <div
+              className="rx-demo-scene rx-demo-scene--product"
+              aria-label="Decision context"
+            >
               <div className="rx-demo-scene-copy">
                 <em>
                   {d.displayId} · {world.unit}

@@ -6143,3 +6143,30 @@ html:has(.rx-ch-light) body {
   scroll-margin-top: 6rem;
   height: 0;
 }
+
+/* Product-led surfaces — no hospitality photography */
+.rx-act-cinema--product {
+  display: grid;
+  align-items: end;
+  background:
+    radial-gradient(ellipse 70% 55% at 18% 20%, rgba(0, 217, 120, 0.12), transparent 55%),
+    linear-gradient(165deg, #0a1210 0%, #08100c 55%, #0d1612 100%);
+  min-height: min(52vh, 26rem);
+  padding-bottom: 2.5rem;
+}
+
+.rx-demo-scene--product {
+  display: grid;
+  align-items: end;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 30%, rgba(0, 217, 120, 0.1), transparent 50%),
+    linear-gradient(160deg, #0c1411 0%, #08100c 100%);
+  padding: 1.25rem;
+}
+
+.rx-demo-scene--product .rx-demo-scene-copy {
+  position: relative;
+  left: auto;
+  right: auto;
+  bottom: auto;
+}

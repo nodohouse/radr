@@ -14,6 +14,7 @@ import {
 } from "@/data/demo";
 import { CANON_PLAYBOOK } from "@/lib/radr/decision/demo/canonical";
 import { CTAS } from "@/lib/marketing/brand";
+import { marketingImage } from "@/lib/marketing/publicImagery";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
 
@@ -66,8 +67,8 @@ const INDUSTRIES: IndustryStory[] = [
     exposure: CANON_PEAK.exposureEuro,
     exposureLabel: "vs seat-now",
     displayId: CANON_PEAK.displayId,
-    src: "/demo/facilities/berlin-dining.jpg",
-    pos: "48% 40%",
+    src: marketingImage("industriesRestaurant").src,
+    pos: `${marketingImage("industriesRestaurant").focalX} ${marketingImage("industriesRestaurant").focalY}`,
   },
   {
     id: "hotels",
@@ -90,8 +91,8 @@ const INDUSTRIES: IndustryStory[] = [
     exposure: CANON_OTA.exposureEuro,
     exposureLabel: "contribution exposure",
     displayId: CANON_OTA.displayId,
-    src: "/demo/facilities/canal-suite.jpg",
-    pos: "55% 40%",
+    src: marketingImage("industriesHotel").src,
+    pos: `${marketingImage("industriesHotel").focalX} ${marketingImage("industriesHotel").focalY}`,
   },
   {
     id: "apartments",
@@ -114,8 +115,8 @@ const INDUSTRIES: IndustryStory[] = [
     exposure: CANON_ORPHAN.exposureEuro,
     exposureLabel: "net opportunity",
     displayId: CANON_ORPHAN.displayId,
-    src: "/demo/facilities/lisbon-studio.jpg",
-    pos: "50% 50%",
+    src: marketingImage("industriesApartment").src,
+    pos: `${marketingImage("industriesApartment").focalX} ${marketingImage("industriesApartment").focalY}`,
   },
   {
     id: "groups",
@@ -138,8 +139,8 @@ const INDUSTRIES: IndustryStory[] = [
     exposure: CANON_PLAYBOOK.exposureEuro,
     exposureLabel: "structural / month",
     displayId: CANON_PLAYBOOK.displayId,
-    src: "/demo/facilities/canal-deluxe-king.jpg",
-    pos: "60% 40%",
+    src: marketingImage("industriesGroup").src,
+    pos: `${marketingImage("industriesGroup").focalX} ${marketingImage("industriesGroup").focalY}`,
     groupCompare: {
       left: { site: "Amsterdam", adr: "€214 ADR", gop: "38% GOP" },
       right: { site: "Berlin", adr: "€216 ADR", gop: "31% GOP" },

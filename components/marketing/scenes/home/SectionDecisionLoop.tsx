@@ -161,7 +161,7 @@ export function SectionDecisionLoop() {
         <div className="rx-dec-film-stage">
           <div className="rx-dec-film-world" aria-hidden="true">
             <Image
-              src="/demo/facilities/berlin-dining.jpg"
+              src=""
               alt=""
               fill
               sizes="100vw"

@@ -29,7 +29,7 @@ const PANELS: Record<
 > = {
   restaurant: {
     label: "Restaurant",
-    src: "/demo/facilities/berlin-bar.jpg",
+    src: "",
     pos: "50% 40%",
     problem: "Obvious: seat walk-ins · RADR: wait 12 minutes",
     outcomeLabel: "After service · Verified · D-1911",
@@ -38,7 +38,7 @@ const PANELS: Record<
   },
   hotel: {
     label: "Hotel",
-    src: "/demo/facilities/canal-suite.jpg",
+    src: "",
     pos: "55% 40%",
     problem: "Channel economics under occupancy",
     outcomeLabel: "Verified protected · D-2201",
@@ -46,7 +46,7 @@ const PANELS: Record<
   },
   apartment: {
     label: "Aparthotels",
-    src: "/demo/facilities/lisbon-studio.jpg",
+    src: "",
     pos: "50% 50%",
     problem: "Orphan night still recoverable",
     outcomeLabel: "Verified recovered · incremental",

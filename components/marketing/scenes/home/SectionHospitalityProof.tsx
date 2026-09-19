@@ -29,7 +29,7 @@ export function SectionHospitalityProof() {
           <div>
             <h3 className="rx-hosp-pain-h">A full hotel can still leak profit.</h3>
             <PhotoOverlay
-              src="/demo/facilities/canal-deluxe-king.jpg"
+              src=""
               position="62% 40%"
               kicker={`${CANON_OTA.displayId} · ${CANON_OTA.property}`}
               title="89% occupancy looks good."
@@ -59,7 +59,7 @@ export function SectionHospitalityProof() {
           <div>
             <h3 className="rx-hosp-pain-h">Empty nights expire.</h3>
             <PhotoOverlay
-              src="/demo/facilities/lisbon-onebed.jpg"
+              src=""
               position="55% 45%"
               kicker={`${CANON_ORPHAN.displayId} · Chiado`}
               title="One-night orphan gap."

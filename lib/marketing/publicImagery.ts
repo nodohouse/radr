@@ -337,6 +337,68 @@ export const MARKETING_IMAGES = {
     vertical: "restaurant",
     kind: "photo",
   },
+
+  /* ── INDUSTRIES (secondary public route) ─────────── */
+  industriesRestaurant: {
+    id: "industriesRestaurant",
+    src: "/menu/menu-truffle-pasta.jpg",
+    alt: "Plated pasta during service — restaurant contribution economics",
+    nativeWidth: FAC.w,
+    nativeHeight: FAC.h,
+    cssMax: 520,
+    focalX: "48%",
+    focalY: "40%",
+    route: "/en/industries",
+    usage: "Industry canvas · restaurants",
+    topic: "restaurant service contribution",
+    vertical: "restaurant",
+    kind: "photo",
+  },
+  industriesHotel: {
+    id: "industriesHotel",
+    src: "/demo/facilities/canal-suite.jpg",
+    alt: "Hotel suite detail — channel and inventory economics",
+    nativeWidth: FAC.w,
+    nativeHeight: FAC.h,
+    cssMax: 520,
+    focalX: "55%",
+    focalY: "40%",
+    route: "/en/industries",
+    usage: "Industry canvas · hotels",
+    topic: "hotel room-night contribution",
+    vertical: "hotel",
+    kind: "photo",
+  },
+  industriesApartment: {
+    id: "industriesApartment",
+    src: "/demo/facilities/lisbon-onebed.jpg",
+    alt: "Serviced apartment unit — turnover and orphan-night economics",
+    nativeWidth: FAC.w,
+    nativeHeight: FAC.h,
+    cssMax: 520,
+    focalX: "50%",
+    focalY: "50%",
+    route: "/en/industries",
+    usage: "Industry canvas · apartments",
+    topic: "unit-night turnover economics",
+    vertical: "serviced_apartment",
+    kind: "photo",
+  },
+  industriesGroup: {
+    id: "industriesGroup",
+    src: "/demo/facilities/canal-deluxe-king.jpg",
+    alt: "Premium room inventory across a multi-site portfolio",
+    nativeWidth: FAC.w,
+    nativeHeight: FAC.h,
+    cssMax: 520,
+    focalX: "60%",
+    focalY: "40%",
+    route: "/en/industries",
+    usage: "Industry canvas · groups",
+    topic: "portfolio profit divergence",
+    vertical: "hotel",
+    kind: "photo",
+  },
 } as const satisfies Record<string, MarketingImage>;
 
 export type MarketingImageId = keyof typeof MARKETING_IMAGES;
@@ -399,10 +461,29 @@ export const PUBLIC_IMAGES = {
   "berlin-dining": MARKETING_IMAGES.homeRestaurantEconomics,
   "berlin-bar": MARKETING_IMAGES.blogDecisionGapHero,
   "berlin-terrace": MARKETING_IMAGES.companyRestaurant,
-  "canal-deluxe-king": MARKETING_IMAGES.blogRecoverClockHero,
-  "lisbon-onebed": MARKETING_IMAGES.companyApartments,
+  "canal-classic-queen": MARKETING_IMAGES.blogRecoverClockHero,
+  "canal-deluxe-king": MARKETING_IMAGES.industriesGroup,
+  "canal-suite": MARKETING_IMAGES.industriesHotel,
+  "lisbon-onebed": MARKETING_IMAGES.industriesApartment,
   "lisbon-studio": MARKETING_IMAGES.blogMultiLocationHero,
 } as const;
+
+/** Paths that may repeat (product UI / mockups only) */
+export const PRODUCT_REPEAT_ALLOWLIST = [
+  "/mockup-exports/",
+  "/brand/",
+  "/logos/",
+] as const;
+
+/**
+ * Photographic path prefixes that must be registry-owned and exclusive
+ * when referenced from live public marketing surfaces.
+ */
+export const PHOTO_PATH_PREFIXES = [
+  "/demo/facilities/",
+  "/menu/",
+  "/marketing/",
+] as const;
 
 export const FACILITY_NATIVE = { w: 1152, h: 864 } as const;
 export const FACILITY_CSS_MAX = 520;

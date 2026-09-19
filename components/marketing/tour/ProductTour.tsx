@@ -9,7 +9,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import Image from "next/image";
 import NextLink from "next/link";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { RADR_MOTION } from "@/lib/radr/motion/tokens";
@@ -40,17 +39,16 @@ type Beat = {
   line: string;
   sub?: string;
   green?: boolean;
-  image?: string;
   dwell: number;
 };
 
+/** Product-led beats only — no hospitality photography. */
 const BEATS: Beat[] = [
   {
     id: "empty",
     beat: "00:00",
     line: "The tables look empty.",
     sub: "Berlin Mitte · 18:42 · dinner service",
-    image: "/demo/facilities/berlin-dining.jpg",
     dwell: 3200,
   },
   {
@@ -58,7 +56,6 @@ const BEATS: Beat[] = [
     beat: "00:03",
     line: "They aren't.",
     sub: "38 covers inbound · kitchen 92% · 2 walk-ins waiting",
-    image: "/demo/facilities/berlin-dining.jpg",
     dwell: 3800,
   },
   {
@@ -66,7 +63,6 @@ const BEATS: Beat[] = [
     beat: "00:07",
     line: "Capacity collision forming.",
     sub: "Arrival density × delivery × menu mix",
-    image: "/demo/facilities/berlin-bar.jpg",
     dwell: 3600,
   },
   {
@@ -74,7 +70,6 @@ const BEATS: Beat[] = [
     beat: "00:11",
     line: "Three futures. One recommendation.",
     sub: "Seat now · Wait 12m · Pause delivery",
-    image: "/demo/facilities/berlin-bar.jpg",
     dwell: 4000,
   },
   {
@@ -83,7 +78,6 @@ const BEATS: Beat[] = [
     line: "Wait 12 minutes.",
     sub: "€620 expected incremental contribution vs seat-now",
     green: true,
-    image: "/demo/facilities/berlin-dining.jpg",
     dwell: 3800,
   },
   {
@@ -91,7 +85,6 @@ const BEATS: Beat[] = [
     beat: "00:19",
     line: "GM adds context.",
     sub: "VIP party must sit by 18:50 — re-simulating",
-    image: "/demo/facilities/berlin-dining.jpg",
     dwell: 3600,
   },
   {
@@ -100,7 +93,6 @@ const BEATS: Beat[] = [
     line: "Plan approved.",
     sub: "Seat VIP · hold second walk-in · maintain delivery throttle",
     green: true,
-    image: "/demo/facilities/berlin-bar.jpg",
     dwell: 3400,
   },
   {
@@ -108,7 +100,6 @@ const BEATS: Beat[] = [
     beat: "00:27",
     line: "Reality observed.",
     sub: "€590 incremental contribution · peak held",
-    image: "/demo/facilities/berlin-dining.jpg",
     dwell: 3600,
   },
   {
@@ -117,7 +108,6 @@ const BEATS: Beat[] = [
     line: "€590 verified.",
     sub: "STRONGLY_ATTRIBUTED · Decision Record closed",
     green: true,
-    image: "/demo/facilities/berlin-dining.jpg",
     dwell: 3800,
   },
   {
@@ -125,7 +115,6 @@ const BEATS: Beat[] = [
     beat: "00:35",
     line: "Memory updates.",
     sub: "Peak hold when kitchen ≥90% and inbound ≥30 in <25m",
-    image: "/demo/facilities/berlin-bar.jpg",
     dwell: 3600,
   },
   {
@@ -134,7 +123,6 @@ const BEATS: Beat[] = [
     line: "Systems record. RADR decides.",
     sub: "Put one operating problem on RADR.",
     green: true,
-    image: "/demo/facilities/berlin-dining.jpg",
     dwell: 5000,
   },
 ];
@@ -208,16 +196,7 @@ function ProductTourOverlay({
       </div>
 
       <div className="rx-tour-stage">
-        <div className="rx-tour-media" aria-hidden="true">
-          <Image
-            key={beat.image}
-            src={beat.image ?? "/demo/facilities/berlin-dining.jpg"}
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-          />
-        </div>
+        <div className="rx-tour-media rx-tour-media--mineral" aria-hidden="true" />
         <div className="rx-tour-copy">
           <p className="rx-tour-beat">{beat.beat}</p>
           <h2 className="rx-tour-line">{beat.line}</h2>

@@ -958,3 +958,12 @@
 .rx-why-gap-kinetic .rx-why-chip-row li[data-on="true"] {
   opacity: 1;
 }
+
+.rx-tour-media--mineral {
+  background:
+    radial-gradient(ellipse 55% 45% at 65% 35%, rgba(0, 217, 120, 0.1), transparent 55%),
+    linear-gradient(165deg, #0a1210 0%, #08100c 100%);
+}
+.rx-tour-media--mineral::after {
+  background: linear-gradient(180deg, rgba(5, 8, 7, 0.25), rgba(5, 8, 7, 0.55));
+}

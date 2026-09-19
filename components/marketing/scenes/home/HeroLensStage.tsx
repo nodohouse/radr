@@ -71,7 +71,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
       phase: "Dinner service",
     },
     image: {
-      src: "/demo/facilities/berlin-dining.jpg",
+      src: "",
       position: "42% 38%",
     },
     signals: [
@@ -139,7 +139,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
       phase: "Pickup window",
     },
     image: {
-      src: "/demo/facilities/canal-deluxe-king.jpg",
+      src: "",
       position: "58% 35%",
     },
     signals: [
@@ -209,7 +209,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
       phase: "Orphan night",
     },
     image: {
-      src: "/demo/facilities/lisbon-onebed.jpg",
+      src: "",
       position: "50% 42%",
     },
     signals: [

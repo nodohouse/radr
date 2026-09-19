@@ -85,7 +85,7 @@ export function SectionFutures() {
     >
       <div className="rx-fut-field-media" aria-hidden="true">
         <Image
-          src="/demo/facilities/lisbon-onebed.jpg"
+          src=""
           alt=""
           fill
           sizes="100vw"

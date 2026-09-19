@@ -29,7 +29,7 @@ const WORLDS: Record<Vertical, PainWorld> = {
   hotel: {
     id: "hotel",
     tab: "Hotels",
-    image: "/demo/facilities/canal-deluxe-king.jpg",
+    image: "",
     objectPosition: "52% 45%",
     timeline: [
       { t: "14:40", label: "Housekeeping priority" },
@@ -58,7 +58,7 @@ const WORLDS: Record<Vertical, PainWorld> = {
   restaurant: {
     id: "restaurant",
     tab: "Restaurants",
-    image: "/demo/facilities/berlin-dining.jpg",
+    image: "",
     objectPosition: "48% 40%",
     timeline: [
       { t: "18:30", label: "Floor looks open" },
@@ -79,7 +79,7 @@ const WORLDS: Record<Vertical, PainWorld> = {
   aparthotel: {
     id: "aparthotel",
     tab: "Aparthotels",
-    image: "/demo/facilities/lisbon-onebed.jpg",
+    image: "",
     objectPosition: "50% 42%",
     timeline: [
       { t: "NOW", label: "One-night gap opens" },

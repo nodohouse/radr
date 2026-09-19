@@ -48,7 +48,7 @@ export function SectionCompounding() {
         <div className="rx-mem-ghosts-stage">
           <div className="rx-mem-ghosts-world">
             <Image
-              src="/demo/facilities/canal-deluxe-king.jpg"
+              src=""
               alt=""
               fill
               sizes="(max-width: 900px) 100vw, 70vw"
