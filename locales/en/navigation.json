@@ -90,7 +90,7 @@
       "deeper": {
         "lenses": {
           "label": "How RADR interprets the operation",
-          "desc": "BUY · LABOR · SELL · RECOVER — lenses over the same Decision model."
+          "desc": "BUY · LABOR · SELL · RECOVER — secondary lenses over the same Decision model."
         }
       },
       "exploreAll": "Explore where value leaks",

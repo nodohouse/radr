@@ -463,11 +463,11 @@
           ]
         },
         {
-          "heading": "Expected vs Verified — the Finance kill test",
+          "heading": "Expected vs Verified — the finance test",
           "paragraphs": [
             "Expected is fine. It means RADR believes a credit should exist, with a because-line in operator English.",
             "Verified is stricter. It requires a complete Trace: invoice and line, evidence, finding, credit memo, apply to the original invoice, AP match. If a buyer cannot match that chain in AP, the badge should not say Verified.",
-            "Fake Verified is worse than another BI chart. Our rule: systems calculate; humans approve financial commitments."
+            "What Verified should mean to Finance: systems calculate; humans approve financial commitments. A badge without a Trace is worse than another BI chart."
           ]
         },
         {
