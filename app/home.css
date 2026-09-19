@@ -13084,10 +13084,10 @@ html:has(.radr-home) body {
 .rx-he-recover-frame {
   display: grid;
   grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
-  column-gap: clamp(3.5rem, 7.5vw, 6.5rem);
+  column-gap: clamp(2.25rem, 4.5vw, 4rem);
   row-gap: 1.5rem;
   align-items: start;
-  width: calc(100% + clamp(5.5rem, 10vw, 8.5rem));
+  width: calc(100% + clamp(3.5rem, 7vw, 5.5rem));
   max-width: none;
 }
 .rx-he-recover-copy {
@@ -13104,8 +13104,9 @@ html:has(.radr-home) body {
   justify-self: end;
   padding-top: 1.15rem;
   margin-bottom: -2.5rem;
-  margin-right: clamp(-8.5rem, -12vw, -5.5rem);
-  transform: translateX(clamp(2.5rem, 4vw, 4.5rem));
+  margin-right: clamp(-3.5rem, -5vw, -1.5rem);
+  /* ~3.5cm left vs prior rightward push */
+  transform: translateX(clamp(-4.25rem, -6vw, -2.75rem));
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;

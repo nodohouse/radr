@@ -2791,8 +2791,8 @@
     max-width: 100%;
   }
   .rx-he-recover-product {
-    transform: translateX(1rem);
-    margin-right: -2rem;
+    transform: translateX(-1rem);
+    margin-right: -1rem;
   }
 }
 
