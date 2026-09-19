@@ -3,9 +3,9 @@
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
-import NextLink from "next/link";
 import { Suspense } from "react";
 import { HeroRecoveryScene } from "@/components/marketing/scenes/home/HeroRecoveryScene";
+import { HeroProofRail } from "@/components/marketing/scenes/home/HeroProofRail";
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 import { HospitalityEyebrow } from "@/components/marketing/kinetic/HospitalityContextSwitch";
 
@@ -37,13 +37,11 @@ function HeroInner() {
               >
                 {t("ctaPrimary")} <span aria-hidden="true">→</span>
               </Link>
-              <NextLink
-                href="/app/lab/control-center?seed=recover"
-                className="rx-btn rx-btn-ghost"
-              >
+              <a href="#verified-recovery" className="rx-btn rx-btn-ghost">
                 {t("ctaSecondary")}
-              </NextLink>
+              </a>
             </div>
+            <HeroProofRail />
           </div>
 
           <div className="rx-he-recover-product">

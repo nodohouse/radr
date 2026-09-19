@@ -15145,3 +15145,314 @@ html:has(.radr-home) body {
     min-height: 0;
   }
 }
+
+/* —— Hero proof rail —— */
+.rx-he-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  margin: 1.15rem 0 0;
+  max-width: 28rem;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  color: #626a65;
+}
+.rx-he-proof span[aria-hidden="true"] {
+  opacity: 0.45;
+}
+
+/* —— Homepage Control Center preview —— */
+.rx-hcc {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+.rx-hcc-head {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.rx-hcc-h {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+  color: #0a0d0b;
+}
+.rx-hcc-h span {
+  display: block;
+  color: #3f4642;
+  font-weight: 500;
+}
+.rx-hcc-lead {
+  margin: 0.85rem auto 0;
+  max-width: 38ch;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #626a65;
+}
+.rx-hcc-stage {
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem 1.45rem 1.35rem;
+  box-shadow: 0 18px 48px rgba(10, 13, 11, 0.05);
+}
+.rx-hcc-greet {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #626a65;
+}
+.rx-hcc-need {
+  margin: 0.35rem 0 1.25rem;
+  display: grid;
+  gap: 0.2rem;
+}
+.rx-hcc-need strong {
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  color: #0a0d0b;
+}
+.rx-hcc-need span {
+  font-size: 0.9rem;
+  color: #626a65;
+}
+.rx-hcc-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+.rx-hcc-rows li {
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 14px;
+  background: #fbfaf7;
+}
+.rx-hcc-row-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.45rem;
+}
+.rx-hcc-row-meta em {
+  font-style: normal;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-hcc-id {
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.65rem;
+  color: #626a65;
+}
+.rx-hcc-euro {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+.rx-hcc-euro strong {
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+  color: #0a0d0b;
+}
+.rx-hcc-euro span {
+  font-size: 0.78rem;
+  color: #626a65;
+  text-transform: lowercase;
+}
+.rx-hcc-line {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  color: #0a0d0b;
+}
+.rx-hcc-detail {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: #626a65;
+}
+.rx-hcc-cta {
+  display: inline-flex;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0a0d0b;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.2);
+}
+.rx-hcc-cta:hover {
+  border-bottom-color: #00a85a;
+  color: #007a42;
+}
+.rx-hcc-quiet {
+  margin: 1.15rem 0 0;
+  text-align: center;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+
+/* —— System of Decision Record —— */
+.rx-sodr {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.rx-sodr-h {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+  color: #0a0d0b;
+}
+.rx-sodr-h span {
+  display: block;
+  color: #3f4642;
+  font-weight: 500;
+}
+.rx-sodr-grid {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.5rem;
+  text-align: left;
+}
+@media (min-width: 820px) {
+  .rx-sodr-grid {
+    grid-template-columns: 1fr 1.15fr;
+    gap: 2rem;
+    align-items: start;
+  }
+}
+.rx-sodr-systems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+.rx-sodr-systems li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.08);
+  font-size: 0.92rem;
+}
+.rx-sodr-systems strong {
+  color: #0a0d0b;
+}
+.rx-sodr-systems span {
+  color: #626a65;
+}
+.rx-sodr-radr {
+  padding: 1.15rem 1.2rem;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 16px;
+}
+.rx-sodr-delta {
+  margin: 0;
+  color: #00a85a;
+  font-size: 1.25rem;
+}
+.rx-sodr-radr-k {
+  margin: 0.2rem 0 0.65rem;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-sodr-radr ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.rx-sodr-radr li {
+  font-size: 0.92rem;
+  color: #0a0d0b;
+}
+.rx-sodr-lock {
+  margin: 1.75rem 0 0;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00a85a;
+}
+
+/* —— Verified Value trust —— */
+.rx-vvt {
+  max-width: 40rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.rx-vvt-h {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.45rem, 3vw, 1.95rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  color: #0a0d0b;
+}
+.rx-vvt-lead {
+  margin: 0.75rem auto 0;
+  max-width: 42ch;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #626a65;
+}
+.rx-vvt-rail {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+  text-align: left;
+}
+.rx-vvt-rail li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+}
+.rx-vvt-rail em {
+  font-style: normal;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-vvt-rail strong {
+  font-size: 0.95rem;
+  color: #0a0d0b;
+}
+.rx-vvt-rail li[data-tone="verified"] {
+  background: rgba(0, 217, 120, 0.08);
+  border-color: rgba(0, 168, 90, 0.28);
+}
+.rx-vvt-rail li[data-tone="verified"] strong {
+  color: #007a42;
+}
+.rx-vvt-note {
+  margin: 1rem 0 0;
+  font-size: 0.68rem;
+  color: #626a65;
+}
+
+#verified-recovery {
+  scroll-margin-top: 5.5rem;
+}

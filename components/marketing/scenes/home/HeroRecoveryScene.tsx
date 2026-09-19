@@ -6,7 +6,6 @@
  */
 
 import { useEffect, useState } from "react";
-import NextLink from "next/link";
 import { CANON_SUPPLIER } from "@/lib/radr/decision/demo/canonical";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 
@@ -96,13 +95,10 @@ export function HeroRecoveryScene() {
         ))}
       </ol>
 
-      <NextLink
-        href="/app/lab/control-center?seed=recover"
-        className="rx-hvr-cta"
-      >
-        {sealed ? "Open verified trace" : "See a verified recovery"}{" "}
+      <a href="#verified-recovery" className="rx-hvr-cta">
+        {sealed ? "Open verified recovery" : "See a verified recovery"}{" "}
         <span aria-hidden="true">→</span>
-      </NextLink>
+      </a>
       <p className="rx-hvr-note">Illustrative demo · not customer results</p>
     </aside>
   );

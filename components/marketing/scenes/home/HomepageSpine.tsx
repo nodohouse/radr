@@ -1,23 +1,25 @@
 "use client";
 
 /**
- * Homepage — ROI first, product second, architecture third.
- * Hero → rail → leaks → Decision → roles → progression → research → Data Origin → pilot → FAQ.
+ * Homepage — ROI first, attention second, architecture third.
+ *
+ * Hero → proof rail → Control Center → recovery loop → leaks →
+ * Decision Record → Data Origin → Verified Value → path → pilot →
+ * market evidence → FAQ → CTA
  */
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import NextLink from "next/link";
 import { Hero } from "@/components/marketing/scenes/Hero";
+import { HomeControlCenterPreview } from "@/components/marketing/scenes/home/HomeControlCenterPreview";
 import { RecoveryStoryObject } from "@/components/marketing/scenes/home/RecoveryStoryObject";
+import { SystemOfDecisionRecord } from "@/components/marketing/scenes/home/SystemOfDecisionRecord";
+import { VerifiedValueTrust } from "@/components/marketing/scenes/home/VerifiedValueTrust";
 import { ProgressionLadder } from "@/components/marketing/scenes/home/ProgressionLadder";
-import { EconomicRail } from "@/components/marketing/kinetic/EconomicRail";
 import { LeakMapPanel } from "@/components/marketing/kinetic/LeakMapPanel";
-import { RoleProjectionStrip } from "@/components/marketing/kinetic/RoleProjectionStrip";
 import { ConnectionOriginSection } from "@/components/marketing/kinetic/ConnectionOriginSection";
 import { ResearchEvidenceStrip } from "@/components/marketing/kinetic/ResearchEvidenceStrip";
 import { PilotTimeline } from "@/components/marketing/kinetic/PilotTimeline";
-import { HOME_RAIL } from "@/lib/marketing/economicRail";
 import type { ProblemFamily, ProgressionStage } from "@/lib/radr/problemFamilies";
 import "@/app/kinetic.css";
 
@@ -56,8 +58,24 @@ export function HomepageSpine() {
     <div className="rx-home-spine">
       <Hero />
 
-      <section className="rx-rec-rail-sec" data-nav-theme="light" aria-label="Economic signals">
-        <EconomicRail items={HOME_RAIL} durationSec={64} variant="signature" />
+      <section className="rx-rec-sec rx-rec-sec-quiet" data-nav-theme="light">
+        <div className="rx-shell">
+          <HomeControlCenterPreview />
+        </div>
+      </section>
+
+      <section
+        className="rx-rec-sec rx-rec-sec-cinema"
+        data-nav-theme="light"
+        id="verified-recovery"
+      >
+        <div className="rx-shell">
+          <RecoveryStoryObject
+            kicker="Complete recovery"
+            title="RADR doesn't stop at finding it."
+            lead=""
+          />
+        </div>
       </section>
 
       <section className="rx-rec-sec rx-rec-sec-interactive" data-nav-theme="light">
@@ -71,19 +89,21 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-cinema" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
-          <RecoveryStoryObject
-            kicker={t("story.kicker")}
-            title={t("story.title")}
-            lead=""
-          />
+          <SystemOfDecisionRecord />
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-human" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-ivory" data-nav-theme="light">
+        <div className="rx-shell-wide">
+          <ConnectionOriginSection />
+        </div>
+      </section>
+
+      <section className="rx-rec-sec rx-rec-sec-quiet" data-nav-theme="light">
         <div className="rx-shell">
-          <RoleProjectionStrip />
+          <VerifiedValueTrust />
         </div>
       </section>
 
@@ -99,16 +119,6 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-quiet rx-rec-sec-evidence" data-nav-theme="light">
-        <ResearchEvidenceStrip />
-      </section>
-
-      <section className="rx-rec-sec rx-rec-sec-ivory" data-nav-theme="light">
-        <div className="rx-shell-wide">
-          <ConnectionOriginSection />
-        </div>
-      </section>
-
       <section className="rx-rec-sec rx-rec-sec-convert" data-nav-theme="light">
         <div className="rx-shell">
           <PilotTimeline
@@ -119,6 +129,10 @@ export function HomepageSpine() {
             cta={t("pilot.cta")}
           />
         </div>
+      </section>
+
+      <section className="rx-rec-sec rx-rec-sec-quiet rx-rec-sec-evidence" data-nav-theme="light">
+        <ResearchEvidenceStrip />
       </section>
 
       <section className="rx-rec-sec rx-rec-faq-quiet" data-nav-theme="light" id="faq">
@@ -167,12 +181,9 @@ export function HomepageSpine() {
               >
                 {t("footer.cta")} <span aria-hidden="true">→</span>
               </Link>
-              <NextLink
-                href="/app/lab/control-center?seed=recover"
-                className="rx-btn rx-btn-ghost"
-              >
+              <a href="#verified-recovery" className="rx-btn rx-btn-ghost">
                 {t("footer.secondary")}
-              </NextLink>
+              </a>
             </div>
           </div>
         </div>

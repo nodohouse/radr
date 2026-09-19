@@ -14,7 +14,7 @@ const EUR = `€${CANON_SUPPLIER.exposureEuro.toLocaleString("en-US")}`;
 const STAGES = [
   { id: "contract", label: "Contract", line: "€6.80/L", grade: "CONTRACT" },
   { id: "invoice", label: "Invoice", line: "€7.45/L", grade: "INVOICE" },
-  { id: "exposed", label: "Variance", line: EUR, grade: "VARIANCE FOUND" },
+  { id: "exposed", label: "Difference", line: EUR, grade: "DIFFERENCE" },
   {
     id: "dispute",
     label: "Decision",
@@ -23,9 +23,15 @@ const STAGES = [
   },
   {
     id: "credit",
-    label: "Credit memo",
-    line: EUR,
-    grade: "CREDIT APPLIED",
+    label: "Action",
+    line: "Evidence package prepared",
+    grade: "ACTION",
+  },
+  {
+    id: "observed",
+    label: "Observed",
+    line: `${EUR} credit issued`,
+    grade: "OBSERVED",
   },
   {
     id: "verified",

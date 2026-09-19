@@ -4680,12 +4680,67 @@
 }
 
 /* Data Origin — calm triad (at rest) */
+.rx-intake--calm .rx-intake-head {
+  max-width: 36rem;
+  margin-inline: auto;
+  text-align: center;
+}
 .rx-intake--calm .rx-intake-triad {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   display: grid;
   gap: 0;
   justify-items: center;
-  max-width: 52rem;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+@media (min-width: 960px) {
+  .rx-intake--calm .rx-intake-triad {
+    grid-template-columns: minmax(0, 1.35fr) auto minmax(0, 0.85fr);
+    align-items: center;
+    column-gap: 0.5rem;
+    justify-items: stretch;
+  }
+  .rx-intake--calm .rx-intake-connector {
+    padding: 0 0.35rem;
+  }
+  .rx-intake--calm .rx-intake-connector i {
+    width: 1.75rem;
+    height: 1px;
+  }
+  .rx-intake--calm .rx-intake-connector i::after {
+    left: auto;
+    right: -2px;
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+  }
+  .rx-intake--calm .rx-intake-layer--src {
+    text-align: left;
+  }
+  .rx-intake--calm .rx-intake-chips--flat {
+    justify-content: flex-start;
+    max-width: none;
+  }
+  .rx-intake--calm .rx-intake-layer--out {
+    text-align: left;
+  }
+  .rx-intake--calm .rx-intake-primitives {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+  }
+  .rx-intake--calm .rx-intake-primitives li {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+    color: #0a0d0b;
+  }
+  .rx-intake--calm .rx-intake-primitives li:last-child {
+    color: #00a85a;
+  }
 }
 .rx-intake-layer {
   width: 100%;
@@ -4708,11 +4763,23 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.45rem 0.55rem;
+  gap: 0.55rem 0.65rem;
   margin: 0 auto;
   padding: 0;
   list-style: none;
-  max-width: 40rem;
+  max-width: 36rem;
+}
+.rx-intake--calm .rx-intake-chip {
+  background: transparent;
+  border-color: transparent;
+  padding: 0.35rem 0.45rem;
+  box-shadow: none;
+}
+.rx-intake--calm .rx-intake-chip:hover,
+.rx-intake--calm .rx-intake-chip:focus-visible,
+.rx-intake--calm .rx-intake-chip[data-on="true"] {
+  background: #fff;
+  border-color: rgba(10, 13, 11, 0.1);
 }
 .rx-intake-more-note {
   margin: 0.55rem 0 0;
