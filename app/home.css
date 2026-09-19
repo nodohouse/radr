@@ -13069,8 +13069,9 @@ html:has(.radr-home) body {
 }
 .rx-he-recover {
   position: relative;
-  padding: calc(var(--nav-h, 4.75rem) + clamp(1.75rem, 4vh, 2.75rem)) 0
-    clamp(3.25rem, 6vh, 4.5rem);
+  /* Compact so green ticker enters the first viewport at ~900px height */
+  padding: calc(var(--nav-h, 4.75rem) + clamp(0.85rem, 2vh, 1.35rem)) 0
+    clamp(1.25rem, 2.5vh, 1.85rem);
   background:
     radial-gradient(48% 55% at 12% 18%, rgba(0, 217, 120, 0.09), transparent 58%),
     radial-gradient(42% 48% at 88% 72%, rgba(180, 220, 205, 0.22), transparent 62%),
@@ -13079,14 +13080,14 @@ html:has(.radr-home) body {
   display: block;
   overflow: hidden;
 }
-/* Copy left · product commands the right, bleeding toward the viewport edge */
+/* Copy left · product commands the right edge — editorial tension */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
-  column-gap: clamp(1rem, 2.5vw, 1.85rem);
-  row-gap: 2.25rem;
+  grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
+  column-gap: clamp(2.5rem, 6vw, 5.5rem);
+  row-gap: 1.5rem;
   align-items: start;
-  width: calc(100% + clamp(3.25rem, 7vw, 5.75rem));
+  width: calc(100% + clamp(4.5rem, 9vw, 7.5rem));
   max-width: none;
 }
 .rx-he-recover-copy {
@@ -13094,16 +13095,16 @@ html:has(.radr-home) body {
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  max-width: 30rem;
-  padding-top: 0.35rem;
+  max-width: 28rem;
+  padding-top: 0.15rem;
 }
 .rx-he-recover-product {
   width: 100%;
   max-width: none;
   justify-self: stretch;
-  padding-top: 2.75rem;
-  margin-bottom: -3.25rem;
-  margin-right: clamp(-5rem, -8vw, -3rem);
+  padding-top: 1.15rem;
+  margin-bottom: -2.5rem;
+  margin-right: clamp(-7.5rem, -11vw, -4.5rem);
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;
@@ -13114,10 +13115,10 @@ html:has(.radr-home) body {
     0 22px 56px rgba(10, 13, 11, 0.08);
 }
 .rx-he-recover-title {
-  margin: 1.65rem 0 0;
-  padding-top: 1.35rem;
+  margin: 1rem 0 0;
+  padding-top: 0.95rem;
   border-top: 1px solid rgba(10, 13, 11, 0.08);
-  font-size: clamp(1.28rem, 2.1vw, 1.62rem);
+  font-size: clamp(1.22rem, 2vw, 1.52rem);
   font-weight: 650;
   letter-spacing: -0.035em;
   line-height: 1.22;
@@ -13125,24 +13126,43 @@ html:has(.radr-home) body {
   max-width: 18ch;
 }
 .rx-he-recover-support {
-  margin: 0.75rem 0 0;
+  margin: 0.65rem 0 0;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #4a524e;
-  max-width: 28rem;
+  max-width: 58ch;
 }
 .rx-he-recover .rx-he-ctas {
-  margin-top: 1.65rem;
+  margin-top: 1.15rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
 }
 
+/* Homepage spacing scale: 8 12 16 24 32 48 64 96 */
+.rx-home-spine {
+  --rx-sp-1: 0.5rem;
+  --rx-sp-2: 0.75rem;
+  --rx-sp-3: 1rem;
+  --rx-sp-4: 1.5rem;
+  --rx-sp-5: 2rem;
+  --rx-sp-6: 3rem;
+  --rx-sp-7: 4rem;
+  --rx-sp-8: 6rem;
+}
+.rx-home-spine .rx-rec-p {
+  max-width: 62ch;
+  line-height: 1.55;
+}
+
 /* Body sections — shared shell grid */
 .rx-rec-sec {
-  padding: clamp(3rem, 7vh, 4.5rem) 0;
+  padding: var(--rx-sp-7, 4rem) 0;
   background: #f7faf8;
   color: #0a0d0b;
+}
+.rx-home-spine .rx-rec-sec:nth-of-type(odd) {
+  padding: var(--rx-sp-6, 3rem) 0;
 }
 .rx-rec-sec-band {
   background: #eef6f1;
@@ -13390,10 +13410,10 @@ html:has(.radr-home) body {
   gap: 0;
   width: 100%;
   max-width: 100%;
-  font-size: clamp(3.5rem, 7.2vw, 6.75rem);
+  font-size: clamp(2.85rem, 5.8vw, 5.25rem);
   font-weight: 780;
   letter-spacing: -0.06em;
-  line-height: 0.84;
+  line-height: 0.86;
 }
 .rx-notr--display .rx-notr-line {
   font-size: 1em;

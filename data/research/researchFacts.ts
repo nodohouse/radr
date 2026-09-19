@@ -242,12 +242,11 @@ export function researchFact(id: ResearchFactId): ResearchFact {
   return RESEARCH_FACTS[id];
 }
 
-/** Home evidence moment — max 4 facts */
+/** Home evidence — three editorial proofs */
 export const HOME_RESEARCH_FACTS: ResearchFactId[] = [
   "nraExpenseRise2019to2026",
   "otelierManualReporting2026",
   "otelierReconcileHours2026",
-  "hotrecWorkforceGap2026",
 ];
 
 /** Why RADR — Why now strip */

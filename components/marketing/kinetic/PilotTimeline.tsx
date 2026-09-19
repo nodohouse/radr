@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Pilot timeline — illustrative process, not promised calendar results.
+ * Pilot — one elegant progression. Qualification lives in FAQ.
  */
 
 import { Link } from "@/i18n/navigation";
@@ -15,32 +15,34 @@ type Props = {
 };
 
 const STEPS = [
-  { day: "Day 1", label: "Connect evidence" },
-  { day: "First pass", label: "Anomalies surface" },
-  { day: "Review", label: "RADR builds cases" },
-  { day: "Action", label: "Finance approves" },
-  { day: "Open cases", label: "Tracked until resolved" },
+  { mark: "01", label: "Connect" },
+  { mark: "02", label: "Find" },
+  { mark: "03", label: "Review" },
+  { mark: "04", label: "Act" },
+  { mark: "05", label: "Follow" },
 ] as const;
 
 export function PilotTimeline({ kicker, title, lead, scope, cta }: Props) {
   return (
-    <div className="rx-pilot-tl">
+    <div className="rx-pilot-tl rx-pilot-tl-quiet">
       <p className="rx-rec-k">{kicker}</p>
       <h2 className="rx-rec-h">{title}</h2>
       <p className="rx-rec-p">{lead}</p>
-      <p className="rx-rec-p rx-rec-muted">{scope}</p>
+      {scope ? <p className="rx-rec-p rx-rec-muted">{scope}</p> : null}
 
-      <ol className="rx-pilot-days" aria-label="Illustrative pilot process">
-        {STEPS.map((d) => (
-          <li key={d.day}>
-            <em>{d.day}</em>
+      <ol className="rx-pilot-flow" aria-label="Illustrative pilot path">
+        {STEPS.map((d, i) => (
+          <li key={d.label}>
+            <em>{d.mark}</em>
             <strong>{d.label}</strong>
+            {i < STEPS.length - 1 ? (
+              <span className="rx-pilot-arrow" aria-hidden="true">
+                →
+              </span>
+            ) : null}
           </li>
         ))}
       </ol>
-      <p className="rx-pilot-note">
-        Illustrative process — not a promise of results by day.
-      </p>
 
       <Link
         href="/contact?intent=recovery-pilot"

@@ -89,7 +89,6 @@ export function LeakMapPanel({ kicker, title, bodies, metas }: Props) {
       <div className="rx-leak-panel-stage">
         <LeakClassVisual key={family} family={family} />
         <div className="rx-leak-panel-copy">
-          <p className="rx-leak-panel-money">{FRAMES[family]}</p>
           <h3>{LABELS[family]}</h3>
           <p>{bodies[family]}</p>
           <p className="rx-sticky-meta">{metas[family]}</p>

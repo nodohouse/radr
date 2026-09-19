@@ -1712,7 +1712,7 @@
       },
       "PREVENT": {
         "title": "Prevent",
-        "body": "Stop repeat leakage."
+        "body": "Stop the same leak repeating."
       },
       "OPTIMIZE": {
         "title": "Optimize",
@@ -1763,7 +1763,7 @@
       "kicker": "FAQ",
       "title": "Straight answers",
       "q1": "What if a supplier takes longer than 14 days?",
-      "a1": "RADR keeps the case open until it resolves or is closed.",
+      "a1": "RADR keeps the case open until it resolves or is closed. The 14-day pilot path is illustrative — not a promise of results by day.",
       "q2": "Do we have to replace our accounting or procurement stack?",
       "a2": "No. RADR works across the systems already in use.",
       "q3": "Does RADR send disputes automatically?",

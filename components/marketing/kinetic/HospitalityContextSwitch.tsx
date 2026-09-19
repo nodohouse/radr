@@ -55,10 +55,6 @@ export function HospitalityEyebrow({ className = "" }: { className?: string }) {
   return (
     <p className={`rx-hcx-eyebrow ${className}`.trim()}>
       Built across hospitality
-      <span>
-        Restaurants &amp; F&amp;B · Hotels &amp; Resorts · Serviced apartments ·
-        Multi-location groups · and more
-      </span>
     </p>
   );
 }

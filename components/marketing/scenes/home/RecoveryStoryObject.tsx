@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Living €273 object — same value travels the recovery path.
- * Scroll-linked when sticky; scrubber always.
+ * Living €273 recovery — cinematic economic loop.
+ * Contract → Invoice → Gap → Decision → Credit → Verified.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -10,37 +10,44 @@ import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefer
 
 const STAGES = [
   {
+    id: "contract",
+    label: "Contract",
+    body: "Agreed rate on file.",
+    euro: "€6.80/L",
+    grade: "CONTRACT",
+  },
+  {
+    id: "invoice",
+    label: "Invoice",
+    body: "Billed above contract.",
+    euro: "€7.45/L",
+    grade: "INVOICE",
+  },
+  {
     id: "exposed",
     label: "Exposed",
-    body: "Invoice €7.45/L · Contract €6.80/L · 420 L",
+    body: "420 L · the gap opens.",
     euro: "€273",
     grade: "EXPOSED",
   },
   {
-    id: "review",
-    label: "Under review",
-    body: "Contract clear · qty matched · UOM matched · prior history checked",
-    euro: "€273",
-    grade: "UNDER REVIEW",
-  },
-  {
     id: "dispute",
-    label: "Dispute prepared",
-    body: "Evidence package staged for Finance. Do not reprice the menu yet.",
+    label: "Decision",
+    body: "Dispute the variance. Evidence package prepared.",
     euro: "€273",
-    grade: "DISPUTE PREPARED",
+    grade: "DISPUTE",
   },
   {
     id: "credit",
     label: "Credit memo",
-    body: "Credit memo CM-44102 issued against INV-88421.",
+    body: "CM-44102 observed against INV-88421.",
     euro: "€273",
-    grade: "CREDIT MEMO ISSUED",
+    grade: "CREDIT",
   },
   {
     id: "verified",
     label: "Verified",
-    body: "Matched to original invoice. Value closed in AP.",
+    body: "Matched to the original invoice. Loop closed.",
     euro: "€273",
     grade: "VERIFIED",
   },
@@ -102,49 +109,56 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
     <div
       ref={rootRef}
       className="rx-rso rx-euro-journey"
-      style={reduced ? undefined : { minHeight: "160vh" }}
+      style={reduced ? undefined : { minHeight: "180vh" }}
     >
       <div className="rx-rso-pin">
         <p className="rx-rec-k">{kicker}</p>
         <h2 className="rx-rec-h">{title}</h2>
         {lead ? <p className="rx-rec-p">{lead}</p> : null}
 
-        <div
-          className="rx-euro-chip rx-euro-chip-hero"
-          data-sealed={sealed ? "true" : undefined}
-          data-stage={stage.id}
-          key={stage.id}
-        >
-          <strong>{stage.euro}</strong>
-          <em>{stage.grade}</em>
-        </div>
-
-        <div
-          className="rx-rso-object"
-          data-stage={stage.id}
-          data-sealed={sealed ? "true" : undefined}
-        >
-          <div className="rx-rso-papers" aria-hidden="true">
-            <div className="rx-rso-paper" data-kind="invoice">
-              <em>INV-88421</em>
-              <strong>€7.45/L</strong>
-            </div>
-            <div className="rx-rso-paper" data-kind="contract">
-              <em>CTR-OIL-2026</em>
+        <div className="rx-rso-cinema" data-stage={stage.id} data-sealed={sealed ? "true" : undefined}>
+          <div className="rx-rso-pair" aria-hidden="true">
+            <div className="rx-rso-rate" data-on={idx >= 0 ? "true" : undefined} data-kind="contract">
+              <em>Contract</em>
               <strong>€6.80/L</strong>
             </div>
-            {idx >= 3 ? (
-              <div className="rx-rso-paper" data-kind="credit">
-                <em>CM-44102</em>
-                <strong>€273</strong>
-              </div>
-            ) : null}
+            <div
+              className="rx-rso-gap"
+              data-open={idx >= 2 ? "true" : undefined}
+            >
+              <i />
+              {idx >= 2 ? <span>€273</span> : null}
+            </div>
+            <div className="rx-rso-rate" data-on={idx >= 1 ? "true" : undefined} data-kind="invoice">
+              <em>Invoice</em>
+              <strong>€7.45/L</strong>
+            </div>
+          </div>
+
+          <div
+            className="rx-euro-chip rx-euro-chip-hero"
+            data-sealed={sealed ? "true" : undefined}
+            data-stage={stage.id}
+            key={stage.id}
+          >
+            <strong>{stage.euro}</strong>
+            <em>{stage.grade}</em>
           </div>
 
           <div className="rx-rso-face">
             <p className="rx-rso-stage">{stage.label}</p>
             <p className="rx-rso-body">{stage.body}</p>
           </div>
+
+          {idx >= 3 ? (
+            <p className="rx-rso-resolve" data-done={sealed ? "true" : undefined}>
+              {sealed
+                ? "€273 verified · matched to INV-88421"
+                : idx >= 4
+                  ? "Credit memo observed"
+                  : "Evidence package prepared"}
+            </p>
+          ) : null}
         </div>
 
         <div className="rx-rso-scrub" role="tablist" aria-label="Recovery stages">

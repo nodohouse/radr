@@ -33,11 +33,12 @@ const CUSTOM_EVIDENCE = [
 ] as const;
 
 const OUTPUT_PRIMITIVES = [
-  { id: "Decisions", mark: "01", line: "What to do next" },
-  { id: "Futures", mark: "02", line: "What is likely" },
-  { id: "Actions", mark: "03", line: "What RADR prepared" },
-  { id: "Verified Value", mark: "04", line: "What closed" },
-  { id: "Memory", mark: "05", line: "What the operation learned" },
+  { id: "Evidence", mark: "01", line: "What RADR observed" },
+  { id: "Decision", mark: "02", line: "What to do next" },
+  { id: "Futures", mark: "03", line: "What is likely" },
+  { id: "Action", mark: "04", line: "What RADR prepared" },
+  { id: "Verified Value", mark: "05", line: "What closed" },
+  { id: "Memory", mark: "06", line: "What the operation learned" },
 ] as const;
 
 const DOMAIN_SLOTS: {
@@ -64,7 +65,6 @@ export function ConnectionOriginSection() {
   const reduced = usePrefersReducedMotion();
   const uid = useId();
   const [hotId, setHotId] = useState<string | null>(null);
-  const [openGroup, setOpenGroup] = useState<string | null>(null);
   const hot = hotId ? providerById(hotId) : null;
 
   const payments = visibleInGroup("payments");
@@ -88,10 +88,11 @@ export function ConnectionOriginSection() {
           <span>The economic truth is still fragmented.</span>
         </h2>
         <p className="rx-intake-lead">
-          RADR brings financial and operational signals from the systems already
+          RADR brings financial and operational evidence from the systems already
           in use into one decision-ready operating state — so value leaks can be
-          found, acted on, and verified.
+          found, acted on and verified.
         </p>
+        <p className="rx-intake-cap">Systems RADR can connect to</p>
       </header>
 
       <div
@@ -145,7 +146,7 @@ export function ConnectionOriginSection() {
           {!reduced ? <span className="rx-intake-core-ring" aria-hidden="true" /> : null}
           <div className="rx-intake-core-card">
             <span className="rx-intake-delta" aria-hidden="true">
-              <svg viewBox="0 0 100 90" width="36" height="30">
+              <svg viewBox="0 0 100 90" width="44" height="38">
                 <path
                   d="M50 8 L90 81 H10 Z"
                   fill="none"
@@ -157,16 +158,14 @@ export function ConnectionOriginSection() {
             </span>
             <RadrWordmark surface="light" size="md" compact />
             <p className="rx-intake-core-k">RADR Core</p>
-            <p className="rx-intake-core-sub">Normalized operating state</p>
-            <div className="rx-intake-lane" aria-hidden="true">
-              <span>Signals</span>
-              <i />
-              <span>Evidence</span>
-              <i />
-              <span>State</span>
-              <i />
-              <span>Decision-ready</span>
-            </div>
+            <ol className="rx-intake-orbit-list" aria-label="Operating layers">
+              <li>Evidence</li>
+              <li>Decision</li>
+              <li>Futures</li>
+              <li>Action</li>
+              <li>Verified</li>
+              <li>Memory</li>
+            </ol>
           </div>
         </div>
 
@@ -189,41 +188,28 @@ export function ConnectionOriginSection() {
         </div>
       </div>
 
-      {/* Mobile accordion */}
+      {/* Mobile — flat list, no second taxonomy layer */}
       <div className="rx-intake-mobile">
-        {HOME_CONNECTION_GROUPS.map((g) => {
-          const providers = g.providerIds
-            .map((id) => providerById(id))
-            .filter((p): p is IntegrationProvider => Boolean(p));
-          const open = openGroup === g.id;
-          return (
-            <div key={g.id} className="rx-intake-acc">
-              <button
-                type="button"
-                aria-expanded={open}
-                onClick={() => setOpenGroup(open ? null : g.id)}
-              >
-                {g.label}
-              </button>
-              {open ? (
-                <ul>
-                  {providers.map((p) => (
-                    <li key={p.id}>
-                      <button
-                        type="button"
-                        onClick={() => setHotId(p.id === hotId ? null : p.id)}
-                        data-on={hotId === p.id ? "true" : undefined}
-                      >
-                        <ProviderWordmark id={p.id} name={p.name} />
-                        <em>{statusLabel(p)}</em>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
-          );
-        })}
+        <p className="rx-intake-cap">Systems RADR can connect to</p>
+        <ul className="rx-intake-mobile-flat">
+          {HOME_CONNECTION_GROUPS.flatMap((g) =>
+            g.providerIds
+              .map((id) => providerById(id))
+              .filter((p): p is IntegrationProvider => Boolean(p))
+              .map((p) => (
+                <li key={p.id}>
+                  <button
+                    type="button"
+                    onClick={() => setHotId(p.id === hotId ? null : p.id)}
+                    data-on={hotId === p.id ? "true" : undefined}
+                  >
+                    <ProviderWordmark id={p.id} name={p.name} />
+                    <em>{statusLabel(p)}</em>
+                  </button>
+                </li>
+              )),
+          )}
+        </ul>
       </div>
 
       {hot ? (
@@ -297,6 +283,7 @@ function ProviderChip({
       aria-label={`${provider.name}, ${statusLabel(provider)}`}
       data-on={hotId === provider.id ? "true" : undefined}
       data-status={provider.status}
+      data-provider-brand={provider.id.split("-")[0]}
       onMouseEnter={() => onHot(provider.id)}
       onMouseLeave={() => onHot(null)}
       onFocus={() => onHot(provider.id)}

@@ -66,13 +66,13 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-quiet" data-nav-theme="light">
         <div className="rx-shell-wide">
           <ResearchEvidenceStrip />
         </div>
       </section>
 
-      <section className="rx-rec-sec" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-interactive" data-nav-theme="light">
         <div className="rx-shell">
           <LeakMapPanel
             kicker={t("families.kicker")}
@@ -83,7 +83,7 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-cinema" data-nav-theme="light">
         <div className="rx-shell">
           <RecoveryStoryObject
             kicker={t("story.kicker")}
@@ -93,13 +93,13 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-human" data-nav-theme="light">
         <div className="rx-shell">
           <RoleProjectionStrip />
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-quiet rx-rec-sec-band" data-nav-theme="light">
         <div className="rx-shell">
           <ProgressionLadder
             kicker={t("progression.kicker")}
@@ -111,7 +111,7 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec" data-nav-theme="light">
+      <section className="rx-rec-sec rx-rec-sec-convert" data-nav-theme="light">
         <div className="rx-shell">
           <PilotTimeline
             kicker={t("pilot.kicker")}
