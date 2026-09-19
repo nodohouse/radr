@@ -39,9 +39,33 @@ export const SYSTEM_LAYERS = [
 ] as const;
 
 /**
- * Resting homepage map — three visual clusters only.
+ * Resting homepage — flat curated chip list (~18).
  * Taxonomy richness lives in hover cards + Developers catalog.
  */
+export const HOME_RESTING_PROVIDER_IDS = [
+  "toast",
+  "lightspeed-restaurant",
+  "opentable",
+  "sevenrooms",
+  "mews",
+  "apaleo",
+  "oracle-opera-cloud",
+  "siteminder",
+  "xero",
+  "netsuite",
+  "adyen",
+  "stripe",
+  "uber-eats",
+  "deliveroo",
+  "booking-connectivity",
+  "open-meteo",
+  "predicthq",
+  "ticketmaster",
+  "google-stack",
+  "files-csv",
+] as const;
+
+/** @deprecated — prefer HOME_RESTING_PROVIDER_IDS for resting UI */
 export const HOME_CAPABILITY_GROUPS = [
   {
     id: "operations",

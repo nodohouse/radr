@@ -4704,6 +4704,25 @@
   gap: 1.1rem 1.5rem;
   text-align: left;
 }
+.rx-intake-chips--flat {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem 0.55rem;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  max-width: 40rem;
+}
+.rx-intake-more-note {
+  margin: 0.55rem 0 0;
+  text-align: center;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #626a65;
+}
 @media (min-width: 720px) {
   .rx-intake-src-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -17,7 +17,7 @@ import {
 import { Link } from "@/i18n/navigation";
 import { ProviderWordmark } from "@/components/marketing/kinetic/ProviderWordmark";
 import {
-  HOME_CAPABILITY_GROUPS,
+  HOME_RESTING_PROVIDER_IDS,
   providerById,
 } from "@/lib/marketing/homeConnections";
 import type { IntegrationProvider } from "@/lib/integrations/registry";
@@ -29,13 +29,6 @@ import {
   type CapabilityStory,
 } from "@/lib/integrations/capabilityStory";
 import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
-
-const CUSTOM_EVIDENCE = [
-  "Invoices",
-  "Contracts",
-  "Credit memos",
-  "CSV",
-] as const;
 
 const OUTPUTS = [
   "Decision",
@@ -101,71 +94,36 @@ export function ConnectionOriginSection() {
         {/* LAYER 1 — sources */}
         <div className="rx-intake-layer rx-intake-layer--src">
           <p className="rx-intake-layer-k">Source systems</p>
-          <div className="rx-intake-src-grid">
-            {HOME_CAPABILITY_GROUPS.map((group) => (
-              <div key={group.id} className="rx-intake-src-col">
-                <p className="rx-intake-group-label">{group.label}</p>
-                <ul className="rx-intake-chips">
-                  {group.providerIds.map((id) => {
-                    if (id === "google-stack") {
-                      return (
-                        <li key="google-stack">
-                          <GoogleStackChip
-                            open={
-                              active?.kind === "google-stack" ||
-                              active?.kind === "google-child"
-                            }
-                            onOpen={() =>
-                              setActive({ kind: "google-stack" })
-                            }
-                          />
-                        </li>
-                      );
-                    }
-                    const p = providerById(id);
-                    if (!p) return null;
-                    return (
-                      <li key={id}>
-                        <ProviderChip
-                          provider={p}
-                          selected={
-                            active?.kind === "provider" && active.id === id
-                          }
-                          onOpen={() =>
-                            setActive({ kind: "provider", id })
-                          }
-                        />
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
-            <div className="rx-intake-src-col">
-              <p className="rx-intake-group-label">Custom evidence</p>
-              <ul className="rx-intake-evidence">
-                {CUSTOM_EVIDENCE.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              {providerById("files-csv") ? (
-                <ul className="rx-intake-chips" style={{ marginTop: "0.45rem" }}>
-                  <li>
-                    <ProviderChip
-                      provider={providerById("files-csv")!}
-                      selected={
-                        active?.kind === "provider" &&
-                        active.id === "files-csv"
+          <ul className="rx-intake-chips rx-intake-chips--flat">
+            {HOME_RESTING_PROVIDER_IDS.map((id) => {
+              if (id === "google-stack") {
+                return (
+                  <li key="google-stack">
+                    <GoogleStackChip
+                      open={
+                        active?.kind === "google-stack" ||
+                        active?.kind === "google-child"
                       }
-                      onOpen={() =>
-                        setActive({ kind: "provider", id: "files-csv" })
-                      }
+                      onOpen={() => setActive({ kind: "google-stack" })}
                     />
                   </li>
-                </ul>
-              ) : null}
-            </div>
-          </div>
+                );
+              }
+              const p = providerById(id);
+              if (!p) return null;
+              return (
+                <li key={id}>
+                  <ProviderChip
+                    provider={p}
+                    selected={
+                      active?.kind === "provider" && active.id === id
+                    }
+                    onOpen={() => setActive({ kind: "provider", id })}
+                  />
+                </li>
+              );
+            })}
+          </ul>
 
           {(popoverProvider && popoverStory) ||
           active?.kind === "google-stack" ? (
@@ -219,12 +177,15 @@ export function ConnectionOriginSection() {
         </div>
       </div>
 
-      <Link href="/developers#integrations" className="rx-intake-more">
+      <Link
+        href={{ pathname: "/developers", hash: "integrations" }}
+        className="rx-intake-more"
+      >
         View all connection paths <span aria-hidden="true">→</span>
-        <em className="rx-intake-more-status">
-          Files / CSV · {capabilityBadge("filesCsv")}
-        </em>
       </Link>
+      <p className="rx-intake-more-note">
+        Files / CSV · {capabilityBadge("filesCsv")}
+      </p>
     </div>
   );
 }
