@@ -22,6 +22,7 @@ import { ResearchEvidenceStrip } from "@/components/marketing/kinetic/ResearchEv
 import { PilotTimeline } from "@/components/marketing/kinetic/PilotTimeline";
 import type { ProblemFamily, ProgressionStage } from "@/lib/radr/problemFamilies";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const LEAK_ORDER: ProblemFamily[] = [
   "SUPPLIER_AP",

@@ -26,9 +26,9 @@
     }
   },
   "pilot": {
-    "kicker": "Recovery Pilot",
+    "kicker": "Start",
     "verb": "Prove",
-    "title": "Choose your first recovery scope.",
+    "title": "Start where the value is clearest.",
     "lead": "14 days to find and action recoverable value. Open cases stay on RADR until resolved, verified, or closed.",
     "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
     "priceLabel": "Recovery Pilot",
@@ -44,12 +44,12 @@
     ]
   },
   "core": {
-    "name": "RADR Core",
+    "name": "Expand",
     "verb": "Decide + Verify",
     "line": "Expand from recovery into recurring Decisions across the operation.",
     "audience": "Connect the operation. Make better Decisions. Verify what changed.",
     "priceLabel": "Priced by location + operating scope",
-    "cta": "Discuss Core",
+    "cta": "Discuss Expand",
     "features": [
       "Cross-system Decisions",
       "Broader operating coverage",
@@ -59,22 +59,22 @@
     ]
   },
   "progression": {
-    "kicker": "How to start",
-    "title": "Recover → Decide → Govern.",
+    "kicker": "One brand · RADR",
+    "title": "Start → Expand → Enterprise.",
     "lead": "Pricing scales with the operating scope RADR takes on.",
-    "recover": "Recover",
-    "decide": "Decide",
-    "govern": "Govern"
+    "recover": "Start",
+    "decide": "Expand",
+    "govern": "Enterprise"
   },
   "control": {
-    "name": "RADR Control",
+    "name": "Enterprise",
     "verb": "Govern",
     "line": "Govern trusted Decisions across locations.",
     "audience": "Coordinate, approve and learn across the group.",
     "priceLabel": "Portfolio / group pricing",
-    "cta": "Discuss Control",
+    "cta": "Discuss Enterprise",
     "features": [
-      "Everything in RADR Core",
+      "Everything in Expand",
       "Prepared Actions and approval workflows",
       "Multi-location governance",
       "Autopilot within policy",

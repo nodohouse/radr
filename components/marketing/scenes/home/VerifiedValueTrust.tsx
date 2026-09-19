@@ -5,9 +5,9 @@
  */
 
 import { CANON_SUPPLIER } from "@/lib/radr/decision/demo/canonical";
-import { formatDecisionMoney } from "@/lib/radr/decision/core";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 
-const EUR = formatDecisionMoney(CANON_SUPPLIER.exposureEuro);
+const EUR = euro(ECON_D4102.verified);
 
 const STEPS = [
   { k: "Identified", v: EUR, tone: "neutral" as const },

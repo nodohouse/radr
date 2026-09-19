@@ -6,6 +6,7 @@
  */
 
 import { useState } from "react";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 
 export type TraceStage = {
   id: string;
@@ -14,35 +15,37 @@ export type TraceStage = {
   detail: string;
 };
 
+const EUR = euro(ECON_D4102.verified);
+
 const DEFAULT_STAGES: TraceStage[] = [
   {
     id: "exposure",
     label: "Exposure",
-    euro: "€273",
+    euro: EUR,
     detail: "Invoice above contract · 420 L · variance detected.",
   },
   {
     id: "expected",
     label: "Expected",
-    euro: "€273",
+    euro: EUR,
     detail: "Dispute prepared · credit expected if evidence holds.",
   },
   {
     id: "observed",
     label: "Observed",
-    euro: "€273",
+    euro: EUR,
     detail: "Credit memo CM-44102 issued against INV-88421.",
   },
   {
     id: "attributed",
     label: "Attributed",
-    euro: "€273",
-    detail: "Matched to original Decision D-4102 · supplier variance class.",
+    euro: EUR,
+    detail: `Matched to original Decision ${ECON_D4102.displayId} · supplier variance class.`,
   },
   {
     id: "verified",
     label: "Verified",
-    euro: "€273",
+    euro: EUR,
     detail: "Closed in AP · claim only what you can prove.",
   },
 ];

@@ -12,7 +12,10 @@ import {
   RadrPhone,
 } from "@/components/marketing/scenes/home/RadrPhone";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 import "@/app/kinetic.css";
+
+const EUR = euro(ECON_D4102.verified);
 
 const LIFE = [
   "Detected",
@@ -251,18 +254,18 @@ export function PlatformSignature() {
               ))}
             </div>
             <div className="rx-euro-chip" data-sealed={value === 4 ? "true" : undefined}>
-              <strong>€273</strong>
+              <strong>{EUR}</strong>
               <em>{VALUE[value]}</em>
             </div>
             <p className="rx-psig-value-note">
               {value === 4
-                ? "€273 recovered · matched to INV-88421 · AP-POST-991"
+                ? `${EUR} recovered · matched to INV-88421 · AP-POST-991`
                 : value === 3
-                  ? "Linked to Decision D-4102 + prepared dispute"
+                  ? `Linked to Decision ${ECON_D4102.displayId} + prepared dispute`
                   : value === 2
                     ? "Credit memo observed on supplier ledger"
                     : value === 1
-                      ? "€273 Expected if dispute path holds — not cash"
+                      ? `${EUR} Expected if dispute path holds — not cash`
                       : "Contract variance identified across invoice + terms"}
             </p>
           </div>

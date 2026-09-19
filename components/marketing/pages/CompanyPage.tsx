@@ -15,6 +15,7 @@ import { CTAS } from "@/lib/marketing/brand";
 import { marketingImage } from "@/lib/marketing/publicImagery";
 import "@/app/company.css";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const BELIEFS = [
   { n: "01", title: "Humans provide the hospitality." },

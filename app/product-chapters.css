@@ -3910,6 +3910,20 @@ html:has(.rx-ch-light) body {
   box-shadow: 0 12px 40px rgba(10, 13, 11, 0.04);
 }
 
+.rx-cc-portfolio--quiet .rx-cc-portfolio-card {
+  grid-template-columns: minmax(0, 1fr);
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.1rem 0;
+}
+
+.rx-cc-portfolio--quiet {
+  gap: 0;
+}
+
 .rx-cc-portfolio-card[data-site="ams"] {
   grid-column: 1;
   grid-row: 1;

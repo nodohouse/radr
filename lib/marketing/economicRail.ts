@@ -76,6 +76,14 @@ export const HOME_RAIL: EconomicRailItem[] = [
     tone: "verified",
     detail: "Illustrative Verified outcome · matched evidence",
   },
+  {
+    id: "d4102v",
+    euro: money(CANON_SUPPLIER.actualProtectedEuro),
+    label: "Verified · D-4102",
+    meta: "DEMO",
+    tone: "verified",
+    detail: "Credit matched to original invoice",
+  },
 ];
 
 export const LEAK_MARQUEE: EconomicRailItem[] = [
@@ -107,10 +115,10 @@ export const PRICING_PROOF_RAIL: EconomicRailItem[] = [
   },
   {
     id: "v3",
-    euro: money(CANON_SUPPLIER.exposureEuro),
-    label: "Expected · D-4102",
-    meta: "Open",
-    tone: "exposure",
+    euro: money(CANON_SUPPLIER.actualProtectedEuro),
+    label: "Verified · D-4102",
+    meta: "DEMO",
+    tone: "verified",
   },
 ];
 

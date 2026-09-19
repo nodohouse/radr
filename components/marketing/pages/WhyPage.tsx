@@ -25,6 +25,7 @@ import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMo
 import "@/app/product-chapters.css";
 import "@/app/motion.css";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const FRAGMENTS = [
   { label: "PMS", value: "Nearly full", action: "Sell remaining", tone: "screen" },

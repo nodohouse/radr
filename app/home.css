@@ -14911,10 +14911,22 @@ html:has(.radr-home) body {
   }
 }
 
-/* Blog as editorial publication */
+/* Blog as editorial publication — magazine, not SaaS cards */
 .rx-res-pub .rx-res-pub-frame {
   display: grid;
   gap: clamp(2.5rem, 5vw, 4rem);
+}
+.rx-res-pub .rx-res-card {
+  border: none;
+  border-top: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 1.35rem 0;
+}
+.rx-res-pub .rx-res-card:hover {
+  box-shadow: none;
+  transform: none;
 }
 .rx-res-card {
   overflow: hidden;

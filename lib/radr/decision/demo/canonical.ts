@@ -875,11 +875,11 @@ export const CANON_SUPPLIER: CanonDecision = {
     },
   ],
   chosenScenarioId: "query",
-  /** Not an “expected recovered” figure — exposure / variance only until credit lands. */
-  expectedProtectedEuro: 0,
-  actualProtectedEuro: 0,
+  /** Recoverable expectation once dispute path is chosen — sealed demo credit matches variance. */
+  expectedProtectedEuro: 273,
+  actualProtectedEuro: 273,
   verifiedKind: "recovered",
-  attributionStrength: "MODELED",
+  attributionStrength: "STRONGLY_ATTRIBUTED",
   sources: [
     { name: "Contract", freshness: "08:12" },
     { name: "Invoice", freshness: "2 days" },

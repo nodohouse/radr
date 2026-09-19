@@ -28,10 +28,18 @@ import {
   MONEY_D1911_VERIFIED,
   formatPublicMoney,
 } from "@/lib/marketing/publicMoney";
+import {
+  euro,
+  ECON_D4102,
+} from "@/lib/marketing/publicDecisionEconomics";
 import { ValueTrace } from "@/components/marketing/kinetic/ValueTrace";
+import { DecisionObject } from "@/components/marketing/primitives/DecisionObject";
+import { EvidenceProvenance } from "@/components/marketing/primitives/EvidenceProvenance";
+import { VerifiedStamp } from "@/components/marketing/primitives/VerifiedStamp";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const STREAM = [
   { id: "D-1911", kind: "protected", amt: CANON_PEAK.actualProtectedEuro },
@@ -46,7 +54,7 @@ const STREAM = [
   { id: "D-1920", kind: "protected", amt: CANON_LABOR.actualProtectedEuro },
   {
     id: "D-4102",
-    kind: "closed",
+    kind: "recovered",
     amt: verifiedEuro(CANON_SUPPLIER),
   },
   { id: "D-4410", kind: "created", amt: CANON_CREATED.actualProtectedEuro },
@@ -110,6 +118,36 @@ export function ValueChapter() {
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
             <p className="rx-ch-kicker">
+              {ECON_D4102.displayId} · sealed recovery · DEMO
+            </p>
+            <DecisionObject
+              displayId={ECON_D4102.displayId}
+              title="Contract vs invoice · contribution compression"
+              amount={euro(ECON_D4102.verified)}
+              amountLabel="Verified recovered"
+              verified
+            >
+              <VerifiedStamp verified label="Verified recovered" />
+              <div style={{ marginTop: "0.85rem" }}>
+                <EvidenceProvenance
+                  steps={[
+                    { label: "Variance", value: euro(ECON_D4102.exposed) },
+                    { label: "Expected", value: euro(ECON_D4102.expected) },
+                    {
+                      label: "Verified",
+                      value: euro(ECON_D4102.verified),
+                      verified: true,
+                    },
+                  ]}
+                />
+              </div>
+              <p style={{ marginTop: "0.85rem" }}>
+                Credit matched to INV-88421 · AP-POST-991. A recommendation is
+                not value — this trail is.
+              </p>
+            </DecisionObject>
+
+            <p className="rx-ch-kicker" style={{ marginTop: "2.5rem" }}>
               {MONEY_D1911_EXPECTED.displayId} · peak capacity · DEMO
             </p>
             <ValueTrace
@@ -183,23 +221,15 @@ export function ValueChapter() {
                     data-on={s.id === openId && proof ? "true" : undefined}
                   >
                     <em>{s.id}</em>
-                    <strong>
-                      {s.kind === "closed" && s.amt === 0
-                        ? "€0"
-                        : money(s.amt)}
-                    </strong>
-                    <span>
-                      {s.kind === "closed"
-                        ? "CLOSED · NO VERIFIED RECOVERY"
-                        : s.kind}
-                    </span>
+                    <strong>{money(s.amt)}</strong>
+                    <span>{s.kind}</span>
                   </button>
                 </li>
               ))}
             </ul>
             <p className="rx-value-stream-note">
-              Selected sample Decisions — not a rollup. Zero-recovery cases stay
-              labeled when they close without verified value.
+              Selected sample Decisions — not a rollup. Sealed recoveries show
+              verified amounts; open cases stay unlabeled as verified.
             </p>
 
             {proof && chosen ? (

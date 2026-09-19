@@ -21,6 +21,7 @@ import "@/app/product-chapters.css";
 import "@/app/home.css";
 import "@/app/econ.css";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const PATH_BY_ID: Record<string, { d: string; band: number }> = {
   fut_orphan_discount: {

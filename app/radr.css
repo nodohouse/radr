@@ -806,9 +806,9 @@ html:has(.radr) body {
 
 /* Nav: brand aligns with .rx-shell content edge */
 .rx-nav {
-  --nav-inset: 12px;
-  --nav-bar-h: 52px;
-  --nav-pad-x: 0.75rem;
+  --nav-inset: 16px;
+  --nav-bar-h: 56px;
+  --nav-pad-x: 1rem;
   position: fixed;
   top: var(--nav-inset);
   /* Extend past shell by nav pad so brand text shares the shell left edge */

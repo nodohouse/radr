@@ -10,10 +10,16 @@ import {
   MONEY_D3104_EXPECTED,
   MONEY_D3104_OBSERVED,
   MONEY_D3104_VERIFIED,
+  MONEY_D4102_EXPECTED,
   MONEY_D4102_VARIANCE,
   MONEY_D4102_VERIFIED,
   PUBLIC_MONEY_FIXTURES,
 } from "@/lib/marketing/publicMoney";
+import { ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
+import {
+  CANON_SUPPLIER,
+  verifiedEuro,
+} from "@/lib/radr/decision/demo/canonical";
 import { PUBLIC_CAPABILITIES } from "@/lib/marketing/capabilityStatus";
 import { CATEGORY } from "@/lib/marketing/brand";
 
@@ -27,12 +33,30 @@ describe("public money fixtures", () => {
     expect(MONEY_D1911_EXPECTED.metricType).not.toBe("exposure");
   });
 
-  it("D-4102 €273 is invoice variance / exposure — not expected value", () => {
+  it("D-4102 sealed recovery — variance + verified recovered €273", () => {
     expect(MONEY_D4102_VARIANCE.amount).toBe(273);
     expect(MONEY_D4102_VARIANCE.metricType).toBe("invoice_variance");
-    expect(MONEY_D4102_VARIANCE.label.toLowerCase()).not.toContain("expected value");
-    expect(MONEY_D4102_VERIFIED.amount).toBe(0);
-    expect(MONEY_D4102_VERIFIED.label.toLowerCase()).toContain("no verified");
+    expect(MONEY_D4102_VARIANCE.label.toLowerCase()).not.toContain(
+      "expected value",
+    );
+    expect(MONEY_D4102_EXPECTED.amount).toBe(273);
+    expect(MONEY_D4102_VERIFIED.amount).toBe(273);
+    expect(MONEY_D4102_VERIFIED.label.toLowerCase()).toContain(
+      "verified recovered",
+    );
+    expect(MONEY_D4102_VERIFIED.label.toLowerCase()).not.toContain(
+      "no verified",
+    );
+  });
+
+  it("D-4102 public surfaces cannot disagree on verified amount", () => {
+    const sealed = 273;
+    expect(CANON_SUPPLIER.actualProtectedEuro).toBe(sealed);
+    expect(CANON_SUPPLIER.expectedProtectedEuro).toBe(sealed);
+    expect(verifiedEuro(CANON_SUPPLIER)).toBe(sealed);
+    expect(MONEY_D4102_VERIFIED.amount).toBe(sealed);
+    expect(ECON_D4102.verified).toBe(sealed);
+    expect(ECON_D4102.primary).toBe(sealed);
   });
 
   it("D-3104 keeps expected / observed / verified distinct", () => {

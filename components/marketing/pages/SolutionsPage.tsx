@@ -15,6 +15,7 @@ import {
   TERRITORY_DEFINITIONS,
 } from "@/lib/radr/intelligence";
 import type { CanonDecision } from "@/lib/radr/decision/demo/canonical";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 import { useTranslations } from "next-intl";
 import { StickyStory } from "@/components/marketing/kinetic/StickyStory";
 import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual";
@@ -231,7 +232,7 @@ function LensChoreography({ id }: { id: TerritoryRouteId }) {
         <div className="rx-intel-cause-split">
           <div>
             <em>Price effect</em>
-            <strong>€273</strong>
+            <strong>{euro(ECON_D4102.exposed)}</strong>
             <span>Current supplier variance</span>
           </div>
           <div>

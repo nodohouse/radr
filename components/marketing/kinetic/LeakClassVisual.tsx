@@ -5,6 +5,7 @@
  */
 
 import type { ProblemFamily } from "@/lib/radr/problemFamilies";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 
 export function LeakClassVisual({
   family,
@@ -30,6 +31,8 @@ export function LeakClassVisual({
 }
 
 function SupplierApVisual() {
+  const gap = euro(ECON_D4102.exposed);
+  const recovered = euro(ECON_D4102.verified);
   return (
     <div className="rx-lcv-supplier">
       <div className="rx-lcv-line" data-kind="contract">
@@ -44,11 +47,11 @@ function SupplierApVisual() {
       </div>
       <div className="rx-lcv-gap">
         <span>Gap opens</span>
-        <strong>€273</strong>
+        <strong>{gap}</strong>
       </div>
       <div className="rx-lcv-credit">
         <em>Credit returns</em>
-        <strong data-tone="verified">€273</strong>
+        <strong data-tone="verified">{recovered}</strong>
       </div>
     </div>
   );

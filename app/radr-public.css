@@ -1,0 +1,364 @@
+/**
+ * RADR public design tokens + primitive surfaces.
+ * Marketing pages consume these; do not invent parallel type/spacing scales.
+ */
+
+:root {
+  --rx-sec-y: clamp(4.5rem, 9vw, 7.5rem);
+  --rx-sec-y-tight: clamp(3rem, 6vw, 4.75rem);
+  --rx-ink: #0a0d0b;
+  --rx-mute: #626a65;
+  --rx-canvas: #f7faf8;
+  --rx-surface: #ffffff;
+  --rx-line: rgba(10, 13, 11, 0.1);
+  --rx-verified: #00a85a;
+  --rx-live: #00d978;
+  --rx-display: clamp(2.4rem, 5.5vw, 3.75rem);
+  --rx-statement: clamp(1.55rem, 3.2vw, 2.25rem);
+  --rx-product-num: clamp(2.8rem, 7vw, 4.75rem);
+  --rx-body: clamp(1rem, 1.2vw, 1.125rem);
+  --rx-micro: 0.68rem;
+}
+
+.rx-pub-display {
+  font-size: var(--rx-display);
+  font-weight: 620;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--rx-ink);
+}
+
+.rx-pub-statement {
+  font-size: var(--rx-statement);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+  color: var(--rx-ink);
+}
+
+.rx-pub-num {
+  font-size: var(--rx-product-num);
+  font-weight: 620;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+  color: var(--rx-ink);
+}
+
+.rx-pub-num[data-tone="verified"] {
+  color: var(--rx-verified);
+}
+
+.rx-pub-body {
+  font-size: var(--rx-body);
+  line-height: 1.55;
+  color: var(--rx-mute);
+}
+
+.rx-pub-micro {
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: var(--rx-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rx-mute);
+}
+
+/* —— DecisionObject —— */
+.rx-do {
+  background: var(--rx-surface);
+  border: 1px solid var(--rx-line);
+  border-radius: 1.1rem;
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+}
+
+.rx-do-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 1.15rem;
+}
+
+.rx-do-id {
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rx-mute);
+}
+
+.rx-do-title {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  color: var(--rx-ink);
+}
+
+.rx-do-amount {
+  text-align: right;
+}
+
+.rx-do-amount strong {
+  display: block;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--rx-ink);
+}
+
+.rx-do-amount[data-tone="verified"] strong {
+  color: var(--rx-verified);
+}
+
+.rx-do-amount em {
+  display: block;
+  margin-top: 0.35rem;
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rx-mute);
+}
+
+.rx-do-body {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--rx-mute);
+}
+
+/* —— EvidenceProvenance —— */
+.rx-ep {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.15rem;
+}
+
+.rx-ep li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--rx-mute);
+}
+
+.rx-ep li strong {
+  font-weight: 560;
+  color: var(--rx-ink);
+}
+
+.rx-ep li[data-tone="verified"] strong {
+  color: var(--rx-verified);
+}
+
+.rx-ep-sep {
+  opacity: 0.35;
+  margin: 0 0.15rem;
+}
+
+/* —— VerifiedStamp —— */
+.rx-vs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rx-mute);
+}
+
+.rx-vs[data-on="true"] {
+  color: var(--rx-verified);
+}
+
+.rx-vs-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* —— AttentionBrief —— */
+.rx-ab {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.rx-ab-need {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  letter-spacing: -0.03em;
+  color: var(--rx-ink);
+}
+
+.rx-ab-quiet {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--rx-mute);
+}
+
+/* —— Hero financial instrument —— */
+.rx-fin {
+  position: relative;
+  background: var(--rx-surface);
+  border: 1px solid var(--rx-line);
+  border-radius: 1.25rem;
+  padding: clamp(1.35rem, 3vw, 1.85rem);
+  overflow: hidden;
+}
+
+.rx-fin-eye {
+  margin: 0;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rx-mute);
+}
+
+.rx-fin-place {
+  margin: 0.25rem 0 0;
+  font-size: 0.88rem;
+  color: var(--rx-mute);
+}
+
+.rx-fin-hero {
+  margin: 1.35rem 0 1.1rem;
+}
+
+.rx-fin-hero strong {
+  display: block;
+  font-size: var(--rx-product-num);
+  font-weight: 620;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  color: var(--rx-ink);
+  transition: color 280ms ease;
+}
+
+.rx-fin[data-sealed="true"] .rx-fin-hero strong {
+  color: var(--rx-verified);
+}
+
+.rx-fin-hero em {
+  display: block;
+  margin-top: 0.45rem;
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rx-mute);
+}
+
+.rx-fin[data-sealed="true"] .rx-fin-hero em {
+  color: var(--rx-verified);
+}
+
+.rx-fin-ladder {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.rx-fin-ladder li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-top: 1px solid rgba(10, 13, 11, 0.06);
+  opacity: 0.28;
+  transition: opacity 220ms ease;
+}
+
+.rx-fin-ladder li[data-on="true"] {
+  opacity: 0.72;
+}
+
+.rx-fin-ladder li[data-active="true"] {
+  opacity: 1;
+}
+
+.rx-fin-ladder em {
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rx-mute);
+}
+
+.rx-fin-ladder strong {
+  font-size: 0.95rem;
+  font-weight: 560;
+  color: var(--rx-ink);
+  text-align: right;
+}
+
+.rx-fin-ladder li[data-seal="true"] strong {
+  color: var(--rx-verified);
+}
+
+.rx-fin-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.15rem;
+  font-size: 0.9rem;
+  font-weight: 560;
+  color: var(--rx-ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.28);
+}
+
+.rx-fin-cta:hover {
+  border-bottom-color: rgba(10, 13, 11, 0.7);
+}
+
+.rx-fin-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.78rem;
+  color: var(--rx-mute);
+}
+
+/* —— Quiet Control Center surface —— */
+.rx-hcc {
+  max-width: none;
+}
+
+.rx-hcc-stage {
+  border-radius: 1.35rem;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(10, 13, 11, 0.07);
+  padding: clamp(1.5rem, 3.5vw, 2.15rem);
+}
+
+.rx-hcc-rows li {
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 0;
+  padding: 1.15rem 0;
+}
+
+.rx-hcc-rows li:first-child {
+  border-top: none;
+  padding-top: 0.25rem;
+}
+
+.rx-hcc-quiet {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(10, 13, 11, 0.06);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--rx-mute);
+}

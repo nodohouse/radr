@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Living €273 recovery — one object evolves through the loop.
+ * Living recovery story — one object evolves through the loop.
  * CONTRACT → INVOICE → EXPOSURE → DECISION → CREDIT → VERIFIED.
  */
 

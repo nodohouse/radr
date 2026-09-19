@@ -6,10 +6,8 @@
  */
 
 import { useState } from "react";
-import { EconomicRail } from "@/components/marketing/kinetic/EconomicRail";
 import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual";
 import { HospitalityContextSwitch } from "@/components/marketing/kinetic/HospitalityContextSwitch";
-import { LEAK_MARQUEE } from "@/lib/marketing/economicRail";
 import {
   type HospitalityVertical,
 } from "@/lib/marketing/hospitalityContext";
@@ -133,13 +131,6 @@ export function ValueLeaksNarratives() {
 
   return (
     <div className="rx-vl-narratives rx-atlas">
-      <EconomicRail
-        items={LEAK_MARQUEE}
-        durationSec={40}
-        variant="compact"
-        ariaLabel="Where value leaks examples"
-      />
-
       <section className="rx-vl-section rx-atlas-sec" data-nav-theme="light">
         <div className="rx-shell">
           <header className="rx-vl-head">

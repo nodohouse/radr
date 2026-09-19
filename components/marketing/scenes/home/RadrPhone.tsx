@@ -5,6 +5,8 @@
  * Not a shrunk desktop. Not decorative stock mockup.
  */
 
+import { euro, ECON_D4102, ECON_D1911 } from "@/lib/marketing/publicDecisionEconomics";
+
 export type RadrPhoneTone = "urgent" | "brief" | "shift" | "recover" | "verified";
 
 export type RadrPhoneState = {
@@ -19,11 +21,14 @@ export type RadrPhoneState = {
   tone: RadrPhoneTone;
 };
 
+const EUR_4102 = euro(ECON_D4102.verified);
+const EUR_1911 = euro(ECON_D1911.expected);
+
 export const PHONE_CFO_RECOVER: RadrPhoneState = {
   id: "cfo",
   role: "CFO",
   badge: "Recover",
-  title: "€273 SUPPLIER VARIANCE",
+  title: `${EUR_4102} SUPPLIER VARIANCE`,
   body: "Evidence ready.",
   meta: "Always ask before sending",
   primary: "Review case",
@@ -35,8 +40,8 @@ export const PHONE_GM_PERISHABLE: RadrPhoneState = {
   role: "GM",
   badge: "Needs you",
   title: "WAIT 12 MINUTES",
-  body: "€620 expected.",
-  meta: "D-1911 · Dinner",
+  body: `${EUR_1911} expected.`,
+  meta: `${ECON_D1911.displayId} · Dinner`,
   primary: "Approve",
   tone: "urgent",
 };
@@ -45,7 +50,7 @@ export const PHONE_VERIFIED: RadrPhoneState = {
   id: "verified",
   role: "Finance",
   badge: "Verified",
-  title: "€273 recovered",
+  title: `${EUR_4102} recovered`,
   body: "Matched to invoice INV-88421.",
   meta: "View Trace",
   primary: "Open Trace",

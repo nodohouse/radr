@@ -1,16 +1,18 @@
 "use client";
 
 /**
- * Hero product moment — complete D-4102 micro-recovery.
- * ROI-first vertical ladder. Reduced-motion shows sealed state.
+ * Hero product moment — D-4102 as a financial instrument.
+ * Large euro + restrained provenance. Green only on sealed VERIFIED.
  */
 
 import { useEffect, useState } from "react";
-import { CANON_SUPPLIER } from "@/lib/radr/decision/demo/canonical";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
+import { EvidenceProvenance } from "@/components/marketing/primitives/EvidenceProvenance";
+import { VerifiedStamp } from "@/components/marketing/primitives/VerifiedStamp";
+import "@/app/radr-public.css";
 
-const VARIANCE = CANON_SUPPLIER.exposureEuro;
-const EUR = `€${VARIANCE.toLocaleString("en-US")}`;
+const EUR = euro(ECON_D4102.verified);
 
 const STEPS = [
   { id: "contract", kicker: "Contract", value: "€6.80 / L" },
@@ -63,20 +65,35 @@ export function HeroRecoveryScene() {
 
   return (
     <aside
-      className="rx-hvr"
+      className="rx-fin"
       data-sealed={sealed ? "true" : undefined}
-      aria-label={`Verified recovery ${CANON_SUPPLIER.displayId}`}
+      aria-label={`Verified recovery ${ECON_D4102.displayId}`}
     >
-      <header className="rx-hvr-head">
-        <p className="rx-hvr-eye">
-          Verified recovery · {CANON_SUPPLIER.displayId}
+      <header>
+        <p className="rx-fin-eye">
+          Verified recovery · {ECON_D4102.displayId}
         </p>
-        <p className="rx-hvr-place">
-          {CANON_SUPPLIER.property} · Supplier / AP
-        </p>
+        <p className="rx-fin-place">Berlin Mitte · Supplier / AP</p>
+        <div style={{ marginTop: "0.65rem" }}>
+          <VerifiedStamp verified={sealed} label="Verified recovered" />
+        </div>
       </header>
 
-      <ol className="rx-hvr-ladder">
+      <div className="rx-fin-hero">
+        <strong>{EUR}</strong>
+        <em>{sealed ? "Verified recovered" : "Contract variance"}</em>
+      </div>
+
+      <EvidenceProvenance
+        steps={[
+          { label: "Contract", value: "€6.80" },
+          { label: "Invoice", value: "€7.45" },
+          { label: "Credit", value: EUR },
+          { label: "Verified", value: EUR, verified: sealed },
+        ]}
+      />
+
+      <ol className="rx-fin-ladder" aria-hidden="true">
         {STEPS.map((s, i) => (
           <li
             key={s.id}
@@ -86,20 +103,15 @@ export function HeroRecoveryScene() {
           >
             <em>{s.kicker}</em>
             <strong>{s.value}</strong>
-            {i < LAST ? (
-              <span className="rx-hvr-arrow" aria-hidden="true">
-                ↓
-              </span>
-            ) : null}
           </li>
         ))}
       </ol>
 
-      <a href="#verified-recovery" className="rx-hvr-cta">
+      <a href="#verified-recovery" className="rx-fin-cta">
         {sealed ? "Open verified recovery" : "See a verified recovery"}{" "}
         <span aria-hidden="true">→</span>
       </a>
-      <p className="rx-hvr-note">Illustrative demo · not customer results</p>
+      <p className="rx-fin-note">Illustrative demo · not customer results</p>
     </aside>
   );
 }

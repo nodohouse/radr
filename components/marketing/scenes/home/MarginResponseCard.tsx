@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 
 export type MarginFuture = {
   id: string;
@@ -29,15 +30,16 @@ export type MarginStory = {
   tabLabel: string;
 };
 
+const EUR = euro(ECON_D4102.verified);
+
 export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
   id: "credit-not-applied",
   kicker: "Supplier / AP · Finance",
-  displayId: "D-4102 · Berlin Mitte · Demo",
+  displayId: `${ECON_D4102.displayId} · Berlin Mitte · Demo`,
   variance: "Contract price variance",
-  because:
-    "Invoice €7.45/L vs contract €6.80/L · 420 L — €273 exposed",
-  euro: "€273",
-  grade: "Expected",
+  because: `Invoice €7.45/L vs contract €6.80/L · 420 L — ${euro(ECON_D4102.exposed)} exposed`,
+  euro: EUR,
+  grade: "Verified",
   futures: [
     { id: "absorb", label: "Absorb" },
     { id: "dispute", label: "Dispute", rec: true },

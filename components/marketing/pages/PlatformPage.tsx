@@ -15,13 +15,13 @@ import "@/app/editorial.css";
 import "@/app/econ.css";
 import "@/app/home.css";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const ARCH = [
   { href: "/product/control-center", label: "Control Center" },
   { href: "/product/decisions", label: "Decision" },
   { href: "/product/futures", label: "Futures" },
   { href: "/product/actions", label: "Action" },
-  { href: "/product/floor", label: "Floor" },
   { href: "/product/value", label: "Verified" },
   { href: "/product/memory", label: "Memory" },
 ] as const;

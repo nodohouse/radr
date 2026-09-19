@@ -12,9 +12,13 @@ import {
 } from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { CTAS } from "@/lib/marketing/brand";
+import { DecisionObject } from "@/components/marketing/primitives/DecisionObject";
+import { EvidenceProvenance } from "@/components/marketing/primitives/EvidenceProvenance";
+import { VerifiedStamp } from "@/components/marketing/primitives/VerifiedStamp";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const ACTS = [
   {
@@ -92,27 +96,38 @@ export function DecisionsChapter() {
             ))}
           </div>
 
-          <article
-            className="rx-dec-object"
-            data-stage={current.id}
-            data-sealed={sealed ? "true" : undefined}
+          <DecisionObject
             key={current.id}
+            displayId={`${d.displayId} · ${d.property}`}
+            title={current.line}
+            amount={current.euro}
+            amountLabel={current.grade}
+            verified={sealed}
+            className="rx-dec-object"
           >
-            <header>
-              <em>
-                {d.displayId} · {d.property}
-              </em>
-              <div
-                className="rx-euro-chip"
-                data-sealed={sealed ? "true" : undefined}
-              >
-                <strong>{current.euro}</strong>
-                <em>{current.grade}</em>
-              </div>
-            </header>
-            <h2>{current.line}</h2>
+            <VerifiedStamp
+              verified={sealed}
+              label="Verified protected"
+              pendingLabel={current.grade}
+            />
+            <div style={{ marginTop: "0.85rem" }}>
+              <EvidenceProvenance
+                steps={[
+                  { label: "Exposed", value: formatDecisionMoney(d.exposureEuro) },
+                  {
+                    label: "Expected",
+                    value: formatDecisionMoney(d.expectedProtectedEuro),
+                  },
+                  {
+                    label: "Observed",
+                    value: formatDecisionMoney(d.actualProtectedEuro),
+                    verified: sealed,
+                  },
+                ]}
+              />
+            </div>
             {current.id === "options" ? (
-              <div className="rx-plat-live-paths">
+              <div className="rx-plat-live-paths" style={{ marginTop: "1rem" }}>
                 {d.scenarios.map((s) => (
                   <p key={s.id} data-rec={s.recommended ? "true" : undefined}>
                     <span>
@@ -135,7 +150,7 @@ export function DecisionsChapter() {
                 {d.learning.playbookFrom} → {d.learning.playbookTo}
               </p>
             ) : null}
-          </article>
+          </DecisionObject>
 
           <div className="rx-ch-ctas" style={{ marginTop: "2rem" }}>
             <NextLink href="/product/memory" className="rx-btn rx-btn-primary">

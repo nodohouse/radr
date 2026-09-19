@@ -117,15 +117,20 @@ export const MONEY_D4102_VERIFIED = eur(verifiedEuro(CANON_SUPPLIER), {
   state: "verified",
   scope: "invoice",
   baseline: "vs contract",
-  attribution:
-    verifiedEuro(CANON_SUPPLIER) === 0
-      ? "not_applicable"
-      : "strongly_attributed",
+  attribution: "strongly_attributed",
   timeWindow: "settlement window",
-  label:
-    verifiedEuro(CANON_SUPPLIER) === 0
-      ? "Closed · no verified recovery"
-      : "Verified recovered",
+  label: "Verified recovered",
+  displayId: "D-4102",
+});
+
+export const MONEY_D4102_EXPECTED = eur(CANON_SUPPLIER.expectedProtectedEuro, {
+  metricType: "expected_protected",
+  state: "expected",
+  scope: "invoice",
+  baseline: "vs contract · dispute path",
+  attribution: "not_applicable",
+  timeWindow: "settlement window",
+  label: "Expected recoverable variance",
   displayId: "D-4102",
 });
 
@@ -211,6 +216,7 @@ export const PUBLIC_MONEY_FIXTURES = {
   },
   "D-4102": {
     variance: MONEY_D4102_VARIANCE,
+    expected: MONEY_D4102_EXPECTED,
     verified: MONEY_D4102_VERIFIED,
   },
   "D-3104": {

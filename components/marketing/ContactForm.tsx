@@ -163,11 +163,12 @@ export function ContactForm({
         </div>
 
         <div className="rx-contact-field">
-          <label htmlFor="contact-locations">{t("locations")}</label>
-          <select id="contact-locations" name="locations" defaultValue="" required>
-            <option value="" disabled>
-              {t("select")}
-            </option>
+          <label htmlFor="contact-locations">
+            {t("locations")}{" "}
+            <span className="rx-contact-optional">{t("optional")}</span>
+          </label>
+          <select id="contact-locations" name="locations" defaultValue="">
+            <option value="">{t("select")}</option>
             {LOCATION_OPTIONS.map((value) => (
               <option key={value} value={value}>
                 {t(`locationRanges.${value}`)}
@@ -179,11 +180,12 @@ export function ContactForm({
 
       <div className="rx-contact-row">
         <div className="rx-contact-field">
-          <label htmlFor="contact-industry">{t("industry")}</label>
-          <select id="contact-industry" name="industry" defaultValue="" required>
-            <option value="" disabled>
-              {t("select")}
-            </option>
+          <label htmlFor="contact-industry">
+            {t("industry")}{" "}
+            <span className="rx-contact-optional">{t("optional")}</span>
+          </label>
+          <select id="contact-industry" name="industry" defaultValue="">
+            <option value="">{t("select")}</option>
             {INDUSTRY_OPTIONS.map((value) => (
               <option key={value} value={value}>
                 {t(`industries.${value}`)}

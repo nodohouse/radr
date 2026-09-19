@@ -9,6 +9,7 @@
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { Link } from "@/i18n/navigation";
 import type { RoleId } from "@/components/marketing/kinetic/RoleProjection";
+import { euro, ECON_D4102, ECON_D1911 } from "@/lib/marketing/publicDecisionEconomics";
 
 const ROLE_ORDER: RoleId[] = ["cfo", "gm", "foh"];
 
@@ -17,6 +18,9 @@ const ROLE_TAB: Record<RoleId, string> = {
   gm: "GM",
   foh: "Floor",
 };
+
+const EUR_4102 = euro(ECON_D4102.verified);
+const EUR_1911 = euro(ECON_D1911.expected);
 
 const SCENES: Record<
   RoleId,
@@ -38,31 +42,31 @@ const SCENES: Record<
 > = {
   cfo: {
     deskK: "CFO · Finance",
-    idLine: "D-4102 · Supplier / AP",
-    headline: "€273 supplier recovery",
+    idLine: `${ECON_D4102.displayId} · Supplier / AP`,
+    headline: `${EUR_4102} supplier recovery`,
     lines: [
       "Contract €6.80/L · Invoice €7.45/L",
-      "Evidence package prepared",
-      "Case status · Pending verification",
+      "Credit matched to original invoice",
+      "Verified recovered",
     ],
-    status: "Recovery staged · credit path open",
-    tone: "exposure",
+    status: "Verified · matched to INV-88421",
+    tone: "verified",
     field: {
-      badge: "Recover",
-      title: "€273 SUPPLIER VARIANCE",
-      body: "Evidence ready.",
-      meta: "Always ask before sending",
-      cta: "Review case",
+      badge: "Verified",
+      title: `${EUR_4102} RECOVERED`,
+      body: "Matched to invoice.",
+      meta: `${ECON_D4102.displayId} · View Trace`,
+      cta: "Open Trace",
     },
   },
   gm: {
     deskK: "GM · Operations",
-    idLine: "D-1911 · Dinner service",
+    idLine: `${ECON_D1911.displayId} · Dinner service`,
     headline: "WAIT 12 MINUTES",
     lines: [
       "Kitchen pressure at 19:00",
       "38 inbound covers",
-      "€620 expected vs seat-now",
+      `${EUR_1911} expected vs seat-now`,
     ],
     status: "Needs approval · perishable window",
     tone: "urgent",

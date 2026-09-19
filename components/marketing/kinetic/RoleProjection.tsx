@@ -5,6 +5,8 @@
  * GM / CFO / FOH see different information by design.
  */
 
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
+
 export type RoleId = "cfo" | "gm" | "foh";
 
 export type RoleCard = {
@@ -21,13 +23,13 @@ export const DEFAULT_ROLE_CARDS: RoleCard[] = [
     id: "cfo",
     role: "CFO",
     kicker: "Finance",
-    headline: "€273 supplier recovery",
+    headline: `${euro(ECON_D4102.verified)} supplier recovery`,
     lines: [
-      "D-4102 · contract vs invoice",
-      "Dispute staged · credit path open",
-      "Not yet verified",
+      `${ECON_D4102.displayId} · contract vs invoice`,
+      "Credit matched to original invoice",
+      "Verified recovered",
     ],
-    tone: "exposure",
+    tone: "verified",
   },
   {
     id: "gm",

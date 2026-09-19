@@ -8,6 +8,7 @@ import {
   CANON_PEAK,
   money,
 } from "@/data/demo";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 
 type PreviewRow = { label: string; value: string };
 
@@ -199,7 +200,7 @@ PREVIEWS.overview = PREVIEWS.decision;
 const INTEL_SCENES = [
   {
     vertical: "Supplier / AP",
-    line: "€273 exposed · credit never applied",
+    line: `${euro(ECON_D4102.verified)} recovered · matched to invoice`,
   },
   {
     vertical: "Reconciliation",

@@ -11,6 +11,7 @@ import {
   type CanonDecision,
 } from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
+import { ECON_D4102, ECON_D1911 } from "@/lib/marketing/publicDecisionEconomics";
 
 export type HospitalityVertical =
   | "restaurant"
@@ -163,9 +164,9 @@ export function restaurantRecoverPhone(): HeroSceneModel["phone"] {
   return {
     role: "CFO",
     badge: "Recover",
-    title: "€273 SUPPLIER VARIANCE",
+    title: `${euro(ECON_D4102.exposed)} SUPPLIER VARIANCE`,
     body: "Evidence ready",
-    meta: "D-4102 · Always ask",
+    meta: `${ECON_D4102.displayId} · Always ask`,
     primary: "Review case",
     tone: "recover",
   };
@@ -177,8 +178,8 @@ export function restaurantUrgentPhone(): HeroSceneModel["phone"] {
     role: "GM",
     badge: "Needs you",
     title: "WAIT 12 MINUTES",
-    body: "€620 expected",
-    meta: "D-1911 · Dinner",
+    body: `${euro(ECON_D1911.expected)} expected`,
+    meta: `${ECON_D1911.displayId} · Dinner`,
     primary: "Approve",
     tone: "urgent",
   };

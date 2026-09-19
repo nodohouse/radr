@@ -18,9 +18,9 @@ import {
 } from "@/data/demo";
 import {
   canonScenario,
-  CANON_SUPPLIER,
 } from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
+import { euro, ECON_D1911, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 import { SilenceField } from "@/components/marketing/kinetic/SilenceField";
 import { CTAS } from "@/lib/marketing/brand";
 import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
@@ -28,6 +28,7 @@ import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMo
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
 import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const PORTFOLIO = [
   {
@@ -43,8 +44,8 @@ const PORTFOLIO = [
     site: "Berlin",
     status: "needs-you",
     headline: "Needs you",
-    line: `${money(CANON_PEAK.exposureEuro)} contribution vs seat-now`,
-    meta: `${CANON_PEAK.displayId} · peak capacity · decide before 18:53`,
+    line: `${euro(ECON_D1911.expected)} expected incremental vs seat-now`,
+    meta: `${ECON_D1911.displayId} · peak capacity · decide before 18:53`,
   },
   {
     id: "lis",
@@ -89,8 +90,8 @@ const ROLES = [
     label: "Group CFO",
     lens: "economics",
     line: `Portfolio · ${BRIEF_ATTENTION.needsYou} judgments across environments`,
-    meta: `Berlin peak + Amsterdam channel · ${formatDecisionMoney(CANON_SUPPLIER.exposureEuro)} supplier open`,
-    exposure: CANON_OTA.exposureEuro + CANON_PEAK.exposureEuro,
+    meta: `Berlin peak + Amsterdam channel · ${euro(ECON_D4102.verified)} supplier verified`,
+    exposure: CANON_OTA.exposureEuro + CANON_PEAK.expectedProtectedEuro,
     decision: "Group exposure · same Decision engine",
   },
 ] as const;
@@ -164,7 +165,7 @@ export function ControlCenterChapter() {
               primary Decision → role lens
             </p>
             <div
-              className="rx-cc-portfolio"
+              className="rx-cc-portfolio rx-cc-portfolio--quiet"
               aria-label="Shift Pulse · portfolio brief"
               style={{ marginBottom: "2.5rem" }}
             >

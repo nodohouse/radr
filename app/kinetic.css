@@ -4781,6 +4781,34 @@
   background: #fff;
   border-color: rgba(10, 13, 11, 0.1);
 }
+.rx-intake--calm .rx-intake-connector i {
+  background: rgba(10, 13, 11, 0.18);
+  transition: background 220ms ease, width 220ms ease;
+}
+.rx-intake--calm:has(.rx-intake-chip[data-on="true"]) .rx-intake-connector i,
+.rx-intake--calm:has(.rx-cap-card) .rx-intake-connector i {
+  background: rgba(0, 168, 90, 0.55);
+  width: 2.25rem;
+}
+.rx-intake--calm .rx-cap-card {
+  margin-top: 1rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  border-radius: 0.85rem;
+  background: #fff;
+  box-shadow: none;
+  text-align: left;
+}
+.rx-intake--calm .rx-intake-delta {
+  color: #0a0d0b;
+  opacity: 0.88;
+}
+.rx-intake--calm .rx-intake-layer--core {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
 .rx-intake-more-note {
   margin: 0.55rem 0 0;
   text-align: center;

@@ -38,25 +38,29 @@ export default async function MemoryPage({ params }: Props) {
           <div className="rx-shell">
             <p className="rx-ch-kicker">Platform · Operating Memory · D-1911</p>
             <h1 className="rx-ch-title">
-              The operation should not
+              Night 01 to Night 18.
               <br />
-              have to learn the same lesson twice.
+              Calibration — not chat history.
             </h1>
+            <p className="rx-ch-lead" style={{ marginTop: "1rem", maxWidth: "36rem" }}>
+              The operation should not have to learn the same lesson twice.
+              Memory is the forecast tightening across similar services.
+            </p>
           </div>
 
           <div className="rx-mem-page-stage rx-mem-page-stage-solid">
-            <ol className="rx-mem-history" aria-label="Learning history">
+            <ol className="rx-mem-history" aria-label="Night calibration">
               <li>
-                <em>Past services</em>
-                <strong>18 similar nights</strong>
+                <em>Night 01</em>
+                <strong>Forecast error 14.2%</strong>
               </li>
               <li>
-                <em>Pattern</em>
-                <strong>Forecast error 14.2% → 6.8%</strong>
-              </li>
-              <li>
-                <em>Interventions</em>
+                <em>Nights 02–17</em>
                 <strong>Wait held · kitchen protected</strong>
+              </li>
+              <li>
+                <em>Night 18</em>
+                <strong>Forecast error 6.8%</strong>
               </li>
               <li>
                 <em>Verified</em>

@@ -206,8 +206,8 @@ describe("mobile phone states stay role-actionable", () => {
     expect(src).toContain("PHONE_CFO_RECOVER");
     expect(src).toContain("PHONE_GM_PERISHABLE");
     expect(src).toContain("PHONE_VERIFIED");
-    expect(src).toContain("€273");
-    expect(src).toContain("€184");
+    expect(src).toContain("ECON_D4102");
+    expect(src).toContain("ECON_D1911");
     expect(src).not.toContain("build an agent");
   });
 });

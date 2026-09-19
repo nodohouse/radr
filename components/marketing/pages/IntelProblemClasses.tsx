@@ -11,6 +11,7 @@ import {
   PROBLEM_FAMILY_DEFS,
   type ProblemFamily,
 } from "@/lib/radr/problemFamilies";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 
 type Story = {
   id: ProblemFamily;
@@ -26,7 +27,7 @@ const STORIES: Story[] = [
     id: "SUPPLIER_AP",
     headline: "Supplier / AP",
     facts: ["Invoice €7.45/L", "Contract €6.80/L", "420 L"],
-    euro: "€273 exposed",
+    euro: `${euro(ECON_D4102.verified)} recovered`,
     radr: [
       "Detects variance",
       "Checks evidence",
@@ -34,7 +35,7 @@ const STORIES: Story[] = [
       "Tracks credit",
       "Verifies outcome",
     ],
-    punch: "Credit issued. Never applied. — until RADR follows it home.",
+    punch: "Credit issued. Matched. Verified — RADR follows it home.",
   },
   {
     id: "RECONCILIATION",
