@@ -1621,7 +1621,7 @@
   "recover": {
     "families": {
       "kicker": "Value leak map",
-      "title": "Where value disappears across the stack.",
+      "title": "Where value slips through.",
       "lead": "",
       "whatLeaks": "What leaks",
       "whatDoes": "What RADR does",
@@ -1738,9 +1738,9 @@
     },
     "pilot": {
       "kicker": "Recovery Pilot",
-      "title": "14 days to find and action recoverable value",
-      "lead": "Open cases remain on RADR until resolved, verified, or closed.",
-      "scope": "Start where the economics are clearest.",
+      "title": "14 days to find and action recoverable value.",
+      "lead": "",
+      "scope": "",
       "opt1": "Supplier / AP",
       "opt2": "Reconciliation",
       "opt3": "Supplier / AP + Reconciliation",

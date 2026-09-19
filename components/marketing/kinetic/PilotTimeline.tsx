@@ -27,7 +27,7 @@ export function PilotTimeline({ kicker, title, lead, scope, cta }: Props) {
     <div className="rx-pilot-tl rx-pilot-tl-quiet">
       <p className="rx-rec-k">{kicker}</p>
       <h2 className="rx-rec-h">{title}</h2>
-      <p className="rx-rec-p">{lead}</p>
+      {lead ? <p className="rx-rec-p">{lead}</p> : null}
       {scope ? <p className="rx-rec-p rx-rec-muted">{scope}</p> : null}
 
       <ol className="rx-pilot-flow" aria-label="Illustrative pilot path">

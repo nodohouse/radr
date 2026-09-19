@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Editorial evidence — photography at native-sharp size + solid text panels.
- * Sources are 1152px: never stretch beyond ~576 CSS px (2× retina).
+ * Editorial evidence — three spreads, native-sharp photos + sand panels.
+ * No more stats. 1152px sources → max 576 CSS px.
  */
 
 import Image from "next/image";
@@ -14,24 +14,28 @@ import {
 
 type Proof = {
   id: ResearchFactId;
+  spread: "a" | "b" | "c";
+  chapter: string;
   image: {
     src: string;
     alt: string;
     credit: string;
-    /** object-position for deliberate crop */
     position: string;
   };
-  quote: string;
+  /** Source quote — omit when the panel is editorial-only */
+  quote?: string;
+  /** Editorial interpretation — never in quotation marks */
   note?: string;
 };
 
-/** Native facility assets are 1152×864 — render ≤576 CSS px wide */
 const IMG_W = 576;
 const IMG_H = 432;
 
 const PROOFS: Proof[] = [
   {
     id: "nraSmallRestaurantMargin2023",
+    spread: "a",
+    chapter: "01 · Restaurant economics",
     image: {
       src: "/demo/facilities/berlin-dining.jpg",
       alt: "Active restaurant dining room during service",
@@ -39,22 +43,23 @@ const PROOFS: Proof[] = [
       position: "50% 40%",
     },
     quote: "The average small business restaurant runs on a 3-5% margin.",
-    note: "When margins are this thin, small leakage matters.",
   },
   {
     id: "nraFoodCostChallenge2023",
+    spread: "b",
+    chapter: "02 · Food cost pressure",
     image: {
       src: "/demo/facilities/berlin-bar.jpg",
       alt: "Hospitality service during an active shift",
       credit: "Restaurant operations",
       position: "45% 35%",
     },
-    quote:
-      "92% of operators say the cost of food is a significant issue for their restaurant.",
-    note: "Food and labor each consume roughly one-third of restaurant sales in the Association’s analysis.",
+    note: "When food costs move inside a thin-margin business, small discrepancies stop being small.",
   },
   {
     id: "starfleetHotelIntegration2025",
+    spread: "c",
+    chapter: "03 · Hotel fragmentation",
     image: {
       src: "/demo/facilities/canal-deluxe-king.jpg",
       alt: "Hotel guest environment — operations behind the stay",
@@ -62,7 +67,6 @@ const PROOFS: Proof[] = [
       position: "55% 45%",
     },
     quote: "Only 24% of hotels report full integration of their core systems.",
-    note: "42% reported relying on disconnected systems.",
   },
 ];
 
@@ -81,14 +85,14 @@ export function ResearchEvidenceStrip({
       </header>
 
       <ol className="rx-ev-moments">
-        {PROOFS.map((p, i) => {
+        {PROOFS.map((p) => {
           const f = researchFact(p.id);
           return (
             <li
               key={p.id}
               className="rx-ev-moment"
               data-layout="panel"
-              data-flip={i % 2 === 1 ? "true" : undefined}
+              data-spread={p.spread}
             >
               <figure className="rx-ev-photo">
                 <Image
@@ -104,15 +108,22 @@ export function ResearchEvidenceStrip({
                 <figcaption>{p.image.credit}</figcaption>
               </figure>
               <div className="rx-ev-body">
+                <p className="rx-ev-chapter">{p.chapter}</p>
                 <p className="rx-ev-metric">{f.metric}</p>
                 <p className="rx-ev-label">{f.displayLabel}</p>
-                <blockquote>
-                  <p>“{p.quote}”</p>
-                </blockquote>
+                {p.quote ? (
+                  <blockquote>
+                    <p>“{p.quote}”</p>
+                  </blockquote>
+                ) : null}
                 {p.note ? <p className="rx-ev-note">{p.note}</p> : null}
                 <footer className="rx-ev-source">
                   <span>
-                    {f.publisher} · {f.publicationDate.slice(0, 4)}
+                    {p.id.startsWith("nra")
+                      ? `NRA · ${f.publicationDate.slice(0, 4)}`
+                      : p.id.startsWith("starfleet")
+                        ? `Starfleet / IBS · ${f.publicationDate.slice(0, 4)}`
+                        : `${f.publisher} · ${f.publicationDate.slice(0, 4)}`}
                   </span>
                   <a
                     href={f.sourceUrl}

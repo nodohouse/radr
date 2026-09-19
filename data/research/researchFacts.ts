@@ -248,7 +248,7 @@ export const RESEARCH_FACTS = {
       "Exact quote from NRA press statement, Aug 30 2023. Also framed as typical 3–5% pre-tax margin.",
     sourceUrl:
       "https://restaurant.org/research-and-media/media/press-releases/national-restaurant-association-statement-on-proposed-changes-to-overtime-calculations/",
-    displayLabel: "Typical small-restaurant pre-tax margin",
+    displayLabel: "Small-restaurant pre-tax margin",
     category: "restaurants",
     lastVerifiedAt: "2026-09-19",
   },
@@ -266,7 +266,7 @@ export const RESEARCH_FACTS = {
       "Exact framing from NRA 2023 State of the Industry press materials.",
     sourceUrl:
       "https://restaurant.org/research-and-media/media/press-releases/2023-national-restaurant-association-state-of-the-industry-report-a-new-normal/",
-    displayLabel: "Food costs a significant challenge",
+    displayLabel: "Food cost pressure",
     category: "restaurants",
     lastVerifiedAt: "2026-09-19",
   },

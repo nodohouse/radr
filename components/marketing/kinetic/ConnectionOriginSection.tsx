@@ -23,11 +23,11 @@ const VISIBLE = new Set<string>(SIGNAL_MAP_VISIBLE_IDS);
 const CUSTOM_EVIDENCE = ["Invoices", "Contracts", "CSV"] as const;
 
 const OUTPUTS = [
-  { id: "Decision", line: "What to do next" },
-  { id: "Futures", line: "What is likely" },
-  { id: "Action", line: "What RADR prepared" },
-  { id: "Verified Value", line: "What closed" },
-  { id: "Memory", line: "What was learned" },
+  { id: "Decision" },
+  { id: "Futures" },
+  { id: "Action" },
+  { id: "Verified Value" },
+  { id: "Memory" },
 ] as const;
 
 const DOMAIN_SLOTS: { id: string; label: string }[] = [
@@ -124,7 +124,7 @@ export function ConnectionOriginSection() {
               </svg>
             </span>
             <p className="rx-intake-core-name">RADR</p>
-            <p className="rx-intake-core-k">Decision core</p>
+            <p className="rx-intake-core-k">Economic decision layer</p>
           </div>
         </div>
 
@@ -140,7 +140,6 @@ export function ConnectionOriginSection() {
               data-tone={o.id === "Verified Value" ? "verified" : undefined}
             >
               <strong>{o.id}</strong>
-              <em>{o.line}</em>
             </div>
           ))}
         </div>

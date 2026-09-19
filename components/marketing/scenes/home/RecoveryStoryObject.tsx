@@ -1,54 +1,33 @@
 "use client";
 
 /**
- * Living €273 recovery — cinematic economic loop.
- * Contract → Invoice → Gap → Decision → Credit → Verified.
+ * Living €273 recovery — one object evolves through the loop.
+ * CONTRACT → INVOICE → EXPOSURE → DECISION → CREDIT → VERIFIED.
  */
 
 import { useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 
 const STAGES = [
-  {
-    id: "contract",
-    label: "Contract",
-    body: "Agreed rate on file.",
-    euro: "€6.80/L",
-    grade: "CONTRACT",
-  },
-  {
-    id: "invoice",
-    label: "Invoice",
-    body: "Billed above contract.",
-    euro: "€7.45/L",
-    grade: "INVOICE",
-  },
-  {
-    id: "exposed",
-    label: "Exposed",
-    body: "420 L · the gap opens.",
-    euro: "€273",
-    grade: "EXPOSED",
-  },
+  { id: "contract", label: "Contract", line: "€6.80/L", grade: "CONTRACT" },
+  { id: "invoice", label: "Invoice", line: "€7.45/L", grade: "INVOICE" },
+  { id: "exposed", label: "Exposure", line: "€273", grade: "EXPOSURE" },
   {
     id: "dispute",
     label: "Decision",
-    body: "Dispute the variance. Evidence package prepared.",
-    euro: "€273",
-    grade: "DISPUTE",
+    line: "Dispute variance",
+    grade: "DECISION",
   },
   {
     id: "credit",
     label: "Credit memo",
-    body: "CM-44102 observed against INV-88421.",
-    euro: "€273",
-    grade: "CREDIT",
+    line: "€273",
+    grade: "CREDIT MEMO",
   },
   {
     id: "verified",
     label: "Verified",
-    body: "Matched to the original invoice. Loop closed.",
-    euro: "€273",
+    line: "€273 recovered",
     grade: "VERIFIED",
   },
 ] as const;
@@ -109,56 +88,41 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
     <div
       ref={rootRef}
       className="rx-rso rx-euro-journey"
-      style={reduced ? undefined : { minHeight: "180vh" }}
+      style={reduced ? undefined : { minHeight: "160vh" }}
     >
       <div className="rx-rso-pin">
         <p className="rx-rec-k">{kicker}</p>
         <h2 className="rx-rec-h">{title}</h2>
         {lead ? <p className="rx-rec-p">{lead}</p> : null}
 
-        <div className="rx-rso-cinema" data-stage={stage.id} data-sealed={sealed ? "true" : undefined}>
-          <div className="rx-rso-pair" aria-hidden="true">
-            <div className="rx-rso-rate" data-on={idx >= 0 ? "true" : undefined} data-kind="contract">
-              <em>Contract</em>
-              <strong>€6.80/L</strong>
-            </div>
-            <div
-              className="rx-rso-gap"
-              data-open={idx >= 2 ? "true" : undefined}
-            >
-              <i />
-              {idx >= 2 ? <span>€273</span> : null}
-            </div>
-            <div className="rx-rso-rate" data-on={idx >= 1 ? "true" : undefined} data-kind="invoice">
-              <em>Invoice</em>
-              <strong>€7.45/L</strong>
-            </div>
-          </div>
-
-          <div
-            className="rx-euro-chip rx-euro-chip-hero"
-            data-sealed={sealed ? "true" : undefined}
-            data-stage={stage.id}
-            key={stage.id}
-          >
-            <strong>{stage.euro}</strong>
-            <em>{stage.grade}</em>
-          </div>
-
-          <div className="rx-rso-face">
-            <p className="rx-rso-stage">{stage.label}</p>
-            <p className="rx-rso-body">{stage.body}</p>
-          </div>
-
-          {idx >= 3 ? (
-            <p className="rx-rso-resolve" data-done={sealed ? "true" : undefined}>
-              {sealed
-                ? "€273 verified · matched to INV-88421"
-                : idx >= 4
-                  ? "Credit memo observed"
-                  : "Evidence package prepared"}
-            </p>
-          ) : null}
+        <div
+          className="rx-rso-cinema"
+          data-stage={stage.id}
+          data-sealed={sealed ? "true" : undefined}
+        >
+          <ol className="rx-rso-evolve" aria-live="polite">
+            {STAGES.map((s, i) => (
+              <li key={s.id}>
+                <div
+                  className="rx-rso-node"
+                  data-on={i <= idx ? "true" : undefined}
+                  data-active={i === idx ? "true" : undefined}
+                  data-kind={s.id}
+                  data-sealed={s.id === "verified" && sealed ? "true" : undefined}
+                >
+                  <em>{s.grade}</em>
+                  <strong>{s.line}</strong>
+                </div>
+                {i < STAGES.length - 1 ? (
+                  <span
+                    className="rx-rso-vlink"
+                    data-on={i < idx ? "true" : undefined}
+                    aria-hidden="true"
+                  />
+                ) : null}
+              </li>
+            ))}
+          </ol>
         </div>
 
         <div className="rx-rso-scrub" role="tablist" aria-label="Recovery stages">

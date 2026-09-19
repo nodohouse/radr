@@ -64,21 +64,16 @@ export function Hero() {
 }
 
 function HeroFallback() {
-  const t = useTranslations("homepage.hero");
   return (
     <section
       className="rx-he rx-he-light rx-he-recover rx-he-margin"
-      id="product"
       data-nav-theme="light"
-      aria-label={t("ariaLabel")}
+      aria-hidden="true"
     >
       <div className="rx-shell">
         <div className="rx-he-recover-frame">
           <div className="rx-he-recover-copy">
-            <HospitalityEyebrow />
-            <NothingOffTheRadr size="display" className="rx-he-h0" />
-            <h1 className="rx-he-recover-title">{t("title")}</h1>
-            <p className="rx-he-recover-support">{t("support")}</p>
+            <div className="rx-he-fallback-skel" />
           </div>
         </div>
       </div>
