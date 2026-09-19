@@ -1,6 +1,6 @@
 /**
- * Public homepage connection preview — filters the Developer catalog.
- * Never invent providers or statuses.
+ * Public homepage connection preview — curated subset of Developer catalog.
+ * Never invent providers or statuses. Storytelling via capabilityStory.
  */
 
 import {
@@ -8,6 +8,7 @@ import {
   INTEGRATION_STATUS_LABEL,
   type IntegrationProvider,
 } from "@/lib/integrations/registry";
+import { GOOGLE_STACK_IDS } from "@/lib/integrations/capabilityStory";
 
 export type ConnectionMethod = {
   id: string;
@@ -35,100 +36,124 @@ export const SYSTEM_LAYERS = [
   "Delivery",
   "Procurement",
   "Files / warehouse",
+  "External signals",
 ] as const;
 
-const HOME_PROVIDER_IDS = [
-  "toast",
-  "lightspeed-restaurant",
-  "square",
-  "opentable",
-  "sevenrooms",
-  "deliveroo",
-  "uber-eats",
-  "mews",
-  "apaleo",
-  "oracle-opera-cloud",
-  "siteminder",
-  "booking-connectivity",
-  "guesty",
-  "hostaway",
-  "hospitable",
-  "xero",
-  "quickbooks-online",
-  "stripe",
-  "mollie",
-  "files-csv",
-  "byod-warehouse",
-] as const;
-
-/** ~primary systems only on homepage intake */
-export const SIGNAL_MAP_VISIBLE_IDS = [
-  "toast",
-  "lightspeed-restaurant",
-  "square",
-  "opentable",
-  "mews",
-  "apaleo",
-  "oracle-opera-cloud",
-  "siteminder",
-  "xero",
-  "stripe",
-  "mollie",
-  "files-csv",
-] as const;
-
-export type HomeConnectionGroup = {
-  id: string;
-  label: string;
-  providerIds: readonly string[];
-};
-
-export const HOME_CONNECTION_GROUPS: HomeConnectionGroup[] = [
+/**
+ * Homepage capability map — ~20 representative sources in four groups.
+ * Google stack is one tile (see GOOGLE_STACK_IDS).
+ */
+export const HOME_CAPABILITY_GROUPS = [
   {
-    id: "restaurant",
-    label: "Restaurants & F&B",
+    id: "operations",
+    label: "Operations",
     providerIds: [
       "toast",
-      "lightspeed-restaurant",
-      "square",
       "opentable",
-      "sevenrooms",
-      "deliveroo",
-      "uber-eats",
-    ],
-  },
-  {
-    id: "hotel",
-    label: "Hotels & Resorts",
-    providerIds: [
       "mews",
-      "apaleo",
-      "oracle-opera-cloud",
+      "personio",
       "siteminder",
-      "booking-connectivity",
-    ],
-  },
-  {
-    id: "serviced",
-    label: "Serviced / extended stay",
-    providerIds: ["guesty", "hostaway", "hospitable"],
+    ] as const,
   },
   {
     id: "finance",
     label: "Finance",
-    providerIds: ["xero", "quickbooks-online"],
+    providerIds: ["xero", "netsuite", "adyen", "stripe"] as const,
   },
   {
-    id: "payments",
-    label: "Payments",
-    providerIds: ["stripe", "mollie"],
+    id: "channels",
+    label: "Channels",
+    providerIds: [
+      "uber-eats",
+      "deliveroo",
+      "booking-connectivity",
+      "apaleo",
+    ] as const,
+  },
+  {
+    id: "context",
+    label: "Context",
+    providerIds: [
+      "google-stack",
+      "open-meteo",
+      "predicthq",
+      "ticketmaster",
+    ] as const,
+  },
+] as const;
+
+/** Flat list of real provider ids shown on homepage (excl. google-stack pseudo) */
+export const SIGNAL_MAP_VISIBLE_IDS = [
+  "toast",
+  "opentable",
+  "mews",
+  "personio",
+  "siteminder",
+  "xero",
+  "netsuite",
+  "adyen",
+  "stripe",
+  "uber-eats",
+  "deliveroo",
+  "booking-connectivity",
+  "apaleo",
+  "open-meteo",
+  "predicthq",
+  "ticketmaster",
+  "files-csv",
+  ...GOOGLE_STACK_IDS,
+] as const;
+
+/** @deprecated — prefer HOME_CAPABILITY_GROUPS */
+export const HOME_CONNECTION_GROUPS = [
+  {
+    id: "operations",
+    label: "Operations",
+    providerIds: [
+      "toast",
+      "opentable",
+      "mews",
+      "personio",
+      "siteminder",
+    ],
+  },
+  {
+    id: "finance",
+    label: "Finance",
+    providerIds: ["xero", "netsuite", "adyen", "stripe"],
+  },
+  {
+    id: "channels",
+    label: "Channels",
+    providerIds: [
+      "uber-eats",
+      "deliveroo",
+      "booking-connectivity",
+      "apaleo",
+    ],
+  },
+  {
+    id: "context",
+    label: "Context",
+    providerIds: ["open-meteo", "predicthq", "ticketmaster", "files-csv"],
   },
   {
     id: "custom",
     label: "Custom data",
     providerIds: ["files-csv", "byod-warehouse"],
   },
-];
+] as const;
+
+/** Broader set used by older helpers — still registry-backed */
+const HOME_PROVIDER_IDS = [
+  ...SIGNAL_MAP_VISIBLE_IDS,
+  "lightspeed-restaurant",
+  "square",
+  "sevenrooms",
+  "mollie",
+  "byod-warehouse",
+  "oracle-opera-cloud",
+] as const;
 
 export const SIGNAL_MAP_OUTPUTS = [
   "Decisions",
@@ -143,9 +168,8 @@ export function providerById(id: string): IntegrationProvider | undefined {
 }
 
 export function homeConnectionProviders(): IntegrationProvider[] {
-  return HOME_PROVIDER_IDS.map((id) => providerById(id)).filter(
-    (p): p is IntegrationProvider => Boolean(p),
-  );
+  const ids = new Set<string>(HOME_PROVIDER_IDS);
+  return INTEGRATION_PROVIDERS.filter((p) => ids.has(p.id));
 }
 
 export function statusLabel(p: IntegrationProvider): string {
@@ -157,7 +181,10 @@ export function connectionMethodLabel(p: IntegrationProvider): string {
   if (p.id === "byod-warehouse") return "Warehouse";
   if (p.authMethods.includes("sftp")) return "SFTP";
   if (p.accessType === "CUSTOM") return "Custom connector";
-  if (p.webhookSupport && (p.accessType === "PUBLIC_API" || p.accessType === "PARTNER_API")) {
+  if (
+    p.webhookSupport &&
+    (p.accessType === "PUBLIC_API" || p.accessType === "PARTNER_API")
+  ) {
     return "REST API / Webhook";
   }
   if (p.accessType === "WEBHOOK") return "Webhook";

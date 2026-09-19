@@ -14,6 +14,13 @@ export {
   providersByStatus,
   getProvider,
 } from "./registry";
+export {
+  INTEGRATION_CAPABILITY_STORY,
+  capabilityStoryFor,
+  accessStatusLabel,
+  GOOGLE_STACK_IDS,
+} from "./capabilityStory";
+export type { CapabilityStory } from "./capabilityStory";
 export type * from "./types";
 export { DemoReservationAdapter } from "./demo/DemoReservationAdapter";
 export { normalizeExternalReservation } from "./normalize/reservation";

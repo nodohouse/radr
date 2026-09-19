@@ -1,27 +1,41 @@
 "use client";
 
 /**
- * Data origin — static, crystal-clear, fast.
- * Sources → RADR → Decision outputs. No motion loops.
+ * Data origin — capability map.
+ * Sources → RADR → Decisions. Honest access. Potential signals only.
  */
 
-import { useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from "react";
 import NextLink from "next/link";
 import { ProviderWordmark } from "@/components/marketing/kinetic/ProviderWordmark";
 import {
-  HOME_CONNECTION_GROUPS,
-  SIGNAL_MAP_VISIBLE_IDS,
-  connectionMethodLabel,
+  HOME_CAPABILITY_GROUPS,
   providerById,
-  statusLabel,
 } from "@/lib/marketing/homeConnections";
 import type { IntegrationProvider } from "@/lib/integrations/registry";
+import {
+  accessStatusLabel,
+  capabilityStoryFor,
+  categoryLabel,
+  GOOGLE_STACK_IDS,
+  type CapabilityStory,
+} from "@/lib/integrations/capabilityStory";
 import { CTAS } from "@/lib/marketing/brand";
 import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
 
-const VISIBLE = new Set<string>(SIGNAL_MAP_VISIBLE_IDS);
-
-const CUSTOM_EVIDENCE = ["Invoices", "Contracts", "CSV"] as const;
+const CUSTOM_EVIDENCE = [
+  "Invoices",
+  "Contracts",
+  "Credit memos",
+  "CSV",
+] as const;
 
 const OUTPUTS = [
   { id: "Decision" },
@@ -31,45 +45,63 @@ const OUTPUTS = [
   { id: "Memory" },
 ] as const;
 
-const DOMAIN_SLOTS: { id: string; label: string }[] = [
-  { id: "restaurant", label: "Restaurant" },
-  { id: "hotel", label: "Hotel" },
-  { id: "finance", label: "Finance" },
-];
+/** Illustrative raw signals → Decision (category story, not live data) */
+const SIGNAL_BRIDGE = [
+  { src: "Toast", value: "€42,910 sales" },
+  { src: "OpenTable", value: "412 covers" },
+  { src: "Adyen", value: "€41,884 settled" },
+  { src: "Weather", value: "rain 19:00" },
+  { src: "Events", value: "arena 22:00" },
+  { src: "Google", value: "directions +28%" },
+] as const;
 
-function visibleInGroup(groupId: string): IntegrationProvider[] {
-  const g = HOME_CONNECTION_GROUPS.find((x) => x.id === groupId);
-  if (!g) return [];
-  return g.providerIds
-    .filter((id) => VISIBLE.has(id))
-    .map((id) => providerById(id))
-    .filter((p): p is IntegrationProvider => Boolean(p));
-}
+type ActiveTarget =
+  | { kind: "provider"; id: string }
+  | { kind: "google-stack" }
+  | { kind: "google-child"; id: string }
+  | null;
 
 export function ConnectionOriginSection() {
-  const [hotId, setHotId] = useState<string | null>(null);
-  const hot = hotId ? providerById(hotId) : null;
+  const [active, setActive] = useState<ActiveTarget>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
-  const payments = visibleInGroup("payments");
-  const custom = visibleInGroup("custom");
-  const finance = [...visibleInGroup("finance"), ...payments];
+  const close = useCallback(() => setActive(null), []);
 
-  function providersFor(id: string) {
-    return id === "finance" ? finance : visibleInGroup(id);
-  }
+  useEffect(() => {
+    function onKey(e: globalThis.KeyboardEvent) {
+      if (e.key === "Escape") close();
+    }
+    function onPointer(e: MouseEvent) {
+      if (!rootRef.current?.contains(e.target as Node)) close();
+    }
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("mousedown", onPointer);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("mousedown", onPointer);
+    };
+  }, [close]);
+
+  const popoverProvider =
+    active?.kind === "provider" || active?.kind === "google-child"
+      ? providerById(active.id)
+      : null;
+  const popoverStory = popoverProvider
+    ? capabilityStoryFor(popoverProvider.id)
+    : null;
 
   return (
-    <div className="rx-intake">
+    <div className="rx-intake" ref={rootRef}>
       <header className="rx-intake-head">
         <p className="rx-rec-k">Data origin</p>
         <h2 className="rx-intake-h">
-          The systems are there.
-          <span>The economic truth is still fragmented.</span>
+          Your systems already hold the evidence.
+          <span>RADR connects it into Decisions.</span>
         </h2>
         <p className="rx-intake-lead">
-          RADR brings financial and operational evidence from the systems already
-          in use into one decision-ready operating state — so value leaks can be
-          found, acted on and verified.
+          RADR brings operational, financial and contextual signals into one
+          Decision layer — then connects them to find value no single system can
+          see alone.
         </p>
         <p className="rx-intake-honesty">
           Representative systems. Connection availability varies. First pilots
@@ -79,33 +111,61 @@ export function ConnectionOriginSection() {
         </p>
       </header>
 
-      <div className="rx-intake-stage rx-intake-static" aria-label="Signal intake">
-        <div className="rx-intake-sources">
-          {DOMAIN_SLOTS.map((slot) => {
-            return (
-              <SourceCluster
-                key={slot.id}
-                label={slot.label}
-                providers={providersFor(slot.id)}
-                hotId={hotId}
-                onHot={setHotId}
-              />
-            );
-          })}
-          <div className="rx-intake-cluster">
-            <p>Custom</p>
+      <div className="rx-intake-map" aria-label="Representative connection map">
+        <div className="rx-intake-groups">
+          {HOME_CAPABILITY_GROUPS.map((group) => (
+            <div key={group.id} className="rx-intake-group">
+              <p className="rx-intake-group-label">{group.label}</p>
+              <ul className="rx-intake-chips">
+                {group.providerIds.map((id) => {
+                  if (id === "google-stack") {
+                    return (
+                      <li key="google-stack">
+                        <GoogleStackChip
+                          active={active}
+                          setActive={setActive}
+                        />
+                      </li>
+                    );
+                  }
+                  const p = providerById(id);
+                  if (!p) return null;
+                  return (
+                    <li key={id}>
+                      <ProviderChip
+                        provider={p}
+                        selected={
+                          active?.kind === "provider" && active.id === id
+                        }
+                        onOpen={() =>
+                          setActive({ kind: "provider", id })
+                        }
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+
+          <div className="rx-intake-group">
+            <p className="rx-intake-group-label">Custom evidence</p>
             <ul className="rx-intake-evidence">
               {CUSTOM_EVIDENCE.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            {custom[0] ? (
-              <ul className="rx-intake-chips">
+            {providerById("files-csv") ? (
+              <ul className="rx-intake-chips" style={{ marginTop: "0.55rem" }}>
                 <li>
                   <ProviderChip
-                    provider={custom[0]}
-                    hotId={hotId}
-                    onHot={setHotId}
+                    provider={providerById("files-csv")!}
+                    selected={
+                      active?.kind === "provider" && active.id === "files-csv"
+                    }
+                    onOpen={() =>
+                      setActive({ kind: "provider", id: "files-csv" })
+                    }
                   />
                 </li>
               </ul>
@@ -113,123 +173,240 @@ export function ConnectionOriginSection() {
           </div>
         </div>
 
-        <div className="rx-intake-flow rx-intake-flow-in" aria-hidden="true">
-          <i />
-        </div>
+        {(popoverProvider && popoverStory) || active?.kind === "google-stack" ? (
+          <CapabilityPopover
+            provider={popoverProvider}
+            story={popoverStory}
+            googleExpanded={active?.kind === "google-stack"}
+            onSelectGoogleChild={(id) =>
+              setActive({ kind: "google-child", id })
+            }
+            onClose={close}
+          />
+        ) : null}
+      </div>
 
-        <div className="rx-intake-core">
-          <div className="rx-intake-core-card">
-            <span className="rx-intake-delta" aria-hidden="true">
-              <svg viewBox="0 0 100 90" width="52" height="44">
-                <path
-                  d="M50 8 L90 81 H10 Z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="11"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <p className="rx-intake-core-name">RADR</p>
-            <p className="rx-intake-core-k">Decision layer</p>
+      <div className="rx-intake-bridge" aria-label="Signals become Decisions">
+        <div className="rx-intake-bridge-signals">
+          <p className="rx-intake-bridge-k">Signals</p>
+          <ul>
+            {SIGNAL_BRIDGE.map((s) => (
+              <li key={s.src}>
+                <em>{s.src}</em>
+                <strong>{s.value}</strong>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="rx-intake-bridge-core" aria-hidden="true">
+          <span className="rx-intake-delta">
+            <svg viewBox="0 0 100 90" width="40" height="34">
+              <path
+                d="M50 8 L90 81 H10 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="11"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+          <strong>RADR</strong>
+        </div>
+        <div className="rx-intake-bridge-out">
+          <p className="rx-intake-bridge-k">Decision</p>
+          <div className="rx-intake-bridge-decision">
+            <em>D-1911 · DEMO</em>
+            <strong>Wait 12 minutes</strong>
+            <span>€620 expected incremental vs seat-now</span>
           </div>
-        </div>
-
-        <div className="rx-intake-flow rx-intake-flow-out" aria-hidden="true">
-          <i />
-        </div>
-
-        <div className="rx-intake-out" aria-label="RADR outputs">
-          {OUTPUTS.map((o) => (
-            <div
-              key={o.id}
-              className="rx-intake-primitive"
-              data-tone={o.id === "Verified Value" ? "verified" : undefined}
-            >
-              <strong>{o.id}</strong>
-            </div>
-          ))}
+          <ul className="rx-intake-out-mini" aria-label="RADR outputs">
+            {OUTPUTS.map((o) => (
+              <li key={o.id}>{o.id}</li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      {hot ? (
-        <div className="rx-intake-status" role="status">
-          <ProviderWordmark id={hot.id} name={hot.name} />
-          <div>
-            <strong>{hot.name}</strong>
-            <em data-status={hot.status}>{statusLabel(hot)}</em>
-          </div>
-          <span>{connectionMethodLabel(hot)}</span>
-          <p>
-            {hot.name}
-            <span aria-hidden="true"> → </span>
-            RADR
-            <span aria-hidden="true"> → </span>
-            Decision
-          </p>
-        </div>
-      ) : null}
-
       <NextLink href="/developers#integrations" className="rx-intake-more">
-        {CTAS.viewConnectionStatus}{" "}
-        <span aria-hidden="true">→</span>
+        View all connection paths <span aria-hidden="true">→</span>
         <em className="rx-intake-more-status">
-          Files / CSV · {capabilityBadge("filesCsv")}
+          Files / CSV · {capabilityBadge("filesCsv")} · {CTAS.viewConnectionStatus}
         </em>
       </NextLink>
     </div>
   );
 }
 
-function SourceCluster({
-  label,
-  providers,
-  hotId,
-  onHot,
-}: {
-  label: string;
-  providers: IntegrationProvider[];
-  hotId: string | null;
-  onHot: (id: string | null) => void;
-}) {
-  return (
-    <div className="rx-intake-cluster">
-      <p>{label}</p>
-      <ul className="rx-intake-chips">
-        {providers.map((p) => (
-          <li key={p.id}>
-            <ProviderChip provider={p} hotId={hotId} onHot={onHot} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 function ProviderChip({
   provider,
-  hotId,
-  onHot,
+  selected,
+  onOpen,
 }: {
   provider: IntegrationProvider;
-  hotId: string | null;
-  onHot: (id: string | null) => void;
+  selected: boolean;
+  onOpen: () => void;
 }) {
   return (
     <button
       type="button"
       className="rx-intake-chip"
-      aria-label={`${provider.name}, ${statusLabel(provider)}`}
-      data-on={hotId === provider.id ? "true" : undefined}
+      aria-expanded={selected}
+      aria-label={`${provider.name}, ${accessStatusLabel(provider)}. Show potential signals.`}
+      data-on={selected ? "true" : undefined}
       data-status={provider.status}
       data-provider-brand={provider.id.split("-")[0]}
-      onMouseEnter={() => onHot(provider.id)}
-      onMouseLeave={() => onHot(null)}
-      onFocus={() => onHot(provider.id)}
-      onBlur={() => onHot(null)}
-      onClick={() => onHot(provider.id)}
+      onMouseEnter={onOpen}
+      onFocus={onOpen}
+      onClick={onOpen}
     >
       <ProviderWordmark id={provider.id} name={provider.name} />
     </button>
+  );
+}
+
+function GoogleStackChip({
+  active,
+  setActive,
+}: {
+  active: ActiveTarget;
+  setActive: (t: ActiveTarget) => void;
+}) {
+  const open =
+    active?.kind === "google-stack" || active?.kind === "google-child";
+  return (
+    <button
+      type="button"
+      className="rx-intake-chip rx-intake-chip-google"
+      aria-expanded={open}
+      aria-label="Google stack: Business Profile, Analytics, Search Console, Places. Show details."
+      data-on={open ? "true" : undefined}
+      onMouseEnter={() => setActive({ kind: "google-stack" })}
+      onFocus={() => setActive({ kind: "google-stack" })}
+      onClick={() => setActive({ kind: "google-stack" })}
+    >
+      <ProviderWordmark id="google-stack" name="Google" />
+    </button>
+  );
+}
+
+function CapabilityPopover({
+  provider,
+  story,
+  googleExpanded,
+  onSelectGoogleChild,
+  onClose,
+}: {
+  provider: IntegrationProvider | null | undefined;
+  story: CapabilityStory | null | undefined;
+  googleExpanded: boolean;
+  onSelectGoogleChild: (id: string) => void;
+  onClose: () => void;
+}) {
+  const titleId = useId();
+
+  if (googleExpanded && !provider) {
+    return (
+      <div
+        className="rx-cap-pop"
+        role="dialog"
+        aria-labelledby={titleId}
+      >
+        <button
+          type="button"
+          className="rx-cap-pop-close"
+          onClick={onClose}
+          aria-label="Close"
+        >
+          ×
+        </button>
+        <header className="rx-cap-pop-head">
+          <ProviderWordmark id="google-stack" name="Google" />
+          <div>
+            <h3 id={titleId}>Google</h3>
+            <p>
+              Local demand · marketing · search · place context
+              <em data-status="planned">External data</em>
+            </p>
+          </div>
+        </header>
+        <p className="rx-cap-pop-caveat">
+          One tile, four sources. Access and fields depend on Google products
+          and customer authorization. Not live connectors.
+        </p>
+        <ul className="rx-cap-pop-google">
+          {GOOGLE_STACK_IDS.map((id) => {
+            const p = providerById(id);
+            if (!p) return null;
+            return (
+              <li key={id}>
+                <button
+                  type="button"
+                  onClick={() => onSelectGoogleChild(id)}
+                  onKeyDown={(e: KeyboardEvent<HTMLButtonElement>) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      onSelectGoogleChild(id);
+                    }
+                  }}
+                >
+                  <strong>{p.name}</strong>
+                  <span>{accessStatusLabel(p)}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
+
+  if (!provider || !story) return null;
+
+  return (
+    <div className="rx-cap-pop" role="dialog" aria-labelledby={titleId}>
+      <button
+        type="button"
+        className="rx-cap-pop-close"
+        onClick={onClose}
+        aria-label="Close"
+      >
+        ×
+      </button>
+      <header className="rx-cap-pop-head">
+        <ProviderWordmark id={provider.id} name={provider.name} />
+        <div>
+          <h3 id={titleId}>{provider.name}</h3>
+          <p>
+            {categoryLabel(provider)}
+            <em data-status={provider.status}>{accessStatusLabel(provider)}</em>
+          </p>
+        </div>
+      </header>
+
+      <div className="rx-cap-pop-grid">
+        <div>
+          <p className="rx-cap-pop-k">Potential signals</p>
+          <ul>
+            {story.potentialSignals.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="rx-cap-pop-k">Combine with</p>
+          <p className="rx-cap-pop-combine">{story.combineWith}</p>
+          <p className="rx-cap-pop-k">RADR could see</p>
+          <ul className="rx-cap-pop-see">
+            {story.radrCouldSee.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {provider.notes ? (
+        <p className="rx-cap-pop-caveat">{provider.notes}</p>
+      ) : null}
+    </div>
   );
 }

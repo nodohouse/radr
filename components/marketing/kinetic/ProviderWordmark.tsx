@@ -28,6 +28,20 @@ export function providerShort(id: string, name: string): string {
     mollie: "Mollie",
     "files-csv": "Files",
     "byod-warehouse": "Warehouse",
+    personio: "Personio",
+    netsuite: "NetSuite",
+    adyen: "Adyen",
+    "uber-eats": "Uber Eats",
+    deliveroo: "Deliveroo",
+    "booking-connectivity": "Booking.com",
+    "open-meteo": "Open-Meteo",
+    predicthq: "PredictHQ",
+    ticketmaster: "Ticketmaster",
+    "google-stack": "Google",
+    "google-business-profile": "GBP",
+    "google-analytics-4": "GA4",
+    "google-search-console": "GSC",
+    "google-places": "Places",
   };
   return map[id] ?? name.split(" ")[0]!;
 }
@@ -258,6 +272,66 @@ function ProviderGlyph({ id }: { id: string }) {
           />
           <path
             d="M18 5v7h7M12 17h8M12 21h6"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "google-stack":
+    case "google-business-profile":
+    case "google-analytics-4":
+    case "google-search-console":
+    case "google-places":
+      return (
+        <svg {...common}>
+          <circle cx="16" cy="16" r="10" stroke="currentColor" strokeWidth="1.7" />
+          <path
+            d="M16 6v20M6 16h20"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "adyen":
+      return (
+        <svg {...common}>
+          <path
+            d="M7 13.5c3-4 15-4 15 2.5s-12 6-15 2.5"
+            stroke="currentColor"
+            strokeWidth="1.9"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "open-meteo":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+          <path
+            d="M16 18h8a4 4 0 0 0 0-8 6 6 0 0 0-11-2"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "predicthq":
+    case "ticketmaster":
+      return (
+        <svg {...common}>
+          <rect
+            x="7"
+            y="9"
+            width="18"
+            height="14"
+            rx="2"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+          <path
+            d="M11 9V7h10v2M12 14h8M12 18h5"
             stroke="currentColor"
             strokeWidth="1.4"
             strokeLinecap="round"

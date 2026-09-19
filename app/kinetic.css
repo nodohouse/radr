@@ -4397,3 +4397,284 @@
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+/* Capability map — Data Origin */
+.rx-intake-map {
+  position: relative;
+  margin-top: 1.75rem;
+  padding: 1.25rem 1.35rem 1.5rem;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+}
+.rx-intake-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1.75rem;
+}
+@media (min-width: 960px) {
+  .rx-intake-groups {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.rx-intake-group-label {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-intake-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-intake-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid rgba(10, 13, 11, 0.12);
+  background: #f7f4ed;
+  color: #0a0d0b;
+  cursor: pointer;
+  font: inherit;
+}
+.rx-intake-chip:hover,
+.rx-intake-chip:focus-visible,
+.rx-intake-chip[data-on="true"] {
+  border-color: rgba(0, 168, 90, 0.55);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 217, 120, 0.18);
+}
+.rx-intake-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-intake-evidence li {
+  padding: 0.28rem 0.55rem;
+  background: #f7faf8;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  font-size: 0.82rem;
+  color: #3a403c;
+}
+
+.rx-cap-pop {
+  margin-top: 1.15rem;
+  padding: 1.15rem 1.25rem 1.25rem;
+  background: #f7f4ed;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  color: #0a0d0b;
+  position: relative;
+}
+.rx-cap-pop-close {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.65rem;
+  border: 0;
+  background: transparent;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #626a65;
+}
+.rx-cap-pop-head {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding-right: 1.5rem;
+}
+.rx-cap-pop-head h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+.rx-cap-pop-head p {
+  margin: 0.2rem 0 0;
+  font-size: 0.82rem;
+  color: #3a403c;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+.rx-cap-pop-head em {
+  font-style: normal;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00a85a;
+}
+.rx-cap-pop-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+@media (min-width: 720px) {
+  .rx-cap-pop-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.rx-cap-pop-k {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-cap-pop-grid ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-cap-pop-grid li {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  padding: 0.15rem 0;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.06);
+}
+.rx-cap-pop-combine {
+  margin: 0 0 0.85rem;
+  font-size: 0.92rem;
+  color: #3a403c;
+}
+.rx-cap-pop-see li {
+  color: #0a0d0b;
+  font-weight: 550;
+}
+.rx-cap-pop-caveat {
+  margin: 0.9rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #626a65;
+  max-width: 44rem;
+}
+.rx-cap-pop-google {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+}
+.rx-cap-pop-google button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+.rx-cap-pop-google button:hover,
+.rx-cap-pop-google button:focus-visible {
+  border-color: rgba(0, 168, 90, 0.5);
+  outline: none;
+}
+.rx-cap-pop-google span {
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00a85a;
+}
+
+.rx-intake-bridge {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  background: #0a0d0b;
+  color: #f7faf8;
+}
+@media (min-width: 900px) {
+  .rx-intake-bridge {
+    grid-template-columns: 1.2fr auto 1fr;
+    align-items: center;
+  }
+}
+.rx-intake-bridge-k {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(247, 250, 248, 0.55);
+}
+.rx-intake-bridge-signals ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
+}
+.rx-intake-bridge-signals li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid rgba(247, 250, 248, 0.08);
+  padding: 0.2rem 0;
+}
+.rx-intake-bridge-signals em {
+  font-style: normal;
+  color: rgba(247, 250, 248, 0.55);
+}
+.rx-intake-bridge-core {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  color: #00d978;
+}
+.rx-intake-bridge-core strong {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+.rx-intake-bridge-decision {
+  display: grid;
+  gap: 0.15rem;
+}
+.rx-intake-bridge-decision em {
+  font-style: normal;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00d978;
+}
+.rx-intake-bridge-decision strong {
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+.rx-intake-bridge-decision span {
+  font-size: 0.88rem;
+  color: rgba(247, 250, 248, 0.72);
+}
+.rx-intake-out-mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-intake-out-mini li {
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid rgba(247, 250, 248, 0.18);
+  color: rgba(247, 250, 248, 0.7);
+}

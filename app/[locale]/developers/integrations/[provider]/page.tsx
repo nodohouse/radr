@@ -11,6 +11,10 @@ import {
   integrationTypeOf,
 } from "@/lib/integrations/registry";
 import {
+  accessStatusLabel,
+  capabilityStoryFor,
+} from "@/lib/integrations/capabilityStory";
+import {
   AUTH_METHOD_LABEL,
   accessRequirement,
   codeGuideStatus,
@@ -61,6 +65,7 @@ export default async function ProviderDetailPage({ params }: Props) {
   const codeStatus = codeGuideStatus(p);
   const kind = integrationTypeOf(p);
   const env = envPlaceholders(p).join("\n");
+  const story = capabilityStoryFor(p.id);
   const statusLabel =
     p.status === "custom"
       ? t("labels.status.custom")
@@ -86,6 +91,9 @@ export default async function ProviderDetailPage({ params }: Props) {
                 {statusLabel}
               </span>
             </strong>
+            <p className="rx-dev-fine" style={{ marginTop: "0.35rem" }}>
+              Access: {accessStatusLabel(p)} · potential signals ≠ live receipt
+            </p>
           </div>
           <div>
             <em>{t("provider.accessType")}</em>
@@ -132,6 +140,29 @@ export default async function ProviderDetailPage({ params }: Props) {
         <h2>{t("provider.accessTitle")}</h2>
         <p>{accessRequirement(p)}</p>
       </section>
+
+      {story ? (
+        <section className="rx-dev-block">
+          <h2>Potential signals</h2>
+          <p className="rx-dev-fine">
+            Fields an authorized connection could expose — not a claim that RADR
+            currently receives them. Endpoints and scopes: to be confirmed.
+          </p>
+          <ul className="rx-dev-bullets">
+            {story.potentialSignals.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+          <p style={{ marginTop: "0.75rem" }}>
+            <strong>Combine with:</strong> {story.combineWith}
+          </p>
+          <ul className="rx-dev-bullets" style={{ marginTop: "0.5rem" }}>
+            {story.radrCouldSee.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="rx-dev-block">
         <h2>{t("provider.ingestTitle")}</h2>

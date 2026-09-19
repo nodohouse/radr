@@ -62,14 +62,14 @@ describe("home connection preview", () => {
     expect(providers.length).toBeGreaterThan(10);
     for (const g of HOME_CONNECTION_GROUPS) {
       for (const id of g.providerIds) {
-        expect(providers.some((p) => p.id === id)).toBe(true);
+        expect(providerById(id)?.id).toBe(id);
       }
     }
   });
 
-  it("signal map shows a subset of catalog providers", () => {
-    expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeGreaterThanOrEqual(10);
-    expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeLessThanOrEqual(14);
+  it("signal map shows a curated subset of catalog providers", () => {
+    expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeGreaterThanOrEqual(16);
+    expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeLessThanOrEqual(28);
     for (const id of SIGNAL_MAP_VISIBLE_IDS) {
       expect(providerById(id)?.id).toBe(id);
     }
