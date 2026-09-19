@@ -127,19 +127,19 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
     desktop: {
       kicker: "Berlin Mitte · Dinner service",
       idLine: `${d.displayId} · Restaurant · Demo`,
-      title: d.title,
-      action: "Wait 12 minutes",
+      title: "Wait 12 minutes",
+      action: "Throttle delivery · feature fast dish · hold 2 tables",
       euro: euro(d.expectedProtectedEuro),
       grade: "EXPECTED",
-      because: `vs seat-now baseline · ${formatCanonVariance(d)}`,
+      because: `38 inbound · kitchen pressure at 19:00 · ${formatCanonVariance(d)}`,
     },
     phone: {
       role: "FOH",
       badge: "FOH brief",
-      title: "VIP · Table 12",
-      body: "Nut allergy · Party of 6 · 18:50",
-      meta: "18:42 · Dinner",
-      primary: "Open brief",
+      title: "VIP · TABLE 12",
+      body: "Nut allergy · Seat by 18:50",
+      meta: "Hold · do not release",
+      primary: "Got it",
       tone: "brief",
     },
   };
@@ -149,10 +149,10 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
 export function restaurantFloorSecondaryPhone(): HeroSceneModel["phone"] {
   return {
     role: "FOH",
-    badge: "Shift update",
-    title: "Recommend Ribeye",
-    body: "Cold station 92% · Table 7",
-    meta: "18:42 · Dinner",
+    badge: "FOH brief",
+    title: "VIP · TABLE 12",
+    body: "Nut allergy · Seat by 18:50",
+    meta: "Hold · do not release",
     primary: "Got it",
     tone: "brief",
   };
@@ -161,12 +161,12 @@ export function restaurantFloorSecondaryPhone(): HeroSceneModel["phone"] {
 /** Recover approval on Floor — closes the money loop at the right person */
 export function restaurantRecoverPhone(): HeroSceneModel["phone"] {
   return {
-    role: "Finance",
+    role: "CFO",
     badge: "Recover",
-    title: "€273 credit path",
-    body: "Evidence package ready",
-    meta: "D-4102 · Approve",
-    primary: "Approve",
+    title: "€273 SUPPLIER VARIANCE",
+    body: "Evidence ready",
+    meta: "D-4102 · Always ask",
+    primary: "Review case",
     tone: "recover",
   };
 }
@@ -176,8 +176,8 @@ export function restaurantUrgentPhone(): HeroSceneModel["phone"] {
   return {
     role: "GM",
     badge: "Needs you",
-    title: "Wait 12 minutes",
-    body: "+€620 expected · kitchen spike at 19:00",
+    title: "WAIT 12 MINUTES",
+    body: "€620 expected",
     meta: "D-1911 · Dinner",
     primary: "Approve",
     tone: "urgent",

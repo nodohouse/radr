@@ -2,8 +2,8 @@
 
 /**
  * Hero hospitality scene — one desktop + one phone.
- * Vertical switch changes Decision + context. Default = Restaurant Floor.
- * Within restaurant, phone slowly alternates VIP brief ↔ service recommend.
+ * Vertical switch changes Decision + context.
+ * Restaurant phone cycles CFO · GM · Floor only.
  */
 
 import { useEffect, useState } from "react";
@@ -13,7 +13,6 @@ import {
 } from "@/components/marketing/kinetic/HospitalityContextSwitch";
 import {
   heroSceneFor,
-  restaurantFloorSecondaryPhone,
   restaurantRecoverPhone,
   restaurantUrgentPhone,
   type HospitalityVertical,
@@ -30,7 +29,7 @@ const ROTATE: HospitalityVertical[] = [
   "serviced_apartment",
 ];
 
-type FloorPhone = 0 | 1 | 2 | 3;
+type FloorPhone = 0 | 1 | 2;
 
 export function HeroHospitalityScene() {
   const reduced = usePrefersReducedMotion();
@@ -53,7 +52,7 @@ export function HeroHospitalityScene() {
   useEffect(() => {
     if (reduced || paused || vertical !== "restaurant") return;
     const id = window.setInterval(() => {
-      setFloorPhone((v) => ((v + 1) % 4) as FloorPhone);
+      setFloorPhone((v) => ((v + 1) % 3) as FloorPhone);
     }, 7000);
     return () => window.clearInterval(id);
   }, [reduced, paused, vertical]);
@@ -61,12 +60,10 @@ export function HeroHospitalityScene() {
   const phoneModel =
     vertical === "restaurant"
       ? floorPhone === 0
-        ? scene.phone
+        ? restaurantRecoverPhone()
         : floorPhone === 1
-          ? restaurantFloorSecondaryPhone()
-          : floorPhone === 2
-            ? restaurantUrgentPhone()
-            : restaurantRecoverPhone()
+          ? restaurantUrgentPhone()
+          : scene.phone
       : scene.phone;
 
   const phone: RadrPhoneState = {

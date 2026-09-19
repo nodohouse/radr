@@ -2734,45 +2734,78 @@
 /* ── Hero hospitality scene — desktop commands; phone overlaps ── */
 .rx-hrs-hosp {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(210px, 236px);
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 248px);
   grid-template-areas:
     "switch switch"
     "desk phone"
     "floor floor";
-  gap: 0.75rem 0;
+  gap: 0.65rem 0;
   align-items: start;
   position: relative;
   padding-right: 0;
-  padding-bottom: clamp(2.75rem, 6vw, 4.25rem);
+  padding-bottom: clamp(2.5rem, 5.5vw, 3.75rem);
   transform: none;
   transform-origin: top right;
-  max-width: 40rem;
+  max-width: 42rem;
 }
 .rx-hrs-hosp .rx-hcx-wrap { grid-area: switch; margin-bottom: 0; }
 .rx-hrs-hosp .rx-hcx { margin-bottom: 0; }
 .rx-hrs-hosp .rx-hrs-desktop {
   grid-area: desk;
-  padding: 1.35rem 1.45rem 1.5rem;
+  padding: 1.1rem 1.2rem 1.25rem;
   border-radius: 18px;
   background: #fff;
   border: 1px solid rgba(10, 13, 11, 0.08);
-  min-height: 24rem;
+  min-height: 22rem;
   box-shadow: 0 22px 56px rgba(10, 13, 11, 0.08);
-  margin-right: -3.75rem;
+  margin-right: -4.25rem;
   z-index: 1;
+}
+.rx-hrs-hosp .rx-hrs-title {
+  font-size: clamp(1.55rem, 2.1vw, 1.85rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  font-weight: 650;
+}
+.rx-hrs-hosp .rx-hrs-euro strong {
+  font-size: clamp(2.2rem, 2.8vw, 2.7rem);
+}
+.rx-hrs-hosp .rx-hrs-because {
+  margin-top: 0.75rem;
+  font-size: 1.02rem;
+  font-weight: 550;
+  color: #0a0d0b;
+}
+.rx-hrs-hosp .rx-hrs-note {
+  font-size: 0.88rem;
+  color: #3f4642;
+  line-height: 1.45;
+}
+.rx-hrs-hosp .rx-hrs-k,
+.rx-hrs-hosp .rx-hrs-id {
+  color: #3f4642;
 }
 .rx-hrs-hosp .rx-hrs-phone,
 .rx-hrs-hosp .rx-he-phone {
   grid-area: phone;
   align-self: end;
-  width: clamp(210px, 18vw, 236px);
-  margin-left: -3.5rem;
-  margin-bottom: -2.25rem;
+  width: clamp(220px, 18vw, 248px);
+  margin-left: -3.75rem;
+  margin-bottom: -2rem;
   z-index: 2;
   position: relative;
 }
 .rx-hrs-hosp .rx-he-phone-screen {
-  min-height: 22.5rem;
+  min-height: 23rem;
+}
+.rx-hrs-hosp .rx-he-phone-title {
+  font-size: 1.05rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.rx-hrs-hosp .rx-he-phone-body {
+  font-size: 0.9rem;
+  color: rgba(247, 250, 248, 0.9);
 }
 .rx-hrs-floor-link {
   grid-area: floor;
@@ -3291,17 +3324,18 @@
   text-align: center;
 }
 .rx-intake-core-k {
-  margin: 0.2rem 0 0;
+  margin: 0.55rem 0 0;
   font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
-  font-size: 0.55rem;
-  letter-spacing: 0.14em;
+  font-size: 0.48rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #3f4642;
-  font-weight: 500;
+  color: #5a625d;
+  font-weight: 450;
+  opacity: 0.92;
 }
 .rx-intake-core-name {
-  margin: 0.55rem 0 0;
-  font-size: 1.45rem;
+  margin: 0.35rem 0 0;
+  font-size: 1.55rem;
   font-weight: 700;
   letter-spacing: -0.04em;
   color: #0a0d0b;
@@ -3801,15 +3835,28 @@
   min-height: 14rem;
 }
 .rx-role-desk-k {
-  margin: 0 0 0.55rem;
+  margin: 0;
   font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
   font-size: 0.58rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #8a918d;
+  color: #3f4642;
+}
+.rx-role-desk-id {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: #5a625d;
+}
+.rx-role-tabs button:focus-visible,
+.rx-rso-scrub button:focus-visible,
+.rx-intake-chip:focus-visible {
+  outline: 2px solid #00a85a;
+  outline-offset: 2px;
 }
 .rx-role-desk h3 {
-  margin: 0;
+  margin: 0.55rem 0 0;
   font-size: 1.55rem;
   letter-spacing: -0.03em;
   font-weight: 650;
@@ -3828,7 +3875,7 @@
 .rx-role-desk-foot {
   margin: 1.25rem 0 0;
   font-size: 0.78rem;
-  color: #8a918d;
+  color: #5a625d;
 }
 .rx-role-desk[data-tone="urgent"] h3 { color: #b45309; }
 .rx-role-desk[data-tone="exposure"] h3 { color: #0a0d0b; }
@@ -3902,27 +3949,28 @@
 }
 .rx-ev-moment[data-layout="panel"] {
   display: grid;
-  grid-template-columns: minmax(0, 576px) minmax(0, 1fr);
-  gap: clamp(1.25rem, 3vw, 2rem);
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.25rem);
   align-items: stretch;
   max-width: 64rem;
 }
 .rx-ev-moment[data-spread="b"] {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 576px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto);
 }
 .rx-ev-moment[data-spread="b"] .rx-ev-body { order: 0; }
 .rx-ev-moment[data-spread="b"] .rx-ev-photo { order: 1; justify-self: end; }
 .rx-ev-moment[data-spread="c"] {
-  max-width: 58rem;
+  max-width: 56rem;
   margin-inline: auto;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, auto) minmax(0, 1.25fr);
+  align-items: center;
 }
 .rx-ev-moment[data-spread="c"] .rx-ev-photo {
-  max-width: 480px;
-  border-radius: 4px 18px 18px 4px;
+  border-radius: 4px 20px 20px 4px;
 }
 .rx-ev-moment[data-spread="c"] .rx-ev-body {
   background: #eef6f1;
+  min-height: 18rem;
 }
 .rx-ev-photo {
   margin: 0;
@@ -3931,7 +3979,7 @@
   position: relative;
   background: #dfe6e1;
   width: 100%;
-  max-width: 576px;
+  max-width: 520px;
   justify-self: start;
 }
 .rx-ev-photo img {
@@ -3943,14 +3991,21 @@
 }
 .rx-ev-photo figcaption {
   position: absolute;
-  left: 0.85rem;
-  bottom: 0.75rem;
+  left: 0.65rem;
+  bottom: 0.65rem;
+  margin: 0;
+}
+.rx-ev-photo figcaption span {
+  display: inline-block;
+  padding: 0.28rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(247, 250, 248, 0.94);
   font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
-  font-size: 0.58rem;
+  font-size: 0.55rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(10, 13, 11, 0.45);
+  color: #0a0d0b;
+  font-weight: 550;
 }
 .rx-ev-moment[data-layout="panel"] .rx-ev-body {
   padding: 1.75rem 1.65rem;
@@ -4035,7 +4090,10 @@
   .rx-ev-moment[data-spread="b"] .rx-ev-body {
     order: 0;
   }
-  .rx-ev-photo { max-width: none; }
+  .rx-ev-photo {
+    max-width: min(100%, 520px) !important;
+    justify-self: center;
+  }
 }
 
 /* Contrast: cluster labels / muted UI */
@@ -4226,7 +4284,7 @@
 }
 
 .rx-home-spine .rx-rec-sec-quiet {
-  padding: var(--rx-sp-6, 3rem) 0;
+  padding: var(--rx-sp-7, 4rem) 0;
   background: #f7faf8;
 }
 .rx-home-spine .rx-rec-sec-interactive {
@@ -4237,13 +4295,19 @@
   background: #eef6f1;
 }
 .rx-home-spine .rx-rec-sec-human {
-  padding: var(--rx-sp-6, 3rem) 0;
+  padding: var(--rx-sp-7, 4rem) 0;
 }
 .rx-home-spine .rx-rec-sec-convert {
-  padding: var(--rx-sp-6, 3rem) 0;
+  padding: var(--rx-sp-7, 4rem) 0;
 }
 .rx-home-spine .rx-rec-faq-quiet {
-  padding: var(--rx-sp-5, 2rem) 0 var(--rx-sp-6, 3rem);
+  padding: var(--rx-sp-6, 3rem) 0 var(--rx-sp-7, 4rem);
+}
+.rx-home-spine .rx-rec-sec-ivory {
+  padding: var(--rx-sp-7, 4rem) 0;
+}
+.rx-home-spine .rx-rec-sec-band {
+  padding: var(--rx-sp-6, 3rem) 0;
 }
 
 /* Premium wordmark chips — typography first, calm monochrome */

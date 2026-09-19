@@ -13099,14 +13099,13 @@ html:has(.radr-home) body {
   padding-top: 0.15rem;
 }
 .rx-he-recover-product {
-  width: min(100%, 40rem);
-  max-width: 40rem;
+  width: min(100%, 42rem);
+  max-width: 42rem;
   justify-self: end;
-  padding-top: 1.15rem;
-  margin-bottom: -2.5rem;
-  margin-right: clamp(-3.5rem, -5vw, -1.5rem);
-  /* ~3.5cm left vs prior rightward push */
-  transform: translateX(clamp(-4.25rem, -6vw, -2.75rem));
+  padding-top: 0.85rem;
+  margin-bottom: -2.25rem;
+  margin-right: clamp(-4.5rem, -6.5vw, -2rem);
+  transform: translateX(clamp(-3.5rem, -4.5vw, -1.75rem));
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;

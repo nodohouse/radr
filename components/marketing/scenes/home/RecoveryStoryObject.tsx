@@ -15,7 +15,7 @@ const STAGES = [
   {
     id: "dispute",
     label: "Decision",
-    line: "Dispute variance",
+    line: "DISPUTE VARIANCE",
     grade: "DECISION",
   },
   {
@@ -27,7 +27,7 @@ const STAGES = [
   {
     id: "verified",
     label: "Verified",
-    line: "€273 recovered",
+    line: "€273 RECOVERED",
     grade: "VERIFIED",
   },
 ] as const;

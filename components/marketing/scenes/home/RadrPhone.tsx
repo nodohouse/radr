@@ -23,23 +23,21 @@ export const PHONE_CFO_RECOVER: RadrPhoneState = {
   id: "cfo",
   role: "CFO",
   badge: "Recover",
-  title: "€273 supplier variance",
-  body: "Evidence package ready.",
+  title: "€273 SUPPLIER VARIANCE",
+  body: "Evidence ready.",
   meta: "Always ask before sending",
-  primary: "Review",
-  secondary: "Approve draft",
+  primary: "Review case",
   tone: "recover",
 };
 
 export const PHONE_GM_PERISHABLE: RadrPhoneState = {
   id: "gm",
   role: "GM",
-  badge: "At risk",
-  title: "€184 value at risk",
-  body: "Cancellation at T14.",
-  meta: "Waitlist recovery prepared",
+  badge: "Needs you",
+  title: "WAIT 12 MINUTES",
+  body: "€620 expected.",
+  meta: "D-1911 · Dinner",
   primary: "Approve",
-  secondary: "View why",
   tone: "urgent",
 };
 
@@ -57,11 +55,11 @@ export const PHONE_VERIFIED: RadrPhoneState = {
 export const PHONE_FOH: RadrPhoneState = {
   id: "foh",
   role: "FOH",
-  badge: "FOH",
-  title: "Table 12 released",
-  body: "Offer to waitlist guest prepared.",
-  meta: "Seat by 18:50",
-  primary: "Confirm",
+  badge: "FOH brief",
+  title: "VIP · TABLE 12",
+  body: "Nut allergy · Seat by 18:50.",
+  meta: "Hold · do not release",
+  primary: "Got it",
   tone: "brief",
 };
 

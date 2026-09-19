@@ -151,7 +151,9 @@ export function HomepageSpine() {
           <p className="rx-rec-k">{t("footer.brand")}</p>
           <div>
             <h2 className="rx-rec-h">{t("footer.title")}</h2>
-            <p className="rx-rec-p">{t("footer.body")}</p>
+            {t("footer.body") ? (
+              <p className="rx-rec-p">{t("footer.body")}</p>
+            ) : null}
             <div className="rx-he-ctas">
               <Link
                 href="/contact?intent=recovery-pilot"

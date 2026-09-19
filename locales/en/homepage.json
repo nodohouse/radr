@@ -1739,7 +1739,7 @@
     "pilot": {
       "kicker": "Recovery Pilot",
       "title": "14 days to find and action recoverable value.",
-      "lead": "",
+      "lead": "Open cases stay on RADR until resolved, verified or closed.",
       "scope": "",
       "opt1": "Supplier / AP",
       "opt2": "Reconciliation",
@@ -1763,7 +1763,7 @@
       "kicker": "FAQ",
       "title": "Straight answers",
       "q1": "What if a supplier takes longer than 14 days?",
-      "a1": "RADR keeps the case open until it resolves or is closed. The 14-day pilot path is illustrative — not a promise of results by day.",
+      "a1": "RADR keeps open cases active until they resolve or are closed. The 14-day period covers discovery and action, not supplier settlement timelines.",
       "q2": "Do we have to replace our accounting or procurement stack?",
       "a2": "No. RADR works across the systems already in use.",
       "q3": "Does RADR send disputes automatically?",
@@ -1773,10 +1773,10 @@
     },
     "footer": {
       "brand": "Nothing off the RADR.",
-      "title": "Ready when you are",
-      "body": "Start recovering value on the stack you already run — money that is leaking, missing, owed back, or about to disappear.",
+      "title": "Start with the value already slipping through.",
+      "body": "",
       "cta": "Start a recovery pilot",
-      "secondary": "See how RADR recovers value"
+      "secondary": "See a verified recovery"
     }
   }
 }
