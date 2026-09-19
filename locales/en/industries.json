@@ -1,0 +1,54 @@
+{
+  "metaTitle": "Industries — RADR",
+  "metaDescription": "Margin leaks differently in every hospitality model. RADR learns where to look — restaurants, hotels, serviced apartments and groups.",
+  "kicker": "Industries",
+  "heroTitleLine1": "Different operations.",
+  "heroTitleLine2": "Different ways to lose margin.",
+  "heroLead": "RADR learns the operating physics of each one.",
+  "ctaTitle": "See RADR on your economics.",
+  "ctaLead": "Open the live demo, or talk to RADR about your locations and stack.",
+  "ctaDemo": "See how RADR decides",
+  "storiesLabel": "Decision story",
+  "problemLabel": "The problem",
+  "decisionsLabel": "Decisions RADR owns",
+  "workRemovedLabel": "Work removed",
+  "exampleLabel": "One example",
+  "stories": {
+    "restaurants": {
+      "problem": "More covers can make you less money. Food cost, labor, kitchen throughput, delivery, table turns and guest experience collide during service — demand without contribution is not success.",
+      "decisions": "Hold seating when kitchen load and inbound covers collide. Throttle low-contribution delivery. Feature high €/min dishes under pressure.",
+      "workRemoved": "Floor vs kitchen reconciliation by gut feel, delivery intake without contribution, second-turn surprises.",
+      "example": "D-1911 · Berlin Mitte: Empty tables ≠ capacity. €620 vs seat-now. Wait 12 min. €590 verified protected."
+    },
+    "hotels": {
+      "problem": "Fuller does not always mean more profitable. Occupancy and RevPAR can look healthy while contribution deteriorates underneath — channel mix, rate, and readiness rarely sit in one Decision.",
+      "decisions": "Hold premium direct vs release OTA. Price remaining inventory to pace. Align housekeeping to contribution, not just fill.",
+      "workRemoved": "Occupancy-only brief, OTA dump under event compression, late housekeeping surprises on premium inventory.",
+      "example": "D-2201 · 89% occupancy. OTA +11 pts. €4,200 contribution exposure. Hold premium direct — then verify."
+    },
+    "bars": {
+      "problem": "Bars & cafés live inside Restaurants & F&B — daypart, waste and weather still follow the same decision loop.",
+      "decisions": "Staff and stage inventory to weather and daypart. Challenge supplier price books.",
+      "workRemoved": "Labor-versus-daypart review, supplier price checks, stock-risk monitoring.",
+      "example": "Warm dry afternoon historically lifts terrace demand — RADR prepares staffing and high-velocity SKUs against the indoor baseline."
+    },
+    "groups": {
+      "problem": "Similar revenue. Different profit. Leadership sees locations. They do not always see why similar ADR produces different GOP — labor, channel, supplier, housekeeping and F&B diverge underneath.",
+      "decisions": "Decompose structural variance into drivers. Verify locally. Roll playbooks across comparable sites.",
+      "workRemoved": "Ranking without drivers, repeated local interventions, weekly variance archaeology.",
+      "example": "Amsterdam €214 ADR · 38% GOP vs Berlin €216 ADR · 31% GOP. €14,800 / month structural at risk — local Decision → playbook → group rollout."
+    },
+    "finance": {
+      "problem": "Finance & operations is a role, not an industry. RADR separates identified, expected, observed and verified value for every Decision.",
+      "decisions": "Match invoices to contracts. Chase recoverable credits. Audit Verified Value with proof.",
+      "workRemoved": "Invoice-to-contract matching, credit chase preparation, verified value tracking.",
+      "example": "See Verified Value — claim only what you can prove."
+    },
+    "apartments": {
+      "problem": "Filling the night can be the wrong Decision. Unit-night economics depend on LOS, turnover, cleaning, channel cost, maintenance and future demand — not simply occupancy.",
+      "decisions": "Reject low-quality one-night fill when net contribution after turnover loses to a longer direct path.",
+      "workRemoved": "Take-any-booking reflex, channel release guesswork, post-hoc fill analysis.",
+      "example": "D-3104 · Booking available. Take-it looks obvious. RADR waits — turnover absorbed, OTA drag, 41% longer direct stay, next-stay Wednesday."
+    }
+  }
+}

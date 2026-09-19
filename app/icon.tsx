@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-/** Standalone rounded △ favicon — signal green on near-black. */
+/** Standalone rounded △ favicon: signal green on near-black. */
 export default function Icon() {
   return new ImageResponse(
     (

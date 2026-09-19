@@ -1,0 +1,18 @@
+{
+  "privacyTitle": "Privacidad",
+  "termsTitle": "Términos",
+  "imprintTitle": "Aviso legal",
+  "privacyKicker": "Legal / Privacidad",
+  "termsKicker": "Legal / Términos",
+  "imprintKicker": "Legal / Aviso legal",
+  "privacyPageTitle": "Política de privacidad",
+  "termsPageTitle": "Términos de uso",
+  "imprintPageTitle": "Aviso legal",
+  "convenienceNotice": "Esta página se ofrece como traducción de cortesía. La versión jurídica autoritativa es el inglés hasta que se publique una traducción revisada profesionalmente.",
+  "officialEn": "Ver inglés (autoritativo)",
+  "lastUpdated": "Última actualización: {date}",
+  "draftNotice": "Borrador pendiente de revisión. Aún no finalizado por asesoría legal.",
+  "metaPrivacyDescription": "Cómo RADR trata datos de cuenta, documentos, cookies y solicitudes de privacidad.",
+  "metaTermsDescription": "Términos de uso del sitio radrup.com: demos ilustrativas, IP, límites de responsabilidad y contacto.",
+  "metaImprintDescription": "Aviso legal para RADR (radrup.com). Detalles de la entidad publicados una vez confirmados."
+}

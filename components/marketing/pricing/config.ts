@@ -1,184 +1,124 @@
-/** Central RADR pricing configuration. */
+/**
+ * RADR commercial packaging — public pricing page.
+ *
+ * Motions: Pilot (paid proof) · Core (product) · Control (govern + scale).
+ * No free tier. No list prices. No seat tax. No per-Decision charges.
+ * BUY / LABOR / SELL / RECOVER are lenses — never separately priced modules.
+ *
+ * Capability honesty aligns with lib/radr/capabilityStatus.ts.
+ */
+
+export type PlanId = "pilot" | "core" | "control";
 
 export const pricingConfig = {
-  free: {
-    id: "free" as const,
-    name: "RADR Free",
-    price: 0,
-    priceLabel: "€0",
-    locationLimit: 1,
-    userLimit: 1,
-    documentLimit: 10,
-    historyDays: 30,
-    cta: { href: "/signup", label: "Start free" },
-    noCardRequired: true,
-    purpose: "TRY RADR.",
+  pilot: {
+    id: "pilot" as const,
+    name: "RADR Pilot",
+    verb: "Prove",
+    cta: { href: "/contact?plan=pilot", label: "Talk to us about a Pilot" },
+  },
+  core: {
+    id: "core" as const,
+    name: "RADR Core",
+    verb: "Decide + Verify",
+    cta: { href: "/contact?plan=core", label: "Discuss Core" },
   },
   control: {
     id: "control" as const,
     name: "RADR Control",
-    price: 199,
-    priceLabel: "€199",
-    unit: "per location / month" as const,
-    cta: { href: "/signup", label: "Start Control" },
-    purpose: "PUT RADR TO WORK.",
+    verb: "Govern + Scale",
+    cta: { href: "/contact?plan=control", label: "Discuss Control" },
   },
-  scale: {
-    id: "scale" as const,
-    name: "RADR Scale",
-    price: null,
-    priceLabel: "Custom",
-    cta: { href: "/signup", label: "Talk to RADR" },
-    purpose: "RADR ACROSS THE GROUP.",
-  },
-  billingLive: false,
+  talkHref: "/contact" as const,
+  demoHref: "/demo" as const,
 } as const;
 
-export type StatusTag = "live" | "early" | "next" | "not";
-
-export type CompareRow = {
-  feature: string;
-  free: StatusTag;
-  control: StatusTag;
-  scale: StatusTag;
-};
-
-/** Short comparison — honest availability. */
-export const compareRows: CompareRow[] = [
-  { feature: "Locations", free: "live", control: "live", scale: "live" },
-  { feature: "Evidence upload", free: "live", control: "live", scale: "live" },
-  { feature: "Private storage", free: "live", control: "live", scale: "live" },
-  { feature: "File ingestion", free: "live", control: "live", scale: "live" },
-  { feature: "Basic margin checks", free: "early", control: "early", scale: "early" },
-  { feature: "Cases / decisions", free: "not", control: "early", scale: "early" },
-  { feature: "Money owed tracking", free: "not", control: "early", scale: "early" },
-  { feature: "Procurement control", free: "not", control: "next", scale: "next" },
-  { feature: "Payout reconciliation", free: "not", control: "next", scale: "next" },
-  { feature: "Controls library", free: "not", control: "next", scale: "next" },
-  { feature: "Multi-location control room", free: "not", control: "not", scale: "next" },
-];
-
-export const faqItems = [
+/** How pricing scales — three concepts only. */
+export const pricingDimensions = [
   {
-    q: "Can I try RADR without paying?",
-    a: "Yes. Free includes 1 location, 1 user, and 10 documents total. No credit card required.",
+    id: "locations",
+    title: "Locations",
+    body: "How much of the operation RADR covers.",
   },
   {
-    q: "Is Control priced per user or per location?",
-    a: `${pricingConfig.control.priceLabel} ${pricingConfig.control.unit}. Team access is included in the Control model — not sold per seat.`,
+    id: "scope",
+    title: "Operating scope",
+    body: "The operational complexity RADR is responsible for understanding.",
   },
   {
-    q: "Does RADR block payments or contact suppliers?",
-    a: "No. RADR flags mismatches for human review. It does not move money or contact suppliers without you.",
-  },
-  {
-    q: "What is available now vs coming next?",
-    a: "Available now: document upload, private storage, organization isolation, and early margin checks. Cases, money-owed tracking, procurement control and payout reconciliation expand as Early Access / Coming Next — we do not sell unfinished capability as live.",
-  },
-  {
-    q: "Can I use RADR across multiple locations?",
-    a: "Bill Control per location, or Talk to RADR for Scale — multi-location control room and group workflows.",
-  },
-  {
-    q: "Is there annual pricing?",
-    a: "Not yet. Monthly for now.",
+    id: "responsibility",
+    title: "Decision responsibility",
+    body: "Whether RADR recommends, prepares, or governs.",
   },
 ] as const;
 
-export type DemoId = "suppliers" | "credits" | "services" | "delivery";
+/** Prove → Deploy → Scale */
+export const expansionSteps = [
+  {
+    id: "prove",
+    label: "Prove",
+    title: "One operating problem.",
+    body: "A paid Pilot on one location, defined systems, and a measurable outcome.",
+  },
+  {
+    id: "deploy",
+    label: "Deploy",
+    title: "Make RADR part of one operation.",
+    body: "Core connects the stack, decides what matters, and verifies what changed.",
+  },
+  {
+    id: "scale",
+    label: "Scale",
+    title: "Govern Decisions across locations.",
+    body: "Control prepares, approves, and learns across the group.",
+  },
+] as const;
 
-export const controlDemos: {
-  id: DemoId;
-  label: string;
-  context: string;
-  status: "Example" | "Building";
-  rows: { label: string; value: string; signal?: boolean }[];
-  outcome: { label: string; value: string; sub: string };
-  punch?: string;
-}[] = [
-  {
-    id: "suppliers",
-    label: "Suppliers",
-    context: "Olive oil · supplier agreement",
-    status: "Example",
-    rows: [
-      { label: "Agreed", value: "€6.80 / L" },
-      { label: "Invoiced", value: "€7.45 / L", signal: true },
-      { label: "Monthly volume", value: "420 L" },
-    ],
-    outcome: {
-      label: "Potential monthly impact",
-      value: "€273",
-      sub: "Requires review",
-    },
-  },
-  {
-    id: "credits",
-    label: "Credits",
-    context: "Supplier credit promised",
-    status: "Example",
-    rows: [
-      { label: "Promised", value: "€481.20" },
-      { label: "Expected by", value: "14 days" },
-      { label: "Matching credit", value: "Not found", signal: true },
-      { label: "Outstanding", value: "27 days", signal: true },
-    ],
-    outcome: {
-      label: "Still outstanding",
-      value: "€481.20",
-      sub: "Requires review",
-    },
-  },
-  {
-    id: "services",
-    label: "Services",
-    context: "Night cleaning · agreement",
-    status: "Example",
-    rows: [
-      { label: "Expected visits", value: "22" },
-      { label: "Invoiced", value: "26", signal: true },
-      { label: "Rate", value: "€185 / visit" },
-    ],
-    outcome: {
-      label: "Requires review",
-      value: "€740",
-      sub: "+4 visits",
-    },
-  },
-  {
-    id: "delivery",
-    label: "Delivery apps",
-    context: "Platform payout · Week 32",
-    status: "Building",
-    rows: [
-      { label: "Gross sales", value: "€18,420" },
-      { label: "Refunds", value: "−€436" },
-      { label: "Discounts", value: "−€1,284" },
-      { label: "Fees", value: "−€4,912" },
-      { label: "Adjustments", value: "−€218" },
-      { label: "Expected payout", value: "€11,570" },
-      { label: "Actual payout", value: "€11,238", signal: true },
-    ],
-    outcome: {
-      label: "Unexplained difference",
-      value: "€332",
-      sub: "Requires review · Example · Building",
-    },
-    punch: "1,000 orders. One payout.",
-  },
+export type CellTag = "yes" | "no" | "early" | "selected" | "pilot";
+
+export type ResponsibilityGroup =
+  | "scope"
+  | "intelligence"
+  | "proof"
+  | "action"
+  | "scale";
+
+export type ResponsibilityRow = {
+  group: ResponsibilityGroup;
+  feature: string;
+  pilot: CellTag;
+  core: CellTag;
+  control: CellTag;
+};
+
+/**
+ * Commercial responsibility — not a 40-row SaaS matrix.
+ * early = Early Access · selected = scoped in Pilot · pilot = Pilot-period memory
+ */
+export const responsibilityRows: ResponsibilityRow[] = [
+  { group: "scope", feature: "Defined economic problem", pilot: "yes", core: "no", control: "no" },
+  { group: "scope", feature: "Location(s)", pilot: "selected", core: "yes", control: "yes" },
+  { group: "scope", feature: "Group / portfolio", pilot: "no", core: "no", control: "yes" },
+  { group: "intelligence", feature: "Connected operating data", pilot: "yes", core: "yes", control: "yes" },
+  { group: "intelligence", feature: "Cross-system Decisions", pilot: "yes", core: "yes", control: "yes" },
+  { group: "intelligence", feature: "Operator context", pilot: "yes", core: "yes", control: "yes" },
+  { group: "intelligence", feature: "Futures", pilot: "selected", core: "early", control: "early" },
+  { group: "proof", feature: "Decision Trace", pilot: "yes", core: "yes", control: "yes" },
+  { group: "proof", feature: "Verified Value", pilot: "yes", core: "yes", control: "yes" },
+  { group: "proof", feature: "Operating Memory", pilot: "pilot", core: "early", control: "early" },
+  { group: "action", feature: "Recommendations", pilot: "yes", core: "yes", control: "yes" },
+  { group: "action", feature: "Prepared Actions", pilot: "no", core: "early", control: "yes" },
+  { group: "action", feature: "Approval workflows", pilot: "no", core: "no", control: "yes" },
+  { group: "scale", feature: "Multi-location governance", pilot: "no", core: "no", control: "yes" },
+  { group: "scale", feature: "Group playbooks", pilot: "no", core: "no", control: "early" },
+  { group: "scale", feature: "Portfolio value view", pilot: "no", core: "no", control: "yes" },
+  { group: "scale", feature: "Advanced controls", pilot: "no", core: "no", control: "yes" },
 ];
 
-export function formatEuro(n: number): string {
-  return new Intl.NumberFormat("nl-NL", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(n);
-}
-
-export function statusLabel(s: StatusTag): string {
-  if (s === "live") return "Available now";
-  if (s === "early") return "Early access";
-  if (s === "next") return "Coming next";
+export function cellLabel(tag: CellTag): string {
+  if (tag === "yes") return "Yes";
+  if (tag === "early") return "Early access";
+  if (tag === "selected") return "Selected";
+  if (tag === "pilot") return "Pilot scope";
   return "—";
 }

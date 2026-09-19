@@ -10,6 +10,11 @@ import { documents, locations } from "@/lib/db/schema";
 import { newId } from "@/lib/ids";
 import { putPrivateObject } from "@/lib/storage";
 import { assertAllowedUploadBytes, uploadMetaSchema } from "@/lib/validation";
+import { CLIENT_ERRORS } from "@/lib/security/errors";
+import {
+  clientKeyFromRequest,
+  rateLimit,
+} from "@/lib/security/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -23,9 +28,21 @@ type UploadedDocument = {
 };
 
 export async function POST(request: Request) {
+  const rl = rateLimit({
+    key: clientKeyFromRequest(request, "upload"),
+    limit: 20,
+    windowMs: 60_000,
+  });
+  if (!rl.ok) {
+    return NextResponse.json(
+      { error: CLIENT_ERRORS.rateLimited },
+      { status: 429, headers: { "Retry-After": String(rl.retryAfterSec) } },
+    );
+  }
+
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: CLIENT_ERRORS.unauthorized }, { status: 401 });
   }
 
   let form: FormData;

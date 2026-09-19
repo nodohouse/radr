@@ -2,7 +2,7 @@ import { RadrWordmark } from "@/components/marketing/RadrWordmark";
 
 const SIZES = [24, 32, 48, 72, 120, 180] as const;
 
-/** Temporary optical QA — wordmark only on black. */
+/** Temporary optical QA: wordmark only on black. */
 export default function WordmarkTestPage() {
   return (
     <main
@@ -45,7 +45,7 @@ export default function WordmarkTestPage() {
               {px}px
             </p>
             <div style={{ fontSize: px, lineHeight: 1 }}>
-              <RadrWordmark size="md" />
+              <RadrWordmark size="md" variant="luminous" />
             </div>
           </div>
         ))}

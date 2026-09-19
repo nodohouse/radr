@@ -1,20 +1,20 @@
 /**
  * Central company / legal identity for marketing + legal pages.
- * Leave fields empty until counsel confirms — never invent values.
+ * Leave fields empty until counsel confirms. Never invent values.
  */
 export const COMPANY = {
   brandName: "RADR",
   slogan: "Nothing off the RADR.",
-  tagline: "Margin intelligence",
-  beachhead: "Built first for hospitality.",
-  category: "Margin intelligence",
+  tagline: "Nothing off the RADR.",
+  beachhead: "Built for hospitality.",
+  category: "Adaptive Decision System",
   vision: "Every complex operation on RADR.",
   domain: "radrup.com",
   siteUrl: "https://radrup.com",
-  /** Public contact inbox — leave empty until live */
+  /** Public contact inbox: leave empty until live */
   email: "",
   privacyEmail: "",
-  /** Legal entity (Imprint / Privacy controller) — leave empty until confirmed */
+  /** Legal entity (Imprint / Privacy controller): leave empty until confirmed */
   legalName: "",
   legalForm: "",
   addressLines: [] as string[],
@@ -24,10 +24,10 @@ export const COMPANY = {
   registrationNumber: "",
   vatId: "",
   responsiblePerson: "",
-  /** Governing law placeholder — counsel to confirm */
+  /** Governing law placeholder: counsel to confirm */
   governingLaw: "",
   disputeVenue: "",
-  /** Last reviewed dates (ISO) for legal pages — update when counsel signs off */
+  /** Last reviewed dates (ISO) for legal pages: update when counsel signs off */
   privacyUpdated: "",
   termsUpdated: "",
   imprintUpdated: "",

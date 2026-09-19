@@ -1,0 +1,70 @@
+---
+description: RADR design — Refero-first research, progressive disclosure, five-question hierarchy
+alwaysApply: true
+---
+
+# RADR design research rules
+
+Before redesigning marketing or product UI:
+
+1. Prefer proven interaction patterns (Refero / Refero Styles / equivalent research).
+2. Do **not** clone Linear, Stripe, Vercel, Ramp, Mercury, Grafana, or Power BI.
+3. Ask: "What interaction solves RADR's problem most clearly?" — not "What looks cool?"
+
+## Product hierarchy (Control Center order)
+
+Human attention is scarce. Default to calm ownership, not a work queue.
+
+1. What needs me? — attention requests only (approve / choose / exception)
+2. What is RADR handling? — prepared, waiting, watching, verified since last check
+3. How are we doing? — location + margin + vs plan (context, not the inbox)
+4. What changed? — one primary chart when it explains the attention load
+5. Evidence → Prepared Action → approval → Verified Value
+
+Do not optimize the UI for Finding count, task count, or time spent in RADR.
+Prefer: HANDLE → PREPARE → ASK → INFORM.
+
+## Progressive disclosure
+
+- Default state ≈ 20% of available information
+- Hover = preview · Click = investigate · Deep page = audit trail
+- If two elements say the same thing, remove one
+- If a number cannot lead to understanding or action, question it
+- Do not permanently display Level 3+ detail on Level 1 screens
+
+## Visual system
+
+Marketing default: mineral light canvas (`#F7FAF8`) with atmospheric light fields, pure white surfaces (`#FFFFFF`), and near-black ink (`#0A0D0B`).
+Atmospheric gradients (mint / ice / soft green) are materials for light and depth — not decoration. Use on ~20–30% of a page.
+Product / app remains predominantly dark (`#08100C`).
+Green (`#00D978` / `#00A85A`) = live / detected / positive / verified / RADR intelligence — signal only, never full-bar chrome.
+White = primary info · muted ink (`#626A65`) = context · Amber = watch · Red = material negative only.
+Absolute positioning only for overlays (radar, crosshair, tips) — not for primary layout.
+Typography: Instrument Sans for UI copy; IBM Plex Mono for territories and system labels only.
+
+## Territories
+
+BUY / LABOR / SELL / RECOVER are lenses, not four giant dashboard widgets.
+Radar may illuminate them softly; click opens depth — no giant floating panels on hover.
+
+## Charts
+
+One strong operating chart: real axes, crosshair tip, click → day investigation.
+Actual > forecast > plan visual weight. Finding markers = quiet green dots.
+
+## Scroll belongs to the user
+
+Components may **react** to scroll. Components may **never capture** it.
+
+Banned on public marketing surfaces:
+- wheel interception / scroll-jacking
+- mandatory horizontal scrolling
+- five consecutive 100vh sticky states
+- forced scroll-snap sequences
+- oversized sticky dwell (keep narrative sticky ≤ ~150–180vh total when essential)
+
+Visitor can always scroll past. Prefer click/hover controls over scroll traps.
+
+## Final rule
+
+Do not add more. Replace weak UI with better UI. Every component must justify its existence.

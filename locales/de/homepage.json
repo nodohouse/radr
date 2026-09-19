@@ -1,0 +1,1782 @@
+{
+  "hero": {
+    "kicker": "Value recovery",
+    "title": "Recover the value your operation is losing.",
+    "sub": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
+    "support": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
+    "ctaPrimary": "Start a recovery pilot",
+    "ctaSecondary": "See how RADR recovers value",
+    "ariaLabel": "Nothing off the RADR — Recover the value your operation is losing",
+    "card": {
+      "aria": "Supplier recovery Decision card",
+      "kicker": "Supplier / AP · Finance",
+      "id": "D-4102 · Berlin Mitte · Demo",
+      "title": "Contract price variance",
+      "euro": "€273",
+      "grade": "Verified",
+      "because": "Invoice €7.45/L vs contract €6.80/L · 420 L — credit applied and matched",
+      "step1": "Absorb",
+      "step2": "Dispute",
+      "step3": "Renegotiate",
+      "step4": "Switch supplier",
+      "step5": "See recovery →",
+      "note": "Illustrative demo. Verified when Finance can match the credit to the original invoice."
+    },
+    "titleLine1": "Recover the value your operation is losing.",
+    "titleLine2Prefix": "",
+    "promise": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
+    "lead": "Keep the systems you already run.",
+    "verticals": {
+      "aria": "ICP",
+      "hint": "",
+      "note": "For Finance and operators · multi-location hospitality",
+      "restaurant": "Restaurants",
+      "hotel": "Hotels",
+      "apartments": "Aparthotels"
+    },
+    "demo": {
+      "aria": "RADR Control Center demonstration",
+      "live": "Live",
+      "checkRhythm": "Before · quiet · after",
+      "whenAria": "Operating timeframe",
+      "when": {
+        "pre": "Pre-shift",
+        "live": "Live",
+        "after": "After",
+        "day": "Day"
+      },
+      "chromeLeft": "Berlin Mitte",
+      "chromeRight": "Before · quiet · after",
+      "greeting": "Good morning",
+      "issues": "2 things need you",
+      "sinceLastCheck": "1 decision ready · €184 verified since last check",
+      "exposedAmount": "€8,420",
+      "exposedLabel": "currently exposed",
+      "actNow": "2 things need you",
+      "reviewToday": "",
+      "whyLabel": "What RADR already did",
+      "preparedLabel": "RADR already prepared",
+      "recommendsLabel": "RADR recommends",
+      "evidenceLabel": "Why RADR believes this",
+      "whyBasisLabel": "Based on",
+      "stepNow": "Status quo",
+      "stepPlan": "How RADR solves it",
+      "stepWhy": "Why this works",
+      "learnWorked": "What worked",
+      "learnImprove": "Where to improve",
+      "secondaryAria": "Next decision with options",
+      "secondaryOptions": "Options",
+      "secondaryDefault": "RADR default",
+      "anatomyAria": "Signals in",
+      "evidence": "Evidence",
+      "ifNothing": "If nothing changes",
+      "why": "Why",
+      "simulate": "Simulate",
+      "approvePlan": "Approve plan",
+      "actionLabel": "Prepared action",
+      "verifiedLabel": "Verified Value",
+      "exposureSplit": "Exposure by territory",
+      "recentVerified": "Verified",
+      "recovered": "verified",
+      "viewProof": "View proof",
+      "replay": "Replay",
+      "disclosureShort": "Illustrative product data.",
+      "disclosureLong": "The organizations, locations, findings and financial values shown in this product demonstration are fictional and used to illustrate RADR functionality.",
+      "ctaSeeWhy": "See why",
+      "ctaSimulate": "Simulate",
+      "ctaPrepare": "Prepare action",
+      "bandsAria": "Decision cockpit bands",
+      "bandNeeds": "Needs you",
+      "bandHandling": "RADR is handling",
+      "bandWatching": "Watching",
+      "bandVerified": "Verified",
+      "queueAria": "What needs you",
+      "handlingAria": "What RADR is handling",
+      "later": "Later",
+      "pulseAria": "Shift forecast pulse",
+      "lensesAria": "How different roles see this",
+      "optionsAria": "Decision options",
+      "recommended": "RADR pick",
+      "askTitle": "Ask RADR",
+      "askHint": "Operation",
+      "askQuestion": "Will we do well tonight?",
+      "askLead": "Tonight is tracking above plan.",
+      "askRiskLabel": "Main risk:",
+      "askRisk": "{location} staffing pressure.",
+      "askAmount": "€290",
+      "askAmountLabel": "currently at risk",
+      "askLink": "Show Labor finding",
+      "askLive": "Explore product",
+      "findings": {
+        "labor": {
+          "location": "Berlin Mitte",
+          "money": "€290 at risk",
+          "summary": "Peak service is understaffed.",
+          "why": {
+            "1": "Expected peak demand: 68 covers",
+            "2": "Current service capacity: 54 covers",
+            "3": "FOH requirement: 1 additional employee",
+            "4": "Confidence: High"
+          },
+          "action": "Add one FOH · prepared for approval"
+        },
+        "recover": {
+          "location": "Amsterdam Canal",
+          "money": "€184 verified",
+          "summary": "A cancelled table was replaced and the resulting POS revenue was observed.",
+          "verified": "€184"
+        },
+        "buy": {
+          "location": "Berlin Kreuzberg",
+          "money": "€118 recoverable",
+          "summary": "Supplier invoice pricing exceeds contracted pricing.",
+          "action": "Supplier claim · prepared for approval"
+        }
+      }
+    },
+    "h0": "Nothing off the RADR",
+    "titleVariantB": "Find where hospitality loses money. Recover it. Prove it."
+  },
+  "control": {
+    "kicker": "Control Center",
+    "title": "Attention first. Then the rest of the operation.",
+    "chromeLeft": "Control Center",
+    "chromeRight": "Berlin Mitte · Restaurant",
+    "greeting": "Good morning",
+    "issues": "2 things need your attention",
+    "exposedAmount": "€408",
+    "exposedLabel": "currently exposed",
+    "whyLabel": "Why RADR believes this",
+    "actionLabel": "Prepared action",
+    "openDemo": "Control Center öffnen →",
+    "cards": {
+      "labor": {
+        "location": "Berlin Mitte",
+        "money": "€290 at risk tonight",
+        "summary": "Peak service is understaffed between 19:15 and 20:30.",
+        "why": {
+          "1": "Expected peak covers: 68",
+          "2": "Capacity at current staffing: 54",
+          "3": "FOH scheduled: 1 below requirement",
+          "4": "Confidence: High"
+        },
+        "action": "Add one FOH employee"
+      },
+      "recover": {
+        "location": "Amsterdam Canal",
+        "money": "€184 verified",
+        "summary": "A cancelled four top was released to booking inventory and successfully rebooked.",
+        "verified": "Verified Value: €184"
+      },
+      "buy": {
+        "location": "Berlin Kreuzberg",
+        "money": "€118 recoverable",
+        "summary": "Three supplier invoice lines exceed contracted pricing.",
+        "action": "Request supplier credit"
+      }
+    }
+  },
+  "connected": {
+    "kicker": "Connected operation",
+    "title": "Your systems know pieces of the business. RADR understands the business.",
+    "lead": "Operational sources feed RADR. RADR produces findings, Prepared Actions, and verified value.",
+    "aria": "How RADR connects operational sources",
+    "sources": {
+      "pos": "POS",
+      "reservations": "Reservations",
+      "labor": "Labor",
+      "payments": "Payments",
+      "inventory": "Inventory",
+      "suppliers": "Suppliers",
+      "accounting": "Accounting",
+      "delivery": "Delivery",
+      "weather": "Weather",
+      "events": "Events"
+    },
+    "outputs": {
+      "finds": "Finds what matters",
+      "prepares": "Prepares what happens next",
+      "approval": "Gets approval where needed",
+      "verifies": "Verifies the result"
+    },
+    "lanes": {
+      "sources": "Quellen",
+      "outputs": "Ergebnisse"
+    },
+    "hints": {
+      "findsHint": "What needs attention",
+      "preparesHint": "Evidence, economics, next step",
+      "approvalHint": "Human judgment on the decision",
+      "verifiesHint": "What was proven"
+    }
+  },
+  "territories": {
+    "kicker": "Territories",
+    "title": "Four places money moves.",
+    "buy": {
+      "title": "What you spend.",
+      "example": "€118 supplier overcharge detected."
+    },
+    "labor": {
+      "title": "How you staff.",
+      "example": "€290 at risk during tonight's peak."
+    },
+    "sell": {
+      "title": "How you monetize.",
+      "example": "€218 contribution lost to channel fees."
+    },
+    "recover": {
+      "title": "What you can still get back.",
+      "example": "€184 reservation value recovered."
+    }
+  },
+  "evidence": {
+    "kicker": "Evidence",
+    "title": "RADR shows its work.",
+    "lead": "Every material finding carries source, calculation, freshness, and confidence. RADR is not a black box.",
+    "aria": "Supplier discrepancy evidence",
+    "amount": "€118 recoverable",
+    "kind": "BUY · Berlin Kreuzberg",
+    "summary": "Produce invoice exceeds contracted pricing.",
+    "whyLabel": "Why RADR believes this",
+    "cols": {
+      "line": "Line",
+      "contract": "Contract",
+      "invoiced": "Invoiced",
+      "variance": "Variance"
+    },
+    "lines": {
+      "tomatoes": {
+        "label": "Tomatoes",
+        "contract": "€312",
+        "invoiced": "€358",
+        "variance": "€46"
+      },
+      "oil": {
+        "label": "Olive oil",
+        "contract": "€190",
+        "invoiced": "€228",
+        "variance": "€38"
+      },
+      "herbs": {
+        "label": "Fresh herbs",
+        "contract": "€96",
+        "invoiced": "€130",
+        "variance": "€34"
+      }
+    },
+    "totalLabel": "Total",
+    "totals": {
+      "contract": "€2,722",
+      "invoiced": "€2,840",
+      "variance": "€118"
+    },
+    "meta": {
+      "source": {
+        "label": "Source",
+        "value": "Invoice #10418 · Agreement CT-1842",
+        "kind": "ACTUAL"
+      },
+      "calculation": {
+        "label": "Calculation",
+        "value": "Invoiced total minus contracted total",
+        "kind": "ACTUAL"
+      },
+      "freshness": {
+        "label": "Freshness",
+        "value": "Invoice open · same business day",
+        "kind": "ACTUAL"
+      },
+      "confidence": {
+        "label": "Confidence",
+        "value": "High",
+        "kind": "INFERENCE"
+      }
+    }
+  },
+  "action": {
+    "kicker": "Prepared Actions",
+    "title": "RADR bereitet den nächsten Schritt vor.",
+    "lead": "Kein weiterer Task. Ein Finding, eine Empfehlung, die Ökonomie und eine Freigabe für die richtige Person.",
+    "chrome": "Prepared Action",
+    "findingLabel": "Finding",
+    "gross": "Gross opportunity",
+    "cost": "Cost to capture",
+    "net": "Expected net value",
+    "recommendLabel": "Empfehlung",
+    "recommend": "Add one FOH employee from 12:30 to 15:30.",
+    "approve": "Approve",
+    "outcomeHint": "Nach Freigabe verfolgt RADR das Ergebnis zur Verifikation.",
+    "counterfactual": "If you do nothing",
+    "expectedDemand": "Expected demand",
+    "currentCapacity": "Current service capacity",
+    "constrained": "Potential constrained demand",
+    "leftBehind": "Estimated value left behind"
+  },
+  "finished": {
+    "kicker": "Finished work",
+    "title": "Der nächste Schritt, bereits vorbereitet.",
+    "lead": "RADR sammelt die Evidenz, berechnet die Ökonomie und bereitet den nächsten Schritt vor. Ihr Team greift dort ein, wo Urteilskraft zählt.",
+    "tabsLabel": "Prepared examples",
+    "chrome": "Prepared action",
+    "readyLabel": "Ready",
+    "governanceNote": "Prepared for approval. External execution happens only through supported systems and organization policy.",
+    "tabs": {
+      "buy": "Supplier discrepancy",
+      "labor": "Labor adjustment",
+      "recover": "Cancellation recovery"
+    }
+  },
+  "human": {
+    "kicker": "Hospitality",
+    "title": "Die beste Hospitality entsteht nicht in Software.",
+    "lead": "Ihre Leute sollten ihre Aufmerksamkeit dort einsetzen, wo sie am meisten zählt.",
+    "line": "RADR übernimmt mehr Monitoring, Untersuchung, Abstimmung und Vorbereitung hinter dem Betrieb."
+  },
+  "verified": {
+    "kicker": "Verified Value",
+    "title": "RADR proves what happened next.",
+    "lead": "RADR does not stop at identifying opportunities. It measures the result after an intervention.",
+    "total": "€184",
+    "totalLabel": "Verified Value",
+    "chainAria": "Verified value proof chain",
+    "restraint": "RADR doesn't take credit for what it cannot prove.",
+    "flow": {
+      "potential": {
+        "label": "Potential",
+        "value": "€192",
+        "detail": "Estimated recovery after cancellation"
+      },
+      "action": {
+        "label": "Action",
+        "value": "Replacement booking accepted",
+        "detail": "Waitlist offer seated on Table 14"
+      },
+      "observed": {
+        "label": "Observed",
+        "value": "€184",
+        "detail": "POS transaction closed"
+      },
+      "verified": {
+        "label": "Verified Value",
+        "value": "€184",
+        "detail": "Claims observed revenue, not the potential estimate"
+      }
+    }
+  },
+  "ask": {
+    "kicker": "Ask RADR",
+    "title": "Ask the operation.",
+    "lead": "Ask a serious operating question. Get evidence, money at stake, and a next step that is already prepared where possible.",
+    "loop": "Ask. Answer. Evidence. Prepared action. Outcome.",
+    "q": "Will we do well tonight?",
+    "answerLead": "Yes. Tonight is currently tracking 7% above comparable Mondays.",
+    "answerBody": "Bookings are ahead of pace and expected spend remains strong.",
+    "answerRisk": "The main risk is {location} between {peakStart} and {peakEnd}. Current staffing is below modeled requirement.",
+    "exposedAmount": "€290",
+    "exposed": "currently at risk",
+    "actionLabel": "Prepared next step",
+    "actionText": "Add one FOH employee for peak service.",
+    "showEvidence": "Show evidence",
+    "reviewAction": "Review action",
+    "bookAria": "Ask RADR example questions",
+    "pagesLabel": "Example questions",
+    "prev": "Previous question",
+    "next": "Next question",
+    "pageOf": "Question {n} of {total}",
+    "pages": [
+      {
+        "id": "first",
+        "territory": "LABOR",
+        "q": "What should I fix first?",
+        "answerLead": "Peak staffing is currently your highest priority.",
+        "answerBody": "€290 is at risk between 19:00 and 20:30. The lowest cost staffing adjustment is prepared: €72 additional labor cost against €290 expected value protected.",
+        "amount": "€290",
+        "amountLabel": "currently at risk",
+        "action": "Add one FOH employee for peak service",
+        "prepared": "Approval required"
+      },
+      {
+        "id": "labor",
+        "territory": "LABOR",
+        "q": "Why is labor margin down this week?",
+        "answerLead": "Tonight's peak demand is 68 covers against 54 capacity.",
+        "answerBody": "One additional FOH is required for the dinner peak. The shift adjustment is prepared for manager approval.",
+        "amount": "€290",
+        "amountLabel": "currently at risk",
+        "action": "Add one FOH employee for peak service",
+        "prepared": "Approval required"
+      },
+      {
+        "id": "nothing",
+        "territory": "SELL",
+        "q": "What happens if I don't add staff tonight?",
+        "answerLead": "If FOH stays at plan, about 10 covers may be constrained.",
+        "answerBody": "Estimated contribution left behind is €300. The terrace staffing response is already prepared if you choose to act.",
+        "amount": "€300",
+        "amountLabel": "estimated value left behind",
+        "action": "Review prepared staffing change",
+        "prepared": "Approval required"
+      },
+      {
+        "id": "weather",
+        "territory": "SELL",
+        "q": "Will tomorrow's weather affect us?",
+        "answerLead": "Thursday is forecast 29°C and dry.",
+        "answerBody": "Comparable days lifted terrace covers 24%. RADR expects 14 incremental covers: €420 gross, €72 to capture, €348 expected net. The FOH adjustment is prepared.",
+        "amount": "€420",
+        "amountLabel": "gross opportunity",
+        "action": "Review prepared terrace response",
+        "prepared": "Approval required"
+      },
+      {
+        "id": "owed",
+        "territory": "BUY",
+        "q": "Where are we still owed money?",
+        "answerLead": "Orchard still has €118 recoverable on invoice #10418.",
+        "answerBody": "The tomato line is above contracted rate. Contract line and invoice evidence are attached. The supplier discrepancy is prepared.",
+        "amount": "€118",
+        "amountLabel": "recoverable",
+        "action": "Review prepared claim",
+        "prepared": "Approval required"
+      },
+      {
+        "id": "location",
+        "territory": "LABOR",
+        "q": "Which location needs my attention?",
+        "answerLead": "Berlin Mitte.",
+        "answerBody": "Peak understaffing is the highest urgency unresolved finding. The staffing change is prepared for approval.",
+        "amount": "€290",
+        "amountLabel": "at risk",
+        "action": "Review prepared labor change",
+        "prepared": "Approval required"
+      },
+      {
+        "id": "thursday",
+        "territory": "SELL",
+        "q": "Why is Thursday forecast higher?",
+        "answerLead": "Weather and terrace demand.",
+        "answerBody": "Warm dry conditions historically lift lunch covers. Gross opportunity is €420 before labor cost. The operating response is prepared.",
+        "amount": "€420",
+        "amountLabel": "gross opportunity",
+        "action": "Review prepared Sell response",
+        "prepared": "Approval required"
+      }
+    ]
+  },
+  "integrations": {
+    "kicker": "Integrations",
+    "title": "Keep your stack.",
+    "lead": "RADR works across the systems already running your operation.",
+    "note": "Statuses reflect current product availability. A logo is never a live connector claim.",
+    "cta": "Explore developers →",
+    "cats": {
+      "pos": "POS",
+      "reservations": "Reservations",
+      "labor": "Labor",
+      "accounting": "Accounting",
+      "payments": "Payments",
+      "suppliers": "Suppliers",
+      "delivery": "Delivery",
+      "external": "External signals"
+    },
+    "status": {
+      "available": "Available",
+      "beta": "Beta",
+      "partner": "Partner access",
+      "planned": "Planned",
+      "custom": "Custom"
+    }
+  },
+  "trust": {
+    "kicker": "Enterprise",
+    "title": "Intelligence you can audit.",
+    "lead": "Organization isolation, evidence lineage, action approvals and data freshness stay visible. The more work RADR prepares, the clearer the decision must remain.",
+    "statusLive": "Implemented",
+    "statusPlanned": "In development",
+    "cta": "Read security →",
+    "human": {
+      "kicker": "Hospitality",
+      "title": "The best hospitality doesn't happen in software.",
+      "lead": "RADR handles more of the work behind the operation so your people can focus on guests, food, service and judgment.",
+      "line": "Less operational work. More hospitality."
+    },
+    "controls": {
+      "privateStorage": {
+        "label": "Private document storage",
+        "detail": "Customer documents stay in private object storage with controlled access."
+      },
+      "orgIsolation": {
+        "label": "Organization isolation",
+        "detail": "Tenant boundaries are enforced in application authorization."
+      },
+      "serverAuthz": {
+        "label": "Server side authorization",
+        "detail": "Sensitive reads and writes are checked on the server, not only in the UI."
+      },
+      "controlledDocs": {
+        "label": "Controlled document access",
+        "detail": "Document retrieval requires an authenticated, authorized session."
+      },
+      "sessionAuth": {
+        "label": "Session authentication",
+        "detail": "Signed in access protects the product surface."
+      },
+      "auditExports": {
+        "label": "Audit exports",
+        "detail": "Exportable audit trails for findings, actions, and verifications."
+      }
+    }
+  },
+  "final": {
+    "title": "What is your operation leaving behind?",
+    "lead": "RADR finds the work that needs doing, gets the next step ready and helps prove what happened afterward.",
+    "ctaPrimary": "See RADR in action",
+    "ctaSecondary": "Book a demo"
+  },
+  "industries": {
+    "kicker": "Industry intelligence",
+    "title": "Built around your operation.",
+    "lead": "Every hospitality business runs differently. RADR understands the systems, economics and operating signals that matter to yours."
+  },
+  "story": {
+    "kicker": "Product",
+    "title": "From signal to finished work.",
+    "lead": "RADR connects what is happening across the operation, works out what matters and gets the next step ready.",
+    "tabsLabel": "Territory examples",
+    "findingLabel": "Finding",
+    "doneLabel": "RADR already did",
+    "needsLabel": "What needs you",
+    "tabs": {
+      "buy": "Buy",
+      "labor": "Labor",
+      "sell": "Sell",
+      "recover": "Recover"
+    }
+  },
+  "operating": {
+    "kicker": "Operating model",
+    "title": "Built around your operation.",
+    "lead": "RADR reads the signals across your operation, finds what matters, works out what it is worth, prepares the next step, and verifies the result.",
+    "tabsLabel": "Industry models",
+    "bidirectionalTitle": "Bidirectional by design",
+    "bidirectionalLead": "Signals in. Prepared action out. Outcomes back.",
+    "systemsTitle": "Your systems",
+    "signalsTitle": "Operating signals",
+    "doesTitle": "What RADR does",
+    "outcomesTitle": "Real outcomes",
+    "coreLine1": "Operating",
+    "coreLine2": "intelligence",
+    "mapAria": "Bidirectional operating intelligence map. Systems feed RADR. RADR prepares action. Observed outcomes return to RADR.",
+    "explore": "Explore industries →",
+    "howWorks": "How RADR works →",
+    "status": {
+      "available": "Available",
+      "context": "Context",
+      "connect": "Connect",
+      "planned": "Planned"
+    },
+    "tabs": {
+      "restaurants": "Restaurants",
+      "hotels": "Hotels",
+      "bars": "Bars & Cafés",
+      "groups": "Hospitality Groups"
+    },
+    "strip": {
+      "domainsTitle": "Connected operation",
+      "domainsBody": "Signals understood across your operation",
+      "biTitle": "Bidirectional",
+      "biBody": "Signals in. Action out. Outcomes back.",
+      "hospTitle": "Built for hospitality",
+      "hospBody": "Engineered around how you actually operate"
+    },
+    "titleNext": "From what is happening to what happens next.",
+    "stages": {
+      "observe": "Observe",
+      "detect": "Detect",
+      "understand": "Understand",
+      "quantify": "Quantify",
+      "prepare": "Prepare",
+      "act": "Act",
+      "verify": "Verify",
+      "learn": "Learn"
+    },
+    "stageProgress": "RADR loop stage",
+    "flowGreen": "Green: your systems feed RADR, and RADR sends prepared action out",
+    "flowBlue": "Blue: once the outcome is verified, that result returns to RADR so the next cycle starts with what actually happened",
+    "returnCaption": "After the outcome is verified, the result flows back into RADR. That is how it learns. The next cycle starts with real proof, not a guess.",
+    "returnCaptionTitle": "What the blue line means"
+  },
+  "proof": {
+    "kicker": "Proof",
+    "title": "RADR shows its work.",
+    "lead": "Every important Finding can be traced from evidence to decision to outcome.",
+    "scenario": "Table 14 cancellation",
+    "chainAria": "Verified value proof chain",
+    "restraint": "RADR doesn't take credit for what it cannot prove.",
+    "exploreValue": "Explore Verified Value →",
+    "exploreSecurity": "Security and governance →",
+    "meta": {
+      "evidence": "Evidence attached",
+      "confidence": "Confidence visible",
+      "approval": "Approval history recorded",
+      "outcome": "Outcome observed",
+      "attribution": "Value attribution shown"
+    }
+  },
+  "askCompact": {
+    "kicker": "Ask RADR",
+    "title": "Ask the operation.",
+    "lead": "Ask what needs attention, why it matters or what RADR has already prepared.",
+    "chrome": "Ask RADR",
+    "questionsLabel": "Example questions",
+    "whyLabel": "Warum",
+    "outcomeLabel": "Ergebnis"
+  },
+  "close": {
+    "kicker": "",
+    "title": "See RADR make a decision.",
+    "lead": "One location. One operating problem. One set of systems.",
+    "line": "Humans provide the hospitality.",
+    "ctaPrimary": "Start a 14-day recovery pilot",
+    "ctaSecondary": "See a Verified Recovery"
+  },
+  "loop": {
+    "kicker": "How RADR works",
+    "title": "The RADR loop.",
+    "lead": "Connect the operation. Understand it. Discover what matters. Predict. Simulate. Decide. Act. Verify. Learn.",
+    "scenario": "Table 14 cancellation · Recover",
+    "outerLabel": "The operation",
+    "stagesLabel": "RADR Loop stages",
+    "mapAria": "THE RADR LOOP. Observe, Detect, Understand, Quantify, Prepare, Act, Verify, Learn, then back to Observe.",
+    "close": "This is the full RADR loop — not a five-step slogan.",
+    "foot": "Operating model shows where RADR sits. The loop shows what RADR does.",
+    "aria": "Nine-step RADR loop",
+    "steps": {
+      "connect": {
+        "label": "Connect",
+        "detail": "Bring the operation together."
+      },
+      "understand": {
+        "label": "Understand",
+        "detail": "Build a live operating model."
+      },
+      "discover": {
+        "label": "Discover",
+        "detail": "Find relationships humans miss."
+      },
+      "predict": {
+        "label": "Predict",
+        "detail": "Estimate what happens next."
+      },
+      "simulate": {
+        "label": "Simulate",
+        "detail": "Compare possible actions."
+      },
+      "decide": {
+        "label": "Decide",
+        "detail": "Choose the strongest modeled response."
+      },
+      "act": {
+        "label": "Act",
+        "detail": "Prepare or execute."
+      },
+      "verify": {
+        "label": "Verify",
+        "detail": "Measure the real outcome."
+      },
+      "learn": {
+        "label": "Learn",
+        "detail": "Remember what works here."
+      }
+    }
+  },
+  "problem": {
+    "kicker": "Das Problem",
+    "title": "Hospitality läuft über zu viele getrennte Systeme.",
+    "lead": "Fragmentierte Systeme erzeugen fragmentiertes Verständnis. Jedes Tool sieht nur einen Teil. RADR verbindet die Wahrheit.",
+    "aria": "Systeme laufen in RADR zusammen",
+    "coreHint": "Verbindet die Wahrheit",
+    "questions": {
+      "q1": "What matters?",
+      "q2": "What can wait?",
+      "q3": "What should I do?",
+      "q4": "What happens if I do nothing?",
+      "q5": "Can I trust the recommendation?"
+    }
+  },
+  "decisionLayer": {
+    "kicker": "The decision layer",
+    "title": "Your systems record. RADR decides.",
+    "lead": "Connect the operation. Predict what is coming. Act on the decisions that matter. Verify the value.",
+    "aria": "Connect, predict, act, verify",
+    "steps": {
+      "connect": "Connect",
+      "predict": "Predict",
+      "act": "Act",
+      "verify": "Verify"
+    }
+  },
+  "attention": {
+    "title": "Your attention is the scarce resource.",
+    "lead": "RADR classifies every signal. Most never reach you.",
+    "aria": "How RADR returns attention",
+    "states": {
+      "ask": {
+        "value": "2",
+        "label": "Need you",
+        "note": "Approve, choose, or exception only"
+      },
+      "handling": {
+        "value": "3",
+        "label": "RADR is handling",
+        "note": "Prepared, waiting, or executing within policy"
+      },
+      "watching": {
+        "value": "8",
+        "label": "Watching",
+        "note": "Material enough to track — not interrupt"
+      },
+      "silence": {
+        "value": "—",
+        "label": "Silence",
+        "note": "Everything else is within expectations"
+      }
+    }
+  },
+  "watch": {
+    "kicker": "Operating Model",
+    "title": "RADR understands the operation as one system.",
+    "lead": "Demand, capacity, guests, labor, inventory, revenue, costs, channels, constraints and time — one live operating model. Weather is a trigger. RADR interprets what it means here.",
+    "dimsAria": "Operating twin dimensions",
+    "cascadeAria": "Rain cascade operating response",
+    "cascadeLabel": "Rain tomorrow — so what here?",
+    "close": "Weather is the trigger. RADR intelligence is the interpretation.",
+    "dims": {
+      "demand": "Demand",
+      "capacity": "Capacity",
+      "labor": "Labor",
+      "guests": "Guests",
+      "money": "Money",
+      "channels": "Channels",
+      "time": "Time"
+    },
+    "cascade": {
+      "rain": "Heavy rain · historical rainy Thursdays",
+      "terrace": "Terrace covers −72%",
+      "covers": "Delivery +18% · Bar +11%",
+      "bar": "Walk-in retention 68%",
+      "staff": "Kitchen hot-line +14% · bar constrained 19:15–20:00",
+      "delivery": "Indoor shift absorbable · bar needs +1 FOH",
+      "risk": "€284 exposed · €196 protected if plan approved"
+    },
+    "aria": "Operating twin",
+    "steps": {
+      "connect": "Connect",
+      "understand": "Understand",
+      "find": "Find",
+      "act": "Act",
+      "verify": "Verify"
+    },
+    "details": {
+      "connect": "Bring systems together",
+      "understand": "Normalize the operation",
+      "find": "Detect value at risk",
+      "act": "Prepare the next move",
+      "verify": "Confirm the outcome"
+    }
+  },
+  "hiddenSignals": {
+    "kicker": "Hidden signals",
+    "title": "RADR finds what you are not looking for.",
+    "lead": "Operators can already see weather, revenue and occupancy. RADR discovers relationships across POS, PMS, labor, inventory, channels and finance that a manager would struggle to join manually.",
+    "principle": "The systems show the numbers. RADR finds the meaning.",
+    "aria": "Hidden signal examples across hospitality verticals",
+    "valueLabel": "At stake",
+    "recLabel": "Recommendation",
+    "stories": {
+      "restaurant": {
+        "vertical": "Restaurant",
+        "headline": "Your bestseller is not your best dish.",
+        "what": "Tuna Tataki leads volume. Truffle Pasta leads contribution per kitchen minute — with less waste and faster tickets.",
+        "factALabel": "Volume leader",
+        "factA": "Tataki · #1 sales",
+        "factBLabel": "Peak economics",
+        "factB": "Pasta · +34% / kitchen min",
+        "value": "€8,420",
+        "recommendation": "Promote Truffle Pasta during peak service."
+      },
+      "hotel": {
+        "vertical": "Hotel",
+        "headline": "Occupancy is up. Economics are weaker.",
+        "what": "Occupancy +6 pts. OTA mix +11 pts. Distribution cost +€8,420. Contribution −2.1%.",
+        "factALabel": "Looks strong",
+        "factA": "Occupancy +6 pts",
+        "factBLabel": "Quality of demand",
+        "factB": "OTA mix +11 pts",
+        "value": "€8,420",
+        "recommendation": "Protect direct share on shoulder dates."
+      },
+      "apartment": {
+        "vertical": "Serviced apartments",
+        "headline": "This empty night is not random.",
+        "what": "Tuesday 1-night gaps fill at 64% when minimum stay is relaxed ≥3 days ahead.",
+        "factALabel": "Pattern",
+        "factA": "Tue orphan nights",
+        "factBLabel": "Historical fill",
+        "factB": "64% · €148 median",
+        "value": "€164",
+        "recommendation": "Open 1-night inventory at adjusted rate."
+      }
+    },
+    "weather": {
+      "kicker": "Weather is the trigger",
+      "aria": "Weather reinterpreted as operating response",
+      "headline": "Weather changed the operation.",
+      "lead": "Based on 38 comparable warm-dry services at this location — not a generic forecast tip.",
+      "terrace": "Terrace demand",
+      "terraceVal": "+23%",
+      "walkins": "Walk-ins",
+      "walkinsVal": "+16%",
+      "aperitif": "Aperitif sales",
+      "aperitifVal": "+19%",
+      "staffing": "Staffing",
+      "staffingVal": "Insufficient 18:30–20:00",
+      "grossLabel": "Expected opportunity",
+      "gross": "€420",
+      "costLabel": "Cost to capture",
+      "cost": "€72",
+      "netLabel": "Expected net",
+      "net": "€348",
+      "close": "Recommendation: add one FOH. Weather is the trigger. RADR intelligence is the interpretation."
+    }
+  },
+  "simulate": {
+    "kicker": "Simulate",
+    "title": "Before you act, see the options.",
+    "lead": "Economics before commitment. Do-nothing is always an option — with a cost.",
+    "aria": "Counterfactual options for terrace closure",
+    "current": {
+      "kicker": "Current situation",
+      "title": "Terrace closed.",
+      "exposure": "€284 contribution exposed."
+    },
+    "options": {
+      "a": {
+        "label": "Option A",
+        "title": "Do nothing.",
+        "costLabel": "Cost",
+        "cost": "€0",
+        "resultLabel": "Expected result",
+        "result": "−€284",
+        "netLabel": "Net",
+        "net": "−€284"
+      },
+      "b": {
+        "label": "Option B",
+        "title": "Move 1 FOH to bar.",
+        "costLabel": "Cost",
+        "cost": "€22",
+        "resultLabel": "Expected protected",
+        "result": "€144",
+        "netLabel": "Net",
+        "net": "+€122"
+      },
+      "c": {
+        "label": "Option C",
+        "title": "FOH + standing capacity + delivery prep.",
+        "costLabel": "Cost",
+        "cost": "€48",
+        "resultLabel": "Expected protected",
+        "result": "€231",
+        "netLabel": "Net",
+        "net": "+€183"
+      }
+    },
+    "recommendLabel": "RADR recommends",
+    "recommend": "Option C",
+    "confidenceLabel": "Confidence",
+    "confidence": "78%",
+    "why": "See why — comparable rainy services at this location retained the most contribution under Option C."
+  },
+  "decisionObject": {
+    "kicker": "Decide",
+    "title": "A RADR decision — not a tip.",
+    "lead": "Every material decision answers what happened, why it matters, the cost of doing nothing, the options, the recommendation, confidence, deadline — and what happened afterward.",
+    "aria": "Example decision object for terrace closure",
+    "anatomyAria": "Decision anatomy",
+    "anatomy": {
+      "what": "What happened?",
+      "why": "Why does it matter?",
+      "nothing": "What if we do nothing?",
+      "options": "What are the options?",
+      "recommend": "What does RADR recommend?",
+      "sure": "How sure is RADR?",
+      "when": "When must we decide?",
+      "after": "What happened afterward?"
+    },
+    "territory": "SELL · Berlin Mitte",
+    "what": "Terrace closed",
+    "soWhat": "36 covers displaced.",
+    "money": "€284",
+    "moneyLabel": "contribution at risk",
+    "nothingLabel": "Do nothing",
+    "nothing": "€284 disappears tonight",
+    "planLabel": "Best plan",
+    "plan": {
+      "1": "Move 12 → Main dining",
+      "2": "Move 14 → Bar",
+      "3": "Move Marco → Bar at 19:00"
+    },
+    "protectedLabel": "Expected protected",
+    "protected": "€196",
+    "confidenceLabel": "Confidence",
+    "confidence": "High",
+    "deadlineLabel": "Decide by",
+    "deadline": "18:45",
+    "approve": "Approve",
+    "linkWhy": "Why?",
+    "linkWhatIf": "What if?",
+    "linkEvidence": "Evidence"
+  },
+  "memory": {
+    "kicker": "Learn",
+    "title": "RADR remembers what worked here.",
+    "lead": "Generic hospitality advice is not enough. Recommendations become specific to this location, this service, this demand pattern.",
+    "example": "At Berlin Mitte, opening bar standing capacity during rainy Thursday dinners historically retains 72% of displaced terrace demand.",
+    "exampleMeta": "Location memory · weather × service × channel"
+  },
+  "industriesTeaser": {
+    "title": "One RADR Core. Different operations.",
+    "trustTitle": "No black box.",
+    "trustLine": "Every material decision traces to sources, freshness, assumptions, confidence and outcome.",
+    "trustCta": "Explore Trust →",
+    "items": {
+      "restaurants": {
+        "title": "Restaurants & F&B",
+        "line": "Menu · demand · labor · guests · contribution"
+      },
+      "hotels": {
+        "title": "Hotels & boutique hospitality",
+        "line": "Rooms · channels · housekeeping · guests · contribution"
+      },
+      "apartments": {
+        "title": "Serviced apartments & vacation rentals",
+        "line": "Units · pricing · turnovers · maintenance · contribution"
+      }
+    }
+  },
+  "findingsShow": {
+    "kicker": "Findings",
+    "title": "Operative Ausnahmen mit Geld daran.",
+    "lead": "RADR liefert keine generischen Insights. Es zeigt, wo Wert gefährdet ist, und warum das zählt.",
+    "note": "Illustrative Produktbeispiele."
+  },
+  "valueFlow": {
+    "kicker": "Verified Value",
+    "title": "RADR only takes credit for value it can prove.",
+    "lead": "Every material outcome has an evidence chain — from detection to POS close. No double counting.",
+    "aria": "Verified value evidence chain",
+    "categoriesAria": "Verified value categories",
+    "restraint": "VERIFIED · Recovered · Protected · Created · Avoided — never double counted.",
+    "steps": {
+      "detected": "Cancellation detected",
+      "exposure": "Value exposed",
+      "actioned": "Waitlist recovery approved",
+      "retained": "Replacement booking",
+      "closed": "POS check closed",
+      "verified": "Verified"
+    },
+    "times": {
+      "t1": "19:01",
+      "t2": "19:02",
+      "t3": "19:03",
+      "t4": "19:11",
+      "t5": "21:32",
+      "t6": "€91"
+    },
+    "details": {
+      "d1": "Table cancelled · 20:00 seating",
+      "d2": "€184 exposed",
+      "d3": "Operator approved recovery",
+      "d4": "Guest seated from waitlist",
+      "d5": "Actual spend €172",
+      "d6": "Contribution attributable"
+    },
+    "categories": {
+      "recovered": {
+        "label": "Recovered",
+        "detail": "Value that would have been lost"
+      },
+      "protected": {
+        "label": "Protected",
+        "detail": "Loss prevented by acting in time"
+      },
+      "created": {
+        "label": "Created",
+        "detail": "Incremental value from a better decision"
+      },
+      "avoided": {
+        "label": "Avoided",
+        "detail": "Cost not incurred because RADR said wait — or no"
+      }
+    }
+  },
+  "connections": {
+    "kicker": "Your stack stays",
+    "title": "Your stack stays. RADR thinks across it.",
+    "lead": "Underlying systems still record and operate. What emerges above them: hidden signals, predictions, decisions, prepared actions, verified outcomes and learned playbooks.",
+    "stackLabel": "Systems to RADR to outcomes",
+    "systemsLabel": "Your systems",
+    "outcomesLabel": "What emerges",
+    "layerLabel": "DECISION LAYER",
+    "linkConnections": "Data connections →",
+    "linkSecurity": "Trust →",
+    "outcomes": {
+      "findings": "Hidden signals",
+      "predictions": "Predictions",
+      "decisions": "Decisions",
+      "actions": "Prepared actions",
+      "verified": "Verified outcomes",
+      "playbooks": "Learned playbooks"
+    },
+    "outcomeHints": {
+      "findings": "Relationships humans miss",
+      "predictions": "What is likely next",
+      "decisions": "What should happen",
+      "actions": "Ready for judgment",
+      "verified": "Outcomes RADR can prove",
+      "playbooks": "What works here"
+    }
+  },
+  "knownHidden": {
+    "kicker": "Intelligence hierarchy",
+    "title": "Known. Hidden. Predicted. Decided. Verified.",
+    "lead": "Systems already report what happened. RADR discovers what is hidden, predicts what happens next, prepares the decision, and verifies the outcome.",
+    "aria": "Intelligence hierarchy from known signals to verified outcomes",
+    "layers": {
+      "known": {
+        "label": "Known",
+        "sub": "What systems already report",
+        "items": {
+          "occupancy": "Occupancy",
+          "revenue": "Revenue",
+          "reservations": "Reservations",
+          "labor": "Labor"
+        }
+      },
+      "hidden": {
+        "label": "Hidden",
+        "sub": "What RADR discovers",
+        "items": {
+          "margin": "Margin erosion",
+          "demand": "Demand patterns",
+          "relationships": "Operational relationships",
+          "leakage": "Capacity leakage"
+        }
+      },
+      "predicted": {
+        "label": "Predicted",
+        "sub": "What RADR expects next",
+        "items": {
+          "readiness": "Room readiness",
+          "stockout": "Stockout",
+          "walkins": "Walk-ins",
+          "cancellation": "Cancellation fill probability"
+        }
+      },
+      "decision": {
+        "label": "Decision",
+        "sub": "What should happen",
+        "items": {
+          "action": "Prepared action · ready for judgment"
+        }
+      },
+      "verified": {
+        "label": "Verified",
+        "sub": "What actually happened",
+        "items": {
+          "outcome": "Observed outcome · attributable value"
+        }
+      }
+    }
+  },
+  "predict": {
+    "kicker": "Predict",
+    "titleLine1": "Not just what happened.",
+    "titleLine2": "What happens next.",
+    "lead": "Predictions with estimate, range, confidence and why — not vanity forecasts.",
+    "aria": "Prediction examples across hospitality verticals",
+    "rangeLabel": "Range",
+    "confidenceLabel": "Confidence",
+    "whyLabel": "Why",
+    "cases": {
+      "restaurant": {
+        "vertical": "Restaurant",
+        "headline": "Bluefin stockout",
+        "estimate": "20:15 ± 18 min",
+        "range": "19:57–20:33",
+        "confidence": "High",
+        "why": "Pace vs remaining portions · 38 comparable peak services"
+      },
+      "hotel": {
+        "vertical": "Hotel",
+        "headline": "Rooms at readiness risk",
+        "estimate": "4 rooms · before 14:00",
+        "range": "3–5 rooms",
+        "confidence": "High",
+        "why": "Housekeeping load · group departure · arrival ETA cluster"
+      },
+      "apartment": {
+        "vertical": "Serviced apartments",
+        "headline": "Unit 24 orphan-night fill",
+        "estimate": "64%",
+        "range": "52–71%",
+        "confidence": "Medium-high",
+        "why": "Historical 1-night fills when minimum stay relaxed ≥3 days ahead"
+      }
+    }
+  },
+  "deadline": {
+    "kicker": "Perishable value",
+    "title": "Some value disappears by the minute.",
+    "lead": "Hospitality decisions have deadlines. RADR tracks value decay so operators act while recovery is still possible.",
+    "aria": "Cancelled table value decay timeline",
+    "event": "Cancelled table",
+    "seating": "20:00 seating",
+    "stakeAmount": "€184",
+    "stakeLabel": "value at risk",
+    "close": "RADR understands decision deadlines.",
+    "marks": {
+      "t1905": {
+        "time": "19:05",
+        "note": "Recoverable"
+      },
+      "t1925": {
+        "time": "19:25",
+        "note": "Decay accelerating"
+      },
+      "t1945": {
+        "time": "19:45",
+        "note": "Last useful window"
+      },
+      "t2000": {
+        "time": "20:00",
+        "note": "Seating passed · €0"
+      }
+    }
+  },
+  "roleSwitch": {
+    "kicker": "Role-aware intelligence",
+    "titleLine1": "One operation.",
+    "titleLine2": "Different decisions.",
+    "lead": "The same event surfaces different decisions by role — not the same dashboard filtered by title.",
+    "event": "Event · Terrace closes",
+    "tabsAria": "Operator roles",
+    "roles": {
+      "gm": {
+        "tab": "GM",
+        "label": "General manager",
+        "insight": "36 covers displaced.",
+        "action": "Approve operating plan."
+      },
+      "cfo": {
+        "tab": "CFO",
+        "label": "Finance",
+        "insight": "€284 contribution exposure.",
+        "action": "Protect contribution before service."
+      },
+      "chef": {
+        "tab": "CHEF",
+        "label": "Kitchen",
+        "insight": "+22 indoor covers expected.",
+        "action": "Increase hot-line prep."
+      },
+      "host": {
+        "tab": "HOST",
+        "label": "Front of house",
+        "insight": "12 reservations require reseating.",
+        "action": "Execute reseating sequence."
+      }
+    }
+  },
+  "sinceLastCheck": {
+    "kicker": "Signature UX",
+    "titleLine1": "Don't reread the dashboard.",
+    "titleLine2": "RADR tells you what changed.",
+    "lead": "Since your last check is movement through the loop — handled work, and only what still needs you.",
+    "aria": "Since your last check summary",
+    "boardKicker": "Since your last check",
+    "summary": "3 things changed.",
+    "changedCount": "3",
+    "changedLabel": "changed",
+    "handledCount": "2",
+    "handledLabel": "handled",
+    "needsCount": "1",
+    "needsLabel": "needs you",
+    "items": {
+      "recovered": {
+        "title": "Table cancellation recovered",
+        "detail": "Replacement seated · POS observed",
+        "money": "+€172"
+      },
+      "allergy": {
+        "title": "Allergy confirmed",
+        "detail": "Handled automatically"
+      },
+      "kitchen": {
+        "title": "Kitchen capacity changed",
+        "detail": "Review before 18:45"
+      }
+    }
+  },
+  "trustEvidence": {
+    "kicker": "Trust",
+    "title": "No black box.",
+    "lead": "Every material decision shows why RADR believes it — sources, freshness, sample, drivers, range, confidence, assumptions, evidence and outcome.",
+    "anatomyAria": "Evidence anatomy for material decisions",
+    "exampleAria": "Why RADR believes a walk-in prediction",
+    "anatomy": {
+      "sources": "Sources",
+      "freshness": "Freshness",
+      "sample": "Sample size",
+      "drivers": "Key drivers",
+      "range": "Range",
+      "confidence": "Confidence",
+      "assumptions": "Assumptions",
+      "evidence": "Evidence",
+      "outcome": "Outcome"
+    },
+    "whyLabel": "Why does RADR believe this?",
+    "claim": "26 expected walk-ins",
+    "basedOn": "Based on",
+    "basis": {
+      "thursdays": "42 comparable Thursdays",
+      "pace": "Current booking pace",
+      "weather": "Weather",
+      "event": "Nearby event",
+      "terrace": "Terrace state"
+    },
+    "rangeLabel": "Range",
+    "range": "21–31",
+    "confidenceLabel": "Confidence",
+    "confidence": "High"
+  },
+  "judgment": {
+    "kicker": "Operating judgment",
+    "title": "RADR is not agreeable AI.",
+    "lead": "Sometimes the strongest modeled response is to wait. Sometimes RADR disagrees with intuition — with economics attached.",
+    "aria": "Examples of restraint and disagreement",
+    "wait": {
+      "kicker": "RADR can say wait",
+      "title": "More information is worth more than acting now.",
+      "confidenceLabel": "Confidence",
+      "confidence": "42%",
+      "deadlineLabel": "Decision deadline",
+      "deadline": "2 hours",
+      "dataLabel": "New data expected",
+      "data": "30 minutes",
+      "rec": "Wait.",
+      "why": "Booking pace will clarify before the decision window closes."
+    },
+    "disagree": {
+      "kicker": "RADR can disagree",
+      "title": "Add another FOH?",
+      "intuitionLabel": "Manager intuition",
+      "intuition": "Yes",
+      "costLabel": "Expected labor cost",
+      "cost": "€72",
+      "protectLabel": "Expected contribution protected",
+      "protect": "€31",
+      "netLabel": "Net expected value",
+      "net": "−€41",
+      "rec": "Keep current staffing.",
+      "why": "Cost exceeds protected contribution under current demand."
+    }
+  },
+  "stack": {
+    "title": "Hospitality has enough software.",
+    "aria": "Across hotels, restaurants, bars and apartments — RADR compresses operating noise into the few decisions that need you",
+    "lock1": "One operation.",
+    "lock2": "One decision layer.",
+    "sub": "Systems you run — and the world around them.",
+    "lock": "One operation. One decision layer.",
+    "opsKicker": "Your operation",
+    "worldKicker": "The world around it",
+    "mantra": "Everything in. Only what matters out.",
+    "noiseKicker": "What's happening in the operation",
+    "sameCore": "Same RADR Core",
+    "modesAria": "Hospitality formats",
+    "nodes": {
+      "pos": "POS",
+      "pms": "PMS",
+      "res": "Reservations",
+      "labor": "Labor",
+      "channels": "Channels",
+      "payments": "Payments",
+      "weather": "Weather",
+      "events": "Events",
+      "demand": "Demand",
+      "rates": "Rates",
+      "local": "Local activity"
+    },
+    "verticals": {
+      "hotel": "Hotels",
+      "restaurant": "Restaurants",
+      "bar": "Bars",
+      "apartment": "Apartments"
+    },
+    "compress": {
+      "read": "signals read",
+      "attention": "worth attention",
+      "needYou": "things need you"
+    },
+    "signals": {
+      "hotel": {
+        "h1": "OTA share rising",
+        "h2": "Direct pace behind",
+        "h3": "4 rooms not ready",
+        "h4": "Housekeeping 12 min behind",
+        "h5": "Late checkout request",
+        "h6": "42 arrivals today",
+        "h7": "Suite cancelled",
+        "h8": "ADR +3%",
+        "h9": "VIP arriving 16:00",
+        "h10": "Comp set undercutting",
+        "h11": "Room 412 maintenance",
+        "h12": "Breakfast covers surge"
+      },
+      "restaurant": {
+        "r1": "Table 8 cancelled",
+        "r2": "Cover pace ahead",
+        "r3": "Walk-ins above norm",
+        "r4": "Labor gap at 19:30",
+        "r5": "VIP guest arriving",
+        "r6": "3 allergy tables",
+        "r7": "Delivery fees rising",
+        "r8": "Returning guest tonight",
+        "r9": "Terrace demand strong",
+        "r10": "Ticket time +8 min",
+        "r11": "Supplier cost +12%",
+        "r12": "Rain at 18:00"
+      },
+      "bar": {
+        "b1": "Peak pour window 21:00",
+        "b2": "FOH short by 1",
+        "b3": "Walk-ins clustering",
+        "b4": "Stockout risk: gin",
+        "b5": "Terrace fills first",
+        "b6": "Card tips lagging",
+        "b7": "Local event nearby",
+        "b8": "Happy hour overrun",
+        "b9": "Bottle cost +9%",
+        "b10": "Rain displacing seats"
+      },
+      "apartment": {
+        "a1": "5 turnovers today",
+        "a2": "Cleaner delayed",
+        "a3": "1-night gap Unit 24",
+        "a4": "Maintenance reopened",
+        "a5": "Channel fee variance",
+        "a6": "Check-in approaching",
+        "a7": "Short-stay cluster",
+        "a8": "Linen turn overdue",
+        "a9": "Orphan night risk",
+        "a10": "Review score watch"
+      }
+    },
+    "decision": {
+      "ask": "2 things need you",
+      "recommends": "RADR recommends",
+      "why": "Why",
+      "simulate": "Simulate",
+      "prepare": "Prepare",
+      "quiet": "3 more decisions prepared. Everything else is operating within expectations.",
+      "hotel": {
+        "domain": "Rooms",
+        "title": "You're sold out — and still leaking on the mix.",
+        "lede": "Occupancy is strong. OTA mix is too high.",
+        "value": "€4,200",
+        "valueLabel": "contribution at risk",
+        "rec": "Hold more inventory direct until 72h out and cap OTA availability earlier on high-demand dates."
+      },
+      "restaurant": {
+        "domain": "Service",
+        "title": "Your busiest item is not your best performer.",
+        "lede": "Volume looks healthy. Contribution per kitchen minute says otherwise.",
+        "value": "€8,420",
+        "valueLabel": "annual upside",
+        "rec": "Re-weight the peak menu toward higher contribution dishes — not just bestsellers."
+      },
+      "bar": {
+        "domain": "Service",
+        "title": "The terrace is full. The bar is leaving money down.",
+        "lede": "Standing capacity and one FOH move absorb the displaced covers.",
+        "value": "€1,140",
+        "valueLabel": "weekend contribution",
+        "rec": "Open standing bar capacity and shift one FOH before the rain window locks."
+      },
+      "apartment": {
+        "domain": "Units",
+        "title": "Your calendar is full — your turn cost is not.",
+        "lede": "Short stays and cleaning gaps are crushing margin.",
+        "value": "€2,900",
+        "valueLabel": "monthly leakage",
+        "rec": "Lengthen minimum stay on high-turn clusters and prep cleaner capacity before the next peak."
+      }
+    }
+  },
+  "hiddenCanvas": {
+    "title": "It finds what you weren't looking for.",
+    "lead": "What the GM, ops lead, and CFO each need to see.",
+    "tabsAria": "Hospitality vertical",
+    "whisper": "Known · Hidden · Predicted · Decided · Verified",
+    "tabs": {
+      "restaurant": "Restaurant",
+      "hotel": "Hotel",
+      "apartment": "Apartments"
+    },
+    "restaurant": {
+      "volumeLabel": "#1 by volume",
+      "volumeName": "Tuna Tataki",
+      "volumeStat": "8,420 sold",
+      "econLabel": "Peak economics",
+      "econName": "Truffle Pasta",
+      "econStat": "+34% contribution / kitchen minute",
+      "n1": "Lower waste",
+      "n2": "Faster ticket time",
+      "n3": "Less peak pressure",
+      "conclusion": "Your bestseller isn't your best dish.",
+      "money": "€8,420",
+      "moneyLabel": "expected annual opportunity",
+      "rec": "Increase prominence during 19:00–21:00."
+    },
+    "hotel": {
+      "volumeLabel": "Sold out",
+      "volumeName": "OTA weekend",
+      "volumeStat": "100% occ · +18 pts OTA mix",
+      "econLabel": "Peak economics",
+      "econName": "Direct hold",
+      "econStat": "+€9,800 contribution protected",
+      "n1": "Lower commission drag",
+      "n2": "Guest owned direct",
+      "n3": "Better ADR on same rooms",
+      "conclusion": "Sold out. Still losing money on the mix.",
+      "money": "€9,800",
+      "moneyLabel": "contribution at stake this weekend",
+      "rec": "Hold more inventory direct until 72h out."
+    },
+    "apartment": {
+      "volumeLabel": "Looks full",
+      "volumeName": "Apartment 24",
+      "volumeStat": "Mon · Wed booked",
+      "econLabel": "Hidden gap",
+      "econName": "Tuesday orphan",
+      "econStat": "+€112 expected contribution",
+      "n1": "17 comparable gaps",
+      "n2": "64% historical fill",
+      "n3": "Marathon weekend next door",
+      "conclusion": "This empty night is not random.",
+      "money": "€2,516",
+      "moneyLabel": "annual orphan-night opportunity",
+      "rec": "Open one-night inventory now."
+    }
+  },
+  "signalDecision": {
+    "title": "Rain changed the operation.",
+    "titleSun": "Sun filled the terrace.",
+    "chainAria": "Causal operating response",
+    "fork": "RADR has 3 options.",
+    "forkSun": "RADR has 3 options.",
+    "stake": "€467 at stake tonight",
+    "stakeSun": "€720 perishable · lunch",
+    "valueDeltaLabel": "vs do nothing",
+    "valueDelta": "+€467",
+    "valueDeltaSun": "+€720",
+    "valueProtectLabel": "Value protected",
+    "valueProtect": "26 covers absorbed · delivery surge captured",
+    "valueProtectSun": "36 terrace covers open · walk-ins captured",
+    "optionsAria": "Scenario options",
+    "recommendLabel": "RADR recommends",
+    "recommend": "Option C",
+    "recommendSun": "Option B",
+    "confidenceLabel": "Confidence",
+    "confidence": "78%",
+    "confidenceSun": "81%",
+    "deadlineLabel": "Decide by",
+    "deadline": "18:45",
+    "deadlineSun": "11:30",
+    "approve": "Approve",
+    "chain": {
+      "rain": {
+        "label": "Heavy rain",
+        "detail": "Trigger at this location"
+      },
+      "terrace": {
+        "label": "Terrace",
+        "detail": "36 covers · €284 exposed"
+      },
+      "absorb": {
+        "label": "Bar / dining",
+        "detail": "26 covers · €168 recoverable"
+      },
+      "staff": {
+        "label": "Staff",
+        "detail": "Bar constrained 19:15–20:00"
+      },
+      "delivery": {
+        "label": "Delivery",
+        "detail": "+18% · ~€95 upside"
+      },
+      "exposure": {
+        "label": "At stake",
+        "detail": "€467 if unmanaged"
+      }
+    },
+    "chainSun": {
+      "sun": {
+        "label": "Clear sun",
+        "detail": "Trigger at this location"
+      },
+      "terrace": {
+        "label": "Terrace",
+        "detail": "36 covers · €410 open"
+      },
+      "covers": {
+        "label": "Walk-ins",
+        "detail": "+22 expected · ~€310"
+      },
+      "staff": {
+        "label": "Staff",
+        "detail": "FOH short 12:00–14:00"
+      },
+      "walkins": {
+        "label": "Capacity",
+        "detail": "Standing + 2 tables ready"
+      },
+      "exposure": {
+        "label": "At stake",
+        "detail": "€720 if left closed"
+      }
+    },
+    "options": {
+      "a": {
+        "label": "Option A",
+        "title": "Do nothing",
+        "net": "−€284",
+        "why": "Cost of doing nothing · full terrace loss"
+      },
+      "b": {
+        "label": "Option B",
+        "title": "Move 1 FOH",
+        "net": "+€122 net",
+        "why": "Partial recovery · leaves €155 on the table"
+      },
+      "c": {
+        "label": "Option C",
+        "title": "FOH + standing + delivery prep",
+        "net": "+€183 net",
+        "why": "Best net · matches staff to demand"
+      }
+    },
+    "optionsSun": {
+      "a": {
+        "label": "Option A",
+        "title": "Do nothing",
+        "net": "−€410",
+        "why": "Cost of doing nothing · terrace stays dark"
+      },
+      "b": {
+        "label": "Option B",
+        "title": "Open terrace + add 1 FOH",
+        "net": "+€310 net",
+        "why": "Best net · captures walk-in window"
+      },
+      "c": {
+        "label": "Option C",
+        "title": "Terrace only · keep indoor staffing",
+        "net": "+€140 net",
+        "why": "Understaffed · turns walk-ins away"
+      }
+    },
+    "kicker": "Operating response"
+  },
+  "verifyLearn": {
+    "kicker": "Verified Value",
+    "title": "Prove what changed.",
+    "lead": "RADR doesn't stop at the recommendation — it closes the loop and remembers what worked at this location.",
+    "traceAria": "Decision receipt from detection to verified outcome",
+    "resultAmount": "€184",
+    "resultLabel": "verified",
+    "learnKicker": "Then learn",
+    "learnLine": "12 similar cases here · 72% recovery · +€176 average verified",
+    "trace": {
+      "t1": "Detected",
+      "t2": "Quantified",
+      "t3": "Prepared",
+      "t4": "Executed",
+      "t5": "Verified"
+    }
+  },
+  "recover": {
+    "families": {
+      "kicker": "Value leak map",
+      "title": "The money doesn't disappear in one place.",
+      "lead": "RADR finds value that is leaking, stuck, missed, or about to disappear. You interact with Decisions and Verified outcomes — problem class is context.",
+      "whatLeaks": "What leaks",
+      "whatDoes": "What RADR does",
+      "whatVerifies": "What can be verified",
+      "maturityPilot": "Pilot-ready",
+      "maturityExpansion": "Expansion",
+      "SUPPLIER_AP": {
+        "label": "Supplier / AP",
+        "leaks": "Contract leakage, missing credits, rebates, duplicate charges, UOM and quantity mismatch.",
+        "does": "Detects → prepares evidence → tracks settlement → verifies recovered value.",
+        "verifies": "Credit or settlement matched to the original invoice."
+      },
+      "RECONCILIATION": {
+        "label": "Reconciliation",
+        "leaks": "POS, processors, delivery platforms, refunds, tips, and accounting that refuse to close.",
+        "does": "Detects mismatch → explains source disagreement → prepares correction → verifies closure.",
+        "verifies": "Settlement or journal correction matched across sources."
+      },
+      "COST_VARIANCE": {
+        "label": "Cost variance",
+        "leaks": "Food cost moves without a clear driver — price, waste, yield, mix, substitution.",
+        "does": "Ranks drivers · separates signal from noise · recommends the right lever before repricing.",
+        "verifies": "Cost movement explained and corrective outcome observed."
+      },
+      "PROCUREMENT": {
+        "label": "Procurement",
+        "leaks": "Same SKU, different prices across locations — missed tiers and consolidation opportunity.",
+        "does": "Surfaces dispersion → negotiation leverage → group-rate Decision.",
+        "verifies": "Negotiated rate, credit, or volume tier applied and matched."
+      },
+      "PERISHABLE_REVENUE": {
+        "label": "Perishable revenue",
+        "leaks": "Cancellations, no-shows, late releases, orphan nights — value about to expire.",
+        "does": "Capacity at risk → time remaining → recovery action → observe → verify contribution.",
+        "verifies": "Recovered contribution matched after service or night close."
+      },
+      "maturityPlanned": "Planned"
+    },
+    "story": {
+      "kicker": "One complete recovery",
+      "title": "One leak. One Decision. One traceable outcome.",
+      "lead": "€273 recovered and matched to the original invoice.",
+      "leakK": "The leak",
+      "leakInvoice": "Invoice €7.45 / L",
+      "leakContract": "Contract €6.80 / L",
+      "leakQty": "Quantity 420 L",
+      "leakEuro": "€273 exposed",
+      "checksK": "RADR checks",
+      "c1": "Contract",
+      "c2": "UOM",
+      "c3": "Quantity",
+      "c4": "Prior invoices",
+      "c5": "Credit history",
+      "c6": "Menu exposure",
+      "decisionK": "The Decision",
+      "decisionTitle": "Dispute the variance",
+      "decisionBecause": "Do not reprice the menu yet. The contract is clear — and the evidence does not support passing the cost to guests.",
+      "actionK": "The action",
+      "actionBody": "Evidence package prepared.",
+      "outcomeK": "The outcome",
+      "outcomeBody": "Credit memo issued.",
+      "verifiedK": "Verified",
+      "verifiedEuro": "€273 recovered",
+      "verifiedBody": "Matched to the original invoice."
+    },
+    "thinks": {
+      "kicker": "How RADR thinks",
+      "title": "You don't teach RADR what to look for.",
+      "flow": "Signal → Evidence → Decision → Action → Outcome → Verified",
+      "lead": "RADR already understands the economic patterns that matter in hospitality: contract variance, settlement mismatch, yield loss, price dispersion, no-show exposure, room-night expiry.",
+      "diff": "It connects the evidence, compares the responses, and follows the outcome.",
+      "close": "No custom agent required to know what a supplier credit should look like — or what counts as Verified.",
+      "examples": [
+        "Credit issued. Never applied.",
+        "Three locations. Three prices.",
+        "Settlement received. Still €293 short.",
+        "Food cost rose. Supplier inflation wasn’t the main reason.",
+        "Room cancelled. 19 hours left to recover it."
+      ]
+    },
+    "progression": {
+      "kicker": "The path",
+      "title": "First recover it. Then stop losing it.",
+      "lead": "Recover → Prevent → Optimize → Autopilot.",
+      "RECOVER": {
+        "title": "Recover",
+        "body": "Find the value already lost."
+      },
+      "PREVENT": {
+        "title": "Prevent",
+        "body": "Catch the condition before the value expires."
+      },
+      "OPTIMIZE": {
+        "title": "Optimize",
+        "body": "Choose the strongest response across tradeoffs."
+      },
+      "AUTOPILOT": {
+        "title": "Autopilot",
+        "body": "Execute trusted patterns inside policy."
+      }
+    },
+    "stack": {
+      "kicker": "Your stack",
+      "title": "Keep the systems you already run",
+      "lead": "RADR works across the financial and operating systems already inside your business.",
+      "body": "You do not need to replace your accounting, POS, procurement, forecasting, or scheduling stack to start recovering margin.",
+      "integrationsK": "Connections",
+      "i1": "Invoices · Demo",
+      "i2": "Contracts · Demo",
+      "i3": "AP / accounting · Building",
+      "i4": "POS / menu · Planned",
+      "i5": "Procurement · Planned",
+      "statesNote": "States: Available · Demo · Partner access · Building · Planned."
+    },
+    "pilot": {
+      "kicker": "Recovery Pilot",
+      "title": "14 days to find and action recoverable value",
+      "lead": "Open cases remain on RADR until resolved, verified, or closed.",
+      "scope": "Start where the economics are clearest.",
+      "opt1": "Supplier / AP",
+      "opt2": "Reconciliation",
+      "opt3": "Supplier / AP + Reconciliation",
+      "deliverK": "What you get",
+      "d1": "Recovery opportunities found",
+      "d2": "Evidence packages prepared",
+      "d3": "Cases actioned",
+      "d4": "Value pending",
+      "d5": "Value verified",
+      "cta": "Start a recovery pilot"
+    },
+    "expansion": {
+      "kicker": "Platform",
+      "title": "Recover first. Then expand the Decision system.",
+      "lead": "The same Decision layer extends into cost variance, procurement leverage, and perishable revenue.",
+      "body": "One system learns from what actually happened.",
+      "cta": "Explore the Platform"
+    },
+    "faq": {
+      "kicker": "FAQ",
+      "title": "Straight answers",
+      "q1": "What if a supplier takes longer than 14 days?",
+      "a1": "RADR keeps the case open until it resolves or is closed.",
+      "q2": "Do we have to replace our accounting or procurement stack?",
+      "a2": "No. RADR works across the systems already in use.",
+      "q3": "Does RADR send disputes automatically?",
+      "a3": "Not unless explicitly permitted by policy. Material external actions stay approval-gated.",
+      "q4": "How does RADR define Verified Value?",
+      "a4": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice."
+    },
+    "footer": {
+      "brand": "Nothing off the RADR.",
+      "title": "Ready when you are",
+      "body": "Start recovering value on the stack you already run.",
+      "cta": "Start a recovery pilot",
+      "secondary": "See how RADR recovers value"
+    }
+  }
+}

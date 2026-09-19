@@ -1,0 +1,76 @@
+{
+  "metaTitle": "Glossary · RADR",
+  "metaDescription": "Definitions for RADR margin intelligence: BUY, LABOR, SELL, RECOVER, Verified Value, Control Center, Findings and more.",
+  "kicker": "Resources",
+  "title": "The language of margin intelligence.",
+  "lead": "Shared terms for operators, finance teams and systems that need to understand what RADR means.",
+  "groups": {
+    "brand": {
+      "title": "Brand terms",
+      "items": {
+        "radr": {
+          "term": "RADR",
+          "def": "Continuous margin intelligence for hospitality operations."
+        },
+        "askRadr": {
+          "term": "Ask RADR",
+          "def": "Natural-language interface over operating and financial evidence."
+        },
+        "controlCenter": {
+          "term": "Control Center",
+          "def": "Primary daily shell: performance, findings and action in one place."
+        },
+        "morningBrief": {
+          "term": "Morning Brief",
+          "def": "Overnight change summary ready at open."
+        },
+        "verifiedValue": {
+          "term": "Verified Value",
+          "def": "Money tracked from identified → protected → verified against evidence."
+        }
+      }
+    },
+    "territories": {
+      "title": "Territories",
+      "items": {
+        "buy": {
+          "term": "BUY",
+          "def": "What you spend: supplier pricing, purchasing and invoice leakage."
+        },
+        "labor": {
+          "term": "LABOR",
+          "def": "How you staff: capacity, scheduling and overtime exposure."
+        },
+        "sell": {
+          "term": "SELL",
+          "def": "How you monetize: pricing, inventory, demand and channel contribution."
+        },
+        "recover": {
+          "term": "RECOVER",
+          "def": "What you are owed: cancellations, credits, fees and payouts."
+        }
+      }
+    },
+    "system": {
+      "title": "System terms",
+      "items": {
+        "findings": {
+          "term": "Findings",
+          "def": "Material financial opportunities or exceptions, prioritized by money."
+        },
+        "forecast": {
+          "term": "Forecast",
+          "def": "Expected demand, revenue and margin from bookings and signals."
+        },
+        "reconciliation": {
+          "term": "Reconciliation",
+          "def": "Matching expected money against invoices, credits, fees and payouts."
+        },
+        "delta": {
+          "term": "Delta",
+          "def": "The financial difference between expected and actual operating state."
+        }
+      }
+    }
+  }
+}

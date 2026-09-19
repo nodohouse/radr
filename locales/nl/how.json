@@ -1,0 +1,221 @@
+{
+  "metaTitle": "Hoe het werkt · RADR",
+  "metaDescription": "CONNECT → UNDERSTAND → FUTURES → DECIDE → VERIFY → REMEMBER.",
+  "kicker": "Hoe RADR werkt",
+  "heroTitleLine1": "Van data",
+  "heroTitleLine2": "naar Verified Value.",
+  "heroLead": "Your operation leaves signals. RADR turns them into decisions that can be simulated, acted on, verified and learned from.",
+  "signalPrefix": "Signal 001",
+  "archKicker": "Architectuur",
+  "archTitle": "Systemen → operating model → marge-intelligentie",
+  "archLead": "Eén leveranciersfinding loopt hieronder door Detect → Explain → Act → Control → Verify.",
+  "loopKicker": "The RADR loop",
+  "loopLines": [
+    "Connect.",
+    "Understand.",
+    "Futures.",
+    "Decide.",
+    "Verify.",
+    "Remember."
+  ],
+  "closerLines": [
+    "Vind het.",
+    "Los het op.",
+    "Houd het opgelost."
+  ],
+  "flywheelKicker": "Flywheel",
+  "flywheelTitleLine1": "RADR wordt",
+  "flywheelTitleLine2": "slimmer.",
+  "flywheelLead": "Elke opgeloste finding wordt institutionele kennis.",
+  "archBoardTitleLine1": "Uw stack.",
+  "archBoardTitleLine2": "Op RADR.",
+  "archBoardLoop": "Connect · Understand · Futures · Decide · Verify · Remember",
+  "categoryKicker": "Categorie",
+  "categoryTitleLine1": "Waarom RADR",
+  "categoryTitleLine2": "wint.",
+  "compare": {
+    "bi": {
+      "label": "Traditionele BI",
+      "desc": "Toont wat er is gebeurd"
+    },
+    "alerts": {
+      "label": "Alerts",
+      "desc": "Vertellen dat iets is veranderd"
+    },
+    "consultants": {
+      "label": "Consultants",
+      "desc": "Vinden issues periodiek"
+    },
+    "radr": {
+      "label": "RADR",
+      "desc": "Begrijpt wat had moeten gebeuren, vindt de delta, kwantificeert waarde, stuurt actie, maakt fixes tot controls en verifieert"
+    }
+  },
+  "clarityKicker": "Helderheid",
+  "notTitle": "RADR is niet",
+  "notItems": [
+    "nog een dashboard",
+    "nog een alertfeed",
+    "nog een reconciliatieproject",
+    "nog een consultantrapport"
+  ],
+  "notClose": "RADR zit over de operatie als continue marge-intelligentie, en maakt van verschillen Verified Value.",
+  "ctaPrimary": "Zie wat RADR vindt",
+  "ctaSecondary": "Bekijk RADR in actie",
+  "stages": {
+    "connect": {
+      "label": "Connect",
+      "title": "Breng bewijs binnen.",
+      "copy": "Operationeel en financieel bewijs komt in één intelligence-laag: bestanden, exports en integraties zodra beschikbaar."
+    },
+    "understand": {
+      "label": "Understand",
+      "title": "Normaliseer de operatie.",
+      "copy": "Gefragmenteerde data wordt een gemeenschappelijk model: leverancier, locatie, item, shift, contract, factuur, betaling, kanaal."
+    },
+    "detect": {
+      "label": "Detect",
+      "title": "Vind de delta.",
+      "copy": "RADR vergelijkt wat had moeten gebeuren met wat werkelijk gebeurde, en maakt het verschil zichtbaar."
+    },
+    "explain": {
+      "label": "Explain",
+      "title": "Laat zien waarom het telt.",
+      "copy": "Oorzaak, context, bewijs en financiële impact, gekoppeld aan de finding."
+    },
+    "act": {
+      "label": "Act",
+      "title": "Stuur de respons.",
+      "copy": "Geef de juiste persoon de volgende actie met bewijs klaar."
+    },
+    "control": {
+      "label": "Control",
+      "title": "Houd het opgelost.",
+      "copy": "Elke oplossing leert RADR hoe de operatie moet lopen, en wordt een persistente control."
+    },
+    "verify": {
+      "label": "Verify",
+      "title": "Bewijs de waarde.",
+      "copy": "Identified is niet Verified. RADR checkt of de financiële uitkomst echt is gerealiseerd."
+    },
+    "learn": {
+      "label": "Learn",
+      "title": "Versterk de intelligentie.",
+      "copy": "Opgeloste outcomes verbeteren toekomstige detectie, routing en controls."
+    }
+  },
+  "flywheel": {
+    "1": {
+      "t": "Signaal gedetecteerd",
+      "d": "Verschil gevonden"
+    },
+    "2": {
+      "t": "Mens lost op",
+      "d": "Actie genomen"
+    },
+    "3": {
+      "t": "Patroon geleerd",
+      "d": "Institutionele kennis"
+    },
+    "4": {
+      "t": "Control gemaakt",
+      "d": "Volgende keer eerder gevangen"
+    },
+    "5": {
+      "t": "Verified Value",
+      "d": "Bewijs van impact"
+    }
+  },
+  "workflow": [
+    "Nieuw",
+    "Toegewezen",
+    "In review",
+    "Opgelost",
+    "Geverifieerd"
+  ],
+  "learnNote": "Opgeloste outcomes verbeteren toekomstige detectie en controls.",
+  "stageVisual": {
+    "connect": {
+      "header": "01 · CONNECT",
+      "badge": "Datalaag",
+      "title": "Systemen die al in de operatie zitten",
+      "statusNote": "Status is eerlijk: LIVE · EARLY ACCESS · PLANNED. Geen verzonnen connectors."
+    },
+    "understand": {
+      "header": "02 · UNDERSTAND",
+      "badge": "Operating model",
+      "title": "Genormaliseerde entities",
+      "fields": {
+        "supplier": "Leverancier",
+        "location": "Locatie",
+        "item": "Item",
+        "contract": "Contract",
+        "invoice": "Factuur",
+        "channel": "Kanaal"
+      }
+    },
+    "detect": {
+      "header": "Signal 001 · DETECT",
+      "priority": "Priority 01",
+      "contractPrice": "Contractprijs",
+      "invoicePrice": "Factuurprijs"
+    },
+    "explain": {
+      "header": "04 · EXPLAIN",
+      "badge": "High impact",
+      "supplier": "Leverancier",
+      "item": "Item",
+      "contract": "Contract",
+      "invoice": "Factuur",
+      "volume": "Volume",
+      "volumeValue": "5,172 cases / year",
+      "annualImpact": "Jaarlijkse impact"
+    },
+    "act": {
+      "header": "05 · ACT",
+      "badge": "Actionable",
+      "recommended": "Aanbevolen actie",
+      "title": "Leverancierscharge reviewen",
+      "evidenceReady": "Bewijs klaar",
+      "evidence": [
+        "✓ Contract.pdf",
+        "✓ Invoice #48291",
+        "✓ Purchase history",
+        "✓ Supplier statement"
+      ],
+      "workflowAria": "Finding-workflow",
+      "assigned": "Toegewezen · Finance Manager"
+    },
+    "control": {
+      "header": "06 · CONTROL",
+      "badge": "Learn → Control",
+      "resolution": "Resolution",
+      "title": "Leverancier corrigeerde pricing",
+      "body": "De resolution leert RADR hoe de operatie moet lopen.",
+      "created": "Control gemaakt",
+      "ruleLine1": "Factuurprijs",
+      "ruleLine2": "moet overeenkomen met",
+      "ruleLine3": "contractprijs",
+      "next": "Volgende mismatch · automatisch flaggen"
+    },
+    "verify": {
+      "expected": "Verwachte recovery",
+      "received": "Ontvangen",
+      "verified": "✓ Verified",
+      "added": "Toegevoegd aan Verified Value"
+    },
+    "learn": {
+      "header": "08 · LEARN",
+      "badge": "Compounding",
+      "title": "Institutioneel geheugen",
+      "items": [
+        "Signaal gedetecteerd · Verschil gevonden",
+        "Mens lost op · Actie genomen",
+        "Patroon geleerd · Institutionele kennis",
+        "Control gemaakt · Volgende keer eerder gevangen",
+        "Verified Value · Bewijs van impact"
+      ]
+    }
+  },
+  "ctaBook": "Demo boeken"
+}

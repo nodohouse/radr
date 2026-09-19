@@ -1,10 +1,10 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "RADR — Nothing off the RADR.";
+export const alt = "RADR · Nothing off the RADR.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** Simple OG share image — near-black, large △, wordmark, slogan. */
+/** Simple OG share image: near-black, large △, wordmark, slogan. */
 export default function OpenGraphImage() {
   return new ImageResponse(
     (

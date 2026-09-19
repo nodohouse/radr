@@ -1,28 +1,37 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { FormEvent, useState } from "react";
+import { Link, useRouter } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
 export function ResetPasswordForm() {
+  const t = useTranslations("auth");
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token") ?? "";
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
-  const [showPw, setShowPw] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!token) {
-      setError("This reset link is missing or expired.");
+      setError(t("errors.invalidResetLink"));
       return;
     }
     setPending(true);
     setError(null);
     const form = new FormData(event.currentTarget);
     const newPassword = String(form.get("password") ?? "");
+    const confirm = String(form.get("confirm") ?? "");
+
+    if (newPassword !== confirm) {
+      setPending(false);
+      setError(t("errors.passwordMismatch"));
+      return;
+    }
 
     const result = await authClient.resetPassword({
       newPassword,
@@ -31,7 +40,7 @@ export function ResetPasswordForm() {
     setPending(false);
 
     if (result.error) {
-      setError(result.error.message ?? "Could not reset password");
+      setError(t("errors.invalidResetLink"));
       return;
     }
 
@@ -40,50 +49,72 @@ export function ResetPasswordForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rx-auth-form" noValidate>
+    <form onSubmit={onSubmit} className="ob-auth-form" noValidate>
       {!token ? (
-        <p className="rx-auth-error" role="alert">
-          <strong>Signal expired</strong>
-          This reset link is missing or no longer valid.
+        <p className="ob-error" role="alert">
+          {t("errors.invalidResetLink")}
         </p>
       ) : null}
-      <div className="rx-auth-field">
-        <label htmlFor="password">New password</label>
-        <div className="rx-auth-pw">
+      <div className="ob-field">
+        <label htmlFor="password">{t("newPassword")}</label>
+        <div className="ob-auth-pw">
           <input
             id="password"
             name="password"
-            type={showPw ? "text" : "password"}
+            type={showPassword ? "text" : "password"}
             autoComplete="new-password"
             required
             minLength={10}
-            placeholder="At least 10 characters"
+            placeholder={t("passwordPlaceholder")}
           />
           <button
             type="button"
-            className="rx-auth-pw-toggle"
-            onClick={() => setShowPw((v) => !v)}
-            aria-label={showPw ? "Hide password" : "Show password"}
+            className="ob-auth-pw-toggle"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-pressed={showPassword}
           >
-            {showPw ? "Hide" : "Show"}
+            {showPassword ? t("hidePassword") : t("showPassword")}
           </button>
         </div>
       </div>
+      <div className="ob-field">
+        <label htmlFor="confirm">{t("confirmPassword")}</label>
+        <input
+          id="confirm"
+          name="confirm"
+          type={showPassword ? "text" : "password"}
+          autoComplete="new-password"
+          required
+          minLength={10}
+        />
+      </div>
       {error ? (
-        <p className="rx-auth-error" role="alert">
-          <strong>Signal not confirmed</strong>
-          {error}
-        </p>
+        <div className="ob-error" role="alert">
+          <p>{error}</p>
+          <p className="ob-error-help">
+            <Link href="/forgot-password">{t("forgotPasswordHelp")}</Link>
+          </p>
+        </div>
       ) : null}
       <button
         type="submit"
-        className="rx-auth-submit"
+        className="ob-btn ob-btn-primary"
         disabled={pending || !token}
       >
-        {pending ? "Saving…" : <>Update password <span aria-hidden="true">→</span></>}
+        {pending ? (
+          t("updating")
+        ) : (
+          <>
+            {t("submitReset")} <span aria-hidden="true">→</span>
+          </>
+        )}
       </button>
-      <p className="rx-auth-foot">
-        <Link href="/login">Back to sign in →</Link>
+      <p className="ob-auth-foot">
+        <Link href="/login">{t("backToSignIn")}</Link>
+        <span className="ob-auth-foot-sep" aria-hidden="true">
+          ·
+        </span>
+        <Link href="/forgot-password">{t("forgotPassword")}</Link>
       </p>
     </form>
   );

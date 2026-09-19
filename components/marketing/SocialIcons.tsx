@@ -51,7 +51,7 @@ type Props = {
 };
 
 /**
- * Footer socials — LinkedIn + Instagram always visible.
+ * Footer socials: LinkedIn + Instagram always visible.
  * Real href only when configured; otherwise non-linking (no invented URLs).
  */
 export function SocialIcons({ withLabels = true, className = "" }: Props) {
@@ -59,7 +59,9 @@ export function SocialIcons({ withLabels = true, className = "" }: Props) {
   if (links.length === 0) return null;
 
   return (
-    <ul className={`rx-social ${className}`.trim()}>
+    <ul
+      className={`rx-social ${withLabels ? "" : "rx-social--icons"} ${className}`.trim()}
+    >
       {links.map((link) => {
         const inner = (
           <>
@@ -90,8 +92,9 @@ export function SocialIcons({ withLabels = true, className = "" }: Props) {
             ) : (
               <span
                 className="rx-social-link rx-social-link--pending"
-                title={`${link.label} — URL not configured yet`}
-                aria-label={`${link.label} — coming soon`}
+                role="img"
+                title={`${link.label}: URL not configured yet`}
+                aria-label={`${link.label}: coming soon`}
               >
                 {inner}
               </span>

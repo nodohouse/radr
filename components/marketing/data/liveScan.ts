@@ -39,7 +39,7 @@ export type ScanBeat =
   | { type: "moment"; moment: ScanMoment; delayMs: number }
   | { type: "lock"; delayMs: number };
 
-/** Signal catalog — reuse by id in the script */
+/** Signal catalog: reuse by id in the script */
 export const LIVE_POOL: Record<string, LiveSignal> = {
   delivery_fee: {
     id: "s01",
@@ -378,8 +378,8 @@ export const SCAN_SCRIPT: readonly ScanBeat[] = [
     moment: {
       id: "m-done",
       kind: "complete",
-      kicker: "Demo scan",
-      headline: "Scan complete",
+      kicker: "Demo complete",
+      headline: "Value on RADR",
       body: `${DEMO.locations} locations · 27 signals · ${formatEuro(DEMO.final)} value identified`,
     },
     delayMs: 4200,
@@ -397,7 +397,7 @@ export const SCAN_SCRIPT: readonly ScanBeat[] = [
   },
 ];
 
-/** After lock — cosmetic cycle, meters frozen */
+/** After lock: cosmetic cycle, meters frozen */
 export const POST_LOCK_CYCLE: readonly LiveSignal[] = [
   LIVE_POOL.duplicate_invoice!,
   LIVE_POOL.rebate!,
@@ -414,7 +414,7 @@ export const METER_TARGETS = {
   value: DEMO.final,
 } as const;
 
-/** Verify script math in dev — sum of annualized/recoverable adds before lock */
+/** Verify script math in dev: sum of annualized/recoverable adds before lock */
 export function assertMeterMath(): { annualized: number; recoverable: number } {
   let annualized = 0;
   let recoverable = 0;

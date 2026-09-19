@@ -1,0 +1,221 @@
+{
+  "metaTitle": "Cómo funciona · RADR",
+  "metaDescription": "CONNECT → UNDERSTAND → FUTURES → DECIDE → VERIFY → REMEMBER.",
+  "kicker": "Cómo funciona RADR",
+  "heroTitleLine1": "De los datos",
+  "heroTitleLine2": "a Verified Value.",
+  "heroLead": "Your operation leaves signals. RADR turns them into decisions that can be simulated, acted on, verified and learned from.",
+  "signalPrefix": "Signal 001",
+  "archKicker": "Arquitectura",
+  "archTitle": "Sistemas → modelo operativo → inteligencia de margen",
+  "archLead": "Un finding de proveedor recorre Detect → Explain → Act → Control → Verify abajo.",
+  "loopKicker": "The RADR loop",
+  "loopLines": [
+    "Connect.",
+    "Understand.",
+    "Futures.",
+    "Decide.",
+    "Verify.",
+    "Remember."
+  ],
+  "closerLines": [
+    "Encuéntrelo.",
+    "Arréglelo.",
+    "Manténgalo arreglado."
+  ],
+  "flywheelKicker": "Flywheel",
+  "flywheelTitleLine1": "RADR se vuelve",
+  "flywheelTitleLine2": "más inteligente.",
+  "flywheelLead": "Cada finding resuelto se convierte en conocimiento institucional.",
+  "archBoardTitleLine1": "Su stack.",
+  "archBoardTitleLine2": "En RADR.",
+  "archBoardLoop": "Connect · Understand · Futures · Decide · Verify · Remember",
+  "categoryKicker": "Categoría",
+  "categoryTitleLine1": "Por qué RADR",
+  "categoryTitleLine2": "gana.",
+  "compare": {
+    "bi": {
+      "label": "BI tradicional",
+      "desc": "Muestra lo que ocurrió"
+    },
+    "alerts": {
+      "label": "Alertas",
+      "desc": "Dicen que algo cambió"
+    },
+    "consultants": {
+      "label": "Consultores",
+      "desc": "Encuentran problemas periódicamente"
+    },
+    "radr": {
+      "label": "RADR",
+      "desc": "Entiende lo que debería haber ocurrido, encuentra el delta, cuantifica valor, impulsa acción, convierte fixes en controls y verifica"
+    }
+  },
+  "clarityKicker": "Claridad",
+  "notTitle": "RADR no es",
+  "notItems": [
+    "otro dashboard",
+    "otro feed de alertas",
+    "otro proyecto de conciliación",
+    "otro informe de consultor"
+  ],
+  "notClose": "RADR cubre la operación como inteligencia continua de margen, y convierte diferencias en Verified Value.",
+  "ctaPrimary": "Vea lo que RADR encuentra",
+  "ctaSecondary": "Vea RADR en acción",
+  "stages": {
+    "connect": {
+      "label": "Connect",
+      "title": "Traiga la evidencia.",
+      "copy": "La evidencia operativa y financiera entra en una capa de inteligencia: archivos, exports e integraciones cuando están disponibles."
+    },
+    "understand": {
+      "label": "Understand",
+      "title": "Normalice la operación.",
+      "copy": "Los datos fragmentados se convierten en un modelo común: proveedor, localización, ítem, turno, contrato, factura, pago, canal."
+    },
+    "detect": {
+      "label": "Detect",
+      "title": "Encuentre el delta.",
+      "copy": "RADR compara lo que debería haber ocurrido con lo que ocurrió, y hace visible la diferencia."
+    },
+    "explain": {
+      "label": "Explain",
+      "title": "Muestre por qué importa.",
+      "copy": "Causa, contexto, evidencia e impacto financiero, unidos al finding."
+    },
+    "act": {
+      "label": "Act",
+      "title": "Impulse la respuesta.",
+      "copy": "Dé a la persona correcta la siguiente acción con evidencia lista."
+    },
+    "control": {
+      "label": "Control",
+      "title": "Manténgalo arreglado.",
+      "copy": "Cada resolución enseña a RADR cómo debe comportarse la operación, y se convierte en un control persistente."
+    },
+    "verify": {
+      "label": "Verify",
+      "title": "Demuestre el valor.",
+      "copy": "Identified no es Verified. RADR comprueba si el resultado financiero realmente se materializó."
+    },
+    "learn": {
+      "label": "Learn",
+      "title": "Multiplique la inteligencia.",
+      "copy": "Los outcomes resueltos mejoran la detección, el enrutado y los controls futuros."
+    }
+  },
+  "flywheel": {
+    "1": {
+      "t": "Señal detectada",
+      "d": "Diferencia encontrada"
+    },
+    "2": {
+      "t": "Humano resuelve",
+      "d": "Acción tomada"
+    },
+    "3": {
+      "t": "Patrón aprendido",
+      "d": "Conocimiento institucional"
+    },
+    "4": {
+      "t": "Control creado",
+      "d": "Detectado antes la próxima vez"
+    },
+    "5": {
+      "t": "Verified Value",
+      "d": "Prueba de impacto"
+    }
+  },
+  "workflow": [
+    "Nuevo",
+    "Asignado",
+    "En revisión",
+    "Resuelto",
+    "Verificado"
+  ],
+  "learnNote": "Los outcomes resueltos mejoran la detección y los controls futuros.",
+  "stageVisual": {
+    "connect": {
+      "header": "01 · CONNECT",
+      "badge": "Capa de datos",
+      "title": "Sistemas ya en la operación",
+      "statusNote": "El estado es honesto: LIVE · EARLY ACCESS · PLANNED. Sin conectores inventados."
+    },
+    "understand": {
+      "header": "02 · UNDERSTAND",
+      "badge": "Modelo operativo",
+      "title": "Entidades normalizadas",
+      "fields": {
+        "supplier": "Proveedor",
+        "location": "Localización",
+        "item": "Ítem",
+        "contract": "Contrato",
+        "invoice": "Factura",
+        "channel": "Canal"
+      }
+    },
+    "detect": {
+      "header": "Signal 001 · DETECT",
+      "priority": "Prioridad 01",
+      "contractPrice": "Precio de contrato",
+      "invoicePrice": "Precio de factura"
+    },
+    "explain": {
+      "header": "04 · EXPLAIN",
+      "badge": "High impact",
+      "supplier": "Proveedor",
+      "item": "Ítem",
+      "contract": "Contrato",
+      "invoice": "Factura",
+      "volume": "Volumen",
+      "volumeValue": "5,172 cases / year",
+      "annualImpact": "Impacto anual"
+    },
+    "act": {
+      "header": "05 · ACT",
+      "badge": "Actionable",
+      "recommended": "Acción recomendada",
+      "title": "Revisar cargo del proveedor",
+      "evidenceReady": "Evidencia lista",
+      "evidence": [
+        "✓ Contract.pdf",
+        "✓ Invoice #48291",
+        "✓ Purchase history",
+        "✓ Supplier statement"
+      ],
+      "workflowAria": "Workflow del finding",
+      "assigned": "Asignado · Finance Manager"
+    },
+    "control": {
+      "header": "06 · CONTROL",
+      "badge": "Learn → Control",
+      "resolution": "Resolution",
+      "title": "El proveedor corrigió precios",
+      "body": "La resolución enseña a RADR cómo debe comportarse la operación.",
+      "created": "Control creado",
+      "ruleLine1": "El precio de factura",
+      "ruleLine2": "debe coincidir con",
+      "ruleLine3": "el precio de contrato",
+      "next": "Próximo desajuste · marcar automáticamente"
+    },
+    "verify": {
+      "expected": "Recovery esperada",
+      "received": "Recibido",
+      "verified": "✓ Verified",
+      "added": "Añadido a Verified Value"
+    },
+    "learn": {
+      "header": "08 · LEARN",
+      "badge": "Compounding",
+      "title": "Memoria institucional",
+      "items": [
+        "Señal detectada · Diferencia encontrada",
+        "Humano resuelve · Acción tomada",
+        "Patrón aprendido · Conocimiento institucional",
+        "Control creado · Detectado antes la próxima vez",
+        "Verified Value · Prueba de impacto"
+      ]
+    }
+  },
+  "ctaBook": "Reservar una demo"
+}

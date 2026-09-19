@@ -1,0 +1,213 @@
+{
+  "metaTitle": "Pricing — RADR",
+  "metaDescription": "Recovery Pilot, Core, and Control. Start with Supplier/AP or Reconciliation. Prove Verified Value. Then expand.",
+  "kicker": "Pricing",
+  "heroTitleLine1": "Start where the value is clearest.",
+  "heroTitleLine2": "",
+  "heroLead": "Begin with one defined recovery scope. Expand as RADR proves the economics.",
+  "heroSupport": "Choose Supplier / AP, Reconciliation, or both.",
+  "how": {
+    "kicker": "How pricing works",
+    "title": "Price follows the operating surface.",
+    "lead": "Not seats. Not tokens. Not per-Decision credits."
+  },
+  "dimensions": {
+    "locations": {
+      "title": "Locations",
+      "body": "How much of the operation RADR covers."
+    },
+    "scope": {
+      "title": "Operating scope",
+      "body": "The operational complexity RADR is responsible for understanding."
+    },
+    "responsibility": {
+      "title": "Decision responsibility",
+      "body": "Whether RADR recommends, prepares, or governs."
+    }
+  },
+  "pilot": {
+    "kicker": "Recovery Pilot",
+    "verb": "Prove",
+    "title": "Choose your first recovery scope.",
+    "lead": "14 days to find and action recoverable value. Open cases stay on RADR until resolved, verified, or closed.",
+    "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
+    "priceLabel": "Recovery Pilot",
+    "priceSub": "Scoped with you",
+    "cta": "Start a recovery pilot",
+    "points": [
+      "Supplier / AP · Reconciliation · or both",
+      "2–3 locations",
+      "14-day discovery / action window",
+      "Open cases until resolved, verified, or closed",
+      "Evidence packages · recovery tracking",
+      "Verified Value trace"
+    ]
+  },
+  "core": {
+    "name": "RADR Core",
+    "verb": "Decide + Verify",
+    "line": "Expand from recovery into recurring Decisions across the operation.",
+    "audience": "Connect the operation. Make better Decisions. Verify what changed.",
+    "priceLabel": "Priced by location + operating scope",
+    "cta": "Discuss Core",
+    "features": [
+      "Cross-system Decisions",
+      "Broader operating coverage",
+      "Futures — Early Access",
+      "Verified Value",
+      "Operating Memory — Early Access"
+    ]
+  },
+  "progression": {
+    "kicker": "How to start",
+    "title": "Recover → Decide → Govern.",
+    "lead": "Increasing responsibility — not feature bundles.",
+    "recover": "Recover",
+    "decide": "Decide",
+    "govern": "Govern"
+  },
+  "control": {
+    "name": "RADR Control",
+    "verb": "Govern",
+    "line": "Govern trusted Decisions across locations.",
+    "audience": "Coordinate, approve and learn across the group.",
+    "priceLabel": "Portfolio / group pricing",
+    "cta": "Discuss Control",
+    "features": [
+      "Everything in RADR Core",
+      "Prepared Actions and approval workflows",
+      "Multi-location governance",
+      "Autopilot within policy",
+      "Portfolio Verified Value",
+      "Advanced controls and implementation"
+    ]
+  },
+  "enterprise": {
+    "kicker": "Need enterprise controls?",
+    "body": "For larger groups we can scope SSO / SAML, custom RBAC, warehouse connections, custom APIs, security review, data policies, custom onboarding, dedicated support, SLA and multi-entity deployment.",
+    "cta": "Talk to us"
+  },
+  "packagesNote": "Core and Control are scoped to your operation.",
+  "expansion": {
+    "kicker": "How expansion works",
+    "title": "Recover → Decide → Govern.",
+    "steps": {
+      "prove": {
+        "label": "Recover",
+        "title": "Recover value first.",
+        "body": "A Recovery Pilot on Supplier/AP and/or Reconciliation — measurable Verified outcomes."
+      },
+      "deploy": {
+        "label": "Decide",
+        "title": "Make RADR part of the Decision layer.",
+        "body": "Core connects the stack, decides what matters, and verifies what changed."
+      },
+      "scale": {
+        "label": "Govern",
+        "title": "Govern trusted Decisions across locations.",
+        "body": "Control prepares, approves, and learns across the group."
+      }
+    }
+  },
+  "compare": {
+    "kicker": "Responsibility",
+    "title": "What changes as RADR takes on more.",
+    "expand": "Show comparison",
+    "collapse": "Hide comparison",
+    "legend": {
+      "yes": "Included",
+      "early": "Early access",
+      "selected": "Selected scope",
+      "pilot": "Pilot scope",
+      "no": "Not in package"
+    },
+    "status": {
+      "yes": "Yes",
+      "early": "Early access",
+      "selected": "Selected",
+      "pilot": "Pilot scope",
+      "no": "—"
+    },
+    "columns": {
+      "feature": "Capability",
+      "pilot": "Pilot",
+      "core": "Core",
+      "control": "Control"
+    },
+    "groups": {
+      "scope": "Operating scope",
+      "intelligence": "Decisions",
+      "proof": "Proof",
+      "action": "Action",
+      "scale": "Govern"
+    },
+    "planAria": "Package",
+    "rows": [
+      "Defined economic problem",
+      "Location(s)",
+      "Group / portfolio",
+      "Connected operating data",
+      "Cross-system Decisions",
+      "Operator context",
+      "Futures",
+      "Decision Trace",
+      "Verified Value",
+      "Operating Memory",
+      "Recommendations",
+      "Prepared Actions",
+      "Approval workflows",
+      "Multi-location governance",
+      "Group playbooks",
+      "Portfolio value view",
+      "Advanced controls"
+    ]
+  },
+  "faq": {
+    "kicker": "FAQ",
+    "title": "Straight answers",
+    "items": [
+      {
+        "q": "What if a supplier takes longer than 14 days?",
+        "a": "RADR keeps the case open until it resolves or is closed."
+      },
+      {
+        "q": "Do we have to replace our accounting or procurement stack?",
+        "a": "No. RADR is designed to work across the systems already in use."
+      },
+      {
+        "q": "Does RADR send disputes automatically?",
+        "a": "Not unless explicitly permitted by policy. Material external actions can remain approval-gated."
+      },
+      {
+        "q": "How does RADR define Verified Value?",
+        "a": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice."
+      },
+      {
+        "q": "How is RADR priced?",
+        "a": "Pricing depends on locations, operating scope and the level of Decision responsibility RADR takes on."
+      },
+      {
+        "q": "Can we start with one recovery scope?",
+        "a": "Yes. The Margin Recovery Pilot is the preferred starting point — often 2–3 locations on a defined financial problem."
+      },
+      {
+        "q": "Do we need all our systems connected first?",
+        "a": "No. Start with invoices, contracts, and AP evidence where available. Expand as more systems come online."
+      },
+      {
+        "q": "Can we expand later?",
+        "a": "Yes. Recovery is where RADR starts. The same Decision system can extend into broader operating Decisions."
+      },
+      {
+        "q": "Do you offer enterprise terms?",
+        "a": "Yes. Larger groups can scope advanced controls, security, custom integrations, SLA and multi-entity deployment under Control."
+      }
+    ]
+  },
+  "ready": "Start with one recovery scope.",
+  "readyLead": "Tell us what you run, where margin disappears, and which systems hold the evidence. We will scope the right place to start.",
+  "readyCta": "Start a recovery pilot",
+  "readySecondary": "See a Verified Recovery",
+  "contactSales": "Start a recovery pilot",
+  "bookDemo": "See a Verified Recovery"
+}

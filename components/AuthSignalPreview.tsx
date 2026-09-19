@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { SIGNALS } from "@/components/marketing/data/demo";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 
-/** Subtle rotating finding for auth left panel — one active at a time. */
+/** Subtle rotating finding for auth left panel. One active at a time. */
 export function AuthSignalPreview() {
   const reduced = useReducedMotionSafe();
   const [index, setIndex] = useState(0);

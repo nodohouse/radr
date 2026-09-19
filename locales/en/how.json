@@ -1,0 +1,221 @@
+{
+  "metaTitle": "How it works · RADR",
+  "metaDescription": "CONNECT → UNDERSTAND → FUTURES → DECIDE → VERIFY → REMEMBER.",
+  "kicker": "How RADR works",
+  "heroTitleLine1": "From data",
+  "heroTitleLine2": "to verified value.",
+  "heroLead": "Your operation leaves signals. RADR turns them into decisions that can be simulated, acted on, verified and learned from.",
+  "signalPrefix": "Signal 001",
+  "archKicker": "Architecture",
+  "archTitle": "Systems → operating model → operating intelligence",
+  "archLead": "One supplier finding travels through Detect → Explain → Act → Control → Verify below.",
+  "loopKicker": "The RADR loop",
+  "loopLines": [
+    "Connect.",
+    "Understand.",
+    "Futures.",
+    "Decide.",
+    "Verify.",
+    "Remember."
+  ],
+  "closerLines": [
+    "Find it.",
+    "Fix it.",
+    "Keep it fixed."
+  ],
+  "flywheelKicker": "Flywheel",
+  "flywheelTitleLine1": "RADR gets",
+  "flywheelTitleLine2": "smarter.",
+  "flywheelLead": "Every resolved finding becomes institutional knowledge.",
+  "archBoardTitleLine1": "Your stack.",
+  "archBoardTitleLine2": "On RADR.",
+  "archBoardLoop": "Connect · Understand · Futures · Decide · Verify · Remember",
+  "categoryKicker": "Category",
+  "categoryTitleLine1": "Why RADR",
+  "categoryTitleLine2": "wins.",
+  "compare": {
+    "bi": {
+      "label": "Traditional BI",
+      "desc": "Shows what happened"
+    },
+    "alerts": {
+      "label": "Alerts",
+      "desc": "Tell you something changed"
+    },
+    "consultants": {
+      "label": "Consultants",
+      "desc": "Find issues periodically"
+    },
+    "radr": {
+      "label": "RADR",
+      "desc": "Understands what should have happened, finds the delta, quantifies value, drives action, turns fixes into controls and verifies"
+    }
+  },
+  "clarityKicker": "Clarity",
+  "notTitle": "RADR is not",
+  "notItems": [
+    "another dashboard",
+    "another alert feed",
+    "another reconciliation project",
+    "another consultant report"
+  ],
+  "notClose": "RADR sits across the operation as continuous operating intelligence, and turns differences into verified value.",
+  "ctaPrimary": "See what RADR finds",
+  "ctaSecondary": "See RADR in action",
+  "ctaBook": "Book a demo",
+  "stages": {
+    "connect": {
+      "label": "Connect",
+      "title": "Bring evidence in.",
+      "copy": "Operational and financial evidence enter one intelligence layer: files, exports, and integrations as they become available."
+    },
+    "understand": {
+      "label": "Understand",
+      "title": "Normalize the operation.",
+      "copy": "Fragmented data becomes a common model: supplier, location, item, shift, contract, invoice, payment, channel."
+    },
+    "detect": {
+      "label": "Detect",
+      "title": "Find the delta.",
+      "copy": "RADR compares what should have happened with what actually did, and surfaces the difference."
+    },
+    "explain": {
+      "label": "Explain",
+      "title": "Show why it matters.",
+      "copy": "Cause, context, evidence and financial impact, attached to the finding."
+    },
+    "act": {
+      "label": "Act",
+      "title": "Drive the response.",
+      "copy": "Give the right person the next action with evidence ready."
+    },
+    "control": {
+      "label": "Control",
+      "title": "Keep it fixed.",
+      "copy": "Every resolution teaches RADR how the operation should behave, then becomes a persistent control."
+    },
+    "verify": {
+      "label": "Verify",
+      "title": "Prove the value.",
+      "copy": "Identified is not verified. RADR checks whether the financial outcome actually materialized."
+    },
+    "learn": {
+      "label": "Learn",
+      "title": "Compound the intelligence.",
+      "copy": "Resolved outcomes improve future detection, routing and controls."
+    }
+  },
+  "flywheel": {
+    "1": {
+      "t": "Signal detected",
+      "d": "Difference found"
+    },
+    "2": {
+      "t": "Human resolves",
+      "d": "Action taken"
+    },
+    "3": {
+      "t": "Pattern learned",
+      "d": "Institutional knowledge"
+    },
+    "4": {
+      "t": "Control created",
+      "d": "Caught earlier next time"
+    },
+    "5": {
+      "t": "Verified value",
+      "d": "Proof of impact"
+    }
+  },
+  "workflow": [
+    "New",
+    "Assigned",
+    "In review",
+    "Resolved",
+    "Verified"
+  ],
+  "learnNote": "Resolved outcomes improve future detection and controls.",
+  "stageVisual": {
+    "connect": {
+      "header": "01 · CONNECT",
+      "badge": "Data layer",
+      "title": "Systems already in the operation",
+      "statusNote": "Status is honest: LIVE · EARLY ACCESS · PLANNED. No invented connectors."
+    },
+    "understand": {
+      "header": "02 · UNDERSTAND",
+      "badge": "Operating model",
+      "title": "Normalized entities",
+      "fields": {
+        "supplier": "Supplier",
+        "location": "Location",
+        "item": "Item",
+        "contract": "Contract",
+        "invoice": "Invoice",
+        "channel": "Channel"
+      }
+    },
+    "detect": {
+      "header": "Signal 001 · DETECT",
+      "priority": "Priority 01",
+      "contractPrice": "Contract price",
+      "invoicePrice": "Invoice price"
+    },
+    "explain": {
+      "header": "04 · EXPLAIN",
+      "badge": "High impact",
+      "supplier": "Supplier",
+      "item": "Item",
+      "contract": "Contract",
+      "invoice": "Invoice",
+      "volume": "Volume",
+      "volumeValue": "5,172 cases / year",
+      "annualImpact": "Annual impact"
+    },
+    "act": {
+      "header": "05 · ACT",
+      "badge": "Actionable",
+      "recommended": "Prepared action",
+      "title": "Review supplier charge",
+      "evidenceReady": "Evidence ready",
+      "evidence": [
+        "✓ Contract.pdf",
+        "✓ Invoice #48291",
+        "✓ Purchase history",
+        "✓ Supplier statement"
+      ],
+      "workflowAria": "Finding workflow",
+      "assigned": "Assigned · Finance Manager"
+    },
+    "control": {
+      "header": "06 · CONTROL",
+      "badge": "Learn → Control",
+      "resolution": "Resolution",
+      "title": "Supplier corrected pricing",
+      "body": "The resolution teaches RADR how the operation should behave.",
+      "created": "Control created",
+      "ruleLine1": "Invoice price",
+      "ruleLine2": "must match",
+      "ruleLine3": "contract price",
+      "next": "Next mismatch · flag automatically"
+    },
+    "verify": {
+      "expected": "Expected recovery",
+      "received": "Received",
+      "verified": "✓ Verified",
+      "added": "Added to verified value"
+    },
+    "learn": {
+      "header": "08 · LEARN",
+      "badge": "Compounding",
+      "title": "Institutional memory",
+      "items": [
+        "Signal detected · Difference found",
+        "Human resolves · Action taken",
+        "Pattern learned · Institutional knowledge",
+        "Control created · Caught earlier next time",
+        "Verified value · Proof of impact"
+      ]
+    }
+  }
+}
