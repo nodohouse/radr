@@ -3046,13 +3046,14 @@
 .rx-intake-stage {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(240px, 280px) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px) minmax(200px, 240px);
   grid-template-areas: "sources core out";
-  gap: 1.25rem 1.5rem;
+  gap: 1.1rem 1.25rem;
   align-items: center;
+  justify-content: center;
   margin: 2.25rem 0 1.25rem;
   min-height: clamp(32rem, 58vh, 38rem);
-  padding: 1.5rem 0.75rem 1.75rem;
+  padding: 1.5rem 1rem 1.75rem;
   isolation: isolate;
   overflow: hidden;
   border-radius: 24px;
@@ -3267,16 +3268,32 @@
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 0.55rem;
+  gap: 0.45rem;
   justify-items: stretch;
+  width: min(100%, 15rem);
+  justify-self: start;
+}
+.rx-intake-out-k {
+  margin: 0 0 0.2rem 0.15rem;
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a918d;
 }
 .rx-intake-primitive {
-  padding: 0.85rem 1rem;
-  background: rgba(255, 255, 255, 0.86);
-  border: 1px solid rgba(10, 13, 11, 0.07);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.7rem 0.85rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(10, 13, 11, 0.08);
   border-radius: 14px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 14px 36px -28px rgba(10, 13, 11, 0.35);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 14px 36px -28px rgba(10, 13, 11, 0.35);
   animation: rx-intake-rise 0.7s var(--rx-ease, cubic-bezier(0.22,1,0.36,1)) both;
 }
 .rx-intake-stage[data-reduced="true"] .rx-intake-primitive { animation: none; }
@@ -3284,18 +3301,34 @@
   from { opacity: 0; transform: translateX(10px); }
   to { opacity: 1; transform: none; }
 }
+.rx-intake-primitive > span {
+  font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: #8a918d;
+}
 .rx-intake-primitive strong {
   display: block;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   letter-spacing: -0.02em;
   font-weight: 600;
   color: #0a0d0b;
+  line-height: 1.15;
+}
+.rx-intake-primitive em {
+  display: block;
+  margin-top: 0.12rem;
+  font-style: normal;
+  font-size: 0.68rem;
+  color: #626a65;
+  letter-spacing: -0.01em;
 }
 .rx-intake-primitive[data-tone="verified"] {
-  border-color: rgba(0, 168, 90, 0.35);
-  background: linear-gradient(180deg, rgba(225,251,234,0.65), #fff);
+  border-color: rgba(0, 168, 90, 0.4);
+  background: linear-gradient(180deg, rgba(225, 251, 234, 0.78), #fff);
 }
 .rx-intake-primitive[data-tone="verified"] strong { color: #00a85a; }
+.rx-intake-primitive[data-tone="verified"] > span { color: #00a85a; }
 
 .rx-intake-status {
   display: flex;

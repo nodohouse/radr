@@ -13,7 +13,6 @@ import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefer
 import {
   CATALOG_COUNT,
   HOME_CONNECTION_GROUPS,
-  SIGNAL_MAP_OUTPUTS,
   SIGNAL_MAP_VISIBLE_IDS,
   connectionMethodLabel,
   providerById,
@@ -31,6 +30,14 @@ const CUSTOM_EVIDENCE = [
   "Rate cards",
   "Menus",
   "Policy docs",
+] as const;
+
+const OUTPUT_PRIMITIVES = [
+  { id: "Decisions", mark: "01", line: "What to do next" },
+  { id: "Futures", mark: "02", line: "What is likely" },
+  { id: "Actions", mark: "03", line: "What RADR prepared" },
+  { id: "Verified Value", mark: "04", line: "What closed" },
+  { id: "Memory", mark: "05", line: "What the operation learned" },
 ] as const;
 
 const DOMAIN_SLOTS: {
@@ -164,14 +171,19 @@ export function ConnectionOriginSection() {
         </div>
 
         <div className="rx-intake-out" aria-label="RADR outputs">
-          {SIGNAL_MAP_OUTPUTS.map((o, i) => (
+          <p className="rx-intake-out-k">Decision infrastructure</p>
+          {OUTPUT_PRIMITIVES.map((o, i) => (
             <div
-              key={o}
+              key={o.id}
               className="rx-intake-primitive"
-              data-tone={o === "Verified Value" ? "verified" : undefined}
+              data-tone={o.id === "Verified Value" ? "verified" : undefined}
               style={{ animationDelay: `${0.12 * i}s` }}
             >
-              <strong>{o}</strong>
+              <span aria-hidden="true">{o.mark}</span>
+              <div>
+                <strong>{o.id}</strong>
+                <em>{o.line}</em>
+              </div>
             </div>
           ))}
         </div>
