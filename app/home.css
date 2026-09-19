@@ -13078,16 +13078,16 @@ html:has(.radr-home) body {
     #f7faf8;
   min-height: 0;
   display: block;
-  overflow: hidden;
+  overflow: visible;
 }
 /* Copy left · product composition right — editorial asymmetry */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
-  column-gap: clamp(2.25rem, 4.5vw, 4rem);
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+  column-gap: clamp(1.75rem, 4vw, 3.5rem);
   row-gap: 1.5rem;
   align-items: start;
-  width: calc(100% + clamp(3.5rem, 7vw, 5.5rem));
+  width: 100%;
   max-width: none;
 }
 .rx-he-recover-copy {
@@ -13099,13 +13099,13 @@ html:has(.radr-home) body {
   padding-top: 0.15rem;
 }
 .rx-he-recover-product {
-  width: min(100%, 42rem);
-  max-width: 42rem;
+  width: 100%;
+  max-width: 22rem;
   justify-self: end;
-  padding-top: 0.85rem;
-  margin-bottom: -2.25rem;
-  margin-right: clamp(-4.5rem, -6.5vw, -2rem);
-  transform: translateX(clamp(-3.5rem, -4.5vw, -1.75rem));
+  padding-top: 0.35rem;
+  margin-bottom: 0;
+  margin-right: 0;
+  transform: none;
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;
@@ -15071,7 +15071,7 @@ html:has(.radr-home) body {
   gap: 0.5rem 1rem;
   padding: 0.45rem 0.65rem;
   border-radius: 10px;
-  opacity: 0.28;
+  opacity: 0.42;
   transform: translateY(2px);
   transition:
     opacity 0.35s ease,
