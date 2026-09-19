@@ -69,7 +69,7 @@ describe("home connection preview", () => {
 
   it("signal map shows a curated subset of catalog providers", () => {
     expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeGreaterThanOrEqual(16);
-    expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeLessThanOrEqual(28);
+    expect(SIGNAL_MAP_VISIBLE_IDS.length).toBeLessThanOrEqual(30);
     for (const id of SIGNAL_MAP_VISIBLE_IDS) {
       expect(providerById(id)?.id).toBe(id);
     }

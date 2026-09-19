@@ -18,18 +18,32 @@ export function SiteFooter() {
     { href: "/product/control-center" as const, label: t("controlCenter") },
     { href: "/product/decisions" as const, label: "Decisions" },
     { href: "/product/futures" as const, label: "Futures" },
-    { href: "/product/floor" as const, label: "RADR Floor" },
     { href: "/product/value" as const, label: "Verified Value" },
     { href: "/product/memory" as const, label: "Operating Memory" },
   ];
 
   const VALUE_LEAKS = [
     { href: "/solutions" as const, label: t("solutions") },
-    { href: "/solutions#supplier-ap" as const, label: "Supplier / AP" },
-    { href: "/solutions#reconciliation" as const, label: "Reconciliation" },
-    { href: "/solutions#cost-variance" as const, label: "Cost variance" },
-    { href: "/solutions#procurement" as const, label: "Procurement" },
-    { href: "/solutions#perishable" as const, label: "Perishable revenue" },
+    {
+      href: { pathname: "/solutions" as const, hash: "supplier-ap" },
+      label: "Supplier / AP",
+    },
+    {
+      href: { pathname: "/solutions" as const, hash: "reconciliation" },
+      label: "Reconciliation",
+    },
+    {
+      href: { pathname: "/solutions" as const, hash: "cost-variance" },
+      label: "Cost variance",
+    },
+    {
+      href: { pathname: "/solutions" as const, hash: "procurement" },
+      label: "Procurement",
+    },
+    {
+      href: { pathname: "/solutions" as const, hash: "perishable" },
+      label: "Perishable revenue",
+    },
   ];
 
   const COMPANY_LINKS = [
@@ -88,7 +102,9 @@ export function SiteFooter() {
                 <p className="rx-footer-col-title">{col.title}</p>
                 <ul>
                   {col.items.map((l) => (
-                    <li key={`${col.key}-${l.href}`}>
+                    <li
+                      key={`${col.key}-${l.label}-${typeof l.href === "string" ? l.href : l.href.hash ?? l.href.pathname}`}
+                    >
                       <Link href={l.href}>{l.label}</Link>
                     </li>
                   ))}

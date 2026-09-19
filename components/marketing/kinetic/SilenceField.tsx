@@ -27,7 +27,7 @@ const CLONES = Array.from({ length: 36 }, (_, i) => {
 });
 
 export function SilenceField({
-  signalsLabel = "10,482 signals observed · most suppressed",
+  signalsLabel = "Routine signals suppressed",
   needsYou = 2,
 }: {
   signalsLabel?: string;

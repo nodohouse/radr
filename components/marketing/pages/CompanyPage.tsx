@@ -190,9 +190,9 @@ export function CompanyPage() {
                 Systems of record store facts. RADR stores judgment.
               </p>
               <p className="rx-co2-why-now-sub">
-                Commercial entry is margin recovery and reconciliation — where
-                economics can be proven first. The Decision Gap is the longer
-                reason the product exists.
+                RADR starts where the economics can be proven fastest: recovery
+                and reconciliation. The Decision Gap is the longer reason the
+                product exists.
               </p>
               <div className="rx-co-gap-diagram" aria-hidden="true">
                 <span>POS</span>

@@ -185,6 +185,7 @@ export function restaurantUrgentPhone(): HeroSceneModel["phone"] {
 }
 
 export function platformEconomics(d: CanonDecision) {
+  const isPeak = d.displayId === "D-1911";
   return {
     id: d.displayId,
     property: d.property,
@@ -193,6 +194,14 @@ export function platformEconomics(d: CanonDecision) {
     expected: euro(d.expectedProtectedEuro),
     observed: euro(d.actualProtectedEuro),
     verified: euro(d.actualProtectedEuro),
+    /** Public primary chip — never label D-1911 €620 as Exposure */
+    primaryEuro: isPeak
+      ? euro(d.expectedProtectedEuro)
+      : euro(d.exposureEuro),
+    primaryGrade: isPeak
+      ? "EXPECTED INCREMENTAL"
+      : "EXPOSURE",
+    primaryNote: isPeak ? "vs seat-now baseline" : undefined,
     variance: formatCanonVariance(d),
     prepared: d.prepared,
     verticalLabel:

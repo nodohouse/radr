@@ -48,9 +48,9 @@ export function PricingResponsibilityTrack() {
           Recover → Decide → Govern
         </h2>
         <p className="rx-rec-p" style={{ maxWidth: "40rem" }}>
-          Pricing follows the operating scope RADR takes on — not fictional
-          portfolio totals. Built for multi-location hospitality / F&amp;B groups
-          with Finance, COO, or Procurement as sponsor.
+          Pricing scales with the operating scope RADR takes on — locations,
+          systems, and Decision coverage. Built for multi-location hospitality /
+          F&amp;B groups with Finance, COO, or Procurement as sponsor.
         </p>
 
         <div

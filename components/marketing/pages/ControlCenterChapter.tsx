@@ -11,7 +11,6 @@ import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
 import {
   BRIEF_ATTENTION,
-  FINDING_FUNNEL,
   money,
   CANON_OTA,
   CANON_PEAK,
@@ -134,7 +133,7 @@ export function ControlCenterChapter() {
                 The most important thing RADR removes is noise.
               </h1>
               <SilenceField
-                signalsLabel={`${FINDING_FUNNEL.signals.toLocaleString("en-US")} signals observed · most suppressed`}
+                signalsLabel="Routine signals suppressed"
                 needsYou={BRIEF_ATTENTION.needsYou}
               />
               <p

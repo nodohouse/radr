@@ -29,7 +29,7 @@ const PREVIEWS: Record<string, PreviewModel> = {
     rows: [
       {
         label: "Restaurant",
-        value: `${money(CANON_PEAK.exposureEuro)} · ${CANON_PEAK.displayId}`,
+        value: `${money(CANON_PEAK.expectedProtectedEuro)} expected · ${CANON_PEAK.displayId}`,
       },
       {
         label: "Hotel",
@@ -45,8 +45,8 @@ const PREVIEWS: Record<string, PreviewModel> = {
   decisions: {
     kicker: "Decision",
     title: CANON_PEAK.title,
-    metric: money(CANON_PEAK.exposureEuro),
-    metricLabel: "vs seat-now · Berlin Mitte",
+    metric: money(CANON_PEAK.expectedProtectedEuro),
+    metricLabel: "expected incremental · vs seat-now",
     rows: [
       { label: "Deadline", value: CANON_PEAK.deadline },
       { label: "Recommended", value: "Wait 12 minutes" },

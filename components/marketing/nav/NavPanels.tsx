@@ -11,6 +11,7 @@ import {
   PLATFORM_DEFAULT_PREVIEW,
   VALUE_LEAK_CLASSES,
   VALUE_LEAK_DEEPER,
+  VALUE_LEAK_HREF,
   platformHrefForItem,
 } from "./navConfig";
 import { IntelligenceLivePreview, PlatformLivePreview } from "./NavPreviews";
@@ -120,7 +121,10 @@ export function SolutionsPanel({
             {VALUE_LEAK_CLASSES.map((item) => (
               <Link
                 key={item.key}
-                href={item.href}
+                href={
+                  VALUE_LEAK_HREF[item.key as keyof typeof VALUE_LEAK_HREF] ??
+                  item.href
+                }
                 className="rx-np-item rx-np-item--solo"
                 onClick={onNavigate}
               >

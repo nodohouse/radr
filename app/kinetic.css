@@ -4678,3 +4678,113 @@
   border: 1px solid rgba(247, 250, 248, 0.18);
   color: rgba(247, 250, 248, 0.7);
 }
+
+/* Data Origin — calm triad (at rest) */
+.rx-intake--calm .rx-intake-triad {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0;
+  justify-items: center;
+  max-width: 52rem;
+}
+.rx-intake-layer {
+  width: 100%;
+  text-align: center;
+}
+.rx-intake-layer-k {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+.rx-intake-src-grid {
+  display: grid;
+  gap: 1.1rem 1.5rem;
+  text-align: left;
+}
+@media (min-width: 720px) {
+  .rx-intake-src-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .rx-intake-src-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.rx-intake-connector {
+  display: flex;
+  justify-content: center;
+  padding: 0.85rem 0;
+}
+.rx-intake-connector i {
+  width: 1px;
+  height: 1.75rem;
+  background: rgba(10, 13, 11, 0.18);
+  position: relative;
+}
+.rx-intake-connector i::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid rgba(10, 13, 11, 0.28);
+  border-bottom: 1px solid rgba(10, 13, 11, 0.28);
+  transform: translateX(-50%) rotate(45deg);
+}
+.rx-intake-delta-only {
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+  padding: 0.5rem 0 0.25rem;
+  color: #0a0d0b;
+}
+.rx-intake-delta-only .rx-intake-delta {
+  color: #00a85a;
+}
+.rx-intake-delta-only p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.rx-intake-delta-only em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: #626a65;
+}
+.rx-intake-primitives {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rx-intake-primitives li {
+  padding: 0.4rem 0.7rem;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  font-size: 0.82rem;
+  letter-spacing: -0.01em;
+  color: #0a0d0b;
+}
+.rx-cap-card {
+  margin-top: 1rem;
+  padding: 1rem 1.15rem 1.15rem;
+  background: #f7f4ed;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  text-align: left;
+  max-width: 36rem;
+}
+.rx-intake--calm .rx-intake-chip {
+  background: #fff;
+}
+.rx-intake--calm .rx-intake-chip[data-on="true"] {
+  background: #f7f4ed;
+}

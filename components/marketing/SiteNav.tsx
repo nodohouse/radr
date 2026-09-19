@@ -19,6 +19,7 @@ import {
   PLATFORM_COLUMNS,
   VALUE_LEAK_CLASSES,
   VALUE_LEAK_DEEPER,
+  VALUE_LEAK_HREF,
 } from "./nav/navConfig";
 import {
   CompanyPanel,
@@ -452,7 +453,9 @@ export function SiteNav({ variant }: Props) {
           {VALUE_LEAK_CLASSES.map((l) => (
             <Link
               key={l.key}
-              href={l.href}
+              href={
+                VALUE_LEAK_HREF[l.key as keyof typeof VALUE_LEAK_HREF] ?? l.href
+              }
               onClick={() => setDrawerOpen(false)}
             >
               {t(`panels.solutions.classes.${l.key}.label`)}

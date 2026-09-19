@@ -26,7 +26,7 @@ const LIFE = [
 ] as const;
 
 const LIFE_COPY = [
-  "€620 exposure appears from peak pressure.",
+  "Wait 12 · expected incremental contribution appears from peak pressure.",
   "Drivers connect: inbound + delivery → kitchen load.",
   "Three trajectories diverge on a common timeline.",
   "Wait 12m highlights — reversible, highest contribution.",

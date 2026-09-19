@@ -1,6 +1,6 @@
 /**
  * Public homepage connection preview — curated subset of Developer catalog.
- * Never invent providers or statuses. Storytelling via capabilityStory.
+ * Resting UI: ~16–18 sources. Full catalog lives in Developers.
  */
 
 import {
@@ -16,7 +16,6 @@ export type ConnectionMethod = {
   note: string;
 };
 
-/** Methods architecture supports / plans — not a claim of live coverage for every provider */
 export const CONNECTION_METHODS: ConnectionMethod[] = [
   { id: "rest", label: "REST API / OAuth", note: "Partner & public APIs" },
   { id: "webhook", label: "Webhook", note: "Event push where supported" },
@@ -40,8 +39,8 @@ export const SYSTEM_LAYERS = [
 ] as const;
 
 /**
- * Homepage capability map — ~20 representative sources in four groups.
- * Google stack is one tile (see GOOGLE_STACK_IDS).
+ * Resting homepage map — three visual clusters only.
+ * Taxonomy richness lives in hover cards + Developers catalog.
  */
 export const HOME_CAPABILITY_GROUPS = [
   {
@@ -49,9 +48,12 @@ export const HOME_CAPABILITY_GROUPS = [
     label: "Operations",
     providerIds: [
       "toast",
+      "lightspeed-restaurant",
       "opentable",
+      "sevenrooms",
       "mews",
-      "personio",
+      "apaleo",
+      "oracle-opera-cloud",
       "siteminder",
     ] as const,
   },
@@ -61,33 +63,29 @@ export const HOME_CAPABILITY_GROUPS = [
     providerIds: ["xero", "netsuite", "adyen", "stripe"] as const,
   },
   {
-    id: "channels",
-    label: "Channels",
+    id: "channels-context",
+    label: "Channels & context",
     providerIds: [
       "uber-eats",
       "deliveroo",
       "booking-connectivity",
-      "apaleo",
-    ] as const,
-  },
-  {
-    id: "context",
-    label: "Context",
-    providerIds: [
-      "google-stack",
       "open-meteo",
       "predicthq",
       "ticketmaster",
+      "google-stack",
     ] as const,
   },
 ] as const;
 
-/** Flat list of real provider ids shown on homepage (excl. google-stack pseudo) */
+/** Real provider ids on homepage (excl. google-stack pseudo) */
 export const SIGNAL_MAP_VISIBLE_IDS = [
   "toast",
+  "lightspeed-restaurant",
   "opentable",
+  "sevenrooms",
   "mews",
-  "personio",
+  "apaleo",
+  "oracle-opera-cloud",
   "siteminder",
   "xero",
   "netsuite",
@@ -96,7 +94,6 @@ export const SIGNAL_MAP_VISIBLE_IDS = [
   "uber-eats",
   "deliveroo",
   "booking-connectivity",
-  "apaleo",
   "open-meteo",
   "predicthq",
   "ticketmaster",
@@ -111,9 +108,12 @@ export const HOME_CONNECTION_GROUPS = [
     label: "Operations",
     providerIds: [
       "toast",
+      "lightspeed-restaurant",
       "opentable",
+      "sevenrooms",
       "mews",
-      "personio",
+      "apaleo",
+      "oracle-opera-cloud",
       "siteminder",
     ],
   },
@@ -124,18 +124,16 @@ export const HOME_CONNECTION_GROUPS = [
   },
   {
     id: "channels",
-    label: "Channels",
+    label: "Channels & context",
     providerIds: [
       "uber-eats",
       "deliveroo",
       "booking-connectivity",
-      "apaleo",
+      "open-meteo",
+      "predicthq",
+      "ticketmaster",
+      "files-csv",
     ],
-  },
-  {
-    id: "context",
-    label: "Context",
-    providerIds: ["open-meteo", "predicthq", "ticketmaster", "files-csv"],
   },
   {
     id: "custom",
@@ -144,15 +142,12 @@ export const HOME_CONNECTION_GROUPS = [
   },
 ] as const;
 
-/** Broader set used by older helpers — still registry-backed */
 const HOME_PROVIDER_IDS = [
   ...SIGNAL_MAP_VISIBLE_IDS,
-  "lightspeed-restaurant",
   "square",
-  "sevenrooms",
+  "personio",
   "mollie",
   "byod-warehouse",
-  "oracle-opera-cloud",
 ] as const;
 
 export const SIGNAL_MAP_OUTPUTS = [

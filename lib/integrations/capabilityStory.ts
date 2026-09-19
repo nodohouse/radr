@@ -37,16 +37,15 @@ export const INTEGRATION_CAPABILITY_STORY: Record<string, CapabilityStory> = {
   },
   "lightspeed-restaurant": {
     potentialSignals: [
-      "Orders",
-      "Items · prices",
-      "Discounts",
-      "Payments",
-      "Location · daypart",
+      "Sales · orders",
+      "Items / menu",
+      "Payments / refunds",
+      "Service state (where available)",
     ],
     combineWith: "Reservations · labor · delivery",
     radrCouldSee: [
-      "Sales mix vs kitchen capacity.",
-      "Daypart contribution shifts.",
+      "Margin movement and demand pressure.",
+      "Settlement evidence for verification.",
     ],
   },
   square: {
@@ -113,15 +112,15 @@ export const INTEGRATION_CAPABILITY_STORY: Record<string, CapabilityStory> = {
   mews: {
     potentialSignals: [
       "Reservations",
-      "Rooms / resources",
-      "Stay state",
-      "Rates · availability",
-      "Order / payment items (where available)",
+      "Room inventory",
+      "Rates",
+      "Folios",
+      "Payments",
     ],
     combineWith: "Channel manager · payments · events",
     radrCouldSee: [
-      "Premium inventory exposure.",
-      "Pickup vs channel economics.",
+      "Premium inventory Decisions.",
+      "Cancellation recovery · channel economics.",
     ],
   },
   apaleo: {
@@ -207,15 +206,15 @@ export const INTEGRATION_CAPABILITY_STORY: Record<string, CapabilityStory> = {
   },
   xero: {
     potentialSignals: [
-      "Invoices · credit notes",
+      "Bills",
+      "Credit notes",
       "Payments",
-      "Vendor balances",
-      "Account codes",
+      "Bank / accounting records",
     ],
     combineWith: "Supplier docs · POS · payments",
     radrCouldSee: [
-      "Supplier recovery cases Finance can match.",
-      "Credit application gaps.",
+      "Supplier recovery Finance can match.",
+      "Reconciliation and downstream verification.",
     ],
   },
   "quickbooks-online": {
@@ -250,15 +249,16 @@ export const INTEGRATION_CAPABILITY_STORY: Record<string, CapabilityStory> = {
   },
   adyen: {
     potentialSignals: [
-      "Payments",
+      "Settlements",
       "Fees",
       "Refunds",
-      "Settlement batches",
-      "Payouts · chargebacks",
+      "Chargebacks",
+      "Payouts",
     ],
     combineWith: "POS · delivery · accounting",
     radrCouldSee: [
-      "Expected €9,814 · settled €9,521 · €293 unexplained.",
+      "Settlement gaps and refund mismatch.",
+      "Payment reconciliation for Verified Value.",
     ],
   },
   stripe: {
@@ -340,16 +340,15 @@ export const INTEGRATION_CAPABILITY_STORY: Record<string, CapabilityStory> = {
   },
   "google-business-profile": {
     potentialSignals: [
-      "Search / Maps impressions",
-      "Directions · calls",
-      "Website / booking clicks",
-      "Food orders · menu interactions",
-      "Reviews",
+      "Reviews · ratings",
+      "Listing / reputation context",
+      "Search / Maps impressions (where authorized)",
+      "Directions · calls · website clicks",
     ],
     combineWith: "Reservations · POS · weather",
     radrCouldSee: [
-      "Demand rising before reservations fully show it.",
-      "Reviews deteriorated while FOH staffing stayed normal.",
+      "Reputation shift vs staffing / service context.",
+      "Local demand before reservations fully show it.",
     ],
   },
   "google-analytics-4": {
@@ -357,13 +356,11 @@ export const INTEGRATION_CAPABILITY_STORY: Record<string, CapabilityStory> = {
       "Users · sessions",
       "Traffic source · campaign",
       "Engagement",
-      "Conversion events",
-      "Revenue / ecommerce (where configured)",
+      "Conversion events (where configured)",
     ],
     combineWith: "Bookings · Search Console · revenue",
     radrCouldSee: [
-      "Campaign demand vs operating pressure.",
-      "Direct-booking funnel context.",
+      "Site demand and campaign pressure on the operation.",
     ],
   },
   "google-search-console": {
@@ -371,23 +368,22 @@ export const INTEGRATION_CAPABILITY_STORY: Record<string, CapabilityStory> = {
       "Queries",
       "Impressions · clicks",
       "CTR · average position",
-      "Page · country · device",
     ],
     combineWith: "GA4 · bookings · revenue",
     radrCouldSee: [
-      "Destination demand rising before booking pace catches up.",
+      "Search demand rising before booking pace catches up.",
     ],
   },
   "google-places": {
     potentialSignals: [
-      "Nearby places · categories",
-      "Place information",
+      "Travel distance / duration (Routes where supported)",
+      "Traffic-aware routing (where supported)",
+      "Nearby place / venue context",
       "Opening information (where available)",
-      "Ratings / counts (where supported)",
     ],
     combineWith: "Events · reservations · local demand",
     radrCouldSee: [
-      "Neighborhood structure and venue density context.",
+      "Travel / neighborhood context for arrival pressure.",
     ],
   },
   "files-csv": {

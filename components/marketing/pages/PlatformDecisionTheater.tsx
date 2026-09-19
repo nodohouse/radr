@@ -48,8 +48,8 @@ export function PlatformDecisionTheater() {
   const sealed = life >= 6;
 
   const chipByStage: Record<Life, { euro: string; grade: string }> = {
-    Detected: { euro: econ.exposure, grade: "EXPOSED" },
-    Understood: { euro: econ.exposure, grade: "EXPOSED" },
+    Detected: { euro: econ.primaryEuro, grade: econ.primaryGrade },
+    Understood: { euro: econ.primaryEuro, grade: econ.primaryGrade },
     Futures: { euro: econ.expected, grade: "PATHS OPEN" },
     Recommended: { euro: econ.expected, grade: "EXPECTED" },
     Approved: { euro: econ.expected, grade: "PREPARED" },

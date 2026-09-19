@@ -1,8 +1,9 @@
 "use client";
 
 /**
- * Data origin — capability map.
- * Sources → RADR → Decisions. Honest access. Potential signals only.
+ * Data Origin — three layers at rest.
+ * Sources → △ RADR → Decision primitives.
+ * Richness lives in hover / focus cards only.
  */
 
 import {
@@ -13,7 +14,7 @@ import {
   useState,
   type KeyboardEvent,
 } from "react";
-import NextLink from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ProviderWordmark } from "@/components/marketing/kinetic/ProviderWordmark";
 import {
   HOME_CAPABILITY_GROUPS,
@@ -27,7 +28,6 @@ import {
   GOOGLE_STACK_IDS,
   type CapabilityStory,
 } from "@/lib/integrations/capabilityStory";
-import { CTAS } from "@/lib/marketing/brand";
 import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
 
 const CUSTOM_EVIDENCE = [
@@ -38,21 +38,11 @@ const CUSTOM_EVIDENCE = [
 ] as const;
 
 const OUTPUTS = [
-  { id: "Decision" },
-  { id: "Futures" },
-  { id: "Action" },
-  { id: "Verified Value" },
-  { id: "Memory" },
-] as const;
-
-/** Illustrative raw signals → Decision (category story, not live data) */
-const SIGNAL_BRIDGE = [
-  { src: "Toast", value: "€42,910 sales" },
-  { src: "OpenTable", value: "412 covers" },
-  { src: "Adyen", value: "€41,884 settled" },
-  { src: "Weather", value: "rain 19:00" },
-  { src: "Events", value: "arena 22:00" },
-  { src: "Google", value: "directions +28%" },
+  "Decision",
+  "Futures",
+  "Action",
+  "Verified Value",
+  "Memory",
 ] as const;
 
 type ActiveTarget =
@@ -64,7 +54,6 @@ type ActiveTarget =
 export function ConnectionOriginSection() {
   const [active, setActive] = useState<ActiveTarget>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-
   const close = useCallback(() => setActive(null), []);
 
   useEffect(() => {
@@ -91,7 +80,7 @@ export function ConnectionOriginSection() {
     : null;
 
   return (
-    <div className="rx-intake" ref={rootRef}>
+    <div className="rx-intake rx-intake--calm" ref={rootRef}>
       <header className="rx-intake-head">
         <p className="rx-rec-k">Data origin</p>
         <h2 className="rx-intake-h">
@@ -99,140 +88,143 @@ export function ConnectionOriginSection() {
           <span>RADR connects it into Decisions.</span>
         </h2>
         <p className="rx-intake-lead">
-          RADR brings operational, financial and contextual signals into one
-          Decision layer — then connects them to find value no single system can
-          see alone.
+          Operational, financial and contextual signals into one Decision layer —
+          so value no single system can see alone becomes actionable.
         </p>
         <p className="rx-intake-honesty">
           Representative systems. Connection availability varies. First pilots
-          start with secure exports and documents — invoices, contracts, credit
-          memos, payments, supplier statements, CSV / accounting exports. APIs
-          later where useful.
+          start with secure exports and documents. APIs later where useful.
         </p>
       </header>
 
-      <div className="rx-intake-map" aria-label="Representative connection map">
-        <div className="rx-intake-groups">
-          {HOME_CAPABILITY_GROUPS.map((group) => (
-            <div key={group.id} className="rx-intake-group">
-              <p className="rx-intake-group-label">{group.label}</p>
-              <ul className="rx-intake-chips">
-                {group.providerIds.map((id) => {
-                  if (id === "google-stack") {
+      <div className="rx-intake-triad" aria-label="Evidence to Decision">
+        {/* LAYER 1 — sources */}
+        <div className="rx-intake-layer rx-intake-layer--src">
+          <p className="rx-intake-layer-k">Source systems</p>
+          <div className="rx-intake-src-grid">
+            {HOME_CAPABILITY_GROUPS.map((group) => (
+              <div key={group.id} className="rx-intake-src-col">
+                <p className="rx-intake-group-label">{group.label}</p>
+                <ul className="rx-intake-chips">
+                  {group.providerIds.map((id) => {
+                    if (id === "google-stack") {
+                      return (
+                        <li key="google-stack">
+                          <GoogleStackChip
+                            open={
+                              active?.kind === "google-stack" ||
+                              active?.kind === "google-child"
+                            }
+                            onOpen={() =>
+                              setActive({ kind: "google-stack" })
+                            }
+                          />
+                        </li>
+                      );
+                    }
+                    const p = providerById(id);
+                    if (!p) return null;
                     return (
-                      <li key="google-stack">
-                        <GoogleStackChip
-                          active={active}
-                          setActive={setActive}
+                      <li key={id}>
+                        <ProviderChip
+                          provider={p}
+                          selected={
+                            active?.kind === "provider" && active.id === id
+                          }
+                          onOpen={() =>
+                            setActive({ kind: "provider", id })
+                          }
                         />
                       </li>
                     );
-                  }
-                  const p = providerById(id);
-                  if (!p) return null;
-                  return (
-                    <li key={id}>
-                      <ProviderChip
-                        provider={p}
-                        selected={
-                          active?.kind === "provider" && active.id === id
-                        }
-                        onOpen={() =>
-                          setActive({ kind: "provider", id })
-                        }
-                      />
-                    </li>
-                  );
-                })}
+                  })}
+                </ul>
+              </div>
+            ))}
+            <div className="rx-intake-src-col">
+              <p className="rx-intake-group-label">Custom evidence</p>
+              <ul className="rx-intake-evidence">
+                {CUSTOM_EVIDENCE.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
+              {providerById("files-csv") ? (
+                <ul className="rx-intake-chips" style={{ marginTop: "0.45rem" }}>
+                  <li>
+                    <ProviderChip
+                      provider={providerById("files-csv")!}
+                      selected={
+                        active?.kind === "provider" &&
+                        active.id === "files-csv"
+                      }
+                      onOpen={() =>
+                        setActive({ kind: "provider", id: "files-csv" })
+                      }
+                    />
+                  </li>
+                </ul>
+              ) : null}
             </div>
-          ))}
+          </div>
 
-          <div className="rx-intake-group">
-            <p className="rx-intake-group-label">Custom evidence</p>
-            <ul className="rx-intake-evidence">
-              {CUSTOM_EVIDENCE.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            {providerById("files-csv") ? (
-              <ul className="rx-intake-chips" style={{ marginTop: "0.55rem" }}>
-                <li>
-                  <ProviderChip
-                    provider={providerById("files-csv")!}
-                    selected={
-                      active?.kind === "provider" && active.id === "files-csv"
-                    }
-                    onOpen={() =>
-                      setActive({ kind: "provider", id: "files-csv" })
-                    }
-                  />
-                </li>
-              </ul>
-            ) : null}
+          {(popoverProvider && popoverStory) ||
+          active?.kind === "google-stack" ? (
+            <CapabilityCard
+              provider={popoverProvider}
+              story={popoverStory}
+              googleExpanded={active?.kind === "google-stack"}
+              onSelectGoogleChild={(id) =>
+                setActive({ kind: "google-child", id })
+              }
+              onClose={close}
+            />
+          ) : null}
+        </div>
+
+        <div className="rx-intake-connector" aria-hidden="true">
+          <i />
+        </div>
+
+        {/* LAYER 2 — RADR */}
+        <div className="rx-intake-layer rx-intake-layer--core">
+          <div className="rx-intake-delta-only">
+            <span className="rx-intake-delta" aria-hidden="true">
+              <svg viewBox="0 0 100 90" width="56" height="48">
+                <path
+                  d="M50 8 L90 81 H10 Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="11"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <p>RADR</p>
+            <em>Decision layer</em>
           </div>
         </div>
 
-        {(popoverProvider && popoverStory) || active?.kind === "google-stack" ? (
-          <CapabilityPopover
-            provider={popoverProvider}
-            story={popoverStory}
-            googleExpanded={active?.kind === "google-stack"}
-            onSelectGoogleChild={(id) =>
-              setActive({ kind: "google-child", id })
-            }
-            onClose={close}
-          />
-        ) : null}
-      </div>
+        <div className="rx-intake-connector" aria-hidden="true">
+          <i />
+        </div>
 
-      <div className="rx-intake-bridge" aria-label="Signals become Decisions">
-        <div className="rx-intake-bridge-signals">
-          <p className="rx-intake-bridge-k">Signals</p>
-          <ul>
-            {SIGNAL_BRIDGE.map((s) => (
-              <li key={s.src}>
-                <em>{s.src}</em>
-                <strong>{s.value}</strong>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="rx-intake-bridge-core" aria-hidden="true">
-          <span className="rx-intake-delta">
-            <svg viewBox="0 0 100 90" width="40" height="34">
-              <path
-                d="M50 8 L90 81 H10 Z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="11"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-          <strong>RADR</strong>
-        </div>
-        <div className="rx-intake-bridge-out">
-          <p className="rx-intake-bridge-k">Decision</p>
-          <div className="rx-intake-bridge-decision">
-            <em>D-1911 · DEMO</em>
-            <strong>Wait 12 minutes</strong>
-            <span>€620 expected incremental vs seat-now</span>
-          </div>
-          <ul className="rx-intake-out-mini" aria-label="RADR outputs">
+        {/* LAYER 3 — outputs */}
+        <div className="rx-intake-layer rx-intake-layer--out">
+          <p className="rx-intake-layer-k">Decision formed</p>
+          <ul className="rx-intake-primitives" aria-label="RADR outputs">
             {OUTPUTS.map((o) => (
-              <li key={o.id}>{o.id}</li>
+              <li key={o}>{o}</li>
             ))}
           </ul>
         </div>
       </div>
 
-      <NextLink href="/developers#integrations" className="rx-intake-more">
+      <Link href="/developers#integrations" className="rx-intake-more">
         View all connection paths <span aria-hidden="true">→</span>
         <em className="rx-intake-more-status">
-          Files / CSV · {capabilityBadge("filesCsv")} · {CTAS.viewConnectionStatus}
+          Files / CSV · {capabilityBadge("filesCsv")}
         </em>
-      </NextLink>
+      </Link>
     </div>
   );
 }
@@ -251,10 +243,9 @@ function ProviderChip({
       type="button"
       className="rx-intake-chip"
       aria-expanded={selected}
-      aria-label={`${provider.name}, ${accessStatusLabel(provider)}. Show potential signals.`}
+      aria-label={`${provider.name}, ${accessStatusLabel(provider)}. Possible evidence.`}
       data-on={selected ? "true" : undefined}
       data-status={provider.status}
-      data-provider-brand={provider.id.split("-")[0]}
       onMouseEnter={onOpen}
       onFocus={onOpen}
       onClick={onOpen}
@@ -265,31 +256,29 @@ function ProviderChip({
 }
 
 function GoogleStackChip({
-  active,
-  setActive,
+  open,
+  onOpen,
 }: {
-  active: ActiveTarget;
-  setActive: (t: ActiveTarget) => void;
+  open: boolean;
+  onOpen: () => void;
 }) {
-  const open =
-    active?.kind === "google-stack" || active?.kind === "google-child";
   return (
     <button
       type="button"
       className="rx-intake-chip rx-intake-chip-google"
       aria-expanded={open}
-      aria-label="Google stack: Business Profile, Analytics, Search Console, Places. Show details."
+      aria-label="Google: Business Profile, Analytics, Search Console, Maps Routes. Show details."
       data-on={open ? "true" : undefined}
-      onMouseEnter={() => setActive({ kind: "google-stack" })}
-      onFocus={() => setActive({ kind: "google-stack" })}
-      onClick={() => setActive({ kind: "google-stack" })}
+      onMouseEnter={onOpen}
+      onFocus={onOpen}
+      onClick={onOpen}
     >
       <ProviderWordmark id="google-stack" name="Google" />
     </button>
   );
 }
 
-function CapabilityPopover({
+function CapabilityCard({
   provider,
   story,
   googleExpanded,
@@ -306,11 +295,7 @@ function CapabilityPopover({
 
   if (googleExpanded && !provider) {
     return (
-      <div
-        className="rx-cap-pop"
-        role="dialog"
-        aria-labelledby={titleId}
-      >
+      <div className="rx-cap-card" role="dialog" aria-labelledby={titleId}>
         <button
           type="button"
           className="rx-cap-pop-close"
@@ -324,15 +309,11 @@ function CapabilityPopover({
           <div>
             <h3 id={titleId}>Google</h3>
             <p>
-              Local demand · marketing · search · place context
-              <em data-status="planned">External data</em>
+              Separate products · customer authorization required
+              <em>External data</em>
             </p>
           </div>
         </header>
-        <p className="rx-cap-pop-caveat">
-          One tile, four sources. Access and fields depend on Google products
-          and customer authorization. Not live connectors.
-        </p>
         <ul className="rx-cap-pop-google">
           {GOOGLE_STACK_IDS.map((id) => {
             const p = providerById(id);
@@ -356,6 +337,10 @@ function CapabilityPopover({
             );
           })}
         </ul>
+        <p className="rx-cap-pop-caveat">
+          Does not include Popular Times or live footfall. Places / Routes are
+          contextual sources only.
+        </p>
       </div>
     );
   }
@@ -363,7 +348,7 @@ function CapabilityPopover({
   if (!provider || !story) return null;
 
   return (
-    <div className="rx-cap-pop" role="dialog" aria-labelledby={titleId}>
+    <div className="rx-cap-card" role="dialog" aria-labelledby={titleId}>
       <button
         type="button"
         className="rx-cap-pop-close"
@@ -382,10 +367,9 @@ function CapabilityPopover({
           </p>
         </div>
       </header>
-
       <div className="rx-cap-pop-grid">
         <div>
-          <p className="rx-cap-pop-k">Potential signals</p>
+          <p className="rx-cap-pop-k">Possible evidence</p>
           <ul>
             {story.potentialSignals.map((s) => (
               <li key={s}>{s}</li>
@@ -393,20 +377,18 @@ function CapabilityPopover({
           </ul>
         </div>
         <div>
-          <p className="rx-cap-pop-k">Combine with</p>
-          <p className="rx-cap-pop-combine">{story.combineWith}</p>
-          <p className="rx-cap-pop-k">RADR could see</p>
+          <p className="rx-cap-pop-k">RADR can use it for</p>
           <ul className="rx-cap-pop-see">
             {story.radrCouldSee.map((s) => (
               <li key={s}>{s}</li>
             ))}
           </ul>
+          <p className="rx-cap-pop-k" style={{ marginTop: "0.75rem" }}>
+            Status
+          </p>
+          <p className="rx-cap-pop-combine">{accessStatusLabel(provider)}</p>
         </div>
       </div>
-
-      {provider.notes ? (
-        <p className="rx-cap-pop-caveat">{provider.notes}</p>
-      ) : null}
     </div>
   );
 }

@@ -75,6 +75,15 @@ export const VALUE_LEAK_CLASSES: DropLink[] = [
   { href: "/solutions#perishable", key: "perishable" },
 ];
 
+/** Path + hash for next-intl Link (hash must not be stripped). */
+export const VALUE_LEAK_HREF = {
+  supplier: { pathname: "/solutions" as const, hash: "supplier-ap" },
+  reconciliation: { pathname: "/solutions" as const, hash: "reconciliation" },
+  cost: { pathname: "/solutions" as const, hash: "cost-variance" },
+  procurement: { pathname: "/solutions" as const, hash: "procurement" },
+  perishable: { pathname: "/solutions" as const, hash: "perishable" },
+} as const;
+
 export const VALUE_LEAK_DEEPER: DropLink[] = [
   { href: "/solutions#lenses", key: "lenses" },
 ];
