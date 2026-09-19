@@ -1,13 +1,12 @@
 "use client";
 
 /**
- * Signal intake — cinematic data origin.
- * Catalog-backed providers · curated marks · RADR Core · premium motion.
+ * Signal intake — Sources → RADR → Decision outputs.
+ * One RADR. One system list. Catalog for the rest.
  */
 
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import NextLink from "next/link";
-import { RadrWordmark } from "@/components/radr/RadrWordmark";
 import { ProviderWordmark } from "@/components/marketing/kinetic/ProviderWordmark";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 import {
@@ -22,34 +21,28 @@ import type { IntegrationProvider } from "@/lib/integrations/registry";
 
 const VISIBLE = new Set<string>(SIGNAL_MAP_VISIBLE_IDS);
 
-const CUSTOM_EVIDENCE = [
-  "CSV",
-  "Contracts",
-  "Invoices",
-  "Statements",
-  "Rate cards",
-  "Menus",
-  "Policy docs",
+const CUSTOM_EVIDENCE = ["Invoices", "Contracts", "CSV"] as const;
+
+const OUTPUTS = [
+  { id: "Decision", line: "What to do next", tip: "€273 variance" },
+  { id: "Futures", line: "What is likely", tip: "Wait 12m" },
+  { id: "Action", line: "What RADR prepared", tip: "Evidence package" },
+  { id: "Verified", line: "What closed", tip: "€273 recovered" },
+  { id: "Memory", line: "What was learned", tip: "Pattern retained" },
 ] as const;
 
-const OUTPUT_PRIMITIVES = [
-  { id: "Evidence", mark: "01", line: "What RADR observed" },
-  { id: "Decision", mark: "02", line: "What to do next" },
-  { id: "Futures", mark: "03", line: "What is likely" },
-  { id: "Action", mark: "04", line: "What RADR prepared" },
-  { id: "Verified Value", mark: "05", line: "What closed" },
-  { id: "Memory", mark: "06", line: "What the operation learned" },
+const PACKETS = [
+  { label: "INVOICE", value: "INV-88421" },
+  { label: "PAYMENT", value: "€8,412.20" },
+  { label: "RESERVATIONS", value: "38 inbound" },
+  { label: "CONTRACT", value: "€6.80/L" },
+  { label: "DELIVERY", value: "+31%" },
 ] as const;
 
-const DOMAIN_SLOTS: {
-  id: string;
-  area: string;
-  label?: string;
-}[] = [
-  { id: "restaurant", area: "src-a" },
-  { id: "hotel", area: "src-b" },
-  { id: "serviced", area: "src-c" },
-  { id: "finance", area: "src-d", label: "Finance & payments" },
+const DOMAIN_SLOTS: { id: string; area: string; label?: string }[] = [
+  { id: "restaurant", area: "src-a", label: "Restaurant" },
+  { id: "hotel", area: "src-b", label: "Hotel" },
+  { id: "finance", area: "src-d", label: "Finance" },
 ];
 
 function visibleInGroup(groupId: string): IntegrationProvider[] {
@@ -65,6 +58,8 @@ export function ConnectionOriginSection() {
   const reduced = usePrefersReducedMotion();
   const uid = useId();
   const [hotId, setHotId] = useState<string | null>(null);
+  const [packetIdx, setPacketIdx] = useState(0);
+  const [pulseOut, setPulseOut] = useState(0);
   const hot = hotId ? providerById(hotId) : null;
 
   const payments = visibleInGroup("payments");
@@ -79,6 +74,17 @@ export function ConnectionOriginSection() {
     DOMAIN_SLOTS.find((s) => providersFor(s.id).some((p) => p.id === hotId))
       ?.area ?? (hotId && custom.some((p) => p.id === hotId) ? "src-e" : null);
 
+  useEffect(() => {
+    if (reduced) return;
+    const t = window.setInterval(() => {
+      setPacketIdx((i) => (i + 1) % PACKETS.length);
+      setPulseOut((i) => (i + 1) % OUTPUTS.length);
+    }, 3200);
+    return () => window.clearInterval(t);
+  }, [reduced]);
+
+  const packet = PACKETS[packetIdx]!;
+
   return (
     <div className="rx-intake">
       <header className="rx-intake-head">
@@ -92,7 +98,6 @@ export function ConnectionOriginSection() {
           in use into one decision-ready operating state — so value leaks can be
           found, acted on and verified.
         </p>
-        <p className="rx-intake-cap">Systems RADR can connect to</p>
       </header>
 
       <div
@@ -100,11 +105,16 @@ export function ConnectionOriginSection() {
         data-hot={hotId ?? undefined}
         data-hot-area={hotArea ?? undefined}
         data-reduced={reduced ? "true" : undefined}
+        data-pulse={pulseOut}
         aria-label="Signal intake"
       >
         <div className="rx-intake-atmosphere" aria-hidden="true" />
-
-        <IntakeField uid={uid} hotArea={hotArea} reduced={reduced} />
+        <IntakeField
+          uid={uid}
+          hotArea={hotArea}
+          reduced={reduced}
+          packet={packet}
+        />
 
         <div className="rx-intake-sources">
           {DOMAIN_SLOTS.map((slot) => {
@@ -120,33 +130,32 @@ export function ConnectionOriginSection() {
               />
             );
           })}
-
           <div className="rx-intake-cluster" data-area="src-e">
-            <p>Custom evidence</p>
+            <p>Custom</p>
             <ul className="rx-intake-evidence">
               {CUSTOM_EVIDENCE.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <ul className="rx-intake-chips">
-              {custom.map((p) => (
-                <li key={p.id}>
+            {custom[0] ? (
+              <ul className="rx-intake-chips">
+                <li>
                   <ProviderChip
-                    provider={p}
+                    provider={custom[0]}
                     hotId={hotId}
                     onHot={setHotId}
                   />
                 </li>
-              ))}
-            </ul>
+              </ul>
+            ) : null}
           </div>
         </div>
 
-        <div className="rx-intake-core">
+        <div className="rx-intake-core" data-react={reduced ? undefined : "true"}>
           {!reduced ? <span className="rx-intake-core-ring" aria-hidden="true" /> : null}
           <div className="rx-intake-core-card">
             <span className="rx-intake-delta" aria-hidden="true">
-              <svg viewBox="0 0 100 90" width="44" height="38">
+              <svg viewBox="0 0 100 90" width="52" height="44">
                 <path
                   d="M50 8 L90 81 H10 Z"
                   fill="none"
@@ -156,60 +165,26 @@ export function ConnectionOriginSection() {
                 />
               </svg>
             </span>
-            <RadrWordmark surface="light" size="md" compact />
-            <p className="rx-intake-core-k">RADR Core</p>
-            <ol className="rx-intake-orbit-list" aria-label="Operating layers">
-              <li>Evidence</li>
-              <li>Decision</li>
-              <li>Futures</li>
-              <li>Action</li>
-              <li>Verified</li>
-              <li>Memory</li>
-            </ol>
+            <p className="rx-intake-core-name">RADR</p>
+            <p className="rx-intake-core-k">Decision core</p>
           </div>
         </div>
 
         <div className="rx-intake-out" aria-label="RADR outputs">
-          <p className="rx-intake-out-k">Decision infrastructure</p>
-          {OUTPUT_PRIMITIVES.map((o, i) => (
+          {OUTPUTS.map((o, i) => (
             <div
               key={o.id}
               className="rx-intake-primitive"
-              data-tone={o.id === "Verified Value" ? "verified" : undefined}
-              style={{ animationDelay: `${0.12 * i}s` }}
+              data-tone={o.id === "Verified" ? "verified" : undefined}
+              data-live={i === pulseOut ? "true" : undefined}
+              title={o.tip}
             >
-              <span aria-hidden="true">{o.mark}</span>
-              <div>
-                <strong>{o.id}</strong>
-                <em>{o.line}</em>
-              </div>
+              <strong>{o.id}</strong>
+              <em className="rx-intake-tip">{o.tip}</em>
+              <span className="rx-intake-hint">{o.line}</span>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Mobile — flat list, no second taxonomy layer */}
-      <div className="rx-intake-mobile">
-        <p className="rx-intake-cap">Systems RADR can connect to</p>
-        <ul className="rx-intake-mobile-flat">
-          {HOME_CONNECTION_GROUPS.flatMap((g) =>
-            g.providerIds
-              .map((id) => providerById(id))
-              .filter((p): p is IntegrationProvider => Boolean(p))
-              .map((p) => (
-                <li key={p.id}>
-                  <button
-                    type="button"
-                    onClick={() => setHotId(p.id === hotId ? null : p.id)}
-                    data-on={hotId === p.id ? "true" : undefined}
-                  >
-                    <ProviderWordmark id={p.id} name={p.name} />
-                    <em>{statusLabel(p)}</em>
-                  </button>
-                </li>
-              )),
-          )}
-        </ul>
       </div>
 
       {hot ? (
@@ -223,9 +198,7 @@ export function ConnectionOriginSection() {
           <p>
             {hot.name}
             <span aria-hidden="true"> → </span>
-            {connectionMethodLabel(hot)}
-            <span aria-hidden="true"> → </span>
-            RADR Core
+            RADR
             <span aria-hidden="true"> → </span>
             Decision
           </p>
@@ -299,18 +272,20 @@ function IntakeField({
   uid,
   hotArea,
   reduced,
+  packet,
 }: {
   uid: string;
   hotArea: string | null;
   reduced: boolean;
+  packet: (typeof PACKETS)[number];
 }) {
   const paths: Record<string, string> = {
     "src-a": "M 90 120 C 200 160, 280 220, 400 300",
     "src-b": "M 710 120 C 600 160, 520 220, 400 300",
-    "src-c": "M 100 460 C 200 400, 280 340, 400 300",
     "src-d": "M 700 460 C 600 400, 520 340, 400 300",
     "src-e": "M 400 540 C 400 460, 400 380, 400 300",
   };
+  const activePath = hotArea && paths[hotArea] ? paths[hotArea] : paths["src-a"]!;
 
   return (
     <svg
@@ -330,33 +305,7 @@ function IntakeField({
           <stop offset="100%" stopColor="rgba(0,168,90,0.55)" />
         </linearGradient>
       </defs>
-      <circle cx="400" cy="300" r="230" fill={`url(#${uid}-glow)`} />
-      <circle
-        className="rx-intake-orbit"
-        cx="400"
-        cy="300"
-        r="175"
-        fill="none"
-        stroke="rgba(10,13,11,0.06)"
-        strokeWidth="1"
-        strokeDasharray="2 12"
-      />
-      <circle
-        cx="400"
-        cy="300"
-        r="118"
-        fill="none"
-        stroke="rgba(10,13,11,0.05)"
-        strokeWidth="1"
-      />
-      <circle
-        cx="400"
-        cy="300"
-        r="68"
-        fill="none"
-        stroke="rgba(0,168,90,0.22)"
-        strokeWidth="1.2"
-      />
+      <circle cx="400" cy="300" r="210" fill={`url(#${uid}-glow)`} />
       {Object.entries(paths).map(([area, d]) => (
         <path
           key={area}
@@ -365,41 +314,53 @@ function IntakeField({
           d={d}
           fill="none"
           stroke={
-            hotArea === area ? `url(#${uid}-flow)` : "rgba(10,13,11,0.06)"
+            hotArea === area ? `url(#${uid}-flow)` : "rgba(10,13,11,0.07)"
           }
           strokeWidth={hotArea === area ? 1.75 : 1}
           strokeLinecap="round"
         />
       ))}
-      {!reduced && hotArea && paths[hotArea] ? (
-        <circle r="3.2" fill="#00a85a">
-          <animateMotion
-            dur="1.55s"
-            repeatCount="indefinite"
-            path={paths[hotArea]}
+      {!reduced ? (
+        <g className="rx-intake-packet">
+          <rect
+            x="-46"
+            y="-14"
+            width="92"
+            height="28"
+            rx="8"
+            fill="rgba(255,255,255,0.94)"
+            stroke="rgba(10,13,11,0.1)"
           />
-        </circle>
+          <text
+            x="0"
+            y="-2"
+            textAnchor="middle"
+            fill="#8a918d"
+            fontSize="7"
+            fontFamily="ui-monospace, monospace"
+            letterSpacing="0.08em"
+          >
+            {packet.label}
+          </text>
+          <text
+            x="0"
+            y="10"
+            textAnchor="middle"
+            fill="#0a0d0b"
+            fontSize="9"
+            fontFamily="ui-monospace, monospace"
+            fontWeight="600"
+          >
+            {packet.value}
+          </text>
+          <animateMotion
+            key={packet.label}
+            dur="3.1s"
+            repeatCount="indefinite"
+            path={activePath}
+          />
+        </g>
       ) : null}
-      {!reduced
-        ? Object.entries(paths)
-            .filter(([area]) => !hotArea || area === hotArea)
-            .slice(0, hotArea ? 1 : 3)
-            .map(([area, d], i) => (
-              <circle
-                key={`idle-${area}`}
-                r="2"
-                fill="rgba(0,168,90,0.35)"
-                opacity={hotArea ? 1 : 0.45}
-              >
-                <animateMotion
-                  dur={`${3.8 + i * 0.7}s`}
-                  repeatCount="indefinite"
-                  path={d}
-                  begin={`${i * 0.9}s`}
-                />
-              </circle>
-            ))
-        : null}
     </svg>
   );
 }

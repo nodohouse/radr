@@ -13080,14 +13080,14 @@ html:has(.radr-home) body {
   display: block;
   overflow: hidden;
 }
-/* Copy left · product commands the right edge — editorial tension */
+/* Copy left · product composition right — editorial asymmetry */
 .rx-he-recover-frame {
   display: grid;
-  grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
-  column-gap: clamp(2.5rem, 6vw, 5.5rem);
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+  column-gap: clamp(3.5rem, 7.5vw, 6.5rem);
   row-gap: 1.5rem;
   align-items: start;
-  width: calc(100% + clamp(4.5rem, 9vw, 7.5rem));
+  width: calc(100% + clamp(5.5rem, 10vw, 8.5rem));
   max-width: none;
 }
 .rx-he-recover-copy {
@@ -13095,16 +13095,17 @@ html:has(.radr-home) body {
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  max-width: 28rem;
+  max-width: 30rem;
   padding-top: 0.15rem;
 }
 .rx-he-recover-product {
-  width: 100%;
-  max-width: none;
-  justify-self: stretch;
+  width: min(100%, 34rem);
+  max-width: 34rem;
+  justify-self: end;
   padding-top: 1.15rem;
   margin-bottom: -2.5rem;
-  margin-right: clamp(-7.5rem, -11vw, -4.5rem);
+  margin-right: clamp(-8.5rem, -12vw, -5.5rem);
+  transform: translateX(clamp(2.5rem, 4vw, 4.5rem));
 }
 .rx-he-recover-product .rx-mrc {
   width: 100%;
@@ -13511,6 +13512,8 @@ html:has(.radr-home) body {
     margin-right: 0;
     padding-top: 0.5rem;
     margin-bottom: 0;
+    transform: none;
+    width: 100%;
   }
   .rx-he-recover-product .rx-mrc {
     min-height: 0;

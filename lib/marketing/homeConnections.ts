@@ -61,7 +61,7 @@ const HOME_PROVIDER_IDS = [
   "byod-warehouse",
 ] as const;
 
-/** ~12–14 names on the map at once */
+/** ~primary systems only on homepage intake */
 export const SIGNAL_MAP_VISIBLE_IDS = [
   "toast",
   "lightspeed-restaurant",
@@ -71,8 +71,6 @@ export const SIGNAL_MAP_VISIBLE_IDS = [
   "apaleo",
   "oracle-opera-cloud",
   "siteminder",
-  "guesty",
-  "hostaway",
   "xero",
   "stripe",
   "mollie",

@@ -2,7 +2,7 @@
 
 /**
  * Same RADR · different person.
- * Role selector drives desktop Decision + field phone.
+ * Role switch changes content — flat field surface, no second iPhone chassis.
  */
 
 import { useState } from "react";
@@ -11,10 +11,6 @@ import {
   DEFAULT_ROLE_CARDS,
   type RoleId,
 } from "@/components/marketing/kinetic/RoleProjection";
-import {
-  RadrPhone,
-  type RadrPhoneState,
-} from "@/components/marketing/scenes/home/RadrPhone";
 
 const ROLE_ORDER: RoleId[] = ["cfo", "gm", "foh"];
 
@@ -24,43 +20,37 @@ const ROLE_TAB: Record<RoleId, string> = {
   foh: "Floor",
 };
 
-const PHONE: Record<RoleId, RadrPhoneState> = {
+const FIELD: Record<
+  RoleId,
+  { badge: string; title: string; body: string; meta: string; cta: string }
+> = {
   cfo: {
-    id: "role-cfo",
-    role: "Finance",
     badge: "Recover · approval",
     title: "€273 credit path",
     body: "Dispute staged. Evidence package ready for AP.",
     meta: "D-4102 · Berlin Mitte",
-    primary: "Approve recover",
-    tone: "verified",
+    cta: "Approve recover",
   },
   gm: {
-    id: "role-gm",
-    role: "GM",
     badge: "Urgent Decision",
     title: "Wait 12 minutes",
     body: "Peak capacity · kitchen 92% · €620 vs seat-now.",
     meta: "D-1911 · Dinner",
-    primary: "Hold the line",
-    tone: "urgent",
+    cta: "Hold the line",
   },
   foh: {
-    id: "role-foh",
-    role: "Floor",
     badge: "FOH brief",
     title: "VIP · Table 12",
     body: "Nut allergy on file. Hold cold station. Mention Ribeye.",
     meta: "18:42 · Dinner service",
-    primary: "Got it",
-    tone: "brief",
+    cta: "Got it",
   },
 };
 
 export function RoleProjectionStrip() {
   const [role, setRole] = useState<RoleId>("cfo");
   const card = DEFAULT_ROLE_CARDS.find((c) => c.id === role)!;
-  const phone = PHONE[role];
+  const field = FIELD[role];
 
   return (
     <div className="rx-role-strip rx-role-strip-scene">
@@ -98,7 +88,13 @@ export function RoleProjectionStrip() {
           <p className="rx-role-desk-foot">Same Decision system · different truth</p>
         </article>
 
-        <RadrPhone state={phone} highlight className="rx-role-phone" />
+        <aside className="rx-role-field" aria-label="Field surface">
+          <p className="rx-role-field-badge">{field.badge}</p>
+          <h3>{field.title}</h3>
+          <p>{field.body}</p>
+          <p className="rx-role-field-meta">{field.meta}</p>
+          <span className="rx-role-field-cta">{field.cta}</span>
+        </aside>
       </div>
 
       <Link href="/product/floor" className="rx-btn rx-btn-ghost">

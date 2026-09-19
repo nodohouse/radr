@@ -234,6 +234,60 @@ export const RESEARCH_FACTS = {
     category: "finance_ap",
     lastVerifiedAt: "2026-09-19",
   },
+  nraSmallRestaurantMargin2023: {
+    id: "nra-small-restaurant-margin-2023",
+    metric: "3–5%",
+    statement:
+      "The average small business restaurant runs on a 3-5% margin.",
+    publisher: "National Restaurant Association",
+    report: "Statement on proposed overtime calculations",
+    publicationDate: "2023-08",
+    geography: "United States",
+    population: "U.S. small-business restaurant operators",
+    methodologyNote:
+      "Exact quote from NRA press statement, Aug 30 2023. Also framed as typical 3–5% pre-tax margin.",
+    sourceUrl:
+      "https://restaurant.org/research-and-media/media/press-releases/national-restaurant-association-statement-on-proposed-changes-to-overtime-calculations/",
+    displayLabel: "Typical small-restaurant pre-tax margin",
+    category: "restaurants",
+    lastVerifiedAt: "2026-09-19",
+  },
+  nraFoodCostChallenge2023: {
+    id: "nra-food-cost-challenge-2023",
+    metric: "92%",
+    statement:
+      "92% of operators say the cost of food is a significant issue for their restaurant.",
+    publisher: "National Restaurant Association",
+    report: "2023 State of the Restaurant Industry",
+    publicationDate: "2023",
+    geography: "United States",
+    population: "U.S. restaurant operators · State of the Industry survey",
+    methodologyNote:
+      "Exact framing from NRA 2023 State of the Industry press materials.",
+    sourceUrl:
+      "https://restaurant.org/research-and-media/media/press-releases/2023-national-restaurant-association-state-of-the-industry-report-a-new-normal/",
+    displayLabel: "Food costs a significant challenge",
+    category: "restaurants",
+    lastVerifiedAt: "2026-09-19",
+  },
+  starfleetHotelIntegration2025: {
+    id: "starfleet-hotel-integration-2025",
+    metric: "24%",
+    statement:
+      "Only 24% of hotels report full integration of their core systems.",
+    publisher: "Starfleet Research / IBS Software",
+    report: "How Top-Performing Hotels Turn Big Data Into Big Wins",
+    publicationDate: "2025",
+    geography: "Global survey · 250+ hotel IT decision makers",
+    population: "Hotel IT decision makers · Starfleet Research survey",
+    methodologyNote:
+      "Reported by Hospitality Net Aug 2025. Also: 42% rely on disconnected systems.",
+    sourceUrl:
+      "https://www.hospitalitynet.org/report/4128547/research-fewer-than-one-in-four-hotels-have-fully-integrated-core-systems",
+    displayLabel: "Hotels with fully integrated core systems",
+    category: "hotels",
+    lastVerifiedAt: "2026-09-19",
+  },
 } as const satisfies Record<string, ResearchFact>;
 
 export type ResearchFactId = keyof typeof RESEARCH_FACTS;
@@ -242,11 +296,11 @@ export function researchFact(id: ResearchFactId): ResearchFact {
   return RESEARCH_FACTS[id];
 }
 
-/** Home evidence — three editorial proofs */
+/** Home evidence — three editorial proofs across years */
 export const HOME_RESEARCH_FACTS: ResearchFactId[] = [
-  "nraExpenseRise2019to2026",
-  "otelierManualReporting2026",
-  "otelierReconcileHours2026",
+  "nraSmallRestaurantMargin2023",
+  "nraFoodCostChallenge2023",
+  "starfleetHotelIntegration2025",
 ];
 
 /** Why RADR — Why now strip */
