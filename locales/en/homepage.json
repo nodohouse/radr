@@ -4,7 +4,7 @@
     "h0": "Nothing off the RADR",
     "title": "Recover the value your operation is losing.",
     "sub": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
-    "support": "RADR finds financial and operational value slipping through hospitality operations, recommends the strongest response, and follows the outcome until it is verified.",
+    "support": "RADR finds money that is leaking, missing, owed back, or about to disappear — then determines the strongest response, follows the case, and verifies the outcome.",
     "ctaPrimary": "Start a recovery pilot",
     "ctaSecondary": "See how RADR recovers value",
     "ariaLabel": "Nothing off the RADR — Recover the value your operation is losing",
@@ -1621,7 +1621,7 @@
   "recover": {
     "families": {
       "kicker": "Value leak map",
-      "title": "The money doesn't disappear in one place.",
+      "title": "Where value disappears across the stack.",
       "lead": "",
       "whatLeaks": "What leaks",
       "whatDoes": "What RADR does",
@@ -1630,31 +1630,31 @@
       "maturityExpansion": "Expansion",
       "SUPPLIER_AP": {
         "label": "Supplier / AP",
-        "leaks": "Contract vs invoice. Credits that never land.",
+        "leaks": "Contract variance · unapplied credit · missing rebate · duplicate charge · freight outside terms · UOM mismatch.",
         "does": "Detects → prepares evidence → tracks settlement → verifies recovered value.",
         "verifies": "Credit matched to the original invoice."
       },
       "RECONCILIATION": {
         "label": "Reconciliation",
-        "leaks": "Expected and actual settlement refuse to close.",
+        "leaks": "POS ≠ payments · delivery payout mismatch · refund mismatch · settlement gap · chargeback discrepancy · deposit mismatch.",
         "does": "Detects mismatch → explains source disagreement → prepares correction → verifies closure.",
         "verifies": "Correction matched across sources."
       },
       "COST_VARIANCE": {
         "label": "Cost variance",
-        "leaks": "Food cost moves. Drivers are not the loudest ones.",
+        "leaks": "Supplier cost shift · waste · mix shift · discount leakage · yield issue · recipe cost drift.",
         "does": "Ranks drivers · separates signal from noise · recommends the right lever before repricing.",
         "verifies": "Cost movement explained."
       },
       "PROCUREMENT": {
         "label": "Procurement",
-        "leaks": "Same SKU. Different prices. Unexplained dispersion.",
+        "leaks": "Same SKU different price · missed purchasing tier · rebate not earned · supplier dispersion · contract drift.",
         "does": "Surfaces dispersion → negotiation leverage → group-rate Decision.",
         "verifies": "Negotiated rate applied and matched."
       },
       "PERISHABLE_REVENUE": {
-        "label": "Perishable revenue",
-        "leaks": "Value about to expire.",
+        "label": "Perishable",
+        "leaks": "Late cancellation · no-show · orphan night · unused table · capacity at risk.",
         "does": "Capacity at risk → time remaining → recovery action → observe → verify contribution.",
         "verifies": "Recovered contribution matched after close."
       },
@@ -1708,19 +1708,19 @@
       "lead": "",
       "RECOVER": {
         "title": "Recover",
-        "body": "Find the value already lost."
+        "body": "Value already lost."
       },
       "PREVENT": {
         "title": "Prevent",
-        "body": "Catch the condition before the value expires."
+        "body": "Stop repeat leakage."
       },
       "OPTIMIZE": {
         "title": "Optimize",
-        "body": "Choose the strongest response across tradeoffs."
+        "body": "Improve the economic decision."
       },
       "AUTOPILOT": {
         "title": "Autopilot",
-        "body": "Execute trusted patterns inside policy."
+        "body": "Let RADR handle what policy permits."
       }
     },
     "stack": {
@@ -1774,7 +1774,7 @@
     "footer": {
       "brand": "Nothing off the RADR.",
       "title": "Ready when you are",
-      "body": "Start recovering value on the stack you already run.",
+      "body": "Start recovering value on the stack you already run — money that is leaking, missing, owed back, or about to disappear.",
       "cta": "Start a recovery pilot",
       "secondary": "See how RADR recovers value"
     }

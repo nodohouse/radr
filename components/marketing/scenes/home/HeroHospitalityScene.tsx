@@ -14,6 +14,8 @@ import {
 import {
   heroSceneFor,
   restaurantFloorSecondaryPhone,
+  restaurantRecoverPhone,
+  restaurantUrgentPhone,
   type HospitalityVertical,
 } from "@/lib/marketing/hospitalityContext";
 import {
@@ -28,11 +30,13 @@ const ROTATE: HospitalityVertical[] = [
   "serviced_apartment",
 ];
 
+type FloorPhone = 0 | 1 | 2 | 3;
+
 export function HeroHospitalityScene() {
   const reduced = usePrefersReducedMotion();
   const [vertical, setVertical] = useState<HospitalityVertical>("restaurant");
   const [paused, setPaused] = useState(false);
-  const [floorAlt, setFloorAlt] = useState(false);
+  const [floorPhone, setFloorPhone] = useState<FloorPhone>(0);
   const scene = heroSceneFor(vertical);
 
   useEffect(() => {
@@ -49,18 +53,24 @@ export function HeroHospitalityScene() {
   useEffect(() => {
     if (reduced || paused || vertical !== "restaurant") return;
     const id = window.setInterval(() => {
-      setFloorAlt((v) => !v);
-    }, 5500);
+      setFloorPhone((v) => ((v + 1) % 4) as FloorPhone);
+    }, 4800);
     return () => window.clearInterval(id);
   }, [reduced, paused, vertical]);
 
   const phoneModel =
-    vertical === "restaurant" && floorAlt
-      ? restaurantFloorSecondaryPhone()
+    vertical === "restaurant"
+      ? floorPhone === 0
+        ? scene.phone
+        : floorPhone === 1
+          ? restaurantFloorSecondaryPhone()
+          : floorPhone === 2
+            ? restaurantUrgentPhone()
+            : restaurantRecoverPhone()
       : scene.phone;
 
   const phone: RadrPhoneState = {
-    id: `${scene.vertical}-${floorAlt ? "alt" : "main"}`,
+    id: `${scene.vertical}-${vertical === "restaurant" ? floorPhone : "main"}`,
     role: phoneModel.role,
     badge: phoneModel.badge,
     title: phoneModel.title,
@@ -81,7 +91,7 @@ export function HeroHospitalityScene() {
         value={vertical}
         onChange={(v) => {
           setPaused(true);
-          setFloorAlt(false);
+          setFloorPhone(0);
           setVertical(v);
         }}
         size="hero"

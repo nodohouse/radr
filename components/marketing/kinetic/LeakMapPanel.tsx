@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * LeakMapPanel — one visual, click/hover controls.
- * No tall sticky runway. Page scroll always free.
+ * LeakMapPanel — five value-leak classes.
+ * Money owed / missing / overpaid / about to expire / unexplained.
  */
 
 import { useEffect, useState } from "react";
@@ -22,9 +22,17 @@ const ORDER: ProblemFamily[] = [
 const LABELS: Record<ProblemFamily, string> = {
   SUPPLIER_AP: "Supplier / AP",
   RECONCILIATION: "Reconciliation",
-  COST_VARIANCE: "Cost",
+  COST_VARIANCE: "Cost variance",
   PROCUREMENT: "Procurement",
   PERISHABLE_REVENUE: "Perishable",
+};
+
+const FRAMES: Record<ProblemFamily, string> = {
+  SUPPLIER_AP: "Money owed back.",
+  RECONCILIATION: "Money missing between systems.",
+  COST_VARIANCE: "Why margin moved.",
+  PROCUREMENT: "What the group is overpaying.",
+  PERISHABLE_REVENUE: "Revenue about to disappear.",
 };
 
 type Props = {
@@ -53,6 +61,9 @@ export function LeakMapPanel({ kicker, title, bodies, metas }: Props) {
     <div ref={ref} className="rx-leak-panel">
       <p className="rx-rec-k">{kicker}</p>
       <h2 className="rx-rec-h">{title}</h2>
+      <p className="rx-leak-panel-frame" aria-live="polite">
+        {FRAMES[family]}
+      </p>
 
       <nav className="rx-leak-panel-nav" aria-label="Value leak classes">
         {ORDER.map((id, i) => (
@@ -69,7 +80,8 @@ export function LeakMapPanel({ kicker, title, bodies, metas }: Props) {
               setIdx(i);
             }}
           >
-            {LABELS[id]}
+            <span>{LABELS[id]}</span>
+            <em>{FRAMES[id]}</em>
           </button>
         ))}
       </nav>
@@ -77,6 +89,7 @@ export function LeakMapPanel({ kicker, title, bodies, metas }: Props) {
       <div className="rx-leak-panel-stage">
         <LeakClassVisual key={family} family={family} />
         <div className="rx-leak-panel-copy">
+          <p className="rx-leak-panel-money">{FRAMES[family]}</p>
           <h3>{LABELS[family]}</h3>
           <p>{bodies[family]}</p>
           <p className="rx-sticky-meta">{metas[family]}</p>

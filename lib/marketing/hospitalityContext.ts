@@ -158,6 +158,32 @@ export function restaurantFloorSecondaryPhone(): HeroSceneModel["phone"] {
   };
 }
 
+/** Recover approval on Floor — closes the money loop at the right person */
+export function restaurantRecoverPhone(): HeroSceneModel["phone"] {
+  return {
+    role: "Finance",
+    badge: "Recover",
+    title: "Approve €273 credit path",
+    body: "Contract variance · Orchard invoice · evidence package ready",
+    meta: "D-4102 · Awaiting approval",
+    primary: "Review case",
+    tone: "recover",
+  };
+}
+
+/** Urgent perishable decision */
+export function restaurantUrgentPhone(): HeroSceneModel["phone"] {
+  return {
+    role: "GM",
+    badge: "Needs you",
+    title: "Peak capacity · decide by 18:45",
+    body: "€620 at stake · wait 12 vs seat-now · default prepared",
+    meta: "D-1911 · Dinner",
+    primary: "Open Decision",
+    tone: "urgent",
+  };
+}
+
 export function platformEconomics(d: CanonDecision) {
   return {
     id: d.displayId,
