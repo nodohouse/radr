@@ -3937,40 +3937,58 @@
 }
 
 .rx-ev-cinema .rx-ev-head {
-  max-width: 22rem;
-  margin-bottom: 2.5rem;
+  max-width: 28rem;
+  margin-bottom: 2.75rem;
+}
+.rx-ev-breakout {
+  width: min(94vw, 92rem);
+  margin-inline: auto;
+  padding-inline: clamp(0.75rem, 2vw, 1.5rem);
 }
 .rx-ev-moments {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: clamp(2.5rem, 6vw, 4rem);
+  gap: clamp(3rem, 7vw, 5.5rem);
 }
 .rx-ev-moment[data-layout="panel"] {
   display: grid;
-  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-  gap: clamp(1.25rem, 3vw, 2.25rem);
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1.25rem, 3.5vw, 2.75rem);
   align-items: stretch;
-  max-width: 64rem;
+  max-width: none;
+  width: 100%;
+}
+.rx-ev-moment[data-spread="a"] .rx-ev-body {
+  padding-right: clamp(1.25rem, 4vw, 3.5rem);
 }
 .rx-ev-moment[data-spread="b"] {
-  grid-template-columns: minmax(0, 1fr) minmax(0, auto);
+  grid-template-columns: minmax(0, 1fr) auto;
 }
-.rx-ev-moment[data-spread="b"] .rx-ev-body { order: 0; }
-.rx-ev-moment[data-spread="b"] .rx-ev-photo { order: 1; justify-self: end; }
+.rx-ev-moment[data-spread="b"] .rx-ev-body {
+  order: 0;
+  padding-left: clamp(1.25rem, 4vw, 3.5rem);
+  background: #f7f4ee;
+}
+.rx-ev-moment[data-spread="b"] .rx-ev-photo {
+  order: 1;
+  justify-self: end;
+}
 .rx-ev-moment[data-spread="c"] {
-  max-width: 56rem;
-  margin-inline: auto;
-  grid-template-columns: minmax(0, auto) minmax(0, 1.25fr);
-  align-items: center;
+  max-width: none;
+  margin-inline: 0;
+  grid-template-columns: auto minmax(0, 1.35fr);
+  align-items: stretch;
+  padding-right: clamp(0rem, 2vw, 1.5rem);
 }
 .rx-ev-moment[data-spread="c"] .rx-ev-photo {
-  border-radius: 4px 20px 20px 4px;
+  border-radius: 4px 22px 22px 4px;
 }
 .rx-ev-moment[data-spread="c"] .rx-ev-body {
   background: #eef6f1;
-  min-height: 18rem;
+  min-height: 20rem;
+  padding-right: clamp(1.5rem, 5vw, 4rem);
 }
 .rx-ev-photo {
   margin: 0;
@@ -3981,6 +3999,7 @@
   width: 100%;
   max-width: 520px;
   justify-self: start;
+  flex-shrink: 0;
 }
 .rx-ev-photo img {
   display: block;
@@ -4008,20 +4027,21 @@
   font-weight: 550;
 }
 .rx-ev-moment[data-layout="panel"] .rx-ev-body {
-  padding: 1.75rem 1.65rem;
+  padding: clamp(1.75rem, 3vw, 2.75rem) clamp(1.5rem, 3vw, 2.5rem);
   border-radius: 18px;
   background: #f3eee6;
   border: 1px solid rgba(10, 13, 11, 0.06);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 0;
 }
 .rx-ev-cinema .rx-ev-metric {
   margin: 0;
-  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-size: clamp(3.5rem, 8vw, 6rem);
   font-weight: 680;
-  letter-spacing: -0.05em;
-  line-height: 0.95;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
   color: #0a0d0b;
   font-variant-numeric: tabular-nums;
 }

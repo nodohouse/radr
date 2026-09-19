@@ -88,7 +88,8 @@ export function PricingResponsibilityTrack() {
             ))}
           </div>
           <p className="rx-pilot-note" style={{ marginTop: "0.75rem" }}>
-            Scope expands responsibility — not a price calculator. Scoped with you.
+            Pricing follows the operating scope RADR takes on — locations,
+            systems, and Decision coverage.
           </p>
           <p className="rx-rec-p" style={{ marginTop: "0.5rem" }}>
             Now: <strong>{active.name}</strong> · {SCOPE_LABELS[scope]}

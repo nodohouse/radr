@@ -482,15 +482,21 @@ function SolutionsLeakMap() {
 
 function LensIntro() {
   return (
-    <section className="rx-intel-lenses-intro" id="lenses" data-nav-theme="light">
+    <section className="rx-intel-lenses-intro rx-intel-lenses-quiet" id="lenses" data-nav-theme="light">
       <div className="rx-shell">
-        <p className="rx-intel-k">Also how RADR reads the operation</p>
-        <h2 className="rx-intel-classes-title">BUY · LABOR · SELL · RECOVER</h2>
+        <p className="rx-intel-k">Also on the Platform</p>
+        <h2 className="rx-intel-classes-title rx-intel-classes-title-quiet">
+          RADR can also view Decisions through four economic lenses.
+        </h2>
         <p className="rx-intel-classes-lead">
-          Economic lenses across Decisions — not product modules. Depth lives
-          under each lens when you need it.
+          BUY · LABOR · SELL · RECOVER — secondary lenses over the same Decision
+          model. Not a second taxonomy of value leaks.
         </p>
-        <div className="rx-intel-lenses" role="navigation" aria-label="Economic lenses">
+        <div
+          className="rx-intel-lenses rx-intel-lenses-sub"
+          role="navigation"
+          aria-label="Economic lenses"
+        >
           {LENS_ORDER.map((id) => (
             <Link
               key={id}

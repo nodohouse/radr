@@ -1,9 +1,9 @@
 {
-  "metaTitle": "Recover money on your stack — field notes",
-  "metaDescription": "Field notes on recovering supplier credits on the stack you already run. For Finance and Purchasing in multi-unit FSR and fast-casual.",
-  "kicker": "Recover",
-  "title": "Recover money on your stack — field notes",
-  "lead": "Practical writing for Finance and Purchasing. Credits flagged but never cashed — and how to match Trace to the books.",
+  "metaTitle": "Writing — hospitality operating intelligence | RADR",
+  "metaDescription": "Essays and field notes on recovery, Decisions, Verified Value, and the judgment between hospitality systems.",
+  "kicker": "Writing",
+  "title": "Hospitality operating intelligence",
+  "lead": "Field notes on recovery, Decisions, Verified Value, and the judgment between systems.",
   "read": "Read",
   "minRead": "{minutes} min read",
   "related": "More reading",
@@ -460,15 +460,15 @@
             "The recover path we sell is deliberately short.",
             "Start from an invoice line — not a dashboard tile. Compare contract evidence (price, qty, UOM). Raise a finding when the invoice exceeds contract and the credit has not been applied.",
             "Then match a credit memo to the invoice or payment. Only when that apply lands do we call the euro Verified — Verified equals applied cash, not an estimate.",
-            "Stop there. One recovery. Value Trace. Done. No labor tour. No second general ledger. No overnight Autopilot pitch on the sales path."
+            "The first recovery should stay simple: identify the variance, prepare the evidence, follow the credit, and verify when it lands."
           ]
         },
         {
-          "heading": "Expected vs Verified — the Finance kill test",
+          "heading": "Expected vs Verified — the finance test",
           "paragraphs": [
             "Expected is fine. It means RADR believes a credit should exist, with a because-line in operator English.",
             "Verified is stricter. It requires a complete Trace: invoice and line, evidence, finding, credit memo, apply to the original invoice, AP match. If a buyer cannot match that chain in AP, the badge should not say Verified.",
-            "Fake Verified is worse than another BI chart. Our rule: systems calculate; humans approve financial commitments."
+            "What Verified should mean to Finance: systems calculate; humans approve financial commitments. A badge without a Trace is worse than another BI chart."
           ]
         },
         {

@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Editorial evidence — three spreads.
- * Facility masters are 1152×864 → render ≤480 CSS px (sharp, never upscaled).
+ * Editorial evidence — magazine breakout spreads.
+ * Facility masters 1152×864 → image stays ≤520 CSS px; panel fills the rest.
  */
 
 import Image from "next/image";
@@ -11,64 +11,41 @@ import {
   researchFact,
   type ResearchFactId,
 } from "@/data/research/researchFacts";
+import {
+  FACILITY_NATIVE,
+  PUBLIC_IMAGES,
+  type PublicImageId,
+} from "@/lib/marketing/publicImagery";
 
 type Proof = {
   id: ResearchFactId;
   spread: "a" | "b" | "c";
   chapter: string;
-  image: {
-    src: string;
-    alt: string;
-    credit: string;
-    position: string;
-    /** CSS px cap — native 1152 → stay ≤576 @2x */
-    cssMax: number;
-  };
+  imageId: PublicImageId;
   quote?: string;
   note?: string;
 };
-
-const NATIVE_W = 1152;
-const NATIVE_H = 864;
 
 const PROOFS: Proof[] = [
   {
     id: "nraSmallRestaurantMargin2023",
     spread: "a",
     chapter: "01 · Restaurant economics",
-    image: {
-      src: "/demo/facilities/berlin-dining.jpg",
-      alt: "Active restaurant dining room during service",
-      credit: "Restaurant service",
-      position: "50% 40%",
-      cssMax: 520,
-    },
+    imageId: "berlin-dining",
     quote: "The average small business restaurant runs on a 3-5% margin.",
   },
   {
     id: "nraFoodCostChallenge2023",
     spread: "b",
     chapter: "02 · Food cost pressure",
-    image: {
-      src: "/demo/facilities/berlin-bar.jpg",
-      alt: "Hospitality service during an active shift",
-      credit: "Restaurant operations",
-      position: "45% 35%",
-      cssMax: 480,
-    },
+    imageId: "berlin-bar",
     note: "When food costs move inside a thin-margin business, small discrepancies stop being small.",
   },
   {
     id: "starfleetHotelIntegration2025",
     spread: "c",
     chapter: "03 · Hotel system fragmentation",
-    image: {
-      src: "/demo/facilities/canal-deluxe-king.jpg",
-      alt: "Hotel guest environment — operations behind the stay",
-      credit: "Hotel operations",
-      position: "55% 45%",
-      cssMax: 440,
-    },
+    imageId: "canal-deluxe-king",
     quote: "Only 24% of hotels report full integration of their core systems.",
   },
 ];
@@ -89,8 +66,8 @@ export function ResearchEvidenceStrip({
   title?: string;
 }) {
   return (
-    <div className="rx-ev rx-ev-cinema">
-      <header className="rx-ev-head">
+    <div className="rx-ev rx-ev-cinema rx-ev-breakout">
+      <header className="rx-ev-head rx-shell">
         <p className="rx-rec-k">{kicker}</p>
         <h2 className="rx-rec-h">{title}</h2>
       </header>
@@ -99,6 +76,7 @@ export function ResearchEvidenceStrip({
         {PROOFS.map((p) => {
           const f = researchFact(p.id);
           const year = f.publicationDate.slice(0, 4);
+          const img = PUBLIC_IMAGES[p.imageId];
           return (
             <li
               key={p.id}
@@ -108,20 +86,22 @@ export function ResearchEvidenceStrip({
             >
               <figure
                 className="rx-ev-photo"
-                style={{ maxWidth: p.image.cssMax }}
+                style={{ maxWidth: img.cssMax }}
               >
                 <Image
-                  src={p.image.src}
-                  alt={p.image.alt}
-                  width={NATIVE_W}
-                  height={NATIVE_H}
-                  sizes={`(max-width: 700px) 100vw, ${p.image.cssMax}px`}
-                  style={{ objectPosition: p.image.position }}
+                  src={img.src}
+                  alt={img.alt}
+                  width={FACILITY_NATIVE.w}
+                  height={FACILITY_NATIVE.h}
+                  sizes={`(max-width: 700px) 92vw, ${img.cssMax}px`}
+                  style={{
+                    objectPosition: `${img.focalX} ${img.focalY}`,
+                  }}
                   loading="lazy"
                   quality={90}
                 />
                 <figcaption>
-                  <span>{p.image.credit}</span>
+                  <span>{img.credit}</span>
                 </figcaption>
               </figure>
               <div className="rx-ev-body">
@@ -150,9 +130,11 @@ export function ResearchEvidenceStrip({
         })}
       </ol>
 
-      <NextLink href="/research" className="rx-research-lib">
-        Evidence library <span aria-hidden="true">→</span>
-      </NextLink>
+      <div className="rx-shell">
+        <NextLink href="/research" className="rx-research-lib">
+          Evidence library <span aria-hidden="true">→</span>
+        </NextLink>
+      </div>
     </div>
   );
 }

@@ -987,3 +987,55 @@
   letter-spacing: -0.04em;
   line-height: 1.1;
 }
+
+/* Editorial split hero — sharp image + sand panel (no soft full-bleed) */
+.rx-co2-photo-hero-split {
+  min-height: 0;
+  align-items: stretch;
+  color: #0a0d0b;
+  background: #f3eee6;
+  padding: clamp(3rem, 8vh, 5rem) 0;
+}
+.rx-co2-photo-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.rx-co2-photo-hero-frame {
+  max-width: 520px;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #dfe6e1;
+}
+.rx-co2-photo-hero-frame .rx-co2-photo-hero-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+.rx-co2-photo-hero-split .rx-co2-photo-hero-copy {
+  position: relative;
+  padding: 0;
+  max-width: 28rem;
+}
+.rx-co2-photo-hero-split .rx-co2-photo-hero-copy h1 {
+  margin: 0;
+  font-size: clamp(1.85rem, 3.5vw, 2.85rem);
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+  color: #0a0d0b;
+  max-width: 16ch;
+}
+@media (max-width: 900px) {
+  .rx-co2-photo-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .rx-co2-photo-hero-frame {
+    max-width: min(100%, 520px);
+    justify-self: center;
+  }
+}

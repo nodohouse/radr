@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
@@ -6,6 +7,11 @@ import { SiteNav } from "@/components/marketing/SiteNav";
 import { BLOG_POSTS, type BlogPostMeta } from "@/lib/marketing/blog";
 import { TextSep } from "@/components/TextSep";
 import { buildAlternatesForLocale } from "@/i18n/seo";
+import {
+  BLOG_HERO_IMAGE,
+  FACILITY_NATIVE,
+  PUBLIC_IMAGES,
+} from "@/lib/marketing/publicImagery";
 import "../../home.css";
 import "../../kinetic.css";
 
@@ -48,11 +54,35 @@ const SECTION_LABEL: Record<SectionId, string> = {
   field: "Field notes",
 };
 
+function pillarLabel(post: BlogPostMeta): string {
+  return SECTION_LABEL[sectionFor(post)];
+}
+
+function PostMedia({ slug, featured = false }: { slug: string; featured?: boolean }) {
+  const map = BLOG_HERO_IMAGE[slug];
+  if (!map) return null;
+  const img = PUBLIC_IMAGES[map.imageId];
+  const max = featured ? Math.min(img.cssMax, 520) : Math.min(img.cssMax, 360);
+  return (
+    <figure className="rx-res-card-media" data-panel={map.panel}>
+      <Image
+        src={img.src}
+        alt={img.alt}
+        width={FACILITY_NATIVE.w}
+        height={FACILITY_NATIVE.h}
+        sizes={`(max-width: 700px) 92vw, ${max}px`}
+        style={{ objectPosition: `${img.focalX} ${img.focalY}` }}
+        loading={featured ? "eager" : "lazy"}
+        quality={88}
+      />
+    </figure>
+  );
+}
+
 function PostCard({
   post,
   title,
   excerpt,
-  tags,
   readLabel,
   minRead,
   featured = false,
@@ -60,7 +90,6 @@ function PostCard({
   post: BlogPostMeta;
   title: string;
   excerpt: string;
-  tags: string[];
   readLabel: string;
   minRead: string;
   featured?: boolean;
@@ -70,27 +99,22 @@ function PostCard({
       href={`/blog/${post.slug}`}
       className={featured ? "rx-res-card rx-res-card--feature" : "rx-res-card"}
       data-terr={post.territory}
+      data-size={featured ? "feature" : "story"}
     >
-      <div className="rx-res-card-meta">
-        {post.territory !== "ALL" ? (
-          <em className="rx-res-terr">{post.territory}</em>
-        ) : (
-          <em className="rx-res-terr rx-res-terr--all">FIELD</em>
-        )}
-        <time dateTime={post.date}>{post.date}</time>
-        <TextSep />
-        <span>{minRead}</span>
+      <PostMedia slug={post.slug} featured={featured} />
+      <div className="rx-res-card-copy">
+        <div className="rx-res-card-meta">
+          <em className="rx-res-terr">{pillarLabel(post)}</em>
+          <time dateTime={post.date}>{post.date}</time>
+          <TextSep />
+          <span>{minRead}</span>
+        </div>
+        <h2>{title}</h2>
+        <p>{excerpt}</p>
+        <span className="rx-res-read">
+          {readLabel} <span aria-hidden="true">→</span>
+        </span>
       </div>
-      <h2>{title}</h2>
-      <p>{excerpt}</p>
-      <ul className="rx-res-tags" aria-label="Tags">
-        {tags.map((tag) => (
-          <li key={tag}>{tag}</li>
-        ))}
-      </ul>
-      <span className="rx-res-read">
-        {readLabel} <span aria-hidden="true">→</span>
-      </span>
     </Link>
   );
 }
@@ -114,7 +138,7 @@ export default async function BlogIndexPage({ params }: Props) {
   return (
     <div className="radr radr-home">
       <SiteNav />
-      <main className="rx-res">
+      <main className="rx-res rx-res-pub">
         <section className="rx-res-hero" data-nav-theme="light">
           <div className="rx-shell">
             <p className="rx-kicker">{t("kicker")}</p>
@@ -124,14 +148,13 @@ export default async function BlogIndexPage({ params }: Props) {
         </section>
 
         <section className="rx-res-list" data-nav-theme="light">
-          <div className="rx-shell">
+          <div className="rx-shell-wide rx-res-pub-frame">
             {featured ? (
               <PostCard
                 post={featured}
                 featured
                 title={t(`posts.${featured.key}.title`)}
                 excerpt={t(`posts.${featured.key}.excerpt`)}
-                tags={t.raw(`posts.${featured.key}.tags`) as string[]}
                 readLabel={t("read")}
                 minRead={t("minRead", { minutes: featured.readingMinutes })}
               />
@@ -143,24 +166,20 @@ export default async function BlogIndexPage({ params }: Props) {
               return (
                 <div key={sec} className="rx-res-section">
                   <h2 className="rx-res-section-title">{SECTION_LABEL[sec]}</h2>
-                  <ul className="rx-res-grid">
-                    {posts.map((post) => {
-                      const tags = t.raw(`posts.${post.key}.tags`) as string[];
-                      return (
-                        <li key={post.slug}>
-                          <PostCard
-                            post={post}
-                            title={t(`posts.${post.key}.title`)}
-                            excerpt={t(`posts.${post.key}.excerpt`)}
-                            tags={tags}
-                            readLabel={t("read")}
-                            minRead={t("minRead", {
-                              minutes: post.readingMinutes,
-                            })}
-                          />
-                        </li>
-                      );
-                    })}
+                  <ul className="rx-res-grid rx-res-grid-editorial">
+                    {posts.map((post) => (
+                      <li key={post.slug}>
+                        <PostCard
+                          post={post}
+                          title={t(`posts.${post.key}.title`)}
+                          excerpt={t(`posts.${post.key}.excerpt`)}
+                          readLabel={t("read")}
+                          minRead={t("minRead", {
+                            minutes: post.readingMinutes,
+                          })}
+                        />
+                      </li>
+                    ))}
                   </ul>
                 </div>
               );

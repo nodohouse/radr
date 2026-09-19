@@ -66,10 +66,8 @@ export function HomepageSpine() {
         </div>
       </section>
 
-      <section className="rx-rec-sec rx-rec-sec-quiet" data-nav-theme="light">
-        <div className="rx-shell-wide">
-          <ResearchEvidenceStrip />
-        </div>
+      <section className="rx-rec-sec rx-rec-sec-quiet rx-rec-sec-evidence" data-nav-theme="light">
+        <ResearchEvidenceStrip />
       </section>
 
       <section className="rx-rec-sec rx-rec-sec-interactive" data-nav-theme="light">

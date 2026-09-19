@@ -60,37 +60,29 @@ function CoReveal({
  * Hero photo → founder → why now → beliefs → close.
  */
 export function CompanyPage() {
-  const reduced = useReducedMotion();
-
   return (
     <div className="radr radr-mineral rx-co2">
       <PublicNavbar />
       <main>
-        <section className="rx-co2-photo-hero" data-nav-theme="dark">
-          <motion.div
-            className="rx-co2-photo-hero-media"
-            initial={reduced ? false : { scale: 1.06 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Image
-              src="/demo/facilities/berlin-dining.jpg"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="rx-co2-photo-hero-img"
-            />
-          </motion.div>
-          <div className="rx-co2-photo-hero-veil" aria-hidden="true" />
-          <div className="rx-shell rx-co2-photo-hero-copy">
-            <motion.h1
-              initial={reduced ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: reduced ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Hospitality deserves better judgment, not more software.
-            </motion.h1>
+        <section className="rx-co2-photo-hero rx-co2-photo-hero-split" data-nav-theme="light">
+          <div className="rx-shell rx-co2-photo-hero-grid">
+            <div className="rx-co2-photo-hero-frame">
+              <Image
+                src="/demo/facilities/berlin-dining.jpg"
+                alt="Active restaurant dining room during service"
+                width={1152}
+                height={864}
+                priority
+                sizes="(max-width: 900px) 92vw, 520px"
+                quality={90}
+                className="rx-co2-photo-hero-img"
+              />
+            </div>
+            <div className="rx-co2-photo-hero-copy">
+              <h1>
+                Hospitality deserves better judgment, not more software.
+              </h1>
+            </div>
           </div>
         </section>
 
@@ -119,32 +111,27 @@ export function CompanyPage() {
               </p>
               <p className="rx-co2-founder-bio">
                 I grew up around hospitality. My family runs a food business. I
-                spent years wanting to open a restaurant.
+                spent years wanting to open a restaurant — until the operation
+                made something obvious.
               </p>
               <p className="rx-co2-founder-bio">
-                But the closer I got to the operation, the more obvious something
-                became. Hospitality had software for almost everything — sales,
-                reservations, staffing, inventory, purchasing, payments,
-                accounting.
+                Hospitality already had software for sales, reservations,
+                staffing, inventory, purchasing, payments and accounting. What it
+                did not have was a system for the decisions between them — the
+                ones that determine whether revenue becomes contribution, and
+                whether anyone can prove afterward that the call worked.
               </p>
               <p className="rx-co2-founder-bio">
-                What it did not have was a system for the decisions between them.
-                The decisions that determine whether revenue becomes contribution
-                still lived in spreadsheets, meetings and people&apos;s heads.
-                And almost nobody could answer afterward: did that decision
-                actually work?
+                RADR is that Decision layer.
               </p>
-              <p className="rx-co2-founder-bio">RADR came from that gap.</p>
             </CoReveal>
           </div>
         </section>
 
         <section className="rx-co-states" data-nav-theme="light" aria-label="Founder thesis">
           {[
-            "I wanted to open a restaurant.",
             "The software wasn’t the problem.",
             "The decisions between the systems were.",
-            "RADR came from that gap.",
           ].map((line, i) => (
             <div key={line} className="rx-co-state">
               <div className="rx-shell">

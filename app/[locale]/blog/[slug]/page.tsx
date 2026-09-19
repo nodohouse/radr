@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
@@ -7,7 +8,13 @@ import { SiteNav } from "@/components/marketing/SiteNav";
 import { BLOG_POSTS, getBlogPost } from "@/lib/marketing/blog";
 import { TextSep } from "@/components/TextSep";
 import { buildAlternatesForLocale } from "@/i18n/seo";
+import {
+  BLOG_HERO_IMAGE,
+  FACILITY_NATIVE,
+  PUBLIC_IMAGES,
+} from "@/lib/marketing/publicImagery";
 import "../../../home.css";
+import "../../../kinetic.css";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -28,6 +35,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = t(`posts.${post.key}.metaTitle`);
   const description = t(`posts.${post.key}.metaDescription`);
   const path = `/blog/${slug}`;
+  const hero = BLOG_HERO_IMAGE[slug];
+  const ogImage = hero ? PUBLIC_IMAGES[hero.imageId].src : undefined;
   return {
     title,
     description,
@@ -39,15 +48,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `https://radrup.com/${locale}${path}`,
       publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
       authors: ["RADR"],
       tags: t.raw(`posts.${post.key}.tags`) as string[],
+      ...(ogImage
+        ? { images: [{ url: `https://radrup.com${ogImage}` }] }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      ...(ogImage ? { images: [`https://radrup.com${ogImage}`] } : {}),
     },
   };
+}
+
+function pillarFromTerritory(t: string): string {
+  if (t === "RECOVER") return "Recover";
+  if (t === "VALUE") return "Value";
+  if (t === "BUY" || t === "LABOR" || t === "SELL") return "Operations";
+  return "Decisions";
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -62,6 +83,8 @@ export default async function BlogPostPage({ params }: Props) {
   const title = t(`posts.${post.key}.title`);
   const description = t(`posts.${post.key}.metaDescription`);
   const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const heroMap = BLOG_HERO_IMAGE[slug];
+  const hero = heroMap ? PUBLIC_IMAGES[heroMap.imageId] : null;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -72,7 +95,7 @@ export default async function BlogPostPage({ params }: Props) {
     dateModified: post.updated ?? post.date,
     author: {
       "@type": "Organization",
-      name: "RADR GTM",
+      name: "RADR",
       url: "https://radrup.com",
     },
     publisher: {
@@ -86,33 +109,33 @@ export default async function BlogPostPage({ params }: Props) {
     },
     keywords: tags.join(", "),
     inLanguage: locale,
+    ...(hero
+      ? { image: [`https://radrup.com${hero.src}`] }
+      : {}),
   };
+
+  const pull =
+    sections[0]?.paragraphs[0] && sections[0].paragraphs[0].length > 80
+      ? sections[0].paragraphs[0]
+      : null;
 
   return (
     <div className="radr radr-home">
       <SiteNav />
-      <main className="rx-res">
+      <main className="rx-res rx-res-pub">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <article className="rx-res-article" data-nav-theme="light">
-          <div className="rx-res-hero-glow" aria-hidden="true" />
           <div className="rx-shell rx-res-article-inner">
-            <p className="rx-kicker">{t("kicker")}</p>
+            <p className="rx-kicker">{pillarFromTerritory(post.territory)}</p>
             <div className="rx-res-card-meta">
-              {post.territory !== "ALL" ? (
-                <em className="rx-res-terr">{post.territory}</em>
-              ) : (
-                <em className="rx-res-terr rx-res-terr--all">FIELD</em>
-              )}
               <time dateTime={post.date}>{post.date}</time>
               {post.updated && post.updated !== post.date ? (
                 <>
                   <TextSep />
-                  <span>
-                    {t("updatedLabel", { date: post.updated })}
-                  </span>
+                  <span>{t("updatedLabel", { date: post.updated })}</span>
                 </>
               ) : null}
               <TextSep />
@@ -122,52 +145,78 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
             <h1 className="rx-display rx-res-article-title">{title}</h1>
             <p className="rx-res-deck">{t(`posts.${post.key}.excerpt`)}</p>
-            <ul className="rx-res-tags" aria-label="Tags">
-              {tags.map((tag) => (
-                <li key={tag}>{tag}</li>
-              ))}
-            </ul>
+          </div>
+
+          {hero ? (
+            <figure
+              className="rx-res-article-hero"
+              data-panel={heroMap?.panel}
+            >
+              <div className="rx-res-article-hero-frame">
+                <Image
+                  src={hero.src}
+                  alt={hero.alt}
+                  width={FACILITY_NATIVE.w}
+                  height={FACILITY_NATIVE.h}
+                  sizes="(max-width: 900px) 92vw, 520px"
+                  style={{
+                    objectPosition: `${hero.focalX} ${hero.focalY}`,
+                  }}
+                  priority
+                  quality={90}
+                />
+              </div>
+              <figcaption>{hero.credit}</figcaption>
+            </figure>
+          ) : null}
+
+          <div className="rx-shell rx-res-article-inner">
+            {pull ? (
+              <blockquote className="rx-res-pull">
+                <p>{pull}</p>
+              </blockquote>
+            ) : null}
+
             <div className="rx-res-body">
               {sections.map((section, i) => (
-                <section key={section.heading ?? `s-${i}`} className="rx-res-section">
+                <section
+                  key={section.heading ?? `s-${i}`}
+                  className="rx-res-section"
+                >
                   {section.heading ? <h2>{section.heading}</h2> : null}
-                  {section.paragraphs.map((para) => (
-                    <p key={para.slice(0, 56)}>{para}</p>
-                  ))}
+                  {section.paragraphs.map((para, pi) =>
+                    i === 0 && pi === 0 && pull ? null : (
+                      <p key={para.slice(0, 56)}>{para}</p>
+                    ),
+                  )}
                 </section>
               ))}
             </div>
-            <p className="rx-res-deck" style={{ marginTop: "2rem" }}>
-              {post.territory === "BUY" ? (
-                <Link href="/solutions/buy" className="rx-text-link">
-                  Explore BUY Intelligence →
-                </Link>
-              ) : post.territory === "LABOR" ? (
-                <Link href="/solutions/labor" className="rx-text-link">
-                  Explore LABOR Intelligence →
-                </Link>
-              ) : post.territory === "RECOVER" ? (
-                <div className="rx-he-ctas" style={{ marginTop: "0.5rem" }}>
+
+            <div className="rx-res-article-cta">
+              {post.territory === "RECOVER" ? (
+                <div className="rx-he-ctas">
                   <Link
-                    href="/contact?intent=recover-pilot"
+                    href="/contact?intent=recovery-pilot"
                     className="rx-btn rx-btn-primary"
                   >
-                    {t("ctaPilot")} →
+                    {t("ctaPilot")} <span aria-hidden="true">→</span>
                   </Link>
-                  <Link href="/solutions/recover" className="rx-btn rx-btn-ghost">
+                  <Link href="/solutions" className="rx-btn rx-btn-ghost">
                     {t("ctaRecover")}
                   </Link>
                 </div>
               ) : post.territory === "VALUE" ? (
                 <Link href="/product/value" className="rx-text-link">
-                  See Verified Value →
+                  See Verified Value <span aria-hidden="true">→</span>
                 </Link>
               ) : post.key === "whyWeExist" ? (
-                <Link href="/why" className="rx-text-link">
-                  Read Why RADR →
+                <Link href="/product" className="rx-text-link">
+                  Explore the Platform <span aria-hidden="true">→</span>
                 </Link>
               ) : null}
-            </p>
+            </div>
+
             <Link href="/blog" className="rx-text-link">
               {t("backToBlog")}
             </Link>
@@ -187,9 +236,9 @@ export default async function BlogPostPage({ params }: Props) {
                       data-terr={item.territory}
                     >
                       <div className="rx-res-card-meta">
-                        {item.territory !== "ALL" ? (
-                          <em className="rx-res-terr">{item.territory}</em>
-                        ) : null}
+                        <em className="rx-res-terr">
+                          {pillarFromTerritory(item.territory)}
+                        </em>
                         <time dateTime={item.date}>{item.date}</time>
                       </div>
                       <h3>{t(`posts.${item.key}.title`)}</h3>

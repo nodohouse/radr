@@ -14909,3 +14909,120 @@ html:has(.radr-home) body {
     animation: none !important;
   }
 }
+
+/* Blog as editorial publication */
+.rx-res-pub .rx-res-pub-frame {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+.rx-res-card {
+  overflow: hidden;
+}
+.rx-res-card-media {
+  margin: -1.25rem -1.2rem 0.85rem;
+  background: #f3eee6;
+  max-height: 14rem;
+  overflow: hidden;
+}
+.rx-res-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 14rem;
+  object-fit: cover;
+}
+.rx-res-card--feature {
+  display: grid;
+  grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.rx-res-card--feature .rx-res-card-media {
+  margin: 0;
+  max-height: none;
+  height: 100%;
+  min-height: 16rem;
+  background: #f3eee6;
+}
+.rx-res-card--feature .rx-res-card-media img {
+  max-height: none;
+  height: 100%;
+  min-height: 16rem;
+}
+.rx-res-card--feature .rx-res-card-copy {
+  padding: 1.75rem 1.65rem 1.85rem;
+  display: grid;
+  gap: 0.65rem;
+  align-content: center;
+}
+.rx-res-card--feature::before { display: none; }
+.rx-res-card-copy {
+  display: grid;
+  gap: 0.55rem;
+}
+.rx-res-grid-editorial {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 900px) {
+  .rx-res-card--feature {
+    grid-template-columns: 1fr;
+  }
+  .rx-res-grid-editorial {
+    grid-template-columns: 1fr;
+  }
+}
+.rx-res-article-hero {
+  width: min(94vw, 56rem);
+  margin: 1.5rem auto 2.25rem;
+  padding: 0 clamp(0.75rem, 2vw, 1.5rem);
+}
+.rx-res-article-hero-frame {
+  max-width: 520px;
+  margin-inline: auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #dfe6e1;
+}
+.rx-res-article-hero-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.rx-res-article-hero figcaption {
+  margin: 0.55rem auto 0;
+  max-width: 520px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5a625d;
+}
+.rx-res-pull {
+  margin: 0 0 2rem;
+  padding: 1.25rem 0 1.25rem 1.15rem;
+  border-left: 2px solid #00a85a;
+  max-width: 42rem;
+}
+.rx-res-pull p {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: #0a0d0b;
+  font-weight: 450;
+}
+.rx-res-article-inner {
+  max-width: 44rem;
+}
+.rx-res-body {
+  max-width: 42rem;
+}
+.rx-res-article-cta {
+  margin: 2rem 0 1.25rem;
+}
+.rx-res-pub .rx-res-card-meta {
+  color: #5a625d;
+}
