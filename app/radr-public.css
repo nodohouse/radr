@@ -562,11 +562,21 @@
   align-items: center;
   gap: 0.55rem;
   color: #0a0d0b;
-  transition: color 240ms ease;
 }
 
-.rx-origin-delta[data-on="true"] {
-  color: #00a85a;
+.rx-origin-delta-mark {
+  color: #00d978 !important;
+}
+
+.rx-origin-delta-mark .radr-delta-glyph {
+  color: #00d978 !important;
+  filter: none;
+}
+
+.rx-origin-delta[data-on="true"] .rx-origin-delta-mark,
+.rx-origin-delta[data-on="true"] .rx-origin-delta-mark .radr-delta-glyph {
+  color: #00d978 !important;
+  filter: drop-shadow(0 0 8px rgba(0, 217, 120, 0.35));
 }
 
 .rx-origin-delta strong {
@@ -574,6 +584,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   font-weight: 560;
+  color: #0a0d0b;
 }
 
 .rx-origin-decision {

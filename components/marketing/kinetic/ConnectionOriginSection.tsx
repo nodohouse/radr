@@ -25,6 +25,7 @@ import {
   type CapabilityStory,
 } from "@/lib/integrations/capabilityStory";
 import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
+import { RadrDelta } from "@/components/radr/RadrDelta";
 import "@/app/radr-public.css";
 
 const DECISION_CHILDREN = [
@@ -116,15 +117,7 @@ export function ConnectionOriginSection() {
 
         <div className="rx-origin-zone rx-origin-zone--core">
           <div className="rx-origin-delta" data-on={lit ? "true" : undefined}>
-            <svg viewBox="0 0 100 90" width="72" height="64" aria-hidden="true">
-              <path
-                d="M50 8 L90 81 H10 Z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="11"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <RadrDelta variant="nav" height={56} className="rx-origin-delta-mark" />
             <strong>RADR</strong>
           </div>
         </div>
