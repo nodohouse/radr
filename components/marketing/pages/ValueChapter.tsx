@@ -153,7 +153,7 @@ export function ValueChapter() {
               </p>
             </DecisionObject>
 
-            <p className="rx-ch-kicker" style={{ marginTop: "5rem" }}>
+            <p className="rx-ch-kicker" style={{ marginTop: "7.5rem" }}>
               Decision ledger · sample · DEMO
             </p>
             <p className="rx-value-stream-note" style={{ marginBottom: "1.25rem" }}>

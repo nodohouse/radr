@@ -51,7 +51,6 @@ export const HOME_RESTING_PROVIDER_IDS = [
   "apaleo",
   "oracle-opera-cloud",
   "xero",
-  "netsuite",
   "adyen",
   "stripe",
   "uber-eats",

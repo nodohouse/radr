@@ -5,7 +5,6 @@ import { SiteFooter as PublicFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav as PublicNavbar } from "@/components/marketing/SiteNav";
 import { FeatureCompare } from "@/components/marketing/pricing/FeatureCompare";
 import { PricingFaq } from "@/components/marketing/pricing/PricingFaq";
-import { PricingResponsibilityTrack } from "@/components/marketing/pricing/PricingResponsibilityTrack";
 import { PricingTiers } from "@/components/marketing/pricing/PricingTiers";
 import { pricingConfig } from "@/components/marketing/pricing/config";
 import { buildAlternatesForLocale } from "@/i18n/seo";
@@ -52,7 +51,6 @@ export default async function PricingPage({ params }: Props) {
           </div>
         </section>
 
-        <PricingResponsibilityTrack />
         <PricingTiers />
         <FeatureCompare defaultCollapsed />
         <PricingFaq />

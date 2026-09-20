@@ -3,8 +3,8 @@ import { Link } from "@/i18n/navigation";
 import { pricingConfig } from "./config";
 
 /**
- * One commercial progression: Start → Expand → Enterprise.
- * Not three equal SaaS feature cards.
+ * One commercial hierarchy: Start · Expand · Enterprise.
+ * Appears exactly once on the pricing page.
  */
 export async function PricingTiers() {
   const t = await getTranslations("pricing");
@@ -15,33 +15,14 @@ export async function PricingTiers() {
   return (
     <section className="px-tiers" id="plans" data-nav-theme="light">
       <div className="rx-shell">
-        <header className="px-section-head px-section-head--center">
-          <p className="rx-kicker">{t("progression.kicker")}</p>
-          <h2 className="px-section-title">{t("progression.title")}</h2>
-          <p className="px-section-lead">{t("progression.lead")}</p>
-          <ol className="px-prog-rail" aria-label="Commercial progression">
-            <li>
-              <em>{t("progression.recover")}</em>
-            </li>
-            <li aria-hidden="true">→</li>
-            <li>
-              <em>{t("progression.decide")}</em>
-            </li>
-            <li aria-hidden="true">→</li>
-            <li>
-              <em>{t("progression.govern")}</em>
-            </li>
-          </ol>
-        </header>
-
         <div className="px-tier-grid" data-count="3" data-progression="true">
           <article className="px-tier" data-tier="pilot" data-step="recover">
             <header className="px-tier-head">
               <div className="px-tier-title-row">
-                <p className="rx-kicker">{t("pilot.kicker")}</p>
+                <p className="rx-kicker">Start</p>
                 <span className="px-tier-desig">{t("pilot.verb")}</span>
               </div>
-              <p className="px-tier-line">{t("pilot.title")}</p>
+              <h2 className="px-tier-line">{t("pilot.title")}</h2>
               <p className="px-tier-audience">{t("pilot.body")}</p>
             </header>
             <div className="px-tier-price-block">
@@ -71,11 +52,11 @@ export async function PricingTiers() {
           >
             <header className="px-tier-head">
               <div className="px-tier-title-row">
-                <p className="rx-kicker">{t("core.name")}</p>
+                <p className="rx-kicker">Expand</p>
                 <span className="px-tier-desig">{t("core.verb")}</span>
               </div>
-              <p className="px-tier-line">{t("core.line")}</p>
-              <p className="px-tier-audience">{t("core.audience")}</p>
+              <h2 className="px-tier-line">RADR</h2>
+              <p className="px-tier-audience">{t("core.line")}</p>
             </header>
             <div className="px-tier-price-block">
               <p className="px-tier-price-label">{t("core.priceLabel")}</p>
@@ -103,11 +84,11 @@ export async function PricingTiers() {
           >
             <header className="px-tier-head">
               <div className="px-tier-title-row">
-                <p className="rx-kicker">{t("control.name")}</p>
+                <p className="rx-kicker">Enterprise</p>
                 <span className="px-tier-desig">{t("control.verb")}</span>
               </div>
-              <p className="px-tier-line">{t("control.line")}</p>
-              <p className="px-tier-audience">{t("control.audience")}</p>
+              <h2 className="px-tier-line">RADR at group scale</h2>
+              <p className="px-tier-audience">{t("control.line")}</p>
             </header>
             <div className="px-tier-price-block">
               <p className="px-tier-price-label">{t("control.priceLabel")}</p>
@@ -126,17 +107,6 @@ export async function PricingTiers() {
               </Link>
             </div>
           </article>
-        </div>
-
-        <div className="px-enterprise">
-          <p className="rx-kicker">{t("enterprise.kicker")}</p>
-          <p className="px-enterprise-body">{t("enterprise.body")}</p>
-          <Link
-            href={pricingConfig.talkHref}
-            className="rx-btn rx-btn-ghost px-enterprise-cta"
-          >
-            {t("enterprise.cta")} <span aria-hidden="true">→</span>
-          </Link>
         </div>
 
         <p className="px-pricing-note">{t("packagesNote")}</p>

@@ -2,7 +2,7 @@
 
 /**
  * Data Origin — Sources → △ RADR → Decision.
- * Readable in two seconds at rest. Detail only on interaction.
+ * Two seconds at rest. Provenance only on interaction.
  */
 
 import {
@@ -110,10 +110,13 @@ export function ConnectionOriginSection() {
         <div className="rx-origin-flow" aria-hidden="true">
           <i data-arm="in" data-on={lit ? "true" : undefined} />
         </div>
+        <p className="rx-origin-mobile-arrow" aria-hidden="true">
+          ↓
+        </p>
 
         <div className="rx-origin-zone rx-origin-zone--core">
           <div className="rx-origin-delta" data-on={lit ? "true" : undefined}>
-            <svg viewBox="0 0 100 90" width="64" height="56" aria-hidden="true">
+            <svg viewBox="0 0 100 90" width="72" height="64" aria-hidden="true">
               <path
                 d="M50 8 L90 81 H10 Z"
                 fill="none"
@@ -129,6 +132,9 @@ export function ConnectionOriginSection() {
         <div className="rx-origin-flow" aria-hidden="true">
           <i data-arm="out" data-on={lit ? "true" : undefined} />
         </div>
+        <p className="rx-origin-mobile-arrow" aria-hidden="true">
+          ↓
+        </p>
 
         <div className="rx-origin-zone rx-origin-zone--out">
           <p className="rx-origin-decision" data-on={lit ? "true" : undefined}>
