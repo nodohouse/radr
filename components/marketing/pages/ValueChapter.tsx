@@ -110,7 +110,8 @@ export function ValueChapter() {
               className="rx-pilot-note"
               style={{ color: "rgba(247,250,248,0.78)" }}
             >
-              One Decision. Traceable. Not a synthetic portfolio total.
+              One Decision. Traceable. Every verified euro has a Decision behind
+              it.
             </p>
           </div>
         </section>
@@ -157,8 +158,8 @@ export function ValueChapter() {
               Decision ledger · sample · DEMO
             </p>
             <p className="rx-value-stream-note" style={{ marginBottom: "1.25rem" }}>
-              Precise. Dense. Calm. Secondary Decisions — including zero or open
-              cases. Not a rollup.
+              Every verified euro traces back to a Decision and its downstream
+              evidence.
             </p>
             <p className="rx-ch-kicker">
               {MONEY_D1911_EXPECTED.displayId} · historical peak · DEMO

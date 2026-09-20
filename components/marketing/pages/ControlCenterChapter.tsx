@@ -66,10 +66,7 @@ export function ControlCenterChapter() {
               <h1 className="rx-ch-title" style={{ color: "#f7faf8" }}>
                 The most important thing RADR removes is noise.
               </h1>
-              <SilenceField
-                signalsLabel={`${ROUTINE_SIGNALS_SUPPRESSED} routine changes suppressed`}
-                needsYou={MORNING_BRIEF_LIVE.length}
-              />
+              <SilenceField needsYou={MORNING_BRIEF_LIVE.length} />
               <p
                 className="rx-pilot-note"
                 style={{
@@ -113,8 +110,7 @@ export function ControlCenterChapter() {
             </ul>
 
             <p className="rx-hcc-quiet" style={{ marginTop: "1.25rem" }}>
-              Routine signals suppressed · {ROUTINE_SIGNALS_SUPPRESSED} routine
-              changes suppressed
+              {ROUTINE_SIGNALS_SUPPRESSED} routine changes suppressed
             </p>
 
             <p className="rx-ch-kicker" style={{ marginTop: "3rem" }}>

@@ -62,9 +62,7 @@ export function HomeControlCenterPreview() {
         </ul>
 
         <p className="rx-hcc-quiet">
-          Routine signals suppressed
-          <span aria-hidden="true"> · </span>
-          <span>{ROUTINE_SIGNALS_SUPPRESSED} routine changes suppressed</span>
+          {ROUTINE_SIGNALS_SUPPRESSED} routine changes suppressed
         </p>
       </div>
     </div>

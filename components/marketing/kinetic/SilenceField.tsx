@@ -2,14 +2,15 @@
 
 /**
  * SilenceField — compression into attention. No decorative signal ticker.
+ * Suppressed count belongs once, next to the brief — not here.
  */
 
 export function SilenceField({
-  signalsLabel = "Routine signals suppressed",
   needsYou = 2,
 }: {
-  signalsLabel?: string;
   needsYou?: number;
+  /** @deprecated unused — suppressed line lives once beside the brief */
+  signalsLabel?: string;
 }) {
   return (
     <div className="rx-silence" data-phase="silence">
@@ -20,9 +21,6 @@ export function SilenceField({
             {needsYou === 1 ? "thing needs you" : "things need you"} · everything
             else within expectations
           </span>
-        </p>
-        <p className="rx-silence-suppressed" data-on="true">
-          {signalsLabel}
         </p>
       </div>
     </div>

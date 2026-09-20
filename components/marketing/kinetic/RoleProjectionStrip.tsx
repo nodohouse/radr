@@ -7,20 +7,24 @@
  */
 
 import { useId, useRef, useState, type KeyboardEvent } from "react";
-import { Link } from "@/i18n/navigation";
 import type { RoleId } from "@/components/marketing/kinetic/RoleProjection";
-import { euro, ECON_D4102, ECON_D1911 } from "@/lib/marketing/publicDecisionEconomics";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
+import {
+  LIVE_D7021,
+  LIVE_D7022,
+} from "@/lib/marketing/publicLiveDecisions";
 
 const ROLE_ORDER: RoleId[] = ["cfo", "gm", "foh"];
 
 const ROLE_TAB: Record<RoleId, string> = {
   cfo: "CFO",
-  gm: "GM",
-  foh: "Floor",
+  gm: "Ops",
+  foh: "GM",
 };
 
 const EUR_4102 = euro(ECON_D4102.verified);
-const EUR_1911 = euro(ECON_D1911.expected);
+const EUR_7021 = euro(LIVE_D7021.economics.exposed);
+const EUR_7022 = euro(LIVE_D7022.economics.exposed);
 
 const SCENES: Record<
   RoleId,
@@ -42,7 +46,7 @@ const SCENES: Record<
 > = {
   cfo: {
     deskK: "CFO · Finance",
-    idLine: `${ECON_D4102.displayId} · Supplier / AP`,
+    idLine: `Historical · ${ECON_D4102.displayId} · Supplier / AP`,
     headline: `${EUR_4102} supplier recovery`,
     lines: [
       "Contract €6.80/L · Invoice €7.45/L",
@@ -55,46 +59,46 @@ const SCENES: Record<
       badge: "Verified",
       title: `${EUR_4102} RECOVERED`,
       body: "Matched to invoice.",
-      meta: `${ECON_D4102.displayId} · View Trace`,
+      meta: `${ECON_D4102.displayId} · sealed`,
       cta: "Open Trace",
     },
   },
   gm: {
-    deskK: "GM · Operations",
-    idLine: `${ECON_D1911.displayId} · Dinner service`,
-    headline: "WAIT 12 MINUTES",
+    deskK: "Ops · Reconciliation",
+    idLine: `LIVE · ${LIVE_D7021.displayId} · Berlin`,
+    headline: `${EUR_7021} unexplained`,
     lines: [
-      "Kitchen pressure at 19:00",
-      "38 inbound covers",
-      `${EUR_1911} expected vs seat-now`,
+      LIVE_D7021.line,
+      LIVE_D7021.detail,
+      "Needs investigation",
     ],
-    status: "Needs approval · perishable window",
+    status: "Needs you · open Decision",
     tone: "urgent",
     field: {
       badge: "Needs you",
-      title: "WAIT 12 MINUTES",
-      body: "€620 expected.",
-      meta: "D-1911 · Dinner",
-      cta: "Approve",
+      title: `${EUR_7021} UNEXPLAINED`,
+      body: "Settlement gap requires review.",
+      meta: `${LIVE_D7021.displayId} · LIVE`,
+      cta: "Investigate",
     },
   },
   foh: {
-    deskK: "Floor · FOH",
-    idLine: "Table 12 · Dinner",
-    headline: "VIP · TABLE 12",
+    deskK: "GM · Location",
+    idLine: `LIVE · ${LIVE_D7022.displayId} · Amsterdam`,
+    headline: `${EUR_7022} at risk`,
     lines: [
-      "Nut allergy on file",
-      "Seat by 18:50",
-      "Hold table · do not release",
+      LIVE_D7022.line,
+      LIVE_D7022.detail,
+      "Review ready",
     ],
-    status: "Brief updated · Floor only",
-    tone: "neutral",
+    status: "Review · open Decision",
+    tone: "exposure",
     field: {
-      badge: "FOH brief",
-      title: "VIP · TABLE 12",
-      body: "Nut allergy · Seat by 18:50.",
-      meta: "Hold · do not release",
-      cta: "Got it",
+      badge: "Review",
+      title: `${EUR_7022} AT RISK`,
+      body: "Evidence package ready.",
+      meta: `${LIVE_D7022.displayId} · LIVE`,
+      cta: "Review",
     },
   },
 };
@@ -182,10 +186,6 @@ export function RoleProjectionStrip() {
           <span className="rx-role-field-cta">{scene.field.cta}</span>
         </aside>
       </div>
-
-      <Link href="/product/floor" className="rx-btn rx-btn-ghost">
-        Explore RADR Floor <span aria-hidden="true">→</span>
-      </Link>
     </div>
   );
 }

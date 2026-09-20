@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Data Origin — Sources → △ RADR → Decision.
- * Two seconds at rest. Provenance only on interaction.
+ * Data Origin — YOUR STACK → △ RADR → DECISION.
+ * Source TYPES on the homepage. Full catalog lives on Developers.
  */
 
 import {
@@ -13,19 +13,8 @@ import {
   useState,
 } from "react";
 import { Link } from "@/i18n/navigation";
-import { ProviderWordmark } from "@/components/marketing/kinetic/ProviderWordmark";
-import {
-  HOME_RESTING_PROVIDER_IDS,
-  providerById,
-} from "@/lib/marketing/homeConnections";
-import type { IntegrationProvider } from "@/lib/integrations/registry";
-import {
-  accessStatusLabel,
-  capabilityStoryFor,
-  type CapabilityStory,
-} from "@/lib/integrations/capabilityStory";
-import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
 import { RadrDelta } from "@/components/radr/RadrDelta";
+import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
 import "@/app/radr-public.css";
 
 const DECISION_CHILDREN = [
@@ -34,6 +23,82 @@ const DECISION_CHILDREN = [
   "Verified Value",
   "Memory",
 ] as const;
+
+type StackType = {
+  id: string;
+  label: string;
+  systems: string[];
+  evidence: string[];
+  uses: string[];
+  status: string;
+};
+
+const STACK: StackType[] = [
+  {
+    id: "invoices",
+    label: "Invoices",
+    systems: ["PDF / CSV", "Supplier portals", "AP inbox"],
+    evidence: ["Line items", "Unit prices", "Credit memos", "Tax lines"],
+    uses: ["Contract variance", "Duplicate charges", "Unapplied credits"],
+    status: "Files · AVAILABLE",
+  },
+  {
+    id: "contracts",
+    label: "Contracts",
+    systems: ["Signed PDFs", "Rate cards", "Group agreements"],
+    evidence: ["Agreed rates", "Volume tiers", "Rebate terms"],
+    uses: ["Price dispersion", "Missed rebates", "Supplier / AP"],
+    status: "Files · AVAILABLE",
+  },
+  {
+    id: "pos",
+    label: "POS",
+    systems: ["Toast", "Lightspeed", "Custom POS"],
+    evidence: ["Sales", "Voids", "Comps", "Tender mix"],
+    uses: ["Settlement gaps", "Cost variance", "Perishable revenue"],
+    status: "Partner / Planned",
+  },
+  {
+    id: "accounting",
+    label: "Accounting / AP",
+    systems: ["Xero", "NetSuite", "Exports"],
+    evidence: ["AP ledger", "Payments", "Credits applied"],
+    uses: ["Reconciliation", "Verified recovery proof"],
+    status: "Planned / Files",
+  },
+  {
+    id: "procurement",
+    label: "Procurement",
+    systems: ["Purchase orders", "Supplier catalogs"],
+    evidence: ["PO prices", "Received quantities", "Location rates"],
+    uses: ["Price dispersion", "Procurement leaks"],
+    status: "Files · AVAILABLE",
+  },
+  {
+    id: "payments",
+    label: "Payments",
+    systems: ["Adyen", "Stripe", "Worldpay"],
+    evidence: ["Settlements", "Refunds", "Fees", "Chargebacks", "Payouts"],
+    uses: ["Settlement gaps", "Refund mismatches", "Payment reconciliation"],
+    status: "Planned",
+  },
+  {
+    id: "reservations",
+    label: "Reservations",
+    systems: ["OpenTable", "SevenRooms", "PMS / CRS"],
+    evidence: ["Covers", "No-shows", "Cancellations", "Channel mix"],
+    uses: ["Perishable revenue", "Peak capacity"],
+    status: "Partner access",
+  },
+  {
+    id: "labor",
+    label: "Labor",
+    systems: ["Workforce tools", "Timesheets"],
+    evidence: ["Shifts", "Hours", "Coverage"],
+    uses: ["Labor mismatch", "Peak staffing Decisions"],
+    status: "Planned",
+  },
+];
 
 export function ConnectionOriginSection() {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -55,9 +120,8 @@ export function ConnectionOriginSection() {
     };
   }, [close]);
 
-  const provider = activeId ? providerById(activeId) : null;
-  const story = provider ? capabilityStoryFor(provider.id) : null;
-  const lit = Boolean(activeId);
+  const active = STACK.find((s) => s.id === activeId) ?? null;
+  const lit = Boolean(active);
 
   return (
     <div
@@ -66,46 +130,35 @@ export function ConnectionOriginSection() {
       data-lit={lit ? "true" : undefined}
     >
       <header className="rx-origin-head">
-        <p className="rx-rec-k">Data origin</p>
+        <p className="rx-rec-k">Your stack</p>
         <h2 className="rx-origin-h">
-          Source systems → RADR → Decision
+          Your stack → RADR → Decision
         </h2>
       </header>
 
-      <div className="rx-origin-triad" aria-label="Sources to Decision">
+      <div className="rx-origin-triad" aria-label="Stack to Decision">
         <div className="rx-origin-zone rx-origin-zone--src">
-          <p className="rx-origin-zone-k">Source systems</p>
-          <ul className="rx-origin-logos">
-            {HOME_RESTING_PROVIDER_IDS.map((id) => {
-              const p = providerById(id);
-              if (!p) return null;
-              return (
-                <li key={id}>
-                  <button
-                    type="button"
-                    className="rx-origin-logo"
-                    aria-expanded={activeId === id}
-                    aria-label={`${p.name}, ${accessStatusLabel(p)}. Possible evidence.`}
-                    data-on={activeId === id ? "true" : undefined}
-                    onMouseEnter={() => setActiveId(id)}
-                    onFocus={() => setActiveId(id)}
-                    onClick={() =>
-                      setActiveId((cur) => (cur === id ? null : id))
-                    }
-                  >
-                    <ProviderWordmark id={p.id} name={p.name} />
-                  </button>
-                </li>
-              );
-            })}
+          <p className="rx-origin-zone-k">Your stack</p>
+          <ul className="rx-origin-stack">
+            {STACK.map((s) => (
+              <li key={s.id}>
+                <button
+                  type="button"
+                  className="rx-origin-stack-btn"
+                  aria-expanded={activeId === s.id}
+                  data-on={activeId === s.id ? "true" : undefined}
+                  onMouseEnter={() => setActiveId(s.id)}
+                  onFocus={() => setActiveId(s.id)}
+                  onClick={() =>
+                    setActiveId((cur) => (cur === s.id ? null : s.id))
+                  }
+                >
+                  {s.label}
+                </button>
+              </li>
+            ))}
           </ul>
-          {provider && story ? (
-            <OriginNote
-              provider={provider}
-              story={story}
-              onClose={close}
-            />
-          ) : null}
+          {active ? <StackNote stack={active} onClose={close} /> : null}
         </div>
 
         <div className="rx-origin-flow" aria-hidden="true">
@@ -117,7 +170,11 @@ export function ConnectionOriginSection() {
 
         <div className="rx-origin-zone rx-origin-zone--core">
           <div className="rx-origin-delta" data-on={lit ? "true" : undefined}>
-            <RadrDelta variant="nav" height={56} className="rx-origin-delta-mark" />
+            <RadrDelta
+              variant="nav"
+              height={56}
+              className="rx-origin-delta-mark"
+            />
             <strong>RADR</strong>
           </div>
         </div>
@@ -145,22 +202,21 @@ export function ConnectionOriginSection() {
         href={{ pathname: "/developers", hash: "integrations" }}
         className="rx-origin-more"
       >
-        View all connection paths <span aria-hidden="true">→</span>
+        Full integration catalog <span aria-hidden="true">→</span>
       </Link>
       <p className="rx-origin-note">
-        Files / CSV · {capabilityBadge("filesCsv")}
+        Files / CSV · {capabilityBadge("filesCsv")} · keep the systems you
+        already run
       </p>
     </div>
   );
 }
 
-function OriginNote({
-  provider,
-  story,
+function StackNote({
+  stack,
   onClose,
 }: {
-  provider: IntegrationProvider;
-  story: CapabilityStory;
+  stack: StackType;
   onClose: () => void;
 }) {
   const titleId = useId();
@@ -178,20 +234,26 @@ function OriginNote({
       >
         ×
       </button>
-      <h3 id={titleId}>{provider.name}</h3>
+      <h3 id={titleId}>{stack.label}</h3>
+      <p className="rx-origin-note-k">Systems</p>
+      <ul>
+        {stack.systems.map((e) => (
+          <li key={e}>{e}</li>
+        ))}
+      </ul>
       <p className="rx-origin-note-k">Evidence</p>
       <ul>
-        {story.potentialSignals.slice(0, 5).map((e) => (
+        {stack.evidence.map((e) => (
           <li key={e}>{e}</li>
         ))}
       </ul>
-      <p className="rx-origin-note-k">RADR can use it for</p>
+      <p className="rx-origin-note-k">RADR can use this for</p>
       <ul>
-        {story.radrCouldSee.slice(0, 3).map((e) => (
+        {stack.uses.map((e) => (
           <li key={e}>{e}</li>
         ))}
       </ul>
-      <p className="rx-origin-note-status">{accessStatusLabel(provider)}</p>
+      <p className="rx-origin-note-status">{stack.status}</p>
     </aside>
   );
 }

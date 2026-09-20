@@ -14,7 +14,7 @@ import {
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { RadrDelta } from "@/components/radr/RadrDelta";
-import { CommercialBanner } from "@/components/marketing/CommercialBanner";
+import { OperatingPulse } from "@/components/marketing/OperatingPulse";
 import {
   COMPANY_LINKS,
   PLATFORM_COLUMNS,
@@ -241,7 +241,7 @@ export function SiteNav({ variant }: Props) {
 
   return (
     <>
-      <CommercialBanner />
+      <OperatingPulse />
       <header
       ref={navRef}
       className="rx-nav"
