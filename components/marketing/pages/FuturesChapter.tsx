@@ -46,6 +46,14 @@ const END_LABEL: Record<string, string> = {
 
 const TIME_MARKS = [
   {
+    id: "now",
+    label: "NOW",
+    actions: "Decision window open",
+    net: "Full option set",
+    risk: "Time has not decayed yet",
+    open: ["fut_orphan_discount", "fut_orphan_ota", "fut_orphan_wait"] as const,
+  },
+  {
     id: "72h",
     label: "72H",
     actions: "All paths open",
@@ -86,7 +94,7 @@ export function FuturesChapter() {
   const bundle = useMemo(() => buildOrphanFutures(), []);
   const [selected, setSelected] = useState(bundle.recommendedScenarioId);
   const [why, setWhy] = useState(false);
-  const [timeIdx, setTimeIdx] = useState(1);
+  const [timeIdx, setTimeIdx] = useState(2);
   const time = TIME_MARKS[timeIdx]!;
   const openSet = useMemo(() => new Set<string>(time.open), [time.open]);
 

@@ -1,9 +1,8 @@
 "use client";
 
 /**
- * Data Origin — three layers at rest.
- * Sources → △ RADR → Decision primitives.
- * Richness lives in hover / focus cards only.
+ * Data Origin — Sources → △ RADR → Decision.
+ * Readable in two seconds at rest. Detail only on interaction.
  */
 
 import {
@@ -23,25 +22,22 @@ import type { IntegrationProvider } from "@/lib/integrations/registry";
 import {
   accessStatusLabel,
   capabilityStoryFor,
-  categoryLabel,
   type CapabilityStory,
 } from "@/lib/integrations/capabilityStory";
 import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
+import "@/app/radr-public.css";
 
-const OUTPUTS = [
-  "Decision",
+const DECISION_CHILDREN = [
   "Futures",
   "Action",
   "Verified Value",
   "Memory",
 ] as const;
 
-type ActiveTarget = { kind: "provider"; id: string } | null;
-
 export function ConnectionOriginSection() {
-  const [active, setActive] = useState<ActiveTarget>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-  const close = useCallback(() => setActive(null), []);
+  const close = useCallback(() => setActiveId(null), []);
 
   useEffect(() => {
     function onKey(e: globalThis.KeyboardEvent) {
@@ -58,89 +54,89 @@ export function ConnectionOriginSection() {
     };
   }, [close]);
 
-  const popoverProvider =
-    active?.kind === "provider" ? providerById(active.id) : null;
-  const popoverStory = popoverProvider
-    ? capabilityStoryFor(popoverProvider.id)
-    : null;
+  const provider = activeId ? providerById(activeId) : null;
+  const story = provider ? capabilityStoryFor(provider.id) : null;
+  const lit = Boolean(activeId);
 
   return (
-    <div className="rx-intake rx-intake--calm" ref={rootRef}>
-      <header className="rx-intake-head">
+    <div
+      className="rx-origin"
+      ref={rootRef}
+      data-lit={lit ? "true" : undefined}
+    >
+      <header className="rx-origin-head">
         <p className="rx-rec-k">Data origin</p>
-        <h2 className="rx-intake-h">
-          Source systems become Decisions.
+        <h2 className="rx-origin-h">
+          Source systems → RADR → Decision
         </h2>
-        <p className="rx-intake-lead">
-          Representative connections. Detail on focus. Full catalog in
-          Developers.
-        </p>
       </header>
 
-      <div className="rx-intake-triad" aria-label="Evidence to Decision">
-        {/* LAYER 1 — sources */}
-        <div className="rx-intake-layer rx-intake-layer--src">
-          <p className="rx-intake-layer-k">Source systems</p>
-          <ul className="rx-intake-chips rx-intake-chips--flat">
+      <div className="rx-origin-triad" aria-label="Sources to Decision">
+        <div className="rx-origin-zone rx-origin-zone--src">
+          <p className="rx-origin-zone-k">Source systems</p>
+          <ul className="rx-origin-logos">
             {HOME_RESTING_PROVIDER_IDS.map((id) => {
               const p = providerById(id);
               if (!p) return null;
               return (
                 <li key={id}>
-                  <ProviderChip
-                    provider={p}
-                    selected={
-                      active?.kind === "provider" && active.id === id
+                  <button
+                    type="button"
+                    className="rx-origin-logo"
+                    aria-expanded={activeId === id}
+                    aria-label={`${p.name}, ${accessStatusLabel(p)}. Possible evidence.`}
+                    data-on={activeId === id ? "true" : undefined}
+                    onMouseEnter={() => setActiveId(id)}
+                    onFocus={() => setActiveId(id)}
+                    onClick={() =>
+                      setActiveId((cur) => (cur === id ? null : id))
                     }
-                    onOpen={() => setActive({ kind: "provider", id })}
-                  />
+                  >
+                    <ProviderWordmark id={p.id} name={p.name} />
+                  </button>
                 </li>
               );
             })}
           </ul>
-
-          {popoverProvider && popoverStory ? (
-            <CapabilityCard
-              provider={popoverProvider}
-              story={popoverStory}
+          {provider && story ? (
+            <OriginNote
+              provider={provider}
+              story={story}
               onClose={close}
             />
           ) : null}
         </div>
 
-        <div className="rx-intake-connector" aria-hidden="true">
-          <i />
+        <div className="rx-origin-flow" aria-hidden="true">
+          <i data-arm="in" data-on={lit ? "true" : undefined} />
         </div>
 
-        {/* LAYER 2 — RADR */}
-        <div className="rx-intake-layer rx-intake-layer--core">
-          <div className="rx-intake-delta-only">
-            <span className="rx-intake-delta" aria-hidden="true">
-              <svg viewBox="0 0 100 90" width="56" height="48">
-                <path
-                  d="M50 8 L90 81 H10 Z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="11"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <p>RADR</p>
-            <em>Compression</em>
+        <div className="rx-origin-zone rx-origin-zone--core">
+          <div className="rx-origin-delta" data-on={lit ? "true" : undefined}>
+            <svg viewBox="0 0 100 90" width="64" height="56" aria-hidden="true">
+              <path
+                d="M50 8 L90 81 H10 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="11"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <strong>RADR</strong>
           </div>
         </div>
 
-        <div className="rx-intake-connector" aria-hidden="true">
-          <i />
+        <div className="rx-origin-flow" aria-hidden="true">
+          <i data-arm="out" data-on={lit ? "true" : undefined} />
         </div>
 
-        {/* LAYER 3 — outputs */}
-        <div className="rx-intake-layer rx-intake-layer--out">
-          <p className="rx-intake-layer-k">Outputs</p>
-          <ul className="rx-intake-primitives" aria-label="RADR outputs">
-            {OUTPUTS.map((o) => (
-              <li key={o}>{o}</li>
+        <div className="rx-origin-zone rx-origin-zone--out">
+          <p className="rx-origin-decision" data-on={lit ? "true" : undefined}>
+            Decision
+          </p>
+          <ul className="rx-origin-children">
+            {DECISION_CHILDREN.map((c) => (
+              <li key={c}>{c}</li>
             ))}
           </ul>
         </div>
@@ -148,100 +144,55 @@ export function ConnectionOriginSection() {
 
       <Link
         href={{ pathname: "/developers", hash: "integrations" }}
-        className="rx-intake-more"
+        className="rx-origin-more"
       >
         View all connection paths <span aria-hidden="true">→</span>
       </Link>
-      <p className="rx-intake-more-note">
+      <p className="rx-origin-note">
         Files / CSV · {capabilityBadge("filesCsv")}
       </p>
     </div>
   );
 }
 
-function ProviderChip({
-  provider,
-  selected,
-  onOpen,
-}: {
-  provider: IntegrationProvider;
-  selected: boolean;
-  onOpen: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      className="rx-intake-chip"
-      aria-expanded={selected}
-      aria-label={`${provider.name}, ${accessStatusLabel(provider)}. Possible evidence.`}
-      data-on={selected ? "true" : undefined}
-      data-status={provider.status}
-      onMouseEnter={onOpen}
-      onFocus={onOpen}
-      onClick={onOpen}
-    >
-      <ProviderWordmark id={provider.id} name={provider.name} />
-    </button>
-  );
-}
-
-function CapabilityCard({
+function OriginNote({
   provider,
   story,
   onClose,
 }: {
-  provider: IntegrationProvider | null | undefined;
-  story: CapabilityStory | null | undefined;
-  googleExpanded?: boolean;
-  onSelectGoogleChild?: (id: string) => void;
+  provider: IntegrationProvider;
+  story: CapabilityStory;
   onClose: () => void;
 }) {
   const titleId = useId();
-
-  if (!provider || !story) return null;
-
   return (
-    <div className="rx-cap-card" role="dialog" aria-labelledby={titleId}>
+    <aside
+      className="rx-origin-note-card"
+      role="dialog"
+      aria-labelledby={titleId}
+    >
       <button
         type="button"
-        className="rx-cap-pop-close"
+        className="rx-origin-note-close"
         onClick={onClose}
         aria-label="Close"
       >
         ×
       </button>
-      <header className="rx-cap-pop-head">
-        <ProviderWordmark id={provider.id} name={provider.name} />
-        <div>
-          <h3 id={titleId}>{provider.name}</h3>
-          <p>
-            {categoryLabel(provider)}
-            <em data-status={provider.status}>{accessStatusLabel(provider)}</em>
-          </p>
-        </div>
-      </header>
-      <div className="rx-cap-pop-grid">
-        <div>
-          <p className="rx-cap-pop-k">Possible evidence</p>
-          <ul>
-            {story.potentialSignals.map((s) => (
-              <li key={s}>{s}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p className="rx-cap-pop-k">RADR can use it for</p>
-          <ul className="rx-cap-pop-see">
-            {story.radrCouldSee.map((s) => (
-              <li key={s}>{s}</li>
-            ))}
-          </ul>
-          <p className="rx-cap-pop-k" style={{ marginTop: "0.75rem" }}>
-            Status
-          </p>
-          <p className="rx-cap-pop-combine">{accessStatusLabel(provider)}</p>
-        </div>
-      </div>
-    </div>
+      <h3 id={titleId}>{provider.name}</h3>
+      <p className="rx-origin-note-k">Evidence</p>
+      <ul>
+        {story.potentialSignals.slice(0, 5).map((e) => (
+          <li key={e}>{e}</li>
+        ))}
+      </ul>
+      <p className="rx-origin-note-k">RADR can use it for</p>
+      <ul>
+        {story.radrCouldSee.slice(0, 3).map((e) => (
+          <li key={e}>{e}</li>
+        ))}
+      </ul>
+      <p className="rx-origin-note-status">{accessStatusLabel(provider)}</p>
+    </aside>
   );
 }

@@ -20,6 +20,27 @@ import "@/app/kinetic.css";
 import "@/app/radr-public.css";
 
 const LIFE = [
+  { time: "18:42", label: "Detected" },
+  { time: "18:44", label: "Understood" },
+  { time: "18:46", label: "Futures formed" },
+  { time: "18:48", label: "Recommendation ready" },
+  { time: "18:53", label: "Action approved" },
+  { time: "20:16", label: "Outcome observed" },
+  { time: "23:42", label: "Verified" },
+  { time: "—", label: "Memory updated" },
+] as const;
+
+type LifeLabel =
+  | "Detected"
+  | "Understood"
+  | "Futures"
+  | "Recommended"
+  | "Approved"
+  | "Observed"
+  | "Verified"
+  | "Learned";
+
+const LIFE_KEY: LifeLabel[] = [
   "Detected",
   "Understood",
   "Futures",
@@ -28,9 +49,7 @@ const LIFE = [
   "Observed",
   "Verified",
   "Learned",
-] as const;
-
-type Life = (typeof LIFE)[number];
+];
 
 export function PlatformDecisionTheater() {
   const reduced = usePrefersReducedMotion();
@@ -43,10 +62,11 @@ export function PlatformDecisionTheater() {
   const decision = decisionForVertical(vertical);
   const econ = platformEconomics(decision);
   const scene = platformSceneFor(vertical);
-  const stage = LIFE[life]!;
+  const beat = LIFE[life]!;
+  const stage = LIFE_KEY[life]!;
   const sealed = life >= 6;
 
-  const chipByStage: Record<Life, { euro: string; grade: string }> = {
+  const chipByStage: Record<LifeLabel, { euro: string; grade: string }> = {
     Detected: { euro: econ.primaryEuro, grade: econ.primaryGrade },
     Understood: { euro: econ.primaryEuro, grade: econ.primaryGrade },
     Futures: { euro: econ.expected, grade: "PATHS OPEN" },
@@ -132,25 +152,25 @@ export function PlatformDecisionTheater() {
               />
             </header>
 
-            <div
-              className="rx-pdt-scrub"
-              role="tablist"
-              aria-label="Decision lifecycle"
+            <ol
+              className="rx-pdt-timeline"
+              aria-label="Historical Decision replay"
             >
               {LIFE.map((s, i) => (
-                <button
-                  key={s}
-                  type="button"
-                  role="tab"
-                  aria-selected={life === i}
-                  data-on={life === i ? "true" : undefined}
-                  data-done={i < life ? "true" : undefined}
-                  onClick={() => scrollToStage(i)}
-                >
-                  {s}
-                </button>
+                <li key={s.label}>
+                  <button
+                    type="button"
+                    aria-current={life === i ? "step" : undefined}
+                    data-on={life === i ? "true" : undefined}
+                    data-done={i < life ? "true" : undefined}
+                    onClick={() => scrollToStage(i)}
+                  >
+                    <time>{s.time}</time>
+                    <span>{s.label}</span>
+                  </button>
+                </li>
               ))}
-            </div>
+            </ol>
 
             <article
               className="rx-pdt-object"
@@ -161,9 +181,11 @@ export function PlatformDecisionTheater() {
               <header className="rx-pdt-object-head">
                 <div>
                   <em>
-                    {econ.id} · {econ.property} · {econ.verticalLabel} · DEMO
+                    Historical replay · {beat.time} · {econ.id} ·{" "}
+                    {econ.property} · DEMO
                   </em>
-                  <h3>{scene.heads[stage]}</h3>
+                  <h3>{beat.label}</h3>
+                  <p className="rx-pdt-object-sub">{scene.heads[stage]}</p>
                 </div>
                 <div
                   className="rx-euro-chip"
@@ -207,7 +229,7 @@ function StageBody({
   trust,
   setTrust,
 }: {
-  stage: Life;
+  stage: LifeLabel;
   scene: ReturnType<typeof platformSceneFor>;
   econ: ReturnType<typeof platformEconomics>;
   future: number;

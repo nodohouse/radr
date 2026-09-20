@@ -85,7 +85,7 @@ export function ContactForm({
     role === "finance" || role === "owner"
       ? ["Recovery / Reconciliation", "Multi-location economics", "Verified Value"]
       : role === "gm" || role === "ops"
-        ? ["Operations", "Perishable revenue", "Decisions / Floor"]
+        ? ["Operations", "Perishable revenue", "Decisions"]
         : [];
 
   const formKey = useMemo(

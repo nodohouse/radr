@@ -1,11 +1,6 @@
 /**
  * RADR commercial packaging — public pricing page.
- *
- * Motions: Pilot (paid proof) · Core (product) · Control (govern + scale).
- * No free tier. No list prices. No seat tax. No per-Decision charges.
- * BUY / LABOR / SELL / RECOVER are lenses — never separately priced modules.
- *
- * Capability honesty aligns with lib/radr/capabilityStatus.ts.
+ * Motions: Start (Recovery Pilot) · Expand (RADR) · Enterprise (group scale).
  */
 
 export type PlanId = "pilot" | "core" | "control";
@@ -13,23 +8,23 @@ export type PlanId = "pilot" | "core" | "control";
 export const pricingConfig = {
   pilot: {
     id: "pilot" as const,
-    name: "RADR Pilot",
+    name: "Recovery Pilot",
     verb: "Prove",
-    cta: { href: "/contact?plan=pilot", label: "Talk to us about a Pilot" },
+    cta: { href: "/contact?plan=pilot", label: "Start a recovery pilot" },
   },
   core: {
     id: "core" as const,
-    name: "RADR Core",
-    verb: "Decide + Verify",
-    cta: { href: "/contact?plan=core", label: "Discuss Core" },
+    name: "Expand",
+    verb: "RADR",
+    cta: { href: "/contact?plan=core", label: "Discuss Expand" },
   },
   control: {
     id: "control" as const,
-    name: "RADR Control",
-    verb: "Govern + Scale",
-    cta: { href: "/contact?plan=control", label: "Discuss Control" },
+    name: "Enterprise",
+    verb: "Group scale",
+    cta: { href: "/contact?plan=control", label: "Discuss Enterprise" },
   },
-  talkHref: "/contact" as const,
+  talkHref: "/contact?intent=recovery-pilot" as const,
   demoHref: "/demo" as const,
 } as const;
 
@@ -52,25 +47,25 @@ export const pricingDimensions = [
   },
 ] as const;
 
-/** Prove → Deploy → Scale */
+/** Start → Expand → Enterprise */
 export const expansionSteps = [
   {
     id: "prove",
-    label: "Prove",
-    title: "One operating problem.",
-    body: "A paid Pilot on one location, defined systems, and a measurable outcome.",
+    label: "Start",
+    title: "Prove recoverable value.",
+    body: "A Recovery Pilot on one defined scope — measurable Verified outcomes.",
   },
   {
     id: "deploy",
-    label: "Deploy",
-    title: "Make RADR part of one operation.",
-    body: "Core connects the stack, decides what matters, and verifies what changed.",
+    label: "Expand",
+    title: "Make RADR the Decision layer.",
+    body: "More locations, Decision classes, and connected evidence — with Verified Value and Memory.",
   },
   {
     id: "scale",
-    label: "Scale",
-    title: "Govern Decisions across locations.",
-    body: "Control prepares, approves, and learns across the group.",
+    label: "Enterprise",
+    title: "RADR at group scale.",
+    body: "Policies, approvals, governance, and enterprise controls across locations.",
   },
 ] as const;
 

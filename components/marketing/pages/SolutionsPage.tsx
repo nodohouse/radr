@@ -16,9 +16,6 @@ import {
 } from "@/lib/radr/intelligence";
 import type { CanonDecision } from "@/lib/radr/decision/demo/canonical";
 import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
-import { useTranslations } from "next-intl";
-import { StickyStory } from "@/components/marketing/kinetic/StickyStory";
-import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual";
 import type { ProblemFamily } from "@/lib/radr/problemFamilies";
 import { PublicFooter, PublicNavbar } from "../PublicShell";
 import { IntelFuturesFork } from "./IntelFuturesFork";
@@ -472,78 +469,9 @@ function LensStory({ routeId }: { routeId: TerritoryRouteId }) {
   );
 }
 
-function SolutionsLeakMap() {
-  const t = useTranslations("homepage.recover");
-  const familyKeys: ProblemFamily[] = [
-    "SUPPLIER_AP",
-    "RECONCILIATION",
-    "COST_VARIANCE",
-    "PROCUREMENT",
-    "PERISHABLE_REVENUE",
-  ];
-  const chapters = familyKeys.map((id) => ({
-    id: LEAK_ANCHORS[id],
-    kicker: t(`families.${id}.label`),
-    title: t(`families.${id}.label`),
-    body: `${t(`families.${id}.leaks`)} ${t(`families.${id}.does`)}`,
-    meta: t(`families.${id}.verifies`),
-  }));
-
-  return (
-    <section className="rx-rec-sec rx-rec-sec-band" data-nav-theme="light">
-      <div className="rx-shell">
-        <LeakHashFocus anchors={Object.values(LEAK_ANCHORS)} />
-        <StickyStory
-          kicker={t("families.kicker")}
-          title={t("families.title")}
-          lead={t("families.lead")}
-          chapters={chapters}
-          vhPerChapter={65}
-          syncHash
-          renderVisual={(i) => (
-            <LeakClassVisual key={familyKeys[i]} family={familyKeys[i]!} />
-          )}
-        />
-      </div>
-    </section>
-  );
-}
-
-function LensIntro() {
-  return (
-    <section className="rx-intel-lenses-intro rx-intel-lenses-quiet" id="lenses" data-nav-theme="light">
-      <div className="rx-shell">
-        <p className="rx-intel-k">Also on the Platform</p>
-        <h2 className="rx-intel-classes-title rx-intel-classes-title-quiet">
-          RADR can also view Decisions through four economic lenses.
-        </h2>
-        <p className="rx-intel-classes-lead">
-          BUY · LABOR · SELL · RECOVER — secondary lenses over the same Decision
-          model. Not a second taxonomy of value leaks.
-        </p>
-        <div
-          className="rx-intel-lenses rx-intel-lenses-sub"
-          role="navigation"
-          aria-label="Economic lenses"
-        >
-          {LENS_ORDER.map((id) => (
-            <Link
-              key={id}
-              href={TERRITORY_ROUTE[id].path}
-              className="rx-intel-lens"
-            >
-              {TERRITORY_ROUTE[id].code}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /**
- * Where value leaks — five intelligence classes, then lenses demoted.
- * Lens routes keep BUY / LABOR / SELL / RECOVER depth.
+ * Where value leaks — one framework (five leak classes).
+ * BUY / LABOR / SELL / RECOVER remain as optional lens routes, not competing top-level.
  */
 export function SolutionsPage({
   lens,
@@ -612,9 +540,8 @@ export function SolutionsPage({
           </section>
         ) : (
           <>
-            <SolutionsLeakMap />
+            <LeakHashFocus anchors={Object.values(LEAK_ANCHORS)} />
             <ValueLeaksNarratives />
-            <LensIntro />
           </>
         )}
 

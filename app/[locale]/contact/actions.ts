@@ -89,11 +89,11 @@ export async function submitContactInquiry(
   if (inbox) {
     const planLabel =
       payload.plan === "pilot"
-        ? "RADR Pilot"
+        ? "Recovery Pilot"
         : payload.plan === "core"
-          ? "RADR Core"
+          ? "Expand"
           : payload.plan === "control"
-            ? "RADR Control"
+            ? "Enterprise"
             : null;
     const subject = encodeURIComponent(
       planLabel

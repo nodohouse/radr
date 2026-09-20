@@ -159,8 +159,8 @@ html:has(.radr) body {
   --max-band: 1600px;
   --max-narrow: 1080px;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
-  /* Floating nav: 12px inset + ~52px bar + breathing room */
-  --nav-h: 76px;
+  /* Floating nav: banner + inset + bar + breathing room */
+  --nav-h: 108px;
   --section-y: clamp(4rem, 7vw, 6.5rem);
   --section-y-compact: clamp(3rem, 5vw, 4.5rem);
   /* Type: Instrument Sans (display/body) · IBM Plex Mono (labels only) */
@@ -805,12 +805,67 @@ html:has(.radr) body {
 }
 
 /* Nav: brand aligns with .rx-shell content edge */
+:root {
+  --rx-banner-h: 2rem;
+}
+
+.rx-commercial-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 220;
+  height: var(--rx-banner-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0d0b;
+  color: rgba(247, 250, 248, 0.78);
+  border-bottom: 1px solid rgba(247, 250, 248, 0.08);
+}
+
+.rx-commercial-banner-inner {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.55rem;
+  padding: 0 1rem;
+  font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.rx-commercial-banner-inner > span[aria-hidden="true"] {
+  opacity: 0.35;
+}
+
+.rx-commercial-banner-cta {
+  margin-left: 0.35rem;
+  color: #00d978;
+  text-decoration: none;
+  font-weight: 560;
+}
+
+.rx-commercial-banner-cta:hover {
+  color: #f7faf8;
+}
+
+@media (max-width: 720px) {
+  .rx-commercial-banner-inner > span:nth-child(n + 5):not(.rx-commercial-banner-cta) {
+    display: none;
+  }
+}
+
 .rx-nav {
   --nav-inset: 16px;
   --nav-bar-h: 56px;
   --nav-pad-x: 1rem;
   position: fixed;
-  top: var(--nav-inset);
+  top: calc(var(--rx-banner-h) + var(--nav-inset));
   /* Extend past shell by nav pad so brand text shares the shell left edge */
   left: max(var(--nav-inset), calc(var(--gutter) - var(--nav-pad-x)));
   right: max(var(--nav-inset), calc(var(--gutter) - var(--nav-pad-x)));

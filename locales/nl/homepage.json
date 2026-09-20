@@ -947,7 +947,7 @@
     "exampleMeta": "Location memory · weather × service × channel"
   },
   "industriesTeaser": {
-    "title": "One RADR Core. Different operations.",
+    "title": "One RADR. Different operations.",
     "trustTitle": "No black box.",
     "trustLine": "Every material decision traces to sources, freshness, assumptions, confidence and outcome.",
     "trustCta": "Explore Trust →",
@@ -1305,7 +1305,7 @@
     "worldKicker": "The world around it",
     "mantra": "Everything in. Only what matters out.",
     "noiseKicker": "What's happening in the operation",
-    "sameCore": "Same RADR Core",
+    "sameCore": "Same RADR engine",
     "modesAria": "Hospitality formats",
     "nodes": {
       "pos": "POS",

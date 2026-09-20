@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Pricing responsibility track — Recover → Decide → Govern.
- * No demo money ticker — commercial seriousness.
+ * Pricing responsibility — Start → Expand → Enterprise.
+ * One brand. One product. RADR.
  */
 
 import { useState } from "react";
@@ -11,24 +11,24 @@ import "@/app/kinetic.css";
 
 const STAGES = [
   {
-    id: "recover",
-    label: "Recover",
+    id: "start",
+    label: "Start",
     name: "Recovery Pilot",
-    body: "One recovery scope. Supplier/AP, Reconciliation, or both. Cases, evidence, verification. File-first — secure exports before a large API project.",
+    body: "Prove recoverable value. Supplier/AP, Reconciliation, or both. Evidence, cases, verification — file-first.",
     status: "early_access" as const,
   },
   {
-    id: "decide",
-    label: "Decide",
-    name: "RADR Core",
-    body: "More systems. Recurring Decisions. Futures. Memory. Verified Value across the operation.",
+    id: "expand",
+    label: "Expand",
+    name: "RADR",
+    body: "More locations. More Decision classes. More connected evidence. Verified Value. Operating Memory.",
     status: "demo" as const,
   },
   {
-    id: "govern",
-    label: "Govern",
-    name: "RADR Control",
-    body: "Multi-location. Policy. Approval. Autopilot within policy (planned). Portfolio Verified Value.",
+    id: "enterprise",
+    label: "Enterprise",
+    name: "RADR at group scale",
+    body: "Policies. Approvals. Governance. Custom integrations. Security and enterprise controls.",
     status: "planned" as const,
   },
 ] as const;
@@ -43,20 +43,19 @@ export function PricingResponsibilityTrack() {
   return (
     <div className="px-resp-track">
       <div className="rx-shell">
-        <p className="rx-rec-k">Commercial structure</p>
+        <p className="rx-rec-k">One company · one product · RADR</p>
         <h2 className="rx-rec-h" style={{ maxWidth: "28rem" }}>
-          Recover → Decide → Govern
+          Start → Expand → Enterprise
         </h2>
         <p className="rx-rec-p" style={{ maxWidth: "40rem" }}>
-          Pricing scales with the operating scope RADR takes on — locations,
-          systems, and Decision coverage. Built for multi-location hospitality /
-          F&amp;B groups with Finance, COO, or Procurement as sponsor.
+          How do I start? What does the pilot measure? How does pricing scale
+          with locations and Decision coverage?
         </p>
 
         <div
           className="px-resp-stages"
           role="tablist"
-          aria-label="Responsibility"
+          aria-label="Commercial path"
           style={{ marginTop: "1.75rem" }}
         >
           {STAGES.map((s, i) => (
@@ -70,7 +69,14 @@ export function PricingResponsibilityTrack() {
               onClick={() => setStage(i)}
             >
               <em>
-                {s.label} · {capabilityBadge(s.id === "recover" ? "recoveryPilot" : s.id === "decide" ? "decisions" : "autopilot")}
+                {s.label} ·{" "}
+                {capabilityBadge(
+                  s.id === "start"
+                    ? "recoveryPilot"
+                    : s.id === "expand"
+                      ? "decisions"
+                      : "autopilot",
+                )}
               </em>
               <strong>{s.name}</strong>
               <p>{s.body}</p>

@@ -14,6 +14,7 @@ import {
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { RadrDelta } from "@/components/radr/RadrDelta";
+import { CommercialBanner } from "@/components/marketing/CommercialBanner";
 import {
   COMPANY_LINKS,
   PLATFORM_COLUMNS,
@@ -239,7 +240,9 @@ export function SiteNav({ variant }: Props) {
     : { duration: 0.14, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
-    <header
+    <>
+      <CommercialBanner />
+      <header
       ref={navRef}
       className="rx-nav"
       data-theme={navTheme}
@@ -512,6 +515,7 @@ export function SiteNav({ variant }: Props) {
         </Link>
       </div>
     </header>
+    </>
   );
 }
 

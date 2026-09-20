@@ -37,7 +37,7 @@ export const CTAS = {
   primarySales: "Start a recovery pilot",
   secondaryProduct: "See a Verified Recovery",
   secondaryProductHref: "/app/lab/control-center?seed=recover",
-  enterprise: "Talk to RADR",
+  enterprise: "Scope my recovery pilot",
   openTrace: "Open Trace",
   compareFutures: "Compare Futures",
   seeVerified: "See Verified Value",

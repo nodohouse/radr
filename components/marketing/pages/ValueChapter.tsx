@@ -120,7 +120,7 @@ export function ValueChapter() {
             <p className="rx-ch-kicker">
               Historical · {ECON_D4102.displayId} · sealed recovery · DEMO
             </p>
-            <div className="rx-rso-hero-num" style={{ marginBottom: "2rem" }}>
+            <div className="rx-rso-hero-num" style={{ marginBottom: "3rem" }}>
               <strong className="rx-pub-num" data-tone="verified">
                 {euro(ECON_D4102.verified)}
               </strong>
@@ -153,11 +153,11 @@ export function ValueChapter() {
               </p>
             </DecisionObject>
 
-            <p className="rx-ch-kicker" style={{ marginTop: "3.5rem" }}>
+            <p className="rx-ch-kicker" style={{ marginTop: "5rem" }}>
               Decision ledger · sample · DEMO
             </p>
-            <p className="rx-value-stream-note" style={{ marginBottom: "1rem" }}>
-              Secondary Decisions as a precise ledger — including zero or open
+            <p className="rx-value-stream-note" style={{ marginBottom: "1.25rem" }}>
+              Precise. Dense. Calm. Secondary Decisions — including zero or open
               cases. Not a rollup.
             </p>
             <p className="rx-ch-kicker">

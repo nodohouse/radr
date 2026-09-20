@@ -1,6 +1,6 @@
 {
   "metaTitle": "Pricing — RADR",
-  "metaDescription": "Recovery Pilot, Core, and Control. Start with Supplier/AP or Reconciliation. Prove Verified Value. Then expand.",
+  "metaDescription": "Recovery Pilot, Expand, and Enterprise. Start with Supplier/AP or Reconciliation. Prove Verified Value. Then expand.",
   "kicker": "Pricing",
   "heroTitleLine1": "Start where the value is clearest.",
   "heroTitleLine2": "",
@@ -86,25 +86,25 @@
     "body": "For larger groups we can scope SSO / SAML, custom RBAC, warehouse connections, custom APIs, security review, data policies, custom onboarding, dedicated support, SLA and multi-entity deployment.",
     "cta": "Talk to us"
   },
-  "packagesNote": "Core and Control are scoped to your operation.",
+  "packagesNote": "Start, Expand, and Enterprise are scoped to your operation.",
   "expansion": {
     "kicker": "How expansion works",
-    "title": "Recover → Decide → Govern.",
+    "title": "Start → Expand → Enterprise.",
     "steps": {
       "prove": {
-        "label": "Recover",
-        "title": "Recover value first.",
+        "label": "Start",
+        "title": "Prove recoverable value.",
         "body": "A Recovery Pilot on Supplier/AP and/or Reconciliation — measurable Verified outcomes."
       },
       "deploy": {
-        "label": "Decide",
-        "title": "Make RADR part of the Decision layer.",
-        "body": "Core connects the stack, decides what matters, and verifies what changed."
+        "label": "Expand",
+        "title": "Make RADR the Decision layer.",
+        "body": "More locations, Decision classes, and connected evidence — with Verified Value and Memory."
       },
       "scale": {
-        "label": "Govern",
-        "title": "Govern trusted Decisions across locations.",
-        "body": "Control prepares, approves, and learns across the group."
+        "label": "Enterprise",
+        "title": "RADR at group scale.",
+        "body": "Policies, approvals, governance, and enterprise controls across the group."
       }
     }
   },
@@ -129,16 +129,16 @@
     },
     "columns": {
       "feature": "Capability",
-      "pilot": "Pilot",
-      "core": "Core",
-      "control": "Control"
+      "pilot": "Start",
+      "core": "Expand",
+      "control": "Enterprise"
     },
     "groups": {
       "scope": "Operating scope",
       "intelligence": "Decisions",
       "proof": "Proof",
       "action": "Action",
-      "scale": "Govern"
+      "scale": "Enterprise"
     },
     "planAria": "Package",
     "rows": [
@@ -199,7 +199,7 @@
       },
       {
         "q": "Do you offer enterprise terms?",
-        "a": "Yes. Larger groups can scope advanced controls, security, custom integrations, SLA and multi-entity deployment under Control."
+        "a": "Yes. Larger groups can scope advanced controls, security, custom integrations, SLA and multi-entity deployment under Enterprise."
       }
     ]
   },

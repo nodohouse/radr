@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { pricingConfig } from "./config";
 
 /**
- * One commercial progression: Recover → Decide → Govern.
+ * One commercial progression: Start → Expand → Enterprise.
  * Not three equal SaaS feature cards.
  */
 export async function PricingTiers() {

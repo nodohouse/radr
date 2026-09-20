@@ -72,7 +72,7 @@
     "role": "Your role",
     "locations": "Locations",
     "industry": "Industry",
-    "interest": "What do you need?",
+    "interest": "Where is value leaking?",
     "message": "Message",
     "optional": "optional",
     "emailPlaceholder": "you@company.com",
@@ -103,15 +103,15 @@
     "interests": {
       "demo": "Product demo",
       "pricing": "Pricing",
-      "package-pilot": "RADR Pilot",
-      "package-core": "RADR Core",
-      "package-control": "RADR Control",
+      "package-pilot": "Recovery Pilot",
+      "package-core": "Expand",
+      "package-control": "Enterprise",
       "multi-location": "Multi-location rollout",
       "integrations": "Integrations",
       "other": "Something else"
     },
     "messagePlaceholder": "Anything we should know before we talk?",
-    "submit": "Talk to RADR →",
+    "submit": "Scope my recovery pilot →",
     "sending": "Sending…",
     "okWebhook": "We received your message. We’ll follow up at your work email.",
     "okMailto": "We received your message. We’ll follow up at your work email.",
@@ -336,7 +336,7 @@
     "heroLine2": "Real findings.",
     "heroLine3": "Real value.",
     "heroLead": "Case studies coming soon. When they land, each one will follow the same shape as the product itself: operation, problem, finding, action, verified value.",
-    "ctaTalk": "Talk to RADR →",
+    "ctaTalk": "Scope my recovery pilot →",
     "ctaProduct": "See the product"
   },
   "founder": {

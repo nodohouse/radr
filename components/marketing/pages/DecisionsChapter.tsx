@@ -1,10 +1,9 @@
 "use client";
 
 /**
- * Decisions — one persistent Decision object transforms through Acts.
+ * Decisions — one integrated Decision object. Not Act 1 / Act 2 slides.
  */
 
-import { useState } from "react";
 import NextLink from "next/link";
 import {
   CANON_OTA,
@@ -12,152 +11,138 @@ import {
 } from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { CTAS } from "@/lib/marketing/brand";
-import { DecisionObject } from "@/components/marketing/primitives/DecisionObject";
-import { EvidenceProvenance } from "@/components/marketing/primitives/EvidenceProvenance";
 import { VerifiedStamp } from "@/components/marketing/primitives/VerifiedStamp";
+import { EvidenceProvenance } from "@/components/marketing/primitives/EvidenceProvenance";
 import "@/app/product-chapters.css";
 import "@/app/econ.css";
 import "@/app/kinetic.css";
 import "@/app/radr-public.css";
 
-const ACTS = [
-  {
-    id: "problem",
-    label: "Act 1 · Problem",
-    grade: "EXPOSED",
-    euro: formatDecisionMoney(CANON_OTA.exposureEuro),
-    line: "89% full looks like pricing power. The obvious move is release the last premium keys to OTA.",
-  },
-  {
-    id: "options",
-    label: "Act 2 · Futures",
-    grade: "PATHS OPEN",
-    euro: formatDecisionMoney(CANON_OTA.expectedProtectedEuro),
-    line: "Fill vs ADR vs direct mix — three viable moves, one recommended.",
-  },
-  {
-    id: "call",
-    label: "Act 3 · Selected",
-    grade: "RECOMMENDED",
-    euro: formatDecisionMoney(CANON_OTA.expectedProtectedEuro),
-    line: "Hold 4 premium direct 72h — not raise rate or OTA dump.",
-  },
-  {
-    id: "happened",
-    label: "Act 4 · Observed",
-    grade: "OBSERVED",
-    euro: formatDecisionMoney(CANON_OTA.actualProtectedEuro),
-    line: "Direct filled inside the window. OTA share held. Housekeeping block stayed clean.",
-  },
-  {
-    id: "learned",
-    label: "Act 5 · Memory",
-    grade: "LEARNED",
-    euro: formatDecisionMoney(CANON_OTA.actualProtectedEuro),
-    line: CANON_OTA.learning.lesson,
-  },
-] as const;
-
 export function DecisionsChapter() {
-  const [act, setAct] = useState(0);
   const d = CANON_OTA;
-  const current = ACTS[act]!;
-  const sealed = act >= 3;
+  const rec = d.scenarios.find((s) => s.recommended) ?? d.scenarios[0]!;
 
   return (
     <main className="rx-ch-main">
       <section className="rx-ch-hero" data-nav-theme="light">
         <div className="rx-shell">
           <p className="rx-ch-kicker">
-            Platform · Decisions · {CANON_OTA.displayId} · DEMO · ILLUSTRATIVE
+            Platform · Decisions · Historical · {d.displayId} · DEMO
           </p>
           <h1 className="rx-ch-title">
             One Decision.
             <br />
-            From first signal to lasting memory.
+            The operating unit of RADR.
           </h1>
         </div>
       </section>
 
       <section className="rx-ch-body" data-nav-theme="light">
         <div className="rx-shell">
-          <div className="rx-plat-stage-rail" role="tablist">
-            {ACTS.map((a, i) => (
-              <button
-                key={a.id}
-                type="button"
-                role="tab"
-                data-on={act === i ? "true" : "false"}
-                aria-selected={act === i}
-                onClick={() => setAct(i)}
-              >
-                {a.label}
-              </button>
-            ))}
-          </div>
-
-          <DecisionObject
-            key={current.id}
-            displayId={`${d.displayId} · ${d.property}`}
-            title={current.line}
-            amount={current.euro}
-            amountLabel={current.grade}
-            verified={sealed}
-            className="rx-dec-object"
-          >
-            <VerifiedStamp
-              verified={sealed}
-              label="Verified protected"
-              pendingLabel={current.grade}
-            />
-            <div style={{ marginTop: "0.85rem" }}>
-              <EvidenceProvenance
-                steps={[
-                  { label: "Exposed", value: formatDecisionMoney(d.exposureEuro) },
-                  {
-                    label: "Expected",
-                    value: formatDecisionMoney(d.expectedProtectedEuro),
-                  },
-                  {
-                    label: "Observed",
-                    value: formatDecisionMoney(d.actualProtectedEuro),
-                    verified: sealed,
-                  },
-                ]}
-              />
-            </div>
-            {current.id === "options" ? (
-              <div className="rx-plat-live-paths" style={{ marginTop: "1rem" }}>
-                {d.scenarios.map((s) => (
-                  <p key={s.id} data-rec={s.recommended ? "true" : undefined}>
-                    <span>
-                      {s.title} · {s.note}
-                    </span>
-                    <strong>
-                      {formatDecisionMoney(s.expectedContributionEuro ?? 0)}
-                    </strong>
-                  </p>
-                ))}
+          <article className="rx-dec-record">
+            <header className="rx-dec-record-head">
+              <div>
+                <p className="rx-pub-micro">
+                  {d.displayId} · {d.property}
+                </p>
+                <h2 className="rx-dec-record-title">{d.title}</h2>
+                <p className="rx-dec-record-class">Premium inventory</p>
               </div>
-            ) : null}
-            {current.id === "happened" ? (
-              <p className="rx-plat10-muted">
-                {formatCanonVariance(d)} vs expected
-              </p>
-            ) : null}
-            {current.id === "learned" ? (
-              <p className="rx-plat10-playbook-tag">
-                {d.learning.playbookFrom} → {d.learning.playbookTo}
-              </p>
-            ) : null}
-          </DecisionObject>
+              <div className="rx-dec-record-amount" data-tone="exposure">
+                <strong>{formatDecisionMoney(d.exposureEuro)}</strong>
+                <em>At risk</em>
+              </div>
+            </header>
 
-          <div className="rx-ch-ctas" style={{ marginTop: "2rem" }}>
+            <VerifiedStamp
+              verified
+              label="Historical · verified protected"
+              pendingLabel="Recommendation ready"
+            />
+
+            <dl className="rx-dec-record-grid">
+              <div>
+                <dt>Why now</dt>
+                <dd>{d.problemLine}</dd>
+              </div>
+              <div>
+                <dt>Evidence</dt>
+                <dd>
+                  <EvidenceProvenance
+                    steps={d.sources.slice(0, 4).map((s) => ({
+                      label: s.name,
+                      value: s.freshness,
+                    }))}
+                  />
+                </dd>
+              </div>
+              <div>
+                <dt>No-action baseline</dt>
+                <dd>
+                  {
+                    d.scenarios.find((s) => s.isNoAction)?.note ??
+                    "OTA fill · commission stands"
+                  }
+                </dd>
+              </div>
+              <div>
+                <dt>Futures</dt>
+                <dd>
+                  <ul className="rx-dec-record-futures">
+                    {d.scenarios.map((s) => (
+                      <li
+                        key={s.id}
+                        data-rec={s.recommended ? "true" : undefined}
+                      >
+                        <span>{s.title}</span>
+                        <strong>
+                          {formatDecisionMoney(
+                            s.expectedContributionEuro ?? 0,
+                          )}
+                        </strong>
+                      </li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+              <div>
+                <dt>Recommended action</dt>
+                <dd>
+                  {rec.title}
+                  <br />
+                  <span>{rec.note}</span>
+                </dd>
+              </div>
+              <div>
+                <dt>Owner · Deadline</dt>
+                <dd>
+                  Revenue · {d.deadline}
+                </dd>
+              </div>
+              <div>
+                <dt>Outcome</dt>
+                <dd>
+                  Observed {formatDecisionMoney(d.actualProtectedEuro)} ·{" "}
+                  {formatCanonVariance(d)} vs expected
+                </dd>
+              </div>
+              <div>
+                <dt>Verification</dt>
+                <dd>
+                  {formatDecisionMoney(d.actualProtectedEuro)} verified{" "}
+                  {d.verifiedKind} · {d.attributionStrength.replaceAll("_", " ")}
+                </dd>
+              </div>
+              <div>
+                <dt>Memory</dt>
+                <dd>{d.learning.lesson}</dd>
+              </div>
+            </dl>
+          </article>
+
+          <div className="rx-ch-ctas" style={{ marginTop: "2.5rem" }}>
             <NextLink href="/product/memory" className="rx-btn rx-btn-primary">
               Operating Memory <span aria-hidden="true">→</span>
-            </NextLink>
-            <NextLink href="/product/floor" className="rx-btn rx-btn-ghost">
-              RADR Floor
             </NextLink>
             <NextLink href="/demo" className="rx-btn rx-btn-ghost">
               {CTAS.primaryProduct}
