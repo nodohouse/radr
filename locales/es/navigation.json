@@ -1,0 +1,443 @@
+{
+  "product": "Platform",
+  "solutions": "Where value leaks",
+  "industries": "Industrias",
+  "how": "How it works",
+  "pricing": "Pricing",
+  "company": "Company",
+  "signIn": "Login",
+  "seeRadr": "Start a recovery pilot",
+  "contactSales": "Start a recovery pilot",
+  "getStarted": "Start a recovery pilot",
+  "bookDemo": "See a Verified Recovery",
+  "seeInAction": "Start a recovery pilot",
+  "menu": "Menu",
+  "close": "Close",
+  "footerProduct": "Platform",
+  "footerCompany": "Company",
+  "footerLegal": "Trust",
+  "footerFollow": "Follow",
+  "why": "Why RADR",
+  "approach": "Our approach",
+  "about": "About RADR",
+  "developers": "Developers",
+  "security": "Trust & Security",
+  "contact": "Contact",
+  "privacy": "Privacy",
+  "terms": "Terms",
+  "imprint": "Imprint",
+  "homeAria": "RADR home",
+  "primaryNav": "Primary",
+  "customerStories": "Customer stories",
+  "comingSoon": "Coming soon",
+  "panels": {
+    "product": {
+      "title": "Platform",
+      "kicker": "The Decision Cockpit for hospitality.",
+      "items": {
+        "overview": {
+          "label": "Overview",
+          "desc": "The decision layer: attention, prepared actions, verified outcomes."
+        },
+        "forecast": {
+          "label": "Forecast",
+          "desc": "Expected demand, revenue and margin from bookings and signals."
+        },
+        "findings": {
+          "label": "Findings",
+          "desc": "Material decisions with evidence and economics attached."
+        },
+        "verifiedValue": {
+          "label": "Verified Value",
+          "desc": "Track identified → protected → verified economic value."
+        }
+      }
+    },
+    "solutions": {
+      "title": "Where value leaks",
+      "lead": "Economic intelligence classes — not modules.",
+      "columns": {
+        "classes": "Where value leaks",
+        "deeper": "Deeper",
+        "territories": "Territories",
+        "operation": "Industries",
+        "priority": "Territories"
+      },
+      "classes": {
+        "supplier": {
+          "label": "Supplier / AP",
+          "desc": "Contract leakage · credits · rebates"
+        },
+        "reconciliation": {
+          "label": "Reconciliation",
+          "desc": "Settlements · refunds · payment mismatch"
+        },
+        "cost": {
+          "label": "Cost variance",
+          "desc": "Food cost · waste · yield · mix"
+        },
+        "procurement": {
+          "label": "Procurement",
+          "desc": "Price dispersion · tiers · leverage"
+        },
+        "perishable": {
+          "label": "Perishable revenue",
+          "desc": "Cancellations · no-shows · rooms · tables"
+        }
+      },
+      "deeper": {
+        "lenses": {
+          "label": "How RADR interprets the operation",
+          "desc": "BUY · LABOR · SELL · RECOVER — secondary lenses over the same Decision model."
+        }
+      },
+      "exploreAll": "Explore where value leaks",
+      "priority": {
+        "buy": {
+          "label": "BUY",
+          "desc": "Know what inputs really cost the operation."
+        },
+        "labor": {
+          "label": "LABOR",
+          "desc": "Put capacity where demand will actually hit."
+        },
+        "sell": {
+          "label": "SELL",
+          "desc": "Choose the demand that creates the strongest contribution."
+        },
+        "recover": {
+          "label": "RECOVER",
+          "desc": "Reclaim value before it disappears."
+        }
+      },
+      "operation": {
+        "independent": {
+          "label": "Restaurants & F&B"
+        },
+        "hotels": {
+          "label": "Hotels & Resorts"
+        },
+        "apartments": {
+          "label": "Serviced Apartments"
+        },
+        "groups": {
+          "label": "Multi-location Groups"
+        }
+      },
+      "territories": {
+        "buy": {
+          "title": "BUY",
+          "desc": "Know what inputs really cost the operation."
+        },
+        "labor": {
+          "title": "LABOR",
+          "desc": "Put capacity where demand will actually hit."
+        },
+        "sell": {
+          "title": "SELL",
+          "desc": "Choose the demand that creates the strongest contribution."
+        },
+        "recover": {
+          "title": "RECOVER",
+          "desc": "Reclaim value before it disappears."
+        }
+      }
+    },
+    "how": {
+      "title": "How it works",
+      "kicker": "How RADR produces value.",
+      "cta": "Explore the RADR model →",
+      "items": {
+        "connect": {
+          "label": "Connect",
+          "desc": "Bring operational and financial evidence into one layer."
+        },
+        "understand": {
+          "label": "Understand",
+          "desc": "Build the expected operating state."
+        },
+        "detect": {
+          "label": "Detect",
+          "desc": "Surface the financial difference between expected and actual."
+        },
+        "act": {
+          "label": "Act",
+          "desc": "Give the right person the next move with evidence ready."
+        },
+        "verify": {
+          "label": "Verify",
+          "desc": "Prove the value that was actually captured."
+        }
+      }
+    },
+    "company": {
+      "title": "Company",
+      "lead": "Built for the economics of hospitality.",
+      "sideTitle": "Company",
+      "primary": {
+        "why": {
+          "label": "Why RADR",
+          "title": "Hospitality doesn't need another dashboard.",
+          "desc": "It needs to know where margin is being made, lost, owed and left behind.",
+          "cta": "Why we exist"
+        },
+        "approach": {
+          "label": "Our approach",
+          "title": "Nothing off the RADR.",
+          "desc": "We connect operational reality to financial consequence, and turn it into action.",
+          "cta": "Our approach"
+        },
+        "hospitality": {
+          "label": "Built for hospitality",
+          "title": "Not adapted from generic finance software.",
+          "desc": "RADR starts with how restaurants actually buy, staff, sell and recover.",
+          "cta": "What we believe"
+        }
+      },
+      "secondary": {
+        "about": {
+          "label": "About RADR",
+          "desc": "The company and the idea behind it."
+        },
+        "developers": {
+          "label": "Developers",
+          "desc": "APIs, connectors and how to build on RADR."
+        },
+        "security": {
+          "label": "Trust & Security",
+          "desc": "How RADR earns trust on decisions and data."
+        },
+        "contact": {
+          "label": "Contact",
+          "desc": "Talk to us."
+        },
+        "blog": {
+          "label": "Blog",
+          "desc": "Field notes on the Decision Gap and hospitality economics."
+        }
+      },
+      "brandLine": "Hecho para quienes dirigen la hospitalidad.",
+      "links": {
+        "about": {
+          "label": "Sobre RADR"
+        },
+        "why": {
+          "label": "Por qué RADR"
+        },
+        "security": {
+          "label": "Trust & Security"
+        },
+        "developers": {
+          "label": "Developers"
+        },
+        "contact": {
+          "label": "Contacto"
+        },
+        "blog": {
+          "label": "Blog"
+        }
+      }
+    },
+    "platform": {
+      "title": "Platform",
+      "featured": {
+        "title": "See a Verified Recovery",
+        "desc": "One Margin Recovery Decision — from leak to verified euro.",
+        "cta": "See a Verified Recovery"
+      },
+      "columns": {
+        "how": {
+          "title": "How RADR works",
+          "items": {
+            "decision": {
+              "label": "Decision",
+              "desc": "Persistent object from signal to memory."
+            },
+            "futures": {
+              "label": "Futures",
+              "desc": "Compare responses before you commit."
+            },
+            "actions": {
+              "label": "Prepared Actions",
+              "desc": "Ready for approval — not fake writes."
+            },
+            "verifiedValue": {
+              "label": "Verified Value",
+              "desc": "Matched economic outcomes."
+            },
+            "memory": {
+              "label": "Operating Memory",
+              "desc": "What worked becomes next Friday."
+            }
+          }
+        },
+        "surfaces": {
+          "title": "Operating surfaces",
+          "items": {
+            "controlCenter": {
+              "label": "Control Center",
+              "desc": "What needs you · what RADR handles."
+            },
+            "decisions": {
+              "label": "Decisions",
+              "desc": "One primary Decision at a time."
+            },
+            "floor": {
+              "label": "RADR Floor",
+              "desc": "Decision layer reaches FOH — not a POS."
+            },
+            "value": {
+              "label": "Value",
+              "desc": "Identified → Verified lifecycle."
+            },
+            "memorySurface": {
+              "label": "Memory",
+              "desc": "Patterns that earn Autopilot."
+            }
+          }
+        },
+        "trust": {
+          "title": "Trust",
+          "items": {
+            "autopilot": {
+              "label": "Autopilot",
+              "desc": "Suggest → Stage → Auto within policy."
+            },
+            "policies": {
+              "label": "Policies",
+              "desc": "Always-ask for material commitments."
+            },
+            "evidence": {
+              "label": "Evidence",
+              "desc": "Sources, freshness, confidence."
+            },
+            "verification": {
+              "label": "Verification",
+              "desc": "No Verified without a Trace."
+            }
+          }
+        }
+      }
+    },
+    "resources": {
+      "title": "Recursos",
+      "featured": {
+        "title": "Último del blog",
+        "desc": "Notas de campo sobre margen hospitality, labor, spend y Verified Value.",
+        "cta": "Leer artículo"
+      },
+      "writingTitle": "Últimos artículos",
+      "allPosts": "Todos los artículos",
+      "columns": {
+        "guides": {
+          "title": "Guías",
+          "items": {
+            "blog": {
+              "label": "Blog",
+              "desc": "Inteligencia de margen hospitality, por escrito."
+            },
+            "how": {
+              "label": "Cómo funciona RADR",
+              "desc": "Connect → understand → detect → act → verify."
+            },
+            "glossary": {
+              "label": "Glosario",
+              "desc": "BUY, LABOR, Verified Value y el lenguaje de RADR."
+            },
+            "industries": {
+              "label": "Industrias",
+              "desc": "Modelos para restaurantes, hoteles, bares y grupos."
+            },
+            "why": {
+              "label": "Por qué RADR",
+              "desc": "Hospitality no necesita otro dashboard."
+            },
+            "approach": {
+              "label": "Nuestro enfoque",
+              "desc": "Nothing off the RADR."
+            }
+          }
+        },
+        "build": {
+          "title": "Build",
+          "items": {
+            "developers": {
+              "label": "Developer Hub",
+              "desc": "APIs, conectores e instrumentación."
+            },
+            "quickstart": {
+              "label": "Quickstart",
+              "desc": "Conecta tu primera fuente operativa."
+            },
+            "api": {
+              "label": "Referencia API",
+              "desc": "Autenticar, consultar y actuar sobre findings."
+            },
+            "security": {
+              "label": "Trust & Security",
+              "desc": "Decision trust, evidence, and access controls."
+            }
+          }
+        },
+        "company": {
+          "title": "Empresa",
+          "items": {
+            "customers": {
+              "label": "Clientes",
+              "desc": "Cómo los grupos usan RADR en varias sedes."
+            },
+            "company": {
+              "label": "Sobre RADR",
+              "desc": "Quiénes somos y qué creemos."
+            },
+            "pricing": {
+              "label": "Precios",
+              "desc": "Planes para grupos hospitality multi-sede."
+            },
+            "contact": {
+              "label": "Contacto",
+              "desc": "Habla con el equipo RADR."
+            }
+          }
+        }
+      }
+    },
+    "industries": {
+      "title": "Industrias",
+      "lead": "Decision stories for how your hospitality business actually runs.",
+      "featured": {
+        "title": "Construido alrededor de tu operación.",
+        "desc": "Different stacks. Different economics. One decision philosophy.",
+        "cta": "Explorar industrias",
+        "label": "Explorar industrias"
+      },
+      "models": {
+        "restaurants": {
+          "label": "Restaurantes",
+          "desc": "Cubiertos, ritmo de reservas, labor, menú y facturas de proveedores."
+        },
+        "hotels": {
+          "label": "Hoteles",
+          "desc": "Ocupación, ADR, RevPAR, canales y housekeeping."
+        },
+        "bars": {
+          "label": "Bares y cafés",
+          "desc": "Ventas por daypart, desperdicio, clima y ticket medio."
+        },
+        "groups": {
+          "label": "Grupos de hospitalidad",
+          "desc": "Por qué difieren las ubicaciones, del portfolio a la evidencia."
+        },
+        "finance": {
+          "label": "Finanzas y operaciones",
+          "desc": "Valor identificado, verificación y preguntas de margen con dinero."
+        }
+      }
+    }
+  },
+  "platform": "Platform",
+  "resources": "Recursos",
+  "controlCenter": "Control Center",
+  "blog": "Blog",
+  "footerValueLeaks": "Where value leaks"
+}

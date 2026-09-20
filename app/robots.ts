@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/home", "/documents", "/cases", "/controls", "/sources", "/money", "/scan", "/onboarding", "/api/"],
+      disallow: ["/app", "/home", "/documents", "/cases", "/controls", "/sources", "/money", "/scan", "/onboarding", "/api/", "/dev"],
     },
     sitemap: "https://radrup.com/sitemap.xml",
   };

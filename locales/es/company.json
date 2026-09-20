@@ -1,0 +1,365 @@
+{
+  "metaTitle": "Company — RADR",
+  "metaDescription": "Hospitality deserves better judgment, not more software. Why RADR exists.",
+  "kicker": "Company",
+  "heroTitleLine1": "Hospitality deserves better judgment,",
+  "heroTitleLine2": "not more software.",
+  "heroLead": "Hospitality is intensely human in front of the guest and brutally operational behind the scenes. Thousands of small decisions determine whether revenue becomes contribution. RADR exists to improve those decisions.",
+  "decisionsLead": "Thousands of signals. A few decisions that materially change revenue, contribution, cost, guest experience and operational risk.",
+  "decisions": [
+    "what gets bought",
+    "who gets scheduled",
+    "what gets sold",
+    "what gets charged",
+    "what gets paid back"
+  ],
+  "decisionsTogether": "Individually they look operational.",
+  "decisionsMargin": "Together they determine margin.",
+  "claim": "RADR makes those decisions",
+  "claimStrong": "simulatable, decidable, and verified.",
+  "hospitalityKicker": "Hecho para hospitality",
+  "hospitalityTitleLine1": "Not adapted from",
+  "hospitalityTitleLine2": "generic finance software.",
+  "hospitalityLead1": "Restaurants, hotels, and serviced apartments share one decision engine — different economics, same loop.",
+  "hospitalityLead2": "That operating truth is the product thesis, not a vertical skin.",
+  "ambitionKicker": "Ambición",
+  "ambitionTitleLine1": "From one restaurant",
+  "ambitionTitleLine2": "to an international group.",
+  "ambitionLead": "One operating language across every location.",
+  "goDeeper": "Ir más profundo",
+  "whyLink": "Por qué RADR",
+  "approachLink": "Nuestro enfoque",
+  "securityLink": "Trust & Security",
+  "contactLink": "Contacto",
+  "whyTitle": "Por qué RADR",
+  "approachTitle": "Nuestro enfoque",
+  "customersTitle": "Clientes",
+  "securityTitle": "Trust & Security",
+  "contactTitle": "Contacto",
+  "contactLead": "Cuéntenos sobre su operación.",
+  "contactHeroTitleLine1": "Ponga su operación",
+  "contactHeroTitleLine2": "en RADR.",
+  "contactHeroLead": "¿Quiere saber qué encontraría RADR en su operación?",
+  "securityLead": "How RADR earns trust on decisions and data.",
+  "preferEmail": "¿Prefiere email?",
+  "contactAlt": "¿Prefiere correo? Use la dirección abajo.",
+  "form": {
+    "workEmail": "Email de trabajo",
+    "company": "Empresa",
+    "role": "Tu rol",
+    "locations": "Locales",
+    "industry": "Sector",
+    "interest": "Where is value leaking?",
+    "message": "Mensaje",
+    "optional": "opcional",
+    "emailPlaceholder": "tu@empresa.com",
+    "companyPlaceholder": "Tu grupo o marca",
+    "select": "Seleccionar…",
+    "roles": {
+      "owner": "Propietario / fundador",
+      "ops": "Operaciones",
+      "finance": "Finanzas",
+      "gm": "Gerente general",
+      "other": "Otro"
+    },
+    "locationRanges": {
+      "1": "1 local",
+      "2-5": "2-5 locales",
+      "6-15": "6-15 locales",
+      "16-50": "16-50 locales",
+      "50+": "50+ locales"
+    },
+    "industries": {
+      "restaurants": "Restaurantes",
+      "hotels": "Hoteles",
+      "bars-nightlife": "Bares y nightlife",
+      "multi-brand": "Grupo multi-marca",
+      "retail": "Retail",
+      "other": "Otro"
+    },
+    "interests": {
+      "demo": "Demo del producto",
+      "pricing": "Precios",
+      "package-pilot": "Recovery Pilot",
+      "package-core": "Expand",
+      "package-control": "Enterprise",
+      "multi-location": "Despliegue multi-local",
+      "integrations": "Integraciones",
+      "other": "Otra cosa"
+    },
+    "messagePlaceholder": "¿Qué debemos saber antes de hablar?",
+    "submit": "Scope my recovery pilot →",
+    "sending": "Enviando…",
+    "okWebhook": "Hemos recibido su mensaje. Le responderemos a su correo de trabajo.",
+    "okMailto": "Hemos recibido su mensaje. Le responderemos a su correo de trabajo.",
+    "errorGeneric": "Completa los campos obligatorios antes de enviar.",
+    "errorDeliver": "No se pudo entregar el mensaje. Inténtalo de nuevo en breve."
+  },
+  "cta": "Solicitar acceso",
+  "body": "RADR se construyó para conectar la evidencia y mostrar a los operadores lo que importa.",
+  "why": {
+    "metaTitle": "Why RADR · Hospitality has a decision problem",
+    "metaDescription": "The data already exists. The operating judgment is fragmented. RADR owns the decision lifecycle across systems.",
+    "kicker": "Why RADR",
+    "heroLine1": "Hospitality doesn't have",
+    "heroLine2": "a data problem.",
+    "heroAccentLine1": "It has a",
+    "heroAccentLine2": "decision problem.",
+    "leadProduce": "The data already exists. The operating judgment is fragmented.",
+    "systems": [
+      "SYSTEM A · Bookings",
+      "SYSTEM B · Labor",
+      "SYSTEM C · Transactions",
+      "SYSTEM D · Costs"
+    ],
+    "leadFragments": "Each system knows a slice. The decision crosses all four.",
+    "leadFewAnswer": "RADR owns the decision lifecycle — and answers:",
+    "questions": [
+      "What changed?",
+      "What happens if we do nothing?",
+      "What could we do?",
+      "Which move is strongest?",
+      "Did it actually work?",
+      "What did we learn?"
+    ],
+    "punch": "That is why RADR exists.",
+    "territoriesKicker": "Economic territories — not the category",
+    "territories": {
+      "BUY": "Supplier pricing, invoices, waste, services.",
+      "LABOR": "Demand, staffing, productivity, overtime.",
+      "SELL": "Pricing, mix, channels, commercial capacity.",
+      "RECOVER": "Credits, cancellations, uncollected and perishable value."
+    },
+    "loopKicker": "The decision loop",
+    "loopAria": "RADR decision loop",
+    "loop": [
+      "CONNECT",
+      "UNDERSTAND",
+      "FUTURES",
+      "DECIDE",
+      "VERIFY",
+      "REMEMBER"
+    ],
+    "close": "Systems record. RADR decides.",
+    "ctaApproach": "Our approach",
+    "ctaSee": "See how RADR decides →"
+  },
+  "approach": {
+    "metaTitle": "Our approach · Not more data. Better decisions.",
+    "metaDescription": "RADR surfaces material decisions, plays futures forward, prepares action, and verifies value — then learns.",
+    "kicker": "Nuestro enfoque",
+    "heroLine1": "No más datos.",
+    "heroLine2": "Mejores decisiones.",
+    "heroLead": "Nada fuera de RADR. Conectamos la realidad operativa con la consecuencia financiera, y la convertimos en acción.",
+    "principlesKicker": "Principios",
+    "principles": [
+      {
+        "n": "01",
+        "title": "La consecuencia financiera primero.",
+        "body": "No muestre algo solo porque cambió. Muéstrelo cuando importa."
+      },
+      {
+        "n": "02",
+        "title": "Evidencia antes que alertas.",
+        "body": "Cada finding de RADR debe explicar por qué existe."
+      },
+      {
+        "n": "03",
+        "title": "Acción por encima de observación.",
+        "body": "Un dashboard le dice qué ocurrió. RADR debe ayudar a determinar qué ocurre después."
+      },
+      {
+        "n": "04",
+        "title": "El valor debe ser demostrable.",
+        "body": "El valor Identified no es valor realizado. RADR distingue Identified, Protected y Verified."
+      },
+      {
+        "n": "05",
+        "title": "Diseñado para operadores.",
+        "body": "Inteligencia compleja. Interfaz simple."
+      }
+    ],
+    "valueKicker": "Estados de valor",
+    "valueTitleLine1": "Identified no es",
+    "valueTitleLine2": "verified.",
+    "valueStates": {
+      "identified": {
+        "label": "Identified",
+        "desc": "La diferencia financiera es conocida y evidenciada."
+      },
+      "protected": {
+        "label": "Protected",
+        "desc": "Hay un control o una acción para evitar la recurrencia."
+      },
+      "verified": {
+        "label": "Verified",
+        "desc": "El valor se capturó realmente, con prueba."
+      }
+    },
+    "ctaWhy": "Por qué existe RADR",
+    "ctaHow": "Cómo funciona →"
+  },
+  "securityPage": {
+    "metaTitle": "Trust & Security · Decision trust and honest controls",
+    "metaDescription": "Decision trust: evidence grades, human approval for material actions, Verified Value chain — plus the access and data controls that actually exist.",
+    "kicker": "Trust & Security",
+    "heroLine1": "Trust the decision.",
+    "heroLine2": "Understand the uncertainty.",
+    "heroLead": "RADR separates OBSERVED, ESTIMATED, OPERATOR CONTEXT, PREDICTED, RECOMMENDED and VERIFIED. Predictions are estimates — not guarantees. Human approval for material actions. No Verified Value without an evidence chain.",
+    "categories": {
+      "DATA": "DATA",
+      "ACCESS": "ACCESS",
+      "INFRASTRUCTURE": "INFRASTRUCTURE",
+      "APPLICATION": "APPLICATION",
+      "DOCUMENTS": "DOCUMENTS"
+    },
+    "status": {
+      "LIVE": "LIVE",
+      "IN_DEVELOPMENT": "IN DEVELOPMENT"
+    },
+    "controls": {
+      "privateStorage": {
+        "label": "Almacenamiento privado de documentos",
+        "detail": "Los PDF e imágenes subidos se guardan en object storage privado (o un almacén local privado en desarrollo), no en buckets públicos."
+      },
+      "orgIsolation": {
+        "label": "Aislamiento de organización",
+        "detail": "El acceso a documentos y cuentas está limitado en el servidor a la membresía de organización autenticada."
+      },
+      "serverAuthz": {
+        "label": "Autorización en el servidor",
+        "detail": "Las rutas y APIs protegidas comprueban sesión y membresía antes de devolver datos sensibles."
+      },
+      "controlledDocs": {
+        "label": "Acceso controlado a documentos",
+        "detail": "La lectura y descarga de documentos requieren autenticación; las rutas de acceso no son públicamente enumerables."
+      },
+      "sessionAuth": {
+        "label": "Autenticación de sesión",
+        "detail": "Las sesiones de cuenta las gestiona Better Auth con validación de sesión en el servidor."
+      },
+      "auditExports": {
+        "label": "Exports de auditoría avanzados",
+        "detail": "Pistas de auditoría exportables para operadores y equipos de finance."
+      }
+    },
+    "certNote": "Aquí no se hacen afirmaciones de certificación SOC 2 ni ISO. El RGPD es un marco legal, no una certificación que reclamemos. Cuando existan certificaciones formales, se listarán con fechas y alcance.",
+    "questionsPrefix": "¿Preguntas sobre el tratamiento de datos?",
+    "privacyLink": "Política de privacidad",
+    "contactLink": "Contacto",
+    "trustKicker": "Decision trust",
+    "trustTitle": "How RADR earns judgment.",
+    "trustLead": "Operators should know what is fact, what is estimate, and what still needs a human.",
+    "trustPrinciples": [
+      {
+        "title": "Evidence before advice",
+        "detail": "Material recommendations carry sources, freshness, drivers and confidence — not chatty tips."
+      },
+      {
+        "title": "Grade every claim",
+        "detail": "OBSERVED · ESTIMATED · PREDICTED · RECOMMENDED · VERIFIED stay distinct. RADR does not blur them."
+      },
+      {
+        "title": "Human approval for material actions",
+        "detail": "Prepared for approval is not execution. External action only through supported systems and organization policy."
+      },
+      {
+        "title": "Verified Value chain",
+        "detail": "Potential stays separate until observed proof lands. RADR claims only what the operation can prove."
+      }
+    ],
+    "controlsKicker": "Controls in place",
+    "controlsTitle": "Honest security controls.",
+    "controlsLead": "Only controls that actually exist. Status is LIVE or IN DEVELOPMENT — never aspirational theater.",
+    "stagesKicker": "Evidence grades",
+    "stagesTitle": "How a Decision earns trust.",
+    "stages": [
+      {
+        "grade": "OBSERVED",
+        "example": "31 portions in stock"
+      },
+      {
+        "grade": "ESTIMATED",
+        "example": "37 portions expected"
+      },
+      {
+        "grade": "PREDICTED",
+        "example": "82% sellout probability · 11 comparable services"
+      },
+      {
+        "grade": "RECOMMENDED",
+        "example": "Feature Truffle Pasta"
+      },
+      {
+        "grade": "VERIFIED",
+        "example": "€1,590 protected"
+      }
+    ],
+    "uncertaintyTitle": "What if reality does something else?",
+    "uncertaintyLead": "RADR compares predicted vs actual, then updates. Humility is a feature.",
+    "uncertaintyNote": "RADR does not need to be right every time. It needs to measure when it was wrong — and learn.",
+    "modelNote": "Model confidence is calculated from the model, sample size, and data freshness. Evidence coverage is factual. They are not the same.",
+    "opsNote": "RADR provides operational decision support. It is not investment, legal, tax, or regulated financial advice. Managers approve material actions."
+  },
+  "customers": {
+    "metaTitle": "Historias de clientes · Próximamente",
+    "metaDescription": "Operaciones reales. Findings reales. Valor real. Los casos de clientes RADR llegan pronto.",
+    "kicker": "Historias de clientes",
+    "heroLine1": "Operaciones reales.",
+    "heroLine2": "Findings reales.",
+    "heroLine3": "Valor real.",
+    "heroLead": "Casos de estudio próximamente. Cuando lleguen, cada uno seguirá la misma forma que el producto: operación, problema, finding, acción, Verified Value.",
+    "ctaTalk": "Hablar con RADR →",
+    "ctaProduct": "Ver el producto"
+  },
+  "decisionsKicker": "Why we exist",
+  "hospitalityCta": "Ver modelos operativos →",
+  "pillars": {
+    "control": {
+      "label": "Control Center",
+      "title": "Only what needs you.",
+      "body": "Attention load, what RADR is handling, verified since last check."
+    },
+    "value": {
+      "label": "Verified Value",
+      "title": "Claim only what you can prove.",
+      "body": "Exposure becomes expected, observed, then verified — with proof."
+    },
+    "memory": {
+      "label": "Operating Memory",
+      "title": "The operation remembers.",
+      "body": "Every verified outcome makes the next decision better."
+    }
+  },
+  "industriesLink": "Industrias",
+  "pricingLink": "Precios",
+  "finalTitle": "Ve RADR en tu economía.",
+  "finalDemo": "See how RADR decides",
+  "founder": {
+    "kicker": "Founder",
+    "quote": "I thought I wanted to open a restaurant. What I really wanted was to make hospitality work better.",
+    "name": "Daniel Do",
+    "body": "Grew up close to hospitality through a family food business, worked in hospitality, then technology and sales. The deeper problem was not another venue — it was the operating system behind thousands of venues. RADR is the larger expression of that obsession."
+  },
+  "beliefs": {
+    "kicker": "Beliefs",
+    "items": [
+      {
+        "title": "Humans provide the hospitality.",
+        "body": "Software should reduce work, not create it."
+      },
+      {
+        "title": "Claim only what you can prove.",
+        "body": "Expected is not verified."
+      },
+      {
+        "title": "The operation should learn.",
+        "body": "Every verified outcome compounds."
+      },
+      {
+        "title": "Start with what you have.",
+        "body": "Files, APIs, or a mature stack — RADR meets you there."
+      }
+    ]
+  }
+}

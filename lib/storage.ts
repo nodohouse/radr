@@ -81,7 +81,7 @@ export async function putPrivateObject(params: {
         Key: storagePath,
         Body: params.body,
         ContentType: params.mimeType,
-        // Private by default — no ACL grants.
+        // Private by default. No ACL grants.
       }),
     );
     return { storagePath, driver: "s3", documentId };

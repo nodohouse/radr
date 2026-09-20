@@ -1,217 +1,300 @@
-import Link from "next/link";
-import { SiteFooter } from "../SiteFooter";
-import { SiteNav } from "../SiteNav";
-import { TRUST_CONTROLS } from "../config/trust";
-import { SectionFinal } from "../scenes/SectionFinal";
+"use client";
 
-const SYSTEMS = [
-  "Procurement",
-  "Finance",
-  "Operations",
-  "Labor",
-  "Revenue",
-  "Payments",
-  "Delivery",
-  "Accounting",
-] as const;
+/**
+ * Company — editorial hospitality emotion.
+ * Unique imagery only. Solid panels for readability. No fabricated documentary.
+ */
 
-const GAPS = [
-  "supplier overcharge",
-  "staffing mismatch",
-  "missed credit",
-  "pricing opportunity",
-] as const;
+import type { ReactNode } from "react";
+import Image from "next/image";
+import { Link } from "@/i18n/navigation";
+import { motion, useReducedMotion } from "motion/react";
+import { PublicFooter, PublicNavbar } from "../PublicShell";
+import { useInView } from "@/components/marketing/motion/useInView";
+import { CTAS } from "@/lib/marketing/brand";
+import { marketingImage } from "@/lib/marketing/publicImagery";
+import "@/app/company.css";
+import "@/app/kinetic.css";
+import "@/app/radr-public.css";
 
 const BELIEFS = [
-  {
-    n: "01",
-    title: "The small things aren't small.",
-    body: "€3.60 on one case looks irrelevant. Across thousands of transactions it isn't.",
-  },
-  {
-    n: "02",
-    title: "Show the money.",
-    body: "Every finding should have a financial impact.",
-  },
-  {
-    n: "03",
-    title: "Don't just alert.",
-    body: "Explain. Act. Learn. Verify.",
-  },
-  {
-    n: "04",
-    title: "Don't fix the same thing twice.",
-    body: "Every resolution should become a control.",
-  },
-  {
-    n: "05",
-    title: "Prove the value.",
-    body: "If RADR says it created value, it should be able to prove it.",
-  },
+  { n: "01", title: "Humans provide the hospitality." },
+  { n: "02", title: "Claim only what you can prove." },
+  { n: "03", title: "The operation should learn." },
 ] as const;
 
-export function CompanyPage() {
+const ENVS = [
+  { id: "companyRestaurant" as const, label: "Restaurants & F&B" },
+  { id: "companyHotel" as const, label: "Hotels & Resorts" },
+  { id: "companyApartments" as const, label: "Serviced apartments" },
+  { id: "companyGroup" as const, label: "Groups" },
+];
+
+function CoReveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const reduced = useReducedMotion();
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.12 });
+
+  // Readability P0: never leave body copy at opacity 0 if IO misses.
+  // Animate only as enhancement once in view.
   return (
-    <div className="radr">
-      <SiteNav />
+    <motion.div
+      ref={ref}
+      className={`rx-co2-reveal ${className}`.trim()}
+      initial={false}
+      animate={
+        reduced || inView
+          ? { opacity: 1, y: 0 }
+          : { opacity: 1, y: 8 }
+      }
+      transition={{
+        duration: 0.45,
+        delay: reduced ? 0 : delay / 1000,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function CompanyPage() {
+  const hero = marketingImage("companyHero");
+  const founder = marketingImage("companyFounderStory");
+
+  return (
+    <div className="radr radr-mineral rx-co2">
+      <PublicNavbar />
       <main>
-        <section className="rx-page-hero" data-nav-theme="dark">
-          <div className="rx-shell rx-page-hero-inner">
-            <p className="rx-kicker">Company</p>
-            <h1 className="rx-page-title">
-              Too much money
-              <br />
-              disappears
-              <br />
-              between systems.
-            </h1>
-            <p className="rx-lead-inv rx-lead-short">
-              Complex operations run across dozens of systems, teams and
-              decisions.
-              <br />
-              <br />
-              Nobody sees all of it.
-              <br />
-              <br />
-              RADR exists to watch the difference.
-            </p>
+        <section
+          className="rx-co2-photo-hero rx-co2-photo-hero-split"
+          data-nav-theme="light"
+        >
+          <div className="rx-shell rx-co2-photo-hero-grid">
+            <div className="rx-co2-photo-hero-frame">
+              <Image
+                src={hero.src}
+                alt={hero.alt}
+                width={hero.nativeWidth}
+                height={hero.nativeHeight}
+                priority
+                sizes={`(max-width: 900px) 92vw, ${hero.cssMax}px`}
+                quality={90}
+                className="rx-co2-photo-hero-img"
+                style={{ objectPosition: `${hero.focalX} ${hero.focalY}` }}
+              />
+            </div>
+            <div className="rx-co2-photo-hero-copy">
+              <h1>
+                Hospitality deserves better judgment, not more software.
+              </h1>
+            </div>
           </div>
         </section>
 
-        <section className="rx-co-section" data-nav-theme="dark">
+        <section className="rx-co2-founder-ed" data-nav-theme="light">
+          <div className="rx-shell rx-co2-founder-grid">
+            <CoReveal className="rx-co2-founder-photo-wrap">
+              <div className="rx-co2-founder-photo">
+                <Image
+                  src={founder.src}
+                  alt={founder.alt}
+                  fill
+                  sizes={`(max-width: 900px) 92vw, ${founder.cssMax}px`}
+                  className="rx-co2-founder-img"
+                  style={{
+                    objectPosition: `${founder.focalX} ${founder.focalY}`,
+                  }}
+                />
+              </div>
+            </CoReveal>
+            <CoReveal delay={80} className="rx-co2-founder-copy">
+              <blockquote>
+                “I thought I wanted to open a restaurant.
+                <br />
+                What I really wanted was to make hospitality work better.”
+              </blockquote>
+              <p className="rx-co2-founder-name">
+                Daniel Do
+                <span>Founder</span>
+              </p>
+              <p className="rx-co2-founder-bio">
+                I grew up around hospitality. My family runs a food business. I
+                spent years wanting to open a restaurant — until the operation
+                made something obvious.
+              </p>
+              <p className="rx-co2-founder-bio">
+                Hospitality already had software for sales, reservations,
+                staffing, inventory, purchasing, payments and accounting. What
+                it did not have was a system for the decisions between them —
+                the ones that determine whether revenue becomes contribution,
+                and whether anyone can prove afterward that the call worked.
+              </p>
+              <p className="rx-co2-founder-bio">
+                RADR is that Decision layer.
+              </p>
+            </CoReveal>
+          </div>
+        </section>
+
+        <section
+          className="rx-co2-environments"
+          data-nav-theme="light"
+        >
           <div className="rx-shell">
-            <p className="rx-kicker">The gap</p>
-            <h2 className="rx-display rx-display-sm">
-              The money disappears
-              <br />
-              between systems.
-            </h2>
-            <p className="rx-lead-inv rx-lead-short">
-              RADR watches the gaps.
-            </p>
-            <ul className="rx-co-systems">
-              {SYSTEMS.map((s) => (
-                <li key={s}>{s}</li>
-              ))}
-            </ul>
-            <p className="rx-co-bridge">Small gaps appear between the systems.</p>
-            <ul className="rx-co-gaps">
-              {GAPS.map((g) => (
-                <li key={g}>
-                  <span className="rx-tri">△</span> {g}
-                </li>
-              ))}
-            </ul>
-            <p className="rx-co-claim">
-              Nobody owns the difference.
-              <br />
-              <strong>RADR does.</strong>
-            </p>
+            <CoReveal>
+              <p className="rx-co2-env-kicker">Where it landed</p>
+              <p className="rx-co2-env-lead">
+                The restaurant dream stayed personal. The work opened to every
+                hospitality environment where small decisions become economic
+                outcomes.
+              </p>
+              <ul className="rx-co2-env-unique" aria-label="Hospitality environments">
+                {ENVS.map((env) => {
+                  const img = marketingImage(env.id);
+                  return (
+                    <li key={env.id}>
+                      <figure>
+                        <Image
+                          src={img.src}
+                          alt={img.alt}
+                          width={img.nativeWidth}
+                          height={img.nativeHeight}
+                          sizes={`(max-width: 700px) 45vw, ${img.cssMax}px`}
+                          style={{
+                            objectPosition: `${img.focalX} ${img.focalY}`,
+                          }}
+                          loading="lazy"
+                          quality={85}
+                        />
+                        <figcaption>{env.label}</figcaption>
+                      </figure>
+                    </li>
+                  );
+                })}
+              </ul>
+            </CoReveal>
           </div>
         </section>
 
-        <section className="rx-co-section rx-co-section--tight" data-nav-theme="dark">
-          <div className="rx-shell rx-co-narrow">
-            <p className="rx-kicker">Beachhead</p>
-            <h2 className="rx-display rx-display-sm">
-              Built first for
-              <br />
-              hospitality.
-            </h2>
-            <p className="rx-lead-inv">
-              Hospitality combines thin margins, high transaction volume, labor
-              intensity, fragmented systems, volatile demand and complex supplier
-              relationships.
-            </p>
-            <p className="rx-lead-inv">
-              It is the perfect proving ground — and where we show the product
-              with invoices, schedules, rates, credits and settlements you
-              already recognize.
-            </p>
-          </div>
-        </section>
-
-        <section className="rx-co-section rx-co-section--tight" data-nav-theme="dark">
-          <div className="rx-shell rx-co-narrow">
-            <p className="rx-kicker">Why now</p>
-            <h2 className="rx-display rx-display-sm">
-              Continuous comparison
-              <br />
-              is finally possible.
-            </h2>
-            <p className="rx-lead-inv">
-              For years, finding these issues required spreadsheets, manual
-              reconciliation, consultants, finance teams — or an operator
-              noticing something looked wrong.
-            </p>
-            <p className="rx-lead-inv">
-              Now software can continuously compare what happened with what
-              should have happened. RADR turns that into an always-on margin
-              intelligence layer.
-            </p>
-          </div>
-        </section>
-
-        <section className="rx-co-section" data-nav-theme="dark">
+        <section className="rx-co2-why-now" data-nav-theme="light">
           <div className="rx-shell">
-            <p className="rx-kicker">What we believe</p>
-            <ol className="rx-co-beliefs">
-              {BELIEFS.map((b) => (
+            <CoReveal>
+              <p className="rx-co2-why-now-h">
+                Systems of record store facts. RADR stores judgment.
+              </p>
+              <p className="rx-co2-why-now-sub">
+                RADR starts where the economics can be proven fastest: recovery
+                and reconciliation. The Decision Gap is the longer reason the
+                product exists.
+              </p>
+              <div className="rx-co-gap-diagram" aria-hidden="true">
+                <span>POS</span>
+                <span>Reservations</span>
+                <span>Labor</span>
+                <span>Inventory</span>
+                <span>Accounting</span>
+                <em>Decision Gap</em>
+                <strong>RADR</strong>
+              </div>
+              <div className="rx-co2-gtm-bridge">
+                <Link href="/solutions" className="rx-btn rx-btn-ghost">
+                  Where value leaks <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </CoReveal>
+          </div>
+        </section>
+
+        <section className="rx-co2-beliefs-ed" data-nav-theme="light">
+          <div className="rx-shell">
+            <ul className="rx-co2-belief-giant">
+              {BELIEFS.map((b, i) => (
                 <li key={b.n}>
-                  <span>{b.n}</span>
-                  <div>
-                    <h3>{b.title}</h3>
-                    <p>{b.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        <section className="rx-co-vision" data-nav-theme="dark">
-          <div className="rx-shell">
-            <p className="rx-kicker">The vision</p>
-            <h2 className="rx-page-title">
-              Every complex
-              <br />
-              operation on RADR.
-            </h2>
-            <p className="rx-lead-inv rx-lead-short">
-              Hospitality first. Then any complex operation where money leaks
-              between systems, teams and decisions.
-            </p>
-          </div>
-        </section>
-
-        <section className="rx-co-section" id="trust" data-nav-theme="dark">
-          <div className="rx-shell rx-co-narrow">
-            <p className="rx-kicker">Trust</p>
-            <h2 className="rx-display rx-display-sm">
-              Built for sensitive
-              <br />
-              commercial data.
-            </h2>
-            <ul className="rx-co-trust">
-              {TRUST_CONTROLS.map((t) => (
-                <li key={t.label}>
-                  <span>{t.label}</span>
-                  <em data-status={t.status === "LIVE" ? "on" : "dev"}>
-                    {t.status}
-                  </em>
+                  <CoReveal delay={i * 90}>
+                    <em>{b.n}</em>
+                    <strong>{b.title}</strong>
+                  </CoReveal>
                 </li>
               ))}
             </ul>
-            <p className="rx-co-trust-note">
-              We only claim controls that are actually in place.{" "}
-              <Link href="/security">Full security page →</Link>
-            </p>
           </div>
         </section>
 
-        <SectionFinal />
+        <section
+          className="rx-co2-essay"
+          data-nav-theme="light"
+          id="why-we-exist"
+        >
+          <div className="rx-shell">
+            <CoReveal>
+              <p className="rx-kicker">From the company</p>
+              <h2 className="rx-co2-essay-title">Why we exist</h2>
+              <p className="rx-co2-essay-lead">
+                A longer field essay on the Decision Gap — what systems record,
+                what operations decide, and why hospitality still loses money
+                between the two.
+              </p>
+              <div className="rx-co2-essay-card">
+                <p className="rx-co2-essay-meta">
+                  <span>14 min read</span>
+                  <span aria-hidden="true">·</span>
+                  <time dateTime="2026-09-17">2026-09-17</time>
+                </p>
+                <h3 className="rx-co2-essay-card-title">
+                  The Decision Gap: why RADR exists
+                </h3>
+                <p className="rx-co2-essay-card-body">
+                  Hospitality digitized records before it digitized judgment.
+                  This is the gap RADR is built for.
+                </p>
+                <div className="rx-ctas rx-co2-essay-ctas">
+                  <Link
+                    href="/blog/the-decision-gap"
+                    className="rx-btn rx-btn-primary"
+                  >
+                    Read the essay <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link href="/blog" className="rx-btn rx-btn-ghost">
+                    All writing
+                  </Link>
+                </div>
+              </div>
+            </CoReveal>
+          </div>
+        </section>
+
+        <section className="rx-co2-close" data-nav-theme="light">
+          <div className="rx-shell">
+            <CoReveal>
+              <p className="rx-co2-close-h">
+                One restaurant started the question.
+                <br />
+                Hospitality became the answer.
+              </p>
+              <div className="rx-ctas rx-co2-hero-ctas">
+                <Link
+                  href="/contact?intent=recovery-pilot"
+                  className="rx-btn rx-btn-primary"
+                >
+                  {CTAS.primaryProduct} <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/why" className="rx-btn rx-btn-ghost">
+                  Why RADR
+                </Link>
+              </div>
+            </CoReveal>
+          </div>
+        </section>
       </main>
-      <SiteFooter />
+      <PublicFooter />
     </div>
   );
 }

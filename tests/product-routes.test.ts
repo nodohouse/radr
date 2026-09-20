@@ -9,77 +9,101 @@ function read(path: string) {
 }
 
 describe("product navigation integrity", () => {
-  it("AppNav exposes the five primary destinations", () => {
-    const nav = read("components/AppNav.tsx");
-    for (const href of ["/home", "/cases", "/money", "/controls", "/sources"]) {
+  it("ProductNav exposes Decide destinations + Explore drawer", () => {
+    const nav = read("components/product/ProductNav.tsx");
+    for (const href of [
+      "/app",
+      "/app/decisions",
+      "/app/value",
+      "/app/memory",
+      "/app/service",
+      "/app/intelligence/menu",
+      "/app/intelligence/margin",
+      "/app/locations",
+      "/app/integrations",
+      "/app/settings",
+    ]) {
       expect(nav).toContain(`href: "${href}"`);
     }
-    expect(nav).not.toContain('href: "/scan"');
+    expect(nav).toContain("Explore");
+    expect(nav).toContain("Ask RADR");
+    expect(nav).not.toContain('href: "/app/m"');
+    expect(nav).not.toContain('href: "/app/buy"');
+    expect(nav).not.toContain('href: "/home"');
   });
 
-  it("middleware protects money, controls, and sources", () => {
-    const mw = read("middleware.ts");
-    expect(mw).toContain('"/money"');
-    expect(mw).toContain('"/controls"');
-    expect(mw).toContain('"/sources"');
+  it("next.config redirects legacy tree into /app", () => {
+    const cfg = read("next.config.ts");
+    expect(cfg).toContain('source: "/home"');
+    expect(cfg).toContain('destination: "/app"');
+    expect(cfg).toContain('source: "/cases"');
+    expect(cfg).toContain('destination: "/app/findings"');
+    expect(cfg).toContain('source: "/money"');
+    expect(cfg).toContain('destination: "/app/value"');
+    expect(cfg).toContain('source: "/sources"');
+    expect(cfg).toContain('destination: "/app/data"');
   });
 
-  it("legacy /scan redirects to /sources", () => {
-    const scan = read("app/(app)/scan/page.tsx");
-    expect(scan).toContain('redirect("/sources")');
+  it("legacy /home page redirects to /app", () => {
+    const home = read("app/(app)/home/page.tsx");
+    expect(home).toContain('redirect("/app")');
   });
 
-  it("money page does not invent verified value numbers", () => {
-    const money = read("app/(app)/money/page.tsx");
-    expect(money).toContain("No verified value yet.");
-    expect(money).not.toMatch(/€\d/);
+  it("onboarding exit always goes to /app", () => {
+    const onboarding = read("app/onboarding/page.tsx");
+    expect(onboarding).toContain('redirect("/app?welcome=1")');
+    expect(onboarding).not.toContain('redirect("/home")');
   });
 
-  it("marketing homepage is one coherent demo story", () => {
-    const page = read("app/page.tsx");
-    expect(page).toContain('className="radr"');
-    expect(page).toContain("HeroProduct");
-    expect(page).toContain("SectionCoverage");
-    expect(page).toContain("SectionOutcome");
-    expect(page).toContain("SectionPricingTeaser");
-    expect(page).not.toContain("SectionVerifiedValue");
-    expect(page).not.toContain("SectionScenarios");
-    expect(page).not.toContain("SectionFindings");
-    expect(page).not.toContain("SectionMission");
+  it("marketing homepage tells the category leadership story", () => {
+    const hero = read("components/marketing/scenes/Hero.tsx");
+    expect(hero).toContain("RadrWordmark");
+    expect(hero).toContain("HeroProductDemo");
+    expect(hero).not.toContain("HeroIntelBoard");
+    expect(hero).toContain('useTranslations("homepage.hero")');
+    expect(hero).toContain('t("titleLine1")');
+    expect(hero).toContain('t("promise")');
+    expect(hero).toContain('t("ctaSecondary")');
+    expect(hero).toContain('data-nav-theme="light"');
+    expect(hero).toContain("rx-he-canvas");
+    expect(hero).toContain("rx-he-light");
+    expect(hero).not.toContain("rx-he-replay");
+    expect(hero).not.toContain("rx-he-object");
+    expect(hero).not.toContain("RadrHeroField");
+    expect(hero).not.toContain("HeroInstrument");
+    expect(hero).not.toContain("TerritorySelector");
 
-    const demo = read("components/marketing/data/demo.ts");
-    expect(demo).toContain("176_740");
-    expect(demo).toContain("18_620");
-    expect(demo).toContain("4_280");
-    expect(demo).toContain("11_840");
-    expect(demo).toContain("142_000");
-    expect(demo).not.toContain("4_284_620");
-
-    const hero = read("components/marketing/scenes/HeroProduct.tsx");
-    expect(hero).toContain("useLiveScan");
-    expect(hero).toContain("MissionTypewriter");
-    expect(hero).toContain("Identified exposure");
-
-    const live = read("components/marketing/data/liveScan.ts");
-    expect(live).toContain("172_460");
-    expect(live).toContain("4_280");
-    expect(live).toContain("METER_TARGETS");
-    expect(live).toContain("You wouldn't chase");
+    const page = read("app/[locale]/page.tsx");
+    expect(page).toContain("Hero");
+    expect(page).toContain("radr-home");
+    expect(page).toContain("radr-editorial");
+    expect(page).toContain("SectionProblem");
+    expect(page).toContain("SectionWatchFlow");
+    expect(page).toContain("SectionFindings");
+    expect(page).toContain("SectionAction");
+    expect(page).toContain("SectionValueFlow");
+    expect(page).toContain("SectionClose");
+    expect(page).not.toContain("SectionOperatingModel");
+    expect(page).not.toContain("SectionRadrLoop");
+    expect(page).not.toContain("SectionProof");
+    expect(page).not.toContain("SectionAskCompact");
+    expect(page).not.toContain("SectionProductStory");
+    expect(page).not.toContain("SectionTerritories");
+    expect(page).not.toContain("IndustryIntelligence");
+    expect(page).not.toContain("SectionEvidence");
+    expect(page).not.toContain("SectionFinishedWork");
+    expect(page).not.toContain("SectionIntegrations");
+    expect(page).not.toContain("SectionTrust");
+    expect(page).not.toContain("SectionFinal");
+    expect(page).not.toContain("SectionControlCenter");
+    expect(page).not.toContain("SectionSees");
+    expect(page).not.toContain("SectionVerify");
+    expect(page).not.toContain("SectionMultiLocation");
+    expect(page).not.toContain("SectionSignalValue");
 
     const nav = read("components/marketing/SiteNav.tsx");
     expect(nav).toContain("/pricing");
-    expect(nav).toContain("/how");
-    expect(nav).toContain("/solutions");
-    expect(nav).toContain("/company");
-
-    expect(read("app/how/page.tsx")).toContain("HowPage");
-    expect(read("app/solutions/page.tsx")).toContain("SolutionsPage");
-    expect(read("app/company/page.tsx")).toContain("CompanyPage");
-    expect(read("app/security/page.tsx")).toContain("Built for sensitive");
-    expect(read("app/imprint/page.tsx")).toContain("Imprint");
-
-    const mark = read("components/marketing/RadrWordmark.tsx");
-    expect(mark).toContain('viewBox="0 0 152 44"');
-    expect(mark).toContain("M52.5 10.55");
+    expect(nav).toContain('useTranslations("navigation")');
+    expect(nav).toContain("createPortal");
   });
 });

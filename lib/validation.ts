@@ -17,9 +17,76 @@ export const onboardingSchema = z.object({
   locationName: z.string().trim().min(2).max(120),
   country: z.enum(countryCodes),
   currency: z.enum(CURRENCIES),
+  locationBand: z.enum(["1", "2-5", "6-20", "21-50", "50+"]).optional(),
+  hqCity: z.string().trim().max(120).optional(),
+  locationCity: z.string().trim().max(120).optional(),
+  venueType: z
+    .enum([
+      "restaurant",
+      "bar",
+      "hotel",
+      "cafe",
+      "other",
+      "boutique_hotel",
+      "serviced_apartments",
+      "vacation_rental",
+      "spa",
+    ])
+    .optional(),
+  timezone: z.string().trim().max(80).optional(),
+  operateFamilies: z.array(z.string()).optional(),
+  operateSubtypes: z.array(z.string()).optional(),
+  operatingUnits: z.array(z.string()).optional(),
+  roomCount: z.number().int().positive().optional(),
+  role: z.string().optional(),
+  helpFocus: z.array(z.string()).optional(),
+  selectedKpis: z.array(z.string()).optional(),
+  operatingProfileId: z.string().optional(),
+  pendingSystem: z.string().trim().max(40).optional(),
+  pendingSystemLabel: z.string().trim().max(80).optional(),
 });
 
 export type OnboardingInput = z.infer<typeof onboardingSchema>;
+
+export const onboardingPatchSchema = z.object({
+  step: z
+    .enum([
+      "welcome",
+      "organization",
+      "operate",
+      "units",
+      "role",
+      "kpis",
+      "system",
+      "insight",
+      "operation",
+      "location",
+      "building",
+      "choose",
+      "connect",
+      "done",
+    ])
+    .optional(),
+  demoEnabled: z.boolean().optional(),
+  tourDismissed: z.boolean().optional(),
+  checklistDismissed: z.boolean().optional(),
+  firstWelcomeSeen: z.boolean().optional(),
+  pendingSystem: z.string().trim().max(40).optional(),
+  pendingSystemLabel: z.string().trim().max(80).optional(),
+  completedAt: z.string().optional(),
+  operateFamilies: z.array(z.string()).optional(),
+  operateSubtypes: z.array(z.string()).optional(),
+  operatingUnits: z.array(z.string()).optional(),
+  roomCount: z.number().int().positive().optional(),
+  role: z.string().optional(),
+  helpFocus: z.array(z.string()).optional(),
+  selectedKpis: z.array(z.string()).optional(),
+  operatingProfileId: z.string().optional(),
+  venueType: z.string().optional(),
+  organizationName: z.string().optional(),
+  locationName: z.string().optional(),
+});
+
 
 export const uploadMetaSchema = z.object({
   organizationId: z.string().uuid(),
@@ -156,7 +223,7 @@ export function assertAllowedUploadBytes(params: {
     filename = defaultFilenameForMime(detected);
   }
 
-  // Camera captures sometimes omit an extension — attach one from sniffed type.
+  // Camera captures sometimes omit an extension. Attach one from sniffed type.
   if (!extensionOf(filename)) {
     const base = filename.replace(/\.+$/, "") || "photo";
     filename = `${base}${

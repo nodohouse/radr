@@ -103,7 +103,7 @@ export function UploadPanel({ organizationId, locationId }: UploadPanelProps) {
           >
             Upload another
           </button>
-          <Link href="/home" className="prep-btn prep-btn-secondary w-full sm:w-auto">
+          <Link href="/app" className="prep-btn prep-btn-secondary w-full sm:w-auto">
             Back to Control
           </Link>
           <Link href="/documents" className="prep-btn prep-btn-ghost w-full sm:w-auto">

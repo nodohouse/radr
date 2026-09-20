@@ -6,12 +6,19 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "bash scripts/dev.sh",
+    "dev:turbo": "bash scripts/dev.sh --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H 127.0.0.1 -p 3020",
     "lint": "eslint",
     "test": "vitest run",
-    "db:migrate": "tsx scripts/migrate.ts"
+    "i18n:check": "node scripts/check-locale-parity.mjs",
+    "check:links": "node scripts/check-internal-links.mjs",
+    "check:coherence": "node scripts/check-coherence.mjs",
+    "qa:product-routes": "node scripts/qa-product-routes.mjs",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "mockups:export": "node scripts/export-mockups.mjs",
+    "qa:visual": "playwright test tests/e2e/public-visual-qa.spec.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1106.0",
@@ -23,6 +30,7 @@
     "gsap": "^3.15.0",
     "motion": "^13.1.0",
     "next": "15.5.23",
+    "next-intl": "^4.14.1",
     "postgres": "^3.4.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -37,6 +45,7 @@
     "drizzle-kit": "^0.31.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.23",
+    "playwright": "^1.52.0",
     "tailwindcss": "^4",
     "tsx": "^4.20.0",
     "typescript": "^5",

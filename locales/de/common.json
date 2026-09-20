@@ -1,0 +1,26 @@
+{
+  "brand": "RADR",
+  "slogan": "Nothing off the RADR.",
+  "tagline": "Nothing off the RADR.",
+  "territories": {
+    "BUY": "BUY",
+    "LABOR": "LABOR",
+    "SELL": "SELL",
+    "RECOVER": "RECOVER"
+  },
+  "askRadr": "Ask RADR",
+  "verifiedValue": "Verified Value",
+  "controlCenter": "Control Center",
+  "morningBrief": "Morning Brief",
+  "simulatedExample": "Simuliertes Beispiel",
+  "productPreview": "Produktvorschau",
+  "seeRadr": "RADR ansehen",
+  "seeRadrInAction": "RADR in Aktion sehen",
+  "exploreProduct": "Produkt entdecken",
+  "requestAccess": "Zugang anfragen",
+  "signIn": "Anmelden",
+  "mainSite": "Hauptseite",
+  "language": "Sprache",
+  "languageMenu": "Sprache wählen",
+  "copyright": "© {year} RADR"
+}

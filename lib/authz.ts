@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import {
   documents,
+  locations,
   organizationMembers,
   organizations,
   type Document,
@@ -96,6 +97,17 @@ export async function getPrimaryOrganizationForUser(
   return rows[0] ?? null;
 }
 
+/** Location IDs for an organization - used for Ask/tool scope until location RBAC exists. */
+export async function listLocationIdsForOrganization(
+  organizationId: string,
+): Promise<string[]> {
+  const rows = await db
+    .select({ id: locations.id })
+    .from(locations)
+    .where(eq(locations.organizationId, organizationId));
+  return rows.map((r) => r.id);
+}
+
 /**
  * Tenant isolation for documents:
  * access is granted only when the actor is a member of the document's organization.
@@ -112,13 +124,14 @@ export async function requireDocumentAccess(
     .limit(1);
 
   if (!document) {
-    throw new AuthzError("Document not found", 404);
+    // Opaque: do not distinguish miss vs cross-tenant.
+    throw new AuthzError("Not found", 404);
   }
 
-  const membership = await requireOrganizationMembership(
-    userId,
-    document.organizationId,
-  );
+  const membership = await getMembership(userId, document.organizationId);
+  if (!membership) {
+    throw new AuthzError("Not found", 404);
+  }
 
   return { document, membership };
 }
@@ -134,7 +147,7 @@ export async function requireUploadAuthorization(
   ]);
 }
 
-/** Pure helper used by tests — decides whether a membership may access a resource org. */
+/** Pure helper used by tests. Decides whether a membership may access a resource org. */
 export function canAccessOrganization(
   membershipOrgId: string | null | undefined,
   resourceOrgId: string,

@@ -1,0 +1,615 @@
+{
+  "metaTitle": "Where value leaks — RADR",
+  "metaDescription": "Where hospitality loses value: Supplier/AP, Reconciliation, Cost variance, Procurement, Perishable revenue.",
+  "kicker": "Where value leaks",
+  "heroTitleLine1": "Where hospitality loses value.",
+  "heroTitleLine2": "",
+  "heroLead": "RADR looks for value that is leaking, stuck, misallocated, or about to expire.",
+  "jump": {
+    "operators": "Restaurants",
+    "groups": "Groups",
+    "finance": "Finance",
+    "intelligence": "Operating models",
+    "hotels": "Hotels",
+    "bars": "Bars & Cafés"
+  },
+  "buy": {
+    "title": "Stop leaking value before it hits the P&L.",
+    "lead": "Supplier systems, invoices, contracts and deliveries become one decision story: variance detected, credit prepared, value verified.",
+    "examples": [
+      "Duplicate invoice",
+      "Unapproved price increase",
+      "Wrong delivery fee",
+      "Contract mismatch",
+      "Waste / yield issue"
+    ],
+    "contract": "Contract",
+    "paid": "Paid",
+    "flow": [
+      "Supplier systems",
+      "Invoice / contract / delivery",
+      "Variance detected",
+      "Credit prepared",
+      "Value verified"
+    ]
+  },
+  "labor": {
+    "title": "Staff to demand. Not to guesswork.",
+    "lead": "Forecast demand against the current roster. Catch over and under staffing early, prepare the adjustment, protect margin — without another scheduling product.",
+    "examples": [
+      "Overtime emerging",
+      "Agency usage",
+      "Schedule above demand",
+      "Low productivity",
+      "Labor % above target"
+    ],
+    "needed": "Needed",
+    "scheduled": "Scheduled",
+    "flow": [
+      "Forecast demand",
+      "Current roster",
+      "Over / under staffing",
+      "Prepared adjustment",
+      "Margin protected"
+    ]
+  },
+  "sell": {
+    "title": "Know where revenue becomes margin.",
+    "lead": "Sales, channel mix, discounts, menu contribution and delivery commissions, compared across locations with money attached and a clear next decision.",
+    "examples": [
+      "Room rate opportunity",
+      "Menu mix",
+      "Channel fees",
+      "Delivery commissions",
+      "Promotion leakage"
+    ],
+    "current": "Current",
+    "optimal": "Optimal",
+    "flow": [
+      "Sales & channel mix",
+      "Discounts & menu margin",
+      "Delivery commissions",
+      "Location comparison",
+      "Margin clarity"
+    ]
+  },
+  "recover": {
+    "title": "What you're owed shouldn't disappear.",
+    "lead": "Supplier credits, refunds, late cancellations, inventory recovery and uncollected value, carried until observed proof — Verified Value, not a hopeful estimate.",
+    "examples": [
+      "Supplier credits",
+      "Rebates",
+      "Refunds",
+      "Settlement differences",
+      "Missing commissions"
+    ],
+    "expected": "Expected",
+    "received": "Received",
+    "flow": [
+      "Credits & refunds",
+      "Late cancellations",
+      "Inventory recovery",
+      "Uncollected value",
+      "Verified return"
+    ]
+  },
+  "builtFor": "Built for",
+  "industriesKicker": "Where RADR excels",
+  "industriesTitle": "Built for serious hospitality.",
+  "industriesLead": "Not every venue. Operations with enough complexity that margin disappears between systems.",
+  "industries": {
+    "restaurants": {
+      "title": "Restaurant groups",
+      "lead": "Multi-unit dining portfolios: city concepts, regional groups, international brands. Shared suppliers, shared labor markets, one language for margin."
+    },
+    "hotels": {
+      "title": "Hotels",
+      "lead": "Rooms and F&B as one operating picture. Banqueting, outlets, procurement and labor finally sit in the same financial truth."
+    },
+    "destination": {
+      "title": "Destination hospitality",
+      "lead": "Resorts, private clubs and venue groups: high-stakes service, complex spend, and recovery that cannot wait for month-end."
+    }
+  },
+  "operations": {
+    "title": "Independent operators",
+    "lead": "One location. The same financial discipline as a group: spend, labor, sales and recovery in one operating view."
+  },
+  "groups": {
+    "title": "Hospitality groups",
+    "lead": "Compare locations and control margin across the portfolio: one language from site to finance."
+  },
+  "cfo": {
+    "title": "Finance & operations",
+    "lead": "One operating truth between the floor and the P&L: findings with money attached, Prepared Actions with owners, value that can be verified."
+  },
+  "ctaTitleLine1": "See how RADR decides",
+  "ctaTitleLine2": "on your economics.",
+  "ctaOs": "See the Decision Cockpit",
+  "cta": "See how RADR decides",
+  "detect": "DETECT",
+  "intelligence": {
+    "kicker": "Decision models",
+    "title": "Built around your operation.",
+    "lead": "Every hospitality business runs differently. RADR understands the systems, economics and decisions that matter to yours.",
+    "tabsLabel": "Choose an operating model",
+    "domainsLabel": "Data RADR can reason across",
+    "domainsNote": "Domain model, not a live connector claim. Status marks what exists today.",
+    "signalsLabel": "RADR understands",
+    "workRemovedLabel": "Work RADR can take away",
+    "workRemovedNote": "Preparation and monitoring first. External execution only where systems and policy support it.",
+    "findingsLabel": "Example findings",
+    "evidenceLabel": "Ask RADR RADR believes this",
+    "actionLabel": "Prepared action",
+    "confidenceLabel": "Confidence",
+    "demoChrome": "Finding",
+    "disclaimer": "Illustrative operating models. Detectors and connectors ship by domain over time.",
+    "status": {
+      "available": "Available",
+      "developing": "In development",
+      "planned": "Planned"
+    },
+    "domains": {
+      "pos": "POS",
+      "reservations": "Reservations",
+      "labor": "Labor",
+      "payments": "Payments",
+      "inventory": "Inventory",
+      "suppliers": "Suppliers",
+      "delivery": "Delivery",
+      "accounting": "Accounting",
+      "weather": "Weather",
+      "localEvents": "Local events",
+      "pms": "PMS",
+      "bookings": "Bookings",
+      "rooms": "Rooms",
+      "revenueManagement": "Revenue management",
+      "channelManager": "Channel manager",
+      "ota": "OTA distribution",
+      "housekeeping": "Housekeeping",
+      "fb": "F&B",
+      "events": "Events and banqueting",
+      "guestFeedback": "Guest feedback",
+      "footfall": "Footfall",
+      "loyalty": "Loyalty",
+      "invoices": "Invoices",
+      "contracts": "Supplier contracts",
+      "payroll": "Payroll",
+      "channels": "Delivery or distribution"
+    },
+    "signals": {
+      "restaurants": {
+        "covers": "Covers",
+        "bookingPace": "Booking pace",
+        "averageSpend": "Average spend",
+        "tableTurns": "Table turns",
+        "labor": "Labor cost",
+        "foodCost": "Food cost",
+        "menuMix": "Menu mix",
+        "delivery": "Delivery economics"
+      },
+      "hotels": {
+        "occupancy": "Occupancy",
+        "adr": "ADR",
+        "revpar": "RevPAR",
+        "pickup": "Pickup",
+        "channelMix": "Channel mix",
+        "housekeeping": "Housekeeping",
+        "labor": "Labor",
+        "ancillary": "Ancillary spend"
+      },
+      "bars": {
+        "transactions": "Transactions",
+        "averageTicket": "Average ticket",
+        "hourlySales": "Hourly sales",
+        "productMix": "Product mix",
+        "laborHours": "Labor hours",
+        "waste": "Waste",
+        "weatherSensitivity": "Weather sensitivity",
+        "daypart": "Daypart performance"
+      },
+      "groups": {
+        "crossLocation": "Cross location comparison",
+        "portfolioExposure": "Portfolio exposure",
+        "exceptions": "Location exceptions",
+        "forecastVariance": "Forecast variance",
+        "marginCompare": "Margin comparison",
+        "supplierPricing": "Supplier pricing",
+        "laborProductivity": "Labor productivity",
+        "verifiedByLocation": "Verified Value by location"
+      },
+      "finance": {
+        "leakage": "Where money leaks",
+        "marginMove": "Ask RADR margin moved",
+        "invoiceMatch": "Invoice to contract",
+        "locationSpend": "Location overspend",
+        "outstandingCredits": "Outstanding credits",
+        "verifiedValue": "Verified Value",
+        "dayChange": "What changed since yesterday"
+      },
+      "apartments": {
+        "occupancy": "Occupancy",
+        "orphanGaps": "Orphan gaps",
+        "channelMix": "Channel mix",
+        "turnover": "Turnover",
+        "adr": "ADR",
+        "directShare": "Direct share"
+      }
+    },
+    "categories": {
+      "restaurants": {
+        "tab": "Restaurants & F&B",
+        "headline": "Restaurant economics, read as one operation.",
+        "lead": "Covers, labor, menu mix, supplier invoices and delivery are not separate tools. They are one money story for the night.",
+        "edge": "RADR watches booking pace against staffing, invoice lines against contracts, and menu contribution against volume.",
+        "findings": {
+          "labor": {
+            "switch": "D-1920",
+            "money": "€840 contribution at risk",
+            "summary": "Service pressure · kitchen 94% · adding FOH feeds the bottleneck · Berlin Mitte",
+            "evidence": [
+              "Expected covers: 142",
+              "Kitchen capacity: 94%",
+              "Ticket time rising",
+              "Add-FOH path expected: €410"
+            ],
+            "action": "Move 1 FOH to bar · slow delivery 25m",
+            "confidence": "Medium"
+          },
+          "recover": {
+            "switch": "RECOVER",
+            "money": "€184 verified",
+            "summary": "A late cancellation released a four top. RADR identified replacement demand and the table was rebooked.",
+            "evidence": [
+              "Cancelled party: 4 covers",
+              "Waitlist match within 12 minutes",
+              "Replacement party seated",
+              "Observed POS: €184"
+            ],
+            "action": "Keep recovery workflow on for peak cancellations.",
+            "confidence": "High"
+          },
+          "buy": {
+            "switch": "D-1842",
+            "money": "€1,840 at risk tonight",
+            "summary": "Tuna Tataki bestseller · 6 portions short for peak · Berlin Mitte",
+            "evidence": [
+              "82% sellout probability by 20:10",
+              "81% feature-swap historical success",
+              "Deadline 17:15"
+            ],
+            "action": "Feature Truffle Pasta first · supplier fallback",
+            "confidence": "High"
+          },
+          "sell": {
+            "switch": "SELL",
+            "money": "€260 margin opportunity",
+            "summary": "Two high volume menu items are generating strong revenue but below target contribution margin.",
+            "evidence": [
+              "Items: house burger, seasonal pasta",
+              "Volume: above 30-day average",
+              "Contribution: 4.2 pts below target",
+              "Food cost drift on both recipes"
+            ],
+            "action": "Review portion and pricing on the two items before the weekend.",
+            "confidence": "Medium"
+          },
+          "capacity": {
+            "switch": "D-1911",
+            "money": "€620 vs seat-now",
+            "summary": "Empty tables ≠ capacity · 38 covers inbound · kitchen 92% · Berlin Mitte",
+            "evidence": [
+              "Floor occupancy: 78% · walk-ins waiting",
+              "38 covers arriving in 22 min",
+              "KDS ticket time 14 min ↑ · kitchen 92%",
+              "Delivery +31% vs plan · 9 second-turn tables at risk"
+            ],
+            "action": "Wait 12 minutes · throttle delivery · feature fast dish",
+            "confidence": "High"
+          }
+        }
+      },
+      "hotels": {
+        "tab": "Hotels & Resorts",
+        "headline": "Hotel economics, not a restaurant model in different clothes.",
+        "lead": "Occupancy, ADR, RevPAR, channel mix, housekeeping and room inventory move money differently from covers and table turns.",
+        "edge": "RADR reasons across rooms, distribution, labor and ancillary spend so rate, recovery and cost sit in one operating picture.",
+        "findings": {
+          "sell": {
+            "switch": "SELL",
+            "money": "€4,200 contribution drag",
+            "summary": "89% occupancy · OTA share +11 pts · hold direct vs release OTA",
+            "evidence": [
+              "Premium rooms committed: 91%",
+              "Booking pace: 17% ahead",
+              "Remaining inventory: 8 rooms",
+              "Confidence: High"
+            ],
+            "action": "Review premium room pricing for remaining inventory.",
+            "confidence": "High"
+          },
+          "recover": {
+            "switch": "RECOVER",
+            "money": "€1,260 recoverable",
+            "summary": "Six cancelled rooms for this weekend have returned to inventory. Current pickup suggests four are likely to refill naturally. Two remain financially exposed.",
+            "evidence": [
+              "Cancellations returned: 6 rooms",
+              "Modeled natural refill: 4",
+              "Exposed rooms: 2",
+              "Channel mix favors OTA refill unless direct offers run"
+            ],
+            "action": "Release a targeted direct offer on the two exposed rooms.",
+            "confidence": "Medium"
+          },
+          "buy": {
+            "switch": "BUY",
+            "money": "€740 cost variance",
+            "summary": "Laundry cost per occupied room increased 11% this month without a corresponding occupancy or contract change.",
+            "evidence": [
+              "Cost per occupied room: +11%",
+              "Occupancy change: flat",
+              "Contract rate unchanged",
+              "Variance concentrated in towel and sheet lines"
+            ],
+            "action": "Open a cost review with the laundry vendor this week.",
+            "confidence": "High"
+          },
+          "labor": {
+            "switch": "LABOR",
+            "money": "€680 potential overspend",
+            "summary": "Housekeeping hours scheduled tomorrow exceed modeled room turnover demand.",
+            "evidence": [
+              "Departures modeled: 42",
+              "Stayover cleans modeled: 38",
+              "Hours scheduled: 11% above model",
+              "Out of order rooms: 3"
+            ],
+            "action": "Trim two housekeeping shifts before the morning briefing.",
+            "confidence": "Medium"
+          }
+        }
+      },
+      "bars": {
+        "tab": "Bars & Cafés",
+        "headline": "Daypart economics for bars and cafés.",
+        "lead": "Hourly sales, product mix, waste and weather move cash differently than a full-service dining room.",
+        "edge": "RADR watches ticket size, staffing and inventory against the conditions that actually drive the daypart.",
+        "findings": {
+          "sell": {
+            "switch": "SELL",
+            "money": "€310 opportunity",
+            "summary": "Warm afternoon conditions historically increase terrace demand, while current staffing and inventory remain planned to the indoor baseline.",
+            "evidence": [
+              "Forecast: warm, dry afternoon",
+              "Historical terrace lift on comparable days",
+              "FOH plan: indoor baseline",
+              "Terrace inventory: unchanged"
+            ],
+            "action": "Staff the terrace for peak and stage high velocity terrace SKUs.",
+            "confidence": "High"
+          },
+          "buy": {
+            "switch": "BUY",
+            "money": "€96 recoverable",
+            "summary": "Coffee supplier pricing differs from the agreed August price book.",
+            "evidence": [
+              "Price book: August contract",
+              "Invoice lines: 2 beans over contract",
+              "Variance: €96",
+              "Invoice open"
+            ],
+            "action": "Request a credit against the August price book.",
+            "confidence": "High"
+          },
+          "labor": {
+            "switch": "LABOR",
+            "money": "€220 potential overspend",
+            "summary": "Tuesday afternoon labor is scheduled above demand observed across comparable weeks.",
+            "evidence": [
+              "Comparable Tuesday afternoon tickets: -18%",
+              "Hours scheduled: flat to last week",
+              "No event demand on calendar",
+              "Idle time concentrated 14:00 to 16:30"
+            ],
+            "action": "Cut one afternoon shift or move coverage to evening peak.",
+            "confidence": "Medium"
+          }
+        }
+      },
+      "groups": {
+        "tab": "Hospitality Groups",
+        "headline": "One operating truth across every location.",
+        "lead": "Portfolio value is not a ranking table. It is understanding why locations differ, then acting on the drivers.",
+        "edge": "RADR decomposes performance so an executive can move from group to region to location to finding to evidence.",
+        "portfolio": {
+          "money": "€4,200 weekly gap",
+          "summary": "Amsterdam Zuid is outperforming De Pijp by €4,200 this week.",
+          "decompLabel": "What drives the difference",
+          "drivers": [
+            {
+              "label": "More covers",
+              "value": "+€1,640"
+            },
+            {
+              "label": "Higher average spend",
+              "value": "+€980"
+            },
+            {
+              "label": "Better product mix",
+              "value": "+€720"
+            },
+            {
+              "label": "Lower discounts",
+              "value": "+€410"
+            },
+            {
+              "label": "Higher labor efficiency",
+              "value": "+€450"
+            }
+          ],
+          "why": "The strongest driver is dinner traffic between Thursday and Saturday. Labor productivity explains another meaningful portion of the variance.",
+          "action": "Replicate Zuid dinner pacing and discount discipline at De Pijp for the next two weekends.",
+          "path": "Group → Amsterdam → De Pijp → Finding → Evidence"
+        }
+      },
+      "finance": {
+        "tab": "Finance & Operations",
+        "headline": "When operations and finance share one truth.",
+        "lead": "RADR connects invoices, contracts, labor, payments and POS so margin questions have money attached.",
+        "edge": "The point is not another dashboard. It is identified value, pending verification and verified outcomes in one ledger.",
+        "month": {
+          "money": "€14,820 identified this month",
+          "summary": "Operational and financial signals reconciled into one identified value total.",
+          "breakLabel": "Where the money sits",
+          "buckets": [
+            {
+              "label": "Supplier discrepancies",
+              "value": "€4,180"
+            },
+            {
+              "label": "Labor exposure",
+              "value": "€3,420"
+            },
+            {
+              "label": "Revenue leakage",
+              "value": "€2,960"
+            },
+            {
+              "label": "Recoverable credits",
+              "value": "€2,100"
+            },
+            {
+              "label": "Other identified value",
+              "value": "€2,160"
+            }
+          ],
+          "stages": [
+            {
+              "label": "Verified Value",
+              "value": "€9,640"
+            },
+            {
+              "label": "Pending verification",
+              "value": "€2,180"
+            },
+            {
+              "label": "Awaiting action",
+              "value": "€3,000"
+            }
+          ],
+          "action": "Clear the three awaiting-action findings before month close.",
+          "questions": "Where are we leaking money? Which invoices miss contracts? How much value has RADR verified?"
+        }
+      },
+      "apartments": {
+        "tab": "Serviced Apartments",
+        "headline": "This empty Tuesday isn’t random.",
+        "lead": "Orphan gaps look random until comparable history and release conditions are modeled together.",
+        "edge": "Wait · discount · direct first · OTA first — with net contribution attached.",
+        "findings": {
+          "sell": {
+            "switch": "Orphan gap",
+            "money": "€164 net opportunity",
+            "summary": "17 comparable orphan gaps · 64% historical fill under relevant release condition",
+            "evidence": [
+              "Premium rooms committed: 91%",
+              "Booking pace: 17% ahead",
+              "Remaining inventory: 8 rooms",
+              "Confidence: High"
+            ],
+            "action": "Review premium room pricing for remaining inventory.",
+            "confidence": "High"
+          },
+          "recover": {
+            "switch": "RECOVER",
+            "money": "€1,260 recoverable",
+            "summary": "Six cancelled rooms for this weekend have returned to inventory. Current pickup suggests four are likely to refill naturally. Two remain financially exposed.",
+            "evidence": [
+              "Cancellations returned: 6 rooms",
+              "Modeled natural refill: 4",
+              "Exposed rooms: 2",
+              "Channel mix favors OTA refill unless direct offers run"
+            ],
+            "action": "Release a targeted direct offer on the two exposed rooms.",
+            "confidence": "Medium"
+          },
+          "buy": {
+            "switch": "BUY",
+            "money": "€740 cost variance",
+            "summary": "Laundry cost per occupied room increased 11% this month without a corresponding occupancy or contract change.",
+            "evidence": [
+              "Cost per occupied room: +11%",
+              "Occupancy change: flat",
+              "Contract rate unchanged",
+              "Variance concentrated in towel and sheet lines"
+            ],
+            "action": "Open a cost review with the laundry vendor this week.",
+            "confidence": "High"
+          },
+          "labor": {
+            "switch": "LABOR",
+            "money": "€680 potential overspend",
+            "summary": "Housekeeping hours scheduled tomorrow exceed modeled room turnover demand.",
+            "evidence": [
+              "Departures modeled: 42",
+              "Stayover cleans modeled: 38",
+              "Hours scheduled: 11% above model",
+              "Out of order rooms: 3"
+            ],
+            "action": "Trim two housekeeping shifts before the morning briefing.",
+            "confidence": "Medium"
+          }
+        }
+      }
+    },
+    "workRemoved": {
+      "restaurants": {
+        "dailyBrief": "Daily operating brief preparation",
+        "laborDemand": "Labor versus demand checks",
+        "supplierVariance": "Supplier variance review",
+        "cancellationPrep": "Cancellation recovery preparation",
+        "deliveryMargin": "Delivery margin review",
+        "forecastExceptions": "Forecast exception monitoring"
+      },
+      "hotels": {
+        "dailyBrief": "Daily operating brief preparation",
+        "rateAnomalies": "Rate anomaly review",
+        "otaCommission": "OTA commission checks",
+        "housekeepingDemand": "Housekeeping demand reconciliation",
+        "bookingPace": "Booking pace exception monitoring",
+        "groupVariance": "Group booking variance review",
+        "crossDeptDemand": "Cross departmental demand coordination"
+      },
+      "bars": {
+        "laborDaypart": "Labor versus daypart review",
+        "supplierPrice": "Supplier price checks",
+        "stockRisk": "Stock risk monitoring",
+        "weatherDemand": "Weather demand checks",
+        "eventDemand": "Event demand preparation",
+        "productMix": "Product mix exception review"
+      },
+      "groups": {
+        "locationReports": "Location report compilation",
+        "manualRanking": "Manual ranking",
+        "varianceInvestigation": "Variance investigation",
+        "crossLocationCompare": "Cross location comparisons",
+        "weeklySummaries": "Weekly operating summaries",
+        "valueTracking": "Verified value tracking"
+      },
+      "finance": {
+        "invoiceMatch": "Invoice to contract matching",
+        "creditChase": "Credit chase preparation",
+        "marginException": "Margin exception review",
+        "valueTracking": "Verified value tracking"
+      },
+      "apartments": {
+        "gapReview": "Manual gap review",
+        "channelRelease": "Channel release guesswork",
+        "fillAnalysis": "Post-hoc fill analysis",
+        "turnoverPrep": "Turnover preparation"
+      }
+    }
+  },
+  "ctaBridge": "Four territories. One decision engine.",
+  "ctaIndustries": "Industries →"
+}

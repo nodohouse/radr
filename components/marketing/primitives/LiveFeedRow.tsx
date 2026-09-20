@@ -10,7 +10,7 @@ type Props = {
   onLeave?: () => void;
 };
 
-/** Compact live-feed row — channel, raw △, annualized, tag. */
+/** Compact live-feed row: channel, raw △, annualized, tag. */
 export function LiveFeedRow({
   signal,
   active = false,
@@ -52,7 +52,7 @@ export function LiveFeedRow({
           </p>
         ) : (
           <p className="rx-live-annual rx-live-annual--muted">
-            Continues scanning
+            Continuous
           </p>
         )}
         <p className="rx-money-signal-tag">{signal.tag}</p>

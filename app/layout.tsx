@@ -1,70 +1,49 @@
-import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Manrope, Source_Sans_3 } from "next/font/google";
+import type { ReactNode } from "react";
+import { cookies } from "next/headers";
+import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import { locales, type AppLocale } from "@/i18n/routing";
 import "./globals.css";
 import "./radr.css";
+import "./motion.css";
 
-const display = Manrope({
-  subsets: ["latin"],
+const display = Instrument_Sans({
+  subsets: ["latin", "latin-ext"],
   variable: "--font-display",
   display: "swap",
 });
 
-const body = Source_Sans_3({
-  subsets: ["latin"],
+const body = Instrument_Sans({
+  subsets: ["latin", "latin-ext"],
   variable: "--font-body",
   display: "swap",
 });
 
 const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://radrup.com"),
-  title: {
-    default: "RADR — Continuous Margin Intelligence",
-    template: "%s · RADR",
-  },
-  description:
-    "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality — designed for complex operations.",
-  applicationName: "RADR",
-  authors: [{ name: "RADR" }],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://radrup.com",
-    siteName: "RADR",
-    title: "RADR — Continuous Margin Intelligence",
-    description:
-      "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "RADR — Continuous Margin Intelligence",
-    description:
-      "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+/**
+ * Root layout owns <html>/<body> for every route.
+ * Do not call next-intl getLocale() here - it can resolve the first path
+ * segment as a locale and make /app match [locale]=app.
+ */
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const jar = await cookies();
+  const preferred = jar.get("radr_locale")?.value;
+  const locale: AppLocale =
+    preferred && (locales as readonly string[]).includes(preferred)
+      ? (preferred as AppLocale)
+      : "en";
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#070807",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang={locale} suppressHydrationWarning>
+      <body
+        className={`${display.variable} ${body.variable} ${mono.variable}`}
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
