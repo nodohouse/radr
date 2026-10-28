@@ -8,6 +8,19 @@ export function Glyph({
   size?: number;
 }) {
   const paths: Record<string, React.ReactNode> = {
+    pos: (
+      <>
+        <rect x="3" y="5" width="18" height="16" rx="3" />
+        <circle cx="12" cy="13" r="3" />
+        <path d="M7 5V3h4v2m5 4h2" />
+      </>
+    ),
+    calendar: (
+      <>
+        <rect x="3" y="5" width="18" height="16" rx="2" />
+        <path d="M7 3v4m10-4v4M3 11h18m-14 4h3m4 0h3" />
+      </>
+    ),
     hotel: (
       <>
         <path d="M3 20V6h18v14M3 15h18M7 15v-5h10v5M7 20v-2m10 2v-2" />

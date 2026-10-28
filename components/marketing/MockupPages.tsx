@@ -18,6 +18,7 @@ import {
 import { MockupCalculator } from "./MockupCalculator";
 import { pricingConfig, faqItems } from "./pricing/config";
 import { MotionScene } from "./MotionScene";
+import { SolutionsStory } from "./SolutionsStory";
 import "./mockup-pages.css";
 
 function Buttons({
@@ -351,19 +352,7 @@ export function MockupSolutions() {
     <PageShell>
       <OperationProvider>
         <div className="mx-page">
-          <MockHero
-            kind="solutions"
-            title={
-              <>
-                Turn real signals
-                <br />
-                into better decisions<span>.</span>
-              </>
-            }
-            copy="RADR connects your data, understands your hospitality operation, and helps you take the right action across restaurants, hotels, and multi-site groups."
-          >
-            <PortfolioPreview solutions />
-          </MockHero>
+          <SolutionsStory />
           <OperationSelector compact />
           <section className="mx-section mx-light">
             <div className="mx-wrap mx-split">

@@ -1,0 +1,92 @@
+{
+  "layouts": [
+    {
+      "width": 1920,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 1512,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 1366,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 1101,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 1100,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 1024,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 850,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 550,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 430,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    },
+    {
+      "width": 320,
+      "overflow": false,
+      "cardClipping": false,
+      "reducedMotion": "static"
+    }
+  ],
+  "motion": [
+    "Incoming and outgoing SVG packets visibly travel",
+    "Pause freezes exact packet positions",
+    "Replay resets and preserves keyboard focus",
+    "Stage exploration works",
+    "Offscreen animation pauses",
+    "Expected/observed/verified remain distinct"
+  ],
+  "errors": [],
+  "status": "passed"
+}
