@@ -9,7 +9,10 @@ import {
 const initial: ContactResult | null = null;
 
 export function ContactForm() {
-  const [state, action, pending] = useActionState(submitContactInquiry, initial);
+  const [state, action, pending] = useActionState(
+    submitContactInquiry,
+    initial,
+  );
 
   useEffect(() => {
     if (state?.ok && state.mode === "mailto") {
@@ -104,7 +107,7 @@ export function ContactForm() {
         className="rx-btn rx-btn-primary"
         disabled={pending}
       >
-        {pending ? "Sending…" : "See what RADR finds →"}
+        {pending ? "Sending…" : "Request a walkthrough →"}
       </button>
     </form>
   );

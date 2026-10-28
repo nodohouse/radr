@@ -1,83 +1,63 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteFooter } from "@/components/marketing/SiteFooter";
-import { SiteNav } from "@/components/marketing/SiteNav";
+import {
+  PageShell,
+  PageHero,
+  SectionHeading,
+} from "@/components/marketing/MarketingShell";
 import { TRUST_CONTROLS } from "@/components/marketing/config/trust";
-
 export const metadata: Metadata = {
   title: "Security — Built for sensitive commercial data",
   description:
-    "How RADR handles documents, access, and application security — only controls that actually exist.",
+    "How RADR handles documents, access and application security. Honest controls and availability.",
 };
-
-const CATEGORIES = [
-  "DATA",
-  "ACCESS",
-  "INFRASTRUCTURE",
-  "APPLICATION",
-  "DOCUMENTS",
-] as const;
-
 export default function SecurityPage() {
   return (
-    <div className="radr">
-      <SiteNav />
-      <main>
-        <section className="rx-page-hero" data-nav-theme="dark">
-          <div className="rx-shell rx-page-hero-inner">
-            <p className="rx-kicker">Security</p>
-            <h1 className="rx-page-title">
-              Built for sensitive
-              <br />
-              commercial data.
-            </h1>
-            <p className="rx-lead-inv rx-lead-short">
-              Hospitality margins depend on contracts, invoices, labor and
-              revenue data. RADR only claims controls that are actually in
-              place.
-            </p>
+    <PageShell>
+      <PageHero
+        eyebrow="SECURITY"
+        title={
+          <>
+            Built for sensitive
+            <br />
+            commercial data.
+          </>
+        }
+        description="Contracts, invoices and operating data deserve clear boundaries. Here is what exists today, and what is still being built."
+        compact
+      />
+      <section className="rp-section rp-ivory">
+        <div className="rp-container">
+          <SectionHeading
+            kicker="CONTROLS, WITH CONTEXT"
+            title="Trust starts with specifics."
+          />
+          <div className="rp-trust-grid">
+            {TRUST_CONTROLS.map((control) => (
+              <article key={control.label}>
+                <span
+                  className={`rp-status ${control.status !== "LIVE" ? "rp-status-muted" : ""}`}
+                >
+                  {control.status === "LIVE"
+                    ? "Available now"
+                    : "In development"}
+                </span>
+                <h3>{control.label}</h3>
+                <p>{control.detail}</p>
+              </article>
+            ))}
           </div>
-        </section>
-
-        <section className="rx-sec" data-nav-theme="dark">
-          <div className="rx-shell rx-sec-inner">
-            {CATEGORIES.map((cat) => {
-              const items = TRUST_CONTROLS.filter((t) => t.category === cat);
-              if (items.length === 0) return null;
-              return (
-                <div key={cat} className="rx-sec-block">
-                  <p className="rx-sec-cat">{cat}</p>
-                  <ul className="rx-sec-list">
-                    {items.map((t) => (
-                      <li key={t.label}>
-                        <div className="rx-sec-row">
-                          <h2>{t.label}</h2>
-                          <em data-status={t.status === "LIVE" ? "on" : "dev"}>
-                            {t.status}
-                          </em>
-                        </div>
-                        <p>{t.detail}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-
-            <p className="rx-sec-note">
-              No SOC 2, ISO, or GDPR certification claims are made here. When
-              certifications exist, they will be listed with dates and scope.
-            </p>
-            <p className="rx-sec-note">
-              Questions about data handling?{" "}
-              <Link href="/privacy">Privacy Policy</Link>
-              {" · "}
-              <Link href="/contact">Contact</Link>
-            </p>
-          </div>
-        </section>
-      </main>
-      <SiteFooter />
-    </div>
+          <p className="rp-security-note">
+            No SOC 2, ISO, or GDPR certification claims are made here. When
+            certifications exist, they will be listed with dates and scope.
+          </p>
+          <p className="rp-security-note">
+            Questions about data handling?{" "}
+            <Link href="/privacy">Read the Privacy Policy</Link> or{" "}
+            <Link href="/contact">contact us</Link>.
+          </p>
+        </div>
+      </section>
+    </PageShell>
   );
 }

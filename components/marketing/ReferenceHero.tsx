@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "./reference-hero.css";
+import { ReferenceNav } from "./ReferenceNav";
 
 const brand = "/brand/radr-wordmark-clean-white.svg";
 const destinations = [
@@ -222,40 +223,7 @@ export function ReferenceHero() {
   return (
     <section className="rh-hero" id="product" aria-labelledby="rh-title">
       <div className="rh-backdrop" />
-      <header className="rh-header">
-        <Link href="/en" aria-label="RADR home" className="rh-brand">
-          <Image src={brand} alt="RADR" width={145} height={33} priority />
-        </Link>
-        <nav aria-label="Primary navigation">
-          <Link href="/how">Platform</Link>
-          <Link href="/solutions">Solutions</Link>
-          <Link href="/#value-map">Value Calculator</Link>
-          <Link href="/pricing">Pricing</Link>
-          <Link href="/company">Company</Link>
-        </nav>
-        <div className="rh-header-actions">
-          <details className="rh-mobile-menu">
-            <summary>Menu</summary>
-            <div className="rh-mobile-links">
-              <Link href="/how">Platform</Link>
-              <Link href="/solutions">Solutions</Link>
-              <Link href="/#value-map">Value Calculator</Link>
-              <Link href="/pricing">Pricing</Link>
-              <Link href="/company">Company</Link>
-              <Link href="/login">Sign in</Link>
-            </div>
-          </details>
-          <span className="rh-language" aria-label="Language: English">
-            EN <span aria-hidden="true">⌄</span>
-          </span>
-          <Link className="rh-signin" href="/login">
-            Sign in
-          </Link>
-          <Link className="rh-button rh-nav-demo" href="/contact">
-            Book a demo <Arrow />
-          </Link>
-        </div>
-      </header>
+      <ReferenceNav />
       <div className="rh-copy">
         <p className="rh-eyebrow">HOSPITALITY OPERATING INTELLIGENCE</p>
         <h1 id="rh-title">

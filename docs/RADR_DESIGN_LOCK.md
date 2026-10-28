@@ -7,7 +7,7 @@ Read this document and `visual-qa/implementation-brief.txt` before changing publ
 - Branch: `radr-reference-rebuild`.
 - Starting commit: `10592c1933c37f86dce1d5a664efab69eb5a6fd4`; working tree was clean.
 - Canonical viewport: 1512 × 982; routes: `/` and `/en`.
-- The user approved the header and hero in chat and authorized continuing. The full reference sequence now replaces the old homepage. Full-page visual review is pending; no publication has been performed.
+- The user approved the header and hero in chat and authorized continuing. The full reference sequence now replaces the old homepage. The user approved the full page and it is deployed through Vercel’s preview integration on `radr-reference-rebuild`.
 
 ## Header and hero geometry
 
@@ -64,4 +64,18 @@ The homepage now uses `radr-wordmark-clean-white.svg`, `radr-wordmark-clean-mono
 
 Rebuild derivatives with `node scripts/brand/build-clean-logos.mjs`. The website uses SVG, not a 4K bitmap. Additional transparent 3840 px-wide PNG exports are in `docs/visual-qa/radr-logo-4k-white.png` and `radr-logo-4k-black.png`; `logo-before-after.png` shows the outline change enlarged.
 
-A hosted preview was requested. No hosting CLI authentication or connected deployment tool was found. Scoped Git reads work, but the GitHub API request for existing deployment metadata was denied by the current network policy. No public URL has been created or deployment claimed. An existing hosting project/account is required to continue deployment.
+The user connected Vercel’s Git integration and confirmed the branch preview works at `https://radr-41j4-git-radr-reference-rebuild-nodo13.vercel.app/`. Push updates to `radr-reference-rebuild`; do not modify `main` for this workflow. The environment cannot independently query Vercel due to network policy, so distinguish a successful push from a confirmed finished deployment.
+
+## Navigation pages — approved scope expansion
+
+After approving the homepage, the user requested the other navigation destinations match it. `ReferenceNav` is now shared by the homepage and the public page shell. Retain its logo, dimensions, active-page indication, and working mobile disclosure. Value Calculator now navigates to `/value-calculator`; the original homepage Value Map remains intact.
+
+- Shared page composition: `MarketingShell.tsx`; page content: `MarketingPages.tsx`; interactive solution explorer and dedicated calculator: `MarketingInteractions.tsx`; scoped styles: `marketing-pages.css` (`rp-` prefix).
+- Main destinations: Platform (`/how`), Solutions, Value Calculator, Pricing, Company, and Contact. The authentication shell, Security, and legal chrome use the same visual language. Existing auth logic, contact action, security controls, and legal copy are preserved.
+- Interior pages use the same generated architecture, 1356 px content width, 78 px canonical insets, clean SVG branding, ivory/forest palette, editorial headings, and restrained mint glass surfaces. These are extensions of the approved homepage language, not exact additional reference screenshots.
+- Preserve pricing source of truth in `pricing/config.ts`: Free €0; Control €199 per location/month; Scale custom. Billing remains inactive and capability availability is explicit. Do not advertise upcoming features as live or change commercial terms during visual edits.
+- The dedicated calculator models one area at a time to avoid cross-category double counting. Baseline × assumed improvement × locations × optional 12 months. Assumptions are user-controlled; results are explicitly illustrative and not verified financial outcomes.
+- Contact UI retains the existing server action. Invalid-input handling is browser-tested. Actual inquiry delivery still depends on the existing configured webhook or published inbox and is not claimed as validated by these visual checks.
+- Navigation QA: `docs/visual-qa/navigation.mjs` checks all 14 public routes at 1512, 390, and 768 px widths and exercises native FAQs, solution selection, calculator arithmetic, mobile navigation, contact validation, and password visibility. Captures use route-prefixed filenames. See `navigation-results.json` for outcomes.
+
+Navigation revision verification: production build, ESLint, TypeScript and all 28 unit/integration tests passed. Browser QA passed 42 route/viewport checks (14 routes × desktop/mobile/tablet), all five interactive test groups, and the original homepage regression suite at nine viewport sizes. The final visual correction replaced unsupported solution-tab arrow glyphs with native SVG and improved small-screen hero text contrast.

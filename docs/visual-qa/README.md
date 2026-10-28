@@ -20,7 +20,7 @@ NODE_PATH=/workspace/radr-visual-tools/node_modules node docs/visual-qa/capture.
 
 The tooling uses an external Playwright installation and system Chromium. For a different machine, install Playwright in a tooling location outside this checkout and point `NODE_PATH` there. `CHROMIUM_PATH` can select another installed Chromium. Browser errors, failed image loads, horizontal overflow, hidden hero content, or failed interaction assertions cause a nonzero exit.
 
-The run verifies both `/` and `/en`, all six decision stages, the action/verification flow, Restaurant/Hotel selection, calculator arithmetic, negative-input handling, native dialog Escape/focus behavior, on-page navigation, and the mobile menu. Layout checks cover 1512, 1920, 1440, 1280, 1024, 768, 430, 390, and 3840 px widths.
+The run verifies both `/` and `/en`, all six decision stages, the action/verification flow, Restaurant/Hotel selection, calculator arithmetic, negative-input handling, native dialog Escape/focus behavior, navigation to the dedicated Value Calculator, and the mobile menu. Layout checks cover 1512, 1920, 1440, 1280, 1024, 768, 430, 390, and 3840 px widths.
 
 ## Reference comparison and limitations
 
@@ -33,3 +33,9 @@ RADR_REFERENCE=/absolute/path/to/reference.png NODE_PATH=/workspace/radr-visual-
 Photography is newly generated with user authorization, not an exact reconstruction of the reference's architecture. Original 1536 × 1024 plates remain in `/workspace/generated_images`; the site serves optimized WebP versions. The 4K check validates layout; these photographs do not have native 4K detail.
 
 Preview metrics are illustrative, not live customer results. The Value Map calculator is a local scenario model using user-adjustable assumptions, not an integration or a forecast. CTAs link to existing contact/platform pages; no publication or deployment was performed.
+
+## Interior page review
+
+Run `NODE_PATH=/workspace/radr-visual-tools/node_modules node docs/visual-qa/navigation.mjs` with the local app running. This verifies `/how`, `/solutions`, `/value-calculator`, `/pricing`, `/company`, `/contact`, `/login`, `/signup`, `/forgot-password`, `/reset-password`, `/security`, `/privacy`, `/terms`, and `/imprint` at desktop (1512), mobile (390), and tablet (768) widths.
+
+`<route>-desktop.png` and `<route>-mobile.png` contain full-page review captures; `navigation-results.json` records the latest checks. The interaction checks include all solution areas, calculator categories/arithmetic/periods/bounds, FAQ expand/collapse, mobile navigation/closing, invalid contact input, and password visibility. Contact delivery and production account authentication are outside this visual validation; existing backend behavior is preserved.

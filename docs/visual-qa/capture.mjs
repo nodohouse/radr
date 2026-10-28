@@ -141,11 +141,11 @@ try {
     .locator(".rh-header")
     .getByRole("link", { name: "Value Calculator" })
     .click();
-  await page.waitForURL("**/#value-map");
-  assert.equal(new URL(page.url()).hash, "#value-map");
-  assert.equal(await page.locator("#value-map").isVisible(), true);
+  await page.waitForURL("**/value-calculator");
+  assert.equal(new URL(page.url()).pathname, "/value-calculator");
+  assert.equal(await page.locator("#calculator").isVisible(), true);
   results.interactions.push(
-    "Value Calculator navigation reaches the on-page Value Map",
+    "Value Calculator navigation reaches the dedicated scenario calculator",
   );
   for (const [width, height] of [
     [1512, 982],

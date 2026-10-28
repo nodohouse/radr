@@ -329,7 +329,7 @@
     "All six decision stages, action, and verification",
     "Restaurant/Hotel selection",
     "Value calculator calculation, negative input clamp, Escape close, and focus restoration",
-    "Value Calculator navigation reaches the on-page Value Map"
+    "Value Calculator navigation reaches the dedicated scenario calculator"
   ],
   "overlay": "Not run: original reference file unavailable",
   "status": "passed",

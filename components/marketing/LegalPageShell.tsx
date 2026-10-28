@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import { SiteFooter } from "@/components/marketing/SiteFooter";
-import { SiteNav } from "@/components/marketing/SiteNav";
+import { PageShell } from "./MarketingShell";
 
 type Props = {
   kicker: string;
@@ -19,9 +18,8 @@ export function LegalPageShell({
   children,
 }: Props) {
   return (
-    <div className="radr">
-      <SiteNav />
-      <main className="rx-legal" data-nav-theme="dark">
+    <PageShell>
+      <div className="rp-legal">
         <div className="rx-shell rx-legal-inner">
           <header className="rx-legal-header">
             <p className="rx-kicker">{kicker}</p>
@@ -37,9 +35,8 @@ export function LegalPageShell({
           </header>
           <div className="rx-legal-body">{children}</div>
         </div>
-      </main>
-      <SiteFooter />
-    </div>
+      </div>
+    </PageShell>
   );
 }
 

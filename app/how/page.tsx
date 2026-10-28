@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { HowPage } from "@/components/marketing/pages/HowPage";
 
 export const metadata: Metadata = {
-  title: "How RADR works — From signal to verified value",
+  title: "Platform — One operating picture",
   description:
-    "Follow one finding through Detect, Explain, Act, Learn and Verify — from △ €3.60 / case to €18,620 verified value.",
+    "Connect evidence, understand the difference, and keep the whole decision lifecycle in view. Explore the RADR platform.",
 };
 
 export default function HowRoute() {
