@@ -1144,3 +1144,27 @@
 .sf-demo-footer > span {
   max-width: 100%;
 }
+
+/* Carry the same live signal through the comparison, decision and outcome. */
+.sf-handoff {
+  stroke-dasharray: 28 72;
+  animation-duration: 1.8s;
+}
+.sf-orbit {
+  animation: sf-process 4.8s ease-in-out infinite;
+  transform-origin: center;
+}
+.sf-orbit-outer {
+  animation-delay: -2.4s;
+}
+@keyframes sf-process {
+  0%,
+  100% {
+    transform: scale(0.97);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.035);
+    opacity: 1;
+  }
+}

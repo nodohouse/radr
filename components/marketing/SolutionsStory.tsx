@@ -157,6 +157,15 @@ export function SolutionsStory() {
                   />
                 </g>
               ))}
+              {["M770 285H784", "M1015 285H1044"].map((d, i) => (
+                <path
+                  key={d}
+                  d={d}
+                  pathLength="100"
+                  className="sf-packet sf-out-packet sf-handoff"
+                  style={{ animationDelay: `${i * -0.8}s` }}
+                />
+              ))}
               <path
                 d="M770 285H784m-6-5 6 5-6 5M1015 285H1044m-6-5 6 5-6 5"
                 stroke="#c1e8d6"
