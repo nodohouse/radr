@@ -16,15 +16,20 @@ const links = [
 
 export function ReferenceNav() {
   const pathname = usePathname();
+  const light = pathname === "/value-calculator";
   const menu = useRef<HTMLDetailsElement>(null);
   const closeMenu = () => {
     if (menu.current) menu.current.open = false;
   };
   return (
-    <header className="rh-header">
+    <header className="rh-header" data-tone={light ? "light" : "dark"}>
       <Link href="/en" aria-label="RADR home" className="rh-brand">
         <Image
-          src="/brand/radr-wordmark-clean-white.svg"
+          src={
+            light
+              ? "/brand/radr-wordmark-clean-monochrome-black.svg"
+              : "/brand/radr-wordmark-clean-white.svg"
+          }
           alt="RADR"
           width={145}
           height={33}

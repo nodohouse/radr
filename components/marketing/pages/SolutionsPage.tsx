@@ -1,1 +1,1 @@
-export { NewSolutionsPage as SolutionsPage } from "../MarketingPages";
+export { MockupSolutions as SolutionsPage } from "../MockupPages";

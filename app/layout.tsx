@@ -25,11 +25,11 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://radrup.com"),
   title: {
-    default: "RADR — Continuous Margin Intelligence",
+    default: "RADR — Hospitality Operating Intelligence",
     template: "%s · RADR",
   },
   description:
-    "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality — designed for complex operations.",
+    "Turn hospitality data into better decisions across restaurants, hotels and multi-site groups.",
   applicationName: "RADR",
   authors: [{ name: "RADR" }],
   openGraph: {
@@ -37,15 +37,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://radrup.com",
     siteName: "RADR",
-    title: "RADR — Continuous Margin Intelligence",
+    title: "RADR — Hospitality Operating Intelligence",
     description:
-      "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality.",
+      "Hospitality operating intelligence. Connect signals, create decisions and verify outcomes.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RADR — Continuous Margin Intelligence",
+    title: "RADR — Hospitality Operating Intelligence",
     description:
-      "RADR continuously finds money you're losing, missing or leaving behind. Built first for hospitality.",
+      "Hospitality operating intelligence. Connect signals, create decisions and verify outcomes.",
   },
   robots: {
     index: true,

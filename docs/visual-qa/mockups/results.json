@@ -1,0 +1,371 @@
+{
+  "layouts": [
+    {
+      "route": "en",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "en",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "en",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "how",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "how",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "how",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "solutions",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "solutions",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "solutions",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "value-calculator",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "value-calculator",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "value-calculator",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "pricing",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "pricing",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "pricing",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "company",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "company",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "company",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "contact",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "contact",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "contact",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "imprint",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "imprint",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "imprint",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "privacy",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "privacy",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "privacy",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "terms",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "terms",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "terms",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "security",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "security",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "security",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "responsible-ai",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "responsible-ai",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "responsible-ai",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "data-processing-agreement",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "data-processing-agreement",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "data-processing-agreement",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "login",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "login",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "login",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "signup",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "signup",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "signup",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "forgot-password",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "forgot-password",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "forgot-password",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    },
+    {
+      "route": "reset-password",
+      "width": 1512,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 1434
+    },
+    {
+      "route": "reset-password",
+      "width": 390,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 366
+    },
+    {
+      "route": "reset-password",
+      "width": 768,
+      "overflow": false,
+      "broken": [],
+      "headerRight": 736
+    }
+  ],
+  "interactions": [
+    "Six-step calculator: operation, locations, annual inputs, channel mix validation, formula result, disclosure",
+    "Shared operation selector: strip and tailored panel stay in sync",
+    "Operating table filter and native insight workflow",
+    "Confirmed pricing and working native FAQs",
+    "Expanded footer section links resolve to real anchors"
+  ],
+  "errors": [],
+  "failedResponses": [],
+  "status": "passed"
+}

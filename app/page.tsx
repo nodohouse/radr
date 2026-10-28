@@ -1,3 +1,4 @@
+import { MockupFooter } from "@/components/marketing/MockupFooter";
 import { ReferenceHero } from "@/components/marketing/ReferenceHero";
 import {
   ConnectSystems,
@@ -10,14 +11,17 @@ import {
 
 export default function Home() {
   return (
-    <main className="radr reference-page">
-      <ReferenceHero />
-      <ConnectSystems />
-      <DecisionGap />
-      <DecisionPreview />
-      <Hospitality />
-      <ValueMap />
-      <ReferenceFinal />
-    </main>
+    <>
+      <main className="radr reference-page">
+        <ReferenceHero />
+        <ConnectSystems />
+        <DecisionGap />
+        <DecisionPreview />
+        <Hospitality />
+        <ValueMap />
+        <ReferenceFinal />
+      </main>
+      <MockupFooter />
+    </>
   );
 }

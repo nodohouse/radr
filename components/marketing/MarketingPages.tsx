@@ -490,7 +490,7 @@ export function NewPricingPage() {
             Start with your evidence.
           </p>
           <Link href={free.cta.href} className="rh-button">
-            Start free <Arrow />
+            Start a pilot <Arrow />
           </Link>
         </div>
       </PageHero>

@@ -402,7 +402,7 @@ export function Hospitality() {
     {
       name: "Restaurant",
       icon: "pos" as IconName,
-      image: "/images/radr-coastal-pavilion.webp",
+      image: "/images/radr-restaurant.webp",
       alt: "Warmly lit coastal restaurant with glass walls and an olive-lined terrace",
       items: [
         "Food cost variance",
@@ -691,14 +691,6 @@ export function ReferenceFinal() {
             </Link>
           </div>
         </div>
-        <footer className="rs-footer">
-          <span>© {new Date().getFullYear()} RADR</span>
-          <nav aria-label="Legal">
-            <Link href="/privacy">Privacy</Link>
-            <Link href="/terms">Terms</Link>
-            <Link href="/imprint">Imprint</Link>
-          </nav>
-        </footer>
       </div>
     </section>
   );

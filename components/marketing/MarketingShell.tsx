@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ReferenceNav } from "./ReferenceNav";
 import "./marketing-pages.css";
+import { MockupFooter as MarketingFooter } from "./MockupFooter";
 
 export function PageShell({ children }: { children: ReactNode }) {
   return (
@@ -140,42 +140,4 @@ export function MarketingCTA({
     </section>
   );
 }
-export function MarketingFooter() {
-  return (
-    <footer className="rp-footer">
-      <div className="rp-container">
-        <div className="rp-footer-top">
-          <Link href="/en" aria-label="RADR home">
-            <Image
-              src="/brand/radr-wordmark-clean-white.svg"
-              alt="RADR"
-              width={138}
-              height={32}
-            />
-          </Link>
-          <p>
-            Hospitality operating intelligence.
-            <br />A clearer picture. Better decisions.
-          </p>
-          <nav aria-label="Footer navigation">
-            <Link href="/how">Platform</Link>
-            <Link href="/solutions">Solutions</Link>
-            <Link href="/value-calculator">Value Calculator</Link>
-            <Link href="/pricing">Pricing</Link>
-            <Link href="/company">Company</Link>
-            <Link href="/contact">Contact</Link>
-          </nav>
-        </div>
-        <div className="rp-footer-bottom">
-          <span>© {new Date().getFullYear()} RADR</span>
-          <nav aria-label="Legal">
-            <Link href="/security">Security</Link>
-            <Link href="/privacy">Privacy</Link>
-            <Link href="/terms">Terms</Link>
-            <Link href="/imprint">Imprint</Link>
-          </nav>
-        </div>
-      </div>
-    </footer>
-  );
-}
+export { MockupFooter as MarketingFooter } from "./MockupFooter";

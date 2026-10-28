@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
     "/terms",
     "/imprint",
+    "/responsible-ai",
+    "/data-processing-agreement",
   ];
 
   return paths.map((path) => ({

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { NewPricingPage } from "@/components/marketing/MarketingPages";
+import { MockupPricing } from "@/components/marketing/MockupPages";
 export const metadata: Metadata = {
-  title: "Pricing — Start with clarity",
+  title: "Pricing — Intelligence for every stage",
   description:
-    "Explore RADR Free, Control at €199 per location per month, and Scale. Clear pricing and honest capability availability.",
+    "Starter at $1,500/month and Multi-site at $3,500/month, billed annually. Enterprise pricing tailored to your operation.",
 };
-export default NewPricingPage;
+export default MockupPricing;

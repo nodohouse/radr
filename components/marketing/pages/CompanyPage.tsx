@@ -1,1 +1,1 @@
-export { NewCompanyPage as CompanyPage } from "../MarketingPages";
+export { MockupCompany as CompanyPage } from "../MockupPages";

@@ -237,25 +237,30 @@ try {
     await page.setViewportSize({ width: 1512, height: 982 });
     await page.goto("http://127.0.0.1:3000/en", { waitUntil: "networkidle" });
     await ready();
-    const reference = fs.readFileSync(process.env.RADR_REFERENCE);
-    fs.copyFileSync(process.env.RADR_REFERENCE, "docs/visual-qa/reference.png");
-    await page.evaluate(
-      (data) => {
-        const image = document.createElement("img");
-        image.src = data;
-        Object.assign(image.style, {
-          position: "absolute",
-          inset: "0",
-          width: "1512px",
-          height: "auto",
-          opacity: ".5",
-          zIndex: "99999",
-          pointerEvents: "none",
-        });
-        document.body.append(image);
-      },
-      "data:image/png;base64," + reference.toString("base64"),
+    await page.route("**/__visual_reference.png", (route) =>
+      route.fulfill({
+        path: process.env.RADR_REFERENCE,
+        contentType: "image/png",
+      }),
     );
+    fs.copyFileSync(process.env.RADR_REFERENCE, "docs/visual-qa/reference.png");
+    await page.evaluate(() => {
+      const image = document.createElement("img");
+      image.src = "/__visual_reference.png";
+      Object.assign(image.style, {
+        position: "absolute",
+        inset: "0",
+        width: "1512px",
+        height: "auto",
+        opacity: ".5",
+        zIndex: "99999",
+        pointerEvents: "none",
+      });
+      document.body.append(image);
+    });
+    await page
+      .locator('img[src="/__visual_reference.png"]')
+      .evaluate((img) => img.decode());
     await page.screenshot({
       path: "docs/visual-qa/overlay-1512.png",
       fullPage: true,

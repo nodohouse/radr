@@ -1,1 +1,1 @@
-export { PlatformPage as HowPage } from "../MarketingPages";
+export { MockupPlatform as HowPage } from "../MockupPages";
