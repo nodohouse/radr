@@ -734,3 +734,107 @@
     font-size: 10px;
   }
 }
+
+/* A deep emerald stage keeps the entire signal journey legible. */
+.dg-section {
+  background:
+    radial-gradient(ellipse at 72% 47%, #167b6652, transparent 43%),
+    radial-gradient(ellipse at 99% 0%, #74d1bb24, transparent 48%),
+    linear-gradient(115deg, #031416, #082b2d 65%, #123e39);
+  padding-top: 64px;
+  padding-bottom: 30px;
+  border-block: 1px solid #9fffd51a;
+}
+.dg-section:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(#a3e9d504 1px, transparent 1px),
+    linear-gradient(90deg, #a3e9d504 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 72% 50%, black, transparent 75%);
+}
+.dg-copy h2 {
+  letter-spacing: -0.045em;
+}
+.dg-copy h2 > span {
+  color: #74edc2;
+  text-shadow: 0 0 26px #59e4ad44;
+}
+.dg-eyebrow {
+  color: #9de4cf;
+}
+.dg-glow {
+  background: radial-gradient(ellipse, #4df9c251, transparent 65%);
+}
+.dg-core {
+  background:
+    linear-gradient(145deg, #399a874d, transparent 40%),
+    radial-gradient(ellipse at 40% 0, #116d5f, #002d29 65%, #011e20);
+  box-shadow:
+    inset 0 1px 1px #dcfffab3,
+    inset 0 -12px 32px #001e21aa,
+    0 0 0 5px #80ffd009,
+    0 0 60px #49edb64d,
+    0 24px 50px #00101299;
+}
+.dg-core:after {
+  content: "";
+  position: absolute;
+  inset: -28%;
+  border: 1px solid #80ffd01c;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.dg-source:before,
+.dg-result:before {
+  content: "";
+  position: absolute;
+  inset: -8px -6px;
+  border: 1px solid #b3ffdf14;
+  border-radius: 12px;
+  background: linear-gradient(115deg, #c6fff309, #70ecbd03);
+  pointer-events: none;
+}
+.dg-result,
+.dg-result strong,
+.dg-result:nth-last-child(-n + 2) strong {
+  color: #edfff6;
+}
+.dg-result small,
+.dg-result:nth-last-child(-n + 2) small {
+  color: #bad9cc;
+}
+.dg-result-icon {
+  color: #73eabd;
+}
+.dg-lane-headings span:last-child {
+  color: #a5d5c5;
+}
+.dg-caption {
+  color: #bbd9cc;
+}
+.dg-track-in {
+  opacity: 0.65;
+}
+.dg-track-out {
+  opacity: 0.7;
+}
+.dg-packet {
+  stroke-width: 3.5;
+}
+@media (max-width: 550px) {
+  .dg-section {
+    padding-top: 40px;
+  }
+  .dg-source:before,
+  .dg-result:before {
+    inset: -4px -7px;
+  }
+  .dg-core:after {
+    inset: -20%;
+  }
+}
