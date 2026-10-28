@@ -1,0 +1,68 @@
+{
+  "layouts": [
+    {
+      "width": 1512,
+      "overflow": false,
+      "reducedMotion": "static",
+      "sources": 5,
+      "results": 5
+    },
+    {
+      "width": 1920,
+      "overflow": false,
+      "reducedMotion": "static",
+      "sources": 5,
+      "results": 5
+    },
+    {
+      "width": 1024,
+      "overflow": false,
+      "reducedMotion": "static",
+      "sources": 5,
+      "results": 5
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "reducedMotion": "static",
+      "sources": 5,
+      "results": 5
+    },
+    {
+      "width": 550,
+      "overflow": false,
+      "reducedMotion": "static",
+      "sources": 5,
+      "results": 5
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "reducedMotion": "static",
+      "sources": 5,
+      "results": 5
+    },
+    {
+      "width": 430,
+      "overflow": false,
+      "reducedMotion": "static",
+      "sources": 5,
+      "results": 5
+    },
+    {
+      "width": 320,
+      "overflow": false,
+      "reducedMotion": "static",
+      "sources": 5,
+      "results": 5
+    }
+  ],
+  "motion": [
+    "Incoming packets visibly move",
+    "Outgoing packets visibly move",
+    "Pause freezes actual SVG position",
+    "Replay restarts travel",
+    "Offscreen flow pauses"
+  ],
+  "errors": []
+}

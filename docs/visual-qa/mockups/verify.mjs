@@ -97,6 +97,7 @@ try {
           fullPage: true,
         });
       results.layouts.push({ route, width, ...layout });
+      console.log(`${route} ${width}px: layout and legal checks passed`);
     }
   }
   await page.setViewportSize({ width: 1512, height: 982 });

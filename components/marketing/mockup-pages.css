@@ -3750,3 +3750,207 @@
     font-size: 9px;
   }
 }
+
+/* Reference diagram refinement: moving signals, luminous context, native role views. */
+.mx-motion-scene {
+  position: relative;
+}
+.mx-motion-scene[data-moving="false"] * {
+  animation-play-state: paused !important;
+}
+.mx-motion-toggle {
+  position: absolute;
+  bottom: -25px;
+  right: 4px;
+  z-index: 4;
+  border: 1px solid #c6e9d433;
+  border-radius: 20px;
+  padding: 5px 10px;
+  background: #062e2e;
+  color: #c5dfd3;
+  font: 9px Arial;
+  cursor: pointer;
+}
+.mx-motion-toggle:focus-visible {
+  outline: 2px solid #99efcf;
+  outline-offset: 3px;
+}
+.mx-data-packet {
+  fill: none;
+  stroke: #b1ffcf;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 7 93;
+  stroke-dashoffset: 107;
+  animation: mx-signal-flow 3s linear infinite;
+  filter: drop-shadow(0 0 3px #7af9c6);
+}
+.mx-data-packet-in {
+  stroke: #7ed8f0;
+  filter: drop-shadow(0 0 3px #64cbe3);
+}
+.mx-foundation-core {
+  box-shadow:
+    0 0 22px #77ffd882,
+    inset 0 0 20px #65f3c455;
+}
+.mx-solution-streams {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.mx-decision-flow article {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(145deg, #143b3bbb, #07242666);
+  backdrop-filter: blur(2px);
+}
+.mx-decision-flow article:nth-of-type(2) {
+  background: radial-gradient(at 50% 80%, #37b99624, transparent 65%);
+  border-color: #66dcaa66;
+}
+.mx-flow-logo {
+  position: relative;
+  background: radial-gradient(at 25% 0, #167664, #003d36 65%, #002a29);
+  box-shadow:
+    0 0 20px #4df6c35c,
+    inset 0 0 20px #66f6cc38;
+}
+.mx-flow-systems {
+  background: #123b35aa;
+  line-height: 2.8;
+  border-color: #bde1d24d;
+}
+.mx-infinity-packet {
+  stroke-dasharray: 8 92;
+  animation: mx-signal-flow 5s linear infinite;
+  filter: drop-shadow(0 0 5px #83ffde);
+}
+@keyframes mx-signal-flow {
+  from {
+    stroke-dashoffset: 107;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.mx-role-preview {
+  display: flex;
+  gap: 6px;
+  padding: 7px 5px 5px;
+  background: #fdfefd;
+  border: 1px solid #dce9e3;
+  border-radius: 5px;
+  box-shadow: 0 3px 12px #183c3810;
+  min-height: 112px;
+}
+.mx-role-mini-nav {
+  width: 11px;
+  border-right: 1px solid #e5eeea;
+  padding-top: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex-shrink: 0;
+}
+.mx-role-mini-nav i {
+  width: 5px;
+  height: 5px;
+  background: #b2d3c6;
+  border-radius: 1px;
+}
+.mx-role-mini-nav i:first-child {
+  background: #40bba0;
+}
+.mx-role-mini-body {
+  min-width: 0;
+  flex: 1;
+}
+.mx-role-mini-body > span {
+  font-size: 6px;
+  display: block;
+  color: #42615b;
+  margin-bottom: 7px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.mx-role-mini-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+.mx-role-mini-metrics b {
+  font: 500 10px Arial;
+  padding: 5px 3px;
+  background: #f0f7f3;
+  border-radius: 3px;
+  color: #203e37;
+}
+.mx-role-mini-metrics small {
+  display: block;
+  font-size: 5px;
+  color: #70918a;
+  line-height: 1.3;
+  margin-top: 3px;
+}
+.mx-role-mini-body .mx-performance-chart {
+  height: 47px !important;
+  width: 100%;
+  margin-top: 5px;
+}
+.mx-role-mini-caption {
+  display: block;
+  font-size: 5px;
+  color: #7b938b;
+  margin-top: 3px;
+}
+.mx-role-mini-rows {
+  padding-top: 7px;
+  display: grid;
+  gap: 7px;
+}
+.mx-role-mini-rows span {
+  display: flex;
+  justify-content: space-between;
+  font-size: 5px;
+  color: #56746b;
+}
+.mx-role-mini-rows i {
+  width: 10px;
+  height: 3px;
+  border-radius: 3px;
+  background: #50c19a;
+}
+@media (max-width: 700px) {
+  .mx-role-preview {
+    min-height: 125px;
+  }
+  .mx-role-mini-body > span {
+    font-size: 8px;
+  }
+  .mx-role-mini-metrics b {
+    font-size: 13px;
+  }
+  .mx-role-mini-metrics small {
+    font-size: 7px;
+  }
+  .mx-role-mini-caption,
+  .mx-role-mini-rows span {
+    font-size: 7px;
+  }
+  .mx-solution-streams {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mx-data-packet,
+  .mx-infinity-packet {
+    display: none;
+  }
+  .mx-motion-toggle {
+    display: none;
+  }
+}

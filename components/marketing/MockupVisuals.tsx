@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MotionScene } from "./MotionScene";
 export function Glyph({
   name = "spark",
   size = 22,
@@ -253,10 +254,9 @@ export function PortfolioPreview({
 }
 export function DataFoundation() {
   return (
-    <div
+    <MotionScene
       className="mx-foundation-art"
-      role="img"
-      aria-label="POS, PMS, Finance, Procurement and Labor connect through RADR to a unified operating model"
+      label="Connected data foundation"
     >
       <svg viewBox="0 0 700 300" preserveAspectRatio="none" aria-hidden="true">
         <defs>
@@ -275,6 +275,22 @@ export function DataFoundation() {
             strokeWidth="1.3"
             opacity=".7"
           />
+        ))}
+        {Array.from({ length: 5 }, (_, i) => (
+          <g key={`packet-${i}`}>
+            <path
+              className="mx-data-packet mx-data-packet-in"
+              d={`M20 ${25 + i * 60}C210 ${25 + i * 60} 210 150 350 150`}
+              pathLength="100"
+              style={{ animationDelay: `${i * -0.5}s` }}
+            />
+            <path
+              className="mx-data-packet"
+              d={`M350 150C510 150 510 ${25 + i * 60} 690 ${25 + i * 60}`}
+              pathLength="100"
+              style={{ animationDelay: `${i * -0.5 - 1.4}s` }}
+            />
+          </g>
         ))}
       </svg>
       <div className="mx-foundation-inputs">
@@ -307,6 +323,79 @@ export function DataFoundation() {
             {s}
           </span>
         ))}
+      </div>
+    </MotionScene>
+  );
+}
+
+/** Small native dashboards echo the role-specific views in the approved Platform reference. */
+export function RolePreview({ role }: { role: string }) {
+  const finance = role === "Finance";
+  const procurement = role === "Procurement";
+  const leadership = role === "Leadership";
+  return (
+    <div
+      className="mx-role-preview"
+      aria-label={`${role} illustrative product view`}
+    >
+      <div className="mx-role-mini-nav">
+        <i />
+        <i />
+        <i />
+        <i />
+      </div>
+      <div className="mx-role-mini-body">
+        <span>
+          {leadership
+            ? "Portfolio overview"
+            : finance
+              ? "Financial overview"
+              : procurement
+                ? "Supplier performance"
+                : role === "Labor"
+                  ? "Workforce performance"
+                  : "Operating overview"}
+        </span>
+        <div className="mx-role-mini-metrics">
+          <b>
+            {finance
+              ? "$124K"
+              : procurement
+                ? "12"
+                : role === "Labor"
+                  ? "28.4%"
+                  : "94%"}
+            <small>
+              {finance
+                ? "Revenue"
+                : procurement
+                  ? "Suppliers"
+                  : role === "Labor"
+                    ? "Labor cost"
+                    : "Operating state"}
+            </small>
+          </b>
+          <b>
+            +8%<small>Illustrative trend</small>
+          </b>
+        </div>
+        {procurement ? (
+          <div className="mx-role-mini-rows">
+            {[
+              "Supply cost variance",
+              "Invoice reconciliation",
+              "Contract comparison",
+            ].map((x) => (
+              <span key={x}>
+                {x}
+                <i />
+              </span>
+            ))}
+          </div>
+        ) : (
+          <PerformanceChart />
+        )}
+        <small className="mx-role-mini-caption">Illustrative interface</small>
       </div>
     </div>
   );

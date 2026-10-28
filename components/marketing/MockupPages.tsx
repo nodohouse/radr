@@ -6,7 +6,7 @@ import {
   PortfolioPreview,
   DataFoundation,
   Glyph,
-  PerformanceChart,
+  RolePreview,
   Sparkline,
 } from "./MockupVisuals";
 import {
@@ -17,6 +17,7 @@ import {
 } from "./MockupInteractive";
 import { MockupCalculator } from "./MockupCalculator";
 import { pricingConfig, faqItems } from "./pricing/config";
+import { MotionScene } from "./MotionScene";
 import "./mockup-pages.css";
 
 function Buttons({
@@ -186,7 +187,7 @@ export function MockupPlatform() {
                     Not just a data point<span>.</span>
                   </>
                 }
-                copy="RADR connects the dots across operating data and shows the context behind what’s happening."
+                copy="RADR continuously monitors your operations, connects the dots, and shows what’s happening across every location — in real time."
               />
               <Link className="mx-button mx-small-button" href="/contact">
                 Explore operating state →
@@ -291,7 +292,7 @@ export function MockupPlatform() {
                   <Glyph name={icon} />
                   <h3>{name}</h3>
                   <p>{copy}</p>
-                  <PerformanceChart />
+                  <RolePreview role={name} />
                 </article>
               ))}
             </div>
@@ -408,7 +409,33 @@ export function MockupSolutions() {
                   See how it works →
                 </Link>
               </div>
-              <div className="mx-decision-flow">
+              <MotionScene
+                className="mx-decision-flow"
+                label="Signals to verified value"
+              >
+                <svg
+                  className="mx-solution-streams"
+                  viewBox="0 0 800 360"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <g key={i}>
+                      <path
+                        d={`M60 ${130 + i * 30}C170 ${130 + i * 30} 210 255 300 255S500 ${170 + i * 20} 760 ${170 + i * 20}`}
+                        stroke="#71d8bd"
+                        strokeOpacity=".25"
+                        fill="none"
+                      />
+                      <path
+                        className="mx-data-packet"
+                        d={`M60 ${130 + i * 30}C170 ${130 + i * 30} 210 255 300 255S500 ${170 + i * 20} 760 ${170 + i * 20}`}
+                        pathLength="100"
+                        style={{ animationDelay: `${i * -0.5}s` }}
+                      />
+                    </g>
+                  ))}
+                </svg>
                 {[
                   ["Signals", "Connect evidence across your systems.", "data"],
                   [
@@ -466,7 +493,7 @@ export function MockupSolutions() {
                     )}
                   </article>
                 ))}
-              </div>
+              </MotionScene>
             </div>
             <p className="mx-wrap mx-example-disclosure">
               Illustrative operating model. Capabilities and integrations are
@@ -776,10 +803,9 @@ export function MockupCompany() {
                 Explore our approach →
               </Link>
             </div>
-            <div
+            <MotionScene
               className="mx-infinity"
-              role="img"
-              aria-label="Data and people connect to decisions and better experiences"
+              label="People data and better decisions"
             >
               <span>
                 DATA
@@ -820,6 +846,14 @@ export function MockupCompany() {
                     transform={`translate(0 ${i * 5})`}
                   />
                 ))}
+                <path
+                  className="mx-infinity-packet"
+                  d="M225 120C120-50 15 15 35 120S145 285 225 120 420-45 415 120 320 285 225 120Z"
+                  pathLength="100"
+                  fill="none"
+                  stroke="#c8ffe6"
+                  strokeWidth="3"
+                />
               </svg>
               <span>
                 DECISIONS
@@ -831,7 +865,7 @@ export function MockupCompany() {
                 <br />
                 <small>For guests, teams and business</small>
               </span>
-            </div>
+            </MotionScene>
           </div>
         </section>
         <section className="mx-section mx-light">
