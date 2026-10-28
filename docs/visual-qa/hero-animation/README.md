@@ -1,5 +1,7 @@
 # Hero tablet animation QA
 
+Historical first animation pass. The current cinematic timeline, 15-second recordings, native 4K checks, and pause/resume behavior are documented in `../hero-cinematic/README.md`; use `../hero-cinematic/verify.mjs` for the current implementation.
+
 Approved visual reference: `docs/visual-qa/current-1512x982.png` (repository file path only). The reference is not embedded in the page or the QA tooling.
 
 Only the native interface inside the existing hero tablet was changed. `ReferenceHero.tsx` delegates the existing shell/dashboard to `HeroTablet.tsx`; `hero-tablet.css` is scoped to that interior. The original hero stylesheet, device geometry, photo, logo, headline, copy, navigation, CTA layout, and other homepage sections were not edited.

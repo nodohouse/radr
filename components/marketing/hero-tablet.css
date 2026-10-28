@@ -419,3 +419,155 @@
   font-size: 10px;
   line-height: 1.4;
 }
+
+/* Cinematic demo pass: all changes stay inside the original device aperture. */
+.ht-demo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 22px;
+  border-top: 1px solid #b9cfc155;
+  margin-top: 5px;
+  padding-top: 5px;
+  flex-shrink: 0;
+}
+.ht-demo-controls > span {
+  font: 500 6px/1.3 Arial;
+  letter-spacing: 1px;
+  color: #708c80;
+  white-space: nowrap;
+}
+.ht-demo-controls nav {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.ht-demo-controls button {
+  font: 7px/1.2 Arial;
+  color: #617f72;
+  border: 0;
+  background: transparent;
+  border-radius: 5px;
+  padding: 4px 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ht-demo-controls button[aria-pressed="true"] {
+  color: #17694d;
+  background: #cae8d5;
+}
+.ht-demo-controls button:focus-visible {
+  outline: 1px solid #268967;
+  outline-offset: 1px;
+}
+.ht-stage {
+  overflow: hidden;
+  border-radius: 8px;
+}
+.ht-action-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 23px;
+}
+.ht-take-action {
+  background: #073f34;
+  color: #e7fff0;
+  padding: 5px 11px;
+  border-radius: 15px;
+  white-space: nowrap;
+  font-size: 8px;
+}
+.ht-steps > span {
+  position: relative;
+  isolation: isolate;
+}
+.ht-steps > span > span {
+  position: relative;
+  z-index: 1;
+}
+.ht-tab-indicator {
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  background: #1e9678;
+  z-index: 0;
+}
+.ht-steps > span:first-child .ht-tab-indicator {
+  background: #3a7d9a;
+}
+.ht-steps > span[data-active="true"] {
+  background: transparent;
+  color: #fff !important;
+}
+.ht-facts > div:nth-child(-n + 2) {
+  background: #eef7f9;
+  border-color: #d6e6eb;
+}
+.ht-facts > div:nth-child(-n + 2) span {
+  color: #4d7990;
+}
+.ht-facts > div:last-child strong {
+  color: #25775a;
+}
+.ht-decision .ht-heading {
+  margin-top: 12px;
+}
+.ht-context {
+  margin: 7px 0 9px;
+}
+.ht-facts {
+  margin-bottom: 10px;
+}
+.ht-steps {
+  margin-top: 9px;
+  padding-top: 6px;
+}
+.ht-value h2 {
+  margin-top: 24px;
+}
+.ht-value-track {
+  padding: 20px 0 16px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ht-demo-controls {
+    justify-content: flex-end;
+  }
+}
+/* Reserve a complete, readable lifecycle row above the quiet demo controls. */
+.ht-decision .ht-heading {
+  margin: 8px 0;
+}
+.ht-context {
+  margin: 6px 0 7px;
+}
+.ht-facts > div {
+  padding-block: 8px;
+}
+.ht-recommendation {
+  padding: 10px 14px;
+}
+.ht-recommendation h3 {
+  margin: 4px 0 7px;
+}
+.rh-device .rh-metric {
+  transition: box-shadow 0.25s ease-out;
+}
+.rh-device:has(.ht-stage[data-phase="control"][data-beat="1"])
+  .rh-metric:first-child {
+  box-shadow: inset 0 0 0 1px #54b89a80;
+}
+.ht-control .rh-greeting {
+  margin: 12px 0 8px;
+}
+.ht-control .rh-dashboard-bottom {
+  margin-top: 12px;
+}
+.ht-value > p {
+  margin-bottom: 20px;
+}
+.ht-value-track {
+  padding-bottom: 12px;
+}

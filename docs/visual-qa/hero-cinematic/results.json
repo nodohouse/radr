@@ -1,0 +1,154 @@
+{
+  "referencePath": "docs/visual-qa/current-1512x982.png",
+  "recordings": [
+    {
+      "width": 1512,
+      "height": 982,
+      "path": "docs/visual-qa/hero-cinematic/hero-1512x982.mp4",
+      "phases": [
+        {
+          "phase": "control",
+          "ms": 0
+        },
+        {
+          "phase": "decision",
+          "ms": 2772.5
+        },
+        {
+          "phase": "action",
+          "ms": 4570.4000000003725
+        },
+        {
+          "phase": "value",
+          "ms": 5671.5999999996275
+        },
+        {
+          "phase": "control",
+          "ms": 9071.299999998882
+        },
+        {
+          "phase": "decision",
+          "ms": 11778
+        },
+        {
+          "phase": "action",
+          "ms": 13566.599999999627
+        },
+        {
+          "phase": "value",
+          "ms": 14674.299999998882
+        }
+      ],
+      "firstMotionMs": 570.4000000003725,
+      "geometry": "unchanged within .02 CSS px",
+      "clipping": false,
+      "frames": {
+        "samples": 485,
+        "medianMs": 16.700000000000273,
+        "p95Ms": 83.39999999999964
+      }
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "path": "docs/visual-qa/hero-cinematic/hero-1920x1080.mp4",
+      "phases": [
+        {
+          "phase": "control",
+          "ms": 0
+        },
+        {
+          "phase": "decision",
+          "ms": 2749.9000000003725
+        },
+        {
+          "phase": "action",
+          "ms": 4542.4000000003725
+        },
+        {
+          "phase": "value",
+          "ms": 5645.199999999255
+        },
+        {
+          "phase": "control",
+          "ms": 9042
+        },
+        {
+          "phase": "decision",
+          "ms": 11743.300000000745
+        },
+        {
+          "phase": "action",
+          "ms": 13543.199999999255
+        },
+        {
+          "phase": "value",
+          "ms": 14642.599999999627
+        }
+      ],
+      "firstMotionMs": 547.4000000003725,
+      "geometry": "unchanged within .02 CSS px",
+      "clipping": false,
+      "frames": {
+        "samples": 571,
+        "medianMs": 16.700000000000728,
+        "p95Ms": 50.100000000000364
+      }
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "path": "docs/visual-qa/hero-cinematic/hero-3840x2160.mp4",
+      "phases": [
+        {
+          "phase": "control",
+          "ms": 0
+        },
+        {
+          "phase": "decision",
+          "ms": 2925.5999999996275
+        },
+        {
+          "phase": "action",
+          "ms": 4719.300000000745
+        },
+        {
+          "phase": "value",
+          "ms": 5845.0999999996275
+        },
+        {
+          "phase": "control",
+          "ms": 9215.300000000745
+        },
+        {
+          "phase": "decision",
+          "ms": 11921.300000000745
+        },
+        {
+          "phase": "action",
+          "ms": 13704.5
+        },
+        {
+          "phase": "value",
+          "ms": 14805.699999999255
+        }
+      ],
+      "firstMotionMs": 705.3000000007451,
+      "geometry": "unchanged within .02 CSS px",
+      "clipping": false,
+      "frames": {
+        "samples": 85,
+        "medianMs": 150,
+        "p95Ms": 316.7000000000003
+      }
+    }
+  ],
+  "checks": [
+    "Scene controls, pause/play, scroll suspension and re-entry preserve current state",
+    "Reduced motion always shows complete static Control Center",
+    "Mobile uses only Control Center and Decision, with unchanged device geometry",
+    "Native HTML/SVG interface reviewed at 2× device pixel ratio"
+  ],
+  "errors": [],
+  "status": "passed"
+}

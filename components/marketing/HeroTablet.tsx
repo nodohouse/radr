@@ -12,7 +12,7 @@ import {
 import "./hero-tablet.css";
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const sharedTransition = { duration: 0.4, ease };
+const sharedTransition = { duration: 0.55, ease };
 type Phase = "control" | "decision" | "action" | "value";
 const destinations = [
   "Control Center",
@@ -43,11 +43,25 @@ const subscribeVisibility = (listener: () => void) => {
 };
 const getForeground = () => document.visibilityState !== "hidden";
 
-function ControlCenter({ reduced }: { reduced: boolean }) {
+const subscribeScroll = (listener: () => void) => {
+  window.addEventListener("scroll", listener, { passive: true });
+  return () => window.removeEventListener("scroll", listener);
+};
+const getScrollY = () => window.scrollY;
+
+function ControlCenter({
+  reduced,
+  chart,
+  attention,
+}: {
+  reduced: boolean;
+  chart: boolean;
+  attention: boolean;
+}) {
   return (
     <>
       <div className="rh-greeting">
-        <span className="rh-demo-label">ILLUSTRATIVE PRODUCT PREVIEW</span>
+        <span className="rh-demo-label">CONTROL CENTER</span>
         <h2>Good morning, Alex.</h2>
         <p>Here’s what needs your attention today.</p>
       </div>
@@ -121,13 +135,12 @@ function ControlCenter({ reduced }: { reduced: boolean }) {
                 fill="url(#rhArea)"
               />
               <motion.path
-                initial={reduced ? false : { pathLength: 0.8, opacity: 0.6 }}
-                animate={
-                  reduced
-                    ? { pathLength: 1, opacity: 1 }
-                    : { pathLength: [0.82, 1], opacity: [0.7, 1] }
-                }
-                transition={{ duration: 0.7, ease }}
+                initial={false}
+                animate={{
+                  pathLength: reduced || chart ? 1 : 0.82,
+                  opacity: reduced || chart ? 1 : 0.7,
+                }}
+                transition={{ duration: reduced ? 0 : 0.65, ease }}
                 d="M0 135 L30 128 L63 115 L94 118 L126 95 L157 101 L188 113 L220 102 L252 66 L283 73 L315 55"
                 fill="none"
                 stroke="#49bd9b"
@@ -166,6 +179,7 @@ function ControlCenter({ reduced }: { reduced: boolean }) {
           className="rh-signal"
           layoutId="hero-supplier-signal"
           transition={sharedTransition}
+          animate={{ y: !reduced && attention ? -3 : 0 }}
         >
           <h3>Top signal</h3>
           <div className="rh-signal-content">
@@ -207,45 +221,95 @@ export function HeroTablet() {
     getForeground,
     () => true,
   );
-  const [phase, setPhase] = useState<Phase>("control");
-  const [signalActive, setSignalActive] = useState(false);
+  const [frame, setFrame] = useState({ phase: "control" as Phase, beat: 0 });
+  const elapsed = useRef(0);
+  const seekTarget = useRef<number | null>(null);
+  const [seek, setSeek] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const scrollY = useSyncExternalStore(subscribeScroll, getScrollY, () => 0);
+  const running =
+    !reduced &&
+    visible &&
+    foreground &&
+    !paused &&
+    scrollY < (mobile ? 560 : 60);
   useEffect(() => {
-    setPhase("control");
-    setSignalActive(false);
-    if (reduced || !visible || !foreground) return;
-    let timers: ReturnType<typeof setTimeout>[] = [];
-    const cycle = () => {
-      timers = [];
-      setPhase("control");
-      setSignalActive(false);
-      const at = (ms: number, fn: () => void) =>
-        timers.push(setTimeout(fn, ms));
-      at(800, () => setSignalActive(true));
-      at(1400, () => setPhase("decision"));
-      if (!mobile) {
-        at(3500, () => setPhase("action"));
-        at(4500, () => setPhase("value"));
-      }
-      at(mobile ? 4400 : 6800, () => {
-        setPhase("control");
-        setSignalActive(false);
-      });
-      at(mobile ? 5600 : 7600, cycle);
+    if (!running) return;
+    const duration = mobile ? 7000 : 9000;
+    const marks = [
+      0,
+      500,
+      1500,
+      2700,
+      3300,
+      3450,
+      3630,
+      3810,
+      ...(mobile ? [] : [4500, 5600]),
+      duration,
+    ];
+    const started = performance.now();
+    const initial = (seekTarget.current ?? elapsed.current) % duration;
+    seekTarget.current = null;
+    let timer: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      const ms = (initial + performance.now() - started) % duration;
+      const phase: Phase =
+        ms < 2700
+          ? "control"
+          : !mobile && ms >= 5600
+            ? "value"
+            : !mobile && ms >= 4500
+              ? "action"
+              : "decision";
+      const beat =
+        ms < 500
+          ? 0
+          : ms < 1500
+            ? 1
+            : ms < 2700
+              ? 2
+              : ms < 3300
+                ? 3
+                : ms < 3450
+                  ? 4
+                  : ms < 3630
+                    ? 5
+                    : ms < 3810
+                      ? 6
+                      : 7;
+      setFrame({ phase, beat });
+      const next = marks.find((mark) => mark > ms) ?? duration;
+      timer = setTimeout(tick, Math.max(1, next - ms + 2));
     };
-    cycle();
+    tick();
     return () => {
-      timers.forEach(clearTimeout);
-      timers = [];
+      clearTimeout(timer);
+      if (seekTarget.current === null)
+        elapsed.current = (initial + performance.now() - started) % duration;
     };
-  }, [reduced, mobile, visible, foreground]);
+  }, [running, mobile, seek]);
+  const phase = reduced
+    ? "control"
+    : mobile && (frame.phase === "action" || frame.phase === "value")
+      ? "decision"
+      : frame.phase;
+  const jump = (destination: Phase) => {
+    elapsed.current =
+      destination === "control" ? 0 : destination === "decision" ? 2700 : 5600;
+    seekTarget.current = elapsed.current;
+    setFrame({ phase: destination, beat: destination === "control" ? 0 : 7 });
+    setSeek((n) => n + 1);
+  };
   return (
     <div
       ref={device}
       className="rh-device"
       data-motion={reduced ? "reduced" : "full"}
       data-signal-active={
-        signalActive && phase === "control" ? "true" : "false"
+        !reduced && frame.beat === 2 && phase === "control" ? "true" : "false"
       }
+      data-playing={running}
       aria-label="RADR product preview with illustrative data"
     >
       <MotionConfig reducedMotion="user">
@@ -296,7 +360,11 @@ export function HeroTablet() {
                 <span className="rh-group">Group view ⌄</span>
                 <span className="rh-avatar">A</span>
               </div>
-              <div className="ht-stage" data-phase={phase}>
+              <div
+                className="ht-stage"
+                data-phase={phase}
+                data-beat={frame.beat}
+              >
                 <AnimatePresence initial={false} mode="sync">
                   {phase === "control" ? (
                     <motion.div
@@ -307,16 +375,20 @@ export function HeroTablet() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2, ease }}
                     >
-                      <ControlCenter reduced={reduced} />
+                      <ControlCenter
+                        reduced={reduced}
+                        chart={frame.beat >= 1}
+                        attention={frame.beat === 2}
+                      />
                     </motion.div>
                   ) : phase === "value" ? (
                     <motion.div
                       key="value"
                       className="ht-view"
-                      initial={{ opacity: 0, y: 5 }}
+                      initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3, ease }}
+                      transition={{ duration: 0.45, ease }}
                     >
                       <ValueView />
                     </motion.div>
@@ -329,10 +401,48 @@ export function HeroTablet() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2, ease }}
                     >
-                      <DecisionView action={phase === "action"} />
+                      <DecisionView
+                        action={phase === "action"}
+                        beat={frame.beat}
+                      />
                     </motion.div>
                   )}
                 </AnimatePresence>
+              </div>
+              <div className="ht-demo-controls">
+                <span>ILLUSTRATIVE DEMO</span>
+                {!reduced && (
+                  <nav aria-label="Product demo scenes">
+                    {(mobile
+                      ? ["control", "decision"]
+                      : ["control", "decision", "value"]
+                    ).map((destination) => (
+                      <button
+                        key={destination}
+                        aria-label={`Show ${destination === "control" ? "Control Center" : destination === "decision" ? "Decision" : "Value"} demo`}
+                        aria-pressed={
+                          phase === destination ||
+                          (destination === "decision" && phase === "action")
+                        }
+                        onClick={() => jump(destination as Phase)}
+                      >
+                        {destination === "control"
+                          ? "Control Center"
+                          : destination === "decision"
+                            ? "Decision"
+                            : "Value"}
+                      </button>
+                    ))}
+                    <button
+                      aria-label={
+                        paused ? "Play product demo" : "Pause product demo"
+                      }
+                      onClick={() => setPaused((p) => !p)}
+                    >
+                      {paused ? "Play" : "Pause"}
+                    </button>
+                  </nav>
+                )}
               </div>
             </div>
           </div>
@@ -350,13 +460,11 @@ const steps = [
   "Action",
   "Verification",
 ];
-function DecisionView({ action }: { action: boolean }) {
+function DecisionView({ action, beat }: { action: boolean; beat: number }) {
   return (
     <div className="ht-decision">
       <div className="ht-heading">
-        <span className="rh-demo-label">
-          SUPPLIER / AP · ILLUSTRATIVE EXAMPLE
-        </span>
+        <span className="rh-demo-label">SUPPLIER / AP</span>
         <span className="ht-status">
           {action ? "Ready for review" : "Decision 01 of 03"}
         </span>
@@ -378,7 +486,7 @@ function DecisionView({ action }: { action: boolean }) {
         className="ht-decision-body"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.18, delay: 0.42, ease }}
+        transition={{ duration: 0.22, delay: 0.55, ease }}
       >
         <p className="ht-context">
           Contract and invoice evidence connected across 3 locations.
@@ -391,11 +499,27 @@ function DecisionView({ action }: { action: boolean }) {
           ].map((fact) => (
             <div key={fact.label}>
               <span>{fact.label}</span>
-              <strong>{fact.value}</strong>
+              <motion.strong
+                initial={false}
+                animate={{
+                  opacity:
+                    fact.label !== "Exposure" || beat >= 5 || action ? 1 : 0,
+                  y: fact.label === "Exposure" && beat < 5 && !action ? 3 : 0,
+                }}
+                transition={{ duration: 0.16, ease }}
+              >
+                {fact.value}
+              </motion.strong>
             </div>
           ))}
         </div>
-        <div
+        <motion.div
+          initial={false}
+          animate={{
+            opacity: beat >= 6 || action ? 1 : 0,
+            y: beat >= 6 || action ? 0 : 4,
+          }}
+          transition={{ duration: 0.18, ease }}
           className="ht-recommendation"
           data-active={action ? "true" : "false"}
         >
@@ -412,9 +536,20 @@ function DecisionView({ action }: { action: boolean }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.24, ease }}
                 >
-                  <span>Compile evidence</span>
-                  <span>Generate supplier communication</span>
-                  <span>Track to resolution</span>
+                  {[
+                    "Compile evidence",
+                    "Generate supplier communication",
+                    "Track to resolution",
+                  ].map((step, i) => (
+                    <motion.span
+                      key={step}
+                      initial={{ opacity: 0, y: 3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.16, delay: i * 0.14, ease }}
+                    >
+                      {step}
+                    </motion.span>
+                  ))}
                 </motion.div>
               ) : (
                 <motion.div
@@ -437,23 +572,46 @@ function DecisionView({ action }: { action: boolean }) {
             </AnimatePresence>
           </div>
           <div className="ht-action-caption">
-            {action
-              ? "Human approval required · demo sends nothing"
-              : "Recommended next step · requires review"}
+            <span>
+              {action
+                ? "Human approval required"
+                : "Your team stays in control"}
+            </span>
+            <motion.span
+              className="ht-take-action"
+              initial={false}
+              animate={{ opacity: beat >= 7 || action ? 1 : 0 }}
+              transition={{ duration: 0.16 }}
+            >
+              Take action →
+            </motion.span>
           </div>
-        </div>
+        </motion.div>
         <div className="ht-steps" aria-label="Decision lifecycle">
-          {steps.map((step, i) => (
+          {steps.map((step) => (
             <motion.span
               key={step}
-              initial={{ opacity: 0.3 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2, delay: 0.4 + i * 0.18, ease }}
+              initial={false}
               data-active={
-                action ? step === "Action" : step === "Recommendation"
+                action
+                  ? step === "Action"
+                  : beat >= 6
+                    ? step === "Recommendation"
+                    : step === "Evidence"
               }
             >
-              {step}
+              {(action
+                ? step === "Action"
+                : beat >= 6
+                  ? step === "Recommendation"
+                  : step === "Evidence") && (
+                <motion.i
+                  className="ht-tab-indicator"
+                  layoutId="hero-decision-tab"
+                  transition={{ duration: 0.18, ease }}
+                />
+              )}
+              <span>{step}</span>
             </motion.span>
           ))}
         </div>{" "}
@@ -503,7 +661,7 @@ function ValueView() {
         <span>Outcome pending</span>
       </div>
       <div className="ht-value-note">
-        Illustrative example · expected value is not recovered value.
+        Expected value is not recovered value.
       </div>
     </div>
   );
