@@ -1,0 +1,176 @@
+{
+  "390": {
+    ".rh-hero": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 940,
+      "transform": "none"
+    },
+    ".rh-device": {
+      "x": 16.5,
+      "y": 560.1197509765625,
+      "width": 356.61517333984375,
+      "height": 277.48480224609375,
+      "transform": "matrix3d(0.452835, -0.012844, 0.17358, -0.000108488, 0.0126488, 0.459821, 0.00484854, -3.03034e-06, -0.0798782, 0, 0.984808, -0.000615505, 0, 0, 0, 1)"
+    },
+    ".rh-dashboard": {
+      "x": 27.233657836914062,
+      "y": 571.893310546875,
+      "width": 333.3028564453125,
+      "height": 253.8404541015625,
+      "transform": "none"
+    },
+    ".rh-copy": {
+      "x": 25,
+      "y": 185,
+      "width": 345,
+      "height": 296.59375,
+      "transform": "none"
+    },
+    ".rh-backdrop": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 940,
+      "transform": "none"
+    },
+    ".rs-connect": {
+      "x": 0,
+      "y": 940,
+      "width": 390,
+      "height": 447.5,
+      "transform": "none"
+    },
+    ".rs-section": {
+      "x": 0,
+      "y": 1387.5,
+      "width": 390,
+      "height": 685.796875,
+      "transform": "none"
+    },
+    ".rs-final": {
+      "x": 0,
+      "y": 4612.453125,
+      "width": 390,
+      "height": 681.921875,
+      "transform": "none"
+    }
+  },
+  "1512": {
+    ".rh-hero": {
+      "x": 0,
+      "y": 0,
+      "width": 1512,
+      "height": 1050,
+      "transform": "none"
+    },
+    ".rh-device": {
+      "x": 716.0315551757812,
+      "y": 364.7205810546875,
+      "width": 790.2938842773438,
+      "height": 579.480712890625,
+      "transform": "matrix3d(0.984678, -0.0278834, 0.172141, -0.000107588, 0.0184129, 0.99824, 0.0563693, -3.52308e-05, -0.17341, -0.052336, 0.983458, -0.000614661, 0, 0, 0, 1)"
+    },
+    ".rh-dashboard": {
+      "x": 736.8521728515625,
+      "y": 389.5897521972656,
+      "width": 743.7769775390625,
+      "height": 530.358642578125,
+      "transform": "none"
+    },
+    ".rh-copy": {
+      "x": 78,
+      "y": 324,
+      "width": 504.28125,
+      "height": 406.5,
+      "transform": "none"
+    },
+    ".rh-backdrop": {
+      "x": 0,
+      "y": 0,
+      "width": 1512,
+      "height": 1050,
+      "transform": "none"
+    },
+    ".rs-connect": {
+      "x": 0,
+      "y": 1050,
+      "width": 1512,
+      "height": 271,
+      "transform": "none"
+    },
+    ".rs-section": {
+      "x": 0,
+      "y": 1321,
+      "width": 1512,
+      "height": 550,
+      "transform": "none"
+    },
+    ".rs-final": {
+      "x": 0,
+      "y": 3536,
+      "width": 1512,
+      "height": 730,
+      "transform": "none"
+    }
+  },
+  "1920": {
+    ".rh-hero": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "transform": "none"
+    },
+    ".rh-device": {
+      "x": 920.5159301757812,
+      "y": 364.7205810546875,
+      "width": 790.2938842773438,
+      "height": 579.480712890625,
+      "transform": "matrix3d(0.984678, -0.0278834, 0.172141, -0.000107588, 0.0184129, 0.99824, 0.0563693, -3.52308e-05, -0.17341, -0.052336, 0.983458, -0.000614661, 0, 0, 0, 1)"
+    },
+    ".rh-dashboard": {
+      "x": 941.3365478515625,
+      "y": 389.5897521972656,
+      "width": 743.7769775390625,
+      "height": 530.358642578125,
+      "transform": "none"
+    },
+    ".rh-copy": {
+      "x": 282,
+      "y": 324,
+      "width": 504.28125,
+      "height": 406.5,
+      "transform": "none"
+    },
+    ".rh-backdrop": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "transform": "none"
+    },
+    ".rs-connect": {
+      "x": 0,
+      "y": 1080,
+      "width": 1920,
+      "height": 271,
+      "transform": "none"
+    },
+    ".rs-section": {
+      "x": 0,
+      "y": 1351,
+      "width": 1920,
+      "height": 550,
+      "transform": "none"
+    },
+    ".rs-final": {
+      "x": 0,
+      "y": 3566,
+      "width": 1920,
+      "height": 800,
+      "transform": "none"
+    }
+  }
+}

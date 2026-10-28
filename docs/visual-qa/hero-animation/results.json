@@ -1,0 +1,109 @@
+{
+  "referencePath": "docs/visual-qa/current-1512x982.png",
+  "recordings": [
+    {
+      "width": 1512,
+      "height": 982,
+      "path": "docs/visual-qa/hero-animation/hero-1512x982.mp4",
+      "duration": 11.96,
+      "geometry": "unchanged within 0.02 CSS px",
+      "phases": [
+        {
+          "phase": "control",
+          "time": 0
+        },
+        {
+          "phase": "decision",
+          "time": 1452.7999999998137
+        },
+        {
+          "phase": "action",
+          "time": 3548.7999999998137
+        },
+        {
+          "phase": "value",
+          "time": 4549.9000000003725
+        },
+        {
+          "phase": "control",
+          "time": 6850.600000000559
+        },
+        {
+          "phase": "decision",
+          "time": 9050
+        },
+        {
+          "phase": "action",
+          "time": 11147.100000000559
+        }
+      ],
+      "frameSummary": {
+        "samples": 573,
+        "medianMs": 16.699999999999818,
+        "p95Ms": 33.40000000000009,
+        "over33ms": 29
+      }
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "path": "docs/visual-qa/hero-animation/hero-1920x1080.mp4",
+      "duration": 12.0,
+      "geometry": "unchanged within 0.02 CSS px",
+      "phases": [
+        {
+          "phase": "control",
+          "time": 0
+        },
+        {
+          "phase": "decision",
+          "time": 1466.7000000001863
+        },
+        {
+          "phase": "action",
+          "time": 3558.2000000001863
+        },
+        {
+          "phase": "value",
+          "time": 4559.799999999814
+        },
+        {
+          "phase": "control",
+          "time": 6859.4000000003725
+        },
+        {
+          "phase": "decision",
+          "time": 9059.200000000186
+        },
+        {
+          "phase": "action",
+          "time": 11159.900000000373
+        }
+      ],
+      "frameSummary": {
+        "samples": 563,
+        "medianMs": 16.699999999999818,
+        "p95Ms": 33.40000000000009,
+        "over33ms": 29
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "Mobile sequence",
+      "phases": [
+        "control",
+        "decision",
+        "control",
+        "decision"
+      ],
+      "geometry": "unchanged"
+    },
+    {
+      "name": "Reduced motion",
+      "result": "Static readable Control Center; preference changes respected"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

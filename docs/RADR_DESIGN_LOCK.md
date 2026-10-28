@@ -79,3 +79,11 @@ After approving the homepage, the user requested the other navigation destinatio
 - Navigation QA: `docs/visual-qa/navigation.mjs` checks all 14 public routes at 1512, 390, and 768 px widths and exercises native FAQs, solution selection, calculator arithmetic, mobile navigation, contact validation, and password visibility. Captures use route-prefixed filenames. See `navigation-results.json` for outcomes.
 
 Navigation revision verification: production build, ESLint, TypeScript and all 28 unit/integration tests passed. Browser QA passed 42 route/viewport checks (14 routes × desktop/mobile/tablet), all five interactive test groups, and the original homepage regression suite at nine viewport sizes. The final visual correction replaced unsupported solution-tab arrow glyphs with native SVG and improved small-screen hero text contrast.
+
+## Hero tablet animation pass
+
+Animate only the native interface in `HeroTablet.tsx` with the existing `motion/react` (Framer Motion) dependency. The physical `.rh-device` and original hero stylesheet remain fixed. Desktop: Control Center → supplier Decision → action preparation → Value → Control Center. Mobile ≤700 px: Control Center → Decision only. Reduced motion is static Control Center. Timelines pause offscreen and in hidden tabs.
+
+Always retain the distinction between Expected $2,430, Observed Pending, and Verified $0. The action remains illustrative and requires human approval; it sends nothing. Blue denotes evidence, green decision/action/value. No bounce or overshoot. The shared supplier-signal transition finishes before decision details fade in.
+
+Reference path: `docs/visual-qa/current-1512x982.png`. Reference it by file path, never embed it as base64. QA, pre-change geometry, state captures and two 12-second recordings live in `docs/visual-qa/hero-animation/`. See that directory's README and results for actual timing, clipping, motion preference, mobile, and geometry checks. Other homepage sections are outside this animation task.
