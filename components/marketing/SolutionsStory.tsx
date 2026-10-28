@@ -65,10 +65,8 @@ export function SolutionsStory() {
     getForeground,
     () => true,
   );
-  const [paused, setPaused] = useState(false);
   const [stage, setStage] = useState(0);
-  const [replay, setReplay] = useState(0);
-  const moving = visible && !reduced && foreground && !paused;
+  const moving = visible && !reduced && foreground;
   useEffect(() => {
     if (!moving) return;
     const durations = [1800, 1700, 2300, 2300, 2400];
@@ -77,7 +75,7 @@ export function SolutionsStory() {
       durations[stage],
     );
     return () => clearTimeout(timer);
-  }, [moving, stage, replay]);
+  }, [moving, stage]);
   return (
     <section
       ref={ref}
@@ -110,23 +108,20 @@ export function SolutionsStory() {
           role="group"
           aria-label="Illustrative restaurant decision: connected signals, compared futures, recommended seating pace, and outcome tracking"
         >
-          <nav className="sf-stages" aria-label="Explore the decision story">
+          <ol className="sf-stages" aria-label="Decision story stages">
             {stages.map(([name, detail], i) => (
-              <button
+              <li
+                className="sf-stage"
                 key={name}
                 aria-current={Math.min(stage, 3) === i ? "step" : undefined}
-                onClick={() => {
-                  setStage(i);
-                  setPaused(true);
-                }}
               >
                 <strong>{name}</strong>
                 <span>{detail}</span>
                 <i aria-hidden="true" />
-              </button>
+              </li>
             ))}
-          </nav>
-          <div className="sf-board" key={replay}>
+          </ol>
+          <div className="sf-board">
             <svg
               className="sf-streams"
               viewBox="0 0 1180 470"
@@ -331,30 +326,6 @@ export function SolutionsStory() {
             <span>
               ILLUSTRATIVE SCENARIO · Expected value is not verified value.
             </span>
-            {!reduced && (
-              <div>
-                <button
-                  aria-label={
-                    paused
-                      ? "Play solutions animation"
-                      : "Pause solutions animation"
-                  }
-                  onClick={() => setPaused((p) => !p)}
-                >
-                  {paused ? "Play" : "Pause"}
-                </button>
-                <button
-                  onClick={() => {
-                    setStage(0);
-                    setReplay((n) => n + 1);
-                    setPaused(false);
-                  }}
-                  aria-label="Replay solutions animation"
-                >
-                  Replay
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 # Visible data-flow animation
 
+**Continuous-autoplay update:** playback controls and manual scene selection have since been removed. The controls-based checks below describe the historical revision. Use `../continuous-motion/verify.mjs` for the current site-wide behavior.
+
 This supersedes the earlier step-card emphasis implementation. Blue illuminated packets travel along source-system curves into the RADR operating-state core. Green packets leave it on separate paths to Insights, Futures, Recommendations, Actions, and Verification. Source data and result meanings remain readable throughout. Mobile uses its own vertical path geometry.
 
 - `verify.mjs`: eight widths (320–1920px), source/result visibility, text overflow, reduced motion, measured SVG travel, frozen stroke positions during pause, replay/resume, offscreen pause, browser errors.

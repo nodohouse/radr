@@ -1,0 +1,206 @@
+{
+  "pages": [
+    {
+      "route": "en",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "how",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "solutions",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "value-calculator",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "pricing",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "company",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "contact",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "imprint",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "privacy",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "terms",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "security",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "responsible-ai",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "data-processing-agreement",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "login",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "signup",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "forgot-password",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "reset-password",
+      "width": 1512,
+      "playbackControls": 0
+    },
+    {
+      "route": "en",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "how",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "solutions",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "value-calculator",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "pricing",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "company",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "contact",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "imprint",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "privacy",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "terms",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "security",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "responsible-ai",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "data-processing-agreement",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "login",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "signup",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "forgot-password",
+      "width": 390,
+      "playbackControls": 0
+    },
+    {
+      "route": "reset-password",
+      "width": 390,
+      "playbackControls": 0
+    }
+  ],
+  "loops": [
+    {
+      "hero": [
+        "control",
+        "decision",
+        "action",
+        "value",
+        "control",
+        "decision",
+        "action"
+      ],
+      "continuesWhileScrolledAndHovered": true
+    },
+    ".dg-section: visible movement continues while hovered",
+    ".mx-foundation-art: visible movement continues while hovered",
+    ".mx-decision-flow: visible movement continues while hovered",
+    ".mx-infinity: visible movement continues while hovered",
+    {
+      "solutions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        0
+      ],
+      "stageLabelsDoNotStopAutoplay": true
+    }
+  ],
+  "errors": [],
+  "reducedMotion": "respected",
+  "status": "passed"
+}

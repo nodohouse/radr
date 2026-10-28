@@ -1,5 +1,7 @@
 # Animated Solutions operating story
 
+**Continuous-autoplay update:** playback controls and manual scene selection have since been removed. The controls-based checks below describe the historical revision. Use `../continuous-motion/verify.mjs` for the current site-wide behavior.
+
 The latest supplied reference replaces the Solutions hero's former portfolio dashboard. Implementation: `components/marketing/SolutionsStory.tsx` and `solutions-story.css`. The homepage hero, its tablet animation/position, confirmed pricing, compact legal footer, and lower Solutions content remain unchanged.
 
 The native interface includes six source feeds (POS, PMS, Reservations, Finance, Procurement, Labor), moving blue packets converging into the RADR operating-state core, green outbound packets, two future comparisons, a seating-pace decision, and outcome tracking. All text is present immediately. The glass surfaces use the existing repository photo `/images/radr-coastal-pavilion.webp`; the supplied reference screenshot is not embedded or rasterized into the site.

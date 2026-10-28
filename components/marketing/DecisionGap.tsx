@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, useSyncExternalStore } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import { useInView } from "motion/react";
 import { Glyph } from "./MockupVisuals";
 import "./decision-gap.css";
@@ -104,9 +104,7 @@ export function DecisionGap() {
     foregroundSnapshot,
     () => true,
   );
-  const [paused, setPaused] = useState(false);
-  const [run, setRun] = useState(0);
-  const running = !reduced && inView && foreground && !paused;
+  const running = !reduced && inView && foreground;
   return (
     <section
       ref={section}
@@ -133,61 +131,12 @@ export function DecisionGap() {
             then clear decisions, action and evidence of what changed.
           </p>
           <div className="dg-controls">
-            {reduced ? (
-              <span>Complete flow · reduced motion</span>
-            ) : (
-              <>
-                <button
-                  aria-label={
-                    paused
-                      ? "Play data flow animation"
-                      : "Pause data flow animation"
-                  }
-                  onClick={() => setPaused((p) => !p)}
-                >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    {paused ? (
-                      <path d="m5 3 8 5-8 5Z" />
-                    ) : (
-                      <path d="M4 3h3v10H4zm5 0h3v10H9z" />
-                    )}
-                  </svg>
-                  {paused ? "Play flow" : "Pause flow"}
-                </button>
-                <button
-                  aria-label="Replay data flow animation"
-                  onClick={() => {
-                    setRun((n) => n + 1);
-                    setPaused(false);
-                  }}
-                >
-                  Replay{" "}
-                  <svg
-                    aria-hidden="true"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                  >
-                    <path d="M13 7a5 5 0 1 0 0 4M13 2v5H8" />
-                  </svg>
-                </button>
-              </>
-            )}
+            {reduced && <span>Complete flow · reduced motion</span>}
           </div>
         </div>
         <div
           className="dg-visual"
           role="group"
-          key={run}
           aria-label="Data flows from POS, PMS, Finance, Procurement and Labor into RADR’s operating state, then out to insights, futures, recommendations, actions and verification."
         >
           <div className="dg-glow" aria-hidden="true" />

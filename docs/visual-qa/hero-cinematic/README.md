@@ -1,5 +1,7 @@
 # Cinematic native hero demo
 
+**Continuous-autoplay update:** playback controls and manual scene selection have since been removed. The controls-based checks below describe the historical revision. Use `../continuous-motion/verify.mjs` for the current site-wide behavior.
+
 Approved reference: `docs/visual-qa/current-1512x982.png`, referenced by repository path only. Changes are confined to `HeroTablet.tsx` and the interior stylesheet `hero-tablet.css`. Physical device geometry, hero composition, headline, photography, approved logo assets, and all other homepage sections are unchanged.
 
 ## Timeline

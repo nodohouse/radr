@@ -43,12 +43,6 @@ const subscribeVisibility = (listener: () => void) => {
 };
 const getForeground = () => document.visibilityState !== "hidden";
 
-const subscribeScroll = (listener: () => void) => {
-  window.addEventListener("scroll", listener, { passive: true });
-  return () => window.removeEventListener("scroll", listener);
-};
-const getScrollY = () => window.scrollY;
-
 function ControlCenter({
   reduced,
   chart,
@@ -223,16 +217,7 @@ export function HeroTablet() {
   );
   const [frame, setFrame] = useState({ phase: "control" as Phase, beat: 0 });
   const elapsed = useRef(0);
-  const seekTarget = useRef<number | null>(null);
-  const [seek, setSeek] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const scrollY = useSyncExternalStore(subscribeScroll, getScrollY, () => 0);
-  const running =
-    !reduced &&
-    visible &&
-    foreground &&
-    !paused &&
-    scrollY < (mobile ? 560 : 60);
+  const running = !reduced && visible && foreground;
   useEffect(() => {
     if (!running) return;
     const duration = mobile ? 7000 : 9000;
@@ -249,8 +234,7 @@ export function HeroTablet() {
       duration,
     ];
     const started = performance.now();
-    const initial = (seekTarget.current ?? elapsed.current) % duration;
-    seekTarget.current = null;
+    const initial = elapsed.current % duration;
     let timer: ReturnType<typeof setTimeout>;
     const tick = () => {
       const ms = (initial + performance.now() - started) % duration;
@@ -285,22 +269,14 @@ export function HeroTablet() {
     tick();
     return () => {
       clearTimeout(timer);
-      if (seekTarget.current === null)
-        elapsed.current = (initial + performance.now() - started) % duration;
+      elapsed.current = (initial + performance.now() - started) % duration;
     };
-  }, [running, mobile, seek]);
+  }, [running, mobile]);
   const phase = reduced
     ? "control"
     : mobile && (frame.phase === "action" || frame.phase === "value")
       ? "decision"
       : frame.phase;
-  const jump = (destination: Phase) => {
-    elapsed.current =
-      destination === "control" ? 0 : destination === "decision" ? 2700 : 5600;
-    seekTarget.current = elapsed.current;
-    setFrame({ phase: destination, beat: destination === "control" ? 0 : 7 });
-    setSeek((n) => n + 1);
-  };
   return (
     <div
       ref={device}
@@ -411,38 +387,6 @@ export function HeroTablet() {
               </div>
               <div className="ht-demo-controls">
                 <span>ILLUSTRATIVE DEMO</span>
-                {!reduced && (
-                  <nav aria-label="Product demo scenes">
-                    {(mobile
-                      ? ["control", "decision"]
-                      : ["control", "decision", "value"]
-                    ).map((destination) => (
-                      <button
-                        key={destination}
-                        aria-label={`Show ${destination === "control" ? "Control Center" : destination === "decision" ? "Decision" : "Value"} demo`}
-                        aria-pressed={
-                          phase === destination ||
-                          (destination === "decision" && phase === "action")
-                        }
-                        onClick={() => jump(destination as Phase)}
-                      >
-                        {destination === "control"
-                          ? "Control Center"
-                          : destination === "decision"
-                            ? "Decision"
-                            : "Value"}
-                      </button>
-                    ))}
-                    <button
-                      aria-label={
-                        paused ? "Play product demo" : "Pause product demo"
-                      }
-                      onClick={() => setPaused((p) => !p)}
-                    >
-                      {paused ? "Play" : "Pause"}
-                    </button>
-                  </nav>
-                )}
               </div>
             </div>
           </div>
