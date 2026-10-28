@@ -72,7 +72,12 @@ try {
     const videoStart = Date.now();
     await ready(p);
     const original = await geometry(p);
-    if (baseline[width]) same(original, baseline[width]);
+    if (baseline[width]) {
+      const approved = structuredClone(baseline[width]);
+      // User-approved tighter header-to-copy gap after the cinematic pass.
+      approved[".rh-copy"].y -= width > 1024 ? 60 : 30;
+      same(original, approved);
+    }
     assert.equal(
       await p.locator(".ht-stage").getAttribute("data-phase"),
       "control",
@@ -289,7 +294,9 @@ try {
     "Reduced motion always shows complete static Control Center",
   );
   await p.setViewportSize({ width: 390, height: 844 });
-  same(await geometry(p), baseline[390]);
+  const approvedMobile = structuredClone(baseline[390]);
+  approvedMobile[".rh-copy"].y -= 30;
+  same(await geometry(p), approvedMobile);
   await p.emulateMedia({ reducedMotion: "no-preference" });
   await p.getByRole("button", { name: "Show Control Center demo" }).click();
   const mobilePhases = new Set();

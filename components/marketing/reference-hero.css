@@ -111,7 +111,7 @@
 }
 .rh-copy {
   position: absolute;
-  top: 324px;
+  top: 264px;
   left: max(78px, calc((100vw - 1356px) / 2));
   z-index: 2;
 }
@@ -521,7 +521,7 @@
   }
   .rh-copy {
     left: 25px;
-    top: 185px;
+    top: 155px;
     right: 20px;
   }
   .rh-eyebrow {
@@ -642,7 +642,7 @@
     height: 1240px;
   }
   .rh-copy {
-    top: 190px;
+    top: 160px;
     left: 40px;
     right: 40px;
   }
