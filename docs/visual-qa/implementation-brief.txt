@@ -1,0 +1,658 @@
+RADR — EXACT REFERENCE IMPLEMENTATION
+
+This is no longer a design task.
+
+The attached image is the APPROVED RADR HOMEPAGE DESIGN.
+
+Your role is FRONTEND IMPLEMENTATION ENGINEER.
+
+Do not redesign it.
+
+Do not reinterpret it.
+
+Do not improve it creatively.
+
+Do not turn it into your own version.
+
+Turn THIS DESIGN into production-quality code.
+
+==================================================
+SOURCE OF TRUTH
+==================================================
+
+VISUAL SOURCE OF TRUTH:
+the attached approved homepage reference image.
+
+LOGO SOURCE OF TRUTH:
+the separately supplied approved RADR SVG assets.
+
+CONTENT SOURCE OF TRUTH:
+the existing RADR repository and approved product copy.
+
+Priority if anything conflicts:
+
+1. Approved reference image for visual composition
+2. Approved RADR SVG for logo geometry
+3. Existing approved RADR product/content
+4. Existing website implementation
+
+The existing website is NOT the visual source of truth.
+
+==================================================
+NON-NEGOTIABLE RULE
+==================================================
+
+When the implementation and reference image differ:
+
+THE IMPLEMENTATION CHANGES.
+
+THE REFERENCE DOES NOT.
+
+==================================================
+DO NOT USE THE SCREENSHOT AS THE WEBSITE
+==================================================
+
+Do not:
+
+- place the complete reference PNG as a background
+- crop UI elements out of it
+- rasterize text
+- rasterize buttons
+- rasterize dashboards
+- rasterize charts
+- extract the logo from it
+
+The reference is the blueprint.
+
+Build the interface natively.
+
+==================================================
+NATIVE IMPLEMENTATION
+==================================================
+
+HTML/CSS:
+
+- typography
+- navigation
+- cards
+- buttons
+- forms
+- product surfaces
+- dashboard UI
+- Decision objects
+- Value Map labels
+
+SVG:
+
+- approved RADR logo
+- icons
+- charts
+- connectors
+- subtle graphical elements
+
+Raster:
+
+ONLY actual photographic / architectural imagery.
+
+==================================================
+RADR LOGO
+==================================================
+
+Use ONLY the approved SVG master supplied separately.
+
+Never trace the logo from the reference screenshot.
+
+Never recreate the A.
+
+Never modify its geometry.
+
+IMPORTANT BRAND RULE:
+
+Whenever the written word RADR appears in a major branded headline such as:
+
+NOTHING OFF THE RADR.
+
+the A must use the approved RADR A-mark geometry.
+
+It must be optically matched to the surrounding R/D/R cap height.
+
+Same geometry.
+
+Different tight typographic viewBox is allowed.
+
+==================================================
+PHASE 0 — FREEZE EXISTING SITE
+==================================================
+
+Before editing:
+
+create a dedicated branch:
+
+`radr-reference-rebuild`
+
+Do not modify production/main.
+
+Record the current state.
+
+==================================================
+PHASE 1 — CANONICAL VIEWPORT
+==================================================
+
+Build FIRST for exactly:
+
+1512 × 982
+
+Do not optimize for mobile yet.
+
+Do not compromise desktop composition for responsiveness.
+
+1512 × 982 is the canonical visual target.
+
+==================================================
+PHASE 2 — HEADER + HERO ONLY
+==================================================
+
+DO NOT IMPLEMENT THE REST OF THE PAGE YET.
+
+First reproduce only:
+
+navigation
+hero background
+headline
+copy
+CTAs
+hero product/dashboard visual
+architectural / hospitality atmosphere
+
+Match the approved reference.
+
+==================================================
+HEADER
+==================================================
+
+Match reference:
+
+left:
+approved RADR mark / lockup
+
+center:
+Platform
+Solutions
+Value Calculator
+Pricing
+Company
+
+right:
+EN
+Log in / Sign in where appropriate
+Book a demo
+
+Match:
+
+height
+spacing
+vertical alignment
+type size
+button proportions
+page margins.
+
+Do not invent another header.
+
+==================================================
+HERO
+==================================================
+
+Match reference composition extremely closely.
+
+LEFT:
+
+HOSPITALITY OPERATING INTELLIGENCE
+
+NOTHING OFF
+THE RADR.
+
+supporting copy
+
+Book a demo →
+See how it works →
+
+RIGHT:
+
+large RADR product surface/device presentation.
+
+Hospitality atmosphere surrounding it.
+
+==================================================
+HERO HIERARCHY
+==================================================
+
+Do not add more information.
+
+The reference works because it has hierarchy.
+
+Primary:
+headline
+
+Secondary:
+product
+
+Tertiary:
+copy + CTAs
+
+Atmosphere:
+hospitality.
+
+Do not turn this back into a dense SaaS infographic.
+
+==================================================
+HOSPITALITY
+==================================================
+
+The reference conveys hospitality through:
+
+architecture
+material
+warmth
+light
+water
+space
+premium operating environment
+
+NOT through:
+
+generic stock restaurant chair photos
+chefs posing
+hotel receptionists
+people smiling
+obvious hospitality clichés.
+
+Maintain this.
+
+==================================================
+VISUAL CHARACTER
+==================================================
+
+The target is:
+
+premium
+calm
+cinematic
+precise
+expensive
+modern
+hospitality-specific
+technological
+
+NOT:
+
+generic SaaS
+cyberpunk
+neon gaming
+overcrowded
+template-based.
+
+==================================================
+COLOR
+==================================================
+
+Match reference.
+
+Base:
+warm ivory / premium neutral.
+
+Dark:
+deep forest / near-black.
+
+Accent:
+RADR green.
+
+Secondary accent:
+controlled analytical blue.
+
+Blue and green must feel embedded in the atmosphere.
+
+Not pasted on.
+
+==================================================
+BACKGROUND
+==================================================
+
+Recreate the reference atmosphere with:
+
+high-resolution photographic imagery
+soft gradient overlays
+controlled light
+very subtle atmospheric color.
+
+Do not use arbitrary background wires.
+
+Do not add network spaghetti.
+
+Do not add random particles.
+
+==================================================
+PHOTOGRAPHIC ASSET
+==================================================
+
+If the exact architectural background cannot be reconstructed from existing assets:
+
+STOP and identify that as the only missing visual asset.
+
+Do NOT substitute a random hospitality stock image.
+
+The photographic scene is part of the approved design.
+
+Use the provided matching high-resolution background plate when supplied.
+
+==================================================
+PRODUCT UI
+==================================================
+
+The product UI must be native.
+
+Do not use a screenshot of the dashboard from the reference.
+
+Build the visible dashboard.
+
+Match:
+
+container angle
+size
+border
+surface treatment
+navigation
+metric cards
+chart
+top signal
+spacing
+visual density.
+
+Do not attempt to expose the entire product.
+
+Only reproduce what the approved design shows.
+
+==================================================
+VISUAL DIFF LOOP — MANDATORY
+==================================================
+
+After implementing header + hero:
+
+1. Run the site.
+2. Open at exactly 1512 × 982.
+3. Capture screenshot.
+4. Compare with approved reference.
+5. Overlay reference and implementation at 50% opacity.
+6. Record deviations.
+7. Correct them.
+8. Repeat.
+
+Do NOT proceed below the hero until the hero passes.
+
+==================================================
+COMPARE
+==================================================
+
+Compare:
+
+X positions
+Y positions
+container widths
+container heights
+headline dimensions
+line breaks
+logo size
+navigation spacing
+button size
+dashboard scale
+image crop
+background brightness
+green/blue balance
+white space
+corner radii.
+
+==================================================
+FIDELITY TARGET
+==================================================
+
+For primary geometry:
+
+target deviation:
+≤ 4px where practical.
+
+For major alignment:
+
+≤ 2–4px.
+
+For typography:
+visually equivalent line wrapping and hierarchy.
+
+For colors:
+match perceived luminance and hue closely.
+
+Do not blindly optimize a numeric pixel score at the expense of correct browser UI.
+
+Use visual judgment + overlay.
+
+==================================================
+PHASE 3 — CONNECT YOUR SYSTEMS
+==================================================
+
+Only after hero approval:
+
+implement the next chapter exactly as the reference.
+
+Do the same:
+
+implement
+screenshot
+overlay
+correct
+approve.
+
+==================================================
+PHASE 4 — DECISION GAP
+==================================================
+
+Then:
+
+Decision Gap.
+
+Again:
+
+NO design improvisation.
+
+Match reference composition.
+
+==================================================
+PHASE 5 — SEE RADR AT WORK
+==================================================
+
+Implement the product Decision object shown in the reference.
+
+Native UI.
+
+Do not replace it with a generic dashboard.
+
+==================================================
+PHASE 6 — BUILT FOR HOSPITALITY
+==================================================
+
+Match the Restaurant / Hotel composition.
+
+Keep it restrained.
+
+No additional cards.
+
+==================================================
+PHASE 7 — VALUE MAP
+==================================================
+
+Match the reference Value Map.
+
+Do not enlarge it into a giant dashboard.
+
+Keep the visual hierarchy shown.
+
+==================================================
+PHASE 8 — FINAL CTA
+==================================================
+
+Match the final dark hospitality scene and CTA.
+
+It should feel like the cinematic conclusion.
+
+Not a generic footer banner.
+
+==================================================
+SECTION-BY-SECTION RULE
+==================================================
+
+NEVER implement three sections and review them together.
+
+Each section receives:
+
+implementation
+screenshot
+comparison
+correction
+approval
+
+before continuing.
+
+==================================================
+CREATE VISUAL QA TOOLING
+==================================================
+
+Use Playwright or the existing browser testing stack.
+
+Create screenshot tests for:
+
+`/en`
+
+at:
+
+1512 × 982.
+
+Save captures under:
+
+`/docs/visual-qa/`
+
+Include:
+
+reference
+current implementation
+overlay / diff.
+
+==================================================
+CREATE DESIGN LOCK
+==================================================
+
+Create:
+
+`/docs/RADR_DESIGN_LOCK.md`
+
+Document:
+
+approved viewport
+page grid
+max widths
+header dimensions
+type scale
+spacing
+radii
+colors
+logo usage
+button system
+product surface rules
+reference screenshot path.
+
+Future agents must read this before editing public marketing UI.
+
+==================================================
+NO CREATIVE DRIFT
+==================================================
+
+Do not:
+
+“modernize”
+“simplify”
+“make more SaaS”
+“make more futuristic”
+“add visual interest”
+“improve the composition”
+
+unless explicitly requested.
+
+The composition has already been approved.
+
+==================================================
+RESPONSIVE ONLY AFTER DESKTOP
+==================================================
+
+After full 1512px page approval:
+
+adapt to:
+
+1920 × 1080
+1440 × 900
+1280 × 800
+1024
+768
+430
+390.
+
+Maintain the same hierarchy.
+
+Mobile may reflow.
+
+It may not become a different visual identity.
+
+==================================================
+4K
+==================================================
+
+Test:
+
+3840 × 2160.
+
+Core content remains constrained.
+
+Photographic asset must be sufficiently high-resolution.
+
+Logo / UI / charts remain vector/native.
+
+No visible pixelation.
+
+==================================================
+ACCEPTANCE TEST
+==================================================
+
+Open:
+
+REFERENCE
+
+and
+
+LIVE IMPLEMENTATION
+
+side by side.
+
+A designer should immediately say:
+
+“that is the same website.”
+
+Not:
+
+“that is a version inspired by it.”
+
+==================================================
+FINAL INSTRUCTION
+==================================================
+
+DO NOT BUILD A RADR HOMEPAGE.
+
+BUILD THE RADR HOMEPAGE SHOWN IN THE ATTACHED REFERENCE.
+
+DESIGN IS FINISHED.
+
+IMPLEMENTATION STARTS NOW.

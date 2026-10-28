@@ -1,0 +1,338 @@
+{
+  "viewports": [
+    {
+      "width": 1512,
+      "height": 982,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 1050
+        },
+        {
+          "className": "rs-connect",
+          "height": 271
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 580
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 535
+        },
+        {
+          "className": "rs-final",
+          "height": 730
+        }
+      ],
+      "imageFailures": []
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 1080
+        },
+        {
+          "className": "rs-connect",
+          "height": 271
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 580
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 535
+        },
+        {
+          "className": "rs-final",
+          "height": 800
+        }
+      ],
+      "imageFailures": []
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 1050
+        },
+        {
+          "className": "rs-connect",
+          "height": 271
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 580
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 535
+        },
+        {
+          "className": "rs-final",
+          "height": 730
+        }
+      ],
+      "imageFailures": []
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 1050
+        },
+        {
+          "className": "rs-connect",
+          "height": 271
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 580
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 535
+        },
+        {
+          "className": "rs-final",
+          "height": 730
+        }
+      ],
+      "imageFailures": []
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 1240
+        },
+        {
+          "className": "rs-connect",
+          "height": 229
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 570
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 530
+        },
+        {
+          "className": "rs-final",
+          "height": 700
+        }
+      ],
+      "imageFailures": []
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 1240
+        },
+        {
+          "className": "rs-connect",
+          "height": 423.5
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 660.203125
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 1066.578125
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 635.953125
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 722.453125
+        },
+        {
+          "className": "rs-final",
+          "height": 650
+        }
+      ],
+      "imageFailures": []
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 940
+        },
+        {
+          "className": "rs-connect",
+          "height": 423.5
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 685.796875
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 1082.875
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 661.546875
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 743.546875
+        },
+        {
+          "className": "rs-final",
+          "height": 650
+        }
+      ],
+      "imageFailures": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 940
+        },
+        {
+          "className": "rs-connect",
+          "height": 447.5
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 685.796875
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 1108.46875
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 687.140625
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 743.546875
+        },
+        {
+          "className": "rs-final",
+          "height": 681.921875
+        }
+      ],
+      "imageFailures": []
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "overflow": false,
+      "sections": [
+        {
+          "className": "rh-hero",
+          "height": 1080
+        },
+        {
+          "className": "rs-connect",
+          "height": 271
+        },
+        {
+          "className": "rs-section rs-gap",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-work",
+          "height": 580
+        },
+        {
+          "className": "rs-section rs-hospitality",
+          "height": 550
+        },
+        {
+          "className": "rs-section rs-value",
+          "height": 535
+        },
+        {
+          "className": "rs-final",
+          "height": 800
+        }
+      ],
+      "imageFailures": []
+    }
+  ],
+  "interactions": [
+    "All six decision stages, action, and verification",
+    "Restaurant/Hotel selection",
+    "Value calculator calculation, negative input clamp, Escape close, and focus restoration",
+    "Value Calculator navigation reaches the on-page Value Map"
+  ],
+  "overlay": "Not run: original reference file unavailable",
+  "status": "passed",
+  "errors": [],
+  "httpFailures": []
+}
