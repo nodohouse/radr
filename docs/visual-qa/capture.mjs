@@ -33,7 +33,7 @@ async function ready() {
   for (const selector of [
     ".rh-hero",
     ".rs-connect",
-    ".rs-gap",
+    ".dg-section",
     ".rs-work",
     ".rs-hospitality",
     ".rs-value",
@@ -63,7 +63,7 @@ try {
   });
   for (const [selector, name] of [
     [".rs-connect", "02-systems"],
-    [".rs-gap", "03-decision-gap"],
+    [".dg-section", "03-decision-gap"],
     [".rs-work", "04-decision-preview"],
     [".rs-hospitality", "05-hospitality"],
     [".rs-value", "06-value-map"],

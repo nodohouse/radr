@@ -104,3 +104,9 @@ The user supplied additional mockups for Platform, Solutions, Value Calculator, 
 - The current comprehensive browser QA entry is `docs/visual-qa/mockups/verify.mjs`; `docs/visual-qa/navigation.mjs` delegates to it. See the mockups QA README and results for actual runs and captures.
 
 Mockup implementation validation: 32 passing tests (including four annual-model tests), production build, ESLint and TypeScript passed. The browser suite passed 51 route/viewport checks and all five interaction groups. Legal-placeholder guards found no mockup registration/contact fiction. Hero device geometry remains unchanged within 0.02 CSS px at 1512, 1920 and 390px; the animation source and geometry stylesheet are unchanged. See `docs/visual-qa/mockups/` for full-page screenshots, results and methodology.
+
+### Decision Gap clarity and animation
+
+The homepage Decision Gap now uses three readable steps: connected source systems, RADR's contextual comparison, and insight/action/outcome. Native SVG connectors and restrained emphasis progress through the story while all text remains visible. Animation runs only in view, pauses in background tabs, and includes pause/replay controls. Reduced motion presents the complete static flow. Mobile stacks the same steps vertically. The supplier illustration explicitly separates expected $2,430, observed Pending, and verified $0; no recovered value is implied. The hero and other homepage sections are unchanged.
+
+Validation: `docs/visual-qa/decision-gap/verify.mjs` checks six widths, overflow, reduced motion, progression, pause, replay, and browser errors. Desktop and mobile screenshots are stored alongside it.

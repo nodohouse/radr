@@ -1,0 +1,780 @@
+.dg-section {
+  position: relative;
+  overflow: hidden;
+  padding: 65px 78px 38px;
+  color: #eef8f1;
+  background:
+    radial-gradient(ellipse at 53% 65%, #377d6c3d, transparent 55%),
+    linear-gradient(115deg, #061d23, #0c3030 60%, #163e37);
+  font-family: Arial, Helvetica, sans-serif;
+  isolation: isolate;
+}
+.dg-section:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 45px;
+  bottom: -35px;
+  background: #143536;
+  border-radius: 50% 50% 0 0;
+  z-index: -1;
+}
+.dg-wrap {
+  max-width: 1356px;
+  margin: auto;
+}
+.dg-intro {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.dg-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #a9c7bd;
+  font-weight: 500;
+  margin: 0 0 20px;
+}
+.dg-intro h2 {
+  font-size: 46px;
+  line-height: 1.1;
+  letter-spacing: -1.7px;
+  font-weight: 400;
+  margin: 0;
+}
+.dg-intro h2 > span {
+  color: #45c69e;
+}
+.dg-intro > div > p:not(.dg-eyebrow) {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #c0d3c9;
+  margin: 0 0 19px;
+  max-width: 590px;
+}
+.dg-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 31px;
+}
+.dg-controls button {
+  background: #ffffff06;
+  border: 1px solid #739f8c55;
+  border-radius: 20px;
+  padding: 8px 13px;
+  color: #bcd8c9;
+  font:
+    400 11px/1.3 Arial,
+    sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  transition: background 0.2s;
+}
+.dg-controls button:hover {
+  background: #ffffff12;
+}
+.dg-static-label {
+  font-size: 10px;
+  color: #9db9a9;
+}
+.dg-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 65px minmax(0, 1fr) 65px minmax(
+      0,
+      1.2fr
+    );
+  align-items: stretch;
+  gap: 0;
+}
+.dg-column {
+  min-width: 0;
+}
+.dg-step {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  min-height: 51px;
+  margin: 0 0 22px;
+}
+.dg-step > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #8ab1a466;
+  border-radius: 50%;
+  font-size: 11px;
+  color: #8dcbb7;
+  flex-shrink: 0;
+}
+.dg-step h3 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  margin: 0 0 5px;
+  color: #edf7ed;
+}
+.dg-step p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #9cbbb0;
+  margin: 0;
+}
+.dg-source-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dg-source {
+  display: grid;
+  grid-template-columns: 33px 1fr 1.5fr 7px;
+  align-items: center;
+  gap: 9px;
+  min-height: 55px;
+  padding: 9px 12px;
+  border: 1px solid #89b5b329;
+  border-radius: 11px;
+  background: linear-gradient(100deg, #2c67812b, #0d303b4d);
+  color: #d8e9e6;
+}
+.dg-source-icon {
+  display: grid;
+  place-items: center;
+  color: #8fc4d4;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #4691ad18;
+}
+.dg-source strong {
+  font-size: 13px;
+  font-weight: 500;
+}
+.dg-source > span:not(.dg-source-icon) {
+  font-size: 11px;
+  color: #a9c5cd;
+  line-height: 1.4;
+}
+.dg-source > i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #72c6df;
+  display: block;
+}
+.dg-source-note {
+  color: #8eafa5;
+  font-size: 10px;
+  line-height: 1.5;
+  margin: 16px 0 0;
+}
+.dg-connector {
+  align-self: center;
+  padding-top: 43px;
+  color: #75cbb0;
+}
+.dg-connector svg {
+  width: 100%;
+  height: 50px;
+  display: block;
+}
+.dg-context-panel {
+  position: relative;
+  min-height: 328px;
+  border: 1px solid #81c7ac66;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 50% 12%, #3ba98e33, transparent 65%),
+    linear-gradient(140deg, #0e4039, #072b2c);
+  padding: 26px 22px;
+  text-align: center;
+  box-shadow: inset 0 1px #bcefd01a;
+  transition:
+    border-color 0.5s,
+    box-shadow 0.5s;
+}
+.dg-context[data-active="true"] .dg-context-panel {
+  border-color: #8ce4bd;
+  box-shadow:
+    0 0 28px #40c99d1c,
+    inset 0 0 22px #40c99d14;
+}
+.dg-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0 22px;
+}
+.dg-logo img {
+  width: 132px;
+  height: auto;
+}
+.dg-context-panel h4 {
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: -0.6px;
+  line-height: 1.2;
+  color: #f0f8ed;
+  margin: 0 0 14px;
+}
+.dg-context-panel > p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #b1d1c0;
+  margin: 0 0 24px;
+}
+.dg-evidence-pair {
+  display: grid;
+  grid-template-columns: 1fr 15px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 14px 9px;
+  background: #031e242b;
+  border: 1px solid #8daea333;
+  border-radius: 10px;
+  text-align: center;
+}
+.dg-evidence-pair > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.dg-evidence-pair > div > span {
+  font-size: 10px;
+  color: #a0c3c9;
+}
+.dg-evidence-pair strong {
+  font-size: 18px;
+  font-weight: 400;
+  color: #e0eee7;
+  letter-spacing: -0.5px;
+}
+.dg-evidence-pair > span {
+  font-size: 17px;
+  color: #81b5a4;
+}
+.dg-context-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 9px;
+  color: #83b7a1;
+  margin-top: 18px;
+}
+.dg-result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dg-result {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #ecf8e9f2;
+  color: #1b4034;
+  border: 1px solid #d2ead6;
+  border-radius: 13px;
+  padding: 15px 16px;
+  transition:
+    background 0.35s,
+    border-color 0.35s,
+    box-shadow 0.35s;
+}
+.dg-result[data-active="true"] {
+  background: #f7fff2;
+  border-color: #8de7b8;
+  box-shadow:
+    0 0 0 2px #63e3ad33,
+    0 7px 20px #001d2110;
+}
+.dg-result-icon {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  background: #d6efdc;
+  color: #1b9169;
+  margin-top: 2px;
+}
+.dg-result > div {
+  min-width: 0;
+}
+.dg-result-label {
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: 1.3px;
+  color: #3a7860;
+  font-weight: 500;
+}
+.dg-result h4 {
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: #173f33;
+  margin: 6px 0;
+}
+.dg-result p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #557360;
+  margin: 0;
+}
+.dg-result small {
+  font-size: 9px;
+  line-height: 1.5;
+  color: #6b8370;
+  display: block;
+  margin-top: 5px;
+}
+.dg-outcome-values {
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.dg-outcome-values > span {
+  font-size: 9px;
+  color: #62806b;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.dg-outcome-values b {
+  font-size: 13px;
+  font-weight: 500;
+  color: #28583c;
+}
+.dg-outcome-values > span:nth-child(2) b {
+  color: #6d7e68;
+  font-weight: 400;
+}
+.dg-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  border-top: 1px solid #69917f40;
+  padding-top: 23px;
+  margin-top: 28px;
+  min-height: 48px;
+}
+.dg-story-status {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #bfd5c7;
+}
+.dg-progress-dots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.dg-progress-dots i {
+  height: 4px;
+  width: 12px;
+  border-radius: 5px;
+  background: #a7c5b33d;
+  transition: background 0.3s;
+}
+.dg-progress-dots i[data-active="true"] {
+  background: #69d4ad;
+}
+.dg-footer > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 12px;
+  color: #daf5e5;
+  white-space: nowrap;
+}
+.dg-footer > a:hover {
+  color: #8ee4bb;
+}
+.dg-disclaimer {
+  font-size: 9px;
+  line-height: 1.6;
+  color: #91aea1;
+  margin: 18px 0 0;
+  max-width: 1000px;
+}
+.dg-section button:focus-visible,
+.dg-section a:focus-visible {
+  outline: 2px solid #9cf4c8;
+  outline-offset: 5px;
+}
+@media (max-width: 1200px) {
+  .dg-section {
+    padding: 55px 45px 35px;
+  }
+  .dg-intro {
+    gap: 45px;
+  }
+  .dg-intro h2 {
+    font-size: 40px;
+  }
+  .dg-intro > div > p:not(.dg-eyebrow) {
+    font-size: 16px;
+  }
+  .dg-flow {
+    grid-template-columns: minmax(0, 1fr) 35px minmax(0, 1fr) 35px minmax(
+        0,
+        1.15fr
+      );
+  }
+  .dg-step {
+    gap: 9px;
+  }
+  .dg-step h3 {
+    font-size: 15px;
+  }
+  .dg-step p {
+    font-size: 10px;
+  }
+  .dg-step > span {
+    width: 27px;
+    height: 27px;
+    font-size: 10px;
+  }
+  .dg-source {
+    grid-template-columns: 28px 1fr;
+    gap: 3px 9px;
+    padding: 10px;
+  }
+  .dg-source-icon {
+    grid-row: 1/3;
+    width: 27px;
+    height: 27px;
+  }
+  .dg-source > span:not(.dg-source-icon) {
+    grid-column: 2;
+    font-size: 10px;
+  }
+  .dg-source > i {
+    display: none;
+  }
+  .dg-source strong {
+    font-size: 12px;
+  }
+  .dg-context-panel {
+    padding: 24px 15px;
+    min-height: 345px;
+  }
+  .dg-context-panel h4 {
+    font-size: 21px;
+  }
+  .dg-context-panel > p {
+    font-size: 11px;
+  }
+  .dg-evidence-pair {
+    padding: 13px 7px;
+    gap: 4px;
+    grid-template-columns: 1fr 10px 1fr;
+  }
+  .dg-evidence-pair strong {
+    font-size: 16px;
+  }
+  .dg-result {
+    padding: 14px 12px;
+    gap: 9px;
+  }
+  .dg-result h4 {
+    font-size: 14px;
+  }
+  .dg-result p {
+    font-size: 10px;
+  }
+  .dg-result-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .dg-result-label {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+  .dg-outcome-values {
+    gap: 11px;
+  }
+  .dg-outcome-values > span {
+    font-size: 8px;
+  }
+  .dg-outcome-values b {
+    font-size: 12px;
+  }
+}
+@media (max-width: 850px) {
+  .dg-section {
+    padding: 50px 30px 35px;
+  }
+  .dg-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+  .dg-intro h2 {
+    font-size: 41px;
+  }
+  .dg-intro > div > p:not(.dg-eyebrow) {
+    max-width: 650px;
+  }
+  .dg-flow {
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 620px;
+    margin: auto;
+  }
+  .dg-step {
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+  .dg-step h3 {
+    font-size: 19px;
+  }
+  .dg-step p {
+    font-size: 12px;
+  }
+  .dg-step > span {
+    width: 31px;
+    height: 31px;
+    font-size: 11px;
+  }
+  .dg-source-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .dg-source {
+    min-height: 66px;
+    grid-template-columns: 32px 1fr;
+    padding: 12px;
+  }
+  .dg-source strong {
+    font-size: 13px;
+  }
+  .dg-source > span:not(.dg-source-icon) {
+    font-size: 11px;
+  }
+  .dg-source:last-child {
+    grid-column: 1/-1;
+  }
+  .dg-source-note {
+    font-size: 11px;
+  }
+  .dg-connector {
+    height: 55px;
+    padding: 0;
+    width: 65px;
+    justify-self: center;
+    align-self: center;
+    display: grid;
+    place-items: center;
+  }
+  .dg-connector svg {
+    height: 40px;
+    width: 65px;
+    transform: rotate(90deg);
+  }
+  .dg-context-panel {
+    padding: 28px;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 25px;
+    text-align: left;
+    align-items: center;
+  }
+  .dg-logo {
+    grid-column: 1;
+    justify-content: flex-start;
+    padding: 0 0 18px;
+  }
+  .dg-logo img {
+    width: 118px;
+  }
+  .dg-context-panel h4 {
+    grid-column: 1;
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  .dg-context-panel > p {
+    grid-column: 1;
+    font-size: 12px;
+    margin: 0;
+  }
+  .dg-evidence-pair {
+    grid-column: 2;
+    grid-row: 1/4;
+    padding: 20px 12px;
+    gap: 8px;
+    grid-template-columns: 1fr;
+  }
+  .dg-evidence-pair > span {
+    font-size: 17px;
+  }
+  .dg-evidence-pair strong {
+    font-size: 22px;
+  }
+  .dg-evidence-pair > div > span {
+    font-size: 11px;
+  }
+  .dg-context-caption {
+    grid-column: 1/-1;
+    font-size: 10px;
+    justify-content: flex-start;
+    margin-top: 23px;
+  }
+  .dg-result {
+    padding: 20px;
+    gap: 15px;
+  }
+  .dg-result-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .dg-result-label {
+    font-size: 9px;
+  }
+  .dg-result h4 {
+    font-size: 18px;
+    margin: 6px 0 9px;
+  }
+  .dg-result p {
+    font-size: 13px;
+  }
+  .dg-result small {
+    font-size: 11px;
+  }
+  .dg-outcome-values {
+    gap: 23px;
+    margin-top: 14px;
+  }
+  .dg-outcome-values > span {
+    font-size: 11px;
+  }
+  .dg-outcome-values b {
+    font-size: 17px;
+  }
+  .dg-footer {
+    margin-top: 27px;
+    align-items: flex-start;
+  }
+  .dg-story-status {
+    font-size: 10px;
+    align-items: flex-start;
+  }
+  .dg-progress-dots {
+    margin-top: 5px;
+  }
+  .dg-footer > a {
+    font-size: 11px;
+  }
+  .dg-disclaimer {
+    font-size: 10px;
+    max-width: 620px;
+  }
+  .dg-eyebrow {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+}
+@media (max-width: 500px) {
+  .dg-section {
+    padding: 43px 25px 30px;
+  }
+  .dg-intro h2 {
+    font-size: 35px;
+    letter-spacing: -1.3px;
+  }
+  .dg-intro > div > p:not(.dg-eyebrow) {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .dg-controls button {
+    padding: 9px 12px;
+    font-size: 10px;
+  }
+  .dg-source {
+    padding: 12px 10px;
+    gap: 3px 8px;
+  }
+  .dg-source > span:not(.dg-source-icon) {
+    font-size: 10px;
+  }
+  .dg-context-panel {
+    padding: 24px 20px;
+    gap: 0 15px;
+    grid-template-columns: 1.05fr 0.85fr;
+  }
+  .dg-logo img {
+    width: 105px;
+  }
+  .dg-context-panel h4 {
+    font-size: 23px;
+    line-height: 1.2;
+  }
+  .dg-context-panel > p {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .dg-evidence-pair {
+    padding: 18px 8px;
+  }
+  .dg-evidence-pair strong {
+    font-size: 20px;
+  }
+  .dg-result {
+    padding: 19px 15px;
+    gap: 12px;
+  }
+  .dg-result h4 {
+    font-size: 17px;
+  }
+  .dg-result p {
+    font-size: 12px;
+  }
+  .dg-result-label {
+    font-size: 8px;
+  }
+  .dg-outcome-values {
+    gap: 18px;
+  }
+  .dg-outcome-values > span {
+    font-size: 10px;
+  }
+  .dg-outcome-values b {
+    font-size: 16px;
+  }
+  .dg-footer {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .dg-story-status {
+    font-size: 10px;
+    min-height: 30px;
+  }
+  .dg-disclaimer {
+    font-size: 9px;
+    line-height: 1.7;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dg-section * {
+    transition: none !important;
+  }
+  .dg-progress-dots {
+    display: none;
+  }
+}
