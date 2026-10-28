@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LegalIdentity } from "./LegalIdentity";
 import { contactEmail } from "./config/company";
 import "./mockup-pages.css";
 
@@ -97,29 +96,17 @@ export function MockupFooter() {
             </Link>
           </div>
         </div>
-        <div className="mx-footer-legal">
-          <nav aria-label="Legal policies">
-            <h2>Legal</h2>
-            <Link href="/terms">Terms of Service</Link>
-            <Link href="/privacy">Privacy Policy</Link>
-            <Link href="/security">Security</Link>
-            <Link href="/responsible-ai">Responsible AI</Link>
-            <Link href="/data-processing-agreement">
-              Data Processing Agreement
-            </Link>
-          </nav>
-          <div>
-            <h2>Imprint / Legal Notice</h2>
-            <LegalIdentity />
-          </div>
-        </div>
         <div className="mx-footer-bottom">
           <span>© {new Date().getFullYear()} RADR. All rights reserved.</span>
           <nav aria-label="Legal shortcuts">
             <Link href="/terms">Terms</Link>
             <Link href="/privacy">Privacy</Link>
             <Link href="/security">Security</Link>
-            <Link href="/imprint">Imprint</Link>
+            <Link href="/responsible-ai">Responsible AI</Link>
+            <Link href="/data-processing-agreement">
+              Data Processing Agreement
+            </Link>
+            <Link href="/imprint">Imprint / Legal Notice</Link>
           </nav>
         </div>
       </div>

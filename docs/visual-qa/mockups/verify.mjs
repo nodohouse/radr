@@ -72,9 +72,25 @@ try {
       assert.deepEqual(layout.broken, []);
       assert.ok(layout.headerRight <= width, `${route} header clipped`);
       const footer = await page.locator(".mx-footer").innerText();
-      assert.ok(footer.includes("Legal entity details to be confirmed."));
-      assert.ok(footer.includes("Registered office"));
-      assert.ok(footer.includes("To be added"));
+      for (const href of [
+        "/terms",
+        "/privacy",
+        "/security",
+        "/responsible-ai",
+        "/data-processing-agreement",
+        "/imprint",
+      ])
+        assert.equal(
+          await page.locator(`.mx-footer-bottom a[href="${href}"]`).count(),
+          1,
+        );
+      assert.ok(!footer.includes("Registered office"));
+      if (route === "imprint") {
+        const legal = await page.locator("main").innerText();
+        assert.ok(legal.includes("Legal entity details to be confirmed."));
+        assert.ok(legal.includes("Registered office"));
+        assert.ok(legal.includes("To be added"));
+      }
       assert.ok(
         !/San Francisco|Delaware|Amsterdam|Netherlands|548 Market|RADR Inc|hello@radr|415 555|8383921|EIN\s*:/i.test(
           footer,

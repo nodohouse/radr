@@ -47,8 +47,8 @@ const geometry = (p) =>
 // Subsequent user-approved compact hero composition; retain historical baselines.
 function approvedGeometry(width) {
   const approved = structuredClone(baseline[width]);
-  const lift = width > 1024 ? 150 : 85;
-  approved[".rh-copy"].y -= width > 1024 ? 139 : 60;
+  const lift = width > 1024 ? 175 : 95;
+  approved[".rh-copy"].y -= width > 1024 ? 164 : 70;
   approved[".rh-device"].y -= lift;
   approved[".rh-dashboard"].y -= lift;
   approved[".rh-hero"].height -= lift;

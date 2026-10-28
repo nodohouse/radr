@@ -3954,3 +3954,12 @@
     display: none;
   }
 }
+
+/* Compact legal navigation: full notices live on their dedicated pages. */
+.mx-footer-bottom {
+  flex-wrap: wrap;
+}
+.mx-footer-bottom nav {
+  flex-wrap: wrap;
+  gap: 12px 22px;
+}

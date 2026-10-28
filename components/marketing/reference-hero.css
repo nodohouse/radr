@@ -1,6 +1,6 @@
 .rh-hero {
   position: relative;
-  height: 900px;
+  height: 875px;
   min-height: 850px;
   overflow: hidden;
   isolation: isolate;
@@ -111,7 +111,7 @@
 }
 .rh-copy {
   position: absolute;
-  top: 185px;
+  top: 160px;
   left: max(78px, calc((100vw - 1356px) / 2));
   z-index: 2;
 }
@@ -167,7 +167,7 @@
 .rh-device {
   position: absolute;
   left: 46%;
-  top: 235px;
+  top: 210px;
   width: 790px;
   height: 556px;
   border-radius: 35px;
@@ -430,7 +430,7 @@
     left: calc(50% - 60px);
   }
   .rh-hero {
-    height: 930px;
+    height: 905px;
   }
   .rh-backdrop {
     background-position: center 55%;
@@ -521,7 +521,7 @@
   }
   .rh-copy {
     left: 25px;
-    top: 125px;
+    top: 115px;
     right: 20px;
   }
   .rh-eyebrow {
@@ -554,12 +554,12 @@
   }
   .rh-device {
     left: 20px;
-    top: 485px;
+    top: 475px;
     transform: scale(0.46) perspective(1600px) rotateY(-10deg) rotateZ(-1.6deg);
     width: 710px;
   }
   .rh-hero {
-    height: 855px;
+    height: 845px;
     min-height: 0;
   }
   .rh-backdrop {
@@ -639,10 +639,10 @@
 }
 @media (min-width: 701px) and (max-width: 1024px) {
   .rh-hero {
-    height: 1125px;
+    height: 1115px;
   }
   .rh-copy {
-    top: 130px;
+    top: 125px;
     left: 40px;
     right: 40px;
   }
@@ -653,7 +653,7 @@
     width: 205px;
   }
   .rh-device {
-    top: 565px;
+    top: 555px;
     left: 50%;
     margin-left: -355px;
     width: 710px;
