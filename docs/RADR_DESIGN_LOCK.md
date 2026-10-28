@@ -122,3 +122,7 @@ The user's latest hero-only brief supersedes the earlier short animation timing.
 ### User-approved tighter hero spacing
 
 Move the complete hero copy/CTA group up 60px on desktop (top 324 → 264px) and 30px on tablet/mobile (190 → 160px and 185 → 155px). This specifically supersedes the old copy Y-coordinate lock; the physical tablet, header, photography, and animation remain unchanged. Browser checks at 1512, 1920, 768, and 390px confirmed the intended offsets, separation from the header, no horizontal overflow, and unchanged tablet bounds. The cinematic verifier accounts for this approved offset while retaining the original historical baseline file.
+
+### Compact complete hero — supersedes text-only spacing adjustment
+
+The user clarified that both the tablet graphic and copy should sit higher below the navigation. Desktop copy now starts at 185px, the tablet at 235px (150px higher than the original), and hero height is 900px / 930px on wide screens. Tablet layout: copy 130px, device 565px, hero 1125px. Mobile: copy 125px, device 485px, hero 855px. Tablet scale, angle, size and internal demo are unchanged. Browser checks at 1512, 1920, 1024, 768, 390 and 320px confirmed header clearance, copy/device separation, complete device visibility and no horizontal overflow. Current static screenshots and bounds are in `docs/visual-qa/hero-spacing/`. Historical cinematic recordings precede this explicit user-authorized composition change; the current verifier adjusts its geometry expectations accordingly.

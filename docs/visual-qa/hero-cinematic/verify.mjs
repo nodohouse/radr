@@ -44,6 +44,17 @@ const geometry = (p) =>
       ),
     selectors,
   );
+// Subsequent user-approved compact hero composition; retain historical baselines.
+function approvedGeometry(width) {
+  const approved = structuredClone(baseline[width]);
+  const lift = width > 1024 ? 150 : 85;
+  approved[".rh-copy"].y -= width > 1024 ? 139 : 60;
+  approved[".rh-device"].y -= lift;
+  approved[".rh-dashboard"].y -= lift;
+  approved[".rh-hero"].height -= lift;
+  approved[".rh-backdrop"].height -= lift;
+  return approved;
+}
 function same(a, b) {
   for (const s of selectors) {
     for (const k of ["x", "y", "width", "height"])
@@ -73,10 +84,7 @@ try {
     await ready(p);
     const original = await geometry(p);
     if (baseline[width]) {
-      const approved = structuredClone(baseline[width]);
-      // User-approved tighter header-to-copy gap after the cinematic pass.
-      approved[".rh-copy"].y -= width > 1024 ? 60 : 30;
-      same(original, approved);
+      same(original, approvedGeometry(width));
     }
     assert.equal(
       await p.locator(".ht-stage").getAttribute("data-phase"),
@@ -294,9 +302,7 @@ try {
     "Reduced motion always shows complete static Control Center",
   );
   await p.setViewportSize({ width: 390, height: 844 });
-  const approvedMobile = structuredClone(baseline[390]);
-  approvedMobile[".rh-copy"].y -= 30;
-  same(await geometry(p), approvedMobile);
+  same(await geometry(p), approvedGeometry(390));
   await p.emulateMedia({ reducedMotion: "no-preference" });
   await p.getByRole("button", { name: "Show Control Center demo" }).click();
   const mobilePhases = new Set();
