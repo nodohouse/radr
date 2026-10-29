@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Glyph } from "./MockupVisuals";
 import "./reference-hero.css";
 import "./reference-nav.css";
+import "./premium-interactions.css";
 
 const links = [
   { href: "/how", label: "Platform" },
@@ -114,15 +115,37 @@ export function ReferenceNav() {
   const light = pathname === "/value-calculator";
   const header = useRef<HTMLElement>(null);
   const [open, setOpen] = useState<MenuName | "mobile" | null>(null);
-  const close = () => setOpen(null);
+  const pending = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancelPending = () => {
+    if (pending.current) clearTimeout(pending.current);
+    pending.current = null;
+  };
+  const close = () => {
+    cancelPending();
+    setOpen(null);
+  };
+  const hoverMenu = (name: MenuName) => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches)
+      return;
+    cancelPending();
+    pending.current = setTimeout(() => {
+      setOpen(name);
+      pending.current = null;
+    }, 90);
+  };
   useEffect(() => {
-    const outside = (e: PointerEvent) => {
-      if (!header.current?.contains(e.target as Node)) setOpen(null);
+    const resize = () => {
+      if (pending.current) clearTimeout(pending.current);
+      pending.current = null;
+      setOpen(null);
     };
-    const resize = () => setOpen(null);
+    const outside = (e: PointerEvent) => {
+      if (!header.current?.contains(e.target as Node)) resize();
+    };
     document.addEventListener("pointerdown", outside);
     window.addEventListener("resize", resize);
     return () => {
+      if (pending.current) clearTimeout(pending.current);
       document.removeEventListener("pointerdown", outside);
       window.removeEventListener("resize", resize);
     };
@@ -147,6 +170,15 @@ export function ReferenceNav() {
       ref={header}
       className="rh-header rn-header"
       data-tone={light ? "light" : "dark"}
+      onPointerEnter={cancelPending}
+      onPointerLeave={(e) => {
+        if (e.pointerType !== "mouse") return;
+        cancelPending();
+        pending.current = setTimeout(() => {
+          if (!header.current?.querySelector(":focus-visible")) setOpen(null);
+          pending.current = null;
+        }, 200);
+      }}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) close();
       }}
@@ -187,9 +219,14 @@ export function ReferenceNav() {
               data-active={pathname === link.href}
               aria-expanded={open === link.label}
               aria-controls="rn-dropdown"
-              onClick={() =>
-                setOpen(open === link.label ? null : (link.label as MenuName))
-              }
+              onPointerEnter={(e) => {
+                if (e.pointerType === "mouse")
+                  hoverMenu(link.label as MenuName);
+              }}
+              onClick={() => {
+                cancelPending();
+                setOpen(open === link.label ? null : (link.label as MenuName));
+              }}
             >
               {link.label}
               <span aria-hidden="true" className="rn-chevron">
@@ -202,6 +239,9 @@ export function ReferenceNav() {
               href={link.href}
               aria-current={pathname === link.href ? "page" : undefined}
               onClick={close}
+              onPointerEnter={(e) => {
+                if (e.pointerType === "mouse") close();
+              }}
             >
               {link.label}
             </Link>
@@ -229,7 +269,12 @@ export function ReferenceNav() {
           Book a demo <span aria-hidden="true">→</span>
         </Link>
       </div>
-      <div id="rn-dropdown" className="rn-dropdown" hidden={!open}>
+      <div
+        id="rn-dropdown"
+        className="rn-dropdown"
+        hidden={!open}
+        onPointerEnter={cancelPending}
+      >
         {open && open !== "mobile" && (
           <>
             <div className="rn-feature">
@@ -245,7 +290,9 @@ export function ReferenceNav() {
             </div>
             <div className="rn-items">{menuLinks(open)}</div>
             <div className="rn-bottom">
-              <span>Hospitality operating intelligence.</span>
+              <Link href="/value-calculator" onClick={close}>
+                Estimate your opportunity <span aria-hidden="true">→</span>
+              </Link>
               <Link href="/contact" onClick={close}>
                 See RADR in action <span aria-hidden="true">→</span>
               </Link>
