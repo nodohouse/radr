@@ -8,18 +8,18 @@ import { Glyph } from "./MockupVisuals";
 import "./decision-gap.css";
 
 const sources = [
-  { name: "POS", detail: "Sales & payments", icon: "restaurant" },
-  { name: "PMS", detail: "Bookings & stays", icon: "hotel" },
-  { name: "Finance", detail: "Invoices & credits", icon: "data" },
-  { name: "Procurement", detail: "Contracts & prices", icon: "document" },
-  { name: "Labor", detail: "Schedules & hours", icon: "labor" },
+  { name: "POS", detail: "Sales & payments", icon: "restaurant", brand: "Stripe", logo: "stripe", sample: "$12,480 · net sales", meta: "246 transactions · today" },
+  { name: "Bookings", detail: "Bookings & stays", icon: "hotel", brand: "Booking.com", logo: "bookingdotcom", sample: "84% · occupancy", meta: "126 room nights · today" },
+  { name: "Finance", detail: "Invoices & credits", icon: "data", brand: "Xero", logo: "xero", sample: "$8.40 · invoiced / unit", meta: "Invoice #1048 · 120 units" },
+  { name: "Procurement", detail: "Contracts & prices", icon: "document", brand: "SAP", logo: "sap", sample: "$7.90 · agreed / unit", meta: "Supplier contract · matched" },
+  { name: "Labor", detail: "Schedules & hours", icon: "labor", brand: "Clockify", logo: "clockify", sample: "312 h · recorded", meta: "298 h scheduled · this week" },
 ];
 const outputs = [
-  { name: "Insights", detail: "See what matters", icon: "chart" },
-  { name: "Futures", detail: "Compare possible outcomes", icon: "spark" },
-  { name: "Recommendations", detail: "Choose a clear next step", icon: "document" },
-  { name: "Actions", detail: "Keep your team in control", icon: "arrow" },
-  { name: "Verification", detail: "Check what actually changed", icon: "check" },
+  { name: "Insights", detail: "A price variance comes into view", sample: "+6.3% unit price", icon: "chart" },
+  { name: "Futures", detail: "Compare leaving it vs. correcting it", sample: "Two paths. One clear choice.", icon: "spark" },
+  { name: "Recommendations", detail: "Evidence attached. Ready to review.", sample: "Review the $60 variance", icon: "document" },
+  { name: "Actions", detail: "Your team approves before sending.", sample: "Prepare a supplier query", icon: "arrow" },
+  { name: "Verification", detail: "Track the credit when it arrives.", sample: "Verified recovery: $0", icon: "check" },
 ];
 function subscribe(listener: () => void) {
   const query = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -68,6 +68,7 @@ export function DecisionGap() {
             <Link href="/how" className="dg-link">Explore the platform <span aria-hidden="true">↗</span></Link>
           </div>
         </header>
+        <div className="dg-status"><span><i /> CONTINUOUS CONTEXT</span><span>Different signals. One operating picture.</span><span>ILLUSTRATIVE SCENARIO</span></div>
         <div className="dg-panel">
           <div className="dg-lane-headings">
             <span><b>01</b> YOUR SYSTEMS</span>
@@ -79,24 +80,30 @@ export function DecisionGap() {
             <FlowPaths /><FlowPaths mobile />
             <div className="dg-inputs">
               {sources.map((source, i) => <div className="dg-source" key={source.name} style={{ "--dg-delay": `${i * -.62}s` } as React.CSSProperties}>
-                <Glyph name={source.icon} size={25} /><span><strong>{source.name}</strong><small>{source.detail}</small></span><i aria-hidden="true" />
+                <div className="dg-source-top"><span className="dg-brand"><Image src={`/brand/sources/${source.logo}.svg`} alt={source.brand} width={42} height={22} /></span><span className="dg-source-type">{source.name}</span></div><strong className="dg-data">{source.sample}</strong><small className="dg-data-meta">{source.meta}</small><i aria-hidden="true" />
               </div>)}
             </div>
             <div className="dg-core">
               <div className="dg-core-sheen" aria-hidden="true" />
               <Image src="/brand/radr-wordmark-clean-white.svg" width={148} height={34} alt="RADR" />
-              <strong>Operating state</strong>
-              <span>Evidence + context</span>
+              <strong>Connected intelligence</strong>
+              <span>Evidence + operating context</span>
               <div className="dg-processing" aria-hidden="true"><i /><i /><i /></div>
             </div>
             <div className="dg-outputs">
               {outputs.map((output, i) => <div className="dg-result" key={output.name} style={{ "--dg-delay": `${i * -.62}s` } as React.CSSProperties}>
-                <Glyph name={output.icon} size={25} /><span><strong>{output.name}</strong><small>{output.detail}</small></span><i aria-hidden="true" />
+                <div className="dg-result-top"><Glyph name={output.icon} size={19} /><strong>{output.name}</strong></div><span className="dg-result-sample">{output.sample}</span><small className="dg-result-detail">{output.detail}</small><i aria-hidden="true" />
               </div>)}
             </div>
-            <p className="dg-connected">One connected picture</p>
+            <p className="dg-connected"><span className="dg-core-beacon" /> Always connecting the dots</p>
           </div>
-          <div className="dg-legend"><span><i />Your operational data</span><span><i />Decisions with evidence</span><small>Illustrative data flow</small></div>
+          <div className="dg-legend"><span><i />Your operational data</span><span><i />Decisions with evidence</span><small>Example source systems · integration availability varies</small></div>
+        </div>
+        <div className="dg-evidence">
+          <div className="dg-evidence-title"><span className="dg-eyebrow">FROM SIGNAL TO DECISION</span><h3>A small difference.<br /><span>A clearer next move.</span></h3></div>
+          <div className="dg-proof"><span>01 / OBSERVED</span><strong>$8.40 <small>/ unit</small></strong><p>Invoice #1048 · 120 units</p></div>
+          <div className="dg-proof"><span>02 / EXPECTED</span><strong>$7.90 <small>/ unit</small></strong><p>Matched supplier agreement</p></div>
+          <div className="dg-proof dg-proof-accent"><span>03 / IDENTIFIED VARIANCE</span><strong>$60.00</strong><p>For review · not a verified recovery</p></div>
         </div>
         <div className="dg-caption"><span className="dg-eyebrow">THE DIFFERENCE</span><i aria-hidden="true" /><p>From knowing what happened <span aria-hidden="true">→</span> <strong>to knowing what to do next.</strong></p></div>
       </div>

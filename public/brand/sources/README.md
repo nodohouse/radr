@@ -1,0 +1,1 @@
+Source marks from Simple Icons (https://simpleicons.org), distributed under CC0. Brand marks remain trademarks of their respective owners. These are illustrative source-system examples; their appearance does not claim an active integration or partnership.
