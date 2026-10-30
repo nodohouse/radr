@@ -75,7 +75,7 @@ export function MockupCalculator() {
   };
   return (
     <div className="mx-page mx-calculator-page">
-      <div className="mx-calc-hero">
+      <div className="mx-calc-hero ps-calc-hero">
         <ReferenceNav />
         <div className="mx-wrap mx-calc-hero-grid">
           <div>
@@ -116,6 +116,7 @@ export function MockupCalculator() {
             </div>
           </div>
           <div className="mx-wizard" id="calculator">
+            <div className="ps-wizard-brand"><Image src="/brand/radr-wordmark-clean-monochrome-black.svg" alt="RADR" width={86} height={20} /><span>YOUR OPERATING SCENARIO</span></div>
             <p className="mx-kicker">YOUR VALUE CALCULATOR</p>
             <div
               className="mx-wizard-progress"

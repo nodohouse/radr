@@ -5,6 +5,7 @@ import "./radr.css";
 import "@/components/marketing/professional.css";
 import "@/components/marketing/vibrant.css";
 import "@/components/marketing/editorial.css";
+import "@/components/marketing/premium.css";
 import { SiteExperience } from "@/components/marketing/SiteExperience";
 
 const display = Manrope({

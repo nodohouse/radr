@@ -1,3 +1,4 @@
+import { IntelligenceFlow } from "./IntelligenceFlow";
 import Image from "next/image";
 import { MotionScene } from "./MotionScene";
 export function Glyph({
@@ -266,79 +267,7 @@ export function PortfolioPreview({
   );
 }
 export function DataFoundation() {
-  return (
-    <MotionScene
-      className="mx-foundation-art"
-      label="Connected data foundation"
-    >
-      <svg viewBox="0 0 700 300" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="mx-connection">
-            <stop stopColor="#3c9ec0" stopOpacity=".2" />
-            <stop offset=".5" stopColor="#78dfaf" />
-            <stop offset="1" stopColor="#d7eee0" stopOpacity=".5" />
-          </linearGradient>
-        </defs>
-        {Array.from({ length: 11 }, (_, i) => (
-          <path
-            key={i}
-            d={`M20 ${15 + i * 27}C210 ${15 + i * 27} 210 150 350 150S510 ${15 + i * 27} 690 ${15 + i * 27}`}
-            fill="none"
-            stroke={i % 4 === 0 ? "#b1b95a" : "url(#mx-connection)"}
-            strokeWidth="1.3"
-            opacity=".7"
-          />
-        ))}
-        {Array.from({ length: 5 }, (_, i) => (
-          <g key={`packet-${i}`}>
-            <path
-              className="mx-data-packet mx-data-packet-in"
-              d={`M20 ${25 + i * 60}C210 ${25 + i * 60} 210 150 350 150`}
-              pathLength="100"
-              style={{ animationDelay: `${i * -0.5}s` }}
-            />
-            <path
-              className="mx-data-packet"
-              d={`M350 150C510 150 510 ${25 + i * 60} 690 ${25 + i * 60}`}
-              pathLength="100"
-              style={{ animationDelay: `${i * -0.5 - 1.4}s` }}
-            />
-          </g>
-        ))}
-      </svg>
-      <div className="mx-foundation-inputs">
-        {["POS", "PMS", "Finance", "Procurement", "Labor"].map((s) => (
-          <span key={s}>
-            <Glyph name="document" size={14} />
-            {s}
-          </span>
-        ))}
-        <small>...and more</small>
-      </div>
-      <div className="mx-foundation-core">
-        <Image
-          src="/brand/radr-mark-clean-white.svg"
-          alt="RADR"
-          width={83}
-          height={73}
-        />
-      </div>
-      <div className="mx-foundation-outputs">
-        {[
-          "Cleaned data",
-          "Unified model",
-          "Real-time sync",
-          "Context enrichment",
-          "Built for hospitality",
-        ].map((s) => (
-          <span key={s}>
-            <Glyph name="check" size={14} />
-            {s}
-          </span>
-        ))}
-      </div>
-    </MotionScene>
-  );
+  return <IntelligenceFlow />;
 }
 
 /** Small native dashboards echo the role-specific views in the approved Platform reference. */

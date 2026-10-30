@@ -1,3 +1,4 @@
+import { BrandPortrait, PlanPortrait } from "./PremiumBrandPanels";
 import { OperatingCanvas } from "./OperatingCanvas";
 import { RouteChapterBand } from "./SiteExperience";
 import Image from "next/image";
@@ -90,11 +91,15 @@ function MockHero({
           <h1>{title}</h1>
           <p>{copy}</p>
           <Buttons
+            primary={kind === "pricing" ? "Compare plans" : "Book a demo"}
+            href={kind === "pricing" ? "#plans" : "/contact"}
             secondary={
-              kind === "company" ? "Our story" : "Explore the platform"
+              kind === "company" ? "Our story" : kind === "pricing" ? "Talk to us" : "Explore the platform"
             }
             secondaryHref={
-              kind === "company"
+              kind === "pricing"
+                ? "/contact"
+                : kind === "company"
                 ? "#mission"
                 : kind === "platform"
                   ? "#foundation"
@@ -138,7 +143,7 @@ export function MockupBottomCTA() {
 export function MockupPlatform() {
   return (
     <PageShell>
-      <div className="mx-page">
+      <div className="mx-page ps-page">
         <MockHero
           kind="platform"
           title={
@@ -155,7 +160,7 @@ export function MockupPlatform() {
           <PortfolioPreview />
         </MockHero>
         <section
-          className="mx-section mx-dark mx-curved-bottom"
+          className="mx-section mx-dark mx-curved-bottom ps-foundation-section"
           id="foundation"
         >
           <div className="mx-wrap mx-split">
@@ -173,9 +178,9 @@ export function MockupPlatform() {
               />
               <Link
                 className="mx-button mx-small-button"
-                href="/solutions#operations"
+                href="/solutions#operation-types"
               >
-                See all integrations →
+                Explore data sources →
               </Link>
             </div>
             <DataFoundation />
@@ -351,7 +356,7 @@ export function MockupSolutions() {
   return (
     <PageShell>
       <OperationProvider>
-        <div className="mx-page">
+        <div className="mx-page ps-page">
           <SolutionsStory />
           <RouteChapterBand />
           <OperationSelector compact />
@@ -551,7 +556,7 @@ export function MockupPricing() {
   ];
   return (
     <PageShell>
-      <div className="mx-page">
+      <div className="mx-page ps-page">
         <MockHero
           kind="pricing"
           title={
@@ -563,8 +568,10 @@ export function MockupPricing() {
               of your operation<span>.</span>
             </>
           }
-          copy="Flexible plans built for hospitality. Turn your data into better decisions, higher profits, and stronger guest experiences."
-        />
+          copy="A clear plan for your operating scope. Compare what’s included, understand the investment and choose the right starting point."
+        >
+          <PlanPortrait />
+        </MockHero>
         <section className="mx-section mx-pricing-section" id="plans">
           <div className="mx-wrap">
             <div className="mx-pricing-heading">
@@ -725,7 +732,7 @@ export function MockupPricing() {
 export function MockupCompany() {
   return (
     <PageShell>
-      <div className="mx-page">
+      <div className="mx-page ps-page">
         <MockHero
           kind="company"
           title={
@@ -738,7 +745,9 @@ export function MockupCompany() {
             </>
           }
           copy="RADR exists to give hospitality operators the clarity to make better decisions, turning data into better experiences for every guest, every stay, every day."
-        />
+        >
+          <BrandPortrait />
+        </MockHero>
         <section className="mx-section mx-light" id="mission">
           <div className="mx-wrap mx-mission-grid">
             <Heading
@@ -750,7 +759,7 @@ export function MockupCompany() {
                   into better decisions<span>.</span>
                 </>
               }
-              copy="We build a decision layer for hospitality. connecting data across operations, surfacing what matters, and helping teams act with clarity and confidence."
+              copy="We build a decision layer for hospitality, connecting data across operations, surfacing what matters, and helping teams act with clarity and confidence."
             />
             <div className="mx-mission-photo">
               <OperatingCanvas variant="operations" />
