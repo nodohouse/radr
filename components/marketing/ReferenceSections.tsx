@@ -1,5 +1,7 @@
 "use client";
 
+import { OperationPreview } from "./OperatingCanvas";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -366,12 +368,7 @@ export function Hospitality() {
                 {operation.name}
               </span>
               <span className="rs-operation-image">
-                <Image
-                  src={operation.image}
-                  alt={operation.alt}
-                  fill
-                  sizes="(max-width: 700px) 44vw, 340px"
-                />
+                <OperationPreview hotel={operation.name === "Hotel"} />
               </span>
               <span className="rs-operation-items">
                 {operation.items.map((item, i) => (

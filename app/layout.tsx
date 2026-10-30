@@ -3,6 +3,8 @@ import { IBM_Plex_Mono, Manrope, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import "./radr.css";
 import "@/components/marketing/professional.css";
+import "@/components/marketing/vibrant.css";
+import { SiteExperience } from "@/components/marketing/SiteExperience";
 
 const display = Manrope({
   subsets: ["latin"],
@@ -66,6 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
+        <SiteExperience />
         {children}
       </body>
     </html>

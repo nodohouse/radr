@@ -1,3 +1,5 @@
+import { OperatingCanvas } from "./OperatingCanvas";
+import { RouteChapterBand } from "./SiteExperience";
 import Image from "next/image";
 import Link from "next/link";
 import { PageShell } from "./MarketingShell";
@@ -74,6 +76,7 @@ function MockHero({
   children?: React.ReactNode;
 }) {
   return (
+    <>
     <section className={`mx-hero mx-hero-${kind}`} id="overview">
       <div className="mx-wrap mx-hero-grid">
         <div>
@@ -102,6 +105,8 @@ function MockHero({
         {children}
       </div>
     </section>
+    <RouteChapterBand />
+    </>
   );
 }
 export function MockupBottomCTA() {
@@ -250,12 +255,7 @@ export function MockupPlatform() {
               </div>
             </div>
             <div className="mx-proof-photo">
-              <Image
-                src="/images/radr-pavilion-new.webp"
-                fill
-                sizes="(max-width:700px) 90vw, 350px"
-                alt="A luminous coastal hospitality terrace"
-              />
+              <OperatingCanvas variant="portfolio" />
               <div>
                 <strong>
                   From location performance
@@ -353,6 +353,7 @@ export function MockupSolutions() {
       <OperationProvider>
         <div className="mx-page">
           <SolutionsStory />
+          <RouteChapterBand />
           <OperationSelector compact />
           <section className="mx-section mx-light">
             <div className="mx-wrap mx-split">
@@ -752,12 +753,7 @@ export function MockupCompany() {
               copy="We build a decision layer for hospitality — connecting data across operations, surfacing what matters, and helping teams act with clarity and confidence."
             />
             <div className="mx-mission-photo">
-              <Image
-                src="/images/radr-pavilion-new.webp"
-                fill
-                sizes="(max-width:700px)90vw, 550px"
-                alt="A contemporary terrace overlooking the coast"
-              />
+              <OperatingCanvas variant="operations" />
             </div>
             <ul className="mx-mission-benefits">
               {[
@@ -938,12 +934,7 @@ export function MockupCompany() {
               copy="Technology should remove friction, not replace the human touch — empowering teams to focus on creating exceptional guest experiences."
             />
             <div className="mx-philosophy-image">
-              <Image
-                src="/images/radr-restaurant.webp"
-                fill
-                sizes="(max-width:700px)90vw, 350px"
-                alt="Thoughtfully designed hospitality interiors"
-              />
+              <OperatingCanvas variant="people" />
             </div>
             <blockquote>
               “Hospitality has always been about people. Our job is to make it
@@ -980,6 +971,7 @@ export function MockupCalculatorPage() {
     <div className="rp-site mx-page">
       <main>
         <MockupCalculator />
+        <RouteChapterBand />
         <section className="mx-global-photo">
           <div className="mx-wrap">
             <Heading
