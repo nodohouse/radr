@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Manrope, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import "./radr.css";
+import "@/components/marketing/professional.css";
 
 const display = Manrope({
   subsets: ["latin"],

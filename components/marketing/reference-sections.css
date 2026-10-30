@@ -1242,8 +1242,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url("/images/radr-coastal-pavilion.webp") center 57% / cover
-    no-repeat;
+  background: linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
 }
 .rs-final:after {
   content: "";

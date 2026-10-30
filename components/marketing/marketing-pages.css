@@ -538,7 +538,7 @@
   min-height: 410px;
   background:
     linear-gradient(90deg, #06252aef, #06252a44),
-    url("/images/radr-coastal-pavilion.webp") center 58% / cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
   color: #f4faf0;
 }
 .rp-company-photo h2 {
@@ -1095,7 +1095,7 @@
   color: #f4faef;
   background:
     linear-gradient(90deg, #002326f2, #05272abb 45%, #05272a22),
-    url("/images/radr-coastal-pavilion.webp") center 60% / cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
 }
 .rp-cta .rp-kicker {
   color: #7ec6a0;
@@ -1799,7 +1799,7 @@
   padding-right: 45px;
   background:
     linear-gradient(90deg, #05282ae6, #05282a66),
-    url("/images/radr-coastal-architecture.webp") 42% center/cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c)/cover;
   color: #eff9ed;
 }
 .rp-auth-atmosphere > div {

@@ -152,7 +152,7 @@
   min-height: 620px;
   background:
     linear-gradient(90deg, #031e24e8, #06282c66 53%, #001a2110),
-    url("/images/radr-pavilion-new.webp") center 50% / cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
 }
 .mx-hero .mx-kicker {
   color: #d9e7de;
@@ -1195,7 +1195,7 @@
 .mx-pricing-faq {
   background:
     linear-gradient(90deg, #041f24f2, #123a36b3),
-    url("/images/radr-pavilion-new.webp") center 60% / cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
 }
 .mx-faq-grid {
   display: grid;
@@ -1351,7 +1351,7 @@
   padding: 65px 0;
   background:
     linear-gradient(90deg, #05232be6, #062b3255),
-    url("/images/radr-pavilion-new.webp") center 55% / cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
   color: #f4f9f1;
   position: relative;
 }
@@ -1445,7 +1445,7 @@
   padding: 110px 0 120px;
   background:
     linear-gradient(90deg, #031d28db, #051e2c99 47%, transparent),
-    url("/images/radr-pavilion-new.webp") center 55% / cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
   color: #f6faf4;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -1707,7 +1707,7 @@
       #f2f6ef66 55%,
       #f2f6ef00 75%
     ),
-    url("/images/radr-pavilion-new.webp") center 50% / cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
   min-height: 650px;
 }
 .mx-calc-hero-grid {
@@ -3449,7 +3449,7 @@
   .mx-calc-hero {
     background:
       linear-gradient(90deg, #fafbf6f2, #fafbf6bf),
-      url("/images/radr-pavilion-new.webp") 70% center/cover;
+      linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c)/cover;
   }
   .mx-calc-hero-grid {
     grid-template-columns: 1fr;
@@ -3664,7 +3664,7 @@
   opacity: 0.3;
   background:
     linear-gradient(90deg, #00181c 0%, transparent 70%),
-    url("/images/radr-pavilion-new.webp") 75% 70% / cover;
+    linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
   mask-image: linear-gradient(
     0deg,
     transparent 0%,
