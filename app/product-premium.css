@@ -162,6 +162,7 @@
   .rp-shell-v2.rp-premium.rp-premium[data-theme="daylight"] .rp-pulse-land { min-height: 0 !important; height: auto !important; }
   .rp-shell-v2.rp-premium.rp-premium[data-theme="daylight"] .rp-pulse-land-svg { min-height: 0 !important; height: 210px !important; }
   .rp-shell-v2.rp-premium.rp-premium[data-theme="daylight"] .rv-pulse-flagship { min-height: 0 !important; }
-  .rp-shell-v2.rp-premium.rp-premium[data-theme="daylight"] .rp-mobile-tabs { display: grid !important; grid-template-columns: repeat(5,minmax(0,1fr)) !important; padding: 7px 5px !important; gap: 2px !important; left: 8px !important; right: 8px !important; bottom: 8px !important; width: auto !important; border-radius: 15px; box-shadow: 0 8px 32px #142e531c; }
+  .rp-shell-v2.rp-premium.rp-premium[data-theme="daylight"] .rp-mobile-tabs { position: fixed !important; z-index: 70; display: grid !important; grid-template-columns: repeat(5,minmax(0,1fr)) !important; padding: 7px 5px !important; gap: 2px !important; left: 8px !important; right: 8px !important; bottom: max(8px,env(safe-area-inset-bottom)) !important; width: auto !important; border-radius: 15px; box-shadow: 0 8px 32px #142e531c; }
   .rp-shell-v2.rp-premium.rp-premium[data-theme="daylight"] .rp-mobile-tab { min-width: 0 !important; padding: 10px 3px !important; font-size: 10px !important; }
+  .rp-shell-v2.rp-premium.rp-premium[data-theme="daylight"] .rp-frame-v2 { padding: 0 !important; }
 }
