@@ -39,7 +39,7 @@ export function IntelligenceFlow({ service = false }: { service?: boolean }) {
     <div className="pf-flow-layout">
       <div className="pf-sources">{sources.map(([id, name, category]) => <div className="pf-source" key={id}><span className="pf-source-mark"><Image src={`/brand/sources/${id}.svg`} alt={name} width={25} height={25} /></span><span><strong>{name}</strong><small>{category}</small></span></div>)}</div>
       <div className="pf-rail pf-rail-in" aria-hidden="true"><svg viewBox="0 0 70 320" preserveAspectRatio="none">{[28,94,160,226,292].map((y,i)=><g key={y}><path d={`M0 ${y}C40 ${y} 30 160 70 160`} /><path className="pf-packet" pathLength="100" d={`M0 ${y}C40 ${y} 30 160 70 160`} style={{animationDelay:`${i*-.5}s`}} /></g>)}</svg></div>
-      <div className="pf-core"><Image src="/brand/radr-wordmark-clean-white.svg" alt="RADR" width={120} height={28} /><span>Operating<br />intelligence</span><i aria-hidden="true" /></div>
+      <div className="pf-core"><Image src="/brand/radr-wordmark-balanced-white.svg" alt="RADR" width={120} height={28} /><span>Operating<br />intelligence</span><i aria-hidden="true" /></div>
       <div className="pf-rail pf-rail-out" aria-hidden="true"><svg viewBox="0 0 70 320" preserveAspectRatio="none"><path d="M0 160H70" /><path className="pf-packet" pathLength="100" d="M0 160H70" /></svg></div>
       <div className="pf-decision">
         <div className="pf-decision-top"><span>{service ? "RESTAURANT / SERVICE" : "SUPPLIER / AP"}</span><i>Illustrative</i></div>

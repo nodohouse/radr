@@ -165,7 +165,7 @@ export function PortfolioPreview({
       <div className="mx-preview">
         <aside>
           <Image
-            src="/brand/radr-wordmark-clean-monochrome-black.svg"
+            src="/brand/radr-wordmark-balanced-monochrome-black.svg"
             width={92}
             height={22}
             alt="RADR"

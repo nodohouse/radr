@@ -200,8 +200,8 @@ export function ReferenceNav() {
         <Image
           src={
             light
-              ? "/brand/radr-wordmark-clean-monochrome-black.svg"
-              : "/brand/radr-wordmark-clean-white.svg"
+              ? "/brand/radr-wordmark-balanced-monochrome-black.svg"
+              : "/brand/radr-wordmark-balanced-white.svg"
           }
           alt="RADR"
           width={145}

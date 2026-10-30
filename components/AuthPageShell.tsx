@@ -29,7 +29,7 @@ export function AuthPageShell({
                 <br />
                 On{" "}
                 <Image
-                  src="/brand/radr-wordmark-clean-white.svg"
+                  src="/brand/radr-wordmark-balanced-white.svg"
                   alt="RADR"
                   width={250}
                   height={57}

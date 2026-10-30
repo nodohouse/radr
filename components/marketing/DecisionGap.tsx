@@ -85,7 +85,7 @@ export function DecisionGap() {
             </div>
             <div className="dg-core">
               <div className="dg-core-sheen" aria-hidden="true" />
-              <Image src="/brand/radr-wordmark-clean-white.svg" width={148} height={34} alt="RADR" />
+              <Image src="/brand/radr-wordmark-balanced-white.svg" width={148} height={34} alt="RADR" />
               <strong>Connected intelligence</strong>
               <span>Evidence + operating context</span>
               <div className="dg-processing" aria-hidden="true"><i /><i /><i /></div>

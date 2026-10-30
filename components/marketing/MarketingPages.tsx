@@ -71,7 +71,7 @@ export function PlatformPage() {
         <div className="rp-operating-card">
           <div className="rp-card-top">
             <Image
-              src="/brand/radr-wordmark-clean-monochrome-black.svg"
+              src="/brand/radr-wordmark-balanced-monochrome-black.svg"
               alt="RADR"
               width={95}
               height={23}

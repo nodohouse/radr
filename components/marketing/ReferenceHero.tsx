@@ -5,7 +5,7 @@ import { ReferenceNav } from "./ReferenceNav";
 import { HeroScrollStory } from "./HeroScrollStory";
 import { HeroTablet } from "./HeroTablet";
 
-const brand = "/brand/radr-wordmark-clean-white.svg";
+const brand = "/brand/radr-wordmark-balanced-white.svg";
 
 function Arrow() {
   return (

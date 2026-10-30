@@ -1,3 +1,4 @@
+import { SocialIcons } from "./SocialIcons";
 import Image from "next/image";
 import Link from "next/link";
 import { contactEmail } from "./config/company";
@@ -58,7 +59,7 @@ export function MockupFooter() {
           <div className="mx-footer-brand">
             <Link href="/en" aria-label="RADR home">
               <Image
-                src="/brand/radr-wordmark-clean-white.svg"
+                src="/brand/radr-wordmark-balanced-white.svg"
                 width={180}
                 height={41}
                 alt="RADR"
@@ -66,9 +67,9 @@ export function MockupFooter() {
             </Link>
             <p>Hospitality operating intelligence.</p>
             <p>
-              Turn your data into better decisions, higher profits and stronger
-              guest experiences.
+              Find the gaps. Prepare the next move. Keep the value in view.
             </p>
+            <SocialIcons className="en-footer-socials" withLabels linksEnabled={false} />
           </div>
           {columns.map((column) => (
             <nav key={column.title} aria-label={`Footer ${column.title}`}>

@@ -567,7 +567,7 @@ export function ReferenceFinal() {
             <span>
               See{" "}
               <Image
-                src="/brand/radr-wordmark-clean-white.svg"
+                src="/brand/radr-wordmark-balanced-white.svg"
                 width={270}
                 height={62}
                 alt="RADR"

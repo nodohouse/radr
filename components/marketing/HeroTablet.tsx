@@ -304,7 +304,7 @@ export function HeroTablet() {
           <div className="rh-dashboard">
             <aside className="rh-sidebar">
               <Image
-                src="/brand/radr-wordmark-clean-monochrome-black.svg"
+                src="/brand/radr-wordmark-balanced-monochrome-black.svg"
                 width={83}
                 height={20}
                 alt="RADR"

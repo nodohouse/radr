@@ -118,12 +118,12 @@ export function MockupBottomCTA() {
   return (
     <section className="mx-bottom-cta">
       <div className="mx-wrap">
-        <p className="mx-kicker">YOUR OPERATION. YOUR NEXT MOVE.</p>
+        <p className="mx-kicker">YOUR NEXT OPPORTUNITY IS IN THE DETAILS.</p>
         <h2>
           See{" "}
           <Image
             className="mx-wordmark"
-            src="/brand/radr-wordmark-clean-white.svg"
+            src="/brand/radr-wordmark-balanced-white.svg"
             width={240}
             height={55}
             alt="RADR"
@@ -131,9 +131,9 @@ export function MockupBottomCTA() {
           in action<span>.</span>
         </h2>
         <p>
-          Bring your systems, your priorities and your questions.
+          Supplier discrepancies. Missed credits. Revenue opportunities.
           <br />
-          See what a clearer operating picture could change.
+          See where your team should look next.
         </p>
         <Buttons />
       </div>
@@ -462,7 +462,7 @@ export function MockupSolutions() {
                     ) : i === 1 ? (
                       <div className="mx-flow-logo">
                         <Image
-                          src="/brand/radr-wordmark-clean-white.svg"
+                          src="/brand/radr-wordmark-balanced-white.svg"
                           alt="RADR"
                           width={95}
                           height={22}
@@ -925,7 +925,7 @@ export function MockupCompany() {
             <div className="mx-global-tags">
               <span>◯ BUILT FOR GLOBAL HOSPITALITY</span>
               <span>◇ FLEXIBLE BY DESIGN</span>
-              <span>＋ YOUR OPERATION. YOUR NEXT MOVE.</span>
+              <span>＋ YOUR NEXT OPPORTUNITY IS IN THE DETAILS.</span>
             </div>
           </div>
         </section>

@@ -89,7 +89,7 @@ export function MockupCalculator() {
               <span className="mx-brand-inline">
                 <Image
                   className="mx-wordmark"
-                  src="/brand/radr-wordmark-clean-monochrome-black.svg"
+                  src="/brand/radr-wordmark-balanced-monochrome-black.svg"
                   width={220}
                   height={50}
                   alt="RADR"
@@ -116,7 +116,7 @@ export function MockupCalculator() {
             </div>
           </div>
           <div className="mx-wizard" id="calculator">
-            <div className="ps-wizard-brand"><Image src="/brand/radr-wordmark-clean-monochrome-black.svg" alt="RADR" width={86} height={20} /><span>YOUR OPERATING SCENARIO</span></div>
+            <div className="ps-wizard-brand"><Image src="/brand/radr-wordmark-balanced-monochrome-black.svg" alt="RADR" width={86} height={20} /><span>YOUR OPERATING SCENARIO</span></div>
             <p className="mx-kicker">YOUR VALUE CALCULATOR</p>
             <div
               className="mx-wizard-progress"
