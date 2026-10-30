@@ -67,3 +67,28 @@
   .pro-banner-window { overflow-x: auto; }
   .pro-banner-group[aria-hidden="true"] { display: none; }
 }
+
+/* Physical tablet drifts independently of its fixed perspective and internal demo. */
+.reference-page .rh-device {
+  --tablet-scroll-y: 0px;
+  --tablet-scroll-roll: 0deg;
+  animation: pro-tablet-float 8s ease-in-out infinite;
+  animation-play-state: paused;
+  rotate: var(--tablet-scroll-roll);
+}
+.reference-page .rh-device[data-playing="true"] { animation-play-state: running; }
+@keyframes pro-tablet-float {
+  0%, 100% { translate: 0 var(--tablet-scroll-y); }
+  50% { translate: 0 calc(var(--tablet-scroll-y) - 10px); }
+}
+.reference-page .rh-backdrop { inset: -75px 0; }
+@media (max-width: 700px) {
+  @keyframes pro-tablet-float {
+    0%, 100% { translate: 0 var(--tablet-scroll-y); }
+    50% { translate: 0 calc(var(--tablet-scroll-y) - 5px); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reference-page .rh-device { animation: none !important; translate: none !important; rotate: none !important; }
+  .reference-page .rh-copy, .reference-page .rh-backdrop { translate: none !important; }
+}

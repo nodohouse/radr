@@ -31,35 +31,94 @@ export function RunningBanner({ kind = "signals" }: { kind?: keyof typeof messag
   );
 }
 
-/** Reveal the existing narrative without hiding server-rendered content. */
+/** Scroll-linked depth follows native scrolling; content stays visible without JS. */
 export function ProfessionalScroll() {
   const progress = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobile = window.matchMedia("(max-width: 700px)");
+    const hero = document.querySelector<HTMLElement>(".rh-hero");
+    const tablet = document.querySelector<HTMLElement>(".rh-device");
+    const backdrop = document.querySelector<HTMLElement>(".rh-backdrop");
+    const copy = document.querySelector<HTMLElement>(".rh-copy");
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(
+      ".reference-page .rs-copy, .reference-page .rs-decision, .reference-page .rs-system-tiles, .reference-page .rs-value-visual, .reference-page .rs-operation-card, .reference-page .dg-header, .reference-page .dg-panel, .pro-proof-intro, .pro-proof li, .rs-final-copy"
+    ));
+    let scenes: { node: HTMLElement; animation: Animation }[] = [];
     let frame = 0;
+    const clamp = (value: number) => Math.max(0, Math.min(1, value));
+    const resetHero = () => {
+      tablet?.style.removeProperty("--tablet-scroll-y");
+      tablet?.style.removeProperty("--tablet-scroll-roll");
+      backdrop?.style.removeProperty("translate");
+      copy?.style.removeProperty("translate");
+    };
     const update = () => {
       frame = 0;
-      const range = document.documentElement.scrollHeight - window.innerHeight;
-      if (progress.current) progress.current.style.transform = `scaleX(${range > 0 ? Math.min(1, window.scrollY / range) : 0})`;
+      const height = window.innerHeight;
+      const range = document.documentElement.scrollHeight - height;
+      const heroRect = hero?.getBoundingClientRect();
+      // Read geometry together before updating composited animation properties.
+      const positions = scenes.map(scene => {
+        let top = 0;
+        let node: HTMLElement | null = scene.node;
+        while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; }
+        return top - window.scrollY;
+      });
+      if (progress.current) progress.current.style.transform = `scaleX(${range > 0 ? clamp(window.scrollY / range) : 0})`;
+      if (preference.matches) return;
+      if (heroRect && heroRect.bottom > 0) {
+        const travel = clamp(-heroRect.top / heroRect.height);
+        tablet?.style.setProperty("--tablet-scroll-y", `${travel * (mobile.matches ? -18 : -65)}px`);
+        tablet?.style.setProperty("--tablet-scroll-roll", `${travel * (mobile.matches ? .4 : 1.8)}deg`);
+        if (backdrop) backdrop.style.translate = `0 ${travel * 65}px`;
+        if (copy) copy.style.translate = `0 ${travel * -28}px`;
+      }
+      scenes.forEach((scene, i) => {
+        // Finish each entrance in the upper-middle viewport; keep it readable afterward.
+        const entrance = clamp((height * .96 - positions[i]) / (height * .65));
+        scene.animation.currentTime = entrance * 1000;
+      });
     };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
-    update();
+    const onScroll = () => { if (!frame && !document.hidden) frame = requestAnimationFrame(update); };
+    const configure = () => {
+      scenes.forEach(scene => scene.animation.cancel());
+      scenes = [];
+      resetHero();
+      if (!preference.matches) {
+        scenes = targets.map((node, i) => {
+          const visual = node.matches(".rs-decision, .rs-value-visual, .dg-panel");
+          const distance = mobile.matches ? 28 : visual ? 76 : 44;
+          const animation = node.animate([
+            { opacity: .25, transform: `translate3d(0,${distance}px,0) scale(${visual ? .965 : 1})`, filter: visual && !mobile.matches ? "blur(2px)" : "blur(0px)" },
+            { opacity: 1, transform: "translate3d(0,0,0) scale(1)", filter: "blur(0px)" }
+          ], { duration: 1000, fill: "both", easing: "cubic-bezier(.22,1,.36,1)" });
+          animation.pause();
+          animation.currentTime = 1000;
+          // Alternate only the transform origin, never the reading order.
+          node.style.transformOrigin = i % 2 ? "60% 50%" : "40% 50%";
+          return { node, animation };
+        });
+      }
+      onScroll();
+    };
+    configure();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    const animations: Animation[] = [];
-    const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        observer.unobserve(entry.target);
-        if (preference.matches) continue;
-        const children = entry.target.querySelectorAll(".rs-copy, .rs-decision, .rs-system-tiles, .rs-value-visual, .rs-operation-card, .dg-header, .dg-panel");
-        children.forEach((node, i) => animations.push(node.animate([{ opacity: .45, transform: "translateY(26px)" }, { opacity: 1, transform: "translateY(0)" }], { duration: 650, delay: Math.min(i * 100, 250), easing: "cubic-bezier(.22,1,.36,1)" })));
-      }
-    }, { threshold: .12 });
-    document.querySelectorAll(".reference-page > section").forEach(section => observer.observe(section));
-    const reduce = () => { if (preference.matches) animations.forEach(animation => animation.finish()); };
-    preference.addEventListener("change", reduce);
-    return () => { observer.disconnect(); animations.forEach(animation => animation.cancel()); preference.removeEventListener("change", reduce); window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); cancelAnimationFrame(frame); };
+    document.addEventListener("visibilitychange", onScroll);
+    preference.addEventListener("change", configure);
+    mobile.addEventListener("change", configure);
+    return () => {
+      scenes.forEach(scene => scene.animation.cancel());
+      targets.forEach(node => node.style.removeProperty("transform-origin"));
+      resetHero();
+      preference.removeEventListener("change", configure);
+      mobile.removeEventListener("change", configure);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      document.removeEventListener("visibilitychange", onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
   return <div className="pro-scroll-progress" ref={progress} aria-hidden="true" />;
 }
