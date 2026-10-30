@@ -92,3 +92,33 @@
   .reference-page .rh-device { animation: none !important; translate: none !important; rotate: none !important; }
   .reference-page .rh-copy, .reference-page .rh-backdrop { translate: none !important; }
 }
+
+/* A deliberate scroll chapter: turn the device, then tell the story on its screen. */
+.rh-scroll-track { position: relative; }
+.rh-scroll-track[data-enhanced="true"] { height: calc(max(875px, 100svh) + 180svh); }
+.rh-scroll-track[data-enhanced="true"] .rh-hero { position: sticky; top: 0; height: max(875px, 100svh); }
+.rh-scroll-track[data-engaged="true"] .rh-device { animation: none; rotate: none; }
+.rh-story-captions { display: none; position: absolute; z-index: 3; top: 126px; left: 24px; right: 24px; text-align: center; pointer-events: none; }
+.rh-story-captions > div { display: none; }
+.rh-story-captions span { color: #70dfbd; font: 10px var(--font-mono), monospace; letter-spacing: 2px; }
+.rh-story-captions h2 { color: #f2f6fa; font: 400 clamp(26px, 3vw, 42px)/1.12 Arial, sans-serif; letter-spacing: -1px; margin: 12px 0; }
+.rh-story-captions p { color: #bacbd6; font: 15px/1.5 Arial, sans-serif; margin: 0; }
+.rh-scroll-track[data-scene="0"] .rh-story-captions,
+.rh-scroll-track[data-scene="1"] .rh-story-captions,
+.rh-scroll-track[data-scene="2"] .rh-story-captions { display: block; }
+.rh-scroll-track[data-scene="0"] [data-story-caption="0"],
+.rh-scroll-track[data-scene="1"] [data-story-caption="1"],
+.rh-scroll-track[data-scene="2"] [data-story-caption="2"] { display: block; animation: pro-caption-in .4s ease both; }
+@keyframes pro-caption-in { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0; } }
+@media (max-width: 1024px) {
+  .rh-scroll-track[data-enhanced="true"] { height: calc(max(845px, 100svh) + 160svh); }
+  .rh-scroll-track[data-enhanced="true"] .rh-hero { height: max(845px, 100svh); }
+  .rh-story-captions { top: 128px; }
+  .rh-story-captions p { font-size: 13px; max-width: 500px; margin-inline: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rh-scroll-track[data-enhanced="true"] { height: auto; }
+  .rh-scroll-track[data-enhanced="true"] .rh-hero { position: relative; }
+  .rh-story-captions { display: none !important; }
+}
+.rh-story-captions { opacity: var(--story-caption-opacity, 0); }

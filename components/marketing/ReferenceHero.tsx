@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "./reference-hero.css";
 import { ReferenceNav } from "./ReferenceNav";
+import { HeroScrollStory } from "./HeroScrollStory";
 import { HeroTablet } from "./HeroTablet";
 
 const brand = "/brand/radr-wordmark-clean-white.svg";
@@ -29,6 +30,7 @@ function Arrow() {
 
 export function ReferenceHero() {
   return (
+    <HeroScrollStory>
     <section className="rh-hero" id="product" aria-labelledby="rh-title">
       <div className="rh-backdrop" />
       <ReferenceNav />
@@ -57,8 +59,14 @@ export function ReferenceHero() {
           </Link>
         </div>
       </div>
+      <div className="rh-story-captions" aria-label="Scroll through the RADR product story">
+        <div data-story-caption="0"><span>01 / EVIDENCE</span><h2>See the discrepancy.</h2><p>Contract $6.80/L. Invoice $7.45/L. The evidence is connected.</p></div>
+        <div data-story-caption="1"><span>02 / RECOMMENDED ACTION</span><h2>Know what to do next.</h2><p>Prepare the dispute package. Your team reviews and approves.</p></div>
+        <div data-story-caption="2"><span>03 / VERIFY THE OUTCOME</span><h2>Track value. Prove the result.</h2><p>$2,430 expected. Outcome pending. $0 verified so far.</p></div>
+      </div>
       <HeroTablet />
-      <span className="rh-scene-note">CLARITY FOR EVERY OPERATION.</span>
+      <span className="rh-scene-note">SCROLL TO EXPLORE THE DECISION ↓</span>
     </section>
+    </HeroScrollStory>
   );
 }

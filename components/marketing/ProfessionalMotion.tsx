@@ -37,10 +37,10 @@ export function ProfessionalScroll() {
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const mobile = window.matchMedia("(max-width: 700px)");
-    const hero = document.querySelector<HTMLElement>(".rh-hero");
+
     const tablet = document.querySelector<HTMLElement>(".rh-device");
-    const backdrop = document.querySelector<HTMLElement>(".rh-backdrop");
-    const copy = document.querySelector<HTMLElement>(".rh-copy");
+
+
     const targets = Array.from(document.querySelectorAll<HTMLElement>(
       ".reference-page .rs-copy, .reference-page .rs-decision, .reference-page .rs-system-tiles, .reference-page .rs-value-visual, .reference-page .rs-operation-card, .reference-page .dg-header, .reference-page .dg-panel, .pro-proof-intro, .pro-proof li, .rs-final-copy"
     ));
@@ -50,14 +50,14 @@ export function ProfessionalScroll() {
     const resetHero = () => {
       tablet?.style.removeProperty("--tablet-scroll-y");
       tablet?.style.removeProperty("--tablet-scroll-roll");
-      backdrop?.style.removeProperty("translate");
-      copy?.style.removeProperty("translate");
+
+
     };
     const update = () => {
       frame = 0;
       const height = window.innerHeight;
       const range = document.documentElement.scrollHeight - height;
-      const heroRect = hero?.getBoundingClientRect();
+
       // Read geometry together before updating composited animation properties.
       const positions = scenes.map(scene => {
         let top = 0;
@@ -67,13 +67,6 @@ export function ProfessionalScroll() {
       });
       if (progress.current) progress.current.style.transform = `scaleX(${range > 0 ? clamp(window.scrollY / range) : 0})`;
       if (preference.matches) return;
-      if (heroRect && heroRect.bottom > 0) {
-        const travel = clamp(-heroRect.top / heroRect.height);
-        tablet?.style.setProperty("--tablet-scroll-y", `${travel * (mobile.matches ? -18 : -65)}px`);
-        tablet?.style.setProperty("--tablet-scroll-roll", `${travel * (mobile.matches ? .4 : 1.8)}deg`);
-        if (backdrop) backdrop.style.translate = `0 ${travel * 65}px`;
-        if (copy) copy.style.translate = `0 ${travel * -28}px`;
-      }
       scenes.forEach((scene, i) => {
         // Finish each entrance in the upper-middle viewport; keep it readable afterward.
         const entrance = clamp((height * .96 - positions[i]) / (height * .65));

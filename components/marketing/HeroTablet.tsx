@@ -216,8 +216,19 @@ export function HeroTablet() {
     () => true,
   );
   const [frame, setFrame] = useState({ phase: "control" as Phase, beat: 0 });
+  const [scrollStage, setScrollStage] = useState<number | null>(null);
+  useEffect(() => {
+    const track = device.current?.closest(".rh-scroll-track");
+    if (!track) return;
+    const change = (event: Event) => {
+      const stage = (event as CustomEvent<number>).detail;
+      setScrollStage(stage < 0 ? null : stage);
+    };
+    track.addEventListener("radr:tablet-stage", change);
+    return () => track.removeEventListener("radr:tablet-stage", change);
+  }, []);
   const elapsed = useRef(0);
-  const running = !reduced && visible && foreground;
+  const running = !reduced && visible && foreground && scrollStage === null;
   useEffect(() => {
     if (!running) return;
     const duration = mobile ? 7000 : 9000;
@@ -272,18 +283,18 @@ export function HeroTablet() {
       elapsed.current = (initial + performance.now() - started) % duration;
     };
   }, [running, mobile]);
-  const phase = reduced
-    ? "control"
-    : mobile && (frame.phase === "action" || frame.phase === "value")
-      ? "decision"
-      : frame.phase;
+  const displayFrame = scrollStage === null || reduced ? frame : {
+    phase: (["decision", "action", "value"] as Phase[])[scrollStage], beat: 7,
+  };
+  const phase = reduced ? "control" : scrollStage !== null ? displayFrame.phase
+    : mobile && (frame.phase === "action" || frame.phase === "value") ? "decision" : frame.phase;
   return (
     <div
       ref={device}
       className="rh-device"
       data-motion={reduced ? "reduced" : "full"}
       data-signal-active={
-        !reduced && frame.beat === 2 && phase === "control" ? "true" : "false"
+        !reduced && displayFrame.beat === 2 && phase === "control" ? "true" : "false"
       }
       data-playing={running}
       aria-label="RADR product preview with illustrative data"
@@ -339,7 +350,7 @@ export function HeroTablet() {
               <div
                 className="ht-stage"
                 data-phase={phase}
-                data-beat={frame.beat}
+                data-beat={displayFrame.beat}
               >
                 <AnimatePresence initial={false} mode="sync">
                   {phase === "control" ? (
@@ -353,8 +364,8 @@ export function HeroTablet() {
                     >
                       <ControlCenter
                         reduced={reduced}
-                        chart={frame.beat >= 1}
-                        attention={frame.beat === 2}
+                        chart={displayFrame.beat >= 1}
+                        attention={displayFrame.beat === 2}
                       />
                     </motion.div>
                   ) : phase === "value" ? (
@@ -379,7 +390,7 @@ export function HeroTablet() {
                     >
                       <DecisionView
                         action={phase === "action"}
-                        beat={frame.beat}
+                        beat={displayFrame.beat}
                       />
                     </motion.div>
                   )}
