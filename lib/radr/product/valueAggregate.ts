@@ -53,8 +53,9 @@ export function attentionEuro(r: DecisionRecord): number {
 export function deriveValueAggregate(
   role: RoleView,
   vertical?: DemoVerticalFamily,
+  recordsOverride?: DecisionRecord[],
 ): ValueAggregate {
-  const all = listDecisionRecords();
+  const all = recordsOverride ?? listDecisionRecords();
   const scoped =
     vertical != null
       ? scopedDecisionsForDemo(all, role, vertical)

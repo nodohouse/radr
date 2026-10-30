@@ -19,12 +19,13 @@ import type {
 } from "@/lib/radr/butler/types";
 import { AskAnswer } from "./AskAnswer";
 import { useAskRadr } from "./AskRadrContext";
-import { RADR_DELTA_NAV_ASSET } from "@/lib/radr/brandTokens";
+import { ProductBrand } from "../ProductBrand";
+import { useDemoOrg } from "../useDemoOrg";
 import { findingsForScope } from "@/lib/radr/findings";
 import { createActionFromFinding } from "@/lib/radr/actions/service";
 import { getRoleProfile } from "@/lib/radr/role/profiles";
 import { migrateRoleView } from "@/lib/product/types";
-import { locationLabel } from "@/lib/product/demo/dashboard";
+
 
 import "@/app/ask-radr.css";
 
@@ -45,8 +46,8 @@ const CFO_SUGGESTIONS = [
   },
   {
     id: "exposure",
-    label: "Show me the €788 at risk.",
-    query: "Show me the €788 at risk.",
+    label: "Which decisions need my attention?",
+    query: "Which decisions need my attention?",
   },
   {
     id: "weather",
@@ -57,6 +58,7 @@ const CFO_SUGGESTIONS = [
 
 export function AskRadr() {
   const router = useRouter();
+  const { org } = useDemoOrg();
   const pathname = usePathname();
   const {
     locationScope,
@@ -135,7 +137,7 @@ export function AskRadr() {
   const scopeShort =
     locationScope === "all"
       ? "Group"
-      : locationLabel(locationScope).split(" · ")[0] ?? "Location";
+      : org.locations.find(location => location.id === locationScope)?.displayName ?? "Selected locations";
   const periodShort =
     period === "mtd"
       ? "MTD"
@@ -405,6 +407,7 @@ export function AskRadr() {
   const overlay = (
     <div
       className={`rp-ask ${isAnalysis ? "rp-ask-analysis" : ""}`}
+      style={{ fontFamily: mounted ? getComputedStyle(document.querySelector(".rp-root") ?? document.body).fontFamily : undefined }}
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
@@ -422,13 +425,9 @@ export function AskRadr() {
       >
         <header className="rp-ask-chrome">
           <div className="rp-ask-chrome-left">
-            <span className="rp-ask-mark" aria-hidden="true">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={RADR_DELTA_NAV_ASSET} alt="" width={18} height={16} />
-            </span>
             <div>
               <p id={titleId} className="rp-ask-brand">
-                Ask RADR
+                <span>Ask</span> <ProductBrand width={88} />
               </p>
               <p className="rp-ask-ctx">{contextLine}</p>
             </div>
@@ -454,7 +453,8 @@ export function AskRadr() {
         {isOpening ? (
           <div className="rp-ask-opening">
             <div className="rp-ask-scroll-open">
-              <h2 className="rp-ask-greeting">Ask RADR</h2>
+              <p className="rp-ask-eyebrow">YOUR DECISION PARTNER</p>
+              <h2 className="rp-ask-greeting">Clarity starts with<br />a good question.</h2>
               <p className="rp-ask-subline">Ask about your operation.</p>
               <div className="rp-ask-suggest">
                 <p className="rp-ask-label">Try</p>

@@ -4,6 +4,7 @@
  * Deterministic. No Math.random().
  */
 
+import type { DecisionRecord } from "@/lib/radr/decision/record";
 import type { RoleView } from "@/lib/product/types";
 import type { DemoVerticalFamily } from "@/lib/radr/vertical/experienceProfile";
 import { DECISION_IDS, displayDecisionId } from "@/lib/radr/decision/ids";
@@ -138,14 +139,15 @@ function sparkFor(id: ValueDriverId): number[] {
 export function buildValueOverview(
   role: RoleView = "cfo",
   vertical: DemoVerticalFamily = "restaurant",
+  recordsOverride?: DecisionRecord[],
 ): ValueOverviewModel {
-  const agg = deriveValueAggregate(role, vertical);
-  const prior = priorMtdVerifiedTotal(role, vertical);
+  const agg = deriveValueAggregate(role, vertical, recordsOverride);
+  const prior = priorMtdVerifiedTotal(role, vertical, recordsOverride);
   const deltaPct =
     prior > 0 ? Math.round(((agg.verifiedTotal - prior) / prior) * 100) : null;
 
   const verified = scopedDecisionsForDemo(
-    listDecisionRecords(),
+    recordsOverride ?? listDecisionRecords(),
     role,
     vertical,
   ).filter(
@@ -287,9 +289,9 @@ export function buildValueOverview(
     driversSum,
     reconciles: driversSum === agg.verifiedTotal,
     miss,
-    proof: euroTraceForDecision(DECISION_IDS.supplier),
+    proof: recordsOverride ? (verified[0] ? euroTraceForDecision(verified[0].id) : null) : euroTraceForDecision(DECISION_IDS.supplier),
     closed,
-    trend: buildVerifiedValueTrend(role, vertical),
+    trend: buildVerifiedValueTrend(role, vertical, recordsOverride),
   };
 }
 

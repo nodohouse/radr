@@ -3,6 +3,9 @@
 import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useDemoOrg } from "@/components/product/useDemoOrg";
+import { recordsForLocationSelection } from "@/lib/radr/product/selectedScope";
+import { scopedDecisionsForDemo } from "@/lib/radr/product/roleScope";
 import { useProduct } from "@/lib/product/store";
 import {
   getDecisionStoreSnapshot,
@@ -40,9 +43,10 @@ export function MemoryShell() {
   const router = useRouter();
   const pathname = usePathname() || "/app/memory";
   const search = useSearchParams();
-  const { roleView } = useProduct();
+  const { roleView,locationScope,locationMode,comparisonLocationIds } = useProduct();
+  const {session}=useDemoOrg();
 
-  useSyncExternalStore(
+  const snapshot = useSyncExternalStore(
     subscribeDecisionStore,
     getDecisionStoreSnapshot,
     getDecisionStoreSnapshot,
@@ -57,7 +61,7 @@ export function MemoryShell() {
   const [hypothesisOpen, setHypothesisOpen] = useState(false);
   const [modelPerfOpen, setModelPerfOpen] = useState(false);
 
-  const base = useMemo(() => buildMemoryOverview(roleView), [roleView]);
+  const base = useMemo(() => buildMemoryOverview(roleView,recordsForLocationSelection(scopedDecisionsForDemo(Object.values(snapshot.records),roleView,session.vertical),locationScope,locationMode === "comparison" ? comparisonLocationIds : [])), [roleView,snapshot,session.vertical,locationScope,locationMode,comparisonLocationIds]);
   const model = useMemo(() => {
     const slice = seriesForPeriod(period, base.series);
     const last = slice[slice.length - 1]!;
@@ -134,7 +138,7 @@ export function MemoryShell() {
         <div>
           <p className="mk-eyebrow">Memory</p>
           <h1>Your operating memory, always on.</h1>
-          <p>Capture learnings, surface what matters, and turn experience into better decisions.</p>
+          <p>Selected-scope learnings and playbooks. Calibration examples describe comparable Soho dinner services.</p>
         </div>
         <div className="me-page-actions">
           <button

@@ -99,7 +99,7 @@ export function SettingsOrganization({
           </div>
 
           <div className="se-field">
-            <label htmlFor="se-tz">Default timezone</label>
+            <label htmlFor="se-tz">Organization reporting timezone</label>
             <small>Used for calendars, reporting and notifications.</small>
             <select
               id="se-tz"

@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { recordsForLocationSelection } from "@/lib/radr/product/selectedScope";
 import { useProduct } from "@/lib/product/store";
 import { useDemoOrg } from "@/components/product/useDemoOrg";
 import {
@@ -28,10 +29,10 @@ export function ValueShell() {
   const router = useRouter();
   const pathname = usePathname() || "/app/value";
   const search = useSearchParams();
-  const { roleView } = useProduct();
+  const { roleView, locationScope, comparisonLocationIds, locationMode } = useProduct();
   const { session, isHotel } = useDemoOrg();
 
-  useSyncExternalStore(
+  const decisionSnapshot = useSyncExternalStore(
     subscribeDecisionStore,
     getDecisionStoreSnapshot,
     getDecisionStoreSnapshot,
@@ -46,8 +47,8 @@ export function ValueShell() {
 
   const model = useMemo(
     () =>
-      buildValueOverview(roleView, isHotel ? "hotel" : session.vertical),
-    [roleView, session.vertical, isHotel],
+      buildValueOverview(roleView, isHotel ? "hotel" : session.vertical, recordsForLocationSelection(Object.values(decisionSnapshot.records), locationScope, locationMode === "comparison" ? comparisonLocationIds : [])),
+    [roleView, session.vertical, isHotel, decisionSnapshot, locationScope, comparisonLocationIds, locationMode],
   );
 
   const pushView = useCallback(
@@ -63,7 +64,7 @@ export function ValueShell() {
 
   return (
     <div className="ve-root" data-value-engine="true">
-      <header className="mk-page-head"><p className="mk-eyebrow">Value</p><h1>Track value. Verify the outcome.</h1><p>Expected, observed and verified results, kept clearly apart.</p></header>
+      <header className="mk-page-head"><p className="mk-eyebrow">Value</p><h1>Track value. Verify the outcome.</h1><p>Expected, observed and verified results for the selected location scope. USD reporting.</p></header>
       <nav className="ve-views" aria-label="Value perspective">
         {VIEWS.map((v) => (
           <button

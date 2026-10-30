@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  GOVERNANCE_SUMMARY,
   currencyLabel,
   operatingModelLabel,
 } from "@/lib/radr/product/settingsProofEngine";
+import { useDemoOrg } from "@/components/product/useDemoOrg";
 import type { DemoSettingsState } from "@/lib/radr/product/demoSettings";
 import {
   IconAccess,
@@ -21,10 +21,12 @@ type Props = {
 };
 
 export function SettingsGovernanceRail({ demo, industryLabel }: Props) {
+  const { org, isHotel } = useDemoOrg();
+  const policies = demo.policies.filter(p => isHotel || !["housekeeping_reassign", "hotel_channel_hold"].includes(p.id));
   const rows = [
     {
       icon: IconClock,
-      label: "Default timezone",
+      label: "Reporting timezone",
       value: demo.timezone,
       detail: null as string | null,
     },
@@ -43,20 +45,20 @@ export function SettingsGovernanceRail({ demo, industryLabel }: Props) {
     {
       icon: IconLocations,
       label: "Locations",
-      value: `${GOVERNANCE_SUMMARY.locationsTotal} total`,
-      detail: `${GOVERNANCE_SUMMARY.restaurants} restaurants · ${GOVERNANCE_SUMMARY.hotels} hotels`,
+      value: `${org.locations.length} total`,
+      detail: industryLabel,
     },
     {
       icon: IconAccess,
       label: "Active personas",
-      value: `${GOVERNANCE_SUMMARY.personas} roles`,
+      value: `${demo.users.length} roles`,
       detail: "Group · Venue · Functional",
     },
     {
       icon: IconPolicies,
       label: "Policy coverage",
-      value: `${GOVERNANCE_SUMMARY.policiesActive} policies`,
-      detail: `Across ${GOVERNANCE_SUMMARY.policyCategories} categories`,
+      value: `${policies.filter(p => p.status === "active").length} policies`,
+      detail: `Across ${new Set(policies.map(p => p.category)).size} categories`,
     },
   ];
 

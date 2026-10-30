@@ -19,6 +19,7 @@ import {
 import { controlCenterLensFor } from "@/lib/radr/product/controlCenterLens";
 import {
   DEFAULT_DEMO_SETTINGS,
+  DEMO_SETTINGS_KEY,
   DEMO_USERS_HOTEL,
   DEMO_USERS_RESTAURANT,
   readDemoSettings,
@@ -98,8 +99,19 @@ export function SettingsShell() {
   const saveTimer = useRef<number | null>(null);
 
   useEffect(() => {
-    setDemo(readDemoSettings());
-  }, []);
+    const saved = readDemoSettings();
+    // Demo-world switches use the canonical organization, while custom names survive.
+    const defaultName = ["Northstar Restaurants", "Northstar Hotels"].includes(saved.orgName);
+    let hasSavedPreferences = true;
+    try { hasSavedPreferences = Boolean(localStorage.getItem(DEMO_SETTINGS_KEY)); } catch { /* preserve defaults when storage is unavailable */ }
+    const home = org.locations.find(location => location.id === primaryLocationId(org)) ?? org.locations[0];
+    setDemo({
+      ...saved,
+      ...(!hasSavedPreferences ? { currency: home?.currency ?? "USD", timezone: home?.timezone ?? "America/New_York" } : {}),
+      ...(defaultName ? { orgName: org.name, operatingModel: session.vertical === "hotel" ? "hotel_model" : "restaurant_model" } : {}),
+      ...(defaultName && saved.orgName !== org.name ? { users: session.vertical === "hotel" ? DEMO_USERS_HOTEL : DEMO_USERS_RESTAURANT } : {}),
+    });
+  }, [session.vertical, org]);
 
   const select = useCallback(
     (id: SettingsSectionId, policy?: string | null) => {
@@ -279,6 +291,7 @@ export function SettingsShell() {
         </header>
 
         <SettingsSummaryCards
+          demo={demo}
           orgName={demo.orgName}
           industryLabel={industryLabel}
           onSelect={(id) => select(id)}
@@ -291,8 +304,10 @@ export function SettingsShell() {
           roleView={roleView}
           onPersona={(role) => setRoleView(role)}
           onReset={() => {
-            writeDemoSettings(DEFAULT_DEMO_SETTINGS);
-            setDemo(DEFAULT_DEMO_SETTINGS);
+            const home = org.locations.find(location => location.id === primaryLocationId(org)) ?? org.locations[0];
+            const reset = { ...DEFAULT_DEMO_SETTINGS, orgName: org.name, operatingModel: session.vertical === "hotel" ? "hotel_model" : "restaurant_model", users: session.vertical === "hotel" ? DEMO_USERS_HOTEL : DEMO_USERS_RESTAURANT, currency: home?.currency ?? "USD", timezone: home?.timezone ?? "America/New_York" };
+            writeDemoSettings(reset);
+            setDemo(reset);
             setRoleView("cfo");
             setLocationScope("all");
             setPeriod("mtd");

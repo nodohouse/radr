@@ -169,7 +169,7 @@ export function ValueOverview({
         <section className="ve-miss" aria-label="Honest miss">
           <div className="ve-miss-head">
             <h2 className="ve-miss-title">
-              <span aria-hidden>●</span> Honest miss
+              <span aria-hidden>●</span> Honest miss · Demo comparison
             </h2>
             <p className="ve-miss-trust">Expected ≠ Verified builds trust</p>
           </div>
@@ -210,7 +210,7 @@ export function ValueOverview({
           <div className="ve-proof-head">
             <div>
               <h2>
-                Proof path · {proof?.displayId ?? "D-4102"}
+                Proof path · {proof?.displayId ?? "No verified record in this selection"}
               </h2>
               <p>Contract vs invoice · contribution compression</p>
             </div>

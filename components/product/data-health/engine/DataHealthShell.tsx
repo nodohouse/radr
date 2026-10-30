@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useProduct } from "@/lib/product/store";
@@ -59,6 +60,7 @@ export function DataHealthShell() {
   // PASS 2 default: open Xero inspector when no source/decision in URL
   useEffect(() => {
     if (
+      vertical === "hotel" ||
       searchParams.get("source") ||
       searchParams.get("decision") ||
       searchParams.get("cleared") === "1"
@@ -71,7 +73,7 @@ export function DataHealthShell() {
     router.replace(qs ? `${pathname}?${qs}` : `${pathname}?source=xero`, {
       scroll: false,
     });
-  }, [pathname, router, searchParams]);
+  }, [pathname, router, searchParams, vertical]);
 
   const filtered = useMemo(
     () => filterEvidenceSources(model.sources, query, statusFilter),
@@ -119,8 +121,10 @@ export function DataHealthShell() {
     [pathname, router, searchParams],
   );
 
+  if (vertical === "hotel") return <div className="dh-root" data-data-health-engine="true"><header className="mk-page-head"><p className="mk-eyebrow">Data Health</p><h1>Hotel evidence health</h1><p>A hotel source-health snapshot is not available in this demo. Restaurant connection scores are kept separate.</p><Link href="/app/connections">Review hotel connections →</Link></header></div>;
   return (
     <div className="dh-root" data-data-health-engine="true">
+      <p className="mk-eyebrow">Restaurant estate source health · 10 locations</p>
       <DataHealthOverview
         model={model}
         sources={filtered}

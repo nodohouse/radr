@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { ProductBrand } from "../ProductBrand";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { NAV_ICONS } from "../shell/navIcons";
@@ -21,10 +21,10 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
   const path = usePathname();
   const [more, setMore] = useState(false);
   const { roleView } = useProduct();
-  const { session } = useDemoOrg();
+  const { session, isHotel } = useDemoOrg();
   const health = buildDataHealthOverview(roleView, session.vertical);
   return <aside className="rs-navigation" aria-label="RADR workspace">
-    <Link className="rs-brand" href="/app" onClick={onNavigate} aria-label="RADR Control Center"><Image src="/brand/radr-website-wordmark.svg" alt="RADR" width={136} height={24} priority /></Link>
+    <Link className="rs-brand" href="/app" onClick={onNavigate} aria-label="RADR Control Center"><ProductBrand width={136} /></Link>
     <button type="button" className="rs-workspace" onClick={() => setMore(v => !v)} aria-expanded={more} aria-controls="rs-workspace-menu">WORKSPACE <span aria-hidden="true">⌄</span></button>
     {more ? <div className="rs-more" id="rs-workspace-menu">{MORE.map(([label,href]) => <Link key={href} href={href} onClick={() => { setMore(false); onNavigate(); }}>{label}<span aria-hidden="true">↗</span></Link>)}</div> : null}
     <nav className="rs-nav-items" aria-label="Primary">{ITEMS.map(([id,label,href]) => {
@@ -32,6 +32,6 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
       const Icon = NAV_ICONS[id];
       return <Link key={id} href={href} aria-current={active ? "page" : undefined} data-active={active || undefined} onClick={onNavigate}><span className="rs-nav-icon"><Icon /></span><span>{label}</span></Link>;
     })}</nav>
-    <Link href="/app/data-health" className="rs-connection-status" onClick={onNavigate}><i data-warning={health.attentionCount > 0 || undefined} /><span>{health.attentionCount > 0 ? `${health.attentionCount} evidence ${health.attentionCount === 1 ? "source needs" : "sources need"} review` : "Evidence sources connected"}</span></Link>
+    <Link href="/app/data-health" className="rs-connection-status" onClick={onNavigate}><i data-warning={!isHotel && health.attentionCount > 0 || undefined} /><span>{isHotel ? "Review evidence health" : health.attentionCount > 0 ? `${health.attentionCount} evidence ${health.attentionCount === 1 ? "source needs" : "sources need"} review` : "Evidence sources connected"}</span></Link>
   </aside>;
 }

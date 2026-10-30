@@ -7,6 +7,7 @@
  * "vs prior MTD" is deterministic and reconciles to the Decision ledger.
  */
 
+import type { DecisionRecord } from "@/lib/radr/decision/record";
 import type { RoleView } from "@/lib/product/types";
 import { listDecisionRecords } from "@/lib/radr/decision/store";
 import {
@@ -43,8 +44,9 @@ function verifiedStamp(r: {
 export function buildVerifiedValueTrend(
   role: RoleView,
   vertical: DemoVerticalFamily = "restaurant",
+  recordsOverride?: DecisionRecord[],
 ): VerifiedTrendPoint[] {
-  const scoped = scopedDecisionsForDemo(listDecisionRecords(), role, vertical).filter(
+  const scoped = scopedDecisionsForDemo(recordsOverride ?? listDecisionRecords(), role, vertical).filter(
     (r) =>
       r.verifiedValue &&
       (recordAttention(r) === "verified" || recordAttention(r) === "learned"),
@@ -105,8 +107,9 @@ export function buildVerifiedValueTrend(
 export function priorMtdVerifiedTotal(
   role: RoleView,
   vertical: DemoVerticalFamily = "restaurant",
+  recordsOverride?: DecisionRecord[],
 ): number {
-  const agg = deriveValueAggregate(role, vertical);
+  const agg = deriveValueAggregate(role, vertical, recordsOverride);
   const supplierInScope = agg.decisionIdsVerified.includes(
     DECISION_IDS.supplier,
   );

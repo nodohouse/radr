@@ -31,6 +31,8 @@ import "@/app/product-premium.css";
 import "@/app/control-center-tablet.css";
 import "@/app/backend-reference.css";
 import "@/app/reference-workspace.css";
+import "@/app/surface-polish.css";
+import "@/app/utility-polish.css";
 
 export const dynamic = "force-dynamic";
 

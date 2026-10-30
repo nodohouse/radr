@@ -54,6 +54,7 @@ export function LocationSwitcher() {
   const [comparePick, setComparePick] = useState(false);
   const [draftIds, setDraftIds] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!locationSwitcherOpen) {
@@ -62,14 +63,25 @@ export function LocationSwitcher() {
       setDraftIds([]);
       return;
     }
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const t = window.setTimeout(() => inputRef.current?.focus(), 30);
-    return () => window.clearTimeout(t);
+    return () => {
+      window.clearTimeout(t);
+      previousFocus?.focus();
+    };
   }, [locationSwitcherOpen]);
 
   useEffect(() => {
     if (!locationSwitcherOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeLocationSwitcher();
+      if (e.key === "Tab") {
+        const controls = Array.from(panelRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled),input:not(:disabled),a[href],[tabindex="0"]') ?? []);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -170,14 +182,14 @@ export function LocationSwitcher() {
   const cityName = peerCity[0]?.city;
 
   return (
-    <div className="rp-locsw" role="dialog" aria-label="Switch location">
+    <div className="rp-locsw" role="dialog" aria-modal="true" aria-label="Switch location">
       <button
         type="button"
         className="rp-locsw-backdrop"
         aria-label="Close location switcher"
         onClick={closeLocationSwitcher}
       />
-      <div className="rp-locsw-panel">
+      <div ref={panelRef} className="rp-locsw-panel">
         <header className="rp-locsw-head">
           <div>
             <p className="rp-locsw-kicker">
@@ -188,10 +200,12 @@ export function LocationSwitcher() {
                 ? "Select 2-4 venues"
                 : "Where are you operating?"}
             </h2>
+            <p className="rp-locsw-description">{org.name} · {org.locations.length} locations</p>
           </div>
           <button
             type="button"
             className="rp-locsw-close"
+            aria-label="Close location switcher"
             onClick={closeLocationSwitcher}
           >
             Esc
@@ -220,11 +234,6 @@ export function LocationSwitcher() {
                   className="rp-locsw-chip"
                   data-active={l.id === activeId ? "true" : "false"}
                   onClick={() => {
-                    if (l.id === activeId) {
-                      setLocationScope("all");
-                      clearComparison();
-                      return;
-                    }
                     selectLocation(l.id);
                   }}
                 >

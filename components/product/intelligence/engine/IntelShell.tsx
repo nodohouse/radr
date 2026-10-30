@@ -1,6 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useProduct } from "@/lib/product/store";
+import { useDemoOrg } from "@/components/product/useDemoOrg";
+import { recordsForLocationSelection } from "@/lib/radr/product/selectedScope";
+import { scopedDecisionsForDemo } from "@/lib/radr/product/roleScope";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   COMPARE_DRIVERS,
@@ -72,6 +76,10 @@ export function IntelShell() {
     getDecisionStoreSnapshot,
     getDecisionStoreSnapshot,
   );
+
+  const {roleView,locationScope,locationMode,comparisonLocationIds}=useProduct();
+  const {session}=useDemoOrg();
+  const allowedIds = useMemo(()=>new Set(recordsForLocationSelection(scopedDecisionsForDemo(Object.values(decisionSnap.records),roleView,session.vertical),locationScope,locationMode === "comparison" ? comparisonLocationIds : []).map(r=>r.id)),[decisionSnap,roleView,session.vertical,locationScope,locationMode,comparisonLocationIds]);
 
   const domain = parseDomain(search.get("domain") ?? search.get("cat"));
   const findingId = parseFindingId(search.get("finding"));
@@ -150,7 +158,7 @@ export function IntelShell() {
   );
 
   const ranked = useMemo(() => {
-    let list = findingsForDomain(domain);
+    let list = findingsForDomain(domain).filter(f=>f.decisionId && allowedIds.has(f.decisionId));
     if (q.trim()) {
       const needle = q.trim().toLowerCase();
       list = list.filter(
@@ -170,11 +178,10 @@ export function IntelShell() {
       const bf = favorites.has(b.id) ? 1 : 0;
       return bf - af;
     });
-  }, [domain, sort, q, favorites]);
+  }, [domain, sort, q, favorites, allowedIds]);
 
   const finding =
     ranked.find((f) => f.id === findingId) ??
-    getFindingById(findingId) ??
     ranked[0] ??
     INTEL_FINDINGS[0]!;
 
@@ -232,7 +239,7 @@ export function IntelShell() {
   };
 
   const catalogItems = [
-    ...INTEL_EXTRA_FINDINGS.map((f) => ({
+    ...INTEL_EXTRA_FINDINGS.filter(f=>f.decisionId && allowedIds.has(f.decisionId)).map((f) => ({
       id: f.id,
       label: `${f.title} · ${f.domain}`,
       state: f.state,
@@ -255,6 +262,7 @@ export function IntelShell() {
     })),
   ].slice(0, 12);
 
+  if (!ranked.length) return <div className="ie-root" data-intel-engine="true"><header className="ie-head"><div><p className="ie-kicker">Intelligence</p><h1>No signals in this selection.</h1><p className="ie-head-sub">Choose another location or economic lens to explore its connected decision evidence.</p><button type="button" onClick={()=>pushState({domain:"overview"})}>View all lenses</button></div></header></div>;
   return (
     <div className="ie-root" data-intel-engine="true">
       <header className="ie-head">

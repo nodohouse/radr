@@ -1,9 +1,10 @@
 "use client";
 
 import {
-  GOVERNANCE_SUMMARY,
   type SettingsSectionId,
 } from "@/lib/radr/product/settingsProofEngine";
+import { useDemoOrg } from "@/components/product/useDemoOrg";
+import type { DemoSettingsState } from "@/lib/radr/product/demoSettings";
 import {
   IconAccess,
   IconLocations,
@@ -13,15 +14,20 @@ import {
 
 type Props = {
   orgName: string;
+  demo: DemoSettingsState;
   industryLabel: string;
   onSelect: (id: SettingsSectionId) => void;
 };
 
 export function SettingsSummaryCards({
   orgName,
+  demo,
   industryLabel,
   onSelect,
 }: Props) {
+  const { org, isHotel } = useDemoOrg();
+  const policies = demo.policies.filter(p => isHotel || !["housekeeping_reassign", "hotel_channel_hold"].includes(p.id));
+  const categories = new Set(policies.map(p => p.category)).size;
   const cards: {
     id: SettingsSectionId;
     label: string;
@@ -33,28 +39,28 @@ export function SettingsSummaryCards({
       id: "organization",
       label: "Organization",
       value: orgName,
-      detail: `${industryLabel} · 2 demo modes`,
+      detail: `${industryLabel} · Current demo organization`,
       icon: IconOrg,
     },
     {
       id: "locations",
       label: "Locations",
-      value: String(GOVERNANCE_SUMMARY.locationsTotal),
-      detail: `${GOVERNANCE_SUMMARY.restaurants} restaurants · ${GOVERNANCE_SUMMARY.hotels} hotels`,
+      value: String(org.locations.length),
+      detail: `${org.locations.length} ${industryLabel.toLowerCase()}`,
       icon: IconLocations,
     },
     {
       id: "access",
       label: "Access roles",
-      value: String(GOVERNANCE_SUMMARY.personas),
+      value: String(demo.users.length),
       detail: "Active personas",
       icon: IconAccess,
     },
     {
       id: "policies",
       label: "Policies active",
-      value: String(GOVERNANCE_SUMMARY.policiesActive),
-      detail: `Across ${GOVERNANCE_SUMMARY.policyCategories} categories`,
+      value: String(policies.filter(p => p.status === "active").length),
+      detail: `Across ${categories} categories`,
       icon: IconPolicies,
     },
   ];

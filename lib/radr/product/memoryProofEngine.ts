@@ -3,6 +3,7 @@
  * Deterministic demo SSOT. Calibration: 14.2% → 5.4% across N=24.
  */
 
+import type { DecisionRecord } from "@/lib/radr/decision/record";
 import type { RoleView } from "@/lib/product/types";
 import { DECISION_IDS, displayDecisionId } from "@/lib/radr/decision/ids";
 import { MemoryService } from "@/lib/radr/product/services";
@@ -586,7 +587,7 @@ function buildYear(): MemoryYearModel {
   };
 }
 
-export function buildMemoryOverview(role: RoleView = "cfo"): MemoryOverviewModel {
+export function buildMemoryOverview(role: RoleView = "cfo", recordsOverride?: DecisionRecord[]): MemoryOverviewModel {
   const series = CALIBRATION_SERIES;
   const start = series[0]!;
   const current = series[series.length - 1]!;
@@ -594,11 +595,13 @@ export function buildMemoryOverview(role: RoleView = "cfo"): MemoryOverviewModel
     ((start.error - current.error) / start.error) * 100,
   );
   const deltaPp = Math.round((start.error - current.error) * 10) / 10;
-  const playbooks = buildPlaybooks();
-  const dna = buildDna();
+  const ids = recordsOverride ? new Set(recordsOverride.map(r=>r.id)) : null;
+  const locations = recordsOverride ? new Set(recordsOverride.map(r=>r.locationId)) : null;
+  const playbooks = buildPlaybooks().filter(p=>!ids || p.decisionIds.some(id=>ids.has(id)));
+  const dna = buildDna().filter(d=>!locations || locations.has(d.locationId));
   const year = buildYear();
 
-  const fromStore = MemoryService.forRole(role)
+  const fromStore = (recordsOverride ?? MemoryService.forRole(role))
     .filter((r) => r.lesson)
     .slice(0, 10)
     .map((r, i) => {
@@ -667,7 +670,7 @@ export function buildMemoryOverview(role: RoleView = "cfo"): MemoryOverviewModel
   };
 
   const allLearnings: MemoryLearningRow[] = [...fromStore];
-  if (!allLearnings.some((l) => l.id === missLearning.id)) {
+  if ((!ids || ids.has(missLearning.id)) && !allLearnings.some((l) => l.id === missLearning.id)) {
     allLearnings.splice(Math.min(3, allLearnings.length), 0, missLearning);
   }
 
