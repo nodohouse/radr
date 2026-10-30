@@ -73,8 +73,8 @@
   color: #b7ffdc;
 }
 .rn-item:is(:hover, :focus-visible) .rn-icon {
-  background: #88e8bb20;
-  border-color: #a0f2c64d;
+  background: #a4accc20;
+  border-color: #b8beda4d;
 }
 .rn-item,
 .rn-feature > a,
@@ -95,8 +95,8 @@
     :is(.rh-button, .mx-button, .rp-button, .sf-cta):hover {
     transform: translateY(-2px);
     box-shadow:
-      0 8px 24px #052c2724,
-      0 0 0 1px #7dcfb329;
+      0 8px 24px #10132124,
+      0 0 0 1px #959bb729;
   }
   .mx-pricing-cards article,
   .mx-solution-grid article,
@@ -108,8 +108,8 @@
   .mx-pricing-cards article:has(a:hover),
   .mx-solution-grid article:has(a:hover),
   .mx-role-cards article:has(a:hover) {
-    box-shadow: 0 15px 38px #082e2514;
-    border-color: #6db89b77;
+    box-shadow: 0 15px 38px #13162314;
+    border-color: #8389a277;
   }
   .mx-footer a {
     transition:

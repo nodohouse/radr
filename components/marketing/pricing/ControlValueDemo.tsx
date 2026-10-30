@@ -49,7 +49,7 @@ export function ControlValueDemo() {
             actually do?
           </h2>
           <p className="prep-lead">
-            Click a check. RADR rearranges the same surface — evidence first,
+            Click a check. RADR rearranges the same surface. evidence first,
             money last.
           </p>
           <div className="px-value-tabs" role="tablist" aria-label="Control examples">

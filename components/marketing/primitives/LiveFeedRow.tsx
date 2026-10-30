@@ -10,7 +10,7 @@ type Props = {
   onLeave?: () => void;
 };
 
-/** Compact live-feed row — channel, raw △, annualized, tag. */
+/** Compact live-feed row. channel, raw △, annualized, tag. */
 export function LiveFeedRow({
   signal,
   active = false,

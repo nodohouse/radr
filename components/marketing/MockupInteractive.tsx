@@ -23,7 +23,7 @@ const operationData = [
     icon: "restaurant",
     sub: "Independent and multi-unit restaurants",
     title: "From daily shifts to bigger opportunities.",
-    copy: "Optimize labor, menu performance, guest experience and procurement — all in one place.",
+    copy: "Optimize labor, menu performance, guest experience and procurement. all in one place.",
     items: [
       "Control costs and improve margins",
       "Adapt to real-time demand",

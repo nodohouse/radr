@@ -96,7 +96,7 @@ export function SolutionsStory() {
           </h1>
           <p>
             RADR connects your fragmented data, understands what’s happening,
-            and shows you the best decision — before it impacts your guests,
+            and shows you the best decision. before it impacts your guests,
             your team or your margins.
           </p>
           <Link href="/how" className="sf-cta">

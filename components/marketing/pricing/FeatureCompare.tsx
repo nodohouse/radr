@@ -25,7 +25,7 @@ export function FeatureCompare() {
           <span data-s="live">Available now</span>
           <span data-s="early">Early access</span>
           <span data-s="next">Coming next</span>
-          <span data-s="not">— Not included</span>
+          <span data-s="not">,  Not included</span>
         </div>
 
         <div className="px-table-wrap">

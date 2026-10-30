@@ -8,7 +8,7 @@ import { BRAND } from "../config/brand";
 import { RadrWordmark } from "../RadrWordmark";
 
 /**
- * How RADR sees the operation — data in → normalize → intelligence → value.
+ * How RADR sees the operation. data in → normalize → intelligence → value.
  */
 export function SectionSees() {
   return (
@@ -30,7 +30,7 @@ export function SectionSees() {
           </p>
           <p className="rx-lead-inv rx-lead-short">
             RADR brings together operational, financial and commercial data that
-            normally lives in separate systems — then continuously compares what
+            normally lives in separate systems, then continuously compares what
             happened with what should have happened.
           </p>
         </div>

@@ -21,8 +21,8 @@
   margin-top: 25px;
 }
 .rh-device[data-signal-active="true"] .rh-signal {
-  background: #e9f9edb3;
-  box-shadow: inset 0 0 0 1px #65c5a380;
+  background: #eeeff4b3;
+  box-shadow: inset 0 0 0 1px #8189a980;
 }
 .rh-device .rh-signal {
   transition:
@@ -34,7 +34,7 @@
 }
 .rh-device:has(.ht-decision) .rh-side-items > div.selected,
 .rh-device:has(.ht-value) .rh-side-items > div.selected {
-  background: #ccebdc;
+  background: #d5d7e2;
   color: #24785b;
 }
 .ht-heading {
@@ -48,7 +48,7 @@
 .ht-status {
   font-size: 8px;
   color: #4b9476;
-  background: #e2f5e6;
+  background: #e8e9ef;
   padding: 5px 8px;
   border-radius: 15px;
   white-space: nowrap;
@@ -59,7 +59,7 @@
   gap: 12px;
   border-radius: 11px;
   padding: 9px 12px;
-  background: #e1f3e7;
+  background: #e6e8ee;
   color: #194f3c;
   transform-origin: left center;
 }
@@ -69,7 +69,7 @@
   border-radius: 8px;
   min-width: 31px;
   height: 34px;
-  background: #175a47;
+  background: #2a3047;
   color: #d8f4e1;
   font-size: 19px;
 }
@@ -119,7 +119,7 @@
 }
 .ht-recommendation {
   padding: 15px 16px;
-  border: 1px solid #bedfd1;
+  border: 1px solid #c8cad5;
   background: #eff9ee80;
   border-radius: 12px;
   transition:
@@ -127,8 +127,8 @@
     border-color 0.3s;
 }
 .ht-recommendation[data-active="true"] {
-  background: #d8f5e4;
-  border-color: #74bfa1;
+  background: #e0e3ed;
+  border-color: #8a90a9;
 }
 .ht-panel-label {
   font-size: 7px;
@@ -183,14 +183,14 @@
   content: "";
   width: 5px;
   height: 5px;
-  border: 1px solid #50a382;
+  border: 1px solid #686f8b;
   border-radius: 50%;
   flex-shrink: 0;
 }
 .ht-action-caption {
   font-size: 8px;
   color: #77917e;
-  border-top: 1px solid #bddcc6;
+  border-top: 1px solid #c6c8d3;
   padding-top: 9px;
   line-height: 1.4;
 }
@@ -200,7 +200,7 @@
   justify-content: space-between;
   gap: 4px;
   margin-top: 16px;
-  border-top: 1px solid #d3dfd2;
+  border-top: 1px solid #d6d7db;
   padding-top: 12px;
 }
 .ht-steps > span {
@@ -211,7 +211,7 @@
   white-space: nowrap;
 }
 .ht-steps > span[data-active="true"] {
-  background: #1e9678;
+  background: #414a73;
   color: #fff;
 }
 .ht-value h2 {
@@ -244,8 +244,8 @@
   min-width: 0;
 }
 .ht-value-cards > div:last-child {
-  background: #dff4e7;
-  border-color: #b7dfc8;
+  background: #e5e7ee;
+  border-color: #c3c6d3;
 }
 .ht-value-cards span {
   font-size: 10px;
@@ -278,13 +278,13 @@
 .ht-value-track i {
   flex: 1;
   height: 1px;
-  background: #b1d7bc;
+  background: #bcbfcc;
 }
 .ht-value-track > span:last-child {
   color: #8b9c83;
 }
 .ht-value-note {
-  border-top: 1px solid #ccdecd;
+  border-top: 1px solid #d1d3d9;
   padding-top: 16px;
   font-size: 8px;
   line-height: 1.5;
@@ -427,7 +427,7 @@
   justify-content: space-between;
   gap: 8px;
   min-height: 22px;
-  border-top: 1px solid #b9cfc155;
+  border-top: 1px solid #bfc1c955;
   margin-top: 5px;
   padding-top: 5px;
   flex-shrink: 0;
@@ -455,7 +455,7 @@
 }
 .ht-demo-controls button[aria-pressed="true"] {
   color: #17694d;
-  background: #cae8d5;
+  background: #d3d5df;
 }
 .ht-demo-controls button:focus-visible {
   outline: 1px solid #268967;
@@ -473,7 +473,7 @@
   min-height: 23px;
 }
 .ht-take-action {
-  background: #073f34;
+  background: #171c2f;
   color: #e7fff0;
   padding: 5px 11px;
   border-radius: 15px;
@@ -492,7 +492,7 @@
   position: absolute;
   inset: 0;
   border-radius: 5px;
-  background: #1e9678;
+  background: #414a73;
   z-index: 0;
 }
 .ht-steps > span:first-child .ht-tab-indicator {
@@ -557,7 +557,7 @@
 }
 .rh-device:has(.ht-stage[data-phase="control"][data-beat="1"])
   .rh-metric:first-child {
-  box-shadow: inset 0 0 0 1px #54b89a80;
+  box-shadow: inset 0 0 0 1px #71799b80;
 }
 .ht-control .rh-greeting {
   margin: 12px 0 8px;

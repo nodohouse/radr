@@ -17,7 +17,7 @@ export type ContactResult =
   | { ok: false; error: string };
 
 /**
- * Contact inquiry — never silently drops.
+ * Contact inquiry: never silently drops.
  * Prefer CONTACT_WEBHOOK_URL; otherwise build a mailto to the configured inbox.
  */
 export async function submitContactInquiry(
@@ -68,14 +68,14 @@ export async function submitContactInquiry(
   const inbox = contactEmail();
   if (inbox) {
     const subject = encodeURIComponent(
-      `RADR contact — ${payload.company}`,
+      `RADR contact: ${payload.company}`,
     );
     const body = encodeURIComponent(
       [
         `Work email: ${payload.email}`,
         `Company: ${payload.company}`,
-        `Locations / units: ${payload.locations || "—"}`,
-        `Industry: ${payload.industry || "—"}`,
+        `Locations / units: ${payload.locations || "Not provided"}`,
+        `Industry: ${payload.industry || "Not provided"}`,
         "",
         payload.message || "(no message)",
       ].join("\n"),
@@ -91,6 +91,6 @@ export async function submitContactInquiry(
     ok: false,
     error:
       COMPANY.brandName +
-      " contact delivery is not configured yet. Please check back shortly — we will not silently discard your message.",
+      " contact delivery is not configured yet. Please check back shortly. We will not silently discard your message.",
   };
 }

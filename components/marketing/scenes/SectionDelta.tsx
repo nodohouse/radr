@@ -195,7 +195,7 @@ function Carry({ buy, on }: { buy: Buy; on: boolean }) {
 }
 
 /**
- * △ instrument — detect → explain → act → learn → verify.
+ * △ instrument. detect → explain → act → learn → verify.
  * Sticky scroll on desktop; linear stack on mobile. Same visual language.
  */
 export function SectionDelta() {

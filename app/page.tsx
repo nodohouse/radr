@@ -1,3 +1,4 @@
+import { OutcomeStory } from "@/components/marketing/OutcomeStory";
 import { ProfessionalScroll, RunningBanner, ValueProof } from "@/components/marketing/ProfessionalMotion";
 import { MockupFooter } from "@/components/marketing/MockupFooter";
 import { ReferenceHero } from "@/components/marketing/ReferenceHero";
@@ -18,6 +19,7 @@ export default function Home() {
         <ReferenceHero />
         <RunningBanner />
         <ConnectSystems />
+        <OutcomeStory />
         <DecisionGap />
         <DecisionPreview />
         <ValueProof />

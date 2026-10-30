@@ -45,21 +45,21 @@
   display: grid;
   grid-template-columns: 0.8fr 1.7fr;
   color: #eafff4;
-  border: 1px solid #b5efd235;
+  border: 1px solid #c6cade35;
   border-radius: 22px;
   overflow: hidden;
-  background: linear-gradient(120deg, #163c37f5, #061f24fa);
+  background: linear-gradient(120deg, #212431f5, #061f24fa);
   backdrop-filter: blur(24px);
   box-shadow:
-    inset 0 1px #e0fff516,
+    inset 0 1px #e9ebf616,
     0 30px 80px #00101780;
   animation: rn-enter 0.22s ease-out both;
   font-family: Arial, Helvetica, sans-serif;
 }
 .rn-feature {
   padding: 32px;
-  background: radial-gradient(ellipse at 0 0, #61e2ad20, transparent 75%);
-  border-right: 1px solid #b7e9d31a;
+  background: radial-gradient(ellipse at 0 0, #8691bd20, transparent 75%);
+  border-right: 1px solid #c5c9db1a;
 }
 .rn-eyebrow {
   font-size: 9px;
@@ -109,16 +109,16 @@
   text-decoration: none;
 }
 .rn-item:hover {
-  background: #b1ffe00a;
-  border-color: #99e5c52b;
+  background: #c8cee80a;
+  border-color: #afb5cf2b;
 }
 .rn-icon {
   width: 36px;
   height: 36px;
   border-radius: 11px;
-  background: linear-gradient(135deg, #6decb61c, #6decb606);
+  background: linear-gradient(135deg, #929cc71c, #929cc706);
   color: #9cebc8;
-  border: 1px solid #9ae5c51f;
+  border: 1px solid #b0b6cf1f;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -151,7 +151,7 @@
   justify-content: space-between;
   gap: 15px;
   padding: 17px 30px;
-  border-top: 1px solid #c2ead319;
+  border-top: 1px solid #ced1de19;
   font-size: 11px;
   color: #a3c5b6;
   background: #001a202b;
@@ -213,7 +213,7 @@
     padding: 12px 20px 18px;
   }
   .rn-mobile-content details {
-    border-bottom: 1px solid #b5e4cd1c;
+    border-bottom: 1px solid #c3c6d61c;
   }
   .rn-mobile-content summary {
     display: flex;
@@ -233,7 +233,7 @@
     padding: 18px 0;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #b5e4cd1c;
+    border-bottom: 1px solid #c3c6d61c;
     font-size: 15px;
   }
   .rn-mobile-overview {

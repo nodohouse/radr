@@ -13,9 +13,9 @@ import {
 } from "@/components/marketing/config/company";
 
 export const metadata: Metadata = {
-  title: "Terms of Use — RADR",
+  title: "Terms of Use. RADR",
   description:
-    "Website terms of use for radrup.com — illustrative demos, IP, liability limits, and contact.",
+    "Website terms of use for radrup.com. illustrative demos, IP, liability limits, and contact.",
 };
 
 export default function TermsPage() {
@@ -42,8 +42,8 @@ export default function TermsPage() {
           do not use the site.
         </p>
         <p>
-          The site provides information about {COMPANY.brandName} — continuous
-          margin intelligence — and may link to product sign-in or signup flows.
+          The site provides information about {COMPANY.brandName}. continuous
+          margin intelligence, and may link to product sign-in or signup flows.
           Hospitality is the first market where we demonstrate the product.
         </p>
       </LegalSection>
@@ -98,7 +98,7 @@ export default function TermsPage() {
           excludes liability that cannot be excluded under applicable law.
         </p>
         <LegalPending>
-          Detailed limitation-of-liability language — pending counsel review.
+          Detailed limitation-of-liability language. pending counsel review.
         </LegalPending>
       </LegalSection>
 
@@ -109,7 +109,7 @@ export default function TermsPage() {
           Dispute venue: {displayOrPending(COMPANY.disputeVenue)}.
         </p>
         <LegalPending>
-          Governing law and venue — pending company / counsel confirmation.
+          Governing law and venue. pending company / counsel confirmation.
         </LegalPending>
       </LegalSection>
 

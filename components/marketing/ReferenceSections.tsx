@@ -1,6 +1,5 @@
 "use client";
 
-import { OperationPreview } from "./OperatingCanvas";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -110,7 +109,7 @@ export function ConnectSystems() {
         </div>
         <p>
           RADR connects to your existing systems, understands your operating
-          state, and prepares better decisions — so you can act with control and
+          state, and prepares better decisions, so you can act with control and
           verify what happened.
         </p>
       </div>
@@ -220,7 +219,7 @@ export function DecisionPreview() {
           </h2>
           <p>
             RADR detects what matters, explains why, compares possible futures
-            and recommends the best action — so you can move from reactive to in
+            and recommends the best action, so you can move from reactive to in
             control.
           </p>
           <Link className="rh-button rs-work-link" href="/how">
@@ -341,14 +340,13 @@ export function Hospitality() {
         <div className="rs-copy">
           <p className="rs-eyebrow">BUILT FOR HOSPITALITY</p>
           <h2 id="hospitality-title">
-            Different operations.
+            Your world.
             <br />
-            Same intelligence layer.
+            In sharper focus.
           </h2>
           <p>
-            From single restaurants to global hotel groups — RADR understands
-            the unique dynamics of your operation and turns them into better
-            decisions.
+            A busy dining room. A full-service hotel. A portfolio of both.
+            Bring the decisions behind every service, stay and location into focus.
           </p>
         </div>
         <div
@@ -368,7 +366,7 @@ export function Hospitality() {
                 {operation.name}
               </span>
               <span className="rs-operation-image">
-                <OperationPreview hotel={operation.name === "Hotel"} />
+                <Image src={operation.image} alt={operation.alt} fill sizes="(max-width: 700px) 90vw, 650px" />
               </span>
               <span className="rs-operation-items">
                 {operation.items.map((item, i) => (
@@ -415,7 +413,7 @@ export function ValueMap() {
           </h2>
           <p>
             Model where value may be hiding across labor, procurement, revenue
-            and operations — then see what may be worth investigating first.
+            and operations, then see what may be worth investigating first.
           </p>
           <button
             className="rh-button rs-value-button"
@@ -563,9 +561,7 @@ export function ReferenceFinal() {
       <div className="rs-container">
         <div className="rs-final-copy">
           <p className="rs-eyebrow">
-            A MORE INTELLIGENT.
-            <br />
-            HUMAN HOSPITALITY INDUSTRY
+            YOUR NEXT DECISION STARTS HERE
           </p>
           <h2 id="final-title">
             <span>
@@ -580,7 +576,7 @@ export function ReferenceFinal() {
             in action<span className="rs-final-period">.</span>
           </h2>
           <p>
-            A focused walkthrough for your operation — tailored
+            See the signals, decisions and value behind your operation. A walkthrough tailored
             <br className="rs-desktop-break" /> to your systems, priorities and
             opportunities.
           </p>

@@ -8,7 +8,7 @@ const STEPS = [
 ] as const;
 
 /**
- * Product flywheel — every resolution becomes institutional knowledge.
+ * Product flywheel. every resolution becomes institutional knowledge.
  */
 export function SectionFlywheel() {
   return (

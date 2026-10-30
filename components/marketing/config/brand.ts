@@ -10,7 +10,7 @@ export const BRAND = {
   coreIdea: "△ is the difference.",
   productLoop: ["Find it.", "Fix it.", "Keep it fixed."] as const,
   explanation:
-    "RADR continuously compares what happened with what should have happened — then finds, explains and quantifies the difference.",
+    "RADR continuously compares what happened with what should have happened, then finds, explains and quantifies the difference.",
   plainValue:
     "RADR finds the money you're losing, missing or leaving behind.",
   beachhead: "Built first for hospitality.",

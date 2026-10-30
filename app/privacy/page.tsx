@@ -13,7 +13,7 @@ import {
 } from "@/components/marketing/config/company";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — RADR",
+  title: "Privacy Policy. RADR",
   description:
     "How RADR handles account data, documents, cookies, and privacy requests.",
 };
@@ -26,7 +26,7 @@ export default function PrivacyPage() {
     <LegalPageShell
       kicker="Legal / Privacy"
       title="Privacy Policy"
-      lead="This notice explains what information RADR handles on the website and product. It is a professional draft — entity-specific details marked below require confirmation before this is treated as final."
+      lead="This notice explains what information RADR handles on the website and product. It is a professional draft. entity-specific details marked below require confirmation before this is treated as final."
       updated={COMPANY.privacyUpdated || undefined}
     >
       {showDevWarn ? (
@@ -70,24 +70,24 @@ export default function PrivacyPage() {
         <p>Depending on how you use RADR, we may process:</p>
         <ul>
           <li>
-            <strong>Account data</strong> — name, work email, authentication
+            <strong>Account data</strong>. name, work email, authentication
             credentials (handled by Better Auth; passwords are not stored in
             plaintext).
           </li>
           <li>
-            <strong>Organization data</strong> — company / group details
+            <strong>Organization data</strong>. company / group details
             provided during onboarding (for example country, locations).
           </li>
           <li>
-            <strong>Business documents</strong> — PDFs and images you upload
+            <strong>Business documents</strong>. PDFs and images you upload
             (invoices and related files) for product features.
           </li>
           <li>
-            <strong>Contact inquiries</strong> — work email, company, location
+            <strong>Contact inquiries</strong>. work email, company, location
             count, and optional message submitted via the contact form.
           </li>
           <li>
-            <strong>Technical logs</strong> — standard server logs needed to
+            <strong>Technical logs</strong>. standard server logs needed to
             operate and secure the service (for example request metadata).
           </li>
         </ul>
@@ -99,8 +99,8 @@ export default function PrivacyPage() {
           third-party analytics, advertising pixels, or marketing trackers.
         </p>
         <p>
-          If analytics are introduced later, this policy will be updated and —
-          where required — consent will be collected before non-essential
+          If analytics are introduced later, this policy will be updated and , 
+          where required. consent will be collected before non-essential
           tracking loads.
         </p>
       </LegalSection>
@@ -154,7 +154,7 @@ export default function PrivacyPage() {
           finalized.
         </p>
         <LegalPending>
-          Subprocessor list — pending production confirmation. Do not assume
+          Subprocessor list. pending production confirmation. Do not assume
           specific cloud vendors from this draft alone.
         </LegalPending>
       </LegalSection>
@@ -165,7 +165,7 @@ export default function PrivacyPage() {
           the service and meet legal obligations.
         </p>
         <LegalPending>
-          Retention periods by data type — pending counsel confirmation.
+          Retention periods by data type. pending counsel confirmation.
         </LegalPending>
       </LegalSection>
 
@@ -190,7 +190,7 @@ export default function PrivacyPage() {
           and processors are confirmed.
         </p>
         <LegalPending>
-          Transfer mechanisms — pending production / counsel confirmation.
+          Transfer mechanisms. pending production / counsel confirmation.
         </LegalPending>
       </LegalSection>
 

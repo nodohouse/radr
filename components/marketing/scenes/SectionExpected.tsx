@@ -34,7 +34,7 @@ const EXAMPLES = [
 ] as const;
 
 /**
- * Conceptual engine — expected vs actual → △.
+ * Conceptual engine. expected vs actual → △.
  */
 export function SectionExpected() {
   const buy = signalByChannel("buy");
@@ -54,7 +54,7 @@ export function SectionExpected() {
             vs actual.
           </h2>
           <p className="rx-lead-inv rx-lead-short">
-            {BRAND.coreIdea} RADR determines what should have happened — then
+            {BRAND.coreIdea} RADR determines what should have happened. then
             finds the financial and operational difference.
           </p>
         </div>

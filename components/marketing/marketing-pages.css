@@ -119,7 +119,7 @@
 }
 .rp-dark {
   background:
-    radial-gradient(ellipse at 80% 20%, #34695766, transparent 60%), #0a2729;
+    radial-gradient(ellipse at 80% 20%, #43485a66, transparent 60%), #0a2729;
   color: #edf6ee;
 }
 .rp-section-heading {
@@ -166,9 +166,9 @@
   align-items: center;
   gap: 7px;
   padding: 6px 9px;
-  background: #d8f0df;
+  background: #dfe1e9;
   color: #38715d;
-  border: 1px solid #b4dec977;
+  border: 1px solid #c0c4d277;
   border-radius: 20px;
   font-size: 9px;
   line-height: 1.4;
@@ -179,7 +179,7 @@
   content: "";
   width: 4px;
   height: 4px;
-  background: #319c77;
+  background: #50597d;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -193,8 +193,8 @@
 }
 .rp-operating-card {
   border-radius: 25px;
-  background: linear-gradient(135deg, #f3fbeced, #d1e9dddf);
-  border: 1px solid #f1fff2a3;
+  background: linear-gradient(135deg, #f3fbeced, #d8dae2df);
+  border: 1px solid #f5f6fba3;
   color: #183b37;
   padding: 30px;
   box-shadow: 0 25px 70px #00191b35;
@@ -254,7 +254,7 @@
   gap: 30px;
 }
 .rp-workflow article {
-  border-top: 1px solid #b5c6b9;
+  border-top: 1px solid #babbc1;
   padding-top: 24px;
 }
 .rp-step-number {
@@ -262,7 +262,7 @@
   place-items: center;
   width: 37px;
   height: 37px;
-  border: 1px solid #c2d4c5;
+  border: 1px solid #c7c9cf;
   border-radius: 50%;
   font-size: 11px;
   color: #6a8778;
@@ -326,7 +326,7 @@
   gap: 28px;
   padding: 0 0 32px;
   margin-bottom: 32px;
-  border-bottom: 1px solid #c6d2c7;
+  border-bottom: 1px solid #c9cacf;
 }
 .rp-numbered-list article:last-child {
   margin-bottom: 0;
@@ -345,8 +345,8 @@
 .rp-sol-hero {
   color: #f0f9ed;
   padding: 27px 30px 28px;
-  border-top: 1px solid #b9d7bd55;
-  border-bottom: 1px solid #b9d7bd55;
+  border-top: 1px solid #c2c4ce55;
+  border-bottom: 1px solid #c2c4ce55;
   background: #062a2b80;
   backdrop-filter: blur(14px);
 }
@@ -391,7 +391,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  border: 1px solid #adc9b755;
+  border: 1px solid #b5b7c155;
   background: #f8fff405;
   color: inherit;
   padding: 20px 24px;
@@ -404,12 +404,12 @@
     color 0.2s;
 }
 .rp-switches button[aria-pressed="true"] {
-  background: #d0f1df;
+  background: #dadce7;
   color: #174337;
-  border-color: #d0f1df;
+  border-color: #dadce7;
 }
 .rp-switches button:hover {
-  background: #85c4a630;
+  background: #979cb230;
 }
 .rp-switches button span {
   font-size: 16px;
@@ -464,8 +464,8 @@
   color: #d1e3d5;
 }
 .rp-example-card {
-  background: linear-gradient(130deg, #e6f6e5, #d2e6d8);
-  border: 1px solid #edfff0;
+  background: linear-gradient(130deg, #eaebf1, #d8d9e0);
+  border: 1px solid #f2f4fa;
   border-radius: 24px;
   padding: 32px;
   color: #183c36;
@@ -510,7 +510,7 @@
 }
 .rp-example-outcome {
   padding-top: 21px;
-  border-top: 1px solid #b4d2bc;
+  border-top: 1px solid #bdbfc9;
 }
 .rp-example-outcome > span {
   font-size: 11px;
@@ -559,7 +559,7 @@
   margin-bottom: 38px;
 }
 .rp-trust-grid article {
-  border-top: 1px solid #81a58e4d;
+  border-top: 1px solid #8b8e9b4d;
   padding: 27px 13px 18px 0;
 }
 .rp-trust-grid h3 {
@@ -577,10 +577,10 @@
 .rp-pricing-hero-card {
   padding: 33px;
   border-radius: 25px;
-  background: linear-gradient(125deg, #e8f7e6ed, #d1e7d8eb);
+  background: linear-gradient(125deg, #ebecf2ed, #d7d9e1eb);
   box-shadow: 0 20px 70px #001a222d;
   color: #183e34;
-  border: 1px solid #e6ffeb99;
+  border: 1px solid #edeff899;
 }
 .rp-pricing-hero-card > .rp-kicker {
   color: #688b75;
@@ -605,7 +605,7 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  border-block: 1px solid #bad1bc;
+  border-block: 1px solid #c1c3ca;
   padding: 17px 0;
   font-size: 12px;
   color: #628271;
@@ -617,14 +617,14 @@
   color: #6c8675;
 }
 .rp-pricing-hero-card > .rh-button {
-  background: #0b4237;
+  background: #1b1f32;
   color: #f1fbef;
   width: 100%;
-  border-color: #0b4237;
+  border-color: #1b1f32;
   font-size: 13px;
 }
 .rp-pricing-note {
-  border-left: 2px solid #81b297;
+  border-left: 2px solid #8f93a4;
   padding: 4px 0 4px 17px;
   color: #6e8374;
   font-size: 12px;
@@ -644,9 +644,9 @@
   color: #243e35;
 }
 .rp-plan-featured {
-  background: linear-gradient(145deg, #daf2e4, #eff6e9);
-  border-color: #99c9b0;
-  box-shadow: 0 12px 45px #397b5610;
+  background: linear-gradient(145deg, #e1e3eb, #eff6e9);
+  border-color: #a7abbb;
+  box-shadow: 0 12px 45px #4c516810;
 }
 .rp-plan > .rp-kicker {
   font-size: 10px;
@@ -681,13 +681,13 @@
   padding: 17px 15px;
   font-size: 13px;
   gap: 15px;
-  border-color: #cfe1ce;
+  border-color: #d4d5db;
   background: #ffffffa1;
 }
 .rp-plan-featured > .rh-button {
-  background: #0d4539;
+  background: #1d2235;
   color: #f1fbee;
-  border-color: #0d4539;
+  border-color: #1d2235;
 }
 .rp-plan .rp-check-list {
   gap: 17px;
@@ -713,7 +713,7 @@
 .rp-comparison th,
 .rp-comparison td {
   padding: 20px 18px;
-  border-bottom: 1px solid #ced9ca;
+  border-bottom: 1px solid #ced0d5;
   line-height: 1.5;
 }
 .rp-comparison thead th {
@@ -745,7 +745,7 @@
   gap: 90px;
 }
 .rp-faq details {
-  border-bottom: 1px solid #c5d2c0;
+  border-bottom: 1px solid #c5c7cd;
 }
 .rp-faq summary {
   display: flex;
@@ -777,7 +777,7 @@
 }
 .rp-calculator-section {
   background:
-    radial-gradient(ellipse at 75% 50%, #aaddc260, transparent 60%), #f0efe8;
+    radial-gradient(ellipse at 75% 50%, #b9bdce60, transparent 60%), #f0efe8;
 }
 .rp-calculator-layout {
   display: grid;
@@ -799,12 +799,12 @@
   padding: 15px;
   justify-content: center;
   background: #fff4;
-  border-color: #ccdbca;
+  border-color: #cfd0d6;
 }
 .rp-calculator-controls .rp-switches button[aria-pressed="true"] {
-  background: #155843;
+  background: #282e45;
   color: #f5fff1;
-  border-color: #155843;
+  border-color: #282e45;
 }
 .rp-input-label {
   display: flex;
@@ -816,7 +816,7 @@
 }
 .rp-input-label input[type="number"] {
   padding: 16px 18px;
-  border: 1px solid #ccd9c7;
+  border: 1px solid #ccced4;
   border-radius: 10px;
   background: #fafdf5b3;
   font: inherit;
@@ -847,10 +847,10 @@
 }
 .rp-calculator-output {
   padding: 33px;
-  border: 1px solid #d0e7d2;
+  border: 1px solid #d7d9e0;
   border-radius: 25px;
-  background: linear-gradient(130deg, #f6fcf0cb, #cde6d3d9);
-  box-shadow: 0 20px 60px #18472c0d;
+  background: linear-gradient(130deg, #f6fcf0cb, #d4d6dfd9);
+  box-shadow: 0 20px 60px #2629390d;
 }
 .rp-output-heading {
   display: flex;
@@ -866,7 +866,7 @@
 .rp-period-switch {
   display: flex;
   padding: 3px;
-  background: #ccdfce80;
+  background: #d2d3d980;
   border-radius: 20px;
 }
 .rp-period-switch button {
@@ -882,7 +882,7 @@
 .rp-period-switch button[aria-pressed="true"] {
   background: #f8fff2;
   color: #256448;
-  box-shadow: 0 2px 5px #254f2410;
+  box-shadow: 0 2px 5px #30344310;
 }
 .rp-output-orbit {
   height: 285px;
@@ -893,13 +893,13 @@
     radial-gradient(
       circle,
       transparent 120px,
-      #8acda43d 121px,
+      #9da3ba3d 121px,
       transparent 123px
     ),
     radial-gradient(
       circle,
       transparent 138px,
-      #8acda421 139px,
+      #9da3ba21 139px,
       transparent 141px
     );
   margin: 20px 0;
@@ -915,11 +915,11 @@
   min-height: 240px;
   padding: 20px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 20%, #277b65, #075449 70%, #1aa27e);
-  border: 1px solid #99edc2;
+  background: radial-gradient(circle at 40% 20%, #3f4663, #1d233e 70%, #414c7b);
+  border: 1px solid #b1b8d5;
   box-shadow:
-    inset 0 0 15px #74e8c444,
-    0 0 60px #54c58c30;
+    inset 0 0 15px #969fc644,
+    0 0 60px #757ea430;
   color: #f0ffed;
 }
 .rp-output-orbit span {
@@ -941,7 +941,7 @@
   justify-content: space-between;
   gap: 15px;
   padding: 14px 0;
-  border-bottom: 1px solid #b9d4b7;
+  border-bottom: 1px solid #bfc2cc;
   font-size: 12px;
   color: #6f8a6f;
 }
@@ -955,7 +955,7 @@
 }
 .rp-calculator-output > .rh-button {
   width: 100%;
-  background: #0b4d3b;
+  background: #1e233a;
   color: #f1ffed;
   font-size: 13px;
   padding: 16px 20px;
@@ -975,7 +975,7 @@
   display: flex;
   gap: 25px;
   padding: 19px 0;
-  border-top: 1px solid #cad8c6;
+  border-top: 1px solid #cbcdd3;
   align-items: center;
 }
 .rp-contact-steps span {
@@ -988,11 +988,11 @@
   margin: 0;
 }
 .rp-contact-card {
-  border: 1px solid #d6e3d1;
+  border: 1px solid #d6d8de;
   border-radius: 24px;
   padding: 35px;
   background: linear-gradient(120deg, #f9fcf3, #e4efdf);
-  box-shadow: 0 20px 60px #3d6d3510;
+  box-shadow: 0 20px 60px #454a5d10;
 }
 .rp-contact-card > .rp-kicker {
   font-size: 9px;
@@ -1027,7 +1027,7 @@
 .rp-contact-card select,
 .rp-contact-card textarea {
   width: 100%;
-  border: 1px solid #cbd9c3;
+  border: 1px solid #c9cbd3;
   background: #fffffaab;
   border-radius: 9px;
   padding: 14px 15px;
@@ -1052,7 +1052,7 @@
   border: 0;
   border-radius: 30px;
   min-height: 52px;
-  background: #15523f;
+  background: #272c40;
   color: #f0ffec;
   font:
     500 13px Arial,
@@ -1118,7 +1118,7 @@
 }
 .rp-cta .rh-button {
   padding: 18px 27px;
-  background: linear-gradient(#f2fff0, #bfe8cc);
+  background: linear-gradient(#f4f6fb, #cbcedc);
   font-size: 14px;
 }
 .rp-footer {
@@ -1150,7 +1150,7 @@
   justify-content: space-between;
   gap: 25px;
   padding: 25px 0;
-  border-top: 1px solid #64876633;
+  border-top: 1px solid #6e717d33;
   font-size: 10px;
   color: #809d84;
 }
@@ -1890,7 +1890,7 @@
 .rp-auth-body input {
   width: 100%;
   padding: 15px 16px;
-  border: 1px solid #cad9c2;
+  border: 1px solid #c9cbd2;
   background: #fffff8aa;
   border-radius: 9px;
   font:
@@ -1930,7 +1930,7 @@
   padding: 17px;
   border: 0;
   border-radius: 30px;
-  background: #14513f;
+  background: #262b3f;
   color: #f2ffed;
   font:
     400 14px Arial,
@@ -2050,7 +2050,7 @@
 }
 .rp-legal .rx-legal-section {
   padding: 30px 0;
-  border-top: 1px solid #cad9bf;
+  border-top: 1px solid #c7c9d1;
 }
 .rp-legal .rx-legal-section h2 {
   font:

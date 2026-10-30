@@ -6,7 +6,7 @@ import { useRadrReveal } from "../motion/useRadrReveal";
 import { ValueCounter } from "../primitives/ValueCounter";
 
 /**
- * Verified value closure — transparent methodology, illustrative demo only.
+ * Verified value closure. transparent methodology, illustrative demo only.
  */
 export function SectionOutcome() {
   const { ref, active } = useRadrReveal<HTMLElement>({ threshold: 0.25 });

@@ -21,7 +21,7 @@ const ROWS = [
 ] as const;
 
 /**
- * Category differentiation — not another dashboard.
+ * Category differentiation, not another dashboard.
  */
 export function SectionWhy() {
   return (

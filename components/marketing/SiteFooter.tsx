@@ -22,7 +22,7 @@ const LEGAL = [
   { href: "/imprint", label: "Imprint" },
 ] as const;
 
-/** Quiet global footer — no decorative geometry. */
+/** Quiet global footer. no decorative geometry. */
 export function SiteFooter() {
   const year = new Date().getFullYear();
 

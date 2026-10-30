@@ -9,7 +9,7 @@ type Props = {
   children: ReactNode;
 };
 
-/** Shared chrome for Privacy / Terms / Imprint — readable, fast, on-brand. */
+/** Shared chrome for Privacy / Terms / Imprint. readable, fast, on-brand. */
 export function LegalPageShell({
   kicker,
   title,
@@ -29,7 +29,7 @@ export function LegalPageShell({
               <p className="rx-legal-updated">Last updated: {updated}</p>
             ) : (
               <p className="rx-legal-updated">
-                Draft for review — not yet finalized by counsel.
+                Draft for review, not yet finalized by counsel.
               </p>
             )}
           </header>

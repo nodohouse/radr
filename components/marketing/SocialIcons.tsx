@@ -51,7 +51,7 @@ type Props = {
 };
 
 /**
- * Footer socials — LinkedIn + Instagram always visible.
+ * Footer socials. LinkedIn + Instagram always visible.
  * Real href only when configured; otherwise non-linking (no invented URLs).
  */
 export function SocialIcons({ withLabels = true, className = "" }: Props) {
@@ -90,8 +90,8 @@ export function SocialIcons({ withLabels = true, className = "" }: Props) {
             ) : (
               <span
                 className="rx-social-link rx-social-link--pending"
-                title={`${link.label} — URL not configured yet`}
-                aria-label={`${link.label} — coming soon`}
+                title={`${link.label}. URL not configured yet`}
+                aria-label={`${link.label}. coming soon`}
               >
                 {inner}
               </span>

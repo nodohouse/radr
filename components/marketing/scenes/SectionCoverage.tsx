@@ -105,7 +105,7 @@ function Panel({
 
 /**
  * Sticky product story through the SAME four signals as the hero.
- * BUY → RECOVER → LABOR → SELL — each explains one line of the €176,740 total.
+ * BUY → RECOVER → LABOR → SELL. each explains one line of the €176,740 total.
  */
 export function SectionCoverage() {
   const reduced = useReducedMotionSafe();
@@ -135,7 +135,7 @@ export function SectionCoverage() {
         One total.
       </h2>
       <p className="rx-lead-inv rx-lead-short">
-        Continues from △ detection — same 18-location · 30-day scan.
+        Continues from △ detection. same 18-location · 30-day scan.
         BUY opens with the €18,620 finding.
       </p>
       {showThread ? (

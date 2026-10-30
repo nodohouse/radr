@@ -18,7 +18,7 @@ export default async function ControlsPage() {
       <PageHeader
         eyebrow="Controls"
         title="Rules RADR keeps checking"
-        description="Confirmed problems can become permanent rules — so the same leak doesn’t repeat."
+        description="Confirmed problems can become permanent rules, so the same leak doesn’t repeat."
       />
 
       <EmptyState

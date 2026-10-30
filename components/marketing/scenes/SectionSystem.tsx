@@ -6,7 +6,7 @@ import {
 import { RadrWordmark } from "../RadrWordmark";
 
 /**
- * Architecture — don't replace your stack; put it on RADR.
+ * Architecture. don't replace your stack; put it on RADR.
  */
 export function SectionSystem() {
   return (
@@ -27,7 +27,7 @@ export function SectionSystem() {
             Put it on RADR.
           </p>
           <p className="rx-lead-inv rx-lead-short">
-            RADR watches the economics between the systems you already run —
+            RADR watches the economics between the systems you already run , 
             then turns differences into verified value.
           </p>
         </div>

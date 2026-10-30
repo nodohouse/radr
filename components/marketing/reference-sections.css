@@ -10,10 +10,10 @@
 .rs-connect {
   position: relative;
   background:
-    radial-gradient(ellipse at 60% 0%, #23444180, transparent 70%), #071b1c;
+    radial-gradient(ellipse at 60% 0%, #2d2f3a80, transparent 70%), #071b1c;
   color: #e2e7e2;
   padding: 54px 78px 62px;
-  border-bottom: 1px solid #35514b55;
+  border-bottom: 1px solid #3d3f4955;
 }
 .rs-connect-grid {
   display: grid;
@@ -29,7 +29,7 @@
 }
 .rs-divider-label span {
   height: 1px;
-  background: #8a9b8c55;
+  background: #8f909655;
   flex: 1;
 }
 .rs-divider-label h2 {
@@ -45,7 +45,7 @@
   gap: 12px;
 }
 .rs-system-tile {
-  border: 1px solid #b1c2b121;
+  border: 1px solid #b6b7bd21;
   border-radius: 17px;
   min-height: 116px;
   display: flex;
@@ -155,12 +155,12 @@
   background:
     radial-gradient(
       ellipse at 89% 45%,
-      #e1eee0 0%,
-      #94bfb4 15%,
-      #1a6b6555 36%,
+      #e4e5ea 0%,
+      #a0a4b3 15%,
+      #31385455 36%,
       transparent 56%
     ),
-    linear-gradient(100deg, #061415, #0a2526 62%, #d9e8df);
+    linear-gradient(100deg, #061415, #0a2526 62%, #dddfe4);
   min-height: 545px;
 }
 .rs-gap:after {
@@ -201,14 +201,14 @@
   flex-direction: column;
   gap: 15px;
   background:
-    radial-gradient(ellipse at 25% 0%, #43bd9a66, transparent 60%),
-    linear-gradient(130deg, #075c53, #002d2b 80%);
-  border: 1px solid #b7ffe7;
+    radial-gradient(ellipse at 25% 0%, #66709a66, transparent 60%),
+    linear-gradient(130deg, #202643, #002d2b 80%);
+  border: 1px solid #ccd2ea;
   border-radius: 27px;
   box-shadow:
-    inset 0 0 19px #7df8d96b,
-    0 0 15px #70e7c2bb,
-    0 0 70px #83e5cc77;
+    inset 0 0 19px #a1aad46b,
+    0 0 15px #939cc4bb,
+    0 0 70px #9fa7c977;
   color: #e2f2dc;
 }
 .rs-flow-core span {
@@ -293,7 +293,7 @@
   .rs-gap {
     padding: 55px 25px 40px;
     background:
-      radial-gradient(ellipse at 85% 74%, #c9e6d4, transparent 55%), #092122;
+      radial-gradient(ellipse at 85% 74%, #d1d4de, transparent 55%), #092122;
   }
   .rs-two-column {
     grid-template-columns: 1fr;
@@ -360,7 +360,7 @@
   padding: 64px 78px 82px;
   color: #f0f4ed;
   background:
-    radial-gradient(ellipse at 77% 50%, #b8d8cda3, transparent 51%),
+    radial-gradient(ellipse at 77% 50%, #c1c4cfa3, transparent 51%),
     linear-gradient(115deg, #071e21 12%, #244b49 64%, #dce6dc);
   min-height: 570px;
 }
@@ -394,7 +394,7 @@
   padding: 20px 22px 22px;
   border: 1px solid #ffffff9c;
   border-radius: 27px;
-  background: linear-gradient(110deg, #d9f3ecb8, #f8fbf1e0 87%);
+  background: linear-gradient(110deg, #e1e3ebb8, #f8fbf1e0 87%);
   color: #213835;
   box-shadow:
     0 20px 50px #091f2230,
@@ -459,7 +459,7 @@
   border-radius: 12px;
   background: #ffffffc2;
   min-height: 107px;
-  box-shadow: 0 5px 16px #325b4e10;
+  box-shadow: 0 5px 16px #3e414f10;
 }
 .rs-evidence-metrics span {
   font-size: 12px;
@@ -476,7 +476,7 @@
   color: #aa6851;
 }
 .rs-recommendation {
-  background: linear-gradient(130deg, #e6fff4ad, #f1fbef64);
+  background: linear-gradient(130deg, #edeff8ad, #f1fbef64);
   border: 1px solid #fff9;
   border-radius: 18px;
   padding: 20px;
@@ -531,7 +531,7 @@
   color: #c3e8da;
 }
 .rs-action-button:hover {
-  background: #0e5147;
+  background: #21273e;
 }
 .rs-stage-buttons {
   margin-top: 22px;
@@ -542,7 +542,7 @@
   flex: 1;
   background: #ffffff30;
   color: #5b736c;
-  border: 1px solid #d8e4dc;
+  border: 1px solid #dbdce1;
   border-radius: 10px;
   min-height: 44px;
   font-size: 10px;
@@ -555,13 +555,13 @@
   transition: background 0.2s;
 }
 .rs-stage-buttons button[aria-pressed="true"] {
-  background: linear-gradient(120deg, #46cba7, #0e967c);
+  background: linear-gradient(120deg, #6d77a4, #35406f);
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 4px 12px #14776026;
+  box-shadow: 0 4px 12px #31395a26;
 }
 .rs-stage-buttons button:hover {
-  background: #c7e7db;
+  background: #d0d3de;
 }
 .rs-section button:focus-visible,
 .rs-section a:focus-visible {
@@ -615,7 +615,7 @@
   .rs-work {
     padding: 45px 25px 65px;
     background:
-      radial-gradient(ellipse at 80% 75%, #90bfb0aa, transparent 70%), #0c2929;
+      radial-gradient(ellipse at 80% 75%, #9ea1b1aa, transparent 70%), #0c2929;
   }
   .rs-work .rs-two-column {
     grid-template-columns: 1fr;
@@ -725,13 +725,13 @@
   transition:
     opacity 0.25s,
     box-shadow 0.25s;
-  box-shadow: 0 9px 35px #2f463908;
+  box-shadow: 0 9px 35px #36383f08;
   font-family: inherit;
 }
 .rs-operation-card[aria-pressed="true"],
 .rs-operation-card:hover {
   opacity: 1;
-  box-shadow: 0 8px 30px #2f46390a;
+  box-shadow: 0 8px 30px #36383f0a;
 }
 .rs-operation-title {
   display: flex;
@@ -844,7 +844,7 @@
 }
 .rs-value {
   background:
-    radial-gradient(ellipse at 71% 45%, #b5e3d06b, transparent 43%), #efeee7;
+    radial-gradient(ellipse at 71% 45%, #c2c6d66b, transparent 43%), #efeee7;
   color: #183039;
   padding: 10px 78px 55px;
   min-height: 530px;
@@ -903,14 +903,14 @@
   background: radial-gradient(
     circle at 50% 38%,
     #073938,
-    #005a52 55%,
-    #00a884 87%,
-    #65ebc5
+    #1a2140 55%,
+    #313e77 87%,
+    #8c97c4
   );
   box-shadow:
-    inset 0 0 22px #23ccbb,
-    0 0 1px 2px #77f8c9,
-    0 0 90px #25ccab66;
+    inset 0 0 22px #54619b,
+    0 0 1px 2px #9ca7d3,
+    0 0 90px #55639c66;
   color: #fff;
 }
 .rs-value-core strong {
@@ -930,23 +930,23 @@
   transform: translate(-50%, -50%);
   width: 420px;
   height: 420px;
-  border: 1px solid #a5d6c266;
+  border: 1px solid #b3b7c866;
   border-radius: 50%;
-  background: #2be0aa06;
+  background: #5f6eac06;
 }
 .rs-value-orbits > span {
   position: absolute;
   inset: 38px;
-  border: 1px solid #9bd7c566;
+  border: 1px solid #acb1c666;
   border-radius: 50%;
-  background: #44d4b008;
+  background: #6e79aa08;
 }
 .rs-value-orbits > span:nth-child(2) {
   inset: 78px;
 }
 .rs-value-orbits > span:nth-child(3) {
   inset: -45px;
-  border-color: #a7d9c329;
+  border-color: #b5b9cb29;
 }
 .rs-value-connectors {
   position: absolute;
@@ -961,11 +961,11 @@
   justify-content: center;
   gap: 10px;
   background: #fafff7ab;
-  border: 1px solid #d9e8db;
+  border: 1px solid #dddfe4;
   border-radius: 20px;
   min-width: 205px;
   padding: 26px 28px;
-  box-shadow: 0 8px 30px #193e2710;
+  box-shadow: 0 8px 30px #24273310;
 }
 .rs-value-label strong {
   font-size: 31px;
@@ -1006,7 +1006,7 @@
 }
 .rs-calculator {
   background: #f4f3ed;
-  border: 1px solid #c2d8cb;
+  border: 1px solid #c8cad2;
   border-radius: 24px;
   padding: 40px;
   max-width: 560px;
@@ -1061,7 +1061,7 @@
 }
 .rs-calculator-fields input[type="number"] {
   padding: 12px 14px;
-  border: 1px solid #ccd9cc;
+  border: 1px solid #d0d1d5;
   border-radius: 8px;
   background: #ffffffa1;
   color: #183039;
@@ -1073,7 +1073,7 @@
   accent-color: #0c8b6f;
 }
 .rs-calculator-result {
-  background: #e2efe5;
+  background: #e6e7eb;
   padding: 22px;
   border-radius: 14px;
   display: flex;
@@ -1103,7 +1103,7 @@
 .rs-calculator > .rh-button {
   padding: 15px 22px;
   font-size: 13px;
-  background: #0c493e;
+  background: #1e2337;
   color: #fff;
 }
 @media (max-width: 1100px) {
@@ -1293,11 +1293,11 @@
   gap: 20px;
 }
 .rs-final-buttons > .rh-button:first-child {
-  background: linear-gradient(#f8fff6, #bdeed8);
-  border-color: #ceeedd;
+  background: linear-gradient(#f8fff6, #cbcfe0);
+  border-color: #d7dae5;
 }
 .rs-final-buttons > .rh-button:first-child:hover {
-  background: #bdeed8;
+  background: #cbcfe0;
 }
 .rs-footer {
   display: flex;
@@ -1306,7 +1306,7 @@
   color: #bed3c0bb;
   font-size: 10px;
   padding: 25px 0 24px;
-  border-top: 1px solid #a3c7a325;
+  border-top: 1px solid #adb0bd25;
   margin-top: 130px;
   letter-spacing: 0.3px;
 }

@@ -31,7 +31,7 @@ export default async function SourcesPage() {
       <PageHeader
         eyebrow="Sources"
         title="What RADR can currently check"
-        description="Start with a file. Connect systems when they’re ready — we don’t fake connections."
+        description="Start with a file. Connect systems when they’re ready. we don’t fake connections."
       />
 
       <section className="space-y-4">

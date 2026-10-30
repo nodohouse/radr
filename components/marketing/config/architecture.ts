@@ -1,5 +1,5 @@
 /**
- * Architecture + ingestion — status must stay honest.
+ * Architecture + ingestion. status must stay honest.
  * LIVE = exists today. EARLY ACCESS = limited/partial. PLANNED = not shipped.
  */
 export type IngestStatus = "LIVE" | "EARLY ACCESS" | "PLANNED";

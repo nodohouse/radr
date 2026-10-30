@@ -327,7 +327,7 @@ export function NewCompanyPage() {
               Too often, the difference between those views belongs to nobody.
             </p>
             <p>
-              RADR exists to connect that context — built first for hospitality,
+              RADR exists to connect that context, built first for hospitality,
               with a longer-term vision of clearer decisions across complex
               operations.
             </p>
@@ -602,7 +602,7 @@ export function NewPricingPage() {
       </section>
       <MarketingCTA
         title="Find the right starting point."
-        description="One restaurant or a global group — let’s talk about the operation you want to understand."
+        description="One restaurant or a global group? Let’s talk about the operation you want to understand."
       />
     </PageShell>
   );

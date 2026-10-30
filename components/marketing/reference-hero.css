@@ -91,14 +91,14 @@
   font-size: 15px;
   font-weight: 600;
   border: 1px solid #ffffff66;
-  box-shadow: 0 3px 20px #0624210d;
+  box-shadow: 0 3px 20px #0f111b0d;
   transition:
     transform 0.2s,
     background 0.2s;
 }
 .rh-button:hover {
   transform: translateY(-2px);
-  background: #e1f5eb;
+  background: #e7e8ef;
 }
 .rh-button > span {
   font-size: 20px;
@@ -172,7 +172,7 @@
   height: 556px;
   border-radius: 35px;
   padding: 22px;
-  background: linear-gradient(120deg, #ffffff70, #fff3 65%, #ddf7ee19);
+  background: linear-gradient(120deg, #ffffff70, #fff3 65%, #e5e7ef19);
   border: 1px solid #ffffff8c;
   box-shadow:
     0 35px 65px #071d2440,
@@ -195,7 +195,7 @@
   flex-shrink: 0;
   padding: 26px 15px;
   position: relative;
-  border-right: 1px solid #c5d1ca55;
+  border-right: 1px solid #c8c9ce55;
 }
 .rh-sidebar > img {
   margin: 2px 7px 28px;
@@ -240,7 +240,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #2db68e;
+  background: #55608e;
 }
 .rh-main {
   padding: 20px 22px;
@@ -383,7 +383,7 @@
 .rh-signal-icon {
   display: grid;
   place-items: center;
-  background: #08634f;
+  background: #222a49;
   color: #d2f5db;
   min-width: 30px;
   height: 34px;
@@ -619,7 +619,7 @@
     right: 24px;
     top: calc(100% - 8px);
     padding: 18px;
-    border: 1px solid #95c0ab55;
+    border: 1px solid #a1a5b455;
     border-radius: 17px;
     box-shadow: 0 18px 50px #00181c80;
     background: #082c2ef5;

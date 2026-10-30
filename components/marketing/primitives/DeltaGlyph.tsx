@@ -5,7 +5,7 @@ import { useReducedMotionSafe } from "../motion/useReducedMotionSafe";
 
 type Props = {
   className?: string;
-  /** Living gradient stroke — major moments only */
+  /** Living gradient stroke. major moments only */
   living?: boolean;
   /** Pause SMIL when false (offscreen / hidden tab) */
   active?: boolean;
@@ -17,7 +17,7 @@ type Props = {
 };
 
 /**
- * Soft rounded outline △ — transparent center.
+ * Soft rounded outline △. transparent center.
  * No SVG blur filters. Living = animated gradient stroke only.
  */
 export function DeltaGlyph({

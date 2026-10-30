@@ -100,7 +100,7 @@ export function MockupCalculator() {
             <p>
               Turn your data into a clearer picture of opportunity. Get a
               personalized view of potential impact across revenue, labor,
-              procurement, and more — based on your operation.
+              procurement, and more, based on your operation.
             </p>
             <div className="mx-calculator-benefits">
               {[
@@ -404,7 +404,7 @@ export function MockupCalculator() {
               for your operation.
             </h3>
             <p>
-              A practical starting point for your {operation.toLowerCase()} —
+              A practical starting point for your {operation.toLowerCase()} , 
               based on the areas in your model.
             </p>
             {[...result.categories]

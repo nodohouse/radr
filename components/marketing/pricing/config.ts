@@ -43,7 +43,7 @@ export type CompareRow = {
   scale: StatusTag;
 };
 
-/** Short comparison — honest availability. */
+/** Short comparison. honest availability. */
 export const compareRows: CompareRow[] = [
   { feature: "Locations", free: "live", control: "live", scale: "live" },
   { feature: "Evidence upload", free: "live", control: "live", scale: "live" },
@@ -210,5 +210,5 @@ export function statusLabel(s: StatusTag): string {
   if (s === "live") return "Available now";
   if (s === "early") return "Early access";
   if (s === "next") return "Coming next";
-  return "—";
+  return ", ";
 }

@@ -113,7 +113,7 @@ export function MockupBottomCTA() {
   return (
     <section className="mx-bottom-cta">
       <div className="mx-wrap">
-        <p className="mx-kicker">READY FOR WHAT’S NEXT</p>
+        <p className="mx-kicker">YOUR OPERATION. YOUR NEXT MOVE.</p>
         <h2>
           See{" "}
           <Image
@@ -126,9 +126,9 @@ export function MockupBottomCTA() {
           in action<span>.</span>
         </h2>
         <p>
-          Explore how RADR turns your data into better decisions,
+          Bring your systems, your priorities and your questions.
           <br />
-          higher profits and stronger guest experiences.
+          See what a clearer operating picture could change.
         </p>
         <Buttons />
       </div>
@@ -150,7 +150,7 @@ export function MockupPlatform() {
               Verify value<span>.</span>
             </>
           }
-          copy="RADR turns your hospitality data into a real-time operating intelligence layer — across restaurants, hotels, and multi-site groups."
+          copy="RADR turns your hospitality data into a real-time operating intelligence layer, across restaurants, hotels, and multi-site groups."
         >
           <PortfolioPreview />
         </MockHero>
@@ -169,7 +169,7 @@ export function MockupPlatform() {
                     hospitality data<span>.</span>
                   </>
                 }
-                copy="Bring together data from across your operations — POS, PMS, finance, procurement, labor and more — into a single, clean foundation."
+                copy="Bring together data from across your operations, POS, PMS, finance, procurement, labor and more, into a single, clean foundation."
               />
               <Link
                 className="mx-button mx-small-button"
@@ -193,7 +193,7 @@ export function MockupPlatform() {
                     Not just a data point<span>.</span>
                   </>
                 }
-                copy="RADR continuously monitors your operations, connects the dots, and shows what’s happening across every location — in real time."
+                copy="RADR continuously monitors your operations, connects the dots, and shows what’s happening across every location, in real time."
               />
               <Link className="mx-button mx-small-button" href="/contact">
                 Explore operating state →
@@ -217,7 +217,7 @@ export function MockupPlatform() {
                     decisions, faster<span>.</span>
                   </>
                 }
-                copy="RADR identifies what matters, explains why, and recommends the best next steps — so your team can move from reactive to in control."
+                copy="RADR identifies what matters, explains why, and recommends the best next steps, so your team can move from reactive to in control."
               />
               <Link className="mx-button mx-small-button" href="#decisions">
                 See how it works →
@@ -393,7 +393,7 @@ export function MockupSolutions() {
                       Take the right action<span>.</span>
                     </>
                   }
-                  copy="RADR connects your data, adds context, and recommends a next step — with your team in control."
+                  copy="RADR connects your data, adds context, and recommends a next step, with your team in control."
                 />
                 <Link className="mx-button mx-button-outline" href="/how">
                   See how it works →
@@ -509,7 +509,7 @@ export function MockupPricing() {
       features: [
         "1 property / location",
         "Core operating intelligence",
-        "Standard integrations — scoped",
+        "Standard integrations (scoped)",
         "Interactive dashboards",
         "Email support",
       ],
@@ -523,10 +523,10 @@ export function MockupPricing() {
       cta: "Book a demo",
       features: [
         "Up to 10 properties",
-        "Core and advanced modules — scoped",
-        "Multi-property benchmarking — planned",
-        "Custom reports and exports — scoped",
-        "Role-based access — scoped",
+        "Core and advanced modules (scoped)",
+        "Multi-property benchmarking (planned)",
+        "Custom reports and exports (scoped)",
+        "Role-based access (scoped)",
         "Priority support",
       ],
       ideal: "Regional groups and multi-property operators.",
@@ -539,7 +539,7 @@ export function MockupPricing() {
       cta: "Talk to sales",
       features: [
         "Portfolio scope tailored to your group",
-        "Platform access — scoped",
+        "Platform access (scoped)",
         "Custom integrations and data sources",
         "Dedicated success contact",
         "Custom modeling and reporting",
@@ -737,7 +737,7 @@ export function MockupCompany() {
               hospitality industry<span>.</span>
             </>
           }
-          copy="RADR exists to give hospitality operators the clarity to make better decisions — turning data into better experiences for every guest, every stay, every day."
+          copy="RADR exists to give hospitality operators the clarity to make better decisions, turning data into better experiences for every guest, every stay, every day."
         />
         <section className="mx-section mx-light" id="mission">
           <div className="mx-wrap mx-mission-grid">
@@ -750,7 +750,7 @@ export function MockupCompany() {
                   into better decisions<span>.</span>
                 </>
               }
-              copy="We build a decision layer for hospitality — connecting data across operations, surfacing what matters, and helping teams act with clarity and confidence."
+              copy="We build a decision layer for hospitality. connecting data across operations, surfacing what matters, and helping teams act with clarity and confidence."
             />
             <div className="mx-mission-photo">
               <OperatingCanvas variant="operations" />
@@ -782,7 +782,7 @@ export function MockupCompany() {
                     is a series of decisions<span>.</span>
                   </>
                 }
-                copy="Behind every memorable stay are decisions about people, resources, timing and experience. Better context helps teams make better decisions — and create more meaningful hospitality."
+                copy="Behind every memorable stay are decisions about people, resources, timing and experience. Better context helps teams make better decisions, and create more meaningful hospitality."
               />
               <Link className="mx-button mx-small-button" href="/how">
                 Explore our approach →
@@ -911,12 +911,12 @@ export function MockupCompany() {
                   Designed for what’s next<span>.</span>
                 </>
               }
-              copy="Designed around the realities of modern hospitality — diverse operations, brands and markets. A flexible operating picture that can grow with your needs."
+              copy="Designed around the realities of modern hospitality: diverse operations, brands and markets. A flexible operating picture that can grow with your needs."
             />
             <div className="mx-global-tags">
               <span>◯ BUILT FOR GLOBAL HOSPITALITY</span>
               <span>◇ FLEXIBLE BY DESIGN</span>
-              <span>＋ READY FOR WHAT’S NEXT</span>
+              <span>＋ YOUR OPERATION. YOUR NEXT MOVE.</span>
             </div>
           </div>
         </section>
@@ -931,7 +931,7 @@ export function MockupCompany() {
                   what makes hospitality human<span>.</span>
                 </>
               }
-              copy="Technology should remove friction, not replace the human touch — empowering teams to focus on creating exceptional guest experiences."
+              copy="Technology should remove friction, not replace the human touch. empowering teams to focus on creating exceptional guest experiences."
             />
             <div className="mx-philosophy-image">
               <OperatingCanvas variant="people" />
@@ -983,7 +983,7 @@ export function MockupCalculatorPage() {
                   Same intelligence layer<span>.</span>
                 </>
               }
-              copy="Whether you run a single restaurant, a global hotel group, or a mixed portfolio — explore where to investigate next, with your team in control."
+              copy="Whether you run a single restaurant, a global hotel group, or a mixed portfolio. explore where to investigate next, with your team in control."
             />
             <Buttons />
           </div>

@@ -24,7 +24,7 @@ export function RunningBanner({ kind = "signals" }: { kind?: keyof typeof messag
       <span className="pro-banner-label">{kind === "signals" ? "SIGNAL → DECISION" : "THE OPERATING LOOP"}</span>
       <div className="pro-banner-window" tabIndex={0} aria-label="Scrollable workflow banner">
         <div className="pro-banner-track">
-          {[0, 1].map(copy => <div className="pro-banner-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>{messages[kind].map(message => <span key={message}><i aria-hidden="true">↗</i>{message}</span>)}</div>)}
+          {[0, 1].map(copy => <div className="pro-banner-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>{messages[kind].map(message => <span key={message}><i aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M6 18 18 6M6 6h12v12" /></svg></i>{message}</span>)}</div>)}
         </div>
       </div>
     </section>
@@ -42,7 +42,7 @@ export function ProfessionalScroll() {
 
 
     const targets = Array.from(document.querySelectorAll<HTMLElement>(
-      ".reference-page .rs-copy, .reference-page .rs-decision, .reference-page .rs-system-tiles, .reference-page .rs-value-visual, .reference-page .rs-operation-card, .reference-page .dg-header, .reference-page .dg-panel, .pro-proof-intro, .pro-proof li, .rs-final-copy"
+      ".reference-page .rs-copy, .reference-page .rs-decision, .reference-page .rs-system-tiles, .reference-page .rs-value-visual, .reference-page .rs-operation-card, .reference-page .dg-header, .reference-page .dg-panel, .pro-proof-intro, .pro-proof li, .rs-final-copy, .ed-outcome-heading, .ed-outcome-grid article"
     ));
     let scenes: { node: HTMLElement; animation: Animation }[] = [];
     let frame = 0;
@@ -71,6 +71,7 @@ export function ProfessionalScroll() {
         // Finish each entrance in the upper-middle viewport; keep it readable afterward.
         const entrance = clamp((height * .96 - positions[i]) / (height * .65));
         scene.animation.currentTime = entrance * 1000;
+        scene.node.dataset.revealed = String(entrance > .1);
       });
     };
     const onScroll = () => { if (!frame && !document.hidden) frame = requestAnimationFrame(update); };

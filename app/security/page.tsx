@@ -7,7 +7,7 @@ import {
 } from "@/components/marketing/MarketingShell";
 import { TRUST_CONTROLS } from "@/components/marketing/config/trust";
 export const metadata: Metadata = {
-  title: "Security — Built for sensitive commercial data",
+  title: "Security. Built for sensitive commercial data",
   description:
     "How RADR handles documents, access and application security. Honest controls and availability.",
 };

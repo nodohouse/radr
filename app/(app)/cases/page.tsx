@@ -14,7 +14,7 @@ export default async function CasesPage() {
       <PageHeader
         eyebrow="Cases"
         title="Cases"
-        description="Exceptions between expected and actual — review, decide, resolve."
+        description="Exceptions between expected and actual. review, decide, resolve."
       />
 
       <EmptyState

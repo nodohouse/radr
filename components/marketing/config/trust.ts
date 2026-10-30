@@ -1,5 +1,5 @@
 /**
- * Honest trust / security controls — only what exists in the product.
+ * Honest trust / security controls. only what exists in the product.
  * Status must stay truthful: LIVE or IN DEVELOPMENT. Never "Designed".
  */
 export type TrustStatus = "LIVE" | "IN DEVELOPMENT";

@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Manrope, Source_Sans_3 } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import "./radr.css";
 import "@/components/marketing/professional.css";
 import "@/components/marketing/vibrant.css";
+import "@/components/marketing/editorial.css";
 import { SiteExperience } from "@/components/marketing/SiteExperience";
 
 const display = Manrope({
@@ -12,23 +13,10 @@ const display = Manrope({
   display: "swap",
 });
 
-const body = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://radrup.com"),
   title: {
-    default: "RADR — Hospitality Operating Intelligence",
+    default: "RADR. Hospitality Operating Intelligence",
     template: "%s · RADR",
   },
   description:
@@ -40,13 +28,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://radrup.com",
     siteName: "RADR",
-    title: "RADR — Hospitality Operating Intelligence",
+    title: "RADR. Hospitality Operating Intelligence",
     description:
       "Hospitality operating intelligence. Connect signals, create decisions and verify outcomes.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RADR — Hospitality Operating Intelligence",
+    title: "RADR. Hospitality Operating Intelligence",
     description:
       "Hospitality operating intelligence. Connect signals, create decisions and verify outcomes.",
   },
@@ -59,7 +47,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#070807",
+  themeColor: "#101223",
 };
 
 export default function RootLayout({
@@ -67,7 +55,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <body className={display.variable}>
         <SiteExperience />
         {children}
       </body>

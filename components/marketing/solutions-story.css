@@ -72,13 +72,13 @@
   text-decoration: none;
 }
 .sf-cta:hover {
-  background: #d7f4e5;
+  background: #dfe2ec;
 }
 .sf-demo {
   position: relative;
   min-width: 0;
   background: linear-gradient(125deg, #0b242a33, #08252477);
-  border: 1px solid #aacbbd1c;
+  border: 1px solid #b4b6c11c;
   border-radius: 23px;
   padding: 12px 14px 12px;
   backdrop-filter: blur(8px);
@@ -99,7 +99,7 @@
 .sf-stages:before {
   content: "";
   height: 1px;
-  background: #bce9d64d;
+  background: #c9cddc4d;
   position: absolute;
   bottom: 5px;
   left: 12%;
@@ -130,15 +130,15 @@
   height: 8px;
   width: 8px;
   border-radius: 50%;
-  background: #b5d5cb;
+  background: #bec1cc;
   margin-top: 5px;
   transition:
     background 0.3s,
     box-shadow 0.3s;
 }
 .sf-stages .sf-stage[aria-current] i {
-  background: #6fe5bc;
-  box-shadow: 0 0 14px #6fe5bc99;
+  background: #919bc3;
+  box-shadow: 0 0 14px #919bc399;
 }
 .sf-board {
   position: relative;
@@ -192,7 +192,7 @@
   align-items: center;
   gap: 9px;
   padding: 8px 10px;
-  border: 1px solid #b9dac337;
+  border: 1px solid #c3c5d037;
   background: linear-gradient(125deg, #40606352, #192e3199);
   border-radius: 14px;
   position: relative;
@@ -250,12 +250,12 @@
   gap: 13px;
   width: 100%;
   height: 100%;
-  border: 1px solid #acffe0;
+  border: 1px solid #c4cbe7;
   border-radius: 18px;
-  background: radial-gradient(at 25% 0, #1c8b77, #003a34 60%, #012c2c);
+  background: radial-gradient(at 25% 0, #3c456b, #111529 60%, #012c2c);
   box-shadow:
-    inset 0 0 20px #75dcb74d,
-    0 0 25px #61e8c473;
+    inset 0 0 20px #939bbe4d,
+    0 0 25px #8893c173;
 }
 .sf-core img {
   width: 82%;
@@ -269,15 +269,15 @@
 .sf-orbit {
   position: absolute;
   inset: -30% -24%;
-  border: 1px solid #b6ffee36;
+  border: 1px solid #cbd1ea36;
   border-radius: 50%;
-  background: radial-gradient(ellipse, #58d7bd20, transparent 66%);
+  background: radial-gradient(ellipse, #7d87b220, transparent 66%);
   transition: opacity 0.5s;
 }
 .sf-orbit-outer {
   inset: -52% -46%;
-  border-color: #b6ffee1c;
-  background: #4ccdb509;
+  border-color: #cbd1ea1c;
+  background: #717ca809;
 }
 .sf-futures {
   position: absolute;
@@ -286,7 +286,7 @@
   width: 19%;
   height: 67%;
   padding: 12px;
-  border: 1px solid #a9cab333;
+  border: 1px solid #b3b5c033;
   background: #09292b70;
   border-radius: 17px;
   display: flex;
@@ -307,16 +307,16 @@
   position: relative;
   padding: 10px 11px;
   flex: 1;
-  border: 1px solid #aacdb533;
+  border: 1px solid #b4b7c333;
   border-radius: 11px;
   min-height: 0;
 }
 .sf-future-risk {
-  background: linear-gradient(135deg, #5e45454d, #17333099);
+  background: linear-gradient(135deg, #5e45454d, #1f212b99);
   color: #d28371;
 }
 .sf-future-recommended {
-  background: linear-gradient(135deg, #276c5e8c, #053a3288);
+  background: linear-gradient(135deg, #3b41588c, #14192b88);
   color: #79d9b2;
   transition:
     box-shadow 0.4s,
@@ -387,9 +387,9 @@
   width: 19.5%;
   height: 72%;
   padding: 15px 14px;
-  border: 1px solid #b0d8bd55;
+  border: 1px solid #bcbfcc55;
   border-radius: 18px;
-  background: linear-gradient(135deg, #193d3aab, #071f21bf);
+  background: linear-gradient(135deg, #232633ab, #071f21bf);
   display: flex;
   flex-direction: column;
   transition:
@@ -404,7 +404,7 @@
 }
 .sf-decision-label > span {
   font-size: 7px;
-  border: 1px solid #57cb9d66;
+  border: 1px solid #7982a966;
   border-radius: 15px;
   padding: 5px;
   color: #79dbb6;
@@ -467,7 +467,7 @@
   justify-content: space-between;
   gap: 8px;
   margin-top: auto;
-  border-top: 1px solid #bfd8be30;
+  border-top: 1px solid #c6c8d030;
   padding-top: 12px;
 }
 .sf-impact > span {
@@ -497,7 +497,7 @@
   height: 72%;
   border: 1px solid #d5d8c64d;
   border-radius: 18px;
-  background: linear-gradient(130deg, #3b4f4980, #51443b99);
+  background: linear-gradient(130deg, #41424980, #51443b99);
   padding: 17px 12px;
 }
 .sf-outcome ol {
@@ -515,7 +515,7 @@
   top: 8px;
   bottom: 20px;
   width: 1px;
-  background: #93beab66;
+  background: #9fa3b266;
 }
 .sf-outcome li {
   display: flex;
@@ -527,9 +527,9 @@
   width: 11px;
   height: 11px;
   flex-shrink: 0;
-  border: 1px solid #a5c5b455;
+  border: 1px solid #aeb1bc55;
   border-radius: 50%;
-  background: #213c34;
+  background: #292b34;
   margin-top: 2px;
 }
 .sf-outcome li > span {
@@ -549,9 +549,9 @@
   color: #e6f8ec;
 }
 .sf-outcome .sf-expected > i {
-  background: #5cd3aa;
-  border-color: #b6ffe0;
-  box-shadow: 0 0 13px #65e4b077;
+  background: #7f88b0;
+  border-color: #cbd1ea;
+  box-shadow: 0 0 13px #8a94bf77;
   transition: box-shadow 0.5s;
 }
 .sf-demo-footer {
@@ -572,8 +572,8 @@
 }
 .sf-demo-footer button {
   font: 9px Arial;
-  border: 1px solid #bad6c038;
-  background: #123933;
+  border: 1px solid #c2c4ce38;
+  background: #1d202e;
   color: #d7e8df;
   border-radius: 15px;
   padding: 6px 10px;
@@ -586,23 +586,23 @@
 }
 .sf-hero[data-stage="1"] .sf-core {
   box-shadow:
-    inset 0 0 20px #75dcb74d,
-    0 0 35px #61e8c4a0;
+    inset 0 0 20px #939bbe4d,
+    0 0 35px #8893c1a0;
 }
 .sf-hero[data-stage="2"] .sf-future-recommended {
-  border-color: #9bf4cc;
-  box-shadow: 0 0 14px #77e7b72b;
+  border-color: #b5bcda;
+  box-shadow: 0 0 14px #97a0c72b;
 }
 .sf-hero[data-stage="2"] .sf-future-chart path {
   stroke-dasharray: 100;
   animation: sf-chart 0.75s ease-out both;
 }
 .sf-hero[data-stage="3"] .sf-decision {
-  border-color: #80e4b6;
-  box-shadow: 0 0 18px #7fe8b42b;
+  border-color: #9da5c7;
+  box-shadow: 0 0 18px #9da6ca2b;
 }
 .sf-hero[data-stage="4"] .sf-expected > i {
-  box-shadow: 0 0 20px #65e4b0c0;
+  box-shadow: 0 0 20px #8a94bfc0;
 }
 .sf-hero[data-moving="false"] * {
   animation-play-state: paused !important;
@@ -789,7 +789,7 @@
     top: 50%;
     width: 50px;
     height: 2px;
-    background: linear-gradient(90deg, #5ab5d9, #89e5c2);
+    background: linear-gradient(90deg, #5ab5d9, #a4abca);
   }
   .sf-core > span {
     font-size: 12px;
@@ -1030,7 +1030,7 @@
     display: none;
   }
   .sf-stages i {
-    background: #7ae0b7;
+    background: #98a0c2;
   }
 }
 .sf-mobile-streams {
@@ -1070,7 +1070,7 @@
   color: #91dbbd;
 }
 .sf-demo {
-  background: linear-gradient(115deg, #0c292e96, #092624b3);
+  background: linear-gradient(115deg, #0c292e96, #11141eb3);
 }
 .mx-page .sf-decision h3 {
   margin: 12px 0;
@@ -1176,10 +1176,10 @@
     linear-gradient(125deg, #151d29, #0b111a 65%, #102d2c);
 }
 .sf-demo {
-  background: linear-gradient(120deg, #8bd4c011, #03191e85 45%, #041e206b);
-  border: 1px solid #d8ffed26;
+  background: linear-gradient(120deg, #a0a6bf11, #03191e85 45%, #041e206b);
+  border: 1px solid #e3e6f426;
   box-shadow:
-    inset 0 1px 0 #e0fff718,
+    inset 0 1px 0 #e9ebf618,
     0 28px 80px #000b1166;
   backdrop-filter: blur(18px);
 }
@@ -1188,40 +1188,40 @@
 .sf-decision,
 .sf-outcome {
   box-shadow:
-    inset 0 1px 0 #edfff514,
+    inset 0 1px 0 #f2f4fa14,
     0 12px 28px #00111440;
 }
 .sf-source {
-  background: linear-gradient(125deg, #60858038, #082529cc);
-  border-color: #b5f6df33;
+  background: linear-gradient(125deg, #6b6e7a38, #082529cc);
+  border-color: #c8cde333;
 }
 .sf-source > svg {
   color: #a9eadb;
 }
 .sf-core {
   background:
-    linear-gradient(140deg, #88ffe533, transparent 45%),
-    radial-gradient(at 30% 0, #167f69, #00352f 60%, #011e22);
+    linear-gradient(140deg, #abb4dc33, transparent 45%),
+    radial-gradient(at 30% 0, #343d61, #0f1426 60%, #011e22);
   box-shadow:
-    inset 0 1px 2px #ddffefb0,
+    inset 0 1px 2px #e7eaf5b0,
     inset 0 -10px 25px #001d24aa,
-    0 0 0 4px #a4ffdc10,
-    0 0 50px #50efbd66;
+    0 0 0 4px #bec6e510,
+    0 0 50px #7e8bc166;
 }
 .sf-futures {
-  background: linear-gradient(140deg, #183e3bdb, #061e22ed);
-  border-color: #96ddc73d;
+  background: linear-gradient(140deg, #232633db, #061e22ed);
+  border-color: #abb0c83d;
 }
 .sf-future-recommended {
-  background: linear-gradient(125deg, #25866a59, #0b3b34b0);
-  border-color: #7de4b765;
+  background: linear-gradient(125deg, #41496a59, #191d2db0);
+  border-color: #9ba3c665;
 }
 .sf-decision {
-  background: linear-gradient(135deg, #1e4e41e6, #041f22ed);
+  background: linear-gradient(135deg, #2c3040e6, #041f22ed);
 }
 .sf-outcome {
-  background: linear-gradient(140deg, #2b5347d9, #0b2527eb);
-  border-color: #a6e3c94d;
+  background: linear-gradient(140deg, #373a47d9, #0b2527eb);
+  border-color: #b8bdd14d;
 }
 .sf-packet {
   stroke-width: 3;
@@ -1235,8 +1235,8 @@
 }
 .sf-stages .sf-stage[aria-current] i {
   box-shadow:
-    0 0 0 5px #7ce5b218,
-    0 0 22px #7ce5b288;
+    0 0 0 5px #9aa3c718,
+    0 0 22px #9aa3c788;
 }
 @media (max-width: 700px) {
   .sf-demo {

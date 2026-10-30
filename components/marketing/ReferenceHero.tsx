@@ -46,16 +46,16 @@ export function ReferenceHero() {
           </span>
         </h1>
         <p className="rh-description">
-          Turn your data into better decisions,
+          Find what’s costing you. See what to do next.
           <br />
-          higher profits and stronger guest experiences.
+          Make every operating decision count.
         </p>
         <div className="rh-ctas">
           <Link href="/contact" className="rh-button">
             Book a demo <Arrow />
           </Link>
-          <Link href="/how" className="rh-button rh-button-ghost">
-            See how it works <Arrow />
+          <Link href="#product-story" className="rh-button rh-button-ghost">
+            See it in action <Arrow />
           </Link>
         </div>
       </div>

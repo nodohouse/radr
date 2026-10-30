@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-/** Homepage teaser — full story lives on /how */
+/** Homepage teaser. full story lives on /how */
 export function SectionHow() {
   return (
     <section
@@ -16,7 +16,7 @@ export function SectionHow() {
           to verified value.
         </h2>
         <p className="rx-lead-inv rx-lead-short">
-          Detect. Explain. Act. Learn. Verify — watch one finding travel through
+          Detect. Explain. Act. Learn. Verify. watch one finding travel through
           the full loop.
         </p>
         <ol className="rx-how-teaser-steps" aria-label="RADR loop">

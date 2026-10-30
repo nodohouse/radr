@@ -80,5 +80,5 @@ export function HeroScrollStory({ children }: { children: ReactNode }) {
       copy.style.removeProperty("opacity"); copy.style.removeProperty("visibility"); copy.style.removeProperty("translate");
     };
   }, []);
-  return <div className="rh-scroll-track" ref={root}>{children}</div>;
+  return <div className="rh-scroll-track" ref={root}><span id="product-story" className="rh-story-anchor" aria-hidden="true" />{children}</div>;
 }

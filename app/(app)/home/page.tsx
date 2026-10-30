@@ -42,7 +42,7 @@ export default async function ControlPage({
         title="All clear."
         body={
           hasEvidence
-            ? "RADR has nothing for you to review. Checking is still being built — when exceptions appear, they will show here."
+            ? "RADR has nothing for you to review. Checking is still being built. when exceptions appear, they will show here."
             : "Nothing to review yet. Give RADR an invoice, credit, contract, statement, or payout file."
         }
         action={

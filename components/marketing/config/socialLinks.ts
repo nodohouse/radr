@@ -13,7 +13,7 @@ export const SOCIAL_LINKS = {
   linkedin: process.env.NEXT_PUBLIC_RADR_LINKEDIN_URL?.trim() || "",
   /** TODO: real Instagram profile URL */
   instagram: process.env.NEXT_PUBLIC_RADR_INSTAGRAM_URL?.trim() || "",
-  /** Optional — only render when set */
+  /** Optional. only render when set */
   x: process.env.NEXT_PUBLIC_RADR_X_URL?.trim() || "",
 } as const;
 

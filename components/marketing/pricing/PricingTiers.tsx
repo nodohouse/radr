@@ -17,29 +17,29 @@ const freeItems = [
   `${pricingConfig.free.documentLimit} documents total`,
   "Manual evidence upload",
   "Private document storage",
-  "Basic checks — Building",
+  "Basic checks. Building",
   `${pricingConfig.free.historyDays}-day history`,
 ];
 
 const controlItems = [
   "Everything in Free",
-  "Continuous financial control — Building",
-  "Cases & human decisions — Building",
-  "Money owed / credit tracking — Building",
-  "Procurement mismatch checks — Building",
-  "Verified outcome ledger — Building",
-  "Controls library — Building",
-  "Delivery-platform reconciliation — Building",
-  "Team access — Building",
+  "Continuous financial control. Building",
+  "Cases & human decisions. Building",
+  "Money owed / credit tracking. Building",
+  "Procurement mismatch checks. Building",
+  "Verified outcome ledger. Building",
+  "Controls library. Building",
+  "Delivery-platform reconciliation. Building",
+  "Team access. Building",
 ];
 
 const scaleItems = [
   "Everything in Control",
-  "Multi-location control room — Building",
-  "Group-wide exception queue — Building",
-  "Cross-location supplier intelligence — Building",
-  "Advanced integrations — Building",
-  "Roles & permissions — Building",
+  "Multi-location control room. Building",
+  "Group-wide exception queue. Building",
+  "Cross-location supplier intelligence. Building",
+  "Advanced integrations. Building",
+  "Roles & permissions. Building",
   "Dedicated onboarding",
 ];
 

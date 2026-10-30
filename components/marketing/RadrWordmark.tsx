@@ -10,7 +10,7 @@ type Props = {
 };
 
 /**
- * Canonical R△DR — ONE SVG, shared baseline / cap height.
+ * Canonical R△DR. ONE SVG, shared baseline / cap height.
  *
  * Cap top y=8.2 · baseline y=36 · cap height 27.8
  * △ path is inset for stroke so optical outer edges match letter extents.
@@ -60,7 +60,7 @@ export function RadrWordmark({
           </defs>
         ) : null}
 
-        {/* R — cap 8.2 → baseline 36 */}
+        {/* R. cap 8.2 → baseline 36 */}
         <path
           className="rx-mark-glyph"
           d="M8 36 V8.2 H22.4 C28.9 8.2 33.2 11.6 33.2 17.6 C33.2 22.4 30.5 25.7 25.8 26.7 L34.6 36 H28.1 L20.1 26.9 H14.2 V36 H8 Z M14.2 21.6 H22.1 C25.5 21.6 27.2 20 27.2 17.6 C27.2 15.1 25.5 13.5 22.1 13.5 H14.2 V21.6 Z"
@@ -80,7 +80,7 @@ export function RadrWordmark({
           strokeLinejoin="round"
         />
 
-        {/* D — same cap / baseline */}
+        {/* D. same cap / baseline */}
         <path
           className="rx-mark-glyph"
           d="M70 8.2 H85.2 C95.6 8.2 102.4 14.4 102.4 22.1 C102.4 29.8 95.6 36 85.2 36 H70 V8.2 Z M76.2 13.6 V30.6 H84.6 C91.2 30.6 95.8 27.2 95.8 22.1 C95.8 17 91.2 13.6 84.6 13.6 H76.2 Z"

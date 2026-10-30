@@ -12,7 +12,7 @@ const REASONS = [
 ] as const;
 
 /**
- * Hospitality beachhead — then vision beyond.
+ * Hospitality beachhead, then vision beyond.
  */
 export function SectionWedge() {
   return (
@@ -25,7 +25,7 @@ export function SectionWedge() {
         <p className="rx-kicker">Beachhead</p>
         <h2 className="rx-display rx-display-sm">{BRAND.beachhead}</h2>
         <p className="rx-lead-inv rx-lead-short">
-          Hospitality is an exceptional proving ground — and where we show the
+          Hospitality is an exceptional proving ground, and where we show the
           product with invoices, schedules, rates, credits and settlements you
           already recognize.
         </p>

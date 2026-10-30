@@ -18,7 +18,7 @@ export default async function MoneyPage() {
       <PageHeader
         eyebrow="Money"
         title="Verified value"
-        description="What RADR has verified — recovered and prevented."
+        description="What RADR has verified. recovered and prevented."
       />
 
       <EmptyState

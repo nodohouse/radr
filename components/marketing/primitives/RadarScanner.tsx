@@ -23,7 +23,7 @@ type Props = {
   pingKey?: string;
 };
 
-/** Precision radar — quiet geometry, signal-forward. Pauses offscreen. */
+/** Precision radar. quiet geometry, signal-forward. Pauses offscreen. */
 export function RadarScanner({
   className = "",
   armed = true,
