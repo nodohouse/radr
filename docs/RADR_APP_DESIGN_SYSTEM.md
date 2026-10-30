@@ -35,14 +35,14 @@ Approved immutable logo masters are rendered through `FrozenRadrLogo`; `ProductB
 | `--app-nav` | `#f0f5f7` | Solid pale blue-gray rail |
 | `--app-surface` | `#ffffff` | Cards and product surfaces |
 | `--app-ink` | `#163044` | Primary navy typography |
-| `--app-muted` | `#607684` | Supporting copy |
-| `--app-quiet` | `#758a96` | Metadata |
+| `--app-muted` | `#4f6674` | Supporting copy |
+| `--app-quiet` | `#5c717e` | Metadata |
 | `--app-border` | `#dce6ea` | Thin neutral cool borders |
-| `--app-green` | `#16876b` | Action, verified value, healthy state |
+| `--app-green` | `#158166` | Action, verified value, healthy state |
 | `--app-mint` | `#e1f0e9` | Selected rail item, healthy field |
-| `--app-blue` | `#397eab` | Analytical context, attention |
-| `--app-amber` | `#a57124` | Watch, stale, degraded |
-| `--app-red` | `#b95050` | Material urgent risk only |
+| `--app-blue` | `#2e709d` | Analytical context, attention |
+| `--app-amber` | `#8e5f1a` | Watch, stale, degraded |
+| `--app-red` | `#a54444` | Material urgent risk only |
 
 ## Navigation and top bar
 
@@ -119,3 +119,5 @@ Compared the native Control Center at 1512 × 982 with the UI inside `radr_contr
 | Alignment | Shared left edge for heading, cards and chart; solid 232px left navigation with eight destinations |
 
 A second stable browser pass reported zero page errors and zero horizontal overflow at 1512px, 1024px and 390px. Object search located D-1911 and Ask RADR opened separately at each width. Application type checking and 35 focused product/scope tests passed. This is an implemented preview awaiting Control Center visual approval, not a declaration that later page migrations are complete.
+
+Small-label contrast check: the quiet text token is 5.10:1 on white and 4.64:1 on the pale navigation surface. Action green is 4.81:1 on white. Chart labels use the same quiet token instead of the older low-contrast hardcoded gray. This token check does not certify every legacy page for accessibility.

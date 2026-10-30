@@ -32,7 +32,7 @@ export function Chart({ values,labels,caption,bars=true }: { values: number[]; l
     {[45,95,145,195].map(y => <path key={y} d={`M35 ${y}H530`} stroke="#e3e9f0" strokeWidth="1" />)}
     <path d={`${path} L525 195H35Z`} fill="#cdeee04d" />
     {bars ? chartValues.map((v,i) => <rect key={i} x={25+i*(490/Math.max(1,chartValues.length-1))} y={195-v/max*140} width={Math.min(29,330/Math.max(1,chartValues.length))} height={v/max*140} rx="1" fill="#1ca98a" opacity={0.35+i/Math.max(1,chartValues.length)*.4} />) : null}
-    <path d={path} fill="none" stroke="#15a886" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
-    {chartLabels.map((label,i) => <text key={i} x={35+i*(490/Math.max(1,chartLabels.length-1))} y="225" fontSize="10" fill="#8792a1" textAnchor="middle">{label}</text>)}
+    <path d={path} fill="none" stroke="var(--app-green, #158166)" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+    {chartLabels.map((label,i) => <text key={i} x={35+i*(490/Math.max(1,chartLabels.length-1))} y="225" fontSize="10" fill="var(--app-quiet, #5c717e)" textAnchor="middle">{label}</text>)}
   </svg></div>;
 }
