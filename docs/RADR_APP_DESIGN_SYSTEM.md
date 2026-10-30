@@ -142,3 +142,5 @@ The section-44 approval gate remains active. Later page composition changes requ
 
 
 Ask uses the same current record truth: pending recovery is not historical verified recovery, and its month ledger is the scoped Value aggregate. The public demo's existing server authorization is limited to Soho; unsupported UI scopes receive a clear availability response instead of a silently substituted location. LIVE server tenancy and permissions remain authoritative.
+
+Ask labels its response-quality score as **Answer confidence**. It is not the selected Decision’s confidence or verification state. Never substitute that answer score for the record-level confidence shown in Decisions.

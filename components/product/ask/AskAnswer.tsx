@@ -364,7 +364,7 @@ export function AskAnswer({
           ) : null}
           {response.confidence ? (
             <p className="rp-ask-confidence">
-              Confidence
+              Answer confidence
               <TextSep />
               {response.confidence.band}
               {response.confidence.score != null ? (
