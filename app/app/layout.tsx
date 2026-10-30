@@ -30,6 +30,7 @@ import "@/app/radr-daylight.css";
 import "@/app/product-premium.css";
 import "@/app/control-center-tablet.css";
 import "@/app/backend-reference.css";
+import "@/app/reference-workspace.css";
 
 export const dynamic = "force-dynamic";
 

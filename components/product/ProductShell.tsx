@@ -2,7 +2,8 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { AppSidebar } from "./shell/AppSidebar";
+import { ReferenceNavigation } from "./reference/ReferenceNavigation";
+import { ReferenceWorkspace } from "./reference/ReferenceWorkspace";
 import { GlobalOperatingHeader } from "./shell/GlobalOperatingHeader";
 import { AskRadrProvider } from "./ask/AskRadrContext";
 import { AskRadr } from "./ask/AskRadr";
@@ -18,7 +19,6 @@ import {
   isSyntheticData,
 } from "@/lib/radr/env";
 import { MobileTabBar } from "./MobileTabBar";
-import { SIDEBAR_PIN_KEY } from "@/lib/product/appNav";
 import { useShellNavMode } from "./shell/useShellBreakpoint";
 
 function ShellChrome({
@@ -54,28 +54,9 @@ function ShellChrome({
   const showHamburger = navMode === "drawer" || navMode === "mobile";
   const railPersistent = navMode === "desktop" || navMode === "drawer";
 
-  /**
-   * Drive-in / drive-out: rail always overlays content.
-   * Collapsed by default · expands on hover · never pushes layout.
-   * Clicking a route does not pin the menu open.
-   */
+  // Desktop uses the eight-destination reference navigation; phones use a sheet.
   const overlayRail = true;
   const pinned = false;
-  const setPinned = (_v: boolean) => {
-    try {
-      localStorage.setItem(SIDEBAR_PIN_KEY, "0");
-    } catch {
-      /* ignore */
-    }
-  };
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(SIDEBAR_PIN_KEY, "0");
-    } catch {
-      /* ignore */
-    }
-  }, []);
 
   useEffect(() => {
     document.documentElement.classList.add("rp-overflow-guard");
@@ -125,15 +106,7 @@ function ShellChrome({
           <div className="rp-rail-spacer" aria-hidden="true" />
         ) : null}
         {showSidebar ? (
-          <AppSidebar
-            pinned={pinned}
-            onPinnedChange={setPinned}
-            overlayRail={overlayRail}
-            forceOpen={
-              navMode === "desktop" ? true : mobileNav
-            }
-            onNavigate={() => setMobileNav(false)}
-          />
+          <ReferenceNavigation onNavigate={() => setMobileNav(false)} />
         ) : null}
         <div className="rp-main-v2">
           <GlobalOperatingHeader
@@ -142,7 +115,7 @@ function ShellChrome({
             showHamburger={showHamburger}
           />
           <a className="px-skip" href="#product-content">Skip to content</a>
-          <main id="product-content" className="rp-content-v2" tabIndex={-1}>{children}<p className="px-workspace-note">DEMO WORKSPACE · Illustrative data · No external system writes</p></main>
+          <main id="product-content" className="rp-content-v2" tabIndex={-1}><ReferenceWorkspace>{children}</ReferenceWorkspace><p className="px-workspace-note">DEMO WORKSPACE · Illustrative data · No external system writes</p></main>
           {showMobileTabs ? (
             <MobileTabBar onOpenMore={() => setMobileNav(true)} />
           ) : null}

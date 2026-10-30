@@ -18,6 +18,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useProduct } from "@/lib/product/store";
 import type { DashPeriod } from "@/lib/product/demo/dashboard";
+import { roleContextFor } from "@/lib/radr/product/personas";
 import { useDemoOrg } from "@/components/product/useDemoOrg";
 import { WorldSwitcher } from "@/components/product/WorldSwitcher";
 import { getRadrEnvironment, isSyntheticData } from "@/lib/radr/env";
@@ -704,13 +705,13 @@ export function GlobalOperatingHeader({
                   />
                 </svg>
               </button>
-              <button
-                type="button"
+              <Link
+                href="/app/settings"
                 className="rp-goh-avatar"
-                aria-label="Account"
+                aria-label="Account settings"
               >
-                JB
-              </button>
+                {roleContextFor(roleView, session.vertical).initials}
+              </Link>
             </div>
           </div>
         </div>
