@@ -1,3 +1,4 @@
+import { sourceCurrency } from "@/lib/radr/product/demoMoney";
 /**
  * RADR Butler: domain tool helpers + Ask RADR façade.
  * Structured intelligence routes through lib/ai (tools planner / optional LLM).
@@ -143,7 +144,7 @@ export function getCancellationExposureTool(ctx: ButlerContext): {
       grossBookingValue: 0,
       expectedNaturalRecovery: 0,
       unrecoveredRevenue: 0,
-      currency: "EUR",
+      currency: sourceCurrency(ctx.locationScope),
     };
   }
   const rs = BERLIN_RESERVATION_SUMMARY;
@@ -153,7 +154,7 @@ export function getCancellationExposureTool(ctx: ButlerContext): {
     grossBookingValue: rs.cancelledBookingValue,
     expectedNaturalRecovery: rs.expectedRecoveredValue,
     unrecoveredRevenue: rs.revenueAtRisk,
-    currency: "EUR",
+    currency: sourceCurrency(ctx.locationScope),
   };
 }
 

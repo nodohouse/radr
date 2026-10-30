@@ -59,11 +59,11 @@ const PEAK_META: Record<
 
 const PEAK_METRIC_META: Record<
   Metric,
-  { label: string; unit: "€" | "%" | "min" | "n"; higherIsWorse: boolean }
+  { label: string; unit: "money" | "%" | "min" | "n"; higherIsWorse: boolean }
 > = {
   contribution: {
     label: "Incremental vs seat-now",
-    unit: "€",
+    unit: "money",
     higherIsWorse: false,
   },
   kitchen: { label: "Kitchen", unit: "%", higherIsWorse: true },
@@ -88,10 +88,10 @@ function peakKey(id: string): PeakKey | null {
 
 function formatPeakCell(metric: Metric, v: number): string {
   const unit = PEAK_METRIC_META[metric].unit;
-  if (unit === "€") {
-    if (v === 0) return "€0";
+  if (unit === "money") {
+    if (v === 0) return formatDecisionMoney(0);
     const sign = v > 0 ? "+" : "−";
-    return `${sign}€${Math.abs(v).toLocaleString("en-IE")}`;
+    return `${sign}${formatDecisionMoney(Math.abs(v))}`;
   }
   if (unit === "%") return `${v}%`;
   if (unit === "min") return `${v}m`;
@@ -399,9 +399,7 @@ function ScenarioTrajectory({
         cells: profile.labels.map((h, i) => ({
           h,
           formatted:
-            vals[i] === 0
-              ? "€0"
-              : formatDecisionMoney(vals[i] ?? 0),
+            formatDecisionMoney(vals[i] ?? 0, s.economicMetrics?.find(m => m.currency)?.currency),
         })),
         end,
       };
@@ -531,7 +529,7 @@ function ScenarioTrajectory({
           <h3>
             Endpoint ·{" "}
             <span data-tone="ok">
-              {formatDecisionMoney(scenarioEndEuro(active))}
+              {formatDecisionMoney(scenarioEndEuro(active), active.economicMetrics?.find(m => m.currency)?.currency)}
             </span>
           </h3>
           <p className="rp-drec-quiet">

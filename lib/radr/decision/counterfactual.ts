@@ -1,3 +1,4 @@
+import type { DemoEstateCurrency } from "@/lib/radr/demo/estateRegistry";
 /**
  * Counterfactual engine + internal DecisionRegret.
  * Regret is internal — never shaming UI.
@@ -8,7 +9,7 @@ import type { EconomicMetricType } from "@/lib/economics/metricTypes";
 export type ScenarioEconomicMetric = {
   type: EconomicMetricType | "NOT_MODELED" | "QUALITATIVE";
   value?: number;
-  currency?: "EUR";
+  currency?: DemoEstateCurrency;
   label: string;
   baseline?: string;
   scope?: string;

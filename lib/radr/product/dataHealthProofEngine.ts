@@ -88,7 +88,7 @@ export type DataHealthOverviewModel = {
   decisionsAffected: number;
   sourcesAffectingDecisions: number;
   trustScore: number;
-  trustDeltaPct: number;
+  trustDeltaPct: number | null;
   trustTooltip: string;
   sources: EvidenceSource[];
   dependencyDomains: DependencyDomain[];
@@ -161,24 +161,18 @@ const SOURCE_INPUTS: SourceInput[] = [
         label: "D-4102",
         title: "Settlement reconciliation",
         impact: "High",
-        confidenceBefore: 92,
-        confidenceAfter: 68,
       },
       {
         id: "dec_settlement_berlin",
         label: "D-2201",
         title: "Daily P&L",
         impact: "Medium",
-        confidenceBefore: 88,
-        confidenceAfter: 74,
       },
       {
         id: "dec_created",
         label: "D-1188",
         title: "Cash flow forecast",
         impact: "Medium",
-        confidenceBefore: 85,
-        confidenceAfter: 72,
       },
     ],
     recommendedAction:
@@ -216,16 +210,12 @@ const SOURCE_INPUTS: SourceInput[] = [
         label: "D-1911",
         title: "Peak kitchen pressure",
         impact: "High",
-        confidenceBefore: 88,
-        confidenceAfter: 79,
       },
       {
         id: "dec_menu_peak_berlin",
         label: "D-7110",
         title: "Menu × peak contribution",
         impact: "Medium",
-        confidenceBefore: 86,
-        confidenceAfter: 78,
       },
     ],
     recommendedAction:
@@ -350,7 +340,7 @@ const DEPENDENCY_DOMAINS: DependencyDomain[] = [
 function buildSources(): EvidenceSource[] {
   return SOURCE_INPUTS.map((raw) => {
     const evidenceConfidence = computeEvidenceConfidence(raw);
-    return { ...raw, evidenceConfidence };
+    return { ...raw, affectedDecisions: raw.affectedDecisions.filter(decision=>raw.evidenceTags.includes(decision.label)), evidenceConfidence };
   }).sort((a, b) => {
     const rank = (s: HealthStatus) =>
       s === "STALE" ? 0 : s === "DEGRADED" ? 1 : s === "ERROR" ? 2 : 3;
@@ -381,7 +371,7 @@ export function buildDataHealthOverview(
     decisionsAffected: evidenceDecisionTags.size,
     sourcesAffectingDecisions: affecting.length,
     trustScore,
-    trustDeltaPct: 12,
+    trustDeltaPct: null,
     trustTooltip:
       "Trust Score = average evidence confidence across estate sources. Each source = 35% freshness · 30% completeness · 25% conflicts · 10% coverage. Stale required sources are capped at 50%.",
     sources,

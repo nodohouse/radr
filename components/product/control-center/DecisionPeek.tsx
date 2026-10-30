@@ -41,11 +41,7 @@ type Props = {
 };
 
 /** Public / demo Futures — Wait · Seat · Throttle (marketing-aligned). */
-const PEAK_FUTURES = [
-  { id: "wait", label: "Wait 12 min", value: "+€620", preferred: true },
-  { id: "seat", label: "Seat now", value: "+€410" },
-  { id: "throttle", label: "Throttle delivery", value: "+€470" },
-];
+const PEAK_FUTURES = peekFuturesFromCanon(CANON_PEAK);
 
 function peekFuturesFromCanon(canon: CanonDecision) {
   return canon.scenarios.slice(0, 4).map((s) => {

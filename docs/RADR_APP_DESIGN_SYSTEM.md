@@ -121,3 +121,24 @@ Compared the native Control Center at 1512 × 982 with the UI inside `radr_contr
 A second stable browser pass reported zero page errors and zero horizontal overflow at 1512px, 1024px and 390px. Object search located D-1911 and Ask RADR opened separately at each width. Application type checking and 35 focused product/scope tests passed. This is an implemented preview awaiting Control Center visual approval, not a declaration that later page migrations are complete.
 
 Small-label contrast check: the quiet text token is 5.10:1 on white and 4.64:1 on the pale navigation surface. Action green is 4.81:1 on white. Chart labels use the same quiet token instead of the older low-contrast hardcoded gray. This token check does not certify every legacy page for accessibility.
+
+## Product consistency contract (31 October 2026)
+
+The Decision store remains the only writable demo dataset. Canonical scenario definitions seed its Decision records. Do not create an independent `demoData` store or duplicate headline numbers in components. The canonical demo-data layer consists of existing estate/Decision/source registries plus these shared derived selectors:
+
+- `decisionSummary(records)`: one disjoint partition for cards and filters. All = needs judgment + in motion + resolved + watching. Resolved includes learned/closed and zero-value outcomes; it is not a synonym for positive verified value.
+- `moneyContext(records, role)`: local operator amounts remain in source currency. Group/finance views use USD reporting and identify other source currencies plus illustrative FX. Rates come only from the estate registry. Convert and round each record once, then sum the same amounts in cards, categories and charts.
+- `currencyForRecord(record)`: inherit the canonical venue currency; explicit group or legacy European cases carry source denomination on the record. Correcting New York fixtures from legacy EUR labels to USD is a fixture migration, not a claimed 1:1 FX conversion.
+- `deriveValueAggregate` / `buildValueOverview` / `buildVerifiedValueTrend`: same scoped records and currency context. Show the complete category breakdown, or explicitly reconcile a remainder; never silently omit categories. Do not fabricate a trend when a scope has no verified outcomes.
+- `applyDecisionEvidenceHealth`: active recommendations using required degraded sources have capped data/decision confidence and require human approval. Required stale sources limit preparation. Historical sealed verified outcomes retain their evidence-backed result. Do not invent before/after confidence percentages or upgrade freshness labels independently.
+
+Expected, observed and verified remain separate. Preparing a table intervention does not verify an outcome. The old service-detail timer that declared verification after 4.8 seconds is removed; review/preparation waits for evidence and makes no external writes.
+
+Page titles are server metadata derived from the route, including canonical Decision IDs. Control Center is not the label for Live, Value or other pages. Show temporal controls only when the report actually responds to them; fixed demo snapshots and month-to-date charts must not expose a misleading date selector.
+
+On phones the Control Center priority Decision and next action precede financial context and the chart. Desktop stays three metrics, one proof chart and one top Decision.
+
+The section-44 approval gate remains active. Later page composition changes require the Control Center direction to be approved; shared data corrections are not a claim that later density issues have been redesigned.
+
+
+Ask uses the same current record truth: pending recovery is not historical verified recovery, and its month ledger is the scoped Value aggregate. The public demo's existing server authorization is limited to Soho; unsupported UI scopes receive a clear availability response instead of a silently substituted location. LIVE server tenancy and permissions remain authoritative.

@@ -7,6 +7,7 @@ import {
   deriveRestaurantGmConclusion,
   restaurantLocationAllowed,
 } from "@/lib/radr/product/restaurantGmControlCenterCanon";
+import { CANON_PEAK, canonChosen } from "@/lib/radr/decision/demo/canonical";
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
 
 const ROOT = join(process.cwd());
@@ -36,7 +37,7 @@ describe("Restaurant GM Control Center canon", () => {
   it("D-1911 paces seating — never Add FOH", () => {
     expect(D1911_CC_DECISION.id).toBe(DECISION_IDS.peak);
     expect(D1911_CC_DECISION.expectedEuro).toBe(620);
-    expect(D1911_CC_DECISION.confidencePct).toBe(82);
+    expect(D1911_CC_DECISION.confidencePct).toBe(canonChosen(CANON_PEAK).confidence);
     expect(D1911_CC_DECISION.deadlineLabel).toBe("19:59");
     expect(D1911_CC_DECISION.action).toMatch(/Hold next seating wave for 12 min/i);
     expect(D1911_CC_DECISION.action).not.toMatch(/FOH/i);

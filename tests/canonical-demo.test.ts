@@ -1,3 +1,4 @@
+import { resetDecisionStore } from "@/lib/radr/decision/store";
 import { describe, expect, it } from "vitest";
 import { findingsForScope } from "@/lib/radr/findings";
 import {
@@ -149,13 +150,15 @@ describe("canonical demo ledger", () => {
     expect(result.response.answer).toMatch(/€348|348/);
   });
 
-  it("Ask RADR distinguishes €192 potential from €184 verified", () => {
+  it("Ask RADR distinguishes current expected recovery from pending verification", () => {
+    resetDecisionStore();
     const result = orchestrateAskSync(
       "Did we recover the Table 14 cancellation?",
       ctx,
     );
-    expect(result.response.impactEuro).toBe(184);
+    expect(result.response.impactEuro).toBe(0);
     expect(result.response.answer).toMatch(/184/);
+    expect(result.response.answer).toMatch(/no verified|awaiting|pending/i);
     expect(result.response.answer).not.toMatch(/Verified value is €192/);
   });
 });

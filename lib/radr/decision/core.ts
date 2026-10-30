@@ -106,31 +106,17 @@ export type DecisionCardState =
   | "VERIFIED";
 
 /** Product display money — global estate reporting / hero local = USD. */
-export function formatDecisionMoney(amount: number): string {
-  const grouped = Math.round(Math.abs(amount))
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return `$${grouped}`;
+export function formatDecisionMoney(amount: number, currency = "USD"): string {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency, currencyDisplay: "narrowSymbol", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(amount).replace("-", "−");
 }
 
-/**
- * Unit rates and cents-critical amounts — never round $6.80 → $7.
- * Always two decimal places for reproducibility in Decision Traces.
- */
-export function formatDecisionMoneyCents(amount: number): string {
-  const sign = amount < 0 ? "−" : "";
-  const abs = Math.abs(amount);
-  const [intPart, frac = "00"] = abs.toFixed(2).split(".");
-  const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return `${sign}$${grouped}.${frac}`;
+/** Cents-critical unit prices retain their source currency and precision. */
+export function formatDecisionMoneyCents(amount: number, currency = "USD"): string {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency, currencyDisplay: "narrowSymbol", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount).replace("-", "−");
 }
 
-/** e.g. $6.80/L — for contract / invoice unit rates. */
-export function formatDecisionUnitRate(
-  amount: number,
-  unit = "L",
-): string {
-  return `${formatDecisionMoneyCents(amount)}/${unit}`;
+export function formatDecisionUnitRate(amount: number, unit = "L", currency = "USD"): string {
+  return `${formatDecisionMoneyCents(amount, currency)}/${unit}`;
 }
 
 export function horizonLabel(h: Horizon): string {

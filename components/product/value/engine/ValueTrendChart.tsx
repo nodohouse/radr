@@ -5,22 +5,13 @@ import { formatDecisionMoney } from "@/lib/radr/decision/core";
 
 type Props = {
   points: VerifiedTrendPoint[];
+  currency?: import("@/lib/radr/demo/estateRegistry").DemoEstateCurrency;
   tipLabel?: string;
 };
 
-export function ValueTrendChart({ points, tipLabel = "MTD" }: Props) {
-  const series =
-    points.length >= 2
-      ? points
-      : [
-          { date: "2026-01-01", label: "Jan 1", cumulative: 0, stepAmount: 0 },
-          {
-            date: "2026-01-31",
-            label: "Jan 31",
-            cumulative: 3793,
-            stepAmount: 3793,
-          },
-        ];
+export function ValueTrendChart({ points, tipLabel = "MTD", currency = "USD" }: Props) {
+  if (!points.length || !points.some(point=>point.cumulative!==0)) return <div className="rs-chart-empty"><p>No verified outcomes yet.</p><span>Evidence-linked results will appear here.</span></div>;
+  const series = points;
 
   const w = 560;
   const h = 160;
@@ -76,7 +67,7 @@ export function ValueTrendChart({ points, tipLabel = "MTD" }: Props) {
           textAnchor="middle"
           className="ve-trend-tip-text"
         >
-          {formatDecisionMoney(last.cumulative)} {tipLabel}
+          {formatDecisionMoney(last.cumulative,currency)} {tipLabel}
         </text>
         <text x={padL} y={h - 8} className="ve-trend-axis">
           Jan 1

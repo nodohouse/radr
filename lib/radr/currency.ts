@@ -3,23 +3,12 @@
  * Location UI = local currency. Group reporting = explicit conversion label.
  */
 
+import { DEMO_FX_TO_USD } from "./demo/estateRegistry";
 import type { CurrencyCode } from "./venueProfiles";
 import { GROUP_REPORTING_CURRENCY, getVenueProfile } from "./venueProfiles";
 
 /** Demo FX → USD reporting (group reporting currency). Legacy name kept. */
-export const DEMO_FX_TO_EUR: Record<CurrencyCode, number> = {
-  USD: 1,
-  EUR: 1.08,
-  GBP: 1.27,
-  JPY: 0.0067,
-  SGD: 0.74,
-  AED: 0.27,
-  AUD: 0.66,
-  HKD: 0.128,
-  MXN: 0.058,
-  BRL: 0.18,
-  ZAR: 0.055,
-};
+export const DEMO_FX_TO_EUR: Record<CurrencyCode, number> = DEMO_FX_TO_USD;
 
 export function formatCurrency(
   value: number,
@@ -118,8 +107,8 @@ export function convertCurrency(
   to: CurrencyCode = GROUP_REPORTING_CURRENCY,
 ): number {
   if (from === to) return Math.round(value);
-  const inEur = value * DEMO_FX_TO_EUR[from];
-  return Math.round(inEur / DEMO_FX_TO_EUR[to]);
+  const inReporting = value * DEMO_FX_TO_EUR[from];
+  return Math.round(inReporting / DEMO_FX_TO_EUR[to]);
 }
 
 export function dualCurrencyLabel(

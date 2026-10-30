@@ -96,7 +96,7 @@ export function buildTableRecoverDecisionRecord(
     })),
     relatedEntities: [{ type: "table", id: "t14", label: "Table 14" }],
     baselinePrediction: "Leave empty → night contribution lost",
-    noActionOutcome: "€210 exposure unrecovered",
+    noActionOutcome: "$210 exposure unrecovered",
     options,
     recommendedOptionId: c.chosenScenarioId,
     recommendationReasoning: c.understand,
@@ -169,7 +169,7 @@ export function buildTableRecoverDecisionRecord(
       {
         epistemic: "RECOMMENDED",
         title: "Recover",
-        body: "RADR prepared waitlist rebook. €184 potential recovered contribution — not verified until outcome completes.",
+        body: "RADR prepared waitlist rebook. $184 potential recovered contribution — not verified until outcome completes.",
       },
     ],
     locationDnaLine: "Same-service waitlist recover historically precedes protected covers.",
@@ -189,7 +189,7 @@ export function buildTableRecoverDecisionRecord(
         note: "POS observed · DEMO",
       },
       actualContributionImpact: c.actualProtectedEuro,
-      observedOutcome: "Waitlist party seated · €184 recovered",
+      observedOutcome: "Waitlist party seated · $184 recovered",
     };
   }
   return base;
@@ -212,7 +212,7 @@ export function buildSupplierDecisionRecord(
     territories: ["BUY", "SELL"],
     title: c.title,
     problemStatement: c.problemLine.replace(/\n/g, " "),
-    currentState: "Contract €6.80/L · Invoice €7.45/L · 420L · contribution −13.2%",
+    currentState: "Contract $6.80/L · Invoice $7.45/L · 420L · contribution −13.2%",
     property: c.property,
     phaseLabel: "Procurement",
     contextLine:
@@ -257,15 +257,15 @@ export function buildSupplierDecisionRecord(
     })),
     relatedEntities: [{ type: "sku", id: "oil", label: "Culinary oil" }],
     operatingStateSnapshot: [
-      { label: "Contract", value: "€6.80/L" },
-      { label: "Invoice", value: "€7.45/L" },
+      { label: "Contract", value: "$6.80/L" },
+      { label: "Invoice", value: "$7.45/L" },
       { label: "Delivery", value: "420L" },
-      { label: "Invoice exposure", value: "€273", tone: "risk" },
+      { label: "Invoice exposure", value: "$273", tone: "risk" },
       { label: "Usage", value: "+4%", tone: "watch" },
       { label: "Dish contribution", value: "−13.2%", tone: "risk" },
     ],
     baselinePrediction: "Pay as invoiced · contribution keeps compressing",
-    noActionOutcome: "€273 drift compounds",
+    noActionOutcome: "$273 drift compounds",
     options: mapOptions(
       c,
       status === "VERIFIED" || status === "LEARNED" || status === "CLOSED",
@@ -352,14 +352,14 @@ export function buildSupplierDecisionRecord(
     ],
     graph: {
       nodes: [
-        { id: "n_ctr", entityType: "cost", label: "Contract €6.80/L" },
-        { id: "n_inv", entityType: "cost", label: "Invoice €7.45/L" },
+        { id: "n_ctr", entityType: "cost", label: "Contract $6.80/L" },
+        { id: "n_inv", entityType: "cost", label: "Invoice $7.45/L" },
         { id: "n_qty", entityType: "inventory", label: "420 L" },
-        { id: "n_var", entityType: "cost", label: "€273 variance" },
+        { id: "n_var", entityType: "cost", label: "$273 variance" },
         { id: "n_dish", entityType: "menu_item", label: "Dish contrib −13.2%" },
         { id: "n_dec", entityType: "decision", label: "Dispute · hold · yield" },
         { id: "n_act", entityType: "action", label: "Credit path" },
-        { id: "n_out", entityType: "outcome", label: "€273 verified" },
+        { id: "n_out", entityType: "outcome", label: "$273 verified" },
       ],
       edges: [
         { fromId: "n_ctr", toId: "n_var", relation: "informed_by" },
@@ -386,7 +386,7 @@ export function buildSupplierDecisionRecord(
       {
         epistemic: "OBSERVED",
         title: "Invoice clue",
-        body: "Contract €6.80/L vs invoice €7.45/L on 420L → €273 exposure. Not tuna stock (D-1842).",
+        body: "Contract $6.80/L vs invoice $7.45/L on 420L → $273 exposure. Not tuna stock (D-1842).",
       },
       {
         epistemic: "ESTIMATED",
@@ -415,6 +415,7 @@ export function buildPlaybookDecisionRecord(
     id: DECISION_IDS.playbook,
     organizationId: "org_northstar",
     locationId: "loc_group",
+    sourceCurrency: "EUR",
     operatingUnitId: "ou_group",
     roleContext: "COO",
     decisionType: "structural_margin_pattern",

@@ -20,13 +20,13 @@ export function buildTunaDecisionRecord(
     {
       id: "do_nothing",
       title: "Do nothing",
-      // Peak convention: expected = 0; €1,840 is EXPOSURE (exposedContribution).
+      // Peak convention: expected = 0; $1,840 is EXPOSURE (exposedContribution).
       expectedContributionEuro: 0,
       guestImpact: "high" as const,
       operationalRisk: "high" as const,
       confidence: 90,
       timeToResult: "Peak",
-      note: "Sellout ~20:10 · €1,840 contribution exposed",
+      note: "Sellout ~20:10 · $1,840 contribution exposed",
       isNoAction: true,
     },
     {
@@ -49,7 +49,7 @@ export function buildTunaDecisionRecord(
       operationalRisk: "low" as const,
       confidence: 81,
       timeToResult: "Immediate",
-      note: "Feature-swap-first · historical feature-swap success 81% (n=22) · €1,590 verified protected",
+      note: "Feature-swap-first · historical feature-swap success 81% (n=22) · $1,590 verified protected",
       recommended: true,
     },
   ];
@@ -82,7 +82,7 @@ export function buildTunaDecisionRecord(
       id: "le_tuna_03",
       at: "17:03",
       kind: "understand" as const,
-      title: "€1,840 contribution exposed",
+      title: "$1,840 contribution exposed",
       amountEuro: 1840,
       statusAfter: "UNDERSTANDING" as const,
     },
@@ -91,7 +91,7 @@ export function buildTunaDecisionRecord(
       at: "17:04",
       kind: "simulate" as const,
       title: "Rush 6 portions option modeled",
-      detail: "€1,520 expected protected · obvious path",
+      detail: "$1,520 expected protected · obvious path",
       statusAfter: "SIMULATED" as const,
     },
     {
@@ -99,7 +99,7 @@ export function buildTunaDecisionRecord(
       at: "17:04",
       kind: "simulate" as const,
       title: "Feature-swap option modeled",
-      detail: "€1,640 expected protected",
+      detail: "$1,640 expected protected",
     },
     {
       id: "le_tuna_06",
@@ -158,7 +158,7 @@ export function buildTunaDecisionRecord(
       { type: "supplier", id: "sup_bluefin_de", label: "Bluefin Berlin" },
     ],
     baselinePrediction: "Sellout ~20:10 if no intervention",
-    noActionOutcome: "−€1,840 peak contribution · guest disappointment at peak",
+    noActionOutcome: "−$1,840 peak contribution · guest disappointment at peak",
     options,
     recommendedOptionId: "feature_swap",
     recommendationReasoning:
@@ -285,7 +285,7 @@ export function buildTunaDecisionRecord(
         },
       ],
       recommendedOptionId: "feature_swap",
-      note: "Historical feature-swap success 81% (n=22). Canonical verified protected €1,590.",
+      note: "Historical feature-swap success 81% (n=22). Canonical verified protected $1,590.",
     },
     playbook: {
       id: "pb_tuna_feature_first",
@@ -350,7 +350,7 @@ export function buildTunaDecisionRecord(
       {
         epistemic: "ESTIMATED",
         title: "Peak exposure",
-        body: "37 expected tuna covers in the peak window. €1,840 contribution exposed tonight if stockout stands.",
+        body: "37 expected tuna covers in the peak window. $1,840 contribution exposed tonight if stockout stands.",
       },
       {
         epistemic: "PREDICTED",
@@ -441,13 +441,13 @@ export function buildTunaDecisionRecord(
       },
       verificationMethod: "POS_TRANSACTION",
       verifiedAt: "2026-09-16T22:34:00+02:00",
-      forecastError: "Expected €1,640 · actual €1,590 (−€50)",
+      forecastError: "Expected $1,640 · actual $1,590 (−$50)",
       recommendationQuality: {
         score: 0.92,
         note: "Aligned with memory ranking; small forecast overage",
       },
       counterfactualAssessment:
-        "Supplier-first counterfactual estimated €1,520 — chosen path beat it.",
+        "Supplier-first counterfactual estimated $1,520 — chosen path beat it.",
       regret: regret ?? undefined,
       lesson:
         "Feature-swap-first outperformed supplier-first under these conditions.",
@@ -496,7 +496,7 @@ export function buildTunaDecisionRecord(
           id: "le_tuna_11",
           at: "22:34",
           kind: "verify",
-          title: "€1,590 protected",
+          title: "$1,590 protected",
           amountEuro: 1590,
           statusAfter: "VERIFIED",
         },
@@ -522,7 +522,7 @@ export function buildTunaDecisionRecord(
         {
           epistemic: "VERIFIED",
           title: "Peak held",
-          body: "€1,590 protected tonight. Feature swap executed. Supplier fallback unused.",
+          body: "$1,590 protected tonight. Feature swap executed. Supplier fallback unused.",
         },
       ],
       updatedAt: "2026-09-16T23:01:00+02:00",
@@ -546,7 +546,7 @@ export function buildTunaStructuralDecision(): DecisionRecord {
     title: "Tuna supply risk is structural",
     problemStatement:
       "7 shortages across 12 peak services. Temporary fixes are absorbing attention.",
-    currentState: "Supplier / par structure unstable · €8.420 cumulative exposure",
+    currentState: "Supplier / par structure unstable · $8.420 cumulative exposure",
     property: "Soho · New York",
     phaseLabel: "Structural · Supply",
     contextLine: "THIS KEEPS HAPPENING",
@@ -562,7 +562,7 @@ export function buildTunaStructuralDecision(): DecisionRecord {
       {
         id: "ev_exp",
         label: "Cumulative exposure",
-        value: "€8.420",
+        value: "$8.420",
         source: "Verified ledger",
         freshness: "YTD peaks",
       },
@@ -582,7 +582,7 @@ export function buildTunaStructuralDecision(): DecisionRecord {
         operationalRisk: "high",
         confidence: 85,
         timeToResult: "Ongoing",
-        note: "Decision debt compounds · €8,420 annualized exposure",
+        note: "Decision debt compounds · $8,420 annualized exposure",
         isNoAction: true,
       },
       {
@@ -691,7 +691,7 @@ export function buildTunaStructuralDecision(): DecisionRecord {
       {
         epistemic: "ESTIMATED",
         title: "Cumulative exposure",
-        body: "€8.420 cumulative exposure. Temporary fixes used 5 times.",
+        body: "$8.420 cumulative exposure. Temporary fixes used 5 times.",
       },
       {
         epistemic: "RECOMMENDED",

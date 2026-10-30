@@ -8,7 +8,8 @@ import type { ButlerResponse, ButlerSession, ButlerSource } from "@/lib/radr/but
 import type { AskIntentClass } from "./intents";
 import type { ResolvedContext } from "./context";
 import type { LaborRequirementLocation, ToolResult } from "./tools";
-import { euro } from "./tools";
+import { euro as formatAskMoney } from "./tools";
+import { sourceCurrency } from "@/lib/radr/product/demoMoney";
 import { CONNECTED_PILOT_MTD } from "@/lib/radr/product/demoOperatingPulse";
 import {
   getRestaurantDayPace,
@@ -17,7 +18,7 @@ import {
 import { composeLiveOperatingSurface } from "@/lib/radr/product/liveOperating";
 import { getCombinedTonightDemand } from "@/lib/radr/product/externalSignals";
 import { DECISION_IDS, displayDecisionId } from "@/lib/radr/decision/ids";
-import { formatDecisionMoney } from "@/lib/radr/decision/core";
+import { formatDecisionMoney as formatMoney } from "@/lib/radr/decision/core";
 import { invokeTool } from "@/lib/radr/tools/gateway";
 
 function demoSources(
@@ -66,6 +67,9 @@ export function composeAskAnswer(
   question: string,
   classification?: { clarification?: string; confidence?: number },
 ): ButlerResponse {
+  const currency = ctx.isGroup ? "USD" : sourceCurrency(ctx.locationId);
+  const euro = (amount: number) => formatAskMoney(amount, currency);
+  const formatDecisionMoney = (amount: number) => formatMoney(amount, currency);
   const fresh = results.find((r) => r.tool === "get_data_freshness");
   const sources = demoSources(fresh);
   const warnings =
@@ -997,7 +1001,7 @@ export function composeAskAnswer(
       bookingValue: number;
       currentlyAtRisk: number;
       potentialRecovery?: number;
-      observedPos?: number;
+      observedPos?: number | null;
       verifiedValue?: number;
       status?: string;
       expectedNaturalRecovery: number;
@@ -1007,7 +1011,7 @@ export function composeAskAnswer(
     if (!c) return notEnough(ctx, "Cancellation data unavailable.", results);
     const verified = c.verifiedValue ?? 0;
     const potential = c.potentialRecovery ?? 0;
-    const isVerified = c.status === "VERIFIED" && verified > 0;
+    const isVerified = ["VERIFIED","LEARNED","CLOSED"].includes(c.status ?? "") && verified > 0;
     return {
       ...base,
       responseKind: "cancellation_recovery",
@@ -1017,7 +1021,7 @@ export function composeAskAnswer(
         : `${c.note} Booking value ${euro(c.bookingValue)}.`,
       answer: isVerified
         ? `Potential recovery was ${euro(potential)}. Observed POS ${euro(c.observedPos ?? verified)}. Verified value is ${euro(verified)}, not the potential.`
-        : `${euro(c.currentlyAtRisk)} currently at risk from cancellations.`,
+        : `Expected recovery ${euro(potential)}. Observed outcome ${c.observedPos == null ? "pending" : euro(c.observedPos)}. Verified ${euro(0)}; awaiting evidence.`,
       primaryMetric: isVerified
         ? {
             label: "Verified value",
@@ -1025,8 +1029,8 @@ export function composeAskAnswer(
             tone: "positive",
           }
         : {
-            label: "Original booking value",
-            value: euro(c.bookingValue),
+            label: "Expected recovery",
+            value: euro(potential),
             tone: "watch",
           },
       metrics: isVerified
@@ -1047,11 +1051,9 @@ export function composeAskAnswer(
             },
           ]
         : [
-            {
-              label: "Currently at risk",
-              value: euro(c.currentlyAtRisk),
-              tone: "risk",
-            },
+            { label: "Expected recovery", value: euro(potential) },
+            { label: "Observed outcome", value: c.observedPos == null ? "Pending" : euro(c.observedPos) },
+            { label: "Verified value", value: euro(0) },
           ],
       explanation: c.note,
       recommendation: isVerified
@@ -1210,25 +1212,35 @@ export function composeAskAnswer(
     const v = tool<{
       monthVerifiedCatalog: number;
       scenarioVerified: number;
+      scenarioExpected: number;
+      scenarioObserved: number | null;
+      scenarioIsVerified: boolean;
+      scenarioAvailable?: boolean;
     }>(results, "get_verified_value");
     if (!v) return notEnough(ctx, "Verified value ledger unavailable.", results);
     const table14 = /table 14|actually spend|recover the table/i.test(question);
     if (table14) {
+      if(v.scenarioAvailable===false)return notEnough(ctx,"No Table 14 recovery Decision exists in the selected organization/location.",results);
       return {
         ...base,
         responseKind: "verified_value",
         title: "Table 14 recovery",
-        summary: `Observed POS on Table 14 is ${euro(v.scenarioVerified)}. Verified value uses observed spend only - not the ${euro(192)} waitlist estimate.`,
-        answer: `${euro(v.scenarioVerified)} observed on Table 14.`,
+        summary: v.scenarioIsVerified
+          ? `Table 14 recovery has ${euro(v.scenarioVerified)} verified against the Decision record.`
+          : `Table 14 recovery is awaiting outcome. Expected ${euro(v.scenarioExpected)}; observed ${v.scenarioObserved == null ? "pending" : euro(v.scenarioObserved)}; verified ${euro(0)}.`,
+        answer: v.scenarioIsVerified
+          ? `${euro(v.scenarioVerified)} verified. Observed ${v.scenarioObserved == null ? "pending" : euro(v.scenarioObserved)}.`
+          : `No verified recovery yet. Expected ${euro(v.scenarioExpected)}.`,
         primaryMetric: {
-          label: "Observed POS",
+          label: v.scenarioIsVerified ? "Verified recovery" : "Awaiting verification",
           value: euro(v.scenarioVerified),
-          tone: "positive",
+          tone: v.scenarioIsVerified ? "positive" : "watch",
         },
         evidence: [
-          { label: "Observed POS", value: euro(v.scenarioVerified) },
-          { label: "Potential recoverable", value: euro(192) },
-          { label: "Finding", value: "fnd_cancel_recovery_t14" },
+          { label: "Expected recovery", value: euro(v.scenarioExpected) },
+          { label: "Observed outcome", value: v.scenarioObserved == null ? "Pending" : euro(v.scenarioObserved) },
+          { label: "Verified value", value: euro(v.scenarioVerified) },
+          { label: "Decision", value: "D-6671" },
         ],
         actions: [{ label: "Open Verified Value", href: "/app/value" }],
         impactEuro: v.scenarioVerified,
@@ -1249,7 +1261,7 @@ export function composeAskAnswer(
       },
       evidence: [
         { label: "Month ledger", value: euro(v.monthVerifiedCatalog) },
-        { label: "Table 14 observed", value: euro(v.scenarioVerified) },
+        { label: "Table 14 verified", value: euro(v.scenarioVerified) },
       ],
       actions: [{ label: "Open Verified Value", href: "/app/value" }],
       impactEuro: v.monthVerifiedCatalog,
@@ -2174,6 +2186,8 @@ function composeStaffing(
   fresh: ToolResult | undefined,
   base: { sources: ButlerSource[]; warnings?: ButlerResponse["warnings"]; confidence: { band: "HIGH"; score: number } },
 ): ButlerResponse {
+  const currency = ctx.isGroup ? "USD" : sourceCurrency(ctx.locationId);
+  const euro = (amount: number) => formatAskMoney(amount, currency);
   const req = tool<{
     needAdditionalStaff: boolean;
     scopeLabel: string;

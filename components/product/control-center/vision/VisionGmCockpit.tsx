@@ -254,7 +254,7 @@ export function VisionGmCockpit({
                 <strong>{formatEuro(decision.expectedEuro)}</strong>
               </div>
               <div>
-                <span className="rv-label">Confidence</span>
+                <span className="rv-label">Scenario confidence</span>
                 <strong>{decision.confidencePct}%</strong>
               </div>
               <div data-deadline="true">

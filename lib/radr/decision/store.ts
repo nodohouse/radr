@@ -3,6 +3,7 @@
  * Source of truth for /app Control Center + Decision Record.
  */
 
+import { applyDecisionEvidenceHealth } from "@/lib/radr/product/decisionEvidenceHealth";
 import type { DecisionVertical } from "./core";
 import type {
   DecisionRecord,
@@ -70,7 +71,7 @@ const KITCHEN_WATCH: WatchingSignal = {
 };
 
 function seedPortfolio(): Record<string, DecisionRecord> {
-  return {
+  const records: Record<string, DecisionRecord> = {
     [DECISION_IDS.peak]: buildPeakDecisionRecord("AWAITING_APPROVAL"),
     [DECISION_IDS.tableRecover]: buildTableRecoverDecisionRecord("APPROVED"),
     [DECISION_IDS.ota]: buildOtaDecisionRecord("AWAITING_APPROVAL"),
@@ -93,6 +94,7 @@ function seedPortfolio(): Record<string, DecisionRecord> {
     [DECISION_IDS.created]: buildCreatedMissDecisionRecord(),
     ...seedHotelCatalogRecords(),
   };
+  return Object.fromEntries(Object.entries(records).map(([id,record])=>[id,applyDecisionEvidenceHealth(record)]));
 }
 
 let state: DecisionStoreState = {
@@ -177,7 +179,7 @@ export function listDecisionRecords(opts?: {
 function patchRecord(id: string, next: DecisionRecord) {
   state = {
     ...state,
-    records: { ...state.records, [id]: next },
+    records: { ...state.records, [id]: applyDecisionEvidenceHealth(next) },
   };
   emit();
 }

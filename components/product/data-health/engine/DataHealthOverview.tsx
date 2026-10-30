@@ -432,7 +432,7 @@ export function DataHealthOverview({
             <p className="dh-k">Trust score</p>
             <div className="dh-trust-score">
               <strong>{model.trustScore}%</strong>
-              <span className="dh-trust-delta">+{model.trustDeltaPct}%</span>
+              {model.trustDeltaPct != null ? <span className="dh-trust-delta">+{model.trustDeltaPct}%</span> : null}
             </div>
             <p>Based on freshness, completeness and conflicts.</p>
             <div className="dh-trust-msg">

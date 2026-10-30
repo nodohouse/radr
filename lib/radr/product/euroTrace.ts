@@ -1,3 +1,4 @@
+import { currencyForRecord } from "./demoMoney";
 /**
  * Euro proof traces for Verified Value — built from sealed Decision fields.
  * Never invents amounts.
@@ -97,7 +98,7 @@ export function euroTraceForDecision(id: string): EuroTrace | null {
         },
         {
           step: "Observed",
-          detail: `€${r.actualContributionImpact ?? 90} · demand faded`,
+          detail: `${formatDecisionMoney(r.actualContributionImpact ?? 90,currencyForRecord(r))} · demand faded`,
           state: "OBSERVED",
         },
         {
@@ -109,7 +110,7 @@ export function euroTraceForDecision(id: string): EuroTrace | null {
         },
         {
           step: "Verified",
-          detail: "€0 · attribution gate",
+          detail: `${formatDecisionMoney(0,currencyForRecord(r))} · attribution gate`,
           state: "VERIFIED",
         },
         {

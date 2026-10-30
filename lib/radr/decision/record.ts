@@ -128,6 +128,8 @@ export type DecisionVerificationDetail = {
 };
 
 export type DecisionRecord = {
+  /** Explicit source denomination for group cases; venue records inherit the estate currency. */
+  sourceCurrency?: import("@/lib/radr/demo/estateRegistry").DemoEstateCurrency;
   id: string;
   organizationId: string;
   locationId: string;

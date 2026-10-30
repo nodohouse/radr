@@ -108,3 +108,11 @@
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rs-navigation { background:var(--app-nav)!important; }
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-goh-avatar { background:#23546c!important;color:#fff!important;box-shadow:none!important; }
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-goh-search-label { display:flex;align-items:center;gap:10px; }
+/* Phone briefing order: decision, status and next action before financial context. */
+@media(max-width:700px) {
+  .rp-premium .rs-brief-grid { display:contents; }
+  .rp-premium .rs-brief>.rs-heading { order:0; }
+  .rp-premium .rs-brief .rs-brief-decision { order:1; }
+  .rp-premium .rs-brief>.rs-metrics { order:2; }
+  .rp-premium .rs-brief .rs-brief-proof { order:3; }
+}

@@ -121,7 +121,7 @@ export function ValueOverview({
               <option value="weekly">Weekly</option>
             </select>
           </div>
-          <ValueTrendChart points={model.trend} />
+          <ValueTrendChart points={model.trend} currency={model.currency} />
         </section>
       </div>
 
@@ -145,7 +145,7 @@ export function ValueOverview({
               <Spark values={d.spark} tone={d.tone} />
             </span>
             <span>{d.label}</span>
-            <strong>{formatDecisionMoney(d.euro)}</strong>
+            <strong>{formatDecisionMoney(d.euro, model.currency)}</strong>
             <em>
               {d.decisionCount} decision{d.decisionCount === 1 ? "" : "s"}
             </em>
@@ -158,7 +158,7 @@ export function ValueOverview({
           {model.hiddenDrivers.map((d, i) => (
             <span key={d.id}>
               {i > 0 ? " · " : null}
-              <strong>{d.label}</strong> {formatDecisionMoney(d.euro)}
+              <strong>{d.label}</strong> {formatDecisionMoney(d.euro, model.currency)}
             </span>
           ))}
           {model.reconciles ? null : " · reconcile check pending"}
@@ -166,7 +166,7 @@ export function ValueOverview({
       ) : null}
 
       <div className="ve-mid">
-        <section className="ve-miss" aria-label="Honest miss">
+        {model.hasMiss ? <section className="ve-miss" aria-label="Honest miss">
           <div className="ve-miss-head">
             <h2 className="ve-miss-title">
               <span aria-hidden>●</span> Honest miss · Demo comparison
@@ -180,16 +180,16 @@ export function ValueOverview({
           <div className="ve-eov">
             <div>
               <span>Expected</span>
-              <strong>{formatDecisionMoney(model.miss.expectedEuro)}</strong>
+              <strong>{formatDecisionMoney(model.miss.expectedEuro, model.currency)}</strong>
             </div>
             <div>
               <span>Observed</span>
-              <strong>{formatDecisionMoney(model.miss.observedEuro)}</strong>
+              <strong>{formatDecisionMoney(model.miss.observedEuro, model.currency)}</strong>
             </div>
             <div>
               <span>Verified</span>
               <strong data-miss="true">
-                {formatDecisionMoney(model.miss.verifiedEuro)}
+                {formatDecisionMoney(model.miss.verifiedEuro, model.currency)}
               </strong>
             </div>
           </div>
@@ -204,7 +204,7 @@ export function ValueOverview({
               Open decision →
             </Link>
           </div>
-        </section>
+        </section> : null}
 
         <section className="ve-proof" aria-label="Proof path">
           <div className="ve-proof-head">
@@ -212,14 +212,14 @@ export function ValueOverview({
               <h2>
                 Proof path · {proof?.displayId ?? "No verified record in this selection"}
               </h2>
-              <p>Contract vs invoice · contribution compression</p>
+              <p>Decision evidence and verified outcome</p>
             </div>
-            <span className="ve-badge">
+            {proof ? <span className="ve-badge">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
                 <path d="M2.5 6.2l2.2 2.2 4.8-4.8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               Verified
-            </span>
+            </span> : null}
           </div>
           <ol className="ve-steps">
             {(proof?.chain ?? []).map((step) => (
@@ -269,16 +269,16 @@ export function ValueOverview({
               </div>
               <div className="ve-row-metric">
                 <span>Expected</span>
-                <strong>{formatDecisionMoney(row.expected)}</strong>
+                <strong>{formatDecisionMoney(row.expected, model.currency)}</strong>
               </div>
               <div className="ve-row-metric">
                 <span>Observed</span>
-                <strong>{formatDecisionMoney(row.observed)}</strong>
+                <strong>{formatDecisionMoney(row.observed, model.currency)}</strong>
               </div>
               <div className="ve-row-metric">
                 <span>Verified</span>
                 <strong data-verified="true">
-                  {formatDecisionMoney(row.verified)}
+                  {formatDecisionMoney(row.verified, model.currency)}
                 </strong>
               </div>
               <p className="ve-row-note">{row.note}</p>

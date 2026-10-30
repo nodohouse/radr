@@ -22,7 +22,11 @@ import type { ValueKind } from "@/lib/radr/decision/core";
 import type { DecisionRecord } from "@/lib/radr/decision/record";
 import { primaryMetricOf } from "@/lib/radr/product/primaryMetric";
 
+import { moneyContext } from "./demoMoney";
+
 export type ValueAggregate = {
+  currency: import("@/lib/radr/demo/estateRegistry").DemoEstateCurrency;
+  currencyLabel: string;
   activeExposure: number;
   activeOpportunity: number;
   /** Convenience: exposure + opportunity (still excludes pending + verified). */
@@ -61,6 +65,7 @@ export function deriveValueAggregate(
       ? scopedDecisionsForDemo(all, role, vertical)
       : scopedDecisions(all, role);
 
+  const money = moneyContext(scoped, role);
   const needsYou = scoped.filter((r) => recordAttention(r) === "needs_you");
   const pending = scoped.filter((r) => recordAttention(r) === "handling");
   const verified = scoped.filter(
@@ -74,11 +79,11 @@ export function deriveValueAggregate(
   const opportunityRecords = needsYou.filter((r) => isOpportunity(r));
 
   const activeExposure = exposureRecords.reduce(
-    (s, r) => s + attentionEuro(r),
+    (s, r) => s + money.toDisplay(r, attentionEuro(r)),
     0,
   );
   const activeOpportunity = opportunityRecords.reduce(
-    (s, r) => s + attentionEuro(r),
+    (s, r) => s + money.toDisplay(r, attentionEuro(r)),
     0,
   );
 
@@ -90,15 +95,17 @@ export function deriveValueAggregate(
   };
   for (const r of verified) {
     const k = r.verifiedValue!.kind;
-    verifiedByKind[k] += r.verifiedValue!.amount;
+    verifiedByKind[k] += money.toDisplay(r, r.verifiedValue!.amount);
   }
 
   return {
+    currency: money.currency,
+    currencyLabel: money.label,
     activeExposure,
     activeOpportunity,
     activeExposureOrOpportunity: activeExposure + activeOpportunity,
     pendingVerification: pending.reduce(
-      (s, r) => s + (r.expectedContributionImpact ?? 0),
+      (s, r) => s + money.toDisplay(r, r.expectedContributionImpact ?? 0),
       0,
     ),
     verifiedByKind,

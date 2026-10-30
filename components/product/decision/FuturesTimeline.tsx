@@ -16,7 +16,7 @@ function metricLine(m: ScenarioEconomicMetric): string {
   if (m.value === 0 && /baseline|no incremental/i.test(m.label)) {
     return m.label;
   }
-  const money = formatDecisionMoney(m.value);
+  const money = formatDecisionMoney(m.value, m.currency);
   const baseline =
     m.baseline &&
     !m.label.toLowerCase().includes(m.baseline.toLowerCase().replace(/^vs\s+/i, ""))
@@ -119,7 +119,7 @@ export function FuturesTimeline({ futures, selectedId, onSelect }: Props) {
               {active.economicMetrics.map((m) => (
                 <li key={`${m.type}-${m.label}`}>
                   {m.value != null ? (
-                    <strong>{formatDecisionMoney(m.value)}</strong>
+                    <strong>{formatDecisionMoney(m.value, m.currency)}</strong>
                   ) : null}
                   <span>{m.label}</span>
                   {m.baseline &&

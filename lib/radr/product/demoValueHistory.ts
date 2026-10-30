@@ -21,6 +21,8 @@ import { customerDecisionClass } from "@/lib/radr/product/decisionClass";
 import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
 
+import { moneyContext } from "./demoMoney";
+
 export type VerifiedTrendPoint = {
   date: string;
   label: string;
@@ -52,6 +54,7 @@ export function buildVerifiedValueTrend(
       (recordAttention(r) === "verified" || recordAttention(r) === "learned"),
   );
 
+  const money = moneyContext(scopedDecisionsForDemo(recordsOverride ?? listDecisionRecords(), role, vertical), role);
   const sorted = [...scoped].sort((a, b) =>
     verifiedStamp(a).localeCompare(verifiedStamp(b)),
   );
@@ -76,7 +79,7 @@ export function buildVerifiedValueTrend(
   }
 
   for (const r of sorted) {
-    const amount = r.verifiedValue!.amount;
+    const amount = money.toDisplay(r, r.verifiedValue!.amount);
     cumulative += amount;
     const date = verifiedStamp(r);
     points.push({
@@ -113,9 +116,8 @@ export function priorMtdVerifiedTotal(
   const supplierInScope = agg.decisionIdsVerified.includes(
     DECISION_IDS.supplier,
   );
-  const supplierAmount = supplierInScope
-    ? listDecisionRecords().find((r) => r.id === DECISION_IDS.supplier)
-        ?.verifiedValue?.amount ?? 0
-    : 0;
+  const supplier = (recordsOverride ?? listDecisionRecords()).find(r=>r.id===DECISION_IDS.supplier);
+  const context = moneyContext(scopedDecisionsForDemo(recordsOverride ?? listDecisionRecords(),role,vertical),role);
+  const supplierAmount = supplierInScope && supplier ? context.toDisplay(supplier,supplier.verifiedValue?.amount??0) : 0;
   return Math.max(0, agg.verifiedTotal - supplierAmount);
 }

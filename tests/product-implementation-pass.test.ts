@@ -1,3 +1,5 @@
+import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
+import { resetDecisionStore } from "@/lib/radr/decision/store";
 import { describe, expect, it, beforeEach } from "vitest";
 import {
   assertActionTransition,
@@ -175,9 +177,10 @@ describe("Ask RADR grounded answers (product pass)", () => {
     expect(result.response.impactEuro).toBe(408);
   });
 
-  it("How much Verified Value? → 184", () => {
+  it("How much Verified Value? reconciles with the scoped Decision ledger", () => {
+    resetDecisionStore();
     const result = orchestrateAskSync("How much Verified Value do we have?", ctx);
-    expect(result.response.impactEuro).toBe(184);
+    expect(result.response.impactEuro).toBe(deriveValueAggregate("gm", "restaurant").verifiedTotal);
   });
 
   it("Did we recover €192? must not say yes as verified", () => {

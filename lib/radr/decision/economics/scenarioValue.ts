@@ -1,3 +1,4 @@
+import type { DemoEstateCurrency } from "@/lib/radr/demo/estateRegistry";
 /**
  * Canonical ScenarioValue — CFO-grade economic labeling.
  *
@@ -32,7 +33,7 @@ export type ScenarioMetricType =
 
 export type ScenarioValue = {
   amount: number;
-  currency: "EUR";
+  currency: DemoEstateCurrency;
   metricType: ScenarioMetricType;
   /** What the number covers — e.g. "Remaining 4 premium rooms" */
   scope: string;

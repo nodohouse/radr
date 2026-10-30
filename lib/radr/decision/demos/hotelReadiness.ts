@@ -35,7 +35,7 @@ const RELATIONSHIP = [
   "Floor 3 lag",
   "VIP / FR exposure",
   "HK allocation",
-  "€1,840 guest-service value",
+  "$1,840 guest-service value",
 ];
 
 export function buildHotelReadinessDecisionRecord(
@@ -83,7 +83,7 @@ export function buildHotelReadinessDecisionRecord(
       operationalRisk: "low" as const,
       confidence: 78,
       timeToResult: "90m",
-      note: "+€1,620 protected · −€280 labor",
+      note: "+$1,620 protected · −$280 labor",
     },
   ];
 
@@ -144,7 +144,7 @@ export function buildHotelReadinessDecisionRecord(
     contextLine: "42 arrivals · 31 ready · 7 at risk · Floor 3 behind",
     recommendationHeadline: "REASSIGN 2 HOUSEKEEPERS",
     recommendationReasoning:
-      "Reassignment protects €1,840 expected guest-service value without calling extra labor. Keep-allocation leaves 7 arrivals at late-room risk. D-2201 channel hold is independent.",
+      "Reassignment protects $1,840 expected guest-service value without calling extra labor. Keep-allocation leaves 7 arrivals at late-room risk. D-2201 channel hold is independent.",
     triggerEvents: ["housekeeping_behind", "check_in_wave"],
     evidenceRefs: [
       {
@@ -246,7 +246,7 @@ export function buildHotelReadinessDecisionRecord(
         { id: "n_arr", entityType: "booking", label: "42 arrivals" },
         { id: "n_f3", entityType: "staff", label: "Floor 3 behind" },
         { id: "n_vip", entityType: "guest", label: "VIP / early" },
-        { id: "n_exp", entityType: "revenue", label: "€1,840 protected" },
+        { id: "n_exp", entityType: "revenue", label: "$1,840 protected" },
         { id: "n_dec", entityType: "decision", label: "Reassign 2 HK" },
         { id: "n_act", entityType: "action", label: "Roster move prepared" },
       ],
@@ -285,7 +285,7 @@ export function buildHotelReadinessDecisionRecord(
       {
         epistemic: "RECOMMENDED",
         title: "Reassign",
-        body: "Move 2 housekeepers to Floor 3 · protect €1,840 without calling extra labor.",
+        body: "Move 2 housekeepers to Floor 3 · protect $1,840 without calling extra labor.",
       },
     ],
     locationDnaLine:

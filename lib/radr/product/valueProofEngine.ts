@@ -9,7 +9,7 @@ import type { RoleView } from "@/lib/product/types";
 import type { DemoVerticalFamily } from "@/lib/radr/vertical/experienceProfile";
 import { DECISION_IDS, displayDecisionId } from "@/lib/radr/decision/ids";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
-import { getDecisionRecord, listDecisionRecords } from "@/lib/radr/decision/store";
+import { listDecisionRecords } from "@/lib/radr/decision/store";
 import {
   recordAttention,
   scopedDecisionsForDemo,
@@ -58,7 +58,12 @@ export type ClosedValueRow = {
   openHref: string;
 };
 
+import { moneyContext } from "./demoMoney";
+
 export type ValueOverviewModel = {
+  currency: import("@/lib/radr/demo/estateRegistry").DemoEstateCurrency;
+  currencyLabel: string;
+  hasMiss: boolean;
   verifiedTotal: number;
   verifiedFormatted: string;
   decisionCount: number;
@@ -114,7 +119,7 @@ const DRIVER_META: Record<
 /** Mockup card 4 label; ledger class may be Operating pattern (social demand). */
 const SOCIAL_AS_CARD: ValueDriverCard = {
   id: "social-mix",
-  label: "Cancellation recovery",
+  label: "Demand and mix",
   euro: 280,
   decisionCount: 1,
   decisionIds: [DECISION_IDS.socialDemand],
@@ -157,11 +162,12 @@ export function buildValueOverview(
       (recordAttention(r) === "verified" || recordAttention(r) === "learned"),
   );
 
+  const money = moneyContext(scopedDecisionsForDemo(recordsOverride ?? listDecisionRecords(),role,vertical),role);
   const byClass = new Map<string, { euro: number; ids: string[] }>();
   for (const r of verified) {
     const c = customerDecisionClass(r);
     const cur = byClass.get(c) ?? { euro: 0, ids: [] };
-    cur.euro += r.verifiedValue!.amount;
+    cur.euro += money.toDisplay(r, r.verifiedValue!.amount);
     cur.ids.push(r.id);
     byClass.set(c, cur);
   }
@@ -177,8 +183,8 @@ export function buildValueOverview(
       );
       if (guest.length) {
         const euro = guest.reduce((s, id) => {
-          const r = getDecisionRecord(id);
-          return s + (r?.verifiedValue?.amount ?? 0);
+          const r = verified.find(record=>record.id===id);
+          return s + (r ? money.toDisplay(r,r.verifiedValue?.amount??0) : 0);
         }, 0);
         allDrivers.push({
           id: "operating-pattern",
@@ -192,8 +198,8 @@ export function buildValueOverview(
       }
       if (social.length) {
         const euro = social.reduce((s, id) => {
-          const r = getDecisionRecord(id);
-          return s + (r?.verifiedValue?.amount ?? 0);
+          const r = verified.find(record=>record.id===id);
+          return s + (r ? money.toDisplay(r,r.verifiedValue?.amount??0) : 0);
         }, 0);
         allDrivers.push({
           ...SOCIAL_AS_CARD,
@@ -204,8 +210,8 @@ export function buildValueOverview(
       }
       if (other.length) {
         const euro = other.reduce((s, id) => {
-          const r = getDecisionRecord(id);
-          return s + (r?.verifiedValue?.amount ?? 0);
+          const r = verified.find(record=>record.id===id);
+          return s + (r ? money.toDisplay(r,r.verifiedValue?.amount??0) : 0);
         }, 0);
         allDrivers.push({
           id: "operating-pattern",
@@ -236,11 +242,16 @@ export function buildValueOverview(
     });
   }
 
+  const uniqueDrivers = [...allDrivers.reduce((map, driver) => {
+    const previous=map.get(driver.id);
+    map.set(driver.id,previous?{...previous,euro:previous.euro+driver.euro,decisionCount:previous.decisionCount+driver.decisionCount,decisionIds:[...previous.decisionIds,...driver.decisionIds]}:driver);
+    return map;
+  },new Map<ValueDriverId,ValueDriverCard>()).values()];
   const drivers = OVERVIEW_ORDER.map((id) =>
-    allDrivers.find((d) => d.id === id),
+    uniqueDrivers.find((d) => d.id === id),
   ).filter(Boolean) as ValueDriverCard[];
 
-  const hiddenDrivers = allDrivers.filter(
+  const hiddenDrivers = uniqueDrivers.filter(
     (d) => !OVERVIEW_ORDER.includes(d.id),
   );
 
@@ -254,11 +265,11 @@ export function buildValueOverview(
   ];
   const closed: ClosedValueRow[] = closedIds
     .map((id) => {
-      const r = getDecisionRecord(id);
+      const r = verified.find(record=>record.id===id);
       if (!r?.verifiedValue) return null;
-      const verifiedAmt = r.verifiedValue.amount;
-      const expected = r.expectedContributionImpact ?? verifiedAmt;
-      const observed = r.actualContributionImpact ?? verifiedAmt;
+      const verifiedAmt = money.toDisplay(r,r.verifiedValue.amount);
+      const expected = money.toDisplay(r,r.expectedContributionImpact ?? r.verifiedValue.amount);
+      const observed = money.toDisplay(r,r.actualContributionImpact ?? r.verifiedValue.amount);
       return {
         decisionId: id,
         displayId: displayDecisionId(id),
@@ -277,8 +288,10 @@ export function buildValueOverview(
   const miss = misses[0] ?? TERRACE_DEMAND_FADE_MISS;
 
   return {
+    currency: agg.currency,
+    currencyLabel: agg.currencyLabel,
     verifiedTotal: agg.verifiedTotal,
-    verifiedFormatted: formatDecisionMoney(agg.verifiedTotal),
+    verifiedFormatted: formatDecisionMoney(agg.verifiedTotal, agg.currency),
     decisionCount: agg.decisionIdsVerified.length,
     priorMtd: prior,
     deltaPct,
@@ -289,6 +302,7 @@ export function buildValueOverview(
     driversSum,
     reconciles: driversSum === agg.verifiedTotal,
     miss,
+    hasMiss: scopedDecisionsForDemo(recordsOverride ?? listDecisionRecords(),role,vertical).some(record=>record.id===miss.decisionId),
     proof: recordsOverride ? (verified[0] ? euroTraceForDecision(verified[0].id) : null) : euroTraceForDecision(DECISION_IDS.supplier),
     closed,
     trend: buildVerifiedValueTrend(role, vertical, recordsOverride),

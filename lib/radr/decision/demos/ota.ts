@@ -22,7 +22,7 @@ export function buildOtaDecisionRecord(
       operationalRisk: "low" as const,
       confidence: 88,
       timeToResult: "Immediate",
-      note: "€4.200 perishes to OTA commission drag",
+      note: "$4.200 perishes to OTA commission drag",
       isNoAction: true,
     },
     {
@@ -115,7 +115,7 @@ export function buildOtaDecisionRecord(
       {
         id: "ev_adr",
         label: "ADR uplift",
-        value: "+€26",
+        value: "+$26",
         source: "Historical weekends",
         freshness: "18 dates",
       },
@@ -125,7 +125,7 @@ export function buildOtaDecisionRecord(
       { type: "channel", id: "ch_ota", label: "OTA mix" },
     ],
     baselinePrediction: "Direct-fill 73% if held 72h",
-    noActionOutcome: "€4.200 commission drag on demand that can fill direct",
+    noActionOutcome: "$4.200 commission drag on demand that can fill direct",
     options,
     recommendedOptionId: "hold_72h",
     recommendationHeadline: "Hold premium rooms direct 72 hours",
@@ -267,7 +267,7 @@ export function buildOtaDecisionRecord(
       {
         epistemic: "ESTIMATED",
         title: "Commission drag",
-        body: "€4.200 contribution exposed to OTA commission on demand that can still fill direct.",
+        body: "$4.200 contribution exposed to OTA commission on demand that can still fill direct.",
       },
       {
         epistemic: "PREDICTED",
@@ -378,7 +378,7 @@ export function buildOtaDecisionRecord(
           id: "le_ota_08",
           at: "18:00",
           kind: "verify",
-          title: `3/4 sold direct · €${CANON_OTA.actualProtectedEuro.toLocaleString("de-DE")} protected`,
+          title: `3/4 sold direct · $${CANON_OTA.actualProtectedEuro.toLocaleString("de-DE")} protected`,
           amountEuro: CANON_OTA.actualProtectedEuro,
           statusAfter: "VERIFIED",
         },

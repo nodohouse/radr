@@ -31,6 +31,7 @@ import { selectNeedsJudgmentCount } from "@/lib/radr/product/selectNeedsJudgment
 import { useDemoOrg } from "@/components/product/useDemoOrg";
 import { useProduct } from "@/lib/product/store";
 import { ForecastExplain } from "./ForecastExplain";
+import { CANON_PEAK } from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { OperatingDayChart } from "./OperatingDayChart";
 import { OperatingCalendar } from "./OperatingCalendar";
@@ -111,7 +112,7 @@ export function LiveCommandSurface({
     (needsDecisionId === DECISION_IDS.peak ? "Wait 12 minutes" : null);
   const needsEconomic =
     peakDecision?.economicFormatted ??
-    (needsDecisionId === DECISION_IDS.peak ? "€620" : null);
+    (needsDecisionId === DECISION_IDS.peak ? formatDecisionMoney(CANON_PEAK.expectedProtectedEuro) : null);
   const materialSignal = surface.stock.items[0];
   const st = day.status;
   const needJudgment = selectNeedsJudgmentCount({

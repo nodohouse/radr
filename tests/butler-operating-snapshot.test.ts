@@ -25,7 +25,7 @@ describe("butler tools", () => {
     const a = resolveButlerQuery("Show cancellations tonight", ctx);
     expect(a.toolUsed).toBe("get_cancellations");
     expect(a.evidence.length).toBeGreaterThan(0);
-    expect(a.answer).toMatch(/€|EUR|exposure|cancel/i);
+    expect(a.answer).toMatch(/\$|USD|exposure|cancel/i);
   });
 
   it("compares berlin and paris without inventing math", () => {

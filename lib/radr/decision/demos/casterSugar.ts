@@ -24,13 +24,13 @@ export function buildCasterSugarDecisionRecord(
         {
           type: "EXPECTED_PROTECTED",
           value: EXPOSURE,
-          currency: "EUR",
+          currency: "USD",
           label: "Contribution protected",
           status: "EXPECTED",
         },
         {
           type: "QUALITATIVE",
-          label: "Courier + sugar €28 · ETA 45 min",
+          label: "Courier + sugar $28 · ETA 45 min",
           status: "EXPECTED",
         },
       ],
@@ -53,7 +53,7 @@ export function buildCasterSugarDecisionRecord(
         {
           type: "EXPECTED_PROTECTED",
           value: 160,
-          currency: "EUR",
+          currency: "USD",
           label: "Contribution protected",
           status: "EXPECTED",
         },
@@ -81,7 +81,7 @@ export function buildCasterSugarDecisionRecord(
         {
           type: "EXPECTED_PROTECTED",
           value: 90,
-          currency: "EUR",
+          currency: "USD",
           label: "Contribution protected",
           status: "EXPECTED",
         },
@@ -103,7 +103,7 @@ export function buildCasterSugarDecisionRecord(
         {
           type: "EXPOSURE",
           value: EXPOSURE,
-          currency: "EUR",
+          currency: "USD",
           label: "Exposed if stockout",
           status: "EXPOSED",
         },
@@ -149,7 +149,7 @@ export function buildCasterSugarDecisionRecord(
       at: "14:18",
       kind: "recommend" as const,
       title: "Emergency top-up prepared",
-      detail: "€28 · 45 min · policy GM ≤ €250",
+      detail: "$28 · 45 min · policy GM ≤ $250",
       statusAfter: "AWAITING_APPROVAL" as const,
     },
   ];
@@ -167,7 +167,7 @@ export function buildCasterSugarDecisionRecord(
     territories: ["BUY", "RECOVER"],
     title: "Restore caster sugar before pastry pull",
     problemStatement:
-      "Dry store reports 2 kg caster sugar vs 5 kg house par. Expected use tonight 2.4 kg. Projected stockout 19:40 — pastry pull and dessert 86 at risk (€186 exposure).",
+      "Dry store reports 2 kg caster sugar vs 5 kg house par. Expected use tonight 2.4 kg. Projected stockout 19:40 — pastry pull and dessert 86 at risk ($186 exposure).",
     currentState:
       "Observed 2.0 kg · Par 5.0 kg · Gap 3.0 kg · Voice capture confirmed 14:12 · Confidence high.",
     property: "Soho · New York",
@@ -213,7 +213,7 @@ export function buildCasterSugarDecisionRecord(
       {
         id: "ev_sugar_exp",
         label: "Service exposure",
-        value: `€${EXPOSURE}`,
+        value: `$${EXPOSURE}`,
         source: "Contribution model",
         freshness: "Demo",
         grade: "ESTIMATED",
@@ -229,7 +229,7 @@ export function buildCasterSugarDecisionRecord(
       },
     ],
     baselinePrediction: "Stockout 19:40 → dessert / pastry failure",
-    noActionOutcome: `€${EXPOSURE} exposed · comps / complaints likely`,
+    noActionOutcome: `$${EXPOSURE} exposed · comps / complaints likely`,
     options,
     recommendedOptionId: "topup",
     expectedContributionImpact: EXPOSURE,
@@ -255,7 +255,7 @@ export function buildCasterSugarDecisionRecord(
     constraints: [
       "Do not auto-write procurement",
       "Physical inventory Decision — not AP invoice variance",
-      "GM may approve ≤ €250 under Supplier emergency order policy",
+      "GM may approve ≤ $250 under Supplier emergency order policy",
     ],
     decisionDeadline: "Decide by 19:25",
     decisionDeadlineAt: "2026-09-18T19:25:00+02:00",
@@ -274,7 +274,7 @@ export function buildCasterSugarDecisionRecord(
         {
           id: "ap_sug_2",
           provider: "Logistics",
-          title: "Dispatch bike courier · ETA 45 min · €28",
+          title: "Dispatch bike courier · ETA 45 min · $28",
           status: "READY",
           preparedOnly: true,
         },
@@ -310,7 +310,7 @@ export function buildCasterSugarDecisionRecord(
       historicalSuccessRate: 0.86,
       nHistorical: 9,
       neverFullyAutonomous: false,
-      reason: "Emergency stock restore stays prepared until GM approval (≤ €250).",
+      reason: "Emergency stock restore stays prepared until GM approval (≤ $250).",
     },
     whyBlocks: [
       {
@@ -326,7 +326,7 @@ export function buildCasterSugarDecisionRecord(
       {
         epistemic: "RECOMMENDED",
         title: "Emergency top-up",
-        body: "€28 · 45 min · protects €186 dessert/pastry contribution.",
+        body: "$28 · 45 min · protects $186 dessert/pastry contribution.",
       },
     ],
     locationDnaLine:

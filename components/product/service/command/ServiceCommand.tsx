@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { CANON_PEAK } from "@/lib/radr/decision/demo/canonical";
+import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useProduct } from "@/lib/product/store";
 import {
@@ -22,7 +24,7 @@ type Focus =
   | { kind: "demand"; id: string }
   | null;
 
-type Handling = "idle" | "handling" | "watching" | "verified";
+type Handling = "idle" | "prepared" | "handling" | "watching" | "verified";
 
 const VIEWS: { id: ServiceView; label: string }[] = [
   { id: "floor", label: "Floor" },
@@ -176,12 +178,12 @@ export function ServiceCommand() {
   const walkIns = Math.max(12, 21 + meta.shift * 2);
   const recoverable =
     handling === "verified"
-      ? "€0"
+      ? "$0"
       : handling === "handling" || handling === "watching"
-        ? "€414"
+        ? "$414"
         : meta.shift >= 2
-          ? "€620"
-          : "€498";
+          ? "$620"
+          : "$498";
 
   const tables = model.tables.filter((t) => t.zone === zone);
   const selectedTable = model.tables.find((t) => t.id === tableId);
@@ -215,16 +217,16 @@ export function ServiceCommand() {
       confidence: isWait || isTurn ? "High" : "Medium",
       outcomes: [
         { value: isWait ? `−${Math.min(16, wait - 5)} min` : "−8 min", label: "Expected wait / turn" },
-        { value: isWait ? "+€48" : "+€96", label: "Contribution" },
+        { value: isWait ? "+$48" : "+$96", label: "Contribution" },
         { value: "+8%", label: "Guest satisfaction" },
       ],
       doNothing: [
         { label: "Wait", value: isWait ? `${wait} → ${wait + 6} min` : "Slip +12 min" },
-        { label: "Recovered", value: "€0" },
+        { label: "Recovered", value: "$0" },
       ],
       withRadr: [
         { label: "Wait", value: isWait ? `${wait} → 5 min` : "On plan" },
-        { label: "Recovered", value: isWait ? "+€48" : "+€96" },
+        { label: "Recovered", value: isWait ? "+$48" : "+$96" },
       ],
     };
   }, [model, tableId, selectedTable, kitchenLoad]);
@@ -330,16 +332,8 @@ export function ServiceCommand() {
 
   const applyRec = () => {
     setApplyOpen(false);
-    setHandling("handling");
-    setToast("HANDLING · Expedite T8 · Pre-bus T6");
-    setTimeout(() => {
-      setHandling("watching");
-      setToast("WATCHING · Leading indicators within tolerance");
-    }, 2200);
-    setTimeout(() => {
-      setHandling("verified");
-      setToast("VERIFIED · +€84 contribution · linked to Value");
-    }, 4800);
+    setHandling("prepared");
+    setToast("Prepared for operator review. No systems changed; outcome awaiting evidence.");
     setTimeout(() => setToast(null), 7000);
   };
 
@@ -437,7 +431,7 @@ export function ServiceCommand() {
                         <span>RADR recommends</span>
                         <strong>Throttle delivery 12 min · expedite T8</strong>
                         <span>Expected</span>
-                        <strong className="sc-tone-pos">92% → 84% · +€620</strong>
+                        <strong className="sc-tone-pos">92% → 84% · +{formatDecisionMoney(CANON_PEAK.expectedProtectedEuro)}</strong>
                       </div>
                     ) : null}
                   </div>
@@ -460,7 +454,7 @@ export function ServiceCommand() {
             <span>
               Expected:{" "}
               <strong className="sc-tone-pos">
-                {isCfo ? "+€620 protected" : "+€620 · −12 min wait"}
+                {`+${formatDecisionMoney(CANON_PEAK.expectedProtectedEuro)} expected contribution · −12 min wait`}
               </strong>
             </span>
           </div>
@@ -471,7 +465,7 @@ export function ServiceCommand() {
               disabled={handling === "verified"}
               onClick={() => setApplyOpen(true)}
             >
-              {handling === "idle" ? "Apply plan" : handling === "verified" ? "Verified" : "Handling…"}
+              {handling === "idle" ? "Review plan" : "Prepared for review"}
             </button>
             <button type="button" className="sc-btn-ghost" onClick={() => setInsightOpen(true)}>
               Details
@@ -768,35 +762,21 @@ export function ServiceCommand() {
       ) : null}
 
       {applyOpen ? (
-        <Drawer title="Apply plan" onClose={() => setApplyOpen(false)}>
+        <Drawer title="Review prepared intervention" onClose={() => setApplyOpen(false)}>
           <h3>Actions</h3>
           <ul className="sc-apply-list">
-            <li>Expedite Table 8 mains</li>
-            <li>Pre-bus Table 6</li>
+            <li>{detail.recommendation}</li>
           </ul>
           <h3>Expected</h3>
-          <ul className="sc-insight-expect">
-            <li>
-              <strong>−14 min</strong>
-              <span>wait</span>
-            </li>
-            <li>
-              <strong>+€84</strong>
-              <span>contribution</span>
-            </li>
-            <li>
-              <strong>+12%</strong>
-              <span>guest satisfaction</span>
-            </li>
-          </ul>
+          <ul className="sc-insight-expect">{detail.outcomes.map(outcome=><li key={outcome.label}><strong>{outcome.value}</strong><span>{outcome.label}</span></li>)}</ul>
           <h3>Confidence</h3>
-          <p>87%</p>
+          <p>{detail.confidence} · table intervention evidence</p>
           <div className="sc-drawer-actions">
             <button type="button" className="sc-btn-secondary" onClick={() => setApplyOpen(false)}>
               Cancel
             </button>
             <button type="button" className="sc-btn-primary" onClick={applyRec}>
-              Apply
+              Prepare for review
             </button>
           </div>
         </Drawer>
@@ -997,7 +977,7 @@ function TableInspector({
                 <p className="sc-cfo-note">
                   <strong>Financial lens</strong>
                   <br />
-                  {detail.outcomes.find((o) => o.value.includes("€"))?.value ?? "+€84"}{" "}
+                  {detail.outcomes.find((o) => o.value.includes("$"))?.value ?? "+$84"}{" "}
                   contribution at risk. Delay compounds if the 20:10 wave is seated
                   without intervention.
                 </p>
@@ -1009,7 +989,7 @@ function TableInspector({
                   disabled={handling === "verified"}
                   onClick={onApply}
                 >
-                  Apply recommendation
+                  Review recommendation
                 </button>
                 <button type="button" className="sc-btn-secondary" onClick={onCompare}>
                   Compare impact
@@ -1062,7 +1042,7 @@ function TableInspector({
         {tab === "order" ? (
           <div className="sc-tab-block">
             <p>Course: Mains · Ticket age: {table?.waitMin ?? 19} min</p>
-            <p>Expected spend: €180 · Contribution at risk: €84</p>
+            <p>Expected spend: $180 · Contribution at risk: $84</p>
             <p>Items on hold: 2 mains (Hot)</p>
           </div>
         ) : null}

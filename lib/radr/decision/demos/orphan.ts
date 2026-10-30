@@ -90,6 +90,7 @@ export function buildOrphanDecisionRecord(
 
   const base: DecisionRecord = {
     id: DECISION_IDS.orphan,
+    sourceCurrency: "EUR",
     organizationId: "org_northstar",
     locationId: "loc_chiado_collective",
     operatingUnitId: "ou_chiado_units",

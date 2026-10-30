@@ -38,7 +38,7 @@ export function futuresFromCanon(
               {
                 type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
                 value: expected,
-                currency: "EUR",
+                currency: d.property.includes("New York") ? "USD" : "EUR",
                 label: s.value?.label ?? "Expected economic effect",
                 baseline: s.value?.comparedTo,
                 scope: s.value?.scope,

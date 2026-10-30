@@ -20,6 +20,9 @@ import {
   addOperatorContext,
 } from "@/lib/radr/decision/store";
 import { futuresFromCanon } from "@/lib/radr/decision/futures/fromCanon";
+import { CANON_PEAK } from "@/lib/radr/decision/demo/canonical";
+import { D1911_ECONOMICS } from "@/lib/radr/decision/economics/validator";
+import { currencyForRecord } from "@/lib/radr/product/demoMoney";
 import { CANON_BY_ID } from "@/lib/radr/decision/demo/canonical";
 import { incrementalVsNoActionEuro } from "@/lib/radr/decision/economics/moneyImpact";
 import {
@@ -75,11 +78,12 @@ function freshnessLabel(
 function optionEconomics(
   o: CounterfactualOption,
   resolved: boolean,
+  currency = "USD",
 ): ReactNode {
   if (o.economicMetrics?.length) {
     return o.economicMetrics.map((m) => (
       <span key={`${m.type}-${m.label}`}>
-        {m.value != null ? `${formatDecisionMoney(m.value)} · ` : null}
+        {m.value != null ? `${formatDecisionMoney(m.value, m.currency)} · ` : null}
         {m.label}
         {!resolved && m.status === "POTENTIAL" ? " · pending" : null}
         {resolved && m.status === "VERIFIED" && m.baseline
@@ -96,7 +100,7 @@ function optionEconomics(
   }
   return (
     <span>
-      {formatDecisionMoney(euro)} expected economic effect
+      {formatDecisionMoney(euro, currency)} expected economic effect
     </span>
   );
 }
@@ -104,12 +108,13 @@ function optionEconomics(
 function optionEconomicEffectText(
   o: CounterfactualOption,
   resolved: boolean,
+  currency = "USD",
 ): string {
   if (o.economicMetrics?.length) {
     return o.economicMetrics
       .map((m) => {
         const parts = [
-          m.value != null ? formatDecisionMoney(m.value) : null,
+          m.value != null ? formatDecisionMoney(m.value, m.currency) : null,
           m.label,
           !resolved && m.status === "POTENTIAL" ? "pending" : null,
         ].filter(Boolean);
@@ -120,8 +125,8 @@ function optionEconomicEffectText(
   if (o.economicEffectNote) return o.economicEffectNote;
   const euro = optionEconomicEuro(o);
   if (euro == null) return "Not yet modeled";
-  if (o.isNoAction && euro === 0) return "€0 · baseline";
-  return formatDecisionMoney(euro);
+  if (o.isNoAction && euro === 0) return "Baseline path · no incremental contribution";
+  return formatDecisionMoney(euro, currency);
 }
 
 function ExactOptionMatrix({
@@ -130,12 +135,14 @@ function ExactOptionMatrix({
   resolved,
   onSelect,
   mainRiskFallback,
+  currency,
 }: {
   options: CounterfactualOption[];
   selected: string;
   resolved: boolean;
   onSelect: (id: string) => void;
   mainRiskFallback?: string;
+  currency: string;
 }) {
   return (
     <div className="rp-drec-matrix" data-open="true">
@@ -179,7 +186,7 @@ function ExactOptionMatrix({
                   </th>
                   <td>
                     <span className="rp-drec-exact-euro">
-                      {optionEconomicEffectText(o, resolved)}
+                      {optionEconomicEffectText(o, resolved, currency)}
                     </span>
                   </td>
                   <td>{bandLabel(o.guestImpact)}</td>
@@ -202,6 +209,7 @@ function ExactOptionMatrix({
 }
 
 export function DecisionRecordView({ record, onChange }: Props) {
+  const money = (amount: number) => formatDecisionMoney(amount, currencyForRecord(record));
   const band = attentionBandOf(record.status);
   const primary = formatPrimaryMetric(record);
   const policyRef = policyRefForDecision({
@@ -391,7 +399,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
             aspect="4/3"
             overlay={
               <>
-                <span className="rp-scene-place">Mercer House · New York</span>
+                <span className="rp-scene-place">Amsterdam hotel · European source comparison</span>
                 <span className="rp-scene-phase">ADR similar · GOP different</span>
               </>
             }
@@ -401,7 +409,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
             aspect="4/3"
             overlay={
               <>
-                <span className="rp-scene-place">Soho · New York</span>
+                <span className="rp-scene-place">Berlin hotel · European source comparison</span>
                 <span className="rp-scene-phase">
                   Comparable commercial · different profit
                 </span>
@@ -415,6 +423,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
         <div className="rp-drec-head-meta">
           <span className="rp-cc-id">{displayDecisionId(record.id)}</span>
           <span>{record.property}</span>
+          <span>{record.sourceCurrency ? "Source" : "Local"} currency {currencyForRecord(record)}</span>
           <span className="rp-drec-status-pill" data-band={band}>
             {lifecycleLabel(record.status)}
           </span>
@@ -569,7 +578,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
                     { from: "arr", to: "risk" },
                     { from: "f3", to: "risk" },
                   ]}
-                  exposure={{ label: "Protected", value: "€1,840" }}
+                  exposure={{ label: "Protected", value: money(record.expectedContributionImpact) }}
                   footer="Reassign 2 attendants · protect check-in without calling extra labor."
                 />
               ) : whyNowFacts.length ? (
@@ -638,7 +647,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
                   <p>
                     Temporary fix used {record.debt.temporaryFixesUsed}× in{" "}
                     {record.debt.windowLabel}. Cumulative exposure{" "}
-                    {formatDecisionMoney(record.debt.cumulativeExposureEuro)}.
+                    {money(record.debt.cumulativeExposureEuro)}.
                   </p>
                   <p className="rp-drec-quiet">
                     {record.debt.structuralRecommendation}
@@ -697,6 +706,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
                   resolved={resolved}
                   onSelect={setSelected}
                   mainRiskFallback={record.mainRiskNarrative}
+                  currency={currencyForRecord(record)}
                 />
               ) : null}
             </section>
@@ -712,7 +722,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
                       onClick={() => setSelected(o.id)}
                     >
                       <strong>{o.title}</strong>
-                      {optionEconomics(o, resolved)}
+                      {optionEconomics(o, resolved, currencyForRecord(record))}
                       <span>
                         Guest {o.guestImpact} · forecast confidence{" "}
                         {forecastBand(o.confidence)}
@@ -757,17 +767,17 @@ export function DecisionRecordView({ record, onChange }: Props) {
               <div className="rp-droom-baseline-grid">
                 <div>
                   <em>Seat-now · baseline</em>
-                  <strong>€0</strong>
-                  <span>incremental €0 · absolute covers ≈ €410</span>
+                  <strong>{money(0)}</strong>
+                  <span>incremental {money(0)} · absolute covers ≈ {money(D1911_ECONOMICS.options.find(o => o.isBaseline)?.economics.absoluteExpectedContribution ?? 0)}</span>
                 </div>
                 <div data-selected="true">
                   <em>Selected · Wait 12</em>
-                  <strong data-semantic="positive">+€620</strong>
+                  <strong data-semantic="positive">+{money(CANON_PEAK.expectedProtectedEuro)}</strong>
                   <span>incremental vs seat-now · not vs plan</span>
                 </div>
                 <div>
                   <em>Throttle delivery</em>
-                  <strong data-semantic="positive">+€180</strong>
+                  <strong data-semantic="positive">+{money(CANON_PEAK.scenarios.find(s => s.id === "hard_stop")?.expectedContributionEuro ?? 0)}</strong>
                   <span>incremental vs seat-now · not vs plan</span>
                 </div>
               </div>
@@ -780,8 +790,8 @@ export function DecisionRecordView({ record, onChange }: Props) {
                   <em>{noActionOption!.title}</em>
                   <strong>
                     {noActionOption!.expectedContributionEuro != null
-                      ? formatDecisionMoney(noActionOption!.expectedContributionEuro)
-                      : "€0"}
+                      ? money(noActionOption!.expectedContributionEuro)
+                      : money(0)}
                   </strong>
                   <span>{noActionOption!.note ?? "Cost of doing nothing"}</span>
                 </div>
@@ -789,7 +799,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
                   <em>Selected · {recommendedOption!.title}</em>
                   <strong data-semantic="positive">
                     {recommendedOption!.expectedContributionEuro != null
-                      ? formatDecisionMoney(recommendedOption!.expectedContributionEuro)
+                      ? money(recommendedOption!.expectedContributionEuro)
                       : primary?.money ?? "—"}
                   </strong>
                   <span>Recommended path</span>
@@ -799,7 +809,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
                   <div>
                     <em>Incremental</em>
                     <strong data-semantic="positive">
-                      {formatDecisionMoney(
+                      {money(
                         recommendedOption!.expectedContributionEuro -
                           noActionOption!.expectedContributionEuro,
                       )}
@@ -857,7 +867,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
                 {record.outcomeDetail?.summary ??
                   record.observedOutcome ??
                   (record.verifiedValue
-                    ? `${formatDecisionMoney(record.verifiedValue.amount)} ${record.verifiedValue.kind}`
+                    ? `${money(record.verifiedValue.amount)} ${record.verifiedValue.kind}`
                     : resolved
                       ? "Observed after action"
                       : null)}
@@ -915,7 +925,7 @@ export function DecisionRecordView({ record, onChange }: Props) {
               ) : null}
               {resolved && record.verifiedValue ? (
                 <p className="rp-drec-quiet">
-                  {formatDecisionMoney(record.verifiedValue.amount)} matched ·{" "}
+                  {money(record.verifiedValue.amount)} matched ·{" "}
                   {record.verifiedValue.note ??
                     record.verificationDetail?.comparedTo ??
                     "Evidence chain"}

@@ -308,6 +308,7 @@ function buildInsight(rows: LocationRow[], sort: LocationsSort): string {
   if (bad.length === 1) {
     return `${bad[0]!.name} requires attention — ${bad[0]!.headline.toLowerCase()}. Primary driver: ${bad[0]!.primaryDriver}.`;
   }
+  if(rows.length===1&&rows[0]!.contributionVsPlanPct<0)return `${rows[0]!.name} contribution is ${Math.abs(rows[0]!.contributionVsPlanPct)}% behind plan. Review ${rows[0]!.primaryDriver.toLowerCase()}.`;
   return "Portfolio contribution is healthy. Protect outperforming sites and promote transferable playbooks.";
 }
 

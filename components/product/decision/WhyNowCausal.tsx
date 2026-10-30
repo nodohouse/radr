@@ -1,5 +1,8 @@
 "use client";
 
+import { CANON_PEAK } from "@/lib/radr/decision/demo/canonical";
+import { formatDecisionMoney } from "@/lib/radr/decision/core";
+
 /**
  * Causal / relationship diagram for Decision "Why now" —
  * one relationship visual, not a metric tile soup.
@@ -146,16 +149,16 @@ export const PEAK_WHY_NOW = {
       ],
     },
   ],
-  exposure: { label: "At stake", value: "€620" },
+  exposure: { label: "At stake", value: formatDecisionMoney(CANON_PEAK.expectedProtectedEuro) },
   footer: "Empty tables are not free capacity when kitchen ≥90% and inbound is already forming.",
 };
 
 export const SUPPLIER_WHY_NOW = {
   nodes: [
-    { id: "contract", label: "Contract", value: "€6.80/L", tone: "ok" as const },
-    { id: "invoice", label: "Invoice", value: "€7.45/L", tone: "risk" as const },
+    { id: "contract", label: "Contract", value: "$6.80/L", tone: "ok" as const },
+    { id: "invoice", label: "Invoice", value: "$7.45/L", tone: "risk" as const },
     { id: "qty", label: "Delivery", value: "420 L" },
-    { id: "var", label: "Variance", value: "€273", tone: "risk" as const },
+    { id: "var", label: "Variance", value: "$273", tone: "risk" as const },
     { id: "usage", label: "Usage", value: "+4%", tone: "watch" as const },
     { id: "contrib", label: "Dish contrib", value: "−13.2%", tone: "risk" as const },
   ],

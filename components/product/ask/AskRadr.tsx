@@ -19,6 +19,8 @@ import type {
 } from "@/lib/radr/butler/types";
 import { AskAnswer } from "./AskAnswer";
 import { useAskRadr } from "./AskRadrContext";
+import { getRadrEnvironment, isSyntheticData } from "@/lib/radr/env";
+import { toCanonicalLocationId } from "@/lib/radr/product/locationIds";
 import { ProductBrand } from "../ProductBrand";
 import { useDemoOrg } from "../useDemoOrg";
 import { findingsForScope } from "@/lib/radr/findings";
@@ -104,6 +106,7 @@ export function AskRadr() {
       locationScope,
       period,
       role,
+      organizationId: org.id,
       allowedLocationIds: allowed,
       page: pathname,
       defaultLocationId,
@@ -119,6 +122,7 @@ export function AskRadr() {
     period,
     role,
     pathname,
+    org.id,
     defaultLocationId,
     comparisonLocationIds,
     seed?.entityId,
@@ -186,6 +190,12 @@ export function AskRadr() {
         return;
       }
 
+      if (isSyntheticData(getRadrEnvironment()) && (org.id !== "org_northstar_restaurants" || toCanonicalLocationId(locationScope) !== "loc_berlin_mitte")) {
+        setAskedQuery(query);
+        setThinking(false);
+        setResponse({title:"Choose a supported demo location",summary:"The public Ask demo is scoped to Soho · New York. Select Soho to review its Decisions. Other locations are not connected to this Ask demo.",answer:"No answer was generated for a different location.",actions:[],evidence:[],toolUsed:"none",topic:"general"});
+        return;
+      }
       setShowCommands(false);
       setConfirmWrite(false);
       setAskedQuery(query);
@@ -291,7 +301,7 @@ export function AskRadr() {
         setThinking(false);
       }
     },
-    [butlerCtx, session, locationScope, period, pathname, role, seed, lens, serviceTime, selectedFindingId],
+    [butlerCtx, org.id, session, locationScope, period, pathname, role, seed, lens, serviceTime, selectedFindingId],
   );
 
   useEffect(() => {

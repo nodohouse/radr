@@ -5,6 +5,7 @@
  * D-1911 = hold/pace seating — never “Add FOH” when grill is the constraint.
  */
 
+import { CANON_PEAK } from "@/lib/radr/decision/demo/canonical";
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
 import { LIVE_SCENARIO } from "@/lib/radr/demoClock";
 
@@ -130,8 +131,8 @@ export const D1911_CC_DECISION: RestaurantGmDecisionCanon = {
   action: "Hold next seating wave for 12 min",
   supporting:
     "Kitchen pressure is forecast to peak at 20:10 while inbound covers remain above plan. Pace seating briefly to protect ticket time, guest satisfaction and contribution.",
-  expectedEuro: 620,
-  confidencePct: 82,
+  expectedEuro: CANON_PEAK.expectedProtectedEuro,
+  confidencePct: CANON_PEAK.scenarios.find(scenario=>scenario.id===CANON_PEAK.chosenScenarioId)?.confidence ?? 0,
   deadlineLabel: "19:59",
   bannedAction: "Add 1 FOH for the peak window",
 };

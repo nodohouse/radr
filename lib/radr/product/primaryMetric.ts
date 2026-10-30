@@ -1,3 +1,4 @@
+import { currencyForRecord } from "./demoMoney";
 /**
  * Primary metric presentation per Decision — from Canon, never invented in UI.
  */
@@ -24,7 +25,7 @@ import {
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { attentionBandOf } from "@/lib/radr/decision/lifecycle";
 
-export function primaryMetricOf(r: DecisionRecord): MetricPresentation | null {
+function rawPrimaryMetricOf(r: DecisionRecord): MetricPresentation | null {
   const band = r.attentionOverride ?? attentionBandOf(r.status);
   const verified =
     band === "verified" || band === "learned"
@@ -290,6 +291,11 @@ export function primaryMetricOf(r: DecisionRecord): MetricPresentation | null {
   }
 }
 
+export function primaryMetricOf(r: DecisionRecord): MetricPresentation | null {
+  const metric = rawPrimaryMetricOf(r);
+  return metric ? { ...metric, currency: currencyForRecord(r) } : null;
+}
+
 export function formatPrimaryMetric(r: DecisionRecord): {
   money: string;
   caption: string;
@@ -297,7 +303,7 @@ export function formatPrimaryMetric(r: DecisionRecord): {
   const m = primaryMetricOf(r);
   if (!m) return null;
   return {
-    money: formatDecisionMoney(m.value),
+    money: formatDecisionMoney(m.value, m.currency),
     caption: metricCaption(m),
   };
 }

@@ -1,5 +1,8 @@
 "use client";
 
+import { CANON_PEAK, CANON_MENU_PEAK } from "@/lib/radr/decision/demo/canonical";
+import { formatDecisionMoney } from "@/lib/radr/decision/core";
+
 import { useEffect, useState } from "react";
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
 import { LIVE_SCENARIO } from "@/lib/radr/demoClock";
@@ -30,7 +33,7 @@ const PEAK_REPLAY: ReplayBeat[] = [
   {
     at: "19:39",
     title: "Recommendation prepared",
-    detail: "Wait 12 minutes · €620 expected incremental contribution vs seat-now",
+    detail: `Wait 12 minutes · ${formatDecisionMoney(CANON_PEAK.expectedProtectedEuro)} expected incremental contribution vs seat-now`,
     kind: "recommend",
   },
   {
@@ -66,13 +69,13 @@ const PEAK_REPLAY: ReplayBeat[] = [
   {
     at: LIVE_SCENARIO.outcomeCalculatedClock,
     title: "Outcome calculated",
-    detail: "€590 observed incremental contribution",
+    detail: `${formatDecisionMoney(CANON_PEAK.actualProtectedEuro)} observed incremental contribution`,
     kind: "observe",
   },
   {
     at: "Next day",
     title: "Value verified",
-    detail: "€590 verified incremental · strongly attributed",
+    detail: `${formatDecisionMoney(CANON_PEAK.actualProtectedEuro)} verified incremental · strongly attributed`,
     kind: "verify",
   },
   {
@@ -116,14 +119,14 @@ const MENU_REPLAY: ReplayBeat[] = [
   },
   {
     at: "Verified",
-    title: "€610 verified",
+    title: `${formatDecisionMoney(CANON_MENU_PEAK.actualProtectedEuro)} verified`,
     detail: "MODELED attribution · playbook v3",
     kind: "verify",
   },
   {
     at: "Memory",
     title: "Playbook",
-    detail: "When kitchen ≥90% and dish €/min weak: de-emphasize peak window only",
+    detail: "When kitchen ≥90% and dish $/min weak: de-emphasize peak window only",
     kind: "learn",
   },
 ];

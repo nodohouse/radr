@@ -1,11 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { resetDecisionStore } from "@/lib/radr/decision/store";
+import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
+import { describe, expect, it, beforeEach } from "vitest";
 import {
   nextSession,
   resolveButlerIntelligence,
 } from "@/lib/radr/butler/tools";
 import { buildButlerOpening } from "@/lib/radr/butler/opening";
-import { findingsForScope } from "@/lib/radr/findings";
-import { currentExposureFromFindings } from "@/lib/radr/valueSemantics";
 import { getVerifiedValueFromScenarios } from "@/lib/radr/scenarios/store";
 import { BERLIN_RESERVATION_SUMMARY } from "@/lib/radr/reservationDemo";
 import { buildLocationTonightPulse } from "@/lib/radr/servicePulse";
@@ -27,6 +27,7 @@ const ctx = {
 };
 
 describe("Ask RADR tool-grounded intelligence", () => {
+  beforeEach(() => resetDecisionStore());
   it("opens with contextual intelligence, not a command list", () => {
     const opening = buildButlerOpening(ctx);
     expect(opening.greeting).toMatch(/Good /);
@@ -38,7 +39,7 @@ describe("Ask RADR tool-grounded intelligence", () => {
       opening.rightNow.exposureLabel || opening.rightNow.attentionLabel,
     ).toBeTruthy();
     expect(opening.exposureEuro).toBe(
-      currentExposureFromFindings(findingsForScope("loc_ber")),
+      deriveValueAggregate("gm", "restaurant").activeExposureOrOpportunity,
     );
   });
 
@@ -69,7 +70,7 @@ describe("Ask RADR tool-grounded intelligence", () => {
     session = nextSession(session, "Why?", why);
     const rec = resolveButlerIntelligence("What would you do?", ctx, session);
     expect(rec.pendingWrite).toBeTruthy();
-    expect(rec.recommendation?.costValue).toBe("€68");
+    expect(rec.recommendation?.costValue).toBe("$68");
     expect(rec.recommendation?.protectValue).toMatch(/290/);
 
     session = nextSession(session, "What would you do?", rec);
@@ -148,13 +149,16 @@ describe("Ask RADR tool-grounded intelligence", () => {
       "Did we recover the Table 14 cancellation?",
       ctx,
     );
-    expect(t.impactEuro).toBe(184);
+    expect(t.impactEuro).toBe(0);
+    expect(t.answer).toMatch(/no verified|awaiting|pending/i);
+    expect(t.answer).toContain("184");
 
     const s = resolveButlerIntelligence(
       "How much did they actually spend?",
       ctx,
     );
-    expect(s.impactEuro).toBe(184);
+    expect(s.impactEuro).toBe(0);
+    expect(s.answer).toMatch(/pending|awaiting|no verified/i);
   });
 
   it("16–17. verified month + €408 origin", () => {
@@ -162,8 +166,8 @@ describe("Ask RADR tool-grounded intelligence", () => {
       "How much value has RADR verified this month?",
       ctx,
     );
-    // Scenario SoT only — never illustrative catalog YTD
-    expect(v.impactEuro).toBe(184);
+    // Current Decision ledger, scoped to Soho, rather than a historical scenario replay.
+    expect(v.impactEuro).toBe(deriveValueAggregate("gm", "restaurant").verifiedTotal);
     expect(getVerifiedValueFromScenarios().verified).toBe(184);
 
     const o = resolveButlerIntelligence(

@@ -194,7 +194,7 @@ export const CANON_TUNA: CanonDecision = {
       operationalRisk: "high",
       guestImpact: "high",
       confidence: 90,
-      note: "Sellout ~20:10 · €1,840 contribution exposed",
+      note: "Sellout ~20:10 · $1,840 contribution exposed",
       isNoAction: true,
     },
     {
@@ -263,8 +263,8 @@ export const CANON_TUNA: CanonDecision = {
     { label: "Shortfall", value: "6 portions" },
     { label: "Kitchen utilization", value: "91%" },
     { label: "Substitute acceptance", value: "71%" },
-    { label: "Rush path expected contribution", value: "€1,520" },
-    { label: "Feature-swap expected contribution", value: "€1,640" },
+    { label: "Rush path expected contribution", value: "$1,520" },
+    { label: "Feature-swap expected contribution", value: "$1,640" },
   ],
 };
 
@@ -299,7 +299,7 @@ export const CANON_PEAK: CanonDecision = {
         {
           type: "INCREMENTAL_CONTRIBUTION",
           value: 0,
-          currency: "EUR",
+          currency: "USD",
           label: "Baseline · no incremental contribution vs wait path",
           baseline: "vs wait-12 path",
           scope: "Peak service · Soho · New York",
@@ -309,7 +309,7 @@ export const CANON_PEAK: CanonDecision = {
       ],
       value: {
         amount: 0,
-        currency: "EUR",
+        currency: "USD",
         metricType: "INCREMENTAL_CONTRIBUTION",
         scope: "Peak service · Soho · New York",
         horizon: "tonight",
@@ -334,7 +334,7 @@ export const CANON_PEAK: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 180,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental contribution",
           baseline: "vs seat-now",
           scope: "Peak service · Soho · New York",
@@ -344,7 +344,7 @@ export const CANON_PEAK: CanonDecision = {
       ],
       value: {
         amount: 180,
-        currency: "EUR",
+        currency: "USD",
         metricType: "INCREMENTAL_CONTRIBUTION",
         scope: "Peak service · Soho · New York",
         horizon: "tonight",
@@ -368,7 +368,7 @@ export const CANON_PEAK: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 620,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental contribution",
           baseline: "vs seat-now",
           scope: "Tonight's dinner service · Soho · New York",
@@ -378,7 +378,7 @@ export const CANON_PEAK: CanonDecision = {
       ],
       value: {
         amount: 620,
-        currency: "EUR",
+        currency: "USD",
         metricType: "EXPECTED_INCREMENTAL_CONTRIBUTION",
         scope: "Tonight's dinner service · Soho · New York",
         horizon: "tonight · decide by 19:59",
@@ -391,7 +391,7 @@ export const CANON_PEAK: CanonDecision = {
       mainRiskDescription: "Walk-in abandonment during the 12-minute hold",
       guestImpact: "low",
       confidence: 78,
-      note: "+€620 expected incremental contribution vs seat-now · hold 2 tables · throttle delivery · feature fast dish · resume 20:00",
+      note: "+$620 expected incremental contribution vs seat-now · hold 2 tables · throttle delivery · feature fast dish · resume 20:00",
       recommended: true,
     },
   ],
@@ -423,7 +423,7 @@ export const CANON_PEAK: CanonDecision = {
       "Holding two walk-in tables for 12 minutes protected second turns better than seating into a 92% kitchen with inbound covers.",
     playbookFrom: "Seat empty tables whenever walk-ins wait",
     playbookTo:
-      "When kitchen ≥90% and ≥30 covers inbound <25m: hold walk-ins · throttle delivery · feature high €/min dish",
+      "When kitchen ≥90% and ≥30 covers inbound <25m: hold walk-ins · throttle delivery · feature high $/min dish",
     nextTimeImpact:
       "Peak collision: wait-then-resume ranked ahead of seat-now when ticket time rising.",
   },
@@ -443,9 +443,9 @@ export const CANON_PEAK: CanonDecision = {
     { label: "Kitchen modeled capacity", value: "92%" },
     { label: "Delivery vs plan", value: "+31%" },
     { label: "Second-turn tables at risk", value: "9" },
-    { label: "Seat-now", value: "€0 incremental vs wait path · not €0 total covers" },
-    { label: "Wait-12 expected protected", value: "+€620 vs seat-now · tonight" },
-    { label: "Expected vs seat-now", value: "+€620" },
+    { label: "Seat-now", value: "$0 incremental vs wait path · not $0 total covers" },
+    { label: "Wait-12 expected protected", value: "+$620 vs seat-now · tonight" },
+    { label: "Expected vs seat-now", value: "+$620" },
     { label: "History · load >94% >15m", value: "tickets ≥17m · comps ↑" },
   ],
 };
@@ -476,18 +476,18 @@ export const CANON_OTA: CanonDecision = {
       expectedContributionEuro: 0,
       value: {
         amount: 0,
-        currency: "EUR",
+        currency: "USD",
         metricType: "INCREMENTAL_CONTRIBUTION",
         scope: "Remaining 4 premium rooms",
         horizon: "72h",
         comparedTo: "vs hold-direct allocation (baseline)",
-        label: "€0 incremental contribution vs hold path",
+        label: "$0 incremental contribution vs hold path",
         baselineId: "hold_72h",
       },
       operationalRisk: "low",
       guestImpact: "none",
       confidence: 88,
-      note: "Obvious fill · commission drag stands · not €0 room revenue",
+      note: "Obvious fill · commission drag stands · not $0 room revenue",
       isNoAction: true,
     },
     {
@@ -496,7 +496,7 @@ export const CANON_OTA: CanonDecision = {
       expectedContributionEuro: 1800,
       value: {
         amount: 1800,
-        currency: "EUR",
+        currency: "USD",
         metricType: "EXPECTED_PROTECTED",
         scope: "Remaining 4 premium rooms",
         horizon: "72h",
@@ -515,7 +515,7 @@ export const CANON_OTA: CanonDecision = {
       expectedContributionEuro: 3100,
       value: {
         amount: 3100,
-        currency: "EUR",
+        currency: "USD",
         metricType: "EXPECTED_PROTECTED",
         scope: "Remaining 4 premium rooms · Canal House",
         horizon: "72h",
@@ -574,7 +574,7 @@ export const CANON_OTA: CanonDecision = {
   /**
    * Unit path economics (1 premium room · 1 night) — channel quality illustration.
    * Not multiplied into expectedProtectedEuro: the Decision models the remaining
-   * block over 72h vs OTA-release baseline (€3,100 expected protected).
+   * block over 72h vs OTA-release baseline ($3,100 expected protected).
    */
   unitEconomics: {
     otaPath: {
@@ -594,7 +594,7 @@ export const CANON_OTA: CanonDecision = {
       horizon: "1 night",
     },
     blockNote:
-      "Unit path = channel quality on one premium room. Block expected protected (€3,100) = remaining 4 premium rooms · 72h · vs OTA release — not 4 × unit delta.",
+      "Unit path = channel quality on one premium room. Block expected protected ($3,100) = remaining 4 premium rooms · 72h · vs OTA release — not 4 × unit delta.",
   },
 };
 
@@ -756,7 +756,7 @@ export const CANON_LABOR: CanonDecision = {
       operationalRisk: "high",
       guestImpact: "high",
       confidence: 88,
-      note: "Guest waits compound · €840 contribution exposed",
+      note: "Guest waits compound · $840 contribution exposed",
       isNoAction: true,
     },
     {
@@ -805,8 +805,8 @@ export const CANON_LABOR: CanonDecision = {
   evidence: [
     { label: "Expected covers", value: "142" },
     { label: "Kitchen capacity", value: "94%" },
-    { label: "Add-FOH path", value: "€410 expected" },
-    { label: "Rebalance path", value: "€720 expected" },
+    { label: "Add-FOH path", value: "$410 expected" },
+    { label: "Rebalance path", value: "$720 expected" },
   ],
 };
 
@@ -818,14 +818,14 @@ export const CANON_SUPPLIER: CanonDecision = {
   property: "Soho · New York",
   title: "Contract vs invoice · contribution compression",
   problemLine:
-    "Supplier unit price +9.6%.\nInvoice variance €273 is the clue — dish contribution compressed 13.2% with menu price unchanged.",
+    "Supplier unit price +9.6%.\nInvoice variance $273 is the clue — dish contribution compressed 13.2% with menu price unchanged.",
   territories: ["BUY", "SELL"],
   detectionType: "LEAKAGE",
   horizon: "TACTICAL",
   scope: "ITEM",
   connect: "Contract × invoice × delivery × usage × menu",
   understand:
-    "This is not purely a menu-pricing problem. Price effect (€273 variance) and usage effect (+4%) are separate — normalize input cost before reprice.",
+    "This is not purely a menu-pricing problem. Price effect ($273 variance) and usage effect (+4%) are separate — normalize input cost before reprice.",
   prepared:
     "Dispute variance · hold next above-contract PO · check yield · do not reprice menu yet.",
   exposureEuro: 273,
@@ -838,7 +838,7 @@ export const CANON_SUPPLIER: CanonDecision = {
         {
           type: "SUPPLIER_VARIANCE",
           value: 273,
-          currency: "EUR",
+          currency: "USD",
           label: "Supplier variance remains exposed",
           scope: "Current invoice",
           status: "EXPOSED",
@@ -866,7 +866,7 @@ export const CANON_SUPPLIER: CanonDecision = {
         {
           type: "SUPPLIER_VARIANCE",
           value: 273,
-          currency: "EUR",
+          currency: "USD",
           label: "Potentially recoverable variance",
           scope: "Current invoice",
           status: "POTENTIAL",
@@ -886,7 +886,7 @@ export const CANON_SUPPLIER: CanonDecision = {
   actualProtectedEuro: 273,
   verifiedKind: "recovered",
   /** When Decision is VERIFIED, Futures UI shows this instead of potential baselines. */
-  verifiedOutcomeNote: "€273 credit memo matched to original invoice",
+  verifiedOutcomeNote: "$273 credit memo matched to original invoice",
   attributionStrength: "STRONGLY_ATTRIBUTED",
   sources: [
     { name: "Contract", freshness: "08:12" },
@@ -918,9 +918,9 @@ export const CANON_SUPPLIER: CanonDecision = {
       "Variance + usage watch gate before menu economics change.",
   },
   evidence: [
-    { label: "Contract", value: "€6.80/L" },
-    { label: "Invoice", value: "€7.45/L · 420 L" },
-    { label: "Price effect · invoice variance", value: "€273" },
+    { label: "Contract", value: "$6.80/L" },
+    { label: "Invoice", value: "$7.45/L · 420 L" },
+    { label: "Price effect · invoice variance", value: "$273" },
     { label: "Unit price", value: "+9.6%" },
     { label: "Usage effect", value: "+4%" },
     { label: "Menu price", value: "Unchanged" },
@@ -1082,10 +1082,10 @@ export const CANON_CREATED: CanonDecision = {
     nextTimeImpact: "Weather-hold terrace prep ranked ahead of wait.",
   },
   evidence: [
-    { label: "Gross opportunity", value: "€820" },
-    { label: "Expected net contribution", value: "€640" },
-    { label: "Observed net contribution", value: "€620" },
-    { label: "Verified incremental value", value: "€620 created" },
+    { label: "Gross opportunity", value: "$820" },
+    { label: "Expected net contribution", value: "$640" },
+    { label: "Observed net contribution", value: "$620" },
+    { label: "Verified incremental value", value: "$620 created" },
     { label: "Value category", value: "created" },
     { label: "Weather hold", value: "Clear · 17:40–19:10" },
   ],
@@ -1136,7 +1136,7 @@ export const CANON_TABLE: CanonDecision = {
       operationalRisk: "low",
       guestImpact: "low",
       confidence: 81,
-      note: "SMS prepared · same cover window · €184 potential recovered contribution",
+      note: "SMS prepared · same cover window · $184 potential recovered contribution",
       recommended: true,
     },
   ],
@@ -1162,10 +1162,10 @@ export const CANON_TABLE: CanonDecision = {
     nextTimeImpact: "Same-service recover ranked ahead of walk-in hold.",
   },
   evidence: [
-    { label: "Gross opportunity", value: "€210" },
-    { label: "Potential recovered contribution", value: "€184" },
-    { label: "Observed recovered contribution", value: "€184" },
-    { label: "Verified recovered value", value: "€184" },
+    { label: "Gross opportunity", value: "$210" },
+    { label: "Potential recovered contribution", value: "$184" },
+    { label: "Observed recovered contribution", value: "$184" },
+    { label: "Verified recovered value", value: "$184" },
     { label: "Value category", value: "recovered" },
     { label: "Waitlist party", value: "2 · confirmed 18:19" },
   ],
@@ -1192,7 +1192,7 @@ export const CANON_BESTSELLER: CanonDecision = {
   understand:
     "The bestseller is economically strong off-peak but creates weak capacity economics during peak — scarce kitchen capacity has a better alternative use.",
   prepared:
-    "De-emphasize 19:00–20:30 only · feature higher €/min dish · restore after peak.",
+    "De-emphasize 19:00–20:30 only · feature higher $/min dish · restore after peak.",
   exposureEuro: 940,
   deadline: "19:00",
   scenarios: [
@@ -1255,7 +1255,7 @@ export const CANON_BESTSELLER: CanonDecision = {
       "Peak de-emphasis protected contribution per kitchen minute — slightly under model on soft second turns.",
     playbookFrom: "Feature #1 all service",
     playbookTo:
-      "When kitchen ≥90% and dish €/min weak: de-emphasize peak window only",
+      "When kitchen ≥90% and dish $/min weak: de-emphasize peak window only",
     nextTimeImpact:
       "Friday peak: kitchen threshold adjusted for featuring rules.",
   },
@@ -1265,8 +1265,8 @@ export const CANON_BESTSELLER: CanonDecision = {
     { label: "LABOR · kitchen time vs peers", value: "+21%" },
     { label: "Ticket delay at peak", value: "+4 min" },
     { label: "Contribution / kitchen minute", value: "−18%" },
-    { label: "No-action baseline", value: "€0 · peak capacity burned" },
-    { label: "De-emphasize expected", value: "+€680 vs feature-through" },
+    { label: "No-action baseline", value: "$0 · peak capacity burned" },
+    { label: "De-emphasize expected", value: "+$680 vs feature-through" },
     { label: "Window", value: "19:00–20:30 only" },
   ],
 };
@@ -1280,7 +1280,7 @@ export const CANON_MENU_PEAK: CanonDecision = {
   property: "Soho · New York",
   title: "Signature dish profitable · destroying peak contribution",
   problemLine:
-    "Tuna Tataki is a menu-engineering STAR.\n€14.20 contribution · high sales — and −18% contribution per kitchen minute at peak.",
+    "Tuna Tataki is a menu-engineering STAR.\n$14.20 contribution · high sales — and −18% contribution per kitchen minute at peak.",
   territories: ["BUY", "LABOR", "SELL"],
   detectionType: "EXPOSURE",
   horizon: "SERVICE",
@@ -1288,7 +1288,7 @@ export const CANON_MENU_PEAK: CanonDecision = {
   connect:
     "Dish contribution × cold-station minutes × ticket time × second turns × substitutes",
   understand:
-    "Classic margin analysis keeps the STAR. At peak the dish consumes scarce cold-station capacity — constrained-resource economics says de-emphasize only 19:00–20:30 and feature a faster high €/min alternative.",
+    "Classic margin analysis keeps the STAR. At peak the dish consumes scarce cold-station capacity — constrained-resource economics says de-emphasize only 19:00–20:30 and feature a faster high $/min alternative.",
   prepared:
     "Keep the dish · de-emphasize 19:00–20:30 · feature Truffle Pasta · restore after peak.",
   exposureEuro: 940,
@@ -1302,14 +1302,14 @@ export const CANON_MENU_PEAK: CanonDecision = {
         {
           type: "INCREMENTAL_CONTRIBUTION",
           value: 0,
-          currency: "EUR",
-          label: "Baseline · peak capacity burned on weak €/min mix",
+          currency: "USD",
+          label: "Baseline · peak capacity burned on weak $/min mix",
           status: "EXPECTED",
         },
       ],
       operationalRisk: "high",
       riskLevel: "high",
-      mainRiskDescription: "Peak capacity burned on weak €/min mix",
+      mainRiskDescription: "Peak capacity burned on weak $/min mix",
       guestImpact: "medium",
       confidence: 86,
       note: "STAR volume holds · kitchen minutes burn · tickets stretch · second turns slip",
@@ -1323,7 +1323,7 @@ export const CANON_MENU_PEAK: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 220,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental contribution vs keep-mix",
           status: "EXPECTED",
         },
@@ -1343,7 +1343,7 @@ export const CANON_MENU_PEAK: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 180,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental contribution vs keep-mix",
           status: "EXPECTED",
         },
@@ -1363,7 +1363,7 @@ export const CANON_MENU_PEAK: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 410,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental contribution vs keep-mix",
           status: "EXPECTED",
         },
@@ -1383,7 +1383,7 @@ export const CANON_MENU_PEAK: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 680,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental contribution",
           baseline: "vs keep-current-mix",
           scope: "Tonight peak window · Soho · New York",
@@ -1428,11 +1428,11 @@ export const CANON_MENU_PEAK: CanonDecision = {
       "Peak-only de-emphasis protected contribution per kitchen minute without killing the signature dish.",
     playbookFrom: "Feature STAR all service",
     playbookTo:
-      "When kitchen ≥90% and dish €/min weak vs peer: de-emphasize peak window only",
-    nextTimeImpact: "Friday peak featuring rules prefer high €/min dishes.",
+      "When kitchen ≥90% and dish $/min weak vs peer: de-emphasize peak window only",
+    nextTimeImpact: "Friday peak featuring rules prefer high $/min dishes.",
   },
   evidence: [
-    { label: "Dish contribution", value: "€14.20" },
+    { label: "Dish contribution", value: "$14.20" },
     { label: "Classic menu class", value: "STAR" },
     { label: "Prep time vs category", value: "+21%" },
     { label: "Station at peak", value: "92% utilization" },
@@ -1485,7 +1485,7 @@ export const CANON_SOCIAL_DEMAND: CanonDecision = {
         {
           type: "EXPOSURE",
           value: 420,
-          currency: "EUR",
+          currency: "USD",
           label: "Contribution exposure remains if mix spike hits empty stock",
           status: "EXPOSED",
         },
@@ -1505,7 +1505,7 @@ export const CANON_SOCIAL_DEMAND: CanonDecision = {
         {
           type: "EXPECTED_PROTECTED",
           value: 310,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected protected contribution vs unaligned prep",
           scope: "Tonight · Soho · New York",
           status: "EXPECTED",
@@ -1591,7 +1591,7 @@ export const CANON_GUEST_VOICE: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: -180,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected contribution impact · labor cost without fixing bottleneck",
           status: "EXPECTED",
         },
@@ -1609,7 +1609,7 @@ export const CANON_GUEST_VOICE: CanonDecision = {
         {
           type: "EXPOSURE",
           value: 520,
-          currency: "EUR",
+          currency: "USD",
           label: "Contribution / reputation exposure remains",
           status: "EXPOSED",
         },
@@ -1627,7 +1627,7 @@ export const CANON_GUEST_VOICE: CanonDecision = {
         {
           type: "EXPECTED_PROTECTED",
           value: 390,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected protected contribution vs recurring Friday drag",
           status: "EXPECTED",
         },
@@ -1691,7 +1691,7 @@ export const CANON_MARGIN_COKE: CanonDecision = {
   property: "Soho · New York",
   title: "Beverage margin shock · Coca-Cola 330ml",
   problemLine:
-    "Supplier unit cost +€0.10 (+23.8%).\nThe obvious move is raise Coke — RADR asks which response is strongest.",
+    "Supplier unit cost +$0.10 (+23.8%).\nThe obvious move is raise Coke — RADR asks which response is strongest.",
   territories: ["BUY", "SELL"],
   detectionType: "EXPOSURE",
   horizon: "TACTICAL",
@@ -1699,7 +1699,7 @@ export const CANON_MARGIN_COKE: CanonDecision = {
   connect:
     "Supplier invoice × SKU × beverage menu × bundles × category contribution × location P&L",
   understand:
-    "Price needed to restore theoretical margin (€0.55) is not the Decision. Category rebalance may recover more contribution with less guest-price concentration — elasticity evidence is insufficient for a blunt raise.",
+    "Price needed to restore theoretical margin ($0.55) is not the Decision. Category rebalance may recover more contribution with less guest-price concentration — elasticity evidence is insufficient for a blunt raise.",
   prepared:
     "Category rebalance draft · negotiation pack · hold single-item raise pending approval",
   exposureEuro: 796,
@@ -1713,7 +1713,7 @@ export const CANON_MARGIN_COKE: CanonDecision = {
         {
           type: "INCREMENTAL_CONTRIBUTION",
           value: 0,
-          currency: "EUR",
+          currency: "USD",
           label: "Baseline · full exposure absorbed",
           status: "EXPECTED",
         },
@@ -1723,18 +1723,18 @@ export const CANON_MARGIN_COKE: CanonDecision = {
       mainRiskDescription: "Weekly contribution bleed compounds if surcharge persists",
       guestImpact: "none",
       confidence: 88,
-      note: "No guest price move · ~€184 / week exposure",
+      note: "No guest price move · ~$184 / week exposure",
       isNoAction: true,
     },
     {
       id: "raise_item",
-      title: "Raise Coke only (+€0.20)",
+      title: "Raise Coke only (+$0.20)",
       expectedContributionEuro: 142,
       economicMetrics: [
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 142,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental contribution vs absorb",
           baseline: "vs absorb",
           status: "EXPECTED",
@@ -1745,7 +1745,7 @@ export const CANON_MARGIN_COKE: CanonDecision = {
       mainRiskDescription: "PRICE RESPONSE UNCERTAIN — attach and volume risk",
       guestImpact: "medium",
       confidence: 54,
-      note: "Price-needed input €0.55 · elasticity evidence insufficient",
+      note: "Price-needed input $0.55 · elasticity evidence insufficient",
     },
     {
       id: "category_rebalance",
@@ -1755,7 +1755,7 @@ export const CANON_MARGIN_COKE: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 168,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental contribution vs absorb",
           baseline: "vs absorb",
           status: "EXPECTED",
@@ -1777,7 +1777,7 @@ export const CANON_MARGIN_COKE: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 110,
-          currency: "EUR",
+          currency: "USD",
           label: "Expected incremental if terms improve",
           status: "EXPECTED",
         },
@@ -1797,7 +1797,7 @@ export const CANON_MARGIN_COKE: CanonDecision = {
         {
           type: "EXPECTED_INCREMENTAL_CONTRIBUTION",
           value: 40,
-          currency: "EUR",
+          currency: "USD",
           label: "Option value of waiting 2 invoice cycles",
           status: "EXPECTED",
         },
@@ -1842,10 +1842,10 @@ export const CANON_MARGIN_COKE: CanonDecision = {
   },
   evidence: [
     { label: "SKU", value: "Coca-Cola 330ml" },
-    { label: "Unit cost", value: "€0.42 → €0.52" },
+    { label: "Unit cost", value: "$0.42 → $0.52" },
     { label: "Shock class", value: "Market price change" },
-    { label: "Weekly exposure", value: "€184 if absorbed" },
-    { label: "Price needed", value: "€0.55 · input only" },
+    { label: "Weekly exposure", value: "$184 if absorbed" },
+    { label: "Price needed", value: "$0.55 · input only" },
     { label: "Elasticity", value: "Insufficient sample" },
   ],
 };

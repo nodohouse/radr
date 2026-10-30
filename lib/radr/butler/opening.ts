@@ -1,13 +1,14 @@
+import { formatDecisionMoney } from "@/lib/radr/decision/core";
+import { sourceCurrency } from "@/lib/radr/product/demoMoney";
 /**
  * Contextual Ask RADR opening state from domain SoT.
  */
 
 import { getOperatingSnapshot } from "@/lib/radr/operatingSnapshot";
 import { findingsForScope } from "@/lib/radr/findings";
-import { currentExposureFromFindings } from "@/lib/radr/valueSemantics";
 import { demoGreeting } from "@/lib/radr/demoClock";
 import { BERLIN_TONIGHT_OPS } from "@/lib/radr/venueProfiles";
-import { getCancellationRecoveryScenario } from "@/lib/radr/scenarios/store";
+import { table14DecisionTruth, scopedButlerDecisionTruth } from "./decisionTruth";
 import { locationLabel, type DashPeriod, type LocationScope } from "@/lib/product/demo/dashboard";
 import type { ButlerContext, ButlerOpening, ButlerOpeningSuggestion } from "./types";
 
@@ -50,31 +51,29 @@ export function buildButlerOpening(ctx: ButlerContext): ButlerOpening {
   const engineFindings = findingsForScope(
     scope === "all" || String(scope).startsWith("region_") ? "loc_ber" : String(scope),
   );
-  const atRisk = currentExposureFromFindings(engineFindings);
-  const openCount = engineFindings.filter(
-    (f) =>
-      f.status !== "VERIFIED" &&
-      f.status !== "RESOLVED" &&
-      f.status !== "DISMISSED" &&
-      currentExposureFromFindings([f]) > 0,
-  ).length;
+  const current = scopedButlerDecisionTruth(ctx);
+  const isSohoContext=current.records.some(record=>record.locationId==="loc_berlin_mitte");
+  const atRisk = current.value.activeExposureOrOpportunity;
+  const openCount = current.summary.counts.needs_you;
   const isGroup = scope === "all" || scope.startsWith("region_");
   const periodLabel = PERIOD_LABEL[period] ?? "Today";
-  const actNow = engineFindings.filter((f) => f.urgency === "ACT_NOW").length;
+  const currency = current.value.currency;
+  const money = (amount: number) => formatDecisionMoney(amount, currency);
+  const actNow = current.summary.groups.needs_you.filter(record=>record.decisionHorizon==="NOW"||record.decisionHorizon==="TODAY").length;
 
   const greeting = hourGreeting();
   const headline =
     openCount === 0
       ? `${snap.locationName} is broadly on plan.`
       : isGroup
-        ? `${openCount} open finding${openCount === 1 ? "" : "s"} across the group.`
+        ? `${openCount} Decision${openCount === 1 ? "" : "s"} need attention across the group.`
         : `${snap.locationName} · ${openCount} item${openCount === 1 ? "" : "s"} need attention.`;
 
   const attentionLine =
     openCount > 0
       ? isGroup
-        ? `${snap.attention.open} locations need attention · €${atRisk.toLocaleString("en-GB")} currently exposed`
-        : `€${atRisk.toLocaleString("en-GB")} currently exposed`
+        ? `${new Set(current.summary.groups.needs_you.map(record=>record.locationId)).size} locations need attention · ${money(atRisk)} Decision value under review`
+        : `${money(atRisk)} Decision value under review`
       : null;
 
   const suggestions: ButlerOpeningSuggestion[] = [];
@@ -150,9 +149,9 @@ export function buildButlerOpening(ctx: ButlerContext): ButlerOpening {
     .slice(0, 3);
 
   let observation: ButlerOpening["observation"] = null;
-  const scenario = getCancellationRecoveryScenario();
+  const recovery = table14DecisionTruth();
   if (
-    (scope === "loc_ber" || scope === "all") &&
+    isSohoContext &&
     BERLIN_TONIGHT_OPS.bookingPaceVsComparable >= 8
   ) {
     observation = {
@@ -160,10 +159,10 @@ export function buildButlerOpening(ctx: ButlerContext): ButlerOpening {
       body: `Soho · New York booking pace +${BERLIN_TONIGHT_OPS.bookingPaceVsComparable}% vs comparable Wednesday.`,
       query: "Which location worries me most tonight?",
     };
-  } else if (scenario.verification?.verifiedValue) {
+  } else if (isSohoContext && recovery.isVerified) {
     observation = {
       title: "RADR noticed",
-      body: `Table 14 recovery verified €${scenario.verification.verifiedValue}.`,
+      body: `Table 14 recovery verified ${formatDecisionMoney(recovery.verified, sourceCurrency("loc_ber"))}.`,
       query: "Did we recover the Table 14 cancellation?",
     };
   }
@@ -178,7 +177,7 @@ export function buildButlerOpening(ctx: ButlerContext): ButlerOpening {
 
   const locationsNeeding =
     isGroup
-      ? Math.max(snap.attention.open, openCount > 0 ? 1 : 0)
+      ? new Set(current.summary.groups.needs_you.map(record=>record.locationId)).size
       : openCount > 0
         ? 1
         : 0;
@@ -194,7 +193,7 @@ export function buildButlerOpening(ctx: ButlerContext): ButlerOpening {
     exposureEuro: openCount > 0 ? atRisk : null,
     rightNow: {
       exposureLabel:
-        atRisk > 0 ? `€${atRisk.toLocaleString("en-GB")} exposed` : null,
+        atRisk > 0 ? `${money(atRisk)} under review` : null,
       attentionLabel:
         locationsNeeding > 0
           ? isGroup

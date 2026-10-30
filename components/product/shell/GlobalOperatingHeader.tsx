@@ -677,7 +677,7 @@ export function GlobalOperatingHeader({
           </div>
 
           <div className="rp-goh-zone" data-zone="time">
-            {!onControlCenter ? <PeriodSwitcher /> : null}
+            {pathname.startsWith("/app/dashboards") ? <PeriodSwitcher /> : null}
             {synthetic ? (
               <WorldSwitcher className="rp-goh-world" />
             ) : null}

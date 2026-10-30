@@ -1,3 +1,4 @@
+import type { DemoEstateCurrency } from "@/lib/radr/demo/estateRegistry";
 /**
  * Canonical economic metric semantics.
  * UI labels must derive from type — never rename the same field differently per page.
@@ -51,7 +52,7 @@ export const ECONOMIC_METRIC_LABEL: Record<EconomicMetricType, string> = {
 export type MetricPresentation = {
   type: EconomicMetricType;
   value: number;
-  currency: "EUR";
+  currency: DemoEstateCurrency;
   label: string;
   scopeLabel: string;
   horizonLabel: string;

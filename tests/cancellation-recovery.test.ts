@@ -1,3 +1,5 @@
+import { resetDecisionStore, verifyDecision } from "@/lib/radr/decision/store";
+import { displayDecisionId, DECISION_IDS } from "@/lib/radr/decision/ids";
 import { describe, expect, it, beforeEach } from "vitest";
 import {
   buildCancellationRecoveryScenario,
@@ -20,6 +22,7 @@ import { getRadrEnvironment, environmentChrome } from "@/lib/radr/env";
 describe("cancellation recovery gold standard", () => {
   beforeEach(() => {
     resetCancellationRecoveryScenario("VERIFIED");
+    resetDecisionStore();
   });
 
   it("verifies €184 not €192", () => {
@@ -51,7 +54,8 @@ describe("cancellation recovery gold standard", () => {
     expect(recovery!.financialImpact.primaryValue).toBe(184);
   });
 
-  it("Butler Table 14 answer matches verified ledger", () => {
+  it("Butler Table 14 answer matches the current verified Decision ledger", () => {
+    const verifiedRecord = verifyDecision(DECISION_IDS.tableRecover)!;
     const a = butlerTable14RecoveryAnswer();
     expect(a.answer).toContain("184");
     expect(a.answer.includes("192 verified")).toBe(false);
@@ -64,11 +68,11 @@ describe("cancellation recovery gold standard", () => {
         allowedLocationIds: ["loc_ber"],
       },
     );
-    expect(butler.answer).toContain("184");
+    expect(butler.answer).toContain(String(verifiedRecord.verifiedValue!.amount));
     expect(
       butler.evidence.some(
         (e) =>
-          e.value.includes(CANCELLATION_RECOVERY_ID) || e.label === "Finding",
+          e.value.includes(displayDecisionId(DECISION_IDS.tableRecover)) && e.label === "Decision",
       ),
     ).toBe(true);
   });

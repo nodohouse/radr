@@ -173,7 +173,7 @@ export function LocationsOverview({
             <div>
               <span>Locations</span>
               <strong>{model.locationCount}</strong>
-              <em data-tone="neg">{model.needAttentionCount} need attention</em>
+              <em data-tone="neg">{model.needAttentionCount} {model.needAttentionCount===1?"needs":"need"} attention</em>
             </div>
             <div>
               <span>Avg. contribution / location</span>
@@ -317,7 +317,7 @@ export function LocationsOverview({
         <section className="le-panel" aria-labelledby="le-att-h">
           <h2 id="le-att-h">
             {model.attention.length}{" "}
-            {model.attention.length === 1 ? "location" : "locations"} need
+            {model.attention.length === 1 ? "location needs" : "locations need"}
             attention
           </h2>
           <ul className="le-att-list">

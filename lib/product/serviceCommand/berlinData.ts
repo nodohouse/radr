@@ -1,3 +1,5 @@
+import { CANON_PEAK } from "@/lib/radr/decision/demo/canonical";
+import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import type { ServiceCommandModel } from "./types";
 
 const sparkUp = [40, 42, 44, 48, 50, 52, 55, 58, 60, 62, 66, 70];
@@ -63,15 +65,15 @@ export const berlinServiceCommand: ServiceCommandModel = {
     {
       id: "recoverable",
       label: "Recoverable value",
-      value: "€498",
+      value: "$498",
       delta: "From 6 opportunities",
       deltaTone: "pos",
       spark: sparkUp,
       detail: [
-        { label: "Table 8 expedite", value: "€84" },
-        { label: "Wave prep 20:10", value: "€220" },
-        { label: "Pre-bus 6 + 12", value: "€96" },
-        { label: "Delivery throttle", value: "€98" },
+        { label: "Table 8 expedite", value: "$84" },
+        { label: "Wave prep 20:10", value: "$220" },
+        { label: "Pre-bus 6 + 12", value: "$96" },
+        { label: "Delivery throttle", value: "$98" },
         { label: "Confidence", value: "High" },
       ],
     },
@@ -80,7 +82,7 @@ export const berlinServiceCommand: ServiceCommandModel = {
     title: "A wave of 6 inbound tables will hit at 20:10.",
     body: "Pre-bus Tables 6 and 12, move 2 tables from terrace to dining, and prepare kitchen for a higher load. This reduces wait time by 12 minutes.",
     expected: [
-      { label: "Contribution", value: "+€620" },
+      { label: "Contribution", value: `+${formatDecisionMoney(CANON_PEAK.expectedProtectedEuro)}` },
       { label: "Wait", value: "−12 min" },
       { label: "Kitchen peak", value: "Lower" },
     ],
@@ -115,11 +117,11 @@ export const berlinServiceCommand: ServiceCommandModel = {
     { id: "t29", n: 29, zone: "private", x: 64.1, y: 22.9, seats: 8, tone: "seated", party: 8, statusLabel: "19:00", seatedMin: 48 },
   ],
   pressure: [
-    { id: "dining", label: "Dining", current: 78, seatNow: 84, optimized: 72, delta: 4, cause: "Inbound wave + slow turns", recommendation: "Pre-bus 6 & 12 · expedite 8", expectedValue: "+€220" },
-    { id: "bar", label: "Bar", current: 71, seatNow: 76, optimized: 68, delta: 3, cause: "Drink queue backing up", recommendation: "Float 1 runner to bar", expectedValue: "+€60" },
-    { id: "cold", label: "Cold", current: 78, seatNow: 80, optimized: 70, delta: 2, cause: "Starter batching", recommendation: "Batch cold plates", expectedValue: "+€40" },
-    { id: "hot", label: "Hot", current: 96, seatNow: 98, optimized: 84, delta: -8, cause: "Delivery + dine-in collision", recommendation: "Throttle delivery 12 min", expectedValue: "+€280" },
-    { id: "delivery", label: "Delivery", current: 91, seatNow: 94, optimized: 68, delta: -23, cause: "Delivery spike", recommendation: "Throttle intake 12 min", expectedValue: "+€280" },
+    { id: "dining", label: "Dining", current: 78, seatNow: 84, optimized: 72, delta: 4, cause: "Inbound wave + slow turns", recommendation: "Pre-bus 6 & 12 · expedite 8", expectedValue: "+$220" },
+    { id: "bar", label: "Bar", current: 71, seatNow: 76, optimized: 68, delta: 3, cause: "Drink queue backing up", recommendation: "Float 1 runner to bar", expectedValue: "+$60" },
+    { id: "cold", label: "Cold", current: 78, seatNow: 80, optimized: 70, delta: 2, cause: "Starter batching", recommendation: "Batch cold plates", expectedValue: "+$40" },
+    { id: "hot", label: "Hot", current: 96, seatNow: 98, optimized: 84, delta: -8, cause: "Delivery + dine-in collision", recommendation: "Throttle delivery 12 min", expectedValue: "+$280" },
+    { id: "delivery", label: "Delivery", current: 91, seatNow: 94, optimized: 68, delta: -23, cause: "Delivery spike", recommendation: "Throttle intake 12 min", expectedValue: "+$280" },
   ],
   demand: [
     { id: "d1", time: "19:00", current: 42, expected: 48, covers: 48, parties: 14, walkIns: 4 },
@@ -151,18 +153,18 @@ export const berlinServiceCommand: ServiceCommandModel = {
       confidence: "High",
       outcomes: [
         { value: "−14 min", label: "Expected wait time" },
-        { value: "+€84", label: "Contribution recovered" },
+        { value: "+$84", label: "Expected contribution recovery" },
         { value: "+12%", label: "Guest satisfaction expected" },
       ],
       doNothing: [
         { label: "Wait", value: "19 → 25 min" },
         { label: "Guest risk", value: "High" },
-        { label: "Recovered", value: "€0" },
+        { label: "Recovered", value: "$0" },
       ],
       withRadr: [
         { label: "Wait", value: "19 → 5 min" },
         { label: "Guest risk", value: "Lower" },
-        { label: "Recovered", value: "+€84" },
+        { label: "Recovered", value: "+$84" },
       ],
     },
     t6: {
@@ -177,7 +179,7 @@ export const berlinServiceCommand: ServiceCommandModel = {
       confidence: "High",
       outcomes: [
         { value: "−8 min", label: "Turn time" },
-        { value: "+€96", label: "Contribution protected" },
+        { value: "+$96", label: "Contribution protected" },
         { value: "On time", label: "Next booking" },
       ],
       doNothing: [
@@ -201,7 +203,7 @@ export const berlinServiceCommand: ServiceCommandModel = {
       confidence: "Medium",
       outcomes: [
         { value: "−16 min", label: "Expected wait" },
-        { value: "+€48", label: "Contribution" },
+        { value: "+$48", label: "Contribution" },
         { value: "+8%", label: "Satisfaction" },
       ],
       doNothing: [

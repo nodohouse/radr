@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { getDecisionRecord } from "@/lib/radr/decision/store";
 import { VendorLogo } from "@/components/product/connections/VendorLogo";
 import {
   confidenceBarTone,
@@ -172,9 +173,7 @@ export function DataHealthInspector({ source, tab, onTab, onClose }: Props) {
                 <li key={d.id}>
                   <Link href={`/app/decisions/${d.id}`}>{d.label}</Link>
                   <span>
-                    {d.confidenceBefore != null && d.confidenceAfter != null
-                      ? `Confidence ${d.confidenceBefore}% → ${d.confidenceAfter}%`
-                      : d.title}
+                    {getDecisionRecord(d.id)?.confidence.userFacing.toLowerCase() ?? "Review"} decision confidence · {source.status === "HEALTHY" ? "Evidence available" : source.status === "STALE" ? "Refresh evidence before relying on new actions" : "Human approval required"}
                   </span>
                   <em data-impact={d.impact.toLowerCase()}>{d.impact}</em>
                 </li>

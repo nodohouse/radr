@@ -1,3 +1,6 @@
+import { table14DecisionTruth, scopedButlerDecisionTruth } from "@/lib/radr/butler/decisionTruth";
+import { toCanonicalLocationId } from "@/lib/radr/product/locationIds";
+import { formatDecisionMoney } from "@/lib/radr/decision/core";
 /**
  * Ask RADR tools - production-shaped interfaces, demo adapters today.
  * Tenant/scope checks happen before any data is read.
@@ -11,7 +14,7 @@ import { DAILY_PULSE, TONIGHT } from "@/lib/radr/operatingPulse";
 import { getLocation } from "@/lib/radr/operatingHero";
 import { locationLabel } from "@/lib/product/demo/dashboard";
 import type { DashPeriod, LocationScope } from "@/lib/product/demo/dashboard";
-import { getVerifiedValueFromScenarios, getCancellationRecoveryScenario } from "@/lib/radr/scenarios/store";
+import { getCancellationRecoveryScenario } from "@/lib/radr/scenarios/store";
 import { demoDataHealth } from "@/lib/platform/dataHealth";
 import {
   canAccessLocation,
@@ -101,12 +104,9 @@ function assertLoc(auth: ToolAuth, locationId: string): string | null {
   return null;
 }
 
-function euro(n: number): string {
-  return new Intl.NumberFormat("en-GB", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(n);
+/** Legacy helper name retained; currency is explicit and USD is the demo reporting default. */
+function euro(n: number, currency = "USD"): string {
+  return formatDecisionMoney(n, currency);
 }
 
 function locName(id: string): string {
@@ -481,7 +481,7 @@ export function executeAskTool(
         };
       }
       case "get_cancellations": {
-        if (locationId !== "loc_ber" && locationId !== "all") {
+        if (auth.organizationId === "org_northstar_hotels" || (toCanonicalLocationId(locationId) !== "loc_berlin_mitte" && locationId !== "all")) {
           return {
             tool: name,
             ok: false,
@@ -490,7 +490,8 @@ export function executeAskTool(
           };
         }
         const scenario = getCancellationRecoveryScenario();
-        const verified = scenario.verification?.verifiedValue ?? 0;
+        const truth = table14DecisionTruth();
+        const verified = truth.verified;
         return {
           tool: name,
           ok: true,
@@ -499,17 +500,16 @@ export function executeAskTool(
             cancelledReservations: 1,
             cancelledCovers: scenario.reservation.partySize,
             bookingValue: scenario.reservation.expectedBookingValueMajor,
-            potentialRecovery: scenario.potentialRecoverableMajor,
-            observedPos: scenario.pos.observedRevenueMajor,
+            potentialRecovery: truth.expected,
+            observedPos: truth.observed,
             verifiedValue: verified,
             expectedNaturalRecovery: 0,
-            currentlyAtRisk: 0,
-            status: scenario.actionStatus,
-            note:
-              scenario.actionStatus === "VERIFIED"
-                ? `Table 14 late cancellation is verified. Potential recovery was €${scenario.potentialRecoverableMajor}. Observed POS €${scenario.pos.observedRevenueMajor}. RADR claims verified value €${verified} only.`
-                : "Late cancellation released Table 14. Waitlist match available.",
-            recoverableStill: scenario.actionStatus !== "VERIFIED",
+            currentlyAtRisk: truth.isVerified ? 0 : truth.record?.exposedContribution ?? truth.expected,
+            status: truth.status,
+            note: truth.isVerified
+              ? `Table 14 recovery is verified. Expected ${euro(truth.expected)}. Observed ${truth.observed == null ? "pending" : euro(truth.observed)}. Verified ${euro(verified)}.`
+              : `Table 14 recovery is ${truth.status.toLowerCase()}. Expected ${euro(truth.expected)}; observed outcome ${truth.observed == null ? "pending" : euro(truth.observed)}; verified ${euro(0)} until evidence is matched.`,
+            recoverableStill: !truth.isVerified,
             tableHint: `Table ${scenario.reservation.tableId} · ${scenario.reservation.serviceTime}`,
           },
         };
@@ -633,23 +633,29 @@ export function executeAskTool(
         };
       }
       case "get_verified_value": {
-        const scenario = getVerifiedValueFromScenarios();
+        const truth = table14DecisionTruth();
+        const current = scopedButlerDecisionTruth({role:auth.role,locationScope:locationId,organizationId:auth.organizationId});
+        const aggregate = current.value;
+        const table14Available = current.records.some(record=>record.id===truth.record?.id);
         return {
           tool: name,
           ok: true,
           data: {
-            /** Scenario SoT only - never the illustrative catalog YTD. */
-            monthVerifiedCatalog: scenario.verified,
-            scenarioVerified: scenario.verified,
-            scenarioIdentified: scenario.identified,
-            byTerritory: scenario.byTerritory,
-            currency: "EUR",
-            attribution: scenario.attribution,
-            sources: scenario.sources,
+            monthVerifiedCatalog: aggregate.verifiedTotal,
+            scenarioAvailable: table14Available,
+            scenarioVerified: table14Available ? truth.verified : 0,
+            scenarioExpected: table14Available ? truth.expected : 0,
+            scenarioObserved: table14Available ? truth.observed : null,
+            scenarioStatus: table14Available ? truth.status : null,
+            scenarioIsVerified: table14Available && truth.isVerified,
+            currency: aggregate.currency,
+            attribution: truth.isVerified ? "EVIDENCE_MATCHED" : "AWAITING_OUTCOME",
+            sources: aggregate.decisionIdsVerified,
             demo: true,
           },
         };
       }
+
       case "get_forecast": {
         if (locationId !== "loc_ber" && locationId !== "all") {
           const snap = getOperatingSnapshot(locationId as LocationScope, period);

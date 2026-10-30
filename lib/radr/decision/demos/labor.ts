@@ -35,7 +35,7 @@ const RELATIONSHIP = [
   "Bar coverage gap",
   "Delivery intake",
   "Ticket-time trajectory",
-  "€840 contribution exposed",
+  "$840 contribution exposed",
 ];
 
 export function buildLaborDecisionRecord(
@@ -52,7 +52,7 @@ export function buildLaborDecisionRecord(
       operationalRisk: "high" as const,
       confidence: 88,
       timeToResult: "Service",
-      note: "Guest waits compound · €840 contribution exposed",
+      note: "Guest waits compound · $840 contribution exposed",
       isNoAction: true,
     },
     {
@@ -178,7 +178,7 @@ export function buildLaborDecisionRecord(
     constraints: CONSTRAINTS,
     baselinePrediction:
       "Add FOH → more order injection → longer tickets → lower throughput",
-    noActionOutcome: "€840 contribution exposed · guest waits compound",
+    noActionOutcome: "$840 contribution exposed · guest waits compound",
     options,
     recommendedOptionId: "rebalance",
     expectedContributionImpact: c.expectedProtectedEuro,
@@ -271,7 +271,7 @@ export function buildLaborDecisionRecord(
       {
         epistemic: "RECOMMENDED",
         title: "Rebalance",
-        body: "Move 1 FOH to bar · throttle delivery 25m · protect €720 expected.",
+        body: "Move 1 FOH to bar · throttle delivery 25m · protect $720 expected.",
       },
     ],
     locationDnaLine:
@@ -312,7 +312,7 @@ export function buildLaborDecisionRecord(
           id: "le_lab_06",
           at: "22:15",
           kind: "verify" as const,
-          title: "€690 protected · waits contained",
+          title: "$690 protected · waits contained",
           statusAfter: "VERIFIED" as const,
         },
         {
