@@ -260,7 +260,7 @@ export function IntelShell() {
       <header className="ie-head">
         <div>
           <p className="ie-kicker">Intelligence</p>
-          <h1>What is moving contribution?</h1>
+          <h1>Signals into decisions.</h1>
           <p className="ie-head-sub">
             RADR continuously connects operating, financial and guest signals to
             explain what is changing and why.

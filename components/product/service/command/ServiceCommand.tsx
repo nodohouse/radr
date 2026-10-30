@@ -121,6 +121,7 @@ export function ServiceCommand() {
   const pathname = usePathname() || "/app/service";
   const search = useSearchParams();
 
+  const [floorImageMissing, setFloorImageMissing] = useState(false);
   const [view, setView] = useState<ServiceView>(() => parseView(search.get("view")));
   const [time, setTime] = useState<TimeKey>(() => parseTime(search.get("time")));
   const [zone, setZone] = useState<ZoneKey>("main");
@@ -359,7 +360,7 @@ export function ServiceCommand() {
       data-flow={showFlow ? flowMode || "dining" : undefined}
     >
       <header className="sc-head">
-        <h1 className="sc-visually-hidden">Service command</h1>
+        <div className="mk-page-head"><p className="mk-eyebrow">Operations</p><h1>Keep your operation on track.</h1><p>Service readiness, workforce and the next operational decision.</p></div>
         <div className="sc-ops-context" aria-label="Operating context">
           <span className="sc-ops-loc">
             {model.location} · {model.mode}
@@ -535,21 +536,27 @@ export function ServiceCommand() {
               ))}
             </div>
             <div className="sc-floor-stage">
-              <picture>
+              {floorImageMissing ? <svg className="sc-floor-schematic" viewBox="0 0 1000 562.5" role="img" aria-label="Schematic floor view using the demo table positions">
+                <rect x="12" y="12" width="976" height="538" rx="20" fill="#f3f8fd" stroke="#cbdcf0" strokeWidth="2" />
+                <path d="M32 100H968M32 452H968M120 100V452M920 100V452" stroke="#d8e4f3" strokeWidth="2" strokeDasharray="7 7" />
+                <text x="40" y="55" fill="#6f87a5" fontSize="14" letterSpacing="2">{zone.toUpperCase()} · SCHEMATIC DEMO</text>
+                {tables.map(t => <g key={t.id} transform={`translate(${t.x * 10} ${t.y * 5.625})`}><rect x="-45" y="-30" width="90" height="60" rx="13" fill="#fff" stroke="#cadaeb" strokeWidth="2" /><rect x="-32" y="-40" width="22" height="7" rx="3" fill="#bdccdd" /><rect x="10" y="33" width="22" height="7" rx="3" fill="#bdccdd" /></g>)}
+              </svg> : <picture>
                 <source
                   srcSet="/service/berlin-mitte-floorplan.webp"
                   type="image/webp"
                 />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={model.floorImage}
+                  ref={image => { if (image?.complete && image.naturalWidth === 0) setFloorImageMissing(true); }}
+                  onError={() => setFloorImageMissing(true)}
                   alt="Soho · New York fictional floor plan"
                   className="sc-floor-img"
                   width={2560}
                   height={1440}
                   decoding="async"
                 />
-              </picture>
+              </picture>}
               {showFlow ? <FlowOverlay mode={flowMode || "dining"} tableId={tableId} /> : null}
               <div className="sc-floor-overlay">
                 {tables.map((t) => (

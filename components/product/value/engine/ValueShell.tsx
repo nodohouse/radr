@@ -63,6 +63,7 @@ export function ValueShell() {
 
   return (
     <div className="ve-root" data-value-engine="true">
+      <header className="mk-page-head"><p className="mk-eyebrow">Value</p><h1>Track value. Verify the outcome.</h1><p>Expected, observed and verified results, kept clearly apart.</p></header>
       <nav className="ve-views" aria-label="Value perspective">
         {VIEWS.map((v) => (
           <button

@@ -132,8 +132,9 @@ export function MemoryShell() {
     <div className="me-root" data-memory-engine="true">
       <header className="me-page-head">
         <div>
-          <h1>Operating Memory</h1>
-          <p>Calibration · playbooks · learnings that compound</p>
+          <p className="mk-eyebrow">Memory</p>
+          <h1>Your operating memory, always on.</h1>
+          <p>Capture learnings, surface what matters, and turn experience into better decisions.</p>
         </div>
         <div className="me-page-actions">
           <button

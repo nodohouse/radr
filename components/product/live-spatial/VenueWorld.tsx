@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import {
   STATION_HITS,
   TABLE_POSITIONS,
@@ -247,6 +247,13 @@ function VenueWorldInner({
   onSelectStation,
   onSelectTable,
 }: Props) {
+  const [artMissing, setArtMissing] = useState(false);
+  useEffect(() => {
+    const image = new window.Image();
+    image.onerror = () => setArtMissing(true);
+    image.src = VENUE_ART.master;
+    return () => { image.onerror = null; };
+  }, []);
   const focus = selectedZone ?? hoverZone;
   const ls = Number.isFinite(labelScale) && labelScale > 0 ? labelScale : 1;
   const kitchenSev: LiveSeverity =
@@ -278,7 +285,12 @@ function VenueWorldInner({
       </defs>
 
       {/* 4K master — never stretch a 1280 source across Retina + zoom */}
-      <image
+      {artMissing ? <g aria-label="Schematic venue view">
+        <rect x="0" y="20" width="960" height="640" rx="22" fill="#f0f6fd" />
+        {ZONE_ORDER.map(id => <path key={id} d={ZONE_PATH[id]} fill={id === "kitchen" ? "#e6effb" : "#e9f4ef"} stroke="#bed1e7" strokeWidth="2" />)}
+        <text x="40" y="615" fontSize="12" fill="#7089a7" letterSpacing="2">DEMO VENUE · SCHEMATIC VIEW</text>
+      </g> : <image
+        onError={() => setArtMissing(true)}
         href={VENUE_ART.master}
         x={0}
         y={20}
@@ -287,10 +299,10 @@ function VenueWorldInner({
         preserveAspectRatio="xMidYMid slice"
         className="ls-venue-art"
         style={{ pointerEvents: "none" }}
-      />
+      />}
 
       {/* Zone detail plate — native tile fills camera so focus stays sharp */}
-      {detailHref && detailCam ? (
+      {!artMissing && detailHref && detailCam ? (
         <image
           href={detailHref}
           x={detailCam.x}
