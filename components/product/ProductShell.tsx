@@ -115,7 +115,7 @@ function ShellChrome({
             showHamburger={showHamburger}
           />
           <a className="px-skip" href="#product-content">Skip to content</a>
-          <main id="product-content" className="rp-content-v2" tabIndex={-1}><ReferenceWorkspace>{children}</ReferenceWorkspace><p className="px-workspace-note">DEMO WORKSPACE · Illustrative data · No external system writes</p></main>
+          <main id="product-content" className="rp-content-v2" tabIndex={-1}><ReferenceWorkspace>{children}</ReferenceWorkspace><p className="px-workspace-note">ILLUSTRATIVE DEMO · No external system writes</p></main>
           {showMobileTabs ? (
             <MobileTabBar onOpenMore={() => setMobileNav(true)} />
           ) : null}

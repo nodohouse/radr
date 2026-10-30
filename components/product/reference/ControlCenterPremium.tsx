@@ -9,8 +9,9 @@ import { buildValueOverview } from "@/lib/radr/product/valueProofEngine";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { formatPrimaryMetric } from "@/lib/radr/product/primaryMetric";
 import { displayDecisionId } from "@/lib/radr/decision/ids";
-import { Arrow, Chart, Heading, Metric, Panel, TextLink, detailHref } from "./ReferenceUI";
+import { Arrow, Chart, Heading, Metric, Panel, StatusPill, TextLink } from "./ReferenceUI";
 
+/** The daily brief: three summaries, one proof visual, one priority decision. */
 export function ControlCenterPremium() {
   const { roleView, vertical, records, scopeLabel } = useRecords();
   const context = roleContextFor(roleView, vertical);
@@ -20,25 +21,29 @@ export function ControlCenterPremium() {
   const aggregate = deriveValueAggregate(roleView, vertical, records);
   const value = buildValueOverview(roleView, vertical, records);
   const metric = primary ? formatPrimaryMetric(primary) : null;
-  return <div className="rs-page rs-center rc-premium">
-    <Heading eyebrow="Your daily brief" title={`A clear next move, ${context.firstName}.`} description={`${scopeLabel} · What needs you. What is moving. What came back.`} aside={<span className="rc-session"><i />Demo workspace</span>} />
+
+  return <div className="rs-page rs-center rs-brief">
+    <Heading eyebrow="Control Center" title={`Your day in focus, ${context.firstName}.`} description={`Here’s what needs your attention · ${scopeLabel}`} />
     <div className="rs-metrics rs-three">
-      <Metric value={needs.length} label="Needs your decision" note="Prioritized for your role and location" href="/app/decisions?band=needs_you" link="Review decisions" />
-      <Metric value={formatDecisionMoney(aggregate.pendingVerification)} label="Awaiting verification" note={`${handling.length} ${handling.length === 1 ? "decision" : "decisions"} in progress · expected value`} href={detailHref('/app/value')} link="Follow the evidence" />
-      <Metric value={value.verifiedFormatted} label="Verified contribution" note="Month to date · evidence linked" href="/app/value" link="Explore outcomes" positive />
+      <Metric value={needs.length} label="Decisions need attention" note="Prioritized for your role and location" href="/app/decisions?band=needs_you" link="See decisions" />
+      <Metric value={formatDecisionMoney(aggregate.pendingVerification)} label="Expected value" note="In progress · awaiting verification" href="/app/decisions?band=handling" link={`Follow ${handling.length === 1 ? '1 decision' : `${handling.length} decisions`}`} />
+      <Metric value={value.verifiedFormatted} label="Verified contribution" note="Month to date · evidence linked" href="/app/value" link="See verified outcomes" positive />
     </div>
-    {primary ? <section className="rc-priority" aria-label="Priority decision">
-      <div className="rc-priority-copy"><div className="rc-priority-meta"><span className="rc-attention"><i />Needs you</span><span>{displayDecisionId(primary.id)} · {primary.decisionDeadline || primary.decisionHorizon.replaceAll('_',' ').toLowerCase()}</span></div>
-        <h2>{primary.title}</h2><p>{(primary.recommendationHeadline || primary.contextLine).replace(/\s*—\s*/g,', ')}</p>
-        <div className="rc-impact"><strong>{metric?.money}</strong><span>{metric?.caption}</span></div>
-        <Link href={`/app/decisions/${primary.id}`} className="rc-review">Review the decision <Arrow /></Link>
-      </div>
-      <div className="rc-evidence"><div className="rc-evidence-heading"><span>THE EVIDENCE BEHIND THE MOVE</span><b>{primary.confidence.userFacing.toLowerCase()} confidence</b></div>
-        <div className="rc-evidence-items">{primary.evidenceRefs.slice(0,3).map((e,i)=><Link key={e.id} href={detailHref(`/app/decisions/${primary.id}#evidence`)}><span className="rc-evidence-number">0{i+1}</span><div><small>{e.source}</small><strong>{e.label}</strong><p>{e.value}</p></div><Arrow /></Link>)}</div>
-        <div className="rc-evidence-foot"><i />{primary.evidenceRefs.length} connected evidence items<span>Human approval stays with you</span></div>
-      </div>
-    </section> : <Panel title="You’re up to date."><p className="rs-description">No decisions need your review in this scope.</p><TextLink href="/app/decisions">Explore the decision record</TextLink></Panel>}
-    <div className="rs-two-columns"><Panel title="Value, with a trail." action={<TextLink href="/app/value">View ledger</TextLink>}><div className="rc-chart-total"><strong>{value.verifiedFormatted}</strong><span>verified contribution · month to date</span></div><Chart values={value.trend.map(p=>p.cumulative)} labels={value.trend.map(p=>p.label)} caption="Cumulative verified contribution, month to date" /></Panel>
-      <Panel title="In your decision queue" action={<span className="rs-meta">{records.length} in scope</span>}><div className="rc-queue">{[...needs.slice(1),...handling].slice(0,3).map(r=><Link key={r.id} href={`/app/decisions/${r.id}`}><span className="rc-queue-icon">↗</span><div><small>{recordAttention(r)==='handling'?'In progress':'Needs you'} · {displayDecisionId(r.id)}</small><h3>{r.title}</h3><p>{r.property}</p></div><Arrow /></Link>)}{needs.length<=1&&!handling.length?<p className="rs-description">Your next priorities will appear here.</p>:null}</div><TextLink href="/app/decisions">Open all decisions</TextLink></Panel></div>
+    <div className="rs-two-columns rs-brief-grid">
+      <Panel title="Verified contribution" action={<span className="rs-meta">Month to date · USD</span>} className="rs-brief-proof">
+        <Chart values={value.trend.map(p=>p.cumulative)} labels={value.trend.map(p=>p.label)} caption="Cumulative verified contribution, month to date" />
+        <div className="rs-chart-legend"><i />Evidence-linked outcomes<TextLink href="/app/value">View value record</TextLink></div>
+      </Panel>
+      <Panel title="Top decision" className="rs-brief-decision">
+        {primary ? <>
+          <div className="rs-brief-status"><StatusPill tone="attention">Needs you</StatusPill><span>{displayDecisionId(primary.id)}</span></div>
+          <h3>{primary.title}</h3>
+          <p className="rs-brief-recommendation">{(primary.recommendationHeadline || primary.contextLine).replace(/\s*—\s*/g,', ')}</p>
+          <div className="rs-brief-impact"><strong>{metric?.money}</strong><span>{metric?.caption}</span></div>
+          <Link href={`/app/decisions/${primary.id}`} className="rs-text-link">Review recommended action <Arrow /></Link>
+          <div className="rs-brief-evidence"><span><i />{primary.evidenceRefs.length} evidence items connected</span><span>{primary.confidence.userFacing.toLowerCase()} confidence · approval required</span></div>
+        </> : <div className="rs-empty"><h3>You’re up to date.</h3><p>No decisions currently need your review in this scope.</p><TextLink href="/app/decisions">View decision record</TextLink></div>}
+      </Panel>
+    </div>
   </div>;
 }

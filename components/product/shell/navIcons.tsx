@@ -27,7 +27,7 @@ export function IconValue({ className }: IconProps) {
   return (
     <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <path
-        d="M10 3.5l1.6 3.4 3.7.4-2.8 2.5.8 3.6L10 11.7 6.7 13.4l.8-3.6L4.7 7.3l3.7-.4L10 3.5z"
+        d="M10 3l7 7-7 7-7-7 7-7Z"
         stroke="currentColor"
         strokeWidth="1.3"
         strokeLinejoin="round"

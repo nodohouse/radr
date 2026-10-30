@@ -1,6 +1,6 @@
-import Image from "next/image";
+import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 
-/** Exact website artwork, including the approved green focal dot. */
+/** One approved immutable master across the product, including Ask RADR. */
 export function ProductBrand({ width = 132, className = "", decorative = false }: { width?: number; className?: string; decorative?: boolean }) {
-  return <Image className={`product-brand ${className}`} src="/brand/radr-website-color.svg" alt={decorative ? "" : "RADR"} width={width} height={Math.round(width * 45 / 255)} style={{ width, height: "auto", objectFit: "contain", flexShrink: 0 }} priority />;
+  return <FrozenRadrLogo variant="wordmark" theme="light" width={width} className={`product-brand ${className}`} decorative={decorative} priority />;
 }

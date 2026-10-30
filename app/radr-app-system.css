@@ -1,0 +1,110 @@
+/* RADR approved light system. See docs/RADR_APP_DESIGN_SYSTEM.md. */
+.rp-root.rp-premium {
+  --app-bg:#f8faf9;
+  --app-nav:#f0f5f7;
+  --app-surface:#fff;
+  --app-ink:#163044;
+  --app-muted:#607684;
+  --app-quiet:#758a96;
+  --app-border:#dce6ea;
+  --app-green:#16876b;
+  --app-mint:#e1f0e9;
+  --app-blue:#397eab;
+  --app-amber:#a57124;
+  --app-red:#b95050;
+  --app-radius-control:9px;
+  --app-radius-card:14px;
+  --app-radius-surface:18px;
+  --app-space-1:4px; --app-space-2:8px; --app-space-3:12px; --app-space-4:16px;
+  --app-space-5:24px; --app-space-6:32px; --app-space-7:40px; --app-space-8:48px;
+  --app-type-heading:38px; --app-type-metric:44px; --app-type-body:14px; --app-type-meta:12px;
+  --app-motion:180ms;
+}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] { background:var(--app-bg); color:var(--app-ink); }
+.rp-premium .rs-navigation { background:var(--app-nav); border-color:var(--app-border); box-shadow:none; padding-top:34px; }
+.rp-premium .rs-brand { margin-bottom:32px; }
+.rp-premium .rs-workspace { padding:12px;margin:0 0 19px;gap:12px;text-align:left;border:1px solid var(--app-border);border-radius:var(--app-radius-control);background:#ffffff78;color:var(--app-muted);min-height:61px; }
+.rp-premium .rs-workspace-copy { display:grid;gap:5px;min-width:0; }
+.rp-premium .rs-workspace-copy small { font-size:8px;letter-spacing:.12em;font-weight:500;color:var(--app-quiet); }
+.rp-premium .rs-workspace-copy strong { font-size:11px;letter-spacing:0;line-height:1.4;font-weight:550;color:var(--app-ink); }
+.rp-premium .rs-nav-items { gap:8px; }
+.rp-premium .rs-nav-items>a { min-height:51px;font-size:13px;padding:13px 17px;gap:15px;border-radius:10px;color:#536a78;transition:background-color var(--app-motion),color var(--app-motion); }
+.rp-premium .rs-nav-items>a:hover { background:#e5edf1;color:var(--app-ink); }
+.rp-premium .rs-nav-items>a[data-active=true] { background:var(--app-mint);color:#19775e; }
+.rp-premium .rs-connection-status { font-size:11px;color:var(--app-muted);padding-inline:10px; }
+.rp-premium .rs-nav-icon svg { width:18px;height:18px; }
+.rp-premium .rs-page { color:var(--app-ink);gap:24px; }
+.rp-premium .rs-card { border:1px solid var(--app-border);background:var(--app-surface);border-radius:var(--app-radius-card);box-shadow:none; }
+.rp-premium .rs-heading h1 { font-size:var(--app-type-heading);font-weight:550;letter-spacing:-.045em;color:var(--app-ink); }
+.rp-premium .rs-eyebrow { font-size:10px;letter-spacing:.12em;color:var(--app-quiet);margin-bottom:20px; }
+.rp-premium .rs-description { font-size:14px;color:var(--app-muted); }
+.rp-premium .rs-metrics { gap:18px; }
+.rp-premium .rs-metric { padding:24px;min-height:182px;gap:8px; }
+.rp-premium .rs-metric>strong { color:var(--app-ink);font-size:var(--app-type-metric);font-weight:550;letter-spacing:-.045em; }
+.rp-premium .rs-metric>strong[data-positive=true] { color:var(--app-green); }
+.rp-premium .rs-metric-label { font-size:15px;line-height:1.5;color:#465f6e; }
+.rp-premium .rs-metric>small { color:var(--app-quiet);font-size:11px;line-height:1.6; }
+.rp-premium a.rs-metric:hover { border-color:#a7ccbd;box-shadow:none; }
+.rp-premium .rs-text-link { color:var(--app-green);font-size:12px;font-weight:550; }
+.rp-premium .rs-panel { padding:24px; }
+.rp-premium .rs-panel h2 { font-size:16px;color:var(--app-ink);font-weight:550; }
+.rp-premium .rs-meta { color:var(--app-quiet);font-size:11px; }
+.rp-premium .rs-brief { padding-top:12px; }
+.rp-premium .rs-brief-grid { grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:18px; }
+.rp-premium .rs-brief-proof { display:flex;flex-direction:column;min-height:345px; }
+.rp-premium .rs-brief-proof .rs-chart { margin:15px 0 0;flex:1; }
+.rp-premium .rs-brief-proof .rs-chart svg { max-height:260px; }
+.rs-chart-legend { display:flex;align-items:center;gap:7px;color:var(--app-quiet);font-size:10px;line-height:1.6;margin-top:13px;flex-wrap:wrap; }
+.rs-chart-legend>i { display:block;width:7px;height:7px;border-radius:50%;background:var(--app-green); }
+.rs-chart-legend>.rs-text-link { margin-left:auto;font-size:11px; }
+.rs-status-pill { display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:8px;background:#edf2f5;color:var(--app-muted);font-size:10px;line-height:1.5; }
+.rs-status-pill i { width:5px;height:5px;background:currentColor;border-radius:50%; }
+.rs-status-pill[data-tone=attention] { color:var(--app-blue);background:#edf4fa; }
+.rs-status-pill[data-tone=healthy] { color:var(--app-green);background:var(--app-mint); }
+.rs-status-pill[data-tone=watch] { color:var(--app-amber);background:#fbf5e9; }
+.rs-status-pill[data-tone=risk] { color:var(--app-red);background:#fbefef; }
+.rs-brief-decision { display:flex;flex-direction:column; }
+.rs-brief-status { display:flex;align-items:center;gap:10px;color:var(--app-quiet);font-size:10px; }
+.rs-brief-decision h3 { font-size:24px;line-height:1.28;letter-spacing:-.035em;font-weight:550;margin:19px 0 10px;color:var(--app-ink); }
+.rs-brief-recommendation { font-size:13px;color:var(--app-muted);line-height:1.7;margin:0; }
+.rs-brief-impact { display:flex;align-items:center;gap:13px;margin:19px 0; }
+.rs-brief-impact strong { color:var(--app-green);font-size:28px;font-weight:550;letter-spacing:-.04em; }
+.rs-brief-impact span { font-size:10px;line-height:1.6;color:var(--app-quiet);max-width:205px; }
+.rs-brief-evidence { border-top:1px solid var(--app-border);margin-top:23px;padding-top:15px;display:grid;gap:8px;font-size:10px;color:var(--app-quiet); }
+.rs-brief-evidence>span:first-child { display:flex;align-items:center;gap:7px;color:var(--app-muted); }
+.rs-brief-evidence i { width:6px;height:6px;border-radius:50%;background:var(--app-green); }
+.rs-chart-empty { display:grid;place-content:center;min-height:230px;color:var(--app-muted);text-align:center;line-height:1.6; }
+.rs-chart-empty p { font-size:14px; }.rs-chart-empty span { font-size:11px;max-width:300px; }
+.rp-root.rp-premium .px-workspace-note { font-size:9px;color:var(--app-quiet);letter-spacing:.04em;margin-top:26px; }
+.rp-root.rp-premium .rs-ask-shortcut { background:transparent;border:0;padding:8px;color:var(--app-muted);font-family:inherit;font-size:11px;white-space:nowrap;cursor:pointer;border-radius:8px; }
+.rp-root.rp-premium .rs-ask-shortcut:hover { color:var(--app-green);background:var(--app-mint); }
+.rp-root.rp-premium .rp-goh-avatar { background:#23546c!important;border:0!important;box-shadow:none!important;font-size:11px!important; }
+.rp-root.rp-premium .rp-goh-search { border-color:var(--app-border)!important;background:#ffffffa3!important; }
+/* A native modal provides keyboard containment, Escape, and a true top layer. */
+.rs-search-dialog { border:1px solid var(--app-border);border-radius:var(--app-radius-surface);background:#fff;color:var(--app-ink);font-family:var(--font-product),sans-serif;padding:0;width:min(650px,calc(100vw - 32px));max-height:min(680px,calc(100dvh - 48px));margin:72px auto auto;box-shadow:0 20px 60px #17334410; }
+.rs-search-dialog::backdrop { background:#19334445;backdrop-filter:blur(3px); }
+.rs-search-content { padding:24px; }
+.rs-search-content>header { display:flex;justify-content:space-between;align-items:center;margin-bottom:16px; }
+.rs-search-content>header label { font-size:13px;font-weight:600; }
+.rs-search-content button { color:var(--app-muted);font-family:inherit;font-size:10px;padding:6px 9px;border:1px solid var(--app-border);background:#f8fafb;border-radius:7px;cursor:pointer; }
+.rs-search-content>input { width:100%;font:inherit;font-size:14px;padding:15px;border:1px solid #cbdde3;border-radius:10px;background:#fbfcfc;outline:none;color:var(--app-ink);box-sizing:border-box; }
+.rs-search-content>input:focus { border-color:var(--app-green);outline:2px solid #16876b15; }
+.rs-search-context { color:var(--app-quiet);font-size:11px;line-height:1.6;margin:12px 0; }
+.rs-search-results { max-height:440px;overflow-y:auto; }
+.rs-search-results>a { display:flex;align-items:center;gap:15px;padding:14px 8px;border-bottom:1px solid #edf1f3;color:var(--app-ink);text-decoration:none; }
+.rs-search-results>a:hover,.rs-search-results>a:focus-visible { background:#f0f7f4;outline:1px solid #a9cdbf;border-radius:7px; }
+.rs-search-kind { font-size:9px;color:var(--app-muted);min-width:45px; }
+.rs-search-results>a>div { flex:1;min-width:0; }
+.rs-search-results strong { display:block;font-size:13px;font-weight:550;line-height:1.5; }
+.rs-search-results small { display:block;font-size:11px;line-height:1.6;color:var(--app-quiet);margin-top:4px; }
+.rs-search-results>a>span:last-child { color:var(--app-green); }.rs-search-empty { padding:35px 0;font-size:13px;color:var(--app-muted); }
+@media(max-width:1099px) { .rp-premium .rs-navigation { box-shadow:10px 0 35px #1733440a; }.rp-premium .rs-heading h1 { font-size:32px; }.rp-premium .rs-metric>strong { font-size:38px; } }
+@media(max-width:700px) { .rp-premium .rs-heading h1 { font-size:29px; }.rp-premium .rs-brief { padding-top:4px; }.rp-premium .rs-brief-grid { grid-template-columns:1fr; }.rp-premium .rs-metric { min-height:150px;padding:22px; }.rp-premium .rs-panel { padding:22px; }.rp-premium .rs-brief-proof { min-height:290px; }.rs-brief-decision h3 { font-size:24px; }.rs-chart-legend>.rs-text-link { margin-left:0;width:100%; }.rs-search-dialog { margin-top:20px; }.rs-search-content { padding:18px; }.rs-search-results { max-height:calc(100dvh - 240px); }.rp-root.rp-premium .rs-ask-shortcut { font-size:10px; }.rp-premium .rs-description { font-size:12px; } }
+@media(prefers-reduced-motion:reduce) { .rp-premium .rs-nav-items>a,.rp-premium a.rs-metric { transition:none; } }
+/* One explicit compatibility reset for legacy shell geometry and surfaces. */
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight],
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-frame-v2 { background:var(--app-bg)!important; }
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-main-v2 { padding:0!important; }
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rs-navigation { background:var(--app-nav)!important; }
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-goh-avatar { background:#23546c!important;color:#fff!important;box-shadow:none!important; }
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-goh-search-label { display:flex;align-items:center;gap:10px; }

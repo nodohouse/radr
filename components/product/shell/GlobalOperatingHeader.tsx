@@ -15,6 +15,8 @@ import {
   type ReactNode,
 } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+const WorkspaceSearch = dynamic(() => import("../reference/WorkspaceSearch"), { ssr: false });
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useProduct } from "@/lib/product/store";
 import type { DashPeriod } from "@/lib/product/demo/dashboard";
@@ -517,6 +519,17 @@ export function GlobalOperatingHeader({
   } = useProduct();
   const { org, isHotel, session } = useDemoOrg();
   const ask = useAskRadrOptional();
+  const [searchOpen, setSearchOpen] = useState(false);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setSearchOpen(value => !value);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
   const synthetic = isSyntheticData(getRadrEnvironment());
   const title = useMemo(() => pageTitle(pathname), [pathname]);
 
@@ -634,7 +647,7 @@ export function GlobalOperatingHeader({
               {"\u00a0"}
             </span>
           ) : (
-            <h1 className="rp-goh-title">{contextLine}</h1>
+            <span className="rp-goh-title" aria-hidden="true">{contextLine}</span>
           )}
         </div>
 
@@ -664,7 +677,7 @@ export function GlobalOperatingHeader({
           </div>
 
           <div className="rp-goh-zone" data-zone="time">
-            <PeriodSwitcher />
+            {!onControlCenter ? <PeriodSwitcher /> : null}
             {synthetic ? (
               <WorldSwitcher className="rp-goh-world" />
             ) : null}
@@ -675,36 +688,15 @@ export function GlobalOperatingHeader({
               <button
                 type="button"
                 className="rp-goh-search"
-                onClick={() => ask.openAsk()}
+                onClick={() => setSearchOpen(true)}
                 aria-label="Search anything"
               >
-                <span className="rp-goh-search-label">Search anything…</span>
+                <span className="rp-goh-search-label"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5" stroke="currentColor" strokeWidth="1.4"/><path d="m12.3 12.3 4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>Search anything…</span>
                 <kbd>⌘K</kbd>
               </button>
             ) : null}
             <div className="rp-goh-utility-end">
-              <button
-                type="button"
-                className="rp-goh-bell"
-                aria-label="Notifications"
-                onClick={() => ask?.openAsk()}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-                  <path
-                    d="M6 9a6 6 0 0 1 12 0c0 7 3 7 3 7H3s3 0 3-7"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M10 19a2 2 0 0 0 4 0"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
+              <button type="button" className="rs-ask-shortcut" onClick={() => ask?.openAsk()} aria-label="Ask RADR">Ask RADR</button>
               <Link
                 href="/app/settings"
                 className="rp-goh-avatar"
@@ -716,6 +708,7 @@ export function GlobalOperatingHeader({
           </div>
         </div>
       </div>
+      {searchOpen ? <WorkspaceSearch onClose={() => setSearchOpen(false)} /> : null}
     </header>
   );
 }
