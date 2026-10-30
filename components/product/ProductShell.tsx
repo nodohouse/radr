@@ -130,7 +130,7 @@ function ShellChrome({
             onPinnedChange={setPinned}
             overlayRail={overlayRail}
             forceOpen={
-              navMode === "mobile" || navMode === "drawer" ? mobileNav : false
+              navMode === "desktop" && isControlCenter ? true : mobileNav
             }
             onNavigate={() => setMobileNav(false)}
           />

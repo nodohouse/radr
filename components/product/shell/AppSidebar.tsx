@@ -305,7 +305,7 @@ export function AppSidebar({
             <span className="rp-rail-mark" aria-hidden="true">
               <FrozenRadrLogo
                 variant="mark"
-                theme="dark"
+                theme="light"
                 width={22}
                 decorative
               />
@@ -313,7 +313,7 @@ export function AppSidebar({
             <span className="rp-rail-word">
               <FrozenRadrLogo
                 variant="wordmark"
-                theme="dark"
+                theme="light"
                 size="sm"
                 decorative
               />

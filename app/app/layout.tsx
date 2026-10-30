@@ -28,6 +28,7 @@ import "@/app/radr-vision.css";
 import "@/components/product/control-center/control-center-instrument.css";
 import "@/app/radr-daylight.css";
 import "@/app/product-premium.css";
+import "@/app/control-center-tablet.css";
 
 export const dynamic = "force-dynamic";
 

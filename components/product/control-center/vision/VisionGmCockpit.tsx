@@ -19,7 +19,6 @@ import {
   intelligenceHref,
   valueHref,
 } from "@/lib/product/radrContext/navigateWithContext";
-import { verifiedBars } from "./visionMeta";
 import { OperatingPulseLandscape } from "../OperatingPulseLandscape";
 
 type Props = {
@@ -81,49 +80,8 @@ const KPI_ICONS: Record<string, ReactNode> = {
   ),
 };
 
-function HeroTrajectory() {
-  return (
-    <svg
-      className="rv-tonight-atm"
-      viewBox="0 0 720 160"
-      preserveAspectRatio="none"
-      aria-hidden
-    >
-      <defs>
-        <linearGradient id="rvTonightFill" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#00d978" stopOpacity="0" />
-          <stop offset="45%" stopColor="#00d978" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#00a85a" stopOpacity="0.18" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M0,118 C90,112 150,96 230,88 C320,78 390,92 470,70 C540,52 610,40 720,28 L720,160 L0,160 Z"
-        fill="url(#rvTonightFill)"
-      />
-      <path
-        d="M0,118 C90,112 150,96 230,88 C320,78 390,92 470,70 C540,52 610,40 720,28"
-        fill="none"
-        stroke="#0f6b3c"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        opacity="0.7"
-      />
-      <circle cx="470" cy="70" r="3.5" fill="#00a85a" stroke="#fff" strokeWidth="1.5" />
-      <g transform="translate(482 52)">
-        <rect width="52" height="20" rx="10" fill="#ffffff" stroke="rgba(15,107,60,0.18)" />
-        <text x="26" y="13.5" textAnchor="middle" fill="#0f6b3c" fontSize="10" fontWeight="650">
-          +12.6%
-        </text>
-      </g>
-      <path
-        d="M40,132 C160,128 280,124 400,120"
-        fill="none"
-        stroke="rgba(95,104,97,0.35)"
-        strokeWidth="1.2"
-        strokeDasharray="3 4"
-      />
-    </svg>
-  );
+function SummaryArrow() {
+  return <svg width="13" height="13" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
 export function VisionGmCockpit({
@@ -136,7 +94,6 @@ export function VisionGmCockpit({
   const conclusion = useMemo(() => deriveRestaurantGmConclusion(state), [state]);
   const decision = D1911_CC_DECISION;
   const [whyOpen, setWhyOpen] = useState(false);
-  const bars = verifiedBars(3);
 
   const kpis = [
     {
@@ -189,20 +146,26 @@ export function VisionGmCockpit({
       <div className="rv-cc-main">
         <header className="rv-cc-head">
           <p className="rv-cc-eyebrow">Control Center</p>
-          <h1 className="rv-display">Your operation. <span className="px-heading-accent">In focus.</span></h1>
-          <p className="px-intro">The important changes. The next right move.</p>
+          <h1 className="rv-display">Your Control Center<span className="tx-heading-dot">.</span></h1>
+          <p className="px-intro">Here’s what needs your attention today.</p>
           <p className="rv-cc-context">
             {state.servicePeriod} · LIVE {state.clockLabel}
             <span className="rv-cc-weather"> · {state.weather}</span>
           </p>
         </header>
 
+        <div className="tx-summary-grid">
+        <Link href={decisionsNeedsYouHref()} className="tx-summary tx-summary-attention">
+          <span className="tx-summary-label"><i />Needs your judgment</span>
+          <strong>{needsFiltered.length.toString().padStart(2, "0")}</strong>
+          <p>Decisions ready for your review</p>
+          <small>See decisions <SummaryArrow /></small>
+        </Link>
         <Link
           href={intelligenceHref({ lens: "sell" })}
           className="rv-tonight rv-tonight-card"
           data-testid="gm-cc-hero-revenue"
         >
-          <HeroTrajectory />
           <div className="rv-tonight-top">
             <span className="rv-label">
               <i className="rv-tonight-ico" aria-hidden />
@@ -213,10 +176,17 @@ export function VisionGmCockpit({
             </span>
           </div>
           <strong className="rv-num">{formatEuro(state.revenueEuro)}</strong>
-          <span className="rv-delta">
-            ↑ +{state.revenueDeltaPct.toFixed(1)}% vs plan
-          </span>
+          <span className="rv-delta">↑ +{state.revenueDeltaPct.toFixed(1)}% vs plan</span>
+          <small className="tx-revenue-link">See performance <SummaryArrow /></small>
         </Link>
+
+        <Link href={valueHref()} className="tx-summary tx-summary-verified" data-testid="gm-cc-verified">
+          <span className="tx-summary-label"><i />Verified value · MTD</span>
+          <strong>{verifiedValue}</strong>
+          <p>Evidence behind every outcome</p>
+          <small>Explore value <SummaryArrow /></small>
+        </Link>
+        </div>
 
         <div
           className="rv-metric-band rv-metric-band-compact rv-metric-card"
@@ -385,23 +355,13 @@ export function VisionGmCockpit({
           </ul>
         </div>
 
-        <Link
-          href={valueHref()}
-          className="rv-verified"
-          data-testid="gm-cc-verified"
-        >
-          <span className="rv-label">Verified Value · MTD</span>
-          <strong className="rv-num">{verifiedValue}</strong>
-          <em data-tone="pos">↑ +18.6% vs prior MTD</em>
-          <div className="rv-verified-bars" aria-hidden>
-            {bars.map((h, i) => (
-              <i key={i} style={{ height: `${h}%` }} />
-            ))}
-          </div>
-          <p className="rv-verified-note">
-            Contribution protected from earlier peak and stock Decisions.
-          </p>
-        </Link>
+        <section className="tx-evidence-card" aria-label="Decision evidence">
+          <p className="rv-label">The evidence behind the decision</p>
+          <h3>Connected. Considered.</h3>
+          <p>Cross-system signals, brought into one operating picture.</p>
+          <div className="tx-source-chips">{D1911_WHY_NOW.evidence.map(source => <span key={source}>{source}</span>)}</div>
+          <Link href="/app/connections">Review connections <SummaryArrow /></Link>
+        </section>
       </aside>
     </div>
   );
