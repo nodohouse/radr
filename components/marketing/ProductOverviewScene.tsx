@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { CANON_PEAK, money } from "@/data/demo";
 import { CTAS } from "@/lib/marketing/brand";
 
-/** Compact Platform decision moment — Berlin · D-1911. */
+/** Compact Platform decision moment — Soho · New York · D-1911. */
 export function ProductOverviewScene() {
   const d = CANON_PEAK;
   return (
@@ -29,7 +29,7 @@ export function ProductOverviewScene() {
               Recommended: Wait 12 minutes · {money(d.expectedProtectedEuro)}{" "}
               expected vs seating now
             </p>
-            <Link href="/demo" className="rx-pos-cta">
+            <Link href="/signup?intent=demo&next=/app/enter" className="rx-pos-cta">
               {CTAS.primaryProduct} →
             </Link>
           </div>

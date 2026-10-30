@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte tonight: realistic simulated reservation operating input.
+ * Soho · New York tonight: realistic simulated reservation operating input.
  * Aligns with venueProfiles BERLIN_TONIGHT_OPS (72 seats).
  */
 

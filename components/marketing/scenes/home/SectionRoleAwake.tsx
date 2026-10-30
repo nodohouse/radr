@@ -98,17 +98,17 @@ export function SectionRoleAwake() {
             <em>3 NEED INTERVENTION</em>
             <ul className="rx-role-locs">
               <li>
-                <span>Berlin</span>
+                <span>New York</span>
                 <strong data-tone="up">+4.2%</strong>
                 <em>Supplier pattern</em>
               </li>
               <li>
-                <span>Amsterdam</span>
+                <span>Singapore</span>
                 <strong data-tone="down">−1.8%</strong>
                 <em>Distribution drag</em>
               </li>
               <li>
-                <span>Lisbon</span>
+                <span>Tokyo</span>
                 <strong data-tone="up">+2.1%</strong>
                 <em>Orphan playbook</em>
               </li>
@@ -125,11 +125,11 @@ export function SectionRoleAwake() {
             <em>THINGS NEED YOU</em>
             <ul>
               <li>
-                <strong className="rx-econ-risk">€620</strong>
+                <strong className="rx-econ-risk">$620</strong>
                 <span>Vs seat-now · decide by 18:53</span>
               </li>
               <li>
-                <strong className="rx-econ-risk">€284</strong>
+                <strong className="rx-econ-risk">$284</strong>
                 <span>Exposure · watching → ask</span>
               </li>
             </ul>

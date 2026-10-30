@@ -90,7 +90,7 @@ describe("OperatingMemory", () => {
   it("learning unit is location-first", () => {
     const unit = buildTunaLearningUnit();
     expect(unit.hierarchy).toBe("LOCATION");
-    expect(unit.locationEvidence).toMatch(/Berlin Mitte/);
+    expect(unit.locationEvidence).toMatch(/Soho · New York/);
     expect(unit.playbookUpdate).toMatch(/v2/);
   });
 });

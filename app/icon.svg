@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="RADR mark">
+  <rect width="100" height="100" fill="#0A1110"/>
+  <svg x="20" y="20" width="60" height="60" viewBox="0 33 60 60">
+  <path d="M 29 60 L 27 62 L 27 66 L 28 67 L 28 68 L 30 70 L 30 71 L 33 74 L 33 75 L 35 77 L 35 78 L 38 81 L 38 82 L 40 84 L 40 85 L 43 88 L 55 88 L 54 85 L 52 83 L 52 82 L 50 80 L 50 79 L 47 76 L 47 75 L 45 73 L 45 72 L 43 70 L 43 69 L 41 67 L 41 66 L 39 64 L 39 63 L 36 60 L 35 60 L 34 59 L 31 59 L 30 60 Z" fill="#FFFFFF" fill-rule="evenodd"/>
+  <path d="M 24 37 L 23 38 L 23 39 L 20 42 L 20 43 L 17 46 L 17 47 L 14 50 L 14 51 L 12 53 L 12 54 L 9 57 L 9 58 L 7 60 L 7 61 L 4 64 L 4 65 L 2 67 L 2 68 L 1 69 L 0 69 L 0 88 L 1 88 L 2 87 L 2 86 L 4 84 L 4 83 L 7 80 L 7 79 L 9 77 L 9 76 L 11 74 L 11 73 L 14 70 L 14 69 L 16 67 L 16 66 L 19 63 L 19 62 L 21 60 L 21 59 L 24 56 L 24 55 L 26 53 L 27 53 L 30 50 L 30 48 L 29 47 L 28 44 L 26 42 L 26 41 L 25 40 Z" fill="#FFFFFF" fill-rule="evenodd"/>
+  <path d="M 23 75 L 21 75 L 20 76 L 19 76 L 16 79 L 16 84 L 17 85 L 17 86 L 18 86 L 21 88 L 22 88 L 23 87 L 25 87 L 27 85 L 27 84 L 28 83 L 28 80 L 27 79 L 27 78 L 25 76 L 24 76 Z" fill="#00E676" fill-rule="evenodd"/>
+  </svg>
+</svg>

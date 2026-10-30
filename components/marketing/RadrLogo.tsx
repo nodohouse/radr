@@ -1,5 +1,6 @@
 export {
-  RadrWordmark,
   RadrLogo,
+  RADRLogo,
+  BrandLogo,
   BrandMark,
-} from "./RadrWordmark";
+} from "@/components/brand/RadrLogo";

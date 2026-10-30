@@ -9,6 +9,7 @@ import {
   COMPANY_LINKS,
   PLATFORM_COLUMNS,
   PLATFORM_DEFAULT_PREVIEW,
+  SOLUTIONS_HOSPITALITY,
   VALUE_LEAK_CLASSES,
   VALUE_LEAK_DEEPER,
   VALUE_LEAK_HREF,
@@ -117,6 +118,21 @@ export function SolutionsPanel({
     <div className="rx-np rx-np-solutions" data-theme={theme}>
       <div className="rx-np-solutions-body">
         <div className="rx-np-solutions-cols">
+          <DropGroup title={t("columns.hospitality")}>
+            {SOLUTIONS_HOSPITALITY.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                className="rx-np-item rx-np-item--solo"
+                onClick={onNavigate}
+              >
+                <span className="rx-np-item-signal" aria-hidden="true" />
+                <strong>{t(`hospitality.${item.key}.label`)}</strong>
+                <span>{t(`hospitality.${item.key}.desc`)}</span>
+              </Link>
+            ))}
+          </DropGroup>
+
           <DropGroup title={t("columns.classes")}>
             {VALUE_LEAK_CLASSES.map((item) => (
               <Link

@@ -1,19 +1,25 @@
 /**
  * Connected operating scenario — Futures selection updates Service Map / related surfaces.
+ * Floor / Timeline / Recovery share this clock + path + view.
  */
+
+import type { ServiceViewMode } from "@/lib/radr/service/types";
 
 type Listener = () => void;
 
 export type ConnectedScenario = {
   peakPath: "wait" | "seat" | "refuse";
-  serviceTime: "18:00" | "18:42" | "19:00" | "20:00" | "21:00";
+  serviceTime: "18:00" | "19:48" | "19:00" | "20:00" | "21:00";
+  /** Service Intelligence view — same universe, different lens. */
+  serviceView: ServiceViewMode;
   marginFutureId: string | null;
   cokePriceDeltaEuro: number | null;
 };
 
 let state: ConnectedScenario = {
   peakPath: "wait",
-  serviceTime: "18:42",
+  serviceTime: "19:48",
+  serviceView: "floor",
   marginFutureId: "category_rebalance",
   cokePriceDeltaEuro: null,
 };
@@ -31,6 +37,11 @@ export function setPeakPath(peakPath: ConnectedScenario["peakPath"]) {
 
 export function setServiceTime(serviceTime: ConnectedScenario["serviceTime"]) {
   state = { ...state, serviceTime };
+  listeners.forEach((l) => l());
+}
+
+export function setServiceView(serviceView: ServiceViewMode) {
+  state = { ...state, serviceView };
   listeners.forEach((l) => l());
 }
 

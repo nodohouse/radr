@@ -1,5 +1,5 @@
 /**
- * Demo menu allergen graph - Berlin Mitte.
+ * Demo menu allergen graph - Soho · New York.
  * Containment is fixture-verified; never invent "safe".
  */
 

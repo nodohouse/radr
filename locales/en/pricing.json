@@ -4,7 +4,7 @@
   "kicker": "Pricing",
   "heroTitleLine1": "Start where the value is clearest.",
   "heroTitleLine2": "",
-  "heroLead": "Begin with one defined recovery scope. Expand as RADR proves the economics.",
+  "heroLead": "Start where the economic problem is clearest. Expand as Verified Value proves the economics.",
   "heroSupport": "Choose Supplier / AP, Reconciliation, or both.",
   "how": {
     "kicker": "How pricing works",
@@ -75,10 +75,11 @@
     "features": [
       "Everything in Expand",
       "Prepared Actions and approval workflows",
-      "Multi-location governance",
-      "Autopilot within policy",
+      "Multi-location / multi-entity governance",
+      "Regional and group permissions",
+      "Governed execution within policy",
       "Portfolio Verified Value",
-      "Advanced controls and implementation"
+      "Advanced controls and custom integration"
     ]
   },
   "enterprise": {
@@ -111,8 +112,8 @@
   "compare": {
     "kicker": "Responsibility",
     "title": "What changes as RADR takes on more.",
-    "expand": "Show comparison",
-    "collapse": "Hide comparison",
+    "expand": "View full comparison",
+    "collapse": "Hide full comparison",
     "legend": {
       "yes": "Included",
       "early": "Early access",
@@ -166,40 +167,36 @@
     "title": "Straight answers",
     "items": [
       {
-        "q": "What if a supplier takes longer than 14 days?",
-        "a": "RADR keeps the case open until it resolves or is closed."
-      },
-      {
-        "q": "Do we have to replace our accounting or procurement stack?",
-        "a": "No. RADR is designed to work across the systems already in use."
-      },
-      {
-        "q": "Does RADR send disputes automatically?",
-        "a": "Not unless explicitly permitted by policy. Material external actions can remain approval-gated."
-      },
-      {
-        "q": "How does RADR define Verified Value?",
-        "a": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice."
-      },
-      {
         "q": "How is RADR priced?",
-        "a": "Pricing depends on locations, operating scope and the level of Decision responsibility RADR takes on."
+        "a": "Pricing scales with estate size, connected systems, operating scope, and Decision responsibility. Not seats or tokens."
       },
       {
-        "q": "Can we start with one recovery scope?",
-        "a": "Yes. The Margin Recovery Pilot is the preferred starting point — often 2–3 locations on a defined financial problem."
+        "q": "What affects price?",
+        "a": "How many locations RADR covers, which systems feed evidence, how broad the operating surface is, and whether RADR recommends, prepares, or governs."
       },
       {
-        "q": "Do we need all our systems connected first?",
-        "a": "No. Start with invoices, contracts, and AP evidence where available. Expand as more systems come online."
+        "q": "Do I need all systems connected first?",
+        "a": "No. Start with the evidence sources that unlock the clearest economic problem. Expand as more systems come online."
       },
       {
-        "q": "Can we expand later?",
-        "a": "Yes. Recovery is where RADR starts. The same Decision system can extend into broader operating Decisions."
+        "q": "Can I start small?",
+        "a": "Yes. A typical starting scope is 2–3 locations focused on one defined economic problem."
+      },
+      {
+        "q": "Can I expand later?",
+        "a": "Yes. The same Decision layer expands into broader operating coverage, Futures, Verified Value, Memory, and enterprise governance."
+      },
+      {
+        "q": "Is implementation included?",
+        "a": "Scoped onboarding is part of the commercial conversation: connect core systems, configure operating context, and review first material Decisions."
       },
       {
         "q": "Do you offer enterprise terms?",
-        "a": "Yes. Larger groups can scope advanced controls, security, custom integrations, SLA and multi-entity deployment under Enterprise."
+        "a": "Yes. Larger groups can scope advanced controls, security review, custom integrations, multi-entity deployment, and SLA terms where agreed."
+      },
+      {
+        "q": "What does a pilot / starting scope look like?",
+        "a": "A paid Start engagement on a defined economic problem. Clear go / no-go, evidence packages, and Verified Value where evidence supports it."
       }
     ]
   },

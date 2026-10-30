@@ -498,37 +498,71 @@ html:has(.radr) body {
   padding: 0.2rem 0.15rem 0.2rem 0;
   margin-left: 0;
 }
-.rx-nav-mark {
+/* Nav brand — canonical wordmark SVG (artwork, not live text) */
+.rx-nav-lockup,
+.rx-nav-lockup--wordmark,
+.rx-nav-lockup--horizontal,
+.radr-brand-logo--horizontal {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 2.05rem;
-  height: 2.05rem;
-  border-radius: 8px;
-  border: none;
-  background: #00b96b;
-  color: #04140c;
-  box-shadow:
-    0 0 0 1px rgba(4, 20, 12, 0.08),
-    0 6px 14px -10px rgba(0, 185, 107, 0.55);
-  transition: box-shadow 180ms ease, transform 180ms ease;
+  line-height: 1;
+  /* clear space ~ 2–3× focal-dot height */
+  margin-inline-end: 0.75rem;
 }
-.rx-nav-brand:hover .rx-nav-mark {
-  transform: scale(1.03);
-  box-shadow:
-    0 0 0 1px rgba(4, 20, 12, 0.1),
-    0 8px 18px -10px rgba(0, 185, 107, 0.65);
+
+.rx-nav-lockup .radr-logo,
+.rx-nav-lockup--wordmark .radr-logo,
+.rx-nav-lockup--horizontal .radr-logo {
+  max-width: 100%;
+  height: auto;
+  filter: none !important;
+  box-shadow: none !important;
 }
-.rx-nav-mark .radr-delta {
+.rx-nav-lockup--wordmark.radr-wm,
+.rx-nav-lockup--wordmark {
+  font-family: var(--font-display), var(--font-geist-sans), "Geist", system-ui, sans-serif;
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--radr-ink, #0b1512);
+}
+.rx-nav[data-theme="dark"] .rx-nav-lockup--wordmark {
+  color: #fff;
+}
+.rx-nav-lockup .radr-brand-logo-mark,
+.radr-brand-logo--horizontal .radr-brand-logo-mark {
   display: grid;
   place-items: center;
-  width: 1.05rem !important;
-  height: 1.05rem !important;
-  color: inherit !important;
+  flex: none;
+  color: var(--radr-ink, #0b1512);
 }
-.rx-nav-mark .radr-delta-glyph {
-  color: inherit !important;
-  filter: none !important;
+.rx-nav-lockup .radr-brand-logo-name,
+.radr-brand-logo--horizontal .radr-brand-logo-name {
+  font-family: var(--font-display), var(--font-geist-sans), "Geist", system-ui, sans-serif;
+  font-size: 1.12rem;
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  color: inherit;
+  line-height: 1;
+  padding-top: 0.02em;
+}
+.rx-nav[data-theme="dark"] .rx-nav-lockup .radr-brand-logo-mark {
+  color: #fff;
+}
+.radr-brand-logo--mark {
+  display: inline-grid;
+  place-items: center;
+  color: var(--radr-ink, #0b1512);
+}
+.radr-brand-logo--dark {
+  color: #fff;
+}
+.radr-brand-logo--mono {
+  color: currentColor;
+}
+/* Legacy mark class kept for old selectors */
+.rx-nav-mark {
+  display: none;
 }
 .rx-nav-name {
   font-family: var(--font-display), system-ui, sans-serif;
@@ -610,13 +644,20 @@ html:has(.radr) body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 0.8em;
-  height: 0.82em;
-  margin: 0 0.11em 0 0.11em;
-  transform: translateY(0.03em);
+  /* Letter-proportioned A-mark (viewBox 80×100) */
+  width: 0.72em;
+  height: 0.9em;
+  margin: 0 0.04em 0 0.02em;
+  transform: translateY(0.06em);
   flex: none;
   line-height: 0;
   position: relative;
+  color: inherit;
+}
+.radr-wm-a .radr-a-mark {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .radr-wm-a img {
   display: block;
@@ -829,7 +870,7 @@ html:has(.radr) body {
   flex-wrap: nowrap;
   align-items: center;
   width: max-content;
-  animation: rx-opulse-scroll 72s linear infinite;
+  animation: rx-opulse-scroll 160s linear infinite;
   will-change: transform;
 }
 
@@ -860,16 +901,22 @@ html:has(.radr) body {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0 0.15rem 0 1.1rem;
+  gap: 1.35rem;
+  padding: 0 0.35rem 0 2.4rem;
   font-family: var(--font-mono, "IBM Plex Mono", ui-monospace, monospace);
   font-size: 0.625rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
   line-height: 1;
+  color: rgba(10, 13, 11, 0.78);
+  font-weight: 520;
+}
+
+.rx-opulse-status {
+  font-weight: 720;
   color: #0a0d0b;
-  font-weight: 560;
+  letter-spacing: 0.12em;
 }
 
 .rx-opulse-sep {
@@ -1052,15 +1099,15 @@ html:has(.radr) body {
   box-shadow: 0 0 12px rgba(0, 217, 120, 0.35);
 }
 .rx-nav[data-theme="light"] .rx-nav-cta {
-  background: var(--signal);
-  color: #04140c;
-  border-color: var(--signal);
+  background: var(--radr-forest, #064d39);
+  color: #fff;
+  border-color: var(--radr-forest, #064d39);
   box-shadow: none;
 }
 .rx-nav[data-theme="light"] .rx-nav-cta:hover {
-  background: var(--signal-dim);
-  border-color: var(--signal-dim);
-  color: #04140c;
+  background: #043d2d;
+  border-color: #043d2d;
+  color: #fff;
 }
 .rx-nav[data-theme="light"] .rx-nav-cta-ghost {
   background: transparent;
@@ -1201,18 +1248,22 @@ html:has(.radr) body {
   padding: 0.32rem 0.85rem;
   border-radius: 10px;
   border: 1px solid transparent;
-  background: var(--signal);
-  color: #04140c;
-  font-family: var(--font-display), system-ui, sans-serif;
+  background: var(--radr-forest, #064d39);
+  color: #fff;
+  font-family: var(--font-display), var(--font-geist-sans), "Geist", system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   text-decoration: none;
-  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+  transition: background var(--radr-motion-standard, 220ms) var(--radr-ease, ease),
+    color var(--radr-motion-standard, 220ms) var(--radr-ease, ease),
+    border-color var(--radr-motion-standard, 220ms) var(--radr-ease, ease),
+    box-shadow var(--radr-motion-standard, 220ms) var(--radr-ease, ease);
 }
 .rx-nav-cta:hover {
-  background: var(--signal-dim);
-  color: #04140c;
+  background: #043d2d;
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 217, 120, 0.28);
 }
 .rx-nav-cta-ghost {
   display: none;
@@ -3345,19 +3396,28 @@ html:has(.radr) body {
 .rx-footer-mark {
   position: relative;
   z-index: 1;
+  color: var(--radr-ink, #0b1512);
+}
+.rx-footer-mark.radr-brand-logo--horizontal .radr-brand-logo-mark {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+.rx-footer-mark.radr-brand-logo--horizontal .radr-brand-logo-name {
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+  font-weight: 650;
+  letter-spacing: -0.04em;
 }
 .rx-footer-mark.radr-wm--footer {
   font-size: clamp(1.65rem, 3vw, 2.05rem) !important;
   letter-spacing: -0.04em;
   font-weight: 620;
 }
-/* Quiet delta — intelligence signal, not a glow blob */
 .rx-footer-mark.radr-wm--plain .radr-wm-a {
   filter: none;
 }
 .rx-footer-mark.radr-wm--plain .radr-wm-a svg,
 .rx-footer-mark.radr-wm--plain .radr-wm-a {
-  color: #00e889;
+  color: var(--radr-green, #00d978);
   opacity: 0.92;
 }
 .rx-footer-slogan {
@@ -3716,8 +3776,22 @@ html:has(.radr) body {
 }
 .rx-contact-inner { max-width: 34rem; }
 .rx-contact-form {
+  position: relative;
   display: grid;
   gap: 1rem;
+}
+/* Anti-spam honeypot: not visible, not focusable, not announced */
+.rx-contact-honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  pointer-events: none;
 }
 .rx-contact-row {
   display: grid;
@@ -18468,3 +18542,10 @@ html:has(.rx-dev-root) body {
 [data-nav-theme="light"].rx-sec .rx-sec-row em {
   font-size: max(0.75rem, 12px) !important;
 }
+
+.rx-dev-list{margin:0.75rem 0 0;padding-left:1.1rem;display:grid;gap:0.35rem}
+.rx-dev-footer-links{margin-top:1.5rem}
+.rx-trust-econ-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem}
+.rx-trust-econ-cols h3{margin:0 0 0.35rem;font-size:0.95rem}
+.rx-trust-econ-cols ul{margin:0;padding-left:1.1rem;display:grid;gap:0.25rem}
+@media (max-width:720px){.rx-trust-econ-cols{grid-template-columns:1fr}}

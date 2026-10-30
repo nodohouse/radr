@@ -7,18 +7,31 @@ import { Link } from "@/i18n/navigation";
 import { AuthSsoBlock } from "@/components/AuthSsoBlock";
 import { authClient } from "@/lib/auth-client";
 import { trackOnboarding } from "@/lib/onboarding/analytics";
+import { safeDemoNext } from "@/lib/marketing/demoAccess";
+
+type Props = {
+  inviteToken?: string;
+  inviteEmail?: string;
+  nextPath?: string;
+  intent?: "demo";
+};
 
 /**
  * Minimal signup. Social OAuth not wired yet - email + password preserved.
  * Errors never reveal whether an email is already registered.
  */
-export function SignupForm() {
+export function SignupForm({
+  inviteToken,
+  inviteEmail,
+  nextPath,
+  intent,
+}: Props) {
   const t = useTranslations("auth");
-  // /onboarding is outside the locale tree.
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const dest = safeDemoNext(nextPath, intent === "demo" ? "/app/enter" : "/onboarding");
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,17 +43,37 @@ export function SignupForm() {
     const password = String(form.get("password") ?? "");
     const name = email.split("@")[0] || "Operator";
 
+    if (inviteEmail && email.trim().toLowerCase() !== inviteEmail.toLowerCase()) {
+      setPending(false);
+      setError(t("errors.inviteEmailMismatch"));
+      return;
+    }
+
     const result = await authClient.signUp.email({ name, email, password });
-    setPending(false);
 
     if (result.error) {
-      // Anti-enumeration: never echo USER_ALREADY_EXISTS or similar.
+      setPending(false);
       setError(t("errors.signupFailed"));
       return;
     }
 
     trackOnboarding("signup_completed");
-    router.push("/onboarding");
+
+    if (inviteToken) {
+      const accept = await fetch("/api/invitations", {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ token: inviteToken }),
+      });
+      if (accept.ok) {
+        router.push(dest);
+        router.refresh();
+        return;
+      }
+    }
+
+    setPending(false);
+    router.push(dest);
     router.refresh();
   }
 
@@ -54,9 +87,11 @@ export function SignupForm() {
           type="email"
           autoComplete="email"
           required
+          defaultValue={inviteEmail ?? ""}
           placeholder={t("emailPlaceholder")}
         />
       </div>
+
       <div className="ob-field">
         <label htmlFor="password">{t("password")}</label>
         <div className="ob-auth-pw">
@@ -67,6 +102,7 @@ export function SignupForm() {
             autoComplete="new-password"
             required
             minLength={10}
+            placeholder={t("passwordPlaceholder")}
           />
           <button
             type="button"
@@ -77,39 +113,39 @@ export function SignupForm() {
             {showPassword ? t("hidePassword") : t("showPassword")}
           </button>
         </div>
-        <p className="ob-meta">{t("passwordHint")}</p>
+        <p className="ob-field-hint">{t("passwordHint")}</p>
       </div>
+
       {error ? (
         <div className="ob-error" role="alert">
           <p>{error}</p>
-          <p className="ob-error-help">
-            <Link href="/login">{t("signInLink")}</Link>
-            <span className="ob-auth-foot-sep" aria-hidden="true">
-              ·
-            </span>
-            <Link href="/forgot-password">{t("forgotPassword")}</Link>
-          </p>
         </div>
       ) : null}
+
       <button type="submit" className="ob-btn ob-btn-primary" disabled={pending}>
         {pending ? (
           t("creating")
         ) : (
           <>
-            {t("continue")} <span aria-hidden="true">→</span>
+            {t("submitSignUp")} <span aria-hidden="true">→</span>
           </>
         )}
       </button>
 
       <AuthSsoBlock />
 
-      <p className="ob-auth-foot">
-        {t("alreadyHaveAccess")} <Link href="/login">{t("signInLink")}</Link>
-        <span className="ob-auth-foot-sep" aria-hidden="true">
-          ·
-        </span>
-        <Link href="/forgot-password">{t("forgotPassword")}</Link>
-      </p>
+      {intent === "demo" ? (
+        <p className="ob-auth-demo-note">{t("demoSignupNote")}</p>
+      ) : null}
+
+      {!inviteToken ? (
+        <p className="ob-auth-foot">
+          {t("hasAccount")}{" "}
+          <Link href={`/login?next=${encodeURIComponent(dest)}`}>
+            {t("signInLink")}
+          </Link>
+        </p>
+      ) : null}
     </form>
   );
 }

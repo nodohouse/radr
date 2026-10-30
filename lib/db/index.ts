@@ -43,10 +43,20 @@ function createDb(): PrepDb {
     return drizzlePglite(client, { schema });
   }
 
+  // Vercel / serverless: only /tmp is writable. Prefer explicit PGLITE_DATA_DIR,
+  // then /tmp on Vercel, else local .data/pglite.
   const dataDir =
     process.env.PGLITE_DATA_DIR ??
-    path.join(process.cwd(), ".data", "pglite");
-  fs.mkdirSync(dataDir, { recursive: true });
+    (process.env.VERCEL
+      ? path.join("/tmp", "radr-pglite")
+      : path.join(process.cwd(), ".data", "pglite"));
+  try {
+    fs.mkdirSync(dataDir, { recursive: true });
+  } catch {
+    // Last resort: in-memory PGlite so auth module import cannot crash the app.
+    const client = new PGlite();
+    return drizzlePglite(client, { schema });
+  }
 
   const client = globalThis.__prepPglite ?? new PGlite(dataDir);
 

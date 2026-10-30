@@ -173,15 +173,55 @@ const PREVIEWS: Record<string, PreviewModel> = {
 PREVIEWS.decision = PREVIEWS.decisions;
 PREVIEWS.value = PREVIEWS.verifiedValue;
 PREVIEWS.memorySurface = PREVIEWS.memory;
+PREVIEWS.live = {
+  kicker: "Live",
+  title: "Real-time operating layer",
+  rows: [
+    { label: "Now", value: "Pressure forming" },
+    { label: "Objects", value: "Tables · rooms · zones" },
+    { label: "Intervene", value: "Compare futures" },
+  ],
+  cta: "Explore the platform",
+};
 PREVIEWS.autopilot = {
-  kicker: "Autopilot",
+  kicker: "Governed execution",
   title: "Earned trust — not magic",
   rows: [
     { label: "Suggest", value: "Recommend · human decides" },
     { label: "Stage", value: "Prepare · no SoR write yet" },
-    { label: "Auto", value: "Within policy only" },
+    { label: "Execute", value: "Within policy only" },
   ],
-  cta: "See Autopilot",
+  cta: "See governed execution",
+};
+PREVIEWS.operations = {
+  kicker: "Operations",
+  title: "Can we run today",
+  rows: [
+    { label: "Service", value: "Ready" },
+    { label: "Labor", value: "Coverage check" },
+    { label: "Kitchen", value: "Prep status" },
+  ],
+  cta: "Open Operations",
+};
+PREVIEWS.intelligence = {
+  kicker: "Intelligence",
+  title: "Why this is happening",
+  rows: [
+    { label: "Drivers", value: "Ranked" },
+    { label: "Confidence", value: "Visible" },
+    { label: "Economics", value: "Material first" },
+  ],
+  cta: "Open Intelligence",
+};
+PREVIEWS.dataHealth = {
+  kicker: "Data Health",
+  title: "Evidence gates action",
+  rows: [
+    { label: "Freshness", value: "Checked" },
+    { label: "Confidence", value: "Scored" },
+    { label: "Allowed action", value: "Policy-bound" },
+  ],
+  cta: "Open Data Health",
 };
 PREVIEWS.policies = PREVIEWS.security;
 PREVIEWS.evidence = {
@@ -204,7 +244,7 @@ const INTEL_SCENES = [
   },
   {
     vertical: "Reconciliation",
-    line: "€293 unexplained · settlement short",
+    line: "$293 unexplained · settlement short",
   },
   {
     vertical: "Perishable",

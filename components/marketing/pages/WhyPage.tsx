@@ -28,15 +28,15 @@ const FRAGMENTS = [
 const JUDGMENT = [
   {
     k: "Decision",
-    b: "What to do next — with evidence, economics, and a default.",
+    b: "What to do next: evidence, economics, and a default.",
   },
   {
     k: "Outcome",
-    b: "What reality returned after the action — observed, not hoped.",
+    b: "What reality returned after the action. Observed, not hoped.",
   },
   {
     k: "Memory",
-    b: "What the operation learned — so the next night starts smarter.",
+    b: "What the operation learned, so the next night starts smarter.",
   },
 ] as const;
 

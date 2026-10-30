@@ -7,6 +7,7 @@ import type {
   User,
   ValueSummary,
 } from "../types";
+import { toCatalogLocationId } from "@/lib/radr/product/locationIds";
 
 export const ORG: Organization = {
   id: "org_northstar",
@@ -19,8 +20,8 @@ export const ORG: Organization = {
 export const LOCATIONS: Location[] = [
   {
     id: "loc_ber",
-    name: "Berlin Mitte",
-    city: "Berlin",
+    name: "Soho · New York",
+    city: "New York",
     country: "DE",
     openSignals: 3,
     valueOnRadr: 19_600,
@@ -30,7 +31,7 @@ export const LOCATIONS: Location[] = [
   {
     id: "loc_ber_kreuz",
     name: "Berlin Kreuzberg",
-    city: "Berlin",
+    city: "New York",
     country: "DE",
     openSignals: 2,
     valueOnRadr: 15_200,
@@ -110,7 +111,7 @@ export const LOCATIONS: Location[] = [
   {
     id: "loc_ams",
     name: "Amsterdam Centraal",
-    city: "Amsterdam",
+    city: "New York",
     country: "NL",
     openSignals: 4,
     valueOnRadr: 26_400,
@@ -119,8 +120,8 @@ export const LOCATIONS: Location[] = [
   },
   {
     id: "loc_ams_canal",
-    name: "Canal House Amsterdam",
-    city: "Amsterdam",
+    name: "Mercer House Amsterdam",
+    city: "New York",
     country: "NL",
     openSignals: 2,
     valueOnRadr: 18_400,
@@ -945,7 +946,11 @@ export function formatEuro(n: number) {
 }
 
 export function locationById(id: string) {
-  return LOCATIONS.find((l) => l.id === id);
+  const catalogId = toCatalogLocationId(id);
+  return (
+    LOCATIONS.find((l) => l.id === catalogId) ??
+    LOCATIONS.find((l) => l.id === id)
+  );
 }
 
 export function signalById(id: string) {

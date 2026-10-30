@@ -1,0 +1,699 @@
+/**
+ * RADR Command Center — visual-system source of truth.
+ * Light JARVIS: luminous · precise · spatial · calm.
+ */
+
+/* ——— Depth planes ——— */
+.rp-cmd[data-depth="command"] {
+  --plane-0: var(--color-canvas);
+  --plane-1: rgba(255, 255, 255, 0.55);
+  --plane-2: rgba(255, 255, 255, 0.92);
+  --plane-lift: 0 1px 0 rgba(10, 13, 11, 0.04), 0 18px 40px rgba(10, 13, 11, 0.04);
+}
+
+/* ——— MetricDelta ——— */
+.rp-metric-delta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.28rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text);
+}
+
+.rp-metric-delta-glyph {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.rp-metric-delta-val {
+  font-weight: 520;
+  letter-spacing: -0.035em;
+}
+
+.rp-metric-delta[data-size="hero"] .rp-metric-delta-val {
+  font-size: clamp(2.625rem, 3.8vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.rp-metric-delta[data-size="hero"] .rp-metric-delta-glyph {
+  font-size: clamp(1.5rem, 2vw, 1.9rem);
+}
+
+.rp-metric-delta[data-size="primary"] .rp-metric-delta-val {
+  font-size: 1.375rem;
+}
+
+.rp-metric-delta[data-size="meta"] .rp-metric-delta-val {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.rp-metric-delta[data-semantic="positive"],
+.rp-metric-delta[data-semantic="positive"] .rp-metric-delta-val,
+[data-semantic="positive"] {
+  color: var(--semantic-positive) !important;
+}
+
+.rp-metric-delta[data-semantic="negative"],
+.rp-metric-delta[data-semantic="negative"] .rp-metric-delta-val,
+[data-semantic="negative"] {
+  color: var(--semantic-negative) !important;
+}
+
+.rp-metric-delta[data-semantic="warning"],
+[data-semantic="warning"] {
+  color: var(--semantic-warning) !important;
+}
+
+.rp-metric-delta[data-semantic="neutral"],
+[data-semantic="neutral"] {
+  color: var(--semantic-neutral) !important;
+}
+
+.rp-metric-delta[data-semantic="verified"],
+[data-semantic="verified"] {
+  color: var(--semantic-verified) !important;
+}
+
+/* ——— Spatial command surface ——— */
+.rp-cmd-surface {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(15.5rem, 0.7fr);
+  gap: clamp(1.75rem, 3.5vw, 3.5rem);
+  align-items: start;
+  margin: 0 0 1.75rem;
+  min-height: min(62vh, 34rem);
+}
+
+.rp-cmd-surface > .rp-cmd-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.rp-cmd-situation {
+  margin: 0;
+  max-width: 13ch;
+  font-size: clamp(2.5rem, 3.8vw, 3rem);
+  font-weight: 520;
+  line-height: 1.05;
+  letter-spacing: -0.042em;
+  color: var(--color-text);
+}
+
+.rp-cmd-situation-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem 3rem;
+  margin-top: 0.35rem;
+}
+
+.rp-cmd-situation-metrics > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.rp-cmd-situation-metrics span {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-weight: 450;
+}
+
+/* ——— Operating Field (wow) ——— */
+.rp-op-field {
+  position: relative;
+  margin: 0.25rem 0 0;
+  padding: 0.85rem 0 0.35rem;
+  background: transparent;
+}
+
+.rp-op-field-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 44rem;
+}
+
+.rp-op-field-plan {
+  stroke: var(--chart-compare);
+  stroke-width: 1.25;
+  stroke-dasharray: 4 5;
+  opacity: 0.55;
+}
+
+.rp-op-field-forecast {
+  stroke: var(--chart-forecast);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 5;
+  opacity: 0.7;
+}
+
+.rp-op-field-actual {
+  stroke: var(--chart-primary);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.rp-op-field-now-line {
+  stroke: var(--color-brand);
+  stroke-width: 1;
+  opacity: 0.35;
+}
+
+.rp-op-field-now-dot {
+  fill: var(--color-brand);
+  filter: drop-shadow(0 0 6px rgba(0, 217, 120, 0.45));
+  animation: rp-op-breathe 3.2s ease-in-out infinite;
+}
+
+@keyframes rp-op-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(0, 217, 120, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(0, 217, 120, 0.55));
+  }
+}
+
+.rp-op-field-now-lbl {
+  fill: var(--semantic-verified);
+  font-size: 11px;
+  font-family: var(--type-mono);
+  letter-spacing: 0.08em;
+}
+
+.rp-op-field-dec-dot {
+  fill: var(--color-brand);
+}
+
+.rp-op-field-dec-lbl {
+  fill: var(--color-text-secondary);
+  font-size: 11px;
+  font-family: var(--type-mono);
+  letter-spacing: 0.04em;
+}
+
+.rp-op-field-end-lbl,
+.rp-op-field-tick {
+  fill: var(--color-text-muted);
+  font-size: 11px;
+  font-family: var(--type-body);
+}
+
+.rp-op-field-readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.25rem 2rem;
+  margin-top: 0.85rem;
+  max-width: 44rem;
+}
+
+.rp-op-field-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.rp-op-field-metric-k {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.rp-op-field-drivers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1rem;
+  margin-left: auto;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* ——— System awareness ——— */
+.rp-cmd-awareness {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+  margin: 0.35rem 0 0;
+  padding: 0.65rem 0 0;
+  border-top: 1px solid var(--color-hairline);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  max-width: 44rem;
+}
+
+.rp-cmd-awareness span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.01em;
+}
+
+.rp-cmd-awareness strong {
+  font-size: 1.35rem;
+  font-weight: 520;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.rp-cmd-awareness span[data-need="true"] strong {
+  color: var(--color-text);
+}
+
+.rp-cmd-system-breakout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.75rem;
+  margin: -0.5rem 0 1.25rem;
+  padding: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  max-width: 44rem;
+}
+
+.rp-cmd-system-breakout strong {
+  color: var(--color-text);
+  font-weight: 520;
+  margin-right: 0.25rem;
+}
+
+/* ——— Handoff zone (spatially distinct) ——— */
+.rp-cmd-handoff-zone {
+  position: sticky;
+  top: 0.75rem;
+  padding: 1.15rem 0 1.15rem 1.35rem;
+  border-left: 1px solid rgba(10, 13, 11, 0.1);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    transparent 100%
+  );
+  min-height: 16rem;
+}
+
+.rp-cmd-handoff-k {
+  margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-family: var(--type-mono);
+}
+
+.rp-cmd-handoff-count {
+  margin: 0 0 1.15rem;
+  font-size: 0.9375rem;
+  font-weight: 450;
+  color: var(--color-text);
+  letter-spacing: -0.015em;
+}
+
+.rp-cmd-handoff-count strong {
+  display: block;
+  font-size: 3rem;
+  font-weight: 520;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  margin-bottom: 0.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-cmd-handoff-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.rp-cmd-handoff-list > li {
+  position: relative;
+}
+
+.rp-cmd-handoff-card {
+  width: 100%;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--color-border);
+  cursor: pointer;
+  color: inherit;
+}
+
+.rp-cmd-handoff-card[data-urgent="true"] {
+  box-shadow: inset 2px 0 0 var(--color-brand);
+  padding-left: 0.85rem;
+}
+
+.rp-cmd-handoff-verb {
+  margin: 0 0 0.3rem;
+  font-size: 1.35rem;
+  font-weight: 520;
+  letter-spacing: -0.028em;
+  line-height: 1.12;
+}
+
+.rp-cmd-handoff-where {
+  margin: 0 0 0.55rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.rp-cmd-handoff-econ {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem 0.65rem;
+  margin-bottom: 0.45rem;
+}
+
+.rp-cmd-handoff-econ em {
+  font-style: normal;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.rp-cmd-handoff-cta {
+  font-size: 0.8125rem;
+  font-weight: 520;
+  color: var(--semantic-verified);
+}
+
+.rp-cmd-handoff-open {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.rp-cmd-handoff-calm-copy {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+}
+
+/* ——— Ambient plane (bottom) ——— */
+.rp-cmd-ambient-plane {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem 1.75rem;
+  margin: 0 0 1.75rem;
+  padding: 1.35rem 0 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.rp-cmd-ambient-k {
+  margin: 0 0 0.55rem;
+  font-size: 0.8125rem;
+  font-weight: 520;
+  color: var(--color-text-secondary);
+  letter-spacing: -0.01em;
+}
+
+.rp-cmd-ambient-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.rp-cmd-ambient-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.rp-cmd-ambient-list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.rp-cmd-ambient-list em {
+  display: block;
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.1rem;
+}
+
+.rp-cmd-ambient-dot {
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-top: 0.45rem;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.rp-cmd-ambient-dot[data-live="true"] {
+  background: var(--semantic-live);
+  box-shadow: 0 0 0 3px rgba(0, 217, 120, 0.16);
+  animation: rp-cmd-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes rp-cmd-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.rp-cmd-watch-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rp-cmd-watch-list a,
+.rp-cmd-watch-list li {
+  text-decoration: none;
+  color: inherit;
+}
+
+.rp-cmd-watch-list strong {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 520;
+  letter-spacing: -0.02em;
+}
+
+.rp-cmd-watch-list span {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.rp-cmd-watch-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.rp-cmd-verified-num {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 520;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-cmd-verified-link,
+.rp-cmd-verified-all {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.rp-cmd-verified-all {
+  color: var(--semantic-verified);
+  font-weight: 520;
+}
+
+.rp-cmd-loc-signals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.rp-cmd-loc-signals a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.rp-cmd-loc-signals strong {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 520;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+
+.rp-cmd-loc-deltas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.55rem;
+}
+
+.rp-cmd-loc-deltas em {
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.rp-cmd-quiet {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.rp-cmd-syshealth {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  max-width: 15rem;
+}
+
+.rp-cmd-syshealth strong {
+  font-weight: 520;
+  letter-spacing: 0.05em;
+  font-size: 0.6875rem;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.rp-cmd-syshealth[data-ok="true"] strong {
+  color: var(--semantic-verified);
+}
+
+.rp-cmd-syshealth-dot {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--semantic-warning);
+  flex-shrink: 0;
+}
+
+.rp-cmd-syshealth-dot[data-live="true"] {
+  background: var(--semantic-live);
+  box-shadow: 0 0 0 3px rgba(0, 217, 120, 0.18);
+}
+
+/* Instrument strip — no KPI cards */
+.rp-cmd .rp-cin-rail {
+  margin: 0 0 0.5rem;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--color-border);
+  background: transparent !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  box-shadow: none !important;
+}
+
+.rp-cmd .rp-cin-rail-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border: 0;
+  padding: 0;
+}
+
+.rp-cmd .rp-cin-rail-item {
+  padding: 0 1.5rem 0 0 !important;
+  margin-right: 1.5rem;
+  border-right: 1px solid var(--color-hairline);
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  min-width: 0;
+}
+
+.rp-cmd .rp-cin-rail-item:last-child {
+  border-right: 0;
+}
+
+.rp-cmd .rp-cin-rail .rp-cin-kicker {
+  display: none;
+}
+
+/* Kill leftover CC boxed chrome on overview */
+.rp-cmd[data-view="overview"] .rp-cin-bridge,
+.rp-cmd[data-view="overview"] .rp-ccx-queue,
+.rp-cmd[data-view="overview"] .rp-ccx-hero-card {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 980px) {
+  .rp-cmd-surface {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .rp-cmd-handoff-zone {
+    position: static;
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+    padding: 1.25rem 0 0;
+    background: transparent;
+  }
+
+  .rp-cmd-ambient-plane {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rp-cmd-situation {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .rp-cmd-ambient-plane {
+    grid-template-columns: 1fr;
+  }
+
+  .rp-cmd-situation {
+    font-size: 2.15rem;
+  }
+
+  .rp-cmd-handoff-count strong {
+    font-size: 2.35rem;
+  }
+}

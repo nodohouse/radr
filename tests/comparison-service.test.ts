@@ -19,7 +19,7 @@ describe("comparisonService", () => {
       "loc_ber",
     ]);
     expect(href).toBe(
-      "/app/compare?locations=loc_nyc,loc_nyc_wvill,loc_ber",
+      "/app/compare?locations=loc_nyc,loc_nyc_wvill,loc_ber&stay=1",
     );
   });
 

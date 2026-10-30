@@ -716,7 +716,7 @@ function composeCoo(input: GlanceComposeInput): GlanceDraft {
       {
         id: "berlin",
         label: "PRIORITY",
-        state: "Berlin Mitte",
+        state: "Soho · New York",
         context: "Bluefin + staffing",
         action: "plan",
         actionLabel: "Open",
@@ -725,9 +725,9 @@ function composeCoo(input: GlanceComposeInput): GlanceDraft {
     ],
     secondary: [
       {
-        id: "ams",
+        id: "hh",
         label: "OPPORTUNITY",
-        state: "Amsterdam West terrace",
+        state: "Roma Norte · Mexico City terrace",
         number: "+€1.240,00",
         action: "none",
         tone: "ready",

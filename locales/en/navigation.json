@@ -1,17 +1,19 @@
 {
   "product": "Platform",
-  "solutions": "Where value leaks",
+  "platform": "Platform",
+  "solutions": "Solutions",
+  "valueCalculator": "Value Calculator",
   "controlCenter": "Control Center",
   "industries": "Industries",
   "how": "How it works",
   "pricing": "Pricing",
   "company": "Company",
   "signIn": "Login",
-  "seeRadr": "Start a recovery pilot",
-  "contactSales": "Start a recovery pilot",
-  "getStarted": "Start a recovery pilot",
+  "seeRadr": "See RADR in action",
+  "contactSales": "Contact Sales",
+  "getStarted": "See RADR in action",
   "bookDemo": "See a Verified Recovery",
-  "seeInAction": "Start a recovery pilot",
+  "seeInAction": "See RADR in action",
   "menu": "Menu",
   "close": "Close",
   "footerProduct": "Platform",
@@ -56,14 +58,15 @@
       }
     },
     "solutions": {
-      "title": "Where value leaks",
-      "lead": "Economic intelligence classes — not modules.",
+      "title": "Solutions",
+      "lead": "Built across hospitality — restaurants, hotels, and groups.",
       "columns": {
-        "classes": "Where value leaks",
+        "classes": "WHERE VALUE LEAKS",
         "deeper": "Deeper",
         "territories": "Territories",
         "operation": "Industries",
-        "priority": "Territories"
+        "priority": "Territories",
+        "hospitality": "Hospitality"
       },
       "classes": {
         "supplier": {
@@ -142,6 +145,24 @@
         "recover": {
           "title": "RECOVER",
           "desc": "Reclaim value before it disappears."
+        }
+      },
+      "hospitality": {
+        "restaurants": {
+          "label": "Restaurants",
+          "desc": "Service, kitchen, guests, labor, contribution."
+        },
+        "hotels": {
+          "label": "Hotels",
+          "desc": "Rooms, arrivals, revenue, readiness, channels."
+        },
+        "leaks": {
+          "label": "Where value leaks",
+          "desc": "Supplier, reconciliation, cost, procurement, perishable."
+        },
+        "groups": {
+          "label": "Hospitality groups",
+          "desc": "Multi-venue and mixed portfolios."
         }
       }
     },
@@ -244,7 +265,7 @@
       "title": "Platform",
       "featured": {
         "title": "See a Verified Recovery",
-        "desc": "One Margin Recovery Decision — from leak to verified euro.",
+        "desc": "One Margin Recovery Decision — from leak to verified value.",
         "cta": "See a Verified Recovery"
       },
       "columns": {
@@ -280,38 +301,46 @@
               "label": "Control Center",
               "desc": "What needs you · what RADR handles."
             },
+            "live": {
+              "label": "Live",
+              "desc": "What is happening now — pressure, objects, intervene."
+            },
             "decisions": {
               "label": "Decisions",
               "desc": "One primary Decision at a time."
             },
-            "floor": {
-              "label": "RADR Floor",
-              "desc": "Decision layer reaches FOH — not a POS."
+            "operations": {
+              "label": "Operations",
+              "desc": "Can we run today successfully."
+            },
+            "intelligence": {
+              "label": "Intelligence",
+              "desc": "Why this is happening — drivers and economics."
             },
             "value": {
               "label": "Value",
-              "desc": "Identified → Verified lifecycle."
+              "desc": "Expected · Observed · Verified."
             },
             "memorySurface": {
               "label": "Memory",
-              "desc": "Patterns that earn Autopilot."
+              "desc": "Patterns that earn governed execution."
+            },
+            "dataHealth": {
+              "label": "Data Health",
+              "desc": "Evidence health gates allowed action."
             }
           }
         },
         "trust": {
           "title": "Trust",
           "items": {
-            "autopilot": {
-              "label": "Autopilot",
-              "desc": "Suggest → Stage → Auto within policy."
-            },
             "policies": {
               "label": "Policies",
               "desc": "Always-ask for material commitments."
             },
             "evidence": {
-              "label": "Evidence",
-              "desc": "Sources, freshness, confidence."
+              "label": "Evidence & Data Health",
+              "desc": "Sources, freshness, confidence — gates allowed action."
             },
             "verification": {
               "label": "Verification",
@@ -437,7 +466,6 @@
       }
     }
   },
-  "platform": "Platform",
   "resources": "Resources",
   "footerValueLeaks": "Where value leaks"
 }

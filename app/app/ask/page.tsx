@@ -41,10 +41,10 @@ export default function AskPage() {
   return (
     <div className="rp-ask-page rp-ask-elevated rp-ask-reveal">
       <header className="rp-ledger-head">
-        <p className="rp-cc-kicker">Ask</p>
-        <h1 className="rp-cc-title">What do you want to understand?</h1>
+        <p className="rp-cc-kicker">Ask RADR</p>
+        <h1 className="rp-cc-title">Ask about your operation</h1>
         <p className="rp-cc-since">
-          Analyst surface over the operation · {ctx.shortLabel}
+          {ctx.shortLabel} · Direct answer · evidence · related Decision
         </p>
       </header>
 
@@ -63,7 +63,7 @@ export default function AskPage() {
           placeholder="What am I missing?"
         />
         <button type="submit" className="rp-cc-cta">
-          Ask
+          Ask RADR
         </button>
       </form>
 

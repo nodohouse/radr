@@ -55,7 +55,7 @@ export function HotelPropertyBoard() {
     <div className="rp-hotel-prop" aria-label="Property · rooms">
       <header className="rp-hotel-prop-head">
         <div>
-          <p className="rp-hotel-glance-kicker">PROPERTY · ROOMS · DEMO</p>
+          <p className="rp-hotel-glance-kicker">Property · Rooms</p>
           <h1>{CANAL_HOUSE.name}</h1>
           <p className="rp-hotel-glance-lead">
             Rooms · equipment · who arrives today and what to prepare
@@ -217,10 +217,10 @@ export function HotelPropertyBoard() {
               })}
             </h2>
             <p className="rp-hotel-glance-lead">
-              WHAT RADR ALREADY DID · Held off automatic OTA push · prepared
+              What RADR already did · Held off automatic OTA push · prepared
               three paths.
             </p>
-            <p className="rp-hotel-sec-label">WHAT RADR NEEDS FROM YOU</p>
+            <p className="rp-hotel-sec-label">What RADR needs from you</p>
             <ul className="rp-hotel-recover-opts">
               {options.map((o) => (
                 <li key={o.id}>

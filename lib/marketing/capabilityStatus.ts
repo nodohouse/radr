@@ -83,7 +83,7 @@ export const PUBLIC_CAPABILITIES = {
   },
   autopilot: {
     id: "autopilot",
-    label: "Autopilot within policy",
+    label: "Governed execution within policy",
     status: "planned",
     note: "Not production autonomous execution.",
   },

@@ -36,7 +36,7 @@ export function buildMarginCokeDecisionRecord(
 
   return {
     id: DECISION_IDS.marginCoke,
-    organizationId: "org_northstar",
+    organizationId: "org_northstar_restaurants",
     locationId: "loc_berlin_mitte",
     operatingUnitId: "ou_berlin_dinner",
     roleContext: "GM",
@@ -50,8 +50,10 @@ export function buildMarginCokeDecisionRecord(
     currentState: c.understand,
     property: c.property,
     phaseLabel: "Procurement · beverage category",
-    contextLine: c.deadline,
-    recommendationHeadline: "CATEGORY REBALANCE — NOT BLUNT REPRICE",
+    contextLine: "Beverage category cost shock · NOT AP invoice variance (D-4102)",
+    recommendationHeadline: "Category rebalance — not blunt reprice",
+    silenceNote:
+      "D-7501 is margin response on Coca-Cola unit cost. Sealed AP credit lives on D-4102. Tuna stock is D-1842.",
     triggerEvents: ["supplier_unit_cost_increase"],
     evidenceRefs: c.evidence.map((e, i) => ({
       id: `ev_mc_${i}`,
@@ -111,7 +113,7 @@ export function buildMarginCokeDecisionRecord(
       "Beverage menu items",
       "Lunch drink bundle",
       "Category contribution",
-      "Berlin Mitte P&L",
+      "Soho · New York P&L",
     ],
     constraints: [
       "Do not auto-write POS prices",
@@ -199,7 +201,7 @@ export function buildMarginCokeDecisionRecord(
       },
     ],
     locationDnaLine: c.learning?.lesson,
-    demoLabel: "DEMO · ILLUSTRATIVE",
+    demoLabel: "Demo · illustrative",
     modelVersion: "decision-record/v2",
     createdAt: "2026-09-15T09:10:00+02:00",
     updatedAt: "2026-09-17T11:20:00+02:00",

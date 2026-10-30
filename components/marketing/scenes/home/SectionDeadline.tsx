@@ -3,10 +3,10 @@
 import { useTranslations } from "next-intl";
 
 const MARKS = [
-  { id: "t1905", value: "€184", tone: "full" as const },
-  { id: "t1925", value: "€132", tone: "mid" as const },
-  { id: "t1945", value: "€74", tone: "low" as const },
-  { id: "t2000", value: "€0", tone: "gone" as const },
+  { id: "t1905", value: "$184", tone: "full" as const },
+  { id: "t1925", value: "$132", tone: "mid" as const },
+  { id: "t1945", value: "$74", tone: "low" as const },
+  { id: "t2000", value: "$0", tone: "gone" as const },
 ] as const;
 
 /**

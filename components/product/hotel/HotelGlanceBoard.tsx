@@ -75,12 +75,12 @@ export function HotelGlanceBoard() {
   );
 
   const kicker = isFinance
-    ? "Finance · Contribution · Demo"
+    ? "Finance · Contribution"
     : isRevenue
-      ? "Revenue · Pace · Demo"
+      ? "Revenue · Pace"
       : isHk
-        ? "Housekeeping · Readiness · Demo"
-        : "Start of day · House brief · Demo";
+        ? "Housekeeping · Readiness"
+        : "Start of day · House brief";
 
   return (
     <div
@@ -342,7 +342,7 @@ export function HotelGlanceBoard() {
                     <p>{item.body}</p>
                     {item.radrDid ? (
                       <p className="rp-hotel-attn-did">
-                        WHAT RADR ALREADY DID · {item.radrDid}
+                        What RADR already did · {item.radrDid}
                       </p>
                     ) : null}
                   </div>
@@ -372,7 +372,7 @@ export function HotelGlanceBoard() {
 
       {moduleEnabled(composed, "predictions") && visiblePredictions.length > 0 ? (
         <section aria-label="Predictions">
-          <p className="rp-hotel-sec-label">Predicted · DEMO</p>
+          <p className="rp-hotel-sec-label">Predicted</p>
           <div className="rp-pred-list">
             {visiblePredictions.map((p) => (
               <PredictionChip key={p.id} prediction={p} />

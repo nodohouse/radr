@@ -67,7 +67,7 @@ export function MarginResponseCanvas() {
 
   return (
     <IntelligenceCanvas
-      kicker="Margin Response · DEMO · ILLUSTRATIVE"
+      kicker="Margin response"
       title="What is the strongest response to this margin shock?"
       inspector={
         <div className="rp-margin-why">
@@ -225,7 +225,7 @@ export function MarginResponseCanvas() {
           </div>
 
           <div className="rp-margin-nl">
-            <p className="rp-icanvas-kicker">Natural-language simulation · DEMO</p>
+            <p className="rp-icanvas-kicker">Natural-language simulation</p>
             <button type="button" className="rp-drec-disclose" onClick={runNlRaise}>
               What if we raise Coke by €0.20?
             </button>

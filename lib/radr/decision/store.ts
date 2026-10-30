@@ -19,7 +19,6 @@ import {
   buildSupplierDecisionRecord,
   buildPlaybookDecisionRecord,
   buildArchivedTuna,
-  buildVerifiedOta,
   buildVerifiedOrphan,
 } from "./demos/portfolio";
 import {
@@ -31,11 +30,25 @@ import { buildMarginCokeDecisionRecord } from "./demos/marginCoke";
 import {
   buildOtaDecisionRecord,
 } from "./demos/ota";
+import { buildHotelReadinessDecisionRecord } from "./demos/hotelReadiness";
+import { buildLaborDecisionRecord } from "./demos/labor";
+import {
+  seedHotelCatalogRecords,
+  buildCancelRecoverDecisionRecord,
+  buildHotelHkStaffDecisionRecord,
+  buildHotelMaintenanceDecisionRecord,
+  buildHotelUpsellDecisionRecord,
+  buildHotelOverbookDecisionRecord,
+  buildHotelRateDemandDecisionRecord,
+} from "./demos/hotelCatalog";
+import { HOTEL_DECISION_IDS } from "@/lib/radr/demo/hotelDecisions";
 import { buildOrphanDecisionRecord } from "./demos/orphan";
 import {
   buildTunaDecisionRecord,
   applySupplierFailure,
 } from "./demos/tuna";
+import { buildCasterSugarDecisionRecord } from "./demos/casterSugar";
+import { buildCreatedMissDecisionRecord } from "@/lib/radr/product/valueMiss";
 
 export type DecisionStoreState = {
   records: Record<string, DecisionRecord>;
@@ -48,19 +61,19 @@ export type DecisionStoreState = {
 const KITCHEN_WATCH: WatchingSignal = {
   id: "watch_kitchen_berlin",
   locationId: "loc_berlin_mitte",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Kitchen pressure",
   detail: "Modeled load rising — below Decision threshold.",
   metricLabel: "Kitchen load",
   metricValue: "83% → projected 91%",
-  reason: "Not yet material / actionable enough to require intervention.",
+  reason: "No action.",
 };
 
 function seedPortfolio(): Record<string, DecisionRecord> {
   return {
     [DECISION_IDS.peak]: buildPeakDecisionRecord("AWAITING_APPROVAL"),
     [DECISION_IDS.tableRecover]: buildTableRecoverDecisionRecord("APPROVED"),
-    [DECISION_IDS.ota]: buildVerifiedOta(),
+    [DECISION_IDS.ota]: buildOtaDecisionRecord("AWAITING_APPROVAL"),
     [DECISION_IDS.orphan]: buildVerifiedOrphan(),
     [DECISION_IDS.supplier]: buildSupplierDecisionRecord("VERIFIED"),
     [DECISION_IDS.playbook]: buildPlaybookDecisionRecord("SIMULATED"),
@@ -70,6 +83,15 @@ function seedPortfolio(): Record<string, DecisionRecord> {
     [DECISION_IDS.socialDemand]: buildSocialDemandDecisionRecord("LEARNED"),
     [DECISION_IDS.guestVoice]: buildGuestVoiceDecisionRecord("LEARNED"),
     [DECISION_IDS.marginCoke]: buildMarginCokeDecisionRecord("AWAITING_APPROVAL"),
+    [DECISION_IDS.hotelReadiness]:
+      buildHotelReadinessDecisionRecord("AWAITING_APPROVAL"),
+    [DECISION_IDS.casterSugar]:
+      buildCasterSugarDecisionRecord("AWAITING_APPROVAL"),
+    /** Workforce peer — LEARNED so it does not steal Needs You from D-1911. */
+    [DECISION_IDS.labor]: buildLaborDecisionRecord("LEARNED"),
+    /** Honest miss — Verified €0 · does not inflate Verified totals. */
+    [DECISION_IDS.created]: buildCreatedMissDecisionRecord(),
+    ...seedHotelCatalogRecords(),
   };
 }
 
@@ -174,6 +196,15 @@ const BUILDERS: Partial<
     ...buildOtaDecisionRecord(s),
     territories: ["SELL"],
   }),
+  [DECISION_IDS.hotelReadiness]: buildHotelReadinessDecisionRecord,
+  [DECISION_IDS.labor]: buildLaborDecisionRecord,
+  [DECISION_IDS.created]: () => buildCreatedMissDecisionRecord(),
+  [HOTEL_DECISION_IDS.cancelRecover]: buildCancelRecoverDecisionRecord,
+  [HOTEL_DECISION_IDS.hkStaff]: buildHotelHkStaffDecisionRecord,
+  [HOTEL_DECISION_IDS.maintenance]: buildHotelMaintenanceDecisionRecord,
+  [HOTEL_DECISION_IDS.upsell]: buildHotelUpsellDecisionRecord,
+  [HOTEL_DECISION_IDS.overbook]: buildHotelOverbookDecisionRecord,
+  [HOTEL_DECISION_IDS.rateDemand]: buildHotelRateDemandDecisionRecord,
   [DECISION_IDS.orphan]: (s) => ({
     ...buildOrphanDecisionRecord(s),
     territories: ["RECOVER", "SELL"],
@@ -182,6 +213,7 @@ const BUILDERS: Partial<
     ...buildTunaDecisionRecord(s),
     territories: ["BUY", "SELL"],
   }),
+  [DECISION_IDS.casterSugar]: buildCasterSugarDecisionRecord,
 };
 
 function preserveOperatorFields(

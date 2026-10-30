@@ -67,6 +67,7 @@ describe("public money fixtures", () => {
     expect(MORNING_BRIEF_LIVE.map((d) => d.displayId)).toEqual([
       "D-7021",
       "D-7022",
+      "D-7023",
     ]);
     expect(LIVE_D7021.economics.verified).toBe(0);
     expect(LIVE_D7022.economics.verified).toBe(0);

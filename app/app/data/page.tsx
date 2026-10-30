@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-/** Canonical source-health surface is /app/integrations. */
+/** Canonical source-health surface is /app/connections. */
 export default function DataRedirect() {
-  redirect("/app/integrations");
+  redirect("/app/connections");
 }

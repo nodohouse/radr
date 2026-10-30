@@ -63,7 +63,7 @@ function eur(
   return { amount, currency: "EUR", ...rest };
 }
 
-/** D-1911 — €620 = expected incremental contribution vs seat-now */
+/** D-1911 — $620 = expected incremental contribution vs seat-now */
 export const MONEY_D1911_EXPECTED = eur(CANON_PEAK.expectedProtectedEuro, {
   metricType: "expected_incremental_contribution",
   state: "expected",
@@ -100,7 +100,7 @@ export const MONEY_D1911_VERIFIED = eur(verifiedEuro(CANON_PEAK), {
   displayId: "D-1911",
 });
 
-/** D-4102 — €273 = supplier variance / current invoice exposure (NOT expected value) */
+/** D-4102 — $273 = supplier variance / current invoice exposure (NOT expected value) */
 export const MONEY_D4102_VARIANCE = eur(CANON_SUPPLIER.exposureEuro, {
   metricType: "invoice_variance",
   state: "exposed",

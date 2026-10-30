@@ -211,7 +211,7 @@ export function SectionFutures() {
                     {s.id === "fut_orphan_wait" &&
                     CANON_ORPHAN.recommendedRateEuro != null ? (
                       <span className="rx-fut-opt-story">
-                        €{CANON_ORPHAN.recommendedRateEuro} recommended rate
+                        ${CANON_ORPHAN.recommendedRateEuro} recommended rate
                       </span>
                     ) : null}
                   </button>

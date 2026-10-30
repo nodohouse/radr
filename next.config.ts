@@ -5,6 +5,9 @@ import { securityHeaders } from "@/lib/security/headers";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  typescript: { tsconfigPath: "tsconfig.app.json" },
+  // Avoid advertising the framework in responses.
+  poweredByHeader: false,
   // Avoid flaky webpack-runtime prerender races under parallel static generation.
   experimental: {
     cpus: 1,
@@ -67,6 +70,8 @@ const nextConfig: NextConfig = {
       { source: "/app/team", destination: "/app/settings", permanent: false },
       { source: "/app/signals", destination: "/app/findings", permanent: false },
       { source: "/app/signals/:id", destination: "/app/findings/:id", permanent: false },
+      { source: "/app/integrations", destination: "/app/connections", permanent: false },
+      { source: "/app/integrations/:path*", destination: "/app/connections", permanent: false },
     ];
   },
   productionBrowserSourceMaps: false,

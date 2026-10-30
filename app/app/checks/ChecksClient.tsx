@@ -13,6 +13,7 @@ import { useProduct } from "@/lib/product/store";
 import type { Area } from "@/lib/product/types";
 import { PageHeader } from "@/components/product/PageHeader";
 import { StatusCalm } from "@/components/product/StatusCalm";
+import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 
 type Filter = "all" | Area;
 
@@ -107,7 +108,7 @@ export default function ChecksClient() {
       </ul>
 
       <StatusCalm
-        detail={`Scoped to current location context (${locationScope}).`}
+        detail={`Scoped to current location context (${locationDisplayName(locationScope)}).`}
       />
     </div>
   );

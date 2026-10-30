@@ -26,11 +26,14 @@ const GROUPS: ResponsibilityGroup[] = [
   "scale",
 ];
 
+/** Buyer-first preview — 8 rows; rest behind expand. */
+const PREVIEW_COUNT = 8;
+
 type FeatureCompareProps = {
   defaultCollapsed?: boolean;
 };
 
-export function FeatureCompare({ defaultCollapsed = false }: FeatureCompareProps) {
+export function FeatureCompare({ defaultCollapsed = true }: FeatureCompareProps) {
   const t = useTranslations("pricing.compare");
   const [open, setOpen] = useState(!defaultCollapsed);
   const [mobilePlan, setMobilePlan] = useState<PlanKey>("core");
@@ -40,29 +43,33 @@ export function FeatureCompare({ defaultCollapsed = false }: FeatureCompareProps
     return t(`status.${s}`);
   }
 
-  let featureIndex = 0;
+  const visibleRows = open
+    ? responsibilityRows
+    : responsibilityRows.slice(0, PREVIEW_COUNT);
 
   return (
     <section className="px-compare" id="compare" data-nav-theme="light">
-      <div className="rx-shell">
+      <div className="rx30-shell">
         <header className="px-section-head">
-          <p className="rx-kicker">{t("kicker")}</p>
-          <h2 className="px-section-title">{t("title")}</h2>
-          {defaultCollapsed ? (
-            <button
-              type="button"
-              className="rx-btn rx-btn-ghost px-compare-toggle"
-              aria-expanded={open}
-              aria-controls="px-compare-body"
-              onClick={() => setOpen((v) => !v)}
-            >
-              {open ? t("collapse") : t("expand")}{" "}
-              <span aria-hidden="true">{open ? "↑" : "↓"}</span>
-            </button>
-          ) : null}
+          <p className="rx30-kicker">{t("kicker")}</p>
+          <h2 className="rx30-h2 px-section-title">{t("title")}</h2>
+          <button
+            type="button"
+            className="rx30-btn rx30-btn-ghost px-compare-toggle"
+            aria-expanded={open}
+            aria-controls="px-compare-body"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? t("collapse") : t("expand")}{" "}
+            <span aria-hidden="true">{open ? "↑" : "↓"}</span>
+          </button>
         </header>
-        {open ? (
-          <div id="px-compare-body">
+        <div
+          id="px-compare-body"
+          className="px-compare-body px-compare-body--always"
+          data-open="true"
+        >
+          <div className="px-compare-body-inner">
             <div className="px-legend">
               <span data-s="yes">{t("legend.yes")}</span>
               <span data-s="early">{t("legend.early")}</span>
@@ -83,7 +90,8 @@ export function FeatureCompare({ defaultCollapsed = false }: FeatureCompareProps
                 </thead>
                 <tbody>
                   {GROUPS.map((group) => {
-                    const rows = responsibilityRows.filter((r) => r.group === group);
+                    const rows = visibleRows.filter((r) => r.group === group);
+                    if (rows.length === 0) return null;
                     return (
                       <Fragment key={group}>
                         <tr className="px-table-group">
@@ -92,8 +100,8 @@ export function FeatureCompare({ defaultCollapsed = false }: FeatureCompareProps
                           </th>
                         </tr>
                         {rows.map((row) => {
-                          const label = features[featureIndex] ?? row.feature;
-                          featureIndex += 1;
+                          const fullIdx = responsibilityRows.indexOf(row);
+                          const label = features[fullIdx] ?? row.feature;
                           return (
                             <tr key={`${group}-${row.feature}`}>
                               <th scope="row">{label}</th>
@@ -145,22 +153,27 @@ export function FeatureCompare({ defaultCollapsed = false }: FeatureCompareProps
                 ))}
               </div>
               <ul className="px-m-list">
-                {responsibilityRows.map((row, i) => (
-                  <li key={`${row.group}-${row.feature}`}>
-                    <span>
-                      <em className="px-m-group">{t(`groups.${row.group}`)}</em>
-                      {features[i] ?? row.feature}
-                    </span>
-                    <Cell
-                      status={row[mobilePlan]}
-                      label={statusText(row[mobilePlan])}
-                    />
-                  </li>
-                ))}
+                {visibleRows.map((row) => {
+                  const i = responsibilityRows.indexOf(row);
+                  return (
+                    <li key={`${row.group}-${row.feature}`}>
+                      <span>
+                        <em className="px-m-group">
+                          {t(`groups.${row.group}`)}
+                        </em>
+                        {features[i] ?? row.feature}
+                      </span>
+                      <Cell
+                        status={row[mobilePlan]}
+                        label={statusText(row[mobilePlan])}
+                      />
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
-        ) : null}
+        </div>
       </div>
     </section>
   );

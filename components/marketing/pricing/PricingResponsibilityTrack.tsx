@@ -107,7 +107,7 @@ export function PricingResponsibilityTrack() {
             ))}
           </div>
           <p className="rx-pilot-note" style={{ marginTop: "0.75rem" }}>
-            Autopilot within policy: {capabilityBadge("autopilot")} — not
+            Governed execution within policy: {capabilityBadge("autopilot")} — not
             production autonomous execution.
           </p>
           <p className="rx-rec-p" style={{ marginTop: "0.5rem" }}>

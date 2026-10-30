@@ -11,7 +11,7 @@ type Props = {
 };
 
 /**
- * RADR △: clean luminous brand character (lockup glyph).
+ * RADR A-mark: clean brand character (lockup glyph).
  * Same geometry everywhere. Never the old 3D PNG in brand chrome.
  */
 export function RadrDelta({
@@ -28,7 +28,7 @@ export function RadrDelta({
       data-pulse={pulse ? "true" : undefined}
       style={
         h
-          ? { height: h, width: h * 0.9 }
+          ? { height: h, width: h }
           : undefined
       }
       aria-hidden="true"

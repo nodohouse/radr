@@ -175,7 +175,7 @@ export function primaryMetricOf(r: DecisionRecord): MetricPresentation | null {
           value: verified,
           currency: "EUR",
           label: ECONOMIC_METRIC_LABEL.VERIFIED_PROTECTED,
-          scopeLabel: "Historical · Berlin Mitte",
+          scopeLabel: "Historical · Soho · New York",
           horizonLabel: "",
         };
       }
@@ -184,7 +184,7 @@ export function primaryMetricOf(r: DecisionRecord): MetricPresentation | null {
         value: CANON_TUNA.expectedProtectedEuro,
         currency: "EUR",
         label: ECONOMIC_METRIC_LABEL.EXPECTED_PROTECTED,
-        scopeLabel: "Historical · Berlin Mitte",
+        scopeLabel: "Historical · Soho · New York",
         horizonLabel: "",
       };
     }
@@ -255,7 +255,7 @@ export function primaryMetricOf(r: DecisionRecord): MetricPresentation | null {
           value: verified,
           currency: "EUR",
           label: ECONOMIC_METRIC_LABEL.VERIFIED_INCREMENTAL_CONTRIBUTION,
-          scopeLabel: "Beverage category · Berlin Mitte",
+          scopeLabel: "Beverage category · Soho · New York",
           horizonLabel: "",
           baselineLabel: "vs absorb-cost baseline",
         };
@@ -265,7 +265,7 @@ export function primaryMetricOf(r: DecisionRecord): MetricPresentation | null {
         value: CANON_MARGIN_COKE.expectedProtectedEuro,
         currency: "EUR",
         label: ECONOMIC_METRIC_LABEL.EXPECTED_INCREMENTAL_CONTRIBUTION,
-        scopeLabel: "Beverage category · Berlin Mitte",
+        scopeLabel: "Beverage category · Soho · New York",
         horizonLabel: "This week",
         baselineLabel: "vs absorb-cost baseline",
       };
@@ -298,6 +298,6 @@ export function formatPrimaryMetric(r: DecisionRecord): {
   if (!m) return null;
   return {
     money: formatDecisionMoney(m.value),
-    caption: `${metricCaption(m)} · DEMO`,
+    caption: metricCaption(m),
   };
 }

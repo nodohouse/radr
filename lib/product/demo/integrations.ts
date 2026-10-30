@@ -110,7 +110,7 @@ export const VALUE_LEDGER = [
   {
     amount: 4280,
     kind: "Supplier credit",
-    location: "Berlin Mitte",
+    location: "Soho · New York",
     signalId: "sig_002",
     verified: "Bank settlement matched",
     date: "17 Aug 2026",

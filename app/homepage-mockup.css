@@ -1,0 +1,337 @@
+/* ============================================================
+   Mockup fidelity layer — continuous atmosphere + chapter match
+   Loaded after homepage-premium.css. Overrides section cutoffs.
+   Canonical target: 1512 × 982
+   ============================================================ */
+
+.rx30--fidelity {
+  position: relative !important;
+  isolation: isolate;
+  overflow: clip;
+  background: transparent !important;
+  --rx-p-blue: #2f7fe8;
+  --rx-p-blue-bright: #4b9fff;
+  --rx-p-green: #00e676;
+  --rx-p-green-deep: #00a85a;
+  --rx-p-ink: #0b1512;
+}
+
+/* —— One continuous atmosphere: light through glass —— */
+.rx-home-atm {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rx-home-atm-base {
+  position: absolute;
+  inset: 0;
+  background: #f7faf8;
+}
+
+.rx-home-atm-field {
+  position: absolute;
+  pointer-events: none;
+  filter: none;
+  opacity: 1;
+}
+
+/* Very large radials — extend beyond viewport; soft falloff only */
+.rx-home-atm-field--hero-blue {
+  inset: -28% -30% auto 18%;
+  height: 72%;
+  background: radial-gradient(
+    ellipse 1400px 1100px at 78% 22%,
+    rgba(47, 127, 232, 0.28) 0%,
+    rgba(47, 127, 232, 0.1) 38%,
+    transparent 72%
+  );
+}
+
+.rx-home-atm-field--hero-cyan {
+  inset: -8% auto auto -18%;
+  width: 70%;
+  height: 52%;
+  background: radial-gradient(
+    ellipse 1100px 900px at 28% 32%,
+    rgba(94, 234, 212, 0.16) 0%,
+    rgba(75, 159, 255, 0.08) 42%,
+    transparent 74%
+  );
+}
+
+.rx-home-atm-field--hero-green {
+  inset: -4% -8% auto auto;
+  width: 58%;
+  height: 58%;
+  background: radial-gradient(
+    ellipse 1200px 1000px at 62% 40%,
+    rgba(0, 230, 118, 0.22) 0%,
+    rgba(0, 217, 120, 0.07) 44%,
+    transparent 74%
+  );
+}
+
+.rx-home-atm-field--mid-neutral {
+  inset: 24% 0 auto;
+  height: 32%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(247, 250, 248, 0.35) 40%,
+    rgba(247, 250, 248, 0.5) 55%,
+    transparent 100%
+  );
+  opacity: 0.85;
+}
+
+.rx-home-atm-field--mid-blue {
+  inset: 28% auto auto -22%;
+  width: 72%;
+  height: 42%;
+  background: radial-gradient(
+    ellipse 1200px 900px at 22% 48%,
+    rgba(47, 127, 232, 0.14) 0%,
+    transparent 70%
+  );
+}
+
+.rx-home-atm-field--mid-green {
+  inset: 36% -16% auto 18%;
+  height: 40%;
+  background: radial-gradient(
+    ellipse 1300px 950px at 55% 45%,
+    rgba(0, 217, 120, 0.14) 0%,
+    transparent 72%
+  );
+}
+
+.rx-home-atm-field--value-green {
+  inset: 60% -18% auto auto;
+  width: 68%;
+  height: 44%;
+  background: radial-gradient(
+    ellipse 1300px 1000px at 70% 42%,
+    rgba(0, 230, 118, 0.2) 0%,
+    rgba(0, 217, 120, 0.06) 48%,
+    transparent 74%
+  );
+}
+
+.rx-home-atm-field--value-blue {
+  inset: 64% auto auto -16%;
+  width: 62%;
+  height: 38%;
+  background: radial-gradient(
+    ellipse 1100px 850px at 30% 55%,
+    rgba(47, 127, 232, 0.12) 0%,
+    transparent 72%
+  );
+}
+
+.rx-home-atm-field--close-ramp {
+  inset: auto -12% -8%;
+  height: 42%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 230, 118, 0.1) 22%,
+    rgba(8, 28, 22, 0.55) 52%,
+    #050a08 100%
+  );
+}
+
+/* Transparent chapters — atmosphere shows through */
+.rx30--fidelity > *:not(.rx-home-atm) {
+  position: relative;
+  z-index: 1;
+}
+
+.rx30--fidelity .rx-chapter,
+.rx30--fidelity .rx30-bleed--premium,
+.rx30--fidelity .rx-gap-story--premium,
+.rx30--fidelity .rx30-connect--premium,
+.rx30--fidelity .rx30-signal-sec--premium,
+.rx30--fidelity .rx-proof,
+.rx30--fidelity .rx30-rh--premium,
+.rx30--fidelity .vc-home-cta--premium {
+  background: transparent !important;
+}
+
+.rx30--fidelity .rx-story-bridge {
+  background: transparent !important;
+}
+
+/* Kill marketing hairlines on home fidelity */
+.rx30--fidelity .rx-gap-story,
+.rx30--fidelity .rx30-signal-sec,
+.rx30--fidelity .rx30-signal-sec--board,
+.rx30--fidelity .vc-home-cta,
+.rx30--fidelity .rx30-close,
+.rx30--fidelity .rx-proof,
+.rx30--fidelity .rx30-rh--premium,
+.rx30--fidelity .rx30-connect--premium {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* Hero proportions ~40 / 60 */
+.rx30--fidelity .rx30-bleed-grid--fidelity {
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: center;
+  min-height: calc(982px - 74px - 4rem);
+}
+
+.rx30--fidelity .rx30-bleed-h1 {
+  text-wrap: balance;
+}
+
+/* Gap story composition */
+.rx30--fidelity .rx-gap-story {
+  padding-block: clamp(5.5rem, 11vh, 8.5rem);
+}
+
+.rx30--fidelity .rx-gap-cols {
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* Proof breathing room */
+.rx30--fidelity .rx-proof {
+  padding-block: clamp(5.5rem, 12vh, 9rem);
+}
+
+.rx30--fidelity .rx-proof-frame {
+  width: min(100%, 90%);
+  margin-inline: auto;
+  border-radius: 20px;
+}
+
+/* Value map node air */
+.rx30--fidelity .rx-home-value {
+  padding-block: clamp(5.5rem, 11vh, 8.5rem);
+}
+
+/* ============================================================
+   Final CTA — cinematic deep forest + restrained light
+   ============================================================ */
+
+.rx-close {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(26rem, 52vh, 34rem);
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  background: #050a08;
+  color: #f4f7f5;
+  border-top: none !important;
+}
+
+.rx-close-glow {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  filter: none;
+}
+
+.rx-close-glow--blue {
+  inset: -20% -10% auto 20%;
+  height: 70%;
+  background: radial-gradient(
+    ellipse 900px 700px at 70% 30%,
+    rgba(47, 127, 232, 0.28) 0%,
+    transparent 68%
+  );
+}
+
+.rx-close-glow--green {
+  inset: 10% auto -15% -15%;
+  width: 55%;
+  height: 80%;
+  background: radial-gradient(
+    ellipse 850px 750px at 30% 55%,
+    rgba(0, 230, 118, 0.22) 0%,
+    transparent 70%
+  );
+}
+
+.rx-close-accent {
+  position: absolute;
+  right: max(2%, calc((100% - 1520px) / 2 + 4%));
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(28vw, 380px);
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.rx-close-inner {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(4.5rem, 9vh, 6.5rem);
+  max-width: 40rem;
+}
+
+.rx-close-kicker {
+  margin: 0 0 0.85rem;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #00e676;
+}
+
+.rx-close-h1 {
+  margin: 0;
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.rx-close-lead {
+  margin: 1rem 0 0;
+  max-width: 34ch;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: rgba(244, 247, 245, 0.78);
+}
+
+.rx-close .rx30-ctas {
+  margin-top: 1.5rem;
+}
+
+.rx30-btn-ghost--on-dark {
+  background: transparent !important;
+  border: 1px solid rgba(244, 247, 245, 0.35) !important;
+  color: #f4f7f5 !important;
+}
+
+.rx30-btn-ghost--on-dark:hover {
+  border-color: rgba(244, 247, 245, 0.7) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+@media (max-width: 900px) {
+  .rx30--fidelity .rx30-bleed-grid--fidelity {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .rx-close-h1 {
+    white-space: normal;
+  }
+
+  .rx-close-accent {
+    display: none;
+  }
+}

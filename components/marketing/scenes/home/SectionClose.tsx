@@ -21,7 +21,7 @@ export function SectionClose() {
             Hospitality margins are too thin for important decisions to be late.
           </h2>
           <div className="rx-ctas">
-            <NextLink href="/demo" className="rx-btn rx-btn-primary">
+            <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-btn rx-btn-primary">
               See how RADR decides <span aria-hidden="true">→</span>
             </NextLink>
             <Link href="/contact" className="rx-btn rx-btn-ghost">

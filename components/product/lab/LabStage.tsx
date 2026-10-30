@@ -25,7 +25,7 @@ export function LabStage({ seed, zone = "main", commandOpen }: Props) {
       : zone === "terrace"
         ? {
             src: TERRACE_SRC,
-            alt: "Terrace at Berlin Mitte",
+            alt: "Terrace at Soho · New York",
             focal: DINING.focal,
           }
         : DINING;

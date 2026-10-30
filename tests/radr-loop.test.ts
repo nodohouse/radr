@@ -95,13 +95,19 @@ describe("THE RADR LOOP", () => {
       join(process.cwd(), "app/[locale]/page.tsx"),
       "utf8",
     );
-    expect(page).toContain("SectionProblem");
-    expect(page).toContain("SectionWatchFlow");
-    expect(page).toContain("SectionFindings");
-    expect(page).toContain("SectionValueFlow");
-    expect(page).toContain("SectionClose");
+    expect(page).toContain("HomepageSpine");
+    expect(page).toContain("radr-home");
     expect(page).not.toContain("SectionOperatingModel");
     expect(page).not.toContain("SectionRadrLoop");
     expect(page).not.toContain("SectionProductStory");
+
+    const spine = readFileSync(
+      join(process.cwd(), "components/marketing/scenes/home/HomepageSpine.tsx"),
+      "utf8",
+    );
+    expect(spine).toContain("Hero");
+    expect(spine).toContain("LeakMapPanel");
+    expect(spine).toContain("RecoveryStoryObject");
+    expect(spine).toContain("ConnectionOriginSection");
   });
 });

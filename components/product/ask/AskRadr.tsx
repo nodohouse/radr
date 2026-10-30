@@ -24,10 +24,36 @@ import { findingsForScope } from "@/lib/radr/findings";
 import { createActionFromFinding } from "@/lib/radr/actions/service";
 import { getRoleProfile } from "@/lib/radr/role/profiles";
 import { migrateRoleView } from "@/lib/product/types";
+import { locationLabel } from "@/lib/product/demo/dashboard";
+
+import "@/app/ask-radr.css";
 
 function roleFromView(roleView: string): ButlerRole {
   return getRoleProfile(migrateRoleView(roleView)).butlerRole;
 }
+
+const CFO_SUGGESTIONS = [
+  {
+    id: "contrib",
+    label: "Why is contribution behind?",
+    query: "Why is contribution behind?",
+  },
+  {
+    id: "tracking",
+    label: "How are we tracking today?",
+    query: "How are we tracking today?",
+  },
+  {
+    id: "exposure",
+    label: "Show me the €788 at risk.",
+    query: "Show me the €788 at risk.",
+  },
+  {
+    id: "weather",
+    label: "What does the weather change?",
+    query: "What does the weather change?",
+  },
+] as const;
 
 export function AskRadr() {
   const router = useRouter();
@@ -61,7 +87,6 @@ export function AskRadr() {
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
   const seededRef = useRef<string | null>(null);
   const titleId = useId();
@@ -102,7 +127,29 @@ export function AskRadr() {
   ]);
 
   const opening = useMemo(() => buildButlerOpening(butlerCtx), [butlerCtx]);
-  const placeholder = `Ask anything about ${opening.scopeLabel}…`;
+  const suggestions =
+    roleView === "cfo" || roleView === "owner" || role === "group_cfo"
+      ? [...CFO_SUGGESTIONS]
+      : opening.suggestions.slice(0, 4);
+  const roleShort = getRoleProfile(migrateRoleView(roleView)).shortLabel;
+  const scopeShort =
+    locationScope === "all"
+      ? "Group"
+      : locationLabel(locationScope).split(" · ")[0] ?? "Location";
+  const periodShort =
+    period === "mtd"
+      ? "MTD"
+      : period === "wtd"
+        ? "WTD"
+        : period === "ytd"
+          ? "YTD"
+          : period === "today"
+            ? "Today"
+            : period === "yesterday"
+              ? "Yesterday"
+              : String(period).toUpperCase();
+  const contextLine = `${roleShort} · ${scopeShort} · ${periodShort}`;
+  const placeholder = "Ask about your operation";
 
   const isAnalysis =
     analysisForced || Boolean(response?.expanded) || Boolean(response?.visualization?.type === "comparison");
@@ -270,7 +317,7 @@ export function AskRadr() {
     setAnalysisForced(false);
     seededRef.current = null;
     window.setTimeout(() => {
-      const el = returnFocusRef.current ?? triggerRef.current;
+      const el = returnFocusRef.current;
       el?.focus?.();
     }, 20);
   }, [closeAsk]);
@@ -351,23 +398,7 @@ export function AskRadr() {
     { label: "Controls", href: "/app/controls" },
   ];
 
-  const trigger = (
-    <button
-      ref={triggerRef}
-      type="button"
-      className="rp-ask-launch"
-      onClick={() => {
-        returnFocusRef.current = document.activeElement as HTMLElement | null;
-        openAsk();
-      }}
-      aria-label="Ask RADR"
-    >
-      <span>Ask RADR</span>
-      <kbd>⌘K</kbd>
-    </button>
-  );
-
-  if (!open) return trigger;
+  if (!open) return null;
 
   const isOpening = !response && !thinking && !showCommands && !askedQuery;
 
@@ -391,13 +422,16 @@ export function AskRadr() {
       >
         <header className="rp-ask-chrome">
           <div className="rp-ask-chrome-left">
-            <p id={titleId} className="rp-ask-brand">
-              Ask RADR
-            </p>
-            <span className="rp-ask-live" aria-label="RADR live">
-              <span className="rp-ask-live-pulse" aria-hidden="true" />
-              RADR Live
+            <span className="rp-ask-mark" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={RADR_DELTA_NAV_ASSET} alt="" width={18} height={16} />
             </span>
+            <div>
+              <p id={titleId} className="rp-ask-brand">
+                Ask RADR
+              </p>
+              <p className="rp-ask-ctx">{contextLine}</p>
+            </div>
           </div>
           <div className="rp-ask-chrome-right">
             {isAnalysis && response ? (
@@ -405,10 +439,6 @@ export function AskRadr() {
                 ← Back
               </button>
             ) : null}
-            <span className="rp-ask-mark" aria-hidden="true">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={RADR_DELTA_NAV_ASSET} alt="" width={18} height={16} />
-            </span>
             <button
               type="button"
               className="rp-ask-close"
@@ -423,9 +453,29 @@ export function AskRadr() {
 
         {isOpening ? (
           <div className="rp-ask-opening">
-            <h2 className="rp-ask-greeting">{opening.greeting}</h2>
-            <p className="rp-ask-invite">{opening.invite}</p>
-
+            <div className="rp-ask-scroll-open">
+              <h2 className="rp-ask-greeting">Ask RADR</h2>
+              <p className="rp-ask-subline">Ask about your operation.</p>
+              <div className="rp-ask-suggest">
+                <p className="rp-ask-label">Try</p>
+                <ul>
+                  {suggestions.map((s) => (
+                    <li key={s.id}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setQ(s.query);
+                          void runAsk(s.query);
+                        }}
+                      >
+                        <span>{s.label}</span>
+                        <em aria-hidden="true">→</em>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
             <form
               className="rp-ask-composer"
               onSubmit={(e) => {
@@ -439,7 +489,7 @@ export function AskRadr() {
                 rows={1}
                 value={q}
                 placeholder={placeholder}
-                aria-label="Ask RADR about your operation"
+                aria-label="Ask about your operation"
                 onChange={(e) => {
                   setQ(e.target.value);
                   growField(e.target);
@@ -461,63 +511,18 @@ export function AskRadr() {
                 ↑
               </button>
             </form>
-
-            <p className="rp-ask-scope">{opening.contextLine}</p>
-
-            <div className="rp-ask-now">
-              <p className="rp-ask-label">Right now</p>
-              <div className="rp-ask-now-row">
-                {opening.rightNow.exposureLabel ? (
-                  <span className="rp-ask-now-stat rp-ask-now-money">
-                    {opening.rightNow.exposureLabel}
-                  </span>
-                ) : null}
-                {opening.rightNow.attentionLabel ? (
-                  <span className="rp-ask-now-stat">
-                    {opening.rightNow.attentionLabel}
-                  </span>
-                ) : null}
-                {opening.rightNow.actionsLabel ? (
-                  <span className="rp-ask-now-stat">
-                    {opening.rightNow.actionsLabel}
-                  </span>
-                ) : null}
-              </div>
-            </div>
-
-            <div className="rp-ask-suggest">
-              <p className="rp-ask-label">Try</p>
-              <ul>
-                {opening.suggestions.map((s) => (
-                  <li key={s.id}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setQ(s.query);
-                        runAsk(s.query);
-                      }}
-                    >
-                      <span>{s.label}</span>
-                      <em aria-hidden="true">→</em>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         ) : (
           <div className="rp-ask-active">
-            <p className="rp-ask-scope">{opening.contextLine}</p>
-            {askedQuery ? (
-              <p className="rp-ask-asked">“{askedQuery}”</p>
-            ) : null}
-
             <div className="rp-ask-scroll">
+              {askedQuery ? (
+                <p className="rp-ask-asked">“{askedQuery}”</p>
+              ) : null}
+
               {thinking ? (
                 <div className="rp-ask-thinking" aria-live="polite">
                   <p className="rp-ask-label">
-                    Analyzing {opening.scopeLabel}
-                    {askMode === "llm" ? " · AI" : ""}
+                    Analyzing{askMode === "llm" ? " · AI" : ""}
                   </p>
                   {analyzing.length ? (
                     <ul className="rp-ask-analyzing">
@@ -563,7 +568,7 @@ export function AskRadr() {
                   response={response}
                   onFollowUp={(follow) => {
                     setQ(follow);
-                    runAsk(follow);
+                    void runAsk(follow);
                   }}
                   onNavigate={(href) => {
                     resetClose();
@@ -591,7 +596,7 @@ export function AskRadr() {
 
             <form
               className="rp-ask-composer rp-ask-composer-follow"
-                onSubmit={(e) => {
+              onSubmit={(e) => {
                 e.preventDefault();
                 void runAsk(q);
               }}
@@ -629,12 +634,7 @@ export function AskRadr() {
     </div>
   );
 
-  return (
-    <>
-      {trigger}
-      {mounted ? createPortal(overlay, document.body) : null}
-    </>
-  );
+  return mounted ? createPortal(overlay, document.body) : null;
 }
 
 export { AskRadr as CommandPalette };

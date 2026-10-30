@@ -87,7 +87,7 @@ export function LiveOperatingCanvas({
         {mode === "decision" ? (
           <article className="rp-live-decision">
             <p className="rp-live-kicker">
-              One Decision needs you · {displayDecisionId(primary.id)} · DEMO
+              One Decision needs you · {displayDecisionId(primary.id)}
             </p>
             <h2 className="rp-live-rec">{primary.recommendationHeadline}</h2>
             {metric ? (

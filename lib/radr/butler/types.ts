@@ -212,6 +212,8 @@ export type ButlerResponse = {
   expanded?: boolean;
   why?: string;
   impactEuro?: number;
+  /** Optional Decision path collapse (gateway get_decision_trace). */
+  decisionPath?: { step: string; detail: string }[];
 };
 
 export type ButlerOpeningSuggestion = {

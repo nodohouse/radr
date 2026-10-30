@@ -154,7 +154,7 @@ export function composeContextPanel(
       sections: [
         {
           label: "Priority",
-          lines: ["Berlin Mitte, Bluefin + staffing"],
+          lines: ["Soho · New York, Bluefin + staffing"],
         },
       ],
       next,

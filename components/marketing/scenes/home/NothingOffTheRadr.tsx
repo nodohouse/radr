@@ -11,6 +11,7 @@ type Props = {
 /**
  * Brand lockup: NOTHING / OFF THE / R△DR
  * Green △ replaces the A — never letter-R as the mark.
+ * Subtle brand-green outline + traveling laser along the letterforms.
  */
 export function NothingOffTheRadr({
   className = "",
@@ -21,10 +22,10 @@ export function NothingOffTheRadr({
       className={`rx-notr rx-notr--${size} ${className}`.trim()}
       aria-label="Nothing off the RADR"
     >
-      <span className="rx-notr-line" aria-hidden="true">
+      <span className="rx-notr-line" data-text="Nothing" aria-hidden="true">
         Nothing
       </span>
-      <span className="rx-notr-line" aria-hidden="true">
+      <span className="rx-notr-line" data-text="Off the" aria-hidden="true">
         Off the
       </span>
       <RadrWordmark

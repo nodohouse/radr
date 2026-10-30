@@ -102,7 +102,7 @@ export function IntelOperatingGraph() {
         </div>
 
         {showFlagship ? (
-          <NextLink href="/demo" className="rx-reveal-cta">
+          <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-reveal-cta">
             Open Decision →
           </NextLink>
         ) : (

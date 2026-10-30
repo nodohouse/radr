@@ -14,7 +14,7 @@ type Props = {
 };
 
 /**
- * Mineral light auth shell - canvas + white card + signal green.
+ * Mineral light auth shell — atmospheric canvas + white card + signal green.
  * Login / signup / recovery.
  */
 export function LightAuthShell({ title, subtitle, children }: Props) {
@@ -23,14 +23,20 @@ export function LightAuthShell({ title, subtitle, children }: Props) {
   return (
     <div className="ob-root ob-auth" data-nav-theme="light">
       <div className="ob-auth-atm" aria-hidden="true">
-        <div className="ob-auth-atm-glow" />
+        <div className="ob-auth-atm-glow ob-auth-atm-glow--a" />
+        <div className="ob-auth-atm-glow ob-auth-atm-glow--b" />
+        <div className="ob-auth-atm-veil" />
         <div className="ob-auth-atm-grid" />
+        <div className="ob-auth-atm-delta" />
       </div>
 
       <div className="ob-auth-stage">
-        <Link href="/" aria-label={tNav("homeAria")} className="ob-auth-mark">
-          <RADRLogo size="md" variant="plain" surface="light" />
-        </Link>
+        <header className="ob-auth-brand">
+          <Link href="/" aria-label={tNav("homeAria")} className="ob-auth-mark">
+            <RADRLogo size="lg" variant="plain" surface="light" />
+          </Link>
+          <p className="ob-auth-brand-line">Verified Decision Intelligence</p>
+        </header>
 
         <main className="ob-auth-card">
           <header className="ob-auth-header">

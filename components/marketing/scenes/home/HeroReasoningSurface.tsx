@@ -76,7 +76,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
         "Delivery +31% · LIVE",
       ],
       estimated: ["Seat-now → kitchen 97%", "9 second-turn tables at risk"],
-      predicted: ["Wait-12 · +€620 vs seat-now", "Resume · 18:54"],
+      predicted: ["Pace seating · +$620 vs seat-now", "Resume · 18:54"],
       assumes: ["Inbound holds", "No VIP exception yet"],
       couldChange: ["VIP party", "Kitchen recovery", "Delivery spike"],
     },
@@ -120,7 +120,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
     signals: [
       { id: "gap", label: "GAP", value: "1-night orphan", slot: "a" },
       { id: "time", label: "UNTIL CHECK-IN", value: "72 hours", slot: "b" },
-      { id: "rate", label: "FLOOR", value: "€148 profitable", slot: "c" },
+      { id: "rate", label: "FLOOR", value: "$148 profitable", slot: "c" },
     ],
     expectedDemand: "64% historical fill",
     history: "17 comparable gaps",
@@ -131,7 +131,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
     futures: [
       {
         id: "open",
-        label: `Wait · €${CANON_ORPHAN.recommendedRateEuro} direct`,
+        label: `Wait · $${CANON_ORPHAN.recommendedRateEuro} direct`,
         expected: CANON_ORPHAN.expectedProtectedEuro,
         selected: true,
       },
@@ -158,11 +158,11 @@ const STORIES: Record<HeroVerticalId, Story> = {
         "Next stay Wednesday · LIVE",
       ],
       estimated: [
-        "Profitable floor · €148",
+        "Profitable floor · $148",
         "Take-now OTA drag · ~18%",
         "Longer direct stay · 41%",
       ],
-      predicted: ["Wait path expected net · €112"],
+      predicted: ["Wait path expected net · $112"],
       assumes: ["Maintenance clear"],
       couldChange: ["Housekeeping delay", "Comp ADR drop"],
     },

@@ -1,16 +1,16 @@
 {
   "metaTitle": "Platform",
-  "metaDescription": "The decision layer above your hospitality stack: Brief, Decisions, prepared actions, verified outcomes.",
+  "metaDescription": "Operating intelligence for hospitality: Control Center, Live, Decisions, Value, Memory, and Data Health — above the systems you already run.",
   "heroTitleLine1": "The decision layer.",
   "heroTitleLine2": "Every system underneath.",
   "heroTitle": "The decision layer. Every system underneath.",
-  "heroLead": "Your systems record the operation. RADR understands it — attention first, Prepared Actions next, Verified Value when it lands.",
+  "heroLead": "Your systems record the operation. RADR understands it — Live for what is happening now, Decisions for what to do next, Verified Value for proof, Memory for what worked, Data Health for whether the evidence can be trusted.",
   "openDemo": "See how RADR decides",
   "howItWorks": "How it works",
   "comingSoon": "Deeper product copy is localized. Open the demo for the full experience.",
   "connectKicker": "Keep your systems",
   "connectTitle": "Not another dashboard for each system.",
-  "connectLead": "RADR connects the systems that already run your operation and understands what they mean together.",
+  "connectLead": "Systems of record store facts. RADR helps turn them into decisions — one platform configured to your operation, across cities, currencies, and time zones.",
   "insideKicker": "Inside RADR",
   "mapTitle": "Product map",
   "mapLead": "Browse every surface in the Decision Cockpit.",
@@ -53,7 +53,7 @@
       "body": "Match expected money to what landed across payouts, invoices and credits, then close the gap with a clear next move.",
       "expected": "Expected",
       "landed": "Landed",
-      "gap": "€2.1k gap to close"
+      "gap": "$2.1k gap to close"
     },
     "verifiedValue": {
       "label": "Verify",
@@ -176,9 +176,9 @@
     "decidesCaption": "RADR decides",
     "humansCaption": "Humans provide the hospitality",
     "decision": {
-      "phase": "Pre-shift · Dinner · Berlin Mitte",
+      "phase": "Pre-shift · Dinner · Soho · New York",
       "headline": "Empty tables ≠ available capacity.",
-      "exposed": "€620",
+      "exposed": "$620",
       "exposedLabel": "contribution exposed · tonight",
       "action": "Wait 12 minutes. Don't seat yet.",
       "deadline": "Decide by 18:53"
@@ -191,7 +191,7 @@
     "example": {
       "kicker": "One Decision",
       "title": "From signal to verified euros.",
-      "lead": "Decision D-1911 · Berlin Mitte. Illustrative product data.",
+      "lead": "Decision D-1911 · Soho · New York. Illustrative product data.",
       "traceAria": "Decision trace from systems of record to verified value",
       "steps": {
         "event": {
@@ -200,7 +200,7 @@
         },
         "exposure": {
           "label": "Exposure",
-          "detail": "€620 contribution vs seating now during peak capacity collision."
+          "detail": "$620 contribution vs seating now during peak capacity collision."
         },
         "prepared": {
           "label": "Decision prepared",
@@ -212,7 +212,7 @@
         },
         "verified": {
           "label": "Next-day verified",
-          "detail": "€1,590 protected. Feature swap executed. Variance −€50."
+          "detail": "$1,590 protected. Feature swap executed. Variance −$50."
         }
       }
     },
@@ -359,7 +359,7 @@
       "cta": "See how RADR decides",
       "ctaSecondary": "Book a demo",
       "proofTitle": "From potential to verified.",
-      "proofLead": "Decision D-1911 · Berlin Mitte. Illustrative product data.",
+      "proofLead": "Decision D-1911 · Soho · New York. Illustrative product data.",
       "totalLabel": "Verified Value",
       "totalDetail": "{label} at {location}",
       "chainLabel": "Verification chain",
@@ -398,7 +398,7 @@
       "boardTitle": "Show, don’t explain.",
       "boardLead": "Three operating gaps RADR watches as the week unfolds.",
       "demoNote": "The forecast demo uses illustrative data. It does not claim autonomous execution.",
-      "demoLink": "Open /app/forecast →",
+      "demoLink": "See RADR in action →",
       "linkActions": "Prepared Actions →",
       "linkControl": "Control Center →",
       "linkArchitecture": "Platform architecture →"

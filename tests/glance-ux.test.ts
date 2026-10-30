@@ -12,7 +12,7 @@ import { getRoleProfile, ROLE_ORDER } from "@/lib/radr/role/profiles";
 const base = glanceInputFromDemo({
   role: "gm",
   phase: "PRE_SHIFT",
-  locationName: "Berlin Mitte",
+  locationName: "Soho · New York",
   expectedCovers: 142,
   expectedWalkIns: 26,
   projectedRevenue: 9480,

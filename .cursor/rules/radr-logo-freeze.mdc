@@ -1,0 +1,40 @@
+---
+description: RADR logo is frozen immutable brand artwork — never modify SVG geometry
+alwaysApply: true
+---
+
+# RADR logo — FROZEN
+
+The logo is **APPROVED IMMUTABLE BRAND ARTWORK**.
+
+## Source of truth (verbatim only)
+
+- `/public/brand/radr-wordmark-master-v4.svg`
+- `/public/brand/radr-mark-master-v4.svg`
+- theme variants: `*-master-v4-white.svg`, `*-master-v4-mono-*.svg`
+
+Prior `*-master-v2*` / `*-master-v3*` files are archived. Do not rewire live surfaces to them.
+Traced `*-master.svg` (pre-clean) and `*-traced*.svg` files are superseded. Do not reintroduce them.
+
+## Forbidden
+
+- Editing SVG path / circle / viewBox / fills
+- Substituting approx / legacy / CSS / typed “RADR” + separate dot
+- Rebalancing, sharpening, cropping, or transforming the artwork to “fit”
+- Page-specific logo implementations
+- Reverting to sharp polygon A (v2/v3)
+
+## Required
+
+- Render only via `FrozenRadrLogo` (or `RadrLogo` shim → FrozenRadrLogo)
+- Square / card / intelligence nodes: use `RadrMarkNode` (safe-area ~46% + center) — never raw mark sizing per page
+- If clipped / wrong: **fix the container** (`object-fit: contain`, safe-area inset, never edit SVG)
+- One dimension + `height: auto` — never distort aspect ratio
+
+## Do not touch during other passes
+
+Homepage, color, motion, 4K QA, performance work must **not** modify:
+
+- `components/brand/FrozenRadrLogo.tsx`
+- `public/brand/radr-*-master-v4*.svg`
+- `public/brand/favicon.svg` path geometry

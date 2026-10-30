@@ -29,6 +29,10 @@ export const DECISION_IDS = {
   settlement: "dec_settlement_berlin",
   playbook: "dec_playbook_group",
   created: "dec_created_terrace",
+  /** Hotel D-H-9201 — reassign housekeeping before check-in wave. */
+  hotelReadiness: "dec_hotel_readiness_canal",
+  /** BOH D-8204 — restore caster sugar before pastry pull (physical stock). */
+  casterSugar: "dec_caster_sugar_berlin",
 } as const;
 
 /** Human-facing Decision numbers (System of Decision Record). */
@@ -52,6 +56,14 @@ export const DECISION_DISPLAY_IDS: Record<string, string> = {
   [DECISION_IDS.playbook]: "D-5208",
   [DECISION_IDS.created]: "D-4410",
   [DECISION_IDS.tableRecover]: "D-6671",
+  [DECISION_IDS.hotelReadiness]: "D-H-9201",
+  [DECISION_IDS.casterSugar]: "D-8204",
+  dec_hotel_cancel_recover_canal: "D-2412",
+  dec_hotel_hk_staff_canal: "D-2408",
+  dec_hotel_ooo_canal: "D-2420",
+  dec_hotel_upsell_canal: "D-2424",
+  dec_hotel_overbook_canal: "D-2428",
+  dec_hotel_rate_canal: "D-2432",
 };
 
 export function displayDecisionId(id: string): string {

@@ -40,7 +40,7 @@ export const ValueOnRadr = forwardRef<
     () => ({
       pulseCapture: (euro: number) => {
         if (badgeRef.current) {
-          badgeRef.current.textContent = `€${euro.toLocaleString("en-IE")}`;
+          badgeRef.current.textContent = `$${euro.toLocaleString("en-IE")}`;
         }
         rootRef.current?.setAttribute("data-flash", "true");
         badgeFlashRef.current?.setAttribute("data-flash", "true");
@@ -96,13 +96,13 @@ export const ValueOnRadr = forwardRef<
           <RadrDeltaGlyph />
         </span>
         <span className="rx-value-badge-amt" ref={badgeRef}>
-          €332
+          $332
         </span>
       </p>
       <p className="rx-value-sub">
-        <span>€684k identified</span>
+        <span>$684k identified</span>
         <TextSep />
-        <span>€58.9k verified</span>
+        <span>$58.9k verified</span>
       </p>
     </div>
   );

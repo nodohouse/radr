@@ -3,9 +3,9 @@
     "kicker": "Value recovery",
     "title": "Recover the value your operation is losing.",
     "sub": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
-    "support": "RADR finds financial and operational value slipping through hospitality operations, recommends the strongest response, and follows the outcome until it is verified.",
-    "ctaPrimary": "Start a recovery pilot",
-    "ctaSecondary": "See how RADR recovers value",
+    "support": "See what needs intervention.\nKnow what happens next.\nProve what worked.",
+    "ctaPrimary": "See RADR in action",
+    "ctaSecondary": "Explore the platform",
     "ariaLabel": "Nothing off the RADR — Recover the value your operation is losing",
     "card": {
       "aria": "Supplier recovery Decision card",
@@ -1705,22 +1705,22 @@
     "progression": {
       "kicker": "The path",
       "title": "First recover it. Then stop losing it.",
-      "lead": "Recover → Prevent → Optimize → Autopilot.",
+      "lead": "",
       "RECOVER": {
         "title": "Recover",
-        "body": "Find the value already lost."
+        "body": "Invoice variance · settlement gap · supplier credit · channel leakage."
       },
       "PREVENT": {
         "title": "Prevent",
-        "body": "Catch the condition before the value expires."
+        "body": "Inventory shortage · waste · housekeeping delay · cancellation loss · staffing shortfall."
       },
       "OPTIMIZE": {
         "title": "Optimize",
-        "body": "Choose the strongest response across tradeoffs."
+        "body": "Menu mix · prep · labor · room/channel allocation · upsell."
       },
       "AUTOPILOT": {
         "title": "Autopilot",
-        "body": "Execute trusted patterns inside policy."
+        "body": "Prepare PO · dispute · staffing · HK reprioritization · channel action — for approval within policy."
       }
     },
     "stack": {
@@ -1775,10 +1775,10 @@
     },
     "footer": {
       "brand": "Nothing off the RADR.",
-      "title": "Ready when you are",
-      "body": "Start recovering value on the stack you already run.",
+      "title": "Ready to see what your operation is leaving behind?",
+      "body": "Start with the value already slipping through.",
       "cta": "Start a recovery pilot",
-      "secondary": "See how RADR recovers value"
+      "secondary": "Contact Sales"
     }
   }
 }

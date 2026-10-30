@@ -36,7 +36,7 @@ Prefer: HANDLE → PREPARE → ASK → INFORM.
 
 Marketing default: mineral light canvas (`#F7FAF8`) with atmospheric light fields, pure white surfaces (`#FFFFFF`), and near-black ink (`#0A0D0B`).
 Atmospheric gradients (mint / ice / soft green) are materials for light and depth — not decoration. Use on ~20–30% of a page.
-Product / app remains predominantly dark (`#08100C`).
+Product `/app` default is the same warm mineral light shell (ivory rail + near-black ink). Keep graphite (`#08100C` / `#0E1512`) only for selective instruments (pulse, timeline, judgment surfaces) and overlays (Butler, deep Focus) — not full-app dark chrome.
 Green (`#00D978` / `#00A85A`) = live / detected / positive / verified / RADR intelligence — signal only, never full-bar chrome.
 White = primary info · muted ink (`#626A65`) = context · Amber = watch · Red = material negative only.
 Absolute positioning only for overlays (radar, crosshair, tips) — not for primary layout.

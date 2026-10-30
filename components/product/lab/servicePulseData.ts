@@ -1,5 +1,5 @@
 /**
- * Service Pulse series for Berlin Mitte dinner — D-1911 grounded.
+ * Service Pulse series for Soho · New York dinner — D-1911 grounded.
  * Observed left of NOW · modeled right of NOW.
  */
 

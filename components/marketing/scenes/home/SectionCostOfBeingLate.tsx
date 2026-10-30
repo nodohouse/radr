@@ -21,7 +21,7 @@ export function SectionCostOfBeingLate() {
       vert: "Restaurant",
       label: table.title,
       value: formatDecisionMoney(table.nowValueEuro),
-      hint: "Recoverable now · €0 after service",
+      hint: "Recoverable now · $0 after service",
     },
     {
       vert: "Hotel",
@@ -33,7 +33,7 @@ export function SectionCostOfBeingLate() {
       vert: "Apartment",
       label: "Orphan night",
       value: formatDecisionMoney(apt.nowValueEuro),
-      hint: "72 hours · then €0",
+      hint: "72 hours · then $0",
     },
     {
       vert: "Labor",
@@ -45,7 +45,7 @@ export function SectionCostOfBeingLate() {
       vert: "Supplier",
       label: "Contract variance",
       value: formatDecisionMoney(CANON_SUPPLIER.exposureEuro),
-      hint: "€6.80 contract · €7.45 invoiced",
+      hint: "$6.80 contract · $7.45 invoiced",
     },
   ] as const;
 

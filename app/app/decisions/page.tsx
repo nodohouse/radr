@@ -1,12 +1,12 @@
 "use client";
 
 import { Suspense } from "react";
-import { DecisionLedger } from "@/components/product/decisions/DecisionLedger";
+import { RadrDecisions } from "@/components/product/decisions/workspace";
 
 export default function DecisionsPage() {
   return (
     <Suspense fallback={null}>
-      <DecisionLedger />
+      <RadrDecisions />
     </Suspense>
   );
 }

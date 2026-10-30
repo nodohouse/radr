@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
+import { getAuthIdentity } from "@/lib/identity/provider";
 import {
   createOrganizationWithLocation,
   getWorkspaceForUser,
@@ -16,14 +15,14 @@ import {
 } from "@/lib/security/rate-limit";
 
 export async function GET() {
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) {
+  const identity = await getAuthIdentity();
+  if (!identity) {
     return NextResponse.json(
       { error: CLIENT_ERRORS.unauthorized },
       { status: 401 },
     );
   }
-  const workspace = await getWorkspaceForUser(session.user.id);
+  const workspace = await getWorkspaceForUser(identity.userId);
   return NextResponse.json({
     ok: true,
     workspace,
@@ -44,15 +43,15 @@ export async function POST(request: Request) {
     );
   }
 
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) {
+  const identity = await getAuthIdentity();
+  if (!identity) {
     return NextResponse.json(
       { error: CLIENT_ERRORS.unauthorized },
       { status: 401 },
     );
   }
 
-  if (await userHasOrganization(session.user.id)) {
+  if (await userHasOrganization(identity.userId)) {
     return NextResponse.json(
       { error: "Workspace already created" },
       { status: 409 },
@@ -78,7 +77,7 @@ export async function POST(request: Request) {
   }
 
   const result = await createOrganizationWithLocation({
-    userId: session.user.id,
+    userId: identity.userId,
     input: parsed.data,
   });
 
@@ -98,15 +97,15 @@ export async function PATCH(request: Request) {
     );
   }
 
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) {
+  const identity = await getAuthIdentity();
+  if (!identity) {
     return NextResponse.json(
       { error: CLIENT_ERRORS.unauthorized },
       { status: 401 },
     );
   }
 
-  const workspace = await getWorkspaceForUser(session.user.id);
+  const workspace = await getWorkspaceForUser(identity.userId);
   if (!workspace) {
     return NextResponse.json(
       { error: CLIENT_ERRORS.notFound },

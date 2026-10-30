@@ -1,0 +1,1103 @@
+/**
+ * RADR public brand takeover — first pass.
+ * Source: approved branding board (A-mark · Geist · black/white/green · blue atmosphere).
+ * Scope: tokens, type, header, hero, Decision Gap, footer.
+ * Does not invent product IA — only the brand experience layer.
+ */
+
+/* ——— Tokens ——— */
+.rx30,
+.radr-home,
+.radr {
+  --bt-ink: #0a0d0b;
+  --bt-forest: #06281f;
+  --bt-forest-mid: #064d39;
+  --bt-green: #00d978;
+  --bt-green-bright: #19ea8a;
+  --bt-muted: #5a635e;
+  --bt-blue: #2777e8;
+  --bt-blue-soft: rgba(39, 119, 232, 0.14);
+  --bt-bg: #f7faf8;
+  --bt-surface: #ffffff;
+  --bt-border: rgba(10, 13, 11, 0.08);
+  --bt-radius-sm: 12px;
+  --bt-radius-md: 16px;
+  --bt-radius-lg: 18px;
+  --bt-radius-xl: 20px;
+  --bt-shadow: 0 4px 18px rgba(8, 18, 14, 0.045);
+  --bt-font: var(--font-geist-sans), "Geist", system-ui, sans-serif;
+  /* Canonical page grid: 1520 max · 48 / 32 / 20 gutters */
+  --bt-max: 1520px;
+  --bt-content-readable: 720px;
+  --bt-product-max: 1680px;
+  --bt-gutter: 48px;
+  --rx30-shell: min(var(--bt-max), calc(100% - (var(--bt-gutter) * 2)));
+
+  /* Spacing scale */
+  --rx-space-xs: 8px;
+  --rx-space-sm: 12px;
+  --rx-space-md: 16px;
+  --rx-space-lg: 24px;
+  --rx-space-xl: 32px;
+  --rx-space-2xl: 48px;
+  --rx-space-3xl: 72px;
+  --rx-space-4xl: 96px;
+  --rx-space-5xl: 128px;
+  --rx-space-6xl: 160px;
+
+  --rx30-bg: var(--bt-bg);
+  --rx30-surface: var(--bt-surface);
+  --rx30-text: var(--bt-ink);
+  --rx30-muted: var(--bt-muted);
+  --rx30-border: var(--bt-border);
+  --rx30-green: var(--bt-green);
+  --rx30-green-dark: var(--bt-forest-mid);
+  --rx30-blue: var(--bt-blue);
+  --rx30-radius: var(--bt-radius-md);
+  --rx30-shadow: var(--bt-shadow);
+  --rx30-shadow-soft: 0 2px 10px rgba(8, 18, 14, 0.04);
+
+  font-family: var(--bt-font);
+  color: var(--bt-ink);
+}
+
+@media (max-width: 1023px) {
+  .rx30,
+  .radr-home,
+  .radr {
+    --bt-gutter: 32px;
+  }
+}
+
+@media (max-width: 639px) {
+  .rx30,
+  .radr-home,
+  .radr {
+    --bt-gutter: 20px;
+  }
+}
+
+/* Atmosphere — light through glass. Large soft fields, no hard edges. */
+.rx30::before {
+  background:
+    radial-gradient(ellipse 1100px 900px at 82% -8%, rgba(47, 127, 232, 0.16), transparent 68%),
+    radial-gradient(ellipse 900px 780px at 12% 18%, rgba(94, 234, 212, 0.1), transparent 70%),
+    radial-gradient(ellipse 1000px 820px at 58% 42%, rgba(0, 217, 120, 0.09), transparent 72%),
+    radial-gradient(ellipse 1200px 900px at 88% 78%, rgba(47, 127, 232, 0.08), transparent 70%),
+    radial-gradient(ellipse 900px 700px at 18% 92%, rgba(0, 230, 118, 0.07), transparent 68%),
+    #f7faf8 !important;
+}
+
+/* Home fidelity: one atmosphere only (RadrAtmosphere owns the wash) */
+.rx30--fidelity::before {
+  display: none !important;
+}
+
+/* Kill purposeless marketing chapter hairlines — space separates */
+.rx30--mockup .rx30-pain,
+.rx30--mockup .rx30-signal-sec,
+.rx30--mockup .rx30-signal-sec--board,
+.rx30--mockup .vc-home-cta,
+.rx30--mockup .rx30-co-global,
+.rx30--mockup .rx30-close,
+.rx30--mockup .rx30-close--saas,
+.rx30--mockup .rx30-close--cine,
+.rx30--mockup .rx30-global,
+.rx30--mockup .rx30-impact,
+.rx30--mockup .rx30-loop,
+.rx30--mockup .rx30-marquee-sec,
+.rx30--mockup .rx-gap-story,
+.rx30--fidelity .rx-gap-story,
+.rx30--fidelity .rx30-signal-sec,
+.rx30--fidelity .rx30-signal-sec--board,
+.rx30--fidelity .vc-home-cta,
+.rx30--fidelity .rx30-close {
+  border-top: none !important;
+}
+
+/* Kill busy top ticker — brand must breathe (all public marketing) */
+.radr .rx-opulse,
+.radr-home .rx-opulse,
+.rx30 .rx-opulse {
+  display: none !important;
+}
+
+.radr,
+.radr-home {
+  --rx-banner-h: 0px;
+}
+
+/* ——— Logo production QA ———
+   Never clip / stretch / filter the brand mark. */
+.radr-logo,
+.rx-nav-lockup .radr-logo,
+.rx-footer-mark .radr-logo {
+  object-fit: contain !important;
+  object-position: left center;
+  height: auto !important;
+  max-width: 100%;
+  flex-shrink: 0;
+  filter: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+/* Square-node marks: always center (never left-bias) */
+.radr-mark-node .radr-logo,
+.radr-mark-node img,
+.rx-hcm-hub-face .radr-logo,
+.rx-irn-face .radr-logo,
+.rx-gap-cont-hub .radr-logo,
+.vc-vmap-core .radr-logo,
+.vc-omap-hub .radr-logo {
+  object-position: center center !important;
+}
+
+.rx-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  /* Optical lift — SVG bbox sits slightly low vs nav text */
+  padding-block: 6px 10px;
+  margin-top: -1px;
+  overflow: visible !important;
+}
+
+.rx-nav-lockup,
+.rx-nav-lockup--wordmark {
+  overflow: visible !important;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rx-footer-home {
+  display: inline-flex;
+  padding-block: 8px;
+  overflow: visible !important;
+}
+
+.rx-hpt-frame[data-stage="connect"] {
+  overflow: visible !important;
+}
+
+.rx-hcm {
+  overflow: visible !important;
+}
+
+.rx-hcm-hub {
+  width: 8.75rem !important;
+  height: 8.75rem !important;
+  overflow: visible !important;
+}
+
+.rx-hcm-hub-face {
+  overflow: visible !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+.rx-hcm-hub-face .radr-mark-node {
+  width: 100%;
+  height: 100%;
+}
+
+/* Connect IntegrationRadrNode — RadrMarkNode owns safe area */
+.rx-irn {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  min-width: 7.5rem;
+}
+
+.rx-irn-face {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6.5rem;
+  height: 6.5rem;
+  padding: 0 !important;
+  box-sizing: border-box;
+  border-radius: var(--bt-radius-lg);
+  border: 1px solid rgba(0, 168, 90, 0.36);
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(39, 119, 232, 0.07), transparent 70%),
+    linear-gradient(165deg, #ffffff 0%, #f4faf7 100%);
+  box-shadow:
+    0 10px 28px rgba(8, 24, 40, 0.08),
+    0 0 0 1px rgba(0, 217, 120, 0.1);
+  overflow: visible;
+}
+
+.rx-irn-face .radr-mark-node {
+  width: 100%;
+  height: 100%;
+}
+
+.rx-irn-label {
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bt-muted);
+  font-weight: 550;
+}
+
+.rx30-imarquee-core .rx-irn {
+  position: relative;
+  z-index: 2;
+}
+
+.rx30-imarquee-node {
+  display: none !important;
+}
+
+/* ——— Typography ——— */
+.rx30-kicker {
+  font-family: var(--bt-font);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--bt-muted);
+  margin: 0 0 1.15rem;
+}
+
+.rx30-h1,
+.rx30-h2,
+.rx30-bleed-h1,
+.rx30-bleed-lead,
+.rx30-lead,
+.rx30-btn {
+  font-family: var(--bt-font);
+}
+
+.rx30-h1 {
+  font-size: clamp(2.75rem, 5.2vw, 4.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+  color: var(--bt-ink);
+}
+
+.rx30-h2 {
+  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 680;
+  color: var(--bt-ink);
+  margin: 0 0 1rem;
+}
+
+.rx30-lead {
+  font-size: clamp(1rem, 1.25vw, 1.1rem);
+  line-height: 1.55;
+  color: var(--bt-muted);
+  max-width: 38.75rem; /* ~620px Decision Gap */
+  font-weight: 400;
+}
+
+/* ——— Buttons — architectural, not pill SaaS ——— */
+.rx30-btn {
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: var(--bt-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.rx30-btn-primary {
+  background: var(--bt-forest);
+  color: #fff;
+  border-color: var(--bt-forest);
+  box-shadow: none;
+}
+
+.rx30-btn-primary:hover {
+  background: #041a14;
+  box-shadow: 0 0 0 1px rgba(0, 217, 120, 0.35);
+}
+
+.rx30-btn-ghost,
+.rx30-btn-ghost--solid {
+  background: #fff;
+  color: var(--bt-ink);
+  border: 1px solid rgba(10, 13, 11, 0.22);
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.rx30-btn-ghost:hover,
+.rx30-btn-ghost--solid:hover {
+  border-color: rgba(10, 13, 11, 0.4);
+  background: #fff;
+  box-shadow: none;
+}
+
+/* ——— Header — all public marketing routes (not home-only) ——— */
+.radr .rx-nav,
+.radr-home .rx-nav,
+.radr-mineral .rx-nav {
+  --nav-inset: 0px;
+  --nav-bar-h: 64px;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.radr .rx-nav[data-scrolled="true"],
+.radr-home .rx-nav[data-scrolled="true"],
+.radr-mineral .rx-nav[data-scrolled="true"] {
+  background: rgba(247, 249, 248, 0.92);
+  border-bottom-color: var(--bt-border);
+  box-shadow: 0 1px 0 rgba(10, 13, 11, 0.04);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+}
+
+.radr .rx-nav-bar,
+.radr-home .rx-nav-bar,
+.radr-mineral .rx-nav-bar {
+  width: var(--rx30-shell) !important;
+  max-width: var(--bt-max);
+  margin-inline: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 0 !important;
+  align-items: center !important;
+  min-height: var(--nav-bar-h, 64px);
+}
+
+.radr .rx-nav-link,
+.radr-mineral .rx-nav-link {
+  font-family: var(--bt-font);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgba(10, 13, 11, 0.62);
+  padding: 0.35rem 0.55rem;
+}
+
+.radr .rx-nav-link[data-active="true"],
+.radr .rx-nav-link:hover,
+.radr-mineral .rx-nav-link[data-active="true"],
+.radr-mineral .rx-nav-link:hover {
+  color: var(--bt-ink);
+}
+
+.radr .rx-nav-link[data-active="true"]::after,
+.radr-mineral .rx-nav-link[data-active="true"]::after {
+  width: 4px;
+  height: 4px;
+  background: var(--bt-green);
+  box-shadow: none;
+  bottom: 0.05rem;
+}
+
+.radr .rx-nav-cta:not(.rx-nav-cta-ghost),
+.radr-mineral .rx-nav-cta:not(.rx-nav-cta-ghost) {
+  border-radius: var(--bt-radius-sm) !important;
+  background: var(--bt-forest) !important;
+  color: #fff !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+  min-height: 34px;
+  padding: 0.3rem 0.9rem;
+  border-color: var(--bt-forest) !important;
+  box-shadow: none !important;
+}
+
+.radr .rx-nav-cta:not(.rx-nav-cta-ghost):hover,
+.radr-mineral .rx-nav-cta:not(.rx-nav-cta-ghost):hover {
+  background: #041a14 !important;
+  box-shadow: 0 0 0 1px rgba(0, 217, 120, 0.35) !important;
+}
+
+.radr .rx-nav-signin,
+.radr-mineral .rx-nav-signin {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* ——— Hero — web product scale, not poster ——— */
+.rx30-bleed--hero-story {
+  /* ~650–720px incl. header at 1512×982; hint of Decision Gap below */
+  min-height: 0;
+  max-height: none;
+  padding-top: clamp(4.75rem, 7.5vh, 5.75rem);
+  padding-bottom: clamp(2rem, 3.5vh, 2.75rem);
+}
+
+.rx30-bleed-h1--slogan {
+  font-family: var(--bt-font);
+  font-size: clamp(3.75rem, 5.6vw, 5.75rem); /* ~60–92px — equal weight with product visual */
+  line-height: 0.93;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+  color: #0a0d0b !important;
+  margin: 0 0 1rem;
+  max-width: none;
+  white-space: normal;
+  -webkit-text-fill-color: #0a0d0b;
+}
+
+.rx30-bleed-h1--slogan em {
+  font-style: normal;
+  color: var(--bt-ink);
+}
+
+.rx30-bleed-lead {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.5;
+  color: var(--bt-muted);
+  max-width: 35rem; /* ~560px */
+  font-weight: 400;
+}
+
+.rx30-shell {
+  width: var(--rx30-shell) !important;
+  max-width: var(--bt-max);
+}
+
+/* Section rhythm */
+.rx-gap-story,
+.rx30-connect,
+.vc-home-cta {
+  padding-block: clamp(5.5rem, 10vh, 8.5rem); /* large 120–144px */
+}
+
+.rx30-bleed-lead + .rx30-bleed-lead,
+.rx30-bleed-lead--split {
+  margin-top: 0.55rem;
+}
+
+.rx-hero-proof {
+  display: none; /* board: no clutter under CTAs */
+}
+
+.rx30-ctas {
+  margin-top: 1.75rem;
+  gap: 0.7rem;
+}
+
+/* Hero theater — sharper, less pastel glass */
+.rx-hpt {
+  max-width: 40rem;
+}
+
+.rx-hpt-frame {
+  border-radius: var(--bt-radius-xl);
+}
+
+.rx-hpt-frame[data-stage="connect"] {
+  overflow: visible;
+}
+
+.rx-hcm {
+  border-radius: var(--bt-radius-xl);
+  min-height: 26rem;
+  overflow: visible !important;
+  background:
+    radial-gradient(ellipse 48% 55% at 52% 42%, rgba(39, 119, 232, 0.09), transparent 62%),
+    radial-gradient(ellipse 36% 40% at 50% 48%, rgba(0, 217, 120, 0.07), transparent 58%),
+    linear-gradient(160deg, #eef4fb 0%, #f7faf8 48%, #eaf1f8 100%);
+  box-shadow: var(--bt-shadow);
+}
+
+.rx-hcm-sources li,
+.rx-hcm-signals li {
+  border-radius: var(--bt-radius-md);
+  box-shadow: 0 4px 14px rgba(20, 50, 90, 0.06);
+  border: 1px solid rgba(39, 119, 232, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.rx-hcm-signals li[data-status="warn"] {
+  border-color: rgba(220, 100, 80, 0.22);
+}
+
+.rx-hcm-hub-face {
+  border-radius: var(--bt-radius-lg);
+  box-shadow:
+    0 14px 28px rgba(11, 61, 46, 0.14),
+    0 0 0 1px rgba(0, 168, 90, 0.18);
+}
+
+.rx-hpt-switch {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--bt-border);
+  border-radius: var(--bt-radius-sm) !important;
+  padding: 0.15rem;
+  gap: 0;
+}
+
+.rx-hpt-switch button {
+  border-radius: 6px !important;
+  font-size: 0.75rem;
+  font-weight: 550;
+  padding: 0.4rem 0.85rem;
+  background: transparent;
+  color: var(--bt-muted);
+}
+
+.rx-hpt-switch button[data-on="true"],
+.rx-hpt .rx-hpt-switch button[data-on="true"] {
+  background: var(--bt-forest) !important;
+  color: #fff !important;
+}
+
+.rx-hpt-stages button {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  font-weight: 550;
+}
+
+.rx-hpt-stages button[data-on="true"] {
+  color: var(--bt-forest-mid);
+  box-shadow: inset 0 -2px 0 var(--bt-green);
+}
+
+/* ——— Decision Gap ——— */
+.rx-gap-story {
+  border-top: 1px solid var(--bt-border);
+}
+
+.rx-gap-story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: center;
+}
+
+.rx-gap-story .rx30-h2 {
+  font-size: clamp(2.1rem, 3.8vw, 3.35rem);
+  max-width: 16ch;
+}
+
+.rx-gap-story .rx30-lead {
+  max-width: 38.75rem;
+}
+
+.rx-hpt-switch--gap {
+  margin-top: 1.5rem;
+  width: fit-content;
+}
+
+.rx-gap-one {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--bt-muted);
+  letter-spacing: -0.01em;
+}
+
+.rx-gap-cont {
+  border-radius: var(--bt-radius-xl) !important;
+  box-shadow: var(--bt-shadow) !important;
+  padding: 1.35rem !important;
+  gap: 1rem !important;
+  background:
+    radial-gradient(ellipse 50% 60% at 70% 30%, rgba(39, 119, 232, 0.05), transparent 65%),
+    #fff !important;
+  border: 1px solid var(--bt-border) !important;
+}
+
+.rx-gap-cont-sources span {
+  border-radius: var(--bt-radius-sm) !important;
+  border-color: rgba(39, 119, 232, 0.32) !important;
+  background: rgba(39, 119, 232, 0.08) !important;
+  color: #1a3a5c !important;
+  font-weight: 550;
+}
+
+.rx-gap-cont-hub {
+  position: relative !important;
+  width: 4.25rem !important;
+  height: 4.25rem !important;
+  border-radius: var(--bt-radius-md) !important;
+  background: #fff !important;
+  border: 1px solid rgba(0, 168, 90, 0.28) !important;
+  box-shadow:
+    0 8px 20px rgba(11, 61, 46, 0.1),
+    0 0 0 1px rgba(0, 217, 120, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  overflow: visible !important;
+}
+
+.rx-gap-cont-hub .radr-mark-node {
+  width: 100%;
+  height: 100%;
+}
+
+.rx-gap-cont-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.35rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--bt-forest-mid);
+}
+
+.rx-gap-cont-brand .radr-logo {
+  width: 0.95rem !important;
+  height: auto !important;
+}
+
+.rx-gap-cont-dec {
+  border-radius: var(--bt-radius-md) !important;
+  border-color: rgba(0, 168, 90, 0.32) !important;
+  background: rgba(0, 217, 120, 0.07) !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.rx-gap-cont-dec:hover {
+  border-color: rgba(0, 168, 90, 0.5) !important;
+  box-shadow: 0 6px 18px rgba(0, 100, 60, 0.08);
+}
+
+.rx-gap-cont-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.25rem;
+  margin: 0.55rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rx-gap-cont-metrics li {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.rx-gap-cont-metrics span {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bt-muted);
+}
+
+.rx-gap-cont-metrics strong {
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  color: var(--bt-forest-mid);
+  font-weight: 650;
+}
+
+.rx-gap-cont-note {
+  margin: 0.55rem 0 0 !important;
+  font-size: 0.72rem !important;
+  color: var(--bt-muted) !important;
+}
+
+/* ——— Close = ONE dark brand moment ——— */
+.rx30-close--saas {
+  background: var(--bt-forest) !important;
+  color: #f7faf8;
+  padding-block: clamp(5rem, 9vh, 7.5rem) !important;
+  border: 0;
+  margin-top: 0;
+}
+
+.rx30-close--saas::before {
+  display: none;
+}
+
+.rx30-close--saas .rx30-h1 {
+  color: #fff;
+  font-size: clamp(2.75rem, 6vw, 5rem);
+  letter-spacing: -0.05em;
+}
+
+.rx30-close--saas .rx30-lead {
+  color: rgba(247, 250, 248, 0.62);
+}
+
+.rx30-close--saas .rx30-btn-primary {
+  background: var(--bt-green);
+  color: var(--bt-forest);
+  border-color: var(--bt-green);
+}
+
+.rx30-close--saas .rx30-btn-primary:hover {
+  background: var(--bt-green-bright);
+  box-shadow: none;
+}
+
+.rx30-close--saas .rx30-btn-ghost--solid {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.rx30-close--saas .rx30-btn-ghost--solid:hover {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Board close — SVG network energy */
+.rx30-close--board {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.rx30-close-net {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.rx30-close--board .rx30-close-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Board Value Map radial */
+.vc-vmap--radial {
+  position: relative;
+  min-height: 18rem;
+}
+
+.vc-vmap-arcs {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vc-vmap--radial .vc-vmap-node,
+.vc-vmap--radial .vc-vmap-core {
+  z-index: 1;
+}
+
+/* ——— Footer dark ——— */
+.rx-footer {
+  background: #041510 !important;
+  color: rgba(247, 250, 248, 0.78);
+  border-top: 0;
+  padding-top: 3.5rem;
+  padding-bottom: 2rem;
+}
+
+.rx-footer-bg,
+.rx-footer-atm {
+  display: none !important;
+}
+
+.rx-footer-mark,
+.rx-footer-mark.radr-wm,
+.rx-footer .radr-brand-logo {
+  color: #fff !important;
+}
+
+.rx-footer-slogan {
+  color: rgba(247, 250, 248, 0.55) !important;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  max-width: 16rem;
+}
+
+.rx-footer-col-title {
+  color: rgba(247, 250, 248, 0.4) !important;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+}
+
+.rx-footer-col a {
+  color: rgba(247, 250, 248, 0.78) !important;
+}
+
+.rx-footer-col a:hover {
+  color: #fff !important;
+}
+
+.rx-footer-meta,
+.rx-footer-copy,
+.rx-footer-domain {
+  color: rgba(247, 250, 248, 0.4) !important;
+}
+
+.rx-footer-bottom {
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Value CTA — analytical surface + Value Map teaser */
+.vc-home-cta {
+  border-top: 1px solid var(--bt-border);
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 40%, rgba(39, 119, 232, 0.08), transparent 60%),
+    transparent;
+}
+
+.vc-home-cta-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: center;
+}
+
+.vc-home-cta-inner:has(.vc-vmap) {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+}
+
+.vc-home-cta .rx30-h2 {
+  max-width: 16ch;
+}
+
+.vc-vmap {
+  position: relative;
+  min-height: 11rem;
+  border-radius: var(--bt-radius-xl);
+  border: 1px solid rgba(39, 119, 232, 0.16);
+  background:
+    radial-gradient(ellipse 50% 55% at 50% 50%, rgba(0, 217, 120, 0.06), transparent 65%),
+    linear-gradient(160deg, #f4f8fc 0%, #fff 55%, #f2faf6 100%);
+  box-shadow: var(--bt-shadow);
+  overflow: hidden;
+}
+
+.vc-vmap-node {
+  position: absolute;
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--bt-radius-sm);
+  border: 1px solid rgba(39, 119, 232, 0.22);
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 0.72rem;
+  letter-spacing: -0.01em;
+  color: var(--bt-ink);
+  box-shadow: 0 3px 10px rgba(20, 50, 90, 0.06);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.vc-vmap-node:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 168, 90, 0.4);
+}
+
+.vc-vmap-node strong {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bt-muted);
+  font-weight: 550;
+  margin-bottom: 0.1rem;
+}
+
+.vc-vmap-node[data-i="0"] { left: 8%; top: 18%; }
+.vc-vmap-node[data-i="1"] { right: 10%; top: 28%; border-color: rgba(0, 168, 90, 0.28); }
+.vc-vmap-node[data-i="2"] { left: 22%; bottom: 16%; }
+.vc-vmap-node[data-i="3"] { right: 18%; bottom: 22%; border-color: rgba(0, 168, 90, 0.28); }
+
+.vc-vmap-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: var(--bt-radius-md);
+  background: #fff;
+  border: 1px solid rgba(0, 168, 90, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  box-shadow: 0 6px 16px rgba(11, 61, 46, 0.1);
+}
+
+.vc-vmap-core .radr-mark-node {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1023px) {
+  .rx-gap-story-grid,
+  .vc-home-cta-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .rx30-bleed-h1--slogan {
+    font-size: clamp(3.25rem, 12vw, 4rem);
+  }
+
+  .rx-hcm {
+    min-height: 22rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rx-gap-cont-dec,
+  .vc-vmap-node {
+    transition: none;
+  }
+}
+
+/* ——— Deep public routes — same grid / type / radii / energy ——— */
+.rx30-bleed--page {
+  padding-top: clamp(5rem, 8vh, 6.25rem);
+  padding-bottom: clamp(3rem, 6vh, 4.5rem);
+  background:
+    radial-gradient(ellipse 55% 60% at 90% 8%, rgba(39, 119, 232, 0.09), transparent 58%),
+    radial-gradient(ellipse 40% 45% at 10% 70%, rgba(0, 217, 120, 0.055), transparent 60%),
+    transparent;
+}
+
+.rx30-bleed--page .rx30-bleed-h1,
+.rx30 .rx30-bleed-h1:not(.rx30-bleed-h1--slogan) {
+  font-family: var(--bt-font);
+  font-size: clamp(2.5rem, 4.8vw, 4rem);
+  line-height: 0.96;
+  letter-spacing: -0.042em;
+  font-weight: 700;
+  color: #0a0d0b;
+  max-width: 16ch;
+}
+
+.rx30-bleed--page .rx30-bleed-lead {
+  max-width: 36rem;
+  color: var(--bt-muted);
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  line-height: 1.5;
+}
+
+.rx30-module-rail {
+  border-radius: var(--bt-radius-sm) !important;
+  gap: 0.2rem;
+}
+
+.rx30-module-rail button {
+  border-radius: 6px !important;
+  font-family: var(--bt-font);
+  font-size: 0.78rem;
+  font-weight: 550;
+}
+
+.rx30-module-rail button[data-on="true"] {
+  background: var(--bt-forest) !important;
+  color: #fff !important;
+}
+
+.rx30-module-preview,
+.rx30-module-preview--morph,
+.rx30-module-preview--leak,
+.rx30-plat-canvas,
+.rx30-flow-grid article,
+.rx30-decision-card,
+.vc-panel,
+.vc-card,
+.vc-step,
+.px-tier,
+.px-card,
+.co-card,
+.rx30-trust-card {
+  border-radius: var(--bt-radius-lg) !important;
+  box-shadow: var(--bt-shadow) !important;
+}
+
+.rx30-flow-grid article {
+  border: 1px solid var(--bt-border);
+  background: #fff;
+  padding: 1.1rem 1.15rem;
+}
+
+.rx30-flow-grid article em {
+  color: var(--bt-blue);
+  font-style: normal;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+.rx30-loop-pills span {
+  border-radius: var(--bt-radius-sm) !important;
+  border-color: rgba(39, 119, 232, 0.28) !important;
+  background: rgba(39, 119, 232, 0.07) !important;
+  color: #1a3a5c !important;
+  font-weight: 550;
+}
+
+/* Value Calculator shell */
+.vc-app,
+.vc-shell,
+.radr .vc-root {
+  --rx30-shell: min(var(--bt-max), calc(100% - (var(--bt-gutter) * 2)));
+  font-family: var(--bt-font);
+}
+
+.vc-app .rx30-btn-primary,
+.vc-shell .rx30-btn-primary,
+.px-cta .rx30-btn-primary,
+.vc2-btn-primary,
+.vc2-cta,
+.px-plan-cta {
+  background: var(--bt-forest) !important;
+  border-color: var(--bt-forest) !important;
+  border-radius: var(--bt-radius-sm) !important;
+  color: #fff !important;
+}
+
+.vc-app .rx30-btn-primary:hover,
+.vc-shell .rx30-btn-primary:hover,
+.vc2-btn-primary:hover,
+.vc2-cta:hover {
+  background: #041a14 !important;
+  box-shadow: 0 0 0 1px rgba(0, 217, 120, 0.35);
+}
+
+/* Kill bubbly SaaS pills on primary journey controls */
+.vc2-chip,
+.vc2-option,
+.px-billing-toggle,
+.px-billing-toggle button {
+  border-radius: var(--bt-radius-sm) !important;
+}
+
+/* Pricing / company / trust section rhythm */
+.rx30--mockup > main > section.rx30-connect,
+.rx30--mockup > main > section.rx30-section {
+  padding-block: clamp(4.5rem, 8vh, 7rem);
+}
+
+.rx30-close--saas .rx30-h2 {
+  color: #fff;
+  max-width: 18ch;
+}

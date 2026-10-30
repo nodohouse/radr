@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { eq } from "drizzle-orm";
-import { auth } from "@/lib/auth";
 import { writeAuditLog } from "@/lib/audit";
-import { AuthzError, requireDocumentAccess } from "@/lib/authz";
+import { AuthzError, requireDocumentAccess, requirePermission } from "@/lib/authz";
+import { getAuthIdentity } from "@/lib/identity/provider";
 import { db } from "@/lib/db";
 import { documents } from "@/lib/db/schema";
 import { createSignedDownloadUrl, deletePrivateObject, getPrivateObjectBuffer } from "@/lib/storage";
@@ -18,15 +17,15 @@ type Params = { params: Promise<{ id: string }> };
  * For S3, may return a short-lived signed URL; otherwise streams bytes.
  */
 export async function GET(_request: Request, { params }: Params) {
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) {
+  const identity = await getAuthIdentity();
+  if (!identity) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { id } = await params;
 
   try {
-    const { document } = await requireDocumentAccess(session.user.id, id);
+    const { document } = await requireDocumentAccess(identity.userId, id);
 
     const signedUrl = await createSignedDownloadUrl(document.storagePath, 60);
     if (signedUrl) {
@@ -59,29 +58,28 @@ export async function GET(_request: Request, { params }: Params) {
 }
 
 export async function DELETE(_request: Request, { params }: Params) {
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) {
+  const identity = await getAuthIdentity();
+  if (!identity) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const { id } = await params;
 
   try {
-    const { document, membership } = await requireDocumentAccess(
-      session.user.id,
-      id,
+    const { document } = await requireDocumentAccess(identity.userId, id);
+    await requirePermission(
+      identity.userId,
+      document.organizationId,
+      "document.upload",
+      document.locationId ?? undefined,
     );
-
-    if (!["OWNER", "ADMIN"].includes(membership.role)) {
-      return NextResponse.json({ error: "Not found" }, { status: 404 });
-    }
 
     await db.delete(documents).where(eq(documents.id, id));
     await deletePrivateObject(document.storagePath);
 
     await writeAuditLog({
       organizationId: document.organizationId,
-      actorUserId: session.user.id,
+      actorUserId: identity.userId,
       action: "DOCUMENT_DELETED",
       resourceType: "document",
       resourceId: id,

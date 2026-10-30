@@ -1,0 +1,242 @@
+/**
+ * Menu Intelligence — ranking table with real column tracks.
+ * Layout responds to the ranking container (not the viewport) so the shell rail
+ * never collapses it into a raw text flow.
+ */
+
+.rp-menu-intel .rp-menu-ranks {
+  container-type: inline-size;
+  container-name: menurank;
+  font-family: var(--rp-font-ui, "Instrument Sans", system-ui, sans-serif);
+}
+
+.rp-menu-intel .rp-menu-rank-tracks {
+  --mr-cols:
+    2.25rem
+    3rem
+    minmax(9rem, 1.7fr)
+    5rem
+    6.5rem
+    8.5rem
+    minmax(5.5rem, 1fr)
+    4.75rem;
+  gap: 0;
+  background: var(--rp-surface-raised, #fff);
+  border: 1px solid var(--rp-border, rgba(18, 20, 15, 0.09));
+  border-radius: var(--rp-radius-lg, 0.85rem);
+  overflow: hidden;
+}
+
+.rp-menu-intel .rp-menu-rank-head,
+.rp-menu-intel .rp-menu-rank-row {
+  grid-template-columns: var(--mr-cols);
+  grid-template-areas: "n img name sold contrib cpk station state";
+  column-gap: 0.9rem;
+  row-gap: 0.35rem;
+  align-items: center;
+}
+
+.rp-menu-intel .rp-menu-rank-head {
+  padding: 0.55rem 1rem;
+  background: var(--rp-surface-1, #fbfaf6);
+  border-bottom: 1px solid var(--rp-border, rgba(18, 20, 15, 0.09));
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--rp-text-xs, 0.625rem);
+  letter-spacing: 0.08em;
+  color: var(--rp-text-quiet, #8a8f86);
+}
+
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-sold,
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-contrib,
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-cpk {
+  grid-area: unset;
+}
+
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-n { grid-area: n; }
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-img { grid-area: img; }
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-name { grid-area: name; font-size: inherit; font-weight: inherit; color: inherit; }
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-sold { grid-area: sold; font-size: inherit; color: inherit; }
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-contrib { grid-area: contrib; font-size: inherit; color: inherit; font-weight: inherit; }
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-cpk { grid-area: cpk; font-size: inherit; color: inherit; }
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-station { grid-area: station; font-size: inherit; color: inherit; }
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-state { grid-area: state; font-size: inherit; color: inherit; }
+
+/* Numeric columns right-aligned with tabular numerals */
+.rp-menu-intel .rp-menu-rank-sold,
+.rp-menu-intel .rp-menu-rank-contrib,
+.rp-menu-intel .rp-menu-rank-cpk {
+  justify-self: stretch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rp-menu-intel .rp-menu-rank-sold {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.rp-menu-intel .rp-menu-rank-head .rp-menu-rank-sold {
+  display: block;
+}
+
+.rp-menu-intel .rp-menu-rank-station {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rp-menu-intel .rp-menu-rank-list {
+  gap: 0;
+}
+
+.rp-menu-intel .rp-menu-rank-list > li + li {
+  border-top: 1px solid var(--rp-border, rgba(18, 20, 15, 0.09));
+}
+
+.rp-menu-intel .rp-menu-rank-row {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.65rem 1rem;
+  box-shadow: none;
+  transition: background var(--rp-dur-fast, 140ms) var(--rp-ease, ease);
+}
+
+.rp-menu-intel .rp-menu-rank-row:hover {
+  background: color-mix(in srgb, var(--rp-surface-2, #efebe3) 55%, transparent);
+}
+
+.rp-menu-intel .rp-menu-rank-row[data-selected="true"] {
+  background: color-mix(in srgb, var(--rp-surface-2, #efebe3) 70%, transparent);
+  box-shadow: inset 2px 0 0 var(--rp-green-live, #00a85a);
+}
+
+.rp-menu-intel .rp-menu-rank-name {
+  font-size: var(--rp-text-md, 0.875rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rp-menu-intel .rp-menu-rank-state {
+  justify-self: start;
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+}
+
+.rp-menu-intel .rp-menu-rank-state[data-action="PUSH"] { color: var(--rp-green-live, #00a85a); }
+.rp-menu-intel .rp-menu-rank-state[data-action="HOLD"] { color: var(--rp-watch, #b07a3a); }
+.rp-menu-intel .rp-menu-rank-state[data-action="REWORK"] { color: var(--rp-adverse, #a84a3c); }
+
+/* Secondary detail — only used in narrow containers */
+.rp-menu-intel .rp-menu-rank-more {
+  display: none;
+}
+
+/* ——— Medium container: fold €/min + station beneath, keep demand ——— */
+@container menurank (max-width: 760px) {
+  .rp-menu-intel .rp-menu-rank-tracks {
+    --mr-cols: 2rem 2.75rem minmax(7rem, 1fr) 4.5rem 6rem 4.5rem;
+  }
+  .rp-menu-intel .rp-menu-rank-head,
+  .rp-menu-intel .rp-menu-rank-row {
+    grid-template-areas:
+      "n img name sold contrib state"
+      ". . more more more more";
+    column-gap: 0.7rem;
+  }
+  .rp-menu-intel .rp-menu-rank-head {
+    grid-template-areas: "n img name sold contrib state";
+  }
+  .rp-menu-intel .rp-menu-rank-cpk,
+  .rp-menu-intel .rp-menu-rank-station {
+    display: none;
+  }
+  .rp-menu-intel .rp-menu-rank-row .rp-menu-rank-more {
+    grid-area: more;
+    display: none;
+    grid-template-columns: repeat(3, minmax(0, auto));
+    justify-content: start;
+    gap: 0.25rem 1.5rem;
+    padding-top: 0.45rem;
+    border-top: 1px dashed var(--rp-border, rgba(18, 20, 15, 0.09));
+    font-size: var(--rp-text-sm, 0.75rem);
+    color: var(--rp-text-primary, #12140f);
+    font-variant-numeric: tabular-nums;
+  }
+  .rp-menu-intel .rp-menu-rank-row[data-selected="true"] .rp-menu-rank-more {
+    display: grid;
+  }
+  .rp-menu-intel .rp-menu-rank-more i {
+    display: block;
+    font-style: normal;
+    font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+    font-size: var(--rp-text-xs, 0.625rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--rp-text-quiet, #8a8f86);
+  }
+}
+
+/* ——— Narrow container: name + state on top, contribution beside ——— */
+@container menurank (max-width: 520px) {
+  .rp-menu-intel .rp-menu-rank-tracks {
+    --mr-cols: 1.75rem 2.5rem minmax(0, 1fr) auto;
+  }
+  .rp-menu-intel .rp-menu-rank-head {
+    display: none;
+  }
+  .rp-menu-intel .rp-menu-rank-row {
+    grid-template-areas:
+      "n img name state"
+      "n img contrib contrib"
+      ". more more more";
+    padding-inline: 0.75rem;
+  }
+  .rp-menu-intel .rp-menu-rank-sold {
+    display: none;
+  }
+  .rp-menu-intel .rp-menu-rank-contrib {
+    text-align: left;
+  }
+  .rp-menu-intel .rp-menu-rank-row .rp-menu-rank-more {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ——— Basket: image + economics in tracks ——— */
+.rp-menu-intel .rp-menu-basket li {
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.35rem 0.85rem;
+  padding: 0.65rem 0.5rem;
+  border-top: 1px solid var(--rp-border, rgba(18, 20, 15, 0.09));
+  border-radius: 0;
+}
+
+.rp-menu-intel .rp-menu-basket li:first-child {
+  border-top: 0;
+}
+
+.rp-menu-intel .rp-menu-basket li > div {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.rp-menu-intel .rp-menu-basket li > div > strong {
+  font-size: var(--rp-text-md, 0.875rem);
+}
+
+.rp-menu-intel .rp-menu-basket li > div > span {
+  font-size: var(--rp-text-sm, 0.75rem);
+  color: var(--rp-text-secondary, #5e645c);
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-menu-intel .rp-menu-pair-dims {
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  margin: 0.1rem 0;
+}

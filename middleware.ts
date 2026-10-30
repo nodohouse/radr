@@ -1,7 +1,8 @@
-import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
+import createMiddleware from "next-intl/middleware";
 import { getSessionCookie } from "better-auth/cookies";
 import { routing, isNonLocalizedPath } from "./i18n/routing";
+import { safeDemoNext } from "./lib/marketing/demoAccess";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -14,6 +15,8 @@ const protectedPrefixes = [
   "/controls",
   "/documents",
   "/onboarding",
+  "/select-org",
+  "/invite",
 ];
 
 const authPages = ["/login", "/signup", "/forgot-password", "/reset-password"];
@@ -81,28 +84,65 @@ function repairLeakedLocaleRewrite(
   return repaired;
 }
 
+/** Unauthenticated /app → signup (demo unlock). Other protected → login. */
+function redirectToAuth(request: NextRequest, nextPath: string, preferSignup: boolean) {
+  const preferred =
+    request.cookies.get("radr_locale")?.value || routing.defaultLocale;
+  const locale =
+    (routing.locales as readonly string[]).includes(preferred)
+      ? preferred
+      : routing.defaultLocale;
+  const safeNext = safeDemoNext(nextPath, preferSignup ? "/app/enter" : "/onboarding");
+  const authPath = preferSignup ? "signup" : "login";
+  const url = new URL(`/${locale}/${authPath}`, request.url);
+  if (preferSignup) {
+    url.searchParams.set("intent", "demo");
+  }
+  url.searchParams.set("next", safeNext);
+  return withSecurityHeaders(NextResponse.redirect(url));
+}
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Product demo, APIs, authenticated shell: no locale prefix
   if (isNonLocalizedPath(pathname)) {
     const sessionCookie = getSessionCookie(request);
+    // Local / CI product QA only — never set RADR_E2E_UNLOCK on public prod.
+    const e2eUnlock =
+      process.env.RADR_E2E_UNLOCK === "1" &&
+      (request.cookies.get("radr_e2e")?.value === "1" ||
+        request.headers.get("x-radr-e2e") === "1");
     const isOnboardingPreview = pathname.startsWith("/onboarding/preview");
-    const isProtected =
+    const isAppPath = pathname === "/app" || pathname.startsWith("/app/");
+    const isProtectedPrefix =
       protectedPrefixes.some(
         (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
       ) && !isOnboardingPreview;
+    // DEMO Northstar is public (AUTH_SECURITY_MODEL). LIVE/SANDBOX or
+    // NEXT_PUBLIC_RADR_REQUIRE_AUTH=true require a session for /app.
+    const radrEnv = (process.env.NEXT_PUBLIC_RADR_ENV ?? "DEMO").toUpperCase();
+    const requireAuth =
+      process.env.NEXT_PUBLIC_RADR_REQUIRE_AUTH === "true" ||
+      radrEnv === "LIVE" ||
+      radrEnv === "SANDBOX";
+    const isProtected =
+      isProtectedPrefix || (isAppPath && requireAuth);
 
-    if (isProtected && !sessionCookie) {
-      const preferred =
-        request.cookies.get("radr_locale")?.value || routing.defaultLocale;
-      const locale =
-        (routing.locales as readonly string[]).includes(preferred)
-          ? preferred
-          : routing.defaultLocale;
-      const loginUrl = new URL(`/${locale}/login`, request.url);
-      loginUrl.searchParams.set("next", pathname);
-      return withSecurityHeaders(NextResponse.redirect(loginUrl));
+    if (isProtected && !sessionCookie && !e2eUnlock) {
+      const full = `${pathname}${request.nextUrl.search}`;
+      const nextTarget =
+        isAppPath && (pathname === "/app" || pathname === "/app/")
+          ? "/app/enter"
+          : full;
+      return redirectToAuth(request, nextTarget, isAppPath);
+    }
+
+    // Product surfaces: never index (demo or authenticated).
+    if (isAppPath) {
+      const res = withSecurityHeaders(NextResponse.next());
+      res.headers.set("X-Robots-Tag", "noindex, nofollow");
+      return res;
     }
 
     return withSecurityHeaders(NextResponse.next());
@@ -115,9 +155,11 @@ export function middleware(request: NextRequest) {
   );
 
   if (isAuthPage && sessionCookie) {
-    return withSecurityHeaders(
-      NextResponse.redirect(new URL("/onboarding", request.url)),
+    const next = safeDemoNext(
+      request.nextUrl.searchParams.get("next"),
+      "/app/enter",
     );
+    return withSecurityHeaders(NextResponse.redirect(new URL(next, request.url)));
   }
 
   const response = repairLeakedLocaleRewrite(request, intlMiddleware(request));
@@ -130,8 +172,10 @@ export const config = {
     // Localized marketing + auth (all locales prefixed, including en)
     "/",
     "/(en|de|nl|fr|es)/:path*",
-    "/((?!api|app|home|scan|sources|cases|money|controls|documents|onboarding|dev|mockups|_next|_vercel|.*\\..*).*)",
+    "/((?!api|app|home|scan|sources|cases|money|controls|documents|onboarding|select-org|invite|dev|mockups|_next|_vercel|.*\\..*).*)",
     // Non-localized authenticated surfaces (auth gate only)
+    "/app",
+    "/app/:path*",
     "/home",
     "/home/:path*",
     "/scan",
@@ -148,5 +192,9 @@ export const config = {
     "/documents/:path*",
     "/onboarding",
     "/onboarding/:path*",
+    "/select-org",
+    "/select-org/:path*",
+    "/invite",
+    "/invite/:path*",
   ],
 };

@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte dinner - LIVE Channel Economics fixture.
+ * Soho · New York dinner - LIVE Channel Economics fixture.
  * Net sales aligned with live strip / finance (~€6.787 mid-service).
  * Providers resolved via catalog - not hardcoded in UI.
  */
@@ -583,7 +583,7 @@ export function demoBerlinLiveChannels(
       role: "coo",
       headline: "Channel pressure",
       lines: [
-        "Berlin Mitte - delivery load affecting dine-in service",
+        "Soho · New York - delivery load affecting dine-in service",
         `Delivery ${delivery.revenueSharePct}% of sales · kitchen pressure high`,
         `Ticket times +${pressure.dineInTicketDeltaMin} min · pause prepared for approval`,
       ],
@@ -620,7 +620,7 @@ export function demoBerlinLiveChannels(
   return {
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     serviceLabel: "Dinner",
     phaseLabel: "Live",
     businessDate: "2026-08-19",

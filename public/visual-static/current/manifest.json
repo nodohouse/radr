@@ -1,0 +1,105 @@
+{
+  "capturedAt": "2026-10-05T20:42:36.694Z",
+  "base": "https://prep-ten-zeta.vercel.app",
+  "viewport": {
+    "width": 1512,
+    "height": 982
+  },
+  "shots": [
+    {
+      "id": "cc-gm-restaurant",
+      "path": "/app?stay=1",
+      "file": "cc-gm-restaurant.png"
+    },
+    {
+      "id": "cc-cfo-restaurant",
+      "path": "/app?stay=1",
+      "file": "cc-cfo-restaurant.png"
+    },
+    {
+      "id": "live-estate-restaurant",
+      "path": "/app/live?stay=1",
+      "file": "live-estate-restaurant.png"
+    },
+    {
+      "id": "live-venue-restaurant",
+      "path": "/app/live?stay=1",
+      "file": "live-venue-restaurant.png"
+    },
+    {
+      "id": "decisions",
+      "path": "/app/decisions?stay=1",
+      "file": "decisions.png"
+    },
+    {
+      "id": "operations",
+      "path": "/app/service?stay=1",
+      "file": "operations.png"
+    },
+    {
+      "id": "house",
+      "path": "/app/house?stay=1",
+      "file": "house.png"
+    },
+    {
+      "id": "guests",
+      "path": "/app/guests?stay=1",
+      "file": "guests.png"
+    },
+    {
+      "id": "intelligence",
+      "path": "/app/intelligence?stay=1",
+      "file": "intelligence.png"
+    },
+    {
+      "id": "value",
+      "path": "/app/value?stay=1",
+      "file": "value.png"
+    },
+    {
+      "id": "memory",
+      "path": "/app/memory?stay=1",
+      "file": "memory.png"
+    },
+    {
+      "id": "locations",
+      "path": "/app/locations?stay=1",
+      "file": "locations.png"
+    },
+    {
+      "id": "reports",
+      "path": "/app/reports?stay=1",
+      "file": "reports.png"
+    },
+    {
+      "id": "connections",
+      "path": "/app/connections?stay=1",
+      "file": "connections.png"
+    },
+    {
+      "id": "data-health",
+      "path": "/app/data-health?stay=1",
+      "file": "data-health.png"
+    },
+    {
+      "id": "dashboards",
+      "path": "/app/dashboards?stay=1",
+      "file": "dashboards.png"
+    },
+    {
+      "id": "settings",
+      "path": "/app/settings?stay=1",
+      "file": "settings.png"
+    },
+    {
+      "id": "cc-revenue-hotel",
+      "path": "/app?stay=1",
+      "file": "cc-revenue-hotel.png"
+    },
+    {
+      "id": "live-hotel-ops",
+      "path": "/app/live?stay=1",
+      "file": "live-hotel-ops.png"
+    }
+  ]
+}

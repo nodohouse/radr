@@ -49,6 +49,7 @@ describe("organization document isolation (db)", () => {
       {
         id: "org_a",
         name: "Restaurant A",
+        slug: "restaurant-a",
         country: "NL",
         currency: "EUR",
         timezone: "Europe/Amsterdam",
@@ -58,6 +59,7 @@ describe("organization document isolation (db)", () => {
       {
         id: "org_b",
         name: "Restaurant B",
+        slug: "restaurant-b",
         country: "NL",
         currency: "EUR",
         timezone: "Europe/Amsterdam",
@@ -72,6 +74,8 @@ describe("organization document isolation (db)", () => {
         organizationId: "org_a",
         userId: "user_a",
         role: "OWNER",
+        roleId: "role_owner",
+        status: "active",
         createdAt: now,
         updatedAt: now,
       },
@@ -80,6 +84,8 @@ describe("organization document isolation (db)", () => {
         organizationId: "org_b",
         userId: "user_b",
         role: "OWNER",
+        roleId: "role_owner",
+        status: "active",
         createdAt: now,
         updatedAt: now,
       },

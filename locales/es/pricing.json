@@ -68,10 +68,11 @@
     "features": [
       "Everything in Expand",
       "Prepared Actions and approval workflows",
-      "Multi-location governance",
+      "Multi-location / multi-entity governance",
+      "Regional and group permissions",
       "Autopilot within policy",
       "Portfolio Verified Value",
-      "Advanced controls and implementation"
+      "Advanced controls and custom integration"
     ]
   },
   "enterprise": {

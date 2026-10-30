@@ -144,7 +144,7 @@ export function DecisionsChapter() {
             <NextLink href="/product/memory" className="rx-btn rx-btn-primary">
               Operating Memory <span aria-hidden="true">→</span>
             </NextLink>
-            <NextLink href="/demo" className="rx-btn rx-btn-ghost">
+            <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-btn rx-btn-ghost">
               {CTAS.primaryProduct}
             </NextLink>
           </div>

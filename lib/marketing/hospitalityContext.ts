@@ -31,10 +31,12 @@ export const HOSPITALITY_VERTICALS: {
   label: string;
   short: string;
 }[] = [
-  { id: "restaurant", label: "Restaurant", short: "Restaurant" },
-  { id: "hotel", label: "Hotel", short: "Hotel" },
-  { id: "serviced_apartment", label: "Serviced apartment", short: "Serviced" },
+  { id: "restaurant", label: "Restaurants", short: "Restaurants" },
+  { id: "hotel", label: "Hotels", short: "Hotels" },
 ];
+
+/** Example operating models for Platform theater — not the platform boundary. */
+export const PLATFORM_EXAMPLE_VERTICALS = HOSPITALITY_VERTICALS;
 
 export function decisionForVertical(v: HospitalityVertical): CanonDecision {
   if (v === "hotel") return CANON_OTA;
@@ -77,7 +79,7 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
       vertical: v,
       decision: d,
       desktop: {
-        kicker: "Canal House · Amsterdam",
+        kicker: "Mercer House · New York",
         idLine: `${d.displayId} · Hotel · Demo`,
         title: "Premium inventory",
         action: "Hold 4 premium rooms direct",
@@ -102,7 +104,7 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
       vertical: v,
       decision: d,
       desktop: {
-        kicker: "Chiado Collective · Lisbon",
+        kicker: "Roma Norte Collective · Mexico City",
         idLine: `${d.displayId} · Serviced · Demo`,
         title: "Orphan night",
         action: "Keep unit direct-first",
@@ -126,7 +128,7 @@ export function heroSceneFor(v: HospitalityVertical): HeroSceneModel {
     vertical: v,
     decision: d,
     desktop: {
-      kicker: "Berlin Mitte · Dinner service",
+      kicker: "Soho · New York · Dinner service",
       idLine: `${d.displayId} · Restaurant · Demo`,
       title: "Wait 12 minutes",
       action: "Throttle delivery · feature fast dish · hold 2 tables",
@@ -195,7 +197,7 @@ export function platformEconomics(d: CanonDecision) {
     expected: euro(d.expectedProtectedEuro),
     observed: euro(d.actualProtectedEuro),
     verified: euro(d.actualProtectedEuro),
-    /** Public primary chip — never label D-1911 €620 as Exposure */
+    /** Public primary chip — never label D-1911 $620 as Exposure */
     primaryEuro: isPeak
       ? euro(d.expectedProtectedEuro)
       : euro(d.exposureEuro),
@@ -246,7 +248,7 @@ export function platformSceneFor(v: HospitalityVertical): PlatformSceneContent {
         {
           id: "ota",
           title: "Release to OTA",
-          euro: "€0",
+          euro: "$0",
           note: "Fills · commission stands",
           rec: false,
         },
@@ -307,7 +309,7 @@ export function platformSceneFor(v: HospitalityVertical): PlatformSceneContent {
         {
           id: "empty",
           title: "Leave empty",
-          euro: "€0",
+          euro: "$0",
           note: "Night expires",
           rec: false,
         },
@@ -363,29 +365,29 @@ export function platformSceneFor(v: HospitalityVertical): PlatformSceneContent {
       hot: "Table turns",
       line: "Empty tables ≠ capacity when kitchen is constrained.",
     },
-    futures: [
-      {
-        id: "seat",
-        title: "Seat now",
-        euro: "€0",
-        note: "Fills fast · burns second turn",
-        rec: false,
-      },
-      {
-        id: "wait",
-        title: "Wait 12 minutes",
-        euro: econ.expected,
-        note: "Protect contribution · reversible",
-        rec: true,
-      },
-      {
-        id: "hard",
-        title: "Hard stop",
-        euro: euro(180),
-        note: "Safer · leaves money on table",
-        rec: false,
-      },
-    ],
+      futures: [
+        {
+          id: "wait",
+          title: "Wait 12 minutes",
+          euro: econ.expected,
+          note: "Protect contribution · reversible",
+          rec: true,
+        },
+        {
+          id: "seat",
+          title: "Seat now",
+          euro: euro(410),
+          note: "Fills fast · kitchen risk",
+          rec: false,
+        },
+        {
+          id: "throttle",
+          title: "Throttle delivery",
+          euro: euro(470),
+          note: "Safer volume · less contribution",
+          rec: false,
+        },
+      ],
     actions: [
       { em: "Floor", strong: "Hold 2 tables · 12 minutes" },
       { em: "Delivery", strong: "Throttle until 18:54" },

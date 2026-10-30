@@ -4,7 +4,7 @@ export const alt = "RADR · Nothing off the RADR.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** Simple OG share image: near-black, large △, wordmark, slogan. */
+/** OG share: near-black, A-mark wordmark, slogan. */
 export default function OpenGraphImage() {
   return new ImageResponse(
     (
@@ -21,35 +21,43 @@ export default function OpenGraphImage() {
           fontFamily: "sans-serif",
         }}
       >
-        <svg width="180" height="180" viewBox="0 0 100 100">
-          <path
-            d="M50 12 L88 86 H12 Z"
-            fill="none"
-            stroke="#00F56A"
-            strokeWidth="6.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
         <div
           style={{
-            marginTop: 36,
-            fontSize: 72,
-            fontWeight: 650,
-            letterSpacing: "0.12em",
             display: "flex",
             alignItems: "center",
+            gap: 8,
+            fontSize: 96,
+            fontWeight: 700,
+            letterSpacing: "-0.05em",
           }}
         >
-          RADR
+          <span>R</span>
+          <svg width="72" height="90" viewBox="0 0 80 100" fill="none">
+            <path
+              d="M29 12 L10 90"
+              stroke="#FFFFFF"
+              strokeWidth="14"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M51 12 L70 90"
+              stroke="#FFFFFF"
+              strokeWidth="14"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <circle cx="40" cy="56" r="7.25" fill="#00D978" />
+          </svg>
+          <span>DR</span>
         </div>
         <div
           style={{
-            marginTop: 18,
-            fontSize: 28,
-            letterSpacing: "0.08em",
+            marginTop: 28,
+            fontSize: 26,
+            letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "rgba(245,242,235,0.55)",
+            color: "rgba(245,242,235,0.5)",
           }}
         >
           Nothing off the RADR.

@@ -342,7 +342,7 @@ export function composeBerlinPreShiftBrief(
         summary:
           "Forecast 142 covers vs 128 FOH (Front of House) capacity - a 14-cover gap in the peak window. Guests wait longer; ticket times slip.",
         lines: [
-          "Berlin Mitte dinner peak · +1 FOH (Front of House) closes the gap",
+          "Soho · New York dinner peak · +1 FOH (Front of House) closes the gap",
           `Cost ${staffingCost} · expected protection ${staffingProtected}`,
         ],
         recommendation: "+1 FOH (Front of House) · 19:15-20:30",

@@ -1,7 +1,7 @@
 /**
  * Canonical fictional world for the public homepage product demonstration.
  *
- * Isolated from product `/app` demo fixtures (Northstar / Berlin / EUR), but
+ * Isolated from product `/app` demo fixtures (Northstar / NYC / USD), but
  * money semantics must match the product:
  * unresolved exposure = LABOR 290 + BUY 118 = 408
  * verified value = 184 (excluded from exposure)

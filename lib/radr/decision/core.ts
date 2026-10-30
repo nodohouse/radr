@@ -66,7 +66,7 @@ export type DecisionWhy = {
   effect: string;
   confidence: { point: number; low: number; high: number };
   assumptions: string[];
-  /** “At Berlin Mitte, under these conditions…” */
+  /** “At Soho · New York, under these conditions…” */
   locationDna: string;
 };
 
@@ -105,11 +105,32 @@ export type DecisionCardState =
   | "APPROVED"
   | "VERIFIED";
 
+/** Product display money — global estate reporting / hero local = USD. */
 export function formatDecisionMoney(amount: number): string {
   const grouped = Math.round(Math.abs(amount))
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return `€${grouped}`;
+  return `$${grouped}`;
+}
+
+/**
+ * Unit rates and cents-critical amounts — never round $6.80 → $7.
+ * Always two decimal places for reproducibility in Decision Traces.
+ */
+export function formatDecisionMoneyCents(amount: number): string {
+  const sign = amount < 0 ? "−" : "";
+  const abs = Math.abs(amount);
+  const [intPart, frac = "00"] = abs.toFixed(2).split(".");
+  const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return `${sign}$${grouped}.${frac}`;
+}
+
+/** e.g. $6.80/L — for contract / invoice unit rates. */
+export function formatDecisionUnitRate(
+  amount: number,
+  unit = "L",
+): string {
+  return `${formatDecisionMoneyCents(amount)}/${unit}`;
 }
 
 export function horizonLabel(h: Horizon): string {

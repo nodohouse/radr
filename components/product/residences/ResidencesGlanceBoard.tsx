@@ -78,10 +78,10 @@ export function ResidencesGlanceBoard() {
             <p className="rp-hotel-glance-kicker">
               <i className="rp-hotel-live-dot" aria-hidden="true" />
               {showFinance
-                ? "Portfolio · Contribution · Demo"
+                ? "Portfolio · Contribution"
                 : showRevenue
-                  ? "Commercial · Pace · Demo"
-                  : "Operations · Turnovers · Demo"}
+                  ? "Commercial · Pace"
+                  : "Operations · Turnovers"}
             </p>
             <h1 className="rp-hotel-glance-title">{LISBON_RESIDENCES.name}</h1>
             <p className="rp-hotel-glance-lead">
@@ -134,7 +134,7 @@ export function ResidencesGlanceBoard() {
 
       {showFinance ? (
         <section className="rp-hotel-overnight" aria-label="Contribution">
-          <p className="rp-hotel-sec-label">Contribution snapshot · DEMO</p>
+          <p className="rp-hotel-sec-label">Contribution snapshot</p>
           <div className="rp-hotel-yesterday">
             <p className="rp-hotel-yesterday-main">
               Revenue quality · Direct {pulse.directSharePct}% ·{" "}
@@ -167,7 +167,7 @@ export function ResidencesGlanceBoard() {
                   <p>{item.body}</p>
                   {item.radrDid ? (
                     <p className="rp-hotel-attn-did">
-                      WHAT RADR ALREADY DID · {item.radrDid}
+                      What RADR already did · {item.radrDid}
                     </p>
                   ) : null}
                 </div>
@@ -224,7 +224,7 @@ export function ResidencesGlanceBoard() {
 
       {moduleEnabled(composed, "predictions") ? (
         <section aria-label="Predictions">
-          <p className="rp-hotel-sec-label">Predicted · DEMO</p>
+          <p className="rp-hotel-sec-label">Predicted</p>
           <div className="rp-pred-list">
             {predictions
               .filter(

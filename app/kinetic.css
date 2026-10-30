@@ -786,7 +786,7 @@
 }
 
 .rx-pilot-days li {
-  padding: 0.85rem 0.7rem;
+  padding: 1rem 0.85rem;
   border-radius: 12px;
   background: #fff;
   border: 1px solid rgba(10, 13, 11, 0.1);
@@ -796,14 +796,16 @@
   display: block;
   font-style: normal;
   font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
-  font-size: 0.68rem;
-  color: #00a85a;
-  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #067a42;
+  margin-bottom: 0.4rem;
 }
 
 .rx-pilot-days strong {
   display: block;
-  font-size: 0.85rem;
+  font-size: 1.05rem;
   font-weight: 650;
   color: #0a0d0b;
   line-height: 1.3;
@@ -811,8 +813,8 @@
 
 .rx-pilot-note {
   margin: 0 0 0.5rem;
-  font-size: 0.78rem;
-  color: #626a65;
+  font-size: 0.9rem;
+  color: #3f4642;
 }
 
 @media (max-width: 800px) {
@@ -2860,56 +2862,76 @@
   max-width: 56rem;
 }
 .rx-leak-panel-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 1.25rem 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 1.5rem 0 1.15rem;
 }
 .rx-leak-panel-nav button {
   appearance: none;
-  border: 1px solid rgba(10, 13, 11, 0.1);
+  border: 1px solid rgba(10, 13, 11, 0.12);
   background: #fff;
-  border-radius: 14px;
-  padding: 0.55rem 0.85rem;
+  border-radius: 12px;
+  padding: 0.7rem 0.85rem;
   font-family: inherit;
-  color: #626a65;
+  color: #1a1f1c;
   cursor: pointer;
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  max-width: 11.5rem;
+  gap: 0.25rem;
+  min-width: 0;
+  width: 100%;
+  max-width: none;
 }
 .rx-leak-panel-nav button span {
   font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
-  font-size: 0.65rem;
-  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  font-weight: 560;
+  color: #0a0d0b;
 }
 .rx-leak-panel-nav button em {
   font-style: normal;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   letter-spacing: -0.01em;
-  color: #8a918d;
-  line-height: 1.25;
+  color: #3f4642;
+  line-height: 1.3;
 }
 .rx-leak-panel-nav button[data-on="true"] {
-  border-color: rgba(0, 168, 90, 0.45);
+  border-color: rgba(0, 168, 90, 0.55);
   color: #0a0d0b;
-  background: #fff;
+  background: rgba(0, 217, 120, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(0, 168, 90, 0.2);
 }
-.rx-leak-panel-nav button[data-on="true"] em { color: #00a85a; }
+.rx-leak-panel-nav button[data-on="true"] span {
+  color: #067a42;
+}
+.rx-leak-panel-nav button[data-on="true"] em { color: #067a42; }
+
+@media (max-width: 900px) {
+  .rx-leak-panel-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .rx-leak-panel-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 .rx-leak-panel-frame {
-  margin: 0.65rem 0 0;
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
+  margin: 0.75rem 0 0;
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  letter-spacing: -0.025em;
   color: #0a0d0b;
-  font-weight: 550;
+  font-weight: 600;
 }
 .rx-leak-panel-money {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.45rem;
   font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #00a85a;
@@ -2928,13 +2950,15 @@
 }
 .rx-leak-panel-copy h3 {
   margin: 0 0 0.5rem;
-  font-size: 1.35rem;
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
   letter-spacing: -0.03em;
+  color: #0a0d0b;
 }
 .rx-leak-panel-copy p {
   margin: 0 0 0.65rem;
-  color: #3f4642;
-  line-height: 1.45;
+  color: #1a1f1c;
+  font-size: 1.05rem;
+  line-height: 1.5;
 }
 
 /* ── Role strip ── */
@@ -2964,6 +2988,7 @@
   text-transform: uppercase;
   color: #626a65;
   cursor: pointer;
+  scroll-margin-top: 6.5rem;
 }
 .rx-atlas-problems button[data-on="true"] {
   border-color: rgba(0, 168, 90, 0.45);
@@ -3808,10 +3833,10 @@
   border: 0;
   background: transparent;
   border-radius: 999px;
-  padding: 0.45rem 0.95rem;
-  font-size: 0.82rem;
-  font-weight: 550;
-  color: #626a65;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 560;
+  color: #3f4642;
   cursor: pointer;
 }
 .rx-role-tabs button[data-on="true"] {
@@ -3837,7 +3862,7 @@
 .rx-role-desk-k {
   margin: 0;
   font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
-  font-size: 0.58rem;
+  font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #3f4642;
@@ -3845,9 +3870,9 @@
 .rx-role-desk-id {
   margin: 0.35rem 0 0;
   font-family: var(--font-ibm-plex-mono, ui-monospace, monospace);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   letter-spacing: 0.04em;
-  color: #5a625d;
+  color: #3f4642;
 }
 .rx-role-tabs button:focus-visible,
 .rx-rso-scrub button:focus-visible,
@@ -3857,25 +3882,27 @@
 }
 .rx-role-desk h3 {
   margin: 0.55rem 0 0;
-  font-size: 1.55rem;
+  font-size: clamp(1.55rem, 2.6vw, 1.95rem);
   letter-spacing: -0.03em;
   font-weight: 650;
+  color: #0a0d0b;
 }
 .rx-role-desk ul {
   list-style: none;
   margin: 1rem 0 0;
   padding: 0;
   display: grid;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 .rx-role-desk li {
-  font-size: 0.92rem;
-  color: #3f4642;
+  font-size: 1.02rem;
+  color: #1a1f1c;
+  line-height: 1.45;
 }
 .rx-role-desk-foot {
   margin: 1.25rem 0 0;
-  font-size: 0.78rem;
-  color: #5a625d;
+  font-size: 0.88rem;
+  color: #3f4642;
 }
 .rx-role-desk[data-tone="urgent"] h3 { color: #b45309; }
 .rx-role-desk[data-tone="exposure"] h3 { color: #0a0d0b; }
@@ -4260,7 +4287,7 @@
 .rx-pilot-tl-quiet .rx-rec-h { max-width: 22ch; }
 
 .rx-prog-quiet {
-  max-width: 40rem;
+  max-width: 44rem;
 }
 .rx-prog-quiet-list {
   list-style: none;
@@ -4279,28 +4306,43 @@
   text-align: left;
   border: 0;
   background: transparent;
-  padding: 1.15rem 0.15rem;
+  padding: 1.25rem 0.15rem;
   cursor: pointer;
   display: grid;
-  gap: 0.3rem;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+  row-gap: 0.25rem;
   transition: opacity 180ms ease;
 }
 .rx-prog-quiet-list button:not([data-on="true"]) {
-  opacity: 0.55;
+  opacity: 0.62;
 }
 .rx-prog-quiet-list button[data-on="true"] {
   opacity: 1;
 }
+.rx-prog-quiet-list em {
+  grid-row: 1 / span 2;
+  font-style: normal;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #067a42;
+  padding-top: 0.2rem;
+}
 .rx-prog-quiet-list strong {
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
-  font-weight: 650;
+  grid-column: 2;
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  letter-spacing: -0.03em;
+  font-weight: 680;
   color: #0a0d0b;
 }
 .rx-prog-quiet-list span {
-  font-size: 0.92rem;
-  color: #626a65;
-  max-width: 42ch;
+  grid-column: 2;
+  font-size: 1.02rem;
+  color: #1a1f1c;
+  max-width: 46ch;
+  line-height: 1.45;
 }
 
 .rx-home-spine .rx-rec-sec-quiet {

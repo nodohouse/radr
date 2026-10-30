@@ -1,331 +1,191 @@
 "use client";
 
 /**
- * Futures — signature trajectory visual.
- * Three paths through time → observation → verification → learning.
- * Product economics unchanged.
+ * Public Futures — D-1911 peak.
+ * Light mineral marketing experience. Not product UI. Not /app.
  */
 
-import { useEffect, useMemo, useState } from "react";
-import NextLink from "next/link";
+import { useMemo, useState } from "react";
+import { Link } from "@/i18n/navigation";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
-import { formatDecisionMoney } from "@/lib/radr/decision/core";
-import {
-  buildOrphanFutures,
-  ORPHAN_FUTURES_ACTUAL,
-} from "@/lib/radr/decision/futures";
-import {
-  CANON_ORPHAN,
-  verifiedEuro,
-} from "@/lib/radr/decision/demo/canonical";
-import { CTAS } from "@/lib/marketing/brand";
+import { demoSignupHref } from "@/lib/marketing/demoAccess";
+import { ECON_D1911 } from "@/lib/marketing/publicDecisionEconomics";
 import "@/app/product-chapters.css";
 import "@/app/home.css";
-import "@/app/econ.css";
-import "@/app/kinetic.css";
 import "@/app/radr-public.css";
+import "@/app/futures-public.css";
 
-/** Elegant routes — shared origin, diverge toward check-in. */
-const PATH_BY_ID: Record<
-  string,
-  { d: string; endX: number; endY: number; labelY: number }
-> = {
-  fut_orphan_wait: {
-    d: "M48 168 C 160 150, 280 72, 520 52",
-    endX: 528,
-    endY: 52,
-    labelY: 42,
-  },
-  fut_orphan_discount: {
-    d: "M48 168 C 170 172, 300 188, 520 198",
-    endX: 528,
-    endY: 198,
-    labelY: 188,
-  },
-  fut_orphan_ota: {
-    d: "M48 168 C 165 165, 290 158, 520 148",
-    endX: 528,
-    endY: 148,
-    labelY: 138,
-  },
-};
+type FutureId = "wait" | "seat" | "throttle";
 
-const END_LABEL: Record<string, string> = {
-  fut_orphan_discount: "Discount now",
-  fut_orphan_ota: "OTA release",
-  fut_orphan_wait: "RADR plan",
-};
+const FUTURES: {
+  id: FutureId;
+  label: string;
+  value: string;
+  note: string;
+  preferred: boolean;
+  span: number;
+}[] = [
+  {
+    id: "wait",
+    label: "Pace seating 12 min",
+    value: "+$620",
+    note: "Protect contribution · reversible",
+    preferred: true,
+    span: 1,
+  },
+  {
+    id: "seat",
+    label: "Seat now",
+    value: "+$410",
+    note: "Fills fast · kitchen risk",
+    preferred: false,
+    span: 0.66,
+  },
+  {
+    id: "throttle",
+    label: "Throttle delivery",
+    value: "+$470",
+    note: "Safer volume · less contribution",
+    preferred: false,
+    span: 0.76,
+  },
+];
 
-const TIME_MARKS = [
-  {
-    id: "now",
-    label: "NOW",
-    x: 48,
-    open: ["fut_orphan_discount", "fut_orphan_ota", "fut_orphan_wait"] as const,
-  },
-  {
-    id: "72h",
-    label: "72H",
-    x: 160,
-    open: ["fut_orphan_discount", "fut_orphan_ota", "fut_orphan_wait"] as const,
-  },
-  {
-    id: "48h",
-    label: "48H",
-    x: 272,
-    open: ["fut_orphan_discount", "fut_orphan_ota", "fut_orphan_wait"] as const,
-  },
-  {
-    id: "24h",
-    label: "24H",
-    x: 384,
-    open: ["fut_orphan_ota", "fut_orphan_wait"] as const,
-  },
-  {
-    id: "checkin",
-    label: "CHECK-IN",
-    x: 520,
-    open: ["fut_orphan_wait"] as const,
-  },
-] as const;
+const SIGNALS = [
+  { label: "38 inbound", detail: "covers arriving" },
+  { label: "Delivery +31%", detail: "vs plan" },
+  { label: "Kitchen 92 → 97%", detail: "pressure rising" },
+];
 
 export function FuturesChapter() {
-  const bundle = useMemo(() => buildOrphanFutures(), []);
-  const [selected, setSelected] = useState(bundle.recommendedScenarioId);
-  const [timeIdx, setTimeIdx] = useState(2);
-  const time = TIME_MARKS[timeIdx]!;
-  const openSet = useMemo(() => new Set<string>(time.open), [time.open]);
-
-  useEffect(() => {
-    if (!openSet.has(selected)) {
-      const fallback = openSet.has(bundle.recommendedScenarioId)
-        ? bundle.recommendedScenarioId
-        : time.open[time.open.length - 1]!;
-      setSelected(fallback);
-    }
-  }, [openSet, selected, bundle.recommendedScenarioId, time.open]);
-
-  const pick =
-    bundle.scenarios.find((s) => s.id === selected) ?? bundle.scenarios[0]!;
-  const recommended = bundle.scenarios.find((s) => s.recommended)!;
-
-  const paths = bundle.scenarios
-    .filter((s) => !s.isNoAction)
-    .map((s) => {
-      const geom = PATH_BY_ID[s.id]!;
-      return { ...s, ...geom };
-    });
-
-  const observed =
-    CANON_ORPHAN.observedContributionEuro ?? ORPHAN_FUTURES_ACTUAL.actualEuro;
-  const verified = verifiedEuro(CANON_ORPHAN);
+  const [selected, setSelected] = useState<FutureId>("wait");
+  const pick = useMemo(
+    () => FUTURES.find((f) => f.id === selected) ?? FUTURES[0]!,
+    [selected],
+  );
 
   return (
-    <div className="radr rx-ch rx-ch-light">
+    <div className="radr radr-mineral rx-ch rx-ch-light rx-fut-pub">
       <SiteNav />
-      <main className="rx-ch-main">
-        <section
-          className="rx-fut-field-scene rx-fut-field-scene-solid"
-          data-nav-theme="dark"
-        >
-          <div className="rx-shell rx-fut-field-inner">
-            <header className="rx-cinema-head rx-cinema-head-on-dark">
-              <p className="rx-cinema-kicker">
-                Platform · Futures · {CANON_ORPHAN.displayId} · DEMO ·
-                ILLUSTRATIVE
-              </p>
-              <h2 className="rx-cinema-title">
-                Don&apos;t guess the next move.
-                <br />
-                Play it forward.
-              </h2>
-              <p className="rx-fut-field-sit">
-                {bundle.situation.slice(0, 2).join(" · ")}
-              </p>
-            </header>
-
-            <div
-              className="rx-fut-time-scrub"
-              role="group"
-              aria-label="Time to check-in"
-            >
-              {TIME_MARKS.map((m, i) => (
-                <button
-                  key={m.id}
-                  type="button"
-                  data-on={timeIdx === i ? "true" : undefined}
-                  onClick={() => setTimeIdx(i)}
-                >
-                  {m.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="rx-fut-traj" aria-label="Futures trajectories">
-              <svg
-                className="rx-fut-traj-svg"
-                viewBox="0 0 600 240"
-                role="img"
-                aria-label="Three futures diverging toward check-in"
-              >
-                {/* Timeline baseline */}
-                <line
-                  x1="48"
-                  y1="220"
-                  x2="520"
-                  y2="220"
-                  stroke="rgba(247,250,248,0.12)"
-                  strokeWidth="1"
-                />
-                {TIME_MARKS.map((m) => (
-                  <g key={m.id}>
-                    <line
-                      x1={m.x}
-                      y1="40"
-                      x2={m.x}
-                      y2="220"
-                      stroke="rgba(247,250,248,0.06)"
-                      strokeWidth="1"
-                    />
-                    <text
-                      x={m.x}
-                      y="236"
-                      textAnchor="middle"
-                      fill="rgba(247,250,248,0.45)"
-                      fontSize="9"
-                      fontFamily="IBM Plex Mono, ui-monospace, monospace"
-                      letterSpacing="0.12em"
-                    >
-                      {m.label}
-                    </text>
-                  </g>
-                ))}
-
-                {/* Origin node */}
-                <circle
-                  cx="48"
-                  cy="168"
-                  r="4.5"
-                  fill="rgba(247,250,248,0.85)"
-                />
-
-                {paths.map((p) => {
-                  const on = p.id === selected;
-                  const rec = p.id === recommended.id;
-                  const gone = !openSet.has(p.id);
-                  return (
-                    <g
-                      key={p.id}
-                      className="rx-fut-traj-path"
-                      data-on={on ? "true" : undefined}
-                      data-rec={rec ? "true" : undefined}
-                      data-gone={gone ? "true" : undefined}
-                      opacity={gone ? 0.12 : on ? 1 : 0.35}
-                      style={{ cursor: gone ? "default" : "pointer" }}
-                      onClick={() => {
-                        if (!gone) setSelected(p.id);
-                      }}
-                      onMouseEnter={() => {
-                        if (!gone) setSelected(p.id);
-                      }}
-                    >
-                      <path
-                        d={p.d}
-                        fill="none"
-                        stroke={
-                          on
-                            ? "#00d978"
-                            : rec
-                              ? "rgba(0,217,120,0.45)"
-                              : "rgba(247,250,248,0.28)"
-                        }
-                        strokeWidth={on ? 2.75 : 1.5}
-                        strokeLinecap="round"
-                      />
-                      <circle
-                        cx={p.endX}
-                        cy={p.endY}
-                        r={on ? 4 : 3}
-                        fill={
-                          on
-                            ? "#00d978"
-                            : "rgba(247,250,248,0.55)"
-                        }
-                      />
-                      <text
-                        x={p.endX + 10}
-                        y={p.labelY}
-                        fill={
-                          on
-                            ? "rgba(247,250,248,0.95)"
-                            : "rgba(247,250,248,0.5)"
-                        }
-                        fontSize="10"
-                        fontFamily="Instrument Sans, system-ui, sans-serif"
-                      >
-                        {END_LABEL[p.id] ?? p.label}
-                      </text>
-                      <text
-                        x={p.endX + 10}
-                        y={p.labelY + 14}
-                        fill={
-                          on
-                            ? "#00d978"
-                            : "rgba(247,250,248,0.55)"
-                        }
-                        fontSize="13"
-                        fontWeight="600"
-                        fontFamily="Instrument Sans, system-ui, sans-serif"
-                      >
-                        {formatDecisionMoney(p.expectedContribution)}
-                      </text>
-                    </g>
-                  );
-                })}
-              </svg>
-            </div>
-
-            <p className="rx-fut-traj-pick" role="status">
-              Selected · {END_LABEL[pick.id] ?? pick.label} ·{" "}
-              {formatDecisionMoney(pick.expectedContribution)} expected
-              {pick.recommended ? " · RADR plan" : ""}
+      <main>
+        <section className="rx-fut-pub-hero" data-nav-theme="light">
+          <div className="rx-shell">
+            <p className="rx-fut-pub-kicker">
+              Futures · D-1911 · Soho · New York · Dinner · DEMO
             </p>
+            <h1 className="rx-fut-pub-title">PACE NEXT SEATING WAVE · 12 MIN</h1>
+            <p className="rx-fut-pub-econ">
+              <strong>+$620</strong>
+              <span>expected contribution</span>
+            </p>
+            <p className="rx-fut-pub-lead">
+              Compare paths before you act. Same Decision architecture —
+              different outcomes.
+            </p>
+
+            <ul className="rx-fut-pub-signals" aria-label="Why now">
+              {SIGNALS.map((s) => (
+                <li key={s.label}>
+                  <strong>{s.label}</strong>
+                  <span>{s.detail}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        <section className="rx-ch-body" data-nav-theme="light">
-          <div className="rx-shell rx-fut-reality">
-            <p className="rx-ch-kicker">
-              After the window · {CANON_ORPHAN.displayId} · DEMO · ILLUSTRATIVE
+        <section
+          className="rx-fut-pub-compare"
+          data-nav-theme="light"
+          aria-labelledby="rx-fut-compare-title"
+        >
+          <div className="rx-shell">
+            <p className="rx-fut-pub-kicker" id="rx-fut-compare-title">
+              Compare Futures
             </p>
+            <h2 className="rx-fut-pub-h2">Three paths. One recommendation.</h2>
 
-            <dl className="rx-fut-reality-grid">
-              <div>
-                <dt>Expected</dt>
-                <dd>
-                  {formatDecisionMoney(ORPHAN_FUTURES_ACTUAL.simulatedEuro)}
-                </dd>
-              </div>
-              <div data-tone="observed">
-                <dt>Observed</dt>
-                <dd>{formatDecisionMoney(observed)}</dd>
-              </div>
-              <div data-tone="verified">
-                <dt>Verified recovered</dt>
-                <dd>{formatDecisionMoney(verified)}</dd>
-              </div>
-            </dl>
+            <ul className="rx-fut-pub-paths" role="listbox" aria-label="Futures">
+              {FUTURES.map((f) => (
+                <li key={f.id}>
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={selected === f.id}
+                    data-preferred={f.preferred ? "true" : undefined}
+                    data-on={selected === f.id ? "true" : undefined}
+                    className="rx-fut-pub-path"
+                    style={{ ["--span" as string]: String(f.span) }}
+                    onClick={() => setSelected(f.id)}
+                  >
+                    <div className="rx-fut-pub-path-top">
+                      <span className="rx-fut-pub-path-lab">
+                        {f.label}
+                        {f.preferred ? (
+                          <em>Recommended</em>
+                        ) : null}
+                      </span>
+                      <strong>{f.value}</strong>
+                    </div>
+                    <span className="rx-fut-pub-track" aria-hidden="true">
+                      <svg viewBox="0 0 240 14" preserveAspectRatio="none">
+                        <path d="M0 11 C 48 11, 84 3, 132 5 S 200 12, 240 4" />
+                      </svg>
+                    </span>
+                    <p>{f.note}</p>
+                  </button>
+                </li>
+              ))}
+            </ul>
 
-            <p className="rx-fut-model-updated">Model updated</p>
+            <div className="rx-fut-pub-detail" aria-live="polite">
+              <p className="rx-fut-pub-selected">
+                Selected · {pick.label}
+                {pick.preferred ? " · recommended" : ""}
+              </p>
+              <dl className="rx-fut-pub-meta">
+                <div>
+                  <dt>No-action baseline</dt>
+                  <dd>Seat pressure · kitchen stays elevated · second turn burns</dd>
+                </div>
+                <div>
+                  <dt>Expected effect</dt>
+                  <dd>
+                    {pick.value} contribution vs seat-now path
+                  </dd>
+                </div>
+                <div>
+                  <dt>Key assumption</dt>
+                  <dd>
+                    Holding ~12 minutes does not lose VIP / allergy exceptions
+                  </dd>
+                </div>
+                <div>
+                  <dt>What would change the recommendation</dt>
+                  <dd>
+                    Kitchen recovers below 85% · inbound drops · VIP hard seat
+                    constraint
+                  </dd>
+                </div>
+              </dl>
+              <p className="rx-fut-pub-proof">
+                After the night: observed{" "}
+                {ECON_D1911.observed > 0 ? `$${ECON_D1911.observed}` : "—"} ·
+                verified protected ${ECON_D1911.verified} · Memory V3.
+              </p>
+            </div>
 
-            <div className="rx-ch-ctas">
-              <NextLink href="/product/memory" className="rx-btn rx-btn-primary">
-                Operating Memory <span aria-hidden="true">→</span>
-              </NextLink>
-              <NextLink href="/demo" className="rx-btn rx-btn-ghost">
-                {CTAS.compareFutures}
-              </NextLink>
+            <div className="rx-he-ctas rx-fut-pub-ctas">
+              <Link
+                href={demoSignupHref()}
+                className="rx-btn rx-btn-primary"
+              >
+                See the full Decision in RADR <span aria-hidden="true">→</span>
+              </Link>
+              <Link href="/product/value" className="rx-btn rx-btn-ghost">
+                See Verified Value
+              </Link>
             </div>
           </div>
         </section>

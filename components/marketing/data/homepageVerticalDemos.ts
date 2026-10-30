@@ -121,8 +121,8 @@ export const HERO_VERTICAL_SCENARIOS: Record<
 > = {
   restaurant: {
     id: "restaurant",
-    currency: "EUR",
-    place: "Berlin Mitte",
+    currency: "USD",
+    place: "Soho · New York",
     frames: {
       pre: {
         kicker: "Live · Peak",
@@ -146,7 +146,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
             fallback:
               "Throttle delivery · feature fast dish · resume seating at 18:54.",
           },
-          protectedAmount: "€620",
+          protectedAmount: "$620",
           protectedLabel: "expected vs immediate seating",
           proof: [
             { label: "Inbound 22m", value: "38 covers" },
@@ -210,7 +210,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
             primary: "Post story and open the waitlist now.",
             fallback: "If fill stalls in 12 min, hold for walk-ins.",
           },
-          protectedAmount: "€142",
+          protectedAmount: "$142",
           protectedLabel: "expected protected",
           confidence: "High confidence",
           decideBy: "Decide in 8 min",
@@ -247,7 +247,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           label: "Peak hold protected · D-1911",
         },
         reviewLines: [
-          "D-1911 · expected +€620 vs seat-now · actual €590 protected",
+          "D-1911 · expected +$620 vs seat-now · actual $590 protected",
           "Table 8 cancel filled via waitlist",
         ],
         improveLines: [
@@ -268,7 +268,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           forecastPct: 98,
           forecastLabel: "of week plan",
           chips: [
-            { label: "Verified", value: "€509", tone: "good" },
+            { label: "Verified", value: "$509", tone: "good" },
             { label: "Misses", value: "2 tuna", tone: "watch" },
             { label: "Attention", value: "saved 4h", tone: "good" },
           ],
@@ -283,18 +283,18 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           stakeLabel: "weekly exposure",
           whyBasis: [
             "Two tuna misses already this week",
-            "Peak exposure stacks to €3.2k",
+            "Peak exposure stacks to $3.2k",
             "Backup dish rule would have protected Friday",
             "Supplier lead time still slipping",
           ],
           proof: [
             { label: "Misses this week", value: "2" },
-            { label: "Peak exposure", value: "€3.2k" },
+            { label: "Peak exposure", value: "$3.2k" },
           ],
           recommends: {
             primary: "Open supplier review and set a backup dish rule.",
           },
-          protectedAmount: "€2,400",
+          protectedAmount: "$2,400",
           protectedLabel: "expected weekly protected",
           confidence: "High confidence",
           decideBy: "Decide this afternoon",
@@ -314,14 +314,14 @@ export const HERO_VERTICAL_SCENARIOS: Record<
   },
   hotel: {
     id: "hotel",
-    currency: "EUR",
-    place: "Canal House · Amsterdam",
+    currency: "USD",
+    place: "Mercer House · New York",
     frames: {
       pre: {
         kicker: "Start of day · House",
         headline: "One decision before arrivals.",
         meta: "89% occupancy · 12 arrivals",
-        contextLine: "Today · 89% occupancy · €14,800 projected · 12 arrivals",
+        contextLine: "Today · 89% occupancy · $14,800 projected · 12 arrivals",
         mood: "decide",
         needsCount: 1,
         handlingCount: 2,
@@ -338,11 +338,11 @@ export const HERO_VERTICAL_SCENARIOS: Record<
             primary: "Hold 4 premium rooms direct until 72h out.",
             fallback: "If pickup weakens: release 2 rooms back to OTA.",
           },
-          protectedAmount: "€3,100",
+          protectedAmount: "$3,100",
           protectedLabel: "expected protected tonight",
           proof: [
             { label: "Historical direct-fill probability", value: "73%" },
-            { label: "ADR uplift", value: "+€26" },
+            { label: "ADR uplift", value: "+$26" },
             { label: "OTA share above target", value: "11 pts" },
           ],
           whyBasis: [
@@ -453,7 +453,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
         ],
       },
       day: {
-        kicker: "Day · Canal House",
+        kicker: "Day · Mercer House",
         headline: "Occupancy is strong. Mix still needs a call.",
         meta: "What worked · what to improve",
         mood: "decide",
@@ -467,7 +467,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           forecastPct: 101,
           forecastLabel: "of week plan",
           chips: [
-            { label: "Verified", value: "€1,840", tone: "good" },
+            { label: "Verified", value: "$1,840", tone: "good" },
             { label: "Direct", value: "rising", tone: "good" },
             { label: "Shoulder", value: "OTA watch", tone: "watch" },
           ],
@@ -483,7 +483,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           whyBasis: [
             "Shoulder OTA climb of +9 pts this week",
             "Direct hold protected Friday ADR",
-            "Commission drag already €4.2k exposed",
+            "Commission drag already $4.2k exposed",
             "Comparable weekends fill direct when held to 72h",
           ],
           proof: [
@@ -493,7 +493,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           recommends: {
             primary: "Make the 72h direct hold a standing weekend rule.",
           },
-          protectedAmount: "€3,100",
+          protectedAmount: "$3,100",
           protectedLabel: "expected protected",
           confidence: "High confidence",
           decideBy: "Decide today",
@@ -512,7 +512,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
   },
   apartments: {
     id: "apartments",
-    currency: "EUR",
+    currency: "USD",
     place: CANON_ORPHAN.property,
     frames: {
       pre: {
@@ -533,16 +533,16 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           stakeValue: 164,
           stakeLabel: "exposed if empty",
           recommends: {
-            primary: "Wait 24h · prefer direct at €148.",
+            primary: "Wait 24h · prefer direct at $148.",
             fallback: "If pace weakens: release to OTA at floor.",
           },
-          protectedAmount: `€${CANON_ORPHAN.expectedProtectedEuro}`,
+          protectedAmount: `$${CANON_ORPHAN.expectedProtectedEuro}`,
           protectedLabel: "expected net contribution · wait path",
           proof: [
             { label: "Comparable gaps", value: "17" },
             {
               label: "Recommended rate",
-              value: `€${CANON_ORPHAN.recommendedRateEuro}`,
+              value: `$${CANON_ORPHAN.recommendedRateEuro}`,
             },
           ],
           whyBasis: [
@@ -619,7 +619,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           label: "Orphan Tuesday recovered · direct",
         },
         reviewLines: [
-          "Wait held · then direct filled at €148+",
+          "Wait held · then direct filled at $148+",
           "Turns closed without guest impact",
         ],
         improveLines: [
@@ -641,7 +641,7 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           forecastPct: 102,
           forecastLabel: "of week plan",
           chips: [
-            { label: "Verified", value: "€984", tone: "good" },
+            { label: "Verified", value: "$984", tone: "good" },
             { label: "Orphan fill", value: "64%", tone: "good" },
             { label: "Rule", value: "still open", tone: "watch" },
           ],
@@ -657,18 +657,18 @@ export const HERO_VERTICAL_SCENARIOS: Record<
           whyBasis: [
             "Same orphan Tuesday pattern every week",
             "64% historical fill when opened ≥72h out",
-            "€148 rate clears without guest impact",
+            "$148 rate clears without guest impact",
             "Cleaner capacity already planned for turns",
           ],
           proof: [
             { label: "Historical fill", value: "64%" },
-            { label: "Rate that works", value: "€148" },
+            { label: "Rate that works", value: "$148" },
           ],
           recommends: {
             primary:
               "Approve standing rule: open one-night inventory ≥72h out.",
           },
-          protectedAmount: "€2,516",
+          protectedAmount: "$2,516",
           protectedLabel: "expected annual protected",
           confidence: "High confidence",
           decideBy: "Decide this week",
@@ -691,8 +691,8 @@ export function formatHeroMoney(
   amount: number,
   currency: "USD" | "EUR",
 ): string {
-  const symbol = currency === "EUR" ? "€" : "$";
-  // English marketing site: comma thousands for both (€1,840 / $1,840)
+  const symbol = "$";
+  // English marketing site: comma thousands for both ($1,840 / $1,840)
   const grouped = Math.round(Math.abs(amount))
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");

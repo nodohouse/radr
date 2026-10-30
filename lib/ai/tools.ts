@@ -17,7 +17,6 @@ import {
   canAccessLocation,
   hasPermission,
   type AccessContext,
-  type RadrRole,
 } from "@/lib/platform/rbac";
 import type { ButlerContext, ButlerRole } from "@/lib/radr/butler/types";
 import { dashPeriodOf, type ResolvedContext } from "./context";
@@ -73,15 +72,15 @@ export type ToolResult = {
 };
 
 function toAccess(auth: ToolAuth): AccessContext {
-  const roleMap: Record<ButlerRole, RadrRole> = {
-    location_manager: "GENERAL_MANAGER",
-    regional_manager: "REGIONAL_MANAGER",
-    group_cfo: "CFO",
+  const roleMap: Record<ButlerRole, string> = {
+    location_manager: "role_gm",
+    regional_manager: "role_coo",
+    group_cfo: "role_cfo",
   };
   return {
     userId: auth.userId,
     organizationId: auth.organizationId,
-    role: roleMap[auth.role],
+    roleId: roleMap[auth.role],
     locationIds: auth.allowedLocationIds,
   };
 }
@@ -96,7 +95,7 @@ function assertLoc(auth: ToolAuth, locationId: string): string | null {
   if (!canAccessLocation(toAccess(auth), locationId)) {
     return `Permission denied for ${locationId}.`;
   }
-  if (!hasPermission(toAccess(auth), "butler:read")) {
+  if (!hasPermission(toAccess(auth), "butler.use")) {
     return "Permission denied for Ask RADR read.";
   }
   return null;
@@ -152,7 +151,7 @@ function berlinLaborRequirement(): LaborRequirementLocation {
   return {
     needAdditionalStaff: true,
     locationId: "loc_ber",
-    location: "Berlin Mitte",
+    location: "Soho · New York",
     timeframe: { start: "19:15", end: "20:30" },
     role: "FOH",
     additionalHeadcount: 1,
@@ -200,7 +199,7 @@ function buildLaborRequirement(locationId: string, ctx: ResolvedContext) {
   return {
     scope: locationId === "all" || ctx.isGroup ? "all" : "loc_ber",
     scopeLabel:
-      locationId === "all" || ctx.isGroup ? "All locations" : "Berlin Mitte",
+      locationId === "all" || ctx.isGroup ? "All locations" : "Soho · New York",
     period: "Tonight",
     needAdditionalStaff: needsStaff.length > 0,
     locationsNeedingStaff: needsStaff,
@@ -356,7 +355,7 @@ export function executeAskTool(
             ok: true,
             data: {
               locationId: "loc_ber",
-              locationName: "Berlin Mitte",
+              locationName: "Soho · New York",
               period: ctx.periodLabel,
               revenue: DAILY_PULSE.revenue,
               revenueDisplay: DAILY_PULSE.revenueDisplay,
@@ -388,7 +387,7 @@ export function executeAskTool(
             ok: true,
             data: {
               locationId: "loc_ber",
-              locationName: "Berlin Mitte",
+              locationName: "Soho · New York",
               period: ctx.periodLabel,
               marginPct: DAILY_PULSE.margin,
               vsPlanPts: DAILY_PULSE.marginVsPlanPts,
@@ -444,7 +443,7 @@ export function executeAskTool(
           ok: true,
           data: {
             locationId: "loc_ber",
-            locationName: "Berlin Mitte",
+            locationName: "Soho · New York",
             period: "Tonight",
             reservations: rs.reservationCount,
             bookedCovers: rs.bookedCovers,
@@ -523,7 +522,7 @@ export function executeAskTool(
             data: {
               locationId,
               locationName: locName(locationId),
-              note: "Detailed floor pulse is demo-connected for Berlin Mitte only.",
+              note: "Detailed floor pulse is demo-connected for Soho · New York only.",
             },
           };
         }
@@ -670,7 +669,7 @@ export function executeAskTool(
           ok: true,
           data: {
             locationId: "loc_ber",
-            locationName: "Berlin Mitte",
+            locationName: "Soho · New York",
             tonightExpectedRevenue: TONIGHT.expectedRevenue,
             tonightExpectedOccupancy: TONIGHT.expectedOccupancy,
             bookedCovers: TONIGHT.bookedCovers,
@@ -760,7 +759,7 @@ export function executeAskTool(
           ok: true,
           data: {
             locationId: "loc_ber",
-            locationName: "Berlin Mitte",
+            locationName: "Soho · New York",
             aggregatesOnly: brief.access.aggregatesOnly,
             reservedCovers: brief.reservedCovers,
             returningGuests: brief.returningGuests,
@@ -805,7 +804,7 @@ export function executeAskTool(
           ok: true,
           data: {
             locationId: "loc_ber",
-            locationName: "Berlin Mitte",
+            locationName: "Soho · New York",
             aggregatesOnly: brief.access.aggregatesOnly,
             canSeeAllergyDetail: brief.access.canSeeAllergyDetail,
             reservedCovers: brief.reservedCovers,

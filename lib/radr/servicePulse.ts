@@ -95,7 +95,7 @@ export type GroupTonightPulse = {
 
 const SPEND = BERLIN_TONIGHT_OPS.expectedSpendPerCover;
 
-/** Berlin Mitte waitlist: demand that can absorb late inventory. */
+/** Soho · New York waitlist: demand that can absorb late inventory. */
 export const BERLIN_WAITLIST: WaitlistParty[] = [
   {
     id: "wl_1",
@@ -259,7 +259,7 @@ export function buildGroupTonightPulse(atRiskEuro: number): GroupTonightPulse {
   const hot = [
     {
       id: "loc_ber",
-      name: "Berlin Mitte",
+      name: "Soho · New York",
       atRiskEuro: Math.round(atRiskEuro * 0.42),
       reason: "Peak staffing + late cancel",
     },

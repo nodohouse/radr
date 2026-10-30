@@ -15,7 +15,7 @@ const PROVIDER_ID = "radr-demo-reservations";
 
 const DEMO_LOCATION: ExternalLocation = {
   externalId: "demo-berlin-mitte",
-  name: "Berlin Mitte (Demo)",
+  name: "Soho · New York (Demo)",
   timezone: "Europe/Berlin",
   currency: "EUR",
 };

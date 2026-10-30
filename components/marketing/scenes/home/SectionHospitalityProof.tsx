@@ -69,8 +69,8 @@ export function SectionHospitalityProof() {
                   value: formatDecisionMoney(CANON_ORPHAN.exposureEuro),
                   tone: "risk",
                 },
-                { label: "48 hours", value: "€98", tone: "mute" },
-                { label: "Check-in", value: "€0", tone: "mute" },
+                { label: "48 hours", value: "$98", tone: "mute" },
+                { label: "Check-in", value: "$0", tone: "mute" },
                 {
                   label: "Recovered",
                   value: formatDecisionMoney(CANON_ORPHAN.actualProtectedEuro),

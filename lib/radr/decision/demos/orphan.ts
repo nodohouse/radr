@@ -105,7 +105,7 @@ export function buildOrphanDecisionRecord(
     property: "Chiado Collective · Lisbon",
     phaseLabel: "Availability · Chiado",
     contextLine: "Unit 24 · orphan night · T−72h",
-    recommendationHeadline: "WAIT 24 HOURS · KEEP DIRECT-FIRST",
+    recommendationHeadline: "Wait 24 hours · keep direct-first",
     triggerEvents: ["orphan_gap"],
     evidenceRefs: [
       {

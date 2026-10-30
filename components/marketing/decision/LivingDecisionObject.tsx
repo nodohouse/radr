@@ -315,7 +315,7 @@ export function LivingDecisionObject({
             <li>
               <time>18:43</time>
               <span>
-                €{d.exposureEuro.toLocaleString("en-GB")} vs seat-now modeled
+                ${d.exposureEuro.toLocaleString("en-US")} vs seat-now modeled
               </span>
               <em>{formatDecisionMoney(d.exposureEuro)}</em>
             </li>

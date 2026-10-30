@@ -3,19 +3,19 @@
     "kicker": "Value recovery",
     "h0": "Nothing off the RADR",
     "title": "Recover the value your operation is losing.",
-    "sub": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
-    "support": "RADR finds money that is leaking, missing, owed back, or about to disappear — then determines the strongest response, follows the case, and verifies the outcome.",
-    "ctaPrimary": "Start a recovery pilot",
-    "ctaSecondary": "See a verified recovery",
+    "sub": "RADR connects the systems you already run, surfaces where value or performance is at risk, compares what to do next, and verifies the outcome — recovery first, then the full operating intelligence layer.",
+    "support": "See what needs intervention.\nUnderstand what happens next.\nAct with evidence.\nProve what worked.",
+    "ctaPrimary": "See RADR in action",
+    "ctaSecondary": "Explore the platform",
     "ariaLabel": "Nothing off the RADR — Recover the value your operation is losing",
     "card": {
       "aria": "Supplier recovery Decision card",
       "kicker": "Supplier / AP · Finance",
-      "id": "D-4102 · Berlin Mitte · Demo",
+      "id": "D-4102 · Soho · New York · Demo",
       "title": "Contract price variance",
-      "euro": "€273",
+      "euro": "$273",
       "grade": "Verified",
-      "because": "Invoice €7.45/L vs contract €6.80/L · 420 L — credit applied and matched",
+      "because": "Invoice $7.45/L vs contract $6.80/L · 420 L — credit applied and matched",
       "step1": "Absorb",
       "step2": "Dispute",
       "step3": "Renegotiate",
@@ -25,7 +25,7 @@
     },
     "titleLine1": "Recover the value your operation is losing.",
     "titleLine2Prefix": "",
-    "promise": "RADR finds financial and operational leakage across the systems you already run, recommends the strongest response, and follows the outcome until the value is verified.",
+    "promise": "RADR connects the systems you already run, surfaces where value or performance is at risk, compares what to do next, and verifies the outcome — recovery first, then the full operating intelligence layer.",
     "lead": "Keep the systems you already run.",
     "verticals": {
       "aria": "Hospitality verticals",
@@ -46,12 +46,12 @@
         "after": "After",
         "day": "Day"
       },
-      "chromeLeft": "Berlin Mitte",
+      "chromeLeft": "Soho · New York",
       "chromeRight": "Before · quiet · after",
       "greeting": "Good morning",
       "issues": "2 things need you",
-      "sinceLastCheck": "1 decision ready · €184 verified since last check",
-      "exposedAmount": "€8,420",
+      "sinceLastCheck": "1 decision ready · $184 verified since last check",
+      "exposedAmount": "$8,420",
       "exposedLabel": "currently exposed",
       "actNow": "2 things need you",
       "reviewToday": "",
@@ -104,14 +104,14 @@
       "askLead": "Tonight is tracking above plan.",
       "askRiskLabel": "Main risk:",
       "askRisk": "{location} staffing pressure.",
-      "askAmount": "€290",
+      "askAmount": "$290",
       "askAmountLabel": "currently at risk",
       "askLink": "Show Labor finding",
       "askLive": "Explore product",
       "findings": {
         "labor": {
-          "location": "Berlin Mitte",
-          "money": "€290 at risk",
+          "location": "Soho · New York",
+          "money": "$290 at risk",
           "summary": "Peak service is understaffed.",
           "why": {
             "1": "Expected peak demand: 68 covers",
@@ -122,14 +122,14 @@
           "action": "Add one FOH · prepared for approval"
         },
         "recover": {
-          "location": "Amsterdam Canal",
-          "money": "€184 verified",
+          "location": "Mercer House · New York",
+          "money": "$184 verified",
           "summary": "A cancelled table was replaced and the resulting POS revenue was observed.",
-          "verified": "€184"
+          "verified": "$184"
         },
         "buy": {
-          "location": "Berlin Kreuzberg",
-          "money": "€118 recoverable",
+          "location": "West Hollywood · Los Angeles",
+          "money": "$118 recoverable",
           "summary": "Supplier invoice pricing exceeds contracted pricing.",
           "action": "Supplier claim · prepared for approval"
         }
@@ -141,18 +141,18 @@
     "kicker": "Control Center",
     "title": "Attention first. Then the rest of the operation.",
     "chromeLeft": "Control Center",
-    "chromeRight": "Berlin Mitte · Restaurant",
+    "chromeRight": "Soho · New York · Restaurant",
     "greeting": "Good morning",
     "issues": "2 things need your attention",
-    "exposedAmount": "€408",
+    "exposedAmount": "$408",
     "exposedLabel": "currently exposed",
     "whyLabel": "Why RADR believes this",
     "actionLabel": "Prepared action",
     "openDemo": "See RADR in action →",
     "cards": {
       "labor": {
-        "location": "Berlin Mitte",
-        "money": "€290 at risk",
+        "location": "Soho · New York",
+        "money": "$290 at risk",
         "summary": "Peak service is understaffed.",
         "why": {
           "1": "Expected peak demand: 68 covers",
@@ -163,14 +163,14 @@
         "action": "Add one FOH employee for peak service"
       },
       "recover": {
-        "location": "Amsterdam Canal",
-        "money": "€184 verified",
+        "location": "Mercer House · New York",
+        "money": "$184 verified",
         "summary": "A cancelled four top was released to booking inventory and successfully rebooked.",
-        "verified": "Verified Value: €184"
+        "verified": "Verified Value: $184"
       },
       "buy": {
-        "location": "Berlin Kreuzberg",
-        "money": "€118 recoverable",
+        "location": "West Hollywood · Los Angeles",
+        "money": "$118 recoverable",
         "summary": "Supplier invoice pricing exceeds contracted pricing.",
         "action": "Request supplier credit"
       }
@@ -215,19 +215,19 @@
     "title": "Four places money moves.",
     "buy": {
       "title": "What you spend.",
-      "example": "€118 recoverable · Supplier invoice pricing exceeds contracted pricing."
+      "example": "$118 recoverable · Supplier invoice pricing exceeds contracted pricing."
     },
     "labor": {
       "title": "How you staff.",
-      "example": "€290 at risk · Peak service demand exceeds scheduled FOH capacity."
+      "example": "$290 at risk · Peak service demand exceeds scheduled FOH capacity."
     },
     "sell": {
       "title": "How you monetize.",
-      "example": "€420 gross opportunity · Warm dry weather lifts Thursday terrace demand above plan."
+      "example": "$420 gross opportunity · Warm dry weather lifts Thursday terrace demand above plan."
     },
     "recover": {
       "title": "What you can still get back.",
-      "example": "€184 verified · Cancelled table replaced. POS observed."
+      "example": "$184 verified · Cancelled table replaced. POS observed."
     }
   },
   "evidence": {
@@ -235,8 +235,8 @@
     "title": "RADR shows its work.",
     "lead": "Every material finding carries source, calculation, freshness, and confidence. RADR is not a black box.",
     "aria": "Supplier discrepancy evidence",
-    "amount": "€118 recoverable",
-    "kind": "BUY · Berlin Kreuzberg",
+    "amount": "$118 recoverable",
+    "kind": "BUY · West Hollywood · Los Angeles",
     "summary": "Produce invoice exceeds contracted pricing.",
     "whyLabel": "Why RADR believes this",
     "cols": {
@@ -248,28 +248,28 @@
     "lines": {
       "tomatoes": {
         "label": "Tomatoes",
-        "contract": "€312",
-        "invoiced": "€358",
-        "variance": "€46"
+        "contract": "$312",
+        "invoiced": "$358",
+        "variance": "$46"
       },
       "oil": {
         "label": "Olive oil",
-        "contract": "€190",
-        "invoiced": "€228",
-        "variance": "€38"
+        "contract": "$190",
+        "invoiced": "$228",
+        "variance": "$38"
       },
       "herbs": {
         "label": "Fresh herbs",
-        "contract": "€96",
-        "invoiced": "€130",
-        "variance": "€34"
+        "contract": "$96",
+        "invoiced": "$130",
+        "variance": "$34"
       }
     },
     "totalLabel": "Total",
     "totals": {
-      "contract": "€2,722",
-      "invoiced": "€2,840",
-      "variance": "€118"
+      "contract": "$2,722",
+      "invoiced": "$2,840",
+      "variance": "$118"
     },
     "meta": {
       "source": {
@@ -337,14 +337,14 @@
     "kicker": "Verified Value",
     "title": "RADR proves what happened next.",
     "lead": "RADR does not stop at identifying opportunities. It measures the result after an intervention.",
-    "total": "€184",
+    "total": "$184",
     "totalLabel": "Verified Value",
     "chainAria": "Verified value proof chain",
     "restraint": "RADR doesn't take credit for what it cannot prove.",
     "flow": {
       "potential": {
         "label": "Potential",
-        "value": "€192",
+        "value": "$192",
         "detail": "Estimated recovery after cancellation"
       },
       "action": {
@@ -354,12 +354,12 @@
       },
       "observed": {
         "label": "Observed",
-        "value": "€184",
+        "value": "$184",
         "detail": "POS transaction closed"
       },
       "verified": {
         "label": "Verified Value",
-        "value": "€184",
+        "value": "$184",
         "detail": "Claims observed revenue, not the potential estimate"
       }
     }
@@ -373,7 +373,7 @@
     "answerLead": "Yes. Tonight is currently tracking 7% above comparable Mondays.",
     "answerBody": "Bookings are ahead of pace and expected spend remains strong.",
     "answerRisk": "The main risk is {location} between {peakStart} and {peakEnd}. Current staffing is below modeled requirement.",
-    "exposedAmount": "€290",
+    "exposedAmount": "$290",
     "exposed": "currently at risk",
     "actionLabel": "Prepared next step",
     "actionText": "Add one FOH employee for peak service.",
@@ -390,8 +390,8 @@
         "territory": "LABOR",
         "q": "What should I fix first?",
         "answerLead": "Peak staffing is currently your highest priority.",
-        "answerBody": "€290 is at risk between 19:00 and 20:30. The lowest cost staffing adjustment is prepared: €72 additional labor cost against €290 expected value protected.",
-        "amount": "€290",
+        "answerBody": "$290 is at risk between 19:00 and 20:30. The lowest cost staffing adjustment is prepared: $72 additional labor cost against $290 expected value protected.",
+        "amount": "$290",
         "amountLabel": "currently at risk",
         "action": "Add one FOH employee for peak service",
         "prepared": "Approval required"
@@ -402,7 +402,7 @@
         "q": "Why is labor margin down this week?",
         "answerLead": "Tonight's peak demand is 68 covers against 54 capacity.",
         "answerBody": "One additional FOH is required for the dinner peak. The shift adjustment is prepared for manager approval.",
-        "amount": "€290",
+        "amount": "$290",
         "amountLabel": "currently at risk",
         "action": "Add one FOH employee for peak service",
         "prepared": "Approval required"
@@ -412,8 +412,8 @@
         "territory": "SELL",
         "q": "What happens if I don't add staff tonight?",
         "answerLead": "If FOH stays at plan, about 10 covers may be constrained.",
-        "answerBody": "Estimated contribution left behind is €300. The terrace staffing response is already prepared if you choose to act.",
-        "amount": "€300",
+        "answerBody": "Estimated contribution left behind is $300. The terrace staffing response is already prepared if you choose to act.",
+        "amount": "$300",
         "amountLabel": "estimated value left behind",
         "action": "Review prepared staffing change",
         "prepared": "Approval required"
@@ -423,8 +423,8 @@
         "territory": "SELL",
         "q": "Will tomorrow's weather affect us?",
         "answerLead": "Thursday is forecast 29°C and dry.",
-        "answerBody": "Comparable days lifted terrace covers 24%. RADR expects 14 incremental covers: €420 gross, €72 to capture, €348 expected net. The FOH adjustment is prepared.",
-        "amount": "€420",
+        "answerBody": "Comparable days lifted terrace covers 24%. RADR expects 14 incremental covers: $420 gross, $72 to capture, $348 expected net. The FOH adjustment is prepared.",
+        "amount": "$420",
         "amountLabel": "gross opportunity",
         "action": "Review prepared terrace response",
         "prepared": "Approval required"
@@ -433,9 +433,9 @@
         "id": "owed",
         "territory": "BUY",
         "q": "Where are we still owed money?",
-        "answerLead": "Orchard still has €118 recoverable on invoice #10418.",
+        "answerLead": "Orchard still has $118 recoverable on invoice #10418.",
         "answerBody": "The tomato line is above contracted rate. Contract line and invoice evidence are attached. The supplier discrepancy is prepared.",
-        "amount": "€118",
+        "amount": "$118",
         "amountLabel": "recoverable",
         "action": "Review prepared claim",
         "prepared": "Approval required"
@@ -444,9 +444,9 @@
         "id": "location",
         "territory": "LABOR",
         "q": "Which location needs my attention?",
-        "answerLead": "Berlin Mitte.",
+        "answerLead": "Soho · New York.",
         "answerBody": "Peak understaffing is the highest urgency unresolved finding. The staffing change is prepared for approval.",
-        "amount": "€290",
+        "amount": "$290",
         "amountLabel": "at risk",
         "action": "Review prepared labor change",
         "prepared": "Approval required"
@@ -456,8 +456,8 @@
         "territory": "SELL",
         "q": "Why is Thursday forecast higher?",
         "answerLead": "Weather and terrace demand.",
-        "answerBody": "Warm dry conditions historically lift lunch covers. Gross opportunity is €420 before labor cost. The operating response is prepared.",
-        "amount": "€420",
+        "answerBody": "Warm dry conditions historically lift lunch covers. Gross opportunity is $420 before labor cost. The operating response is prepared.",
+        "amount": "$420",
         "amountLabel": "gross opportunity",
         "action": "Review prepared Sell response",
         "prepared": "Approval required"
@@ -768,7 +768,7 @@
       "bar": "Walk-in retention 68%",
       "staff": "Kitchen hot-line +14% · bar constrained 19:15–20:00",
       "delivery": "Indoor shift absorbable · bar needs +1 FOH",
-      "risk": "€284 exposed · €196 protected if plan approved"
+      "risk": "$284 exposed · $196 protected if plan approved"
     },
     "aria": "Operating twin",
     "steps": {
@@ -803,29 +803,29 @@
         "factA": "Tataki · #1 · 8,420 sold",
         "factBLabel": "Peak economics",
         "factB": "Pasta · +34% / kitchen min",
-        "value": "€8,420",
+        "value": "$8,420",
         "recommendation": "Increase Truffle Pasta prominence during 19:00–21:00."
       },
       "hotel": {
         "vertical": "Hotel",
         "headline": "Occupancy is up. Economics are weaker.",
-        "what": "Occupancy +6.2%. ADR +3.1%. Looks good — until OTA share +11 pts, distribution cost +€8,420, contribution −2.1%.",
+        "what": "Occupancy +6.2%. ADR +3.1%. Looks good — until OTA share +11 pts, distribution cost +$8,420, contribution −2.1%.",
         "factALabel": "Looks strong",
         "factA": "Occupancy +6.2%",
         "factBLabel": "Quality of demand",
         "factB": "OTA mix +11 pts",
-        "value": "€8,420",
+        "value": "$8,420",
         "recommendation": "Protect direct inventory longer during high-demand weekends."
       },
       "apartment": {
         "vertical": "Serviced apartments",
         "headline": "This empty Tuesday isn’t random.",
-        "what": "Apartment 24 · 1 orphan night. 17 comparable gaps. 64% historical fill when one-night stays opened ≥72 hours ahead. Median profitable rate €148.",
+        "what": "Apartment 24 · 1 orphan night. 17 comparable gaps. 64% historical fill when one-night stays opened ≥72 hours ahead. Median profitable rate $148.",
         "factALabel": "Pattern",
         "factA": "Tue orphan nights · n=17",
         "factBLabel": "Historical fill",
-        "factB": "64% · €148 median",
-        "value": "€164",
+        "factB": "64% · $148 median",
+        "value": "$164",
         "recommendation": "Relax minimum stay now."
       }
     },
@@ -843,11 +843,11 @@
       "staffing": "Walk-in retention",
       "staffingVal": "68%",
       "grossLabel": "Contribution exposure",
-      "gross": "€284",
+      "gross": "$284",
       "costLabel": "Bar constrained",
       "cost": "19:15–20:00",
       "netLabel": "Expected protected",
-      "net": "€196",
+      "net": "$196",
       "close": "Move one FOH to bar · increase hot-line prep · keep delivery open. Weather is the trigger. The intelligence is the interpretation."
     }
   },
@@ -859,38 +859,38 @@
     "current": {
       "kicker": "Current situation",
       "title": "Terrace closed.",
-      "exposure": "€284 contribution exposed."
+      "exposure": "$284 contribution exposed."
     },
     "options": {
       "a": {
         "label": "Option A",
         "title": "Do nothing.",
         "costLabel": "Cost",
-        "cost": "€0",
+        "cost": "$0",
         "resultLabel": "Expected result",
-        "result": "−€284",
+        "result": "−$284",
         "netLabel": "Net",
-        "net": "−€284"
+        "net": "−$284"
       },
       "b": {
         "label": "Option B",
         "title": "Move 1 FOH to bar.",
         "costLabel": "Cost",
-        "cost": "€22",
+        "cost": "$22",
         "resultLabel": "Expected protected",
-        "result": "€144",
+        "result": "$144",
         "netLabel": "Net",
-        "net": "+€122"
+        "net": "+$122"
       },
       "c": {
         "label": "Option C",
         "title": "FOH + standing capacity + delivery prep.",
         "costLabel": "Cost",
-        "cost": "€48",
+        "cost": "$48",
         "resultLabel": "Expected protected",
-        "result": "€231",
+        "result": "$231",
         "netLabel": "Net",
-        "net": "+€183"
+        "net": "+$183"
       }
     },
     "recommendLabel": "RADR recommends",
@@ -915,13 +915,13 @@
       "when": "When must we decide?",
       "after": "What happened afterward?"
     },
-    "territory": "SELL · Berlin Mitte",
+    "territory": "SELL · Soho · New York",
     "what": "Terrace closed",
     "soWhat": "36 covers displaced.",
-    "money": "€284",
+    "money": "$284",
     "moneyLabel": "contribution at risk",
     "nothingLabel": "Do nothing",
-    "nothing": "€284 disappears tonight",
+    "nothing": "$284 disappears tonight",
     "planLabel": "Best plan",
     "plan": {
       "1": "Move 12 → Main dining",
@@ -929,7 +929,7 @@
       "3": "Move Marco → Bar at 19:00"
     },
     "protectedLabel": "Expected protected",
-    "protected": "€196",
+    "protected": "$196",
     "confidenceLabel": "Confidence",
     "confidence": "High",
     "deadlineLabel": "Decide by",
@@ -942,8 +942,8 @@
   "memory": {
     "kicker": "Decision memory",
     "title": "RADR remembers what worked here.",
-    "lead": "Hospitality businesses are not averages. Berlin Mitte behaves differently from Amsterdam Canal House. RADR learns from forecasts, decisions, human overrides, actual outcomes, seasonality and location behavior.",
-    "example": "Rainy Thursday dinner · 14 prior occurrences. Opening bar standing capacity retained 72% of displaced terrace demand. Moving one FOH to bar improved net contribution +€176 average. Confidence: High. Next time, RADR already knows the playbook.",
+    "lead": "Hospitality businesses are not averages. Soho · New York behaves differently from Mercer House · New York. RADR learns from forecasts, decisions, human overrides, actual outcomes, seasonality and location behavior.",
+    "example": "Rainy Thursday dinner · 14 prior occurrences. Opening bar standing capacity retained 72% of displaced terrace demand. Moving one FOH to bar improved net contribution +$176 average. Confidence: High. Next time, RADR already knows the playbook.",
     "exampleMeta": "Location DNA · weather × service × channel × labor"
   },
   "industriesTeaser": {
@@ -993,14 +993,14 @@
       "t3": "19:03",
       "t4": "19:11",
       "t5": "21:32",
-      "t6": "€91"
+      "t6": "$91"
     },
     "details": {
       "d1": "Table cancelled · 20:00 seating",
-      "d2": "€184 exposed",
+      "d2": "$184 exposed",
       "d3": "Operator approved recovery",
       "d4": "Guest seated from waitlist",
-      "d5": "Actual spend €172",
+      "d5": "Actual spend $172",
       "d6": "Contribution attributable"
     },
     "categories": {
@@ -1144,7 +1144,7 @@
     "aria": "Cancelled table value decay timeline",
     "event": "Cancelled table",
     "seating": "20:00 seating",
-    "stakeAmount": "€184",
+    "stakeAmount": "$184",
     "stakeLabel": "value at risk",
     "close": "RADR understands decision deadlines.",
     "marks": {
@@ -1162,7 +1162,7 @@
       },
       "t2000": {
         "time": "20:00",
-        "note": "Seating passed · €0"
+        "note": "Seating passed · $0"
       }
     }
   },
@@ -1183,7 +1183,7 @@
       "cfo": {
         "tab": "CFO",
         "label": "Finance",
-        "insight": "€284 contribution exposure.",
+        "insight": "$284 contribution exposure.",
         "action": "Protect contribution before service."
       },
       "chef": {
@@ -1218,7 +1218,7 @@
       "recovered": {
         "title": "Table cancellation recovered",
         "detail": "Replacement seated · POS observed",
-        "money": "+€172"
+        "money": "+$172"
       },
       "allergy": {
         "title": "Allergy confirmed",
@@ -1285,11 +1285,11 @@
       "intuitionLabel": "Manager intuition",
       "intuition": "Yes",
       "costLabel": "Expected labor cost",
-      "cost": "€72",
+      "cost": "$72",
       "protectLabel": "Expected contribution protected",
-      "protect": "€31",
+      "protect": "$31",
       "netLabel": "Net expected value",
-      "net": "−€41",
+      "net": "−$41",
       "rec": "Keep current staffing.",
       "why": "Cost exceeds protected contribution under current demand."
     }
@@ -1396,7 +1396,7 @@
         "domain": "Rooms",
         "title": "You're sold out — and still leaking on the mix.",
         "lede": "Occupancy is strong. OTA mix is too high.",
-        "value": "€4,200",
+        "value": "$4,200",
         "valueLabel": "contribution at risk",
         "rec": "Hold more inventory direct until 72h out and cap OTA availability earlier on high-demand dates."
       },
@@ -1404,7 +1404,7 @@
         "domain": "Service",
         "title": "Your busiest item is not your best performer.",
         "lede": "Volume looks healthy. Contribution per kitchen minute says otherwise.",
-        "value": "€8,420",
+        "value": "$8,420",
         "valueLabel": "annual upside",
         "rec": "Re-weight the peak menu toward higher contribution dishes — not just bestsellers."
       },
@@ -1412,7 +1412,7 @@
         "domain": "Service",
         "title": "The terrace is full. The bar is leaving money down.",
         "lede": "Standing capacity and one FOH move absorb the displaced covers.",
-        "value": "€1,140",
+        "value": "$1,140",
         "valueLabel": "weekend contribution",
         "rec": "Open standing bar capacity and shift one FOH before the rain window locks."
       },
@@ -1420,7 +1420,7 @@
         "domain": "Units",
         "title": "Your calendar is full — your turn cost is not.",
         "lede": "Short stays and cleaning gaps are crushing margin.",
-        "value": "€2,900",
+        "value": "$2,900",
         "valueLabel": "monthly leakage",
         "rec": "Lengthen minimum stay on high-turn clusters and prep cleaner capacity before the next peak."
       }
@@ -1447,7 +1447,7 @@
       "n2": "Faster ticket time",
       "n3": "Less peak pressure",
       "conclusion": "Your bestseller isn't your best dish.",
-      "money": "€8,420",
+      "money": "$8,420",
       "moneyLabel": "expected annual opportunity",
       "rec": "Increase prominence during 19:00–21:00."
     },
@@ -1457,12 +1457,12 @@
       "volumeStat": "100% occ · +18 pts OTA mix",
       "econLabel": "Peak economics",
       "econName": "Direct hold",
-      "econStat": "+€9,800 contribution protected",
+      "econStat": "+$9,800 contribution protected",
       "n1": "Lower commission drag",
       "n2": "Guest owned direct",
       "n3": "Better ADR on same rooms",
       "conclusion": "Sold out. Still losing money on the mix.",
-      "money": "€9,800",
+      "money": "$9,800",
       "moneyLabel": "contribution at stake this weekend",
       "rec": "Hold more inventory direct until 72h out."
     },
@@ -1472,12 +1472,12 @@
       "volumeStat": "Mon · Wed booked",
       "econLabel": "Hidden gap",
       "econName": "Tuesday orphan",
-      "econStat": "+€112 expected contribution",
+      "econStat": "+$112 expected contribution",
       "n1": "17 comparable gaps",
       "n2": "64% historical fill",
       "n3": "Marathon weekend next door",
       "conclusion": "This empty night is not random.",
-      "money": "€2,516",
+      "money": "$2,516",
       "moneyLabel": "annual orphan-night opportunity",
       "rec": "Open one-night inventory now."
     }
@@ -1488,11 +1488,11 @@
     "chainAria": "Causal operating response",
     "fork": "RADR has 3 options.",
     "forkSun": "RADR has 3 options.",
-    "stake": "€467 at stake tonight",
-    "stakeSun": "€720 perishable · lunch",
+    "stake": "$467 at stake tonight",
+    "stakeSun": "$720 perishable · lunch",
     "valueDeltaLabel": "vs do nothing",
-    "valueDelta": "+€467",
-    "valueDeltaSun": "+€720",
+    "valueDelta": "+$467",
+    "valueDeltaSun": "+$720",
     "valueProtectLabel": "Value protected",
     "valueProtect": "26 covers absorbed · delivery surge captured",
     "valueProtectSun": "36 terrace covers open · walk-ins captured",
@@ -1514,11 +1514,11 @@
       },
       "terrace": {
         "label": "Terrace",
-        "detail": "36 covers · €284 exposed"
+        "detail": "36 covers · $284 exposed"
       },
       "absorb": {
         "label": "Bar / dining",
-        "detail": "26 covers · €168 recoverable"
+        "detail": "26 covers · $168 recoverable"
       },
       "staff": {
         "label": "Staff",
@@ -1526,11 +1526,11 @@
       },
       "delivery": {
         "label": "Delivery",
-        "detail": "+18% · ~€95 upside"
+        "detail": "+18% · ~$95 upside"
       },
       "exposure": {
         "label": "At stake",
-        "detail": "€467 if unmanaged"
+        "detail": "$467 if unmanaged"
       }
     },
     "chainSun": {
@@ -1540,11 +1540,11 @@
       },
       "terrace": {
         "label": "Terrace",
-        "detail": "36 covers · €410 open"
+        "detail": "36 covers · $410 open"
       },
       "covers": {
         "label": "Walk-ins",
-        "detail": "+22 expected · ~€310"
+        "detail": "+22 expected · ~$310"
       },
       "staff": {
         "label": "Staff",
@@ -1556,26 +1556,26 @@
       },
       "exposure": {
         "label": "At stake",
-        "detail": "€720 if left closed"
+        "detail": "$720 if left closed"
       }
     },
     "options": {
       "a": {
         "label": "Option A",
         "title": "Do nothing",
-        "net": "−€284",
+        "net": "−$284",
         "why": "Cost of doing nothing · full terrace loss"
       },
       "b": {
         "label": "Option B",
         "title": "Move 1 FOH",
-        "net": "+€122 net",
-        "why": "Partial recovery · leaves €155 on the table"
+        "net": "+$122 net",
+        "why": "Partial recovery · leaves $155 on the table"
       },
       "c": {
         "label": "Option C",
         "title": "FOH + standing + delivery prep",
-        "net": "+€183 net",
+        "net": "+$183 net",
         "why": "Best net · matches staff to demand"
       }
     },
@@ -1583,19 +1583,19 @@
       "a": {
         "label": "Option A",
         "title": "Do nothing",
-        "net": "−€410",
+        "net": "−$410",
         "why": "Cost of doing nothing · terrace stays dark"
       },
       "b": {
         "label": "Option B",
         "title": "Open terrace + add 1 FOH",
-        "net": "+€310 net",
+        "net": "+$310 net",
         "why": "Best net · captures walk-in window"
       },
       "c": {
         "label": "Option C",
         "title": "Terrace only · keep indoor staffing",
-        "net": "+€140 net",
+        "net": "+$140 net",
         "why": "Understaffed · turns walk-ins away"
       }
     },
@@ -1606,10 +1606,10 @@
     "title": "Prove what changed.",
     "lead": "RADR doesn't stop at the recommendation — it closes the loop and remembers what worked at this location.",
     "traceAria": "Decision receipt from detection to verified outcome",
-    "resultAmount": "€184",
+    "resultAmount": "$184",
     "resultLabel": "verified",
     "learnKicker": "Then learn",
-    "learnLine": "12 similar cases here · 72% recovery · +€176 average verified",
+    "learnLine": "12 similar cases here · 72% recovery · +$176 average verified",
     "trace": {
       "t1": "Detected",
       "t2": "Quantified",
@@ -1665,10 +1665,10 @@
       "title": "One leak. One Decision. One traceable outcome.",
       "lead": "",
       "leakK": "The leak",
-      "leakInvoice": "Invoice €7.45 / L",
-      "leakContract": "Contract €6.80 / L",
+      "leakInvoice": "Invoice $7.45 / L",
+      "leakContract": "Contract $6.80 / L",
       "leakQty": "Quantity 420 L",
-      "leakEuro": "€273 exposed",
+      "leakEuro": "$273 exposed",
       "checksK": "RADR checks",
       "c1": "Contract",
       "c2": "UOM",
@@ -1684,7 +1684,7 @@
       "outcomeK": "The outcome",
       "outcomeBody": "Credit memo issued.",
       "verifiedK": "Verified",
-      "verifiedEuro": "€273 recovered",
+      "verifiedEuro": "$273 recovered",
       "verifiedBody": "Matched to the original invoice."
     },
     "thinks": {
@@ -1697,7 +1697,7 @@
       "examples": [
         "Credit issued. Never applied.",
         "Three locations. Three prices.",
-        "Settlement received. Still €293 short.",
+        "Settlement received. Still $293 short.",
         "Food cost rose. Supplier inflation wasn’t the main reason.",
         "Room cancelled. 19 hours left to recover it."
       ]
@@ -1708,19 +1708,19 @@
       "lead": "",
       "RECOVER": {
         "title": "Recover",
-        "body": "Value already lost."
+        "body": "Invoice variance · settlement gap · supplier credit · channel leakage."
       },
       "PREVENT": {
         "title": "Prevent",
-        "body": "Stop the same leak repeating."
+        "body": "Inventory shortage · waste · housekeeping delay · cancellation loss · staffing shortfall."
       },
       "OPTIMIZE": {
         "title": "Optimize",
-        "body": "Improve the economic decision."
+        "body": "Menu mix · prep · labor · room/channel allocation · upsell."
       },
       "AUTOPILOT": {
-        "title": "Autopilot",
-        "body": "Let RADR handle what policy permits."
+        "title": "Governed execution",
+        "body": "Prepare PO · dispute · staffing · HK reprioritization · channel action — for approval within policy."
       }
     },
     "stack": {
@@ -1775,10 +1775,10 @@
     },
     "footer": {
       "brand": "Nothing off the RADR.",
-      "title": "Start with the value already slipping through.",
-      "body": "",
+      "title": "Ready to see what your operation is leaving behind?",
+      "body": "Start with the value already slipping through.",
       "cta": "Start a recovery pilot",
-      "secondary": "See a verified recovery"
+      "secondary": "Contact Sales"
     }
   }
 }

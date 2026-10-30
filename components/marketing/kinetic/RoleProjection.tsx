@@ -37,9 +37,9 @@ export const DEFAULT_ROLE_CARDS: RoleCard[] = [
     kicker: "Operations",
     headline: "Wait 12 minutes",
     lines: [
-      "Peak capacity · Berlin Mitte",
+      "Peak capacity · Soho · New York",
       "Kitchen 92% · 38 covers inbound",
-      "€620 at stake vs seat-now",
+      "$620 at stake vs seat-now",
     ],
     tone: "urgent",
   },

@@ -1,5 +1,5 @@
 /**
- * GOLD STANDARD scenario: Berlin Mitte Table 14 cancellation recovery.
+ * GOLD STANDARD scenario: Soho · New York Table 14 cancellation recovery.
  * One source of truth for Control Center, Brief, Service Map, Value, Butler.
  *
  * Verified value = €184 (observed POS), never €192 (waitlist potential).
@@ -101,7 +101,7 @@ function buildFinding(actionStatus: CancellationRecoveryScenario["actionStatus"]
     id: CANCELLATION_RECOVERY_ID,
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     territory: "RECOVER",
     category: "cancellation_recovery",
     subtype: "Waitlist recovery",
@@ -368,7 +368,7 @@ export function buildCancellationRecoveryScenario(
     id: CANCELLATION_RECOVERY_ID,
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     environment: "DEMO",
     reservation: {
       id: "r_late",

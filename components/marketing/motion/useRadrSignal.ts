@@ -9,7 +9,7 @@ import {
 
 type Options = {
   signals: readonly DemoSignal[];
-  /** When true, start from €0 and climb. When false, show final until armed. */
+  /** When true, start from $0 and climb. When false, show final until armed. */
   startFromZero?: boolean;
   intervalMs?: number;
   startDelayMs?: number;
@@ -75,7 +75,7 @@ export function useRadrSignal({
       step.current = i + 1;
     };
 
-    // Start at €0 visibly, then first signal
+    // Start at $0 visibly, then first signal
     setIndex(-1);
     setTotal(0);
     step.current = 0;

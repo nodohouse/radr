@@ -24,7 +24,7 @@ type TableSpec = {
   state: "occ" | "open" | "reserved" | "turn";
 };
 
-/** Abstract Berlin Mitte floor — not CAD, not OpenTable. */
+/** Abstract Soho · New York floor — not CAD, not OpenTable. */
 const TABLES: TableSpec[] = [
   // Main dining
   { id: "m1", x: 14, y: 22, zone: "main", state: "occ" },
@@ -112,7 +112,7 @@ export function OperatingModelSvg({
       className="lab-model"
       viewBox="0 0 120 72"
       role="img"
-      aria-label="Berlin Mitte operating model"
+      aria-label="Soho · New York operating model"
       data-mode={mode}
       data-future={future}
     >

@@ -1,0 +1,546 @@
+/**
+ * RADR Visual System 3.0 — product application layer.
+ * Loaded LAST under /app. Does not touch marketing.
+ *
+ * Goals: Instrument Sans actually applied · quieter weights ·
+ * fewer card borders · green as signal · temporal/causal hierarchy.
+ */
+
+/* ——— Root: brand font + rendering ——— */
+.rp-root.rp-shell-v2,
+.rp-shell-v2 {
+  --font-brand: var(--type-display);
+  --font-ui: var(--type-body);
+  --font-number: var(--type-numeric);
+
+  font-family: var(--font-ui);
+  font-weight: var(--fw-regular);
+  font-optical-sizing: auto;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text);
+  background: var(--color-canvas);
+}
+
+.rp-shell-v2,
+.rp-shell-v2 button,
+.rp-shell-v2 input,
+.rp-shell-v2 select,
+.rp-shell-v2 textarea,
+.rp-shell-v2 a {
+  font-family: inherit;
+}
+
+.rp-shell-v2 .rp-num,
+.rp-shell-v2 [data-num="true"],
+.rp-shell-v2 .rp-oday-hero-nums strong,
+.rp-shell-v2 .rp-ccx-hero-num,
+.rp-shell-v2 .rp-inst-metric strong {
+  font-family: var(--font-number);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.02em;
+}
+
+/* Mono only for short system states — not body */
+.rp-shell-v2 .rp-status,
+.rp-shell-v2 [data-status],
+.rp-shell-v2 .rp-live-status {
+  font-family: var(--type-mono);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-status);
+}
+
+/* ——— Weight cap: kill 700 shouting ——— */
+.rp-shell-v2 .rp-rail-wordmark,
+.rp-shell-v2 .rp-rail-brand strong,
+.rp-shell-v2 .rp-rail-section-label,
+.rp-shell-v2 .rp-rail-badge,
+.rp-shell-v2 .rp-ctx-title,
+.rp-shell-v2 h1,
+.rp-shell-v2 h2,
+.rp-shell-v2 h3,
+.rp-shell-v2 strong {
+  font-weight: var(--fw-semibold);
+}
+
+.rp-shell-v2 .rp-rail-link {
+  font-family: var(--font-ui) !important;
+  font-weight: var(--fw-regular) !important;
+  letter-spacing: -0.01em;
+  opacity: 0.48;
+}
+
+.rp-shell-v2 .rp-rail-link:hover,
+.rp-shell-v2 .rp-rail-link:focus-visible {
+  font-weight: var(--fw-book) !important;
+  opacity: 0.85;
+  background: rgba(10, 13, 11, 0.03);
+}
+
+.rp-shell-v2 .rp-rail-link[data-active="true"] {
+  font-weight: var(--fw-medium) !important;
+  opacity: 1;
+  background: color-mix(in srgb, var(--color-brand, #00d978) 14%, #ffffff);
+  box-shadow: none;
+}
+
+.rp-shell-v2 .rp-rail-section-label {
+  font-family: var(--font-ui) !important;
+  font-weight: var(--fw-medium) !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.42;
+  font-size: 0.62rem !important;
+}
+
+/* Rail contrast owned by operating-rail reboot — do not flatten. */
+.rp-shell-v2 .rp-rail-link .rp-rail-ico {
+  opacity: 0.85;
+}
+
+.rp-shell-v2 .rp-rail-link[data-active="true"] .rp-rail-ico {
+  opacity: 1;
+  color: var(--radr-signal, #00d978);
+}
+
+/* Context bar — compact, not a second title bar */
+.rp-shell-v2 .rp-ctx {
+  border-bottom: 1px solid var(--color-hairline);
+  background: color-mix(in srgb, var(--color-canvas) 88%, #fff);
+}
+
+.rp-shell-v2 .rp-ctx-title {
+  font-family: var(--font-brand);
+  font-weight: var(--fw-medium) !important;
+  letter-spacing: -0.03em;
+}
+
+/* ——— Modules ≠ cards ——— */
+.rp-shell-v2 .rp-dash-mod,
+.rp-shell-v2 .rp-ccx-queue,
+.rp-shell-v2 .rp-live-mod,
+.rp-shell-v2 .rp-shape,
+.rp-shell-v2 .rp-wf,
+.rp-shell-v2 .rp-inst-panel,
+.rp-shell-v2 .rp-money,
+.rp-shell-v2 .rp-oday-outlook {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  background: color-mix(in srgb, #f7faf8 70%, transparent);
+  border-radius: var(--radius-lg);
+}
+
+.rp-shell-v2 .rp-oday-hero {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent;
+  padding-inline: 0;
+}
+
+.rp-shell-v2 .rp-oday-chart {
+  background: color-mix(in srgb, #f7faf8 85%, #fff);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-xl);
+  padding: 0.85rem 1rem 0.65rem;
+}
+
+/* Soft surfaces for secondary instruments */
+.rp-shell-v2 .rp-oday-nerve > *,
+.rp-shell-v2 .rp-ccx-perf,
+.rp-shell-v2 .rp-live-phase {
+  border-radius: var(--radius-lg);
+}
+
+/* Active rail — soft brand tint only (no inset green bar) */
+.rp-shell-v2 .rp-rail-link[data-active="true"] {
+  background: color-mix(in srgb, var(--color-brand, #00d978) 14%, #ffffff);
+  box-shadow: none;
+}
+
+.rp-shell-v2 .rp-pill-nav button[data-active="true"],
+.rp-shell-v2 .rp-ccx-command-pills button[aria-selected="true"] {
+  background: rgba(10, 13, 11, 0.06);
+  color: var(--color-text);
+  box-shadow: none;
+  font-weight: var(--fw-semibold);
+}
+
+/* ——— Type hierarchy ——— */
+.rp-shell-v2 .rp-oday-time-h {
+  font-family: var(--font-brand);
+  font-size: clamp(1.65rem, 2.4vw, 2.15rem) !important;
+  font-weight: var(--fw-semibold) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.rp-shell-v2 .rp-oday-time-h em {
+  font-style: normal;
+  font-weight: var(--fw-semibold);
+}
+
+.rp-shell-v2 .rp-oday-time-now strong {
+  font-size: clamp(1.35rem, 2vw, 1.75rem) !important;
+  font-weight: var(--fw-semibold) !important;
+  letter-spacing: -0.03em;
+  color: var(--semantic-live);
+}
+
+.rp-shell-v2 .rp-oday-gm-line {
+  font-size: var(--fs-body) !important;
+  font-weight: var(--fw-regular) !important;
+  line-height: 1.45 !important;
+  color: var(--color-text);
+  max-width: 36rem;
+}
+
+.rp-shell-v2 .rp-oday-hero-nums strong {
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem) !important;
+  font-weight: var(--fw-medium) !important;
+}
+
+.rp-shell-v2 .rp-oday-hero-nums span,
+.rp-shell-v2 .rp-live-k,
+.rp-shell-v2 .rp-ccx-k,
+.rp-shell-v2 .rp-cc-kicker {
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-label) !important;
+  font-weight: var(--fw-medium) !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  color: var(--color-text-secondary);
+}
+
+/* Editorial operating brief on Overview */
+.rp-shell-v2 .rp-cc-brief-editorial {
+  margin: 0 0 1.25rem;
+  max-width: 40rem;
+}
+
+.rp-shell-v2 .rp-cc-brief-editorial h2 {
+  margin: 0;
+  font-family: var(--font-brand);
+  font-size: clamp(1.85rem, 2.8vw, 2.55rem);
+  font-weight: var(--fw-semibold);
+  line-height: 1.12;
+  letter-spacing: var(--tracking-display);
+}
+
+.rp-shell-v2 .rp-cc-brief-editorial p {
+  margin: 0.45rem 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  max-width: 34rem;
+}
+
+/* Activity compression motif */
+.rp-shell-v2 .rp-cc-compress {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 1.25rem;
+  font-size: var(--fs-label);
+  color: var(--color-text-secondary);
+}
+
+.rp-shell-v2 .rp-cc-compress strong {
+  color: var(--color-text);
+  font-weight: var(--fw-semibold);
+}
+
+.rp-shell-v2 .rp-cc-compress i {
+  width: 1.1rem;
+  height: 1px;
+  background: rgba(10, 13, 11, 0.2);
+}
+
+.rp-shell-v2 .rp-cc-compress [data-need="true"] {
+  color: var(--semantic-warning);
+  font-weight: var(--fw-semibold);
+}
+
+/* Needs you — decision surface tension */
+.rp-shell-v2 .rp-oday-needs,
+.rp-shell-v2 .rp-ccx-needs-primary {
+  border: 1px solid color-mix(in srgb, var(--semantic-live) 28%, transparent) !important;
+  background: color-mix(in srgb, var(--semantic-live) 6%, #f7faf8) !important;
+  box-shadow: none !important;
+}
+
+/* Chart grammar */
+.rp-shell-v2 .rp-oday-expected {
+  stroke: rgba(58, 48, 36, 0.16) !important;
+}
+
+.rp-shell-v2 .rp-oday-period {
+  fill: rgba(58, 48, 36, 0.018) !important;
+}
+
+.rp-shell-v2 .rp-oday-period[data-kind="peak"] {
+  fill: rgba(181, 71, 8, 0.035) !important;
+}
+
+/* Metric rail — not seven cards */
+.rp-shell-v2 .rp-pulse-rail {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border-top: 1px solid var(--color-hairline);
+  border-bottom: 1px solid var(--color-hairline);
+  padding: 0.85rem 0;
+  margin: 0.5rem 0 1.25rem;
+  background: transparent;
+}
+
+.rp-shell-v2 .rp-pulse-rail > div {
+  flex: 1 1 0;
+  min-width: 5.5rem;
+  padding: 0 0.85rem;
+  border-right: 1px solid var(--color-hairline);
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2 .rp-pulse-rail > div:last-child {
+  border-right: 0;
+}
+
+.rp-shell-v2 .rp-pulse-rail strong {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.02em;
+}
+
+.rp-shell-v2 .rp-pulse-rail span {
+  font-size: var(--fs-meta);
+  color: var(--color-text-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-shell-v2 * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ——— Inheritance pass: marketing → product ——— */
+
+/* Disable synthetic bold — match marketing optical sizing, kill fake weight */
+.rp-shell-v2 {
+  font-synthesis: none !important;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.rp-shell-v2 button,
+.rp-shell-v2 input,
+.rp-shell-v2 select,
+.rp-shell-v2 textarea {
+  font-synthesis: none;
+}
+
+/* Chapter rhythm — more air between visual chapters */
+.rp-shell-v2 .rp-dash-grid {
+  gap: var(--space-32px) var(--space-24px);
+  row-gap: var(--space-40px);
+}
+
+.rp-shell-v2 .rp-dash-mod[data-tier="2"],
+.rp-shell-v2 .rp-dash-mod[data-tier="3"] {
+  opacity: 0.97;
+}
+
+.rp-shell-v2 .rp-dash-mod[data-tier="3"] {
+  opacity: 0.9;
+}
+
+/* Quieter module titles — statement, not shout */
+.rp-shell-v2 .rp-dash-mod-title {
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-label) !important;
+  font-weight: var(--fw-medium) !important;
+  letter-spacing: 0.02em;
+  text-transform: none !important;
+  color: var(--color-text-secondary);
+}
+
+/* Activity pipeline motif — narrowing complexity */
+.rp-shell-v2 .rp-inst-activity-counts {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0.75rem 0 1rem;
+}
+
+.rp-shell-v2 .rp-inst-activity-counts > div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.65rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.rp-shell-v2 .rp-inst-activity-counts > div:last-child {
+  border-bottom: 0;
+}
+
+.rp-shell-v2 .rp-inst-activity-counts strong {
+  font-size: 1.35rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-tight);
+  font-variant-numeric: tabular-nums;
+  min-width: 2.5rem;
+}
+
+.rp-shell-v2 .rp-inst-activity-counts span {
+  font-size: var(--fs-label);
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-regular);
+}
+
+.rp-shell-v2 .rp-inst-activity-counts [data-need="true"] strong {
+  color: var(--semantic-warning);
+}
+
+/* Metric rail — single horizontal instrument, not cards */
+.rp-shell-v2 .rp-inst-rail {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.rp-shell-v2 .rp-inst-rail-primary,
+.rp-shell-v2 .rp-inst-rail-support {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border-top: 1px solid var(--color-hairline);
+  padding: 0.9rem 0 0.35rem;
+}
+
+.rp-shell-v2 .rp-inst-rail-cell {
+  flex: 1 1 0;
+  min-width: 5.25rem;
+  padding: 0 0.85rem;
+  border-right: 1px solid var(--color-hairline);
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.rp-shell-v2 .rp-inst-rail-cell:last-child {
+  border-right: 0;
+}
+
+.rp-shell-v2 .rp-inst-rail-cell em {
+  display: block;
+  font-style: normal;
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-secondary);
+  margin-bottom: 0.2rem;
+}
+
+.rp-shell-v2 .rp-inst-rail-cell strong {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.02em;
+}
+
+.rp-shell-v2 .rp-inst-judgment-kicker {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.rp-shell-v2 .rp-inst-judgment-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  margin-bottom: 1rem;
+}
+
+.rp-shell-v2 .rp-inst-judgment-count {
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  line-height: 1;
+}
+
+.rp-shell-v2 .rp-inst-judgment-verb {
+  font-family: var(--font-brand);
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.2;
+  margin: 0 0 0.35rem;
+}
+
+.rp-shell-v2 .rp-inst-judgment-count {
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Primary product button — near-black marketing primary */
+.rp-shell-v2 .rp-btn-primary,
+.rp-shell-v2 button.rp-primary,
+.rp-shell-v2 .rp-inst-judgment-cta {
+  font-weight: 550;
+  letter-spacing: -0.01em;
+}
+
+.rp-shell-v2 .rp-inst-judgment-cta {
+  display: inline-block;
+  margin-top: 0.85rem;
+  font-size: var(--fs-label);
+  color: var(--color-text);
+  border-bottom: 1px solid rgba(10, 13, 11, 0.28);
+  padding-bottom: 1px;
+}
+
+/* Kill Insight kicker residue */
+.rp-shell-v2 .rp-intel-read-k {
+  display: none !important;
+}
+
+.rp-shell-v2 .rp-intel-read-body {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* Situation metrics sit under statement — evidence second */
+.rp-shell-v2 .rp-inst-situation-metrics {
+  margin-top: 1.35rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--color-hairline);
+  gap: 2rem;
+}
+
+/* Top context — extremely light */
+.rp-shell-v2 .rp-ctx {
+  min-height: var(--ctx-h);
+  padding-block: 0.35rem;
+}
+
+.rp-shell-v2 .rp-ctx-title {
+  font-size: 0.95rem !important;
+  font-weight: var(--fw-medium) !important;
+  letter-spacing: var(--tracking-tight);
+}

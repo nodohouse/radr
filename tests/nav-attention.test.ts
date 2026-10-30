@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { navBadgesForScope } from "@/lib/radr/navAttention";
-import { attentionForScope, needsYouHeadline } from "@/lib/radr/roleAttention";
+import { needsYouCount } from "@/lib/radr/product/controlCenterMetrics";
+import { needsYouHeadline } from "@/lib/radr/roleAttention";
 
 describe("navBadgesForScope", () => {
-  it("never invents demo floor counts", () => {
-    const badges = navBadgesForScope("loc_unknown_empty", "gm");
-    expect(badges["/app"]).toBeUndefined();
-    expect(badges["/app/findings"]).toBeUndefined();
+  it("never invents demo floor counts for empty persona with no needs", () => {
+    const badges = navBadgesForScope("loc_unknown_empty", "revenue_manager");
+    // Revenue persona may still have scoped Decisions; only assert no invented keys
     expect(badges["/app/locations"]).toBeUndefined();
+    expect(badges["/app/findings"]).toBeUndefined();
   });
 
   it("only badges Today destinations that need action", () => {
@@ -22,21 +23,23 @@ describe("navBadgesForScope", () => {
     }
   });
 
-  it("matches attention SoT for the same role and scope", () => {
-    const attn = attentionForScope("loc_ber", "gm");
-    const badges = navBadgesForScope("loc_ber", "gm");
-    if (attn.needsYou === 0) {
+  it("matches Control Center Decision SoT for the same role", () => {
+    const needs = needsYouCount("gm");
+    const badges = navBadgesForScope("all", "gm");
+    if (needs === 0) {
       expect(badges["/app"]).toBeUndefined();
-      expect(badges["/app/findings"]).toBeUndefined();
     } else {
-      expect(badges["/app"]?.count).toBe(attn.needsYou);
-      expect(badges["/app/findings"]?.count).toBe(attn.needsYou);
+      expect(badges["/app"]?.count).toBe(needs);
+      expect(badges["/app/decisions"]?.count).toBe(needs);
+      expect(badges["/app"]?.label).toMatch(/signals? need your judgment/);
     }
-    if (attn.readyForApproval === 0) {
-      expect(badges["/app/controls"]).toBeUndefined();
-    } else {
-      expect(badges["/app/controls"]?.count).toBe(attn.readyForApproval);
-    }
+  });
+
+  it("scopes badges to location when not portfolio", () => {
+    const mid = navBadgesForScope("loc_berlin_mitte", "gm");
+    const kreuz = navBadgesForScope("loc_berlin_kreuzberg", "gm");
+    expect(mid["/app"]?.count ?? 0).toBeGreaterThan(0);
+    expect(kreuz["/app"]?.count ?? 0).toBe(0);
   });
 });
 

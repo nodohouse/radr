@@ -2,16 +2,16 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { LOCATIONS } from "@/lib/product/demo/catalog";
 import { useProduct } from "@/lib/product/store";
 import {
   groupLocationsByCity,
   locationSubtitle,
-  sameCityLocations,
   searchLocations,
   shortLocationName,
 } from "@/lib/radr/locationCatalog";
 import { buildCompareHref } from "@/lib/radr/comparisonService";
+import { useDemoOrg } from "@/components/product/useDemoOrg";
+import { locationIdsForVertical } from "@/lib/radr/demo/verticalScope";
 
 /**
  * Location switcher: search, city groups, default, same-city compare.
@@ -30,6 +30,25 @@ export function LocationSwitcher() {
     clearComparison,
     closeLocationSwitcher,
   } = useProduct();
+  const { session, org, isHotel } = useDemoOrg();
+  const verticalLocationIds = useMemo(
+    () => locationIdsForVertical(session.vertical),
+    [session.vertical],
+  );
+  const orgCatalog = useMemo(
+    () =>
+      org.locations.map((l) => ({
+        id: l.id,
+        name: l.displayName,
+        city: l.city,
+        country: l.country,
+        openSignals: 0,
+        valueOnRadr: 0,
+        verifiedValue: 0,
+        lastSync: "now",
+      })),
+    [org.locations],
+  );
 
   const [q, setQ] = useState("");
   const [comparePick, setComparePick] = useState(false);
@@ -56,7 +75,13 @@ export function LocationSwitcher() {
     return () => window.removeEventListener("keydown", onKey);
   }, [locationSwitcherOpen, closeLocationSwitcher]);
 
-  const filtered = useMemo(() => searchLocations(q), [q]);
+  const filtered = useMemo(
+    () =>
+      searchLocations(q, orgCatalog).filter((l) =>
+        verticalLocationIds.has(l.id),
+      ),
+    [q, verticalLocationIds, orgCatalog],
+  );
   const groups = useMemo(() => groupLocationsByCity(filtered), [filtered]);
 
   const activeId =
@@ -64,7 +89,12 @@ export function LocationSwitcher() {
       ? null
       : locationScope;
 
-  const peerCity = activeId ? sameCityLocations(activeId) : [];
+  const peerCity = useMemo(() => {
+    if (!activeId) return [];
+    const base = orgCatalog.find((l) => l.id === activeId);
+    if (!base) return [];
+    return orgCatalog.filter((l) => l.city === base.city);
+  }, [activeId, orgCatalog]);
 
   if (!locationSwitcherOpen) return null;
 
@@ -78,7 +108,22 @@ export function LocationSwitcher() {
       return;
     }
     setLocationScope(id);
+    setDefaultLocationId(id);
     clearComparison();
+    try {
+      const raw = localStorage.getItem("radr.prefs.v1");
+      const prefs = raw ? (JSON.parse(raw) as Record<string, unknown>) : {};
+      localStorage.setItem(
+        "radr.prefs.v1",
+        JSON.stringify({ ...prefs, defaultLocationId: id }),
+      );
+      sessionStorage.setItem(
+        "radr.scope.v1",
+        JSON.stringify({ locationScope: id }),
+      );
+    } catch {
+      /* ignore */
+    }
     closeLocationSwitcher();
   };
 
@@ -282,8 +327,11 @@ export function LocationSwitcher() {
                 closeLocationSwitcher();
               }}
             >
-              <strong>All locations</strong>
-              <em>Group overview, {LOCATIONS.length} venues</em>
+              <strong>{isHotel ? "All properties" : "All locations"}</strong>
+              <em>
+                Group overview, {org.locations.length}{" "}
+                {isHotel ? "properties" : "venues"}
+              </em>
             </button>
           ) : null}
           <button
@@ -296,9 +344,13 @@ export function LocationSwitcher() {
             <strong>
               {comparePick
                 ? canConfirm
-                  ? `Confirm ${draftIds.length} venues`
-                  : "Select 2-4 locations"
-                : "Compare locations"}
+                  ? `Confirm ${draftIds.length} ${isHotel ? "properties" : "venues"}`
+                  : isHotel
+                    ? "Select 2-4 properties"
+                    : "Select 2-4 locations"
+                : isHotel
+                  ? "Compare properties"
+                  : "Compare locations"}
             </strong>
             <em>
               {comparePick

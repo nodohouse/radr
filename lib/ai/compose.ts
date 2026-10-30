@@ -9,6 +9,16 @@ import type { AskIntentClass } from "./intents";
 import type { ResolvedContext } from "./context";
 import type { LaborRequirementLocation, ToolResult } from "./tools";
 import { euro } from "./tools";
+import { CONNECTED_PILOT_MTD } from "@/lib/radr/product/demoOperatingPulse";
+import {
+  getRestaurantDayPace,
+  getGroupMtdPace,
+} from "@/lib/radr/product/revenuePacing";
+import { composeLiveOperatingSurface } from "@/lib/radr/product/liveOperating";
+import { getCombinedTonightDemand } from "@/lib/radr/product/externalSignals";
+import { DECISION_IDS, displayDecisionId } from "@/lib/radr/decision/ids";
+import { formatDecisionMoney } from "@/lib/radr/decision/core";
+import { invokeTool } from "@/lib/radr/tools/gateway";
 
 function demoSources(
   fresh?: ToolResult,
@@ -74,6 +84,385 @@ export function composeAskAnswer(
     warnings,
     confidence: { band: "HIGH" as const, score: 86 },
   };
+
+  const q = question.toLowerCase();
+
+  /* Deterministic pacing / contribution answers — via Tool Gateway. */
+  if (
+    /contribution.*(behind|short|gap)|why.*contribution/i.test(q) ||
+    (intent === "MARGIN_ANALYSIS" && /contribution/i.test(q))
+  ) {
+    const env = invokeTool("explain_variance", {}, { role: "cfo", enforceAuth: false });
+    const data = env.data as {
+      varianceAmount: number;
+      varianceFormatted: string;
+      conclusion: string;
+      explainedShareLine: string | null;
+      drivers: { label: string; amount: number; formatted: string }[];
+      relatedDecisionId: string;
+      relatedDisplayId: string;
+    } | null;
+    if (!data) {
+      return {
+        ...base,
+        responseKind: "margin_analysis",
+        title: "Contribution vs plan",
+        verdict: "Unavailable",
+        summary: env.error ?? "Variance tool failed",
+        answer: env.error ?? "Unavailable",
+        actions: [],
+        evidence: [],
+        topic: "general",
+        toolUsed: "explain_variance",
+      };
+    }
+    const delta = data.varianceAmount;
+    const trace = invokeTool(
+      "get_decision_trace",
+      { id: data.relatedDisplayId },
+      { enforceAuth: false },
+    );
+    const euroTrace = (trace.data as { euroTrace?: { chain: { step: string; detail: string }[] } } | null)
+      ?.euroTrace;
+    return {
+      ...base,
+      responseKind: "margin_analysis",
+      title: "Contribution vs plan",
+      verdict: "Contribution is behind plan",
+      summary: `${formatDecisionMoney(Math.abs(delta))} ${delta < 0 ? "below" : "above"} plan`,
+      answer: data.conclusion,
+      primaryMetric: {
+        label: "vs plan",
+        value: `${delta < 0 ? "−" : "+"}${formatDecisionMoney(Math.abs(delta))}`,
+        tone: delta < 0 ? "risk" : "positive",
+      },
+      drivers: data.drivers.map((d) => ({
+        label: d.label,
+        value: `${d.amount >= 0 ? "+" : "−"}${formatDecisionMoney(Math.abs(d.amount))}`,
+      })),
+      explanation:
+        data.explainedShareLine ??
+        "Cost mix explains the shortfall. Volume offsets part of the gap.",
+      recommendation: {
+        title: `${data.relatedDisplayId} · Supplier / AP`,
+        detail: "Related Decision",
+        href: `/app/decisions/${data.relatedDecisionId}`,
+      },
+      actions: [
+        { label: "SEE DRIVER", href: "/app?view=performance" },
+        {
+          label: "OPEN DECISION",
+          href: `/app/decisions/${data.relatedDecisionId}`,
+        },
+        {
+          label: "COMPARE FUTURES",
+          href: `/app/decisions/${data.relatedDecisionId}#futures`,
+        },
+        {
+          label: "VIEW EVIDENCE",
+          href: `/app/decisions/${data.relatedDecisionId}#evidence`,
+        },
+      ],
+      evidence: data.drivers.map((d) => ({
+        label: d.label,
+        value: d.formatted,
+      })),
+      decisionPath: euroTrace?.chain.map((c) => ({
+        step: c.step,
+        detail: c.detail,
+      })),
+      topic: "general",
+      toolUsed: "explain_variance",
+    };
+  }
+
+  if (
+    /how are we tracking|tracking today|pace.*today|expected close/i.test(q) ||
+    (intent === "REVENUE_ANALYSIS" && /track|pace|today|close/i.test(q))
+  ) {
+    const env = invokeTool(
+      "get_revenue_pace",
+      { vertical: "restaurant" },
+      { enforceAuth: false },
+    );
+    const pace = (env.data as { pace: ReturnType<typeof getRestaurantDayPace> } | null)?.pace;
+    if (!pace) {
+      return {
+        ...base,
+        responseKind: "revenue_analysis",
+        title: "Today",
+        verdict: "Unavailable",
+        summary: env.error ?? "Pace unavailable",
+        answer: env.error ?? "Unavailable",
+        actions: [],
+        evidence: [],
+        topic: "general",
+        toolUsed: "get_revenue_pace",
+      };
+    }
+    return {
+      ...base,
+      responseKind: "revenue_analysis",
+      title: "Today",
+      verdict: pace.statusLabel,
+      summary: `${formatDecisionMoney(pace.revenueActualNow)} actual · ${formatDecisionMoney(pace.revenueForecastAtNow)} expected by now`,
+      answer: pace.radrRead,
+      primaryMetric: {
+        label: "vs expected now",
+        value: `${pace.deltaPctVsExpected >= 0 ? "+" : ""}${pace.deltaPctVsExpected}%`,
+        tone: pace.deltaPctVsExpected >= 0 ? "positive" : "risk",
+      },
+      drivers: [
+        {
+          label: "Revenue so far",
+          value: formatDecisionMoney(pace.revenueActualNow),
+        },
+        {
+          label: "Expected close",
+          value: formatDecisionMoney(pace.revenueForecastClose),
+        },
+        {
+          label: "Daily target",
+          value: formatDecisionMoney(pace.revenueBudgetDay),
+        },
+        ...pace.drivers.map((d) => ({ label: d.label, value: d.value })),
+      ],
+      actions: [
+        { label: "Open Live view →", href: "/app?view=live" },
+      ],
+      evidence: [],
+      topic: "general",
+      toolUsed: "get_revenue_pace",
+    };
+  }
+
+  if (
+    /run out|stock watch|portions remaining|stockout|enough stock|selling fastest|best.?seller|delivery helping|delivery fees|uber eats|refunds|cancellations cost|what changed in the last|worry about in the next|pacing right now|how are we pacing|where will tonight close|concert change|rain change|what sold most/i.test(
+      q,
+    )
+  ) {
+    const env = invokeTool("get_live_service", {}, { enforceAuth: false });
+    const payload = env.data as {
+      paceHeadline: string;
+      revenue: number;
+      expectedClose: number;
+      join: { radrRead: string; decision: { id: string; displayId: string; recommendation: string } };
+      stock: { items: { remaining: number; unit: string; radrRead: string }[] };
+      delivery: { radrRead: string; feesEuro: number };
+      demand: {
+        signals: { type: string; expectedOperationalEffect: string }[];
+        implication: string;
+      };
+      moneyFlow: { steps: { label: string; amount: number }[] };
+    } | null;
+    if (!payload) {
+      return {
+        ...base,
+        responseKind: "revenue_analysis",
+        title: "Live",
+        verdict: "Unavailable",
+        summary: env.error ?? "Live unavailable",
+        answer: env.error ?? "Unavailable",
+        actions: [],
+        evidence: [],
+        topic: "general",
+        toolUsed: "get_live_service",
+      };
+    }
+    const live = composeLiveOperatingSurface();
+    const s = live.service;
+    const stock = live.stock.items[0];
+    const wantsStock = /stock|run out|portions|stockout|running low/i.test(q);
+    const wantsDelivery = /delivery|uber|channel fee/i.test(q);
+    const wantsChanged = /changed|last (15|30)|since/i.test(q);
+    const wantsMenu = /best.?seller|sold most|selling fastest/i.test(q);
+    const wantsCancel = /cancel/i.test(q);
+    const wantsRefund = /refund/i.test(q);
+    const wantsWeather = /rain|weather/i.test(q);
+    const wantsEvent = /concert|event/i.test(q);
+    const wantsHorizon = /next (1|2|3)|worry about/i.test(q);
+    const top = live.topTonight[0];
+    const wx = live.demand.signals.find((x) => x.type === "weather");
+    const ev = live.demand.signals.find(
+      (x) => x.type === "concert" || x.type === "event",
+    );
+    const answer = wantsStock && stock
+      ? stock.radrRead
+      : wantsDelivery
+        ? live.delivery.radrRead
+        : wantsChanged
+          ? live.sinceChanged.items
+              .map((i) => `${i.label} ${i.delta}`)
+              .join(" · ")
+          : wantsMenu && top
+            ? `${top.name} · ${top.units} sold · ${formatDecisionMoney(top.revenue)} · ${top.vsComparablePct >= 0 ? "+" : ""}${top.vsComparablePct}% vs expected`
+            : wantsCancel
+              ? live.cancellationFlow.radrRead
+              : wantsRefund
+                ? `Refunds ${formatDecisionMoney(Math.abs(live.moneyFlow.steps.find((st) => /refund/i.test(st.label))?.amount ?? 420))} · OBSERVED tonight.`
+                : wantsWeather && wx
+                  ? wx.expectedOperationalEffect
+                  : wantsEvent && ev
+                    ? ev.expectedOperationalEffect
+                    : wantsHorizon
+                      ? payload.join.radrRead
+                      : `${payload.paceHeadline}. Expected close ${formatDecisionMoney(payload.expectedClose)}. ${payload.join.radrRead}`;
+    return {
+      ...base,
+      responseKind: "revenue_analysis",
+      title: wantsStock
+        ? "Stock watch"
+        : wantsMenu
+          ? "Bestsellers"
+          : wantsDelivery
+            ? "Delivery"
+            : "Live operating pulse",
+      verdict: payload.paceHeadline,
+      summary: answer,
+      answer,
+      primaryMetric: {
+        label: wantsStock
+          ? "Stock remaining"
+          : wantsMenu
+            ? "Top tonight"
+            : "vs expected now",
+        value:
+          wantsStock && stock
+            ? `${stock.remaining} ${stock.unit}`
+            : wantsMenu && top
+              ? top.name
+              : `${s.revenueDeltaPct >= 0 ? "+" : ""}${s.revenueDeltaPct}%`,
+        tone: wantsStock ? "risk" : "positive",
+      },
+      drivers: [
+        {
+          label: "Revenue now",
+          value: formatDecisionMoney(s.revenue),
+        },
+        {
+          label: "Expected close",
+          value: formatDecisionMoney(s.expectedClose),
+        },
+        ...(wantsDelivery
+          ? [
+              {
+                label: "Delivery fees",
+                value: formatDecisionMoney(live.delivery.feesEuro),
+              },
+            ]
+          : live.topTonight.slice(0, 2).map((d) => ({
+              label: d.name,
+              value: `${d.units} sold`,
+            }))),
+      ].slice(0, 3),
+      recommendation: {
+        title: `${payload.join.decision.displayId} · ${payload.join.decision.recommendation}`,
+        detail: "Live join",
+        href: `/app/decisions/${payload.join.decision.id}`,
+      },
+      actions: [{ label: "Open Live →", href: "/app?view=live" }],
+      evidence: payload.join
+        ? [
+            {
+              label: "Join",
+              value: payload.join.decision.recommendation,
+            },
+          ]
+        : [],
+      topic: "general",
+      toolUsed: "get_live_service",
+    };
+  }
+
+  if (/tracking this month|mtd|month.?end forecast|month plan/i.test(q)) {
+    const mtd = getGroupMtdPace();
+    return {
+      ...base,
+      responseKind: "revenue_analysis",
+      title: "MTD pacing",
+      verdict: `Revenue ${mtd.revenueDeltaPctVsPlan >= 0 ? "+" : ""}${mtd.revenueDeltaPctVsPlan}% vs plan`,
+      summary: mtd.radrRead,
+      answer: mtd.radrRead,
+      primaryMetric: {
+        label: "Revenue MTD",
+        value: formatDecisionMoney(mtd.revenueMTD),
+        tone: "positive",
+      },
+      drivers: [
+        {
+          label: "Plan MTD",
+          value: formatDecisionMoney(mtd.revenueBudgetMTD),
+        },
+        {
+          label: "Month-end forecast",
+          value: formatDecisionMoney(mtd.revenueForecastMonthEnd),
+        },
+        {
+          label: "Contribution MTD",
+          value: `${mtd.contributionFormatted} (${mtd.contributionDeltaFormatted})`,
+        },
+      ],
+      actions: [
+        { label: "Open Performance →", href: "/app?view=performance" },
+      ],
+      evidence: [],
+      topic: "general",
+      toolUsed: "revenue_pace_mtd",
+    };
+  }
+
+  if (/what does the weather|weather change|rain affect/i.test(q)) {
+    const demand = getCombinedTonightDemand();
+    const wx = demand.signals.find((s) => s.type === "weather");
+    return {
+      ...base,
+      responseKind: "forecast",
+      title: wx?.label ?? "Weather context",
+      verdict: "Operational impact — not a weather report",
+      summary: wx?.expectedOperationalEffect ?? demand.implication,
+      answer: demand.implication,
+      primaryMetric: {
+        label: "Net demand vs normal Friday",
+        value: `${demand.netDemandDeltaPct >= 0 ? "+" : ""}${demand.netDemandDeltaPct}%`,
+        tone: "watch",
+      },
+      drivers: [
+        {
+          label: "Bookings",
+          value: `${demand.bookingsDeltaPct >= 0 ? "+" : ""}${demand.bookingsDeltaPct}%`,
+        },
+        {
+          label: "Concert",
+          value: `${demand.eventDeltaPct >= 0 ? "+" : ""}${demand.eventDeltaPct}%`,
+        },
+        {
+          label: "Rain / terrace",
+          value: `${demand.weatherDeltaPct >= 0 ? "+" : ""}${demand.weatherDeltaPct}%`,
+        },
+      ],
+      recommendation: demand.relatedDecisionId
+        ? {
+            title: `${displayDecisionId(demand.relatedDecisionId)}`,
+            detail: "Decision formed",
+            href: `/app/decisions/${demand.relatedDecisionId}`,
+          }
+        : undefined,
+      actions: [
+        { label: "Open Live →", href: "/app?view=live" },
+      ],
+      evidence: [],
+      sources: [
+        ...sources,
+        {
+          system: wx?.source ?? "Weather",
+          detail: wx?.expectedOperationalEffect ?? "",
+          syncedLabel: wx?.retrievedAt.slice(11, 16),
+        },
+      ],
+      topic: "forecast",
+      toolUsed: "external_signals",
+    };
+  }
 
   if (intent === "CLARIFY") {
     const msg =
@@ -481,7 +870,7 @@ export function composeAskAnswer(
     );
     const curve = svc?.serviceCurve;
     const locLabel =
-      ctx.locationName === "All locations" ? "Berlin Mitte" : ctx.locationName;
+      ctx.locationName === "All locations" ? "Soho · New York" : ctx.locationName;
     return {
       ...base,
       responseKind: "reservation_pulse",

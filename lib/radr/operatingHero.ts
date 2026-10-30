@@ -132,8 +132,8 @@ export const LOCATIONS: VenueLocation[] = [
   },
   {
     id: "loc_ber",
-    venueName: "Northstar Berlin Mitte",
-    city: "Berlin",
+    venueName: "Northstar Soho · New York",
+    city: "New York",
     country: "Germany",
     countryCode: "DE",
     timezone: "Europe/Berlin",
@@ -311,7 +311,7 @@ export const TERRITORY_COPY: Record<OpTerritory, TerritorySurface> = {
     },
     investigate: {
       title: "Supplier pricing mismatch",
-      location: "Berlin Mitte",
+      location: "Soho · New York",
       detail: "Avocado Hass 18ct · FreshCo",
       impact: BUY_FINDING.annualizedDisplay,
       impactKind: "Annualized exposure",
@@ -345,7 +345,7 @@ export const TERRITORY_COPY: Record<OpTerritory, TerritorySurface> = {
     },
     investigate: {
       title: "Peak service understaffed",
-      location: "Berlin Mitte",
+      location: "Soho · New York",
       detail: "FOH · 19:00-20:30",
       impact: "€290",
       impactKind: "Revenue at risk tonight",
@@ -411,7 +411,7 @@ export const TERRITORY_COPY: Record<OpTerritory, TerritorySurface> = {
     },
     investigate: {
       title: "Delivery payout discrepancy",
-      location: "Berlin Mitte",
+      location: "Soho · New York",
       detail: "Platform · Week 32",
       impact: "€332",
       impactKind: "Unexplained",

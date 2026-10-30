@@ -35,7 +35,7 @@ export function provenanceForCancellationRecovery(): ProvenanceBlock {
         detail: "pos_t14_replace · closed 21:36 · €184",
       },
     ],
-    timeRange: "2026-08-18 · Berlin (Europe/Berlin)",
+    timeRange: "2026-08-18 · New York (America/New_York)",
     lastUpdate: "21:37",
     confidence: "HIGH",
     assumptions: [

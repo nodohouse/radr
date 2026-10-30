@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { and, eq } from "drizzle-orm";
-import { auth } from "@/lib/auth";
 import { writeAuditLog } from "@/lib/audit";
-import { AuthzError, requireUploadAuthorization } from "@/lib/authz";
+import {
+  AuthzError,
+  requireUploadAuthorization,
+} from "@/lib/authz";
+import { getAuthIdentity } from "@/lib/identity/provider";
 import { MAX_FILES_PER_UPLOAD } from "@/lib/constants";
 import { db } from "@/lib/db";
 import { documents, locations } from "@/lib/db/schema";
@@ -40,8 +42,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) {
+  const identity = await getAuthIdentity();
+  if (!identity) {
     return NextResponse.json({ error: CLIENT_ERRORS.unauthorized }, { status: 401 });
   }
 
@@ -80,7 +82,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await requireUploadAuthorization(session.user.id, meta.data.organizationId);
+    await requireUploadAuthorization(identity.userId, meta.data.organizationId);
   } catch (error) {
     if (error instanceof AuthzError) {
       return NextResponse.json({ error: error.message }, { status: error.status });
@@ -143,7 +145,7 @@ export async function POST(request: Request) {
       organizationId: meta.data.organizationId,
       locationId: meta.data.locationId ?? null,
       supplierId: null,
-      uploadedBy: session.user.id,
+      uploadedBy: identity.userId,
       documentType: meta.data.documentType,
       originalFilename: validated.filename,
       storagePath: stored.storagePath,
@@ -156,7 +158,7 @@ export async function POST(request: Request) {
 
     await writeAuditLog({
       organizationId: meta.data.organizationId,
-      actorUserId: session.user.id,
+      actorUserId: identity.userId,
       action: "DOCUMENT_UPLOADED",
       resourceType: "document",
       resourceId: documentId,

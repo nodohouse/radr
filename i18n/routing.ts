@@ -39,6 +39,8 @@ export const NON_LOCALIZED_PREFIXES = [
   "/controls",
   "/documents",
   "/onboarding",
+  "/select-org",
+  "/invite",
   "/dev",
   "/mockups",
 ] as const;

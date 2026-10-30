@@ -23,7 +23,7 @@ const FLOW: { id: ProblemFamily; node: string }[] = [
 
 const PUNCH: Record<ProblemFamily, string> = {
   SUPPLIER_AP: "Credit issued. Never applied.",
-  RECONCILIATION: "Settlement received. Still €293 short.",
+  RECONCILIATION: "Settlement received. Still $293 short.",
   COST_VARIANCE: "Food cost rose. Supplier inflation wasn’t the main reason.",
   PROCUREMENT: "Three locations. Three prices.",
   PERISHABLE_REVENUE: "Room cancelled. 19 hours left to recover it.",

@@ -1,0 +1,1347 @@
+/**
+ * Cinema product design system — controlled attention.
+ * Warm RADR identity. Less admin. More composition.
+ */
+
+/* ——— Tokens ——— */
+.rp-ccx-cockpit,
+.rp-locations,
+.rp-memory,
+.rp-integrations,
+.rp-drec,
+.rp-loc-detail,
+.rp-attention {
+  --cin-ink: #0a0d0b;
+  --cin-mute: #5c6560;
+  --cin-hair: rgba(10, 13, 11, 0.08);
+  --cin-green: #00a85a;
+  --cin-green-deep: #008a4a;
+  --cin-warn: #b54708;
+  --cin-risk: #b42318;
+  --cin-radius: 10px;
+  --cin-radius-sm: 6px;
+  --cin-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Soften ALL-CAPS kickers → human labels */
+.rp-ccx-k,
+.rp-ccx-kicker,
+.rp-today-section-label {
+  font-family: inherit !important;
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  color: var(--cin-mute) !important;
+}
+
+.rp-cin-kicker {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--cin-mute);
+  text-transform: none;
+}
+
+.rp-cin-quiet {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--cin-mute);
+}
+
+.rp-cin-headline {
+  margin: 0.25rem 0 0;
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  font-weight: 550;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  color: var(--cin-ink);
+  max-width: 22ch;
+}
+
+/* ——— Executive opening ——— */
+.rp-cin-exec {
+  margin: 0.35rem 0 1.25rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.rp-cin-proof {
+  margin: 0.75rem 0 0;
+  font-size: 0.78rem;
+  color: var(--cin-mute);
+  line-height: 1.4;
+}
+
+.rp-ccx-brief-attn {
+  margin-bottom: 0.85rem;
+}
+
+.rp-cin-tension {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1.1rem;
+}
+
+.rp-cin-tension-a,
+.rp-cin-tension-b {
+  display: grid;
+  gap: 0.15rem;
+  text-decoration: none;
+  color: inherit;
+  min-width: 7rem;
+}
+
+.rp-cin-tension strong {
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  letter-spacing: -0.03em;
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-cin-tension span {
+  font-size: 0.78rem;
+  color: var(--cin-mute);
+}
+
+.rp-cin-tension-a[data-tone="positive"] strong {
+  color: var(--cin-green-deep);
+}
+.rp-cin-tension-b[data-tone="attention"] strong {
+  color: var(--cin-risk);
+}
+
+.rp-cin-tension-arrow {
+  font-size: 1.35rem;
+  color: var(--cin-mute);
+  opacity: 0.55;
+  padding-bottom: 0.35rem;
+}
+
+.rp-cin-facts {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.25rem;
+}
+
+.rp-cin-facts a,
+.rp-cin-facts span {
+  font-size: 0.88rem;
+  color: var(--cin-mute);
+  text-decoration: none;
+}
+
+.rp-cin-facts a:hover {
+  color: var(--cin-ink);
+}
+
+/* ——— Metric rail (no identical boxes) ——— */
+.rp-cin-rail {
+  margin: 0 0 1rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.rp-cin-rail-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  overflow-x: auto;
+  max-width: 100%;
+  border-top: 1px solid var(--cin-hair);
+  border-bottom: 1px solid var(--cin-hair);
+  margin-top: 0.45rem;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.rp-cin-rail-item {
+  flex: 1 0 auto;
+  min-width: 6.5rem;
+  padding: 0.85rem 1rem 0.9rem;
+  display: grid;
+  gap: 0.12rem;
+  text-decoration: none;
+  color: inherit;
+  border-right: 1px solid var(--cin-hair);
+  background: transparent;
+}
+
+.rp-cin-rail-item:last-child {
+  border-right: 0;
+}
+
+.rp-cin-rail-item strong {
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-cin-rail-item em {
+  font-style: normal;
+  font-size: 0.8125rem;
+  color: var(--cin-mute);
+}
+
+.rp-cin-rail-item span {
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--cin-mute);
+}
+
+.rp-cin-rail-item span[data-dir="up"],
+.rp-cin-rail-item span[data-dir="pos"] {
+  color: var(--cin-green-deep);
+}
+.rp-cin-rail-item span[data-dir="down"],
+.rp-cin-rail-item span[data-dir="neg"] {
+  color: var(--cin-risk);
+}
+
+.rp-cin-rail-item[data-tone="risk"] strong,
+.rp-cin-rail-item[data-tone="watch"] strong {
+  color: var(--cin-warn);
+}
+.rp-cin-rail-item[data-tone="ok"] strong,
+.rp-cin-rail-item[data-tone="verified"] strong {
+  color: var(--cin-green-deep);
+}
+
+/* Hide old pulse cell chrome when rail present */
+.rp-ccx-pulse-row .rp-ccx-pulse,
+.rp-ccx-pulse-row .rp-ccx-pulse-primary,
+.rp-ccx-pulse-row .rp-ccx-pulse-support {
+  /* legacy classes may wrap — rail replaces content */
+}
+
+/* ——— Contribution waterfall instrument — light / warm (website sibling) ——— */
+.rp-cin-bridge {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem 1.15rem;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.rp-cin-bridge-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.35rem;
+}
+
+.rp-cin-bridge .rp-cin-kicker {
+  color: var(--color-text-secondary);
+}
+
+.rp-cin-bridge-sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+}
+
+.rp-cin-bridge-var {
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--type-numeric);
+  color: var(--color-text);
+}
+
+.rp-cin-bridge-var[data-neg="true"] {
+  color: var(--color-text);
+}
+
+.rp-cin-bridge-body {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 900px) {
+  .rp-cin-bridge-body {
+    grid-template-columns: 1fr minmax(9rem, 11rem);
+    align-items: start;
+  }
+  .rp-cin-bridge[data-focus="true"] .rp-cin-waterfall {
+    opacity: 1;
+  }
+}
+
+.rp-cin-waterfall {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  background: transparent;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rp-cin-wf-bar {
+  transition: opacity 180ms var(--ease-out), fill 180ms var(--ease-out);
+  animation: rp-cin-wf-in var(--motion-waterfall) var(--ease-emphasis) both;
+}
+
+@keyframes rp-cin-wf-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rp-cin-wf-base {
+  fill: var(--chart-primary);
+  fill-opacity: 0.72;
+}
+.rp-cin-wf-positive {
+  fill: var(--chart-brand);
+}
+.rp-cin-wf-negative {
+  fill: var(--chart-primary);
+  fill-opacity: 0.55;
+}
+.rp-cin-wf-result {
+  fill: var(--chart-brand);
+}
+
+.rp-cin-wf-g[data-dim="true"] {
+  opacity: 0.28;
+}
+.rp-cin-wf-g[data-hot="true"] .rp-cin-wf-bar {
+  fill: var(--chart-brand);
+  fill-opacity: 1;
+}
+
+.rp-cin-wf-label,
+.rp-cin-wf-val {
+  fill: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-family: var(--type-body);
+}
+
+.rp-cin-wf-val {
+  fill: var(--color-text);
+  font-size: 0.75rem;
+}
+
+.rp-cin-driver-focus {
+  padding: 0.75rem 0.85rem;
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  animation: rp-cin-focus-in 220ms var(--ease-out);
+}
+
+@keyframes rp-cin-focus-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rp-cin-driver-focus strong {
+  display: block;
+  margin: 0.2rem 0 0.55rem;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.rp-cin-driver-focus ul {
+  list-style: none;
+  margin: 0 0 0.55rem;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+}
+
+.rp-cin-driver-focus a {
+  color: var(--color-brand-deep);
+  font-size: 0.78rem;
+  text-decoration: none;
+  font-weight: 520;
+}
+
+/* ——— Needs you strip ——— */
+.rp-cin-needs {
+  min-width: 0;
+}
+
+.rp-cin-needs-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.55rem;
+}
+
+.rp-cin-needs-head span {
+  font-size: 2rem;
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: #0a0d0b;
+}
+
+.rp-cin-needs-empty {
+  margin: 0.35rem 0 0.25rem;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  font-weight: 550;
+}
+
+.rp-cin-needs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.rp-cin-needs-list > li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem;
+  align-items: stretch;
+}
+
+.rp-cin-strip {
+  appearance: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  padding: 0.85rem 0.15rem 0.75rem;
+  border-top: 2px solid var(--cin-ink);
+  display: grid;
+  gap: 0.35rem;
+  width: 100%;
+  color: inherit;
+  transition: border-color 180ms var(--cin-ease);
+}
+
+.rp-cin-strip[data-urgent="true"] {
+  border-top-color: var(--cin-green);
+}
+
+.rp-cin-strip-meta {
+  display: flex;
+  gap: 0.65rem;
+  font-size: 0.8125rem;
+  color: var(--cin-mute);
+}
+
+.rp-cin-strip-id {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.rp-cin-strip-verb {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.rp-cin-strip-econ {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.rp-cin-strip-econ strong {
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.rp-cin-strip-econ span {
+  font-size: 0.78rem;
+  color: var(--cin-mute);
+}
+
+.rp-cin-countdown {
+  height: 2px;
+  background: rgba(10, 13, 11, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.15rem;
+}
+
+.rp-cin-countdown i {
+  display: block;
+  height: 100%;
+  background: var(--cin-green);
+}
+
+.rp-cin-strip-open {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  text-decoration: none;
+  color: var(--cin-mute);
+  font-size: 1.1rem;
+  border-top: 2px solid transparent;
+}
+
+/* ——— Outliers microvisual ——— */
+.rp-cin-outliers ul {
+  list-style: none;
+  margin: 0.45rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.rp-cin-out-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.rp-cin-out-top strong {
+  font-size: 0.92rem;
+  letter-spacing: -0.015em;
+}
+
+.rp-cin-out-top em {
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92rem;
+  font-weight: 550;
+}
+
+.rp-cin-dev {
+  position: relative;
+  height: 0.55rem;
+  margin: 0.35rem 0 0.4rem;
+}
+
+.rp-cin-dev-track {
+  position: absolute;
+  inset: 40% 0 auto;
+  height: 1px;
+  background: rgba(10, 13, 11, 0.14);
+}
+
+.rp-cin-dev-mark {
+  position: absolute;
+  top: 50%;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin: -0.225rem 0 0 -0.225rem;
+  border-radius: 50%;
+  background: var(--cin-ink);
+}
+
+.rp-cin-dev[data-dir="neg"] .rp-cin-dev-mark {
+  background: var(--cin-risk);
+}
+.rp-cin-dev[data-dir="pos"] .rp-cin-dev-mark {
+  background: var(--cin-warn);
+}
+
+.rp-cin-out-loc {
+  font-size: 0.8125rem;
+  color: var(--cin-mute);
+}
+
+.rp-cin-outliers p {
+  margin: 0.25rem 0 0.35rem;
+  font-size: 0.82rem;
+  color: var(--cin-mute);
+  line-height: 1.35;
+}
+
+.rp-cin-outliers a {
+  font-size: 0.78rem;
+  color: var(--cin-ink);
+  text-decoration: none;
+}
+
+/* ——— Status trio ——— */
+.rp-cin-status {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .rp-cin-status[data-bento="true"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.rp-cin-status section ul {
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.rp-cin-status a,
+.rp-cin-status span {
+  display: grid;
+  gap: 0.1rem;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.88rem;
+}
+
+.rp-cin-status em {
+  font-style: normal;
+  font-size: 0.8125rem;
+  color: var(--cin-mute);
+}
+
+/* ——— Cinema timeline — light canvas (no black modules) ——— */
+.rp-cin-scene[data-dark="true"],
+.rp-vday-scene[data-dark="true"] {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.05rem 1.15rem;
+  margin: 0.85rem 0;
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.rp-cin-scene-k,
+.rp-vday-scene-k {
+  margin: 0 0 0.85rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-family: var(--type-body);
+}
+
+.rp-cin-timeline-axis {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2px;
+  background: var(--color-border);
+  margin: 0 0.5rem 0.85rem;
+  position: relative;
+}
+
+.rp-cin-timeline-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  margin-top: -0.275rem;
+  flex-shrink: 0;
+}
+
+.rp-cin-timeline-dot[data-kind="now"] {
+  background: var(--color-brand);
+  box-shadow: 0 0 0 4px var(--color-brand-muted);
+}
+
+.rp-cin-timeline-dot[data-kind="pressure"],
+.rp-cin-timeline-dot[data-kind="decision"] {
+  background: var(--color-warning);
+}
+
+.rp-cin-timeline-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+@media (min-width: 900px) {
+  .rp-cin-timeline-events {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+}
+
+.rp-cin-timeline-events li {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.rp-cin-timeline-events time {
+  font-size: 0.8125rem;
+  color: rgba(247, 250, 248, 0.45);
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-cin-timeline-events strong {
+  font-size: 0.82rem;
+  letter-spacing: -0.01em;
+}
+
+.rp-cin-timeline-events span {
+  font-size: 0.7rem;
+  color: rgba(247, 250, 248, 0.5);
+}
+
+.rp-cin-timeline-dec {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #00d978;
+  text-decoration: none;
+}
+
+/* Hotel readiness + turnover */
+.rp-cin-readiness,
+.rp-cin-turnover {
+  margin: 0.75rem 0;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--cin-hair);
+  border-bottom: 1px solid var(--cin-hair);
+}
+
+.rp-cin-ready-bars {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.55rem;
+}
+
+.rp-cin-ready-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  margin-bottom: 0.2rem;
+}
+
+.rp-cin-ready-bars i {
+  display: block;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--cin-green);
+}
+
+.rp-cin-ready-bars i[data-t="risk"] {
+  background: var(--cin-risk);
+}
+.rp-cin-ready-bars i[data-t="watch"] {
+  background: var(--cin-warn);
+}
+
+.rp-cin-turnover {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: flex-start;
+}
+
+.rp-cin-turnover-stage {
+  position: relative;
+  display: grid;
+  gap: 0.1rem;
+  min-width: 4.5rem;
+  padding-right: 1.25rem;
+}
+
+.rp-cin-turnover-stage strong {
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-cin-turnover-stage em {
+  font-style: normal;
+  font-size: 0.8125rem;
+  color: var(--cin-mute);
+}
+
+.rp-cin-turnover-stage span[data-risk="true"] {
+  font-size: 0.8125rem;
+  color: var(--cin-risk);
+}
+
+.rp-cin-turnover-arrow {
+  position: absolute;
+  right: 0;
+  top: 0.35rem;
+  font-style: normal;
+  color: var(--cin-mute);
+  opacity: 0.5;
+}
+
+/* ——— Data health reliability ——— */
+.rp-cin-health-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--cin-hair);
+}
+
+.rp-cin-health-list > li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--cin-hair);
+  display: grid;
+  gap: 0.65rem;
+}
+
+.rp-cin-health-name strong {
+  display: block;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.rp-cin-health-name span {
+  font-size: 0.78rem;
+  color: var(--cin-mute);
+}
+
+.rp-cin-health-dims {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 1rem;
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .rp-cin-health-dims {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.rp-cin-health-dims dt {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--cin-mute);
+}
+
+.rp-cin-health-dims dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.88rem;
+}
+
+.rp-cin-reli {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.rp-cin-reli i {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: rgba(10, 13, 11, 0.12);
+}
+
+.rp-cin-reli i[data-on="true"] {
+  background: var(--cin-green);
+}
+
+.rp-cin-reli em {
+  font-style: normal;
+  font-size: 0.82rem;
+  margin-left: 0.25rem;
+}
+
+.rp-cin-health-affects {
+  margin: 0.45rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.55rem;
+  font-size: 0.8rem;
+}
+
+.rp-cin-health-affects em {
+  font-style: normal;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #7a827d);
+}
+
+.rp-cin-health-affects a {
+  color: var(--color-verified, #00a85a);
+  text-decoration: none;
+  font-weight: 520;
+}
+
+.rp-cin-health-affects a:hover {
+  text-decoration: underline;
+}
+
+/* ——— Decision page cinema ——— */
+.rp-drec-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.55rem) !important;
+  letter-spacing: -0.035em !important;
+  font-weight: 550 !important;
+  line-height: 1.1 !important;
+  text-transform: none !important;
+}
+
+.rp-drec-head-meta {
+  text-transform: none !important;
+}
+
+.rp-drec-head-meta span {
+  font-family: inherit !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  font-size: 0.8125rem !important;
+}
+
+.rp-drec-sec h2 {
+  font-family: inherit !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  font-size: 0.82rem !important;
+  font-weight: 550 !important;
+  color: var(--cin-mute) !important;
+}
+
+.rp-causal-nodes li {
+  border-radius: var(--cin-radius-sm);
+  border-color: transparent !important;
+  background: rgba(255, 255, 255, 0.55) !important;
+  box-shadow: inset 0 0 0 1px var(--cin-hair);
+}
+
+/* ——— Memory evolution ——— */
+.rp-memory-progression {
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0.5rem 0 !important;
+  gap: 0.35rem 0.55rem !important;
+}
+
+.rp-memory-progression strong {
+  font-size: 1.35rem !important;
+  letter-spacing: -0.03em !important;
+}
+
+.rp-memory-converge {
+  border-radius: 14px;
+}
+
+/* ——— CC pulse row: bridge gets visual weight ——— */
+.rp-ccx-pulse-row {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 960px) {
+  .rp-ccx-pulse-row {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.35fr);
+    align-items: stretch;
+  }
+  .rp-ccx-pulse-row[data-perf="true"] {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+}
+
+/* Soften Command bar ALL CAPS */
+.rp-ccx-command .rp-ccx-kicker {
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  font-family: inherit !important;
+}
+
+.rp-ccx-greet {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem) !important;
+  letter-spacing: -0.03em !important;
+  font-weight: 550 !important;
+}
+
+/* ——— Mobile pocket briefing ——— */
+@media (max-width: 720px) {
+  .rp-cin-headline {
+    font-size: 1.55rem;
+    max-width: none;
+  }
+
+  .rp-cin-strip-verb {
+    font-size: 1.2rem;
+  }
+
+  .rp-cin-rail-item strong {
+    font-size: 1.15rem;
+  }
+
+  .rp-cin-tension strong {
+    font-size: 1.35rem;
+  }
+
+  .rp-mobile-tabs {
+    padding: 0.35rem 0.4rem calc(0.35rem + env(safe-area-inset-bottom));
+    background: rgba(247, 250, 248, 0.92);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--cin-hair);
+  }
+
+  .rp-mobile-tab {
+    min-height: 44px;
+    border-radius: 10px;
+  }
+
+  .rp-mobile-tab[data-active="true"] {
+    background: rgba(10, 13, 11, 0.05);
+  }
+
+  .rp-ccx-pulse-row {
+    grid-template-columns: 1fr;
+  }
+
+  .rp-cin-bridge {
+    order: -1;
+  }
+}
+
+/* Reduce card chrome globally in CC */
+.rp-ccx-cockpit .rp-ccx-queue,
+.rp-ccx-cockpit .rp-ccx-outliers,
+.rp-ccx-cockpit .rp-ccx-health-pulse {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.rp-ccx-panel-head {
+  border: 0;
+}
+
+/* ——— Cohesive product voice (Instrument Sans story) ——— */
+.rp-shell-v2,
+.rp-shell-v2 button,
+.rp-shell-v2 input,
+.rp-shell-v2 select {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+}
+
+.rp-shell-v2 .rp-cc-kicker,
+.rp-shell-v2 .rp-ccx-k,
+.rp-shell-v2 .rp-ccx-kicker,
+.rp-shell-v2 .rp-today-section-label,
+.rp-shell-v2 .rp-ledger-head .rp-cc-kicker,
+.rp-shell-v2 .rp-int-status,
+.rp-shell-v2 .rp-drec-sec h2,
+.rp-shell-v2 .rp-cc-id,
+.rp-shell-v2 .rp-ledger-terr,
+.rp-shell-v2 .rp-ledger-state,
+.rp-shell-v2 .rp-drec-status-pill,
+.rp-shell-v2 .rp-drec-life-label,
+.rp-shell-v2 .rp-replay-kicker {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif) !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  font-weight: 500 !important;
+}
+
+.rp-shell-v2 .rp-cc-title,
+.rp-shell-v2 .rp-ccx-greet,
+.rp-shell-v2 .rp-drec-title,
+.rp-shell-v2 .rp-cin-headline {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+  font-weight: 550;
+  letter-spacing: -0.035em;
+  text-transform: none;
+}
+
+.rp-shell-v2 .rp-cc-since,
+.rp-shell-v2 .rp-cin-quiet,
+.rp-shell-v2 .rp-drec-problem,
+.rp-shell-v2 .rp-drec-reason {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+  color: #5c6560;
+  line-height: 1.45;
+}
+
+/* Mono only for true system IDs / shortcuts */
+.rp-shell-v2 .rp-cc-id,
+.rp-shell-v2 .rp-cin-strip-id,
+.rp-shell-v2 kbd {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.rp-shell-v2 .rp-pills {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(10, 13, 11, 0.07);
+  padding: 0.2rem;
+}
+
+.rp-shell-v2 .rp-pill {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 520;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  padding: 0.38rem 0.8rem;
+}
+
+.rp-shell-v2 .rp-pill[data-on="true"] {
+  background: #0a0d0b;
+  color: #f7faf8;
+}
+
+/* Numbers feel physical */
+.rp-shell-v2 .rp-cin-rail-item strong,
+.rp-shell-v2 .rp-cin-strip-econ strong,
+.rp-shell-v2 .rp-cin-tension strong,
+.rp-shell-v2 .rp-drec-econ strong,
+.rp-shell-v2 .rp-ccx-hero-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Soften vertical day state chip */
+.rp-vday-state em {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif) !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
+  font-size: 0.8125rem !important;
+}
+
+/* Intelligence / integrations lists */
+.rp-shell-v2 .rp-int-list strong,
+.rp-shell-v2 .rp-ledger-title {
+  font-weight: 550;
+  letter-spacing: -0.02em;
+}
+
+.rp-shell-v2 .rp-ledger-head h1,
+.rp-shell-v2 .rp-cc-title {
+  text-transform: none;
+}
+
+/* Decision surface tabs — human sentence case */
+.rp-shell-v2 .rp-drec-surface {
+  display: inline-flex;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(10, 13, 11, 0.07);
+}
+
+.rp-shell-v2 .rp-drec-surface button {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif) !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+  font-size: 0.78rem !important;
+  font-weight: 520 !important;
+  padding: 0.4rem 0.85rem !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #626a65 !important;
+}
+
+.rp-shell-v2 .rp-drec-surface button[data-active="true"] {
+  background: #0a0d0b !important;
+  color: #f7faf8 !important;
+}
+
+.rp-shell-v2 .rp-drec-confidence {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.8rem;
+  color: #5c6560;
+}
+
+/* ——— Needs you strip CTA ——— */
+.rp-cin-strip-cta {
+  display: inline-flex;
+  margin-top: 0.55rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  font-size: 0.8125rem;
+  font-weight: 520;
+  letter-spacing: -0.01em;
+}
+
+.rp-cin-strip-verb {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem) !important;
+  font-weight: 550 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 0 0.35rem !important;
+}
+
+.rp-cin-strip-econ em {
+  font-style: normal;
+  color: var(--color-text-secondary);
+  margin-left: 0.35rem;
+}
+
+/* ——— Location performance × exposure matrix ——— */
+.rp-cin-loc-matrix {
+  position: relative;
+  margin: 0.35rem 0 1rem;
+  padding: 0.5rem 0.75rem 0.85rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.rp-cin-loc-matrix-plot {
+  position: relative;
+  height: 11rem;
+  margin: 0.35rem 0.5rem;
+  background:
+    linear-gradient(to right, transparent 49.5%, var(--color-border) 49.5%, var(--color-border) 50.5%, transparent 50.5%),
+    linear-gradient(to bottom, transparent 49.5%, var(--color-border) 49.5%, var(--color-border) 50.5%, transparent 50.5%);
+  border-radius: var(--radius-sm);
+}
+
+.rp-cin-loc-bubble {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(0, 168, 90, 0.14);
+  box-shadow: inset 0 0 0 1.5px var(--color-brand-deep);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  transition: transform 160ms var(--ease-out), background 160ms var(--ease-out);
+}
+
+.rp-cin-loc-bubble:hover,
+.rp-cin-loc-bubble:focus-visible {
+  background: rgba(0, 168, 90, 0.28);
+  transform: translate(-50%, -50%) scale(1.08);
+  outline: none;
+}
+
+.rp-cin-loc-bubble span {
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  padding: 0 0.15rem;
+}
+
+.rp-cin-loc-matrix-axis {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.rp-cin-loc-matrix-axis[data-y] {
+  position: absolute;
+  left: 0.35rem;
+  top: 50%;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left center;
+}
+
+.rp-cin-loc-matrix-axis[data-x] {
+  text-align: center;
+}
+
+.rp-shell-v2 {
+  font-family: var(--type-body);
+  background: var(--color-canvas);
+  color: var(--color-text);
+}
+
+.rp-shell-v2 .rp-cin-kicker,
+.rp-shell-v2 .rp-ccx-kicker {
+  font-family: var(--type-body) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+/* ——— Brand token lock: product = website sibling ——— */
+.rp-root.rp-shell-v2 {
+  --radr-bg: var(--color-canvas);
+  --radr-surface: var(--color-surface);
+  --radr-surface-raised: var(--color-surface);
+  --radr-surface-subtle: var(--color-surface-subtle);
+  --radr-sidebar: var(--color-canvas-elevated);
+  --radr-border: var(--color-border);
+  --radr-border-strong: var(--color-border-strong);
+  --radr-text: var(--color-text);
+  --radr-text-secondary: var(--color-text-secondary);
+  --radr-text-muted: var(--color-text-muted);
+  --radr-green: var(--color-brand);
+  --radr-green-strong: var(--color-verified);
+  --radr-green-soft: var(--color-brand-muted);
+  --radr-amber: var(--color-warning);
+  --radr-red: var(--color-critical);
+  --rail-bg: #f1f6f3;
+  --rail-surface: #ffffff;
+  background: var(--color-canvas);
+  color: var(--color-text);
+  font-family: var(--type-body);
+}
+
+/* Electric green accent — ~5–10% UI */
+.rp-shell-v2 .rp-ctx-env i,
+.rp-shell-v2 .rp-ccx-live .rp-intel-live-dot,
+.rp-shell-v2 .rp-cin-timeline-dot[data-kind="now"],
+.rp-shell-v2 .rp-drec-life-dot[data-active],
+.rp-shell-v2 .rp-ask-send:not(:disabled):hover {
+  background: var(--color-brand) !important;
+}
+
+.rp-shell-v2 .rp-cin-strip[data-urgent="true"] {
+  box-shadow: inset 3px 0 0 var(--color-brand);
+}
+
+.rp-shell-v2 .rp-mobile-dock {
+  z-index: 40;
+}
+
+.rp-shell-v2 .rp-rail {
+  z-index: 50;
+}
+
+@media (max-width: 900px) {
+  .rp-shell-v2 .rp-rail {
+    /* inert when closed — ProductShell already toggles */
+  }
+  .rp-shell-v2 .rp-frame-v2[data-nav="closed"] .rp-rail a,
+  .rp-shell-v2 .rp-frame-v2[data-nav="closed"] .rp-rail button {
+    visibility: hidden;
+  }
+}

@@ -23,7 +23,7 @@ export type FnBCategorySplit = {
   beverageCogs: number;
 };
 
-/** Berlin Mitte dinner - drinks typically ~35% of F&B net. */
+/** Soho · New York dinner - drinks typically ~35% of F&B net. */
 export const BERLIN_BEVERAGE_SHARE_PCT = 34.8;
 
 /** Typical contribution margins after category COGS (demo). */

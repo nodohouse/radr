@@ -13,7 +13,13 @@ export type ScenarioEconomicMetric = {
   baseline?: string;
   scope?: string;
   horizon?: string;
-  status?: "EXPECTED" | "EXPOSED" | "POTENTIAL" | "PENDING" | "NOT_MODELED";
+  status?:
+    | "EXPECTED"
+    | "EXPOSED"
+    | "POTENTIAL"
+    | "PENDING"
+    | "VERIFIED"
+    | "NOT_MODELED";
 };
 
 export type CounterfactualOption = {

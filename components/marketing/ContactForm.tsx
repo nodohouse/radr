@@ -61,6 +61,17 @@ function parsePlan(raw: string | null | undefined): SelectedPlan | undefined {
   return undefined;
 }
 
+/** Map commercial CTA intents onto the interest select. */
+function parseIntentInterest(raw: string | null | undefined): string {
+  if (!raw) return "";
+  if (raw === "recovery-pilot" || raw === "pilot") return "package-pilot";
+  if (raw === "sales" || raw === "demo") return "demo";
+  if (raw === "pricing") return "pricing";
+  if (raw === "core" || raw === "expand") return "package-core";
+  if (raw === "control" || raw === "enterprise") return "package-control";
+  return "";
+}
+
 export function ContactForm({
   selectedPlan,
 }: {
@@ -72,7 +83,10 @@ export function ContactForm({
 
   const planFromUrl = parsePlan(searchParams.get("plan"));
   const activePlan = planFromUrl ?? selectedPlan;
-  const interestFromPlan = planToInterest(activePlan);
+  const interestFromUrl =
+    planToInterest(activePlan) ||
+    parseIntentInterest(searchParams.get("intent"));
+  const interestFromPlan = interestFromUrl;
 
   const [interest, setInterest] = useState(interestFromPlan);
   const [role, setRole] = useState("");
@@ -259,18 +273,8 @@ export function ContactForm({
         to respond to this request. See <Link href="/privacy">Privacy</Link>.
       </p>
 
-      {/* Honeypot — hidden from accessibility tree */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          left: "-10000px",
-          top: "auto",
-          width: 1,
-          height: 1,
-          overflow: "hidden",
-        }}
-      >
+      {/* Honeypot — visually/semantically hidden; still submitted for spam bots */}
+      <div className="rx-contact-honeypot" aria-hidden="true" inert>
         <label htmlFor="contact-website">Website</label>
         <input
           id="contact-website"
@@ -278,6 +282,7 @@ export function ContactForm({
           type="text"
           tabIndex={-1}
           autoComplete="off"
+          defaultValue=""
         />
       </div>
     </form>

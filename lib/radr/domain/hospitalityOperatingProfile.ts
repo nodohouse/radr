@@ -465,7 +465,7 @@ export function berlinRestaurantUnits(
   ];
 }
 
-/** Canal House Amsterdam boutique hotel units. */
+/** Mercer House · New York boutique hotel units. */
 export function canalHouseUnits(
   organizationId = "org_canal_house",
   locationId = "loc_ams_canal",

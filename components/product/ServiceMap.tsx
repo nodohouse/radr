@@ -928,7 +928,7 @@ export function ServiceMap() {
             className="rp-service-svg"
             viewBox={`0 0 ${floor.width} ${floor.height}`}
             role="img"
-            aria-label="Berlin Mitte floor plan"
+            aria-label="Soho · New York floor plan"
           >
             <defs>
               <filter
@@ -1976,7 +1976,7 @@ export function ServiceMap() {
                     <div className="rp-service-story-inline">
                       <p className="rp-service-ig-account">
                         Posting as <strong>@northstar.berlin</strong>
-                        <span>Berlin Mitte · connected</span>
+                        <span>Soho · New York · connected</span>
                       </p>
                       <InstagramStoryMockup
                         preview={cancelStoryPreview}

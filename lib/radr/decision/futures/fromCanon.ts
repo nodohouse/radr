@@ -8,6 +8,7 @@ import type { FuturesBundle, Scenario } from "./types";
 import type { ScenarioEconomicMetric } from "../counterfactual";
 import { DECISION_IDS } from "../ids";
 import { PEAK_SERVICE_CLOCK } from "../demos/peakClock";
+import { incrementalVsNoActionEuro } from "../economics/moneyImpact";
 
 function euroFromScenario(s: CanonDecision["scenarios"][number]): number | undefined {
   if (s.expectedContributionEuro != null) return s.expectedContributionEuro;
@@ -15,10 +16,14 @@ function euroFromScenario(s: CanonDecision["scenarios"][number]): number | undef
   return m?.value;
 }
 
-export function futuresFromCanon(d: CanonDecision): FuturesBundle {
+export function futuresFromCanon(
+  d: CanonDecision,
+  opts?: { verified?: boolean },
+): FuturesBundle {
+  const verified = Boolean(opts?.verified && d.verifiedOutcomeNote);
   const scenarios: Scenario[] = d.scenarios.map((s, i) => {
     const expected = euroFromScenario(s);
-    const economicMetrics: ScenarioEconomicMetric[] | undefined =
+    let economicMetrics: ScenarioEconomicMetric[] | undefined =
       s.economicMetrics ??
       (s.economicEffectNote
         ? [
@@ -42,6 +47,19 @@ export function futuresFromCanon(d: CanonDecision): FuturesBundle {
               },
             ]
           : undefined);
+
+    if (verified && s.recommended && economicMetrics?.length) {
+      economicMetrics = economicMetrics.map((m) =>
+        m.status === "POTENTIAL" || m.status === "PENDING"
+          ? {
+              ...m,
+              status: "VERIFIED",
+              label: "Recovered variance",
+              baseline: d.verifiedOutcomeNote,
+            }
+          : m,
+      );
+    }
 
     return {
       id: `fut_${d.displayId}_${s.id}`,
@@ -111,15 +129,15 @@ export function futuresFromCanon(d: CanonDecision): FuturesBundle {
     scenarios,
     recommendedScenarioId: recommended.id,
     incrementalVsNoAction: recommended.expectedContributionDefined
-      ? recommended.expectedContribution - baseline
+      ? incrementalVsNoActionEuro(recommended.expectedContribution, baseline)
       : 0,
     temporal:
       d.id === DECISION_IDS.peak
         ? [
             { at: PEAK_SERVICE_CLOCK.nowLabel, label: "Now", detail: "Decide" },
-            { at: "18:50", label: "Near", detail: "VIP / inbound" },
-            { at: "19:00", label: "Peak", detail: "Kitchen pressure" },
-            { at: "19:15", label: "Turns", detail: "Second seating" },
+            { at: PEAK_SERVICE_CLOCK.resumeLabel, label: "Resume", detail: "Hold ends" },
+            { at: PEAK_SERVICE_CLOCK.peakObservedLabel, label: "Peak", detail: "Kitchen pressure" },
+            { at: PEAK_SERVICE_CLOCK.turnsObservedLabel, label: "Turns", detail: "Second seating" },
           ]
         : [
             { at: "NOW", label: "Decide", detail: d.deadline },

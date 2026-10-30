@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte - Active Revenue + Live Recovery demo fixture.
+ * Soho · New York - Active Revenue + Live Recovery demo fixture.
  * Hospitality-first: material recoveries + max 1-2 guest suggestions per table.
  */
 
@@ -75,7 +75,7 @@ function openCancellation(): CancellationOpportunity {
     id: "ari_cancel_t8",
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     reservationId: "r_cancel_t8",
     tableId: "tbl_8",
     tableLabel: "Table 8",
@@ -173,7 +173,7 @@ function noShowRecovery(config: RecoveryConfig): CancellationOpportunity {
     id: "ari_noshow_t14",
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     reservationId: "r_noshow_t14",
     tableId: "tbl_14b",
     tableLabel: "Table 14",
@@ -243,7 +243,7 @@ function handlingRecovery(): CancellationOpportunity {
     id: "ari_cancel_t16_handling",
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     reservationId: "r_cancel_t16",
     tableId: "tbl_16",
     tableLabel: "Table 16",
@@ -289,7 +289,7 @@ function walkInHoldOpportunity(): CancellationOpportunity {
     id: "ari_cancel_t22",
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     reservationId: "r_cancel_t22",
     tableId: "tbl_22",
     tableLabel: "Table 22",
@@ -330,7 +330,7 @@ function verifiedFromScenario(): CancellationOpportunity {
     id: "ari_cancel_t14_verified",
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     reservationId: scenario.reservation.id,
     tableId: scenario.reservation.tableId,
     tableLabel: "Table 14",
@@ -708,7 +708,7 @@ export function demoBerlinActiveRevenue(): ActiveRevenueBrief {
   return {
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     serviceLabel: "Dinner",
     businessDate: "2026-08-19",
     asOf: "2026-08-19T20:05:00+02:00",

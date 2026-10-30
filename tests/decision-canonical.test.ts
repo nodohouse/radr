@@ -93,7 +93,7 @@ describe("Library D-1842 supplier / stock", () => {
 describe("Canonical hotel and apartment", () => {
   it("keeps OTA and orphan IDs stable with believable variance", () => {
     expect(CANON_OTA.displayId).toBe("D-2201");
-    expect(CANON_OTA.property).toBe("Canal House · Amsterdam");
+    expect(CANON_OTA.property).toBe("Mercer House · New York");
     expect(CANON_OTA.property).not.toMatch(/Berlin/i);
     expect(CANON_OTA.exposureEuro).toBe(4200);
     expect(CANON_OTA.expectedProtectedEuro).toBe(3100);

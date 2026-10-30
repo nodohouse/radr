@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte week roster — who owns each section by day.
+ * Soho · New York week roster — who owns each section by day.
  * Demo week anchored on Mon 14 Sep 2026 (operating “tonight”).
  */
 

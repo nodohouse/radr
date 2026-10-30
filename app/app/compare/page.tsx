@@ -9,9 +9,10 @@ import {
   parseComparisonLocationIds,
   type CompareMetric,
 } from "@/lib/radr/comparisonService";
+import { getTransferBrief } from "@/lib/radr/product/transferBrief";
 import { formatCompactEuro, formatPts } from "@/lib/product/demo/command";
 import { AskThis } from "@/components/product/ask/AskThis";
-import { PageHeader } from "@/components/product/PageHeader";
+import Link from "next/link";
 
 const METRIC_OPTIONS: { id: CompareMetric; label: string }[] = [
   { id: "revenue", label: "Revenue" },
@@ -72,16 +73,25 @@ function CompareInner() {
     clearComparison,
   } = useProduct();
   const [metric, setMetric] = useState<CompareMetric>("revenue");
-  const [ready, setReady] = useState(false);
+
+  const transferId = params.get("transfer");
+  const transfer = useMemo(
+    () => getTransferBrief(transferId),
+    [transferId],
+  );
 
   const ids = useMemo(
-    () => parseComparisonLocationIds(params.get("locations")),
+    () =>
+      parseComparisonLocationIds(
+        params.get("locations"),
+        params.get("from"),
+        params.get("to"),
+      ),
     [params],
   );
 
   useEffect(() => {
     setComparisonLocationIds(ids);
-    setReady(true);
   }, [ids, setComparisonLocationIds]);
 
   const removeLocation = (id: string) => {
@@ -109,16 +119,6 @@ function CompareInner() {
       }),
     [ids, period],
   );
-
-  if (!ready) {
-    return (
-      <div className="rp-compare" aria-busy="true">
-        <p className="rp-kicker">Compare locations</p>
-        <h1 className="rp-title">Loading comparison…</h1>
-        <div className="rp-compare-skel" />
-      </div>
-    );
-  }
 
   if (!comparison.ok) {
     return (
@@ -159,15 +159,8 @@ function CompareInner() {
 
   return (
     <div className="rp-compare rp-attention">
-      <PageHeader
-        title="Compare locations"
-        sub={
-          comparison.sameCity && comparison.cityLabel
-            ? `${comparison.cityLabel} · ${locations.length} locations`
-            : `${locations.length} locations side by side`
-        }
-      />
       <header className="rp-compare-head">
+        <p className="rp-kicker">Compare locations</p>
         <ul className="rp-compare-tags">
           {locations.map((r) => (
             <li key={r.id} style={{ borderColor: r.color }}>
@@ -245,6 +238,77 @@ function CompareInner() {
           entityLabel="Location comparison"
         />
       </section>
+
+      {transfer ? (
+        <section className="rp-compare-transfer" aria-label="Transfer playbook">
+          <header>
+            <p className="rp-kicker">Estate learning</p>
+            <h2>
+              {transfer.sourceLabel}
+              <span aria-hidden="true"> → </span>
+              {transfer.targetLabel}
+            </h2>
+            <p>{transfer.pattern}</p>
+            <p data-xfer={transfer.transferability}>
+              Transferability · {transfer.transferability}
+            </p>
+          </header>
+          <div className="rp-compare-transfer-grid">
+            <article>
+              <h3>Source evidence</h3>
+              <ul>
+                {transfer.sourceEvidence.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </article>
+            <article>
+              <h3>Target fit</h3>
+              <ul>
+                {transfer.targetFit.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </article>
+            <article>
+              <h3>Differences</h3>
+              <ul>
+                {transfer.differences.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </article>
+          </div>
+          <div className="rp-compare-transfer-futures">
+            <h3>Futures</h3>
+            <ul>
+              {transfer.futures.map((f) => (
+                <li key={f.id} data-no={f.isNoAction ? "true" : undefined}>
+                  <strong>{f.title}</strong>
+                  <span>
+                    {f.expectedMonthlyEuro > 0
+                      ? `+${formatCompactEuro(f.expectedMonthlyEuro)}/mo`
+                      : "€0"}
+                  </span>
+                  <em>{f.note}</em>
+                </li>
+              ))}
+            </ul>
+            {transfer.transferability !== "LOW" ? (
+              <Link
+                href={transfer.decisionHref ?? "/app/decisions"}
+                className="rp-btn rp-btn-primary"
+              >
+                Create test Decision →
+              </Link>
+            ) : (
+              <p className="rp-lede">
+                Context similarity below threshold — do not transfer blind.
+              </p>
+            )}
+          </div>
+        </section>
+      ) : null}
 
       <section className="rp-compare-side" aria-label="Metric summary">
         <h2>
@@ -332,7 +396,7 @@ function CompareInner() {
         {[
           {
             key: "findings",
-            label: "Open findings",
+            label: "Open decisions",
             fmt: (r: (typeof locations)[0]) => String(r.openFindings),
           },
           {
@@ -381,16 +445,49 @@ function CompareInner() {
   );
 }
 
+function CompareLoadingFallback() {
+  const [stuck, setStuck] = useState(false);
+  useEffect(() => {
+    const t = window.setTimeout(() => setStuck(true), 6_000);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  if (stuck) {
+    return (
+      <div className="rp-compare rp-compare-error" role="alert">
+        <p className="rp-kicker">Compare locations</p>
+        <h1 className="rp-title">Comparison did not finish loading</h1>
+        <p className="rp-lede">
+          The workspace stalled before location params resolved. Retry, or return
+          to Locations and open the compare test again.
+        </p>
+        <div className="rp-btn-row">
+          <button
+            type="button"
+            className="rp-btn rp-btn-primary"
+            onClick={() => window.location.reload()}
+          >
+            Retry comparison
+          </button>
+          <Link href="/app/locations" className="rp-btn">
+            Back to Locations
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rp-compare" aria-busy="true">
+      <p className="rp-kicker">Compare locations</p>
+      <h1 className="rp-title">Loading comparison…</h1>
+    </div>
+  );
+}
+
 export default function ComparePage() {
   return (
-    <Suspense
-      fallback={
-        <div className="rp-compare" aria-busy="true">
-          <p className="rp-kicker">Compare locations</p>
-          <h1 className="rp-title">Loading comparison…</h1>
-        </div>
-      }
-    >
+    <Suspense fallback={<CompareLoadingFallback />}>
       <CompareInner />
     </Suspense>
   );

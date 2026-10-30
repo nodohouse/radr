@@ -48,7 +48,7 @@ describe("public Decision surfaces use canonical D-2201", () => {
     const d = decisionForVertical("hotel");
     expect(d).toBe(CANON_OTA);
     const e = platformEconomics(d);
-    expect(e.property).toBe("Canal House · Amsterdam");
+    expect(e.property).toBe("Mercer House · New York");
     expect(e.exposure).toMatch(/4[,.]?200/);
     expect(e.expected).toMatch(/3[,.]?100/);
     expect(e.observed).toMatch(/2[,.]?960/);

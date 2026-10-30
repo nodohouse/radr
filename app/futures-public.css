@@ -1,0 +1,277 @@
+/**
+ * Public Futures — light mineral D-1911 experience.
+ * Ivory · near-black · RADR green sparingly. No dark product chrome.
+ */
+
+.rx-fut-pub {
+  background: #f7faf8;
+  color: #0a0d0b;
+}
+
+.rx-fut-pub-hero {
+  padding: calc(var(--nav-h, 6.75rem) + 2.5rem) 0 2.5rem;
+  background:
+    radial-gradient(70% 60% at 80% 0%, rgba(0, 217, 120, 0.08), transparent 55%),
+    #f7faf8;
+}
+
+.rx-fut-pub-kicker {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+
+.rx-fut-pub-title {
+  margin: 0;
+  font-size: clamp(2.4rem, 5.5vw, 4.25rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  color: #0a0d0b;
+}
+
+.rx-fut-pub-econ {
+  margin: 1.1rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem 0.75rem;
+}
+
+.rx-fut-pub-econ strong {
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.rx-fut-pub-econ span {
+  font-size: 1rem;
+  color: #626a65;
+}
+
+.rx-fut-pub-lead {
+  margin: 1rem 0 0;
+  max-width: 36rem;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #3a413d;
+}
+
+.rx-fut-pub-signals {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.rx-fut-pub-signals li {
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  background: #fff;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.rx-fut-pub-signals strong {
+  font-size: 0.88rem;
+  font-weight: 550;
+}
+
+.rx-fut-pub-signals span {
+  font-size: 0.7rem;
+  color: #7a827d;
+}
+
+.rx-fut-pub-compare {
+  padding: 2.5rem 0 4.5rem;
+  border-top: 1px solid rgba(10, 13, 11, 0.06);
+}
+
+.rx-fut-pub-h2 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.45rem, 2.6vw, 2rem);
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.rx-fut-pub-paths {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.rx-fut-pub-path {
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(10, 13, 11, 0.1);
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.15rem 1.25rem 1.05rem;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.rx-fut-pub-path:hover,
+.rx-fut-pub-path:focus-visible {
+  border-color: rgba(0, 168, 90, 0.35);
+  outline: none;
+}
+
+.rx-fut-pub-path[data-on="true"] {
+  border-color: rgba(0, 168, 90, 0.45);
+  box-shadow: 0 0 0 3px rgba(0, 217, 120, 0.08);
+}
+
+.rx-fut-pub-path-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+}
+
+.rx-fut-pub-path-lab {
+  font-size: 1.15rem;
+  font-weight: 550;
+  letter-spacing: -0.015em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.rx-fut-pub-path-lab em {
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00a85a;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-weight: 600;
+}
+
+.rx-fut-pub-path strong {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.rx-fut-pub-path[data-on="true"] .rx-fut-pub-path-lab,
+.rx-fut-pub-path[data-on="true"] strong {
+  color: #0a0d0b;
+}
+
+.rx-fut-pub-path[data-preferred="true"][data-on="true"] strong {
+  color: #00a85a;
+}
+
+.rx-fut-pub-track {
+  display: block;
+  height: 14px;
+  margin-bottom: 0.55rem;
+}
+
+.rx-fut-pub-track svg {
+  display: block;
+  width: calc(100% * var(--span, 1));
+  max-width: 100%;
+  height: 14px;
+}
+
+.rx-fut-pub-track path {
+  fill: none;
+  stroke: rgba(10, 13, 11, 0.16);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.rx-fut-pub-path[data-on="true"] .rx-fut-pub-track path {
+  stroke: rgba(0, 168, 90, 0.7);
+  stroke-width: 1.8;
+}
+
+.rx-fut-pub-path p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #626a65;
+  line-height: 1.4;
+}
+
+.rx-fut-pub-detail {
+  margin-top: 1.75rem;
+  padding: 1.35rem 1.25rem;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.08);
+}
+
+.rx-fut-pub-selected {
+  margin: 0 0 1rem;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+
+.rx-fut-pub-meta {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 720px) {
+  .rx-fut-pub-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.rx-fut-pub-meta dt {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a827d;
+}
+
+.rx-fut-pub-meta dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #0a0d0b;
+}
+
+.rx-fut-pub-proof {
+  margin: 1.15rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(10, 13, 11, 0.06);
+  font-size: 0.88rem;
+  color: #626a65;
+}
+
+.rx-fut-pub-ctas {
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 520px) {
+  .rx-fut-pub-title {
+    font-size: 2.15rem;
+  }
+  .rx-fut-pub-path-top {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

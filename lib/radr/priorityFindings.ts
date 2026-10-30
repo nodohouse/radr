@@ -201,7 +201,7 @@ export const BERLIN_PRIORITY_FINDINGS: PriorityFinding[] = [
     ),
     status: "NEW",
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     what: "Expected peak demand exceeds current FOH (Front of House) service capacity between 19:00-20:30.",
     whyItMatters:
       "Without coverage, service quality and estimated dinner revenue during the peak are exposed.",
@@ -295,7 +295,7 @@ export const BERLIN_PRIORITY_FINDINGS: PriorityFinding[] = [
     priorityScore: scoreFinding("WATCH", 184, lateConfidence, false),
     status: "RESOLVED",
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     what: "A confirmed Table 14 reservation cancelled at 17:42, releasing 4 covers at 20:00.",
     whyItMatters:
       "Released inventory still has demand on the waitlist. Observed POS becomes verified value only after seating.",
@@ -377,7 +377,7 @@ export const BERLIN_PRIORITY_FINDINGS: PriorityFinding[] = [
     ),
     status: "NEW",
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     what: "Invoice total exceeds the contracted total on this produce delivery.",
     whyItMatters:
       "Three line items differ from contracted pricing. Variance is still actionable while the invoice is open.",

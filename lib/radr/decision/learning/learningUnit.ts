@@ -52,9 +52,9 @@ export function buildTunaLearningUnit(): LearningUnit {
     lesson: "Feature-swap-first outperformed supplier-first under these conditions.",
     modelUpdate: "Substitution conversion prior updated toward location evidence.",
     playbookUpdate: "Playbook v1 supplier-first → v2 feature-swap-first",
-    dnaUpdate: "Berlin Mitte stockoutSensitivity reinforced on peak bestsellers.",
+    dnaUpdate: "Soho · New York stockoutSensitivity reinforced on peak bestsellers.",
     locationEvidence:
-      "At Berlin Mitte, under peak demand, Truffle Pasta retained 71% of demand across 14 comparable events.",
+      "At Soho · New York, under peak demand, Truffle Pasta retained 71% of demand across 14 comparable events.",
   };
 }
 
@@ -64,7 +64,7 @@ export function buildTunaLearningMoment(): LearningMoment {
     title: "RADR learned something",
     predicted: "Substitution conversion 64%",
     actual: "71%",
-    update: "Berlin Mitte substitution behavior updated",
+    update: "Soho · New York substitution behavior updated",
     subtle: true,
   };
 }

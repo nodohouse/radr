@@ -5,7 +5,7 @@
  * Select a leak class → see what leaks / evidence / decision / action / verification.
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LeakClassVisual } from "@/components/marketing/kinetic/LeakClassVisual";
 import type { ProblemFamily } from "@/lib/radr/problemFamilies";
 import "@/app/kinetic.css";
@@ -27,6 +27,14 @@ type LeakDetail = {
   example: string;
 };
 
+const ANCHOR_TO_PROBLEM: Record<string, ProblemId> = {
+  "supplier-ap": "SUPPLIER_AP",
+  reconciliation: "RECONCILIATION",
+  "cost-variance": "COST_VARIANCE",
+  procurement: "PROCUREMENT",
+  perishable: "PERISHABLE_REVENUE",
+};
+
 const PROBLEMS: {
   id: ProblemId;
   label: string;
@@ -43,7 +51,7 @@ const PROBLEMS: {
       decision: "D-4102 · Dispute the variance against contract.",
       action: "Dispute package prepared · credit chase opened",
       verification: "Credit matched to original invoice · Verified recovered",
-      example: "€273 verified recovery · oil contract €6.80/L vs invoice €7.45/L",
+      example: "$273 verified recovery · oil contract $6.80/L vs invoice $7.45/L",
     },
   },
   {
@@ -95,7 +103,7 @@ const PROBLEMS: {
       decision: "D-2201 · Hold premium inventory direct.",
       action: "Channel hold prepared · approved",
       verification: "Expected vs observed · Verified protected",
-      example: "€3,100 expected · €2,960 observed · Verified protected",
+      example: "$3,100 expected · $2,960 observed · Verified protected",
     },
   },
 ];
@@ -103,6 +111,17 @@ const PROBLEMS: {
 export function ValueLeaksNarratives() {
   const [problem, setProblem] = useState<ProblemId>("SUPPLIER_AP");
   const active = PROBLEMS.find((p) => p.id === problem)!;
+
+  useEffect(() => {
+    function syncFromHash() {
+      const raw = window.location.hash.replace(/^#/, "");
+      const next = ANCHOR_TO_PROBLEM[raw];
+      if (next) setProblem(next);
+    }
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
 
   return (
     <div className="rx-vl-narratives">
@@ -121,6 +140,7 @@ export function ValueLeaksNarratives() {
               <button
                 key={p.id}
                 type="button"
+                className="rx-anchor-target"
                 id={
                   p.id === "SUPPLIER_AP"
                     ? "supplier-ap"

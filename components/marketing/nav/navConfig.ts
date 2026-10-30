@@ -15,37 +15,38 @@ export type PlatformColumn = {
 
 export const PLATFORM_COLUMNS: PlatformColumn[] = [
   {
+    key: "surfaces",
+    items: [
+      { href: "/product?surface=control", key: "controlCenter" },
+      { href: "/product?surface=live", key: "live" },
+      { href: "/product?surface=decisions", key: "decisions" },
+      { href: "/product?surface=operations", key: "operations" },
+      { href: "/product?surface=intelligence", key: "intelligence" },
+      { href: "/product?surface=value", key: "value" },
+      { href: "/product?surface=memory", key: "memorySurface" },
+      { href: "/product?surface=health", key: "dataHealth" },
+    ],
+  },
+  {
     key: "how",
     items: [
       { href: "/product", key: "decision" },
       { href: "/product/futures", key: "futures" },
-      { href: "/product/actions", key: "actions" },
       { href: "/product/value", key: "verifiedValue" },
       { href: "/product/memory", key: "memory" },
     ],
   },
   {
-    key: "surfaces",
-    items: [
-      { href: "/product/control-center", key: "controlCenter" },
-      { href: "/product/decisions", key: "decisions" },
-      // Floor demoted from primary Platform nav until frontline depth matches (Option A).
-      { href: "/product/value", key: "value" },
-      { href: "/product/memory", key: "memorySurface" },
-    ],
-  },
-  {
     key: "trust",
     items: [
-      { href: "/product#autopilot", key: "autopilot" },
       { href: "/security", key: "policies" },
-      { href: "/product#evidence", key: "evidence" },
+      { href: "/security", key: "evidence" },
       { href: "/product/value", key: "verification" },
     ],
   },
 ];
 
-export const PLATFORM_DEFAULT_PREVIEW = "decision" as const;
+export const PLATFORM_DEFAULT_PREVIEW = "controlCenter" as const;
 
 export const PRODUCT_LINKS: DropLink[] = PLATFORM_COLUMNS.flatMap((c) => c.items);
 
@@ -66,22 +67,22 @@ export function platformHrefForItem(itemKey: string): string {
   return "/product";
 }
 
-/** Five economic intelligence classes — context, not modules. */
+/** Five economic leak classes — Solutions mega-nav. */
 export const VALUE_LEAK_CLASSES: DropLink[] = [
-  { href: "/solutions#supplier-ap", key: "supplier" },
-  { href: "/solutions#reconciliation", key: "reconciliation" },
-  { href: "/solutions#cost-variance", key: "cost" },
-  { href: "/solutions#procurement", key: "procurement" },
-  { href: "/solutions#perishable", key: "perishable" },
+  { href: "/solutions?leak=supplier", key: "supplier" },
+  { href: "/solutions?leak=recon", key: "reconciliation" },
+  { href: "/solutions?leak=cost", key: "cost" },
+  { href: "/solutions?leak=proc", key: "procurement" },
+  { href: "/solutions?leak=perish", key: "perishable" },
 ];
 
-/** Path + hash for next-intl Link (hash must not be stripped). */
+/** Path + query for next-intl Link. */
 export const VALUE_LEAK_HREF = {
-  supplier: { pathname: "/solutions" as const, hash: "supplier-ap" },
-  reconciliation: { pathname: "/solutions" as const, hash: "reconciliation" },
-  cost: { pathname: "/solutions" as const, hash: "cost-variance" },
-  procurement: { pathname: "/solutions" as const, hash: "procurement" },
-  perishable: { pathname: "/solutions" as const, hash: "perishable" },
+  supplier: { pathname: "/solutions" as const, query: { leak: "supplier" } },
+  reconciliation: { pathname: "/solutions" as const, query: { leak: "recon" } },
+  cost: { pathname: "/solutions" as const, query: { leak: "cost" } },
+  procurement: { pathname: "/solutions" as const, query: { leak: "proc" } },
+  perishable: { pathname: "/solutions" as const, query: { leak: "perish" } },
 } as const;
 
 export const VALUE_LEAK_DEEPER: DropLink[] = [
@@ -103,6 +104,14 @@ export const SOLUTIONS_BY_OPERATION: DropLink[] = [
   { href: "/industries#intelligence-groups", key: "groups" },
 ];
 
+/** Solutions mega-nav hospitality breadth (not eight unsupported vertical pages). */
+export const SOLUTIONS_HOSPITALITY: DropLink[] = [
+  { href: "/industries#intelligence-restaurants", key: "restaurants" },
+  { href: "/industries#intelligence-hotels", key: "hotels" },
+  { href: "/solutions", key: "leaks" },
+  { href: "/industries#intelligence-groups", key: "groups" },
+];
+
 export const SOLUTIONS_TERRITORIES = [
   { n: "01", href: "/solutions/buy", label: "BUY", key: "buy" },
   { n: "02", href: "/solutions/labor", label: "LABOR", key: "labor" },
@@ -113,7 +122,6 @@ export const SOLUTIONS_TERRITORIES = [
 export const COMPANY_LINKS: DropLink[] = [
   { href: "/company", key: "about" },
   { href: "/why", key: "why" },
-  { href: "/blog", key: "blog" },
   { href: "/security", key: "security" },
   { href: "/developers", key: "developers" },
   { href: "/contact", key: "contact" },

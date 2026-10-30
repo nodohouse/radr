@@ -77,6 +77,7 @@ export const MemoryService = {
       const rank = (r: DecisionRecord) => {
         if (r.id === DECISION_IDS.peak) return 100;
         if (r.id === DECISION_IDS.menuPeak) return 95;
+        if (r.id === DECISION_IDS.labor) return 92;
         if (r.id === DECISION_IDS.ota) return 90;
         if (r.id === DECISION_IDS.orphan) return 85;
         if (r.id === DECISION_IDS.guestVoice) return 80;
@@ -310,7 +311,7 @@ export const AskRadrService = {
         id: "supplier_contract",
         prompt: "What if supplier returns to contract price?",
         answer:
-          "MODELED SCENARIO · DEMO\n\nIf Beverage Co returns to contract €0.42:\nMonthly exposure (~€796) collapses.\nCategory rebalance Futures become optional — not urgent.\n\nCross-location leverage still supports a procurement case (Berlin pays above Amsterdam/Lisbon).\n\nOpen Margin Response · DEMO.",
+          "Modeled scenario · demo\n\nIf Beverage Co returns to contract €0.42:\nMonthly exposure (~€796) collapses.\nCategory rebalance Futures become optional — not urgent.\n\nCross-location leverage still supports a procurement case (Berlin pays above Hamburg / München peers).\n\nOpen Margin response · Demo.",
         decisionIds: scoped.some((r) => r.id === DECISION_IDS.marginCoke)
           ? [DECISION_IDS.marginCoke]
           : [],

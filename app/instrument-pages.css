@@ -1,0 +1,979 @@
+/**
+ * Instrument page remaps — graphite tokens on major /app surfaces.
+ * Loaded after page personality CSS; all rules scoped under .rp-shell-v2.
+ * Tokens originate on .rp-shell-v2 in app/instrument-shell.css (--cci-*).
+ */
+
+/* ─── Product token aliases (ivory → graphite) ─── */
+.rp-shell-v2 {
+  --rp-text-primary: var(--cci-ink);
+  --rp-text-secondary: var(--cci-muted);
+  --rp-text-quiet: var(--cci-quiet);
+  --rp-bg: var(--cci-bg);
+  --rp-border: var(--cci-hair);
+  --rp-border-strong: var(--cci-hair-strong);
+  --rp-surface-1: var(--cci-canvas);
+  --rp-surface-2: var(--cci-hover);
+  --rp-surface-raised: var(--cci-elevated);
+  --rp-green: var(--cci-green-deep);
+  --rp-green-live: var(--cci-green);
+  --rp-green-signal: var(--cci-green);
+  --rp-watch: var(--cci-watch);
+  --rp-adverse: var(--cci-adverse);
+  --rp-verified: var(--cci-green);
+  --rp-shadow-soft: none;
+
+  --cin-ink: var(--cci-ink);
+  --cin-mute: var(--cci-muted);
+  --cin-hair: var(--cci-hair);
+  --cin-green: var(--cci-green);
+  --cin-green-deep: var(--cci-green-deep);
+  --cin-warn: var(--cci-watch);
+  --cin-risk: var(--cci-adverse);
+
+  --ih-ink: var(--cci-ink);
+  --ih-muted: var(--cci-muted);
+  --ih-quiet: var(--cci-quiet);
+  --ih-hair: var(--cci-hair);
+  --ih-surface: var(--cci-elevated);
+  --ih-stone: var(--cci-hover);
+
+  --svc-ink: var(--cci-ink);
+  --svc-muted: var(--cci-muted);
+  --svc-quiet: var(--cci-quiet);
+  --svc-surface: var(--cci-canvas);
+  --svc-stone: var(--cci-hover);
+  --svc-border: var(--cci-hair);
+  --svc-green: var(--cci-green);
+  --svc-watch: var(--cci-watch);
+
+  --lc-ink: var(--cci-ink);
+  --lc-muted: var(--cci-muted);
+  --lc-quiet: var(--cci-quiet);
+  --lc-hair: var(--cci-hair);
+}
+
+/* ─── Global: kill soft light shadows on instrument pages ─── */
+.rp-shell-v2 .rp-dl .rp-dl-row,
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="needs_you"],
+.rp-shell-v2 .rp-house .rp-house-gap,
+.rp-shell-v2 .rp-house .rp-house-judgment .rp-house-gap,
+.rp-shell-v2 .rp-ih-lead,
+.rp-shell-v2 .rp-intel-drill-item,
+.rp-shell-v2 .rp-ledger-judgment-card,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-head[data-editorial="true"],
+.rp-shell-v2 .rp-settings-policy-cards li[data-highlight="true"] {
+  box-shadow: none !important;
+}
+
+/* ─── Shared page chrome: headers, kickers, cinema voice ─── */
+.rp-shell-v2 .rp-ledger-head,
+.rp-shell-v2 .rp-dl-head,
+.rp-shell-v2 .rp-house-head,
+.rp-shell-v2 .rp-intel-hub-head {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-cin-kicker,
+.rp-shell-v2 .rp-cin-headline,
+.rp-shell-v2 .rp-cin-quiet,
+.rp-shell-v2 .rp-cc-kicker,
+.rp-shell-v2 .rp-ccx-kicker,
+.rp-shell-v2 .rp-ccx-k,
+.rp-shell-v2 .rp-cap-k,
+.rp-shell-v2 .rp-svc-kicker,
+.rp-shell-v2 .rp-ih-eyebrow,
+.rp-shell-v2 .rp-inode-k {
+  color: var(--cci-quiet) !important;
+}
+
+.rp-shell-v2 .rp-cin-headline,
+.rp-shell-v2 .rp-ledger-head h1,
+.rp-shell-v2 .rp-svc-title,
+.rp-shell-v2 .rp-intel-hub-head h1 {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-cin-quiet,
+.rp-shell-v2 .rp-ccx-quiet,
+.rp-shell-v2 .rp-svc-lede,
+.rp-shell-v2 .rp-intel-lede {
+  color: var(--cci-muted) !important;
+}
+
+/* ─── Tabs & segmented controls ─── */
+.rp-shell-v2 .rp-dl .rp-dl-tabs,
+.rp-shell-v2 .rp-ledger-v4 .rp-ledger-bands,
+.rp-shell-v2 .rp-drec-surface,
+.rp-shell-v2 .rp-pills,
+.rp-shell-v2 .rp-house .rp-house-areas,
+.rp-shell-v2 .rp-stl-clock,
+.rp-shell-v2 .rp-settings-seg {
+  background: var(--cci-canvas) !important;
+  border-color: var(--cci-hair) !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-tab,
+.rp-shell-v2 .rp-ledger-band-tab,
+.rp-shell-v2 .rp-drec-surface button,
+.rp-shell-v2 .rp-pill,
+.rp-shell-v2 .rp-house .rp-house-areas button,
+.rp-shell-v2 .rp-stl-clock button,
+.rp-shell-v2 .rp-settings-seg button {
+  color: var(--cci-muted) !important;
+  background: transparent !important;
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-tab[data-active="true"],
+.rp-shell-v2 .rp-ledger-band-tab[data-active="true"],
+.rp-shell-v2 .rp-drec-surface button[data-active="true"],
+.rp-shell-v2 .rp-pill[data-on="true"],
+.rp-shell-v2 .rp-house .rp-house-areas button[data-active="true"],
+.rp-shell-v2 .rp-stl-clock button[data-active="true"],
+.rp-shell-v2 .rp-settings-seg button[data-active="true"] {
+  background: var(--cci-ink) !important;
+  color: var(--cci-bg) !important;
+  border-color: var(--cci-ink) !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2 .rp-svc-tabs {
+  border-bottom-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-svc-tab {
+  color: var(--cci-quiet) !important;
+}
+
+.rp-shell-v2 .rp-svc-tab[data-active="true"] {
+  color: var(--cci-ink) !important;
+  border-bottom-color: var(--cci-green) !important;
+}
+
+/* ─── Buttons & CTAs ─── */
+.rp-shell-v2 .rp-svc-cta,
+.rp-shell-v2 .rp-house-approve,
+.rp-shell-v2 .rp-inode-cta,
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="needs_you"] .rp-dl-cta,
+.rp-shell-v2 .rp-settings-dirty-bar button:first-child,
+.rp-shell-v2 .rp-btn-primary {
+  background: var(--cci-ink) !important;
+  color: var(--cci-bg) !important;
+  border: 0 !important;
+}
+
+.rp-shell-v2 .rp-svc-cta:hover,
+.rp-shell-v2 .rp-house .rp-house-approve:hover,
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="needs_you"]:hover .rp-dl-cta {
+  background: var(--cci-green) !important;
+  color: var(--cci-bg) !important;
+}
+
+.rp-shell-v2 .rp-svc-cta-sec,
+.rp-shell-v2 .rp-btn-secondary,
+.rp-shell-v2 .rp-house .rp-house-capture-actions button,
+.rp-shell-v2 .rp-smap-intel-links button {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-settings-dirty-bar button:last-child {
+  background: transparent !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-muted) !important;
+}
+
+/* ─── Cards, panels, raised surfaces ─── */
+.rp-shell-v2 .rp-dl .rp-dl-row,
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="needs_you"],
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="in_motion"]:hover,
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="resolved"]:hover,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-head[data-editorial="true"],
+.rp-shell-v2 .rp-drec-elevated .rp-drec-matrix,
+.rp-shell-v2 .rp-drec-elevated .rp-action-sheet,
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid,
+.rp-shell-v2 .rp-house .rp-house-gap,
+.rp-shell-v2 .rp-house .rp-house-prep,
+.rp-shell-v2 .rp-house .rp-house-estate,
+.rp-shell-v2 .rp-fopt,
+.rp-shell-v2 .rp-stl-board,
+.rp-shell-v2 .rp-stl-drawer,
+.rp-shell-v2 .rp-srv-card,
+.rp-shell-v2 .rp-srv-detail,
+.rp-shell-v2 .rp-ih-lead,
+.rp-shell-v2 .rp-ih-rowbody,
+.rp-shell-v2 .rp-intel-mod,
+.rp-shell-v2 .rp-intel-drill-item,
+.rp-shell-v2 .rp-value .rp-ccx-queue-list,
+.rp-shell-v2 .rp-value-service > ul > li,
+.rp-shell-v2 .rp-value .rp-value-miss-card,
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-scroll,
+.rp-shell-v2 .rp-cap-table,
+.rp-shell-v2 .rp-dhm-summary,
+.rp-shell-v2 .rp-dhm-table,
+.rp-shell-v2 .rp-mem-hero,
+.rp-shell-v2 .rp-ccx-queue,
+.rp-shell-v2 .rp-settings-panel {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="in_motion"],
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="resolved"],
+.rp-shell-v2 .rp-house .rp-house-dels li,
+.rp-shell-v2 .rp-house .rp-house-waste li,
+.rp-shell-v2 .rp-house .rp-house-verify li {
+  background: transparent !important;
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-tabs,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-status-pill,
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid > div[data-selected="true"],
+.rp-shell-v2 .rp-ih-lead-foot,
+.rp-shell-v2 .rp-ih-rowbody > .rp-ih-actions,
+.rp-shell-v2 .rp-value .rp-ccx-queue-list > li > .rp-value-euro-trace,
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-head,
+.rp-shell-v2 .rp-cap-head,
+.rp-shell-v2 .rp-dhm-head,
+.rp-shell-v2 .rp-fopt-cols section,
+.rp-shell-v2 .rp-svc-arrivals,
+.rp-shell-v2 .rp-house .rp-house-futures li,
+.rp-shell-v2 .rp-house .rp-house-carrying .rp-house-gap {
+  background: var(--cci-canvas) !important;
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-status-pill[data-band="needs_you"] {
+  background: color-mix(in srgb, var(--cci-watch) 14%, var(--cci-elevated)) !important;
+  border-color: color-mix(in srgb, var(--cci-watch) 45%, transparent) !important;
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-status-pill[data-band="verified"],
+.rp-shell-v2 .rp-drec-elevated .rp-drec-status-pill[data-band="learned"] {
+  background: color-mix(in srgb, var(--cci-green) 12%, var(--cci-elevated)) !important;
+  border-color: color-mix(in srgb, var(--cci-green) 40%, transparent) !important;
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid > div[data-selected="true"] {
+  box-shadow: inset 0 2px 0 var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-foot {
+  background: linear-gradient(transparent, var(--cci-bg) 35%) !important;
+}
+
+/* ─── Tables & matrix rows ─── */
+.rp-shell-v2 .rp-cap-row,
+.rp-shell-v2 .rp-dhm .rp-dhm-row,
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-block,
+.rp-shell-v2 .rp-spg tbody th,
+.rp-shell-v2 .rp-spg tbody td,
+.rp-shell-v2 .rp-settings-table th,
+.rp-shell-v2 .rp-settings-table td,
+.rp-shell-v2 .rp-settings-audit th,
+.rp-shell-v2 .rp-settings-audit td {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row:hover,
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-block[data-open="true"] .rp-loc-table-row,
+.rp-shell-v2 .rp-ih-row > summary:hover {
+  background: color-mix(in srgb, var(--cci-hover) 65%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-cap-row[data-status="degraded"],
+.rp-shell-v2 .rp-cap-row[data-status="stale"],
+.rp-shell-v2 .rp-dhm-row[data-status="degraded"],
+.rp-shell-v2 .rp-dhm-row[data-status="stale"] {
+  background: color-mix(in srgb, var(--cci-watch) 8%, var(--cci-canvas)) !important;
+}
+
+.rp-shell-v2 .rp-dhm-row[data-status="stale"] {
+  background: color-mix(in srgb, var(--cci-adverse) 7%, var(--cci-canvas)) !important;
+  box-shadow: inset 3px 0 0 var(--cci-adverse) !important;
+}
+
+/* ─── Decision Ledger (.rp-ledger / .rp-dl) ─── */
+.rp-shell-v2 .rp-ledger,
+.rp-shell-v2 .rp-dl {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-sec h2,
+.rp-shell-v2 .rp-dl .rp-dl-id,
+.rp-shell-v2 .rp-dl .rp-dl-sub,
+.rp-shell-v2 .rp-dl .rp-dl-domain,
+.rp-shell-v2 .rp-dl .rp-dl-loc,
+.rp-shell-v2 .rp-dl .rp-dl-state {
+  color: var(--cci-muted);
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-sec[data-band="needs_you"] h2,
+.rp-shell-v2 .rp-dl .rp-dl-title,
+.rp-shell-v2 .rp-dl .rp-dl-econ b {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="needs_you"] {
+  border-color: color-mix(in srgb, var(--cci-green) 28%, var(--cci-hair)) !important;
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="needs_you"] .rp-dl-econ b,
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="needs_you"] .rp-dl-mark {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="needs_you"] .rp-dl-state {
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-row[data-band="resolved"] .rp-dl-state {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-dl .rp-dl-empty {
+  border-color: var(--cci-hair-strong) !important;
+  color: var(--cci-quiet);
+}
+
+.rp-shell-v2 .rp-ledger-section[data-band="needs_you"] h2 em,
+.rp-shell-v2 .rp-dl .rp-dl-sec[data-band="needs_you"] h2 em {
+  background: var(--cci-green) !important;
+  color: var(--cci-bg) !important;
+}
+
+/* ─── Decision Room (.rp-drec) ─── */
+.rp-shell-v2 .rp-drec.rp-drec-elevated {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-crumb,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-confidence dt,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-why-facts dt,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-state dt,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-econ-cap {
+  color: var(--cci-quiet) !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-rec-block > h2,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-econ-num,
+.rp-shell-v2 .rp-drec-elevated .rp-action-st,
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid [data-semantic="positive"] {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-deadline-hero {
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec::before,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-nav,
+.rp-shell-v2 .rp-drec-elevated dl.rp-drec-confidence,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-why-facts > div,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-state > div {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec > h2,
+.rp-shell-v2 .rp-drec-elevated .rp-drec-rec-block .rp-drec-reason {
+  color: var(--cci-muted) !important;
+}
+
+/* ─── House (.rp-house) ─── */
+.rp-shell-v2 .rp-house {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-house .rp-house-pulse span {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-house .rp-house-pulse span[data-tone="attention"] {
+  background: var(--cci-ink) !important;
+  border-color: var(--cci-ink) !important;
+  color: var(--cci-bg) !important;
+}
+
+.rp-shell-v2 .rp-house .rp-house-pulse span[data-tone="handling"],
+.rp-shell-v2 .rp-house .rp-house-att[data-state="handling"],
+.rp-shell-v2 .rp-house .rp-house-att[data-state="verified"],
+.rp-shell-v2 .rp-house .rp-house-prepared .rp-house-lbl,
+.rp-shell-v2 .rp-house-decision a {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-house .rp-house-human .rp-house-lbl {
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-house .rp-house-att[data-state="needs_you"] {
+  background: color-mix(in srgb, var(--cci-watch) 12%, var(--cci-elevated)) !important;
+  border-color: color-mix(in srgb, var(--cci-watch) 45%, transparent) !important;
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-house .rp-house-futures li[data-rec="true"] {
+  background: color-mix(in srgb, var(--cci-green) 10%, var(--cci-canvas)) !important;
+  border-color: color-mix(in srgb, var(--cci-green) 35%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-house .rp-house-gap,
+.rp-shell-v2 .rp-house .rp-house-capture,
+.rp-shell-v2 .rp-house .rp-house-gaps,
+.rp-shell-v2 .rp-house .rp-house-captures,
+.rp-shell-v2 .rp-house .rp-house-dels,
+.rp-shell-v2 .rp-house .rp-house-waste,
+.rp-shell-v2 .rp-house .rp-house-verify {
+  border-color: var(--cci-hair) !important;
+}
+
+/* ─── Service (.rp-svc) ─── */
+.rp-shell-v2 .rp-svc {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-svc-rail,
+.rp-shell-v2 .rp-srv-hero {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-fopt[data-result="better"],
+.rp-shell-v2 .rp-fopt-cols section[data-plan="true"],
+.rp-shell-v2 .rp-stl-block[data-kind="walk_in"],
+.rp-shell-v2 .rp-stl-block[data-kind="recoverable"] {
+  background: color-mix(in srgb, var(--cci-green) 10%, var(--cci-canvas)) !important;
+  border-color: color-mix(in srgb, var(--cci-green) 30%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-fopt-compare {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair) !important;
+  box-shadow: 0 12px 32px color-mix(in srgb, #000 35%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-stl-track {
+  background: color-mix(in srgb, var(--cci-ink) 6%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-stl-block {
+  background: color-mix(in srgb, var(--cci-ink) 14%, var(--cci-elevated)) !important;
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-stl-chips li,
+.rp-shell-v2 .rp-srv-sources em,
+.rp-shell-v2 .rp-smap-drawer-state {
+  background: var(--cci-hover) !important;
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-srv-card[data-active="true"] {
+  border-color: color-mix(in srgb, var(--cci-green) 45%, transparent) !important;
+  box-shadow: inset 2px 0 0 var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-spg td[data-tone="risk"] .rp-spg-val,
+.rp-shell-v2 .rp-srv-card dd[data-impact="high"] {
+  color: var(--cci-adverse) !important;
+}
+
+/* ─── Intelligence Hub (.rp-intel-hub / .rp-intel-cockpit) ─── */
+.rp-shell-v2 .rp-intel-hub,
+.rp-shell-v2 .rp-intel-cockpit {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-intel-cockpit .rp-intel-hub-head h1 {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-intel-cockpit .rp-intel-chip,
+.rp-shell-v2 .rp-intel-cockpit .rp-intel-search input,
+.rp-shell-v2 .rp-intel-toolbar .rp-intel-chip,
+.rp-shell-v2 .rp-ih-chips span {
+  background: var(--cci-hover) !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-ih-pill[data-j="DECISION_FORMED"] {
+  background: color-mix(in srgb, var(--cci-green) 14%, transparent) !important;
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-ih-pill[data-j="WATCHING"] {
+  background: color-mix(in srgb, var(--cci-watch) 14%, transparent) !important;
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-ih-declink,
+.rp-shell-v2 .rp-cap-inline,
+.rp-shell-v2 .rp-cap-decs a,
+.rp-shell-v2 .rp-dhm-affects a {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-intel-drill-item,
+.rp-shell-v2 .rp-intel-bento-cell .rp-intel-mod {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair) !important;
+}
+
+/* ─── Intelligence node (.rp-inode) ─── */
+.rp-shell-v2 .rp-inode {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-inode-crumb,
+.rp-shell-v2 .rp-inode-note,
+.rp-shell-v2 .rp-inode-body,
+.rp-shell-v2 .rp-inode-quiet,
+.rp-shell-v2 .rp-inode-sowhat dt,
+.rp-shell-v2 .rp-inode-levers span {
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-inode-crumb button,
+.rp-shell-v2 .rp-inode-crumb em,
+.rp-shell-v2 .rp-inode-sowhat dd {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-inode-health {
+  background: color-mix(in srgb, var(--cci-watch) 14%, var(--cci-canvas)) !important;
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-inode-levers li[data-rec="true"] {
+  background: color-mix(in srgb, var(--cci-green) 10%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-inode-spark polyline {
+  stroke: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-inode-spark text {
+  fill: var(--cci-quiet) !important;
+}
+
+.rp-shell-v2 .rp-inode-evidence li {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-inode-foot {
+  border-color: var(--cci-hair) !important;
+}
+
+/* ─── Value (.rp-value) ─── */
+.rp-shell-v2 .rp-value {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-value .rp-ccx-row-econ strong {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-value .rp-ccx-queue-list > li:hover {
+  background: color-mix(in srgb, var(--cci-hover) 55%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-value .rp-value-euro-trace li:last-child::before {
+  background: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-value .rp-value-miss-card {
+  border-color: color-mix(in srgb, var(--cci-adverse) 35%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-value .rp-value-miss-metrics dd[data-tone="miss"] {
+  color: var(--cci-adverse) !important;
+}
+
+.rp-shell-v2 .rp-value-service {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-value-service dd[data-tone="verified"] {
+  color: var(--cci-green) !important;
+}
+
+/* ─── Locations (.rp-locations / portfolio) ─── */
+.rp-shell-v2 .rp-locations,
+.rp-shell-v2 .rp-loc-portfolio {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-loc-section-head {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich [data-col="attention"][data-state="needs"] {
+  background: color-mix(in srgb, var(--cci-watch) 14%, transparent) !important;
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich [data-col="attention"][data-state="action"] {
+  background: var(--cci-hover) !important;
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich [data-col="vs-fcst"],
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich [data-col="vs-plan"] {
+  color: var(--cci-adverse) !important;
+}
+
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich [data-col="vs-fcst"][data-pos="true"],
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich [data-col="vs-plan"][data-pos="true"],
+.rp-shell-v2 .rp-loc-portfolio .rp-loc-table-rich [data-col="verified"][data-verified="true"] {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-loc-expand-kpis {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-loc-expand-kpis dd[data-pos="true"],
+.rp-shell-v2 .rp-loc-expand-kpis dd[data-verified="true"] {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-loc-expand-kpis dd[data-tone="neg"] {
+  color: var(--cci-adverse) !important;
+}
+
+/* ─── Connections / Integrations (.rp-integrations / .rp-cap) ─── */
+.rp-shell-v2 .rp-integrations,
+.rp-shell-v2 .rp-cap {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-cap-pill,
+.rp-shell-v2 .rp-dhm-pill {
+  background: color-mix(in srgb, var(--cci-green) 12%, transparent) !important;
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-cap-pill[data-status="degraded"],
+.rp-shell-v2 .rp-dhm-pill[data-status="degraded"] {
+  background: color-mix(in srgb, var(--cci-watch) 16%, transparent) !important;
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-cap-pill[data-status="stale"],
+.rp-shell-v2 .rp-dhm-pill[data-status="stale"] {
+  background: color-mix(in srgb, var(--cci-adverse) 12%, transparent) !important;
+  color: var(--cci-adverse) !important;
+}
+
+.rp-shell-v2 .rp-cap-unlocks li {
+  background: var(--cci-hover) !important;
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-cap-impact {
+  color: var(--cci-watch) !important;
+  border-color: var(--cci-hair-strong) !important;
+}
+
+/* ─── Data health (.rp-dhm) ─── */
+.rp-shell-v2 .rp-dhm {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-dhm-summary > div[data-tone="watch"] dd {
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-dhm-summary > div[data-tone="adverse"] dd {
+  color: var(--cci-adverse) !important;
+}
+
+.rp-shell-v2 .rp-dhm-row[data-status="degraded"] {
+  box-shadow: inset 3px 0 0 var(--cci-watch) !important;
+}
+
+/* ─── Memory (.rp-memory) ─── */
+.rp-shell-v2 .rp-memory,
+.rp-shell-v2 .rp-memory-cockpit {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-mem-hero h2,
+.rp-shell-v2 .rp-memory-featured-title {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-mem-hero-sub,
+.rp-shell-v2 .rp-mem-hero-stats span {
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-mem-hero-stats strong[data-now="true"] {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-mem-hero-meta span {
+  background: var(--cci-hover) !important;
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-mem-v-chip[data-now="true"] {
+  border-color: color-mix(in srgb, var(--cci-green) 45%, transparent) !important;
+  background: color-mix(in srgb, var(--cci-green) 10%, var(--cci-canvas)) !important;
+}
+
+.rp-shell-v2 .rp-memory-band-normal {
+  background: color-mix(in srgb, var(--cci-green) 35%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-memory-band-marker {
+  background: var(--cci-ink) !important;
+  box-shadow: 0 0 0 2px var(--cci-elevated) !important;
+}
+
+.rp-shell-v2 .rp-memory-band-track {
+  background: color-mix(in srgb, var(--cci-ink) 8%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-cal-grid,
+.rp-shell-v2 .rp-cal-axis {
+  stroke: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-cal-tick,
+.rp-shell-v2 .rp-cal-axislabel,
+.rp-shell-v2 .rp-cal-reflabel {
+  fill: var(--cci-quiet) !important;
+}
+
+/* ─── Settings (.rp-settings-app) ─── */
+.rp-shell-v2 .rp-settings-app {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-settings-search input,
+.rp-shell-v2 .rp-settings-field input,
+.rp-shell-v2 .rp-settings-field select,
+.rp-shell-v2 .rp-settings-mobile-jump select {
+  background: var(--cci-canvas) !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-settings-policy-cards li,
+.rp-shell-v2 .rp-settings-attention-preview li,
+.rp-shell-v2 .rp-settings-autonomy-ladder li,
+.rp-shell-v2 .rp-settings-inherit li {
+  background: var(--cci-canvas) !important;
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-settings-nav-item:hover,
+.rp-shell-v2 .rp-settings-nav-item:focus-visible {
+  background: color-mix(in srgb, var(--cci-ink) 5%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-settings-nav-item[data-active="true"] {
+  background: color-mix(in srgb, var(--cci-green) 12%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-settings-nav-item[data-active="true"] strong {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-settings-saved {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-settings-saved[data-dirty="true"] {
+  color: var(--cci-watch) !important;
+}
+
+.rp-shell-v2 .rp-settings-policy-cards li[data-highlight="true"] {
+  border-color: color-mix(in srgb, var(--cci-green) 50%, transparent) !important;
+  background: color-mix(in srgb, var(--cci-green) 8%, var(--cci-canvas)) !important;
+}
+
+.rp-shell-v2 .rp-settings-loc-list li {
+  border-color: var(--cci-hair) !important;
+}
+
+/* ─── Forecast & attention lists (.rp-forecast alias + .rp-attention) ─── */
+.rp-shell-v2 .rp-forecast,
+.rp-shell-v2 .rp-attention {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-attention-title,
+.rp-shell-v2 .rp-attention-issue {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-attention-sub,
+.rp-shell-v2 .rp-attention-meta,
+.rp-shell-v2 .rp-attention-terr {
+  color: var(--cci-muted) !important;
+}
+
+.rp-shell-v2 .rp-attention-list {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-attention-row {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-attention-row:hover {
+  background: color-mix(in srgb, var(--cci-green) 6%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-attention-money strong,
+.rp-shell-v2 .rp-attention-rec span {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-attention-search,
+.rp-shell-v2 .rp-attention-filter select {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-ink) !important;
+}
+
+/* ─── Cockpit surfaces (.rp-cock / hotel) ─── */
+.rp-shell-v2 .rp-cock {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-cmd-stage-headline,
+.rp-shell-v2 .rp-cmd-stage-headline[data-need="true"] .rp-cmd-stage-word {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-cmd-stage-headline[data-need="true"] .rp-cmd-stage-count {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-cmd-stage-greet,
+.rp-shell-v2 .rp-cock-k,
+.rp-shell-v2 .rp-hotel-primary-metrics em {
+  color: var(--cci-quiet) !important;
+}
+
+.rp-shell-v2 .rp-cock-hotel .rp-cock-mod,
+.rp-shell-v2 .rp-cock-hotel .rp-cock-mod[data-mod="pace"],
+.rp-shell-v2 .rp-hotel-nownext-instrument,
+.rp-shell-v2 .rp-hotel-primary-metrics {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-hotel-judgment button {
+  border-bottom-color: color-mix(in srgb, var(--cci-green) 28%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-hotel-judgment button:hover {
+  background: color-mix(in srgb, var(--cci-green) 8%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-hotel-primary-metrics li[data-attention="true"] strong {
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-hotel-primary-metrics li[data-risk="true"] strong {
+  color: var(--cci-adverse) !important;
+}
+
+/* Light panels inside cockpit grid */
+.rp-shell-v2 .rp-cock .rp-cock-mod[data-surface="panel"],
+.rp-shell-v2 .rp-cc4-mod,
+.rp-shell-v2 .rp-cock-drawer,
+.rp-shell-v2 .rp-cock-popover {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair) !important;
+  box-shadow: none !important;
+}
+
+/* ─── CCX command rows (memory, value, shared) ─── */
+.rp-shell-v2 .rp-ccx-command,
+.rp-shell-v2 .rp-ccx-row2 {
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-ccx-greet {
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-ccx-queue-list > li,
+.rp-shell-v2 .rp-ccx-mini li {
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2 .rp-ccx-mini li:hover {
+  background: color-mix(in srgb, var(--cci-hover) 50%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-ccx-hero-link {
+  color: var(--cci-green) !important;
+}
+
+/* ─── Forms & inputs (catch stray white fields) ─── */
+.rp-shell-v2 input:not([type="checkbox"]):not([type="radio"]),
+.rp-shell-v2 select,
+.rp-shell-v2 textarea {
+  background-color: var(--cci-canvas);
+  border-color: var(--cci-hair);
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 input::placeholder,
+.rp-shell-v2 textarea::placeholder {
+  color: var(--cci-quiet);
+}
+
+/* ─── Hotel pace calendar (heat) ─── */
+.rp-shell-v2 .rp-heat,
+.rp-shell-v2 .rp-heat-period-cal {
+  background: transparent !important;
+  color: var(--cci-ink) !important;
+  border-color: var(--cci-hair) !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2 .rp-heat-period-nav,
+.rp-shell-v2 .rp-heat-period-select,
+.rp-shell-v2 .rp-heat-metric-btn {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-heat-metric-btn[aria-selected="true"],
+.rp-shell-v2 .rp-heat-metric-btn[data-active="true"] {
+  background: rgba(0, 217, 120, 0.12) !important;
+  color: var(--cci-green) !important;
+}
+
+.rp-shell-v2 .rp-heat-cell {
+  background: var(--cci-canvas) !important;
+  border-color: var(--cci-hair) !important;
+  color: var(--cci-ink) !important;
+}
+
+.rp-shell-v2 .rp-heat-cell:hover {
+  background: var(--cci-hover) !important;
+}
+
+.rp-shell-v2 .rp-heat-tip,
+.rp-shell-v2 .rp-heat-sheet-panel {
+  background: var(--cci-elevated) !important;
+  border-color: var(--cci-hair-strong) !important;
+  color: var(--cci-ink) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4) !important;
+}

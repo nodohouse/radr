@@ -1,33 +1,49 @@
 "use client";
 
 /**
- * Compatibility layer. Prefer RadrWordmark / RadrDelta going forward.
- * Keeps existing imports working while enforcing official delta asset.
+ * Canonical RADR A-mark — approved master-v4 SVG only.
+ * Prefer FrozenRadrLogo / RadrMarkNode for new surfaces.
  */
-export {
-  RADR_DELTA_ASSET as RADR_MARK_GLYPH_SRC,
-} from "@/lib/radr/brandTokens";
 
-export { RadrDelta as RadrMark, RadrDelta as BrandA } from "./RadrDelta";
+import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 
-import { RADR_DELTA_ASSET, RADR_DELTA_NAV_ASSET, RADR_DELTA_INTRINSIC } from "@/lib/radr/brandTokens";
+type Props = {
+  className?: string;
+  /** Pixel width of the mark (height follows master aspect). */
+  size?: number;
+  /** Accessible name when not decorative */
+  label?: string;
+};
 
-export const RADR_MARK = {
-  nav: {
-    src: RADR_DELTA_NAV_ASSET,
-    width: RADR_DELTA_INTRINSIC.width,
-    height: RADR_DELTA_INTRINSIC.height,
-  },
-  glyph: {
-    src: RADR_DELTA_ASSET,
-    width: RADR_DELTA_INTRINSIC.width,
-    height: RADR_DELTA_INTRINSIC.height,
-  },
-  visual: {
-    src: RADR_DELTA_ASSET,
-    width: RADR_DELTA_INTRINSIC.width,
-    height: RADR_DELTA_INTRINSIC.height,
-  },
-} as const;
+export function RadrMark({
+  className = "",
+  size = 22,
+  label,
+}: Props) {
+  return (
+    <span
+      className={`radr-mark ${className}`.trim()}
+      style={{
+        width: size,
+        height: Math.round(size * (108 / 112)),
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "visible",
+      }}
+      aria-hidden={label ? undefined : true}
+      aria-label={label}
+      data-radr-mark="true"
+    >
+      <FrozenRadrLogo
+        variant="mark"
+        theme="dark"
+        width={size}
+        decorative={!label}
+      />
+    </span>
+  );
+}
 
-export type RadrMarkVariant = keyof typeof RADR_MARK;
+/** Alias — prefer RadrMark in new code */
+export { RadrMark as RadrDeltaMark };

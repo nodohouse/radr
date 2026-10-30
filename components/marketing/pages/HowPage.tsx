@@ -49,8 +49,8 @@ function StageVisual({ stage, buy }: { stage: number; buy: Buy }) {
     ["supplier", "FreshCo"],
     ["location", "New York Flatiron"],
     ["item", "Avocado Hass 18ct"],
-    ["contract", "€31.20 / case"],
-    ["invoice", "€34.80 / case"],
+    ["contract", "$31.20 / case"],
+    ["invoice", "$34.80 / case"],
     ["channel", "Procurement"],
   ] as const;
 
@@ -536,7 +536,7 @@ export function HowPage() {
             </ul>
             <p className="rx-howp-not-close">{t("notClose")}</p>
             <div className="rx-ctas">
-              <NextLink href="/demo" className="rx-btn rx-btn-primary">
+              <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-btn rx-btn-primary">
                 {t("ctaSecondary")} <span aria-hidden="true">→</span>
               </NextLink>
               <Link href="/contact" className="rx-btn rx-btn-ghost">

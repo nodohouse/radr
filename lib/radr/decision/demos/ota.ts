@@ -88,7 +88,7 @@ export function buildOtaDecisionRecord(
 
   const base: DecisionRecord = {
     id: DECISION_IDS.ota,
-    organizationId: "org_northstar",
+    organizationId: "org_northstar_hotels",
     locationId: "loc_canal_house",
     operatingUnitId: "ou_canal_rooms",
     roleContext: "GM",
@@ -100,7 +100,7 @@ export function buildOtaDecisionRecord(
     problemStatement:
       "Nearly sold out — but giving too much away to OTAs.",
     currentState: "89% occupancy · direct 48% vs 59% target · OTA +11 pts",
-    property: "Canal House · Amsterdam",
+    property: "Mercer House · New York",
     phaseLabel: "Start of day · House",
     contextLine: "89% occupancy · 12 arrivals",
     triggerEvents: ["ota_share_drift", "high_occupancy"],
@@ -128,6 +128,7 @@ export function buildOtaDecisionRecord(
     noActionOutcome: "€4.200 commission drag on demand that can fill direct",
     options,
     recommendedOptionId: "hold_72h",
+    recommendationHeadline: "Hold premium rooms direct 72 hours",
     recommendationReasoning:
       "On comparable high-demand dates, 72h direct hold historically preceded protected contribution on remaining premium rooms.",
     expectedContributionImpact: 3100,
@@ -137,12 +138,16 @@ export function buildOtaDecisionRecord(
     confidence: {
       forecast: "HIGH",
       data: "HIGH",
-      decision: "HIGH",
-      userFacing: "HIGH",
-      explanation: "PMS + channel manager live · 18 comparable dates",
+      decision: "MEDIUM",
+      userFacing: "MEDIUM",
+      evidenceCoverage: "MEDIUM",
+      dataFreshness: "HIGH",
+      explanation:
+        "PMS + channel manager live · 18 comparable dates · sample is directional, not census",
       point: 73,
       low: 68,
       high: 79,
+      mainUncertainty: "Direct pickup rate vs modeled hold window",
     },
     decisionDeadline: "Decide before noon",
     requiredRole: "GM",
@@ -200,7 +205,7 @@ export function buildOtaDecisionRecord(
     },
     operatingDna: {
       locationId: "loc_canal_house",
-      locationLabel: "Canal House",
+      locationLabel: "Mercer House · New York",
       summary: "Direct elasticity rises on event weekends; OTA over-exposure on shoulders.",
       dna: {
         vertical: "hotel",
@@ -218,7 +223,7 @@ export function buildOtaDecisionRecord(
     memory: {
       id: "mem_ota_canal",
       locationId: "loc_canal_house",
-      locationLabel: "Canal House",
+      locationLabel: "Mercer House · New York",
       decisionType: "channel_mix_hold",
       conditions: [
         { key: "occupancy", op: "gt", value: 85 },

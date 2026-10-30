@@ -1,6 +1,7 @@
 /**
- * Canal House Amsterdam — boutique hotel DEMO fixture.
- * Parallel to Berlin restaurant; does not replace loc_ber.
+ * Mercer House · New York — boutique hotel DEMO fixture (legacy module path).
+ * Location id `loc_ams_canal` aliases to `loc_canal_house` (hero).
+ * Parallel to restaurant hero; does not replace loc_ber.
  */
 
 import type { PerishableInventoryOpportunity } from "@/lib/radr/activeRevenue/liveRecovery";
@@ -18,11 +19,12 @@ export const CANAL_HOUSE_ORG_ID = "org_canal_house";
 
 export const CANAL_HOUSE = {
   id: CANAL_HOUSE_LOCATION_ID,
-  name: "Canal House Amsterdam",
-  city: "Amsterdam",
-  country: "Netherlands",
+  name: "Mercer House",
+  displayName: "Mercer House · New York",
+  city: "New York",
+  country: "United States",
   rooms: 28,
-  street: "Keizersgracht 312",
+  street: "60 Mercer Street",
   roomTypes: ["Classic Queen", "Deluxe King", "Canal Suite"] as const,
 } as const;
 

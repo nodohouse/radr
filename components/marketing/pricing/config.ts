@@ -10,7 +10,7 @@ export const pricingConfig = {
     id: "pilot" as const,
     name: "Recovery Pilot",
     verb: "Prove",
-    cta: { href: "/contact?plan=pilot", label: "Start a recovery pilot" },
+    cta: { href: "/signup?plan=start", label: "Get started" },
   },
   core: {
     id: "core" as const,
@@ -24,7 +24,7 @@ export const pricingConfig = {
     verb: "Group scale",
     cta: { href: "/contact?plan=control", label: "Discuss Enterprise" },
   },
-  talkHref: "/contact?intent=recovery-pilot" as const,
+  talkHref: "/contact?intent=sales" as const,
   demoHref: "/demo" as const,
 } as const;
 

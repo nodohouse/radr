@@ -21,7 +21,7 @@ import type {
 const BERLIN: WeatherLocationRef = {
   locationId: DEMO_LOCATION_ID,
   timezone: "Europe/Berlin",
-  city: "Berlin",
+  city: "New York",
   latitude: 52.52,
   longitude: 13.405,
 };

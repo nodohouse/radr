@@ -6,6 +6,8 @@ import type { RoleView } from "@/lib/product/types";
 import type { DecisionRecord } from "@/lib/radr/decision/record";
 import { attentionBandOf } from "@/lib/radr/decision/lifecycle";
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
+import { filterRecordsByVertical } from "@/lib/radr/demo/verticalScope";
+import type { DemoVerticalFamily } from "@/lib/radr/vertical/experienceProfile";
 import { normalizeLocationId } from "./demoOrg";
 import {
   roleContextFor,
@@ -32,8 +34,9 @@ export function decisionInScope(
 export function filterDecisionsForRole(
   records: DecisionRecord[],
   role: RoleView,
+  vertical: DemoVerticalFamily = "restaurant",
 ): DecisionRecord[] {
-  const ctx = roleContextFor(role);
+  const ctx = roleContextFor(role, vertical);
   return records.filter((r) => decisionInScope(r, ctx));
 }
 
@@ -85,6 +88,14 @@ function priorityScore(
   // Peak always beats weekly supplier for GM
   if (r.id === DECISION_IDS.peak) s += 30;
   if (r.id === DECISION_IDS.supplier) s -= 10;
+  // Workforce peer — COO / labor lens surfaces D-1920 without GM Needs You inflation
+  if (r.id === DECISION_IDS.labor) {
+    if (priorities.includes("pattern") || priorities.includes("group")) s += 55;
+    if (priorities.includes("ops")) s += 25;
+  }
+  if (r.id === DECISION_IDS.casterSugar && priorities.includes("ops")) s += 35;
+  if (r.id === DECISION_IDS.marginCoke && priorities.includes("economics"))
+    s += 30;
 
   return s;
 }
@@ -92,8 +103,9 @@ function priorityScore(
 export function sortDecisionsForRole(
   records: DecisionRecord[],
   role: RoleView,
+  vertical: DemoVerticalFamily = "restaurant",
 ): DecisionRecord[] {
-  const ctx = roleContextFor(role);
+  const ctx = roleContextFor(role, vertical);
   return [...records].sort(
     (a, b) =>
       priorityScore(b, ctx.presentationPriority) -
@@ -104,8 +116,26 @@ export function sortDecisionsForRole(
 export function scopedDecisions(
   records: DecisionRecord[],
   role: RoleView,
+  vertical: DemoVerticalFamily = "restaurant",
 ): DecisionRecord[] {
-  return sortDecisionsForRole(filterDecisionsForRole(records, role), role);
+  return sortDecisionsForRole(
+    filterDecisionsForRole(records, role, vertical),
+    role,
+    vertical,
+  );
+}
+
+/** Role scope + demo org vertical — one org = one operating world. */
+export function scopedDecisionsForDemo(
+  records: DecisionRecord[],
+  role: RoleView,
+  vertical: DemoVerticalFamily = "restaurant",
+): DecisionRecord[] {
+  return scopedDecisions(
+    filterRecordsByVertical(records, vertical),
+    role,
+    vertical,
+  );
 }
 
 /** Urgent (NOW) vs needs review (slower horizon) within needs_you. */

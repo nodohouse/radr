@@ -1,0 +1,603 @@
+/**
+ * RADR Live — immersive spatial surface.
+ * Canvas dominates. Inspector overlays. No permanent side column.
+ */
+
+.rp-live3 {
+  --live-ink: #e8ebe9;
+  --live-muted: rgba(232, 235, 233, 0.58);
+  --live-green: #00d978;
+  --live-watch: #c9a05a;
+  --live-adverse: #c86b5c;
+  position: relative;
+  width: 100%;
+  height: calc(100dvh - 3.25rem);
+  min-height: 36rem;
+  margin: 0;
+  color: var(--live-ink);
+  overflow: hidden;
+  background: #121512;
+}
+
+.rp-live3-hud {
+  position: absolute;
+  z-index: 5;
+  top: 0.85rem;
+  left: 0.95rem;
+  right: auto;
+  display: flex;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.rp-live3-hud-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  pointer-events: auto;
+  max-width: 22rem;
+}
+
+.rp-live3-identity {
+  max-width: 20rem;
+}
+
+.rp-live3-brand {
+  margin: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--live-green);
+}
+
+.rp-live3-place {
+  margin: 0.2rem 0 0;
+  font-size: 0.98rem;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+}
+
+.rp-live3-place em {
+  font-style: normal;
+  color: var(--live-muted);
+  font-weight: 450;
+}
+
+.rp-live3-meta {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: var(--live-muted);
+}
+
+.rp-live3-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.rp-live3-seg {
+  display: inline-flex;
+  padding: 0.15rem;
+  border-radius: 0.45rem;
+  background: rgba(20, 23, 21, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.rp-live3-seg button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--live-muted);
+  font-size: 0.78rem;
+  padding: 0.38rem 0.7rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+.rp-live3-seg button[data-active="true"] {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.rp-live3-pill {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--live-green);
+  border: 1px solid rgba(0, 217, 120, 0.35);
+  background: rgba(0, 217, 120, 0.08);
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+}
+
+.rp-live3-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.rp-live3-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #121512;
+}
+
+.rp-live3-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  touch-action: none;
+}
+
+.rp-live3-spatial2d {
+  background: #12100e;
+}
+
+.rp-live3-spatial-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: default;
+}
+
+.rp-live3-fallback2d {
+  display: grid;
+  place-items: stretch;
+}
+
+.rp-live3-fallback2d svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.rp-live3-fallback-note {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.85rem;
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: rgba(232, 235, 233, 0.45);
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.rp-live3-estate-wrap {
+  position: absolute;
+  inset: 0;
+  padding: 4.5rem 1rem 1rem;
+}
+
+.rp-live3-estate-wrap .rp-live-scene {
+  height: 100%;
+}
+
+.rp-live3-estate-wrap .rp-live-svg {
+  min-height: calc(100% - 4rem);
+}
+
+/* Overlay inspector — does not reflow canvas */
+.rp-live3-inspector {
+  position: absolute;
+  top: 4.5rem;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  width: min(390px, calc(100vw - 2rem));
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.05rem 1.1rem 1.15rem;
+  border-radius: 0.7rem;
+  background: rgba(24, 28, 25, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  overflow: auto;
+}
+
+.rp-live3-insp-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.rp-live3-insp-head h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.rp-live3-insp-close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--live-muted);
+  font-size: 1.35rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.rp-live3-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.4rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--live-muted);
+}
+
+.rp-live3-status i {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--live-muted);
+  display: inline-block;
+}
+
+.rp-live3-status i[data-dot="healthy"] {
+  background: var(--live-green);
+}
+.rp-live3-status i[data-dot="watch"] {
+  background: var(--live-watch);
+}
+.rp-live3-status i[data-dot="intervene"],
+.rp-live3-status i[data-dot="critical"] {
+  background: var(--live-adverse);
+}
+
+.rp-live3-k {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--live-muted);
+}
+
+.rp-live3-body {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: rgba(232, 235, 233, 0.9);
+}
+
+.rp-live3-decision {
+  font-weight: 560;
+}
+
+.rp-live3-value {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  color: var(--live-green);
+}
+
+.rp-live3-metrics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.rp-live3-metrics li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.4rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.84rem;
+}
+
+.rp-live3-metrics li span {
+  color: var(--live-muted);
+}
+.rp-live3-metrics li[data-tone="neg"] strong {
+  color: var(--live-adverse);
+}
+.rp-live3-metrics li[data-tone="watch"] strong {
+  color: var(--live-watch);
+}
+.rp-live3-metrics li[data-tone="pos"] strong {
+  color: var(--live-green);
+}
+
+.rp-live3-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+
+.rp-live3-btn {
+  appearance: none;
+  display: inline-flex;
+  justify-content: center;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  border-radius: 0.45rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.rp-live3-btn[data-primary="true"] {
+  background: rgba(0, 217, 120, 0.14);
+  border-color: rgba(0, 217, 120, 0.35);
+}
+
+/* HTML labels in scene — compact floating cards */
+.rp-live3-label {
+  display: grid;
+  gap: 0.06rem;
+  min-width: 4.8rem;
+  max-width: 8.5rem;
+  padding: 0.28rem 0.4rem;
+  border-radius: 0.28rem;
+  background: rgba(14, 16, 14, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+  color: #f2f4f2;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  text-align: left;
+  opacity: 0.62;
+  transition: opacity 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.rp-live3-label[data-strong="true"] {
+  opacity: 1;
+}
+
+.rp-live3-label strong {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.rp-live3-label span {
+  font-size: 0.68rem;
+  color: rgba(242, 244, 242, 0.68);
+}
+
+.rp-live3-label em {
+  font-style: normal;
+  font-size: 0.6rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--live-muted);
+}
+
+.rp-live3-label em[data-sev="intervene"],
+.rp-live3-label em[data-sev="critical"] {
+  color: var(--live-adverse);
+}
+.rp-live3-label em[data-sev="watch"] {
+  color: var(--live-watch);
+}
+.rp-live3-label em[data-sev="healthy"] {
+  color: var(--live-green);
+}
+
+.rp-live3-label[data-dim="true"] {
+  opacity: 0.28;
+}
+
+.rp-live3-label[data-active="true"] {
+  border-color: rgba(0, 217, 120, 0.32);
+}
+
+/* Dev / ?liveDebug=1 renderer panel */
+.rp-live3-diag {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 12;
+  min-width: 14rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.45rem;
+  background: rgba(10, 14, 12, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d7ddd9;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  line-height: 1.45;
+  pointer-events: none;
+}
+
+.rp-live3-diag-title {
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.1em;
+  color: var(--live-green);
+}
+
+.rp-live3-diag ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rp-live3-diag-detail {
+  color: #c9a05a;
+  margin-top: 0.25rem;
+}
+
+/* Hard WebGL failure — blocks visual review until GL works */
+.rp-live3-fail {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  background: #0c0e0c;
+  color: #e8ebe9;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.rp-live3-fail-kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  color: #c86b5c;
+}
+
+.rp-live3-fail-lead {
+  margin: 0;
+  max-width: 36rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgba(232, 235, 233, 0.82);
+}
+
+.rp-live3-fail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(200, 107, 92, 0.35);
+  background: rgba(200, 107, 92, 0.06);
+  border-radius: 0.4rem;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #d7ddd9;
+}
+
+.rp-live3-fail-detail {
+  color: #c9a05a;
+  margin-top: 0.35rem;
+}
+
+.rp-live3-fail-btn {
+  appearance: none;
+  justify-self: start;
+  border: 1px solid rgba(0, 217, 120, 0.4);
+  background: rgba(0, 217, 120, 0.1);
+  color: #e8ebe9;
+  border-radius: 0.4rem;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.rp-live3-fail-hint {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  color: rgba(232, 235, 233, 0.45);
+}
+
+.rp-live3-fail-hint code,
+.rp-live3-fail-steps code {
+  color: #c9a05a;
+}
+
+.rp-live3-fail-steps {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(232, 235, 233, 0.78);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.rp-live3-fail-steps p {
+  margin: 0 0 0.45rem;
+}
+
+.rp-live3-fail-steps ol {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.rp-live3-fail-steps li {
+  margin: 0.35rem 0;
+}
+
+.rp-live3-sim {
+  margin-top: 0.35rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 0.45rem;
+  border: 1px solid rgba(0, 217, 120, 0.22);
+  background: rgba(0, 217, 120, 0.06);
+}
+
+.rp-live3-sim-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  padding: 0.2rem 0;
+  color: rgba(232, 235, 233, 0.75);
+}
+
+.rp-live3-sim-row strong {
+  color: var(--live-green);
+  font-weight: 560;
+}
+
+.rp-live3-clock {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgba(232, 235, 233, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-live3-inspector {
+    transition: none !important;
+  }
+}
+
+/* Immersive shell when Live is active */
+.rp-shell-v2[data-page="live"] .rp-content-v2 {
+  padding: 0 !important;
+  max-width: none !important;
+  overflow: hidden;
+}
+
+.rp-shell-v2[data-page="live"] .rp-goh {
+  min-height: 0 !important;
+}
+
+.rp-shell-v2[data-page="live"] .rp-goh-strip {
+  display: none !important;
+}
+
+.rp-shell-v2[data-page="live"] .rp-goh-row1 {
+  padding-block: 0.35rem !important;
+}
+
+.rp-shell-v2[data-page="live"] .rp-goh-zones {
+  gap: 0.35rem !important;
+}
+.rp-shell-v2[data-page="live"] .rp-goh-ctrl-k {
+  display: none !important;
+}
+.rp-shell-v2[data-page="live"] .rp-demo-org-kicker {
+  display: none !important;
+}

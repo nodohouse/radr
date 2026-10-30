@@ -7,7 +7,7 @@ import { CATEGORY, LIFECYCLE_PUBLIC } from "@/lib/marketing/brand";
 
 export const BRAND = {
   name: "RADR",
-  wordmark: "R△DR",
+  wordmark: "RADR",
   /** Primary public category */
   category: CATEGORY.primary,
   /** Locked category line under wordmark / footer */
@@ -20,7 +20,7 @@ export const BRAND = {
   systemOfRecord: CATEGORY.systemOfDecisionRecord,
   ambition: "Hospitality decision intelligence",
   promise: CATEGORY.slogan,
-  coreIdea: "△ is the difference.",
+  coreIdea: "Many signals. One decision.",
   productLoop: [
     "Observe.",
     "Understand.",

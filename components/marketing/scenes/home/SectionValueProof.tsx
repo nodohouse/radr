@@ -5,17 +5,17 @@ import { useRadrReveal } from "@/components/marketing/motion/useRadrReveal";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 
 const STEPS = [
-  { id: "id", label: "Identified", value: "€14.2K" },
-  { id: "act", label: "Actionable", value: "€9.7K" },
-  { id: "obs", label: "Observed", value: "€8.2K" },
-  { id: "ver", label: "Verified", value: "€7.86K", verified: true },
+  { id: "id", label: "Identified", value: "$14.2K" },
+  { id: "act", label: "Actionable", value: "$9.7K" },
+  { id: "obs", label: "Observed", value: "$8.2K" },
+  { id: "ver", label: "Verified", value: "$7.86K", verified: true },
 ] as const;
 
 const KINDS = [
-  { id: "protected", label: "Protected", value: "€4.2K" },
-  { id: "recovered", label: "Recovered", value: "€1.1K" },
-  { id: "created", label: "Created", value: "€1.8K" },
-  { id: "avoided", label: "Avoided", value: "€0.76K" },
+  { id: "protected", label: "Protected", value: "$4.2K" },
+  { id: "recovered", label: "Recovered", value: "$1.1K" },
+  { id: "created", label: "Created", value: "$1.8K" },
+  { id: "avoided", label: "Avoided", value: "$0.76K" },
 ] as const;
 
 /**

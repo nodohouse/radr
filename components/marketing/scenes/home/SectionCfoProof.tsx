@@ -81,7 +81,7 @@ export function SectionCfoProof() {
               </div>
             </dl>
             <Link
-              href={`/app/decisions/${proof.decisionId}`}
+              href="/product/value"
               className="rp-brief-open"
             >
               Open Decision Trace

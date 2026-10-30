@@ -23,7 +23,7 @@ export function ResidencesAttentionBoard() {
   return (
     <div className="rp-attention rp-hotel-attention">
       <header className="rp-attention-head">
-        <p className="rp-hotel-glance-kicker">LISBON RESIDENCES · DEMO</p>
+        <p className="rp-hotel-glance-kicker">Lisbon Residences</p>
         <h1 className="rp-attention-title">Needs attention</h1>
         <p className="rp-attention-sub">
           {open.length === 0
@@ -43,7 +43,7 @@ export function ResidencesAttentionBoard() {
               <p>{item.body}</p>
               {item.radrDid ? (
                 <p className="rp-hotel-attn-did">
-                  WHAT RADR ALREADY DID · {item.radrDid}
+                  What RADR already did · {item.radrDid}
                 </p>
               ) : null}
             </div>

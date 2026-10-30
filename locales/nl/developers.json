@@ -28,7 +28,8 @@
     "reference": "Referentie",
     "security": "Security",
     "trust": "Trust center",
-    "contact": "Contact"
+    "contact": "Contact",
+    "mcp": "MCP"
   },
   "codeNote": "Codevoorbeelden, API-paden en schemavelden blijven Engels.",
   "copy": "Kopiëren",
@@ -439,6 +440,47 @@
       "VERIFIED VALUE",
       "MEMORY"
     ],
-    "ingestNote": "High-level typed SDK calls such as radr.reservations.create(...) map onto the generic event ingestion layer radr.events.ingest(...). Quickstart uses the typed path; advanced docs show the generic event API."
+    "ingestNote": "High-level typed SDK calls such as radr.reservations.create(...) map onto the generic event ingestion layer radr.events.ingest(...). Quickstart uses the typed path; advanced docs show the generic event API.",
+    "traceTitle": "Decision Trace model",
+    "traceBody": "Technical Preview · proposed conceptual schema. Not live API contracts. Every material Decision can expose a structured Trace — evidence, calculation, baseline, Futures, constraints, action, outcome, verification, Memory, audit — without generative economics.",
+    "traceObjects": [
+      "Decision",
+      "EvidenceObject",
+      "Calculation",
+      "Baseline",
+      "Future",
+      "Constraint",
+      "OperatorContext",
+      "Recommendation",
+      "Action",
+      "Outcome",
+      "Verification",
+      "MemoryUpdate",
+      "AuditEvent"
+    ],
+    "traceLlmBoundary": "LLM may summarize, classify, and draft text. LLM must not invent economic values, source evidence, or attribution. Numbers derive from canonical data, deterministic functions, forecast models, and rules.",
+    "traceExample": "See demo Traces: D-4102 (verified recovery) and D-4188 (recommendation miss)."
+  },
+  "mcp": {
+    "metaTitle": "MCP — RADR Developer Preview",
+    "metaDescription": "Bring RADR hospitality intelligence into approved AI systems. Coming to developer preview.",
+    "kicker": "MCP",
+    "badge": "Coming to developer preview",
+    "title": "Permissioned hospitality intelligence for approved AI systems.",
+    "lead": "RADR can expose operating pulse, Decisions, Futures, Verified Value, Data Health and Memory to enterprise AI workflows — through the same Tool Gateway the product uses. Actions stay governed by RADR permissions, approval policies and audit controls.",
+    "whatTitle": "What MCP unlocks",
+    "what": [
+      "Query group and location operating pulse",
+      "List and inspect Decisions that need judgment",
+      "Read Futures, Verified Value and Operating Memory",
+      "Inspect Data Health and evidence freshness"
+    ],
+    "governanceTitle": "Governance",
+    "governance": "Write tools (approve, dispute, channel changes) remain gated. MCP never bypasses tenant isolation, RBAC, approval thresholds or audit logging.",
+    "exampleTitle": "Example (preview shape)",
+    "exampleNote": "Illustrative. Not a production endpoint. No secrets.",
+    "responseTitle": "Example structured response",
+    "cta": "Read Tool Gateway notes",
+    "backApi": "API reference"
   }
 }

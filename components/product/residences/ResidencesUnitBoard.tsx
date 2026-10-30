@@ -60,7 +60,7 @@ export function ResidencesUnitBoard() {
     <div className="rp-hotel-prop" aria-label="Units · turnovers">
       <header className="rp-hotel-prop-head">
         <div>
-          <p className="rp-hotel-glance-kicker">UNITS · FACILITIES · DEMO</p>
+          <p className="rp-hotel-glance-kicker">Units · Facilities</p>
           <h1>{LISBON_RESIDENCES.name}</h1>
           <p className="rp-hotel-glance-lead">
             Who arrives today · unit differences · what to prepare

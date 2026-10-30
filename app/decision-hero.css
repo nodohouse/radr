@@ -1,0 +1,507 @@
+/**
+ * Decision hero visual — cinematic product object for homepage.
+ * Open stage. Decision as foreground object. Futures as trajectories.
+ * No browser chrome. No dashboard soup.
+ */
+
+.rx-dh {
+  --dh-ink: #0a0d0b;
+  --dh-mute: #626a65;
+  --dh-faint: #9aa39c;
+  --dh-line: rgba(10, 13, 11, 0.09);
+  --dh-green: #00a85a;
+  --dh-green-live: #00d978;
+  --dh-ivory: #f7faf8;
+  position: relative;
+  isolation: isolate;
+  min-height: 36rem;
+  padding: 1.5rem 1.35rem 1.25rem;
+  border-radius: 22px;
+  background:
+    radial-gradient(90% 70% at 72% 18%, rgba(0, 217, 120, 0.07), transparent 52%),
+    linear-gradient(168deg, #ffffff 0%, var(--dh-ivory) 48%, #eef3ef 100%);
+  border: 1px solid var(--dh-line);
+  overflow: hidden;
+}
+
+.rx-dh-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rx-dh-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.4;
+}
+
+.rx-dh-orb-a {
+  width: 16rem;
+  height: 16rem;
+  top: -5rem;
+  right: -4rem;
+  background: rgba(0, 217, 120, 0.16);
+}
+
+.rx-dh-orb-b {
+  width: 11rem;
+  height: 11rem;
+  bottom: 8%;
+  left: -4rem;
+  background: rgba(10, 13, 11, 0.035);
+}
+
+.rx-dh-hair {
+  position: absolute;
+  inset: 12% 8% 28% 8%;
+  border: 1px solid rgba(10, 13, 11, 0.04);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.rx-dh > *:not(.rx-dh-field) {
+  position: relative;
+  z-index: 1;
+}
+
+.rx-dh-head {
+  margin-bottom: 0.35rem;
+}
+
+.rx-dh-needs {
+  margin: 0;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dh-mute);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.rx-dh-needs[data-on="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stage: signals converge into Decision */
+.rx-dh-stage {
+  position: relative;
+  margin-top: 0.85rem;
+}
+
+.rx-dh-signals {
+  list-style: none;
+  margin: 0 0 0.95rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.rx-dh-signals li {
+  padding: 0.32rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid var(--dh-line);
+  background: rgba(255, 255, 255, 0.55);
+  font-size: 0.74rem;
+  color: var(--dh-mute);
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transition:
+    opacity 0.5s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease,
+    color 0.45s ease,
+    background 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.rx-dh-signals li[data-on="true"] {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--i, 0) * 0.14s);
+}
+
+.rx-dh-signals li[data-i="0"] { --i: 0; }
+.rx-dh-signals li[data-i="1"] { --i: 1; }
+.rx-dh-signals li[data-i="2"] { --i: 2; }
+
+.rx-dh-signals li[data-converge="true"] {
+  border-color: rgba(0, 168, 90, 0.4);
+  color: var(--dh-ink);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 0 3px rgba(0, 217, 120, 0.06);
+  transform: translateY(4px);
+}
+
+.rx-dh-decision {
+  display: block;
+  color: inherit;
+  padding: 1.35rem 1.25rem 1.2rem;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(10, 13, 11, 0.07);
+  box-shadow:
+    0 1px 0 rgba(10, 13, 11, 0.03),
+    0 18px 40px -28px rgba(10, 13, 11, 0.18);
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition:
+    opacity 0.65s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.rx-dh-decision[data-on="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.rx-dh-decision-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dh-faint);
+}
+
+.rx-dh-deadline {
+  color: var(--dh-mute);
+}
+
+.rx-dh-verb {
+  margin: 0;
+  font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+  font-weight: 550;
+  letter-spacing: -0.028em;
+  line-height: 1.02;
+  color: var(--dh-ink);
+}
+
+.rx-dh-where {
+  margin: 0.5rem 0 1.05rem;
+  font-size: 0.92rem;
+  color: var(--dh-mute);
+}
+
+.rx-dh-econ {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.7rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(10, 13, 11, 0.06);
+}
+
+.rx-dh-econ strong {
+  font-size: 1.65rem;
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  color: var(--dh-ink);
+}
+
+.rx-dh-econ span {
+  font-size: 0.8rem;
+  color: var(--dh-mute);
+}
+
+/* Futures as thin trajectories — not a table */
+.rx-dh-futures {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.rx-dh-futures[data-on="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.rx-dh-futures li {
+  display: grid;
+  grid-template-columns: 7.75rem minmax(0, 1fr) auto;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.2rem 0;
+  color: var(--dh-faint);
+}
+
+.rx-dh-fut-lab {
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.rx-dh-fut-track {
+  display: block;
+  height: 12px;
+  overflow: visible;
+}
+
+.rx-dh-fut-track svg {
+  display: block;
+  width: calc(100% * var(--span, 1));
+  max-width: 100%;
+  height: 12px;
+  overflow: visible;
+}
+
+.rx-dh-fut-path {
+  fill: none;
+  stroke: rgba(10, 13, 11, 0.16);
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  transition:
+    stroke 0.45s ease,
+    stroke-width 0.45s ease,
+    stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rx-dh-futures[data-on="true"] .rx-dh-fut-path {
+  stroke-dashoffset: 0;
+  transition-delay: calc(var(--i, 0) * 0.08s);
+}
+
+.rx-dh-futures li:nth-child(1) { --i: 0; }
+.rx-dh-futures li:nth-child(2) { --i: 1; }
+.rx-dh-futures li:nth-child(3) { --i: 2; }
+
+.rx-dh-futures li strong {
+  font-size: 0.88rem;
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.rx-dh-futures li[data-selected="true"] {
+  color: var(--dh-ink);
+}
+
+.rx-dh-futures li[data-selected="true"] .rx-dh-fut-lab {
+  color: var(--dh-green);
+  font-weight: 550;
+}
+
+.rx-dh-futures li[data-selected="true"] .rx-dh-fut-path {
+  stroke: rgba(0, 168, 90, 0.72);
+  stroke-width: 1.6;
+}
+
+.rx-dh-futures li[data-selected="true"] strong {
+  color: var(--dh-green);
+}
+
+.rx-dh-resolve {
+  margin-top: 1.05rem;
+  min-height: 5.25rem;
+  display: grid;
+  gap: 0.32rem;
+}
+
+.rx-dh-action,
+.rx-dh-outcome,
+.rx-dh-verified,
+.rx-dh-memory {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--dh-mute);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.rx-dh-action[data-on="true"],
+.rx-dh-outcome[data-on="true"],
+.rx-dh-verified[data-on="true"],
+.rx-dh-memory[data-on="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.rx-dh-verified {
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dh-green);
+  font-weight: 600;
+}
+
+.rx-dh-verified[data-on="true"] {
+  transform: none;
+  animation: rx-dh-lock 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes rx-dh-lock {
+  0% {
+    opacity: 0;
+    letter-spacing: 0.18em;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: 0.1em;
+    transform: none;
+  }
+}
+
+.rx-dh-memory {
+  font-size: 0.72rem;
+  color: var(--dh-faint);
+}
+
+.rx-dh-foot {
+  margin-top: 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.rx-dh-cta {
+  font-size: 0.86rem;
+  font-weight: 550;
+  color: var(--dh-ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.18);
+  padding-bottom: 0.08rem;
+}
+
+.rx-dh-cta:hover {
+  border-color: var(--dh-green);
+  color: var(--dh-green);
+}
+
+.rx-dh-worlds {
+  display: inline-flex;
+  gap: 0.12rem;
+  padding: 0.14rem;
+  border-radius: 999px;
+  background: rgba(10, 13, 11, 0.035);
+}
+
+.rx-dh-world {
+  border: 0;
+  background: transparent;
+  padding: 0.32rem 0.65rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dh-mute);
+  cursor: pointer;
+}
+
+.rx-dh-world[data-active="true"] {
+  background: #fff;
+  color: var(--dh-ink);
+  box-shadow: 0 1px 2px rgba(10, 13, 11, 0.05);
+}
+
+/* Reduced / hold — show final composed state */
+.rx-dh[data-reduced="true"] .rx-dh-needs,
+.rx-dh[data-reduced="true"] .rx-dh-signals li,
+.rx-dh[data-reduced="true"] .rx-dh-decision,
+.rx-dh[data-reduced="true"] .rx-dh-futures,
+.rx-dh[data-reduced="true"] .rx-dh-action,
+.rx-dh[data-reduced="true"] .rx-dh-outcome,
+.rx-dh[data-reduced="true"] .rx-dh-verified,
+.rx-dh[data-reduced="true"] .rx-dh-memory,
+.rx-dh[data-phase="hold"] .rx-dh-needs,
+.rx-dh[data-phase="hold"] .rx-dh-signals li,
+.rx-dh[data-phase="hold"] .rx-dh-decision,
+.rx-dh[data-phase="hold"] .rx-dh-futures,
+.rx-dh[data-phase="hold"] .rx-dh-action,
+.rx-dh[data-phase="hold"] .rx-dh-outcome,
+.rx-dh[data-phase="hold"] .rx-dh-verified,
+.rx-dh[data-phase="hold"] .rx-dh-memory {
+  opacity: 1;
+  transform: none;
+}
+
+.rx-dh[data-reduced="true"] .rx-dh-fut-path,
+.rx-dh[data-phase="hold"] .rx-dh-fut-path {
+  stroke-dashoffset: 0;
+}
+
+.rx-dh[data-reduced="true"] .rx-dh-futures li[data-preferred="true"],
+.rx-dh[data-phase="hold"] .rx-dh-futures li[data-preferred="true"] {
+  color: var(--dh-ink);
+}
+
+.rx-dh[data-reduced="true"] .rx-dh-futures li[data-preferred="true"] .rx-dh-fut-lab,
+.rx-dh[data-phase="hold"] .rx-dh-futures li[data-preferred="true"] .rx-dh-fut-lab,
+.rx-dh[data-reduced="true"] .rx-dh-futures li[data-preferred="true"] strong,
+.rx-dh[data-phase="hold"] .rx-dh-futures li[data-preferred="true"] strong {
+  color: var(--dh-green);
+}
+
+.rx-dh[data-reduced="true"] .rx-dh-futures li[data-preferred="true"] .rx-dh-fut-path,
+.rx-dh[data-phase="hold"] .rx-dh-futures li[data-preferred="true"] .rx-dh-fut-path {
+  stroke: rgba(0, 168, 90, 0.72);
+  stroke-width: 1.6;
+}
+
+@media (max-width: 900px) {
+  .rx-dh {
+    min-height: 0;
+    padding: 1.25rem 1.1rem 1.05rem;
+  }
+  .rx-dh-verb {
+    font-size: 1.55rem;
+  }
+  .rx-dh-futures li {
+    grid-template-columns: 1fr auto;
+  }
+  .rx-dh-fut-track {
+    display: none;
+  }
+  .rx-dh-hair {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .rx-dh-resolve {
+    min-height: 0;
+  }
+  .rx-dh-action,
+  .rx-dh-outcome,
+  .rx-dh-memory {
+    display: none;
+  }
+  .rx-dh-futures {
+    margin-top: 0.9rem;
+  }
+  .rx-dh[data-phase="hold"] .rx-dh-verified,
+  .rx-dh[data-reduced="true"] .rx-dh-verified {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rx-dh *,
+  .rx-dh *::before,
+  .rx-dh *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -23,11 +23,7 @@ import {
 } from "@/components/marketing/scenes/home/RadrPhone";
 import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
 
-const ROTATE: HospitalityVertical[] = [
-  "restaurant",
-  "hotel",
-  "serviced_apartment",
-];
+const ROTATE: HospitalityVertical[] = ["restaurant", "hotel"];
 
 type FloorPhone = 0 | 1 | 2;
 

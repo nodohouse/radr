@@ -1,60 +1,83 @@
-/**
- * Rail / tab attention cues - scarce actionable counts only.
- * Sourced exclusively from composeRoleAttention (single SoT).
- */
-
 import type { RoleView } from "@/lib/product/types";
-import { attentionForScope } from "@/lib/radr/roleAttention";
+import { selectNeedsJudgmentCount } from "@/lib/radr/product/selectNeedsJudgment";
+import { listDecisionRecords } from "@/lib/radr/decision/store";
+import {
+  scopedDecisionsForDemo,
+  recordAttention,
+} from "@/lib/radr/product/roleScope";
+import type { DemoVerticalFamily } from "@/lib/radr/vertical/experienceProfile";
+import { houseNeedsYouCount } from "@/lib/radr/product/houseAttention";
 
 export type NavBadgeTone = "attention" | "watch" | "live";
 
 export type NavBadge = {
   count: number;
   tone: NavBadgeTone;
-  /** Short aria hint, e.g. "2 need you" */
   label: string;
-  /** @deprecated Never use glowing radar - kept optional for type compat */
   radar?: boolean;
 };
 
-/**
- * Badges only when the current role truly has unresolved attention.
- * Zero ⇒ no badge (do not invent demo floors).
- */
 export function navBadgesForScope(
   scope: string,
   role: RoleView = "gm",
+  vertical: DemoVerticalFamily = "restaurant",
 ): Record<string, NavBadge> {
-  const attn = attentionForScope(scope, role);
+  const locationId =
+    !scope || scope === "all" || scope.startsWith("region_")
+      ? undefined
+      : scope === "loc_ber"
+        ? "loc_berlin_mitte"
+        : scope;
+  const needs = selectNeedsJudgmentCount({ role, vertical, locationId });
+  const handling = scopedDecisionsForDemo(
+    listDecisionRecords(),
+    role,
+    vertical,
+  ).filter((r) => {
+    if (recordAttention(r) !== "handling") return false;
+    if (!locationId) return true;
+    return r.locationId === locationId || r.locationId === "loc_ber";
+  }).length;
+  const houseNeeds = houseNeedsYouCount(vertical);
+
   const badges: Record<string, NavBadge> = {};
 
-  if (attn.needsYou > 0) {
+  if (needs > 0) {
     badges["/app"] = {
-      count: attn.needsYou,
+      count: needs,
       tone: "attention",
       label:
-        attn.needsYou === 1
-          ? "1 thing needs you"
-          : `${attn.needsYou} things need you`,
+        needs === 1
+          ? "1 signal needs your judgment"
+          : `${needs} signals need your judgment`,
     };
     badges["/app/decisions"] = {
-      count: attn.needsYou,
+      count: needs,
       tone: "attention",
       label:
-        attn.needsYou === 1
-          ? "1 needs attention"
-          : `${attn.needsYou} need attention`,
+        needs === 1 ? "1 needs judgment" : `${needs} need judgment`,
     };
   }
 
-  if (attn.readyForApproval > 0) {
+  if (houseNeeds > 0) {
+    badges["/app/house"] = {
+      count: houseNeeds,
+      tone: "attention",
+      label:
+        houseNeeds === 1
+          ? "1 house gap needs you"
+          : `${houseNeeds} house gaps need you`,
+    };
+  }
+
+  if (handling > 0) {
     badges["/app/controls"] = {
-      count: attn.readyForApproval,
+      count: handling,
       tone: "watch",
       label:
-        attn.readyForApproval === 1
-          ? "1 ready for approval"
-          : `${attn.readyForApproval} ready for approval`,
+        handling === 1
+          ? "1 RADR is handling"
+          : `${handling} RADR is handling`,
     };
   }
 

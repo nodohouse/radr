@@ -1,0 +1,689 @@
+/**
+ * Product visual discipline — typography · spacing · hierarchy · density.
+ * Loaded LAST in /app layout. Does not change product logic.
+ * Floor: nothing below 12px (--fs-meta). Marketing typeface: Instrument Sans.
+ */
+
+.rp-root.rp-shell-v2,
+.rp-shell-v2 {
+  font-family: var(--type-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.005em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ——— Absolute readability floor (12px) ——— */
+.rp-shell-v2 .rp-rail-section-label,
+.rp-shell-v2 .rp-rail-badge,
+.rp-shell-v2 .rp-rail-tip,
+.rp-shell-v2 .rp-rail-label kbd,
+.rp-shell-v2 .rp-ctx-env,
+.rp-shell-v2 .rp-ctx-ask kbd,
+.rp-shell-v2 .rp-ccx-k,
+.rp-shell-v2 .rp-ccx-kicker,
+.rp-shell-v2 .rp-cc-kicker,
+.rp-shell-v2 .rp-cin-kicker,
+.rp-shell-v2 .rp-live-k,
+.rp-shell-v2 .rp-live-ev,
+.rp-shell-v2 .rp-intel-kicker,
+.rp-shell-v2 .rp-ask-label,
+.rp-shell-v2 .rp-conn-status,
+.rp-shell-v2 .rp-conn-fresh,
+.rp-shell-v2 .rp-drec-head-meta span,
+.rp-shell-v2 .rp-ccx-period,
+.rp-shell-v2 .rp-ccx-period-chip,
+.rp-shell-v2 .rp-conn-unlocks em,
+.rp-shell-v2 .rp-cin-health-affects em,
+.rp-shell-v2 .rp-rail-health-copy em,
+.rp-shell-v2 .rp-memory-converge-k,
+.rp-shell-v2 .rp-memory-progression span {
+  font-size: var(--fs-meta) !important;
+  font-weight: var(--fw-medium) !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  line-height: var(--lh-meta) !important;
+}
+
+/* ——— Context bar: compact Tier-3 chrome ——— */
+.rp-shell-v2 .rp-ctx {
+  min-height: var(--ctx-h);
+  padding-block: var(--space-8px);
+}
+
+.rp-shell-v2 .rp-ctx-title {
+  font-size: var(--fs-section) !important;
+  font-weight: var(--fw-semibold) !important;
+  line-height: var(--lh-section) !important;
+  letter-spacing: -0.025em !important;
+}
+
+.rp-shell-v2 .rp-ctx-judgment {
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+.rp-shell-v2 .rp-ctx-greet {
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: none !important;
+  font-family: inherit !important;
+}
+
+.rp-shell-v2 .rp-ctx-brief {
+  font-size: var(--fs-section) !important;
+  font-weight: var(--fw-semibold) !important;
+  line-height: var(--lh-section) !important;
+  letter-spacing: -0.025em !important;
+}
+
+.rp-shell-v2 .rp-ctx[data-cc="true"] {
+  min-height: auto;
+  align-items: center;
+}
+
+.rp-shell-v2 .rp-ctx-controls,
+.rp-shell-v2 .rp-ctx-scope,
+.rp-shell-v2 .rp-ctx-period-btn,
+.rp-shell-v2 .rp-role-switch-name {
+  font-size: var(--fs-label) !important;
+  font-weight: var(--fw-medium) !important;
+  line-height: var(--lh-meta) !important;
+}
+
+.rp-shell-v2 .rp-ctx-ask {
+  height: var(--btn-h);
+  font-size: var(--fs-label) !important;
+  padding-inline: var(--space-12px);
+}
+
+.rp-shell-v2 .rp-ctx-ask kbd,
+.rp-shell-v2 .rp-ctx-env {
+  font-size: var(--fs-meta) !important;
+}
+
+/* ——— Sidebar density ——— */
+.rp-shell-v2 .rp-rail-link {
+  min-height: var(--row-nav);
+  padding-block: var(--space-8px);
+}
+
+.rp-shell-v2 .rp-rail-label {
+  font-size: var(--fs-body-sm) !important;
+  font-weight: 450 !important;
+  letter-spacing: -0.01em !important;
+  text-transform: none !important;
+}
+
+.rp-shell-v2 .rp-rail-link:hover .rp-rail-label,
+.rp-shell-v2 .rp-rail-link:focus-visible .rp-rail-label {
+  font-weight: 500 !important;
+}
+
+.rp-shell-v2 .rp-rail-link[data-active="true"] .rp-rail-label,
+.rp-shell-v2 .rp-rail-link[aria-current="page"] .rp-rail-label {
+  font-weight: 600 !important;
+}
+
+.rp-shell-v2 .rp-rail-ico,
+.rp-shell-v2 .rp-rail-ico svg {
+  width: var(--icon-md) !important;
+  height: var(--icon-md) !important;
+}
+
+.rp-shell-v2 .rp-rail-section {
+  gap: var(--space-4px);
+  margin-bottom: var(--space-12px);
+}
+
+.rp-shell-v2 .rp-rail-user-meta strong {
+  font-size: var(--fs-body-sm) !important;
+  font-weight: var(--fw-semibold) !important;
+}
+
+/* ——— Page command strip ——— */
+.rp-shell-v2 .rp-ccx-command {
+  min-height: auto;
+  margin-bottom: var(--space-24px);
+  gap: var(--space-12px) var(--space-16px);
+}
+
+.rp-shell-v2 .rp-ccx-greet {
+  font-size: var(--fs-label) !important;
+  color: var(--color-text-secondary) !important;
+  line-height: var(--lh-meta) !important;
+}
+
+/* ——— Tier 1: executive statement + hero metrics ——— */
+.rp-shell-v2 .rp-ccx-exec-title,
+.rp-shell-v2 .rp-ccx-brief h2,
+.rp-shell-v2 .rp-exec-headline,
+.rp-shell-v2 .rp-cin-headline {
+  font-size: var(--fs-display) !important;
+  font-weight: var(--fw-semibold) !important;
+  line-height: var(--lh-display) !important;
+  letter-spacing: -0.035em !important;
+  max-width: 42rem;
+}
+
+.rp-shell-v2 .rp-ccx-hero-num,
+.rp-shell-v2 .rp-ccx-exec-delta strong,
+.rp-shell-v2 .rp-value .rp-ccx-hero-num,
+.rp-shell-v2 .rp-live-pace,
+.rp-shell-v2 .rp-drec-title {
+  font-size: var(--fs-hero-metric) !important;
+  font-weight: var(--fw-semibold) !important;
+  line-height: var(--lh-metric) !important;
+  letter-spacing: -0.03em !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2 .rp-live-hero-nums strong,
+.rp-shell-v2 .rp-ccx-queue-title,
+.rp-shell-v2 .rp-ccx-queue strong,
+.rp-shell-v2 .rp-ask-metric-hero strong {
+  font-size: var(--fs-key-value) !important;
+  font-weight: var(--fw-semibold) !important;
+  line-height: var(--lh-metric) !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* ——— Tier 2: module titles ——— */
+.rp-shell-v2 .rp-ccx-queue h2,
+.rp-shell-v2 .rp-live-mod > .rp-live-k + *,
+.rp-shell-v2 .rp-intel-bento-cell h3,
+.rp-shell-v2 .rp-cc-title,
+.rp-shell-v2 .rp-module-title {
+  font-size: var(--fs-module) !important;
+  font-weight: var(--fw-semibold) !important;
+  line-height: var(--lh-section) !important;
+  letter-spacing: -0.015em !important;
+  text-transform: none !important;
+}
+
+/* ——— Tier 3: quiet system ——— */
+.rp-shell-v2 .rp-ccx-more-fold,
+.rp-shell-v2 .rp-ccx-more-fold > summary,
+.rp-shell-v2 .rp-cin-quiet,
+.rp-shell-v2 .rp-ccx-quiet,
+.rp-shell-v2 .rp-live-mod-read,
+.rp-shell-v2 .rp-conn-unlocks,
+.rp-shell-v2 .rp-conn-locs {
+  font-size: var(--fs-body-sm) !important;
+  color: var(--color-text-secondary) !important;
+  line-height: var(--lh-body) !important;
+}
+
+.rp-shell-v2 .rp-ccx-more-fold {
+  padding: var(--space-8px) var(--space-16px) var(--space-12px);
+  margin: var(--space-16px) 0 var(--space-24px);
+}
+
+/* ——— Needs You: action dominates ——— */
+.rp-shell-v2 .rp-ccx-queue-list > li strong,
+.rp-shell-v2 .rp-ccx-queue [data-title],
+.rp-shell-v2 .rp-ccx-attn-title {
+  font-size: var(--fs-module) !important;
+  font-weight: var(--fw-semibold) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.rp-shell-v2 .rp-ccx-queue-list > li {
+  min-height: var(--row-table);
+  padding-block: var(--space-12px);
+}
+
+.rp-shell-v2 .rp-ccx-queue-list em,
+.rp-shell-v2 .rp-ccx-queue-list .rp-ccx-id {
+  font-size: var(--fs-meta) !important;
+  font-weight: var(--fw-medium) !important;
+  opacity: 0.85;
+}
+
+/* ——— Outliers: compact rows ——— */
+.rp-shell-v2 .rp-ccx-outliers li,
+.rp-shell-v2 .rp-ccx-out-list > li {
+  min-height: 2.75rem;
+  max-height: 4rem;
+  padding-block: var(--space-8px);
+  font-size: var(--fs-body-sm) !important;
+}
+
+/* ——— Business pulse: rail not equal cards ——— */
+.rp-shell-v2 .rp-cin-rail-track {
+  gap: var(--space-16px);
+}
+
+.rp-shell-v2 .rp-cin-rail[data-compact="true"] .rp-cin-rail-track > * strong,
+.rp-shell-v2 .rp-cin-rail[data-compact="true"] strong {
+  font-size: var(--fs-key-value) !important;
+}
+
+.rp-shell-v2 .rp-cin-rail:not([data-compact="true"]) .rp-cin-rail-track > *:nth-child(n + 4) strong {
+  font-size: var(--fs-module) !important;
+  font-weight: var(--fw-medium) !important;
+}
+
+/* ——— Charts ——— */
+.rp-shell-v2 .rp-live-traj-wrap[data-hero="true"] svg,
+.rp-shell-v2 .rp-live-hero-fold .rp-live-traj-wrap svg,
+.rp-shell-v2 .rp-cfo-hero .rp-live-traj-wrap svg {
+  max-height: var(--chart-hero-h);
+}
+
+.rp-shell-v2 .rp-live-traj-wrap:not([data-hero="true"]) svg,
+.rp-shell-v2 .rp-ccx-hero-chart svg,
+.rp-shell-v2 .rp-money-flow svg {
+  max-height: var(--chart-support-h);
+}
+
+.rp-shell-v2 .rp-live-traj-modes button,
+.rp-shell-v2 .rp-traj-layers button {
+  font-size: var(--fs-label) !important;
+  font-weight: var(--fw-medium) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.rp-shell-v2 .rp-live-traj-wrap text,
+.rp-shell-v2 .rp-live-traj svg text,
+.rp-shell-v2 .rp-opchart text {
+  font-size: 12.5px !important;
+  font-family: var(--type-body) !important;
+  fill: var(--color-text-secondary) !important;
+}
+
+/* ——— Hero chart fold: trajectory dominates, KPIs secondary ——— */
+.rp-shell-v2 .rp-live-hero-nums[data-slim="true"] strong,
+.rp-shell-v2 .rp-live-hero-nums[data-secondary="true"] strong {
+  font-size: var(--fs-module) !important;
+  font-weight: var(--fw-semibold) !important;
+}
+
+.rp-shell-v2 .rp-live-hero-nums span,
+.rp-shell-v2 .rp-live-waypoints em {
+  font-size: var(--fs-meta) !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.rp-shell-v2 .rp-live-waypoints[data-compact="true"] {
+  gap: var(--space-8px);
+  margin-top: var(--space-12px);
+}
+
+.rp-shell-v2 .rp-live-waypoints[data-compact="true"] strong {
+  font-size: var(--fs-body-sm) !important;
+}
+
+/* ——— Section rhythm ——— */
+.rp-shell-v2 .rp-ccx-row2,
+.rp-shell-v2 .rp-ccx-row3,
+.rp-shell-v2 .rp-ccx-pulse-row,
+.rp-shell-v2 .rp-live-cmd > section,
+.rp-shell-v2 .rp-live-mod {
+  margin-bottom: var(--space-24px);
+}
+
+.rp-shell-v2 .rp-ccx-hero,
+.rp-shell-v2 .rp-live-hero-fold {
+  margin-bottom: var(--space-32px);
+}
+
+/* Reduce card chrome */
+.rp-shell-v2 .rp-ccx-queue,
+.rp-shell-v2 .rp-ccx-outliers,
+.rp-shell-v2 .rp-live-mod,
+.rp-shell-v2 .rp-conn-row,
+.rp-shell-v2 .rp-intel-bento-cell {
+  border-radius: var(--radius-module) !important;
+  box-shadow: none !important;
+  border-color: color-mix(in srgb, var(--color-border) 65%, transparent) !important;
+}
+
+.rp-shell-v2 .rp-cock-mod,
+.rp-shell-v2 .rp-cock-hotel .rp-cock-mod {
+  border-color: color-mix(in srgb, #0a0d0b 5%, transparent) !important;
+  box-shadow: none !important;
+}
+
+/* ——— Tables ——— */
+.rp-shell-v2 table th {
+  font-size: var(--fs-label) !important;
+  font-weight: var(--fw-medium) !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  padding-block: var(--space-8px) !important;
+}
+
+.rp-shell-v2 table td {
+  font-size: var(--fs-body-sm) !important;
+  line-height: var(--lh-meta) !important;
+  padding-block: var(--space-12px) !important;
+  height: var(--row-table);
+}
+
+.rp-shell-v2 .rp-ccx-locpulse-row,
+.rp-shell-v2 .rp-ccx-loc-table tr {
+  min-height: var(--row-table);
+}
+
+/* ——— Connections dense rows ——— */
+.rp-shell-v2 .rp-conn-row {
+  padding: var(--space-12px) var(--space-16px) !important;
+  gap: var(--space-12px) !important;
+}
+
+.rp-shell-v2 .rp-conn-title strong {
+  font-size: 0.9375rem !important; /* 15 */
+  font-weight: var(--fw-semibold) !important;
+}
+
+.rp-shell-v2 .rp-conn-domain {
+  font-size: var(--fs-label) !important;
+}
+
+.rp-shell-v2 .rp-conn-unlocks,
+.rp-shell-v2 .rp-conn-locs {
+  font-size: var(--fs-label) !important;
+}
+
+.rp-shell-v2 .rp-vendor-logo {
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+}
+
+/* ——— Data Health compact ——— */
+.rp-shell-v2 .rp-cin-health-list > li {
+  padding: var(--space-12px) !important;
+  gap: var(--space-8px) !important;
+}
+
+.rp-shell-v2 .rp-cin-health-name strong {
+  font-size: var(--fs-body-sm) !important;
+}
+
+.rp-shell-v2 .rp-cin-health-dims {
+  font-size: var(--fs-meta) !important;
+  gap: var(--space-8px) !important;
+}
+
+.rp-shell-v2 .rp-cin-health-dims dt {
+  font-size: var(--fs-meta) !important;
+}
+
+.rp-shell-v2 .rp-cin-health-dims dd {
+  font-size: var(--fs-label) !important;
+}
+
+/* ——— Verified Value hero ——— */
+.rp-shell-v2 .rp-value-cockpit .rp-ccx-hero-num {
+  font-size: var(--fs-display) !important;
+}
+
+.rp-shell-v2 .rp-value-cockpit .rp-ccx-hero-metric-top,
+.rp-shell-v2 .rp-value-cockpit .rp-cin-quiet {
+  font-size: var(--fs-label) !important;
+}
+
+/* ——— Decision detail ——— */
+.rp-shell-v2 .rp-drec-sec h2 {
+  font-size: var(--fs-label) !important;
+  font-weight: var(--fw-medium) !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
+  color: var(--color-text-secondary) !important;
+  margin-bottom: var(--space-12px) !important;
+}
+
+.rp-shell-v2 .rp-drec-sec {
+  margin-bottom: var(--space-32px) !important;
+}
+
+.rp-shell-v2 .rp-causal-stage-nodes strong,
+.rp-shell-v2 .rp-causal-exposure strong {
+  font-size: var(--fs-module) !important;
+}
+
+.rp-shell-v2 .rp-traj-kicker,
+.rp-shell-v2 .rp-traj-sub {
+  font-size: var(--fs-label) !important;
+  text-transform: none !important;
+}
+
+/* ——— Memory calm ——— */
+.rp-shell-v2 .rp-memory-progression strong {
+  font-size: var(--fs-key-value) !important;
+}
+
+.rp-shell-v2 .rp-memory-progression span,
+.rp-shell-v2 .rp-memory-converge-k,
+.rp-shell-v2 .rp-memory-converge em {
+  font-size: var(--fs-meta) !important;
+  text-transform: none !important;
+}
+
+.rp-shell-v2 .rp-memory-converge strong {
+  font-size: var(--fs-module) !important;
+}
+
+/* ——— Butler ——— */
+.rp-ask-panel {
+  width: min(520px, calc(100vw - 32px)) !important;
+}
+
+.rp-ask-brand,
+.rp-ask-greeting {
+  font-size: 1.375rem !important; /* 22 */
+  font-weight: var(--fw-semibold) !important;
+  letter-spacing: -0.025em !important;
+  line-height: var(--lh-section) !important;
+}
+
+.rp-ask-subline,
+.rp-ask-ctx {
+  font-size: var(--fs-label) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.rp-ask-headline {
+  font-size: 1.5rem !important; /* 24 */
+  font-weight: var(--fw-semibold) !important;
+  line-height: var(--lh-section) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.rp-ask-metric-hero strong {
+  font-size: clamp(1.75rem, 2vw, 2.25rem) !important; /* 28–36 */
+  line-height: var(--lh-metric) !important;
+}
+
+.rp-ask-evi-row,
+.rp-ask-field,
+.rp-ask-suggest button {
+  font-size: var(--fs-body) !important;
+  line-height: var(--lh-body) !important;
+}
+
+.rp-ask-collapse-trig,
+.rp-ask-label {
+  font-size: var(--fs-label) !important;
+}
+
+.rp-ask-scroll-open > * + *,
+.rp-ask-scroll > * + * {
+  margin-top: var(--space-24px);
+}
+
+.rp-ask-evi-row + .rp-ask-evi-row {
+  margin-top: var(--space-8px);
+}
+
+/* ——— Buttons ——— */
+.rp-shell-v2 .rp-btn-primary,
+.rp-shell-v2 .rp-btn-secondary,
+.rp-shell-v2 button.rp-ccx-hero-link {
+  min-height: var(--btn-h);
+  font-size: var(--fs-body-sm) !important;
+  font-weight: var(--fw-medium) !important;
+  padding-inline: var(--space-16px);
+  text-transform: none !important;
+}
+
+/* ——— Status: uppercase only for short states ——— */
+.rp-shell-v2 .rp-conn-status,
+.rp-shell-v2 .rp-int-status,
+.rp-shell-v2 .rp-drec-status-pill,
+.rp-shell-v2 .rp-live-fresh[data-state="LIVE"],
+.rp-shell-v2 .rp-ccx-live {
+  font-size: var(--fs-status) !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  font-weight: var(--fw-semibold) !important;
+}
+
+/* Demote ALL CAPS kickers to sentence case */
+.rp-shell-v2 .rp-live-loc,
+.rp-shell-v2 .rp-live-waypoints em,
+.rp-shell-v2 .rp-live-mtabs button,
+.rp-shell-v2 .rp-traj-layers button,
+.rp-shell-v2 .rp-live-traj-modes button {
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* ——— Narrative measure ——— */
+.rp-shell-v2 .rp-ccx-brief p,
+.rp-shell-v2 .rp-exec-body,
+.rp-shell-v2 .rp-live-mod-read,
+.rp-shell-v2 .rp-ask-scroll p,
+.rp-shell-v2 .rp-drec-sec > p {
+  max-width: 42rem;
+}
+
+/* ——— Intelligence modules: normalize ——— */
+.rp-shell-v2 .rp-intel-bento-cell {
+  padding: var(--space-16px) !important;
+}
+
+.rp-shell-v2 .rp-intel-bento-cell p {
+  font-size: var(--fs-body-sm) !important;
+  line-height: var(--lh-body) !important;
+}
+
+/* ——— Mobile ——— */
+@media (max-width: 720px) {
+  .rp-shell-v2 {
+    --fs-display: 2rem; /* 32 */
+    --fs-hero-metric: 2.125rem; /* 34 */
+    --fs-section: 1.25rem; /* 20 */
+    --fs-key-value: 1.375rem; /* 22 */
+    --fs-body: 0.9375rem; /* 15 */
+    --chart-hero-h: 14rem;
+  }
+
+  .rp-shell-v2 .rp-ctx-title {
+    font-size: 1.25rem !important;
+  }
+
+  .rp-shell-v2 .rp-ccx-exec-title,
+  .rp-shell-v2 .rp-cin-headline {
+    font-size: var(--fs-display) !important;
+  }
+
+  .rp-ask-panel {
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-height: 100dvh !important;
+    border-radius: 0 !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .rp-shell-v2 {
+    --fs-display: 1.875rem; /* 30 */
+    --fs-hero-metric: 2rem; /* 32 */
+  }
+}
+
+/* ——— Design review type specimens ——— */
+.rp-design-type-scale {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16px);
+}
+
+.rp-design-type-scale li {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: var(--space-16px);
+  align-items: baseline;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-12px);
+}
+
+.rp-design-type-scale em {
+  font-style: normal;
+  font-size: var(--fs-meta);
+  color: var(--color-text-secondary);
+}
+
+.rp-design-type-scale [data-sample="display"] {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-display);
+  letter-spacing: -0.035em;
+}
+
+.rp-design-type-scale [data-sample="hero"] {
+  font-size: var(--fs-hero-metric);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-metric);
+}
+
+.rp-design-type-scale [data-sample="section"] {
+  font-size: var(--fs-section);
+  font-weight: var(--fw-semibold);
+}
+
+.rp-design-type-scale [data-sample="module"] {
+  font-size: var(--fs-module);
+  font-weight: var(--fw-semibold);
+}
+
+.rp-design-type-scale [data-sample="key"] {
+  font-size: var(--fs-key-value);
+  font-weight: var(--fw-semibold);
+}
+
+.rp-design-type-scale [data-sample="body"] {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.rp-design-type-scale [data-sample="meta"] {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+}
+
+/* Loc pulse / bridge axis floor */
+.rp-shell-v2 .rp-ccx-locpulse th,
+.rp-shell-v2 .rp-ccx-loc-table th,
+.rp-shell-v2 .rp-ccx-bridge-axis,
+.rp-shell-v2 .rp-ccx-bridge-tick,
+.rp-shell-v2 .rp-ccx-mini em,
+.rp-shell-v2 .rp-ccx-id {
+  font-size: var(--fs-meta) !important;
+  line-height: var(--lh-meta) !important;
+}

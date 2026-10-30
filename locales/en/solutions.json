@@ -245,34 +245,34 @@
         "findings": {
           "labor": {
             "switch": "D-1920",
-            "money": "€840 contribution at risk",
-            "summary": "Service pressure · kitchen 94% · adding FOH feeds the bottleneck · Berlin Mitte",
+            "money": "$840 contribution at risk",
+            "summary": "Service pressure · kitchen 94% · adding FOH feeds the bottleneck · Soho · New York",
             "evidence": [
               "Expected covers: 142",
               "Kitchen capacity: 94%",
               "Ticket time rising",
-              "Add-FOH path expected: €410"
+              "Add-FOH path expected: $410"
             ],
             "action": "Move 1 FOH to bar · slow delivery 25m",
             "confidence": "Medium"
           },
           "recover": {
             "switch": "RECOVER",
-            "money": "€184 verified",
+            "money": "$184 verified",
             "summary": "A late cancellation released a four top. RADR identified replacement demand and the table was rebooked.",
             "evidence": [
               "Cancelled party: 4 covers",
               "Waitlist match within 12 minutes",
               "Replacement party seated",
-              "Observed POS: €184"
+              "Observed POS: $184"
             ],
             "action": "Keep recovery workflow on for peak cancellations.",
             "confidence": "High"
           },
           "buy": {
             "switch": "D-1842",
-            "money": "€1,840 at risk tonight",
-            "summary": "Tuna Tataki bestseller · 6 portions short for peak · Berlin Mitte",
+            "money": "$1,840 at risk tonight",
+            "summary": "Tuna Tataki bestseller · 6 portions short for peak · Soho · New York",
             "evidence": [
               "82% sellout probability by 20:10",
               "81% feature-swap historical success",
@@ -283,7 +283,7 @@
           },
           "sell": {
             "switch": "SELL",
-            "money": "€260 margin opportunity",
+            "money": "$260 margin opportunity",
             "summary": "Two high volume menu items are generating strong revenue but below target contribution margin.",
             "evidence": [
               "Items: house burger, seasonal pasta",
@@ -296,8 +296,8 @@
           },
           "capacity": {
             "switch": "D-1911",
-            "money": "€620 vs seat-now",
-            "summary": "Empty tables ≠ capacity · 38 covers inbound · kitchen 92% · Berlin Mitte",
+            "money": "$620 vs seat-now",
+            "summary": "Empty tables ≠ capacity · 38 covers inbound · kitchen 92% · Soho · New York",
             "evidence": [
               "Floor occupancy: 78% · walk-ins waiting",
               "38 covers arriving in 22 min",
@@ -317,7 +317,7 @@
         "findings": {
           "sell": {
             "switch": "SELL",
-            "money": "€4,200 contribution drag",
+            "money": "$4,200 contribution drag",
             "summary": "89% occupancy · OTA share +11 pts · hold direct vs release OTA",
             "evidence": [
               "Premium rooms committed: 91%",
@@ -330,7 +330,7 @@
           },
           "recover": {
             "switch": "RECOVER",
-            "money": "€1,260 recoverable",
+            "money": "$1,260 recoverable",
             "summary": "Six cancelled rooms for this weekend have returned to inventory. Current pickup suggests four are likely to refill naturally. Two remain financially exposed.",
             "evidence": [
               "Cancellations returned: 6 rooms",
@@ -343,7 +343,7 @@
           },
           "buy": {
             "switch": "BUY",
-            "money": "€740 cost variance",
+            "money": "$740 cost variance",
             "summary": "Laundry cost per occupied room increased 11% this month without a corresponding occupancy or contract change.",
             "evidence": [
               "Cost per occupied room: +11%",
@@ -356,7 +356,7 @@
           },
           "labor": {
             "switch": "LABOR",
-            "money": "€680 potential overspend",
+            "money": "$680 potential overspend",
             "summary": "Housekeeping hours scheduled tomorrow exceed modeled room turnover demand.",
             "evidence": [
               "Departures modeled: 42",
@@ -377,7 +377,7 @@
         "findings": {
           "sell": {
             "switch": "SELL",
-            "money": "€310 opportunity",
+            "money": "$310 opportunity",
             "summary": "Warm afternoon conditions historically increase terrace demand, while current staffing and inventory remain planned to the indoor baseline.",
             "evidence": [
               "Forecast: warm, dry afternoon",
@@ -390,12 +390,12 @@
           },
           "buy": {
             "switch": "BUY",
-            "money": "€96 recoverable",
+            "money": "$96 recoverable",
             "summary": "Coffee supplier pricing differs from the agreed August price book.",
             "evidence": [
               "Price book: August contract",
               "Invoice lines: 2 beans over contract",
-              "Variance: €96",
+              "Variance: $96",
               "Invoice open"
             ],
             "action": "Request a credit against the August price book.",
@@ -403,7 +403,7 @@
           },
           "labor": {
             "switch": "LABOR",
-            "money": "€220 potential overspend",
+            "money": "$220 potential overspend",
             "summary": "Tuesday afternoon labor is scheduled above demand observed across comparable weeks.",
             "evidence": [
               "Comparable Tuesday afternoon tickets: -18%",
@@ -422,34 +422,34 @@
         "lead": "Portfolio value is not a ranking table. It is understanding why locations differ, then acting on the drivers.",
         "edge": "RADR decomposes performance so an executive can move from group to region to location to finding to evidence.",
         "portfolio": {
-          "money": "€4,200 weekly gap",
-          "summary": "Amsterdam Zuid is outperforming De Pijp by €4,200 this week.",
+          "money": "$4,200 weekly gap",
+          "summary": "West Hollywood · Los Angeles is outperforming Roma Norte · Mexico City by $4,200 this week.",
           "decompLabel": "What drives the difference",
           "drivers": [
             {
               "label": "More covers",
-              "value": "+€1,640"
+              "value": "+$1,640"
             },
             {
               "label": "Higher average spend",
-              "value": "+€980"
+              "value": "+$980"
             },
             {
               "label": "Better product mix",
-              "value": "+€720"
+              "value": "+$720"
             },
             {
               "label": "Lower discounts",
-              "value": "+€410"
+              "value": "+$410"
             },
             {
               "label": "Higher labor efficiency",
-              "value": "+€450"
+              "value": "+$450"
             }
           ],
           "why": "The strongest driver is dinner traffic between Thursday and Saturday. Labor productivity explains another meaningful portion of the variance.",
-          "action": "Replicate Zuid dinner pacing and discount discipline at De Pijp for the next two weekends.",
-          "path": "Group → Amsterdam → De Pijp → Finding → Evidence"
+          "action": "Replicate Zuid dinner pacing and discount discipline at Roma Norte · Mexico City for the next two weekends.",
+          "path": "Group → Singapore → Roma Norte · Mexico City → Finding → Evidence"
         }
       },
       "finance": {
@@ -458,43 +458,43 @@
         "lead": "RADR connects invoices, contracts, labor, payments and POS so margin questions have money attached.",
         "edge": "The point is not another dashboard. It is identified value, pending verification and verified outcomes in one ledger.",
         "month": {
-          "money": "€14,820 identified this month",
+          "money": "$14,820 identified this month",
           "summary": "Operational and financial signals reconciled into one identified value total.",
           "breakLabel": "Where the money sits",
           "buckets": [
             {
               "label": "Supplier discrepancies",
-              "value": "€4,180"
+              "value": "$4,180"
             },
             {
               "label": "Labor exposure",
-              "value": "€3,420"
+              "value": "$3,420"
             },
             {
               "label": "Revenue leakage",
-              "value": "€2,960"
+              "value": "$2,960"
             },
             {
               "label": "Recoverable credits",
-              "value": "€2,100"
+              "value": "$2,100"
             },
             {
               "label": "Other identified value",
-              "value": "€2,160"
+              "value": "$2,160"
             }
           ],
           "stages": [
             {
               "label": "Verified Value",
-              "value": "€9,640"
+              "value": "$9,640"
             },
             {
               "label": "Pending verification",
-              "value": "€2,180"
+              "value": "$2,180"
             },
             {
               "label": "Awaiting action",
-              "value": "€3,000"
+              "value": "$3,000"
             }
           ],
           "action": "Clear the three awaiting-action findings before month close.",
@@ -509,7 +509,7 @@
         "findings": {
           "sell": {
             "switch": "Orphan gap",
-            "money": "€164 net opportunity",
+            "money": "$164 net opportunity",
             "summary": "17 comparable orphan gaps · 64% historical fill under relevant release condition",
             "evidence": [
               "Premium rooms committed: 91%",
@@ -522,7 +522,7 @@
           },
           "recover": {
             "switch": "RECOVER",
-            "money": "€1,260 recoverable",
+            "money": "$1,260 recoverable",
             "summary": "Six cancelled rooms for this weekend have returned to inventory. Current pickup suggests four are likely to refill naturally. Two remain financially exposed.",
             "evidence": [
               "Cancellations returned: 6 rooms",
@@ -535,7 +535,7 @@
           },
           "buy": {
             "switch": "BUY",
-            "money": "€740 cost variance",
+            "money": "$740 cost variance",
             "summary": "Laundry cost per occupied room increased 11% this month without a corresponding occupancy or contract change.",
             "evidence": [
               "Cost per occupied room: +11%",
@@ -548,7 +548,7 @@
           },
           "labor": {
             "switch": "LABOR",
-            "money": "€680 potential overspend",
+            "money": "$680 potential overspend",
             "summary": "Housekeeping hours scheduled tomorrow exceed modeled room turnover demand.",
             "evidence": [
               "Departures modeled: 42",

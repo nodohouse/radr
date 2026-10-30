@@ -5,6 +5,7 @@
  * Not a shrunk desktop. Not decorative stock mockup.
  */
 
+import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { euro, ECON_D4102, ECON_D1911 } from "@/lib/marketing/publicDecisionEconomics";
 
 export type RadrPhoneTone = "urgent" | "brief" | "shift" | "recover" | "verified";
@@ -87,7 +88,14 @@ export function RadrPhone({ state, className = "", highlight }: Props) {
         <div className="rx-he-phone-notch" aria-hidden="true" />
         <div className="rx-he-phone-screen">
           <header className="rx-he-phone-top">
-            <span className="rx-he-phone-brand">RADR</span>
+            <span className="rx-he-phone-brand">
+              <FrozenRadrLogo
+                variant="wordmark"
+                theme="dark"
+                width={72}
+                decorative
+              />
+            </span>
             <span className="rx-he-phone-role">{state.role}</span>
           </header>
 

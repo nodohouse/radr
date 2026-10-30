@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { COMPANY } from "./config/company";
-import { RadrWordmark } from "./RadrWordmark";
+import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { SocialIcons } from "./SocialIcons";
 import "@/app/kinetic.css";
 
@@ -82,14 +82,13 @@ export function SiteFooter() {
         <div className="rx-footer-top">
           <div className="rx-footer-brand">
             <Link href="/" aria-label={t("homeAria")} className="rx-footer-home">
-              <RadrWordmark
-                size="footer"
-                variant="plain"
-                surface="light"
+              <FrozenRadrLogo
+                variant="wordmark"
+                theme="dark"
+                size="sm"
                 className="rx-footer-mark"
               />
             </Link>
-            <p className="rx-footer-slogan rx-footer-scan">{tc("slogan")}</p>
           </div>
 
           <div className="rx-footer-cols">

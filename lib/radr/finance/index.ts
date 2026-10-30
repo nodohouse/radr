@@ -1,5 +1,7 @@
 export type * from "./types";
 export { demoBerlinLiveFinance } from "./demoBerlinLive";
+export { getContributionBridge } from "./contributionBridge";
+export type { ContributionBridge, BridgeSegment } from "./contributionBridge";
 export {
   composeBerlinFinanceOperatingBrief,
   waterfallContributionIdentity,

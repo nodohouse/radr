@@ -56,7 +56,7 @@ export function parseServicePeriod(input: unknown): ServicePeriod {
   return servicePeriodSchema.parse(input);
 }
 
-/** Canonical Berlin dinner window for the demo clock. */
+/** Canonical Soho · New York dinner window for the demo clock. */
 export function demoBerlinDinnerPeriod(): ServicePeriod {
   return servicePeriodSchema.parse({
     id: "sp_ber_2026-08-19_dinner",
@@ -65,16 +65,16 @@ export function demoBerlinDinnerPeriod(): ServicePeriod {
     date: "2026-08-19",
     type: "DINNER",
     label: "Dinner",
-    startTime: "2026-08-19T17:00:00+02:00",
-    endTime: "2026-08-19T23:00:00+02:00",
+    startTime: "2026-08-19T17:00:00-04:00",
+    endTime: "2026-08-19T23:00:00-04:00",
     expectedCovers: 184,
     capacity: 96,
     waitlistDemand: 3,
     cancellations: 1,
-    weatherContext: "Warm dry evening · terrace demand elevated tomorrow",
+    weatherContext: "Warm dry evening · patio demand elevated tomorrow",
     status: "ACTIVE",
-    currency: "EUR",
-    createdAt: "2026-08-19T12:00:00+02:00",
-    updatedAt: "2026-08-19T17:30:00+02:00",
+    currency: "USD",
+    createdAt: "2026-08-19T12:00:00-04:00",
+    updatedAt: "2026-08-19T17:30:00-04:00",
   });
 }

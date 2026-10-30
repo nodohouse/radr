@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte - forward operating horizon (demo fixture).
+ * Soho · New York - forward operating horizon (demo fixture).
  * Demo as-of ~19 Aug 2026 Thursday → tomorrow Fri, week ahead, 4-week HUGE.
  * Notes are short causal whys - why this night matters.
  */

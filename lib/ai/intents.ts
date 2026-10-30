@@ -339,6 +339,28 @@ export function classifyAskIntent(
     signals.push({ intent: "LABOR_COST", weight: 7, reason: "labor_cost" });
   }
 
+  if (
+    /contribution.*(behind|short|gap|why)|why.*contribution/i.test(q)
+  ) {
+    signals.push({
+      intent: "MARGIN_ANALYSIS",
+      weight: 12,
+      reason: "contribution_behind",
+    });
+  }
+
+  if (
+    /how are we tracking|tracking today|tracking this month|pace(d|ing)? (today|mtd|month)|expected (close|month.?end)/i.test(
+      q,
+    )
+  ) {
+    signals.push({
+      intent: "REVENUE_ANALYSIS",
+      weight: 11,
+      reason: "revenue_pacing",
+    });
+  }
+
   // WEATHER AS OPERATING CONTEXT
   /** Weather, terrace, outdoor - not substrings like “training”. */
   if (
@@ -480,6 +502,42 @@ export function classifyAskIntent(
       intent: "CHANNEL_ECONOMICS",
       weight: 9,
       reason: "channel_delivery",
+    });
+  }
+
+
+  // LIVE OPERATING PULSE
+  if (
+    /pacing right now|where will (tonight|we) close|expected close|how are we pacing|what changed in the last|selling fastest|run out of|stock watch|enough stock|uber eats orders|delivery (helping|hurting)|driving kitchen pressure|worry about in the next hour|rooms still aren'?t ready|today'?s pickup|sell out tonight|room type is constrained/i.test(
+      q,
+    )
+  ) {
+    signals.push({
+      intent: "SERVICE_PRESSURE",
+      weight: 9,
+      reason: "live_operating",
+    });
+  }
+  if (
+    /what are we about to run out|stock for forecast|inventory|portions remaining|stockout/i.test(
+      q,
+    )
+  ) {
+    signals.push({
+      intent: "SERVICE_PRESSURE",
+      weight: 10,
+      reason: "stock_watch",
+    });
+  }
+  if (
+    /delivery helping or hurting|channel (fee|contribution)|uber eats|deliveroo orders/i.test(
+      q,
+    )
+  ) {
+    signals.push({
+      intent: "CHANNEL_ECONOMICS",
+      weight: 10,
+      reason: "live_delivery",
     });
   }
 

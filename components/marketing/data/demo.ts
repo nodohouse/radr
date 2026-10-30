@@ -35,7 +35,7 @@ export type DemoSignal = {
   channel: ChannelId;
   channelLabel: string;
   euros: number;
-  /** Display amount with context, e.g. €18,620 */
+  /** Display amount with context, e.g. $18,620 */
   amount: string;
   /** Period qualifier shown with amount */
   period: string;
@@ -68,7 +68,7 @@ export const SIGNALS: readonly DemoSignal[] = [
     channel: "buy",
     channelLabel: "BUY",
     euros: 18_620,
-    amount: "€18,620",
+    amount: "$18,620",
     period: " / year",
     title: "Supplier pricing mismatch",
     tag: "Review",
@@ -78,9 +78,9 @@ export const SIGNALS: readonly DemoSignal[] = [
       kind: "invoice",
       label: "Supplier invoice",
       detail: "Avocado Hass 18ct",
-      should: { label: "Contract", value: "€31.20" },
-      actual: { label: "Invoice", value: "€34.80" },
-      unitDelta: "€3.60 / case",
+      should: { label: "Contract", value: "$31.20" },
+      actual: { label: "Invoice", value: "$34.80" },
+      unitDelta: "$3.60 / case",
     },
   },
   {
@@ -89,7 +89,7 @@ export const SIGNALS: readonly DemoSignal[] = [
     channel: "recover",
     channelLabel: "RECOVER",
     euros: 4_280,
-    amount: "€4,280",
+    amount: "$4,280",
     period: " / credit",
     title: "Credit never received",
     tag: "Recoverable",
@@ -99,9 +99,9 @@ export const SIGNALS: readonly DemoSignal[] = [
       kind: "credit",
       label: "Credit note",
       detail: "Supplier credit expected",
-      should: { label: "Expected", value: "€4,280" },
-      actual: { label: "Received", value: "€0" },
-      unitDelta: "€4,280",
+      should: { label: "Expected", value: "$4,280" },
+      actual: { label: "Received", value: "$0" },
+      unitDelta: "$4,280",
     },
   },
   {
@@ -110,7 +110,7 @@ export const SIGNALS: readonly DemoSignal[] = [
     channel: "labor",
     channelLabel: "LABOR",
     euros: 11_840,
-    amount: "€11,840",
+    amount: "$11,840",
     period: " / year",
     title: "Scheduled above demand",
     tag: "Avoidable",
@@ -122,7 +122,7 @@ export const SIGNALS: readonly DemoSignal[] = [
       detail: "Staffing vs demand",
       should: { label: "Needed", value: "11" },
       actual: { label: "Scheduled", value: "14" },
-      unitDelta: "△ 3 · €840 / night",
+      unitDelta: "△ 3 · $840 / night",
     },
   },
   {
@@ -131,7 +131,7 @@ export const SIGNALS: readonly DemoSignal[] = [
     channel: "sell",
     channelLabel: "SELL",
     euros: 142_000,
-    amount: "€142,000",
+    amount: "$142,000",
     period: " / year",
     title: "Pricing opportunity",
     tag: "Missed revenue",
@@ -141,9 +141,9 @@ export const SIGNALS: readonly DemoSignal[] = [
       kind: "pricing",
       label: "Deluxe · Saturday",
       detail: "Demand high",
-      should: { label: "Optimal", value: "€395" },
-      actual: { label: "Current", value: "€360" },
-      unitDelta: "€35 / room",
+      should: { label: "Optimal", value: "$395" },
+      actual: { label: "Current", value: "$360" },
+      unitDelta: "$35 / room",
     },
   },
 ] as const;
@@ -159,7 +159,7 @@ export const HERO_TOTALS = RUNNING_TOTALS;
 export const HERO_FINAL = DEMO.final;
 
 export function formatEuro(n: number) {
-  return `€${Math.max(0, Math.round(n)).toLocaleString("en-IE")}`;
+  return `$${Math.max(0, Math.round(n)).toLocaleString("en-IE")}`;
 }
 
 export function signalByChannel(channel: ChannelId) {

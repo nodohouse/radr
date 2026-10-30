@@ -35,9 +35,9 @@ const EUR = euro(ECON_D4102.verified);
 export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
   id: "credit-not-applied",
   kicker: "Supplier / AP · Finance",
-  displayId: `${ECON_D4102.displayId} · Berlin Mitte · Demo`,
+  displayId: `${ECON_D4102.displayId} · Soho · New York · Demo`,
   variance: "Contract price variance",
-  because: `Invoice €7.45/L vs contract €6.80/L · 420 L — ${euro(ECON_D4102.exposed)} exposed`,
+  because: `Invoice $7.45/L vs contract $6.80/L · 420 L — ${euro(ECON_D4102.exposed)} exposed`,
   euro: EUR,
   grade: "Verified",
   futures: [
@@ -48,7 +48,7 @@ export const STORY_CREDIT_NOT_APPLIED: MarginStory = {
     { id: "reprice", label: "Reprice item" },
     { id: "wait", label: "Wait" },
   ],
-  traceHref: "/app/lab/control-center?seed=recover",
+  traceHref: "/product/value",
   traceLabel: "See verified recovery →",
   note: "Illustrative demo. Expected until the credit is applied.",
   tabLabel: "Supplier variance",
@@ -60,8 +60,8 @@ export const STORY_TWO_SITE_GAP: MarginStory = {
   displayId: "D-4108 · Mitte × Prenzlauer Berg",
   variance: "Cross-location price dispersion",
   because:
-    "Same olive oil · Mitte €7.45/L vs Prenzlauer Berg €6.80/L — negotiate group rate",
-  euro: "€410",
+    "Same olive oil · Mitte $7.45/L vs Prenzlauer Berg $6.80/L — negotiate group rate",
+  euro: "$410",
   grade: "Expected",
   futures: [
     { id: "absorb", label: "Absorb" },
@@ -70,7 +70,7 @@ export const STORY_TWO_SITE_GAP: MarginStory = {
     { id: "switch", label: "Switch supplier" },
     { id: "wait", label: "Wait" },
   ],
-  traceHref: "/app/lab/control-center?seed=margin-response",
+  traceHref: "/product/value",
   traceLabel: "Open Decision →",
   note: "Illustrative demo. Expected until negotiated rate or credit applies.",
   tabLabel: "Price dispersion",

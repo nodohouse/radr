@@ -17,7 +17,7 @@ export const onboardingSchema = z.object({
   locationName: z.string().trim().min(2).max(120),
   country: z.enum(countryCodes),
   currency: z.enum(CURRENCIES),
-  locationBand: z.enum(["1", "2-5", "6-20", "21-50", "50+"]).optional(),
+  locationBand: z.enum(["1", "2-5", "6-20", "21-50", "50+", "51-100", "100+"]).optional(),
   hqCity: z.string().trim().max(120).optional(),
   locationCity: z.string().trim().max(120).optional(),
   venueType: z
@@ -49,24 +49,47 @@ export const onboardingSchema = z.object({
 export type OnboardingInput = z.infer<typeof onboardingSchema>;
 
 export const onboardingPatchSchema = z.object({
+  path: z.enum(["first_value", "legacy"]).optional(),
   step: z
     .enum([
       "welcome",
+      "who",
       "organization",
+      "location",
+      "goal",
+      "evidence",
+      "upload",
+      "mapping",
+      "data_health",
+      "analyzing",
+      "reveal",
+      "complete",
+      "legacy",
       "operate",
       "units",
       "role",
+      "priorities",
       "kpis",
       "system",
       "insight",
       "operation",
-      "location",
       "building",
       "choose",
       "connect",
       "done",
     ])
     .optional(),
+  stage: z
+    .enum([
+      "your_organization",
+      "your_locations",
+      "your_goal",
+      "your_data",
+      "data_check",
+      "first_decision",
+    ])
+    .optional(),
+  milestones: z.record(z.string()).optional(),
   demoEnabled: z.boolean().optional(),
   tourDismissed: z.boolean().optional(),
   checklistDismissed: z.boolean().optional(),
@@ -79,12 +102,41 @@ export const onboardingPatchSchema = z.object({
   operatingUnits: z.array(z.string()).optional(),
   roomCount: z.number().int().positive().optional(),
   role: z.string().optional(),
+  roleLens: z.string().optional(),
+  fullName: z.string().trim().max(120).optional(),
+  industry: z.string().optional(),
+  reportingCurrency: z.string().optional(),
+  locationTimezone: z.string().optional(),
+  localCurrency: z.string().optional(),
+  decisionClass: z
+    .enum([
+      "supplier_ap",
+      "reconciliation",
+      "cost_variance",
+      "procurement",
+      "perishable_revenue",
+    ])
+    .optional(),
+  evidenceMethod: z.enum(["upload", "connect", "demo"]).optional(),
+  contractDocumentId: z.string().uuid().optional(),
+  invoiceDocumentId: z.string().uuid().optional(),
+  materialityThresholdMinor: z.number().int().nonnegative().optional(),
+  firstDecision: z.unknown().optional(),
   helpFocus: z.array(z.string()).optional(),
   selectedKpis: z.array(z.string()).optional(),
   operatingProfileId: z.string().optional(),
   venueType: z.string().optional(),
   organizationName: z.string().optional(),
   locationName: z.string().optional(),
+  locationBand: z
+    .enum(["1", "2-5", "6-20", "21-50", "50+", "51-100", "100+"])
+    .optional(),
+  locationCity: z.string().optional(),
+  locationCountry: z.string().optional(),
+  hqCity: z.string().optional(),
+  currency: z.string().optional(),
+  timezone: z.string().optional(),
+  startedAt: z.string().optional(),
 });
 
 

@@ -19,7 +19,7 @@ export function SectionSimulate() {
           <p className="rx-spine-kicker">Simulate</p>
           <h2 className="rx-spine-title">Rain changed the operation.</h2>
           <p className="rx-spine-lead">
-            Do nothing is the baseline (€0 net). Other options are net vs do
+            Do nothing is the baseline ($0 net). Other options are net vs do
             nothing — labor already subtracted. Approve the one RADR prepared.
           </p>
         </header>

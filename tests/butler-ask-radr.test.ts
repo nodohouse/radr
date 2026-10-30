@@ -33,7 +33,7 @@ describe("Ask RADR tool-grounded intelligence", () => {
     expect(opening.invite).toMatch(/want to know/);
     expect(opening.suggestions.length).toBeGreaterThan(0);
     expect(opening.suggestions.length).toBeLessThanOrEqual(3);
-    expect(opening.contextLine).toMatch(/BERLIN|NORTHSTAR/i);
+    expect(opening.contextLine).toMatch(/SOHO|NEW YORK|NORTHSTAR/i);
     expect(
       opening.rightNow.exposureLabel || opening.rightNow.attentionLabel,
     ).toBeTruthy();
@@ -54,7 +54,7 @@ describe("Ask RADR tool-grounded intelligence", () => {
       "Which location worries me most tonight?",
       ctx,
     );
-    expect(worry.summary).toMatch(/Berlin Mitte/);
+    expect(worry.summary).toMatch(/Soho · New York/);
     expect(["location_risk", "attention"]).toContain(worry.topic);
 
     let session = nextSession(

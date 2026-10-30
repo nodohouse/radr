@@ -37,7 +37,7 @@ const WORLDS: Record<Vertical, PainWorld> = {
       { t: "15:35", label: "Arrival wave building" },
       { t: "16:20", label: "Direct hold deadline" },
     ],
-    event: "Premium room booked via OTA · €310 looks good",
+    event: "Premium room booked via OTA · $310 looks good",
     meta: `${CANON_OTA.property} · 89% occupancy · premium inventory tightening`,
     clock: [
       {
@@ -53,7 +53,7 @@ const WORLDS: Record<Vertical, PainWorld> = {
       { t: "16:10", value: 1680, label: "Channel cost · contribution left" },
       { t: "16:40", value: 0, label: "Hold window · contribution gone" },
     ],
-    bench: `${CANON_OTA.property} · €${CANON_OTA.exposureEuro.toLocaleString("en-US")} contribution exposure · channel mix`,
+    bench: `${CANON_OTA.property} · $${CANON_OTA.exposureEuro.toLocaleString("en-US")} contribution exposure · channel mix`,
   },
   restaurant: {
     id: "restaurant",
@@ -74,7 +74,7 @@ const WORLDS: Record<Vertical, PainWorld> = {
       { t: "18:54", value: 180, label: "Comps + ticket drag · left" },
       { t: "19:10", value: 0, label: "Peak collision · contribution gone" },
     ],
-    bench: `${CANON_PEAK.property} · €${CANON_PEAK.exposureEuro.toLocaleString("en-US")} vs seat-now · peak capacity`,
+    bench: `${CANON_PEAK.property} · $${CANON_PEAK.exposureEuro.toLocaleString("en-US")} vs seat-now · peak capacity`,
   },
   aparthotel: {
     id: "aparthotel",
@@ -109,7 +109,7 @@ const WORLDS: Record<Vertical, PainWorld> = {
       },
       { t: "24H", value: 0, label: "Gap expires · contribution gone" },
     ],
-    bench: `${CANON_ORPHAN.property} · €${CANON_ORPHAN.exposureEuro.toLocaleString("en-US")} orphan exposure · wait vs dump`,
+    bench: `${CANON_ORPHAN.property} · $${CANON_ORPHAN.exposureEuro.toLocaleString("en-US")} orphan exposure · wait vs dump`,
   },
 };
 
@@ -231,7 +231,7 @@ export function SectionPainCinema() {
           <i className="rx-econ-clock-ring" data-r="2" />
           <i className="rx-econ-clock-glow" />
           <div className="rx-econ-clock-value" key={`${vertical}-${beat.t}`}>
-            <strong>€{beat.value.toLocaleString("en-US")}</strong>
+            <strong>${beat.value.toLocaleString("en-US")}</strong>
             <em>{beat.label}</em>
             <span>{beat.t}</span>
           </div>
@@ -241,7 +241,7 @@ export function SectionPainCinema() {
                 key={`${vertical}-${c.t}`}
                 data-on={idx === i ? "true" : idx < i ? "past" : "false"}
               >
-                €{c.value.toLocaleString("en-US")}
+                ${c.value.toLocaleString("en-US")}
               </i>
             ))}
           </div>

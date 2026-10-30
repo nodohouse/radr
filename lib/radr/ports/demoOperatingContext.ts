@@ -76,7 +76,7 @@ export function getDemoOperatingContext(
   return {
     organizationId: DEMO_ORG.id,
     locationId: "loc_ber",
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     currency: "EUR",
     timezone: DEMO_TIMEZONE,
     businessDate: DEMO_BUSINESS_DATE,

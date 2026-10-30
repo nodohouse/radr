@@ -1,0 +1,818 @@
+/**
+ * RADR product art direction — editorial · warm · precise.
+ * Loaded after product-density.css. No logic changes.
+ */
+
+.rp-shell-v2 {
+  font-weight: 450;
+  letter-spacing: -0.011em;
+}
+
+.rp-shell-v2 strong,
+.rp-shell-v2 h1,
+.rp-shell-v2 h2,
+.rp-shell-v2 h3 {
+  font-weight: 560;
+}
+
+/* ——— Cover composition (Overview) ——— */
+.rp-shell-v2 .rp-art-cover {
+  margin: 0 0 var(--space-32px);
+  padding: 0;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  max-width: 44rem;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-kicker {
+  font-size: var(--fs-meta) !important;
+  font-weight: 500 !important;
+  color: var(--color-text-secondary) !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  margin-bottom: var(--space-12px) !important;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-headline {
+  font-size: clamp(2.5rem, 3.4vw, 2.875rem) !important; /* 40–46 */
+  font-weight: 520 !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.038em !important;
+  color: var(--color-text) !important;
+  margin: 0 0 var(--space-24px) !important;
+  max-width: 18ch;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-tension {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-16px) var(--space-32px);
+  margin-bottom: var(--space-16px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-tension-a,
+.rp-shell-v2 .rp-art-cover .rp-cin-tension-b {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 8rem;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-tension strong {
+  font-size: clamp(2rem, 2.6vw, 2.75rem) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.05 !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-tension span {
+  font-size: var(--fs-label) !important;
+  color: var(--color-text-secondary) !important;
+  font-weight: 450 !important;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-tension-arrow {
+  display: none;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-facts {
+  list-style: none;
+  margin: var(--space-16px) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 36rem;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-facts a,
+.rp-shell-v2 .rp-art-cover .rp-cin-facts span {
+  font-size: var(--fs-body-sm) !important;
+  color: var(--color-text-secondary) !important;
+  line-height: 1.45 !important;
+}
+
+.rp-shell-v2 .rp-art-cover .rp-cin-proof {
+  margin-top: var(--space-12px);
+  font-size: var(--fs-meta) !important;
+  color: var(--color-text-muted) !important;
+}
+
+/* Command strip: pills only on Overview */
+.rp-shell-v2 .rp-ccx-command[data-minimal="true"] {
+  margin-bottom: var(--space-16px);
+  min-height: 2.25rem;
+}
+
+.rp-shell-v2 .rp-ccx-command-spacer {
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+
+/* ——— Editorial waterfall ——— */
+.rp-shell-v2 .rp-cin-bridge {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: var(--space-8px) 0 var(--space-24px) !important;
+  margin-bottom: var(--space-32px);
+}
+
+.rp-shell-v2 .rp-cin-bridge-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-16px);
+  margin-bottom: var(--space-16px);
+  max-width: 52rem;
+}
+
+.rp-shell-v2 .rp-cin-bridge-head .rp-cin-kicker {
+  font-size: var(--fs-section) !important;
+  font-weight: 520 !important;
+  color: var(--color-text) !important;
+  text-transform: none !important;
+  letter-spacing: -0.02em !important;
+}
+
+.rp-shell-v2 .rp-cin-bridge-sub {
+  font-size: var(--fs-label) !important;
+  color: var(--color-text-secondary) !important;
+  margin: 0.25rem 0 0 !important;
+}
+
+.rp-shell-v2 .rp-cin-bridge-var {
+  font-size: var(--fs-key-value) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.025em !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2 .rp-cin-waterfall {
+  width: 100%;
+  max-width: 56rem;
+  height: auto;
+  min-height: 14rem;
+}
+
+.rp-shell-v2 .rp-cin-waterfall [data-kind="negative"] rect,
+.rp-shell-v2 .rp-cin-wf-g[data-kind="negative"] rect,
+.rp-shell-v2 .rp-cin-wf-negative {
+  fill: var(--semantic-negative) !important;
+  opacity: 0.85;
+}
+
+.rp-shell-v2 .rp-cin-waterfall [data-kind="positive"] rect,
+.rp-shell-v2 .rp-cin-wf-positive {
+  fill: var(--semantic-positive) !important;
+}
+
+.rp-shell-v2 .rp-cin-wf-base,
+.rp-shell-v2 .rp-cin-wf-result {
+  fill: var(--chart-primary) !important;
+}
+
+.rp-shell-v2 .rp-cin-waterfall text {
+  font-family: var(--type-body) !important;
+  font-size: 12.5px !important;
+  fill: var(--color-text-secondary) !important;
+  font-weight: 450 !important;
+}
+
+/* ——— Needs you — editorial urgency ——— */
+.rp-shell-v2 .rp-cin-needs {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.rp-shell-v2 .rp-cin-needs-lede {
+  margin: 0 0 var(--space-16px);
+  font-size: var(--fs-section) !important;
+  font-weight: 450 !important;
+  color: var(--color-text) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.rp-shell-v2 .rp-cin-needs-lede strong {
+  font-size: 2.5rem !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1 !important;
+  margin-right: 0.35rem;
+  vertical-align: -0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2 .rp-cin-needs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12px);
+}
+
+.rp-shell-v2 .rp-cin-strip {
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: var(--space-12px) 0;
+  border-top: 1px solid var(--color-border);
+  cursor: pointer;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.rp-shell-v2 .rp-cin-strip-verb {
+  margin: 0;
+  font-size: 1.25rem !important; /* 20 */
+  font-weight: 520 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.15 !important;
+  color: var(--color-text) !important;
+  text-transform: none !important;
+}
+
+.rp-shell-v2 .rp-cin-strip-loc,
+.rp-shell-v2 .rp-cin-strip-meta {
+  font-size: var(--fs-label) !important;
+  color: var(--color-text-secondary) !important;
+  font-weight: 450 !important;
+}
+
+.rp-shell-v2 .rp-cin-strip-econ strong {
+  font-size: var(--fs-module) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.rp-shell-v2 .rp-cin-strip-econ span,
+.rp-shell-v2 .rp-cin-strip-econ em {
+  font-size: var(--fs-meta) !important;
+  color: var(--color-text-secondary) !important;
+  font-style: normal !important;
+  font-weight: 450 !important;
+}
+
+.rp-shell-v2 .rp-cin-strip[data-urgent="true"] {
+  box-shadow: inset 3px 0 0 var(--color-brand);
+  padding-left: var(--space-12px);
+}
+
+.rp-shell-v2 .rp-cin-strip-cta {
+  font-size: var(--fs-label) !important;
+  color: var(--color-verified) !important;
+  font-weight: 520 !important;
+}
+
+/* Outliers — quiet Tier 2 */
+.rp-shell-v2 .rp-cin-outliers {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.rp-shell-v2 .rp-cin-outliers .rp-cin-kicker {
+  font-size: var(--fs-label) !important;
+  font-weight: 520 !important;
+  text-transform: none !important;
+  color: var(--color-text-secondary) !important;
+}
+
+/* ——— Business pulse rail ——— */
+.rp-shell-v2 .rp-cin-rail {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: var(--space-8px) 0 !important;
+}
+
+.rp-shell-v2 .rp-cin-rail-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24px) var(--space-32px);
+  align-items: flex-start;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-16px);
+}
+
+.rp-shell-v2 .rp-cin-rail-item {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 5.5rem;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2 .rp-cin-rail-item strong {
+  font-size: var(--fs-key-value) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.rp-shell-v2 .rp-cin-rail-item em {
+  order: -1;
+  font-style: normal;
+  font-size: var(--fs-meta) !important;
+  color: var(--color-text-secondary) !important;
+  font-weight: 450 !important;
+}
+
+.rp-shell-v2 .rp-cin-rail-item span {
+  font-size: var(--fs-meta) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.rp-shell-v2 .rp-cin-rail-item[data-tier="secondary"] {
+  opacity: 0.85;
+}
+
+.rp-shell-v2 .rp-cin-rail-item[data-tier="secondary"] strong {
+  font-size: var(--fs-module) !important;
+  font-weight: 500 !important;
+}
+
+/* ——— Live signature ——— */
+.rp-shell-v2 .rp-live-hero-fold,
+.rp-shell-v2 .rp-cfo-hero {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 0 var(--space-24px) !important;
+}
+
+.rp-shell-v2 .rp-live-pace {
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.rp-shell-v2 .rp-live-traj-wrap {
+  background: transparent !important;
+  border: 0 !important;
+  margin: var(--space-16px) 0;
+}
+
+.rp-shell-v2 .rp-live-traj-wrap[data-hero="true"] {
+  margin-bottom: var(--space-24px);
+}
+
+.rp-shell-v2 .rp-live-mod {
+  background: transparent !important;
+  border-top: 1px solid var(--color-border) !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: var(--space-24px) 0 !important;
+}
+
+.rp-shell-v2 .rp-live-k {
+  font-size: var(--fs-label) !important;
+  font-weight: 520 !important;
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+  color: var(--color-text) !important;
+}
+
+/* Money flow — visual bands */
+.rp-shell-v2 .rp-money-flow .rp-money-gross strong {
+  font-size: var(--fs-key-value) !important;
+  font-weight: 520 !important;
+}
+
+.rp-shell-v2 .rp-money-bar[data-kind="inflow"] {
+  background: var(--color-text) !important;
+  opacity: 0.85;
+  height: 0.35rem !important;
+  border-radius: 1px;
+}
+
+.rp-shell-v2 .rp-money-bar[data-kind="reduction"] {
+  background: var(--color-text-muted) !important;
+  height: 0.35rem !important;
+  border-radius: 1px;
+}
+
+.rp-shell-v2 .rp-money-result strong {
+  font-size: var(--fs-key-value) !important;
+  font-weight: 520 !important;
+  color: var(--color-verified) !important;
+}
+
+.rp-shell-v2 .rp-money-sources,
+.rp-shell-v2 .rp-money-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8px);
+}
+
+.rp-shell-v2 .rp-money-divider {
+  font-size: 0 !important;
+  height: var(--space-16px);
+  border: 0;
+  border-top: 1px dashed var(--color-border);
+  margin: var(--space-16px) 0;
+  color: transparent;
+}
+
+/* ——— Verified Value proof room ——— */
+.rp-shell-v2 .rp-art-value-hero {
+  margin: 0 0 var(--space-40px);
+  max-width: 48rem;
+}
+
+.rp-shell-v2 .rp-art-value-num {
+  margin: 0;
+  font-size: clamp(2.75rem, 4vw, 3.25rem) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1 !important;
+  color: var(--color-verified) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2 .rp-art-value-sub {
+  margin: var(--space-8px) 0 0;
+  font-size: var(--fs-label) !important;
+  color: var(--color-text-secondary) !important;
+  font-weight: 450 !important;
+}
+
+.rp-shell-v2 .rp-art-value-meta {
+  margin: 0.2rem 0 var(--space-24px);
+  font-size: var(--fs-meta) !important;
+  color: var(--color-text-muted) !important;
+}
+
+.rp-shell-v2 .rp-art-value-meta [data-pos="true"] {
+  color: var(--color-verified);
+}
+
+.rp-shell-v2 .rp-art-value-chart {
+  background: transparent;
+  border: 0;
+  max-width: 40rem;
+}
+
+/* Kill boxed heroes on value/cc */
+.rp-shell-v2 .rp-art-proof .rp-ccx-hero-card,
+.rp-shell-v2 .rp-ccx-pulse-row[data-brief="true"] > * {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ——— Decision editorial ——— */
+.rp-shell-v2 .rp-drec-title {
+  font-size: clamp(2rem, 3vw, 2.75rem) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.08 !important;
+  text-transform: none !important;
+}
+
+.rp-shell-v2 .rp-drec-sec {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* ——— Futures trajectories ——— */
+.rp-shell-v2 .rp-traj {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2 .rp-traj-kicker {
+  font-size: var(--fs-section) !important;
+  font-weight: 520 !important;
+  text-transform: none !important;
+  color: var(--color-text) !important;
+}
+
+/* ——— Connections / settings rows ——— */
+.rp-shell-v2 .rp-conn-row,
+.rp-shell-v2 .rp-settings-row {
+  background: transparent !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Reduce equal card soup on overview attention row */
+.rp-shell-v2 .rp-ccx-brief-attn .rp-cin-needs,
+.rp-shell-v2 .rp-ccx-brief-attn .rp-cin-outliers {
+  padding-top: var(--space-8px);
+}
+
+.rp-shell-v2 .rp-ccx-more-fold {
+  background: transparent !important;
+  border-color: var(--color-border) !important;
+}
+
+@media (max-width: 720px) {
+  .rp-shell-v2 .rp-art-cover .rp-cin-headline {
+    font-size: 2rem !important;
+    max-width: none;
+  }
+
+  .rp-shell-v2 .rp-cin-needs-lede strong {
+    font-size: 2rem !important;
+  }
+
+  .rp-shell-v2 .rp-art-value-num {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* ——— Sentence case kickers (override uppercase chrome) ——— */
+.rp-shell-v2 .rp-cin-kicker,
+.rp-shell-v2 .rp-ccx-k,
+.rp-shell-v2 .rp-live-k,
+.rp-shell-v2 .rp-focus-k,
+.rp-shell-v2 .rp-focus-label,
+.rp-shell-v2 .rp-traj-kicker,
+.rp-shell-v2 .rp-drec-sec > .rp-cin-kicker,
+.rp-shell-v2 .rp-ccx-panel-head .rp-ccx-k {
+  text-transform: none !important;
+  letter-spacing: -0.01em !important;
+  font-family: var(--type-body) !important;
+  font-weight: 520 !important;
+  font-size: var(--fs-label) !important;
+}
+
+/* Tiny semantic statuses may stay uppercase */
+.rp-shell-v2 .rp-live-status,
+.rp-shell-v2 .rp-ccx-live,
+.rp-shell-v2 .rp-live-ev,
+.rp-shell-v2 .rp-drec-status-pill,
+.rp-shell-v2 .rp-live-traj-now-label {
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  font-family: var(--type-mono) !important;
+  font-size: var(--fs-meta) !important;
+  font-weight: 500 !important;
+}
+
+/* Soften boldness */
+.rp-shell-v2 .rp-cin-headline,
+.rp-shell-v2 .rp-live-pace,
+.rp-shell-v2 .rp-art-value-num,
+.rp-shell-v2 .rp-drec-title,
+.rp-shell-v2 .rp-live-hero-nums strong,
+.rp-shell-v2 .rp-cin-tension strong {
+  font-weight: 520 !important;
+}
+
+/* Live editorial hero */
+.rp-shell-v2 .rp-live-loc {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--fs-label) !important;
+  font-weight: 450 !important;
+  color: var(--color-text-secondary) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-family: var(--type-body) !important;
+}
+
+.rp-shell-v2 .rp-live-status {
+  color: var(--color-verified) !important;
+}
+
+.rp-shell-v2 .rp-live-hero-nums[data-editorial="true"] {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-24px);
+  margin: var(--space-16px) 0 var(--space-8px);
+  max-width: 40rem;
+}
+
+.rp-shell-v2 .rp-live-hero-nums[data-editorial="true"][data-cols="4"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 48rem;
+}
+
+.rp-shell-v2 .rp-live-hero-nums[data-editorial="true"] strong {
+  font-size: clamp(1.75rem, 2.5vw, 2.5rem) !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.05 !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2 .rp-live-hero-nums[data-editorial="true"] span {
+  font-size: var(--fs-label) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.rp-shell-v2 .rp-live-traj-modes button {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-family: var(--type-body) !important;
+  font-weight: 450 !important;
+}
+
+.rp-shell-v2 .rp-live-traj-bg {
+  fill: transparent !important;
+}
+
+.rp-shell-v2 .rp-live-traj-wrap[data-hero="true"] .rp-live-traj {
+  min-height: 14rem;
+}
+
+/* Money flow bands */
+.rp-shell-v2 .rp-money-bands {
+  display: grid;
+  gap: var(--space-24px);
+  margin: var(--space-16px) 0;
+}
+
+.rp-shell-v2 .rp-money-band {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.rp-shell-v2 .rp-money-band-k {
+  margin: 0 0 var(--space-8px);
+  font-size: var(--fs-label) !important;
+  font-weight: 520 !important;
+  color: var(--color-text) !important;
+  letter-spacing: -0.015em !important;
+}
+
+.rp-shell-v2 .rp-money-band[data-band="out"] .rp-money-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: var(--space-4px);
+  border-top: 1px solid var(--color-border);
+}
+
+.rp-shell-v2 .rp-money-band[data-band="leak"] .rp-money-band-k,
+.rp-shell-v2 .rp-money-band[data-band="cost"] .rp-money-band-k {
+  color: var(--color-text-secondary) !important;
+}
+
+.rp-shell-v2 .rp-money-sources li,
+.rp-shell-v2 .rp-money-steps li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.15rem 0.75rem;
+  align-items: baseline;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.rp-shell-v2 .rp-money-sources .rp-money-bar,
+.rp-shell-v2 .rp-money-steps .rp-money-bar {
+  grid-column: 1 / -1;
+  display: block;
+  max-width: 100%;
+}
+
+/* Causal chain — vertical editorial */
+.rp-shell-v2 .rp-causal-stages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-8px);
+}
+
+.rp-shell-v2 .rp-causal-arrow {
+  display: block;
+  margin: 0.15rem 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.rp-shell-v2 .rp-causal-stage-nodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12px) var(--space-24px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rp-shell-v2 .rp-causal-stage-nodes li {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.rp-shell-v2 .rp-causal-stage-nodes em {
+  display: block;
+  font-style: normal;
+  font-size: var(--fs-meta) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.rp-shell-v2 .rp-causal-stage-nodes strong {
+  font-size: var(--fs-section) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.rp-shell-v2 .rp-causal-exposure strong {
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem) !important;
+  font-weight: 520 !important;
+  color: var(--color-verified) !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Decision case file */
+.rp-shell-v2 .rp-drec-head[data-editorial="true"] {
+  max-width: 40rem;
+  margin-bottom: var(--space-32px);
+}
+
+.rp-shell-v2 .rp-drec-deadline-hero {
+  margin: var(--space-12px) 0 var(--space-8px) !important;
+  font-size: var(--fs-section) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--color-text) !important;
+  text-transform: none !important;
+}
+
+.rp-shell-v2 .rp-drec-econ-hero strong {
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem) !important;
+  font-weight: 520 !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Futures — selected path electric, others stone */
+.rp-shell-v2 .rp-traj-path {
+  stroke: var(--chart-primary);
+  stroke-width: 1.4;
+  opacity: 0.45;
+}
+
+.rp-shell-v2 .rp-traj-path[data-selected="true"],
+.rp-shell-v2 .rp-traj-path[data-rec="true"][data-selected="true"] {
+  stroke: var(--color-brand) !important;
+  stroke-width: 2.4 !important;
+  opacity: 1 !important;
+}
+
+.rp-shell-v2 .rp-traj-dot[data-selected="true"] {
+  fill: var(--color-brand) !important;
+}
+
+.rp-shell-v2 .rp-traj-svg {
+  background: transparent !important;
+}
+
+/* Instrument / dark chart panels → light */
+.rp-shell-v2 .rp-ccx-chart[data-surface="instrument"],
+.rp-shell-v2 .rp-ccx-hero-chart[data-surface="instrument"] {
+  background: transparent !important;
+  color: var(--color-text) !important;
+  border: 0 !important;
+}
+
+.rp-shell-v2 .rp-ccx-chart {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+@media (max-width: 720px) {
+  .rp-shell-v2 .rp-live-hero-nums[data-editorial="true"],
+  .rp-shell-v2 .rp-live-hero-nums[data-editorial="true"][data-cols="4"] {
+    grid-template-columns: 1fr 1fr;
+  }
+}

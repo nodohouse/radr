@@ -1,0 +1,255 @@
+/**
+ * Intelligence node — shared drawer + focus body
+ */
+
+.rp-inode {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 0.75rem);
+  min-width: 0;
+  flex: 1;
+}
+
+.rp-inode-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 0.25rem;
+  font-size: 0.72rem;
+  color: #626a65;
+}
+
+.rp-inode-crumb button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: #0a0d0b;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: 0;
+}
+
+.rp-inode-crumb em {
+  font-style: normal;
+  font-weight: 550;
+  color: #0a0d0b;
+}
+
+.rp-inode-crumb-sep {
+  color: #626a65;
+  margin: 0 0.1rem;
+}
+
+.rp-inode-hero-val {
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem) !important;
+  font-weight: 550 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.rp-inode-k {
+  margin: 0 0 0.35rem;
+  font-family: var(--type-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+
+.rp-inode-sec {
+  min-width: 0;
+}
+
+.rp-inode-slices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.rp-inode-slices > li {
+  position: relative;
+}
+
+.rp-inode-share {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 0.62rem;
+  color: #626a65;
+  pointer-events: none;
+}
+
+.rp-inode-note,
+.rp-inode-body,
+.rp-inode-quiet {
+  margin: 0.2rem 0 0.45rem;
+  font-size: 0.78rem;
+  color: #626a65;
+  line-height: 1.35;
+}
+
+.rp-inode-health {
+  margin: 0;
+  padding: 0.4rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  background: color-mix(in srgb, #c47a1a 12%, transparent);
+  color: #0a0d0b;
+}
+
+.rp-inode-spark {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.rp-inode-spark polyline {
+  stroke: #0a0d0b;
+  opacity: 0.7;
+}
+
+.rp-inode-spark text {
+  font-size: 4px;
+  fill: #626a65;
+}
+
+.rp-inode-spine {
+  margin: 0;
+  padding: 0 0 0 1rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.rp-inode-spine li {
+  margin: 0.2rem 0;
+}
+
+.rp-inode-sowhat {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(4.5rem, 1fr));
+  gap: var(--space-2, 0.5rem);
+  margin: 0;
+}
+
+.rp-inode-sowhat div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.rp-inode-sowhat dt {
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+
+.rp-inode-sowhat dd {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-inode-levers {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+}
+
+.rp-inode-levers li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2, 0.5rem);
+  padding: 0.5rem 0.4rem;
+  margin: 0.2rem 0;
+  border-radius: 6px;
+}
+
+.rp-inode-levers li[data-rec="true"] {
+  background: color-mix(in srgb, #00d978 10%, transparent);
+}
+
+.rp-inode-levers strong {
+  display: block;
+  font-size: 0.88rem;
+}
+
+.rp-inode-levers em {
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  margin-left: 0.35rem;
+  color: #0a7a45;
+}
+
+.rp-inode-levers span {
+  display: block;
+  font-size: 0.7rem;
+  color: #626a65;
+  margin-top: 0.1rem;
+}
+
+.rp-inode-levers b[data-tone="neg"] {
+  color: #b42318;
+}
+
+.rp-inode-levers b[data-tone="pos"] {
+  color: #0a7a45;
+}
+
+.rp-inode-evidence {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rp-inode-evidence li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.1rem 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid color-mix(in srgb, #0a0d0b 5%, transparent);
+  font-size: 0.82rem;
+}
+
+.rp-inode-evidence em {
+  grid-column: 1 / -1;
+  font-style: normal;
+  font-size: 0.68rem;
+  color: #626a65;
+}
+
+.rp-inode-foot {
+  margin-top: auto;
+  padding-top: var(--space-3, 0.75rem);
+  border-top: 1px solid color-mix(in srgb, #0a0d0b 8%, transparent);
+}
+
+.rp-inode-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.rp-inode-cta {
+  display: inline-flex;
+  appearance: none;
+  border: 0;
+  background: #0a0d0b;
+  color: #f7faf8;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 550;
+  padding: 0.55rem 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.rp-inode[data-surface="focus"] {
+  padding: 0.25rem 0.15rem 1rem;
+  max-width: 36rem;
+}

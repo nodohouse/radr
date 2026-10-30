@@ -55,7 +55,7 @@ describe("composeOperatingBrief", () => {
       role: "gm",
       findings: findingsForScope("loc_ber"),
       locationScope: "loc_ber",
-      locationName: "Berlin Mitte",
+      locationName: "Soho · New York",
       isGroup: false,
     });
     expect(brief.firstName).toBe("Sarah");
@@ -111,7 +111,7 @@ describe("composeOperatingBrief", () => {
       role: "cfo",
       findings,
       locationScope: "loc_ber",
-      locationName: "Berlin Mitte",
+      locationName: "Soho · New York",
       isGroup: false,
     });
     const fixtureSum = findings.reduce(

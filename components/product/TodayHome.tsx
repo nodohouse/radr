@@ -67,6 +67,7 @@ import {
   getLocationById,
   shortLocationName,
 } from "@/lib/radr/locationCatalog";
+import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 import { buildCompareHref } from "@/lib/radr/comparisonService";
 import { needsYouHeadline, composeRoleAttention } from "@/lib/radr/roleAttention";
 import type { LocationScope, DashPeriod } from "@/lib/product/demo/dashboard";
@@ -181,7 +182,7 @@ export function TodayHome({
       const attention = loc?.openSignals ?? 0;
       return {
         id,
-        name: loc?.name ?? id,
+        name: loc?.name ?? locationDisplayName(id),
         attention,
         status: attention > 0 ? "needs" : "calm",
         statusLabel: attention > 0 ? "Needs you" : "Calm",

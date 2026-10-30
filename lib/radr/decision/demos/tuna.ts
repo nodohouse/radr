@@ -20,7 +20,8 @@ export function buildTunaDecisionRecord(
     {
       id: "do_nothing",
       title: "Do nothing",
-      expectedContributionEuro: -1840,
+      // Peak convention: expected = 0; €1,840 is EXPOSURE (exposedContribution).
+      expectedContributionEuro: 0,
       guestImpact: "high" as const,
       operationalRisk: "high" as const,
       confidence: 90,
@@ -37,7 +38,7 @@ export function buildTunaDecisionRecord(
       operationalRisk: "medium" as const,
       confidence: 74,
       timeToResult: "~40 min",
-      note: "Obvious move · rush premium · historically 62% success at Berlin Mitte",
+      note: "Obvious move · rush premium · historically 62% success at Soho · New York",
     },
     {
       id: "feature_swap",
@@ -112,7 +113,7 @@ export function buildTunaDecisionRecord(
 
   const base: DecisionRecord = {
     id: DECISION_IDS.tuna,
-    organizationId: "org_northstar",
+    organizationId: "org_northstar_restaurants",
     locationId: "loc_berlin_mitte",
     operatingUnitId: "ou_berlin_dinner",
     roleContext: "GM",
@@ -121,10 +122,11 @@ export function buildTunaDecisionRecord(
     status,
     vertical: "restaurant",
     title: "Tuna Tataki shortfall before peak",
+    recommendationHeadline: "Feature Truffle Pasta first",
     problemStatement:
       "Tuna Tataki is tonight’s bestseller. Supplier shortfall: 6 portions missing for dinner.",
     currentState: "31 portions on hand · 37 expected in peak · sellout ~20:10",
-    property: "Berlin Mitte",
+    property: "Soho · New York",
     phaseLabel: "Pre-shift · Dinner",
     contextLine: "Peak 19:30 · supplier shortfall",
     triggerEvents: ["supplier_shortfall", "pos_demand_pace"],
@@ -160,7 +162,7 @@ export function buildTunaDecisionRecord(
     options,
     recommendedOptionId: "feature_swap",
     recommendationReasoning:
-      "At Berlin Mitte, when covers >135 and tuna demand >30 with delivery shortfall ≥6 portions and <2h to service, feature-swap-first historically outperforms supplier-first (81% vs 62%).",
+      "At Soho · New York, when covers >135 and tuna demand >30 with delivery shortfall ≥6 portions and <2h to service, feature-swap-first historically outperforms supplier-first (81% vs 62%).",
     expectedContributionImpact: 1640,
     expectedGuestImpact: "Low — featured substitution historically accepted",
     expectedOperationalImpact: "Kitchen features Truffle Pasta; supplier option held as fallback",
@@ -244,7 +246,7 @@ export function buildTunaDecisionRecord(
     debt: {
       id: "debt_tuna_berlin",
       title: "Tuna supply risk",
-      locationLabel: "Berlin Mitte",
+      locationLabel: "Soho · New York",
       decisionType: "menu_stockout_intervention",
       incidentCount: 7,
       windowLabel: "12 peak services",
@@ -258,7 +260,7 @@ export function buildTunaDecisionRecord(
     memory: {
       id: "mem_tuna_berlin",
       locationId: "loc_berlin_mitte",
-      locationLabel: "Berlin Mitte",
+      locationLabel: "Soho · New York",
       decisionType: "menu_stockout_intervention",
       conditions: [
         { key: "covers", op: "gt", value: 135 },
@@ -313,7 +315,7 @@ export function buildTunaDecisionRecord(
     },
     operatingDna: {
       locationId: "loc_berlin_mitte",
-      locationLabel: "Berlin Mitte",
+      locationLabel: "Soho · New York",
       summary:
         "High stockout sensitivity on peak bestsellers; substitution acceptance strong when featured early.",
       dna: {
@@ -362,7 +364,7 @@ export function buildTunaDecisionRecord(
       },
     ],
     locationDnaLine:
-      "At Berlin Mitte, under these peak conditions, feature-swap-first historically preceded higher protected contribution than supplier-first.",
+      "At Soho · New York, under these peak conditions, feature-swap-first historically preceded higher protected contribution than supplier-first.",
     image: "/marketing/hero-tuna-supply.png",
     imageAlt: "Tuna delivery shortfall",
     modelVersion: "decision-record/v1",
@@ -379,7 +381,7 @@ export function buildTunaDecisionRecord(
       ...base,
       status,
       chosenOptionId: "feature_swap",
-      approver: "GM · Berlin Mitte",
+      approver: "GM · Soho · New York",
       approvedAt: "2026-09-16T17:06:00+02:00",
       actionPlan: {
         ...base.actionPlan,
@@ -427,7 +429,7 @@ export function buildTunaDecisionRecord(
       ...base,
       status,
       chosenOptionId: "feature_swap",
-      approver: "GM · Berlin Mitte",
+      approver: "GM · Soho · New York",
       approvedAt: "2026-09-16T17:06:00+02:00",
       observedOutcome: "Peak held · Truffle featured · no sellout on tuna pathway",
       actualContributionImpact: actual,
@@ -533,7 +535,7 @@ export function buildTunaDecisionRecord(
 export function buildTunaStructuralDecision(): DecisionRecord {
   return {
     id: TUNA_STRUCTURAL_ID,
-    organizationId: "org_northstar",
+    organizationId: "org_northstar_restaurants",
     locationId: "loc_berlin_mitte",
     operatingUnitId: "ou_berlin_dinner",
     roleContext: "Owner",
@@ -545,7 +547,7 @@ export function buildTunaStructuralDecision(): DecisionRecord {
     problemStatement:
       "7 shortages across 12 peak services. Temporary fixes are absorbing attention.",
     currentState: "Supplier / par structure unstable · €8.420 cumulative exposure",
-    property: "Berlin Mitte",
+    property: "Soho · New York",
     phaseLabel: "Structural · Supply",
     contextLine: "THIS KEEPS HAPPENING",
     triggerEvents: ["pattern_escalation"],
@@ -575,12 +577,12 @@ export function buildTunaStructuralDecision(): DecisionRecord {
       {
         id: "do_nothing",
         title: "Keep patching nightly",
-        expectedContributionEuro: -8420,
+        expectedContributionEuro: 0,
         guestImpact: "medium",
         operationalRisk: "high",
         confidence: 85,
         timeToResult: "Ongoing",
-        note: "Decision debt compounds",
+        note: "Decision debt compounds · €8,420 annualized exposure",
         isNoAction: true,
       },
       {
@@ -684,7 +686,7 @@ export function buildTunaStructuralDecision(): DecisionRecord {
       {
         epistemic: "OBSERVED",
         title: "Recurring shortfalls",
-        body: "7 shortages across 12 peak services at Berlin Mitte.",
+        body: "7 shortages across 12 peak services at Soho · New York.",
       },
       {
         epistemic: "ESTIMATED",
@@ -698,7 +700,7 @@ export function buildTunaStructuralDecision(): DecisionRecord {
       },
     ],
     locationDnaLine:
-      "At Berlin Mitte, tuna single-sourcing creates repeated operational debt.",
+      "At Soho · New York, tuna single-sourcing creates repeated operational debt.",
     modelVersion: "decision-record/v1",
     createdAt: "2026-09-16T23:01:00+02:00",
     updatedAt: "2026-09-16T23:01:00+02:00",

@@ -49,7 +49,7 @@ const SCENES: Record<
     idLine: `Historical · ${ECON_D4102.displayId} · Supplier / AP`,
     headline: `${EUR_4102} supplier recovery`,
     lines: [
-      "Contract €6.80/L · Invoice €7.45/L",
+      "Contract $6.80/L · Invoice $7.45/L",
       "Credit matched to original invoice",
       "Verified recovered",
     ],
@@ -65,7 +65,7 @@ const SCENES: Record<
   },
   gm: {
     deskK: "Ops · Reconciliation",
-    idLine: `LIVE · ${LIVE_D7021.displayId} · Berlin`,
+    idLine: `LIVE · ${LIVE_D7021.displayId} · ${LIVE_D7021.location}`,
     headline: `${EUR_7021} unexplained`,
     lines: [
       LIVE_D7021.line,
@@ -84,7 +84,7 @@ const SCENES: Record<
   },
   foh: {
     deskK: "GM · Location",
-    idLine: `LIVE · ${LIVE_D7022.displayId} · Amsterdam`,
+    idLine: `LIVE · ${LIVE_D7022.displayId} · ${LIVE_D7022.location}`,
     headline: `${EUR_7022} at risk`,
     lines: [
       LIVE_D7022.line,

@@ -1,0 +1,44 @@
+---
+description: Marketing site is frozen — prioritize real product Decision loop
+alwaysApply: true
+---
+
+# Marketing freeze + product mode
+
+The public RADR marketing website is **FROZEN** (2026-09-24 final release pass).
+
+Do **not** redesign marketing pages, add sections, or invent product surfaces for the website.
+
+Allowed marketing edits only:
+
+- factual corrections
+- genuine bugs
+- accessibility regressions
+- legal / entity updates
+- updates required because real product capability made a public claim inaccurate
+
+Canonical freeze map: `docs/MARKETING_SITE_FREEZE.md`  
+Release audit: `docs/WEBSITE_RELEASE_AUDIT.md`  
+Company page included (FROZEN).
+
+---
+
+# Product mode (default engineering focus)
+
+Build the **actual RADR product**, not more demo screens.
+
+North star vertical slice:
+
+**REAL DATA → EVIDENCE → FINDING → DECISION → ACTION → OUTCOME → VERIFIED VALUE → MEMORY**
+
+First Decision class: **Supplier / AP contract variance** (D-4102 economics: €6.80 / €7.45 / 420 L / €273).
+
+Do **not**:
+
+- add fake integrations or hard-coded group totals as product truth
+- prioritize Butler / Autopilot / perishable Futures before Recovery + Reconciliation work
+- let LLMs invent economic numbers
+
+Reality audit SSOT: `docs/PRODUCT_REALITY_AUDIT.md`
+
+Implementation order is locked in that document (Phase 0 complete → Phase 1 auth/tenancy → … → golden D-4102 acceptance test).

@@ -1,6 +1,8 @@
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import {
+  authenticationPolicies,
+  locationAccess,
   locations,
   organizationMembers,
   organizations,
@@ -8,6 +10,8 @@ import {
 import { writeAuditLog } from "@/lib/audit";
 import { ONBOARDING_COUNTRIES } from "@/lib/constants";
 import { newId } from "@/lib/ids";
+import { slugifyOrgName } from "@/lib/identity/slug";
+import { ROLE_BY_KEY } from "@/lib/platform/rbac";
 import type { OnboardingInput } from "@/lib/validation";
 import {
   DEFAULT_ONBOARDING,
@@ -15,6 +19,7 @@ import {
   type VenueType,
 } from "@/lib/onboarding/types";
 import { trackOnboarding } from "@/lib/onboarding/analytics";
+import { progressFromLegacyState } from "@/lib/onboarding/engine/progress";
 
 export type CreateWorkspaceInput = OnboardingInput & {
   locationBand?: string;
@@ -45,13 +50,23 @@ export async function createOrganizationWithLocation(params: {
   const now = new Date();
 
   const onboarding: OnboardingState = {
-    step: "insight",
+    path: "first_value",
+    step: "goal",
+    stage: "your_goal",
+    milestones: {
+      account_created: now.toISOString(),
+      org_created: now.toISOString(),
+      first_location_created: now.toISOString(),
+    },
     organizationName: params.input.organizationName,
     locationBand: params.input.locationBand as OnboardingState["locationBand"],
     hqCity: params.input.hqCity,
     hqCountry: params.input.country,
     currency: params.input.currency,
+    reportingCurrency: params.input.currency,
     timezone,
+    locationTimezone: timezone,
+    localCurrency: params.input.currency,
     locationName: params.input.locationName,
     locationCity: params.input.locationCity,
     locationCountry: params.input.country,
@@ -61,21 +76,33 @@ export async function createOrganizationWithLocation(params: {
     operatingUnits: params.input.operatingUnits as OnboardingState["operatingUnits"],
     roomCount: params.input.roomCount,
     role: params.input.role as OnboardingState["role"],
+    roleLens: (params.input.role as OnboardingState["roleLens"]) ?? undefined,
     helpFocus: params.input.helpFocus as OnboardingState["helpFocus"],
     selectedKpis: params.input.selectedKpis,
     operatingProfileId: params.input.operatingProfileId,
     pendingSystem: params.input.pendingSystem,
     pendingSystemLabel: params.input.pendingSystemLabel,
+    decisionClass: "supplier_ap",
+    materialityThresholdMinor: 10000,
     demoEnabled: false,
     startedAt: now.toISOString(),
+    ...progressFromLegacyState("goal"),
   };
+
+  const slug = slugifyOrgName(
+    params.input.organizationName,
+    organizationId.slice(-6).toLowerCase(),
+  );
 
   await db.insert(organizations).values({
     id: organizationId,
     name: params.input.organizationName,
+    slug,
     country: params.input.country,
     currency: params.input.currency,
     timezone,
+    status: "active",
+    plan: "pilot",
     onboarding,
     createdAt: now,
     updatedAt: now,
@@ -86,6 +113,28 @@ export async function createOrganizationWithLocation(params: {
     organizationId,
     userId: params.userId,
     role: "OWNER",
+    roleId: ROLE_BY_KEY.owner.id,
+    status: "active",
+    joinedAt: now,
+    createdAt: now,
+    updatedAt: now,
+  });
+
+  await db.insert(locationAccess).values({
+    id: newId(),
+    membershipId,
+    scope: "all",
+    locationIds: [],
+    createdAt: now,
+    updatedAt: now,
+  });
+
+  await db.insert(authenticationPolicies).values({
+    id: newId(),
+    organizationId,
+    mfaRequired: false,
+    ssoEnforced: false,
+    allowedDomains: [],
     createdAt: now,
     updatedAt: now,
   });

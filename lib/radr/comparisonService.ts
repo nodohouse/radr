@@ -5,6 +5,9 @@
 
 import { getDashboard, type DashPeriod } from "@/lib/product/demo/dashboard";
 import { getLocationById, locationChartColor, locationSubtitle } from "@/lib/radr/locationCatalog";
+import { toCatalogLocationId } from "@/lib/radr/product/locationIds";
+import { locationDisplayName } from "@/lib/radr/product/demoOrg";
+import { NORTHSTAR_RESTAURANTS, NORTHSTAR_HOTELS } from "@/lib/radr/demo/organizations";
 import { LOCATIONS } from "@/lib/product/demo/catalog";
 import { DEMO_FX_TO_EUR } from "@/lib/radr/currency";
 import { getVenueProfile, type CurrencyCode } from "@/lib/radr/venueProfiles";
@@ -64,11 +67,16 @@ const CURRENCY_BY_COUNTRY: Record<string, CurrencyCode> = {
   DE: "EUR",
   FR: "EUR",
   UK: "GBP",
+  GB: "GBP",
   US: "USD",
   JP: "JPY",
   SG: "SGD",
   AE: "AED",
   AU: "AUD",
+  HK: "HKD",
+  MX: "MXN",
+  BR: "BRL",
+  ZA: "ZAR",
 };
 
 function shortName(name: string) {
@@ -93,18 +101,58 @@ function buildSeries(base: number, seed: number) {
   }));
 }
 
-export function parseComparisonLocationIds(raw: string | null | undefined): string[] {
-  if (!raw) return [];
-  return raw
-    .split(",")
-    .map((s) => decodeURIComponent(s.trim()))
-    .filter(Boolean)
-    .slice(0, 8);
+export function parseComparisonLocationIds(
+  raw: string | null | undefined,
+  from?: string | null,
+  to?: string | null,
+): string[] {
+  const fromLocations = raw
+    ? raw
+        .split(",")
+        .map((s) => decodeURIComponent(s.trim()))
+        .filter(Boolean)
+    : [];
+  // Legacy / estate-learn links used ?from=&to=
+  if (fromLocations.length === 0 && from && to) {
+    return [
+      decodeURIComponent(from.trim()),
+      decodeURIComponent(to.trim()),
+    ].filter(Boolean);
+  }
+  return fromLocations.slice(0, 8);
 }
 
-export function buildCompareHref(locationIds: string[]): string {
+export function buildCompareHref(
+  locationIds: string[],
+  opts?: { transferId?: string; stay?: boolean },
+): string {
   const qs = locationIds.map((id) => encodeURIComponent(id)).join(",");
-  return `/app/compare?locations=${qs}`;
+  const transfer = opts?.transferId
+    ? `&transfer=${encodeURIComponent(opts.transferId)}`
+    : "";
+  const stay = opts?.stay === false ? "" : "&stay=1";
+  return `/app/compare?locations=${qs}${transfer}${stay}`;
+}
+
+function resolveCompareLocation(id: string) {
+  const direct = getLocationById(id);
+  if (direct) return { loc: direct, displayName: direct.name, city: direct.city };
+
+  const catalogId = toCatalogLocationId(id);
+  const catalog = getLocationById(catalogId);
+  if (!catalog) return null;
+
+  const orgLoc =
+    NORTHSTAR_RESTAURANTS.locations.find((l) => l.id === id) ??
+    NORTHSTAR_HOTELS.locations.find((l) => l.id === id);
+  const displayName =
+    orgLoc?.displayName ?? orgLoc?.name ?? locationDisplayName(id) ?? catalog.name;
+  const city = orgLoc?.city ?? catalog.city;
+  return {
+    loc: { ...catalog, id, name: displayName, city },
+    displayName,
+    city,
+  };
 }
 
 export function getLocationComparison(input: {
@@ -132,7 +180,8 @@ export function getLocationComparison(input: {
     };
   }
 
-  const invalidIds = unique.filter((id) => !getLocationById(id));
+  const resolved = unique.map((id) => ({ id, resolved: resolveCompareLocation(id) }));
+  const invalidIds = resolved.filter((r) => !r.resolved).map((r) => r.id);
   if (invalidIds.length) {
     return {
       ok: false,
@@ -155,11 +204,15 @@ export function getLocationComparison(input: {
     }
   }
 
-  const locations: CompareLocationRow[] = unique.map((id, i) => {
-    const loc = getLocationById(id)!;
-    const dash = getDashboard(id, period);
+  const locations: CompareLocationRow[] = resolved.map(({ id, resolved: hit }, i) => {
+    const loc = hit!.loc;
+    const catalogId = toCatalogLocationId(id);
+    const dash = getDashboard(catalogId, period);
     const currency =
-      getVenueProfile(id).currency ?? CURRENCY_BY_COUNTRY[loc.country] ?? "EUR";
+      getVenueProfile(catalogId).currency ??
+      getVenueProfile(id).currency ??
+      CURRENCY_BY_COUNTRY[loc.country] ??
+      "EUR";
     const fx = DEMO_FX_TO_EUR[currency];
     const revenueLocal = dash.today.revenue;
     const revenue = Math.round(revenueLocal * fx);
@@ -167,9 +220,9 @@ export function getLocationComparison(input: {
     const avgSpendLocal = revenueLocal / Math.max(covers, 1);
     return {
       id,
-      name: loc.name,
-      shortName: shortName(loc.name),
-      city: loc.city,
+      name: hit!.displayName,
+      shortName: shortName(hit!.displayName),
+      city: hit!.city,
       country: loc.country,
       subtitle: locationSubtitle(loc),
       color: locationChartColor(i),

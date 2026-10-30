@@ -17,7 +17,7 @@ export type RadarFinding = {
 export const HERO_DEMO_FINDINGS: RadarFinding[] = [
   {
     id: "1",
-    amount: "€18,620",
+    amount: "$18,620",
     euros: 18_620,
     title: "Supplier credit never received",
     tag: "Recoverable",
@@ -26,7 +26,7 @@ export const HERO_DEMO_FINDINGS: RadarFinding[] = [
   },
   {
     id: "2",
-    amount: "€4,280",
+    amount: "$4,280",
     euros: 4_280,
     title: "Duplicate invoice",
     tag: "Overpaid",
@@ -35,7 +35,7 @@ export const HERO_DEMO_FINDINGS: RadarFinding[] = [
   },
   {
     id: "3",
-    amount: "€142k / yr",
+    amount: "$142k / yr",
     euros: 142_000,
     title: "Pricing opportunity",
     tag: "Missed revenue",
@@ -44,7 +44,7 @@ export const HERO_DEMO_FINDINGS: RadarFinding[] = [
   },
   {
     id: "4",
-    amount: "€11,840 / mo",
+    amount: "$11,840 / mo",
     euros: 11_840,
     title: "Labor above demand",
     tag: "Avoidable",

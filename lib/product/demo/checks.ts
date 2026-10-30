@@ -56,7 +56,7 @@ export const RADR_CHECKS: readonly RadrCheck[] = [
     verified30d: 3_940,
     example: {
       title: "Platform payout · Week 32",
-      period: "Berlin Mitte · 1,000 orders",
+      period: "Soho · New York · 1,000 orders",
       lines: [
         { label: "Gross sales", value: "€18,420" },
         { label: "Refunds", value: "−€436", tone: "muted" },

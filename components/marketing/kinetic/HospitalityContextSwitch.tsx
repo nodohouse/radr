@@ -20,13 +20,13 @@ type Props = {
 export function HospitalityContextSwitch({
   value,
   onChange,
-  ariaLabel = "Example operating environments",
+  ariaLabel = "Example operating models",
   size = "hero",
 }: Props) {
   return (
     <div className="rx-hcx-wrap">
       {size === "hero" ? (
-        <p className="rx-hcx-examples">Example operating environments</p>
+        <p className="rx-hcx-examples">Example operating models</p>
       ) : null}
       <div
         className="rx-hcx"

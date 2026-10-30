@@ -14,8 +14,10 @@ import type { RoleView } from "@/lib/product/types";
 import { listDecisionRecords } from "@/lib/radr/decision/store";
 import {
   scopedDecisions,
+  scopedDecisionsForDemo,
   recordAttention,
 } from "@/lib/radr/product/roleScope";
+import type { DemoVerticalFamily } from "@/lib/radr/vertical/experienceProfile";
 import type { ValueKind } from "@/lib/radr/decision/core";
 import type { DecisionRecord } from "@/lib/radr/decision/record";
 import { primaryMetricOf } from "@/lib/radr/product/primaryMetric";
@@ -48,14 +50,22 @@ export function attentionEuro(r: DecisionRecord): number {
   return primaryMetricOf(r)?.value ?? r.exposedContribution ?? 0;
 }
 
-export function deriveValueAggregate(role: RoleView): ValueAggregate {
-  const scoped = scopedDecisions(listDecisionRecords(), role);
+export function deriveValueAggregate(
+  role: RoleView,
+  vertical?: DemoVerticalFamily,
+): ValueAggregate {
+  const all = listDecisionRecords();
+  const scoped =
+    vertical != null
+      ? scopedDecisionsForDemo(all, role, vertical)
+      : scopedDecisions(all, role);
 
   const needsYou = scoped.filter((r) => recordAttention(r) === "needs_you");
   const pending = scoped.filter((r) => recordAttention(r) === "handling");
   const verified = scoped.filter(
     (r) =>
       r.verifiedValue &&
+      (r.verifiedValue.amount ?? 0) > 0 &&
       (recordAttention(r) === "verified" || recordAttention(r) === "learned"),
   );
 

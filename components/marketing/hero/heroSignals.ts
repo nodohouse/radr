@@ -85,16 +85,16 @@ function entry(
 }
 
 const SIGNAL_CATALOG: readonly ContactContent[] = [
-  entry("buy_freshco", "€418", "SUPPLIER PRICING", "BUY", 418),
-  entry("buy_annual", "€18.6k / yr", "CONTRACT VARIANCE", "BUY", 1860),
-  entry("buy_unit", "€3.60", "UNIT PRICE", "BUY", 190),
-  entry("labor_dinner", "€840", "DINNER STAFFING", "LABOR", 840),
-  entry("labor_ot", "€1.2k", "OVERTIME", "LABOR", 1200),
-  entry("sell_fee", "€218", "CHANNEL FEE", "SELL", 218),
-  entry("sell_channel", "€3.60", "PROMOTION", "SELL", 360),
-  entry("sell_menu", "€1.30", "MENU CONTRIBUTION", "SELL", 1300),
-  entry("recover_payout", "€332", "DELIVERY PAYOUT", "RECOVER", 332),
-  entry("recover_credit", "€4.3k", "SUPPLIER CREDIT", "RECOVER", 4300),
+  entry("buy_freshco", "$418", "SUPPLIER PRICING", "BUY", 418),
+  entry("buy_annual", "$18.6k / yr", "CONTRACT VARIANCE", "BUY", 1860),
+  entry("buy_unit", "$3.60", "UNIT PRICE", "BUY", 190),
+  entry("labor_dinner", "$840", "DINNER STAFFING", "LABOR", 840),
+  entry("labor_ot", "$1.2k", "OVERTIME", "LABOR", 1200),
+  entry("sell_fee", "$218", "CHANNEL FEE", "SELL", 218),
+  entry("sell_channel", "$3.60", "PROMOTION", "SELL", 360),
+  entry("sell_menu", "$1.30", "MENU CONTRIBUTION", "SELL", 1300),
+  entry("recover_payout", "$332", "DELIVERY PAYOUT", "RECOVER", 332),
+  entry("recover_credit", "$4.3k", "SUPPLIER CREDIT", "RECOVER", 4300),
 ];
 
 export const SIGNAL_SLOT_COUNT = 3;

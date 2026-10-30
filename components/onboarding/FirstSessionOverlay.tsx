@@ -24,7 +24,7 @@ const TOUR = [
   },
   {
     title: "Ask RADR",
-    body: "Ask your operation in plain language - for example, “What should I worry about tonight?”",
+    body: "Ask your operation in plain language — for example, “What should I worry about tonight?”",
   },
 ] as const;
 

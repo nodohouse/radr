@@ -157,7 +157,7 @@ export function buildButlerOpening(ctx: ButlerContext): ButlerOpening {
   ) {
     observation = {
       title: "RADR noticed",
-      body: `Berlin Mitte booking pace +${BERLIN_TONIGHT_OPS.bookingPaceVsComparable}% vs comparable Wednesday.`,
+      body: `Soho · New York booking pace +${BERLIN_TONIGHT_OPS.bookingPaceVsComparable}% vs comparable Wednesday.`,
       query: "Which location worries me most tonight?",
     };
   } else if (scenario.verification?.verifiedValue) {

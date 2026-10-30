@@ -73,7 +73,7 @@ export function outdoorCapabilityFromProfile(
   };
 }
 
-/** Comparable warm-dry dinner nights at Berlin Mitte - location-learned. */
+/** Comparable warm-dry dinner nights at Soho · New York - location-learned. */
 export type TerraceCorrelationNight = {
   dateLabel: string;
   tempC: number;

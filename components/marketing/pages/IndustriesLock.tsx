@@ -142,8 +142,8 @@ const INDUSTRIES: IndustryStory[] = [
     src: marketingImage("industriesGroup").src,
     pos: `${marketingImage("industriesGroup").focalX} ${marketingImage("industriesGroup").focalY}`,
     groupCompare: {
-      left: { site: "Amsterdam", adr: "€214 ADR", gop: "38% GOP" },
-      right: { site: "Berlin", adr: "€216 ADR", gop: "31% GOP" },
+      left: { site: "Singapore", adr: "$214 ADR", gop: "38% GOP" },
+      right: { site: "Hong Kong", adr: "$216 ADR", gop: "31% GOP" },
     },
     chain: ["LOCAL DECISION", "VERIFIED", "PLAYBOOK", "GROUP ROLLOUT"],
   },
@@ -318,7 +318,7 @@ export function IndustriesLock() {
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
             <div className="rx-ch-ctas">
-              <NextLink href="/demo" className="rx-btn rx-btn-primary">
+              <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-btn rx-btn-primary">
                 {CTAS.primaryProduct} <span aria-hidden="true">→</span>
               </NextLink>
               <Link href="/contact" className="rx-btn rx-btn-ghost">

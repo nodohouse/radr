@@ -2,6 +2,7 @@
 
 import { Suspense, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { LabProvider, useLab } from "./LabContext";
 import { LabModeRail } from "./LabModeRail";
 import { LAB_CANON, isFinanceSeed } from "./labState";
@@ -171,6 +172,12 @@ function LabShellInner({ children }: { children: ReactNode }) {
 }
 
 export function LabShell({ children }: { children: ReactNode }) {
+  const pathname = usePathname() || "";
+  // Live V2 is a fully isolated visual prototype — no Lab dock/topbar.
+  if (pathname.startsWith("/app/lab/live-v2")) {
+    return <>{children}</>;
+  }
+
   return (
     <Suspense
       fallback={

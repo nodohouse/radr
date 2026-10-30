@@ -133,7 +133,7 @@ export function SectionDecisionLoop() {
     step === "evidence"
       ? "Empty tables. Waiting guests. Multiple systems disagree on whether to seat."
       : step === "initial"
-        ? `${d.displayId} · Wait 12 minutes. +€620 vs seating now.`
+        ? `${d.displayId} · Wait 12 minutes. +$620 vs seating now.`
         : step === "context"
           ? "Add operator context — it becomes part of the Decision Record."
           : step === "resim"
@@ -200,7 +200,7 @@ export function SectionDecisionLoop() {
               <p className="rx-dec-context-quote">
                 “VIP party at the bar needs to sit by 18:50.”
               </p>
-              <p className="rx-dec-context-who">GM · Berlin Mitte</p>
+              <p className="rx-dec-context-who">GM · Soho · New York</p>
               <ul className="rx-dec-context-tags">
                 {CONTEXT_OPTIONS.map((c) => (
                   <li key={c.id} data-on={c.id === "vip" ? "true" : undefined}>

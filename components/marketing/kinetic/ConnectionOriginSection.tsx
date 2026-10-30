@@ -1,259 +1,250 @@
 "use client";
 
 /**
- * Data Origin — YOUR STACK → △ RADR → DECISION.
- * Source TYPES on the homepage. Full catalog lives on Developers.
+ * Data Origin — YOUR SYSTEMS → △ RADR → DECISION.
+ * Condensed architecture. Inspector appears only on hover/pin — wider cinematic field.
  */
 
 import {
   useCallback,
   useEffect,
   useId,
+  useMemo,
   useRef,
   useState,
+  type CSSProperties,
 } from "react";
+import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { RadrDelta } from "@/components/radr/RadrDelta";
-import { capabilityBadge } from "@/lib/marketing/capabilityStatus";
+import { ProviderWordmark } from "@/components/marketing/kinetic/ProviderWordmark";
+import {
+  CATALOG_COUNT,
+  exampleDecisionHrefForSystem,
+  homepageFeaturedGroups,
+  homepageFeaturedSystems,
+  type HomepageFeaturedSystem,
+} from "@/lib/integrations/homepagePresentation";
 import "@/app/radr-public.css";
 
 const DECISION_CHILDREN = [
-  "Futures",
-  "Action",
-  "Verified Value",
-  "Memory",
+  { label: "Futures", note: "Compare paths before you act" },
+  { label: "Action", note: "Prepare · approve · execute" },
+  { label: "Verified Value", note: "Proof after reality" },
+  { label: "Memory", note: "What the operation learned" },
 ] as const;
 
-type StackType = {
-  id: string;
-  label: string;
-  systems: string[];
-  evidence: string[];
-  uses: string[];
-  status: string;
-};
-
-const STACK: StackType[] = [
-  {
-    id: "invoices",
-    label: "Invoices",
-    systems: ["PDF / CSV", "Supplier portals", "AP inbox"],
-    evidence: ["Line items", "Unit prices", "Credit memos", "Tax lines"],
-    uses: ["Contract variance", "Duplicate charges", "Unapplied credits"],
-    status: "Files · AVAILABLE",
-  },
-  {
-    id: "contracts",
-    label: "Contracts",
-    systems: ["Signed PDFs", "Rate cards", "Group agreements"],
-    evidence: ["Agreed rates", "Volume tiers", "Rebate terms"],
-    uses: ["Price dispersion", "Missed rebates", "Supplier / AP"],
-    status: "Files · AVAILABLE",
-  },
-  {
-    id: "pos",
-    label: "POS",
-    systems: ["Toast", "Lightspeed", "Custom POS"],
-    evidence: ["Sales", "Voids", "Comps", "Tender mix"],
-    uses: ["Settlement gaps", "Cost variance", "Perishable revenue"],
-    status: "Partner / Planned",
-  },
-  {
-    id: "accounting",
-    label: "Accounting / AP",
-    systems: ["Xero", "NetSuite", "Exports"],
-    evidence: ["AP ledger", "Payments", "Credits applied"],
-    uses: ["Reconciliation", "Verified recovery proof"],
-    status: "Planned / Files",
-  },
-  {
-    id: "procurement",
-    label: "Procurement",
-    systems: ["Purchase orders", "Supplier catalogs"],
-    evidence: ["PO prices", "Received quantities", "Location rates"],
-    uses: ["Price dispersion", "Procurement leaks"],
-    status: "Files · AVAILABLE",
-  },
-  {
-    id: "payments",
-    label: "Payments",
-    systems: ["Adyen", "Stripe", "Worldpay"],
-    evidence: ["Settlements", "Refunds", "Fees", "Chargebacks", "Payouts"],
-    uses: ["Settlement gaps", "Refund mismatches", "Payment reconciliation"],
-    status: "Planned",
-  },
-  {
-    id: "reservations",
-    label: "Reservations",
-    systems: ["OpenTable", "SevenRooms", "PMS / CRS"],
-    evidence: ["Covers", "No-shows", "Cancellations", "Channel mix"],
-    uses: ["Perishable revenue", "Peak capacity"],
-    status: "Partner access",
-  },
-  {
-    id: "labor",
-    label: "Labor",
-    systems: ["Workforce tools", "Timesheets"],
-    evidence: ["Shifts", "Hours", "Coverage"],
-    uses: ["Labor mismatch", "Peak staffing Decisions"],
-    status: "Planned",
-  },
-];
-
 export function ConnectionOriginSection() {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const systems = useMemo(() => homepageFeaturedSystems(), []);
+  const groups = useMemo(() => homepageFeaturedGroups(), []);
+  const [hoverId, setHoverId] = useState<string | null>(null);
+  const [pinnedId, setPinnedId] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
-  const close = useCallback(() => setActiveId(null), []);
+
+  const activeId = pinnedId ?? hoverId;
+  const active = systems.find((s) => s.id === activeId) ?? null;
+  const lit = Boolean(active);
+
+  const reset = useCallback(() => {
+    setPinnedId(null);
+    setHoverId(null);
+  }, []);
 
   useEffect(() => {
     function onKey(e: globalThis.KeyboardEvent) {
-      if (e.key === "Escape") close();
-    }
-    function onPointer(e: MouseEvent) {
-      if (!rootRef.current?.contains(e.target as Node)) close();
+      if (e.key === "Escape") reset();
     }
     window.addEventListener("keydown", onKey);
-    window.addEventListener("mousedown", onPointer);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      window.removeEventListener("mousedown", onPointer);
-    };
-  }, [close]);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [reset]);
 
-  const active = STACK.find((s) => s.id === activeId) ?? null;
-  const lit = Boolean(active);
+  const select = (id: string, pin: boolean) => {
+    if (pin) {
+      setPinnedId((cur) => (cur === id ? null : id));
+      setHoverId(id);
+    } else {
+      setHoverId(id);
+    }
+  };
 
   return (
     <div
       className="rx-origin"
       ref={rootRef}
       data-lit={lit ? "true" : undefined}
+      onMouseLeave={() => {
+        if (!pinnedId) setHoverId(null);
+      }}
     >
       <header className="rx-origin-head">
-        <p className="rx-rec-k">Your stack</p>
+        <p className="rx-rec-k">Your systems</p>
         <h2 className="rx-origin-h">
-          Your stack → RADR → Decision
+          <span className="rx-origin-h-line">Connect what you already run.</span>
+          <span className="rx-origin-h-line">Everything RADR needs.</span>
+          <span className="rx-origin-h-line">Nothing you need to replace.</span>
         </h2>
+        <p className="rx-origin-honesty">
+          Representative systems · availability varies by integration
+        </p>
       </header>
 
-      <div className="rx-origin-triad" aria-label="Stack to Decision">
+      <div className="rx-origin-arch" aria-label="Systems to Decision">
         <div className="rx-origin-zone rx-origin-zone--src">
-          <p className="rx-origin-zone-k">Your stack</p>
-          <ul className="rx-origin-stack">
-            {STACK.map((s) => (
-              <li key={s.id}>
-                <button
-                  type="button"
-                  className="rx-origin-stack-btn"
-                  aria-expanded={activeId === s.id}
-                  data-on={activeId === s.id ? "true" : undefined}
-                  onMouseEnter={() => setActiveId(s.id)}
-                  onFocus={() => setActiveId(s.id)}
-                  onClick={() =>
-                    setActiveId((cur) => (cur === s.id ? null : s.id))
-                  }
-                >
-                  {s.label}
-                </button>
-              </li>
+          <p className="rx-origin-zone-k">Your systems</p>
+          <div className="rx-origin-groups">
+            {groups.map((g) => (
+              <div key={g.id} className="rx-origin-group">
+                <p className="rx-origin-group-k">{g.label}</p>
+                <ul className="rx-origin-systems">
+                  {g.systems.map((s) => (
+                    <li key={s.id}>
+                      <button
+                        type="button"
+                        className="rx-origin-sys"
+                        aria-pressed={pinnedId === s.id}
+                        data-on={activeId === s.id ? "true" : undefined}
+                        style={
+                          {
+                            "--sys-brand": s.brandColor,
+                          } as CSSProperties
+                        }
+                        onMouseEnter={() => setHoverId(s.id)}
+                        onFocus={() => setHoverId(s.id)}
+                        onClick={() => select(s.id, true)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            select(s.id, true);
+                          }
+                        }}
+                      >
+                        <span className="rx-origin-sys-mark">
+                          <ProviderWordmark
+                            id={s.id}
+                            name={s.label}
+                            className="rx-origin-pwm"
+                          />
+                        </span>
+                        <i
+                          className="rx-origin-brand-dot"
+                          aria-hidden="true"
+                          style={{ background: s.brandColor }}
+                        />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
-          {active ? <StackNote stack={active} onClose={close} /> : null}
+          </div>
         </div>
 
-        <div className="rx-origin-flow" aria-hidden="true">
-          <i data-arm="in" data-on={lit ? "true" : undefined} />
-        </div>
-        <p className="rx-origin-mobile-arrow" aria-hidden="true">
-          ↓
-        </p>
-
-        <div className="rx-origin-zone rx-origin-zone--core">
+        <div className="rx-origin-bridge" aria-hidden="true">
+          <span className="rx-origin-arrow" data-on={lit ? "true" : undefined} />
           <div className="rx-origin-delta" data-on={lit ? "true" : undefined}>
             <RadrDelta
               variant="nav"
-              height={56}
+              height={72}
               className="rx-origin-delta-mark"
             />
             <strong>RADR</strong>
           </div>
+          <span className="rx-origin-arrow" data-on={lit ? "true" : undefined} />
         </div>
-
-        <div className="rx-origin-flow" aria-hidden="true">
-          <i data-arm="out" data-on={lit ? "true" : undefined} />
-        </div>
-        <p className="rx-origin-mobile-arrow" aria-hidden="true">
-          ↓
-        </p>
 
         <div className="rx-origin-zone rx-origin-zone--out">
+          <p className="rx-origin-zone-k">What RADR forms</p>
           <p className="rx-origin-decision" data-on={lit ? "true" : undefined}>
             Decision
           </p>
           <ul className="rx-origin-children">
-            {DECISION_CHILDREN.map((c) => (
-              <li key={c}>{c}</li>
+            {DECISION_CHILDREN.map((c, i) => (
+              <li key={c.label} data-on={lit ? "true" : undefined}>
+                <em aria-hidden="true">{String(i + 1).padStart(2, "0")}</em>
+                <div>
+                  <strong>{c.label}</strong>
+                  <span>{c.note}</span>
+                </div>
+              </li>
             ))}
           </ul>
         </div>
       </div>
 
-      <Link
-        href={{ pathname: "/developers", hash: "integrations" }}
-        className="rx-origin-more"
+      {/* Inspector only when a system is hovered or pinned — no empty box. */}
+      <div
+        className="rx-origin-inspector-below"
+        data-open={active ? "true" : undefined}
+        aria-hidden={!active}
       >
-        Full integration catalog <span aria-hidden="true">→</span>
-      </Link>
-      <p className="rx-origin-note">
-        Files / CSV · {capabilityBadge("filesCsv")} · keep the systems you
-        already run
+        {active ? (
+          <IntegrationInspector
+            active={active}
+            pinned={Boolean(pinnedId)}
+          />
+        ) : null}
+      </div>
+
+      <p className="rx-origin-catalog-wrap">
+        <Link
+          href={{ pathname: "/developers", hash: "integrations" }}
+          className="rx-origin-catalog"
+        >
+          View all {CATALOG_COUNT} integrations{" "}
+          <span aria-hidden="true">→</span>
+        </Link>
       </p>
     </div>
   );
 }
 
-function StackNote({
-  stack,
-  onClose,
+function IntegrationInspector({
+  active,
+  pinned,
 }: {
-  stack: StackType;
-  onClose: () => void;
+  active: HomepageFeaturedSystem;
+  pinned: boolean;
 }) {
   const titleId = useId();
+  const exampleHref = exampleDecisionHrefForSystem(active.id);
+
   return (
     <aside
-      className="rx-origin-note-card"
-      role="dialog"
+      className="rx-origin-inspector"
+      data-pinned={pinned ? "true" : undefined}
       aria-labelledby={titleId}
     >
-      <button
-        type="button"
-        className="rx-origin-note-close"
-        onClick={onClose}
-        aria-label="Close"
-      >
-        ×
-      </button>
-      <h3 id={titleId}>{stack.label}</h3>
-      <p className="rx-origin-note-k">Systems</p>
-      <ul>
-        {stack.systems.map((e) => (
-          <li key={e}>{e}</li>
-        ))}
-      </ul>
-      <p className="rx-origin-note-k">Evidence</p>
-      <ul>
-        {stack.evidence.map((e) => (
-          <li key={e}>{e}</li>
-        ))}
-      </ul>
-      <p className="rx-origin-note-k">RADR can use this for</p>
-      <ul>
-        {stack.uses.map((e) => (
-          <li key={e}>{e}</li>
-        ))}
-      </ul>
-      <p className="rx-origin-note-status">{stack.status}</p>
+      <div className="rx-origin-inspector-grid">
+        <div className="rx-origin-inspector-lead">
+          <p className="rx-origin-inspector-k">System</p>
+          <h3 id={titleId}>{active.label}</h3>
+          <p className="rx-origin-inspector-status">{active.statusLabel}</p>
+          {active.provider.notes ? (
+            <p className="rx-origin-inspector-notes">{active.provider.notes}</p>
+          ) : null}
+        </div>
+        <div>
+          <p className="rx-origin-note-k">Possible evidence</p>
+          <ul>
+            {active.possibleEvidence.map((e) => (
+              <li key={e}>{e}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="rx-origin-note-k">RADR can use it for</p>
+          <ul>
+            {active.radrUses.map((e) => (
+              <li key={e}>{e}</li>
+            ))}
+          </ul>
+          {exampleHref ? (
+            <NextLink href={exampleHref} className="rx-origin-example">
+              View example Decision <span aria-hidden="true">→</span>
+            </NextLink>
+          ) : null}
+        </div>
+      </div>
     </aside>
   );
 }

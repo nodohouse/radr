@@ -179,6 +179,24 @@ await radr.reservations.create({
             </li>
           ))}
         </ol>
+        <p className="rx-dev-fine" style={{ marginTop: "1.25rem" }}>
+          Multi-location model · TECHNICAL PREVIEW: Organization → Location →
+          Service → Decision. Events and Decisions are location-scoped; group
+          views aggregate across accessible locations.
+        </p>
+        <h3 style={{ marginTop: "2rem" }}>{t("architecture.traceTitle")}</h3>
+        <p>{t("architecture.traceBody")}</p>
+        <ol className="rx-dev-steps">
+          {(t.raw("architecture.traceObjects") as string[]).map((obj) => (
+            <li key={obj}>
+              <code>{obj}</code>
+            </li>
+          ))}
+        </ol>
+        <p className="rx-dev-fine" style={{ marginTop: "1rem" }}>
+          {t("architecture.traceLlmBoundary")}
+        </p>
+        <p className="rx-dev-fine">{t("architecture.traceExample")}</p>
       </section>
 
       <section className="rx-dev-band" aria-label={t("hub.archTitle")}>

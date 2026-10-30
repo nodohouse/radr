@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -29,7 +30,19 @@ import {
   type OperatingServiceTime,
   type TimeFormatPref,
 } from "@/lib/radr/operatingCanvas";
+import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 import { defaultScopeForRole } from "@/lib/radr/role/profiles";
+import {
+  DEMO_ORG_EVENT,
+  type DemoOrgSession,
+  activeDemoOrg,
+} from "@/lib/radr/demo/demoOrgSession";
+import { demoOrgForVertical, primaryLocationId } from "@/lib/radr/demo/organizations";
+import type { DemoVerticalFamily } from "@/lib/radr/vertical/experienceProfile";
+import {
+  toCanonicalLocationId,
+  toCatalogLocationId,
+} from "@/lib/radr/product/locationIds";
 
 type ResolveOption =
   | "Supplier corrected price"
@@ -78,6 +91,8 @@ type ProductState = {
   setRoleView: (v: RoleView) => void;
   completeOnboarding: () => void;
   scopedSignals: Signal[];
+  /** True after session/prefs restored — never trust persona/scope before this. */
+  contextReady: boolean;
 };
 
 const ProductContext = createContext<ProductState | null>(null);
@@ -103,7 +118,7 @@ function readPersisted(): {
 } {
   const fallback = {
     locationScope: "loc_ber" as LocationScope,
-    period: "yesterday" as DashPeriod,
+    period: "today" as DashPeriod,
     lens: DEFAULT_CANVAS.lens,
     serviceTime: DEFAULT_CANVAS.serviceTime,
     selectedFindingId: null as string | null,
@@ -121,12 +136,13 @@ function readPersisted(): {
       selectedFindingId?: string | null;
     };
     const valid: DashPeriod[] = ["today", "yesterday", "wtd", "mtd", "ytd"];
+    const period =
+      parsed.period && valid.includes(parsed.period)
+        ? parsed.period
+        : "today";
     return {
       locationScope: parsed.locationScope ?? "loc_ber",
-      period:
-        parsed.period && valid.includes(parsed.period)
-          ? parsed.period
-          : "yesterday",
+      period,
       lens: isOperatingLens(parsed.lens) ? parsed.lens : DEFAULT_CANVAS.lens,
       serviceTime: isOperatingServiceTime(parsed.serviceTime)
         ? parsed.serviceTime
@@ -166,7 +182,7 @@ function readPrefs(): {
       timeFormat: parsed.timeFormat === "24h" ? "24h" : "12h",
     };
   } catch {
-    return { defaultLocationId: "loc_ber", roleView: "gm", timeFormat: "12h" };
+    return { defaultLocationId: "all", roleView: "cfo", timeFormat: "12h" };
   }
 }
 
@@ -177,8 +193,8 @@ export function ProductProvider({ children }: { children: ReactNode }) {
   const [onboardingDone, setOnboardingDone] = useState(true);
   const [comments, setComments] = useState<Record<string, string[]>>({});
   const [locationScope, setLocationScopeState] =
-    useState<LocationScope>("loc_ber");
-  const [period, setPeriodState] = useState<DashPeriod>("yesterday");
+    useState<LocationScope>("loc_berlin_mitte");
+  const [period, setPeriodState] = useState<DashPeriod>("today");
   const [lens, setLensState] = useState<OperatingLens>(DEFAULT_CANVAS.lens);
   const [serviceTime, setServiceTimeState] = useState<OperatingServiceTime>(
     DEFAULT_CANVAS.serviceTime,
@@ -195,24 +211,106 @@ export function ProductProvider({ children }: { children: ReactNode }) {
   const [locationSwitcherOpen, setLocationSwitcherOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
-  useEffect(() => {
+  // Restore before paint so persona/scope never flash as GM·Berlin defaults.
+  useLayoutEffect(() => {
     const prefs = readPrefs();
     const session = readPersisted();
-    setDefaultLocationIdState(prefs.defaultLocationId);
-    setRoleViewState(prefs.roleView);
+    const org = activeDemoOrg();
+    const primary = primaryLocationId(org) as LocationScope;
+    const orgLocIds = new Set(org.locations.map((l) => l.id));
+    for (const id of [...orgLocIds]) {
+      orgLocIds.add(toCatalogLocationId(id));
+      orgLocIds.add(toCanonicalLocationId(id));
+    }
+
+    let role = prefs.roleView;
+    let home = prefs.defaultLocationId;
+    let scope = session.hasSession
+      ? session.locationScope
+      : defaultScopeForRole(role, home);
+
+    // ?stay=1 pins home for first-enter demos only — never wipe an existing session.
+    const stayPin =
+      typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).get("stay") === "1";
+    if (stayPin && !session.hasSession) {
+      home = primary;
+      scope = defaultScopeForRole(role, primary);
+    } else if (stayPin) {
+      home = prefs.defaultLocationId === "all" ? primary : home;
+    }
+
+    const vertical = org.vertical;
+    if (vertical === "hotel") {
+      if (role === "gm" || role === "head_chef" || role === "kitchen") {
+        role = "hotel_gm";
+      }
+      if (home !== "all" && !orgLocIds.has(home)) home = primary;
+      if (
+        scope !== "all" &&
+        !String(scope).startsWith("region_") &&
+        !orgLocIds.has(scope)
+      ) {
+        scope = primary;
+      }
+    } else {
+      if (
+        role === "hotel_gm" ||
+        role === "housekeeping_manager" ||
+        role === "revenue_manager"
+      ) {
+        role = "gm";
+      }
+      // Hard reject hotel property ids under restaurant vertical (P0).
+      const hotelIds = new Set(["loc_canal_house", "loc_ams_canal"]);
+      if (hotelIds.has(String(home))) home = primary;
+      if (hotelIds.has(String(scope))) {
+        scope = defaultScopeForRole(role, home);
+      }
+      if (home !== "all" && !orgLocIds.has(home)) home = primary;
+      if (
+        scope !== "all" &&
+        !String(scope).startsWith("region_") &&
+        !orgLocIds.has(scope)
+      ) {
+        scope = defaultScopeForRole(role, home);
+      }
+    }
+
+    setDefaultLocationIdState(home);
+    setRoleViewState(role);
     setTimeFormatState(prefs.timeFormat);
     setPeriodState(session.period);
     setLensState(session.lens);
     setServiceTimeState(session.serviceTime);
     setSelectedFindingIdState(session.selectedFindingId);
-    if (session.hasSession) {
-      setLocationScopeState(session.locationScope);
-    } else {
-      setLocationScopeState(
-        defaultScopeForRole(prefs.roleView, prefs.defaultLocationId),
-      );
-    }
+    setLocationScopeState(scope);
     setHydrated(true);
+  }, []);
+
+  /**
+   * World switch from session event — map persona intentionally.
+   * DemoOrgSwitcher applies the full mapping; this is a safety net
+   * for other writers of DEMO_ORG_EVENT.
+   */
+  useEffect(() => {
+    function onOrg(e: Event) {
+      const detail = (e as CustomEvent<DemoOrgSession>).detail;
+      const vertical = (detail?.vertical ?? "restaurant") as DemoVerticalFamily;
+      const org = demoOrgForVertical(vertical);
+      const loc = primaryLocationId(org) as LocationScope;
+      setDefaultLocationIdState(loc);
+      // Do not force GM here — DemoOrgSwitcher owns role mapping.
+      // Only correct impossible location ids for the new org.
+      setLocationScopeState((prev) => {
+        if (prev === "all" || String(prev).startsWith("region_")) return prev;
+        const ids = new Set(org.locations.map((l) => l.id));
+        return ids.has(String(prev)) ? prev : loc;
+      });
+      setComparisonLocationIds([]);
+    }
+    window.addEventListener(DEMO_ORG_EVENT, onOrg);
+    return () => window.removeEventListener(DEMO_ORG_EVENT, onOrg);
   }, []);
 
   useEffect(() => {
@@ -292,14 +390,14 @@ export function ProductProvider({ children }: { children: ReactNode }) {
     setLocationSwitcherOpen(false);
   }, []);
 
-  const setRoleView = useCallback(
-    (v: RoleView) => {
-      setRoleViewState(v);
-      setLocationScopeState(defaultScopeForRole(v, defaultLocationId));
-      setComparisonLocationIds([]);
-    },
-    [defaultLocationId],
-  );
+  /**
+   * Persona is a lens — changing it must not silently reset scope/period.
+   * Callers that intentionally change composition (RoleViewSwitcher,
+   * DemoOrgSwitcher) set scope + period explicitly after setRoleView.
+   */
+  const setRoleView = useCallback((v: RoleView) => {
+    setRoleViewState(v);
+  }, []);
 
   const locationMode = useMemo(
     () => deriveLocationMode(locationScope, comparisonLocationIds),
@@ -359,7 +457,7 @@ export function ProductProvider({ children }: { children: ReactNode }) {
           scope:
             scope === "all"
               ? "All locations"
-              : `${signal.locationId} · supplier`,
+              : `${locationDisplayName(signal.locationId)} · supplier`,
           condition: "monitored condition",
           action: "Create signal",
           status: "ACTIVE",
@@ -437,6 +535,7 @@ export function ProductProvider({ children }: { children: ReactNode }) {
       setRoleView,
       completeOnboarding: () => setOnboardingDone(true),
       scopedSignals,
+      contextReady: hydrated,
     }),
     [
       signals,
@@ -471,6 +570,7 @@ export function ProductProvider({ children }: { children: ReactNode }) {
       addComment,
       setRoleView,
       scopedSignals,
+      hydrated,
     ],
   );
 

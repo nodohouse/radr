@@ -4,12 +4,10 @@ import { HomepageSpine } from "@/components/marketing/scenes/home/HomepageSpine"
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { buildAlternatesForLocale } from "@/i18n/seo";
+import "../marketing-2030.css";
 import "../home.css";
-import "../editorial.css";
-import "../launch.css";
-import "../decision-card.css";
-import "../econ.css";
-import "../motion.css";
+import "../brand-takeover.css";
+import "../homepage-hero.css";
 
 type Props = { params: Promise<{ locale: string }> };
 

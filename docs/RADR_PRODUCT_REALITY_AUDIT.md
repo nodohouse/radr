@@ -1,5 +1,13 @@
 # RADR Product Reality Audit
 
+> **Superseded for engineering priority.**  
+> Use **`docs/PRODUCT_REALITY_AUDIT.md`** (2026-09-20 Phase 0 handoff) as the current product reality SSOT.  
+> This August 2026 document is retained for historical reference only — several architectural claims (dual production shell, live BUY/LABOR/SELL pages, Sources UI) are stale.
+
+---
+
+# RADR Product Reality Audit (historical — 2026-08-28)
+
 **Date:** 2026-08-28  
 **Scope:** Full repository. Marketing must not claim production readiness beyond this document.  
 **Rule:** Status labels are absolute. Demo polish ≠ production capability.

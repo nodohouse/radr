@@ -1,0 +1,130 @@
+/**
+ * Product operating tokens — aliases to marketing brand SSOT.
+ * Do not invent a separate app palette. Canvas = #f7faf8 · surface = #fff · ink = #0a0d0b.
+ * Rail = #f1f6f3 (light mineral). Green = #00d978 / verified #00a85a.
+ */
+
+:root {
+  /* ——— Surfaces (brand) ——— */
+  --rp-frame: var(--color-canvas);
+  --rp-canvas: var(--color-canvas);
+  --rp-surface: var(--color-surface);
+  --rp-surface-elevated: var(--color-canvas-elevated);
+  --rp-surface-hover: var(--color-surface-subtle);
+  --rp-surface-active: color-mix(in srgb, var(--color-brand) 8%, var(--color-surface));
+
+  --radr-canvas: var(--color-canvas);
+  --radr-surface: var(--color-surface);
+  --radr-surface-muted: var(--color-surface-subtle);
+  --radr-surface-strong: var(--color-surface);
+  --radr-stone: var(--color-surface-subtle);
+  --rp-bg: var(--color-canvas);
+  --rp-surface-1: var(--color-surface);
+  --rp-surface-2: var(--color-canvas-elevated);
+  --rp-surface-raised: var(--color-surface);
+
+  /* ——— Ink ——— */
+  --radr-ink: var(--color-text);
+  --radr-muted: var(--color-text-secondary);
+  --radr-quiet: var(--color-text-muted);
+  --rp-text-primary: var(--color-text);
+  --rp-text-secondary: var(--color-text-secondary);
+  --rp-text-quiet: var(--color-text-muted);
+
+  /* ——— Rail (light mineral — never dark) ——— */
+  --radr-rail: var(--radr-sidebar, #f1f6f3);
+  --radr-rail-elevated: var(--color-surface);
+  --radr-rail-hover: rgba(10, 13, 11, 0.04);
+  --radr-rail-text: var(--color-text-secondary);
+  --radr-rail-text-strong: var(--color-text);
+  --radr-rail-muted: var(--color-text-muted);
+  --radr-rail-border: var(--color-border);
+  --radr-rail-collapsed: 68px;
+  --radr-rail-expanded: 224px;
+
+  /* ——— Signal green = EXACT marketing brand ——— */
+  --radr-signal: #00d978;
+  --radr-signal-ink: #0a0d0b;
+  --radr-selected: rgba(0, 217, 120, 0.12);
+  --radr-green-live: #00d978;
+  --radr-green-deep: #00a85a;
+  --rp-green: #00a85a;
+  --rp-green-live: #00d978;
+  --rp-green-signal: #00d978;
+  --rp-verified: #00a85a;
+
+  /* ——— State (brand semantic) ——— */
+  --radr-adverse: var(--semantic-negative);
+  --radr-watch: var(--semantic-warning);
+  --rp-adverse: var(--semantic-negative);
+  --rp-watch: var(--semantic-warning);
+
+  /* ——— Borders / elevation ——— */
+  --rp-border: var(--color-border);
+  --rp-border-strong: var(--color-border-strong);
+  --rp-shadow-soft: var(--shadow-soft);
+  --rp-shadow-menu: var(--shadow-float);
+
+  /* ——— Spacing (8pt) ——— */
+  --rp-space-1: 0.25rem;
+  --rp-space-2: 0.5rem;
+  --rp-space-3: 0.75rem;
+  --rp-space-4: 1rem;
+  --rp-space-5: 1.5rem;
+  --rp-space-6: 2rem;
+  --rp-space-7: 2.5rem;
+  --rp-gutter: clamp(1.25rem, 2.2vw, 2rem);
+  --rp-max: 1560px;
+  --rp-cmd-h: 52px;
+  --rp-telemetry-h: 30px;
+
+  --rp-radius-sm: var(--radius-sm);
+  --rp-radius-md: var(--radius-md);
+  --rp-radius-lg: var(--radius-lg);
+
+  /* ——— Type ——— */
+  --rp-font-ui: var(--type-body);
+  --rp-font-mono: var(--type-mono);
+  --rp-font-editorial: var(--type-display);
+  --rp-type-editorial: var(--type-display);
+  --rp-type-ops: var(--type-body);
+  --rp-type-num: var(--type-numeric);
+  --rp-l0: var(--color-canvas);
+  --rp-l1: var(--color-surface);
+  --rp-l2: var(--color-canvas-elevated);
+  --rp-l3-tint: rgba(0, 217, 120, 0.1);
+  --rp-text-xs: 0.6875rem;
+  --rp-text-sm: 0.75rem;
+  --rp-text-md: 0.875rem;
+  --rp-text-body: 1rem;
+  --rp-text-lg: 1.0625rem;
+  --rp-text-section: 1.25rem;
+  --rp-text-page: 1.35rem;
+  --rp-text-metric: clamp(1.5rem, 2vw, 2rem);
+  --rp-text-hero: clamp(2.25rem, 3.4vw, 3rem);
+  --rp-text-xl: var(--rp-text-page);
+  --rp-text-2xl: var(--rp-text-hero);
+
+  --rp-ease: var(--ease-out);
+  --rp-dur-fast: var(--motion-fast);
+  --rp-dur: var(--motion-base);
+  --rp-dur-slow: var(--motion-slow);
+  --rp-rail-ms: 180ms;
+
+  /* Northstar aliases → mineral light */
+  --rp-ns-ivory: var(--color-canvas);
+  --rp-ns-surface: var(--color-surface);
+  --rp-ns-stone: var(--color-surface-subtle);
+  --rp-ns-ink: var(--color-text);
+  --rp-ns-muted: var(--color-text-secondary);
+  --rp-ns-quiet: var(--color-text-muted);
+  --rp-ns-green: var(--color-verified);
+  --rp-ns-green-live: var(--color-brand);
+  --rp-ns-adverse: var(--semantic-negative);
+  --rp-ns-watch: var(--semantic-warning);
+  --rp-ns-hair: var(--color-hairline);
+  --rp-ns-shadow: var(--shadow-soft);
+  --rp-ns-radius: var(--radius-module);
+  --rp-ns-max: var(--rp-max);
+  --rp-ns-gutter: var(--rp-gutter);
+}

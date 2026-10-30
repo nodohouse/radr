@@ -26,7 +26,7 @@ const REVEALS: Record<LensId, Reveal> = {
       "Ticket time ↑ · second turns ↓ · slow-service mentions ↑",
     ],
     exposure: CANON_PEAK.expectedProtectedEuro,
-    href: "/demo",
+    href: "/signup?intent=demo&next=/app/enter",
   },
   food: {
     think: "SUPPLIER PRICE",
@@ -38,7 +38,7 @@ const REVEALS: Record<LensId, Reveal> = {
       "Recover noncompliance before menu price",
     ],
     exposure: 1590,
-    href: "/demo",
+    href: "/signup?intent=demo&next=/app/enter",
   },
   demand: {
     think: "DEMAND",
@@ -50,7 +50,7 @@ const REVEALS: Record<LensId, Reveal> = {
       "Demand quality changes which orders to accept",
     ],
     exposure: CANON_PEAK.expectedProtectedEuro,
-    href: "/demo",
+    href: "/signup?intent=demo&next=/app/enter",
   },
   reviews: {
     think: "SERVICE STAFF",
@@ -62,7 +62,7 @@ const REVEALS: Record<LensId, Reveal> = {
       "Guest voice attached to physical capacity",
     ],
     exposure: 390,
-    href: "/demo",
+    href: "/signup?intent=demo&next=/app/enter",
   },
   inventory: {
     think: "STOCKOUT LOSS",
@@ -74,7 +74,7 @@ const REVEALS: Record<LensId, Reveal> = {
       "Protect scarce ingredient; feature viable substitute",
     ],
     exposure: 680,
-    href: "/app/intelligence/menu",
+    href: "/signup?intent=demo&next=/app/enter",
   },
 };
 

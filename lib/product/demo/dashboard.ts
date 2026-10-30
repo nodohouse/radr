@@ -1,6 +1,8 @@
 import { LOCATIONS } from "./catalog";
 import type { Area, RoleView } from "../types";
 import type { TerritoryState } from "./command";
+import { toCatalogLocationId } from "@/lib/radr/product/locationIds";
+import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 
 export type DashPeriod = "today" | "yesterday" | "wtd" | "mtd" | "ytd";
 export type LocationScope = "all" | string;
@@ -100,14 +102,23 @@ export function locationLabel(scope: LocationScope) {
     region_fr: "France",
   };
   if (region[scope]) return region[scope]!;
-  return LOCATIONS.find((l) => l.id === scope)?.name ?? "All locations";
+  const catalogId = toCatalogLocationId(String(scope));
+  const fromCatalog = LOCATIONS.find(
+    (l) => l.id === scope || l.id === catalogId,
+  )?.name;
+  if (fromCatalog) return fromCatalog;
+  return locationDisplayName(String(scope));
 }
 
-export function getDashboard(scope: LocationScope, period: DashPeriod) {
+export function getDashboard(rawScope: LocationScope, period: DashPeriod) {
+  const scope =
+    rawScope === "all" || String(rawScope).startsWith("region_")
+      ? rawScope
+      : (toCatalogLocationId(String(rawScope)) as LocationScope);
   const lf = LOC_FACTOR[scope] ?? 0.2;
   const pf = PERIOD_FACTOR[period];
   const group = scope === "all";
-  const regional = scope.startsWith("region_");
+  const regional = String(scope).startsWith("region_");
 
   const marginCurrent = group ? 18.4 : pts(17.2 + lf * 3.2);
   const marginPlan = 17.6;
@@ -280,13 +291,13 @@ export function getDashboard(scope: LocationScope, period: DashPeriod) {
   });
 
   const fleet = {
-    total: group ? 18 : locations.length,
-    onCourse: locations.filter((l) => l.status === "STABLE").length + (group ? 8 : 0),
+    total: group ? 20 : locations.length,
+    onCourse: locations.filter((l) => l.status === "STABLE").length + (group ? 10 : 0),
     watch: locations.filter((l) => l.status === "WATCH").length + (group ? 0 : 0),
     action: locations.filter((l) => l.status === "ACTION").length,
   };
   if (group) {
-    fleet.onCourse = 14;
+    fleet.onCourse = 16;
     fleet.watch = 3;
     fleet.action = 1;
   }

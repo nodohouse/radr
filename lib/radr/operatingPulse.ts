@@ -23,7 +23,7 @@ export const DEMO_CLOCK = {
 /** Closed trading day: primary Daily Pulse */
 export const DAILY_PULSE = {
   locationId: "loc_ber",
-  locationName: "Berlin Mitte",
+  locationName: "Soho · New York",
   periodLabel: "Yesterday",
   periodDate: "Tuesday, 18 August",
   revenue: 7_812,
@@ -154,7 +154,7 @@ const SAT_CANCEL: CancellationCluster = {
 
 export const GROUP_MARGIN_AVG = 17.7;
 
-/** Next 7 days: Berlin Mitte venue scale (~€64 spend / cover). */
+/** Next 7 days: Soho · New York venue scale (~€64 spend / cover). */
 export const FORWARD_WEEK: ForwardDay[] = [
   {
     key: "2026-08-19",
@@ -446,13 +446,13 @@ export const GROUP_TODAY = {
   leaders: [
     { id: "loc_nyc", name: "New York Flatiron", revenue: 16_820, currency: "USD" as const, vsForecast: 7.2, margin: 19.4, rank: 1 },
     { id: "loc_tyo", name: "Tokyo Shibuya", revenue: 13_640, currency: "JPY" as const, vsForecast: 4.1, margin: 18.8, rank: 2 },
-    { id: "loc_ber", name: "Berlin Mitte", revenue: 9_088, currency: "EUR" as const, vsForecast: 6.1, margin: 18.4, rank: 3 },
+    { id: "loc_ber", name: "Soho · New York", revenue: 9_088, currency: "EUR" as const, vsForecast: 6.1, margin: 18.4, rank: 3 },
     { id: "loc_sin", name: "Singapore Marina", revenue: 11_260, currency: "SGD" as const, vsForecast: 2.4, margin: 17.6, rank: 4 },
     { id: "loc_lon", name: "London Soho", revenue: 12_240, currency: "GBP" as const, vsForecast: -1.2, margin: 17.9, rank: 5 },
   ],
 } as const;
 
-/** Rank decomposition for Berlin Mitte */
+/** Rank decomposition for Soho · New York */
 export const LOCATION_RANK_WHY = {
   locationId: "loc_ber",
   overall: 3,

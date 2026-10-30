@@ -52,7 +52,7 @@ function baseFromCanon(
   const options = mapOptions(c);
   return {
     id: opts.id,
-    organizationId: "org_northstar",
+    organizationId: "org_northstar_restaurants",
     locationId: "loc_berlin_mitte",
     operatingUnitId: "ou_berlin_dinner",
     roleContext: "GM",
@@ -155,7 +155,7 @@ function baseFromCanon(
     playbookImpact: c.learning
       ? `${c.learning.playbookFrom} → ${c.learning.playbookTo}`
       : undefined,
-    demoLabel: "DEMO · ILLUSTRATIVE",
+    demoLabel: "Demo · illustrative",
     modelVersion: "decision-record/v2",
     createdAt: "2026-09-10T12:00:00+02:00",
     updatedAt: "2026-09-17T12:00:00+02:00",
@@ -336,7 +336,7 @@ export function buildGuestVoiceDecisionRecord(
       debt: {
         id: "debt_friday_mix",
         title: "Recurring Friday kitchen-mix pressure",
-        locationLabel: "Berlin Mitte",
+        locationLabel: "Soho · New York",
         decisionType: "guest_voice_bottleneck",
         incidentCount: 4,
         windowLabel: "last 6 Fridays",

@@ -6,15 +6,19 @@
 import type { CurrencyCode } from "./venueProfiles";
 import { GROUP_REPORTING_CURRENCY, getVenueProfile } from "./venueProfiles";
 
-/** Demo FX → EUR reporting (centralized; replace with live rates later). */
+/** Demo FX → USD reporting (group reporting currency). Legacy name kept. */
 export const DEMO_FX_TO_EUR: Record<CurrencyCode, number> = {
-  EUR: 1,
-  GBP: 1.165,
-  USD: 0.92,
-  JPY: 0.0061,
-  SGD: 0.69,
-  AED: 0.25,
-  AUD: 0.61,
+  USD: 1,
+  EUR: 1.08,
+  GBP: 1.27,
+  JPY: 0.0067,
+  SGD: 0.74,
+  AED: 0.27,
+  AUD: 0.66,
+  HKD: 0.128,
+  MXN: 0.058,
+  BRL: 0.18,
+  ZAR: 0.055,
 };
 
 export function formatCurrency(
@@ -37,15 +41,28 @@ export function formatCurrency(
     const symbol =
       currency === "GBP"
         ? "£"
-        : currency === "USD" || currency === "SGD" || currency === "AUD"
+        : currency === "USD" ||
+            currency === "SGD" ||
+            currency === "AUD" ||
+            currency === "HKD" ||
+            currency === "MXN" ||
+            currency === "BRL"
           ? "$"
           : currency === "JPY"
             ? "¥"
             : currency === "AED"
               ? "AED "
-              : "€";
+              : currency === "ZAR"
+                ? "R"
+                : "€";
     if (currency === "AED") return `${sign}${symbol}${body}`;
     if (currency === "JPY") return `${sign}${symbol}${body}`;
+    if (currency === "ZAR") return `${sign}${symbol}${body}`;
+    if (currency === "HKD") return `${sign}HK${symbol}${body}`;
+    if (currency === "MXN") return `${sign}MX${symbol}${body}`;
+    if (currency === "BRL") return `${sign}R${symbol}${body}`;
+    if (currency === "SGD") return `${sign}S${symbol}${body}`;
+    if (currency === "AUD") return `${sign}A${symbol}${body}`;
     return `${sign}${symbol}${body}`;
   }
 

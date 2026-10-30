@@ -7,13 +7,11 @@ import { Link } from "@/i18n/navigation";
 import {
   CANON_PEAK,
   CANON_OTA,
-  CANON_ORPHAN,
-  verifiedEuro,
 } from "@/lib/radr/decision/demo/canonical";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { CTAS } from "@/lib/marketing/brand";
 
-type Tab = "restaurant" | "hotel" | "apartment";
+type Tab = "restaurant" | "hotel";
 
 const PANELS: Record<
   Tab,
@@ -28,7 +26,7 @@ const PANELS: Record<
   }
 > = {
   restaurant: {
-    label: "Restaurant",
+    label: "Restaurants",
     src: "",
     pos: "50% 40%",
     problem: "Obvious: seat walk-ins · RADR: wait 12 minutes",
@@ -37,20 +35,12 @@ const PANELS: Record<
     lifecycle: "18:42 Decision → 21:30 Observed → Next day Verified",
   },
   hotel: {
-    label: "Hotel",
+    label: "Hotels",
     src: "",
     pos: "55% 40%",
     problem: "Channel economics under occupancy",
     outcomeLabel: "Verified protected · D-2201",
     outcome: CANON_OTA.actualProtectedEuro,
-  },
-  apartment: {
-    label: "Aparthotels",
-    src: "",
-    pos: "50% 50%",
-    problem: "Orphan night still recoverable",
-    outcomeLabel: "Verified recovered · incremental",
-    outcome: verifiedEuro(CANON_ORPHAN),
   },
 };
 
@@ -70,12 +60,15 @@ export function SectionFinalEngine() {
     >
       <div className="rx-shell">
         <header className="rx-cinema-head">
-          <p className="rx-cinema-kicker">Across hospitality</p>
+          <p className="rx-cinema-kicker">Built across hospitality</p>
           <h2 className="rx-cinema-title">
-            Different operations.
+            Different hospitality operations.
             <br />
-            Same decision loop.
+            One Decision architecture.
           </h2>
+          <p className="rx-cinema-lead" style={{ marginTop: "0.75rem" }}>
+            Two examples of how RADR adapts to different operating models.
+          </p>
         </header>
 
         <div className="rx-vert-panels-rail" role="tablist">
@@ -128,7 +121,7 @@ export function SectionFinalEngine() {
         <div className="rx-vert-panels-cta">
           <h3>Put your operation on RADR.</h3>
           <div className="rx-ctas">
-            <NextLink href="/demo" className="rx-btn rx-btn-primary">
+            <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-btn rx-btn-primary">
               {CTAS.primaryProduct} <span aria-hidden="true">→</span>
             </NextLink>
             <Link href="/contact" className="rx-btn rx-btn-ghost">

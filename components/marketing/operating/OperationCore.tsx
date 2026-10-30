@@ -24,10 +24,10 @@ const ATTENTION: Record<
   OpTerritory,
   { title: string; money: string; territory: OpTerritory }
 > = {
-  buy: { title: "Supplier invoice discrepancy", money: "€118", territory: "buy" },
-  labor: { title: "Peak service capacity", money: "€290", territory: "labor" },
-  sell: { title: "Terrace weather opportunity", money: "€420", territory: "sell" },
-  recover: { title: "Table 14 verified", money: "€184", territory: "recover" },
+  buy: { title: "Supplier invoice discrepancy", money: "$118", territory: "buy" },
+  labor: { title: "Peak service capacity", money: "$290", territory: "labor" },
+  sell: { title: "Terrace weather opportunity", money: "$420", territory: "sell" },
+  recover: { title: "Table 14 verified", money: "$184", territory: "recover" },
 };
 
 /**

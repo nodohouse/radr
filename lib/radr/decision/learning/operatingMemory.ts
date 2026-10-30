@@ -85,7 +85,7 @@ export function buildBerlinOperatingMemory(): OperatingMemory {
 
   return {
     locationId: "loc_berlin_mitte",
-    locationLabel: "Berlin Mitte",
+    locationLabel: "Soho · New York",
     knowledge: {
       level,
       label: knowledgeLabel(level),

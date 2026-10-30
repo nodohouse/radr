@@ -66,7 +66,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
   restaurant: {
     displayId: CANON_PEAK.displayId,
     place: {
-      location: "Berlin Mitte",
+      location: "Soho · New York",
       time: "18:42",
       phase: "Dinner service",
     },
@@ -123,9 +123,9 @@ const STORIES: Record<HeroVerticalId, Story> = {
         "Delivery marginal contribution · lower this window",
       ],
       predicted: [
-        "Wait-12 expected · +€620 vs seat-now",
+        "Pace seating expected · +$620 vs seat-now",
         "Resume seating · 18:54 if load below threshold",
-        "Feature high €/min dish during hold",
+        "Feature high $/min dish during hold",
       ],
       assumes: ["Inbound arrivals hold", "No VIP exception yet"],
       couldChange: ["VIP party", "Kitchen recovery", "Delivery spike"],
@@ -134,7 +134,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
   hotel: {
     displayId: CANON_OTA.displayId,
     place: {
-      location: "Amsterdam Canal",
+      location: "Mercer House · New York",
       time: "14:10",
       phase: "Pickup window",
     },
@@ -153,7 +153,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
     availableValue: "94% ready",
     calcLeft: "6",
     calcRight: "OTA",
-    problem: "€4,200 CONTRIBUTION AT RISK",
+    problem: "$4,200 CONTRIBUTION AT RISK",
     obviousLabel: "THE OBVIOUS MOVE",
     obviousMove: "KEEP SELLING EVERY CHANNEL",
     factors: [
@@ -194,8 +194,8 @@ const STORIES: Record<HeroVerticalId, Story> = {
       ],
       predicted: [
         "Direct-fill probability · 73% historical",
-        "Release OTA expected · €1,800",
-        "Hold-direct expected · €3,100",
+        "Release OTA expected · $1,800",
+        "Hold-direct expected · $3,100",
       ],
       assumes: ["Pickup remains ahead", "Rooms stay ready"],
       couldChange: ["Comp pricing", "Event demand shift", "HK delay"],
@@ -204,7 +204,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
   apartments: {
     displayId: CANON_ORPHAN.displayId,
     place: {
-      location: "Lisbon Chiado",
+      location: "Roma Norte · Mexico City",
       time: "T−72h",
       phase: "Orphan night",
     },
@@ -215,7 +215,7 @@ const STORIES: Record<HeroVerticalId, Story> = {
     signals: [
       { id: "gap", label: "ONE-NIGHT GAP", value: "Tuesday", x: 20, y: 24 },
       { id: "arr", label: "ARRIVAL", value: "72h away", x: 60, y: 46 },
-      { id: "floor", label: "PROFITABLE FLOOR", value: "€148", x: 28, y: 72 },
+      { id: "floor", label: "PROFITABLE FLOOR", value: "$148", x: 28, y: 72 },
     ],
     demandLabel: "DIRECT IN 48H",
     demandValue: "often fills",
@@ -269,9 +269,9 @@ const STORIES: Record<HeroVerticalId, Story> = {
         "OTA fill higher earlier · higher cost",
       ],
       predicted: [
-        `Wait path · €${CANON_ORPHAN.expectedProtectedEuro} expected net contribution`,
-        `Recommended rate · €${CANON_ORPHAN.recommendedRateEuro}`,
-        "Early discount · €78 expected net contribution",
+        `Wait path · $${CANON_ORPHAN.expectedProtectedEuro} expected net contribution`,
+        `Recommended rate · $${CANON_ORPHAN.recommendedRateEuro}`,
+        "Early discount · $78 expected net contribution",
       ],
       assumes: ["No early walkaway on next stay"],
       couldChange: ["Sudden OTA demand", "Maintenance issue"],

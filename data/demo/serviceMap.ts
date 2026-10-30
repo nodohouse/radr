@@ -93,7 +93,7 @@ export function berlinServiceSnapshots(): Record<string, ServiceMapSnapshot> {
   const base: ServiceMapSnapshot = {
     locationId: DEMO_LOCATIONS.berlin.id,
     vertical: "restaurant",
-    at: "18:42",
+    at: "19:48",
     phase: "Building → peak",
     occupancyPct: 78,
     kitchenLoadPct: 92,
@@ -141,7 +141,7 @@ export function berlinServiceSnapshots(): Record<string, ServiceMapSnapshot> {
   };
 
   return {
-    "18:42": base,
+    "19:48": base,
     "18:00": { ...base, at: "18:00", phase: "Building", occupancyPct: 54, kitchenLoadPct: 61, turnRiskCount: 2 },
     "19:00": at1900Wait,
     "19:00_seat": at1900Seat,

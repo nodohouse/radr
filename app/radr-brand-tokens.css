@@ -1,0 +1,244 @@
+/**
+ * RADR brand tokens — single source for /en and /app.
+ * Identity: Geist Sans · A-mark · green-first · blue intelligence · daylight.
+ */
+
+:root {
+  /* ——— Canonical brand palette (2026 A-mark system) ——— */
+  --radr-ink: #0b1512;
+  --radr-forest: #064d39;
+  --radr-green: #00d978;
+  --radr-green-bright: #19ea8a;
+  --radr-mint: #dff9ee;
+  --radr-blue: #2777e8;
+  --radr-blue-soft: #ddebff;
+  --radr-ice: #f1f7fc;
+  --radr-bg: #f8faf7;
+  --radr-surface: #ffffff;
+  --radr-muted: #69746f;
+  --radr-border: rgba(11, 21, 18, 0.1);
+
+  /* Motion */
+  --radr-motion-micro: 150ms;
+  --radr-motion-standard: 220ms;
+  --radr-motion-shared: 450ms;
+  --radr-motion-hero: 600ms;
+  --radr-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Typography — Geist only. Hierarchy via size/weight/tracking. */
+  --type-display: var(--font-display), var(--font-geist-sans), "Geist", Inter, Arial, sans-serif;
+  --type-body: var(--font-body), var(--font-geist-sans), "Geist", Inter, Arial, sans-serif;
+  --type-numeric: var(--font-body), var(--font-geist-sans), "Geist", Inter, Arial, sans-serif;
+  --type-mono: var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
+  /* Legacy alias — never serif in product */
+  --type-editorial: var(--type-display);
+
+  --font-brand: var(--type-display);
+  --font-ui: var(--type-body);
+  --font-number: var(--type-numeric);
+  --font-sans: var(--font-body), var(--font-geist-sans), "Geist", Inter, Arial, sans-serif;
+  /* Public Instrument Sans aliases → Geist */
+  --font-instrument-sans: var(--font-sans);
+
+  /* Surfaces — warm mineral light / daylight */
+  --color-canvas: var(--radr-bg);
+  --color-canvas-elevated: #fbfdfc;
+  --color-surface: var(--radr-surface);
+  --color-surface-subtle: #eef4f0;
+  --color-surface-raised: #ffffff;
+
+  /* Ink */
+  --color-text: var(--radr-ink);
+  --color-text-secondary: var(--radr-muted);
+  --color-text-muted: #7a827d;
+  --color-text-inverse: #f7faf8;
+
+  /* Borders */
+  --color-border: rgba(10, 13, 11, 0.08);
+  --color-border-strong: rgba(10, 13, 11, 0.14);
+  --color-hairline: rgba(10, 13, 11, 0.06);
+
+  /* Brand / interaction (not business outcome) */
+  --color-brand: var(--radr-green);
+  --color-electric: var(--radr-green);
+  --color-brand-muted: rgba(0, 217, 120, 0.12);
+  --color-brand-deep: var(--radr-forest);
+  --color-intel: var(--radr-blue);
+  --color-intel-soft: var(--radr-blue-soft);
+
+  /* Business semantic — meaning, not arithmetic sign */
+  --semantic-positive: #0f7a45;
+  --semantic-positive-soft: rgba(15, 122, 69, 0.1);
+  --semantic-negative: #b42318;
+  --semantic-negative-soft: rgba(180, 35, 24, 0.08);
+  --semantic-warning: #b54708;
+  --semantic-warning-soft: rgba(181, 71, 8, 0.1);
+  --semantic-neutral: #626a65;
+  --semantic-verified: #00a85a;
+  --semantic-verified-soft: rgba(0, 168, 90, 0.1);
+  --semantic-live: #00d978;
+  --semantic-stale: #9aa39c;
+
+  /* Legacy outcome aliases */
+  --color-verified: var(--semantic-verified);
+  --color-verified-soft: var(--semantic-verified-soft);
+  --color-warning: var(--semantic-warning);
+  --color-warning-soft: var(--semantic-warning-soft);
+  --color-critical: var(--semantic-negative);
+  --color-critical-soft: var(--semantic-negative-soft);
+
+  /* Named aliases from polish brief */
+  --font-display-stack: var(--type-display);
+  --font-body-stack: var(--type-body);
+  --font-numeric-stack: var(--type-numeric);
+  --electric-accent: var(--color-electric);
+
+  /* Chart series (light canvas only) */
+  --chart-canvas: transparent;
+  --chart-primary: #0a0d0b;
+  --chart-brand: #00a85a;
+  --chart-compare: #9aa39c;
+  --chart-forecast: #9aa39c;
+  --chart-verified: #00a85a;
+  --chart-warning: #b54708;
+  --chart-negative: #0a0d0b;
+
+  /* Radius */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1rem;
+  --radius-pill: 999px;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.75rem;
+  --space-8: 4rem;
+
+  /* Motion */
+  --motion-fast: var(--radr-motion-micro);
+  --motion-base: var(--radr-motion-standard);
+  --motion-slow: var(--radr-motion-shared);
+  --motion-hero: var(--radr-motion-hero);
+  --motion-waterfall: var(--radr-motion-shared);
+  --ease-out: var(--radr-ease);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Shadow — restrained */
+  --shadow-soft: 0 1px 0 rgba(10, 13, 11, 0.04);
+  --shadow-float: 0 12px 40px rgba(10, 13, 11, 0.08);
+  --shadow-focus: 0 0 0 3px rgba(0, 217, 120, 0.28);
+
+  /* Legacy aliases — keep older CSS compiling */
+  --canvas: var(--color-canvas);
+  --canvas-elevated: var(--color-canvas-elevated);
+  --surface: var(--color-surface);
+  --ink: var(--color-text);
+  --muted: var(--color-text-secondary);
+  --muted-strong: #3f4642;
+  --signal: var(--color-brand);
+  --signal-deep: var(--color-brand-deep);
+  --signal-dim: #00b764;
+  --border: var(--color-border);
+  --border-strong: var(--color-border-strong);
+  --bg: var(--color-canvas);
+  --bg-muted: var(--color-surface-subtle);
+  --bg-elevated: var(--color-canvas-elevated);
+  --bone: var(--color-canvas);
+  --ink-muted: var(--color-text-secondary);
+  --line: var(--color-border);
+  --accent: var(--color-brand);
+  --accent-soft: var(--color-brand-muted);
+  --danger: var(--color-critical);
+  --resolved: var(--color-verified);
+
+  /* Product light foundation aliases */
+  --radr-surface-subtle: #eef4f0;
+  --radr-surface-raised: #ffffff;
+  --radr-text: var(--color-text);
+  --radr-text-secondary: var(--color-text-secondary);
+  --radr-text-muted: var(--color-text-muted);
+  --radr-border-strong: var(--color-border-strong);
+  --radr-green-strong: var(--color-verified);
+  --radr-green-soft: var(--color-brand-muted);
+  --radr-amber: var(--color-warning);
+  --radr-red: var(--color-critical);
+  --radr-sidebar: #f1f6f3;
+  --radr-live: var(--radr-green);
+
+  /* Dark only for overlays / command palette — not charts */
+  --overlay-scrim: rgba(10, 13, 11, 0.42);
+  --overlay-surface: #0a0d0b;
+  --overlay-text: #f7faf8;
+
+  /* ——— Strict product type scale (Geist) ——— */
+  --fs-display: clamp(2.5rem, 3.2vw, 3.25rem); /* 40–52 */
+  --fs-hero-metric: clamp(2.25rem, 2.8vw, 3rem); /* 36–48 */
+  --fs-section: clamp(1.25rem, 1.5vw, 1.5rem); /* 20–24 */
+  --fs-module: 1.0625rem; /* 17 */
+  --fs-key-value: clamp(1.5rem, 2vw, 2rem); /* 24–32 */
+  --fs-body: 1rem; /* 16 — match marketing body */
+  --fs-body-sm: 0.875rem; /* 14 */
+  --fs-label: 0.8125rem; /* 13 */
+  --fs-meta: 0.75rem; /* 12 — absolute floor */
+  --fs-status: 0.75rem; /* 12 */
+
+  --lh-display: 1.08;
+  --lh-metric: 1.05;
+  --lh-section: 1.2;
+  --lh-body: 1.5;
+  --lh-meta: 1.35;
+
+  --fw-regular: 400;
+  --fw-book: 450;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 600; /* never 700 in product UI */
+
+  /* Display tracking — marketing H1 ≈ -0.04em */
+  --tracking-display: -0.04em;
+  --tracking-tight: -0.03em;
+  --tracking-ui: -0.01em;
+
+  /* Spacing scale: 4 8 12 16 24 32 40 48 64 */
+  --space-4px: 0.25rem;
+  --space-8px: 0.5rem;
+  --space-12px: 0.75rem;
+  --space-16px: 1rem;
+  --space-24px: 1.5rem;
+  --space-32px: 2rem;
+  --space-40px: 2.5rem;
+  --space-48px: 3rem;
+  --space-64px: 4rem;
+
+  /* Density */
+  --row-compact: 2.75rem; /* 44 */
+  --row-table: 3rem; /* 48 */
+  --row-nav: 2.625rem; /* 42 */
+  --btn-h: 2.375rem; /* 38 */
+  --btn-h-lg: 2.75rem; /* 44 */
+  --btn-h-sm: 2rem; /* 32 */
+  --ctx-h: 2.75rem; /* 44 */
+  --icon-sm: 1rem; /* 16 */
+  --icon-md: 1.125rem; /* 18 */
+  --icon-lg: 1.25rem; /* 20 */
+
+  /* Chart heights */
+  --chart-hero-h: 22.5rem; /* 360 */
+  --chart-support-h: 13.75rem; /* 220 */
+  --chart-micro-h: 4.5rem; /* 72 */
+
+  /* Radius restrained */
+  --radius-module: 0.5rem;
+
+  /* Visual tiers (opacity / weight hints) */
+  --tier1-weight: 560;
+  --tier2-weight: 520;
+  --tier3-opacity: 0.92;
+}

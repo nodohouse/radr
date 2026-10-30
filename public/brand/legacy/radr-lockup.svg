@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 64" fill="none" role="img" aria-label="RADR">
+  <g transform="translate(0 2) scale(0.58)">
+    <path d="M29 12 L10 90" stroke="#0B1512" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M51 12 L70 90" stroke="#0B1512" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="40" cy="56" r="7.25" fill="#00D978"/>
+  </g>
+  <text x="56" y="44" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="34" font-weight="700" letter-spacing="-1" fill="#0B1512">RADR</text>
+</svg>

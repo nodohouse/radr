@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
-import NextLink from "next/link";
 import {
   useCallback,
   useEffect,
@@ -13,11 +12,12 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { RadrDelta } from "@/components/radr/RadrDelta";
-import { OperatingPulse } from "@/components/marketing/OperatingPulse";
+import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
+import { CTAS } from "@/lib/marketing/brand";
 import {
   COMPANY_LINKS,
   PLATFORM_COLUMNS,
+  SOLUTIONS_HOSPITALITY,
   VALUE_LEAK_CLASSES,
   VALUE_LEAK_DEEPER,
   VALUE_LEAK_HREF,
@@ -30,8 +30,8 @@ import {
 
 type MenuId = "platform" | "solutions" | "company";
 
-const OPEN_DELAY_MS = 90;
-const CLOSE_DELAY_MS = 140;
+const OPEN_DELAY_MS = 120;
+const CLOSE_DELAY_MS = 180;
 
 type Props = { variant?: "home" | "pricing" };
 
@@ -61,16 +61,18 @@ export function SiteNav({ variant }: Props) {
       ? "platform"
       : pathname.startsWith("/solutions") || pathname.startsWith("/industries")
         ? "solutions"
-        : pathname === "/pricing" || variant === "pricing"
-          ? "pricing"
-          : pathname.startsWith("/company") ||
-            pathname.startsWith("/approach") ||
-            pathname.startsWith("/security") ||
-            pathname.startsWith("/contact") ||
-            pathname.startsWith("/why") ||
-            pathname.startsWith("/developers")
-          ? "company"
-          : null;
+        : pathname.startsWith("/value-calculator")
+          ? "valueCalculator"
+          : pathname === "/pricing" || variant === "pricing"
+            ? "pricing"
+            : pathname.startsWith("/company") ||
+                pathname.startsWith("/approach") ||
+                pathname.startsWith("/security") ||
+                pathname.startsWith("/contact") ||
+                pathname.startsWith("/why") ||
+                pathname.startsWith("/developers")
+              ? "company"
+              : null;
 
   const [mounted, setMounted] = useState(false);
 
@@ -177,7 +179,7 @@ export function SiteNav({ variant }: Props) {
       document.querySelectorAll<HTMLElement>("[data-nav-theme]"),
     );
     if (nodes.length === 0) {
-      setNavTheme("dark");
+      setNavTheme("light");
       return;
     }
     const io = new IntersectionObserver(
@@ -239,15 +241,17 @@ export function SiteNav({ variant }: Props) {
     ? { duration: 0 }
     : { duration: 0.14, ease: [0.22, 1, 0.36, 1] as const };
 
+  const isHome = pathname === "/" || pathname === "";
+
   return (
     <>
-      <OperatingPulse />
       <header
       ref={navRef}
       className="rx-nav"
       data-theme={navTheme}
       data-scrolled={scrolled ? "true" : "false"}
       data-menu={menu ? "open" : "closed"}
+      data-home={isHome ? "true" : "false"}
       suppressHydrationWarning
     >
       <div className="rx-nav-bar">
@@ -256,10 +260,13 @@ export function SiteNav({ variant }: Props) {
           className="rx-nav-brand"
           aria-label={t("homeAria")}
         >
-          <span className="rx-nav-mark" aria-hidden="true">
-            <RadrDelta variant="nav" height={17} />
-          </span>
-          <span className="rx-nav-name">RADR</span>
+          <FrozenRadrLogo
+            variant="mark"
+            theme={navTheme === "dark" ? "dark" : "light"}
+            width={40}
+            priority
+            className="rx-nav-lockup rx-nav-lockup--mark"
+          />
         </Link>
 
         <nav
@@ -291,6 +298,17 @@ export function SiteNav({ variant }: Props) {
           ))}
 
           <Link
+            href="/value-calculator"
+            className="rx-nav-link rx-nav-link--direct rx-nav-link--value"
+            data-active={activeTop === "valueCalculator" ? "true" : "false"}
+            title="Model what may be worth investigating in your operation."
+            onMouseEnter={scheduleClose}
+          >
+            <span className="rx-nav-value-dot" aria-hidden />
+            {t("valueCalculator")}
+          </Link>
+
+          <Link
             href="/pricing"
             className="rx-nav-link rx-nav-link--direct"
             data-active={activeTop === "pricing" ? "true" : "false"}
@@ -319,14 +337,11 @@ export function SiteNav({ variant }: Props) {
           <Link href="/login" className="rx-nav-signin">
             {t("signIn")}
           </Link>
-          <NextLink
-            href="/app/lab/control-center?seed=recover"
-            className="rx-nav-cta rx-nav-cta-ghost"
+          <Link
+            href={CTAS.primarySalesHref}
+            className="rx-nav-cta"
           >
-            {t("bookDemo")}
-          </NextLink>
-          <Link href="/contact?intent=recovery-pilot" className="rx-nav-cta">
-            {t("seeInAction")}
+            Book a demo
           </Link>
           <button
             type="button"
@@ -409,10 +424,12 @@ export function SiteNav({ variant }: Props) {
             aria-label={t("homeAria")}
             onClick={() => setDrawerOpen(false)}
           >
-            <span className="rx-nav-mark" aria-hidden="true">
-              <RadrDelta variant="nav" height={17} />
-            </span>
-            <span className="rx-nav-name">RADR</span>
+            <FrozenRadrLogo
+              variant="mark"
+              theme="light"
+              width={34}
+              className="rx-nav-lockup rx-nav-lockup--mark"
+            />
           </Link>
           <button
             type="button"
@@ -453,6 +470,15 @@ export function SiteNav({ variant }: Props) {
           }
           onNavigate={() => setDrawerOpen(false)}
         >
+          {SOLUTIONS_HOSPITALITY.map((l) => (
+            <Link
+              key={l.key}
+              href={l.href}
+              onClick={() => setDrawerOpen(false)}
+            >
+              {t(`panels.solutions.hospitality.${l.key}.label`)}
+            </Link>
+          ))}
           {VALUE_LEAK_CLASSES.map((l) => (
             <Link
               key={l.key}
@@ -474,6 +500,9 @@ export function SiteNav({ variant }: Props) {
             </Link>
           ))}
         </MobileAccordion>
+        <Link href="/value-calculator" onClick={() => setDrawerOpen(false)}>
+          {t("valueCalculator")}
+        </Link>
         <Link href="/pricing" onClick={() => setDrawerOpen(false)}>
           {t("pricing")}
         </Link>
@@ -500,14 +529,7 @@ export function SiteNav({ variant }: Props) {
           {t("signIn")}
         </Link>
         <Link
-          href="/app/lab/control-center?seed=recover"
-          className="rx-nav-drawer-ghost"
-          onClick={() => setDrawerOpen(false)}
-        >
-          {t("bookDemo")}
-        </Link>
-        <Link
-          href="/contact?intent=recovery-pilot"
+          href={CTAS.seeInActionHref}
           className="rx-nav-drawer-cta"
           onClick={() => setDrawerOpen(false)}
         >

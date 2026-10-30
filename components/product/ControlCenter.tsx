@@ -6,6 +6,7 @@ import { getOperatingSnapshot } from "@/lib/radr/operatingSnapshot";
 import type { Finding } from "@/lib/radr/domain";
 import { findingsForScope } from "@/lib/radr/findings";
 import { getLocationById } from "@/lib/radr/locationCatalog";
+import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 import { TodayHome } from "./TodayHome";
 
 /**
@@ -37,7 +38,7 @@ export default function ControlCenter() {
   const locationName =
     comparisonLocationIds.length >= 2
       ? comparisonLocationIds
-          .map((id) => getLocationById(id)?.name ?? id)
+          .map((id) => getLocationById(id)?.name ?? locationDisplayName(id))
           .join(" · ")
       : snapshot.locationName;
 

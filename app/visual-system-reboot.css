@@ -1,0 +1,219 @@
+/**
+ * Product polish on marketing DNA.
+ * Tokens from radr-brand-tokens / radr-product-tokens — no invented greens or dark rail.
+ */
+
+/* ——— Canvas depths ——— */
+.rp-shell-v2 .rp-main-v2,
+.rp-shell-v2 .rp-content-v2 {
+  background: var(--radr-canvas, #f7faf8);
+}
+
+.rp-shell-v2 .rp-content-v2 {
+  font-family: var(--rp-font-ui);
+  font-size: var(--rp-text-body);
+  color: var(--radr-ink);
+}
+
+/* ——— Editorial interpretation ——— */
+.rp-shell-v2 .rp-cc4-situation-h,
+.rp-shell-v2 .rp-ns-situation-h,
+.rp-shell-v2 .rp-mem-hero-h,
+.rp-shell-v2 .rp-val-hero-figure,
+.rp-shell-v2 [data-editorial="true"] {
+  font-family: var(--rp-font-editorial);
+  font-weight: 500;
+  letter-spacing: var(--tracking-display, -0.04em);
+  line-height: 1.12;
+}
+
+.rp-shell-v2 .rp-cc4-situation-h,
+.rp-shell-v2 .rp-ns-situation-h {
+  font-size: var(--rp-text-hero);
+  max-width: 18ch;
+}
+
+/* ——— Marketing eyebrow DNA ——— */
+.rp-shell-v2 .rp-cc4-eyebrow,
+.rp-shell-v2 .rp-ns-eyebrow,
+.rp-shell-v2 .rp-mem-eyebrow,
+.rp-shell-v2 .rp-val-eyebrow,
+.rp-shell-v2 .rp-dl-kicker,
+.rp-shell-v2 .rp-ledger-kicker,
+.rp-shell-v2 [data-eyebrow="true"] {
+  font-family: var(--rp-font-mono, var(--type-mono));
+  font-size: var(--fs-meta, 0.75rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--radr-muted, #626a65);
+}
+
+/* ——— Financial numbers ——— */
+.rp-shell-v2 .rp-val-hero-figure strong,
+.rp-shell-v2 .rp-srv-hero-figure strong,
+.rp-shell-v2 .rp-drec-econ-hero,
+.rp-shell-v2 .rp-cc4-review-econ,
+.rp-shell-v2 [data-numeric="true"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.02em;
+}
+
+.rp-shell-v2 .rp-val-hero-figure strong {
+  font-size: clamp(2.75rem, 5vw, 3.75rem);
+  font-weight: 600;
+  color: var(--radr-ink);
+  line-height: 1;
+}
+
+.rp-shell-v2 .rp-srv-hero-figure strong {
+  font-size: clamp(2.5rem, 4.5vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* ——— Service mode tabs (marketing control language) ——— */
+.rp-shell-v2 .rp-svc-tab {
+  font-family: var(--rp-font-mono, var(--type-mono));
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rp-shell-v2 .rp-svc-tab[data-active="true"] {
+  border-bottom-color: var(--radr-signal, #00d978);
+  color: var(--radr-ink);
+}
+
+.rp-shell-v2 .rp-svc-viewline {
+  font-size: 0.875rem;
+  color: var(--radr-muted);
+}
+
+/* ——— Floor optimizer as RADR moment (selective graphite instrument) ——— */
+.rp-shell-v2 .rp-fopt[data-result="better"] {
+  background: var(--overlay-surface, #0a0d0b);
+  color: var(--overlay-text, #f7faf8);
+  border: 1px solid color-mix(in srgb, var(--radr-signal, #00d978) 28%, transparent);
+  border-radius: var(--rp-radius-md, 0.625rem);
+  padding: 1rem 1.1rem;
+}
+
+.rp-shell-v2 .rp-fopt[data-result="better"] .rp-svc-kicker {
+  color: var(--radr-signal, #00d978);
+}
+
+.rp-shell-v2 .rp-fopt[data-result="better"] h2 {
+  font-family: var(--rp-font-editorial);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--overlay-text, #f7faf8);
+}
+
+.rp-shell-v2 .rp-fopt[data-result="better"] .rp-svc-cta {
+  background: var(--radr-signal, #00d978);
+  color: var(--radr-ink, #0a0d0b);
+  border: 0;
+  border-radius: var(--rp-radius-sm, 0.375rem);
+  font-weight: 600;
+}
+
+.rp-shell-v2 .rp-fopt[data-result="better"] .rp-svc-cta:hover {
+  filter: brightness(1.03);
+}
+
+/* ——— Review Now economics ——— */
+.rp-shell-v2 .rp-cc4-review-econ,
+.rp-shell-v2 .rp-ns-review-econ {
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--rp-verified, #00a85a);
+}
+
+/* ——— Memory hero ——— */
+.rp-shell-v2 .rp-mem-accuracy,
+.rp-shell-v2 .rp-memory-accuracy {
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/* ——— Decisions ledger ——— */
+.rp-shell-v2 .rp-dl-headline,
+.rp-shell-v2 .rp-ledger-headline {
+  font-family: var(--rp-font-editorial);
+  font-size: var(--rp-text-page);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+/* ——— Radius from marketing scale ——— */
+.rp-shell-v2 .rp-cc4-mod,
+.rp-shell-v2 .rp-ns-mod,
+.rp-shell-v2 .rp-srv-card,
+.rp-shell-v2 .rp-loc-table-scroll {
+  border-radius: var(--rp-radius-md, 0.625rem);
+}
+
+/* ——— BOH attention protagonist ——— */
+.rp-shell-v2 .rp-house-band[data-band="needs"],
+.rp-shell-v2 .rp-boh-needs {
+  border-left: 3px solid var(--radr-signal, #00d978);
+}
+
+/* ——— Intelligence question hierarchy ——— */
+.rp-shell-v2 .rp-intel-question,
+.rp-shell-v2 .rp-ih-question {
+  font-family: var(--rp-font-editorial);
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+/* ——— Arrow link language (marketing →) ——— */
+.rp-shell-v2 a.rp-arrow-link,
+.rp-shell-v2 .rp-arrow-link,
+.radr-arrow-link {
+  font-family: var(--rp-font-ui, var(--type-body));
+  font-size: var(--fs-body-sm, 0.875rem);
+  font-weight: 500;
+  color: var(--radr-ink, var(--color-text));
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.rp-shell-v2 a.rp-arrow-link::after,
+.rp-shell-v2 .rp-arrow-link::after {
+  content: " →";
+  color: var(--radr-green-deep, #00a85a);
+}
+
+.radr-eyebrow,
+.radr [data-eyebrow="true"] {
+  margin: 0;
+  font-family: var(--type-mono, var(--font-mono), monospace);
+  font-size: var(--fs-meta, 0.75rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary, #626a65);
+}
+
+/* LIVE accent = exact marketing signal green */
+.rp-goh-strip[data-pulse="marketing"] .rp-goh-live-pill {
+  color: var(--color-brand, #00d978) !important;
+}
+.rp-goh-strip[data-pulse="marketing"] .rp-goh-live-pill::before {
+  color: var(--color-brand, #00d978);
+}
+
+/* Command bar always shows page context (logo lives in rail) */
+.rp-goh[data-nav-mode="rail"] .rp-goh-title,
+.rp-goh[data-nav-mode="rail"][data-page="center"] .rp-goh-title {
+  display: block !important;
+  visibility: visible !important;
+}

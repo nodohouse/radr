@@ -2,89 +2,64 @@
  * LIVE / OPEN public Decisions — Control Center + Needs You only.
  * Sealed historical IDs (D-4102, D-1911, …) live in publicDecisionEconomics.
  * Never mix: a sealed Decision must not appear as Needs You.
+ *
+ * Source of truth for multi-location: northstarGroup.ts
  */
+
+import {
+  LIVE_D7021 as NS_D7021,
+  LIVE_D7022 as NS_D7022,
+  LIVE_D7023 as NS_D7023,
+  GROUP_NEEDS_YOU,
+  ROUTINE_SIGNALS_SUPPRESSED,
+  locationLabel,
+  type GroupLiveDecision,
+} from "@/lib/marketing/northstarGroup";
 
 export type PublicTemporalMode = "live" | "historical" | "replay";
 
 export type PublicLiveDecision = {
   displayId: string;
   location: string;
+  locationId: GroupLiveDecision["locationId"];
   classLabel: string;
   temporalMode: "live";
   state: "needs_you" | "investigate" | "review" | "radr_handling";
   owner: string;
-  economics: {
-    identified: number;
-    exposed: number;
-    expected: number;
-    recoverable: number;
-    observed: number;
-    attributed: number;
-    verified: number;
-    currency: "EUR";
-    basis: string;
-  };
+  economics: GroupLiveDecision["economics"];
   line: string;
   detail: string;
   cta: string;
   ctaHref: string;
 };
 
-/** D-7021 — Berlin reconciliation · OPEN */
-export const LIVE_D7021: PublicLiveDecision = {
-  displayId: "D-7021",
-  location: "Berlin Mitte",
-  classLabel: "Reconciliation",
-  temporalMode: "live",
-  state: "investigate",
-  owner: "Finance",
-  economics: {
-    identified: 395,
-    exposed: 395,
-    expected: 0,
-    recoverable: 395,
-    observed: 0,
-    attributed: 91,
-    verified: 0,
-    currency: "EUR",
-    basis: "Expected settlement vs received funds",
-  },
-  line: "Expected settlement and received funds disagree.",
-  detail: "€91 explained. €395 remains unmatched.",
-  cta: "Investigate",
-  ctaHref: "/solutions#reconciliation",
-};
+function toPublic(d: GroupLiveDecision): PublicLiveDecision {
+  return {
+    displayId: d.displayId,
+    location: locationLabel(d.locationId),
+    locationId: d.locationId,
+    classLabel: d.classLabel,
+    temporalMode: d.temporalMode,
+    state: d.state,
+    owner: d.owner,
+    economics: d.economics,
+    line: d.line,
+    detail: d.detail,
+    cta: d.cta,
+    ctaHref: d.ctaHref,
+  };
+}
 
-/** D-7022 — Amsterdam supplier variance · OPEN (not D-4102) */
-export const LIVE_D7022: PublicLiveDecision = {
-  displayId: "D-7022",
-  location: "Amsterdam",
-  classLabel: "Supplier / AP",
-  temporalMode: "live",
-  state: "review",
-  owner: "CFO",
-  economics: {
-    identified: 186,
-    exposed: 186,
-    expected: 186,
-    recoverable: 186,
-    observed: 0,
-    attributed: 0,
-    verified: 0,
-    currency: "EUR",
-    basis: "Invoice vs agreed contract rate",
-  },
-  line: "Invoice and agreed contract rate disagree.",
-  detail: "Evidence package ready.",
-  cta: "Review",
-  ctaHref: "/contact?intent=recovery-pilot",
-};
+export const LIVE_D7021 = toPublic(NS_D7021);
+export const LIVE_D7022 = toPublic(NS_D7022);
+export const LIVE_D7023 = toPublic(NS_D7023);
 
 export const PUBLIC_LIVE_DECISIONS = {
   "D-7021": LIVE_D7021,
   "D-7022": LIVE_D7022,
+  "D-7023": LIVE_D7023,
 } as const;
 
-export const MORNING_BRIEF_LIVE = [LIVE_D7021, LIVE_D7022] as const;
+export const MORNING_BRIEF_LIVE = GROUP_NEEDS_YOU.map(toPublic);
 
-export const ROUTINE_SIGNALS_SUPPRESSED = 147;
+export { ROUTINE_SIGNALS_SUPPRESSED };

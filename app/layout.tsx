@@ -1,23 +1,17 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { cookies } from "next/headers";
-import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import { locales, type AppLocale } from "@/i18n/routing";
 import "./globals.css";
 import "./radr.css";
 import "./motion.css";
 
-const display = Instrument_Sans({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = Instrument_Sans({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-body",
-  display: "swap",
-});
-
+/**
+ * Product typography is Geist Sans only.
+ * Hierarchy via size / weight / tracking / contrast — never serif.
+ * --font-editorial aliases to Geist for legacy selectors.
+ */
 const mono = IBM_Plex_Mono({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
@@ -41,8 +35,15 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${display.variable} ${body.variable} ${mono.variable}`}
+        className={`${GeistSans.variable} ${mono.variable} ${GeistSans.className}`}
         suppressHydrationWarning
+        style={
+          {
+            "--font-body": "var(--font-geist-sans)",
+            "--font-display": "var(--font-geist-sans)",
+            "--font-editorial": "var(--font-geist-sans)",
+          } as CSSProperties
+        }
       >
         {children}
       </body>

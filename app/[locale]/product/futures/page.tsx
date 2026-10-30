@@ -8,9 +8,9 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: "RADR Futures — Play the Operation Forward",
+    title: "RADR Futures — Compare paths before you act",
     description:
-      "Don’t guess the next move. Play viable responses forward before value is committed.",
+      "D-1911 Wait 12 minutes: compare Wait · Seat now · Throttle delivery with expected contribution before you commit.",
     alternates: buildAlternatesForLocale(locale, "/product/futures"),
   };
 }

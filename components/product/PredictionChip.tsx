@@ -24,7 +24,7 @@ export function PredictionChip({ prediction }: { prediction: Prediction }) {
       ) : null}
       {prediction.recommendedAction ? (
         <p className="rp-pred-do">
-          WHAT RADR NEEDS · {prediction.recommendedAction}
+          What RADR needs · {prediction.recommendedAction}
         </p>
       ) : null}
     </article>

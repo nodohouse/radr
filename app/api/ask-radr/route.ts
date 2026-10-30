@@ -15,7 +15,7 @@ import { NextResponse } from "next/server";
 import {
   getPrimaryOrganizationForUser,
   getSessionOrNull,
-  listLocationIdsForOrganization,
+  listAccessibleLocationIds,
 } from "@/lib/authz";
 import { askRequestSchema, orchestrateAsk } from "@/lib/ai";
 import { buildAskSecureAuth } from "@/lib/ai/askTenant";
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
       );
     }
     organizationId = primary.organization.id;
-    orgLocationIds = await listLocationIdsForOrganization(organizationId);
+    orgLocationIds = await listAccessibleLocationIds(primary.membership);
   }
 
   const resolved = buildAskSecureAuth({

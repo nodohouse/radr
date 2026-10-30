@@ -9,11 +9,11 @@ export function CommercialBanner() {
   return (
     <div className="rx-commercial-banner" role="note">
       <p className="rx-commercial-banner-inner">
-        <span>14-day recovery pilot</span>
+        <span>Decision intelligence for hospitality</span>
         <span aria-hidden="true" className="rx-commercial-banner-dot">
           ·
         </span>
-        <span>Start with exports</span>
+        <span>Above the stack you already run</span>
         <span
           aria-hidden="true"
           className="rx-commercial-banner-dot rx-commercial-banner-hide-sm"
@@ -21,20 +21,11 @@ export function CommercialBanner() {
           ·
         </span>
         <span className="rx-commercial-banner-hide-sm">No rip-and-replace</span>
-        <span
-          aria-hidden="true"
-          className="rx-commercial-banner-dot rx-commercial-banner-hide-sm"
-        >
-          ·
-        </span>
-        <span className="rx-commercial-banner-hide-sm">
-          Value verified downstream
-        </span>
         <Link
-          href="/contact?intent=recovery-pilot"
+          href="/signup"
           className="rx-commercial-banner-cta"
         >
-          Scope a pilot <span aria-hidden="true">→</span>
+          Get started <span aria-hidden="true">→</span>
         </Link>
       </p>
     </div>

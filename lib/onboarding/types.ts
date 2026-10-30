@@ -1,9 +1,35 @@
 /**
  * Onboarding state shape persisted on organizations.onboarding (jsonb).
- * Teaches RADR the hospitality operating model before integrations.
+ *
+ * Supports:
+ * - first_value path (TIME TO FIRST DECISION) — default for new workspaces
+ * - legacy questionnaire path (?legacy=1 / older rows)
  */
 
-export type LocationBand = "1" | "2-5" | "6-20" | "21-50" | "50+";
+import type {
+  DecisionClassGoal,
+  EvidenceMethod,
+  FirstDecisionOutcome,
+  FirstValueStep,
+  IndustryKind,
+  OnboardingMilestone,
+  OnboardingMilestones,
+  OnboardingStage,
+  RoleLens,
+} from "@/lib/onboarding/firstValue";
+import {
+  DEFAULT_FIRST_VALUE,
+  STAGE_FOR_STEP,
+} from "@/lib/onboarding/firstValue";
+
+export type LocationBand =
+  | "1"
+  | "2-5"
+  | "6-20"
+  | "21-50"
+  | "50+"
+  | "51-100"
+  | "100+";
 
 /** Legacy single venue picker — still accepted for older rows. */
 export type VenueType =
@@ -69,7 +95,8 @@ export type OnboardingRole =
   | "housekeeping_manager"
   | "front_desk"
   | "finance"
-  | "other";
+  | "other"
+  | RoleLens;
 
 export type HelpFocus =
   | "profitability"
@@ -92,10 +119,8 @@ export type HelpFocus =
   | "accounting_close";
 
 export type OnboardingStep =
-  | "welcome"
-  | "organization"
+  | FirstValueStep
   | "operate"
-  | "location"
   | "units"
   | "role"
   | "priorities"
@@ -106,11 +131,25 @@ export type OnboardingStep =
   | "choose"
   | "connect"
   | "done"
-  /** Legacy steps kept for persisted rows */
   | "operation";
 
-/** Canonical 8-step progressive path (welcome/building/kpis optional). */
+/** Canonical first-value progressive path. */
 export const PRIMARY_ONBOARDING_STEPS = [
+  "welcome",
+  "who",
+  "organization",
+  "location",
+  "goal",
+  "evidence",
+  "upload",
+  "data_health",
+  "analyzing",
+  "reveal",
+  "complete",
+] as const satisfies readonly OnboardingStep[];
+
+/** @deprecated legacy questionnaire path */
+export const LEGACY_ONBOARDING_STEPS = [
   "organization",
   "operate",
   "location",
@@ -121,15 +160,19 @@ export const PRIMARY_ONBOARDING_STEPS = [
   "insight",
 ] as const satisfies readonly OnboardingStep[];
 
-/** Connect step must resolve before insight — demo counts as a system choice. */
 export const DEMO_SYSTEM_ID = "demo";
 
-export function canEnterInsightStep(pendingSystem: string | null | undefined): boolean {
+export function canEnterInsightStep(
+  pendingSystem: string | null | undefined,
+): boolean {
   return Boolean(pendingSystem && pendingSystem.length > 0);
 }
 
 export type OnboardingState = {
+  path?: "first_value" | "legacy";
   step: OnboardingStep;
+  stage?: OnboardingStage;
+  milestones?: OnboardingMilestones;
   organizationName?: string;
   locationBand?: LocationBand;
   hqCity?: string;
@@ -140,13 +183,24 @@ export type OnboardingState = {
   locationCity?: string;
   locationCountry?: string;
   venueType?: VenueType;
-  /** Multi-select families from “What do you operate?” */
   operateFamilies?: OperateFamily[];
   operateSubtypes?: OperateSubtype[];
   operatingUnits?: OperatingUnitChoice[];
   roomCount?: number;
   seatCount?: number;
   role?: OnboardingRole;
+  roleLens?: RoleLens;
+  fullName?: string;
+  industry?: IndustryKind;
+  reportingCurrency?: string;
+  locationTimezone?: string;
+  localCurrency?: string;
+  decisionClass?: DecisionClassGoal;
+  evidenceMethod?: EvidenceMethod;
+  contractDocumentId?: string;
+  invoiceDocumentId?: string;
+  materialityThresholdMinor?: number;
+  firstDecision?: FirstDecisionOutcome;
   helpFocus?: HelpFocus[];
   selectedKpis?: string[];
   operatingProfileId?: string;
@@ -161,8 +215,52 @@ export type OnboardingState = {
 };
 
 export const DEFAULT_ONBOARDING: OnboardingState = {
+  path: "first_value",
   step: "welcome",
+  stage: "your_organization",
+  milestones: {},
+  materialityThresholdMinor: 10000,
 };
+
+export function isFirstValuePath(state: OnboardingState): boolean {
+  if (state.path === "legacy") return false;
+  if (state.path === "first_value") return true;
+  const legacySteps = new Set([
+    "operate",
+    "units",
+    "priorities",
+    "kpis",
+    "system",
+    "insight",
+    "building",
+    "choose",
+    "connect",
+  ]);
+  return !legacySteps.has(state.step);
+}
+
+export function withStep(
+  state: OnboardingState,
+  step: FirstValueStep,
+): OnboardingState {
+  return {
+    ...state,
+    path: "first_value",
+    step,
+    stage: STAGE_FOR_STEP[step],
+  };
+}
+
+export function ensureMilestone(
+  state: OnboardingState,
+  milestone: OnboardingMilestone,
+  at = new Date().toISOString(),
+): OnboardingState {
+  const milestones = { ...(state.milestones ?? {}) };
+  if (milestones[milestone]) return state;
+  milestones[milestone] = at;
+  return { ...state, milestones };
+}
 
 export type WorkspaceBrand = {
   orgName: string;
@@ -174,3 +272,5 @@ export type WorkspaceBrand = {
   demo: boolean;
   operatingProfileId?: string;
 };
+
+export { DEFAULT_FIRST_VALUE };

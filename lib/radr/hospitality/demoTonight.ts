@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte - hospitality / allergy demo fixtures.
+ * Soho · New York - hospitality / allergy demo fixtures.
  * Synthetic · explicit sources only · no inferred allergies.
  */
 

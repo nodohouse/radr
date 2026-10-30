@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { DECISION_IDS } from "@/lib/radr/decision/ids";
+import { LIVE_SCENARIO } from "@/lib/radr/demoClock";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 
 export type ReplayBeat = {
@@ -21,49 +22,49 @@ export type ReplayBeat = {
 
 const PEAK_REPLAY: ReplayBeat[] = [
   {
-    at: "18:42",
+    at: LIVE_SCENARIO.decisionFormedClock,
     title: "Capacity collision detected",
     detail: "Kitchen 92% · 38 covers inbound · 2 walk-ins waiting",
     kind: "detect",
   },
   {
-    at: "18:44",
+    at: "19:39",
     title: "Recommendation prepared",
     detail: "Wait 12 minutes · €620 expected incremental contribution vs seat-now",
     kind: "recommend",
   },
   {
-    at: "18:46",
+    at: "19:41",
     title: "Operator context",
-    detail: "GM: VIP party at the bar must sit by 18:50",
+    detail: "GM: VIP party at the bar must sit by 19:50",
     kind: "context",
   },
   {
-    at: "18:46",
+    at: "19:41",
     title: "Futures re-simulated",
-    detail: "Seat VIP at 18:50 · hold second walk-in · maintain delivery throttle",
+    detail: "Seat VIP at 19:50 · hold second walk-in · maintain delivery throttle",
     kind: "futures",
   },
   {
-    at: "18:47",
+    at: "19:43",
     title: "Plan approved",
     detail: "Prepared actions remain unwritten until systems of record confirm",
     kind: "approve",
   },
   {
-    at: "19:03",
+    at: LIVE_SCENARIO.peakObservedClock,
     title: "Kitchen pressure peaked",
     detail: "Load held below seat-now counterfactual",
     kind: "observe",
   },
   {
-    at: "19:26",
+    at: LIVE_SCENARIO.turnsObservedClock,
     title: "Second turns observed",
     detail: "More turns protected than seat-now path modeled",
     kind: "observe",
   },
   {
-    at: "21:30",
+    at: LIVE_SCENARIO.outcomeCalculatedClock,
     title: "Outcome calculated",
     detail: "€590 observed incremental contribution",
     kind: "observe",
@@ -71,7 +72,7 @@ const PEAK_REPLAY: ReplayBeat[] = [
   {
     at: "Next day",
     title: "Value verified",
-    detail: "€590 verified incremental · STRONGLY_ATTRIBUTED",
+    detail: "€590 verified incremental · strongly attributed",
     kind: "verify",
   },
   {
@@ -164,13 +165,10 @@ export function DecisionReplay({ decisionId }: { decisionId: string }) {
     <section className="rp-replay rp-replay-cinema" id="replay" aria-label="Decision replay">
       <div className="rp-replay-head">
         <div>
-          <h2>Replay</h2>
+          <p className="rp-replay-kicker">Historical demo replay</p>
+          <h2>How it unfolded</h2>
           <p className="rp-drec-quiet">
-            How the Decision unfolded — evidence, judgment, action, verification
-          </p>
-          <p className="rp-replay-note">
-            Demo documentary of the full eventual lifecycle · current real-time
-            state remains above
+            Documentary of the full eventual lifecycle — not current state
           </p>
         </div>
         <div className="rp-replay-controls">

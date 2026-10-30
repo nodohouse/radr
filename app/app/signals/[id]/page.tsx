@@ -2,11 +2,8 @@ import { redirect } from "next/navigation";
 
 type Props = { params: Promise<{ id: string }> };
 
-/** Legacy signal detail → finding detail when IDs align; else findings queue. */
+/** Legacy signal detail → Decision Ledger (customer vocabulary). */
 export default async function SignalDetailRedirect({ params }: Props) {
-  const { id } = await params;
-  if (id.startsWith("fnd_")) {
-    redirect(`/app/findings/${id}`);
-  }
-  redirect("/app/findings");
+  await params;
+  redirect("/app/decisions");
 }

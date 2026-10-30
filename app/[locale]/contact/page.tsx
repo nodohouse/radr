@@ -50,12 +50,10 @@ export default async function ContactPage({ params, searchParams }: Props) {
         <section className="rx-page-hero rx-page-hero--mineral" data-nav-theme="light">
           <div className="rx-shell rx-page-hero-inner">
             <p className="rx-kicker">{t("contactTitle")}</p>
-            <h1 className="rx-page-title">
-              Start a recovery pilot
-            </h1>
+            <h1 className="rx-page-title">Talk to RADR</h1>
             <p className="rx-lead rx-lead-short">
-              Supplier/AP, Reconciliation, or both — where the economics are
-              clearest.
+              Tell us about your estate. We will scope access and pricing
+              honestly.
             </p>
           </div>
         </section>
@@ -63,15 +61,15 @@ export default async function ContactPage({ params, searchParams }: Props) {
         <section className="rx-contact rx-contact--mineral" data-nav-theme="light">
           <div className="rx-shell rx-contact-split">
             <aside className="rx-contact-rail">
-              <p className="rx-rec-k">What RADR looks for</p>
+              <p className="rx-rec-k">Where value often leaks</p>
               <ul>
                 {LOOKS_FOR.map((x) => (
                   <li key={x}>{x}</li>
                 ))}
               </ul>
               <p className="rx-rec-muted" style={{ marginTop: "1rem", fontSize: "0.9rem" }}>
-                Recovery remains the commercial entry. Tell us where the
-                economics are clearest.
+                Start where the economics are clearest. Expand as Verified Value
+                proves the Decision layer.
               </p>
             </aside>
             <div>

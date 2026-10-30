@@ -22,7 +22,7 @@ const OPERATING_STATE = [
   { label: "Walk-in parties waiting", value: "2", tone: "watch" as const },
   { label: "Inbound reserved covers", value: "38 · next 22m", tone: "risk" as const },
   {
-    label: "Arrival density 19:10–19:35",
+    label: "Arrival density 20:10–20:35",
     value: "42 covers in 25m",
     tone: "risk" as const,
   },
@@ -79,21 +79,21 @@ export function buildPeakDecisionRecord(
   const ledgerBase = [
     {
       id: "le_peak_01",
-      at: "18:40",
+      at: "19:35",
       kind: "signal" as const,
       title: "Kitchen load 92% · inbound 38 covers",
       statusAfter: "DETECTED" as const,
     },
     {
       id: "le_peak_02",
-      at: "18:41",
+      at: "19:36",
       kind: "understand" as const,
       title: "Empty tables ≠ capacity under inbound wave",
       statusAfter: "UNDERSTANDING" as const,
     },
     {
       id: "le_peak_03",
-      at: "18:41",
+      at: "19:36",
       kind: "simulate" as const,
       title: "Seat now vs wait 12m vs pause delivery",
       statusAfter: "SIMULATED" as const,
@@ -109,7 +109,7 @@ export function buildPeakDecisionRecord(
 
   const base: DecisionRecord = {
     id: DECISION_IDS.peak,
-    organizationId: "org_northstar",
+    organizationId: "org_northstar_restaurants",
     locationId: "loc_berlin_mitte",
     operatingUnitId: "ou_berlin_dinner",
     roleContext: "GM",
@@ -125,7 +125,7 @@ export function buildPeakDecisionRecord(
     property: c.property,
     phaseLabel: peakPhaseLabel(),
     contextLine: peakContextLine(),
-    recommendationHeadline: `WAIT ${PEAK_SERVICE_CLOCK.waitMinutes} MINUTES`,
+      recommendationHeadline: `Hold next seating wave for ${PEAK_SERVICE_CLOCK.waitMinutes} min`,
     triggerEvents: ["kitchen_load_high", "inbound_covers", "delivery_surge"],
     evidenceRefs: [
       {
@@ -258,18 +258,27 @@ export function buildPeakDecisionRecord(
         { id: "n_walk", entityType: "guest", label: "2 walk-ins" },
         { id: "n_del", entityType: "channel", label: "Delivery +31%" },
         { id: "n_kit", entityType: "staff", label: "Kitchen 92%" },
+        { id: "n_ticket", entityType: "staff", label: "Ticket 14m ↑" },
+        { id: "n_turn", entityType: "revenue", label: "Second-turn risk" },
+        { id: "n_exp", entityType: "cost", label: "€620 exposure" },
         { id: "n_dec", entityType: "decision", label: "Wait 12m" },
+        { id: "n_act", entityType: "action", label: "Hold · throttle · feature" },
       ],
       edges: [
         { fromId: "n_in", toId: "n_kit", relation: "informed_by" },
         { fromId: "n_walk", toId: "n_kit", relation: "informed_by" },
         { fromId: "n_del", toId: "n_kit", relation: "informed_by" },
+        { fromId: "n_kit", toId: "n_ticket", relation: "precedes" },
+        { fromId: "n_ticket", toId: "n_turn", relation: "precedes" },
+        { fromId: "n_turn", toId: "n_exp", relation: "precedes" },
         { fromId: "n_kit", toId: "n_dec", relation: "triggered_by" },
+        { fromId: "n_exp", toId: "n_dec", relation: "informed_by" },
+        { fromId: "n_dec", toId: "n_act", relation: "option_for" },
       ],
     },
     playbook: {
       id: "pb_peak_capacity_berlin",
-      title: "Peak Capacity Collision · Berlin Mitte",
+      title: "Peak Capacity Collision · Soho · New York",
       decisionType: "peak_capacity_collision",
       triggerConditions: [
         "kitchen_load >= 90%",
@@ -293,7 +302,7 @@ export function buildPeakDecisionRecord(
     },
     operatingDna: {
       locationId: "loc_berlin_mitte",
-      locationLabel: "Berlin Mitte",
+      locationLabel: "Soho · New York",
       summary:
         "Friday dinner kitchen throughput becomes fragile above ~94% for >15m.",
       dna: {
@@ -337,15 +346,15 @@ export function buildPeakDecisionRecord(
       },
       {
         epistemic: "RECOMMENDED",
-        title: "WAIT 12 MINUTES",
+        title: "Wait 12 minutes",
         body: "Do not seat the next two walk-in tables yet. Throttle lower-contribution delivery. Feature high €/min dish. Resume when modeled pressure falls.",
       },
     ],
     locationDnaLine:
       "When kitchen load exceeds ~94% for >15m on comparable Friday dinners, ticket times rise, second turns slip, comps increase, and contribution deteriorates. Demo sample · 12 services.",
-    demoLabel: "DEMO · ILLUSTRATIVE",
+    demoLabel: "Demo · illustrative",
     modelVersion: "decision-record/v2",
-    createdAt: "2026-09-17T18:40:00+02:00",
+    createdAt: "2026-09-18T19:35:00+02:00",
     updatedAt: PEAK_SERVICE_CLOCK.nowIso,
   };
 
@@ -362,8 +371,8 @@ export function buildPeakDecisionRecord(
       ...base,
       status,
       chosenOptionId: "wait_12",
-      approver: "Sarah · GM Berlin Mitte",
-      approvedAt: "2026-09-17T18:44:00+02:00",
+      approver: "Sarah · GM Soho · New York",
+      approvedAt: "2026-09-18T19:50:00+02:00",
       actionPlan: {
         ...base.actionPlan,
         status: status === "APPROVED" ? "APPROVED" : "EXECUTING",
@@ -376,13 +385,13 @@ export function buildPeakDecisionRecord(
         ...ledgerBase,
         {
           id: "le_peak_05",
-          at: "18:44",
+          at: "19:50",
           kind: "approve",
           title: "GM approved wait-12 plan",
           statusAfter: "APPROVED",
         },
       ],
-      updatedAt: "2026-09-17T18:44:00+02:00",
+      updatedAt: "2026-09-18T19:50:00+02:00",
     };
   }
 
@@ -391,8 +400,8 @@ export function buildPeakDecisionRecord(
       ...base,
       status: status === "CLOSED" ? "LEARNED" : status,
       chosenOptionId: "wait_12",
-      approver: "Sarah · GM Berlin Mitte",
-      approvedAt: "2026-09-17T18:44:00+02:00",
+      approver: "Sarah · GM Soho · New York",
+      approvedAt: "2026-09-18T19:50:00+02:00",
       observedOutcome:
         "Peak load 95% · ticket peak 15.6m · 1 second turn lost · +€590 observed",
       actualContributionImpact: c.actualProtectedEuro ?? 590,
@@ -417,7 +426,7 @@ export function buildPeakDecisionRecord(
         note: "Verified incremental contribution vs seat-now · DEMO",
       },
       verificationMethod: "DEMO_ILLUSTRATIVE",
-      verifiedAt: "2026-09-17T21:40:00+02:00",
+      verifiedAt: "2026-09-18T21:40:00+02:00",
       verificationDetail: {
         method: "DEMO_ILLUSTRATIVE",
         attributionStrength: "STRONGLY_ATTRIBUTED",
@@ -452,9 +461,9 @@ export function buildPeakDecisionRecord(
       playbookImpact: `${c.learning.playbookFrom} → ${c.learning.playbookTo}`,
       playbookId: "pb_peak_capacity_berlin",
       patternsUpdated: ["friday_peak_kitchen_fragility"],
-      playbooksUpdated: ["Peak Capacity Collision · Berlin Mitte · v3"],
+      playbooksUpdated: ["Peak Capacity Collision · Soho · New York · v3"],
       playbook: base.playbook
-        ? { ...base.playbook, nEvents: 13, title: "Peak Capacity Collision · Berlin Mitte · v3" }
+        ? { ...base.playbook, nEvents: 13, title: "Peak Capacity Collision · Soho · New York · v3" }
         : undefined,
       actionPlan: {
         ...base.actionPlan,
@@ -469,7 +478,7 @@ export function buildPeakDecisionRecord(
         ...ledgerBase,
         {
           id: "le_peak_05",
-          at: "18:44",
+          at: "19:50",
           kind: "approve",
           title: "GM approved wait-12 plan",
           statusAfter: "APPROVED",
@@ -489,7 +498,7 @@ export function buildPeakDecisionRecord(
           statusAfter: "VERIFIED",
         },
       ],
-      updatedAt: "2026-09-17T21:40:00+02:00",
+      updatedAt: "2026-09-18T21:40:00+02:00",
     };
     return verified;
   }
@@ -510,7 +519,7 @@ export function applyPeakVipContext(record: DecisionRecord): DecisionRecord {
   return {
     ...record,
     status: "AWAITING_APPROVAL",
-    recommendationHeadline: "SEAT VIP BY 18:50 · HOLD SECOND WALK-IN",
+    recommendationHeadline: "Seat VIP by 18:50 · hold second walk-in",
     recommendationReasoning:
       "Operator context added. Seat VIP party at 18:50. Continue holding the second walk-in table. Maintain temporary delivery throttle. Resume standard seating after modeled pressure falls.",
     recommendedOptionId: "wait_12",

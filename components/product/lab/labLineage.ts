@@ -77,7 +77,7 @@ export const TRACE_SUPPLIER_VERIFIED: TraceLineage = {
     { label: "Credit memo", value: "CM-44102" },
     { label: "Applied to", value: "INV-88421" },
     { label: "AP posting", value: "AP-POST-991" },
-    { label: "Vendor", value: "Bluefin Berlin · site Berlin Mitte" },
+    { label: "Vendor", value: "Bluefin Berlin · site Soho · New York" },
     { label: "Aging", value: "11 days · opened 06 Sep" },
   ],
   chain: [
@@ -118,7 +118,7 @@ export const TRACE_SUPPLIER_VERIFIED: TraceLineage = {
       because: "Verified euro equals applied cash — not an estimate",
     },
   ],
-  window: "Recover · verified 17 Sep · Berlin Mitte",
+  window: "Recover · verified 17 Sep · Soho · New York",
   matchChecklist: [
     { label: "Match INV-88421 line L03 variance in AP", done: true },
     { label: "Credit memo CM-44102 posted to supplier ledger", done: true },

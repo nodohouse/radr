@@ -25,7 +25,7 @@ export type TrendPoint = {
 const EXPOSURE =
   CANONICAL_EVENTS.laborAtRisk + CANONICAL_EVENTS.buyRecoverable;
 
-/** Berlin Mitte: unresolved exposure through the afternoon. Ends at €408. */
+/** Soho · New York: unresolved exposure through the afternoon. Ends at €408. */
 export const RISK_TREND_24H: TrendPoint[] = [
   { t: "08:00", value: 0 },
   {
@@ -62,7 +62,7 @@ export const RISK_TREND_24H: TrendPoint[] = [
 
 /** Location concentration of current exposure (sums to €408). */
 export const EXPOSURE_BY_LOCATION = [
-  { id: "loc_ber", name: "Berlin Mitte", euro: EXPOSURE },
+  { id: "loc_ber", name: "Soho · New York", euro: EXPOSURE },
 ] as const;
 
 /** 7-day sparkline series for Daily Pulse (ending yesterday). */

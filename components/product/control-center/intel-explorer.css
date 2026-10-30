@@ -1,0 +1,234 @@
+/**
+ * Intelligence Explorer — extends DecisionPeek panel width.
+ */
+
+.rp-iex-panel {
+  width: min(520px, 94vw);
+}
+
+.rp-iex-scope {
+  margin: 0.25rem 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary, #626a65);
+}
+
+.rp-iex-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0.85rem 0 0.5rem;
+}
+
+.rp-iex-hero strong {
+  font-family: var(--font-brand), "Instrument Sans", sans-serif;
+  font-size: 1.65rem;
+  font-weight: 550;
+  letter-spacing: -0.03em;
+}
+
+.rp-iex-hero span {
+  font-size: 0.88rem;
+  color: #8a3b2a;
+}
+
+.rp-iex-levels {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0.5rem 0 0.85rem;
+  border-bottom: 1px solid color-mix(in srgb, #0a0d0b 8%, transparent);
+  padding-bottom: 0.35rem;
+}
+
+.rp-iex-levels button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #626a65;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+}
+
+.rp-iex-levels button[data-active="true"] {
+  color: #0a0d0b;
+  box-shadow: inset 0 -2px 0 #00d978;
+}
+
+.rp-iex-k {
+  margin: 0.75rem 0 0.35rem;
+  font-family: var(--type-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #626a65;
+}
+
+.rp-iex-body {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.rp-iex-drivers,
+.rp-iex-where,
+.rp-iex-changed,
+.rp-iex-evidence,
+.rp-iex-levers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rp-iex-drivers li,
+.rp-iex-where li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid color-mix(in srgb, #0a0d0b 5%, transparent);
+  font-size: 0.9rem;
+}
+
+.rp-iex-drivers strong[data-tone="neg"],
+.rp-iex-levers b[data-tone="neg"] {
+  color: #8a3b2a;
+}
+
+.rp-iex-drivers strong[data-tone="pos"],
+.rp-iex-levers b[data-tone="pos"] {
+  color: #0a7a45;
+}
+
+.rp-iex-changed li {
+  padding: 0.25rem 0;
+  font-size: 0.88rem;
+}
+
+.rp-iex-note,
+.rp-iex-quiet {
+  margin: 0.65rem 0 0;
+  font-size: 0.8rem;
+  color: #626a65;
+}
+
+.rp-iex-next {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #0a0d0b;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 550;
+  margin-top: 0.85rem;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.rp-iex-levers li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.45rem;
+  margin: 0.25rem 0;
+  border-radius: 6px;
+}
+
+.rp-iex-levers li[data-rec="true"] {
+  background: color-mix(in srgb, #00d978 10%, transparent);
+}
+
+.rp-iex-levers li[data-baseline="true"] {
+  opacity: 0.85;
+}
+
+.rp-iex-levers strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.rp-iex-levers em {
+  font-style: normal;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  margin-left: 0.4rem;
+  color: #0a7a45;
+}
+
+.rp-iex-levers span {
+  display: block;
+  font-size: 0.72rem;
+  color: #626a65;
+  margin-top: 0.15rem;
+}
+
+.rp-iex-evidence li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.15rem 0.75rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid color-mix(in srgb, #0a0d0b 5%, transparent);
+  font-size: 0.86rem;
+}
+
+.rp-iex-evidence em {
+  grid-column: 1 / -1;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: #626a65;
+}
+
+.rp-iex-follow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+.rp-iex-follow button {
+  appearance: none;
+  border: 1px solid color-mix(in srgb, #0a0d0b 10%, transparent);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  font: inherit;
+  font-size: 0.72rem;
+  cursor: pointer;
+  color: #0a0d0b;
+}
+
+.rp-iex-foot {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, #0a0d0b 8%, transparent);
+}
+
+.rp-iex-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.rp-iex-cta {
+  display: inline-flex;
+  align-items: center;
+  appearance: none;
+  border: 0;
+  background: #0a0d0b;
+  color: #f7faf8;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 550;
+  padding: 0.55rem 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.rp-iex-cta:hover {
+  background: #1a211c;
+}

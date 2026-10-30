@@ -1,0 +1,2 @@
+supplier,invoice_id,sku,quantity,unit,unit_price,currency,invoice_date
+FreshCo Oils,INV-88421,OLIVE-EXTRA-V,420,L,7.45,EUR,2026-09-12

@@ -1,0 +1,207 @@
+/**
+ * RADR Warm Product Shell
+ * 75–85% light ivory canvas · 15–25% selective graphite instruments.
+ * Bento hierarchy stays. Global dark mode does not.
+ */
+
+.rp-shell-v2[data-theme="warm"],
+.rp-root[data-theme="warm"] {
+  --rp-canvas: #f7faf8;
+  --rp-panel: #ffffff;
+  --rp-panel-2: #f1f5f2;
+  --rp-panel-3: #e8eeea;
+  --rp-border: rgba(10, 13, 11, 0.1);
+  --rp-border-strong: rgba(10, 13, 11, 0.16);
+  --rp-ink: #0a0d0b;
+  --rp-muted: #556059;
+  --rp-green: var(--radr-green-deep, #00a85a);
+  --rp-verified: var(--semantic-verified, #00a85a);
+  --rp-verified-bright: var(--color-brand, #00d978);
+  --rp-warn: var(--semantic-warning, #b54708);
+  --rp-danger: var(--semantic-negative, #b42318);
+  --rp-instrument: var(--overlay-surface, #0a0d0b);
+  --rp-instrument-2: #121512;
+  --rp-instrument-ink: var(--overlay-text, #f7faf8);
+  --rp-instrument-muted: rgba(247, 250, 248, 0.55);
+  --rp-rail-bg: var(--radr-rail, #f1f6f3);
+  --rp-rail-border: var(--radr-rail-border, rgba(10, 13, 11, 0.08));
+  --rp-rail-text: var(--radr-rail-text-strong, #0a0d0b);
+  --rp-rail-muted: var(--radr-rail-muted, #626a65);
+  --rp-rail-hover: var(--radr-rail-hover, rgba(10, 13, 11, 0.04));
+  --rp-rail-active: color-mix(in srgb, var(--radr-signal, #00d978) 12%, #ffffff);
+  color: var(--rp-ink);
+  background: var(--rp-canvas);
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-main-v2 {
+  background: var(--rp-canvas);
+  color: var(--rp-ink);
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-content-v2 {
+  background: transparent;
+  color: var(--rp-ink);
+  max-width: none;
+  padding: 0.75rem 1.15rem 2rem;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-rail {
+  background: var(--rp-rail-bg);
+  border-right-color: var(--rp-rail-border);
+  color: var(--rp-rail-text);
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-rail[data-expanded="true"] {
+  box-shadow: 8px 0 28px rgba(6, 22, 13, 0.08);
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-ctx {
+  background: transparent;
+  border-bottom: 0;
+  color: var(--rp-ink);
+  padding: 1.15rem 0 1.05rem;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-ctx-title {
+  color: var(--rp-ink);
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+  font-size: clamp(1.5rem, 2.5vw, 1.95rem);
+  font-weight: 550;
+  letter-spacing: -0.045em;
+  text-transform: none;
+  line-height: 1.02;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-ctx-meta,
+.rp-shell-v2[data-theme="warm"] .rp-ctx-role {
+  color: var(--rp-muted);
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-ctx-scope {
+  background: transparent;
+  border: 0;
+  color: var(--rp-ink);
+  padding: 0;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-ctx-ask {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(10, 13, 11, 0.08);
+  color: var(--rp-ink);
+  border-radius: 999px;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-ctx-menu {
+  background: transparent;
+  border: 0;
+  color: var(--rp-ink);
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-ctx-env {
+  color: #008a4a;
+  background: rgba(0, 168, 90, 0.09);
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-family: inherit;
+}
+
+/* Capsule pills — light */
+.rp-shell-v2[data-theme="warm"] .rp-pills {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  padding: 0.18rem;
+  margin: 0;
+  background: var(--rp-panel-2);
+  border: 1px solid var(--rp-border);
+  border-radius: 999px;
+  overflow-x: auto;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-pill {
+  border: 0;
+  background: transparent;
+  color: var(--rp-muted);
+  border-radius: 999px;
+  padding: 0.38rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 520;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  white-space: nowrap;
+  box-shadow: none;
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-pill:hover {
+  color: var(--rp-ink);
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-pill[data-on="true"] {
+  background: #0a0d0b;
+  color: #f7faf8;
+  border: 0;
+  box-shadow: none;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-pill:focus-visible {
+  outline: 2px solid var(--rp-green);
+  outline-offset: 1px;
+}
+
+/* Shared instrument surface — rare, intentional */
+.rp-instrument {
+  background: var(--rp-instrument);
+  color: var(--rp-instrument-ink);
+  border: 1px solid rgba(242, 245, 241, 0.1);
+  border-radius: 0.75rem;
+}
+
+.rp-instrument .rp-ccx-k,
+.rp-instrument .rp-intel-kicker,
+.rp-instrument .rp-intel-mod-head p,
+.rp-instrument .rp-intel-meta,
+.rp-instrument .rp-intel-compare-type,
+.rp-instrument .rp-intel-read-k,
+.rp-instrument .rp-intel-stats dt,
+.rp-instrument .rp-intel-live-clock,
+.rp-instrument .rp-intel-live-nums em,
+.rp-instrument .rp-ccx-chart-sub,
+.rp-instrument .rp-ccx-tip-loc,
+.rp-instrument .rp-ccx-tip-id {
+  color: var(--rp-instrument-muted) !important;
+}
+
+.rp-instrument .rp-intel-mod-head h3,
+.rp-instrument .rp-intel-live-loc,
+.rp-instrument .rp-intel-live-nums strong,
+.rp-instrument .rp-intel-stats dd,
+.rp-instrument .rp-intel-read-body,
+.rp-instrument .rp-intel-metric-hero strong,
+.rp-instrument .rp-ccx-tip-link {
+  color: var(--rp-instrument-ink) !important;
+}
+
+.rp-instrument .rp-intel-judgment,
+.rp-instrument .rp-intel-dec-link,
+.rp-instrument .rp-ccx-tip-amt[data-tone="verified"] {
+  color: #00d978 !important;
+}
+
+.rp-instrument .rp-intel-pin {
+  color: var(--rp-instrument-ink);
+}
+
+.rp-instrument .rp-intel-pin[aria-pressed="true"] {
+  color: #00d978;
+}
+
+.rp-instrument .rp-intel-live-dot {
+  background: #00d978;
+}

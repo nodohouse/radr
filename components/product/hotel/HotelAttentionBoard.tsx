@@ -27,7 +27,7 @@ export function HotelAttentionBoard() {
   return (
     <div className="rp-attention rp-hotel-attention" aria-label="Hotel needs attention">
       <header className="rp-attention-head">
-        <p className="rp-hotel-glance-kicker">CANAL HOUSE · DEMO</p>
+        <p className="rp-hotel-glance-kicker">Mercer House</p>
         <h1 className="rp-attention-title">Needs attention</h1>
         <p className="rp-attention-sub">
           {open.length === 0
@@ -55,11 +55,11 @@ export function HotelAttentionBoard() {
                 <p>{item.body}</p>
                 {item.radrDid ? (
                   <p className="rp-hotel-attn-did">
-                    WHAT RADR ALREADY DID · {item.radrDid}
+                    What RADR already did · {item.radrDid}
                   </p>
                 ) : null}
                 <p className="rp-hotel-attn-need">
-                  WHAT RADR NEEDS FROM YOU · one approval
+                  What RADR needs from you · one approval
                 </p>
               </div>
               <div className="rp-hotel-attn-money">

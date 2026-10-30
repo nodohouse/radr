@@ -43,21 +43,21 @@ const FUTURES = [
   {
     id: "seat",
     title: "Seat now",
-    euro: "€0",
+    euro: "$0",
     note: "Kitchen →97% · 9 second turns lost",
     rec: false,
   },
   {
     id: "wait",
     title: "Wait 12m",
-    euro: "+€620",
+    euro: "+$620",
     note: "Protect peak · reversible",
     rec: true,
   },
   {
     id: "kill",
     title: "Kill delivery",
-    euro: "+€180",
+    euro: "+$180",
     note: "Over-corrects · guest friction",
     rec: false,
   },
@@ -168,7 +168,7 @@ export function PlatformSignature() {
               data-stage={LIFE[life]}
             >
               <header>
-                <em>D-1911 · Berlin Mitte · Peak</em>
+                <em>D-1911 · Soho · New York · Peak</em>
                 <strong>{LIFE[life]}</strong>
               </header>
               <h3>Wait 12 minutes</h3>
@@ -176,7 +176,7 @@ export function PlatformSignature() {
                 className="rx-psig-euro"
                 data-grade={sealed ? "Verified" : "Expected"}
               >
-                {sealed ? "€620 Verified" : "€620 Expected"}
+                {sealed ? "$620 Verified" : "$620 Expected"}
               </p>
               <p>{LIFE_COPY[life]}</p>
               {life >= 2 ? (
@@ -279,7 +279,7 @@ export function PlatformSignature() {
         data-nav-theme="light"
       >
         <div className="rx-shell">
-          <p className="rx-rec-k">Operating Memory → Autopilot</p>
+          <p className="rx-rec-k">Operating Memory → Governed execution</p>
           <h2 className="rx-rec-h">Trust is earned from what verified.</h2>
 
           <div className="rx-psig-memory-ribbon" aria-hidden="true">
@@ -315,9 +315,9 @@ export function PlatformSignature() {
             className="rx-psig-trust-row"
             data-revoked={revoked ? "true" : undefined}
             role="group"
-            aria-label="Autopilot permission"
+            aria-label="Governed execution permission"
           >
-            {(["Suggest", "Stage", "Auto within policy"] as const).map(
+            {(["Suggest", "Stage", "Execute within policy"] as const).map(
               (label, i) => (
                 <span
                   key={label}

@@ -1,0 +1,235 @@
+/**
+ * Product instrument shell — Daylight is the default baseline for /app.
+ * Graphite rules remain gated under [data-theme="graphite"] (unused path).
+ */
+
+/* ——— Daylight default (matches radr-daylight.css; keep for cascade safety) ——— */
+.rp-shell-v2 {
+  --cci-bg: #f7f8f4;
+  --cci-nav: #f4f6f1;
+  --cci-canvas: #f2f4f0;
+  --cci-elevated: #ffffff;
+  --cci-hover: #ebf0ea;
+  --cci-ink: #141814;
+  --cci-muted: #616962;
+  --cci-quiet: #8a918b;
+  --cci-hair: #e2e7e1;
+  --cci-hair-strong: #d4dbd4;
+  --cci-green: #00d978;
+  --cci-green-deep: #00a85a;
+  --cci-adverse: #b42318;
+  --cci-watch: #b54708;
+  --cci-rail-w: 360px;
+
+  --cci-float-bg: #ffffff;
+  --cci-float-hover: #f2f6f2;
+  --cci-float-selected: #e7faed;
+  --cci-float-border: #e2e7e1;
+  --cci-float-shadow: 0 12px 40px rgba(10, 20, 12, 0.1),
+    0 0 0 1px rgba(20, 40, 25, 0.06);
+  --cci-z-dropdown: 120;
+  --cci-z-popover: 130;
+  --cci-z-modal: 140;
+  --cci-z-toast: 150;
+  --cci-z-command: 160;
+
+  --cci-scroll-track: transparent;
+  --cci-scroll-thumb: #c5cbc4;
+  --cci-scroll-thumb-hover: #9aa39c;
+
+  --radr-canvas: var(--cci-bg);
+  --radr-surface: var(--cci-elevated);
+  --radr-sidebar: var(--cci-nav);
+  --radr-ink: var(--cci-ink);
+  --radr-muted: var(--cci-muted);
+  --color-canvas: var(--cci-bg);
+  --color-surface: var(--cci-elevated);
+  --color-surface-subtle: var(--cci-canvas);
+  --color-text: var(--cci-ink);
+  --color-text-secondary: var(--cci-muted);
+  --color-text-muted: var(--cci-quiet);
+  --color-border: var(--cci-hair);
+  --rp-ns-ivory: var(--cci-bg);
+  --rp-ns-surface: var(--cci-elevated);
+  --rp-ns-stone: var(--cci-canvas);
+  --rp-ns-ink: var(--cci-ink);
+  --rp-ns-muted: var(--cci-muted);
+  --rp-ns-quiet: var(--cci-quiet);
+  --rp-ns-hair: var(--cci-hair);
+  --rp-ns-green-live: var(--cci-green);
+  --rp-ns-adverse: var(--cci-adverse);
+  --rp-ns-watch: var(--cci-watch);
+
+  background: var(--cci-bg);
+  color: var(--cci-ink);
+  color-scheme: light;
+}
+
+.rp-shell-v2,
+.rp-shell-v2 * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--cci-scroll-thumb) var(--cci-scroll-track);
+}
+.rp-shell-v2::-webkit-scrollbar,
+.rp-shell-v2 *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.rp-shell-v2::-webkit-scrollbar-track,
+.rp-shell-v2 *::-webkit-scrollbar-track {
+  background: var(--cci-scroll-track);
+}
+.rp-shell-v2::-webkit-scrollbar-thumb,
+.rp-shell-v2 *::-webkit-scrollbar-thumb {
+  background: var(--cci-scroll-thumb);
+  border-radius: 999px;
+}
+.rp-shell-v2::-webkit-scrollbar-thumb:hover,
+.rp-shell-v2 *::-webkit-scrollbar-thumb:hover {
+  background: var(--cci-scroll-thumb-hover);
+}
+
+/* Content width */
+.rp-shell-v2 .rp-content-v2,
+.rp-shell-v2[data-nav-mode="rail"] .rp-content-v2 {
+  max-width: none !important;
+  width: 100% !important;
+  margin-inline: 0 !important;
+  padding: 1.1rem 1.5rem 2.5rem !important;
+  box-sizing: border-box;
+}
+
+.rp-shell-v2:has(.rp-cc-instrument) .rp-content-v2 {
+  padding: 0 !important;
+}
+
+.rp-shell-v2 .rp-goh-row1 {
+  min-height: 2.75rem !important;
+  padding: 0.35rem 1.1rem !important;
+}
+
+.rp-shell-v2 .rp-instrument-page {
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  color: var(--cci-ink);
+}
+
+.rp-shell-v2 .rp-ask,
+body .rp-ask {
+  z-index: var(--cci-z-command, 160) !important;
+}
+
+/* ——— Graphite (dead path — kept gated, unused) ——— */
+.rp-shell-v2[data-theme="graphite"] {
+  --cci-bg: #141716;
+  --cci-nav: #101312;
+  --cci-canvas: #181b19;
+  --cci-elevated: #1e221f;
+  --cci-hover: #252a27;
+  --cci-ink: #e8ebe9;
+  --cci-muted: rgba(232, 235, 233, 0.62);
+  --cci-quiet: rgba(232, 235, 233, 0.45);
+  --cci-hair: rgba(255, 255, 255, 0.08);
+  --cci-hair-strong: rgba(255, 255, 255, 0.14);
+  --cci-green: #00d978;
+  --cci-green-deep: #3dcf8e;
+  --cci-adverse: #e07060;
+  --cci-watch: #d4a04a;
+  --cci-float-bg: #242925;
+  --cci-float-hover: #303630;
+  --cci-float-selected: #343b35;
+  --cci-float-border: rgba(255, 255, 255, 0.16);
+  --cci-float-shadow: 0 18px 48px rgba(0, 0, 0, 0.55),
+    0 0 0 1px var(--cci-float-border);
+  --cci-scroll-track: rgba(255, 255, 255, 0.05);
+  --cci-scroll-thumb: rgba(232, 235, 233, 0.4);
+  --cci-scroll-thumb-hover: rgba(232, 235, 233, 0.7);
+  --radr-canvas: var(--cci-bg);
+  --radr-surface: var(--cci-elevated);
+  --radr-sidebar: var(--cci-nav);
+  --radr-ink: var(--cci-ink);
+  --radr-muted: var(--cci-muted);
+  --color-canvas: var(--cci-bg);
+  --color-surface: var(--cci-elevated);
+  --color-surface-subtle: var(--cci-canvas);
+  --color-text: var(--cci-ink);
+  --color-text-secondary: var(--cci-muted);
+  --color-text-muted: var(--cci-quiet);
+  --color-border: var(--cci-hair);
+  background: var(--cci-bg) !important;
+  color: var(--cci-ink);
+  color-scheme: dark;
+}
+
+.rp-shell-v2[data-theme="graphite"] .rp-rail,
+.rp-shell-v2[data-theme="graphite"] .rp-rail[data-expanded="true"],
+.rp-shell-v2[data-theme="graphite"] .rp-rail[data-pinned="true"] {
+  background: var(--cci-nav, #0a0b0a) !important;
+  border-right-color: var(--cci-hair, rgba(255, 255, 255, 0.08)) !important;
+  color: var(--cci-muted, rgba(242, 240, 232, 0.58)) !important;
+  --rp-rail-bg: var(--cci-nav, #0a0b0a);
+  --rp-rail-text: rgba(232, 235, 233, 0.72);
+  --rp-rail-text-strong: #ffffff;
+  --rp-rail-muted: rgba(232, 235, 233, 0.55);
+  --rp-rail-hover: rgba(255, 255, 255, 0.05);
+  --rp-rail-active: rgba(255, 255, 255, 0.08);
+  --rp-rail-border: var(--cci-hair, rgba(255, 255, 255, 0.08));
+  box-shadow: none !important;
+}
+
+.rp-shell-v2[data-theme="graphite"] .rp-rail-link {
+  color: rgba(232, 235, 233, 0.68) !important;
+  background: transparent !important;
+}
+.rp-shell-v2[data-theme="graphite"] .rp-rail-link:hover:not([data-active="true"]) {
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+.rp-shell-v2[data-theme="graphite"] .rp-rail-link[data-active="true"],
+.rp-shell-v2[data-theme="graphite"] .rp-rail-link[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+.rp-shell-v2[data-theme="graphite"] .rp-rail-link[data-active="true"] .rp-rail-ico {
+  color: #ffffff !important;
+}
+.rp-shell-v2[data-theme="graphite"] .rp-rail-link[data-active="true"]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--cci-green);
+}
+
+.rp-shell-v2[data-theme="graphite"] .rp-float,
+.rp-shell-v2[data-theme="graphite"] .rp-role-switch-menu,
+.rp-shell-v2[data-theme="graphite"] .rp-ctx-period-menu,
+.rp-shell-v2[data-theme="graphite"] .rp-rail-user-menu,
+.rp-shell-v2[data-theme="graphite"] [data-float="true"] {
+  background: #242925 !important;
+  color: #f2f4f2 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55) !important;
+}
+
+.rp-shell-v2[data-theme="graphite"] .rp-goh,
+.rp-shell-v2[data-theme="graphite"] .rp-main-v2,
+.rp-shell-v2[data-theme="graphite"] .rp-content-v2,
+.rp-shell-v2[data-theme="graphite"] .rp-frame-v2 {
+  background: var(--cci-bg) !important;
+  color: var(--cci-ink);
+  border-color: var(--cci-hair) !important;
+}
+
+.rp-shell-v2[data-theme="graphite"] .rp-ask-panel,
+body:has(.rp-shell-v2[data-theme="graphite"]) .rp-ask-panel {
+  background: #1e221f !important;
+  color: #e8ebe9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55) !important;
+}

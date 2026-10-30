@@ -300,7 +300,7 @@ export const TERMINOLOGY = {
     term: "Seats",
     category: "operations",
     shortDefinition: "The physical guest capacity available at the restaurant.",
-    example: "Berlin Mitte has 72 seats.",
+    example: "Soho · New York has 72 seats.",
   }),
   table: t({
     id: "table",

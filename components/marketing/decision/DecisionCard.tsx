@@ -219,7 +219,7 @@ export function DecisionCard({
                       data-neg={opt.netVsDoNothing < 0 ? "true" : "false"}
                     >
                       {opt.netVsDoNothing === 0
-                        ? "€0"
+                        ? "$0"
                         : `${opt.netVsDoNothing > 0 ? "+" : "−"}${formatDecisionMoney(Math.abs(opt.netVsDoNothing))}`}
                     </span>
                   </button>

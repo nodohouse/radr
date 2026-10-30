@@ -35,6 +35,23 @@ export function LoginForm() {
       return;
     }
 
+    try {
+      const destRes = await fetch("/api/orgs");
+      if (destRes.ok) {
+        const data = (await destRes.json()) as {
+          destination?: { path?: string };
+        };
+        const dest = data.destination?.path;
+        if (dest && dest.startsWith("/")) {
+          router.push(dest);
+          router.refresh();
+          return;
+        }
+      }
+    } catch {
+      /* fall through to next */
+    }
+
     router.push(next);
     router.refresh();
   }
@@ -103,7 +120,7 @@ export function LoginForm() {
 
       <p className="ob-auth-foot">
         {t("dontHaveAccess")}{" "}
-        <Link href="/contact">{t("requestAccess")}</Link>
+        <Link href="/signup?intent=demo&next=/app/enter">{t("createOne")}</Link>
         <span className="ob-auth-foot-sep" aria-hidden="true">
           ·
         </span>

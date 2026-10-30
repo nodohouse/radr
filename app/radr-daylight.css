@@ -1,0 +1,1590 @@
+/**
+ * RADR Daylight — product visual system SSOT (Phase 1).
+ * Bright operating system. Green = intelligence accent only.
+ * Loaded last in /app layout so it wins over graphite instrument locks.
+ */
+
+.rp-shell-v2[data-theme="daylight"],
+.rp-shell-v2[data-surface="operating"] {
+  /* ——— Daylight palette (premium hospitality) ——— */
+  --dl-bg: #f8f9f6;
+  --dl-bg-warm: #f6f4ef;
+  --bg-warm: var(--dl-bg-warm);
+  --bg-elevated: #fffcf8;
+  --surface: #ffffff;
+  --surface-mint: #eef8f1;
+  --dl-surface: #ffffff;
+  --dl-secondary: #f3f1eb;
+  --dl-interactive: #eaf0e9;
+  --dl-elevated: #fffcf8;
+  --dl-ink: #141916;
+  --text-primary: var(--dl-ink);
+  --text-secondary: #5a635c;
+  --text-tertiary: #8a928b;
+  --dl-muted: #5a635c;
+  --dl-quiet: #8a928b;
+  --dl-border: rgba(20, 60, 45, 0.11);
+  --border-soft: var(--dl-border);
+  --dl-green: #00d978;
+  --green-primary: #00c86e;
+  --dl-green-signal: #00d978;
+  --dl-green-strong: #00a85a;
+  --dl-green-text: #0f6b3c;
+  --green-dark: #0f6b3c;
+  --green-mint: #ddfbed;
+  --dl-green-soft: #ddfbed;
+  --dl-green-wash: #f0faf4;
+  --dl-green-selected: #e7faed;
+  --dl-green-glow: rgba(0, 217, 120, 0.16);
+  --amber: #c47a12;
+  --coral: #c23b2e;
+  /* Public aliases (brief contract) */
+  --green-signal: var(--dl-green-signal);
+  --green-text: var(--dl-green-text);
+  --green-wash: var(--dl-green-wash);
+  --green-glow: var(--dl-green-glow);
+  --dl-hover: #f2f6f2;
+  --dl-watch: var(--amber);
+  --dl-adverse: var(--coral);
+  --dl-radius-ctrl: 10px;
+  --dl-radius-card: 15px;
+  --dl-radius-chip: 999px;
+  --dl-shadow-soft: 0 1px 2px rgba(18, 28, 20, 0.04);
+  --dl-shadow-float: 0 1px 2px rgba(18, 28, 20, 0.03),
+    0 10px 28px rgba(22, 36, 26, 0.07);
+  --dl-shadow-elevated: 0 8px 24px rgba(22, 36, 26, 0.08);
+  --dl-shadow-menu: 0 12px 32px rgba(18, 28, 20, 0.1),
+    0 0 0 1px rgba(20, 60, 45, 0.08);
+  --dl-ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --dl-green-atmosphere: radial-gradient(
+    circle at 50% 40%,
+    rgba(0, 217, 120, 0.14),
+    rgba(0, 217, 120, 0.04),
+    transparent 70%
+  );
+
+  /* ——— Type scale ——— */
+  --dl-type-display: clamp(2.625rem, 3.2vw, 3rem); /* 42–48 */
+  --dl-type-page: clamp(1.875rem, 2.4vw, 2.25rem); /* 30–36 */
+  --dl-type-section: clamp(1.125rem, 1.4vw, 1.375rem); /* 18–22 */
+  --dl-type-metric-xl: clamp(2rem, 2.8vw, 2.5rem); /* 32–40 */
+  --dl-type-metric: clamp(1.375rem, 1.8vw, 1.75rem); /* 22–28 */
+  --dl-type-body: clamp(0.875rem, 1vw, 1rem); /* 14–16 */
+  --dl-type-label: clamp(0.6875rem, 0.8vw, 0.8125rem); /* 11–13 */
+  --dl-type-meta: 0.6875rem; /* 11 */
+
+  --dl-font-ui: var(--font-body), var(--font-geist-sans), "Geist", Inter, "SF Pro Text", system-ui, sans-serif;
+  /* Editorial = heavy Geist, never serif */
+  --dl-font-editorial: var(--dl-font-ui);
+
+  /* Remap instrument aliases → Daylight (components still read --cci-*) */
+  --cci-bg: var(--dl-bg);
+  --cci-nav: #f4f6f1;
+  --cci-canvas: var(--dl-secondary);
+  --cci-elevated: var(--dl-elevated);
+  --cci-hover: var(--dl-interactive);
+  --cci-ink: var(--dl-ink);
+  --cci-muted: var(--dl-muted);
+  --cci-quiet: var(--dl-quiet);
+  --cci-hair: var(--dl-border);
+  --cci-hair-strong: #d4dbd4;
+  --cci-green: var(--dl-green);
+  --cci-green-deep: var(--dl-green-strong);
+  --cci-adverse: var(--dl-adverse);
+  --cci-watch: var(--dl-watch);
+  --cci-rail-w: 360px;
+
+  --cci-float-bg: var(--dl-surface);
+  --cci-float-hover: var(--dl-hover);
+  --cci-float-selected: var(--dl-green-selected);
+  --cci-float-border: var(--dl-border);
+  --cci-float-shadow: var(--dl-shadow-menu);
+  --cci-z-dropdown: 120;
+  --cci-z-popover: 130;
+  --cci-z-modal: 140;
+  --cci-z-toast: 150;
+  --cci-z-command: 160;
+
+  --cci-scroll-track: transparent;
+  --cci-scroll-thumb: #c5cbc4;
+  --cci-scroll-thumb-hover: #9aa39c;
+
+  /* Brand / product aliases */
+  --radr-canvas: var(--dl-bg);
+  --radr-surface: var(--dl-surface);
+  --radr-sidebar: var(--cci-nav);
+  --radr-ink: var(--dl-ink);
+  --radr-muted: var(--dl-muted);
+  --radr-quiet: var(--dl-quiet);
+  --color-canvas: var(--dl-bg);
+  --color-surface: var(--dl-surface);
+  --color-surface-subtle: var(--dl-secondary);
+  --color-text: var(--dl-ink);
+  --color-text-secondary: var(--dl-muted);
+  --color-text-muted: var(--dl-quiet);
+  --color-border: var(--dl-border);
+  --rp-canvas: var(--dl-bg);
+  --rp-surface: var(--dl-surface);
+  --rp-surface-hover: var(--dl-hover);
+  --rp-surface-active: var(--dl-green-selected);
+  --rp-text-primary: var(--dl-ink);
+  --rp-text-secondary: var(--dl-muted);
+  --rp-text-quiet: var(--dl-quiet);
+  --rp-border: var(--dl-border);
+  --rp-shadow-soft: var(--dl-shadow-soft);
+  --rp-shadow-menu: var(--dl-shadow-menu);
+  --rp-ns-ivory: var(--dl-bg);
+  --rp-ns-surface: var(--dl-surface);
+  --rp-ns-stone: var(--dl-secondary);
+  --rp-ns-ink: var(--dl-ink);
+  --rp-ns-muted: var(--dl-muted);
+  --rp-ns-quiet: var(--dl-quiet);
+  --rp-ns-hair: var(--dl-border);
+  --rp-ns-green-live: var(--dl-green);
+  --rp-ns-adverse: var(--dl-adverse);
+  --rp-ns-watch: var(--dl-watch);
+  --radr-rail: var(--cci-nav);
+  --radr-rail-text: var(--dl-muted);
+  --radr-rail-text-strong: var(--dl-ink);
+  --radr-rail-muted: var(--dl-quiet);
+  --radr-rail-border: var(--dl-border);
+  --radr-rail-hover: rgba(20, 24, 20, 0.04);
+  --radr-rail-elevated: var(--dl-surface);
+  --radr-signal: var(--dl-green);
+  --radr-selected: var(--dl-green-selected);
+
+  background: var(--dl-bg) !important;
+  color: var(--dl-ink);
+  color-scheme: light;
+  font-family: var(--dl-font-ui);
+  font-size: var(--dl-type-body);
+}
+
+/* Scrollbars — light, not green */
+.rp-shell-v2[data-theme="daylight"],
+.rp-shell-v2[data-theme="daylight"] * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--cci-scroll-thumb) var(--cci-scroll-track);
+}
+.rp-shell-v2[data-theme="daylight"]::-webkit-scrollbar-thumb,
+.rp-shell-v2[data-theme="daylight"] *::-webkit-scrollbar-thumb {
+  background: var(--cci-scroll-thumb);
+  border-radius: 999px;
+}
+.rp-shell-v2[data-theme="daylight"]::-webkit-scrollbar-thumb:hover,
+.rp-shell-v2[data-theme="daylight"] *::-webkit-scrollbar-thumb:hover {
+  background: var(--cci-scroll-thumb-hover);
+}
+
+/* ——— Left rail (premium overlay) ——— */
+.rp-shell-v2[data-theme="daylight"] .rp-rail,
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="true"],
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-pinned="true"],
+.rp-shell-v2[data-surface="operating"] .rp-rail {
+  background: rgba(252, 251, 247, 0.96) !important;
+  border-right: 1px solid var(--dl-border) !important;
+  color: #4a544d !important;
+  --rp-rail-bg: rgba(252, 251, 247, 0.96);
+  --rp-rail-text: #4a544d;
+  --rp-rail-text-strong: var(--dl-ink);
+  --rp-rail-muted: var(--dl-quiet);
+  --rp-rail-hover: rgba(15, 107, 60, 0.06);
+  --rp-rail-active: var(--dl-green-soft);
+  --rp-rail-border: var(--dl-border);
+  box-shadow: none !important;
+  transition: width 200ms var(--dl-ease-premium), box-shadow 200ms var(--dl-ease-premium);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="true"] {
+  box-shadow: 10px 0 32px rgba(20, 40, 25, 0.08) !important;
+  background: rgba(255, 252, 248, 0.98) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link {
+  color: #4a544d !important;
+  background: transparent !important;
+  border-radius: 10px !important;
+  min-height: 44px;
+  position: relative;
+  transition: background 120ms ease, color 120ms ease;
+}
+/* Collapsed = icons only. Never force labels visible (that caused Co/De/Liv mess). */
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link .rp-rail-label {
+  transition: opacity 180ms var(--dl-ease-premium) 40ms,
+    transform 180ms var(--dl-ease-premium) 40ms;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="false"] .rp-rail-label,
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="false"] .rp-rail-word,
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="false"] .rp-rail-user-meta,
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="false"] .rp-rail-util-label,
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="false"] .rp-rail-venue-thumb {
+  opacity: 0 !important;
+  width: 0 !important;
+  max-width: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="true"] .rp-rail-link .rp-rail-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link .rp-rail-ico {
+  color: inherit !important;
+  opacity: 1;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link:hover:not([data-active="true"]),
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link:focus-visible:not([data-active="true"]) {
+  color: var(--dl-ink) !important;
+  background: rgba(15, 107, 60, 0.06) !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link[data-active="true"],
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link[aria-current="page"] {
+  background: var(--dl-green-soft) !important;
+  color: var(--dl-green-text) !important;
+  font-weight: 600;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link[data-active="true"] .rp-rail-ico,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link[aria-current="page"] .rp-rail-ico {
+  color: var(--dl-green-strong) !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link[data-active="true"]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 2.5px;
+  border-radius: 2px;
+  background: var(--dl-green);
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-badge[data-tone="urgent"],
+.rp-shell-v2[data-theme="daylight"] .rp-rail-badge[data-tone="warn"],
+.rp-shell-v2[data-theme="daylight"] .rp-rail-badge {
+  background: #e8a04a !important;
+  color: #fff !important;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.65rem;
+  font-weight: 650;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-venue-thumb {
+  height: 3.25rem;
+  margin: 0 0.65rem 0.55rem;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.72;
+  box-shadow: inset 0 0 0 1px rgba(20, 60, 45, 0.08);
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-mark,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-mark svg,
+.rp-shell-v2[data-theme="daylight"] .radr-mark {
+  color: var(--dl-green) !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-word,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-label {
+  color: inherit !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-user-meta strong {
+  color: var(--dl-ink) !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-user-meta em {
+  color: var(--dl-quiet) !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-rail-mission p {
+  color: var(--dl-quiet) !important;
+}
+
+/* ——— Top context bar (beat radr-vision lean graphite chrome) ——— */
+.rp-shell-v2[data-theme="daylight"] .rp-main-v2,
+.rp-shell-v2[data-theme="daylight"] .rp-frame-v2 {
+  background: var(--dl-bg) !important;
+  color: var(--dl-ink);
+  border-color: var(--dl-border) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] {
+  background: var(--dl-surface) !important;
+  border-bottom: 1px solid var(--dl-border) !important;
+  color: var(--dl-ink) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-strip {
+  display: none !important;
+}
+
+/* Remap vision tokens under Daylight so page CSS reading --rv-* brightens */
+.rp-shell-v2[data-theme="daylight"] {
+  --rv-bg: var(--dl-bg);
+  --rv-nav: var(--cci-nav);
+  --rv-canvas: var(--dl-secondary);
+  --rv-surface: var(--dl-surface);
+  --rv-elevated: var(--dl-elevated);
+  --rv-hover: var(--dl-hover);
+  --rv-ink: var(--dl-ink);
+  --rv-muted: var(--dl-muted);
+  --rv-quiet: var(--dl-quiet);
+  --rv-hair: var(--dl-border);
+  --rv-hair-strong: #d4dbd4;
+  --rv-green: var(--dl-green);
+  --rv-green-soft: rgba(0, 217, 120, 0.12);
+  --rv-watch: var(--dl-watch);
+  --rv-adverse: var(--dl-adverse);
+  --rv-shadow: var(--dl-shadow-float);
+  --rv-font-ui: var(--dl-font-ui);
+  --rv-font-display: var(--dl-font-editorial);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-content-v2,
+.rp-shell-v2[data-theme="daylight"][data-nav-mode="rail"] .rp-content-v2 {
+  background: var(--dl-bg) !important;
+  color: var(--dl-ink);
+  max-width: none !important;
+  width: 100% !important;
+  margin-inline: 0 !important;
+  padding: 1.1rem 1.5rem 2.5rem !important;
+  box-sizing: border-box;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-title,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-ctrl-v,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-signal,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-signal-label {
+  color: var(--dl-ink) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-ctrl-k,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-page-period,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-signal-meta,
+.rp-shell-v2[data-theme="daylight"] .rp-demo-org-kicker {
+  color: var(--dl-quiet) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-ctrl-btn,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-ctrl-btn,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-ask,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-scope,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-scope,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-org,
+.rp-shell-v2[data-theme="daylight"] .rp-demo-org-btn,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-demo-org-btn,
+.rp-shell-v2[data-theme="daylight"] .rp-demo-org-segment,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-role,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-role-static,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-search,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-search,
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-btn {
+  background: var(--dl-surface) !important;
+  border: 1px solid var(--dl-border) !important;
+  color: var(--dl-ink) !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-ctrl-btn:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-ctrl-btn:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-search:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-search:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-btn:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-demo-org-btn:hover {
+  background: var(--dl-hover) !important;
+  border-color: #d4dbd4 !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-ask kbd,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-search kbd,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-search kbd {
+  color: var(--dl-quiet) !important;
+  border-color: var(--dl-border) !important;
+  background: var(--dl-secondary) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-bell,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-bell,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-avatar,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-avatar,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-navbtn {
+  background: transparent !important;
+  color: var(--dl-muted) !important;
+  border-color: var(--dl-border) !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-goh-avatar,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-avatar,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-bell {
+  background: var(--dl-interactive) !important;
+  color: var(--dl-ink) !important;
+  border-color: var(--dl-border) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-ctrl-v,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-ctrl-k,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-ctrl-v em,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-search-label {
+  color: inherit !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-mobile-tabs {
+  background: var(--dl-surface) !important;
+  border-top-color: var(--dl-border) !important;
+  color: var(--dl-muted) !important;
+}
+
+/* ——— Dropdowns / popovers (opaque white) ——— */
+.rp-shell-v2[data-theme="daylight"] .rp-float,
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-menu,
+.rp-shell-v2[data-theme="daylight"] .rp-ctx-period-menu,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-more-panel,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-user-menu,
+.rp-shell-v2[data-theme="daylight"] .rp-period-menu,
+.rp-shell-v2[data-theme="daylight"] .rp-scope-menu,
+.rp-shell-v2[data-theme="daylight"] .rp-loc-switch-panel,
+.rp-shell-v2[data-theme="daylight"] [data-float="true"],
+.rp-shell-v2[data-theme="daylight"] [role="listbox"].rp-role-switch-menu,
+.rp-shell-v2[data-theme="daylight"] [role="menu"],
+.rp-shell-v2[data-theme="daylight"] ul.rp-goh-menu,
+body > .rp-float,
+body > .rp-role-switch-menu,
+body > [data-float="true"] {
+  background: var(--dl-surface) !important;
+  background-color: var(--dl-surface) !important;
+  color: var(--dl-ink) !important;
+  border: 1px solid var(--dl-border) !important;
+  box-shadow: 0 12px 40px rgba(10, 20, 12, 0.1),
+    0 0 0 1px rgba(20, 40, 25, 0.06) !important;
+  border-radius: 0.55rem !important;
+  z-index: 120 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-menu button,
+.rp-shell-v2[data-theme="daylight"] .rp-ctx-period-menu button,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-user-menu button,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-more-item,
+.rp-shell-v2[data-theme="daylight"] [role="listbox"] button,
+.rp-shell-v2[data-theme="daylight"] [role="menu"] [role="menuitem"],
+.rp-shell-v2[data-theme="daylight"] ul.rp-goh-menu button,
+body > .rp-role-switch-menu button,
+body > .rp-float button {
+  color: var(--dl-ink) !important;
+  background: transparent !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-menu button:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-ctx-period-menu button:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-user-menu button:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-goh-more-item:hover,
+.rp-shell-v2[data-theme="daylight"] [role="listbox"] button:hover,
+.rp-shell-v2[data-theme="daylight"] ul.rp-goh-menu button:hover,
+body > .rp-role-switch-menu button:hover,
+body > .rp-float button:hover {
+  background: #f2f6f2 !important;
+  color: var(--dl-ink) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-menu button[data-active="true"],
+.rp-shell-v2[data-theme="daylight"] .rp-ctx-period-menu button[data-active="true"],
+.rp-shell-v2[data-theme="daylight"] .rp-goh-more-item[data-active="true"],
+.rp-shell-v2[data-theme="daylight"] ul.rp-goh-menu button[data-active="true"],
+.rp-shell-v2[data-theme="daylight"] [role="option"][aria-selected="true"] button,
+body > .rp-role-switch-menu button[data-active="true"],
+body > .rp-float button[data-active="true"] {
+  background: #e7faed !important;
+  color: var(--dl-ink) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-menu strong,
+body > .rp-role-switch-menu strong {
+  color: var(--dl-ink) !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-menu span,
+body > .rp-role-switch-menu span {
+  color: #616962 !important;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-role-switch-menu button[data-active="true"]::after,
+body > .rp-role-switch-menu button[data-active="true"]::after {
+  content: "✓";
+  color: #00a85a;
+  font-weight: 600;
+}
+
+/* ——— Buttons ——— */
+.rp-shell-v2[data-theme="daylight"] .rp-btn-primary,
+.rp-shell-v2[data-theme="daylight"] button[data-variant="primary"],
+.rp-shell-v2[data-theme="daylight"] [data-btn="primary"] {
+  background: var(--dl-green) !important;
+  border: 1px solid var(--dl-green) !important;
+  color: #0a0d0b !important;
+  font-weight: 600;
+  border-radius: 0.45rem;
+}
+.rp-shell-v2[data-theme="daylight"] .rp-btn-primary:hover,
+.rp-shell-v2[data-theme="daylight"] button[data-variant="primary"]:hover {
+  background: #1ae08a !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-btn-secondary,
+.rp-shell-v2[data-theme="daylight"] button[data-variant="secondary"],
+.rp-shell-v2[data-theme="daylight"] [data-btn="secondary"] {
+  background: var(--dl-surface) !important;
+  border: 1px solid var(--dl-border) !important;
+  color: var(--dl-ink) !important;
+  border-radius: 0.45rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-btn-tertiary,
+.rp-shell-v2[data-theme="daylight"] button[data-variant="tertiary"] {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--dl-muted) !important;
+}
+
+/* ——— Tables ——— */
+.rp-shell-v2[data-theme="daylight"] table,
+.rp-shell-v2[data-theme="daylight"] .rp-table,
+.rp-shell-v2[data-theme="daylight"] [data-table="true"] {
+  background: var(--dl-surface);
+  color: var(--dl-ink);
+  border-collapse: collapse;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2[data-theme="daylight"] table thead,
+.rp-shell-v2[data-theme="daylight"] .rp-table thead,
+.rp-shell-v2[data-theme="daylight"] [data-table="true"] thead {
+  background: color-mix(in srgb, var(--dl-green-soft) 55%, var(--dl-secondary));
+  color: var(--dl-muted);
+}
+
+.rp-shell-v2[data-theme="daylight"] table th,
+.rp-shell-v2[data-theme="daylight"] .rp-table th {
+  font-size: 0.72rem;
+  font-weight: 560;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dl-muted);
+  border-bottom: 1px solid var(--dl-border);
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+}
+
+.rp-shell-v2[data-theme="daylight"] table td,
+.rp-shell-v2[data-theme="daylight"] .rp-table td {
+  border-bottom: 1px solid color-mix(in srgb, var(--dl-border) 80%, transparent);
+  padding: 0.7rem 0.75rem;
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] table tbody tr:hover,
+.rp-shell-v2[data-theme="daylight"] .rp-table tbody tr:hover {
+  background: var(--dl-hover);
+}
+
+.rp-shell-v2[data-theme="daylight"] table tbody tr[data-selected="true"],
+.rp-shell-v2[data-theme="daylight"] .rp-table tbody tr[aria-selected="true"] {
+  background: var(--dl-green-selected);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-num,
+.rp-shell-v2[data-theme="daylight"] [data-num="true"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ——— Forms / inputs ——— */
+.rp-shell-v2[data-theme="daylight"] input:not([type="checkbox"]):not([type="radio"]),
+.rp-shell-v2[data-theme="daylight"] select,
+.rp-shell-v2[data-theme="daylight"] textarea,
+.rp-shell-v2[data-theme="daylight"] .rp-input {
+  background: var(--dl-surface) !important;
+  color: var(--dl-ink) !important;
+  border: 1px solid var(--dl-border) !important;
+  border-radius: 0.45rem;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] input:focus-visible,
+.rp-shell-v2[data-theme="daylight"] select:focus-visible,
+.rp-shell-v2[data-theme="daylight"] textarea:focus-visible,
+.rp-shell-v2[data-theme="daylight"] .rp-input:focus-visible {
+  outline: none !important;
+  border-color: var(--dl-green) !important;
+  box-shadow: 0 0 0 3px rgba(0, 217, 120, 0.22) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] input::placeholder,
+.rp-shell-v2[data-theme="daylight"] textarea::placeholder {
+  color: var(--dl-quiet) !important;
+}
+
+/* ——— Ask RADR panel chrome ——— */
+.rp-shell-v2[data-theme="daylight"] .rp-ask-panel,
+body:has(.rp-shell-v2[data-theme="daylight"]) .rp-ask-panel {
+  background: var(--dl-surface) !important;
+  background-color: var(--dl-surface) !important;
+  color: var(--dl-ink) !important;
+  border: 1px solid var(--dl-border) !important;
+  box-shadow: 0 24px 64px rgba(10, 20, 12, 0.12) !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+}
+
+/* Location switcher / world switcher panels */
+.rp-shell-v2[data-theme="daylight"] .rp-loc-switch,
+.rp-shell-v2[data-theme="daylight"] .rp-world-switch {
+  color: var(--dl-ink);
+}
+
+/* =========================================================
+   PHASE 2 — Control Center (GM / CFO) Daylight
+   ========================================================= */
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc,
+.rp-shell-v2[data-theme="daylight"] .rp-cc-instrument,
+.rp-shell-v2[data-theme="daylight"] .rp-cc4-root:has(.rv-cc) {
+  background: var(--dl-bg) !important;
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-cc-instrument-main {
+  border-right-color: var(--dl-border) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-cc-instrument-rail {
+  background: color-mix(in srgb, var(--dl-secondary) 70%, #ffffff) !important;
+  border-left: 1px solid var(--dl-border);
+}
+
+.rp-shell-v2[data-theme="daylight"]:has(.rp-cc-instrument) .rp-rail-link[data-active="true"] {
+  background: var(--dl-green-soft) !important;
+  color: var(--dl-ink) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"]:has(.rp-cc-instrument) .rp-rail {
+  --rp-rail-hover: rgba(20, 24, 20, 0.04);
+  --rp-rail-active: var(--dl-green-soft);
+}
+
+/* Type utilities — Geist only; hierarchy via weight + tracking */
+.rp-shell-v2[data-theme="daylight"] .rv-display,
+.rp-shell-v2[data-theme="daylight"] .rv-cc-head h1 {
+  font-family: var(--dl-font-ui) !important;
+  font-size: var(--dl-type-page) !important;
+  font-weight: 620 !important;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: var(--dl-ink) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-editorial {
+  font-family: var(--dl-font-ui);
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-editorial-signal {
+  color: var(--dl-green-text);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-label {
+  font-size: var(--dl-type-label) !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dl-muted) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-num,
+.rp-shell-v2[data-theme="daylight"] .rv-metric strong,
+.rp-shell-v2[data-theme="daylight"] .rv-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Open typographic metrics — not equal cards */
+.rp-shell-v2[data-theme="daylight"] .rv-metric {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  min-height: 0 !important;
+  padding: 0.35rem 0.85rem 0.35rem 0 !important;
+  color: var(--dl-ink);
+  border-right: 1px solid var(--dl-border) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric:last-child {
+  border-right: 0 !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric strong {
+  color: var(--dl-ink) !important;
+  font-size: var(--dl-type-metric) !important;
+  font-weight: 560 !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric em {
+  color: var(--dl-muted);
+  font-size: var(--dl-type-meta);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric em[data-tone="pos"],
+.rp-shell-v2[data-theme="daylight"] .rv-tonight .rv-delta,
+.rp-shell-v2[data-theme="daylight"] .rv-decision-econ,
+.rp-shell-v2[data-theme="daylight"] [data-tone="pos"] {
+  color: var(--dl-green-text) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-context {
+  margin: 0.25rem 0 0;
+  font-size: var(--dl-type-body);
+  color: var(--dl-muted);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-weather {
+  margin: 0.15rem 0 0;
+  font-size: var(--dl-type-meta);
+  color: var(--dl-quiet);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric em[data-tone="neg"] {
+  color: var(--dl-adverse) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric-band {
+  gap: 0 !important;
+  padding: 0.35rem 0 0.85rem;
+  border-bottom: 1px solid var(--dl-border);
+  margin-bottom: 1rem;
+}
+
+/* Hero tonight metric */
+.rp-shell-v2[data-theme="daylight"] .rv-tonight {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight .rv-label {
+  color: var(--dl-quiet) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight .rv-num {
+  font-size: var(--dl-type-metric-xl);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  color: var(--dl-ink);
+  line-height: 1.05;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight .rv-delta {
+  font-size: var(--dl-type-body);
+  color: var(--dl-green-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-panel,
+.rp-shell-v2[data-theme="daylight"] .rv-mod-rich,
+.rp-shell-v2[data-theme="daylight"] .rv-card {
+  background: var(--dl-surface) !important;
+  border: 1px solid var(--dl-border) !important;
+  box-shadow: none;
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-panel-head h2,
+.rp-shell-v2[data-theme="daylight"] .rv-cc-head h1,
+.rp-shell-v2[data-theme="daylight"] .rv-card h3 {
+  color: var(--dl-ink) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-head p,
+.rp-shell-v2[data-theme="daylight"] .rv-card p {
+  color: var(--dl-muted) !important;
+}
+
+/* Portfolio / operating tables */
+.rp-shell-v2[data-theme="daylight"] .rv-table {
+  background: var(--dl-surface);
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-table th {
+  background: color-mix(in srgb, var(--dl-green-soft) 60%, var(--dl-secondary));
+  color: var(--dl-muted);
+  border-bottom: 1px solid var(--dl-border);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-table td {
+  border-bottom: 1px solid color-mix(in srgb, var(--dl-border) 85%, transparent);
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-table tbody tr:hover {
+  background: var(--dl-hover) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-loc-thumb {
+  background:
+    linear-gradient(145deg, rgba(0, 217, 120, 0.12), transparent 55%),
+    linear-gradient(145deg, #e8eee9, #dfe6e1) !important;
+  border-color: var(--dl-border) !important;
+}
+
+/* Operating pulse canvas */
+.rp-shell-v2[data-theme="daylight"] .rv-pulse-flagship,
+.rp-shell-v2[data-theme="daylight"] .rp-cci-pulse,
+.rp-shell-v2[data-theme="daylight"] .rv-pulse-canvas {
+  background: var(--dl-surface) !important;
+  border: 1px solid var(--dl-border);
+  border-radius: 0.55rem;
+  box-shadow: var(--dl-shadow-soft);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-bar-track {
+  background: rgba(20, 24, 20, 0.08) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-stock-list li {
+  border-bottom-color: var(--dl-border) !important;
+}
+
+/* Right rail decision — soft green intelligence surface */
+.rp-shell-v2[data-theme="daylight"] .rv-decision-card,
+.rp-shell-v2[data-theme="daylight"] .rp-cci-decision,
+.rp-shell-v2[data-theme="daylight"] [data-block="active-decision"] {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(0, 217, 120, 0.14), transparent 55%),
+    #ffffff !important;
+  border: 1px solid color-mix(in srgb, var(--dl-green) 35%, var(--dl-border)) !important;
+  box-shadow: var(--dl-shadow-soft) !important;
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-card h3,
+.rp-shell-v2[data-theme="daylight"] .rv-btn {
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-btn[data-primary="true"],
+.rp-shell-v2[data-theme="daylight"] .rv-btn-primary {
+  background: var(--dl-green) !important;
+  border-color: var(--dl-green) !important;
+  color: #0a0d0b !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-rail,
+.rp-shell-v2[data-theme="daylight"] .rv-rail-block {
+  background: transparent;
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-rail-block > .rv-label,
+.rp-shell-v2[data-theme="daylight"] .rv-eyebrow {
+  color: var(--dl-green-strong);
+}
+
+/* Instrument metric band (non-vision path) */
+.rp-shell-v2[data-theme="daylight"] .rp-cci-band {
+  border-color: var(--dl-border);
+  background: var(--dl-surface);
+  border-radius: 0.55rem;
+  padding-inline: 0.35rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-cci-band li {
+  border-right-color: var(--dl-border);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-cci-statement,
+.rp-shell-v2[data-theme="daylight"] .rp-cci-band-v,
+.rp-shell-v2[data-theme="daylight"] .rp-cci-net strong {
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-cci-band-v[data-tone="pos"] {
+  color: var(--dl-green-strong);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-cci-band-v[data-tone="neg"],
+.rp-shell-v2[data-theme="daylight"] .rp-cci-net strong {
+  color: var(--dl-adverse);
+}
+
+/* Chart annotation text on light pulse */
+.rp-shell-v2[data-theme="daylight"] .rv-pulse-flagship text,
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm text {
+  fill: var(--dl-ink) !important;
+}
+
+/* =========================================================
+   PHASE 3 — Live V2 Daylight spatial surface
+   ========================================================= */
+
+.rp-shell-v2[data-theme="daylight"][data-page="live"] .rp-main-v2,
+.rp-shell-v2[data-theme="daylight"][data-page="live"] .rp-content-v2 {
+  background: var(--dl-bg) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .lv2-root {
+  background: var(--dl-bg);
+  color: var(--dl-ink);
+}
+
+/* =========================================================
+   CATEGORY REFINEMENT — Pulse, Decision, Verified
+   ========================================================= */
+
+.rp-shell-v2[data-theme="daylight"] .rp-pulse-land,
+.rp-shell-v2[data-theme="daylight"] .rv-pulse-flagship .rp-pulse-land {
+  background: var(--dl-surface);
+  border: 1px solid var(--dl-border);
+  border-radius: 0.55rem;
+  padding: 0.65rem 0.5rem 0.35rem;
+  min-height: 16rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-pulse-land-svg {
+  width: 100%;
+  height: 15.5rem;
+  display: block;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-editorial {
+  margin: 0 0 1.15rem;
+  max-width: 36rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-card {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(0, 217, 120, 0.16), transparent 55%),
+    var(--dl-surface) !important;
+  border: 1px solid color-mix(in srgb, var(--dl-green) 32%, var(--dl-border)) !important;
+  box-shadow: var(--dl-shadow-soft) !important;
+  padding: 1rem !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-card h3 {
+  font-size: var(--dl-type-section);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.45rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-econ {
+  color: var(--dl-green-strong) !important;
+  font-weight: 560;
+  font-variant-numeric: tabular-nums;
+  margin: 0.55rem 0 0.25rem !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-conf {
+  margin: 0 0 0.75rem;
+  font-size: var(--dl-type-meta);
+  color: var(--dl-quiet);
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-verified {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(0, 217, 120, 0.12), transparent 60%),
+    var(--dl-surface);
+  border: 1px solid var(--dl-border);
+  border-radius: 0.55rem;
+  padding: 0.95rem 1rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-verified .rv-num {
+  font-size: var(--dl-type-metric-xl);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  color: var(--dl-ink);
+  display: block;
+  margin: 0.2rem 0;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-station-list em {
+  display: block;
+  font-style: normal;
+  font-size: var(--dl-type-meta);
+  color: var(--dl-muted);
+  margin-left: 1.1rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric-band-compact {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .rp-shell-v2[data-theme="daylight"] .rv-metric-band-compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ——— Restaurant GM Control Center · premium visual system ——— */
+
+/* Shell atmosphere — dedicated top band so the venue is actually visible */
+.rp-shell-v2[data-theme="daylight"]:has(.rv-cc-gm[data-premium="true"]) .rp-main-v2 {
+  position: relative;
+  background: var(--dl-bg) !important;
+  isolation: isolate;
+}
+.rp-shell-v2[data-theme="daylight"]:has(.rv-cc-gm[data-premium="true"]) .rp-main-v2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: min(46vh, 420px);
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("/demo/facilities/radr-restaurant-atmosphere.jpg");
+  background-position: center 35%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 42%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(180deg, #000 0%, #000 42%, transparent 100%);
+}
+.rp-shell-v2[data-theme="daylight"]:has(.rv-cc-gm[data-premium="true"]) .rp-main-v2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: min(46vh, 420px);
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 248, 0.22) 0%,
+    rgba(255, 252, 248, 0.4) 45%,
+    rgba(248, 249, 246, 0.92) 100%
+  );
+}
+.rp-shell-v2[data-theme="daylight"]:has(.rv-cc-gm[data-premium="true"]) .rp-goh,
+.rp-shell-v2[data-theme="daylight"]:has(.rv-cc-gm[data-premium="true"]) .rp-content-v2 {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+.rp-shell-v2[data-theme="daylight"]:has(.rv-cc-gm[data-premium="true"]) .rp-goh[data-chrome="lean"] {
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2[data-theme="daylight"]:has(.rv-cc-gm[data-premium="true"]) .rp-content-v2 {
+  padding: 0.35rem 1.35rem 1.5rem !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-ctrl-btn,
+.rp-shell-v2[data-theme="daylight"] .rp-goh[data-chrome="lean"] .rp-goh-search {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(20, 60, 45, 0.1) !important;
+  border-radius: var(--dl-radius-ctrl) !important;
+  box-shadow: var(--dl-shadow-soft) !important;
+  backdrop-filter: none;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-live-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--dl-green);
+  box-shadow: 0 0 0 3px rgba(0, 217, 120, 0.18);
+  animation: rp-live-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes rp-live-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(0, 217, 120, 0.16);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(0, 217, 120, 0.08);
+  }
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-ctrl-btn[data-live="true"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-inline: 0.75rem !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-goh-ctrl-btn[data-live="true"] .rp-goh-ctrl-v {
+  font-weight: 600;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 22.5rem);
+  gap: 1rem 1.25rem;
+  padding: 0.25rem 0.15rem 0.75rem;
+  align-items: start;
+  max-width: 1760px;
+  animation: rv-cc-enter 220ms var(--dl-ease-premium) both;
+}
+
+@keyframes rv-cc-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-atmosphere {
+  display: none;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dl-muted);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-cc-head h1 {
+  font-size: clamp(2.35rem, 2.9vw, 2.7rem) !important;
+  font-weight: 680 !important;
+  letter-spacing: -0.038em !important;
+  line-height: 1.02 !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-cc-context {
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+  color: var(--dl-muted);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-cc-weather {
+  color: var(--dl-quiet);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-card {
+  position: relative;
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.2rem 1.4rem 1.3rem;
+  border-radius: var(--dl-radius-card);
+  background: #ffffff;
+  border: 1px solid var(--dl-border);
+  box-shadow: var(--dl-shadow-elevated);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  min-height: 8.75rem;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-card:hover {
+  border-color: rgba(15, 107, 60, 0.22);
+  box-shadow: var(--dl-shadow-menu);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-atm {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-card > *:not(.rv-tonight-atm) {
+  position: relative;
+  z-index: 1;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-card .rv-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--dl-green-text) !important;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-ico {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 0.18rem;
+  background: linear-gradient(145deg, #00d978, #0f6b3c);
+  box-shadow: 0 0 0 3px rgba(0, 217, 120, 0.14);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--dl-green-text);
+  background: var(--dl-green-soft);
+  border: 1px solid color-mix(in srgb, var(--dl-green) 30%, transparent);
+  border-radius: var(--dl-radius-chip);
+  padding: 0.22rem 0.58rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-card .rv-num {
+  font-size: clamp(3rem, 3.8vw, 3.5rem) !important;
+  font-weight: 680 !important;
+  letter-spacing: -0.042em;
+  line-height: 1;
+  color: var(--dl-ink) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-tonight-card .rv-delta {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--dl-green-text) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric-card {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0 !important;
+  margin: 0.15rem 0 0.2rem;
+  padding: 0.7rem 0.35rem !important;
+  background: #ffffff !important;
+  border: 1px solid var(--dl-border) !important;
+  border-radius: var(--dl-radius-card) !important;
+  box-shadow: var(--dl-shadow-soft) !important;
+  border-bottom: 1px solid var(--dl-border) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-metric {
+  position: relative;
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.35rem 0.95rem !important;
+  border-right: 1px solid var(--dl-border) !important;
+  background: transparent !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-metric:last-child {
+  border-right: 0 !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric-ico {
+  color: var(--dl-green-text);
+  margin-bottom: 0.1rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-metric .rv-num {
+  font-size: clamp(1.45rem, 1.8vw, 1.75rem) !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.03em;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-metric-sub {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--dl-quiet);
+  line-height: 1.25;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-metric em[data-tone="muted"] {
+  color: var(--dl-muted) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-editorial {
+  font-size: clamp(2rem, 2.7vw, 2.65rem) !important;
+  font-weight: 680;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  max-width: 36rem;
+  margin: 0.55rem 0 0.7rem;
+  color: var(--dl-ink) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-editorial-signal {
+  color: var(--dl-green-text) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-pulse-flagship {
+  min-height: 18.5rem;
+  border-radius: var(--dl-radius-card) !important;
+  box-shadow: var(--dl-shadow-soft) !important;
+  border: 1px solid var(--dl-border) !important;
+  background: #ffffff !important;
+  padding: 0.85rem 0.95rem 0.65rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-panel-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rp-pulse-land {
+  min-height: 16.5rem;
+  position: relative;
+  border: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rp-pulse-land-svg {
+  height: 16rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-pulse-tip {
+  position: absolute;
+  z-index: 4;
+  min-width: 10.5rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--dl-radius-ctrl);
+  background: #ffffff;
+  border: 1px solid var(--dl-border);
+  box-shadow: var(--dl-shadow-menu);
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.72rem;
+  color: var(--dl-muted);
+  pointer-events: none;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rp-pulse-tip strong {
+  color: var(--dl-ink);
+  font-size: 0.8rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-chip {
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  color: var(--dl-green-text);
+  background: var(--dl-green-soft);
+  border: 1px solid color-mix(in srgb, var(--dl-green) 28%, transparent);
+  border-radius: var(--dl-radius-chip);
+  padding: 0.18rem 0.5rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0.75rem 0 0.85rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-metrics .rv-label {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--dl-quiet) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-metrics strong {
+  font-size: 1rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-decision-metrics [data-deadline="true"] strong {
+  color: var(--coral) !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-decision-card {
+  border-radius: var(--dl-radius-card) !important;
+  box-shadow: var(--dl-shadow-elevated) !important;
+  padding: 1.05rem !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-decision-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-btn[data-primary="true"] {
+  background: var(--green-dark) !important;
+  border-color: var(--green-dark) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  border-radius: var(--dl-radius-ctrl) !important;
+  width: 100%;
+  transition: background 150ms ease;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-btn[data-primary="true"]:hover {
+  background: #0c5731 !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-btn-secondary {
+  background: #ffffff !important;
+  border: 1px solid var(--dl-border) !important;
+  color: var(--dl-ink) !important;
+  border-radius: var(--dl-radius-ctrl) !important;
+  box-shadow: var(--dl-shadow-soft);
+  font-weight: 560;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-why-now {
+  margin: 0.75rem 0 0;
+  padding: 0.65rem 0 0;
+  border-top: 1px solid var(--dl-border);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-why-now > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-why-now dt {
+  color: var(--dl-quiet);
+  margin: 0;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-why-now dd {
+  margin: 0;
+  color: var(--dl-ink);
+  font-weight: 540;
+  text-align: right;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-why-evidence {
+  grid-column: 1 / -1;
+  display: block !important;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-why-evidence dd {
+  text-align: left;
+  font-weight: 450;
+  color: var(--dl-muted);
+  margin-top: 0.15rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-need-card {
+  background: #ffffff;
+  border: 1px solid var(--dl-border);
+  border-radius: var(--dl-radius-card);
+  box-shadow: var(--dl-shadow-soft);
+  padding: 0.75rem 0.8rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-need-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-link {
+  font-size: 0.72rem;
+  color: var(--dl-muted);
+  text-decoration: none;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-link:hover {
+  color: var(--dl-ink);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-need-list button {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.2rem;
+  border-radius: 8px;
+  transition: background 120ms ease;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-need-list button:hover {
+  background: rgba(15, 107, 60, 0.04);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-need-copy {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-need-chev {
+  color: var(--dl-quiet);
+  font-size: 1.1rem;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-verified {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--dl-radius-card);
+  box-shadow: var(--dl-shadow-soft);
+  transition: box-shadow 120ms ease;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-verified:hover {
+  box-shadow: var(--dl-shadow-elevated);
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-verified-bars i {
+  background: linear-gradient(180deg, #00d978, #0f6b3c) !important;
+  opacity: 0.85;
+}
+
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-gm-modules,
+.rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-gm-modules-rich {
+  display: none !important;
+}
+
+@media (max-width: 1200px) {
+  .rp-shell-v2[data-theme="daylight"] .rv-metric-card {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .rp-shell-v2[data-theme="daylight"] .rv-cc-gm .rv-metric:nth-child(3) {
+    border-right: 0 !important;
+  }
+}

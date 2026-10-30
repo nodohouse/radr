@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="RADR">
+  <rect width="64" height="64" rx="14" fill="#050705"/>
+  <g transform="translate(14 8) scale(0.45)">
+    <path d="M29 12 L10 90" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M51 12 L70 90" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="40" cy="56" r="7.25" fill="#00D978"/>
+  </g>
+</svg>

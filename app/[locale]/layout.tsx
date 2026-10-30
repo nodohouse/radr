@@ -52,6 +52,10 @@ export async function generateMetadata({
       description: messages.siteDescription,
     },
     robots: { index: true, follow: true },
+    icons: {
+      icon: [{ url: "/brand/favicon.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180" }],
+    },
     alternates: {
       languages: {
         en: "https://radrup.com/en",

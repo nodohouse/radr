@@ -1,0 +1,508 @@
+/**
+ * Decision Room — premium case file composition.
+ * Recommendation → Why now → Futures → Baseline → Policy → Prepared action → Outcome.
+ * Section label rail (left) + content column (right). Northstar ivory via --rp-* tokens.
+ * Specificity is intentionally high: several legacy layers use !important.
+ */
+
+.rp-shell-v2 .rp-drec.rp-drec-elevated {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: var(--rp-space-4) var(--rp-gutter) 6rem;
+  color: var(--rp-text-primary);
+}
+
+/* ─── Header: the case cover ─── */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-crumb {
+  font-size: var(--rp-text-sm);
+  color: var(--rp-text-quiet);
+  margin-bottom: var(--rp-space-5);
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-head[data-editorial="true"] {
+  max-width: none;
+  margin-bottom: var(--rp-space-6);
+  padding: var(--rp-space-5) var(--rp-space-5) var(--rp-space-4);
+  background: var(--rp-surface-raised);
+  border: 1px solid var(--rp-border);
+  border-radius: var(--rp-radius-lg);
+  box-shadow: var(--rp-shadow-soft);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "meta  meta"
+    "dead  dead"
+    "title econ"
+    "nav   nav";
+  column-gap: var(--rp-space-6);
+  row-gap: var(--rp-space-2);
+  align-items: end;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-head-meta {
+  grid-area: meta;
+  align-items: center;
+  gap: var(--rp-space-2) var(--rp-space-3);
+  font-size: var(--rp-text-sm);
+  color: var(--rp-text-secondary);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-head-meta .rp-cc-id {
+  font-family: var(--rp-font-mono) !important;
+  font-size: var(--rp-text-sm);
+  color: var(--rp-text-primary);
+  font-weight: 560 !important;
+  letter-spacing: 0.01em !important;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-head-meta > span + span:not(.rp-drec-status-pill)::before {
+  content: "·";
+  margin-right: var(--rp-space-3);
+  color: var(--rp-text-quiet);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-status-pill {
+  margin-left: auto;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--rp-border-strong);
+  background: var(--rp-surface-1);
+  color: var(--rp-text-secondary);
+  font-size: var(--rp-text-xs) !important;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-status-pill[data-band="needs_you"] {
+  border-color: color-mix(in srgb, var(--rp-watch) 50%, transparent);
+  background: color-mix(in srgb, var(--rp-watch) 9%, #fff);
+  color: var(--rp-watch);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-status-pill[data-band="verified"],
+.rp-shell-v2 .rp-drec-elevated .rp-drec-status-pill[data-band="learned"] {
+  border-color: color-mix(in srgb, var(--rp-verified) 45%, transparent);
+  background: color-mix(in srgb, var(--rp-green-signal) 8%, #fff);
+  color: var(--rp-green);
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-deadline {
+  margin: var(--rp-space-3) 0 0;
+  font-size: var(--rp-text-sm);
+  color: var(--rp-text-secondary);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-deadline-hero {
+  grid-area: dead;
+  margin: var(--rp-space-3) 0 0 !important;
+  font-size: var(--rp-text-md) !important;
+  font-weight: 560 !important;
+  letter-spacing: 0 !important;
+  color: var(--rp-watch) !important;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-head > .rp-drec-deadline:not(.rp-drec-deadline-hero) {
+  grid-area: dead;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-title {
+  grid-area: title;
+  margin: 0 !important;
+  max-width: 34ch;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem) !important;
+  font-weight: 540 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.12 !important;
+  text-transform: none !important;
+  text-wrap: balance;
+}
+.rp-shell-v2 .rp-drec[data-room="true"] .rp-drec-title {
+  text-transform: none !important;
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-econ-hero {
+  grid-area: econ;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  margin: 0;
+  text-align: right;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-econ-num {
+  font-size: clamp(1.75rem, 2.6vw, 2.4rem) !important;
+  font-weight: 560 !important;
+  letter-spacing: -0.035em !important;
+  font-variant-numeric: tabular-nums;
+  color: var(--rp-green);
+  line-height: 1;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-econ-cap {
+  display: block;
+  max-width: 24ch;
+  font-size: var(--rp-text-sm);
+  line-height: 1.35;
+  color: var(--rp-text-quiet);
+}
+
+.rp-shell-v2 .rp-drec-elevated .rp-drec-nav {
+  grid-area: nav;
+  margin-top: var(--rp-space-4);
+  padding-top: var(--rp-space-3);
+  border-top: 1px solid var(--rp-border);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-life-label {
+  font-family: var(--rp-font-ui);
+  font-size: var(--rp-text-sm);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Surface tabs */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-surface {
+  margin: 0 0 var(--rp-space-4);
+}
+
+/* ─── Sections: label rail + content ─── */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec {
+  position: relative;
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  column-gap: var(--rp-space-6);
+  row-gap: var(--rp-space-3);
+  margin-top: 0;
+  padding: var(--rp-space-5) 0 !important;
+  scroll-margin-top: var(--rp-space-6);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: var(--rp-border);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec > h2 {
+  grid-column: 1;
+  align-self: start;
+  margin: 0.15rem 0 0;
+  font-family: var(--rp-font-ui) !important;
+  font-size: var(--rp-text-md);
+  font-weight: 560 !important;
+  letter-spacing: -0.005em !important;
+  text-transform: none !important;
+  color: var(--rp-text-secondary);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec > :not(h2) {
+  grid-column: 2;
+  min-width: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* The first sec after the cover needs no top rule */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-rec-block::before {
+  background: transparent;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec p {
+  max-width: 62ch;
+}
+
+/* Recommendation — the dominant block */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-rec-block > h2 {
+  color: var(--rp-green);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-rec-block .rp-drec-problem {
+  font-size: var(--rp-text-lg);
+  font-weight: 520;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: var(--rp-text-primary);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-rec-block .rp-drec-reason {
+  font-size: var(--rp-text-md);
+  line-height: 1.55;
+  color: var(--rp-text-secondary);
+}
+
+/* Confidence — definition rows, never inline run-on */
+.rp-shell-v2 .rp-drec-elevated dl.rp-drec-confidence {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--rp-space-3) var(--rp-space-5);
+  margin: var(--rp-space-2) 0 0;
+  padding: var(--rp-space-3) 0 0;
+  border-top: 1px solid var(--rp-border);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-confidence > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-confidence dt {
+  font-size: var(--rp-text-xs);
+  color: var(--rp-text-quiet);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-confidence dd {
+  margin: 0;
+  font-size: var(--rp-text-md);
+  font-weight: 560;
+  color: var(--rp-text-primary);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-confidence-wide {
+  grid-column: 1 / -1;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-confidence-wide dd {
+  font-weight: 450;
+  color: var(--rp-text-secondary);
+}
+
+/* Why now */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-why-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--rp-space-3) var(--rp-space-5);
+  margin: 0;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-why-facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0 0 var(--rp-space-3);
+  border-bottom: 1px solid var(--rp-border);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-why-facts dt {
+  font-size: var(--rp-text-xs);
+  color: var(--rp-text-quiet);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-why-facts dd {
+  margin: 0;
+  font-size: var(--rp-text-lg);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Quiet helper lines inside sections */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec .rp-drec-quiet {
+  font-size: var(--rp-text-sm);
+  color: var(--rp-text-quiet);
+}
+
+/* Futures */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-futures-primary > .rp-drec-quiet {
+  margin: 0;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-futures-primary > :not(h2):not(.rp-drec-quiet) {
+  margin-top: var(--rp-space-2);
+}
+
+/* Exact option matrix */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-matrix {
+  margin-top: var(--rp-space-4);
+  border: 1px solid var(--rp-border);
+  border-radius: var(--rp-radius-md);
+  background: var(--rp-surface-raised);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-matrix summary {
+  padding: var(--rp-space-3) var(--rp-space-4);
+  font-size: var(--rp-text-sm);
+  font-weight: 560;
+  color: var(--rp-text-secondary);
+  cursor: pointer;
+}
+
+/* Baseline cards (peak + generic) — quiet three-up, not card soup */
+.rp-shell-v2 .rp-drec-elevated .rp-droom-change,
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline {
+  background: transparent;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-change ul {
+  font-size: var(--rp-text-md);
+  line-height: 1.5;
+  color: var(--rp-text-secondary);
+  max-width: 62ch;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid {
+  gap: 0;
+  border: 1px solid var(--rp-border);
+  border-radius: var(--rp-radius-md);
+  background: var(--rp-surface-raised);
+  overflow: hidden;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: var(--rp-space-4);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid > div + div {
+  border-left: 1px solid var(--rp-border);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid > div[data-selected="true"] {
+  background: color-mix(in srgb, var(--rp-green-signal) 6%, #fff);
+  box-shadow: inset 0 2px 0 var(--rp-green-live);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid em {
+  font-size: var(--rp-text-sm);
+  color: var(--rp-text-secondary);
+  margin: 0;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid strong {
+  font-size: var(--rp-text-2xl, 1.75rem);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid span {
+  font-size: var(--rp-text-sm);
+  line-height: 1.35;
+  color: var(--rp-text-quiet);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid [data-semantic="positive"] {
+  color: var(--rp-green);
+}
+
+/* Policy */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-policy-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--rp-space-2) var(--rp-space-5);
+  margin: 0;
+  font-size: var(--rp-text-md);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-policy-line a {
+  color: var(--rp-text-primary);
+  font-weight: 560;
+  text-underline-offset: 3px;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-policy-line a.rp-drec-policy-open {
+  color: var(--rp-text-secondary);
+  font-weight: 450;
+  font-size: var(--rp-text-sm);
+}
+
+/* Prepared action sheet — three clear columns, detail on its own row */
+.rp-shell-v2 .rp-drec-elevated .rp-action-sheet {
+  margin: 0;
+  border: 1px solid var(--rp-border);
+  border-radius: var(--rp-radius-md);
+  background: var(--rp-surface-raised);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-action-sheet li {
+  grid-template-columns: 8rem minmax(0, 1fr) auto;
+  gap: 0.25rem var(--rp-space-4);
+  padding: var(--rp-space-3) var(--rp-space-4);
+  align-items: baseline;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-action-sheet li:last-child {
+  border-bottom: 0;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-action-sys {
+  font-family: var(--rp-font-ui);
+  font-size: var(--rp-text-sm);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--rp-text-quiet);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-action-title {
+  display: block;
+  font-size: var(--rp-text-md);
+  font-weight: 560;
+  letter-spacing: -0.01em;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-action-st {
+  font-size: var(--rp-text-sm);
+  font-weight: 560;
+  letter-spacing: 0;
+  color: var(--rp-green);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-action-detail {
+  display: block;
+  grid-column: 2 / -1;
+  font-size: var(--rp-text-sm);
+  line-height: 1.4;
+  color: var(--rp-text-secondary);
+}
+
+/* Outcome / verification */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-state {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  gap: var(--rp-space-3) var(--rp-space-5);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-state > div {
+  padding-bottom: var(--rp-space-3);
+  border-bottom: 1px solid var(--rp-border);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-state dt {
+  font-size: var(--rp-text-xs);
+  color: var(--rp-text-quiet);
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-state dd {
+  font-size: var(--rp-text-lg);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+}
+
+/* Memory */
+.rp-shell-v2 .rp-drec-elevated .rp-droom-memory-lead {
+  font-size: var(--rp-text-lg);
+  font-weight: 520;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+
+/* Deep disclosure + footer */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-deep .rp-drec-disclose {
+  font-size: var(--rp-text-sm);
+  border-radius: 999px;
+  border-color: var(--rp-border-strong);
+  padding: 0.38rem 0.85rem;
+  margin: 0;
+}
+.rp-shell-v2 .rp-drec-elevated .rp-drec-foot {
+  margin-top: var(--rp-space-6);
+  padding: var(--rp-space-3) 0;
+  background: linear-gradient(transparent, var(--rp-bg) 35%);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .rp-shell-v2 .rp-drec-elevated .rp-drec-head[data-editorial="true"] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "meta"
+      "dead"
+      "title"
+      "econ"
+      "nav";
+    padding: var(--rp-space-4);
+  }
+  .rp-shell-v2 .rp-drec-elevated .rp-drec-econ-hero {
+    align-items: flex-start;
+    text-align: left;
+    margin-top: var(--rp-space-3);
+  }
+  .rp-shell-v2 .rp-drec-elevated .rp-drec-sec {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rp-shell-v2 .rp-drec-elevated .rp-drec-sec > h2,
+  .rp-shell-v2 .rp-drec-elevated .rp-drec-sec > :not(h2) {
+    grid-column: 1;
+  }
+  .rp-shell-v2 .rp-drec-elevated dl.rp-drec-confidence,
+  .rp-shell-v2 .rp-drec-elevated .rp-drec-why-facts,
+  .rp-shell-v2 .rp-drec-elevated .rp-drec-state {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rp-shell-v2 .rp-drec-elevated .rp-droom-baseline-grid > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--rp-border);
+  }
+  .rp-shell-v2 .rp-drec-elevated .rp-action-sheet li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .rp-shell-v2 .rp-drec-elevated .rp-action-sys {
+    grid-column: 1 / -1;
+  }
+  .rp-shell-v2 .rp-drec-elevated .rp-action-detail {
+    grid-column: 1 / -1;
+  }
+}

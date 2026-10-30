@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Recover → Prevent → Optimize → Autopilot
+ * Recover → Prevent → Optimize → Governed execution
  * Quiet conceptual path — not four huge product cards.
  */
 
@@ -32,7 +32,7 @@ export function ProgressionLadder({
       {lead ? <p className="rx-rec-p">{lead}</p> : null}
 
       <ol className="rx-prog-quiet-list">
-        {PROGRESSION.map((step) => (
+        {PROGRESSION.map((step, i) => (
           <li key={step.stage}>
             <button
               type="button"
@@ -40,6 +40,7 @@ export function ProgressionLadder({
               onClick={() => setActive(step.stage)}
               onMouseEnter={() => setActive(step.stage)}
             >
+              <em aria-hidden="true">{String(i + 1).padStart(2, "0")}</em>
               <strong>{titles[step.stage]}</strong>
               <span>{bodies[step.stage]}</span>
             </button>

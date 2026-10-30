@@ -6202,3 +6202,11 @@ html:has(.rx-ch-light) body {
   right: auto;
   bottom: auto;
 }
+
+/* Design-director: chapter continuity — space over grey rules */
+.rx-ch-light .rx-ch-body,
+.rx-ch-light .rx-why-gap-sec,
+.rx-ch-light .rx-why-sodr,
+.rx-ch .rx-ch-body {
+  border-top: none !important;
+}

@@ -48,7 +48,7 @@ const BEATS: Beat[] = [
     id: "empty",
     beat: "00:00",
     line: "The tables look empty.",
-    sub: "Berlin Mitte · 18:42 · dinner service",
+    sub: "Soho · New York · 18:42 · dinner service",
     dwell: 3200,
   },
   {
@@ -76,7 +76,7 @@ const BEATS: Beat[] = [
     id: "wait",
     beat: "00:15",
     line: "Wait 12 minutes.",
-    sub: "€620 expected incremental contribution vs seat-now",
+    sub: "$620 expected incremental contribution vs seat-now",
     green: true,
     dwell: 3800,
   },
@@ -99,13 +99,13 @@ const BEATS: Beat[] = [
     id: "observe",
     beat: "00:27",
     line: "Reality observed.",
-    sub: "€590 incremental contribution · peak held",
+    sub: "$590 incremental contribution · peak held",
     dwell: 3600,
   },
   {
     id: "verify",
     beat: "00:31",
-    line: "€590 verified.",
+    line: "$590 verified.",
     sub: "STRONGLY_ATTRIBUTED · Decision Record closed",
     green: true,
     dwell: 3800,
@@ -206,7 +206,7 @@ function ProductTourOverlay({
             </p>
           ) : null}
           {isLast ? (
-            <NextLink href="/demo" className="rx-tour-close-cta" onClick={onClose}>
+            <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-tour-close-cta" onClick={onClose}>
               Put one operating problem on RADR →
             </NextLink>
           ) : null}

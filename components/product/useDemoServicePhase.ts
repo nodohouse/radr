@@ -8,16 +8,17 @@
 import { useCallback, useEffect, useState } from "react";
 import type { ServicePhase } from "@/lib/radr/servicePhase";
 import { demoServicePhaseAt } from "@/lib/radr/servicePhase";
-import { DEMO_AS_OF_ISO } from "@/lib/radr/demoClock";
+import { DEMO_AS_OF_ISO, LIVE_SCENARIO } from "@/lib/radr/demoClock";
 
 const KEY = "radr.demo.servicePhase";
 const EVT = "radr-demo-phase";
 
+/** Dinner-day clocks (18 Sep) — Live lens. Morning OS still uses DEMO_AS_OF. */
 const PHASE_CLOCK: Record<ServicePhase, string> = {
-  PRE_SHIFT: "2026-08-19T16:15:00+02:00",
-  LIVE: DEMO_AS_OF_ISO,
-  CLOSING: "2026-08-19T22:15:00+02:00",
-  POST_SHIFT: "2026-08-19T23:15:00+02:00",
+  PRE_SHIFT: "2026-09-18T15:38:00+02:00", // 1h22m to open 17:00
+  LIVE: LIVE_SCENARIO.timestampIso,
+  CLOSING: "2026-09-18T22:15:00+02:00",
+  POST_SHIFT: "2026-09-18T23:15:00+02:00",
 };
 
 function readStored(): ServicePhase | null {
@@ -59,8 +60,8 @@ export function useDemoServicePhase(enabled: boolean) {
     const stored = readStored();
     if (stored) setOverride(stored);
     else {
-      setOverride("PRE_SHIFT");
-      writeStored("PRE_SHIFT");
+      setOverride("LIVE");
+      writeStored("LIVE");
     }
     setReady(true);
 

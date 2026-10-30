@@ -1,9 +1,26 @@
 /**
  * Venue profiles: single source of truth for demo hospitality economics.
  * Capacity, currency, and typical ranges drive pulse / reservations / floor.
+ * Location geography/currency overlays come from DemoEstateRegistry.
  */
 
-export type CurrencyCode = "EUR" | "GBP" | "USD" | "JPY" | "SGD" | "AED" | "AUD";
+import {
+  getEstateEntity,
+  type DemoEstateCurrency,
+} from "@/lib/radr/demo/estateRegistry";
+
+export type CurrencyCode =
+  | "EUR"
+  | "GBP"
+  | "USD"
+  | "JPY"
+  | "SGD"
+  | "AED"
+  | "AUD"
+  | "HKD"
+  | "MXN"
+  | "BRL"
+  | "ZAR";
 
 export type VenueProfile = {
   id: string;
@@ -23,13 +40,14 @@ export type VenueProfile = {
   sections: { id: string; name: string; seats: number }[];
 };
 
-export const GROUP_REPORTING_CURRENCY: CurrencyCode = "EUR";
+/** Group / CFO reporting currency — global estate reports in USD. */
+export const GROUP_REPORTING_CURRENCY: CurrencyCode = "USD";
 
 export const VENUE_PROFILES: Record<string, VenueProfile> = {
   loc_ber: {
     id: "loc_ber",
-    name: "Berlin Mitte",
-    city: "Berlin",
+    name: "Soho · New York",
+    city: "New York",
     country: "Germany",
     countryCode: "DE",
     currency: "EUR",
@@ -49,8 +67,8 @@ export const VENUE_PROFILES: Record<string, VenueProfile> = {
   },
   loc_ber_kreuz: {
     id: "loc_ber_kreuz",
-    name: "Berlin Kreuzberg",
-    city: "Berlin",
+    name: "West Hollywood · Los Angeles",
+    city: "New York",
     country: "Germany",
     countryCode: "DE",
     currency: "EUR",
@@ -217,8 +235,8 @@ export const VENUE_PROFILES: Record<string, VenueProfile> = {
   },
   loc_ams: {
     id: "loc_ams",
-    name: "Amsterdam Central",
-    city: "Amsterdam",
+    name: "Mercer House",
+    city: "New York",
     country: "Netherlands",
     countryCode: "NL",
     currency: "EUR",
@@ -280,15 +298,66 @@ export const VENUE_PROFILES: Record<string, VenueProfile> = {
   },
 };
 
+const ESTATE_CURRENCY_TO_CODE: Record<DemoEstateCurrency, CurrencyCode> = {
+  USD: "USD",
+  EUR: "EUR",
+  GBP: "GBP",
+  AED: "AED",
+  SGD: "SGD",
+  JPY: "JPY",
+  HKD: "HKD",
+  AUD: "AUD",
+  MXN: "MXN",
+  BRL: "BRL",
+  ZAR: "ZAR",
+};
+
+/** Profiles keyed by product location IDs (alias → catalog profile economics). */
+const CANON_PROFILE_ALIAS: Record<string, string> = {
+  loc_berlin_mitte: "loc_nyc",
+  loc_berlin_kreuzberg: "loc_nyc_wvill",
+  loc_hamburg_hafen: "loc_sf",
+  loc_frankfurt_westend: "loc_sf",
+  loc_munich_altstadt: "loc_lon",
+  loc_koln_ehrenfeld: "loc_dxb",
+  loc_dusseldorf_medienhafen: "loc_sin",
+  loc_stuttgart_mitte: "loc_tyo",
+  loc_hk_central: "loc_sin",
+  loc_sydney_surry: "loc_syd",
+  loc_canal_house: "loc_ams",
+  loc_ams_harbour: "loc_sf",
+  loc_schiphol_gate: "loc_sf",
+  loc_lisbon_alfama: "loc_lon",
+  loc_berlin_mitte_hotel: "loc_dxb",
+  loc_paris_opera: "loc_sin",
+  loc_london_clerkenwell: "loc_tyo",
+  loc_munich_airport: "loc_sin",
+  loc_sydney_surry_hotel: "loc_syd",
+  loc_cape_town_waterfront: "loc_dxb",
+};
+
 export function getVenueProfile(locationId: string): VenueProfile {
-  return VENUE_PROFILES[locationId] ?? VENUE_PROFILES.loc_ber;
+  const estate = getEstateEntity(locationId);
+  const aliasId = CANON_PROFILE_ALIAS[locationId] ?? locationId;
+  const base = VENUE_PROFILES[aliasId] ?? VENUE_PROFILES.loc_nyc;
+  if (!estate) return base;
+  return {
+    ...base,
+    id: locationId,
+    name: estate.name,
+    city: estate.city,
+    country: estate.country,
+    countryCode: estate.countryCode,
+    currency: ESTATE_CURRENCY_TO_CODE[estate.currency],
+    locale: estate.locale,
+  };
 }
 
 export function venueSeatTotal(profile: VenueProfile): number {
   return profile.sections.reduce((s, sec) => s + sec.seats, 0);
 }
 
-/** Berlin Mitte: yesterday closed day (coherent demo). */
+/** Soho · New York: yesterday closed day (coherent demo). */
 export const BERLIN_YESTERDAY = {
   locationId: "loc_ber",
   revenue: 7_812,
@@ -302,7 +371,7 @@ export const BERLIN_YESTERDAY = {
   laborVsPlanPts: -0.4,
 } as const;
 
-/** Berlin Mitte: tonight operating scenario. */
+/** Soho · New York: tonight operating scenario. */
 export const BERLIN_TONIGHT_OPS = {
   locationId: "loc_ber",
   reservationCount: 46,

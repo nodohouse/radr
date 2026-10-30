@@ -78,7 +78,7 @@ describe("Ask RADR intent routing — staffing acceptance", () => {
 
     expect(a.responseKind).toBe("staffing_requirement");
     expect(a.verdict).toMatch(/YES/i);
-    expect(a.summary + a.title + a.answer).toMatch(/Berlin Mitte/i);
+    expect(a.summary + a.title + a.answer).toMatch(/Soho · New York/i);
     expect(a.summary + a.title).toMatch(/\+1|FOH|19:15/i);
     expect(a.impactEuro).toBe(290);
     expect(a.visualization?.type).toBe("demandCapacity");

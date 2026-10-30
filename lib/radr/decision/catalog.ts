@@ -50,7 +50,7 @@ const tunaWhyDecide = {
     "Supplier fallback remains available until 17:30",
   ],
   locationDna:
-    "At Berlin Mitte, under these peak conditions, feature-swap-first historically preceded higher protected contribution than supplier-first.",
+    "At Soho · New York, under these peak conditions, feature-swap-first historically preceded higher protected contribution than supplier-first.",
 };
 
 const hotelWhy = {
@@ -140,7 +140,7 @@ export const HERO_BY_VERTICAL: Record<DecisionVertical, Decision> = {
   restaurant: {
     id: DECISION_IDS.tuna,
     vertical: "restaurant",
-    property: "Berlin Mitte",
+    property: "Soho · New York",
     phase: "pre",
     phaseLabel: "Pre-shift · Dinner",
     contextLine: "Peak 19:30 · supplier shortfall",
@@ -167,7 +167,7 @@ export const HERO_BY_VERTICAL: Record<DecisionVertical, Decision> = {
         id: "supplier_first",
         title: "Secure 6 portions now",
         netVsDoNothing: 1520,
-        note: "Supplier-first · historically 62% at Berlin Mitte",
+        note: "Supplier-first · historically 62% at Soho · New York",
       },
       {
         id: "feature_swap",
@@ -185,7 +185,7 @@ export const HERO_BY_VERTICAL: Record<DecisionVertical, Decision> = {
   hotel: {
     id: DECISION_IDS.ota,
     vertical: "hotel",
-    property: "Canal House · Amsterdam",
+    property: "Mercer House · New York",
     phase: "pre",
     phaseLabel: "Start of day · House",
     contextLine: "89% occupancy · 12 arrivals",
@@ -415,7 +415,7 @@ export const VERIFIED_BY_VERTICAL: Record<DecisionVertical, Decision> = {
 export const RAIN_SIMULATE: Decision = {
   id: DECISION_IDS.rain,
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   phase: "live",
   phaseLabel: "Live · Weather",
   contextLine: "Heavy rain · terrace 36 covers",
@@ -487,7 +487,7 @@ export const RAIN_SIMULATE: Decision = {
     confidence: { point: 78, low: 69, high: 84 },
     assumptions: ["One FOH can move without collapsing the floor"],
     locationDna:
-    "At Berlin Mitte, on 38 comparable rainy dinners at this location, a full indoor + delivery replan historically preceded the highest net vs doing nothing.",
+    "At Soho · New York, on 38 comparable rainy dinners at this location, a full indoor + delivery replan historically preceded the highest net vs doing nothing.",
   },
   status: "needs_you",
   payloadNote: PAYLOAD,
@@ -498,7 +498,7 @@ export const HIDDEN_BY_VERTICAL: Record<DecisionVertical, Decision> = {
   restaurant: {
     id: DECISION_IDS.hiddenMenu,
     vertical: "restaurant",
-    property: "Berlin Mitte",
+    property: "Soho · New York",
     phase: "day",
     phaseLabel: "Learn · Menu",
     contextLine: "Peak prominence · this week",
@@ -546,7 +546,7 @@ export const HIDDEN_BY_VERTICAL: Record<DecisionVertical, Decision> = {
       confidence: { point: 76, low: 70, high: 82 },
       assumptions: ["Kitchen capacity holds under re-weight"],
       locationDna:
-        "At Berlin Mitte, under peak pressure, shifting prominence toward higher contribution-per-minute dishes historically preceded stronger peak economics.",
+        "At Soho · New York, under peak pressure, shifting prominence toward higher contribution-per-minute dishes historically preceded stronger peak economics.",
     },
     status: "needs_you",
     payloadNote: PAYLOAD,
@@ -556,7 +556,7 @@ export const HIDDEN_BY_VERTICAL: Record<DecisionVertical, Decision> = {
   hotel: {
     id: DECISION_IDS.hiddenMix,
     vertical: "hotel",
-    property: "Canal House · Amsterdam",
+    property: "Mercer House · New York",
     phase: "day",
     phaseLabel: "Learn · Mix",
     contextLine: "High-demand nights · this week",
@@ -613,7 +613,7 @@ export const HIDDEN_BY_VERTICAL: Record<DecisionVertical, Decision> = {
 export const TABLE_RECOVERED: Decision = {
   id: DECISION_IDS.tableRecover,
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   phase: "after",
   phaseLabel: "After · Recovery",
   contextLine: "Table 8 · earlier tonight",
@@ -648,7 +648,7 @@ export const TABLE_RECOVERED: Decision = {
     confidence: { point: 81, low: 74, high: 87 },
     assumptions: [],
     locationDna:
-      "At Berlin Mitte, prepared waitlist recovery historically preceded recovered table contribution after late cancels.",
+      "At Soho · New York, prepared waitlist recovery historically preceded recovered table contribution after late cancels.",
   },
   payloadNote: PAYLOAD,
   proof: [

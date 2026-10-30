@@ -57,7 +57,7 @@ export function WeatherOperatingStrip({
       aria-label="Operating brief"
     >
       <header className="rp-wx-brief-head">
-        <p className="rp-wx-brief-kicker">Berlin Mitte · weather</p>
+        <p className="rp-wx-brief-kicker">Soho · New York · weather</p>
         <p className="rp-wx-brief-cond">
           <strong>{wx.highC}°C</strong>
           <span> {wx.summary}</span>

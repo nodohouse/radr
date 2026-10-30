@@ -55,7 +55,7 @@ export const HERO_CYCLES: readonly HeroCycleScenario[] = [
   {
     id: "labor",
     key: "labor",
-    location: "Berlin Mitte",
+    location: "Soho · New York",
     time: "7:07 PM",
     window: "7:15-8:30 PM",
     currency: "EUR",

@@ -216,12 +216,12 @@ describe("phase 12–17 platform", () => {
     const gm = {
       userId: "u1",
       organizationId: "org",
-      role: "GENERAL_MANAGER" as const,
-      locationIds: ["loc_ber"],
+      roleId: "role_gm",
+      locationIds: ["loc_ber"] as string[],
     };
     expect(canAccessLocation(gm, "loc_ber")).toBe(true);
     expect(canAccessLocation(gm, "loc_ams")).toBe(false);
-    expect(hasPermission(gm, "butler:read")).toBe(true);
+    expect(hasPermission(gm, "butler.use")).toBe(true);
   });
 
   it("validates onboarding coverage", () => {
@@ -258,7 +258,7 @@ describe("phase 12–17 platform", () => {
       userId: "u1",
       urgency: "ACT_NOW",
       title: "Peak staffing",
-      locationName: "Berlin Mitte",
+      locationName: "Soho · New York",
     });
     expect(note?.interrupt).toBe(true);
     expect(
@@ -266,7 +266,7 @@ describe("phase 12–17 platform", () => {
         userId: "u1",
         urgency: "WATCH",
         title: "Watch item",
-        locationName: "Berlin Mitte",
+        locationName: "Soho · New York",
       }),
     ).toBeNull();
   });

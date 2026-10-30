@@ -112,7 +112,7 @@ export const DEMO_MENU_ITEMS: DemoMenuItem[] = [
       resource: "KITCHEN_MINUTE",
       contributionEuro: 11.0,
       unitsConsumed: 4,
-      contributionPerUnit: 2.75,
+      contributionPerUnit: 3.65,
       currency: "EUR",
       window: "19:00–20:30 peak",
       comparedToPeerPct: 34,
@@ -355,7 +355,6 @@ export const DEMO_MENU_ITEMS: DemoMenuItem[] = [
       demo: true,
     },
     classicMenuClass: "PUZZLE",
-    imageSrc: "/menu/menu-salmon-teriyaki.jpg",
     demo: true,
   },
   {
@@ -394,7 +393,7 @@ export const DEMO_MENU_ITEMS: DemoMenuItem[] = [
       demo: true,
     },
     classicMenuClass: "DOG",
-    imageSrc: "/menu/menu-chicken.jpg",
+    imageSrc: "/menu/menu-burger.jpg",
     demo: true,
   },
   {

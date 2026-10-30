@@ -22,7 +22,7 @@ import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { displayDecisionId, DECISION_IDS } from "@/lib/radr/decision/ids";
 import { IntelligenceCanvas } from "@/components/product/canvas/IntelligenceCanvas";
 
-const TIMES = ["18:00", "18:42", "19:00", "20:00"] as const;
+const TIMES = ["18:00", "19:48", "19:00", "20:00"] as const;
 const MODES: { id: ServiceMapMode; label: string }[] = [
   { id: "pressure", label: "Pressure" },
   { id: "occupancy", label: "Occupancy" },
@@ -59,7 +59,7 @@ export function ServiceFloorCanvas() {
   const time = (
     TIMES.includes(connected.serviceTime as (typeof TIMES)[number])
       ? connected.serviceTime
-      : "18:42"
+      : "19:48"
   ) as (typeof TIMES)[number];
   const [mode, setMode] = useState<ServiceMapMode>("pressure");
   const [inspectId, setInspectId] = useState<string | null>("t6");
@@ -67,14 +67,14 @@ export function ServiceFloorCanvas() {
   const snap = useMemo(() => {
     const shots = berlinServiceSnapshots();
     if (time === "19:00" && path === "seat") return shots["19:00_seat"]!;
-    return shots[time] ?? shots["18:42"]!;
+    return shots[time] ?? shots["19:48"]!;
   }, [time, path]);
 
   const inspected = snap.units.find((u) => u.id === inspectId);
 
-  // Ghost inbound for 19:00 while viewing 18:42
+  // Ghost inbound for 19:00 while viewing NOW (19:48)
   const ghosts =
-    time === "18:42"
+    time === "19:48"
       ? (berlinServiceSnapshots()["19:00"]?.units.filter(
           (u) => u.state === "inbound" || u.state === "held",
         ) ?? [])
@@ -82,7 +82,7 @@ export function ServiceFloorCanvas() {
 
   return (
     <IntelligenceCanvas
-      kicker={`${snap.at} · ${path === "wait" ? "WAIT 12M" : "SEAT NOW"} · DEMO`}
+      kicker={`${snap.at} · ${path === "wait" ? "Wait 12 min" : "Seat now"}`}
       title="Architectural capacity — empty tables are not free capacity"
       inspector={
         inspected ? (
@@ -199,7 +199,7 @@ export function ServiceFloorCanvas() {
         </text>
 
         {/* Arrival wave — future pressure */}
-        {time === "18:42" ? (
+        {time === "19:48" ? (
           <g className="rp-svc-wave" aria-hidden="true">
             <path
               d="M8 68 Q30 58 50 62 T92 48"
@@ -209,7 +209,7 @@ export function ServiceFloorCanvas() {
               strokeDasharray="1.2 1"
             />
             <text className="rp-svc-wave-t" x="52" y="70">
-              Arrival 19:10–19:35 · 42 covers
+              Peak 20:10–20:35 · pressure inbound
             </text>
           </g>
         ) : null}

@@ -46,24 +46,10 @@ export type RoleView =
   | "revenue_manager"
   | "housekeeping_manager";
 
-/** Migrate persisted demo prefs from pre-role-aware ids. */
+/** Migrate persisted demo prefs from pre-role-aware ids. Preserve distinct lenses. */
 export function migrateRoleView(raw: unknown): RoleView {
   if (raw === "procurement") return "finance";
   if (raw === "operations") return "coo";
-  if (raw === "hotel_gm" || raw === "revenue_manager") return "revenue_manager";
-  if (raw === "cfo" || raw === "finance") return "cfo";
-  if (raw === "coo" || raw === "regional" || raw === "owner") return "coo";
-  if (
-    raw === "gm" ||
-    raw === "fb_operator" ||
-    raw === "head_chef" ||
-    raw === "kitchen" ||
-    raw === "host" ||
-    raw === "server" ||
-    raw === "housekeeping_manager"
-  ) {
-    return "gm";
-  }
   if (
     typeof raw === "string" &&
     [

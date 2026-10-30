@@ -15,7 +15,7 @@ import type { RoleView } from "@/lib/product/types";
 const base = glanceInputFromDemo({
   role: "gm",
   phase: "LIVE",
-  locationName: "Berlin Mitte",
+  locationName: "Soho · New York",
   expectedCovers: 142,
   expectedWalkIns: 26,
   projectedRevenue: 9480,

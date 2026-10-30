@@ -1,6 +1,6 @@
 {
   "product": "Platform",
-  "solutions": "Where value leaks",
+  "solutions": "Lösungen",
   "industries": "Branchen",
   "how": "How it works",
   "pricing": "Pricing",
@@ -54,14 +54,15 @@
       }
     },
     "solutions": {
-      "title": "Where value leaks",
-      "lead": "Economic intelligence classes — not modules.",
+      "title": "Lösungen",
+      "lead": "Für Hospitality — Restaurants, Hotels und Gruppen.",
       "columns": {
         "classes": "Where value leaks",
         "deeper": "Deeper",
         "territories": "Territories",
         "operation": "Industries",
-        "priority": "Territories"
+        "priority": "Territories",
+        "hospitality": "Hospitality"
       },
       "classes": {
         "supplier": {
@@ -140,6 +141,24 @@
         "recover": {
           "title": "RECOVER",
           "desc": "Reclaim value before it disappears."
+        }
+      },
+      "hospitality": {
+        "restaurants": {
+          "label": "Restaurants",
+          "desc": "Service, Küche, Gäste, Personal, Beitrag."
+        },
+        "hotels": {
+          "label": "Hotels",
+          "desc": "Zimmer, Ankünfte, Umsatz, Bereitschaft, Kanäle."
+        },
+        "leaks": {
+          "label": "Wo Wert verloren geht",
+          "desc": "Lieferanten, Abstimmung, Kosten, Einkauf, verderblich."
+        },
+        "groups": {
+          "label": "Hospitality-Gruppen",
+          "desc": "Multi-Standort und gemischte Portfolios."
         }
       }
     },
@@ -293,16 +312,28 @@
             "memorySurface": {
               "label": "Memory",
               "desc": "Patterns that earn Autopilot."
+            },
+            "live": {
+              "label": "Live",
+              "desc": "What is happening now — pressure, objects, intervene."
+            },
+            "operations": {
+              "label": "Operations",
+              "desc": "Can we run today successfully."
+            },
+            "intelligence": {
+              "label": "Intelligence",
+              "desc": "Why this is happening — drivers and economics."
+            },
+            "dataHealth": {
+              "label": "Data Health",
+              "desc": "Evidence health gates allowed action."
             }
           }
         },
         "trust": {
           "title": "Trust",
           "items": {
-            "autopilot": {
-              "label": "Autopilot",
-              "desc": "Suggest → Stage → Auto within policy."
-            },
             "policies": {
               "label": "Policies",
               "desc": "Always-ask for material commitments."
@@ -439,5 +470,6 @@
   "resources": "Ressourcen",
   "controlCenter": "Control Center",
   "blog": "Blog",
-  "footerValueLeaks": "Where value leaks"
+  "footerValueLeaks": "Where value leaks",
+  "valueCalculator": "Wertkalkulator"
 }

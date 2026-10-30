@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte floor: 72 seats across Main / Bar / Terrace.
+ * Soho · New York floor: 72 seats across Main / Bar / Terrace.
  * Table seat sum must equal venue profile seats (72).
  *
  * Geometry rule: every section has a reserved header band
@@ -25,7 +25,7 @@ const HEADER = SECTION_HEADER_HEIGHT + SECTION_HEADER_GAP; // 86
 export const BERLIN_FLOOR: FloorPlan = {
   id: "floor_ber",
   locationId: "loc_ber",
-  name: "Berlin Mitte",
+  name: "Soho · New York",
   width: 680,
   height: 520,
   seats: 72,

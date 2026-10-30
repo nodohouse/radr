@@ -1,0 +1,349 @@
+/**
+ * Locations — portfolio composition.
+ * Order: estate pulse → Performance × Exposure → Attention → economics → estate learning.
+ * Real column tracks, right-aligned tabular numerals. Tokens: app/radr-product-tokens.css
+ */
+
+.rp-loc-portfolio {
+  --lc-ink: var(--rp-text-primary, #12140f);
+  --lc-muted: var(--rp-text-secondary, #5e645c);
+  --lc-quiet: var(--rp-text-quiet, #8a8f86);
+  --lc-hair: var(--rp-border, rgba(18, 20, 15, 0.09));
+  font-family: var(--rp-font-ui, "Instrument Sans", system-ui, sans-serif);
+}
+
+.rp-loc-portfolio > * + * {
+  margin-top: var(--rp-space-5, 1.5rem);
+}
+
+.rp-loc-portfolio[data-persona="portfolio"] .rp-loc-section-head {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.rp-loc-zone-head h2 {
+  margin: 0;
+  font-size: var(--rp-text-lg, 1.125rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.rp-loc-zone-head p {
+  margin: 0.2rem 0 0;
+  font-size: var(--rp-text-sm, 0.75rem);
+  color: var(--lc-muted);
+}
+
+.rp-loc-zone-tag {
+  margin: 0 0 0.25rem;
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--rp-text-xs, 0.625rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lc-quiet);
+}
+
+.rp-loc-health {
+  padding: 1rem 1.1rem;
+  border-radius: var(--rp-radius-lg, 0.85rem);
+  border: 1px solid var(--lc-hair);
+  background: var(--rp-surface-raised, #fff);
+}
+
+.rp-loc-health[data-health="warn"] {
+  border-color: color-mix(in srgb, var(--rp-watch, #b07a3a) 35%, var(--lc-hair));
+  box-shadow: inset 3px 0 0 var(--rp-watch, #b07a3a);
+}
+
+.rp-loc-health[data-health="bad"] {
+  border-color: color-mix(in srgb, var(--rp-adverse, #a84a3c) 35%, var(--lc-hair));
+  box-shadow: inset 3px 0 0 var(--rp-adverse, #a84a3c);
+}
+
+.rp-loc-health-line {
+  margin: 0.5rem 0 0;
+  font-size: var(--rp-text-md, 0.875rem);
+  color: var(--lc-ink);
+}
+
+.rp-loc-health-link {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: var(--rp-text-sm, 0.75rem);
+  font-weight: 560;
+  color: var(--rp-green, #1a5c3a);
+  text-decoration: none;
+}
+
+.rp-loc-health-link:hover {
+  text-decoration: underline;
+}
+
+.rp-loc-portfolio[data-persona="gm-single"] .rp-loc-needs {
+  opacity: 0.92;
+  border-style: dashed;
+}
+
+.rp-loc-section-head {
+  padding-top: var(--rp-space-3, 0.75rem);
+  border-top: 1px solid var(--lc-hair);
+}
+
+.rp-loc-section-head h2 {
+  margin: 0.15rem 0 0;
+  font-size: var(--rp-text-lg, 1.125rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--lc-ink);
+}
+
+/* ——— Economics table ——— */
+.rp-loc-portfolio .rp-loc-table-scroll {
+  border-color: var(--lc-hair);
+  border-radius: var(--rp-radius-lg, 0.85rem);
+  background: var(--rp-surface-raised, #fff);
+}
+
+.rp-loc-portfolio .rp-loc-table-scroll .rp-loc-table {
+  min-width: 36rem;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-head,
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row {
+  display: grid;
+  grid-template-columns:
+    minmax(10rem, 1.8fr)   /* location */
+    minmax(5.5rem, 1fr)    /* revenue */
+    minmax(5.5rem, 1fr)    /* contribution */
+    minmax(5rem, 0.9fr)    /* exposure */
+    minmax(6rem, 1fr);     /* attention */
+  column-gap: 0.85rem;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  border-bottom: 0;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-head {
+  background: var(--rp-surface-1, #fbfaf6);
+  border-bottom: 1px solid var(--lc-hair);
+  padding-block: 0.55rem;
+  align-items: end;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-head span {
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--rp-text-xs, 0.625rem);
+  letter-spacing: 0.06em;
+  color: var(--lc-quiet);
+  white-space: nowrap;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-block + .rp-loc-table-block,
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-block {
+  border-bottom: 1px solid var(--lc-hair);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-block:last-child {
+  border-bottom: 0;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row {
+  font-size: var(--rp-text-sm, 0.75rem);
+  color: var(--lc-ink);
+  transition: background var(--rp-dur-fast, 140ms) var(--rp-ease, ease);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row:hover,
+.rp-loc-portfolio .rp-loc-table-block[data-open="true"] .rp-loc-table-row {
+  background: color-mix(in srgb, var(--rp-surface-2, #efebe3) 45%, transparent);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row:focus-visible {
+  outline: 2px solid var(--rp-green-live, #00a85a);
+  outline-offset: -2px;
+}
+
+/* Numeric columns: right-aligned, tabular, never wrapping */
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row span[role="cell"]:not(.rp-loc-table-name):not([data-col="attention"]),
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-head span:not([data-col="location"]):not([data-col="attention"]) {
+  text-align: right;
+  justify-self: stretch;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row span[data-col="revenue"],
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row span[data-col="contrib"] {
+  font-weight: 560;
+  font-size: var(--rp-text-md, 0.875rem);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich [data-col="vs-fcst"],
+.rp-loc-portfolio .rp-loc-table-rich [data-col="vs-plan"] {
+  color: var(--rp-adverse, #a84a3c);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich [data-col="vs-fcst"][data-pos="true"],
+.rp-loc-portfolio .rp-loc-table-rich [data-col="vs-plan"][data-pos="true"] {
+  color: var(--rp-green-live, #00a85a);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich [data-col="refunds"][data-tone="neg"] {
+  color: var(--lc-muted);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich [data-col="verified"][data-verified="true"] {
+  color: var(--rp-verified, #00a85a);
+  font-weight: 560;
+}
+
+/* Location: name over city, truncating — never flows into the next cell */
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-name strong {
+  max-width: 100%;
+  font-size: var(--rp-text-md, 0.875rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-name em {
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--rp-text-xs, 0.625rem);
+  letter-spacing: 0.04em;
+  color: var(--lc-quiet);
+}
+
+/* Attention: quiet text chip, left-aligned */
+.rp-loc-portfolio .rp-loc-table-rich [data-col="attention"] {
+  text-align: left;
+  justify-self: start;
+  white-space: nowrap;
+  font-size: var(--rp-text-xs, 0.625rem);
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lc-quiet);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row [data-col="attention"] {
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich [data-col="attention"][data-state="needs"] {
+  background: color-mix(in srgb, var(--rp-watch, #b07a3a) 14%, transparent);
+  color: var(--rp-watch, #b07a3a);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich [data-col="attention"][data-state="action"] {
+  background: var(--rp-surface-2, #efebe3);
+  color: var(--lc-muted);
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-head [data-col="attention"] {
+  padding: 0;
+  background: none;
+}
+
+/* Sticky location column inherits surface */
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row span[data-col="location"] {
+  background: transparent;
+  position: static;
+}
+
+.rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-head span[data-col="location"] {
+  position: static;
+  background: transparent;
+}
+
+/* ——— Estate watchlist: tracks + right-aligned € ——— */
+.rp-loc-portfolio .rp-loc-pulse li a {
+  grid-template-columns: minmax(0, 1.6fr) minmax(5.5rem, 0.8fr) minmax(5.5rem, 0.8fr) 1.25rem 0.75rem;
+  column-gap: 1rem;
+}
+
+.rp-loc-portfolio .rp-loc-pulse-rev,
+.rp-loc-portfolio .rp-loc-pulse-contrib {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.rp-loc-portfolio .rp-loc-pulse-name em {
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--rp-text-xs, 0.625rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rp-loc-expand-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+  gap: 0.55rem 0.85rem;
+  margin: 0 0 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--lc-hair, color-mix(in srgb, #0a0d0b 8%, transparent));
+}
+
+.rp-loc-expand-kpis div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.rp-loc-expand-kpis dt {
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lc-quiet, #626a65);
+}
+
+.rp-loc-expand-kpis dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.875rem;
+  font-weight: 560;
+  color: var(--lc-ink, #0a0d0b);
+}
+
+.rp-loc-expand-kpis dd[data-pos="true"] {
+  color: color-mix(in srgb, #00a85a 70%, #0a0d0b);
+}
+
+.rp-loc-expand-kpis dd[data-tone="neg"] {
+  color: color-mix(in srgb, #a33a3a 75%, #0a0d0b);
+}
+
+.rp-loc-expand-kpis dd[data-verified="true"] {
+  color: color-mix(in srgb, #00a85a 80%, #0a0d0b);
+}
+
+/* ——— Narrow: keep the five first-level columns readable ——— */
+@media (max-width: 1199px) {
+  .rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-head,
+  .rp-loc-portfolio .rp-loc-table-rich .rp-loc-table-row {
+    grid-template-columns:
+      minmax(8.5rem, 1.5fr)
+      minmax(4.75rem, 1fr)
+      minmax(4.75rem, 1fr)
+      minmax(4.25rem, 0.9fr)
+      minmax(5rem, 1fr);
+    padding-inline: 0.85rem;
+  }
+  .rp-loc-portfolio .rp-loc-table-scroll .rp-loc-table {
+    min-width: 0;
+  }
+}

@@ -1,0 +1,2279 @@
+{
+  "capturedAt": "2026-10-05T09:52:42.543Z",
+  "hits": [
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "navigate",
+      "name": "/app?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "navigate",
+      "name": "/app/decisions?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "navigate",
+      "name": "/app/decisions/dec_peak_berlin?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/decisions/dec_peak_berlin?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "navigate",
+      "name": "/app/service?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "restaurant-ops",
+      "name": "FLOOR tab",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/service?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true,
+      "detail": "hydration-watch×1"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "navigate",
+      "name": "/app/house?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/house?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "navigate",
+      "name": "/app/intelligence?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/intelligence?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "navigate",
+      "name": "/app/memory?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/memory?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "navigate",
+      "name": "/app/value?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/value?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "navigate",
+      "name": "/app/locations?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/locations?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "navigate",
+      "name": "/app/connections?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/connections?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "navigate",
+      "name": "/app/data-health?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/data-health?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "navigate",
+      "name": "/app/settings?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 3 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 3 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "restaurant",
+      "route": "/app/settings?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "navigate",
+      "name": "/app?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "navigate",
+      "name": "/app/decisions?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "navigate",
+      "name": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "navigate",
+      "name": "/app/service?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "hotel-ops",
+      "name": "READINESS tab",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/service?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true,
+      "detail": "hydration-watch×1"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "navigate",
+      "name": "/app/house?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/house?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "navigate",
+      "name": "/app/intelligence?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/intelligence?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true,
+      "detail": "hydration-watch×1"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "navigate",
+      "name": "/app/memory?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/memory?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "navigate",
+      "name": "/app/value?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/value?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "navigate",
+      "name": "/app/locations?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/locations?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true,
+      "detail": "hydration-watch×1"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "navigate",
+      "name": "/app/connections?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/connections?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "navigate",
+      "name": "/app/data-health?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/data-health?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "navigate",
+      "name": "/app/settings?stay=1",
+      "ok": true,
+      "detail": "status 200"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "shell",
+      "name": "AppShell rail+GOH",
+      "ok": true,
+      "detail": "rail=true goh=true"
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "legacy",
+      "name": "No More button (desktop)",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "RADR Control Center",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Center, 4 signals need your judgment",
+      "href": "/app",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Decisions, 4 need judgment",
+      "href": "/app/decisions",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Service",
+      "href": "/app/service",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "BOH, 1 house gap needs you",
+      "href": "/app/house",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Intelligence",
+      "href": "/app/intelligence",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Memory",
+      "href": "/app/memory",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "rail-link",
+      "name": "Value",
+      "href": "/app/value",
+      "ok": true
+    },
+    {
+      "world": "hotel",
+      "route": "/app/settings?stay=1",
+      "kind": "console",
+      "name": "no hard pageerror",
+      "ok": true
+    }
+  ]
+}

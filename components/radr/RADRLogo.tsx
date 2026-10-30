@@ -1,10 +1,11 @@
 /**
- * Single RADR wordmark entry. Use this everywhere (landing, product, auth).
- * Alias of the canonical RadrWordmark + delta glyph.
+ * Single RADR logo entry — canonical SVG assets via RadrLogo.
  */
 export {
-  RadrWordmark as RADRLogo,
-  RadrWordmark,
   RadrLogo,
+  RADRLogo,
+  BrandLogo,
   BrandMark,
-} from "@/components/radr/RadrWordmark";
+} from "@/components/brand/RadrLogo";
+
+export { RadrWordmark } from "@/components/radr/RadrWordmark";

@@ -21,23 +21,45 @@ const PAYLOAD =
 
 function mapOptions(
   c: typeof CANON_TABLE | typeof CANON_SUPPLIER | typeof CANON_PLAYBOOK,
+  verified = false,
 ) {
-  return c.scenarios.map((s) => ({
-    id: s.id,
-    title: s.title,
-    expectedContributionEuro: s.expectedContributionEuro,
-    economicMetrics: s.economicMetrics,
-    economicEffectNote: s.economicEffectNote,
-    guestImpact: s.guestImpact,
-    operationalRisk: s.operationalRisk,
-    riskLevel: s.riskLevel ?? s.operationalRisk,
-    mainRiskDescription: s.mainRiskDescription,
-    confidence: s.confidence,
-    timeToResult: "Service",
-    note: s.note,
-    recommended: s.recommended,
-    isNoAction: s.isNoAction,
-  }));
+  return c.scenarios.map((s) => {
+    let economicMetrics = s.economicMetrics;
+    if (
+      verified &&
+      s.recommended &&
+      "verifiedOutcomeNote" in c &&
+      c.verifiedOutcomeNote &&
+      economicMetrics?.length
+    ) {
+      economicMetrics = economicMetrics.map((m) =>
+        m.status === "POTENTIAL" || m.status === "PENDING"
+          ? {
+              ...m,
+              status: "VERIFIED" as const,
+              label: "Recovered variance",
+              baseline: c.verifiedOutcomeNote,
+            }
+          : m,
+      );
+    }
+    return {
+      id: s.id,
+      title: s.title,
+      expectedContributionEuro: s.expectedContributionEuro,
+      economicMetrics,
+      economicEffectNote: s.economicEffectNote,
+      guestImpact: s.guestImpact,
+      operationalRisk: s.operationalRisk,
+      riskLevel: s.riskLevel ?? s.operationalRisk,
+      mainRiskDescription: s.mainRiskDescription,
+      confidence: s.confidence,
+      timeToResult: "Service",
+      note: s.note,
+      recommended: s.recommended,
+      isNoAction: s.isNoAction,
+    };
+  });
 }
 
 export function buildTableRecoverDecisionRecord(
@@ -47,7 +69,7 @@ export function buildTableRecoverDecisionRecord(
   const options = mapOptions(c);
   const base: DecisionRecord = {
     id: DECISION_IDS.tableRecover,
-    organizationId: "org_northstar",
+    organizationId: "org_northstar_restaurants",
     locationId: "loc_berlin_mitte",
     operatingUnitId: "ou_berlin_dinner",
     roleContext: "GM",
@@ -62,7 +84,7 @@ export function buildTableRecoverDecisionRecord(
     property: c.property,
     phaseLabel: "Dinner · recovery",
     contextLine: "Action prepared / approved · outcome observing",
-    recommendationHeadline: "REBOOK WAITLIST",
+    recommendationHeadline: "Rebook waitlist",
     triggerEvents: ["cancellation"],
     evidenceRefs: c.evidence.slice(0, 4).map((e, i) => ({
       id: `ev_t_${i}`,
@@ -151,7 +173,7 @@ export function buildTableRecoverDecisionRecord(
       },
     ],
     locationDnaLine: "Same-service waitlist recover historically precedes protected covers.",
-    demoLabel: "DEMO · ILLUSTRATIVE",
+    demoLabel: "Demo · illustrative",
     modelVersion: "decision-record/v2",
     createdAt: "2026-09-17T18:12:00+02:00",
     updatedAt: "2026-09-17T18:20:00+02:00",
@@ -179,7 +201,7 @@ export function buildSupplierDecisionRecord(
   const c = CANON_SUPPLIER;
   return {
     id: DECISION_IDS.supplier,
-    organizationId: "org_northstar",
+    organizationId: "org_northstar_restaurants",
     locationId: "loc_berlin_mitte",
     operatingUnitId: "ou_berlin_buy",
     roleContext: "GM",
@@ -193,9 +215,12 @@ export function buildSupplierDecisionRecord(
     currentState: "Contract €6.80/L · Invoice €7.45/L · 420L · contribution −13.2%",
     property: c.property,
     phaseLabel: "Procurement",
-    contextLine: "Invoice was the clue · margin leak is the problem",
-    recommendationHeadline: "DISPUTE · HOLD · CHECK YIELD · NO REPRICE YET",
+    contextLine:
+      "AP contract variance · NOT menu tuna economics · NOT beverage margin shock (D-7501)",
+    recommendationHeadline: "Dispute · hold · check yield · no reprice yet",
     problemFamily: "SUPPLIER_AP",
+    silenceNote:
+      "D-4102 is sealed AP invoice variance. D-1842 is stock/menu tuna. D-7501 is beverage cost shock.",
     economicState: status === "VERIFIED" || status === "LEARNED" ? "VERIFIED" : "EXPECTED",
     recoverability: "high",
     verificationPath: ["supplier_credit", "ap_match"],
@@ -241,7 +266,10 @@ export function buildSupplierDecisionRecord(
     ],
     baselinePrediction: "Pay as invoiced · contribution keeps compressing",
     noActionOutcome: "€273 drift compounds",
-    options: mapOptions(c),
+    options: mapOptions(
+      c,
+      status === "VERIFIED" || status === "LEARNED" || status === "CLOSED",
+    ),
     recommendedOptionId: c.chosenScenarioId,
     recommendationReasoning: c.understand,
     expectedContributionImpact: 0,
@@ -263,13 +291,18 @@ export function buildSupplierDecisionRecord(
       decision: "HIGH",
       userFacing: "HIGH",
       explanation:
-        "Contract vs invoice variance is observed. Usage effect separate. No expected recovered value until credit lands.",
-      point: 0,
-      low: 0,
-      high: 0,
+        status === "VERIFIED" || status === "LEARNED"
+          ? "Credit memo matched to original invoice · usage pressure remains separate from price variance"
+          : "Contract vs invoice variance is observed. Usage effect separate. Recoverable until credit lands.",
+      point: status === "VERIFIED" || status === "LEARNED" ? 94 : 0,
+      low: status === "VERIFIED" || status === "LEARNED" ? 90 : 0,
+      high: status === "VERIFIED" || status === "LEARNED" ? 98 : 0,
       evidenceCoverage: "HIGH",
       dataFreshness: "MEDIUM",
-      mainUncertainty: "Whether variance is price-only or yield-driven",
+      mainUncertainty:
+        status === "VERIFIED" || status === "LEARNED"
+          ? "Usage pressure still open · menu reprice deferred"
+          : "Whether variance is price-only or yield-driven",
     },
     decisionDeadline: c.deadline,
     requiredRole: "GM",
@@ -317,7 +350,28 @@ export function buildSupplierDecisionRecord(
         statusAfter: "AWAITING_APPROVAL",
       },
     ],
-    graph: { nodes: [], edges: [] },
+    graph: {
+      nodes: [
+        { id: "n_ctr", entityType: "cost", label: "Contract €6.80/L" },
+        { id: "n_inv", entityType: "cost", label: "Invoice €7.45/L" },
+        { id: "n_qty", entityType: "inventory", label: "420 L" },
+        { id: "n_var", entityType: "cost", label: "€273 variance" },
+        { id: "n_dish", entityType: "menu_item", label: "Dish contrib −13.2%" },
+        { id: "n_dec", entityType: "decision", label: "Dispute · hold · yield" },
+        { id: "n_act", entityType: "action", label: "Credit path" },
+        { id: "n_out", entityType: "outcome", label: "€273 verified" },
+      ],
+      edges: [
+        { fromId: "n_ctr", toId: "n_var", relation: "informed_by" },
+        { fromId: "n_inv", toId: "n_var", relation: "triggered_by" },
+        { fromId: "n_qty", toId: "n_var", relation: "informed_by" },
+        { fromId: "n_var", toId: "n_dish", relation: "precedes" },
+        { fromId: "n_var", toId: "n_dec", relation: "triggered_by" },
+        { fromId: "n_dish", toId: "n_dec", relation: "informed_by" },
+        { fromId: "n_dec", toId: "n_act", relation: "option_for" },
+        { fromId: "n_act", toId: "n_out", relation: "resulted_in" },
+      ],
+    },
     autonomy: {
       decisionType: "supplier_input_economics",
       level: 2,
@@ -332,12 +386,12 @@ export function buildSupplierDecisionRecord(
       {
         epistemic: "OBSERVED",
         title: "Invoice clue",
-        body: "Contract €6.80/L vs invoice €7.45/L on 420L → €273 exposure.",
+        body: "Contract €6.80/L vs invoice €7.45/L on 420L → €273 exposure. Not tuna stock (D-1842).",
       },
       {
         epistemic: "ESTIMATED",
         title: "Economics",
-        body: "Usage +4% with selling price unchanged → dish contribution −13.2%.",
+        body: "Usage +4% with selling price unchanged → dish contribution −13.2%. Not beverage margin shock (D-7501).",
       },
       {
         epistemic: "RECOMMENDED",
@@ -346,7 +400,7 @@ export function buildSupplierDecisionRecord(
       },
     ],
     locationDnaLine: "Normalize input cost before menu reprice.",
-    demoLabel: "DEMO · ILLUSTRATIVE",
+    demoLabel: "Demo · illustrative",
     modelVersion: "decision-record/v2",
     createdAt: "2026-09-16T09:10:00+02:00",
     updatedAt: "2026-09-16T09:14:00+02:00",
@@ -375,7 +429,7 @@ export function buildPlaybookDecisionRecord(
     property: "Northstar Hospitality Group",
     phaseLabel: "Structural",
     contextLine: "Similar revenue · different profit",
-    recommendationHeadline: "TEST AMSTERDAM PLAYBOOK IN BERLIN?",
+    recommendationHeadline: "Test Amsterdam playbook in Berlin?",
     triggerEvents: ["structural_pattern"],
     evidenceRefs: c.evidence.slice(0, 5).map((e, i) => ({
       id: `ev_p_${i}`,
@@ -476,7 +530,7 @@ export function buildPlaybookDecisionRecord(
       },
     ],
     locationDnaLine: "Group learning transfers with contextual similarity — never blind copy.",
-    demoLabel: "DEMO · ILLUSTRATIVE",
+    demoLabel: "Demo · illustrative",
     modelVersion: "decision-record/v2",
     createdAt: "2026-09-10T10:00:00+02:00",
     updatedAt: "2026-09-15T10:00:00+02:00",

@@ -6,6 +6,7 @@ import {
   type DashPeriod,
 } from "@/lib/product/demo/dashboard";
 import { useProduct } from "@/lib/product/store";
+import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 
 type Props = {
   compact?: boolean;
@@ -27,7 +28,9 @@ export function ScopeBar({ compact, periodOnly }: Props) {
             className="rp-scope-loc-btn"
             onClick={openLocationSwitcher}
           >
-            {locationScope === "all" ? "All locations" : locationScope}
+            {locationScope === "all"
+              ? "All locations"
+              : locationDisplayName(locationScope)}
           </button>
         ) : null}
         <label className="rp-cc-select">

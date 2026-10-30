@@ -27,7 +27,7 @@ export type VisualAsset = {
   crop?: "center" | "top" | "left";
   focal?: VisualFocal;
   credit?: string;
-  demoLabel?: "DEMO EDITORIAL ASSET";
+  demoLabel?: string;
 };
 
 const FOCAL = {
@@ -95,7 +95,7 @@ export const VISUAL_ASSETS = {
       subject: "restaurant_dining_room",
       crop: "center" as const,
       focal: FOCAL.berlinDining,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     berlinKitchen: {
       id: "loc_berlin_bar",
@@ -105,7 +105,7 @@ export const VISUAL_ASSETS = {
       subject: "service_atmosphere",
       crop: "center" as const,
       focal: FOCAL.berlinBar,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     canalHouse: {
       id: "loc_canal_suite",
@@ -115,7 +115,7 @@ export const VISUAL_ASSETS = {
       subject: "hotel_room",
       crop: "center" as const,
       focal: FOCAL.canal,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     canalRoom: {
       id: "loc_canal_deluxe",
@@ -125,7 +125,7 @@ export const VISUAL_ASSETS = {
       subject: "hotel_room",
       crop: "center" as const,
       focal: FOCAL.canal,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     chiado: {
       id: "loc_chiado_studio",
@@ -135,7 +135,7 @@ export const VISUAL_ASSETS = {
       subject: "apartment_interior",
       crop: "center" as const,
       focal: FOCAL.chiado,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     chiadoOneBed: {
       id: "loc_chiado_onebed",
@@ -145,7 +145,7 @@ export const VISUAL_ASSETS = {
       subject: "apartment_interior",
       crop: "center" as const,
       focal: FOCAL.chiado,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
   },
   decisions: {
@@ -158,7 +158,7 @@ export const VISUAL_ASSETS = {
       subject: "peak_dinner_service",
       crop: "center" as const,
       focal: FOCAL.berlinDining,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.ota]: {
       id: "dec_ota_scene",
@@ -169,7 +169,7 @@ export const VISUAL_ASSETS = {
       subject: "premium_room_inventory",
       crop: "center" as const,
       focal: FOCAL.canal,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.orphan]: {
       id: "dec_orphan_scene",
@@ -180,7 +180,7 @@ export const VISUAL_ASSETS = {
       subject: "orphan_unit_night",
       crop: "center" as const,
       focal: FOCAL.chiado,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.supplier]: {
       id: "dec_supplier_scene",
@@ -191,7 +191,7 @@ export const VISUAL_ASSETS = {
       subject: "procurement_ingredient",
       crop: "center" as const,
       focal: FOCAL.dish,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.tableRecover]: {
       id: "dec_table_scene",
@@ -202,7 +202,7 @@ export const VISUAL_ASSETS = {
       subject: "table_service",
       crop: "center" as const,
       focal: FOCAL.berlinTerrace,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.tuna]: {
       id: "dec_tuna_scene",
@@ -213,7 +213,7 @@ export const VISUAL_ASSETS = {
       subject: "menu_item",
       crop: "center" as const,
       focal: FOCAL.dish,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.menuPeak]: {
       id: "dec_menu_peak_scene",
@@ -224,7 +224,7 @@ export const VISUAL_ASSETS = {
       subject: "menu_peak_economics",
       crop: "center" as const,
       focal: FOCAL.dish,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.socialDemand]: {
       id: "dec_social_scene",
@@ -235,7 +235,7 @@ export const VISUAL_ASSETS = {
       subject: "social_demand",
       crop: "center" as const,
       focal: FOCAL.dish,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.guestVoice]: {
       id: "dec_guest_scene",
@@ -246,7 +246,7 @@ export const VISUAL_ASSETS = {
       subject: "guest_voice",
       crop: "center" as const,
       focal: FOCAL.berlinDining,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
     [DECISION_IDS.playbook]: {
       id: "dec_playbook_canal",
@@ -257,7 +257,7 @@ export const VISUAL_ASSETS = {
       subject: "group_property",
       crop: "center" as const,
       focal: FOCAL.canal,
-      demoLabel: "DEMO EDITORIAL ASSET" as const,
+      demoLabel: "Demo editorial",
     },
   },
 } as const;

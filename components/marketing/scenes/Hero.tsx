@@ -4,10 +4,13 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Suspense } from "react";
-import { HeroRecoveryScene } from "@/components/marketing/scenes/home/HeroRecoveryScene";
+import { DecisionHeroVisual } from "@/components/marketing/scenes/home/DecisionHeroVisual";
 import { HeroProofRail } from "@/components/marketing/scenes/home/HeroProofRail";
 import { NothingOffTheRadr } from "@/components/marketing/scenes/home/NothingOffTheRadr";
 import { HospitalityEyebrow } from "@/components/marketing/kinetic/HospitalityContextSwitch";
+import { CTAS } from "@/lib/marketing/brand";
+import { demoSignupHref } from "@/lib/marketing/demoAccess";
+import "@/app/decision-hero.css";
 
 function HeroInner() {
   const t = useTranslations("homepage.hero");
@@ -17,7 +20,7 @@ function HeroInner() {
 
   return (
     <section
-      className="rx-he rx-he-light rx-he-recover rx-he-margin rx-he-sig"
+      className="rx-he rx-he-light rx-he-recover rx-he-margin rx-he-sig rx-he-decision"
       id="product"
       data-nav-theme="light"
       data-hero-variant={useB ? "b" : "a"}
@@ -31,21 +34,18 @@ function HeroInner() {
             <h1 className="rx-he-recover-title">{title}</h1>
             <p className="rx-he-recover-support">{t("support")}</p>
             <div className="rx-he-ctas">
-              <Link
-                href="/contact?intent=recovery-pilot"
-                className="rx-btn rx-btn-primary"
-              >
-                {t("ctaPrimary")} <span aria-hidden="true">→</span>
+              <Link href={demoSignupHref()} className="rx-btn rx-btn-primary">
+                {CTAS.seeInAction} <span aria-hidden="true">→</span>
               </Link>
-              <a href="#verified-recovery" className="rx-btn rx-btn-ghost">
+              <Link href="/product" className="rx-btn rx-btn-ghost">
                 {t("ctaSecondary")}
-              </a>
+              </Link>
             </div>
             <HeroProofRail />
           </div>
 
           <div className="rx-he-recover-product">
-            <HeroRecoveryScene />
+            <DecisionHeroVisual />
           </div>
         </div>
       </div>

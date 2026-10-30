@@ -21,11 +21,47 @@ export function LeakClassVisual({
       data-compact={compact ? "true" : undefined}
       aria-hidden="true"
     >
-      {family === "SUPPLIER_AP" ? <SupplierApVisual /> : null}
-      {family === "RECONCILIATION" ? <ReconVisual /> : null}
-      {family === "COST_VARIANCE" ? <CostVisual /> : null}
-      {family === "PROCUREMENT" ? <ProcureVisual /> : null}
-      {family === "PERISHABLE_REVENUE" ? <PerishVisual /> : null}
+      {/* All instruments stay mounted so class changes morph, not hard-swap. */}
+      <div
+        className="rx-lcv-layer"
+        data-show={family === "SUPPLIER_AP" ? "true" : undefined}
+        aria-hidden={family === "SUPPLIER_AP" ? undefined : true}
+        inert={family === "SUPPLIER_AP" ? undefined : true}
+      >
+        <SupplierApVisual />
+      </div>
+      <div
+        className="rx-lcv-layer"
+        data-show={family === "RECONCILIATION" ? "true" : undefined}
+        aria-hidden={family === "RECONCILIATION" ? undefined : true}
+        inert={family === "RECONCILIATION" ? undefined : true}
+      >
+        <ReconVisual />
+      </div>
+      <div
+        className="rx-lcv-layer"
+        data-show={family === "COST_VARIANCE" ? "true" : undefined}
+        aria-hidden={family === "COST_VARIANCE" ? undefined : true}
+        inert={family === "COST_VARIANCE" ? undefined : true}
+      >
+        <CostVisual />
+      </div>
+      <div
+        className="rx-lcv-layer"
+        data-show={family === "PROCUREMENT" ? "true" : undefined}
+        aria-hidden={family === "PROCUREMENT" ? undefined : true}
+        inert={family === "PROCUREMENT" ? undefined : true}
+      >
+        <ProcureVisual />
+      </div>
+      <div
+        className="rx-lcv-layer"
+        data-show={family === "PERISHABLE_REVENUE" ? "true" : undefined}
+        aria-hidden={family === "PERISHABLE_REVENUE" ? undefined : true}
+        inert={family === "PERISHABLE_REVENUE" ? undefined : true}
+      >
+        <PerishVisual />
+      </div>
     </div>
   );
 }
@@ -37,12 +73,12 @@ function SupplierApVisual() {
     <div className="rx-lcv-supplier">
       <div className="rx-lcv-line" data-kind="contract">
         <em>Contract</em>
-        <strong>€6.80</strong>
+        <strong>$6.80</strong>
         <i style={{ width: "68%" }} />
       </div>
       <div className="rx-lcv-line" data-kind="invoice">
         <em>Invoice</em>
-        <strong>€7.45</strong>
+        <strong>$7.45</strong>
         <i style={{ width: "86%" }} />
       </div>
       <div className="rx-lcv-gap">
@@ -62,17 +98,17 @@ function ReconVisual() {
     <div className="rx-lcv-recon">
       <div className="rx-lcv-stream" data-kind="expected">
         <em>Expected</em>
-        <strong>€9,814</strong>
+        <strong>$9,814</strong>
         <span className="rx-lcv-flow" />
       </div>
       <div className="rx-lcv-stream" data-kind="actual">
         <em>Actual</em>
-        <strong>€9,521</strong>
+        <strong>$9,521</strong>
         <span className="rx-lcv-flow" />
       </div>
       <div className="rx-lcv-diverge">
         <span>Streams diverge</span>
-        <strong>€293 unexplained</strong>
+        <strong>$293 unexplained</strong>
       </div>
       <ul className="rx-lcv-attrs">
         <li>Refund</li>
@@ -110,9 +146,9 @@ function CostVisual() {
 
 function ProcureVisual() {
   const locs = [
-    { city: "Berlin", price: "€7.45" },
-    { city: "Amsterdam", price: "€6.80" },
-    { city: "Lisbon", price: "€6.62" },
+    { city: "New York", price: "$7.45" },
+    { city: "London", price: "£6.80" },
+    { city: "Dubai", price: "AED 6.62" },
   ];
   return (
     <div className="rx-lcv-proc">
@@ -148,7 +184,7 @@ function PerishVisual() {
       </div>
       <div className="rx-lcv-decay">
         <em>Room value</em>
-        <strong>€184 → €0</strong>
+        <strong>$184 → $0</strong>
       </div>
       <ul className="rx-lcv-opts">
         <li data-on="true">Waitlist</li>

@@ -1,36 +1,30 @@
 /**
- * Canonical D-1911 service clock — single source for display time,
- * deadline, window, wait, and resume. Do not hardcode these elsewhere.
+ * Canonical D-1911 service clock — derived from LIVE_SCENARIO (DemoClock).
+ * Do not hardcode conflicting times elsewhere.
  */
 
+import {
+  LIVE_SCENARIO,
+  liveDecisionWindowMinutes,
+} from "@/lib/radr/demoClock";
+
 export const PEAK_SERVICE_CLOCK = {
-  /** Live Decision "now" */
-  nowLabel: "18:42",
-  nowIso: "2026-09-17T18:42:00+02:00",
-  /** Operator must decide by */
-  deadlineLabel: "18:53",
-  deadlineIso: "2026-09-17T18:53:00+02:00",
-  /** Recommended hold duration */
-  waitMinutes: 12,
-  /** Modeled resume seating */
-  resumeLabel: "18:54",
-  /** Observed peak after approval */
-  peakObservedLabel: "19:03",
-  turnsObservedLabel: "19:26",
-  outcomeCalculatedLabel: "21:30",
+  nowLabel: LIVE_SCENARIO.clockLabel,
+  nowIso: LIVE_SCENARIO.timestampIso,
+  formedLabel: LIVE_SCENARIO.decisionFormedClock,
+  formedIso: LIVE_SCENARIO.decisionFormedIso,
+  deadlineLabel: LIVE_SCENARIO.decisionDeadlineClock,
+  deadlineIso: LIVE_SCENARIO.decisionDeadlineIso,
+  waitMinutes: LIVE_SCENARIO.waitMinutes,
+  resumeLabel: LIVE_SCENARIO.resumeClock,
+  peakObservedLabel: LIVE_SCENARIO.peakObservedClock,
+  turnsObservedLabel: LIVE_SCENARIO.turnsObservedClock,
+  outcomeCalculatedLabel: LIVE_SCENARIO.outcomeCalculatedClock,
 } as const;
 
-function minutesFromHm(hm: string): number {
-  const [h, m] = hm.split(":").map(Number);
-  return (h ?? 0) * 60 + (m ?? 0);
-}
-
-/** Minutes from now → deadline (canonical: 11). */
+/** Minutes from Live NOW → deadline (canonical: 11). */
 export function peakDecisionWindowMinutes(): number {
-  return (
-    minutesFromHm(PEAK_SERVICE_CLOCK.deadlineLabel) -
-    minutesFromHm(PEAK_SERVICE_CLOCK.nowLabel)
-  );
+  return liveDecisionWindowMinutes();
 }
 
 export function peakDeadlineDisplay(): string {

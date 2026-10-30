@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import NextLink from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
@@ -44,10 +43,10 @@ export default async function AskChapterPage({ params }: Props) {
             <h1 className="rx-ch-title">{t("title")}</h1>
             <p className="rx-ch-lead">{t("lead")}</p>
             <div className="rx-ch-ctas">
-              <NextLink href="/app" className="rx-ch-cta">
-                {t("cta")} →
-              </NextLink>
-              <Link href="/contact" className="rx-ch-cta-ghost">
+              <Link href="/signup?intent=demo&next=/app/enter" className="rx-ch-cta">
+                See RADR in action →
+              </Link>
+              <Link href="/contact?intent=recovery-pilot" className="rx-ch-cta-ghost">
                 {t("ctaSecondary")}
               </Link>
             </div>

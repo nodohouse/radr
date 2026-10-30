@@ -1,0 +1,398 @@
+/**
+ * Visual polish pass — space · type · proportion · density · contrast · rhythm.
+ * CSS + light structure only. Loaded LAST. No business logic.
+ *
+ * Spacing scale (4–96): --space-1 … --space-10
+ */
+
+:root {
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem; /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem; /* 16 */
+  --space-5: 1.5rem; /* 24 */
+  --space-6: 2rem; /* 32 */
+  --space-7: 3rem; /* 48 */
+  --space-8: 4rem; /* 64 */
+  --space-9: 5rem; /* 80 */
+  --space-10: 6rem; /* 96 */
+
+  --rp-content-max: 72rem;
+  --rp-gutter: var(--space-5);
+  --rp-section-gap: var(--space-6);
+  --rp-radius: 0.5rem;
+  --rp-radius-lg: 0.75rem;
+  --rp-hairline: color-mix(in srgb, #0a0d0b 8%, transparent);
+  --rp-green: #00a85a;
+  --rp-green-live: #00d978;
+}
+
+/* ——— Shared content edge ——— */
+.rp-main-v2 {
+  padding-inline: max(var(--space-4), var(--rp-gutter));
+  padding-block: var(--space-3) var(--space-8);
+}
+@media (min-width: 1100px) {
+  .rp-main-v2 {
+    padding-inline: var(--space-6);
+  }
+}
+
+.rp-ledger-head,
+.rp-settings-app,
+.rp-menu-intel,
+.rp-smap,
+.rp-loc-cmd,
+.rp-intel-hub,
+.rp-conn-page,
+.rp-value-page,
+.rp-memory-page {
+  max-width: var(--rp-content-max);
+}
+
+/* ——— Command Stage = light CC greeting (operating state is GlobalOperatingHeader) ——— */
+.rp-cmd-stage[data-layout="compose"],
+.rp-cmd-stage,
+.rp-cmd-stage-intro {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  text-align: left;
+  gap: 0;
+  min-height: 0;
+  max-height: none;
+  padding: 1.25rem 0.35rem 0.35rem;
+  margin: 0;
+  border-bottom: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.rp-cmd-stage-lead,
+.rp-cmd-stage-trail,
+.rp-cmd-stage-inner {
+  display: contents;
+}
+.rp-cmd-stage-greet {
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #626a65;
+  margin: 0;
+}
+.rp-cmd-stage-headline,
+.rp-cmd-stage-summary,
+.rp-cmd-stage-rail,
+.rp-cmd-stage-signals,
+.rp-cmd-stage-quiet {
+  display: none !important;
+}
+
+/* Judgment briefing lives in GlobalOperatingHeader */
+.rp-shell-v2[data-route="/app"] .rp-ctx[data-cc="true"] {
+  padding-bottom: var(--space-3);
+  align-items: stretch;
+}
+
+/* Breathing room after greeting → Operating Situation */
+.rp-cock > .rp-cock-grid {
+  margin-top: 0.85rem;
+  gap: var(--space-3);
+  flex: 1 1 auto;
+  min-height: 0;
+  grid-template-rows: minmax(10.5rem, 1fr) minmax(13.5rem, 1.25fr) minmax(7rem, 0.85fr) !important;
+}
+.rp-cock-mod {
+  border-radius: var(--rp-radius-lg);
+  box-shadow: none;
+}
+.rp-cock-mod[data-mod="situation"] {
+  min-height: 0 !important;
+}
+.rp-cock-mod[data-mod="pulse"],
+.rp-cock-mod[data-mod="locs"],
+.rp-cock-mod[data-mod="live"],
+.rp-cock-mod[data-mod="menu"],
+.rp-cock-mod[data-mod="perf"],
+.rp-cock-mod[data-mod="history"] {
+  overflow: hidden;
+  min-height: 0;
+}
+.rp-cock-mod[data-mod="pulse"] .rp-cock-kpi {
+  gap: var(--space-2);
+  align-items: stretch;
+}
+.rp-cock-kpi-cell {
+  padding: var(--space-2);
+  min-height: 0;
+}
+.rp-cock-kpi-metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+.rp-cock-kpi-metric .rp-metric-label,
+.rp-cock-kpi-metric .rp-metric-value,
+.rp-cock-kpi-metric .rp-metric-delta,
+.rp-cock-kpi-metric .rp-metric-status {
+  display: block;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+.rp-cock-k {
+  letter-spacing: 0.08em;
+  font-size: 0.6875rem;
+  font-weight: 550;
+  color: #626a65;
+}
+
+@media (max-width: 900px) {
+  .rp-cmd-stage[data-layout="compose"],
+  .rp-cmd-stage {
+    align-items: flex-start;
+    text-align: left;
+    min-height: 0;
+    max-height: none;
+    padding: 1.15rem 0.35rem 1rem;
+  }
+  .rp-cmd-stage-signals {
+    justify-content: flex-start;
+  }
+  .rp-cmd-stage-headline {
+    justify-content: flex-start;
+    font-size: 1.3rem;
+  }
+  .rp-cock > .rp-cock-grid {
+    margin-top: 2rem;
+  }
+}
+
+/* ——— Metric hierarchy ——— */
+.rp-metric {
+  gap: var(--space-1);
+}
+.rp-metric-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #626a65;
+  font-weight: 500;
+}
+.rp-metric-value {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.0625rem;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.rp-metric-delta {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: var(--space-1);
+}
+.rp-metric-meta,
+.rp-metric-status {
+  font-size: 0.6875rem;
+  color: #626a65;
+  margin-top: var(--space-1);
+}
+
+/* ——— Green is precious ——— */
+.rp-shell-v2 .rp-cock-judgment[data-need="true"],
+.rp-shell-v2 .rp-cmd-stage-headline[data-need="true"] {
+  /* underline only — no full fill chrome */
+}
+.rp-shell-v2 [data-semantic="verified"],
+.rp-shell-v2 .rp-metric-delta[data-tone="pos"] {
+  color: var(--rp-green);
+}
+
+/* ——— Reduce card soup ——— */
+.rp-cock-mod,
+.rp-settings-panel,
+.rp-menu-rank-row,
+.rp-smap-drawer,
+.rp-drec-sec {
+  box-shadow: none !important;
+}
+.rp-settings-panel,
+.rp-menu-rank-row {
+  border-radius: var(--rp-radius-lg);
+  border-color: var(--rp-hairline);
+}
+
+/* ——— Tabs / filters rhythm ——— */
+.rp-smap-seg button,
+.rp-menu-rank-tabs button,
+.rp-menu-mode button,
+.rp-settings-seg button {
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+/* ——— Service Map structure ——— */
+.rp-smap {
+  padding-bottom: var(--space-8);
+}
+.rp-smap-head {
+  margin-bottom: var(--space-5);
+  gap: var(--space-4);
+  align-items: flex-end;
+}
+.rp-smap-toolbar {
+  gap: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--rp-hairline);
+}
+.rp-smap-layout {
+  gap: var(--space-5);
+  align-items: start;
+}
+.rp-smap-stage {
+  min-width: 0;
+}
+.rp-smap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-3);
+  font-variant-numeric: tabular-nums;
+}
+.rp-smap-zone-t {
+  font-size: 2px;
+  letter-spacing: 0.1em;
+  fill: #6a736e;
+  opacity: 0.9;
+}
+.rp-smap-wave-t {
+  font-size: 1.7px;
+  opacity: 0.75;
+}
+.rp-smap-table text.rp-smap-table-num {
+  font-size: 2.55px;
+  font-weight: 560;
+  fill: #0a0d0b;
+  font-variant-numeric: tabular-nums;
+}
+.rp-smap-table text.rp-smap-table-state {
+  font-size: 1.15px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  fill: #626a65;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+.rp-smap-below {
+  margin-top: var(--space-4);
+  gap: var(--space-3);
+}
+.rp-smap-pressure {
+  margin-top: 0;
+  gap: var(--space-2);
+}
+.rp-smap-pressure button {
+  border-radius: var(--rp-radius);
+  padding: var(--space-2) var(--space-2) var(--space-3);
+  background: color-mix(in srgb, #0a0d0b 2.5%, transparent);
+}
+.rp-smap-pressure-pair {
+  gap: var(--space-1) var(--space-3);
+}
+.rp-smap-pct-kind {
+  margin-left: 0;
+  font-size: 0.58rem;
+}
+.rp-smap-drawer {
+  border: 1px solid var(--rp-hairline);
+  border-radius: var(--rp-radius-lg);
+  padding: var(--space-4);
+  background: #fff;
+}
+.rp-smap-legend {
+  margin-top: var(--space-3);
+  font-size: 0.6875rem;
+  color: #626a65;
+  line-height: 1.4;
+}
+
+@media (max-width: 960px) {
+  .rp-smap-layout {
+    grid-template-columns: 1fr;
+  }
+  .rp-smap-pressure {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .rp-smap-pressure {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rp-smap-inbound {
+    margin-bottom: var(--space-3);
+  }
+}
+
+/* ——— BOH / Menu / Location / Settings density ——— */
+.rp-house-page,
+.rp-menu-intel,
+.rp-loc-cmd,
+.rp-settings-app {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.rp-settings-layout {
+  gap: var(--space-5) var(--space-6);
+}
+.rp-settings-nav-item {
+  border-radius: var(--rp-radius);
+  padding: var(--space-2) var(--space-3);
+}
+.rp-settings-panel {
+  padding: var(--space-5);
+  max-width: 52rem;
+}
+.rp-loc-cmd-rail {
+  gap: var(--space-4) var(--space-5);
+  padding-block: var(--space-4);
+}
+.rp-menu-ranks {
+  margin-bottom: var(--space-6);
+}
+.rp-menu-rank-row {
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3);
+}
+
+/* Decision room — calm sections */
+.rp-drec-sec {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rp-hairline);
+}
+.rp-drec-sec h2 {
+  letter-spacing: -0.02em;
+  font-weight: 550;
+}
+
+/* Memory / Value / Intel / Connections / Data Health — quiet modules */
+.rp-intel-hub section,
+.rp-conn-page section,
+.rp-value-page section {
+  margin-bottom: var(--space-6);
+}
+
+/* Tabular nums for money rails */
+.rp-cock-kpi-metric .rp-metric-value,
+.rp-loc-cmd-metric .rp-metric-value,
+.rp-handoff-econ,
+.rp-drec-econ strong {
+  font-variant-numeric: tabular-nums;
+}

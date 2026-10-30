@@ -1,0 +1,125 @@
+/* World chooser — minimal, shell-free. Tesla discipline, RADR palette. */
+
+.rp-root-enter {
+  min-height: 100dvh;
+  background: var(--radr-canvas, #f7faf8);
+  color: var(--radr-ink, #0a0d0b);
+}
+
+.rp-enter {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(2rem, 6vh, 4rem) 1.5rem 3rem;
+  font-family: var(--font-body, "Instrument Sans", system-ui, sans-serif);
+}
+
+.rp-enter-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: clamp(3rem, 12vh, 6rem);
+  color: var(--radr-ink, #0a0d0b);
+}
+
+.rp-enter-mark {
+  display: grid;
+  place-items: center;
+  color: var(--radr-green, #00a85a);
+}
+
+.rp-enter-word {
+  font-size: 1.05rem;
+  font-weight: 560;
+  letter-spacing: 0.04em;
+}
+
+.rp-enter-main {
+  width: min(28rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.rp-enter-title {
+  margin: 0;
+  font-size: clamp(1.65rem, 3.2vw, 2.05rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--radr-ink, #0a0d0b);
+}
+
+.rp-enter-worlds {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.rp-enter-world {
+  width: 100%;
+  text-align: left;
+  padding: 1.15rem 0.15rem 1.25rem;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--radr-ink, #0a0d0b) 10%, transparent);
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  gap: 0.2rem;
+  transition: color 0.15s ease, padding-left 0.15s ease;
+  color: inherit;
+  font: inherit;
+}
+
+.rp-enter-world:hover,
+.rp-enter-world:focus-visible {
+  color: var(--radr-ink, #0a0d0b);
+  padding-left: 0.35rem;
+  outline: none;
+}
+
+.rp-enter-world:hover .rp-enter-world-label,
+.rp-enter-world:focus-visible .rp-enter-world-label {
+  color: var(--radr-green-deep, #00a85a);
+}
+
+.rp-enter-world[data-last="true"] .rp-enter-world-label::after {
+  content: " · last";
+  font-size: 0.72em;
+  font-weight: 450;
+  color: color-mix(in srgb, var(--radr-ink, #0a0d0b) 42%, transparent);
+  letter-spacing: 0;
+}
+
+.rp-enter-world-label {
+  font-size: 1.12rem;
+  font-weight: 520;
+  letter-spacing: -0.02em;
+}
+
+.rp-enter-world-meta {
+  font-size: 0.86rem;
+  color: color-mix(in srgb, var(--radr-ink, #0a0d0b) 48%, transparent);
+}
+
+.rp-enter-world-lenses {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--radr-ink, #0a0d0b) 38%, transparent);
+  letter-spacing: 0.01em;
+}
+
+.rp-enter-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--radr-ink, #0a0d0b) 42%, transparent);
+  line-height: 1.45;
+}
+
+@media (max-width: 480px) {
+  .rp-enter-main {
+    width: 100%;
+  }
+}

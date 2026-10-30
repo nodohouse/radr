@@ -1,0 +1,271 @@
+/** Value — trace polish only. Tokens: app/radr-product-tokens.css */
+
+.rp-value .rp-ccx-queue-list {
+  gap: 0;
+  border: 1px solid var(--rp-border, rgba(18, 20, 15, 0.09));
+  border-radius: var(--rp-radius-lg, 0.85rem);
+  background: var(--rp-surface-raised, #fff);
+  overflow: hidden;
+}
+
+.rp-value .rp-ccx-queue-list > li {
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--rp-border, rgba(18, 20, 15, 0.09));
+  grid-template-columns: minmax(0, 1fr) 2.5rem;
+}
+
+.rp-value .rp-ccx-queue-list > li:first-child {
+  border-top: 0;
+}
+
+.rp-value .rp-ccx-queue-list > li:hover {
+  background: color-mix(in srgb, var(--rp-surface-2, #efebe3) 50%, transparent);
+}
+
+/* Row: Decision identity left, € right-aligned, trace hint beneath */
+.rp-value .rp-ccx-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "top econ"
+    "title hint";
+  column-gap: 1.25rem;
+  row-gap: 0.15rem;
+  align-items: baseline;
+  padding: 0.85rem 1rem;
+}
+
+.rp-value .rp-ccx-row-top { grid-area: top; margin: 0; }
+.rp-value .rp-ccx-row-title { grid-area: title; font-weight: 560; }
+.rp-value .rp-ccx-row-econ {
+  grid-area: econ;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+  margin: 0;
+  text-align: right;
+}
+
+.rp-value .rp-ccx-row-econ strong {
+  font-size: var(--rp-text-lg, 1.125rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--rp-green, #1a5c3a);
+}
+
+.rp-value .rp-ccx-row-econ span {
+  font-size: var(--rp-text-sm, 0.75rem);
+  color: var(--rp-text-secondary, #5e645c);
+}
+
+.rp-value-trace-hint {
+  grid-area: hint;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--rp-text-xs, 0.625rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rp-text-quiet, #8a8f86);
+}
+
+.rp-value-trace-hint i {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--rp-dur-fast, 140ms) var(--rp-ease, ease);
+}
+
+.rp-value .rp-ccx-row[aria-expanded="true"] .rp-value-trace-hint {
+  color: var(--rp-green, #1a5c3a);
+}
+
+.rp-value .rp-ccx-row[aria-expanded="true"] .rp-value-trace-hint i {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+/* Trace panel spans the full row, as a vertical proof path */
+.rp-value .rp-ccx-queue-list > li > .rp-value-euro-trace {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.9rem 1rem 1.1rem;
+  border: 0;
+  border-top: 1px dashed var(--rp-border-strong, rgba(18, 20, 15, 0.14));
+  border-radius: 0;
+  background: var(--rp-surface-1, #fbfaf6);
+}
+
+.rp-value .rp-value-euro-trace ol {
+  position: relative;
+  margin: 0.6rem 0 0;
+  gap: 0;
+}
+
+.rp-value .rp-value-euro-trace li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.4rem 0 0.4rem 1.1rem;
+  font-size: var(--rp-text-sm, 0.75rem);
+}
+
+.rp-value .rp-value-euro-trace li::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.85rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--rp-text-quiet, #8a8f86);
+}
+
+.rp-value .rp-value-euro-trace li:last-child::before {
+  background: var(--rp-verified, #00a85a);
+}
+
+.rp-value .rp-value-euro-trace li::after {
+  content: "";
+  position: absolute;
+  left: calc(0.15rem + 0.2rem - 0.5px);
+  top: 1.3rem;
+  bottom: -0.45rem;
+  width: 1px;
+  background: var(--rp-border-strong, rgba(18, 20, 15, 0.14));
+}
+
+.rp-value .rp-value-euro-trace li:last-child::after {
+  display: none;
+}
+
+.rp-value .rp-value-euro-trace strong {
+  font-family: var(--rp-font-mono, "IBM Plex Mono", monospace);
+  font-size: var(--rp-text-xs, 0.625rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rp-text-secondary, #5e645c);
+  padding-top: 0.15rem;
+}
+
+.rp-value .rp-value-euro-trace span {
+  text-align: left;
+  color: var(--rp-text-primary, #12140f);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Honest miss: keep, calm */
+.rp-value .rp-value-miss-card {
+  background: var(--rp-surface-raised, #fff);
+  border-color: color-mix(in srgb, var(--rp-adverse, #a84a3c) 22%, transparent);
+  border-radius: var(--rp-radius-md, 0.55rem);
+}
+
+.rp-value .rp-value-miss-metrics dd[data-tone="miss"] {
+  color: var(--rp-adverse, #a84a3c);
+}
+
+@media (max-width: 640px) {
+  .rp-value .rp-value-euro-trace li {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+  .rp-value .rp-ccx-row {
+    grid-template-areas:
+      "top econ"
+      "title title"
+      "hint hint";
+  }
+  .rp-value-trace-hint {
+    justify-self: start;
+  }
+}
+
+/* Service intelligence verified loops */
+.rp-value-service {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rp-border, color-mix(in srgb, #12140f 9%, transparent));
+}
+
+.rp-value-service h2 {
+  margin: 0.15rem 0 0.35rem;
+  font-size: 1.2rem;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+}
+
+.rp-value-service > ul {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.rp-value-service > ul > li {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--rp-border, color-mix(in srgb, #12140f 9%, transparent));
+  border-radius: var(--rp-radius-md, 0.55rem);
+  background: var(--rp-surface-raised, #fff);
+}
+
+.rp-value-service dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0.55rem 0;
+}
+
+.rp-value-service dt {
+  font-size: 0.6875rem;
+  color: var(--rp-text-quiet, #8a8f86);
+}
+
+.rp-value-service dd {
+  margin: 0.1rem 0 0;
+  font-weight: 560;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-value-service dd[data-tone="verified"] {
+  color: var(--rp-verified, #00a85a);
+}
+
+@media (max-width: 720px) {
+  .rp-value-service dl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.rp-value-trace-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.9fr);
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.rp-value-trace-split .rp-ccx-row[data-active="true"] {
+  outline: 1px solid color-mix(in srgb, #00a85a 35%, transparent);
+  background: #f0faf4;
+}
+
+@media (max-width: 900px) {
+  .rp-value-trace-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rp-art-value-hero--chart {
+  padding-top: 0.35rem;
+}
+
+.rp-art-value-hero--chart .rp-art-value-num {
+  display: none;
+}

@@ -1,10 +1,16 @@
 /**
- * Integration / source-health fixtures — scoped by persona locations.
+ * Connection fixtures — vendor systems RADR can reach.
  */
 
 import type { RoleView } from "@/lib/product/types";
+import { locationIdsForVertical } from "@/lib/radr/demo/verticalScope";
+import type { DemoVerticalFamily } from "@/lib/radr/vertical/experienceProfile";
+import {
+  NORTHSTAR_HOTELS,
+  NORTHSTAR_RESTAURANTS,
+} from "@/lib/radr/demo/organizations";
 import { roleContextFor } from "./personas";
-import { DEMO_LOCATIONS, type DemoLocationId } from "./demoOrg";
+import { type DemoLocationId } from "./demoOrg";
 
 export type SourceHealthStatus =
   | "CONNECTED"
@@ -15,118 +21,143 @@ export type SourceHealthStatus =
 export type SourceHealthRow = {
   id: string;
   name: string;
+  domain: string;
   status: SourceHealthStatus;
   freshness: string;
   coverage: string;
+  /** What this connection unlocks for Decisions. */
+  unlocks: string[];
   lastSync: string;
   impact: string | null;
-  /** Locations this source belongs to. Empty = org-wide. */
   locationIds: DemoLocationId[];
 };
 
+const RESTAURANT_IDS = NORTHSTAR_RESTAURANTS.locations.map(
+  (l) => l.id as DemoLocationId,
+);
+const HOTEL_IDS = NORTHSTAR_HOTELS.locations.map(
+  (l) => l.id as DemoLocationId,
+);
+
 const ALL_SOURCES: SourceHealthRow[] = [
   {
-    id: "pos",
-    name: "POS",
+    id: "lightspeed",
+    name: "Lightspeed",
+    domain: "POS",
     status: "CONNECTED",
     freshness: "40s ago",
-    coverage: "Covers · ticket · menu",
+    coverage: "Orders · menu · tickets",
+    unlocks: ["Revenue", "Covers", "Menu", "Average spend", "Service pace"],
     lastSync: "40s ago",
     impact: null,
-    locationIds: [DEMO_LOCATIONS.berlin.id],
+    locationIds: RESTAURANT_IDS,
   },
   {
-    id: "reservations",
-    name: "Reservations",
+    id: "sevenrooms",
+    name: "SevenRooms",
+    domain: "Reservations",
     status: "CONNECTED",
     freshness: "2m ago",
-    coverage: "Inbound covers · waitlist",
+    coverage: "Covers · waitlist · guest profiles",
+    unlocks: [
+      "Booking pace",
+      "Cancellations",
+      "No-shows",
+      "Walk-ins",
+      "Guest behavior",
+    ],
     lastSync: "2m ago",
     impact: null,
-    locationIds: [DEMO_LOCATIONS.berlin.id],
+    locationIds: RESTAURANT_IDS,
   },
   {
-    id: "kds",
-    name: "KDS",
+    id: "toast-kds",
+    name: "Toast KDS",
+    domain: "Kitchen",
     status: "CONNECTED",
     freshness: "40s ago",
     coverage: "Ticket times · station load",
+    unlocks: ["Ticket time", "Kitchen pressure", "Station load"],
     lastSync: "40s ago",
     impact: null,
-    locationIds: [DEMO_LOCATIONS.berlin.id],
+    locationIds: RESTAURANT_IDS,
   },
   {
-    id: "delivery",
-    name: "Delivery",
+    id: "deliverect",
+    name: "Deliverect",
+    domain: "Delivery",
     status: "DEGRADED",
     freshness: "4m ago",
-    coverage: "Intake volume lag",
+    coverage: "Uber Eats · Deliveroo",
+    unlocks: ["Delivery share", "Channel fees", "Delivery load"],
     lastSync: "4m ago",
-    impact: "Affects D-1911 forecast confidence",
-    locationIds: [DEMO_LOCATIONS.berlin.id],
+    impact: "Channel mix provisional",
+    locationIds: RESTAURANT_IDS,
   },
   {
-    id: "procurement",
-    name: "Procurement",
-    status: "CONNECTED",
-    freshness: "1h ago",
-    coverage: "Supplier invoices · contracts",
-    lastSync: "1h ago",
-    impact: null,
-    locationIds: [DEMO_LOCATIONS.berlin.id],
-  },
-  {
-    id: "accounting",
-    name: "Accounting",
+    id: "xero",
+    name: "Xero",
+    domain: "Accounting",
     status: "STALE",
     freshness: "6h ago",
-    coverage: "AP · invoice lines",
+    coverage: "Settlements · AP ledger",
+    unlocks: ["Settlement", "AP", "Credits", "Verification"],
     lastSync: "6h ago",
-    impact: "Affects D-4102 evidence freshness",
-    locationIds: [DEMO_LOCATIONS.berlin.id],
+    impact: "Affects settlement evidence freshness",
+    locationIds: RESTAURANT_IDS,
   },
   {
-    id: "pms",
-    name: "PMS",
+    id: "mews",
+    name: "Mews",
+    domain: "PMS",
     status: "CONNECTED",
     freshness: "3m ago",
-    coverage: "Canal House inventory",
+    coverage: "Rooms · stay · channel",
+    unlocks: [
+      "Occupancy",
+      "ADR",
+      "Arrivals",
+      "Channel inventory",
+      "Pickup",
+    ],
     lastSync: "3m ago",
     impact: null,
-    locationIds: [DEMO_LOCATIONS.canal.id],
-  },
-  {
-    id: "channel",
-    name: "Channel manager",
-    status: "CONNECTED",
-    freshness: "5m ago",
-    coverage: "OTA · direct rates · pickup",
-    lastSync: "5m ago",
-    impact: null,
-    locationIds: [DEMO_LOCATIONS.canal.id],
-  },
-  {
-    id: "unit_pms",
-    name: "Unit PMS",
-    status: "CONNECTED",
-    freshness: "4m ago",
-    coverage: "Chiado unit calendar · orphans",
-    lastSync: "4m ago",
-    impact: null,
-    locationIds: [DEMO_LOCATIONS.chiado.id],
+    locationIds: HOTEL_IDS,
   },
 ];
 
-export function sourcesForRole(role: RoleView): SourceHealthRow[] {
-  const ctx = roleContextFor(role);
+export function sourcesForRole(
+  role: RoleView,
+  vertical: DemoVerticalFamily = "restaurant",
+): SourceHealthRow[] {
+  const ctx = roleContextFor(role, vertical);
+  const allowed = locationIdsForVertical(vertical);
+  const inVertical = ALL_SOURCES.filter((s) =>
+    s.locationIds.some((id) => allowed.has(id)),
+  );
   if (ctx.scopeType === "PORTFOLIO" || ctx.scopeType === "GROUP") {
-    return ALL_SOURCES;
+    return inVertical;
   }
-  return ALL_SOURCES.filter((s) =>
+  return inVertical.filter((s) =>
     s.locationIds.some((id) => ctx.allowedLocationIds.includes(id)),
   );
 }
 
+/** Role scope + demo vertical — hide cross-vertical connection fixtures. */
+export function sourcesForDemo(
+  role: RoleView,
+  vertical: DemoVerticalFamily = "restaurant",
+): SourceHealthRow[] {
+  const allowed = locationIdsForVertical(vertical);
+  return sourcesForRole(role, vertical)
+    .map((s) => ({
+      ...s,
+      locationIds: s.locationIds.filter((id) => allowed.has(id)),
+    }))
+    .filter((s) => s.locationIds.length > 0);
+}
+
+/** Quiet chrome summary — never invent floor counts. */
 export function sourceIssueSummary(rows: SourceHealthRow[]): string | null {
   const degraded = rows.filter((r) => r.status === "DEGRADED").length;
   const stale = rows.filter((r) => r.status === "STALE").length;
@@ -147,3 +178,5 @@ export const IntegrationHealthService = {
   forRole: sourcesForRole,
   issueSummary: (role: RoleView) => sourceIssueSummary(sourcesForRole(role)),
 };
+
+export { ALL_SOURCES };

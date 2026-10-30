@@ -1,0 +1,601 @@
+/**
+ * RADR Product Design System — mineral light (marketing SSOT).
+ * Features frozen. Visual cohesion with /en only.
+ * Canvas #f7faf8 · surface #fff · ink #0a0d0b · rail #f1f6f3 · green #00d978
+ */
+
+.rp-shell-v2 {
+  --rp-frame: var(--color-canvas);
+  --rp-l0: var(--color-canvas);
+  --rp-l1: var(--color-surface);
+  --rp-l2: var(--color-canvas-elevated);
+  --rp-l3-tint: rgba(0, 217, 120, 0.1);
+  --rp-type-editorial: var(--type-display);
+  --rp-type-ops: var(--type-body);
+  --rp-type-num: var(--type-numeric);
+  --rp-type-mono: var(--type-mono);
+  --rp-fs-editorial: var(--fs-display);
+  --rp-fs-metric-hero: var(--fs-hero-metric);
+  --rp-fs-metric: var(--fs-key-value);
+
+  background: var(--color-canvas);
+  color: var(--color-text);
+  font-family: var(--type-body);
+  font-weight: var(--fw-regular);
+}
+
+body:has(.rp-shell-v2) {
+  background: var(--color-canvas) !important;
+  color: var(--color-text);
+}
+
+/* ——— Rail: light mineral (warm shell only) ——— */
+.rp-shell-v2[data-theme="warm"] .rp-rail ,
+.rp-shell-v2[data-theme="daylight"] .rp-rail {
+  background: var(--radr-sidebar, #f1f6f3) !important;
+  border-right: 1px solid var(--color-border) !important;
+  color: var(--color-text-secondary) !important;
+  --rp-rail-text: var(--color-text-secondary);
+  --rp-rail-text-strong: var(--color-text);
+  --rp-rail-muted: var(--color-text-muted);
+  --rp-rail-hover: rgba(10, 13, 11, 0.04);
+  --rp-rail-active: rgba(0, 217, 120, 0.1);
+  --rp-rail-signal: #00d978;
+  --rp-rail-border: var(--color-border);
+  box-shadow: none !important;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-rail[data-expanded="true"] ,
+.rp-shell-v2[data-theme="daylight"] .rp-rail[data-expanded="true"] {
+  background: var(--radr-sidebar, #f1f6f3) !important;
+  box-shadow: 8px 0 28px rgba(10, 13, 11, 0.06) !important;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-rail-link:hover ,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link:hover {
+  background: rgba(10, 13, 11, 0.04) !important;
+  color: var(--color-text) !important;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-rail-link[data-active="true"] ,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link[data-active="true"] {
+  background: rgba(0, 217, 120, 0.1) !important;
+  color: var(--color-text) !important;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-rail-link[data-active="true"]::before ,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-link[data-active="true"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 2px;
+  border-radius: 1px;
+  background: #00d978;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-rail-mark,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-mark,
+.rp-shell-v2[data-theme="warm"] .radr-mark,
+.rp-shell-v2[data-theme="daylight"] .radr-mark,
+.rp-shell-v2[data-theme="warm"] .radr-delta-glyph ,
+.rp-shell-v2[data-theme="daylight"] .radr-delta-glyph {
+  color: #00d978 !important;
+}
+
+.rp-shell-v2[data-theme="warm"] .rp-rail-avatar ,
+.rp-shell-v2[data-theme="daylight"] .rp-rail-avatar {
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.rp-shell-v2 .rp-rail-user-menu {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text);
+  box-shadow: var(--shadow-float);
+}
+
+.rp-shell-v2 .rp-main-v2,
+.rp-shell-v2 .rp-content-v2,
+.rp-shell-v2 .rp-cc4-root,
+.rp-shell-v2 .rp-cock {
+  background: var(--color-canvas) !important;
+  color: var(--color-text);
+}
+
+/* ——— GOH ——— */
+.rp-shell-v2 .rp-goh {
+  background: var(--color-canvas) !important;
+  border-bottom: 1px solid var(--color-hairline) !important;
+  color: var(--color-text);
+}
+
+.rp-shell-v2 .rp-goh-title {
+  color: var(--color-text) !important;
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-tight);
+  font-family: var(--type-display);
+}
+
+.rp-shell-v2 .rp-goh-strip {
+  background: var(--color-surface) !important;
+  border-bottom: 1px solid var(--color-hairline) !important;
+  font-family: var(--type-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.rp-shell-v2 .rp-goh-live-pill {
+  color: #00a85a !important;
+  border-color: rgba(0, 217, 120, 0.35) !important;
+  background: rgba(0, 217, 120, 0.1) !important;
+  font-weight: var(--fw-semibold);
+}
+
+.rp-shell-v2 .rp-goh-ctrl-btn,
+.rp-shell-v2 .rp-goh-ask,
+.rp-shell-v2 .rp-demo-org-btn {
+  color: var(--color-text) !important;
+  background: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+  border-radius: var(--radius-md);
+}
+
+.rp-shell-v2 .rp-demo-org-btn[data-active="true"],
+.rp-shell-v2 .rp-world-switch .rp-demo-org-btn[data-active="true"] {
+  background: rgba(0, 217, 120, 0.12) !important;
+  border-color: rgba(0, 217, 120, 0.28) !important;
+}
+
+.rp-shell-v2 .rp-world-switch .rp-demo-org-kicker,
+.rp-shell-v2 .rp-goh-world .rp-demo-org-kicker {
+  font-family: var(--type-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.rp-shell-v2 .rp-demo-org-kicker {
+  font-family: var(--type-mono) !important;
+  font-size: var(--fs-meta) !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  font-weight: var(--fw-medium) !important;
+  color: var(--color-text-muted) !important;
+}
+
+/* ——— Modules: open canvas + hairlines, not card soup ——— */
+.rp-shell-v2 .rp-ns-mod,
+.rp-shell-v2 .rp-cock-mod,
+.rp-shell-v2 .rp-cc4-mod,
+.rp-shell-v2 .rp-srv-card,
+.rp-shell-v2 .rp-val-panel,
+.rp-shell-v2 .rp-mem-panel,
+.rp-shell-v2 .rp-ih-section,
+.rp-shell-v2 .rp-dash-lib-card,
+.rp-shell-v2 .rp-set-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-module);
+  box-shadow: none;
+  color: var(--color-text);
+}
+
+.rp-shell-v2 .rp-ns-mod[data-mod="situation"],
+.rp-shell-v2 .rp-ns-mod[data-mod="handoff"],
+.rp-shell-v2 .rp-cock-mod[data-mod="hero"] {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  padding: var(--space-24px) var(--space-24px);
+}
+
+/* Time horizons */
+.rp-shell-v2 .rp-ns-horizon,
+.rp-shell-v2 [data-horizon] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--type-mono);
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.rp-shell-v2 .rp-ns-horizon[data-horizon="now"],
+.rp-shell-v2 [data-horizon="now"] {
+  color: #00a85a;
+}
+
+/* ——— Editorial / numeric ——— */
+.rp-shell-v2 .rp-ns-statement,
+.rp-shell-v2 .rp-cock-statement,
+.rp-shell-v2 .rp-hotel-statement,
+.rp-shell-v2 .rp-mem-hero h2,
+.rp-shell-v2 .rp-intel-question,
+.rp-shell-v2 .rp-ih-question,
+.rp-shell-v2 [data-type="editorial"] {
+  font-family: var(--type-display) !important;
+  font-size: var(--fs-display) !important;
+  font-weight: var(--fw-semibold) !important;
+  letter-spacing: var(--tracking-display) !important;
+  line-height: var(--lh-display) !important;
+  color: var(--color-text) !important;
+}
+
+.rp-shell-v2 .rp-ns-statement [data-tone="adverse"],
+.rp-shell-v2 .rp-hotel-statement [data-tone="adverse"] {
+  color: var(--semantic-negative) !important;
+}
+
+.rp-shell-v2 .rp-ns-eyebrow,
+.rp-shell-v2 .rp-cock-k,
+.rp-shell-v2 .rp-cc4-eyebrow,
+.rp-shell-v2 .rp-mem-eyebrow,
+.rp-shell-v2 .rp-val-eyebrow,
+.rp-shell-v2 .rp-dl-kicker,
+.rp-shell-v2 .radr-eyebrow,
+.rp-shell-v2 [data-eyebrow="true"] {
+  font-family: var(--type-mono) !important;
+  font-size: var(--fs-meta) !important;
+  font-weight: var(--fw-medium) !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--color-text-muted) !important;
+}
+
+.rp-shell-v2 [data-type="numeric"],
+.rp-shell-v2 .rp-metric-value,
+.rp-shell-v2 .rp-val-hero-figure strong,
+.rp-shell-v2 .rp-srv-hero-figure strong,
+.rp-shell-v2 .rp-drec-econ-num,
+.rp-shell-v2 .rp-handoff-ed-econ {
+  font-family: var(--type-numeric);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+}
+
+.rp-shell-v2 .rp-handoff-ed-econ,
+.rp-shell-v2 .rp-drec-econ-num,
+.rp-shell-v2 .rp-hotel-judgment em {
+  color: #00a85a !important;
+  font-style: normal;
+}
+
+/* Review Now accent */
+.rp-shell-v2 .rp-ns-mod[data-mod="handoff"] {
+  border-color: rgba(0, 217, 120, 0.22);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 217, 120, 0.06) 0%,
+    var(--color-surface) 32%
+  );
+}
+
+.rp-shell-v2 .rp-handoff-ed-row {
+  display: grid !important;
+  grid-template-columns: 2.75rem minmax(0, 1fr) auto auto;
+  gap: 0.45rem 0.85rem;
+  align-items: center;
+  padding: 1rem 0.15rem !important;
+  border-bottom: 1px solid var(--color-hairline);
+  background: transparent !important;
+  width: 100%;
+  text-align: left;
+  color: var(--color-text);
+  transition: background var(--rp-dur-fast) var(--rp-ease);
+}
+
+.rp-shell-v2 .rp-handoff-ed-row:hover {
+  background: rgba(10, 13, 11, 0.03) !important;
+}
+
+.rp-shell-v2 .rp-ns-why,
+.rp-shell-v2 .rp-ns-link,
+.rp-shell-v2 .rp-cock-link,
+.rp-shell-v2 .rp-arrow-link,
+.rp-shell-v2 a.rp-handoff-all {
+  color: var(--color-text) !important;
+  border-bottom: 1px solid rgba(10, 13, 11, 0.18);
+  text-decoration: none;
+}
+
+.rp-shell-v2 .rp-ns-why:hover,
+.rp-shell-v2 .rp-ns-link:hover,
+.rp-shell-v2 .rp-arrow-link:hover {
+  color: #00a85a !important;
+  border-bottom-color: rgba(0, 168, 90, 0.45);
+}
+
+/* Metric drivers */
+.rp-shell-v2 .rp-cock-wf[data-layout="row"] .rp-metric-row,
+.rp-shell-v2 .rp-hotel-primary-metrics li {
+  background: var(--color-canvas-elevated);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-sm);
+}
+
+.rp-shell-v2 .rp-hotel-primary-metrics li[data-attention="true"] {
+  background: rgba(0, 217, 120, 0.08);
+  border-color: rgba(0, 217, 120, 0.28);
+}
+
+.rp-shell-v2 .rp-hotel-primary-metrics li[data-risk="true"] {
+  border-color: rgba(180, 35, 24, 0.28);
+}
+
+/* Pulse land — light cinematic */
+.rp-shell-v2 .rp-pulse-land {
+  background: color-mix(in srgb, var(--color-surface-subtle) 55%, #fff) !important;
+  border: 1px solid var(--color-hairline);
+  box-shadow: none !important;
+}
+
+.rp-shell-v2 .rp-pulse-land-events button {
+  background: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.rp-shell-v2 .rp-pulse-land-events li[data-tone="neg"] button {
+  background: var(--semantic-negative-soft) !important;
+  border-color: rgba(180, 35, 24, 0.22) !important;
+}
+
+.rp-shell-v2 .rp-ledger-judgment-card {
+  background: color-mix(in srgb, var(--semantic-live) 7%, var(--color-surface)) !important;
+  border-color: rgba(0, 217, 120, 0.28) !important;
+}
+
+.rp-shell-v2 .rp-ledger-judgment-card:hover {
+  background: var(--color-surface) !important;
+}
+
+/* Cap font-weight at 600 */
+.rp-shell-v2,
+.rp-shell-v2 * {
+  font-weight: inherit;
+}
+
+.rp-shell-v2 strong,
+.rp-shell-v2 b,
+.rp-shell-v2 [data-weight="semibold"],
+.rp-shell-v2 .rp-goh-title,
+.rp-shell-v2 .rp-ns-statement,
+.rp-shell-v2 .rp-metric-value {
+  font-weight: var(--fw-semibold) !important;
+}
+
+/* Mobile tabs */
+.rp-shell-v2 .rp-mobile-tabs {
+  background: var(--color-surface) !important;
+  border-top: 1px solid var(--color-border) !important;
+  color: var(--color-text-secondary);
+}
+
+.rp-shell-v2 .rp-mobile-tab[data-active="true"] {
+  color: #00a85a !important;
+}
+
+/* Restore mineral light canvas — warm shell only (never wipe graphite) */
+.rp-shell-v2[data-theme="warm"],
+.rp-shell-v2[data-theme="daylight"],
+.rp-shell-v2[data-theme="warm"] .rp-oday-hero,
+.rp-shell-v2[data-theme="daylight"] .rp-oday-hero,
+.rp-shell-v2[data-theme="warm"] .rp-hotel-readiness,
+.rp-shell-v2[data-theme="daylight"] .rp-hotel-readiness,
+.rp-shell-v2[data-theme="warm"] .rp-cc4-root ,
+.rp-shell-v2[data-theme="daylight"] .rp-cc4-root {
+  --rp-ns-ivory: var(--color-canvas) !important;
+  --rp-oday-cream: var(--color-canvas);
+  --rp-oday-surface: var(--color-surface);
+  --color-canvas: #f7faf8;
+  --color-surface: #ffffff;
+  --color-text: #0a0d0b;
+  --color-text-secondary: #626a65;
+  --color-border: rgba(10, 13, 11, 0.08);
+}
+
+.rp-shell-v2 .rp-ns-sit-visual {
+  opacity: 0.85;
+  mix-blend-mode: normal;
+  filter: none;
+}
+
+/* Shared metric composition */
+.rp-shell-v2 .rp-metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4px);
+  min-width: 0;
+}
+
+.rp-shell-v2 .rp-metric[data-layout="row"] {
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--space-8px);
+}
+
+.rp-shell-v2 .rp-metric-label {
+  font-family: var(--type-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.rp-shell-v2 .rp-metric-value {
+  font-size: var(--fs-key-value);
+  line-height: var(--lh-metric);
+}
+
+.rp-shell-v2 .rp-metric-delta[data-tone="pos"] {
+  color: var(--semantic-positive);
+}
+.rp-shell-v2 .rp-metric-delta[data-tone="neg"] {
+  color: var(--semantic-negative);
+}
+.rp-shell-v2 .rp-metric-delta[data-tone="warn"] {
+  color: var(--semantic-warning);
+}
+
+.rp-shell-v2 .rp-metric-row {
+  display: grid;
+  grid-template-columns: minmax(5rem, 1fr) minmax(0, 2fr) auto;
+  gap: var(--space-8px);
+  align-items: center;
+  width: 100%;
+  padding: var(--space-8px) var(--space-12px);
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Service tabs — never concatenate with question */
+.rp-shell-v2 .rp-svc-tabs,
+.rp-shell-v2 .rp-srv-tabs,
+.rp-shell-v2 .rp-smap-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8px);
+  margin: 0 0 var(--space-12px);
+}
+
+.rp-shell-v2 .rp-svc-viewline,
+.rp-shell-v2 .rp-srv-question,
+.rp-shell-v2 .rp-smap-question {
+  display: block;
+  clear: both;
+  width: 100%;
+  margin: 0 0 var(--space-16px);
+  font-family: var(--type-display);
+  font-size: var(--fs-section);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  line-height: var(--lh-section);
+}
+
+/* Futures matrix — real columns, never run-on euros */
+.rp-shell-v2 .rp-traj-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-shell-v2 .rp-traj-matrix-table th,
+.rp-shell-v2 .rp-traj-matrix-table td {
+  padding: var(--space-8px) var(--space-12px);
+  text-align: right;
+  border-bottom: 1px solid var(--color-hairline);
+  white-space: nowrap;
+}
+
+.rp-shell-v2 .rp-traj-matrix-table th:first-child,
+.rp-shell-v2 .rp-traj-matrix-table td:first-child {
+  text-align: left;
+}
+
+.rp-shell-v2 .rp-menupulse-sold .rp-metric-value,
+.rp-shell-v2 .rp-menupulse-contrib .rp-metric-value {
+  font-size: var(--fs-body-sm);
+  display: block;
+}
+
+.rp-shell-v2 .rp-menupulse-sold .rp-metric-label,
+.rp-shell-v2 .rp-menupulse-contrib .rp-metric-label {
+  display: block;
+}
+
+/* ——— Page personalities (visual only) ——— */
+
+/* Center: situation + handoff elevated; support modules quieter */
+.rp-shell-v2 .rp-ns-mod[data-mod="contrib"],
+.rp-shell-v2 .rp-ns-mod[data-mod="locations"],
+.rp-shell-v2 .rp-ns-mod[data-mod="menu"],
+.rp-shell-v2 .rp-ns-mod[data-mod="history"],
+.rp-shell-v2 .rp-ns-mod[data-mod="exposure"],
+.rp-shell-v2 .rp-ns-mod[data-mod="watchlist"],
+.rp-shell-v2 .rp-cock-mod[data-mod="locations"],
+.rp-shell-v2 .rp-cock-mod[data-mod="performance"] {
+  background: transparent;
+  border-color: transparent;
+  border-top: 1px solid var(--color-hairline);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Intelligence: one dominant question */
+.rp-shell-v2 .rp-ih-lead,
+.rp-shell-v2 .rp-intel-lead {
+  margin-bottom: var(--space-32px);
+}
+
+.rp-shell-v2 .rp-ih-catalog .rp-ih-card,
+.rp-shell-v2 .rp-intel-module {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Memory / Value: interpretive contrast */
+.rp-shell-v2 .rp-val-hero-figure strong,
+.rp-shell-v2 .rp-mem-hero-stats strong {
+  font-size: var(--fs-hero-metric) !important;
+  letter-spacing: var(--tracking-display);
+}
+
+/* Locations: clean table plane */
+.rp-shell-v2 .rp-loc-table-scroll,
+.rp-shell-v2 .rp-locations-table {
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-module);
+}
+
+/* Connections / Data Health: dense technical rows */
+.rp-shell-v2 .rp-conn-row,
+.rp-shell-v2 .rp-dh-row {
+  border-bottom: 1px solid var(--color-hairline);
+  background: transparent;
+}
+
+/* Settings: beautiful-boring forms */
+.rp-shell-v2 .rp-set-panel,
+.rp-shell-v2 .rp-settings-row {
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+/* Decision room: case-file, less card stack */
+.rp-shell-v2 .rp-drec-elevated .rp-drec-sec {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+  border-radius: 0;
+  box-shadow: none;
+  padding-block: var(--space-24px);
+}
+
+/* BOH bands */
+.rp-shell-v2 .rp-house-band {
+  background: transparent;
+  border-top: 1px solid var(--color-hairline);
+  border-radius: 0;
+}

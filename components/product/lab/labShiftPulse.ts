@@ -59,7 +59,7 @@ export type ShiftPulseModel = {
   nowIndex: number;
 };
 
-/** Berlin Mitte dinner — restaurant service day */
+/** Soho · New York dinner — restaurant service day */
 export const RESTAURANT_SERIES: PulseSeriesPoint[] = [
   { t: "18:00", m: 0, moneyIn: 980, moneyInForecast: 1020, moneyOut: 120, moneyOutForecast: 110, net: 860, netForecast: 910 },
   { t: "18:15", m: 15, moneyIn: 1680, moneyInForecast: 1720, moneyOut: 210, moneyOutForecast: 190, net: 1470, netForecast: 1530 },

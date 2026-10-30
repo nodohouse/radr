@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte dinner - LIVE financial operating fixture.
+ * Soho · New York dinner - LIVE financial operating fixture.
  * Coherent with live shift net sales (~€6.8k mid-service) and contribution math.
  *
  * All amounts: major EUR units. Primary UI must show 2 decimal places.
@@ -372,7 +372,7 @@ export function demoBerlinLiveFinance(
   return {
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     serviceLabel: "Dinner",
     phaseLabel: "Live",
     businessDate: "2026-08-19",

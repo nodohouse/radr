@@ -33,7 +33,7 @@ export const HOME_RAIL: EconomicRailItem[] = [
     label: "Peak capacity",
     meta: "Restaurant",
     tone: "urgent",
-    detail: "Berlin Mitte · wait 12 vs seat-now",
+    detail: "Soho · New York · wait 12 vs seat-now",
   },
   {
     id: "premium",
@@ -41,11 +41,11 @@ export const HOME_RAIL: EconomicRailItem[] = [
     label: "Premium inventory",
     meta: "Hotel",
     tone: "exposure",
-    detail: "Canal House · hold 4 premium direct",
+    detail: "Mercer House · hold 4 premium direct",
   },
   {
     id: "orphan",
-    // Gross night at risk · CANON_ORPHAN.exposureEuro (€164). Pass brief cited €184;
+    // Gross night at risk · CANON_ORPHAN.exposureEuro ($164). Pass brief cited $184;
     // keep fixture so Home / Platform / Value stay coherent.
     euro: money(CANON_ORPHAN.exposureEuro),
     label: "Night at risk",
@@ -59,15 +59,15 @@ export const HOME_RAIL: EconomicRailItem[] = [
     label: "Contract variance",
     meta: "Finance",
     tone: "exposure",
-    detail: "Invoice €7.45/L · Contract €6.80/L · 420 L",
+    detail: "Invoice $7.45/L · Contract $6.80/L · 420 L",
   },
   {
     id: "settle",
-    euro: "€293",
+    euro: "$293",
     label: "Settlement gap",
     meta: "Reconciliation",
     tone: "exposure",
-    detail: "Expected €9,814 · Actual €9,521",
+    detail: "Expected $9,814 · Actual $9,521",
   },
   {
     id: "verified",
@@ -89,7 +89,7 @@ export const HOME_RAIL: EconomicRailItem[] = [
 export const LEAK_MARQUEE: EconomicRailItem[] = [
   { id: "uc", euro: "—", label: "Unapplied credit", tone: "exposure" },
   { id: "dup", euro: "—", label: "Duplicate charge", tone: "exposure" },
-  { id: "sg", euro: "€293", label: "Settlement gap", tone: "exposure" },
+  { id: "sg", euro: "$293", label: "Settlement gap", tone: "exposure" },
   { id: "yl", euro: "—", label: "Yield loss", tone: "urgent" },
   { id: "rb", euro: "—", label: "Missed rebate", tone: "exposure" },
   { id: "ns", euro: "—", label: "No-show", tone: "urgent" },

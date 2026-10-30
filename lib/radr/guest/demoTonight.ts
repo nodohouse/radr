@@ -1,5 +1,5 @@
 /**
- * Berlin Mitte dinner - illustrative guest value fixture.
+ * Soho · New York dinner - illustrative guest value fixture.
  * Synthetic names · no real PII · identity confidence explicit.
  */
 

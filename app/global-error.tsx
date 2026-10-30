@@ -50,6 +50,37 @@ export default function GlobalError({
           <p style={{ color: "#626a65", maxWidth: "28rem", margin: "0 auto 1.5rem" }}>
             Retry the page, or return home. If it continues, contact us.
           </p>
+          {error?.digest ? (
+            <p
+              style={{
+                fontFamily: "IBM Plex Mono, monospace",
+                fontSize: "0.68rem",
+                color: "#4a524c",
+                margin: "0 auto 1rem",
+              }}
+            >
+              ref {error.digest}
+            </p>
+          ) : null}
+          {process.env.NODE_ENV !== "production" && error?.message ? (
+            <pre
+              style={{
+                textAlign: "left",
+                maxWidth: "40rem",
+                margin: "0 auto 1.5rem",
+                padding: "1rem",
+                background: "rgba(255,255,255,0.06)",
+                color: "#f7faf8",
+                fontSize: "0.75rem",
+                overflow: "auto",
+                whiteSpace: "pre-wrap",
+              }}
+            >
+              {error.message}
+              {error.digest ? `\ndigest: ${error.digest}` : ""}
+              {error.stack ? `\n\n${error.stack}` : ""}
+            </pre>
+          ) : null}
           <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
             <button
               type="button"

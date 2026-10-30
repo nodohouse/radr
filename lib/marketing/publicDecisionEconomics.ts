@@ -31,7 +31,7 @@ import {
   formatPublicMoney,
   type PublicMoney,
 } from "@/lib/marketing/publicMoney";
-import { formatDecisionMoney } from "@/lib/radr/decision/core";
+import { formatDecisionMoney, formatDecisionUnitRate, formatDecisionMoneyCents } from "@/lib/radr/decision/core";
 
 export type PublicDecisionEconomics = {
   displayId: string;
@@ -131,6 +131,16 @@ export function publicDecisionEconomics(
 
 export function euro(amount: number): string {
   return formatDecisionMoney(amount);
+}
+
+/** Unit rates that must preserve cents (never $6.80 → €7). */
+export function euroRate(amount: number, unit = "L"): string {
+  return formatDecisionUnitRate(amount, unit);
+}
+
+/** Cents-preserving euro without unit suffix — for formulas. */
+export function euroCents(amount: number): string {
+  return formatDecisionMoneyCents(amount);
 }
 
 export function euroMoney(m: PublicMoney): string {

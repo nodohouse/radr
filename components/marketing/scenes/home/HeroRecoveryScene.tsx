@@ -23,7 +23,7 @@ export function HeroRecoveryScene() {
         <p className="rx-fin-eye">
           Historical · {ECON_D4102.displayId} · sealed
         </p>
-        <p className="rx-fin-place">Berlin Mitte · Supplier / AP</p>
+        <p className="rx-fin-place">Soho · New York · Supplier / AP</p>
         <div style={{ marginTop: "0.65rem" }}>
           <VerifiedStamp verified label="Verified recovered" />
         </div>
@@ -36,8 +36,8 @@ export function HeroRecoveryScene() {
 
       <EvidenceProvenance
         steps={[
-          { label: "Contract", value: "€6.80/L" },
-          { label: "Invoice", value: "€7.45/L" },
+          { label: "Contract", value: "$6.80/L" },
+          { label: "Invoice", value: "$7.45/L" },
           { label: "Decision", value: "Dispute" },
           { label: "Credit", value: EUR },
           { label: "Proof", value: "Matched" },

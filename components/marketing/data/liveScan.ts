@@ -3,7 +3,7 @@ import { DEMO, formatEuro, type ChannelId } from "./demo";
 /**
  * Illustrative live-scan pool for the hero money meter.
  * Independent of SIGNALS (which still power Delta / Coverage).
- * Official demo lock: annualized €172,460 + recoverable €4,280 = €176,740.
+ * Official demo lock: annualized $172,460 + recoverable $4,280 = $176,740.
  */
 
 export type LiveSignal = {
@@ -13,7 +13,7 @@ export type LiveSignal = {
   title: string;
   tag: string;
   action: string;
-  /** Raw / immediate display, e.g. €84 or €840 / night */
+  /** Raw / immediate display, e.g. $84 or $840 / night */
   rawLabel: string;
   /** What gets added to annualized meter (0 if recoverable-only) */
   annualizedAdd: number;
@@ -48,13 +48,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Wrong delivery fee",
     tag: "Actionable",
     action: "Review delivery charge →",
-    rawLabel: "€84",
+    rawLabel: "$84",
     annualizedAdd: 4_368,
     recoverableAdd: 0,
     source: {
-      should: { label: "Contract fee", value: "€12" },
-      actual: { label: "Charged", value: "€96" },
-      delta: "△ €84",
+      should: { label: "Contract fee", value: "$12" },
+      actual: { label: "Charged", value: "$96" },
+      delta: "△ $84",
     },
   },
   overtime: {
@@ -64,13 +64,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Overtime developing",
     tag: "Avoidable",
     action: "Review tonight's roster →",
-    rawLabel: "€216",
+    rawLabel: "$216",
     annualizedAdd: 11_232,
     recoverableAdd: 0,
     source: {
-      should: { label: "Planned OT", value: "€0" },
-      actual: { label: "Projected", value: "€216" },
-      delta: "△ €216 / night",
+      should: { label: "Planned OT", value: "$0" },
+      actual: { label: "Projected", value: "$216" },
+      delta: "△ $216 / night",
     },
   },
   commission: {
@@ -80,13 +80,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Commission mismatch",
     tag: "Missed revenue",
     action: "Review channel rate →",
-    rawLabel: "€1,240",
+    rawLabel: "$1,240",
     annualizedAdd: 14_880,
     recoverableAdd: 0,
     source: {
       should: { label: "Agreed", value: "12%" },
       actual: { label: "Charged", value: "18%" },
-      delta: "△ €1,240",
+      delta: "△ $1,240",
     },
   },
   agency: {
@@ -96,13 +96,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Agency shift avoidable",
     tag: "Avoidable",
     action: "Review agency booking →",
-    rawLabel: "€680 / shift",
+    rawLabel: "$680 / shift",
     annualizedAdd: 680,
     recoverableAdd: 0,
     source: {
       should: { label: "Core staff", value: "Covered" },
       actual: { label: "Agency", value: "1 shift" },
-      delta: "△ €680",
+      delta: "△ $680",
     },
   },
   variance: {
@@ -112,13 +112,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Food cost variance",
     tag: "Review",
     action: "Open variance case →",
-    rawLabel: "€420",
+    rawLabel: "$420",
     annualizedAdd: 420,
     recoverableAdd: 0,
     source: {
       should: { label: "Target", value: "28.4%" },
       actual: { label: "Actual", value: "31.1%" },
-      delta: "△ €420",
+      delta: "△ $420",
     },
   },
   supplier_core: {
@@ -128,13 +128,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Supplier price above contract",
     tag: "Review",
     action: "Review supplier charge →",
-    rawLabel: "€3.60 / case",
+    rawLabel: "$3.60 / case",
     annualizedAdd: 18_620,
     recoverableAdd: 0,
     source: {
-      should: { label: "Contract", value: "€31.20" },
-      actual: { label: "Invoice", value: "€34.80" },
-      delta: "△ €3.60 / case",
+      should: { label: "Contract", value: "$31.20" },
+      actual: { label: "Invoice", value: "$34.80" },
+      delta: "△ $3.60 / case",
     },
   },
   credit_core: {
@@ -144,13 +144,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Supplier credit never received",
     tag: "Recoverable",
     action: "Open credit case →",
-    rawLabel: "€4,280",
+    rawLabel: "$4,280",
     annualizedAdd: 0,
     recoverableAdd: 4_280,
     source: {
-      should: { label: "Expected", value: "€4,280" },
-      actual: { label: "Received", value: "€0" },
-      delta: "△ €4,280",
+      should: { label: "Expected", value: "$4,280" },
+      actual: { label: "Received", value: "$0" },
+      delta: "△ $4,280",
     },
   },
   labor_core: {
@@ -160,13 +160,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Scheduled above forecast demand",
     tag: "Avoidable",
     action: "Review tonight's schedule →",
-    rawLabel: "€840 / night",
+    rawLabel: "$840 / night",
     annualizedAdd: 43_680,
     recoverableAdd: 0,
     source: {
       should: { label: "Needed", value: "11" },
       actual: { label: "Scheduled", value: "14" },
-      delta: "△ 3 people · €840 / night",
+      delta: "△ 3 people · $840 / night",
     },
   },
   rooms: {
@@ -176,13 +176,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Saturday rooms priced below demand",
     tag: "Missed revenue",
     action: "Review rate recommendation →",
-    rawLabel: "€8,400 / month",
+    rawLabel: "$8,400 / month",
     annualizedAdd: 37_480,
     recoverableAdd: 0,
     source: {
-      should: { label: "Demand rate", value: "€395" },
-      actual: { label: "Listed", value: "€360" },
-      delta: "△ €35 / room",
+      should: { label: "Demand rate", value: "$395" },
+      actual: { label: "Listed", value: "$360" },
+      delta: "△ $35 / room",
     },
   },
   menu: {
@@ -192,7 +192,7 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Menu item underpriced",
     tag: "Missed revenue",
     action: "Review contribution →",
-    rawLabel: "€14,200 / year",
+    rawLabel: "$14,200 / year",
     annualizedAdd: 14_200,
     recoverableAdd: 0,
     source: {
@@ -208,7 +208,7 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Delivery commission above agreed rate",
     tag: "Actionable",
     action: "Review platform terms →",
-    rawLabel: "€11,760 / year",
+    rawLabel: "$11,760 / year",
     annualizedAdd: 11_760,
     recoverableAdd: 0,
     source: {
@@ -224,11 +224,11 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Unapproved price increase",
     tag: "Review",
     action: "Challenge supplier increase →",
-    rawLabel: "€9,420 / year",
+    rawLabel: "$9,420 / year",
     annualizedAdd: 9_420,
     recoverableAdd: 0,
     source: {
-      should: { label: "Approved", value: "€0 change" },
+      should: { label: "Approved", value: "$0 change" },
       actual: { label: "Invoiced", value: "+6.2%" },
       delta: "△ unapproved",
     },
@@ -240,7 +240,7 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Staffing above target",
     tag: "Avoidable",
     action: "Align to forecast →",
-    rawLabel: "€2,140 / week",
+    rawLabel: "$2,140 / week",
     annualizedAdd: 5_720,
     recoverableAdd: 0,
     source: {
@@ -257,11 +257,11 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Duplicate invoice detected",
     tag: "Verify",
     action: "Review duplicate →",
-    rawLabel: "€2,840",
+    rawLabel: "$2,840",
     annualizedAdd: 0,
     recoverableAdd: 0,
     source: {
-      should: { label: "Pay once", value: "€2,840" },
+      should: { label: "Pay once", value: "$2,840" },
       actual: { label: "Submitted", value: "×2" },
       delta: "△ duplicate",
     },
@@ -273,12 +273,12 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Rebate missing",
     tag: "Recoverable",
     action: "Chase rebate →",
-    rawLabel: "€12,600",
+    rawLabel: "$12,600",
     annualizedAdd: 0,
     recoverableAdd: 0,
     source: {
-      should: { label: "Due", value: "€12,600" },
-      actual: { label: "Received", value: "€0" },
+      should: { label: "Due", value: "$12,600" },
+      actual: { label: "Received", value: "$0" },
       delta: "△ missing",
     },
   },
@@ -289,11 +289,11 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Refund not processed",
     tag: "Recoverable",
     action: "Process refund →",
-    rawLabel: "€1,840",
+    rawLabel: "$1,840",
     annualizedAdd: 0,
     recoverableAdd: 0,
     source: {
-      should: { label: "Refund", value: "€1,840" },
+      should: { label: "Refund", value: "$1,840" },
       actual: { label: "Status", value: "Open" },
       delta: "△ unpaid",
     },
@@ -305,13 +305,13 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "OTA settlement short",
     tag: "Recoverable",
     action: "Reconcile settlement →",
-    rawLabel: "€3,620",
+    rawLabel: "$3,620",
     annualizedAdd: 0,
     recoverableAdd: 0,
     source: {
-      should: { label: "Expected", value: "€41,200" },
-      actual: { label: "Settled", value: "€37,580" },
-      delta: "△ €3,620",
+      should: { label: "Expected", value: "$41,200" },
+      actual: { label: "Settled", value: "$37,580" },
+      delta: "△ $3,620",
     },
   },
   promo: {
@@ -321,12 +321,12 @@ export const LIVE_POOL: Record<string, LiveSignal> = {
     title: "Promotion destroying contribution",
     tag: "Missed revenue",
     action: "Review promo →",
-    rawLabel: "€6,820 / campaign",
+    rawLabel: "$6,820 / campaign",
     annualizedAdd: 0,
     recoverableAdd: 0,
     source: {
       should: { label: "Contribution", value: "Positive" },
-      actual: { label: "Campaign", value: "−€6,820" },
+      actual: { label: "Campaign", value: "−$6,820" },
       delta: "△ destroyed margin",
     },
   },
@@ -359,8 +359,8 @@ export const SCAN_SCRIPT: readonly ScanBeat[] = [
       id: "m-84",
       kind: "eightyfour",
       kicker: "The RADR idea",
-      headline: "You wouldn't chase €84.\nRADR would.",
-      body: "Because €84 happening 200 times isn't €84.",
+      headline: "You wouldn't chase $84.\nRADR would.",
+      body: "Because $84 happening 200 times isn't $84.",
     },
     delayMs: 4800,
   },

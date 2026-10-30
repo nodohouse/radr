@@ -26,7 +26,7 @@ const STORIES: Story[] = [
   {
     id: "SUPPLIER_AP",
     headline: "Supplier / AP",
-    facts: ["Invoice €7.45/L", "Contract €6.80/L", "420 L"],
+    facts: ["Invoice $7.45/L", "Contract $6.80/L", "420 L"],
     euro: `${euro(ECON_D4102.verified)} recovered`,
     radr: [
       "Detects variance",
@@ -41,10 +41,10 @@ const STORIES: Story[] = [
     id: "RECONCILIATION",
     headline: "Reconciliation",
     facts: [
-      "Expected settlement €9,814",
-      "Actual settlement €9,521",
+      "Expected settlement $9,814",
+      "Actual settlement $9,521",
     ],
-    euro: "€293 unexplained",
+    euro: "$293 unexplained",
     radr: [
       "Refund treatment",
       "Promotion funding",
@@ -52,7 +52,7 @@ const STORIES: Story[] = [
       "Prepares reconciliation",
       "Verifies closure",
     ],
-    punch: "Settlement received. Still €293 short.",
+    punch: "Settlement received. Still $293 short.",
   },
   {
     id: "COST_VARIANCE",
@@ -78,9 +78,9 @@ const STORIES: Story[] = [
     headline: "Procurement leverage",
     facts: [
       "Same olive oil",
-      "Berlin €7.45/L",
-      "Amsterdam €6.80/L",
-      "Lisbon €6.62/L",
+      "Soho New York $7.45/L",
+      "Singapore $6.80/L",
+      "Tokyo $6.62/L",
     ],
     euro: "Group leverage",
     radr: [
@@ -95,7 +95,7 @@ const STORIES: Story[] = [
     id: "PERISHABLE_REVENUE",
     headline: "Perishable revenue",
     facts: ["Room cancelled", "19 hours left"],
-    euro: "€184 value at risk",
+    euro: "$184 value at risk",
     radr: [
       "Waitlist",
       "Direct",

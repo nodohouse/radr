@@ -1,0 +1,100 @@
+{
+  "capturedAt": "2026-10-05T08:21:35.760Z",
+  "routes": [
+    {
+      "id": "cc",
+      "path": "/app?stay=1",
+      "ok": true
+    },
+    {
+      "id": "decisions",
+      "path": "/app/decisions?stay=1",
+      "ok": true
+    },
+    {
+      "id": "d1911",
+      "path": "/app/decisions/dec_peak_berlin?stay=1",
+      "ok": true
+    },
+    {
+      "id": "d8204",
+      "path": "/app/decisions/dec_caster_sugar_berlin?stay=1",
+      "ok": true
+    },
+    {
+      "id": "d4102",
+      "path": "/app/decisions/dec_supplier_berlin?stay=1",
+      "ok": true
+    },
+    {
+      "id": "dhk1402",
+      "path": "/app/decisions/dec_hotel_readiness_canal?stay=1",
+      "ok": true
+    },
+    {
+      "id": "value",
+      "path": "/app/value?stay=1",
+      "ok": true
+    },
+    {
+      "id": "house",
+      "path": "/app/house?stay=1",
+      "ok": true
+    },
+    {
+      "id": "service",
+      "path": "/app/service?stay=1",
+      "ok": true
+    },
+    {
+      "id": "locations",
+      "path": "/app/locations?stay=1",
+      "ok": true
+    },
+    {
+      "id": "berlin",
+      "path": "/app/locations/loc_berlin_mitte?stay=1",
+      "ok": true
+    },
+    {
+      "id": "menu",
+      "path": "/app/intelligence/menu?stay=1",
+      "ok": true
+    },
+    {
+      "id": "intel",
+      "path": "/app/intelligence?stay=1",
+      "ok": true
+    },
+    {
+      "id": "memory",
+      "path": "/app/memory?stay=1",
+      "ok": true
+    },
+    {
+      "id": "connections",
+      "path": "/app/connections?stay=1",
+      "ok": true
+    },
+    {
+      "id": "data-health",
+      "path": "/app/data-health?stay=1",
+      "ok": true
+    },
+    {
+      "id": "settings",
+      "path": "/app/settings?stay=1",
+      "ok": true
+    },
+    {
+      "id": "dashboards",
+      "path": "/app/dashboards?stay=1",
+      "ok": true
+    },
+    {
+      "id": "cc-hotel",
+      "path": "/app?stay=1",
+      "ok": true
+    }
+  ]
+}

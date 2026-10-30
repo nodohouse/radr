@@ -63,7 +63,7 @@ function buildFinding(phase: SupplierScenarioPhase): Finding {
     id: SUPPLIER_VARIANCE_ID,
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     territory: "BUY",
     category: "supplier_price_variance",
     subtype: "Invoice variance",
@@ -246,7 +246,7 @@ export function buildSupplierVarianceScenario(
     id: SUPPLIER_VARIANCE_ID,
     organizationId: ORG,
     locationId: LOC,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     environment: "DEMO",
     invoice: {
       id: "inv_10418",

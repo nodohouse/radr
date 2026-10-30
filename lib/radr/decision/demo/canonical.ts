@@ -132,6 +132,11 @@ export type CanonDecision = {
   /** Explicit verified incremental when different from actualProtectedEuro. */
   verifiedIncrementalEuro?: number;
   verifiedKind: "protected" | "recovered" | "created" | "avoided";
+  /**
+   * When the Decision is VERIFIED / LEARNED, Futures and option economics
+   * use this instead of POTENTIAL / “pending” language.
+   */
+  verifiedOutcomeNote?: string;
   /** Hotel unit-path illustration — scope ≠ block Decision economics. */
   unitEconomics?: CanonUnitEconomics;
   attributionStrength: AttributionStrength;
@@ -166,7 +171,7 @@ export const CANON_TUNA: CanonDecision = {
   id: DECISION_IDS.tuna,
   displayId: "D-1842",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Tuna Tataki shortfall before peak",
   problemLine:
     "Tuna Tataki is tonight’s bestseller.\n6 portions short for peak.\nThe obvious move is a rush order — RADR models why not.",
@@ -184,11 +189,12 @@ export const CANON_TUNA: CanonDecision = {
     {
       id: "do_nothing",
       title: "Do nothing",
-      expectedContributionEuro: -1840,
+      // Peak convention: expected contribution = 0; exposure lives on exposureEuro.
+      expectedContributionEuro: 0,
       operationalRisk: "high",
       guestImpact: "high",
       confidence: 90,
-      note: "Sellout ~20:10",
+      note: "Sellout ~20:10 · €1,840 contribution exposed",
       isNoAction: true,
     },
     {
@@ -271,7 +277,7 @@ export const CANON_PEAK: CanonDecision = {
   id: DECISION_IDS.peak,
   displayId: "D-1911",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Peak capacity collision",
   problemLine:
     "Dining room 78% occupied. Walk-ins waiting.\nThe obvious move is seat them — RADR holds 12 minutes.",
@@ -281,9 +287,9 @@ export const CANON_PEAK: CanonDecision = {
   scope: "SERVICE",
   connect: "Inbound covers × KDS ticket time × kitchen capacity × delivery × table turns",
   understand: "Empty tables are not free capacity when kitchen ≥90% and 38 covers are inbound. Seating now destroys second-turn contribution.",
-  prepared: "Hold 2 tables 12m · throttle delivery · feature fast dish · resume 18:54.",
+  prepared: "Hold 2 tables 12m · throttle delivery · feature fast dish · resume 20:00.",
   exposureEuro: 620,
-  deadline: "18:53",
+  deadline: "19:59",
   scenarios: [
     {
       id: "seat_now",
@@ -296,7 +302,7 @@ export const CANON_PEAK: CanonDecision = {
           currency: "EUR",
           label: "Baseline · no incremental contribution vs wait path",
           baseline: "vs wait-12 path",
-          scope: "Peak service · Berlin Mitte",
+          scope: "Peak service · Soho · New York",
           horizon: "tonight",
           status: "EXPECTED",
         },
@@ -305,7 +311,7 @@ export const CANON_PEAK: CanonDecision = {
         amount: 0,
         currency: "EUR",
         metricType: "INCREMENTAL_CONTRIBUTION",
-        scope: "Peak service · Berlin Mitte",
+        scope: "Peak service · Soho · New York",
         horizon: "tonight",
         comparedTo: "vs wait-12 path (baseline / cost of seating now)",
         label: "Baseline · no incremental contribution vs wait path",
@@ -331,7 +337,7 @@ export const CANON_PEAK: CanonDecision = {
           currency: "EUR",
           label: "Expected incremental contribution",
           baseline: "vs seat-now",
-          scope: "Peak service · Berlin Mitte",
+          scope: "Peak service · Soho · New York",
           horizon: "tonight",
           status: "EXPECTED",
         },
@@ -340,7 +346,7 @@ export const CANON_PEAK: CanonDecision = {
         amount: 180,
         currency: "EUR",
         metricType: "INCREMENTAL_CONTRIBUTION",
-        scope: "Peak service · Berlin Mitte",
+        scope: "Peak service · Soho · New York",
         horizon: "tonight",
         comparedTo: "vs seat-now",
         label: "Expected incremental contribution",
@@ -365,8 +371,8 @@ export const CANON_PEAK: CanonDecision = {
           currency: "EUR",
           label: "Expected incremental contribution",
           baseline: "vs seat-now",
-          scope: "Tonight's dinner service · Berlin Mitte",
-          horizon: "tonight · decide by 18:53",
+          scope: "Tonight's dinner service · Soho · New York",
+          horizon: "tonight · decide by 19:59",
           status: "EXPECTED",
         },
       ],
@@ -374,8 +380,8 @@ export const CANON_PEAK: CanonDecision = {
         amount: 620,
         currency: "EUR",
         metricType: "EXPECTED_INCREMENTAL_CONTRIBUTION",
-        scope: "Tonight's dinner service · Berlin Mitte",
-        horizon: "tonight · decide by 18:53",
+        scope: "Tonight's dinner service · Soho · New York",
+        horizon: "tonight · decide by 19:59",
         comparedTo: "vs seat-now",
         label: "Expected incremental contribution",
         baselineId: "seat_now",
@@ -385,7 +391,7 @@ export const CANON_PEAK: CanonDecision = {
       mainRiskDescription: "Walk-in abandonment during the 12-minute hold",
       guestImpact: "low",
       confidence: 78,
-      note: "+€620 expected incremental contribution vs seat-now · hold 2 tables · throttle delivery · feature fast dish · resume 18:54",
+      note: "+€620 expected incremental contribution vs seat-now · hold 2 tables · throttle delivery · feature fast dish · resume 20:00",
       recommended: true,
     },
   ],
@@ -449,7 +455,7 @@ export const CANON_OTA: CanonDecision = {
   id: DECISION_IDS.ota,
   displayId: "D-2201",
   vertical: "hotel",
-  property: "Canal House · Amsterdam",
+  property: "Mercer House · New York",
   title: "Channel mix on a high-demand night",
   problemLine:
     "89% occupancy looks excellent.\nThe obvious move is release remaining to OTA — RADR holds premium direct instead.",
@@ -727,7 +733,7 @@ export const CANON_LABOR: CanonDecision = {
   id: DECISION_IDS.labor,
   displayId: "D-1920",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Service pressure before peak",
   problemLine:
     "At 18:30 RADR predicts service pressure.\nThe obvious move is add FOH — kitchen is already at 94%. Adding FOH accelerates orders into a bottleneck.",
@@ -746,11 +752,11 @@ export const CANON_LABOR: CanonDecision = {
     {
       id: "do_nothing",
       title: "Do nothing",
-      expectedContributionEuro: -840,
+      expectedContributionEuro: 0,
       operationalRisk: "high",
       guestImpact: "high",
       confidence: 88,
-      note: "Guest waits compound",
+      note: "Guest waits compound · €840 contribution exposed",
       isNoAction: true,
     },
     {
@@ -809,7 +815,7 @@ export const CANON_SUPPLIER: CanonDecision = {
   id: DECISION_IDS.supplier,
   displayId: "D-4102",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Contract vs invoice · contribution compression",
   problemLine:
     "Supplier unit price +9.6%.\nInvoice variance €273 is the clue — dish contribution compressed 13.2% with menu price unchanged.",
@@ -864,7 +870,7 @@ export const CANON_SUPPLIER: CanonDecision = {
           label: "Potentially recoverable variance",
           scope: "Current invoice",
           status: "POTENTIAL",
-          baseline: "Outcome pending credit / yield check",
+          baseline: "Credit / yield check required",
         },
       ],
       operationalRisk: "low",
@@ -879,6 +885,8 @@ export const CANON_SUPPLIER: CanonDecision = {
   expectedProtectedEuro: 273,
   actualProtectedEuro: 273,
   verifiedKind: "recovered",
+  /** When Decision is VERIFIED, Futures UI shows this instead of potential baselines. */
+  verifiedOutcomeNote: "€273 credit memo matched to original invoice",
   attributionStrength: "STRONGLY_ATTRIBUTED",
   sources: [
     { name: "Contract", freshness: "08:12" },
@@ -1008,7 +1016,7 @@ export const CANON_CREATED: CanonDecision = {
   id: DECISION_IDS.created,
   displayId: "D-4410",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Terrace open window · weather hold",
   problemLine:
     "Sun window opens at 17:40.\nThe obvious move is wait for walk-ins — RADR prepares terrace service now.",
@@ -1088,7 +1096,7 @@ export const CANON_TABLE: CanonDecision = {
   id: DECISION_IDS.tableRecover,
   displayId: "D-6671",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Table 14 cancellation · same-service recover",
   problemLine:
     "Table 14 cancelled at 18:12.\nThe obvious move is leave empty — RADR rebooks from waitlist.",
@@ -1171,7 +1179,7 @@ export const CANON_BESTSELLER: CanonDecision = {
   id: DECISION_IDS.bestsellerPeak,
   displayId: "D-1855",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Bestseller weak at peak",
   problemLine:
     "Bestseller #1 looks healthy.\nVolume is not the Decision — contribution per kitchen minute during peak is.",
@@ -1269,7 +1277,7 @@ export const CANON_MENU_PEAK: CanonDecision = {
   id: DECISION_IDS.menuPeak,
   displayId: "D-7110",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Signature dish profitable · destroying peak contribution",
   problemLine:
     "Tuna Tataki is a menu-engineering STAR.\n€14.20 contribution · high sales — and −18% contribution per kitchen minute at peak.",
@@ -1378,7 +1386,7 @@ export const CANON_MENU_PEAK: CanonDecision = {
           currency: "EUR",
           label: "Expected incremental contribution",
           baseline: "vs keep-current-mix",
-          scope: "Tonight peak window · Berlin Mitte",
+          scope: "Tonight peak window · Soho · New York",
           horizon: "19:00–20:30",
           status: "EXPECTED",
         },
@@ -1440,7 +1448,7 @@ export const CANON_SOCIAL_DEMAND: CanonDecision = {
   id: DECISION_IDS.socialDemand,
   displayId: "D-7302",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Social demand is changing tonight's product mix",
   problemLine:
     "14:32 Reel featured Tuna Tataki.\nBy 17:30 engagement is 2.4× baseline — inventory and kitchen are already constrained.",
@@ -1499,7 +1507,7 @@ export const CANON_SOCIAL_DEMAND: CanonDecision = {
           value: 310,
           currency: "EUR",
           label: "Expected protected contribution vs unaligned prep",
-          scope: "Tonight · Berlin Mitte",
+          scope: "Tonight · Soho · New York",
           status: "EXPECTED",
         },
       ],
@@ -1558,7 +1566,7 @@ export const CANON_GUEST_VOICE: CanonDecision = {
   id: DECISION_IDS.guestVoice,
   displayId: "D-7401",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Slow-service mentions ↑ — labor is not the driver",
   problemLine:
     "“Slow service” mentions +31%.\nFOH staffing is normal. Complaints cluster with delivery mix, signature mix, and kitchen load.",
@@ -1680,7 +1688,7 @@ export const CANON_MARGIN_COKE: CanonDecision = {
   id: DECISION_IDS.marginCoke,
   displayId: "D-7501",
   vertical: "restaurant",
-  property: "Berlin Mitte",
+  property: "Soho · New York",
   title: "Beverage margin shock · Coca-Cola 330ml",
   problemLine:
     "Supplier unit cost +€0.10 (+23.8%).\nThe obvious move is raise Coke — RADR asks which response is strongest.",
@@ -1779,11 +1787,11 @@ export const CANON_MARGIN_COKE: CanonDecision = {
       mainRiskDescription: "Supplier may refuse · timeline exceeds week",
       guestImpact: "none",
       confidence: 61,
-      note: "Cross-location leverage Berlin/Amsterdam/Lisbon prepared",
+      note: "Cross-location leverage Berlin / Hamburg / München prepared",
     },
     {
-      id: "wait",
-      title: "Wait · option value",
+      id: "defer_option",
+      title: "Defer · option value",
       expectedContributionEuro: 40,
       economicMetrics: [
         {

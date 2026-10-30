@@ -180,7 +180,7 @@ export function berlinPreShiftBrief() {
 
   return {
     locationId: DEMO_LOCATIONS.berlin.id,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     serviceLabel: "Dinner · tonight",
     asOf: "16:15",
     headline: "Tonight's demand mix exceeds current cold-station flexibility",
@@ -190,14 +190,14 @@ export function berlinPreShiftBrief() {
     arrivalDensity: BERLIN_ARRIVAL_DENSITY,
     demandQuality: BERLIN_DEMAND_QUALITY,
     relatedDecisionIds: [DECISION_IDS.peak, DECISION_IDS.menuPeak],
-    demoLabel: "DEMO · ILLUSTRATIVE" as const,
+    demoLabel: "Demo · illustrative" as const,
   };
 }
 
 export function berlinPostShiftBrief() {
   return {
     locationId: DEMO_LOCATIONS.berlin.id,
-    locationName: "Berlin Mitte",
+    locationName: "Soho · New York",
     serviceLabel: "Dinner · last night",
     expectedIncrementalEuro: CANON_PEAK.expectedProtectedEuro,
     observedIncrementalEuro: CANON_PEAK.actualProtectedEuro,
@@ -219,7 +219,7 @@ export function berlinPostShiftBrief() {
     },
     relatedDecisionIds: [DECISION_IDS.peak],
     optionalPrompt: "Anything unusual the systems would not know?",
-    demoLabel: "DEMO · ILLUSTRATIVE" as const,
+    demoLabel: "Demo · illustrative" as const,
   };
 }
 

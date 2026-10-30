@@ -55,7 +55,7 @@ export function IntelFuturesFork({
           {mode === "options" ? (
             <>
               Every path vs <strong>do nothing</strong>. Risk-adjusted — not max
-              €. <em>WAIT can win.</em>
+              $. <em>WAIT can win.</em>
             </>
           ) : (
             <>Strongest risk-adjusted path — not the highest number.</>

@@ -11,6 +11,7 @@ import {
 import { DECISION_IDS, displayDecisionId } from "@/lib/radr/decision/ids";
 import {
   scopedDecisions,
+  scopedDecisionsForDemo,
   splitNeedsYou,
   recordAttention,
 } from "@/lib/radr/product/roleScope";
@@ -48,11 +49,12 @@ import {
   sourcesForRole,
   sourceIssueSummary,
 } from "@/lib/radr/product/integrations";
+import { buildSupplierDecisionRecord } from "@/lib/radr/decision/demos/portfolio";
 
 describe("Role scope integrity", () => {
   beforeEach(() => resetDecisionStore());
 
-  it("GM Berlin sees only Berlin Decisions", () => {
+  it("GM Soho sees only Berlin Decisions", () => {
     const scoped = scopedDecisions(listDecisionRecords(), "gm");
     const ids = scoped.map((r) => r.id);
     expect(ids).toContain(DECISION_IDS.peak);
@@ -63,18 +65,24 @@ describe("Role scope integrity", () => {
     expect(ids).not.toContain(DECISION_IDS.playbook);
   });
 
-  it("COO sees portfolio including D-5208", () => {
-    const ids = scopedDecisions(listDecisionRecords(), "coo").map((r) => r.id);
+  it("COO sees restaurant portfolio — not hotel or mixed-only Decisions", () => {
+    const ids = scopedDecisionsForDemo(
+      listDecisionRecords(),
+      "coo",
+      "restaurant",
+    ).map((r) => r.id);
     expect(ids).toContain(DECISION_IDS.peak);
-    expect(ids).toContain(DECISION_IDS.ota);
-    expect(ids).toContain(DECISION_IDS.orphan);
-    expect(ids).toContain(DECISION_IDS.playbook);
+    expect(ids).not.toContain(DECISION_IDS.ota);
+    expect(ids).not.toContain(DECISION_IDS.orphan);
+    expect(ids).not.toContain(DECISION_IDS.playbook);
   });
 
   it("Revenue Canal House sees hotel commercial only", () => {
-    const ids = scopedDecisions(listDecisionRecords(), "revenue_manager").map(
-      (r) => r.id,
-    );
+    const ids = scopedDecisionsForDemo(
+      listDecisionRecords(),
+      "revenue_manager",
+      "hotel",
+    ).map((r) => r.id);
     expect(ids).toContain(DECISION_IDS.ota);
     expect(ids).not.toContain(DECISION_IDS.peak);
     expect(ids).not.toContain(DECISION_IDS.supplier);
@@ -100,6 +108,7 @@ describe("Role scope integrity", () => {
         DECISION_IDS.peak,
         DECISION_IDS.supplier,
         DECISION_IDS.marginCoke,
+        DECISION_IDS.casterSugar,
       ].includes(id as typeof DECISION_IDS.peak),
     )).toBe(true);
   });
@@ -122,8 +131,9 @@ describe("Economic semantics", () => {
   it("D-2201 uses 72h protected semantics", () => {
     const r = getDecisionRecord(DECISION_IDS.ota)!;
     const m = primaryMetricOf(r)!;
-    expect(m.type).toBe("VERIFIED_PROTECTED");
-    expect(m.value).toBe(CANON_OTA.actualProtectedEuro);
+    expect(r.status).toBe("AWAITING_APPROVAL");
+    expect(m.type).toBe("EXPECTED_PROTECTED");
+    expect(m.value).toBe(CANON_OTA.expectedProtectedEuro);
     expect(`${m.scopeLabel} ${m.horizonLabel}`).toMatch(/72h/i);
   });
 
@@ -160,23 +170,31 @@ describe("Economic semantics", () => {
     expect(m.type).toBe("VERIFIED_PROTECTED");
     expect(m.value).toBe(1590);
     expect(m.label.toLowerCase()).toContain("protected");
+    expect(r.recommendationHeadline?.trim().length).toBeGreaterThan(4);
   });
 
   it("integrations scope by persona", () => {
     const gm = sourcesForRole("gm");
-    expect(gm.some((s) => s.id === "pms")).toBe(false);
-    expect(gm.some((s) => s.id === "pos")).toBe(true);
-    const rev = sourcesForRole("revenue_manager");
-    expect(rev.some((s) => s.id === "pms")).toBe(true);
-    expect(rev.some((s) => s.id === "kds")).toBe(false);
+    expect(gm.some((s) => s.id === "mews")).toBe(false);
+    expect(gm.some((s) => s.id === "lightspeed")).toBe(true);
+    const rev = sourcesForRole("revenue_manager", "hotel");
+    expect(rev.some((s) => s.id === "mews")).toBe(true);
+    expect(rev.some((s) => s.id === "toast-kds")).toBe(false);
     const coo = sourcesForRole("coo");
-    expect(coo.length).toBeGreaterThan(gm.length);
+    expect(coo.length).toBeGreaterThanOrEqual(gm.length);
     expect(sourceIssueSummary(gm)).toMatch(/degraded|stale/i);
     expect(sourceIssueSummary(gm)).not.toBe("2 sources degraded");
   });
 
+  it("D-2201 has a human Decision headline", () => {
+    const r = getDecisionRecord(DECISION_IDS.ota)!;
+    expect(r.recommendationHeadline?.trim().length).toBeGreaterThan(4);
+    expect(r.recommendationHeadline).toMatch(/hold|direct/i);
+  });
+
   it("D-4102 scenarios never show fake €0 expected effect", () => {
     const r = getDecisionRecord(DECISION_IDS.supplier)!;
+    expect(r.status).toBe("VERIFIED");
     for (const o of r.options) {
       if (o.id === "reprice_now") {
         expect(o.economicEffectNote?.toLowerCase()).toMatch(/not yet modeled/);
@@ -187,9 +205,15 @@ describe("Economic semantics", () => {
         expect(o.economicMetrics?.[0]?.label.toLowerCase()).toMatch(/exposed/);
       }
       if (o.id === "query") {
-        expect(o.economicMetrics?.[0]?.status).toBe("POTENTIAL");
+        // Seeded VERIFIED — remaps POTENTIAL → VERIFIED (no “pending” language)
+        expect(o.economicMetrics?.[0]?.status).toBe("VERIFIED");
+        expect(o.economicMetrics?.[0]?.baseline).toMatch(/credit memo/i);
       }
     }
+    const open = buildSupplierDecisionRecord("AWAITING_APPROVAL");
+    expect(
+      open.options.find((o) => o.id === "query")?.economicMetrics?.[0]?.status,
+    ).toBe("POTENTIAL");
   });
 
   it("prepared actions never leak Provider class names", () => {
@@ -239,8 +263,8 @@ describe("Economic semantics", () => {
     );
     expect(a.activeExposure + a.activeOpportunity).toBe(expected);
     expect(a.activeExposure).toBe(expected); // GM needs_you are exposure-class
-    // Peak 620 + margin Coke 168 (supplier D-4102 is Verified recovered — not active exposure)
-    expect(a.activeExposure).toBe(620 + 168);
+    // Peak 620 + margin Coke 168 + caster sugar 186 (D-4102 Verified — not active)
+    expect(a.activeExposure).toBe(620 + 168 + 186);
     expect(a.decisionIdsActiveExposure).not.toContain(DECISION_IDS.tableRecover);
     const pending = scoped.filter((r) => recordAttention(r) === "handling");
     const pendingSum = pending.reduce(
@@ -301,12 +325,12 @@ describe("Economic semantics", () => {
     expect(EVIDENCE_CONFLICTS[0]?.sources.length).toBeGreaterThanOrEqual(2);
   });
 
-  it("D-1911 clock is consistent — 18:42 now · 18:53 deadline · ~11 min", () => {
-    expect(PEAK_SERVICE_CLOCK.nowLabel).toBe("18:42");
-    expect(PEAK_SERVICE_CLOCK.deadlineLabel).toBe("18:53");
+  it("D-1911 clock is consistent — Live NOW · deadline · ~11 min", () => {
+    expect(PEAK_SERVICE_CLOCK.nowLabel).toBe("19:48");
+    expect(PEAK_SERVICE_CLOCK.deadlineLabel).toBe("19:59");
     expect(peakDecisionWindowMinutes()).toBe(11);
-    expect(peakDeadlineDisplay()).toBe("Decide by 18:53 · ~11 min");
-    expect(CANON_PEAK.deadline).toBe("18:53");
+    expect(peakDeadlineDisplay()).toBe("Decide by 19:59 · ~11 min");
+    expect(CANON_PEAK.deadline).toBe("19:59");
     const r = getDecisionRecord(DECISION_IDS.peak)!;
     expect(r.decisionDeadline).toBe(peakDeadlineDisplay());
     expect(r.decisionDeadlineAt).toBe(PEAK_SERVICE_CLOCK.deadlineIso);
@@ -333,7 +357,7 @@ describe("Economic semantics", () => {
     const rec = COKE_MARGIN_FUTURES.find((f) => f.recommended)!;
     expect(rec.expectedContributionEuro).toBe(168);
     expect(simulateCokePriceRaise(0.2).modeled).toBe(true);
-    expect(tunaComplexityAdjusted().verdict).toMatch(/SYSTEM ECONOMICS WEAK/);
+    expect(tunaComplexityAdjusted().verdict).toMatch(/system economics are weak/i);
   });
 
   it("Ask Coke €0.20 returns modeled scenario fixture", () => {
@@ -343,11 +367,11 @@ describe("Economic semantics", () => {
     expect(a.answer).not.toMatch(/hallucin/i);
   });
 
-  it("pre-shift demand quality is projected — not live 18:42", () => {
+  it("pre-shift demand quality is projected — not live 19:48", () => {
     const b = berlinPreShiftBrief();
     expect(b.demandQuality.some((d) => /projected|committed/i.test(d.label))).toBe(
       true,
     );
-    expect(b.demandQuality.every((d) => !/18:42/.test(d.reason))).toBe(true);
+    expect(b.demandQuality.every((d) => !/19:48/.test(d.reason))).toBe(true);
   });
 });

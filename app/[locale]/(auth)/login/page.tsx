@@ -21,7 +21,10 @@ export default async function LoginPage({ params }: Props) {
   const t = await getTranslations("auth");
 
   return (
-    <LightAuthShell title={t("loginHeading")}>
+    <LightAuthShell
+      title={t("loginHeading")}
+      subtitle={t("loginLead")}
+    >
       <Suspense fallback={<p className="ob-meta">{t("loading")}</p>}>
         <LoginForm />
       </Suspense>

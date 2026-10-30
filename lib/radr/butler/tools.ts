@@ -15,7 +15,6 @@ import {
   canAccessLocation,
   hasPermission,
   type AccessContext,
-  type RadrRole,
 } from "@/lib/platform/rbac";
 import { buildButlerOpening } from "./opening";
 import type {
@@ -84,15 +83,15 @@ export type ButlerAnswer = {
 };
 
 function toAccessContext(ctx: ButlerContext): AccessContext {
-  const roleMap: Record<ButlerRole, RadrRole> = {
-    location_manager: "GENERAL_MANAGER",
-    regional_manager: "REGIONAL_MANAGER",
-    group_cfo: "CFO",
+  const roleMap: Record<ButlerRole, string> = {
+    location_manager: "role_gm",
+    regional_manager: "role_coo",
+    group_cfo: "role_cfo",
   };
   return {
     userId: "butler_demo",
     organizationId: "org_northstar",
-    role: roleMap[ctx.role],
+    roleId: roleMap[ctx.role],
     locationIds: ctx.allowedLocationIds,
   };
 }
@@ -120,7 +119,7 @@ export function getFindings(
   if (!assertScopeAccess(ctx, scope)) {
     return { error: "Permission denied for this location." };
   }
-  if (!hasPermission(toAccessContext(ctx), "butler:read")) {
+  if (!hasPermission(toAccessContext(ctx), "butler.use")) {
     return { error: "Permission denied for Butler read." };
   }
   return findingsForScope(scope);

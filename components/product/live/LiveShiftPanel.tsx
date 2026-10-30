@@ -124,7 +124,7 @@ export function LiveShiftPanel({
             <p className="rp-live-pulse-kicker">
               <span className="rp-live-pulse-dot" aria-hidden="true" />
               {roleSummary.kicker}
-              {illustrative ? " · ILLUSTRATIVE" : ""}
+              {illustrative ? " · Illustrative" : ""}
             </p>
             <h2 className="rp-live-panel-title">
               {roleSummary.primary.amount}

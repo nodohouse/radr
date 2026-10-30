@@ -138,6 +138,30 @@ export function lifecycleLabel(status: DecisionLifecycleStatus): string {
   }
 }
 
+/** Customer-facing Decision state — not internal SIMULATED / LEARNED. */
+export function customerLifecycleLabel(
+  status: DecisionLifecycleStatus,
+): string {
+  const band = attentionBandOf(status);
+  switch (band) {
+    case "needs_you":
+      return "Needs you";
+    case "handling":
+      if (status === "OBSERVING") return "Observing";
+      if (status === "EXECUTING") return "Verifying";
+      return "Actioning";
+    case "watching":
+      /* Watching is attention, not a Decision ledger state */
+      return "Observing";
+    case "verified":
+      return "Verified";
+    case "learned":
+      return "Closed";
+    default:
+      return lifecycleLabel(status);
+  }
+}
+
 export function cardStateFromLifecycle(
   status: DecisionLifecycleStatus,
 ): "DECIDE" | "SIMULATE" | "APPROVED" | "VERIFIED" {

@@ -34,6 +34,7 @@ import { AskThis } from "@/components/product/ask/AskThis";
 import { EvidenceBlock } from "@/components/product/EvidenceBlock";
 import { PreparedActionCard } from "@/components/product/PreparedActionCard";
 import { RadrLoopRail } from "@/components/product/RadrLoopRail";
+import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 import {
   economicStateLabel,
   operatorAttentionState,
@@ -107,7 +108,7 @@ export default function FindingDetailPage() {
       <p className="rp-crumb">
         <Link href="/app/findings">Needs attention</Link>
         <span>/</span>
-        {finding.locationName ?? finding.locationId}
+        {finding.locationName ?? locationDisplayName(finding.locationId)}
         <span>/</span>
         {finding.territory}
       </p>

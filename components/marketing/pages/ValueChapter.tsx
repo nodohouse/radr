@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import NextLink from "next/link";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
@@ -8,7 +8,6 @@ import { money } from "@/data/demo";
 import {
   CANON_OTA,
   CANON_ORPHAN,
-  CANON_PLAYBOOK,
   CANON_LABOR,
   CANON_SUPPLIER,
   CANON_CREATED,
@@ -32,6 +31,13 @@ import {
   euro,
   ECON_D4102,
 } from "@/lib/marketing/publicDecisionEconomics";
+import {
+  GROUP_LEDGER_THIS_MONTH,
+  GROUP_METRICS,
+  LOCATION_BY_ID,
+  ledgerForLocation,
+  type LocationId,
+} from "@/lib/marketing/northstarGroup";
 import { ValueTrace } from "@/components/marketing/kinetic/ValueTrace";
 import { DecisionObject } from "@/components/marketing/primitives/DecisionObject";
 import { EvidenceProvenance } from "@/components/marketing/primitives/EvidenceProvenance";
@@ -41,45 +47,41 @@ import "@/app/econ.css";
 import "@/app/kinetic.css";
 import "@/app/radr-public.css";
 
-const STREAM = [
-  { id: "D-1911", kind: "protected", amt: CANON_PEAK.actualProtectedEuro },
-  { id: "D-2201", kind: "protected", amt: CANON_OTA.actualProtectedEuro },
-  {
-    id: "D-3104",
-    kind: "recovered",
-    amt:
-      CANON_ORPHAN.verifiedIncrementalEuro ?? CANON_ORPHAN.actualProtectedEuro,
-  },
-  { id: "D-5208", kind: "avoided", amt: CANON_PLAYBOOK.actualProtectedEuro },
-  { id: "D-1920", kind: "protected", amt: CANON_LABOR.actualProtectedEuro },
-  {
-    id: "D-4102",
-    kind: "recovered",
-    amt: verifiedEuro(CANON_SUPPLIER),
-  },
-  { id: "D-4410", kind: "created", amt: CANON_CREATED.actualProtectedEuro },
-  { id: "D-6671", kind: "recovered", amt: CANON_TABLE.actualProtectedEuro },
-] as const;
-
 const PROOF_BY_DISPLAY: Record<string, CanonDecision> = {
   "D-1911": CANON_PEAK,
   "D-2201": CANON_OTA,
   "D-3104": CANON_ORPHAN,
-  "D-5208": CANON_PLAYBOOK,
   "D-1920": CANON_LABOR,
   "D-4102": CANON_SUPPLIER,
   "D-4410": CANON_CREATED,
   "D-6671": CANON_TABLE,
 };
 
+const LOCATION_FILTERS: { id: "all" | LocationId; label: string }[] = [
+  { id: "all", label: "All locations" },
+  { id: "nyc-soho", label: "New York" },
+  { id: "london-shoreditch", label: "London" },
+  { id: "tokyo-shibuya", label: "Tokyo" },
+  { id: "dubai-difc", label: "Dubai" },
+  { id: "singapore-marina", label: "Singapore" },
+];
+
 /**
- * Verified Value — one traceable Decision first. No vanity portfolio total.
+ * Verified Value — one traceable Decision first. Multi-location ledger.
  */
 export function ValueChapter() {
-  const [filter, setFilter] = useState<"all" | "protected">("all");
-  const [openId, setOpenId] = useState<string>("D-1911");
-  const visible =
-    filter === "all" ? STREAM : STREAM.filter((s) => s.kind === "protected");
+  const [locationScope, setLocationScope] = useState<"all" | LocationId>("all");
+  const [openId, setOpenId] = useState<string>("D-4102");
+
+  const rows = useMemo(
+    () =>
+      ledgerForLocation(locationScope).filter((r) => r.status === "verified"),
+    [locationScope],
+  );
+  const rollup = useMemo(
+    () => rows.reduce((sum, r) => sum + r.verified, 0),
+    [rows],
+  );
   const proof = PROOF_BY_DISPLAY[openId];
   const chosen = proof ? canonChosen(proof) : null;
   const counterfactual = proof
@@ -121,12 +123,36 @@ export function ValueChapter() {
             <p className="rx-ch-kicker">
               Historical · {ECON_D4102.displayId} · sealed recovery · DEMO
             </p>
-            <div className="rx-rso-hero-num" style={{ marginBottom: "3rem" }}>
+            <div className="rx-rso-hero-num" style={{ marginBottom: "2rem" }}>
               <strong className="rx-pub-num" data-tone="verified">
                 {euro(ECON_D4102.verified)}
               </strong>
               <em>Verified recovery</em>
             </div>
+
+            <ol
+              className="rx-value-recovery-story"
+              aria-label="Verified recovery story"
+            >
+              {[
+                { label: "Contract", value: "$6.80/L" },
+                { label: "Invoice", value: "$7.45/L · 420 L" },
+                { label: "Variance", value: euro(ECON_D4102.exposed) },
+                { label: "Decision", value: "Dispute" },
+                { label: "Credit", value: euro(ECON_D4102.verified) },
+                {
+                  label: "Verified",
+                  value: euro(ECON_D4102.verified),
+                  tone: "verified" as const,
+                },
+              ].map((step) => (
+                <li key={step.label} data-tone={step.tone}>
+                  <span>{step.label}</span>
+                  <strong>{step.value}</strong>
+                </li>
+              ))}
+            </ol>
+
             <DecisionObject
               displayId={ECON_D4102.displayId}
               title="Contract vs invoice · contribution compression"
@@ -152,16 +178,161 @@ export function ValueChapter() {
                 Credit matched to INV-88421 · AP-POST-991. A recommendation is
                 not value — this trail is.
               </p>
+              <p style={{ marginTop: "0.85rem" }}>
+                <NextLink
+                  href="/product/decisions/D-4102/trace"
+                  className="rx-dt-full-link"
+                >
+                  View Trace <span aria-hidden="true">→</span>
+                </NextLink>
+              </p>
             </DecisionObject>
 
+            <div className="rx-he-ctas" style={{ marginTop: "1.75rem" }}>
+              <NextLink
+                href="/signup?intent=demo&next=/app/enter"
+                className="rx-btn rx-btn-primary"
+              >
+                Open this in RADR <span aria-hidden="true">→</span>
+              </NextLink>
+            </div>
+
+            <div className="rx-value-miss" style={{ marginTop: "4.5rem" }}>
+              <p className="rx-ch-kicker">When RADR is wrong · DEMO</p>
+              <h2
+                className="rx-display rx-display-sm"
+                style={{ marginBottom: "0.75rem" }}
+              >
+                D-4188 · $420 expected · $0 verified
+              </h2>
+              <p className="rx-lead rx-lead-short">
+                Supplier provided valid seasonal surcharge documentation after
+                Decision formation. Closed · no recovery · Memory updated.
+              </p>
+              <p>
+                <NextLink
+                  href="/product/decisions/D-4188/trace"
+                  className="rx-dt-full-link"
+                >
+                  Open miss Trace <span aria-hidden="true">→</span>
+                </NextLink>
+              </p>
+            </div>
+
             <p className="rx-ch-kicker" style={{ marginTop: "7.5rem" }}>
-              Decision ledger · sample · DEMO
+              Verified Value · all locations · this month
             </p>
-            <p className="rx-value-stream-note" style={{ marginBottom: "1.25rem" }}>
-              Every verified euro traces back to a Decision and its downstream
-              evidence.
+            <div className="rx-rso-hero-num" style={{ marginBottom: "1.25rem" }}>
+              <strong className="rx-pub-num" data-tone="verified">
+                {euro(
+                  locationScope === "all"
+                    ? GROUP_METRICS.verifiedThisMonth
+                    : rollup,
+                )}
+              </strong>
+              <em>
+                {locationScope === "all"
+                  ? "Verified across the group"
+                  : `Verified · ${LOCATION_BY_ID[locationScope].name}`}
+              </em>
+            </div>
+            {locationScope === "all" ? (
+              <div
+                className="rx-gcc-metrics"
+                style={{ borderTop: "none", paddingTop: 0, marginTop: 0 }}
+                aria-label="Verified by class"
+              >
+                <div>
+                  <em>Supplier / AP</em>
+                  <strong data-tone="verified">
+                    {euro(GROUP_METRICS.byClass.supplierAp)}
+                  </strong>
+                </div>
+                <div>
+                  <em>Labor</em>
+                  <strong data-tone="verified">
+                    {euro(GROUP_METRICS.byClass.labor)}
+                  </strong>
+                </div>
+                <div>
+                  <em>Perishable revenue</em>
+                  <strong data-tone="verified">
+                    {euro(GROUP_METRICS.byClass.perishable)}
+                  </strong>
+                </div>
+              </div>
+            ) : null}
+            <p className="rx-value-stream-note" style={{ marginBottom: "1rem" }}>
+              DEMO · derived from sealed Decision fixtures · not customer results
             </p>
-            <p className="rx-ch-kicker">
+
+            <div
+              className="rx-value-loc-filter"
+              role="tablist"
+              aria-label="Location filter"
+            >
+              {LOCATION_FILTERS.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  role="tab"
+                  data-on={locationScope === f.id ? "true" : "false"}
+                  aria-selected={locationScope === f.id}
+                  onClick={() => setLocationScope(f.id)}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+
+            <ul className="rx-value-ledger" aria-label="Decision ledger">
+              <li className="rx-value-ledger-head" aria-hidden="true">
+                <span>Decision</span>
+                <span>Location</span>
+                <span>Class</span>
+                <span>Expected</span>
+                <span>Observed</span>
+                <span>Verified</span>
+                <span>Status</span>
+              </li>
+              {rows.map((r) => (
+                <li key={r.displayId}>
+                  <em>{r.displayId}</em>
+                  <span>{LOCATION_BY_ID[r.locationId].name}</span>
+                  <span>{r.classLabel}</span>
+                  <span>{euro(r.expected)}</span>
+                  <span>{euro(r.observed)}</span>
+                  <strong data-tone="verified">{euro(r.verified)}</strong>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (PROOF_BY_DISPLAY[r.displayId]) setOpenId(r.displayId);
+                    }}
+                    style={{
+                      appearance: "none",
+                      border: "none",
+                      background: "transparent",
+                      padding: 0,
+                      cursor: PROOF_BY_DISPLAY[r.displayId]
+                        ? "pointer"
+                        : "default",
+                      fontSize: "0.78rem",
+                      fontWeight: 560,
+                      color: "#0a0d0b",
+                      textAlign: "left",
+                    }}
+                  >
+                    {r.status}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <p className="rx-value-ledger-meta">
+              {rows.length} Decisions · {euro(rollup)} verified in view ·{" "}
+              {GROUP_LEDGER_THIS_MONTH.length} group fixtures this month
+            </p>
+
+            <p className="rx-ch-kicker" style={{ marginTop: "4rem" }}>
               {MONEY_D1911_EXPECTED.displayId} · historical peak · DEMO
             </p>
             <ValueTrace
@@ -194,72 +365,15 @@ export function ValueChapter() {
               ]}
             />
 
-            <div
-              className="rx-value-filters"
-              role="tablist"
-              style={{ marginTop: "2rem" }}
-            >
-              <button
-                type="button"
-                data-on={filter === "all" ? "true" : "false"}
-                onClick={() => {
-                  setFilter("all");
-                  setOpenId("D-1911");
-                }}
-              >
-                Sample Decisions
-              </button>
-              <button
-                type="button"
-                data-on={filter === "protected" ? "true" : "false"}
-                onClick={() => {
-                  setFilter("protected");
-                  setOpenId("D-1911");
-                }}
-              >
-                Protected only
-              </button>
-            </div>
-
-            <ul
-              className="rx-value-stream"
-              aria-label="Selected sample Decisions"
-            >
-              {visible.map((s) => (
-                <li key={s.id}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (PROOF_BY_DISPLAY[s.id]) setOpenId(s.id);
-                    }}
-                    data-on={s.id === openId && proof ? "true" : undefined}
-                  >
-                    <em>{s.id}</em>
-                    <strong>{money(s.amt)}</strong>
-                    <span>{s.kind}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <p className="rx-value-stream-note">
-              Selected sample Decisions — not a rollup. Sealed recoveries show
-              verified amounts; open cases stay unlabeled as verified.
-            </p>
-
             {proof && chosen ? (
               <details
                 className="rx-value-proof-details"
-                open={openId === "D-1911"}
+                open={openId === "D-4102"}
+                style={{ marginTop: "2rem" }}
               >
                 <summary>
                   {proof.displayId} ·{" "}
-                  {verifiedEuro(proof) === 0 &&
-                  proof.expectedProtectedEuro === 0
-                    ? "CLOSED · NO VERIFIED RECOVERY"
-                    : proof.actualProtectedEuro === 0 &&
-                        proof.expectedProtectedEuro === 0
-                      ? "OPEN · not yet verified"
-                      : `Proof trail · ${money(verifiedEuro(proof))} verified ${proof.verifiedKind}`}
+                  {`Proof trail · ${money(verifiedEuro(proof))} verified ${proof.verifiedKind}`}
                 </summary>
                 <div className="rx-value-proof">
                   <ol className="rx-value-investigation">
@@ -304,14 +418,17 @@ export function ValueChapter() {
             ) : null}
 
             <div className="rx-ch-ctas">
-              <NextLink href="/demo" className="rx-btn rx-btn-primary">
-                {CTAS.seeVerified} <span aria-hidden="true">→</span>
+              <NextLink
+                href="/signup?intent=demo&next=/app/enter"
+                className="rx-btn rx-btn-primary"
+              >
+                See this inside RADR <span aria-hidden="true">→</span>
               </NextLink>
               <NextLink
-                href={`/app/decisions/${proof?.id ?? CANON_OTA.id}`}
+                href="/contact?intent=recovery-pilot"
                 className="rx-btn rx-btn-ghost"
               >
-                Open the proof
+                Start a recovery pilot
               </NextLink>
             </div>
           </div>

@@ -12,18 +12,27 @@ export const CATEGORY = {
   /** Commercial entry — GTM / pilot language */
   commercialEntry: "Margin recovery / reconciliation.",
   /** Primary customer-facing platform language */
-  primary: "The decision layer for hospitality.",
+  primary: "Hospitality Operating Intelligence.",
   /** Long-term / investor diligence language — use sparingly */
   systemOfDecisionRecord: "System of Decision Record for hospitality.",
   /** Alias for gradual migration */
   systemOfRecord: "System of Decision Record for hospitality.",
   /** Supporting descriptor — not a second category */
   secondary: "Systems record. RADR decides.",
-  slogan: "Nothing off the RADR.",
+  /** Locked homepage hero slogan */
+  slogan: "NOTHING OFF THE RADR.",
+  sloganLines: ["NOTHING", "OFF THE RADR."] as const,
+  heroSupport: [
+    "See what needs attention.",
+    "Understand what happens next.",
+    "Prove what worked.",
+  ] as const,
+  heroCategoryLine:
+    "RADR connects hospitality operations, turns signals into decisions, and tracks what happened next.",
   decisionGap: "The Decision Gap",
   decisionGapDefinition:
     "The gap between what your systems know and what your operation decides.",
-  /** Alias of primary — prefer CATEGORY.primary */
+  /** Supporting descriptor — prefer CATEGORY.primary for public hero */
   decisionLayer: "The decision layer for hospitality.",
   /** Descriptor only — never equal category */
   verifiedDecisionIntelligence: "Verified Decision Intelligence",
@@ -32,14 +41,23 @@ export const CATEGORY = {
 } as const;
 
 export const CTAS = {
-  primaryProduct: "Start a recovery pilot",
-  primaryProductHref: "/contact?intent=recovery-pilot",
-  primarySales: "Start a recovery pilot",
+  /** Paid product entry — signup, not a free recovery pilot */
+  primaryProduct: "Get started",
+  primaryProductHref: "/signup",
+  primarySales: "Talk to sales",
+  primarySalesHref: "/contact?intent=sales",
+  /** Public Verified Recovery story — never /app */
   secondaryProduct: "See a Verified Recovery",
-  secondaryProductHref: "/app/lab/control-center?seed=recover",
-  enterprise: "Scope my recovery pilot",
+  secondaryProductHref: "/product/value",
+  /** Unlock demo after signup */
+  seeInAction: "See RADR in action",
+  seeInActionHref: "/signup?intent=demo&next=/app/enter",
+  talkToRadr: "Talk to RADR",
+  talkToRadrHref: "/contact?intent=sales",
+  enterprise: "Talk to sales",
   openTrace: "Open Trace",
   compareFutures: "Compare Futures",
+  compareFuturesHref: "/product/futures?example=D-1911",
   seeVerified: "See Verified Value",
   openBrief: "Open Control Center",
   viewConnectionStatus: "View connection status",

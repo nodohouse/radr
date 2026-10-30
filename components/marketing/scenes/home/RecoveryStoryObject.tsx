@@ -2,14 +2,15 @@
 
 /**
  * Complete recovery — editorial composition.
- * €273 is the protagonist. Not seven equal cards.
+ * Verified amount is the protagonist. View Trace opens structured Decision Trace.
  */
 
-import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
+import { ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
+import { PUBLIC_SUPPLIER } from "@/lib/marketing/publicCanon";
+import { TRACE_D4102 } from "@/lib/marketing/decisionTrace";
 import { VerifiedStamp } from "@/components/marketing/primitives/VerifiedStamp";
+import { DecisionTraceToggle } from "@/components/marketing/decision/DecisionTrace";
 import "@/app/radr-public.css";
-
-const EUR = euro(ECON_D4102.verified);
 
 type Props = {
   kicker: string;
@@ -29,11 +30,11 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
         aria-label={`${ECON_D4102.displayId} verified recovery`}
       >
         <p className="rx-pub-micro">
-          Historical · {ECON_D4102.displayId} · Berlin Mitte
+          Historical · {PUBLIC_SUPPLIER.displayId} · {PUBLIC_SUPPLIER.location}
         </p>
         <div className="rx-rso-hero-num">
           <strong className="rx-pub-num" data-tone="verified">
-            {EUR}
+            {PUBLIC_SUPPLIER.verifiedFormatted}
           </strong>
           <em>Verified recovery</em>
           <VerifiedStamp verified label="Verified recovered" />
@@ -43,9 +44,9 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
           <div>
             <p className="rx-pub-micro">Why</p>
             <p>
-              Contract €6.80/L
+              Contract {PUBLIC_SUPPLIER.contractFormatted}
               <br />
-              Invoice €7.45/L
+              Invoice {PUBLIC_SUPPLIER.invoiceFormatted}
             </p>
           </div>
           <div>
@@ -54,13 +55,15 @@ export function RecoveryStoryObject({ kicker, title, lead }: Props) {
           </div>
           <div>
             <p className="rx-pub-micro">Outcome</p>
-            <p>{EUR} credit issued</p>
+            <p>{PUBLIC_SUPPLIER.verifiedFormatted} credit issued</p>
           </div>
           <div>
             <p className="rx-pub-micro">Proof</p>
             <p>Credit matched to invoice</p>
           </div>
         </div>
+
+        <DecisionTraceToggle trace={TRACE_D4102} label="View Trace" />
       </article>
     </div>
   );

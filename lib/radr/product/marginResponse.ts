@@ -86,7 +86,7 @@ export const COKE_MARGIN_SHOCK = {
   sku: "Coca-Cola 330ml",
   supplier: "Beverage Co · Berlin",
   locationId: DEMO_LOCATIONS.berlin.id,
-  locationName: "Berlin Mitte",
+  locationName: "Soho · New York",
   priorUnitCostEuro: 0.42,
   newUnitCostEuro: 0.52,
   deltaEuro: 0.1,
@@ -103,7 +103,7 @@ export const COKE_MARGIN_SHOCK = {
   priceNeededNote:
     "€0.55 restores theoretical item margin — not the Decision. Volume, basket, and category architecture may dominate.",
   elasticityEvidence: "INSUFFICIENT" as const,
-  elasticityNote: "PRICE RESPONSE UNCERTAIN — insufficient location price-history sample",
+  elasticityNote: "Price response uncertain — insufficient location price-history sample",
   demo: true as const,
 };
 
@@ -172,7 +172,7 @@ export const COKE_PROPAGATION: PropagationNode[] = [
   {
     id: "n_loc",
     kind: "LOCATION",
-    label: "Berlin Mitte",
+    label: "Soho · New York",
     detail: "P&L week",
     euro: COKE_MARGIN_SHOCK.weeklyExposureEuro,
     depth: 6,
@@ -262,22 +262,22 @@ export const COKE_MARGIN_FUTURES: MarginFuture[] = [
   },
 ];
 
-/** Cross-location SKU leverage — illustrative. */
+/** Cross-location SKU leverage — Northstar Restaurants (DE estate). */
 export const COKE_SUPPLIER_LEVERAGE = [
   {
-    location: "Berlin",
+    location: "Soho · New York",
     unitCostEuro: 0.52,
     volumeWeek: 1840,
     contractEuro: 0.42,
   },
   {
-    location: "Amsterdam",
+    location: "Roma Norte · Mexico City",
     unitCostEuro: 0.48,
     volumeWeek: 980,
     contractEuro: 0.44,
   },
   {
-    location: "Lisbon",
+    location: "Soho · London",
     unitCostEuro: 0.46,
     volumeWeek: 640,
     contractEuro: 0.45,
@@ -304,7 +304,7 @@ export function tunaComplexityAdjusted(): ComplexityAdjustedContribution {
     adjustedContributionEuro: +(direct - tax).toFixed(2),
     drivers,
     verdict:
-      "DIRECT MARGIN STRONG · SYSTEM ECONOMICS WEAK — unique SKUs + cold-station minutes + spoilage",
+      "Direct margin looks strong · system economics are weak — unique SKUs, cold-station minutes, and spoilage",
     demo: true,
   };
 }
@@ -323,6 +323,6 @@ export function simulateCokePriceRaise(deltaEuro: number): {
     deltaEuro,
     expectedIncrementalEuro: expected,
     note:
-      "MODELED SCENARIO · DEMO — attach risk held constant; elasticity evidence insufficient for guest response claim",
+      "Modeled scenario · demo — attach risk held constant; elasticity evidence insufficient for guest response claim",
   };
 }
