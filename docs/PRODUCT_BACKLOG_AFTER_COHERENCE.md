@@ -2,6 +2,17 @@
 
 Ideas deferred — do not derail coherence / VS3 foundation.
 
+## Implemented: glass-style product surfaces (31 October 2026)
+
+The user requested implementation after queuing this direction. Applied through the shared product surface system, starting with the Control Center.
+
+- Explore subtle translucent dashboard surfaces, layered panels, soft blur and restrained depth.
+- Keep the established RADR blue, navy and vibrant green, proportional frozen logo and shared typography.
+- Start with the Control Center and carry the selected treatment through shared components.
+- Preserve text contrast, clear status colors, Decision hierarchy and readable charts. Use opaque fallbacks where blur is unsupported or transparency impairs readability.
+- Check desktop, tablet, phone, keyboard focus and rendering performance before rollout.
+- Keep financial semantics, evidence states, scope and approval behavior unchanged.
+
 ## Visual System 3.0 — remaining
 
 - Decision Room: causal graph + Futures mini-trajectories (no anonymous lifecycle dots)
