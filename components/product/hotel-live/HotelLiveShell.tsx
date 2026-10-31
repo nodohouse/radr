@@ -45,6 +45,7 @@ import {
 } from "@/lib/radr/live/spatialCamera";
 import { displayDecisionId } from "@/lib/radr/decision/ids";
 import "./hotel-live.css";
+import { RoomGuestBrief } from "./RoomGuestBrief";
 
 type StatusFilter = "all" | LiveRoomState;
 type ViewLens = "operational" | "financial" | "readiness" | "guest";
@@ -1301,6 +1302,7 @@ function RoomInspector({
 
         {tab === "overview" ? (
           <>
+            <RoomGuestBrief room={room}/>
             <div className="hl-metric-grid">
               <article>
                 <em>Cleaning time</em>
@@ -1332,24 +1334,10 @@ function RoomInspector({
                     : "Normal"}
                 </strong>
                 <span>
-                  {room.arrivalAt ? `Arrival ${room.arrivalAt}` : "No arrival"}
+                  {room.arrivalAt ? `Arrival ${room.arrivalAt}` : "No linked arrival"}
                 </span>
               </article>
             </div>
-
-            {room.guestName ? (
-              <Link
-                href={`/app/guests?guest=${encodeURIComponent(room.guestName)}`}
-                className="hl-guest-card"
-              >
-                <em>Next guest</em>
-                <strong>{room.guestName}</strong>
-                <span>
-                  {room.adults} adults · {room.nights} nights
-                  {room.arrivalAt ? ` · Arrival ${room.arrivalAt}` : ""}
-                </span>
-              </Link>
-            ) : null}
 
             {room.dependencies.length ? (
               <ul className="hl-deps">
@@ -1383,14 +1371,10 @@ function RoomInspector({
               </div>
             ) : null}
           </>
+        ) : tab === "guests" || tab === "history" ? (
+          <RoomGuestBrief room={room} history={tab === "history"}/>
         ) : (
-          <p className="hl-insp-meta">
-            {tab === "tasks"
-              ? "Housekeeping tasks sync with Operations."
-              : tab === "guests"
-                ? "Guest stay details open in Guests when permitted."
-                : "Status history available after verification."}
-          </p>
+          <div className="room-guest-brief"><h4>Room preparation</h4>{room.dependencies.length?<ul className="hl-deps">{room.dependencies.map(d=><li key={d.id} data-done={d.done?"true":undefined}><i aria-hidden>{d.done?"✓":""}</i>{d.label}</li>)}</ul>:<p>No linked preparation tasks.</p>}<p className="guest-needs-source">{room.assigned?`Assigned to ${room.assigned}`:"No housekeeping owner recorded"} · demo snapshot</p></div>
         )}
 
         <div className="hl-actions">
