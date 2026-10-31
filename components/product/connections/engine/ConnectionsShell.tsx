@@ -1,7 +1,8 @@
 "use client";
 
+import { Heading, TextLink } from "../../reference/ReferenceUI";
+
 import { useCallback, useMemo, useState } from "react";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useProduct } from "@/lib/product/store";
 import { useDemoOrg } from "@/components/product/useDemoOrg";
@@ -90,14 +91,7 @@ export function ConnectionsShell() {
       data-connections-engine="true"
       data-drawer={selectedDetail ? "true" : undefined}
     >
-      <header className="ce-page-head">
-        <h1>Connections</h1>
-        <p>
-          Systems of record stay the source — RADR reads, validates, and decides
-          above them.{" "}
-          <Link href="/app/data-health">Data Health →</Link>
-        </p>
-      </header>
+      <Heading eyebrow="Connections" title="Your systems. One connected picture." description="Evidence coverage, source quality and connection setup in one place." aside={<TextLink href="/app/data-health">Review evidence health</TextLink>} />
 
       <ConnectionsOverview
         model={model}

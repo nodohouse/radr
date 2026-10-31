@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "../../reference/ReferenceUI";
+
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import {
@@ -100,14 +102,7 @@ export function DashboardsLibrary({
       data-vertical={isHotel ? "hotel" : "restaurant"}
     >
       <header className="db-head">
-        <div>
-          <h1>Dashboards</h1>
-          <p>
-            {isHotel
-              ? "Build, save and share hotel operating views."
-              : "Build, save and share operating views."}
-          </p>
-        </div>
+        <Heading eyebrow="Dashboards" title="Your operation. Your perspective." description={isHotel?"Build, save and share hotel operating views.":"Build, save and share operating views."} />
         <div className="db-head-actions">
           <input
             type="search"

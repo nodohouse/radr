@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "../../reference/ReferenceUI";
+
 /**
  * Hotel House Readiness — Daylight Operations command center.
  * Replaces broken SVG HotelServiceMapInstrument room grid.
@@ -48,14 +50,7 @@ export function HouseReadinessShell() {
   return (
     <div className="hr-root" data-tab={tab} data-testid="house-readiness">
       <header className="hr-head">
-        <div>
-          <p className="hr-kicker">OPERATIONS</p>
-          <h1>House readiness</h1>
-          <p className="hr-head-sub">
-            Empty room ≠ ready capacity. Departed → Cleaning → Inspection →
-            Ready.
-          </p>
-        </div>
+        <Heading eyebrow="Operations" title="Every room ready for what’s next." description="Track cleaning, inspection and readiness before the next arrival wave." />
         <div className="hr-live-pill">
           <span>
             <i />

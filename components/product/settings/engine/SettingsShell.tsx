@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "../../reference/ReferenceUI";
+
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useDemoOrg } from "@/components/product/useDemoOrg";
@@ -278,17 +280,7 @@ export function SettingsShell() {
       />
 
       <div className="se-main">
-        <header className="se-head">
-          <div className="se-head-row">
-            <div>
-              <h1>Settings</h1>
-              <p>How RADR is governed</p>
-            </div>
-            <span className="se-save" data-status={saveStatus} role="status">
-              {saveLabel}
-            </span>
-          </div>
-        </header>
+        <Heading eyebrow="Settings" title="Built around your operation." description="Your organization, team, preferences and decision guardrails." aside={<span className="se-save" data-status={saveStatus} role="status">{saveLabel}</span>} />
 
         <SettingsSummaryCards
           demo={demo}

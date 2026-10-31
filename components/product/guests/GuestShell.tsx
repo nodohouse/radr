@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "../reference/ReferenceUI";
+
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDemoOrg } from "@/components/product/useDemoOrg";
@@ -129,17 +131,7 @@ export function GuestShell() {
   return (
     <div className="gi-root" data-view={view} data-vertical={isHotel ? "hotel" : "restaurant"}>
       {view !== "overview" ? null : (
-        <header className="gi-head">
-          <div>
-            <p className="gi-kicker">Guest intelligence</p>
-            <h1>{model.title}</h1>
-            <p className="gi-head-sub">{model.subtitle}</p>
-          </div>
-          <div className="gi-context" aria-label="Service context">
-            <i />
-            Dinner · Live
-          </div>
-        </header>
+        <Heading eyebrow="Guest intelligence" title="Know the guest behind the visit." description={model.subtitle} />
       )}
 
       <nav className="gi-nav" aria-label="Guest views">

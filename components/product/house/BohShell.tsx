@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading, Arrow } from "../reference/ReferenceUI";
+
 import {
   useCallback,
   useEffect,
@@ -117,8 +119,6 @@ export function BohShell() {
 
   const openActions = () => openStockItem("caster-sugar");
 
-  const locationLabel = isHotel ? "Mercer House" : "Soho";
-  const serviceLabel = isHotel ? "Arrivals" : "Dinner service";
 
   let body: ReactNode = null;
   if (view === "overview") {
@@ -185,27 +185,8 @@ export function BohShell() {
 
   return (
     <div className="boh-root" data-view={view} data-vertical={session.vertical}>
-      <header className="boh-head">
-        <div>
-          <p className="boh-kicker">
-            {isHotel ? "Back of house" : "Back of house · Line & prep"}
-          </p>
-          <h1>{house.title}</h1>
-          <p className="boh-head-sub">
-            Live readiness, stock truth, prep, deliveries and service risk — all
-            in one place.
-          </p>
-        </div>
-        <div className="boh-context" aria-label="Service context">
-          <i />
-          {serviceLabel}
-          {!isHotel ? (
-            <span>
-              | Peak 20:15 · {house.readiness.loadValue} forecast load
-            </span>
-          ) : null}
-        </div>
-      </header>
+      <Heading eyebrow="Back of House" title={isHotel?"Behind every ready room.":"Behind every smooth service."} description={isHotel?"Supplies, housekeeping observations and readiness evidence.":"Stock, staff observations and service readiness in one place."} aside={<button type="button" className="rs-section-action" onClick={()=>selectView("captures")}>Review captures <Arrow /></button>} />
+      {view==="overview"?<section className="boh-capture-intro" aria-label="Staff capture workflow"><div><span className="rs-eyebrow">FROM THE FLOOR TO THE RECORD</span><h2>See it. Say it. Keep the evidence.</h2><p>{isHotel?"Room checks, linen, amenities and supplies.":"Storerooms, ingredients, supplies and prep."} Camera, voice and notes come together for review.</p><button type="button" onClick={()=>selectView("captures")}>Explore capture evidence <Arrow /></button><small>Demo evidence feed · staff app connection planned</small></div><ol><li><b>01</b><span>Capture<small>Video, photos, voice or notes</small></span></li><li><b>02</b><span>Review<small>Confirm quantities and uncertain observations</small></span></li><li><b>03</b><span>Act<small>Connect shortages and issues to a decision</small></span></li></ol></section>:null}
 
       <nav className="boh-nav" aria-label="Back of house views">
         {VIEWS.map((v) => (

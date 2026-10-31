@@ -163,3 +163,19 @@ The user explicitly authorized an interactive spatial redesign of Live. Its firs
 TypeScript and targeted ESLint passed. Chromium checks confirmed table selection, zoom, rotation, top view, reset, and no phone horizontal overflow or page errors. This presentation change does not alter financial records, approval rules, source health or integrations.
 
 Back of House is a primary navigation destination beside Operations, per the user’s explicit request. It uses the existing house icon and `/app/house` route, with active selection on its subroutes. It is removed from the supporting workspace menu; mobile BOH access remains available.
+
+## Whole-product consistency pass (31 October 2026)
+
+The user explicitly requested improvements across every navigation section, including supporting workspace destinations. This authorizes the shared and section-level changes in this pass. The existing record stores, approval paths, source-health logic and scoped financial calculations remain authoritative.
+
+All entry points now share `Heading` from `ReferenceUI`: the existing navigation icon, section label, one H1, contextual description and optional real action. Connections, Locations, Guests, Dashboards, Settings, Back of House and hotel Operations use this same component rather than private heading styles. The frozen logo and compact rail spacing are unchanged.
+
+Shared cards use 18px corners, blue borders and restrained depth. Verified-value cards use a navy-to-blue surface, white amounts and green evidence links. Intelligence gives the selected insight a distinct blue surface and exposes selection to assistive technology. Charts use a restrained gradient, native SVG points and deterministic accessible point titles. Legacy overview CSS is wrapped in `:where` so it no longer outranks the authoritative shared system or produces white text on a white feature card.
+
+All native detail engines inherit the same Manrope font, ink, blue actions, accessible green text, borders and surface tokens. This includes BOH, Guests, Connections, Dashboards, Settings, Locations, Value, Memory, Intelligence, Data Health, hotel Live and House Readiness. Semantic risk colors remain distinct.
+
+Back of House introduces the user's staff-app capture workflow: Capture, Review, Act. The capture action opens the real existing evidence feed. The interface explicitly says the staff-app connection is planned; it does not claim video interpretation, transcription, inventory updates or an active device connection. The restaurant and hotel variants use different operating copy.
+
+Phone metrics form compact two-column groups; odd final summaries span both columns. Redundant top-bar page titles are hidden on phones. Wide evidence tables scroll inside their own containers; Guest panels have explicit minimum-width containment. Visible keyboard focus and reduced-motion behavior are retained.
+
+Validation: application TypeScript, targeted ESLint and diff whitespace checks passed. The corrected desktop route sweep covered all 14 navigation destinations with one main heading each, no page errors and no page overflow. Phone and tablet sweeps checked the same destinations. Interaction checks covered decision search/status reset, Intelligence selection, BOH captures/stock, Settings sections and verified-card presence. Hotel checks covered Operations, BOH, Guests and the existing Live route. A chart hydration issue and feature-card contrast conflict were found during review and corrected before publishing. No new business logic or external integration was introduced; the full business test suite was not rerun for this presentation pass.

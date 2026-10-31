@@ -1,5 +1,7 @@
 "use client";
 
+import { Heading } from "../../reference/ReferenceUI";
+
 import {
   useCallback,
   useMemo,
@@ -113,10 +115,7 @@ export function LocationsShell() {
       data-drawer={selected ? "true" : undefined}
     >
       <header className="le-page-head">
-        <div>
-          <h1>Locations</h1>
-          <p>Performance · exposure · contribution · attention</p>
-        </div>
+        <Heading eyebrow="Locations" title="Every location. A sharper perspective." description="Compare performance, exposure and attention across your estate." />
         <nav className="le-views" aria-label="Locations perspective">
           {VIEWS.map((v) => (
             <button
@@ -215,7 +214,7 @@ export function LocationsShell() {
             </div>
           </dl>
           <p className="le-drawer-why">
-            <strong>Why it matters</strong> — {selected.headline}. Primary
+            <strong>Why it matters</strong>, {selected.headline}. Primary
             driver: {selected.primaryDriver}.
           </p>
           <ul className="le-drawer-drivers">
@@ -258,14 +257,14 @@ export function LocationsShell() {
             <ol>
               {model.attention.map((a) => (
                 <li key={a.id}>
-                  <strong>{a.name}</strong> — {a.opportunityLabel} · expected +
+                  <strong>{a.name}</strong>, {a.opportunityLabel} · expected +
                   {a.upsideEuro > 0
                     ? new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "EUR",
                         maximumFractionDigits: 0,
                       }).format(a.upsideEuro)
-                    : "—"}
+                    : "Not available"}
                   <div className="le-modal-links">
                     <Link href={a.diagnosisHref}>Diagnosis →</Link>
                     <Link href={a.decisionsHref}>Decisions →</Link>
