@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Component, useEffect, useRef, useState, type ReactNode } from "react";
+import { Component, useEffect, useRef, useState, type ReactNode, type PointerEvent as ReactPointerEvent } from "react";
 import { useDemoOrg } from "../useDemoOrg";
 import { useProduct } from "@/lib/product/store";
 import { getServiceCommand } from "@/lib/product/serviceCommand";
@@ -9,6 +9,7 @@ import { generateHotel, importLayoutCsv, KIND_SIZE, LAYOUT_KINDS, validateLayout
 import { Heading } from "../reference/ReferenceUI";
 import type { CameraBridge, SceneProps } from "./LayoutScene";
 import "./layout-studio.css";
+import { PlanCanvas } from "./PlanCanvas";
 const Scene = dynamic(()=>import("./LayoutScene"),{ssr:false,loading:()=> <div className="lp-loading">Preparing your spatial workspace…</div>});
 const NAMES:Record<LayoutKind,string>={table2:"Table for 2",table4:"Table for 4",bar:"Counter",shelf:"Storage",wall:"Wall",room:"Room"};
 function starter(vertical:LayoutDraft["vertical"]):LayoutDraft {
@@ -26,6 +27,9 @@ function Studio({vertical,storageKey}:{vertical:LayoutDraft["vertical"];storageK
   const [flatFallback,setFlatFallback]=useState(false);const [editing,setEditing]=useState(true);const [floor,setFloor]=useState(vertical==="hotel"?"floor-1":"ground");const [selected,setSelected]=useState<string|null>(null);const [revision,setRevision]=useState(0);const [notice,setNotice]=useState("");
   const [reference,setReference]=useState<string|null>(null);const [referenceName,setReferenceName]=useState("");const [levels,setLevels]=useState(8);const [rooms,setRooms]=useState(200);const [generationOpen,setGenerationOpen]=useState(false);
   const history=useRef<LayoutDraft[]>([]);
+  const stage=useRef<HTMLDivElement>(null);
+  const palettePointer=useRef<{kind:LayoutKind;x:number;y:number;startX:number;startY:number;moved:boolean}|null>(null);
+  const [paletteDrag,setPaletteDrag]=useState<{kind:LayoutKind;x:number;y:number}|null>(null);
   const bridge=useRef<CameraBridge|null>(null);const file=useRef<HTMLInputElement>(null);
   useEffect(()=>{try{const raw=localStorage.getItem(storageKey);if(raw){const parsed=validateLayout(JSON.parse(raw));if(parsed.vertical===vertical){setDraft(parsed);setFloor(parsed.floors[0].id);setRevision(v=>v+1);}}}catch{setNotice("The saved layout could not be read. Your original file has not been changed.");}setReady(true);},[storageKey,vertical]);
   useEffect(()=>{if(!ready)return;try{localStorage.setItem(storageKey,JSON.stringify(draft));setSaved("Saved on this device");}catch{setSaved("Not saved: browser storage unavailable");}},[draft,ready,storageKey]);
@@ -49,6 +53,9 @@ function Studio({vertical,storageKey}:{vertical:LayoutDraft["vertical"];storageK
     commit(parsed);setFloor(parsed.floors[0].id);setSelected(null);setRevision(v=>v+1);setReference(null);setReferenceName("");setNotice(`Imported ${parsed.floors.length} levels. Geometry is a draft, not verified operating inventory.`);
   }catch(error){setNotice(error instanceof Error?error.message:"The layout could not be imported.");}};
   const download=(name:string,text:string,type="application/json")=>{const url=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+  const finishPalette=(e:ReactPointerEvent<HTMLButtonElement>)=>{const pointer=palettePointer.current;if(!pointer)return;palettePointer.current=null;setPaletteDrag(null);if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);if(!pointer.moved){add(pointer.kind);return;}const bounds=stage.current?.getBoundingClientRect();if(bounds&&e.clientX>=bounds.left&&e.clientX<=bounds.right&&e.clientY>=bounds.top&&e.clientY<=bounds.bottom)bridge.current?.drop(e.clientX,e.clientY,pointer.kind);else setNotice("Drop the object onto the floor.");};
+  const isPaletteDragging=!!paletteDrag;
+  useEffect(()=>{if(!isPaletteDragging)return;let frame=0;const tick=()=>{const p=palettePointer.current;if(!p)return;if(p.y<110)window.scrollBy(0,-12);else if(p.y>window.innerHeight-90)window.scrollBy(0,12);frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame);},[isPaletteDragging]);
   const sceneProps:SceneProps={onGestureStart:remember,draft,floor,editing,selected,reference,revision,onSelect:setSelected,onFloor:chooseFloor,onMove:(id,x,z)=>update(id,{x,z},false),onAdd:add,bridge};
   return <div className="rs-page lp-root" onKeyDown={e=>{if(editing&&(e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="z"&&!(e.target as HTMLElement).closest("input,textarea,[contenteditable=true]")){e.preventDefault();undo();}}}>
     <Heading eyebrow="Live Operations" title={vertical==="hotel"?"Your property, in perspective.":"Your floor, in focus."} description="Drag things into place. That’s it." aside={<Link className="rs-section-action" href="/app/live">Back to Live</Link>} />
@@ -60,19 +67,19 @@ function Studio({vertical,storageKey}:{vertical:LayoutDraft["vertical"];storageK
       </div></header>
       <div className="lp-body" data-editing={editing||undefined}>
         <div className="lp-view">
-          <div className="lp-stage-caption"><span>{floor==="all"?"BUILDING EXPLORER":activeFloor.name.toUpperCase()}</span><small>{flatFallback?"Select objects and edit their position fields.":editing?"Drag to move. Scroll or pinch to zoom.":"Hover to discover. Click a level or object to look closer."}</small></div>
+          <div className="lp-stage-caption"><span>{floor==="all"?"BUILDING EXPLORER":activeFloor.name.toUpperCase()}</span><small>{flatFallback?"Drag any object to move it.":editing?"Drag to move. Scroll or pinch to zoom.":"Hover to discover. Click a level or object to look closer."}</small></div>
 
-        <div className="lp-stage" tabIndex={0} role="region" aria-label={flatFallback?"Top-view layout. Select objects and edit their position fields.":editing?"Floor plan. Drag objects to move, drag empty space to pan, and scroll or pinch to zoom.":"3D layout. Drag to orbit, scroll or pinch to zoom. Plus and minus zoom, zero resets the view."} onKeyDown={e=>{if(e.target!==e.currentTarget)return;if(["+","=","-","0","Escape"].includes(e.key)){e.preventDefault();if(e.key==="0"){setSelected(null);bridge.current?.reset();}else if(e.key==="Escape")setSelected(null);else bridge.current?.zoom(e.key==="-"?1.15:.87);}}} onDragOver={e=>{if(editing)e.preventDefault();}} onDrop={e=>{e.preventDefault();const kind=e.dataTransfer.getData("application/radr-object") as LayoutKind;if(editing&&LAYOUT_KINDS.includes(kind))bridge.current?.drop(e.clientX,e.clientY,kind);else if(e.dataTransfer.files[0])void load(e.dataTransfer.files[0]);}}>
-          {ready?<SceneBoundary onFallback={()=>setFlatFallback(true)} fallback={<TopView {...sceneProps}/>}><Scene {...sceneProps}/></SceneBoundary>:<div className="lp-loading">Opening your layout…</div>}
+        <div ref={stage} className="lp-stage" tabIndex={0} role="region" aria-label={flatFallback?"Floor plan. Drag any object to move it.":editing?"Floor plan. Drag objects to move, drag empty space to pan, and scroll or pinch to zoom.":"3D layout. Drag to orbit, scroll or pinch to zoom. Plus and minus zoom, zero resets the view."} onKeyDown={e=>{if(e.target!==e.currentTarget)return;if(["+","=","-","0","Escape"].includes(e.key)){e.preventDefault();if(e.key==="0"){setSelected(null);bridge.current?.reset();}else if(e.key==="Escape")setSelected(null);else bridge.current?.zoom(e.key==="-"?1.15:.87);}}} onDragOver={e=>{if(editing)e.preventDefault();}} onDrop={e=>{e.preventDefault();const kind=e.dataTransfer.getData("application/radr-object") as LayoutKind;if(editing&&LAYOUT_KINDS.includes(kind))bridge.current?.drop(e.clientX,e.clientY,kind);else if(e.dataTransfer.files[0])void load(e.dataTransfer.files[0]);}}>
+          {ready?editing?<PlanCanvas {...sceneProps}/>:<SceneBoundary onFallback={()=>{setFlatFallback(true);setEditing(true);}} fallback={<TopView {...sceneProps}/>}><Scene {...sceneProps}/></SceneBoundary>:<div className="lp-loading">Opening your layout…</div>}
 
         </div>
-          <div className="lp-camera-hint">{flatFallback?"Top view · use position fields to arrange objects":<>{editing?"Top view":"Drag to explore · Scroll or pinch to zoom"} <button type="button" onClick={()=>{setSelected(null);bridge.current?.reset();}}>Fit view</button></>}</div>
+          <div className="lp-camera-hint">{flatFallback?"Drag objects to arrange":<>{editing?"Top view":"Drag to explore · Scroll or pinch to zoom"} <button type="button" onClick={()=>{setSelected(null);bridge.current?.reset();}}>Fit view</button></>}</div>
           {referenceName?<span className="lp-reference-tag">Tracing reference: {referenceName}</span>:null}
         </div>
         {(editing||current)?<aside className="lp-inspector" aria-label="Layout inspector" data-selected={!!current}>
           {editing?<><div className="lp-inspector-head"><span>LAYOUT STUDIO</span><h2>{vertical==="hotel"?"Shape your property.":"Arrange your floor."}</h2><p>Drag onto the floor, or tap to add.</p></div>
             <details className="lp-advanced-picker"><summary>Find an object</summary><label className="lp-object-picker">Select an object<select aria-label="Select layout object" value={selected||""} onChange={e=>setSelected(e.target.value||null)}><option value="">Choose an object</option>{draft.floors.filter(f=>floor==="all"||f.id===floor).flatMap(f=>f.items.map(i=><option key={i.id} value={i.id}>{f.name} · {i.label}</option>))}</select></label></details>
-            <details className="lp-palette-section" open><summary>Add objects</summary><div className="lp-palette" aria-label="Object palette">{(vertical==="hotel"?["room","wall","shelf"] as const:["table2","table4","bar","shelf","wall"] as const).map(kind=><button type="button" key={kind} draggable onDragStart={e=>{e.dataTransfer.setData("application/radr-object",kind);e.dataTransfer.effectAllowed="copy";}} onClick={()=>add(kind)} disabled={floor==="all"}><span className={`lp-object-symbol is-${kind}`} aria-hidden="true"/>{NAMES[kind]}</button>)}</div></details>
+            <details className="lp-palette-section" open><summary>Add objects</summary><div className="lp-palette" aria-label="Object palette">{(vertical==="hotel"?["room","wall","shelf"] as const:["table2","table4","bar","shelf","wall"] as const).map(kind=><button type="button" key={kind} onPointerDown={e=>{if(e.button!==0)return;e.preventDefault();palettePointer.current={kind,x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,moved:false};e.currentTarget.setPointerCapture(e.pointerId);}} onPointerMove={e=>{const p=palettePointer.current;if(!p||p.kind!==kind)return;p.x=e.clientX;p.y=e.clientY;if(Math.hypot(p.x-p.startX,p.y-p.startY)>5)p.moved=true;if(p.moved)setPaletteDrag({kind,x:p.x,y:p.y});}} onPointerUp={finishPalette} onPointerCancel={()=>{palettePointer.current=null;setPaletteDrag(null);}} onClick={e=>{if(e.detail===0)add(kind);}} disabled={floor==="all"}><span className={`lp-object-symbol is-${kind}`} aria-hidden="true"/>{NAMES[kind]}</button>)}</div></details>
             {floor==="all"?<p className="lp-muted">Choose a level above before adding or moving its objects.</p>:null}
             <details className="lp-plan-setup"><summary>Plan setup</summary><div className="lp-import-actions"><button type="button" onClick={()=>file.current?.click()}>Upload a plan <span aria-hidden="true">↑</span></button>{vertical==="hotel"?<button type="button" aria-expanded={generationOpen} onClick={()=>setGenerationOpen(v=>!v)}>Generate a building <span aria-hidden="true">↗</span></button>:null}</div>
             {generationOpen?<form className="lp-generator" onSubmit={e=>{e.preventDefault();try{const next=generateHotel(levels,rooms);commit(next);setFloor(next.floors[0].id);setSelected(null);setRevision(v=>v+1);setReference(null);setReferenceName("");setGenerationOpen(false);setNotice("Building generated. This is a schematic arrangement; check it against your measured plan.");}catch(error){setNotice((error as Error).message);}}}><label>Levels<input type="number" min="1" max="20" required value={levels} onChange={e=>setLevels(Number(e.target.value))}/></label><label>Total rooms<input type="number" min={levels} max="500" required value={rooms} onChange={e=>setRooms(Number(e.target.value))}/></label><p>Rooms are distributed across levels with a central corridor. Generating replaces this device’s current draft.</p><button type="submit">Generate draft</button></form>:null}</details>
@@ -84,6 +91,7 @@ function Studio({vertical,storageKey}:{vertical:LayoutDraft["vertical"];storageK
       <footer className="lp-footer"><span role="status">{saved}</span><span>Layout draft · confirm dimensions before use · no inventory updates</span></footer>
     </section>
     <input ref={file} hidden type="file" accept=".csv,.json,image/png,image/jpeg,image/webp" aria-label="Upload layout file" onChange={e=>{const upload=e.target.files?.[0];if(upload)void load(upload);e.target.value="";}}/>
+    {paletteDrag?<div className="lp-drag-ghost" style={{left:Math.min(paletteDrag.x+12,typeof window!=="undefined"?window.innerWidth-150:paletteDrag.x),top:paletteDrag.y+12}}>{NAMES[paletteDrag.kind]}</div>:null}
     {notice?<p className="lp-notice" role="status">{notice}</p>:null}
   </div>;
 }

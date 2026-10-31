@@ -10,7 +10,7 @@ import { useDemoOrg } from "../useDemoOrg";
 import { buildDataHealthOverview } from "@/lib/radr/product/dataHealthProofEngine";
 
 const ITEMS = [
-  ["control-center", "Control Center", "/app"], ["live", "Live & floor plan", "/app/live"],
+  ["control-center", "Control Center", "/app"], ["live", "Live & floor plan", "/app/live/plan"],
   ["decisions", "Decisions", "/app/decisions"], ["service", "Operations", "/app/service"],
   ["house", "Back of House", "/app/house"],
   ["intelligence", "Intelligence", "/app/intelligence"], ["value", "Value", "/app/value"],
@@ -37,7 +37,7 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
     <button type="button" className="rs-workspace" onClick={() => setMore(v => !v)} aria-expanded={more} aria-label={`Workspace: ${org.name}`} aria-controls="rs-workspace-menu"><span className="rs-workspace-icon" aria-hidden="true"><WorkspaceIcon /></span><span className="rs-workspace-copy"><small>WORKSPACE</small><strong>{org.name}</strong></span><span className="rs-workspace-chevron" aria-hidden="true">⌄</span></button>
     {more ? <div className="rs-more" id="rs-workspace-menu">{MORE.map(([label,href]) => <Link key={href} href={href} onClick={() => { setMore(false); onNavigate(); }}>{label}<span aria-hidden="true">↗</span></Link>)}</div> : null}
     <nav className="rs-nav-items" aria-label="Primary">{ITEMS.map(([id,label,href]) => {
-      const active = href === "/app" ? path === href : path.startsWith(href);
+      const active = id === "live" ? path.startsWith("/app/live") : href === "/app" ? path === href : path.startsWith(href);
       const Icon = NAV_ICONS[id];
       return <Link key={id} href={href} aria-current={active ? "page" : undefined} data-active={active || undefined} aria-label={label} title={label} onClick={onNavigate}><span className="rs-nav-icon"><Icon /></span><span className="rs-nav-label">{label}</span></Link>;
     })}</nav>
