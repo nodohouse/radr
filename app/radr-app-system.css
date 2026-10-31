@@ -22,7 +22,7 @@
 }
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] { background:var(--app-bg); color:var(--app-ink); }
 .rp-premium .rs-navigation { background:var(--app-nav); border-color:var(--app-border); box-shadow:none; padding-top:34px; }
-.rp-premium .rs-brand { margin-bottom:32px; }
+.rp-premium .rs-brand { margin-bottom:32px; width:48px; min-height:40px; display:flex; align-items:center; }
 .rp-premium .rs-workspace { padding:12px;margin:0 0 19px;gap:12px;text-align:left;border:1px solid var(--app-border);border-radius:var(--app-radius-control);background:#ffffff78;color:var(--app-muted);min-height:61px; }
 .rp-premium .rs-workspace-copy { display:grid;gap:5px;min-width:0; }
 .rp-premium .rs-workspace-copy small { font-size:8px;letter-spacing:.12em;font-weight:500;color:var(--app-quiet); }

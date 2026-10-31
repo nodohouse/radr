@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ProductBrand } from "../ProductBrand";
+import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { NAV_ICONS } from "../shell/navIcons";
@@ -24,7 +24,7 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
   const { session, isHotel, org } = useDemoOrg();
   const health = buildDataHealthOverview(roleView, session.vertical);
   return <aside className="rs-navigation" aria-label="RADR workspace">
-    <Link className="rs-brand" href="/app" onClick={onNavigate} aria-label="RADR Control Center"><ProductBrand width={136} /></Link>
+    <Link className="rs-brand" href="/app" onClick={onNavigate} aria-label="RADR Control Center"><FrozenRadrLogo variant="mark" theme="light" width={44} priority /></Link>
     <button type="button" className="rs-workspace" onClick={() => setMore(v => !v)} aria-expanded={more} aria-controls="rs-workspace-menu"><span className="rs-workspace-copy"><small>WORKSPACE</small><strong>{org.name}</strong></span><span aria-hidden="true">⌄</span></button>
     {more ? <div className="rs-more" id="rs-workspace-menu">{MORE.map(([label,href]) => <Link key={href} href={href} onClick={() => { setMore(false); onNavigate(); }}>{label}<span aria-hidden="true">↗</span></Link>)}</div> : null}
     <nav className="rs-nav-items" aria-label="Primary">{ITEMS.map(([id,label,href]) => {
