@@ -12,11 +12,12 @@ import { buildDataHealthOverview } from "@/lib/radr/product/dataHealthProofEngin
 const ITEMS = [
   ["control-center", "Control Center", "/app"], ["live", "Live", "/app/live"],
   ["decisions", "Decisions", "/app/decisions"], ["service", "Operations", "/app/service"],
+  ["house", "Back of House", "/app/house"],
   ["intelligence", "Intelligence", "/app/intelligence"], ["value", "Value", "/app/value"],
   ["memory", "Memory", "/app/memory"], ["data-health", "Data Health", "/app/data-health"],
 ] as const;
 const WorkspaceIcon = NAV_ICONS.locations;
-const MORE = [["Connections", "/app/connections"], ["Locations", "/app/locations"], ["Guests", "/app/guests"], ["Back of house", "/app/house"], ["Dashboards", "/app/dashboards"], ["Settings", "/app/settings"]] as const;
+const MORE = [["Connections", "/app/connections"], ["Locations", "/app/locations"], ["Guests", "/app/guests"], ["Dashboards", "/app/dashboards"], ["Settings", "/app/settings"]] as const;
 
 export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) {
   const path = usePathname();

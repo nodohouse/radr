@@ -49,7 +49,7 @@ The landing palette is sourced from the current marketing `vibrant.css`. Neon gr
 
 ## Navigation and top bar
 
-The desktop rail has exactly eight primary destinations: Control Center, Live, Decisions, Operations, Intelligence, Value, Memory, Data Health. Icons use the shared 20-unit outline SVG family at 18px. Selection uses vibrant green with navy text against a solid deep blue rail. No gradient rail or glow.
+The desktop rail has nine primary destinations: Control Center, Live, Decisions, Operations, Back of House, Intelligence, Value, Memory, Data Health. Icons use the shared 20-unit outline SVG family at 18px. Selection uses vibrant green with navy text against a solid deep blue rail. No gradient rail or glow.
 
 On fine pointers at 1100px and above the rail rests at 80px and expands to 248px on hover or keyboard focus, overlaying content without shifting it. Leaving the rail retracts it; keyboard focus holds it open. Escape closes supporting menus, releases the pin and returns focus to main content. The optional pin reserves 248px in the layout. Width transitions last 220ms and labels 150ms; reduced motion disables them. Coarse pointers retain a full 232px rail. Tablet and phone keep their drawer and dismissing scrim.
 
@@ -161,3 +161,5 @@ The user explicitly requested landing-page colors and expanding navigation. Brow
 The user explicitly authorized an interactive spatial redesign of Live. Its first main surface is the existing operating floor, presented with CSS perspective, raised table surfaces and blue/green brand colors. Four zone selectors retain canonical demo table positions, statuses and evidence. Clicking a table focuses the camera and updates the existing inspector. Camera controls provide bounded 75–200% zoom, rotation, top view and reset. Native buttons support keyboard and touch; reduced motion removes camera transitions. This is a schematic perspective model, not a surveyed building or new telemetry. The compact shared preview keeps its original presentation.
 
 TypeScript and targeted ESLint passed. Chromium checks confirmed table selection, zoom, rotation, top view, reset, and no phone horizontal overflow or page errors. This presentation change does not alter financial records, approval rules, source health or integrations.
+
+Back of House is a primary navigation destination beside Operations, per the user’s explicit request. It uses the existing house icon and `/app/house` route, with active selection on its subroutes. It is removed from the supporting workspace menu; mobile BOH access remains available.
