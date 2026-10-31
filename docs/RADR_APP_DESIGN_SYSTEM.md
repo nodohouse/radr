@@ -155,3 +155,9 @@ Ask labels its response-quality score as **Answer confidence**. It is not the se
 ## Landing palette and navigation verification (31 October 2026)
 
 The user explicitly requested landing-page colors and expanding navigation. Browser checks passed for idle 80px, expanded 248px, retraction, pin/unpin, keyboard focus and Escape. Hover does not shift content. Tablet 1024px, phone 390px and coarse-pointer desktop checks passed without horizontal overflow or browser page errors. Exact blue and green computed values match the landing palette. Application TypeScript, targeted navigation/chart ESLint and diff whitespace checks passed. Financial derivation and record state are unchanged; the full business test suite was not rerun for this presentation change.
+
+## Live venue explorer (31 October 2026)
+
+The user explicitly authorized an interactive spatial redesign of Live. Its first main surface is the existing operating floor, presented with CSS perspective, raised table surfaces and blue/green brand colors. Four zone selectors retain canonical demo table positions, statuses and evidence. Clicking a table focuses the camera and updates the existing inspector. Camera controls provide bounded 75–200% zoom, rotation, top view and reset. Native buttons support keyboard and touch; reduced motion removes camera transitions. This is a schematic perspective model, not a surveyed building or new telemetry. The compact shared preview keeps its original presentation.
+
+TypeScript and targeted ESLint passed. Chromium checks confirmed table selection, zoom, rotation, top view, reset, and no phone horizontal overflow or page errors. This presentation change does not alter financial records, approval rules, source health or integrations.
