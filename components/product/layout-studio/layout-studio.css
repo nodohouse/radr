@@ -64,3 +64,42 @@
 .lp-object-picker select {max-width:100%;min-width:0;background:#fff;border:1px solid #d9e5fb;border-radius:8px;padding:10px;font:inherit;color:#304b78;min-height:40px;}
 .lp-format-help button:disabled {color:#7c8da7;cursor:default;}
 .lp-object-picker input {max-width:100%;min-width:0;box-sizing:border-box;background:#fff;border:1px solid #d9e5fb;border-radius:8px;padding:10px;font:inherit;color:#304b78;min-height:40px;}
+/* Reserved chrome bands keep text and controls out of the model viewport. */
+.lp-body {align-items:start;}
+.lp-body:has(.lp-inspector) {grid-template-columns:minmax(0,1fr) 310px;}
+.lp-view {min-width:0;position:sticky;top:84px;overflow:hidden;border-right:1px solid #d9e5fb;background:#edf3ff;isolation:isolate;}
+.lp-stage-caption {position:static;max-width:none;padding:23px 26px 18px;background:linear-gradient(115deg,#f8faff,#edf3ff);border-bottom:1px solid #dce7f8;}
+.lp-stage-caption p {font-size:18px;line-height:1.4;margin:7px 0 5px;}
+.lp-stage-caption small {font-size:11px;}
+.lp-stage {height:480px;min-height:380px;overflow:hidden;isolation:isolate;}
+.lp-camera-hint {position:static;transform:none;max-width:none;width:auto;min-height:48px;box-sizing:border-box;margin:0;border:0;border-top:1px solid #d9e5fb;border-radius:0;box-shadow:none;backdrop-filter:none;background:#f8faff;justify-content:space-between;padding:11px 23px;font-size:10px;line-height:1.6;white-space:normal;}
+.lp-reference-tag {position:static;display:block;max-width:none;background:#eaf1ff;border-radius:0;padding:9px 23px;}
+.lp-inspector {max-height:none;overflow:visible;padding:26px 23px;border-left:0;background:#ffffffeb;box-sizing:border-box;}
+.lp-inspector-head h2 {font-size:20px;margin:10px 0;}
+.lp-inspector[data-selected=true] .lp-inspector-head p {display:none;}
+.lp-palette-section {border-bottom:1px solid #d9e5fb;padding:17px 0;margin:0 0 16px;}
+.lp-palette-section>summary {cursor:pointer;font-size:12px;font-weight:600;color:#304b78;}
+.lp-palette {margin:16px 0 0;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.lp-palette>button {min-height:76px;padding:14px 5px;font-size:9px;gap:12px;}
+.lp-object-properties {margin-top:19px;padding-top:19px;}
+.lp-footer {font-size:10px;padding:15px 22px;}
+.lp-world-label {max-width:160px;min-width:0;white-space:normal;overflow-wrap:anywhere;font-size:11px;line-height:1.5;box-sizing:border-box;}
+.lp-format-help {padding-top:19px;margin-top:23px;}
+.lp-fallback {padding:22px;}
+@media(max-width:1100px) {.lp-body:has(.lp-inspector) {grid-template-columns:minmax(0,1fr) 280px;}.lp-inspector {padding:22px 19px;}.lp-stage {height:440px;min-height:360px;}}
+@media(max-width:850px) {.lp-body:has(.lp-inspector) {grid-template-columns:1fr;}.lp-view {position:static;border-right:0;}.lp-inspector {border-top:1px solid #d9e5fb;max-height:none;padding:24px;}.lp-stage {height:400px;min-height:320px;}.lp-stage-caption {padding:19px 20px 16px;}.lp-stage-caption p {font-size:17px;}.lp-camera-hint {padding:10px 18px;font-size:9px;gap:12px;}.lp-toolbar {gap:13px;}.lp-toolbar>div {width:100%;justify-content:flex-start;}.lp-toolbar>div:last-child {justify-content:space-between;}.lp-toolbar select {max-width:100%;}.lp-palette {grid-template-columns:repeat(3,minmax(0,1fr));}.lp-palette>button {font-size:11px;min-height:82px;}.lp-footer {padding:14px 17px;}.lp-stage canvas {touch-action:none;}}
+.lp-stage-caption {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 20px;min-height:62px;box-sizing:border-box;padding:17px 23px;}
+.lp-stage-caption small {max-width:65%;text-align:right;}
+@media(max-width:850px) {.lp-stage-caption {padding:15px 18px;gap:7px;}.lp-stage-caption small {max-width:none;text-align:left;flex-basis:100%;font-size:10px;}}
+@supports(overflow:clip) {.lp-workspace {overflow:clip;}}
+.lp-world-label {width:max-content;min-width:110px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;}
+.lp-world-label small {white-space:normal;}
+.lp-object-picker,.lp-generator label,.lp-object-properties label {font-size:11px;}
+.lp-toolbar>div>span:not(.lp-draft-dot) {font-size:11px;}
+.lp-inspector-head>span,.lp-kicker {font-size:9px;}
+/* In the editor, an expanding rail reserves space instead of covering the plan. */
+@media(min-width:1100px) and (hover:hover) and (pointer:fine) {
+  .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-frame-v2:has(.lp-root) .rp-rail-spacer {transition:width 220ms ease,flex-basis 220ms ease;}
+  .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-frame-v2:has(.lp-root):has(.rs-navigation:is(:hover,:focus-within,[data-pinned=true])) .rp-rail-spacer {width:248px!important;flex-basis:248px!important;}
+}
+@media(prefers-reduced-motion:reduce) {.rp-frame-v2:has(.lp-root) .rp-rail-spacer {transition:none!important;}}
