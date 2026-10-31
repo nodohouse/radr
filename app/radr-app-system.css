@@ -1,15 +1,18 @@
 /* RADR approved light system. See docs/RADR_APP_DESIGN_SYSTEM.md. */
 .rp-root.rp-premium {
-  --app-bg:#f8faf9;
-  --app-nav:#f0f5f7;
+  --app-bg:#f3f7ff;
+  --app-nav:#0a2564;
   --app-surface:#fff;
-  --app-ink:#163044;
-  --app-muted:#4f6674;
+  --app-signal:#00ed87;
+  --app-blue-deep:#0a2564;
+  --app-chart-fill:#00ed871a;
+  --app-ink:#091d49;
+  --app-muted:#526582;
   --app-quiet:#5c717e;
-  --app-border:#dce6ea;
-  --app-green:#158166;
-  --app-mint:#e1f0e9;
-  --app-blue:#2e709d;
+  --app-border:#d9e5fb;
+  --app-green:#08794f;
+  --app-mint:#e4fff2;
+  --app-blue:#1755ed;
   --app-amber:#8e5f1a;
   --app-red:#a54444;
   --app-radius-control:9px;
@@ -115,4 +118,88 @@
   .rp-premium .rs-brief .rs-brief-decision { order:1; }
   .rp-premium .rs-brief>.rs-metrics { order:2; }
   .rp-premium .rs-brief .rs-brief-proof { order:3; }
+}
+
+/* Landing-page palette: white clarity, electric blue intelligence, green action. */
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] {
+  --dl-ink:var(--app-ink); --dl-muted:var(--app-muted); --dl-border:var(--app-border);
+  --radr-text:var(--app-ink); --radr-text-secondary:var(--app-muted); --radr-blue:var(--app-blue);
+}
+.rp-premium .rs-eyebrow { color:var(--app-blue); }
+.rp-premium .rs-text-link { color:var(--app-blue); }
+.rp-premium .rs-card { border-color:var(--app-border); }
+.rp-premium a.rs-metric:hover { border-color:#94b1ff; background:#fcfdff; }
+.rp-premium .rs-metric-icon i { background:var(--app-blue); }
+.rp-premium .rs-metric:has(>strong[data-positive=true]) .rs-metric-icon i { background:var(--app-signal); }
+.rp-premium .rs-brief-decision { border-top:3px solid var(--app-blue); background:linear-gradient(180deg,#f8fbff,#fff 48%); }
+.rp-premium .rs-brief-decision>.rs-text-link,.rp-premium .rs-primary-button { background:var(--app-signal); color:var(--app-ink); border:1px solid transparent; border-radius:9px; padding:11px 14px; font-weight:650; transition:background-color 180ms ease; }
+.rp-premium .rs-brief-decision>.rs-text-link:hover,.rp-premium .rs-primary-button:hover { background:#22f4a0; }
+.rp-premium .rs-status-pill[data-tone=attention] { background:#eaf0ff; color:#174acb; }
+.rp-premium .rs-soft-icon { color:var(--app-blue); background:#edf3ff; }
+.rp-premium .rs-tone-1,.rp-premium .rs-tone-2 { background:#e4fff2; color:var(--app-green); }
+.rp-premium .rs-relationship { background:#f4f7ff; border-color:var(--app-border); }
+.rp-premium .rs-relation-center { background:var(--app-blue-deep); color:#fff; }
+.rp-premium .rs-ranked button[data-selected=true] { background:#eaf0ff; border-color:#a6bfff; }
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-goh-avatar { background:var(--app-blue)!important; }
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-goh-search { border-color:var(--app-border)!important; }
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-goh-search:hover { border-color:#8eadff!important; }
+.rp-premium :is(.ve-root,.me-root,.ie-root,.dh-root,.se-root,.le-root) {
+  --ve-ink:var(--app-ink); --ve-action:var(--app-blue); --ve-green:var(--app-green); --ve-line:var(--app-border);
+  --me-ink:var(--app-ink); --me-action:var(--app-blue); --me-green:var(--app-green); --me-line:var(--app-border);
+  --ie-ink:var(--app-ink); --ie-blue:var(--app-blue); --ie-green:var(--app-green); --ie-line:var(--app-border);
+  --dh-ink:var(--app-ink); --dh-blue:var(--app-blue); --dh-green:var(--app-green); --dh-line:var(--app-border);
+  --se-ink:var(--app-ink); --se-action:var(--app-blue); --se-green:var(--app-green); --se-line:var(--app-border);
+  --le-ink:var(--app-ink); --le-green:var(--app-green); --le-line:var(--app-border);
+}
+/* The rail has its own contrast surface; no decorative gradient or glow. */
+.rp-premium .rs-navigation { color:#dce8ff; }
+.rs-rail-brand-row { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:36px; margin-bottom:14px; }
+.rp-premium .rs-rail-brand-row .rs-brand { margin:0 12px 0; }
+.rs-rail-pin { display:none; align-items:center; justify-content:center; width:30px; height:30px; padding:0; border:1px solid #6086cf60; background:#ffffff0c; border-radius:8px; color:#cfddff; cursor:pointer; flex-shrink:0; }
+.rs-rail-pin:hover,.rs-rail-pin[aria-pressed=true] { background:#00ed8720; color:#00ed87; border-color:#00ed8750; }
+.rp-premium .rs-workspace { background:#ffffff08; border-color:#729bdf45; color:#cfddff; overflow:hidden; }
+.rs-workspace-icon { display:inline-flex; flex:0 0 20px; align-items:center; justify-content:center; }
+.rs-workspace-icon svg { width:18px; height:18px; }
+.rp-premium .rs-workspace-copy strong { color:#f2f6ff; }
+.rp-premium .rs-workspace-copy small { color:#aac1eb; }
+.rp-premium .rs-nav-items>a { color:#ccdcf9; }
+.rp-premium .rs-nav-items>a:hover { background:#194486; color:#fff; }
+.rp-premium .rs-nav-items>a[data-active=true] { background:var(--app-signal); color:#09274c; font-weight:600; }
+.rp-premium .rs-nav-items>a[data-active=true] .rs-nav-icon { color:#09274c; }
+.rp-premium .rs-connection-status { color:#c4d6f4; }
+.rp-premium .rs-more { background:#103275; border-color:#5179bd70; box-shadow:none; }
+.rp-premium .rs-more a { color:#e1ecff; }
+.rp-premium .rs-more a:hover { background:#204888; }
+.rp-premium .rs-navigation :is(a,button):focus-visible { outline:2px solid var(--app-signal); outline-offset:3px; }
+/* Fine-pointer desktop: reserve only the slim rail; expansion overlays, never reflows. */
+@media(min-width:1100px) and (hover:hover) and (pointer:fine) {
+  .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-rail-spacer { width:80px!important; flex-basis:80px!important; }
+  .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-frame-v2:has(.rs-navigation[data-pinned=true]) .rp-rail-spacer { width:248px!important; flex-basis:248px!important; }
+  .rp-premium .rs-navigation { width:80px; padding:18px 12px 26px; overflow-x:hidden; transition:width 220ms ease,box-shadow 220ms ease; }
+  .rp-premium .rs-navigation:is(:hover,:focus-within,[data-pinned=true]) { width:248px; box-shadow:12px 0 32px #071b4918; }
+  .rp-premium .rs-rail-brand-row { width:224px; }
+  .rp-premium .rs-rail-brand-row .rs-brand { margin:0 6px; flex-shrink:0; }
+  .rp-premium .rs-rail-pin { display:inline-flex; margin-right:8px; opacity:0; visibility:hidden; transition:opacity 180ms ease; }
+  .rp-premium .rs-navigation:is(:hover,:focus-within,[data-pinned=true]) .rs-rail-pin { opacity:1; visibility:visible; }
+  .rp-premium .rs-workspace { padding-inline:17px; gap:15px; flex-shrink:0; justify-content:flex-start; }
+  .rp-premium .rs-workspace-copy { min-width:123px; }
+  .rp-premium .rs-workspace-chevron { margin-left:auto; }
+  .rp-premium .rs-nav-items>a { padding-inline:17px; gap:15px; white-space:nowrap; overflow:hidden; }
+  .rp-premium .rs-nav-icon { flex:0 0 20px; }
+  .rp-premium :is(.rs-nav-label,.rs-workspace-copy,.rs-workspace-chevron,.rs-status-label) { opacity:0; transition:opacity 150ms ease; }
+  .rp-premium .rs-navigation:is(:hover,:focus-within,[data-pinned=true]) :is(.rs-nav-label,.rs-workspace-copy,.rs-workspace-chevron,.rs-status-label) { opacity:1; transition-delay:55ms; }
+  .rp-premium .rs-connection-status { padding-inline:23px; gap:14px; min-height:52px; white-space:nowrap; }
+  .rp-premium .rs-status-label { min-width:145px; white-space:normal; }
+  .rp-premium .rs-more { min-width:208px; }
+}
+/* Touch desktops keep the full rail. Tablet/phone use their existing drawer. */
+@media(prefers-reduced-motion:reduce) {
+  .rp-premium .rs-navigation,.rp-premium .rs-rail-pin,.rp-premium :is(.rs-nav-label,.rs-workspace-copy,.rs-workspace-chevron,.rs-status-label) { transition:none!important; }
+}
+/* Portalled Ask uses the same palette without relying on shell-only variables. */
+.rp-ask[role=dialog][aria-modal=true] .rp-ask-send { background:#1755ed; color:#fff; }
+.rp-ask[role=dialog][aria-modal=true] .rp-ask-greeting { color:#091d49; }
+.rp-ask[role=dialog][aria-modal=true] .rp-ask-suggest button:hover { background:#edf3ff; border-color:#1755ed; }
+@media(max-width:1099px) {
+  .rp-root.rp-premium .rp-rail-scrim { display:block; position:fixed; inset:0; z-index:80; border:0; background:#071b4945; backdrop-filter:blur(2px); cursor:pointer; }
 }

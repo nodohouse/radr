@@ -21,7 +21,7 @@ Personas are lenses over shared records. Restaurant and hotel contexts use the s
 
 ## Visual authority
 
-The eight clean light images in `RADR_backend_mockups.zip` define composition. Read the UI inside the pictured tablet, not the device frame or its blue background, as the product reference. Older dark compositions are not the final direction. The latest brief supersedes earlier requests for louder or flashier treatment.
+The eight clean light images in `RADR_backend_mockups.zip` define composition. Read the UI inside the pictured tablet, not the device frame or its blue background, as the product reference. Older dark compositions are not the final direction. The latest palette and navigation request applies the landing page’s blue and vibrant green to this light product composition.
 
 Approved immutable logo masters are rendered through `FrozenRadrLogo`; `ProductBrand` is the shared product wrapper. The light master includes its approved green focal dot. Never redraw artwork, adjust the dot, type a replacement wordmark, or size its height independently.
 
@@ -31,22 +31,29 @@ Approved immutable logo masters are rendered through `FrozenRadrLogo`; `ProductB
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--app-bg` | `#f8faf9` | Cool ivory canvas |
-| `--app-nav` | `#f0f5f7` | Solid pale blue-gray rail |
+| `--app-bg` | `#f3f7ff` | Landing-page paper canvas |
+| `--app-nav` | `#0a2564` | Deep blue navigation |
 | `--app-surface` | `#ffffff` | Cards and product surfaces |
-| `--app-ink` | `#163044` | Primary navy typography |
-| `--app-muted` | `#4f6674` | Supporting copy |
+| `--app-ink` | `#091d49` | Primary navy typography |
+| `--app-muted` | `#526582` | Supporting copy |
 | `--app-quiet` | `#5c717e` | Metadata |
-| `--app-border` | `#dce6ea` | Thin neutral cool borders |
-| `--app-green` | `#158166` | Action, verified value, healthy state |
-| `--app-mint` | `#e1f0e9` | Selected rail item, healthy field |
-| `--app-blue` | `#2e709d` | Analytical context, attention |
+| `--app-border` | `#d9e5fb` | Cool blue borders |
+| `--app-green` | `#08794f` | Accessible healthy text |
+| `--app-signal` | `#00ed87` | Vibrant green fills with navy text |
+| `--app-mint` | `#e4fff2` | Healthy field |
+| `--app-blue` | `#1755ed` | Landing-page blue, analytical context |
 | `--app-amber` | `#8e5f1a` | Watch, stale, degraded |
 | `--app-red` | `#a54444` | Material urgent risk only |
 
+The landing palette is sourced from the current marketing `vibrant.css`. Neon green is an accent fill, not small text on white. Shared legacy engines and portalled Ask controls inherit the same palette.
+
 ## Navigation and top bar
 
-The 232px desktop rail has exactly eight primary destinations: Control Center, Live, Decisions, Operations, Intelligence, Value, Memory, Data Health. Icons use the shared 20-unit outline SVG family at 18px. Rows are 51px minimum with 8px vertical separation. Selection is a subtle mint field; hover changes only tint and ink over 180ms. No gradient rail, glow or oversized icons.
+The desktop rail has exactly eight primary destinations: Control Center, Live, Decisions, Operations, Intelligence, Value, Memory, Data Health. Icons use the shared 20-unit outline SVG family at 18px. Selection uses vibrant green with navy text against a solid deep blue rail. No gradient rail or glow.
+
+On fine pointers at 1100px and above the rail rests at 80px and expands to 248px on hover or keyboard focus, overlaying content without shifting it. Leaving the rail retracts it; keyboard focus holds it open. Escape closes supporting menus, releases the pin and returns focus to main content. The optional pin reserves 248px in the layout. Width transitions last 220ms and labels 150ms; reduced motion disables them. Coarse pointers retain a full 232px rail. Tablet and phone keep their drawer and dismissing scrim.
+
+Use only the standalone approved symbol at 44px, with compact 18px top spacing. The dark-background approved variant retains its green focal dot. Logo masters remain immutable.
 
 The compact organization selector exposes supporting areas. The footer shows actual available source health, never a fictitious all-connected status. Hotel coverage without a health snapshot links to evidence health without assigning restaurant scores.
 
@@ -78,7 +85,7 @@ StatusPill tones are neutral, attention, healthy, watch and risk. Text accompani
 
 ## Charts and evidence semantics
 
-Charts and icons are native SVG, never raster mockup screenshots. One restrained green series with pale fill and subtle grid lines is the default. Labels represent actual model periods. Cumulative events on the same date use that date's final cumulative value once. Empty scopes show an honest empty state, not invented history.
+Charts and icons are native SVG, never raster mockup screenshots. An electric blue line with pale green fill, green bars and subtle grid lines is the default. Labels represent actual model periods. Cumulative events on the same date use that date's final cumulative value once. Empty scopes show an honest empty state, not invented history.
 
 Expected, observed and verified are distinct states. Control Center shows expected value awaiting verification separately from verified contribution month to date. The chart and card must reconcile with the same selected record set. The top Decision uses its own evidence-backed primary metric and confidence; mockup example amounts never override the record store.
 
@@ -144,3 +151,7 @@ The section-44 approval gate remains active. Later page composition changes requ
 Ask uses the same current record truth: pending recovery is not historical verified recovery, and its month ledger is the scoped Value aggregate. The public demo's existing server authorization is limited to Soho; unsupported UI scopes receive a clear availability response instead of a silently substituted location. LIVE server tenancy and permissions remain authoritative.
 
 Ask labels its response-quality score as **Answer confidence**. It is not the selected Decision’s confidence or verification state. Never substitute that answer score for the record-level confidence shown in Decisions.
+
+## Landing palette and navigation verification (31 October 2026)
+
+The user explicitly requested landing-page colors and expanding navigation. Browser checks passed for idle 80px, expanded 248px, retraction, pin/unpin, keyboard focus and Escape. Hover does not shift content. Tablet 1024px, phone 390px and coarse-pointer desktop checks passed without horizontal overflow or browser page errors. Exact blue and green computed values match the landing palette. Application TypeScript, targeted navigation/chart ESLint and diff whitespace checks passed. Financial derivation and record state are unchanged; the full business test suite was not rerun for this presentation change.
