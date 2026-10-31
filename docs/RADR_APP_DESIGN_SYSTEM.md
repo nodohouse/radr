@@ -243,3 +243,11 @@ After the user reported that both existing-object dragging and palette dragging 
 Palette dragging now uses the same pointer model for mouse and touch rather than browser HTML5 drag-and-drop. A transient drag preview follows the pointer; dropping inside the floor places the object using the SVG screen transform. Dragging near screen edges scrolls the page to help reach the floor on phones. Tapping still adds into an available space. The navigation's Live & floor plan entry opens the actual editor rather than the older read-only Live overview, which remains reachable through Back to Live.
 
 Permanent Playwright regressions in `tests/e2e/layout-drag.spec.ts` verify existing furniture dragging and reload persistence, palette drop and undo, and touch dragging of both existing furniture and new palette objects. All three passed using Chromium with WebGL disabled. Separate browser checks verified wheel/pinch zoom, mobile tap-to-add, and no page errors. TypeScript, targeted ESLint and diff checks pass. Geometry and browser-local persistence semantics remain unchanged.
+
+### Restaurant material visualization
+
+The user requested a more restaurant-like service floor with a high-quality rendered surface. The restaurant editor now uses a generated, top-down oak parquet and honed-stone material beneath its editable objects. The generated master remains outside the repository; the application asset is an optimized 1536×1024 WebP (approximately 325 KB) at `public/layout-materials/restaurant-oak-floor.webp`.
+
+Furniture remains native, individually draggable geometry. Restaurant tables use warm wood, green upholstered chairs, soft depth and decorative plate/linen details, with readable identifiers and unchanged selection outlines. The same floor material and warmer furniture colors appear in optional 3D preview. These are illustrative materials, not a survey or photograph of a real venue. Hotel layouts are unchanged. User-supplied tracing images take priority over the decorative restaurant material.
+
+The material and place-setting layers do not intercept pointer events. TypeScript and targeted lint pass. The three mouse/touch drag regression tests pass with WebGL disabled. Browser checks confirm successful asset loading, no page errors or page overflow at desktop and phone widths, and a rendered 3D preview.
