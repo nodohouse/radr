@@ -251,3 +251,9 @@ The user requested a more restaurant-like service floor with a high-quality rend
 Furniture remains native, individually draggable geometry. Restaurant tables use warm wood, green upholstered chairs, soft depth and decorative plate/linen details, with readable identifiers and unchanged selection outlines. The same floor material and warmer furniture colors appear in optional 3D preview. These are illustrative materials, not a survey or photograph of a real venue. Hotel layouts are unchanged. User-supplied tracing images take priority over the decorative restaurant material.
 
 The material and place-setting layers do not intercept pointer events. TypeScript and targeted lint pass. The three mouse/touch drag regression tests pass with WebGL disabled. Browser checks confirm successful asset loading, no page errors or page overflow at desktop and phone widths, and a rendered 3D preview.
+
+### Live floor direct navigation
+
+The restaurant Live overview reuses the native floor canvas and oak material in read-only mode. Dragging empty space or a table pans the camera, wheel/pinch zooms, and double-click fits the floor. Clicking a table retains its evidence inspector. Keyboard users can select tables with Enter/Space, pan with arrow keys on a table, and use +/−/0 from the floor region to zoom or fit. No camera button toolbar is required. Table geometry and operating evidence remain unchanged; editing remains in the separate floor studio.
+
+Five Chromium regression tests pass: Live mouse pan/zoom/selection/zone switch, Live touch pan/pinch with unchanged table coordinates, and the three existing editor drag/persistence/palette/touch tests. Mobile has no horizontal page overflow. TypeScript and targeted lint pass. This is an illustrative demo snapshot, with no writes to external operating systems.
