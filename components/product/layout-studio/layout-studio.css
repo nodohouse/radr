@@ -103,3 +103,16 @@
   .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rp-frame-v2:has(.lp-root):has(.rs-navigation:is(:hover,:focus-within,[data-pinned=true])) .rp-rail-spacer {width:248px!important;flex-basis:248px!important;}
 }
 @media(prefers-reduced-motion:reduce) {.rp-frame-v2:has(.lp-root) .rp-rail-spacer {transition:none!important;}}
+/* Drag-first canvas: everyday tools visible, precision tools tucked away. */
+.lp-body:has(.lp-inspector) {grid-template-columns:minmax(0,1fr) 245px;}
+.lp-inspector {padding:22px 18px;}
+.lp-inspector-head h2 {font-size:19px;}
+.lp-palette {grid-template-columns:repeat(2,minmax(0,1fr));}
+.lp-undo {border:0;background:transparent;color:#526582;font:inherit;font-size:12px;padding:10px;cursor:pointer;}
+.lp-undo:disabled {opacity:.4;cursor:default;}
+.lp-advanced-picker,.lp-precise,.lp-plan-setup {margin:17px 0;font-size:11px;color:#526582;}
+.lp-advanced-picker>summary,.lp-precise>summary,.lp-plan-setup>summary {cursor:pointer;color:#526582;font-size:11px;line-height:1.6;}
+.lp-object-properties .lp-inline-action {width:100%;margin-top:13px;}
+.lp-palette-section>summary {list-style:none;pointer-events:none;font-size:11px;color:#526582;}
+@media(max-width:850px) {.lp-body:has(.lp-inspector) {grid-template-columns:1fr;}.lp-palette {grid-template-columns:repeat(5,minmax(0,1fr));}.lp-palette>button {font-size:9px;}.lp-toolbar>div:last-child {gap:7px;}}
+.lp-palette>button {min-height:66px;padding:12px 6px;gap:9px;}

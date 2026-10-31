@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type MutableRefObject } from "react";
 import { Canvas, type ThreeEvent, useThree } from "@react-three/fiber";
 import { Edges, Html, OrbitControls } from "@react-three/drei";
-import { Color, Plane, PerspectiveCamera, Raycaster, TextureLoader, Vector2, Vector3, SRGBColorSpace, type Texture } from "three";
+import { Color, MOUSE, TOUCH, Plane, PerspectiveCamera, Raycaster, TextureLoader, Vector2, Vector3, SRGBColorSpace, type Texture } from "three";
 import type { OrbitControls as OrbitControlsType } from "three-stdlib";
 import type { LayoutDraft, LayoutItem, LayoutKind } from "@/lib/radr/live/layoutDraft";
 export type CameraBridge = { reset:()=>void; zoom:(factor:number)=>void; drop:(x:number,y:number,kind:LayoutKind)=>void };
@@ -34,12 +34,12 @@ function World(props:SceneProps) {
   const activeIndex=draft.floors.findIndex(f=>f.id===floor);
   useEffect(()=>{if(!reference){setTexture(null);return;}let valid=true;let loaded:Texture|null=null;new TextureLoader().load(reference,t=>{loaded=t;t.colorSpace=SRGBColorSpace;if(valid){setTexture(t);invalidate();}else t.dispose();});return()=>{valid=false;loaded?.dispose();};},[reference,invalidate]);
   useEffect(()=>{
-    const reset=()=>{const items=draftRef.current.floors.flatMap(f=>f.items);const width=Math.max(24,...draftRef.current.floors.map(f=>f.width),...items.map(i=>Math.abs(i.x)*2+i.width+6));const depth=Math.max(18,...draftRef.current.floors.map(f=>f.depth),...items.map(i=>Math.abs(i.z)*2+i.depth+6));const y=floor==="all"?(draftRef.current.floors.length-1)*HEIGHT/2:Math.max(0,activeIndex)*HEIGHT;const fit=Math.max(1,1.5/(camera instanceof PerspectiveCamera?camera.aspect:1.5));const extent=Math.max(width,depth,draftRef.current.floors.length*HEIGHT)*fit;camera.position.set(extent*.85,y+extent*.75,extent);controls.current?.target.set(0,y,0);controls.current?.update();invalidate();};
+    const reset=()=>{const items=draftRef.current.floors.flatMap(f=>f.items);const width=Math.max(24,...draftRef.current.floors.map(f=>f.width),...items.map(i=>Math.abs(i.x)*2+i.width+6));const depth=Math.max(18,...draftRef.current.floors.map(f=>f.depth),...items.map(i=>Math.abs(i.z)*2+i.depth+6));const y=floor==="all"?(draftRef.current.floors.length-1)*HEIGHT/2:Math.max(0,activeIndex)*HEIGHT;const fit=Math.max(1,1.5/(camera instanceof PerspectiveCamera?camera.aspect:1.5));const extent=Math.max(width,depth,draftRef.current.floors.length*HEIGHT)*fit;camera.up.set(0,1,0);if(editing){camera.up.set(0,0,-1);camera.position.set(0,y+extent*1.25,.001);}else camera.position.set(extent*.85,y+extent*.75,extent);controls.current?.target.set(0,y,0);controls.current?.update();invalidate();};
     bridge.current={reset,zoom:factor=>{if(!controls.current)return;camera.position.sub(controls.current.target).multiplyScalar(factor).add(controls.current.target);controls.current.update();invalidate();},drop:(clientX,clientY,kind)=>{const bounds=gl.domElement.getBoundingClientRect();const ray=new Raycaster();ray.setFromCamera(new Vector2((clientX-bounds.left)/bounds.width*2-1,-(clientY-bounds.top)/bounds.height*2+1),camera);const point=ray.ray.intersectPlane(new Plane(new Vector3(0,1,0),-Math.max(0,activeIndex)*HEIGHT),new Vector3());if(point)addRef.current(kind,point.x,point.z);}};
     reset();return()=>{bridge.current=null;};
     // Draft updates move objects without snapping the camera back.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[revision,floor,camera,gl,invalidate,size.width,size.height]);
+  },[revision,floor,editing,camera,gl,invalidate,size.width,size.height]);
   useEffect(()=>{
     if(editing||!selected||!controls.current)return;
     const index=draftRef.current.floors.findIndex(f=>f.items.some(item=>item.id===selected));
@@ -60,7 +60,7 @@ function World(props:SceneProps) {
       {level.items.map(item=><ObjectMesh key={item.id} item={item} y={y} editing={editing&&floor!=="all"} selected={selected===item.id} showLabel={hoverItem===item.id||(!hoverItem&&selected===item.id)} onHover={value=>setHoverItem(value?item.id:null)} onSelect={()=>onSelect(item.id)} onMove={(x,z)=>onMove(item.id,x,z)} onDrag={value=>{if(value)props.onGestureStart();setDragging(value);}}/>)}
       {hoverFloor===level.id&&!selected&&!hoverItem?<Html position={[-width/2,y+1,depth/2]} center zIndexRange={[10,0]} style={{pointerEvents:"none"}}><div className="lp-world-label">{level.name}<small>{level.items.filter(i=>i.kind==="room").length} rooms · click to enter level</small></div></Html>:null}
     </group>;})}
-    <OrbitControls ref={controls} makeDefault enabled={!dragging} minDistance={5} maxDistance={800} maxPolarAngle={Math.PI/2.05} enableDamping={false}/>
+    <OrbitControls ref={controls} makeDefault enabled={!dragging} minDistance={5} maxDistance={800} maxPolarAngle={editing?Math.PI:Math.PI/2.05} enableDamping={false} enableRotate={!editing} mouseButtons={editing?{LEFT:MOUSE.PAN,MIDDLE:MOUSE.DOLLY,RIGHT:MOUSE.PAN}:undefined} touches={editing?{ONE:TOUCH.PAN,TWO:TOUCH.DOLLY_PAN}:undefined}/>
   </>;
 }
 export default function LayoutScene(props:SceneProps) {return <Canvas frameloop="demand" shadows dpr={[1,1.5]} camera={{position:[35,30,40],fov:42,near:.1,far:2000}} onPointerMissed={()=>props.onSelect(null)} gl={{antialias:true}} onCreated={({scene})=>{scene.background=new Color("#edf3ff");}}><World {...props}/></Canvas>;}

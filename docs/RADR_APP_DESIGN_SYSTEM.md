@@ -227,3 +227,11 @@ World labels have bounded dimensions, a local stacking range and viewport clippi
 The editor also reserves layout width when desktop navigation expands, instead of allowing the rail to cover the page heading or workspace. This adjustment is scoped to the editor; reduced-motion preferences disable its width transition.
 
 Camera fitting now includes canvas aspect ratio and refits on viewport changes, avoiding cropped floor plans on phones. The change preserves direct wheel/pinch exploration and object dragging.
+
+### Drag-first floor arrangement
+
+The user's latest direction is Canva-like simplicity. The editor now opens in top-down arrangement mode with the palette already visible. Objects can be dragged immediately; empty-space dragging pans rather than rotating the plan. Scroll/pinch zoom remains available. There is no initial Edit layout step. A single optional 3D preview switch exposes spatial exploration, with Arrange floor returning to the editable level. Hotels start on an editable level rather than an overlapping whole-building plan.
+
+Precision coordinates, dimensions, object lookup, imports and generation are disclosed only when requested. The everyday selection actions are rename, duplicate and remove; Undo is visible in the toolbar. The default instructions are reduced to drag and zoom. Browser checks confirmed immediate palette access, hidden precision fields, direct top-down dragging, duplication and undo, switching between arrangement and 3D, and a phone layout without horizontal overflow or page errors. TypeScript and targeted lint pass. Local draft persistence and the underlying import schema are unchanged.
+
+Tap-to-add places new objects in an available area of the current level instead of stacking them at the canvas centre. Explicit palette drops and dragging remain direct positioning operations.
