@@ -344,6 +344,7 @@ export function HotelLiveShell() {
       <header className="hl-top">
         <div>
           <div className="hl-live-row">
+            <Link href="/app/live/plan" className="lp-hotel-entry">Build your property</Link>
             <div
               className="hl-live-pill"
               data-forecast={isForecast ? "true" : undefined}

@@ -606,3 +606,6 @@
   .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] :is(.rs-metric-verified,.cc-verified) {background:linear-gradient(125deg,#0a2564,#1747a4);}
   .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .cc-area-evidence {background:#edf3ff;}
 }
+
+/* Live entry to the shared spatial editor; visible before the editor chunk loads. */
+.lp-hotel-entry {display:inline-flex;align-items:center;padding:7px 11px;border:1px solid #c4d8ff;border-radius:8px;color:#1755ed;background:#fff;font-size:11px;text-decoration:none;}

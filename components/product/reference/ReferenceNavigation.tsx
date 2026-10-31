@@ -10,7 +10,7 @@ import { useDemoOrg } from "../useDemoOrg";
 import { buildDataHealthOverview } from "@/lib/radr/product/dataHealthProofEngine";
 
 const ITEMS = [
-  ["control-center", "Control Center", "/app"], ["live", "Live", "/app/live"],
+  ["control-center", "Control Center", "/app"], ["live", "Live & floor plan", "/app/live"],
   ["decisions", "Decisions", "/app/decisions"], ["service", "Operations", "/app/service"],
   ["house", "Back of House", "/app/house"],
   ["intelligence", "Intelligence", "/app/intelligence"], ["value", "Value", "/app/value"],

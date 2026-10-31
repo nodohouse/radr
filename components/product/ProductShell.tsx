@@ -40,7 +40,7 @@ function ShellChrome({
   const isLive =
     isLiveV2 ||
     pathname === "/app/live" ||
-    pathname.startsWith("/app/live/");
+    (pathname.startsWith("/app/live/") && pathname !== "/app/live/plan");
   const env = getRadrEnvironment();
   const synthetic = isSyntheticData(env);
   useDemoServicePhase(synthetic);
