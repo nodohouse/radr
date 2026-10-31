@@ -37,7 +37,7 @@ test("table intelligence previews, pins and distinguishes missing records",async
  const six=page.locator('[data-layout-item="t6"]');await six.hover();await expect(panel).toContainText("First recorded visit");await six.click();await page.mouse.move(1200,220);await expect(panel).toContainText("$262");await expect(panel).toContainText("Sam party");
  await page.locator('[data-layout-item="t1"]').click();await page.mouse.move(1200,220);await expect(panel).toContainText("Guest history unavailable");await expect(panel).not.toContainText("Morgan party");
  await page.locator('[data-layout-item="t8"]').click();await page.mouse.move(1200,220);
- const font=await page.locator('[data-layout-item="t8"] text').evaluate(el=>getComputedStyle(el).fontSize);expect(parseFloat(font)).toBeLessThan(1);
+ const font=await page.locator('[data-layout-item="t8"] text').first().evaluate(el=>getComputedStyle(el).fontSize);expect(parseFloat(font)).toBeLessThan(1);
  await page.getByRole("tab",{name:"Table timeline",exact:true}).click();await expect(panel.getByText("Jordan party",{exact:false})).toBeVisible();await expect(panel.getByText("Taylor party",{exact:false})).toBeVisible();await page.getByRole("tab",{name:"Guests & orders",exact:true}).click();await expect(panel.getByText("2 × Steak frites",{exact:true})).toBeVisible();
  await page.screenshot({path:"/workspace/work/qa/live-table-intelligence-desktop.png",fullPage:true});
  await page.setViewportSize({width:390,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:"/workspace/work/qa/live-table-intelligence-mobile.png",fullPage:true});

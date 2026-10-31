@@ -1,4 +1,4 @@
-import type { GuestNeedsRecord } from "@/components/product/guest-context/GuestNeeds";
+import type { GuestNeedsRecord } from "@/lib/product/guestSignals";
 /** Illustrative records for the product demo. Never treated as connected POS/CRM data. */
 export type TableExperience = {
  needs:GuestNeedsRecord;
@@ -11,12 +11,12 @@ export type TableExperience = {
 };
 export const tableExperiences:Record<string,TableExperience>={
  t8:{
-  needs:{allergies:[{guest:"Guest 3",allergen:"Sesame",note:"Guest-reported allergy. Confirm preparation and cross-contact handling with the kitchen."}],dietary:["Guest 2 · alcohol-free preference"],requests:["Anniversary dinner","Quiet service preferred"],source:"Demo guest note · host recorded 18:40 · reconfirm at table"},
+  needs:{booking:{reference:"RES-1840-M",party:"Morgan party",provider:"OpenTable sample · not connected",receivedAt:"18:40"},occasions:["Anniversary"],allergies:[{guest:"Guest 3",allergen:"Sesame",note:"Guest-reported allergy. Confirm preparation and cross-contact handling with the kitchen."}],dietary:["Guest 2 · alcohol-free preference"],requests:["Quiet service preferred"],source:"Demo guest note · host recorded 18:40 · reconfirm at table"},
   turnover:{expectedDeparture:"20:00",resetMinutes:10,owner:"Dining host"},
   guest:{name:"Morgan party",returning:true,visits:5},
   orders:[{name:"Burrata",quantity:2,unitPrice:18,status:"Served"},{name:"Steak frites",quantity:2,unitPrice:38,status:"Preparing"},{name:"Roasted sea bass",quantity:2,unitPrice:34,status:"Preparing"},{name:"House wine · glass",quantity:4,unitPrice:14,status:"Served"}],
   previous:{time:"18:15",party:"Taylor party · 2 guests",summary:"Departed · $126 paid"},
-  next:{time:"20:15",party:"Jordan party",guests:4,note:"Confirmed reservation · not yet seated",reference:"RES-2015-J",needs:{allergies:[{guest:"Guest 2",allergen:"Peanuts",note:"Reservation note. Host to reconfirm before seating; kitchen acknowledgement pending."}],dietary:["Guest 1 · dairy-free preference"],requests:["Step-free route to table"],source:"Demo reservation note · received 18:10 · not yet reconfirmed"}},
+  next:{time:"20:15",party:"Jordan party",guests:4,note:"Confirmed reservation · not yet seated",reference:"RES-2015-J",needs:{booking:{reference:"RES-2015-J",party:"Jordan party",provider:"OpenTable sample · not connected",receivedAt:"18:10"},occasions:["Birthday"],allergies:[{guest:"Guest 2",allergen:"Peanuts",note:"Reservation note. Host to reconfirm before seating; kitchen acknowledgement pending."}],dietary:["Guest 1 · dairy-free preference"],requests:["Step-free route to table"],source:"Demo reservation note · received 18:10 · not yet reconfirmed"}},
   events:[{time:"18:40",label:"Guests seated",detail:"4 guests · returning party"},{time:"18:47",label:"Order placed",detail:"Starters, mains and 4 glasses of wine"},{time:"19:02",label:"Starters served",detail:"2 burrata delivered"},{time:"19:29",label:"Mains sent to kitchen",detail:"2 steak frites · 2 sea bass"},{time:"19:48",label:"Mains waiting · 19 min",detail:"Needs attention · kitchen pressure elevated"}]
  },
  t6:{

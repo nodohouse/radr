@@ -45,6 +45,8 @@ import {
 } from "@/lib/radr/live/spatialCamera";
 import { displayDecisionId } from "@/lib/radr/decision/ids";
 import "./hotel-live.css";
+import { guestSignals, signalDescription } from "@/lib/product/guestSignals";
+import { hotelGuestNeeds } from "@/lib/product/hotelGuestNeeds";
 import { RoomGuestBrief } from "./RoomGuestBrief";
 
 type StatusFilter = "all" | LiveRoomState;
@@ -393,6 +395,7 @@ export function HotelLiveShell() {
               ? "Where pressure is building across the portfolio."
               : "Live hotel operations. Rooms. People. Readiness."}
           </p>
+          {level === "property"?<div className="guest-signal-legend"><span>! Allergy</span><span>★ Occasion</span><span>≡ Booking notes</span><span>Dashed = next stay</span></div>:null}
         </div>
         <div className="hl-kpis" aria-label="Live metrics">
           {level === "estate" ? (
@@ -1153,9 +1156,11 @@ function FloorPlan({
       </div>
       {rooms.map((room) => {
         const selected = room.id === selectedId;
+        const signals=guestSignals(hotelGuestNeeds(room),"incoming");
         const tip = [
           `Room ${room.number}`,
           roomStateLabel(room.state),
+          signalDescription(signals),
           room.arrivalAt ? `Arrival ${room.arrivalAt}` : null,
           room.priority === "high" ? "Priority High" : null,
           room.expectedReadyAt ? `Expected ${room.expectedReadyAt}` : null,
@@ -1182,7 +1187,7 @@ function FloorPlan({
               height: `${room.h}%`,
             }}
             title={tip}
-            aria-label={`Room ${room.number}, ${roomStateLabel(room.state)}${
+            aria-label={`Room ${room.number}, ${roomStateLabel(room.state)}. ${signalDescription(signals)}${
               room.arrivalAt ? `, arrival ${room.arrivalAt}` : ""
             }${room.exposureEuro ? `, $${room.exposureEuro} exposure` : ""}`}
             onClick={() => onSelect(room.id)}
@@ -1200,6 +1205,7 @@ function FloorPlan({
             {mode === "housekeeping" && room.assigned ? (
               <span className="hl-tile-meta">{room.assigned.split(" ")[0]}</span>
             ) : null}
+            {signals.length?<span className="hl-guest-signals" data-testid="room-guest-signals">{signals.map(signal=><span key={signal.kind} data-guest-signal={signal.kind} data-scope={signal.scope} title={`Next booking: ${signal.detail}`} aria-hidden="true">{signal.kind==="allergy"?"!":signal.kind==="occasion"?"★":"≡"}</span>)}</span>:null}
             {debugGeometry ? (
               <span className="hl-debug-cross" aria-hidden />
             ) : null}
