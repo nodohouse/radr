@@ -14,6 +14,7 @@ export function safeInternalPath(
   // Block protocol-relative and scheme injection via encoded tricks
   try {
     const decoded = decodeURIComponent(trimmed);
+    if (decoded.includes("\\") || /[\r\n\0]/.test(decoded)) return fallback;
     if (!decoded.startsWith("/") || decoded.startsWith("//")) return fallback;
     if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(decoded)) return fallback;
   } catch {

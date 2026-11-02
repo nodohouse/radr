@@ -5,6 +5,8 @@ import { securityHeaders } from "@/lib/security/headers";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  // PGlite loads native URL/WASM assets; keep it outside Next's server bundle.
+  serverExternalPackages: ["@electric-sql/pglite"],
   typescript: { tsconfigPath: "tsconfig.app.json" },
   // Avoid advertising the framework in responses.
   poweredByHeader: false,

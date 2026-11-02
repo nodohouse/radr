@@ -5,9 +5,10 @@ import { db } from "@/lib/db";
 import * as schema from "@/lib/db/schema";
 
 const baseURL =
+  (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ??
   process.env.BETTER_AUTH_URL ??
-  process.env.NEXT_PUBLIC_APP_URL ??
-  "http://localhost:3000";
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ??
+  process.env.NEXT_PUBLIC_APP_URL;
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -20,6 +21,7 @@ if (isProd && !process.env.BETTER_AUTH_SECRET) {
 export const auth = betterAuth({
   appName: "RADR",
   baseURL,
+  trustedOrigins: [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL].filter((host): host is string => Boolean(host)).map(host => `https://${host}`),
   secret: process.env.BETTER_AUTH_SECRET,
   database: drizzleAdapter(db, {
     provider: "pg",

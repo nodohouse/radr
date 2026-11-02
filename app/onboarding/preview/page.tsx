@@ -1,7 +1,8 @@
-import { OnboardingFunnel } from "@/components/onboarding/OnboardingFunnel";
+import { FirstValueFunnel } from "@/components/onboarding/FirstValueFunnel";
 import "../onboarding.css";
 
 export const dynamic = "force-dynamic";
+export const metadata = {title:"RADR · Setup preview",robots:{index:false,follow:false}};
 
 /**
  * Visual preview of the onboarding funnel without auth.
@@ -9,7 +10,7 @@ export const dynamic = "force-dynamic";
  */
 export default function OnboardingPreviewPage() {
   return (
-    <OnboardingFunnel
+    <FirstValueFunnel
       userName="Alex"
       workspace={null}
       preview

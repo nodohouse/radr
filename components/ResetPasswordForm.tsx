@@ -33,10 +33,9 @@ export function ResetPasswordForm() {
       return;
     }
 
-    const result = await authClient.resetPassword({
-      newPassword,
-      token,
-    });
+    let result;
+    try { result = await authClient.resetPassword({newPassword, token}); }
+    catch { setPending(false); setError(t("errors.generic")); return; }
     setPending(false);
 
     if (result.error) {
@@ -49,7 +48,7 @@ export function ResetPasswordForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="ob-auth-form" noValidate>
+    <form onSubmit={onSubmit} className="ob-auth-form">
       {!token ? (
         <p className="ob-error" role="alert">
           {t("errors.invalidResetLink")}

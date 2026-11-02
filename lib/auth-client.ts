@@ -2,6 +2,5 @@
 
 import { createAuthClient } from "better-auth/react";
 
-export const authClient = createAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_APP_URL,
-});
+// The UI and auth API share an origin, including isolated Vercel previews.
+export const authClient = createAuthClient();

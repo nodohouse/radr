@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { authClient } from "@/lib/auth-client";
 
-export function ForgotPasswordForm() {
+export function ForgotPasswordForm({available = true}: {available?: boolean}) {
   const t = useTranslations("auth");
   const locale = useLocale();
   const [done, setDone] = useState(false);
@@ -15,14 +15,14 @@ export function ForgotPasswordForm() {
     event.preventDefault();
     setPending(true);
     const form = new FormData(event.currentTarget);
-    const email = String(form.get("email") ?? "");
+    const email = String(form.get("email") ?? "").trim();
 
     // Always complete the same UX path - never reveal whether the email exists.
     // Locale-prefixed path so reset lands on the correct public route.
-    await authClient.requestPasswordReset({
+    try { await authClient.requestPasswordReset({
       email,
       redirectTo: `/${locale}/reset-password`,
-    });
+    }); } catch { /* Same confirmation for every account and delivery outcome. */ }
     setPending(false);
     setDone(true);
   }
@@ -36,14 +36,14 @@ export function ForgotPasswordForm() {
           <span className="ob-auth-foot-sep" aria-hidden="true">
             ·
           </span>
-          <Link href="/contact">{t("requestAccess")}</Link>
+          <Link href="/signup?intent=demo&next=/app/enter">{t("requestAccess")}</Link>
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="ob-auth-form" noValidate>
+    <form onSubmit={onSubmit} className="ob-auth-form">
       <div className="ob-field">
         <label htmlFor="email">{t("workEmail")}</label>
         <input
@@ -55,7 +55,8 @@ export function ForgotPasswordForm() {
           placeholder={t("emailPlaceholder")}
         />
       </div>
-      <button type="submit" className="ob-btn ob-btn-primary" disabled={pending}>
+      {!available ? <p className="ob-entry-availability" role="status">{t("entryRecoveryUnavailable")}</p> : null}
+      <button type="submit" className="ob-btn ob-btn-primary" disabled={pending || !available}>
         {pending ? (
           t("sending")
         ) : (
@@ -69,7 +70,7 @@ export function ForgotPasswordForm() {
         <span className="ob-auth-foot-sep" aria-hidden="true">
           ·
         </span>
-        <Link href="/contact">{t("requestAccess")}</Link>
+        <Link href="/signup?intent=demo&next=/app/enter">{t("requestAccess")}</Link>
       </p>
     </form>
   );

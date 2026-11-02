@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { LightAuthShell } from "@/components/LightAuthShell";
 import { LoginForm } from "@/components/LoginForm";
+import {accountStorageReady} from "@/lib/identity/accountAvailability";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -10,6 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "auth" });
   return {
+    robots: {index:false,follow:false},
     title: t("loginTitle"),
     description: t("metaLoginDescription"),
   };
@@ -26,7 +28,7 @@ export default async function LoginPage({ params }: Props) {
       subtitle={t("loginLead")}
     >
       <Suspense fallback={<p className="ob-meta">{t("loading")}</p>}>
-        <LoginForm />
+        <LoginForm available={accountStorageReady()} />
       </Suspense>
     </LightAuthShell>
   );

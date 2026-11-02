@@ -4,6 +4,7 @@ import { LightAuthShell } from "@/components/LightAuthShell";
 import { SignupForm } from "@/components/SignupForm";
 import { getPendingInvitationByToken } from "@/lib/identity/invitations";
 import { safeDemoNext } from "@/lib/marketing/demoAccess";
+import {accountStorageReady} from "@/lib/identity/accountAvailability";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -27,12 +28,13 @@ export default async function SignupPage({ params, searchParams }: Props) {
   const t = await getTranslations("auth");
 
   const token = invite?.trim() ?? "";
-  if (token) {
+  if (token && accountStorageReady()) {
     const invitation = await getPendingInvitationByToken(token);
     if (invitation) {
       return (
         <LightAuthShell title={t("invitedHeading")} subtitle={t("invitedSubtitle")}>
           <SignupForm
+            available={accountStorageReady()}
             inviteToken={token}
             inviteEmail={invitation.email}
             nextPath="/app"
@@ -42,15 +44,15 @@ export default async function SignupPage({ params, searchParams }: Props) {
     }
   }
 
-  const isDemo = intent === "demo" || !token;
-  const dest = safeDemoNext(next, "/app/enter");
+  const isDemo = intent !== "workspace";
+  const dest = safeDemoNext(next, isDemo ? "/app/enter" : "/onboarding");
 
   return (
     <LightAuthShell
       title={isDemo ? t("demoSignupHeading") : t("signupHeading")}
       subtitle={isDemo ? t("demoSignupSubtitle") : t("signupSubtitle")}
     >
-      <SignupForm nextPath={dest} intent={isDemo ? "demo" : undefined} />
+      <SignupForm available={accountStorageReady()} nextPath={dest} intent={isDemo ? "demo" : undefined} />
     </LightAuthShell>
   );
 }

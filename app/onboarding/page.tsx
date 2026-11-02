@@ -48,6 +48,7 @@ export default async function OnboardingPage({ searchParams }: Props) {
 
   return (
     <FirstValueFunnel
+      userId={session.user.id}
       userName={session.user.name}
       userEmail={session.user.email}
       workspace={snapshot}

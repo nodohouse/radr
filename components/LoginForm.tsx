@@ -4,11 +4,12 @@ import { useTranslations } from "next-intl";
 import { FormEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
+import NextLink from "next/link";
 import { AuthSsoBlock } from "@/components/AuthSsoBlock";
 import { authClient } from "@/lib/auth-client";
 import { safeInternalPath } from "@/lib/security/safe-redirect";
 
-export function LoginForm() {
+export function LoginForm({available = true}: {available?: boolean}) {
   const t = useTranslations("auth");
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -23,10 +24,12 @@ export function LoginForm() {
     setPending(true);
     setError(null);
     const form = new FormData(event.currentTarget);
-    const email = String(form.get("email") ?? "");
+    const email = String(form.get("email") ?? "").trim();
     const password = String(form.get("password") ?? "");
 
-    const result = await authClient.signIn.email({ email, password });
+    let result;
+    try { result = await authClient.signIn.email({ email, password }); }
+    catch { setPending(false); setError(t("errors.generic")); return; }
 
     if (result.error) {
       setPending(false);
@@ -42,8 +45,8 @@ export function LoginForm() {
           destination?: { path?: string };
         };
         const dest = data.destination?.path;
-        if (dest && dest.startsWith("/")) {
-          router.push(dest);
+        if (dest) {
+          router.push(safeInternalPath(dest, next));
           router.refresh();
           return;
         }
@@ -57,7 +60,7 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="ob-auth-form" noValidate>
+    <form onSubmit={onSubmit} className="ob-auth-form">
       <div className="ob-field">
         <label htmlFor="email">{t("workEmail")}</label>
         <input
@@ -84,7 +87,6 @@ export function LoginForm() {
             type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             required
-            minLength={10}
           />
           <button
             type="button"
@@ -106,12 +108,13 @@ export function LoginForm() {
         </div>
       ) : null}
 
-      <button type="submit" className="ob-btn ob-btn-primary" disabled={pending}>
+      {!available ? <p className="ob-entry-availability" role="status">{t("entryUnavailable")} <NextLink href="/onboarding/preview">{t("entryWalkthrough")}</NextLink></p> : null}
+      <button type="submit" className="ob-btn ob-btn-primary" disabled={pending || !available}>
         {pending ? (
           t("signingIn")
         ) : (
           <>
-            {t("continue")} <span aria-hidden="true">→</span>
+            {t("submitSignIn")} <span aria-hidden="true">→</span>
           </>
         )}
       </button>

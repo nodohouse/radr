@@ -1,4 +1,4 @@
-import "dotenv/config";
+import {loadEnvConfig} from "@next/env";
 import fs from "node:fs";
 import path from "node:path";
 import { PGlite } from "@electric-sql/pglite";
@@ -9,6 +9,7 @@ import { migrate as migratePostgres } from "drizzle-orm/postgres-js/migrator";
 import postgres from "postgres";
 
 const migrationsFolder = path.join(process.cwd(), "drizzle");
+loadEnvConfig(process.cwd());
 
 async function main() {
   const databaseUrl = process.env.DATABASE_URL;

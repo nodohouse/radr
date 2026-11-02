@@ -139,7 +139,7 @@ export function middleware(request: NextRequest) {
     }
 
     // Product surfaces: never index (demo or authenticated).
-    if (isAppPath) {
+    if (isAppPath || isOnboardingPreview) {
       const res = withSecurityHeaders(NextResponse.next());
       res.headers.set("X-Robots-Tag", "noindex, nofollow");
       return res;
@@ -155,9 +155,10 @@ export function middleware(request: NextRequest) {
   );
 
   if (isAuthPage && sessionCookie) {
+    const fallback = request.nextUrl.searchParams.get("intent") === "workspace" ? "/onboarding" : "/app/enter";
     const next = safeDemoNext(
       request.nextUrl.searchParams.get("next"),
-      "/app/enter",
+      fallback,
     );
     return withSecurityHeaders(NextResponse.redirect(new URL(next, request.url)));
   }

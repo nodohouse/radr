@@ -135,6 +135,7 @@ export type FirstDecisionOutcome =
       currency: string;
       headline: string;
       rationale: string;
+      evidence?: {supplier:string;sku:string;unit:string;quantity:number;contractRate:number;invoiceRate:number};
     }
   | {
       kind: "nothing_needs_you";

@@ -79,6 +79,7 @@ export async function POST(request: Request) {
       and(
         eq(documents.organizationId, workspace.organizationId),
         eq(documents.documentType, "CONTRACT"),
+        ...(workspace.onboarding.contractDocumentId ? [eq(documents.id, workspace.onboarding.contractDocumentId)] : []),
       ),
     )
     .orderBy(desc(documents.createdAt))
@@ -91,6 +92,7 @@ export async function POST(request: Request) {
       and(
         eq(documents.organizationId, workspace.organizationId),
         eq(documents.documentType, "INVOICE"),
+        ...(workspace.onboarding.invoiceDocumentId ? [eq(documents.id, workspace.onboarding.invoiceDocumentId)] : []),
       ),
     )
     .orderBy(desc(documents.createdAt))
@@ -153,12 +155,13 @@ export async function POST(request: Request) {
   if (result.status === "decision") {
     outcome = {
       kind: "decision",
-      displayId: "D-4102",
+      displayId: "Uploaded evidence review",
       locationName,
       classLabel: "Supplier / AP",
       amountMinor: Math.round(result.economicVariance * 100),
       currency: result.currency,
-      headline: `${formatMoneyMajor(result.economicVariance, result.currency)} at risk`,
+      headline: `${formatMoneyMajor(result.economicVariance, result.currency)} exposed on this invoice batch`,
+      evidence: {supplier:result.invoice.supplier,sku:result.invoice.sku,unit:result.invoice.unit,quantity:result.quantity,contractRate:result.contract.contractRate,invoiceRate:result.invoice.unitPrice},
       rationale: `Invoice unit price is ${formatMoneyMajor(result.rateVariance, result.currency)}/${result.invoice.unit} above the active contract rate across ${result.quantity} ${result.invoice.unit}.`,
     };
     trackOnboarding(

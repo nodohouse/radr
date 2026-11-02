@@ -108,3 +108,7 @@ The remaining heading space contains Your attention: a compact count-based ring 
 ## Approved product-wide rollout
 
 On 2 November 2026 the user explicitly requested the Control Center's visuals and product reasoning across all navigation sections and avatar settings. `radr-workspace-system.css` now supplies shared material, typography, action and engine tokens. `WorkspaceFocus` provides purpose → scoped focus → evidence/trust → next step without introducing a second record or financial model. Filtered Decisions and selected Intelligence signals pass their actual record into the focus. Source cohorts, unmeasured hotel integrations, local preference saving and action approval boundaries remain explicit. See `RADR_WORKSPACE_CONSISTENCY_AUDIT.md` for the section mapping, responsive corrections and review captures.
+
+## Entry and onboarding
+
+Login, signup and recovery now inherit the Control Center's Manrope, blue/green canvas and defined glass material. The same approved mark is used without geometry changes. The first-value setup journey shows role → organization → location → focus → evidence → first decision, with a scoped session draft, honest save state and explicit preview mode. Hosted account access is a capability, not a decorative promise: absent persistent storage, forms explain the missing activation and point to the public demo/setup walkthrough. See `RADR_ENTRY_ONBOARDING_AUDIT.md` for tested flows and actual service boundaries.

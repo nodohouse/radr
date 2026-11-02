@@ -6,9 +6,12 @@
  * MVP: account → org → location → Supplier/AP → upload → analyze → reveal.
  */
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { RadrLogo } from "@/components/marketing/RadrLogo";
+import {FrozenRadrLogo} from "@/components/brand/FrozenRadrLogo";
+import Link from "next/link";
+import {entryFont} from "./entryFont";
+import {SetupJourney, setupIndex} from "./SetupJourney";
 import { SignOutButton } from "@/components/SignOutButton";
 import { ONBOARDING_COUNTRIES } from "@/lib/constants";
 import { writeWorkspaceBrand } from "@/lib/onboarding/brand";
@@ -47,6 +50,8 @@ type Props = {
   userName: string;
   userEmail?: string;
   workspace: WorkspaceSnapshot;
+  preview?: boolean;
+  userId?: string;
 };
 
 const ROLE_LENSES: { id: RoleLens; label: string }[] = [
@@ -121,7 +126,7 @@ function money(minor: number, currency: string) {
   }
 }
 
-export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
+export function FirstValueFunnel({ userName, userEmail, workspace, preview = false, userId }: Props) {
   const router = useRouter();
   const [step, setStep] = useState<FirstValueStep>(() => resumeStep(workspace));
   const [fullName, setFullName] = useState(
@@ -202,36 +207,73 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
               ? "data_check"
               : "first_decision";
 
+  const stateRef = useRef<OnboardingState>(workspace?.onboarding ?? {step:"welcome",path:"first_value"});
+  const draftKey = `radr.setupDraft.v2:${preview ? "preview" : userId || userEmail || "session"}`;
+  const [draftReady,setDraftReady] = useState(false);
+  useEffect(() => {
+    if (!workspace) {
+      try {
+        const raw = JSON.parse(sessionStorage.getItem(draftKey) || "null");
+        if (raw && typeof raw === "object") {
+          if (typeof raw.fullName === "string") setFullName(raw.fullName.slice(0,120));
+          if (typeof raw.orgName === "string") setOrgName(raw.orgName.slice(0,120));
+          if (typeof raw.locationName === "string") setLocationName(raw.locationName.slice(0,120));
+          if (typeof raw.locationCity === "string") {setLocationCity(raw.locationCity.slice(0,120));setCityQuery(raw.locationCity.slice(0,120));}
+          if (ROLE_LENSES.some(r=>r.id===raw.roleLens)) setRoleLens(raw.roleLens);
+          if (INDUSTRIES.some(r=>r.id===raw.industry)) setIndustry(raw.industry);
+          if (BANDS.some(r=>r.id===raw.band)) setBand(raw.band);
+          if (["EUR","GBP","USD","CHF","AED","SGD"].includes(raw.currency)) setCurrency(raw.currency);
+          if (ONBOARDING_COUNTRIES.some(r=>r.code===raw.country)) setCountry(raw.country);
+          if (["who","organization","location"].includes(raw.step)) setStep(raw.step);
+        }
+      } catch { /* Storage is optional. */ }
+    }
+    setDraftReady(true);
+  },[draftKey,workspace]);
+  useEffect(() => {
+    if (!draftReady) return;
+    try {
+      if (activeOrgId && !preview) sessionStorage.removeItem(draftKey);
+      else if (["welcome","who","organization","location"].includes(step)) sessionStorage.setItem(draftKey,JSON.stringify({step,fullName,roleLens,orgName,industry,band,currency,locationName,locationCity,country}));
+    } catch { /* Never block setup on browser storage. */ }
+  },[draftReady,draftKey,activeOrgId,preview,step,fullName,roleLens,orgName,industry,band,currency,locationName,locationCity,country]);
+  useEffect(() => {
+    document.querySelector<HTMLElement>(".ob-main h1")?.focus({preventScroll:true});
+    window.scrollTo({top:0,behavior:"instant"});
+  },[step]);
+
   async function patch(partial: Partial<OnboardingState>) {
-    if (!activeOrgId && !workspace) return;
-    await fetch("/api/onboarding", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(partial),
-    });
+    if (preview || (!activeOrgId && !workspace)) {stateRef.current={...stateRef.current,...partial};return;}
+    const response = await fetch("/api/onboarding",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(partial)});
+    const body = await response.json().catch(()=>null);
+    if (!response.ok) throw new Error(body?.error || "Your progress could not be saved. Please try again.");
+    stateRef.current=body?.onboarding || {...stateRef.current,...partial};
   }
 
   function go(next: FirstValueStep, extra?: Partial<OnboardingState>) {
-    setStep(next);
+    if (pending) return;
     setError(null);
-    if (workspace || activeOrgId) {
-      void patch(
-        withStep(
-          { ...(workspace?.onboarding ?? { step: "welcome" }), ...extra },
-          next,
-        ),
-      );
-    }
+    const update = withStep({...stateRef.current,...extra},next);
+    if (!activeOrgId && !workspace || preview) {stateRef.current=update;setStep(next);return;}
+    startTransition(async()=>{
+      try {await patch(update);setStep(next);}
+      catch(error) {setError(error instanceof Error ? error.message : "Your progress could not be saved.");}
+    });
   }
+  const backStep: Partial<Record<FirstValueStep,FirstValueStep>> = {who:"welcome",organization:"who",location:"organization",evidence:"goal",upload:"evidence",data_health:"upload"};
 
   function createWorkspace() {
     setError(null);
+    if (preview) {setOrgId("preview-workspace");setLocationId("preview-location");setStep("goal");return;}
     startTransition(async () => {
-      const inferred = inferFromCity(locationCity) ?? countryMeta;
+      try {
+      const found = inferFromCity(locationCity);
+      const inferred = found?.countryCode === country ? found : countryMeta;
       const res = await fetch("/api/onboarding", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          fullName:fullName.trim(), roleLens, industry,
           organizationName: orgName.trim(),
           locationName: locationName.trim(),
           country,
@@ -280,11 +322,14 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
         data.organizationId,
       );
       setStep("goal");
+      stateRef.current={...stateRef.current,fullName,roleLens,industry,organizationName:orgName.trim(),locationName:locationName.trim(),locationCity,currency,reportingCurrency:currency,locationCountry:country,step:"goal"};
       router.refresh();
+      } catch(error) {setError(error instanceof Error ? error.message : "Could not create your workspace. Please try again.");}
     });
   }
 
   function uploadFiles() {
+    if (preview) {setError("This is a setup preview. Create an account to upload private evidence, or explore the labelled demo.");return;}
     if (!activeOrgId) {
       setError("Create your organization first.");
       return;
@@ -309,7 +354,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
           form.set("locationId", activeLocationId);
         }
         form.set("documentType", documentType);
-        const res = await fetch("/api/documents/upload", {
+        const res = await fetch("/api/onboarding/upload", {
           method: "POST",
           body: form,
         });
@@ -333,7 +378,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
           ensureMilestone(
             withStep(
               {
-                ...(workspace?.onboarding ?? { step: "welcome" }),
+                ...stateRef.current,
                 evidenceMethod: "upload",
                 contractDocumentId: contractId,
                 invoiceDocumentId: invoiceId,
@@ -364,6 +409,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
       "Forming Decisions",
     ]);
     startTransition(async () => {
+      try {
       const res = await fetch("/api/onboarding/analyze", { method: "POST" });
       const body = (await res.json().catch(() => null)) as {
         error?: string;
@@ -379,16 +425,18 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
         trackOnboarding("first_decision_opened", {}, activeOrgId);
       }
       setStep("reveal");
+      } catch {setError("The analysis could not finish. Your evidence is still available; please try again.");setStep("data_health");}
     });
   }
 
   function finish() {
     startTransition(async () => {
+      try {
       if (activeOrgId) {
         await patch(
           ensureMilestone(
             {
-              ...withStep(workspace?.onboarding ?? { step: "welcome" }, "complete"),
+              ...withStep(stateRef.current, "complete"),
               completedAt: new Date().toISOString(),
               step: "done",
             },
@@ -399,19 +447,23 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
         trackOnboarding("control_center_viewed", {}, activeOrgId);
       }
       router.push("/app?welcome=1");
+      } catch(error) {setError(error instanceof Error ? error.message : "Your progress could not be saved.");}
     });
   }
 
   const places = searchPlaces(cityQuery).slice(0, 6);
 
   return (
-    <div className="ob-root">
+    <div className={`${entryFont.variable} ob-root ob-setup`} data-preview={preview || undefined} aria-busy={pending}>
       <header className="ob-chrome">
-        <RadrLogo size="md" variant="plain" surface="light" as="p" />
-        <SignOutButton />
+        <Link href="/en" aria-label="RADR home"><FrozenRadrLogo variant="mark" width={48} priority /></Link>
+        {preview ? <Link className="ob-link" href="/en/login">Sign in</Link> : <SignOutButton />}
       </header>
 
+      <div className="ob-setup-layout"><SetupJourney step={step} orgName={orgName} locationName={locationName} currency={currency} preview={preview}/>
       <main className="ob-main">
+        <div className="ob-step-controls">{backStep[step] ? <button type="button" className="ob-back" disabled={pending} onClick={()=>go(backStep[step]!)}>Back</button> : <span/>}<span>{preview ? "Preview · nothing is saved to a workspace" : activeOrgId ? "Progress saved to your workspace" : "Draft kept in this browser session"}</span></div>
+        {step!=="welcome"?<div className="ob-setup-progress"><span>Step {setupIndex(step)+1} of 6</span><progress max={6} value={setupIndex(step)+1} aria-label="Setup progress"/></div>:null}
         {step !== "welcome" && step !== "analyzing" ? (
           <p className="ob-stage" aria-live="polite">
             {STAGE_LABEL[stage]}
@@ -426,14 +478,14 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
         {step === "welcome" ? (
           <section className="ob-panel">
-            <h1 className="ob-title">Let&apos;s get RADR working.</h1>
+            <h1 className="ob-title" tabIndex={-1}>Your operation.<br/>Your first clear decision.</h1>
             <p className="ob-lead">
-              Connect your operation. RADR will tell you when there is enough
-              evidence to form your first Decision.
+              Start with one location and one priority. Add evidence when you are ready, or explore a clearly labelled demo first.
             </p>
             <button
               type="button"
               className="ob-btn ob-btn-primary"
+              disabled={pending}
               onClick={() => {
                 trackOnboarding("onboarding_started");
                 if (workspace) go("goal");
@@ -442,12 +494,13 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
             >
               Get started
             </button>
+            <p className="ob-meta"><Link className="ob-link" href="/app/enter">Explore the demo first</Link> · Illustrative Northstar data, separate from your operation.</p>
           </section>
         ) : null}
 
         {step === "who" ? (
           <section className="ob-panel">
-            <h1 className="ob-title">Who are you?</h1>
+            <h1 className="ob-title" tabIndex={-1}>Who are you?</h1>
             <p className="ob-hint">
               RADR uses this to prioritize what you see. It does not limit your
               organization&apos;s underlying data.
@@ -470,7 +523,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
                   key={r.id}
                   type="button"
                   className="ob-choice"
-                  data-on={roleLens === r.id ? "true" : undefined}
+                  aria-pressed={roleLens === r.id} data-on={roleLens === r.id ? "true" : undefined}
                   onClick={() => setRoleLens(r.id)}
                 >
                   {r.label}
@@ -480,7 +533,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
             <button
               type="button"
               className="ob-btn ob-btn-primary"
-              disabled={!fullName.trim()}
+              disabled={pending || !fullName.trim()}
               onClick={() => go("organization", { fullName, roleLens })}
             >
               Continue
@@ -490,7 +543,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
         {step === "organization" ? (
           <section className="ob-panel">
-            <h1 className="ob-title">Your organization</h1>
+            <h1 className="ob-title" tabIndex={-1}>Your organization</h1>
             <label className="ob-field">
               <span>Organization name</span>
               <input
@@ -506,7 +559,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
                   key={i.id}
                   type="button"
                   className="ob-choice"
-                  data-on={industry === i.id ? "true" : undefined}
+                  aria-pressed={industry === i.id} data-on={industry === i.id ? "true" : undefined}
                   onClick={() => setIndustry(i.id)}
                 >
                   {i.label}
@@ -520,7 +573,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
                   key={b.id}
                   type="button"
                   className="ob-chip"
-                  data-on={band === b.id ? "true" : undefined}
+                  aria-pressed={band === b.id} data-on={band === b.id ? "true" : undefined}
                   onClick={() => setBand(b.id)}
                 >
                   {b.label}
@@ -530,6 +583,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
             <label className="ob-field">
               <span>Group reporting currency</span>
               <select
+                aria-label="Group reporting currency"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
               >
@@ -547,7 +601,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
             <button
               type="button"
               className="ob-btn ob-btn-primary"
-              disabled={orgName.trim().length < 2}
+              disabled={pending || orgName.trim().length < 2}
               onClick={() =>
                 go("location", {
                   organizationName: orgName.trim(),
@@ -565,7 +619,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
         {step === "location" ? (
           <section className="ob-panel">
-            <h1 className="ob-title">Add your first location</h1>
+            <h1 className="ob-title" tabIndex={-1}>Add your first location</h1>
             <p className="ob-hint">
               We use location for currency, timezone, operating context, and
               permissions. You can add the rest after the first Decision.
@@ -598,6 +652,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
             <label className="ob-field">
               <span>Country</span>
               <select
+                aria-label="Country"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               >
@@ -609,7 +664,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
               </select>
             </label>
             <p className="ob-meta">
-              Timezone · {countryMeta.timezone} · Local currency · {currency}
+              Timezone · {countryMeta.timezone} · Reporting currency · {currency}
             </p>
             <button
               type="button"
@@ -626,7 +681,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
         {step === "goal" ? (
           <section className="ob-panel">
-            <h1 className="ob-title">Where should RADR look first?</h1>
+            <h1 className="ob-title" tabIndex={-1}>Where should RADR look first?</h1>
             <ul className="ob-goal-list">
               {DECISION_CLASS_CATALOG.map((c) => {
                 const selectable =
@@ -637,7 +692,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
                     <button
                       type="button"
                       className="ob-goal"
-                      data-on={decisionClass === c.id ? "true" : undefined}
+                      aria-pressed={decisionClass === c.id} data-on={decisionClass === c.id ? "true" : undefined}
                       data-avail={c.availability}
                       disabled={!selectable}
                       onClick={() => selectable && setDecisionClass(c.id)}
@@ -661,6 +716,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
             <button
               type="button"
               className="ob-btn ob-btn-primary"
+              disabled={pending}
               onClick={() => {
                 if (workspace) {
                   trackOnboarding(
@@ -679,7 +735,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
         {step === "evidence" ? (
           <section className="ob-panel">
-            <h1 className="ob-title">Connect what you already have</h1>
+            <h1 className="ob-title" tabIndex={-1}>Connect what you already have</h1>
             <p className="ob-hint">
               RADR needs evidence before it can form Decisions.
             </p>
@@ -687,16 +743,16 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
               <button
                 type="button"
                 className="ob-goal"
-                data-on={evidenceMethod === "upload" ? "true" : undefined}
+                aria-pressed={evidenceMethod === "upload"} data-on={evidenceMethod === "upload" ? "true" : undefined}
                 onClick={() => setEvidenceMethod("upload")}
               >
                 <strong>Upload files</strong>
-                <span>CSV or XLSX — best early path for Recovery Pilot.</span>
+                <span>CSV exports, up to 1 MB each. Templates are provided.</span>
               </button>
               <button
                 type="button"
                 className="ob-goal"
-                data-on={evidenceMethod === "demo" ? "true" : undefined}
+                aria-pressed={evidenceMethod === "demo"} data-on={evidenceMethod === "demo" ? "true" : undefined}
                 onClick={() => setEvidenceMethod("demo")}
               >
                 <strong>Explore with demo data</strong>
@@ -711,31 +767,16 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
             <button
               type="button"
               className="ob-btn ob-btn-primary"
+              disabled={pending}
               onClick={() => {
                 if (evidenceMethod === "demo") {
-                  writeWorkspaceBrand({
-                    orgName: orgName || workspace?.name || "Demo",
-                    locationName:
-                      locationName ||
-                      workspace?.primaryLocation?.name ||
-                      "Berlin Mitte",
-                    city: locationCity || undefined,
-                    country,
-                    currency,
-                    timezone: countryMeta.timezone,
-                    demo: true,
+                  startTransition(async()=>{
+                    try {
+                      if (!preview && activeOrgId) await patch({...withStep(stateRef.current,"complete"),evidenceMethod:"demo",demoEnabled:true,step:"done",completedAt:new Date().toISOString()});
+                      const hotel = industry === "hotel_group" || industry === "serviced_apartments";
+                      router.push(`/app/enter?vertical=${hotel?"hotel":"restaurant"}&go=1`);
+                    } catch(error) {setError(error instanceof Error ? error.message : "Your progress could not be saved.");}
                   });
-                  if (workspace) {
-                    void patch({
-                      ...withStep(workspace.onboarding, "complete"),
-                      evidenceMethod: "demo",
-                      demoEnabled: true,
-                      step: "done",
-                      completedAt: new Date().toISOString(),
-                    });
-                    trackOnboarding("demo_selected", {}, workspace.organizationId);
-                  }
-                  router.push("/app?welcome=1&demo=1");
                   return;
                 }
                 go("upload", { evidenceMethod: "upload" });
@@ -750,7 +791,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
         {step === "upload" ? (
           <section className="ob-panel">
-            <h1 className="ob-title">Upload Supplier / AP evidence</h1>
+            <h1 className="ob-title" tabIndex={-1}>Upload Supplier / AP evidence</h1>
             <p className="ob-hint">
               Files are scoped to your organization and used to form RADR
               Decisions. You can review imported records before analysis.
@@ -759,7 +800,8 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
               <h2 className="ob-sub">Contract data</h2>
               <input
                 type="file"
-                accept=".csv,.xlsx,text/csv"
+                aria-label="Contract CSV"
+                accept=".csv,text/csv"
                 onChange={(e) => setContractFile(e.target.files?.[0] ?? null)}
               />
               <a
@@ -774,7 +816,8 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
               <h2 className="ob-sub">Invoice data</h2>
               <input
                 type="file"
-                accept=".csv,.xlsx,text/csv"
+                aria-label="Invoice CSV"
+                accept=".csv,text/csv"
                 onChange={(e) => setInvoiceFile(e.target.files?.[0] ?? null)}
               />
               <a
@@ -798,10 +841,10 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
         {step === "data_health" ? (
           <section className="ob-panel">
-            <h1 className="ob-title">RADR has enough evidence to start</h1>
+            <h1 className="ob-title" tabIndex={-1}>Your files are ready for a quality check</h1>
             <ul className="ob-health">
-              <li>Contract data · Ready</li>
-              <li>Invoice data · Ready</li>
+              <li>Contract data · Uploaded</li>
+              <li>Invoice data · Uploaded</li>
               <li>
                 Location ·{" "}
                 {workspace?.primaryLocation?.name ?? locationName ?? "Ready"}
@@ -821,7 +864,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
         {step === "analyzing" ? (
           <section className="ob-panel" aria-live="polite">
-            <h1 className="ob-title">Working through your evidence</h1>
+            <h1 className="ob-title" tabIndex={-1}>Working through your evidence</h1>
             <ol className="ob-analyze">
               {analyzeLines.map((line) => (
                 <li key={line}>{line}</li>
@@ -838,11 +881,12 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
                 <p className="ob-meta">
                   {outcome.classLabel} · {outcome.locationName}
                 </p>
-                <h1 className="ob-title ob-title-money">
+                <h1 className="ob-title ob-title-money" tabIndex={-1}>
                   {money(outcome.amountMinor, outcome.currency)}
                 </h1>
                 <p className="ob-lead">{outcome.headline}</p>
                 <p className="ob-hint">{outcome.rationale}</p>
+                {outcome.evidence ? <details className="ob-result-evidence"><summary>Review the evidence behind this result</summary><dl>{[["Supplier",outcome.evidence.supplier],["Item",outcome.evidence.sku],["Contract rate",`${outcome.currency} ${outcome.evidence.contractRate.toFixed(2)} / ${outcome.evidence.unit}`],["Invoice rate",`${outcome.currency} ${outcome.evidence.invoiceRate.toFixed(2)} / ${outcome.evidence.unit}`],["Quantity",`${outcome.evidence.quantity} ${outcome.evidence.unit}`]].map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl><p>Expected invoice price variance, not verified recovered value. Check the units and contract applicability before taking action.</p></details> : null}
                 <p className="ob-hint">
                   RADR only surfaced this because the variance exceeds your
                   materiality threshold and has sufficient evidence.
@@ -850,16 +894,17 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
                 <button
                   type="button"
                   className="ob-btn ob-btn-primary"
+                  disabled={pending}
                   onClick={finish}
                 >
-                  Review Decision
+                  Open Control Center
                 </button>
               </>
             ) : null}
 
             {outcome.kind === "nothing_needs_you" ? (
               <>
-                <h1 className="ob-title">Nothing needs your attention</h1>
+                <h1 className="ob-title" tabIndex={-1}>Nothing needs your attention</h1>
                 <p className="ob-lead">
                   RADR reviewed {outcome.invoiceLines} invoice lines and{" "}
                   {outcome.contracts} active contracts. No material
@@ -869,6 +914,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
                 <button
                   type="button"
                   className="ob-btn ob-btn-primary"
+                  disabled={pending}
                   onClick={finish}
                 >
                   Go to Control Center
@@ -878,7 +924,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
 
             {outcome.kind === "insufficient_evidence" ? (
               <>
-                <h1 className="ob-title">RADR found a potential issue</h1>
+                <h1 className="ob-title" tabIndex={-1}>RADR found a potential issue</h1>
                 <p className="ob-lead">
                   There is not enough evidence to recommend action.
                 </p>
@@ -889,6 +935,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
                 <button
                   type="button"
                   className="ob-btn ob-btn-primary"
+                  disabled={pending}
                   onClick={() => setStep("upload")}
                 >
                   Upload contract
@@ -897,7 +944,7 @@ export function FirstValueFunnel({ userName, userEmail, workspace }: Props) {
             ) : null}
           </section>
         ) : null}
-      </main>
+      </main></div>
     </div>
   );
 }

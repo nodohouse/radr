@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Link } from "@/i18n/navigation";
+import NextLink from "next/link";
 import { AuthSsoBlock } from "@/components/AuthSsoBlock";
 import { authClient } from "@/lib/auth-client";
 import { trackOnboarding } from "@/lib/onboarding/analytics";
@@ -14,6 +15,7 @@ type Props = {
   inviteEmail?: string;
   nextPath?: string;
   intent?: "demo";
+  available?: boolean;
 };
 
 /**
@@ -25,6 +27,7 @@ export function SignupForm({
   inviteEmail,
   nextPath,
   intent,
+  available = true,
 }: Props) {
   const t = useTranslations("auth");
   const router = useRouter();
@@ -39,7 +42,7 @@ export function SignupForm({
     setError(null);
     trackOnboarding("signup_started");
     const form = new FormData(event.currentTarget);
-    const email = String(form.get("email") ?? "");
+    const email = String(form.get("email") ?? "").trim();
     const password = String(form.get("password") ?? "");
     const name = email.split("@")[0] || "Operator";
 
@@ -49,7 +52,9 @@ export function SignupForm({
       return;
     }
 
-    const result = await authClient.signUp.email({ name, email, password });
+    let result;
+    try { result = await authClient.signUp.email({ name, email, password }); }
+    catch { setPending(false); setError(t("errors.generic")); return; }
 
     if (result.error) {
       setPending(false);
@@ -60,16 +65,18 @@ export function SignupForm({
     trackOnboarding("signup_completed");
 
     if (inviteToken) {
-      const accept = await fetch("/api/invitations", {
+      let accept;
+      try { accept = await fetch("/api/invitations", {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ token: inviteToken }),
-      });
+      }); } catch { setPending(false); setError(t("errors.inviteFailed")); return; }
       if (accept.ok) {
         router.push(dest);
         router.refresh();
         return;
       }
+      setPending(false); setError(t("errors.inviteFailed")); return;
     }
 
     setPending(false);
@@ -78,7 +85,7 @@ export function SignupForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="ob-auth-form" noValidate>
+    <form onSubmit={onSubmit} className="ob-auth-form">
       <div className="ob-field">
         <label htmlFor="email">{t("workEmail")}</label>
         <input
@@ -122,7 +129,8 @@ export function SignupForm({
         </div>
       ) : null}
 
-      <button type="submit" className="ob-btn ob-btn-primary" disabled={pending}>
+      {!available ? <p className="ob-entry-availability" role="status">{t("entryUnavailable")} <NextLink href="/onboarding/preview">{t("entryWalkthrough")}</NextLink></p> : null}
+      <button type="submit" className="ob-btn ob-btn-primary" disabled={pending || !available}>
         {pending ? (
           t("creating")
         ) : (

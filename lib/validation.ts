@@ -13,6 +13,9 @@ const countryCodes = ONBOARDING_COUNTRIES.map((c) => c.code) as [
 ];
 
 export const onboardingSchema = z.object({
+  fullName: z.string().trim().max(120).optional(),
+  industry: z.enum(["restaurant_group","hotel_group","bar_nightlife","serviced_apartments","mixed_hospitality","other"]).optional(),
+  roleLens: z.string().trim().max(50).optional(),
   organizationName: z.string().trim().min(2).max(120),
   locationName: z.string().trim().min(2).max(120),
   country: z.enum(countryCodes),
