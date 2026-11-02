@@ -53,7 +53,7 @@ export async function generateMetadata({
     },
     robots: { index: true, follow: true },
     icons: {
-      icon: [{ url: "/brand/favicon.svg", type: "image/svg+xml" }],
+      icon: [{ url: "/brand/favicon.svg?v=fit-v4", type: "image/svg+xml" }],
       apple: [{ url: "/brand/apple-touch-icon.png", sizes: "180x180" }],
     },
     alternates: {
