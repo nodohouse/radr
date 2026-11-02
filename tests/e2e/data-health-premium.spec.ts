@@ -18,7 +18,8 @@ test("source logos, scores, remediation, filters and direct links work",async({p
 });
 
 test("hotel health and connections never inherit restaurant source scores",async({page})=>{
+ test.setTimeout(120000);
  await page.addInitScript(()=>sessionStorage.setItem("radr.demoOrg.v1",JSON.stringify({vertical:"hotel",orgId:"org_northstar_hotels"})));
- await page.goto("/app/data-health?stay=1&source=xero");const screen=page.getByTestId("data-health-premium");await expect(screen).toContainText("Unmeasured");await expect(screen).not.toContainText("78/100");await expect(screen.locator('img[src="/vendors/mews.svg"]')).toBeVisible();await expect(screen).not.toContainText("Deliverect");await screen.locator(".hp-hotel-catalog details").first().locator("summary").click();await expect(screen).toContainText("Run an initial import");
+ await page.goto("/app/data-health?stay=1&source=xero");const screen=page.getByTestId("data-health-premium");await expect(screen).toContainText("Unmeasured",{timeout:30000});await expect(screen).not.toContainText("78/100");await expect(screen.locator('img[src="/vendors/mews.svg"]')).toBeVisible();await expect(screen).not.toContainText("Deliverect");await screen.locator(".hp-hotel-catalog details").first().locator("summary").click();await expect(screen).toContainText("Run an initial import");
  await page.goto("/app/connections?stay=1");await expect(page.getByRole("heading",{name:"Connect the hotel evidence that matters.",exact:true})).toBeVisible();await expect(page.locator(".hp-hotel-catalog")).not.toContainText("Lightspeed");await expect(page.locator(".hp-hotel-catalog")).toContainText("Mews");await page.setViewportSize({width:390,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });

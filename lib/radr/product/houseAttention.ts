@@ -225,7 +225,7 @@ const RESTAURANT: HouseSummary = {
   },
   prep: {
     title: "Tuna · cold line",
-    where: "Berlin · dinner service",
+    where: "Soho · New York · dinner service",
     required: 84,
     prepared: 62,
     throughput: 29,
@@ -254,7 +254,7 @@ const RESTAURANT: HouseSummary = {
     {
       id: "gap_sugar_berlin",
       item: "Caster sugar",
-      area: "Dry store · Berlin",
+      area: "Dry store · Soho · New York",
       standard: "5 kg on hand",
       standardQty: "5 kg",
       observed: "2 kg reported",
@@ -275,19 +275,19 @@ const RESTAURANT: HouseSummary = {
       futures: [
         {
           id: "transfer",
-          title: "Redistribute from Kreuzberg",
-          costLabel: "€0 cash · 25 min",
+          title: "Redistribute from Flatiron · New York",
+          costLabel: "$0 cash · 25 min",
           timeLabel: "25 min runner",
           serviceRisk: "medium",
           confidence: 72,
-          note: "Kreuzberg has +2 kg above par",
+          note: "Flatiron · New York has +2 kg above par",
           recommended: true,
           approveHref: CASTER_DECISION_HREF,
         },
         {
           id: "adjust",
           title: "Adjust prep / menu exposure",
-          costLabel: "€0",
+          costLabel: "$0",
           timeLabel: "Immediate",
           serviceRisk: "medium",
           confidence: 64,
@@ -296,7 +296,7 @@ const RESTAURANT: HouseSummary = {
         {
           id: "accept",
           title: "Accept risk",
-          costLabel: "€186 exposed",
+          costLabel: "$186 exposed",
           timeLabel: "—",
           serviceRisk: "high",
           confidence: 91,
@@ -308,7 +308,7 @@ const RESTAURANT: HouseSummary = {
     {
       id: "gap_oil_berlin",
       item: "Fryer oil buckets",
-      area: "Hot line · Berlin",
+      area: "Hot line · Soho · New York",
       standard: "6 buckets",
       standardQty: "6 buckets",
       observed: "4 buckets reported",
@@ -330,7 +330,7 @@ const RESTAURANT: HouseSummary = {
     {
       id: "gap_gloves_berlin",
       item: "Nitrile gloves M",
-      area: "Pass · Berlin",
+      area: "Pass · Soho · New York",
       standard: "4 boxes",
       standardQty: "4 boxes",
       observed: "3 boxes",
@@ -461,7 +461,7 @@ const RESTAURANT: HouseSummary = {
   verifications: [
     {
       id: "v_flour_kreuzberg_fri",
-      title: "Flour transfer · Kreuzberg",
+      title: "Flour transfer · Flatiron · New York",
       requested: "Fri 16:40",
       arrived: "Fri 17:05",
       restored: "12 kg flour on hand",
@@ -469,7 +469,7 @@ const RESTAURANT: HouseSummary = {
       expectedEuro: 220,
       observedEuro: 205,
       verifiedEuro: 198,
-      historicalLabel: "HISTORICAL VERIFIED OUTCOME · Friday · Kreuzberg · flour",
+      historicalLabel: "HISTORICAL VERIFIED OUTCOME · Friday · Flatiron · New York · flour",
       itemKey: "flour",
       locationKey: "berlin_kreuzberg",
     },
@@ -512,7 +512,7 @@ const HOTEL: HouseSummary = {
     {
       id: "gap_soap_canal",
       item: "Guest soap set",
-      area: "Housekeeping · Canal House",
+      area: "Housekeeping · Mercer House · New York",
       standard: "40 sets on cart",
       standardQty: "40 sets",
       observed: "22 sets reported",
@@ -531,7 +531,7 @@ const HOTEL: HouseSummary = {
         {
           id: "transfer",
           title: "Transfer from reserve",
-          costLabel: "€0 cash · 12 min",
+          costLabel: "$0 cash · 12 min",
           timeLabel: "12 min",
           serviceRisk: "low",
           confidence: 90,
@@ -542,7 +542,7 @@ const HOTEL: HouseSummary = {
         {
           id: "partial",
           title: "Partial restock · priority rooms first",
-          costLabel: "€0",
+          costLabel: "$0",
           timeLabel: "8 min",
           serviceRisk: "medium",
           confidence: 74,
@@ -551,7 +551,7 @@ const HOTEL: HouseSummary = {
         {
           id: "accept",
           title: "Accept uneven rooms",
-          costLabel: "€420 exposed",
+          costLabel: "$420 exposed",
           timeLabel: "—",
           serviceRisk: "high",
           confidence: 85,
@@ -567,7 +567,7 @@ const HOTEL: HouseSummary = {
     {
       id: "gap_linen_canal",
       item: "King duvet covers",
-      area: "Linen · Canal House",
+      area: "Linen · Mercer House · New York",
       standard: "36 on floor par",
       standardQty: "36",
       observed: "28 counted",
@@ -672,7 +672,7 @@ const HOTEL: HouseSummary = {
       expectedEuro: 420,
       observedEuro: 390,
       verifiedEuro: 360,
-      historicalLabel: "HISTORICAL VERIFIED OUTCOME · yesterday · Canal House",
+      historicalLabel: "HISTORICAL VERIFIED OUTCOME · yesterday · Mercer House · New York",
       itemKey: "guest_soap_set",
       locationKey: "canal_house_reserve",
     },

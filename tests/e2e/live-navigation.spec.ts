@@ -10,7 +10,7 @@ test("live floor pans and zooms without moving tables",async({page})=>{
   await expect(plan).not.toHaveAttribute("viewBox",initial!);await expect(item).toHaveAttribute("transform",transform!);
   const panned=await plan.getAttribute("viewBox");await page.mouse.wheel(0,-160);await expect(plan).not.toHaveAttribute("viewBox",panned!);
   await plan.dblclick({position:{x:30,y:30}});await expect(plan).toHaveAttribute("viewBox",initial!);
-  await item.click();await expect(item).toHaveAttribute("aria-pressed","true");
+  await item.click();await expect(item).toHaveAttribute("aria-pressed","true");await page.getByRole("button",{name:"Close table details"}).click();
   await page.getByRole("button",{name:"Terrace",exact:true}).click();await expect(plan).toHaveAttribute("aria-label",/Terrace/);
   await page.screenshot({path:"/workspace/work/qa/live-wood-desktop.png",fullPage:true});
 });
@@ -31,14 +31,11 @@ test.describe("touch live navigation",()=>{
 });
 
 
-test("table intelligence previews, pins and distinguishes missing records",async({page})=>{
- await page.goto("/app/live?stay=1");const panel=page.getByTestId("table-service-details");
- await expect(panel).toContainText("Returning guests");await expect(panel).toContainText("$236");await expect(panel).toContainText("Steak frites");await expect(panel).toContainText("Jordan party");await expect(panel).toContainText("Taylor party");
- const six=page.locator('[data-layout-item="t6"]');await six.hover();await expect(panel).toContainText("First recorded visit");await six.click();await page.mouse.move(1200,220);await expect(panel).toContainText("$262");await expect(panel).toContainText("Sam party");
- await page.locator('[data-layout-item="t1"]').click();await page.mouse.move(1200,220);await expect(panel).toContainText("Guest history unavailable");await expect(panel).not.toContainText("Morgan party");
- await page.locator('[data-layout-item="t8"]').click();await page.mouse.move(1200,220);
- const font=await page.locator('[data-layout-item="t8"] text').first().evaluate(el=>getComputedStyle(el).fontSize);expect(parseFloat(font)).toBeLessThan(1);
- await page.getByRole("tab",{name:"Table timeline",exact:true}).click();await expect(panel.getByText("Jordan party",{exact:false})).toBeVisible();await expect(panel.getByText("Taylor party",{exact:false})).toBeVisible();await page.getByRole("tab",{name:"Guests & orders",exact:true}).click();await expect(panel.getByText("2 × Steak frites",{exact:true})).toBeVisible();
- await page.screenshot({path:"/workspace/work/qa/live-table-intelligence-desktop.png",fullPage:true});
- await page.setViewportSize({width:390,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:"/workspace/work/qa/live-table-intelligence-mobile.png",fullPage:true});
+test("table intelligence opens on demand and distinguishes missing records",async({page})=>{
+ await page.goto("/app/live?stay=1");await expect(page.getByRole("dialog")).not.toBeVisible();
+ await page.locator('[data-layout-item="t8"]').click();const panel=page.getByTestId("table-service-details");await expect(panel).toContainText("Returning guests");await expect(panel).toContainText("$236");await expect(panel.locator(".simp-critical-needs")).toContainText("Sesame");await expect(panel.locator(".simp-critical-needs")).toContainText("Peanuts");
+ await page.getByRole("tab",{name:"Order",exact:true}).click();await expect(page.locator(".simp-order-lines li").filter({hasText:"2 × Steak frites"})).not.toBeVisible();await page.getByText("View itemized order",{exact:true}).click();await expect(page.locator(".simp-order-lines li").filter({hasText:"2 × Steak frites"})).toBeVisible();
+ await page.getByRole("tab",{name:"Timeline",exact:true}).click();await expect(page.locator("#table-timeline")).toContainText("Jordan party");await expect(page.locator("#table-timeline")).toContainText("Taylor party");
+ await page.keyboard.press("Escape");await expect(page.getByRole("dialog")).not.toBeVisible();await page.locator('[data-layout-item="t1"]').click();await expect(panel).toContainText("Guest history unavailable");await expect(panel.locator(".simp-critical-needs")).toContainText("Allergies not recorded");await expect(panel.locator(".simp-critical-needs")).not.toContainText("Sesame");
+ await page.setViewportSize({width:390,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });

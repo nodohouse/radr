@@ -393,11 +393,11 @@ export function buildConnectionsOverview(
   const recommended = rankRecommended(catalogAll).slice(0, 7);
 
   // Deterministic summary SSOT (approved mock) — catalog lists remain live-filtered
-  const availableCount = 13;
+  const availableCount = catalogAll.filter(entry => entry.status === "AVAILABLE").length;
 
   return {
-    connectedCount: 8,
-    attentionCount: 2,
+    connectedCount: rows.length,
+    attentionCount: attention.length,
     availableCount,
     coveragePercent: 84,
     coverageTooltip: COVERAGE_TOOLTIP,

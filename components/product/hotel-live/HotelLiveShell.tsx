@@ -1284,7 +1284,7 @@ function RoomInspector({
           {room.type} · Floor {room.floor}
         </p>
 
-        <div className="hl-insp-tabs" role="tablist">
+        <div className="hl-insp-tabs" role="tablist" aria-label="Room details" onKeyDown={event=>{if(["ArrowLeft","ArrowRight","Home","End"].includes(event.key)){event.preventDefault();const tabs=["overview","tasks","guests","history"] as const;const i=tabs.indexOf(tab);const next=tabs[event.key==="Home"?0:event.key==="End"?3:(i+(event.key==="ArrowRight"?1:3))%4];setTab(next);event.currentTarget.querySelector<HTMLButtonElement>(`[data-tab="${next}"]`)?.focus();}}}>
           {(
             [
               ["overview", "Overview"],
@@ -1297,6 +1297,8 @@ function RoomInspector({
               key={id}
               type="button"
               role="tab"
+              data-tab={id}
+              tabIndex={tab === id ? 0 : -1}
               aria-selected={tab === id}
               className={tab === id ? "is-active" : undefined}
               onClick={() => setTab(id)}
@@ -1308,7 +1310,7 @@ function RoomInspector({
 
         {tab === "overview" ? (
           <>
-            <RoomGuestBrief room={room}/>
+            <RoomGuestBrief room={room} compact/>
             <div className="hl-metric-grid">
               <article>
                 <em>Cleaning time</em>

@@ -38,7 +38,7 @@ export function BohWaste({ house, onOpenView, isHotel }: Props) {
       <div className="boh-waste-kpis">
         <article className="boh-panel">
           <span>Exposed this period</span>
-          <strong>€{total}</strong>
+          <strong>${total}</strong>
         </article>
         <article className="boh-panel">
           <span>Prep-linked</span>
@@ -68,7 +68,7 @@ export function BohWaste({ house, onOpenView, isHotel }: Props) {
                   {w.qty} · {w.pattern} · {w.reason}
                 </span>
               </div>
-              <em>€{w.valueEuro}</em>
+              <em>${w.valueEuro}</em>
             </li>
           ))}
         </ul>

@@ -202,7 +202,7 @@ export function buildPeakDecisionRecord(
       data: "HIGH",
       decision: "MEDIUM",
       userFacing: "MEDIUM",
-      explanation: "Evidence coverage High · data freshness Good · main uncertainty walk-in order mix. Historical comparable-service pattern: 78% of matched services showed turn-time deterioration — not Decision Confidence.",
+      explanation: "Evidence coverage and freshness follow the current source checks; main uncertainty is walk-in order mix. Historical comparable-service pattern: 78% of matched services showed turn-time deterioration — not Decision Confidence.",
       point: 0,
       low: 0,
       high: 0,

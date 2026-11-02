@@ -344,7 +344,7 @@ function CatalogCard({
   );
 }
 
-export function ConnectionsOverview({
+function DetailedConnectionsOverview({
   model,
   category,
   onCategory,
@@ -689,4 +689,42 @@ export function ConnectionsOverview({
       ) : null}
     </div>
   );
+}
+
+
+/** Operational coverage first; detailed health and the catalog remain one step away. */
+export function ConnectionsOverview(props: Props) {
+  const [view, setView] = useState<"overview" | "systems" | "catalog">("overview");
+  const { model, onSelect } = props;
+  const healthy = model.rows.filter(r => r.status === "CONNECTED");
+  const issues = model.rows.filter(r => r.status !== "CONNECTED");
+  const coverage: { label: string; category: ConnectionsCategoryFilter; context: string }[] = [
+    { label: "POS", category: "POS", context: "Revenue, service pace and kitchen pressure" },
+    { label: "Reservations", category: "Reservations", context: "Forward demand and guest context" },
+    { label: "Labor", category: "Workforce", context: "Staffing cost and capacity confidence limited" },
+    { label: "Finance", category: "Accounting", context: "Settlement and verified outcome evidence" },
+    { label: "Procurement", category: "Inventory", context: "Stock and supplier confidence limited" },
+  ];
+  const openView = (next: typeof view) => { props.onCategory("All"); props.onStatus("all"); props.onQuery(""); if(next === "catalog") props.onShowAllCatalog(true); setView(next); };
+  return <div className="simp-connections">
+    <nav className="boh-nav" aria-label="Connections views">{(["overview", "systems", "catalog"] as const).map(v => <button key={v} type="button" aria-pressed={view === v} className={view === v ? "is-active" : undefined} onClick={() => openView(v)}>{v === "overview" ? "Coverage overview" : v === "systems" ? "System evidence" : "Browse integrations"}</button>)}</nav>
+    {view === "overview" ? <>
+      <section className="simp-metrics simp-four" aria-label="Connection summary">
+        <button onClick={() => openView("systems")}><span>Connected sources</span><strong>{model.rows.length}</strong><small>Includes degraded and stale sources</small></button>
+        <button onClick={() => openView("systems")}><span>Healthy sources</span><strong>{healthy.length}</strong><small>Connected with no recorded health issue</small></button>
+        <button title={model.coverageTooltip} onClick={() => openView("systems")}><span>Evidence coverage</span><strong>{model.coveragePercent}%</strong><small>Modeled demo coverage · not a sync score</small></button>
+        <button onClick={() => {openView("systems"); props.onStatus("attention");}}><span>Need attention</span><strong>{issues.length}</strong><small>Review before relying on affected Decisions</small></button>
+      </section>
+      <section className="simp-attention simp-coverage" aria-label="Operating source coverage"><header><div><span className="rs-eyebrow">WHAT RADR CAN UNDERSTAND</span><h2>One operating picture, with visible gaps.</h2></div><Link href="/app/data-health">Evidence quality →</Link></header><div className="simp-coverage-grid">{coverage.map(c => {
+        const rows = model.rows.filter(r => r.category === c.category);
+        const issue = rows.find(r => r.status !== "CONNECTED");
+        const row = issue || rows[0];
+        const partial = rows.some(r => r.coverageDetail.startsWith("Partial"));
+        const label = issue ? issue.status === "STALE" ? "Stale" : "Degraded" : partial ? "Partial" : row ? "Connected" : "Missing";
+        return <button key={c.label} onClick={() => {if(row) onSelect(row.id);else {openView("catalog"); props.onCategory(c.category);}}}><div><strong>{c.label}</strong><span data-state={label}>{label}</span></div><p>{c.context}</p><small>{rows.length ? rows.map(r => r.name).join(" · ") : "No connected source recorded"}</small><b>{row ? "Review evidence →" : "Browse options →"}</b></button>;
+      })}<div className="simp-coverage-na"><strong>PMS</strong><span>Not applicable to this restaurant view</span><small>Hotel coverage is assessed separately.</small></div></div></section>
+      <section className="simp-source-attention" aria-label="Decision confidence issues"><h2>What needs attention</h2>{issues.map(r => <button key={r.id} onClick={() => onSelect(r.id)}><VendorLogo id={r.id} name={r.name}/><span><strong>{r.name} · {r.status === "STALE" ? "Stale" : "Degraded"}</strong><small>{r.impact || r.impactDetail || "Review source evidence"}</small></span><b>Review →</b></button>)}</section>
+      <p className="simp-footnote">Operating context supports Decisions. Confidence reflects evidence quality. Verified outcomes require a reconciled evidence chain.</p>
+    </> : <DetailedConnectionsOverview {...props} />}
+  </div>;
 }

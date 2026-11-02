@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Heading, Arrow } from "../reference/ReferenceUI";
 
 import {
@@ -37,14 +38,18 @@ export type BohView =
   | "stock"
   | "prep"
   | "deliveries"
-  | "waste";
+  | "waste"
+  | "suppliers"
+  | "history";
 
 const VIEWS: { id: BohView; label: string }[] = [
   { id: "overview", label: "Overview" },
-  { id: "captures", label: "Captures" },
   { id: "stock", label: "Stock" },
   { id: "prep", label: "Prep & Line" },
   { id: "deliveries", label: "Deliveries" },
+  { id: "suppliers", label: "Suppliers" },
+  { id: "history", label: "History" },
+  { id: "captures", label: "Captures" },
   { id: "waste", label: "Waste" },
 ];
 
@@ -177,6 +182,10 @@ export function BohShell() {
         onReceive={(id) => setReceived((prev) => ({ ...prev, [id]: true }))}
       />
     );
+  } else if (view === "suppliers") {
+    body = <section className="boh-panel simp-suppliers" aria-label="Supplier contacts">{house.suppliers.map(s => <article key={s.id}><h2>{s.name}</h2><p>{s.contact}</p><a href={`tel:${s.phone}`}>{s.phone}</a><a href={`mailto:${s.email}`}>{s.email}</a><small>Fictional demo contact</small></article>)}</section>;
+  } else if (view === "history") {
+    body = <section className="boh-panel simp-history" aria-label="Historical verified outcomes"><h2>Verified outcomes</h2><p>Historical records, separate from today’s unresolved observations.</p>{house.verifications.map(v => <article key={v.id}><span className="boh-badge is-handling">Verified · {v.historicalLabel || "Historical"}</span><h3>{v.title}</h3><dl>{[["Requested",v.requested],["Arrived",v.arrived],["Restored",v.restored],["Expected",`$${v.expectedEuro}`],["Observed",`$${v.observedEuro}`],["Verified value",`$${v.verifiedEuro}`],["Disruption",v.disruption]].map(([label,value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl><Link href="/app/memory">Compare in Memory →</Link></article>)}</section>;
   } else if (view === "waste") {
     body = (
       <BohWaste house={house} onOpenView={selectView} isHotel={isHotel} />
@@ -185,8 +194,8 @@ export function BohShell() {
 
   return (
     <div className="boh-root" data-view={view} data-vertical={session.vertical}>
-      <Heading eyebrow="Back of House" title={isHotel?"Behind every ready room.":"Behind every smooth service."} description={isHotel?"Supplies, housekeeping observations and readiness evidence.":"Stock, staff observations and service readiness in one place."} aside={<button type="button" className="rs-section-action" onClick={()=>selectView("captures")}>Review captures <Arrow /></button>} />
-      {view==="overview"?<section className="boh-capture-intro" aria-label="Staff capture workflow"><div><span className="rs-eyebrow">FROM THE FLOOR TO THE RECORD</span><h2>See it. Say it. Keep the evidence.</h2><p>{isHotel?"Room checks, linen, amenities and supplies.":"Storerooms, ingredients, supplies and prep."} Camera, voice and notes come together for review.</p><button type="button" onClick={()=>selectView("captures")}>Explore capture evidence <Arrow /></button><small>Demo evidence feed · staff app connection planned</small></div><ol><li><b>01</b><span>Capture<small>Video, photos, voice or notes</small></span></li><li><b>02</b><span>Review<small>Confirm quantities and uncertain observations</small></span></li><li><b>03</b><span>Act<small>Connect shortages and issues to a decision</small></span></li></ol></section>:null}
+      <Heading eyebrow="Back of House" title="Back of House" description="What is at risk behind today’s operation?" aside={<button type="button" className="rs-section-action" onClick={()=>selectView("captures")}>Review captures <Arrow /></button>} />
+
 
       <nav className="boh-nav" aria-label="Back of house views">
         {VIEWS.map((v) => (

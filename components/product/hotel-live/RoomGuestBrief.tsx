@@ -3,10 +3,11 @@ import { GuestNeeds } from "../guest-context/GuestNeeds";
 
 import { hotelGuestNeeds } from "@/lib/product/hotelGuestNeeds";
 
-export function RoomGuestBrief({room,history=false}:{room:HotelLiveRoom;history?:boolean}) {
+export function RoomGuestBrief({room,history=false,compact=false}:{room:HotelLiveRoom;history?:boolean;compact?:boolean}) {
  const needs=hotelGuestNeeds(room);
  const example=!!needs;
  const incoming=room.state!=="occupied"&&!!room.arrivalAt;
+ if(compact) return <section className="room-guest-brief" data-testid="room-guest-brief"><span className="rp-preview-eyebrow">{incoming ? "Next arrival" : "Current room"}</span><div className="room-guest-headline"><strong>{incoming ? `${room.arrivalAt} today · ${room.guestName || "Guest name unavailable"}` : room.state === "occupied" ? "In-house stay" : "No next reservation linked"}</strong><span>{example ? "Shellfish allergy · Birthday stay · feather-free bedding requested" : "Allergies and preferences not recorded"}</span></div><p>{room.state === "ready" ? "Room marked ready" : "Room not ready for handover"}{room.expectedReadyAt ? ` · expected ${room.expectedReadyAt}, not confirmed` : ""}</p>{example ? <small>STAY-310-TAN · guest-services acknowledgement pending</small> : null}<p className="guest-needs-source">Guest preferences and booking evidence in Guests; previous stay and timeline in History. Demo snapshot.</p></section>;
  return <section className="room-guest-brief" data-testid="room-guest-brief">
   <span className="rp-preview-eyebrow">Illustrative guest & stay context</span><div className="room-guest-headline"><strong>{incoming?`Next arrival ${room.arrivalAt} · ${room.guestName||"Guest name unavailable"}`:room.state==="occupied"?"Current stay · details not linked":"No next reservation linked"}</strong><span>{example?"Shellfish allergy · Birthday stay · feather-free bedding requested":"Allergies and preferences not recorded"}</span></div>
   {history?<div className="rp-table-slot"><span>Previous stay</span><strong>{example?"Previous party · 2 adults":"Previous stay unavailable"}</strong><small>{example?"Checked out today 11:00 · room released for housekeeping":"No linked departure record"}</small></div>:null}

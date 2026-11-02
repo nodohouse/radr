@@ -59,22 +59,22 @@ export function BohCriticalAction({
       return {
         stockAfter: `${stock.current + 2} kg`,
         stockout: "Protected past pastry",
-        exposure: "€0 unprotected",
-        note: "Kreuzberg surplus covers gap · runner 25 min",
+        exposure: "$0 unprotected",
+        note: "Flatiron · New York surplus covers gap · runner 25 min",
       };
     }
     if (selected === "adjust") {
       return {
         stockAfter: `${stock.current} kg`,
         stockout: "19:55 with dessert hold",
-        exposure: "€72 residual",
+        exposure: "$72 residual",
         note: "Two dessert SKUs held · pastry protected",
       };
     }
     return {
       stockAfter: `${stock.current} kg`,
       stockout: gap.timeToStockout ?? "—",
-      exposure: `€${gap.exposureEuro ?? 0} exposed`,
+      exposure: `$${gap.exposureEuro ?? 0} exposed`,
       note: "Stockout likely mid-service",
     };
   }, [selected, gap, stock]);
@@ -148,7 +148,7 @@ export function BohCriticalAction({
             </div>
             <div>
               <span>Service / economic exposure</span>
-              <strong>€{gap.exposureEuro}</strong>
+              <strong>${gap.exposureEuro}</strong>
             </div>
           </div>
           {recalculated ? (

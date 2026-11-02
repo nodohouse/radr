@@ -165,7 +165,7 @@ export function BohPrep({ house, onOpenView, isHotel }: Props) {
                     {w.qty} · {w.pattern} · {w.reason}
                   </span>
                 </div>
-                <em>€{w.valueEuro}</em>
+                <em>${w.valueEuro}</em>
               </li>
             ))}
           </ul>
@@ -198,11 +198,11 @@ export function BohPrep({ house, onOpenView, isHotel }: Props) {
               </div>
               <div>
                 <dt>Verified value</dt>
-                <dd className="boh-tone-pos">€{verified.verifiedEuro}</dd>
+                <dd className="boh-tone-pos">${verified.verifiedEuro}</dd>
               </div>
             </dl>
             <p className="boh-verified-note">
-              Expected €{verified.expectedEuro} · observed €{verified.observedEuro}{" "}
+              Expected ${verified.expectedEuro} · observed ${verified.observedEuro}{" "}
               · {verified.disruption}
             </p>
             <Link href="/app/value" className="boh-link">
@@ -219,8 +219,8 @@ export function BohPrep({ house, onOpenView, isHotel }: Props) {
               </h3>
             </div>
             <p>
-              Berlin stockouts on caster sugar cluster on high-delivery Fridays.
-              Kreuzberg raised dry-store par — stockout frequency −42%.
+              Soho · New York stockouts on caster sugar cluster on high-delivery Fridays.
+              Flatiron · New York raised dry-store par — stockout frequency −42%.
             </p>
             <Link href="/app/memory" className="boh-btn-dark">
               Compare in Memory →

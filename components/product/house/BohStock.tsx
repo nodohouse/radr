@@ -53,50 +53,35 @@ export function BohStock({
             <thead>
               <tr>
                 <th>Item</th>
-                <th>State</th>
-                <th>Area</th>
-                <th>Current</th>
+                <th>On hand</th>
                 <th>Par</th>
-                <th>Gap</th>
-                <th>Burn</th>
-                <th>Run-out</th>
-                <th>Next delivery</th>
+                <th>Runout risk</th>
                 <th>Supplier</th>
-                <th>Action</th>
+                <th>Decision / action</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((r) => {
-                const gapN = Math.round((r.current - r.par) * 10) / 10;
                 const sup = house.suppliers.find((s) => s.id === r.supplierId);
                 return (
                   <tr
                     key={r.id}
                     onClick={() => onOpenStockItem(slug(r.item))}
                   >
-                    <td className="boh-item">{r.item}</td>
-                    <td>
+                    <td className="boh-item">{r.item}<br/>
                       <span
                         className={`boh-badge is-${r.risk === "critical" ? "critical" : r.risk === "risk" ? "risk" : r.risk === "watch" ? "watching" : "handling"}`}
                       >
                         {RISK_LABEL[r.risk]}
                       </span>
                     </td>
-                    <td>{r.area}</td>
                     <td>
                       {r.current} {r.unit}
                     </td>
                     <td>
                       {r.par} {r.unit}
                     </td>
-                    <td className={gapN < 0 ? "boh-tone-neg" : undefined}>
-                      {gapN > 0 ? `+${gapN}` : gapN} {r.unit}
-                    </td>
-                    <td>
-                      {r.burnPerHour} {r.unit}/h
-                    </td>
                     <td>{r.runOut}</td>
-                    <td>{r.nextDelivery.when}</td>
                     <td>{sup?.name ?? "—"}</td>
                     <td>
                       <div className="boh-row-acts">

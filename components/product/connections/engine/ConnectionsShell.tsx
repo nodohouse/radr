@@ -93,7 +93,7 @@ export function ConnectionsShell() {
       data-connections-engine="true"
       data-drawer={selectedDetail ? "true" : undefined}
     >
-      <Heading eyebrow="Connections" title="Your systems. One connected picture." description="Evidence coverage, source quality and connection setup in one place." aside={<TextLink href="/app/data-health">Review evidence health</TextLink>} />
+      <Heading eyebrow="Connections" title="Connections" description="The systems RADR uses to understand your operation." aside={<TextLink href="/app/data-health">Review evidence health</TextLink>} />
 
       <ConnectionsOverview
         model={model}

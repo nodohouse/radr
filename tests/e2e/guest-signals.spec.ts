@@ -16,7 +16,7 @@ test("signals require records and hotel needs stay bound to the incoming booking
 test("table markers are visible without selection and distinguish incoming notes",async({page})=>{
  const errors:string[]=[];page.on("pageerror",error=>errors.push(error.message));await page.goto("/app/live?stay=1");const table=page.locator('[data-layout-item="t8"]');await expect(table.locator('[data-guest-signal="allergy"][data-scope="current"]')).toBeVisible();await expect(table.locator('[data-guest-signal="occasion"][data-scope="current"]')).toBeVisible();await expect(table.locator('[data-guest-signal="allergy"][data-scope="incoming"]')).toBeVisible();await expect(table).toHaveAttribute("aria-label",/Next booking:.*Peanuts/);await expect(table).toHaveAttribute("aria-label",/Birthday/);
  await expect(page.locator('[data-layout-item="t1"] [data-guest-signal]')).toHaveCount(0);
- await table.click();await page.mouse.move(1200,220);await page.locator(".rp-next-arrival summary").click();const needs=page.getByRole("region",{name:"Incoming party needs",exact:true});await expect(needs).toContainText("RES-2015-J");await expect(needs).toContainText("OpenTable sample · not connected");await expect(needs).toContainText("Birthday");
+ await table.click();await page.mouse.move(1200,220);await page.getByRole("tab",{name:"Notes",exact:true}).click();const needs=page.getByRole("region",{name:"Incoming party notes",exact:true});await expect(needs).toContainText("RES-2015-J");await expect(needs).toContainText("OpenTable sample · not connected");await expect(needs).toContainText("Birthday");
  expect(errors).toEqual([]);await page.screenshot({path:"/workspace/work/qa/table-booking-markers.png",fullPage:true});
 });
 
