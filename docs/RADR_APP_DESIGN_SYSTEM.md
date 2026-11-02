@@ -1,14 +1,14 @@
 # RADR application design system
 
-Status: Control Center material pilot, awaiting visual approval. 2 November 2026.
+Status: Control Center glass revision 2, awaiting visual approval. 2 November 2026.
 
-The current user brief supersedes earlier palette experiments. This system is implemented only on Control Center and its shell. Do not propagate it to Live, Decisions, Operations, Back of House, Intelligence, Value, Memory, Data Health or Connections until the user approves the pilot.
+The user rejected the first material pilot as empty and underwhelming. This revision makes the glass materially visible, restores blue-green contrast, and fills more of the desktop workspace. This feedback supersedes the first pilot’s almost-opaque, almost-shadowless treatment. This system is implemented only on Control Center and its shell. Do not propagate it to Live, Decisions, Operations, Back of House, Intelligence, Value, Memory, Data Health or Connections until the user approves the pilot.
 
 ## Product hierarchy
 
 Metrics are context. Decisions are the product. Verified outcomes are proof. Memory retains the learning. Control Center answers “What needs me?” Its primary object is the current scoped Decision, not a performance chart. Record IDs, lifecycle, money, confidence, action links and verification remain canonical data.
 
-The approved backend mockups define a light, spacious, calm direction. Their tablet frame and exterior blue background are presentation, not application UI. Logos remain approved immutable SVG assets through `FrozenRadrLogo`.
+The approved backend mockups define a light, spacious, calm direction with more tangible material and stronger focal contrast. Their tablet frame and exterior blue background are presentation, not application UI. Logos remain approved immutable SVG assets through `FrozenRadrLogo`.
 
 ## Implementation and scope
 
@@ -20,44 +20,44 @@ After approval, shared material tokens and primitives can replace compatibility 
 
 | Level | Material | Implementation | Use |
 | --- | --- | --- | --- |
-| 0 | Canvas | `--material-canvas: #f5f7f5`; extremely low-opacity blue and mint light fields across 1200–1400px, diffused beyond their origin | Atmospheric environment with neutral ivory underneath |
-| 1 | Working Glass | Solid fallback `#f8fbfa`; normal rendering `rgba(250,252,251,.96)`; border `#d8e1df`; white inset highlight | Operating summary, service/arrival readiness and supporting information |
-| 2 | Decision Glass | Solid fallback `#edf5ef`; near-opaque green-influenced tonal variation; border `#a7c3b4`; 3px restrained edge marker | Current recommendation and its action |
+| 0 | Canvas | `--material-canvas: #eaf1f5`; broad blue and mint illumination over a blue-white base, diffused across 1100–1250px | Atmospheric environment with neutral ivory underneath |
+| 1 | Working Glass | Solid fallback `#f7fbfe`; normal rendering near 74% opacity with white-facing borders and highlights; selective 8px backdrop blur | Operating summary, service/arrival readiness and supporting information |
+| 2 | Decision Glass | Solid fallback `#123f48`; near-opaque deep teal/forest focus surface, light upper edge, mint marker and mint action/value emphasis | Current recommendation and its action |
 
-Glass means material hierarchy. It does not require blur. There are no backdrop-filter layers in the Control Center overview, no glass nested over glass, no animated environmental light, no heavy reflections and no floating drop shadows. The proof strip is plain typography on the canvas, not a fourth material.
+Glass means visible material hierarchy. Only the operating-summary and readiness surfaces use an 8px backdrop blur where supported. Their solid fallbacks preserve separation and legibility. Thin light-facing rims and restrained grounding shadows make the surfaces tangible. The Decision uses a near-opaque focus material rather than blur; the proof strip uses one shallow shared field. There are no animated environmental lights, nested blur stacks or heavy reflections.
 
 ## Color
 
 | Token | Value | Meaning |
 | --- | --- | --- |
-| `--material-ink` | `#192e35` | Headings and primary information |
-| `--material-secondary` | `#52656b` | Supporting information |
-| `--material-quiet` | `#5f7178` | Metadata with readable contrast |
-| `--material-green` | `#086342` | Decision impact and verified contribution |
-| `--material-blue` | `#285e88` | Evidence, analytical links and chart line |
-| Action fill | `#126443` | Primary Decision action; white label |
+| `--material-ink` | `#102b43` | Headings and primary information |
+| `--material-secondary` | `#456079` | Supporting information |
+| `--material-quiet` | `#506b7f` | Metadata with readable contrast |
+| `--material-green` | `#087753` | Decision impact and verified contribution |
+| `--material-blue` | `#225da2` | Evidence, analytical links and chart line |
+| Action fill | `#82efb4` | Primary Decision action; dark forest label |
 | Selected field | `#dcece3` | Active navigation, restrained mint |
-| Navigation material | `#eaf0f1` | Pale blue-gray, no sidebar gradient |
+| Navigation material | `#eaf1f7` | Pale blue-gray, no sidebar gradient |
 | Amber | `#875d24` | Elevated operating pressure or uncertainty |
-| Outflow | `#97515a` | Existing cost/deduction context, distinct from urgent risk |
+| Outflow | `#a44856` | Existing cost/deduction context, distinct from urgent risk |
 
 Urgent red remains reserved for material risk states. Source health, Decision confidence, forecast accuracy, modeled performance and verified value are separate concepts. MEDIUM confidence must never be rendered as an invented percentage.
 
 ## Typography and numbers
 
-Retain Manrope and the existing product font loader. No new fonts, weights downloaded at runtime, serif accents or raster labels. Headline: 36px, weight 550, line-height 1.24, tracking −1.35px; 40px on wide displays and 28px on phones. Recommendation: 25px, weight 550, line-height 1.3; 29px on wide displays. Its record title is quieter at 15px. Primary money is 33px, or 38px on wide displays. Use tabular numerals, quiet labels and explicitly labeled context.
+Retain Manrope and the existing product font loader. No new fonts, weights downloaded at runtime, serif accents or raster labels. Headline: 36px, weight 550, line-height 1.24, tracking −1.35px; 40px on wide displays and 28px on phones. Recommendation: 28px, weight 550, line-height 1.3; 32px on wide displays. Its record title is quieter at 15px. Primary operating money is 36px, or 40px on wide displays; Decision impact is 38px in mint. Use tabular numerals, quiet labels and explicitly labeled context.
 
 Metadata is 10–12px with readable foreground colors. The hero uses the same canonical recommendation, MEDIUM confidence, evidence count, status and horizon as the record, without decorative confidence percentages.
 
 ## Spacing, composition and radii
 
-Use a 4px rhythm with common 8, 12, 16, 22, 26 and 30px intervals. The editorial heading has breathing room before the performance summary. Four existing metrics sit inside one divided working surface. The Decision and readiness surface share a baseline. Proof values and graph drill-downs use separators rather than individual cards.
+Use a 4px rhythm with common 8, 12, 16, 22, 26 and 30px intervals. The editorial heading has breathing room before the performance summary. Four existing metrics sit inside one divided working surface. The Decision and readiness surface share a baseline. Proof values and graph drill-downs share shallow glass fields and internal separators rather than individual cards.
 
-Controls: 8–9px radius. Working surfaces: 14px. Major Decision/readiness surfaces: 18px. No oversized pills. Control Center has a 1200px reading width on desktop, extending to 1480px on wide screens. The main workspace and top bar centre within the space to the right of the rail at 4K; they do not stretch text across the whole monitor.
+Controls: 8–9px radius. Working surfaces: 14px. Major Decision/readiness surfaces: 20px. No oversized pills. Control Center has a 1360px reading width on desktop, extending to 1680px on wide screens. The main workspace and top bar centre within the space to the right of the rail at 4K; they do not stretch text across the whole monitor.
 
 ## Borders and shadows
 
-Working border: 1px cool neutral `#d8e1df`. Decision border: 1px green-influenced `#a7c3b4`. Separators use lower-contrast gray-green. Insets give a slight light-facing edge; the primary Decision has only a 2px, 1.5%-opacity grounding shadow. Hover changes surface contrast, not elevation or scale.
+Working borders are translucent white over a cool blue-gray support edge. Decision borders are green-influenced with a brighter upper rim. Working surfaces use 7–8px low-opacity grounding shadows; the Decision uses a stronger 12px/30px shadow at 13% opacity to establish focus. Insets create a light-facing edge. Hover changes material contrast, not position or scale.
 
 ## Chart language
 
@@ -65,7 +65,7 @@ Existing charts remain native SVG and retain their existing datasets and drill-d
 
 ## Motion and performance
 
-Hover and selection: 180ms. Decision arrival: one 200ms opacity / 3px translation, no bounce or overshoot. No perpetual pulse, animated gradient or page transition. `prefers-reduced-motion: reduce` removes transitions and animation. Reduced transparency removes atmospheric fields and uses opaque working surfaces. The design does not depend on backdrop-filter support. No new JavaScript dependency, network request, rendering canvas or client state is introduced by the visual system.
+Hover and selection: 180ms. Decision arrival: one 200ms opacity / 3px translation, no bounce or overshoot. No perpetual pulse, animated gradient or page transition. `prefers-reduced-motion: reduce` removes transitions and animation. Reduced transparency removes atmospheric fields and uses opaque working surfaces. The design does not depend on backdrop-filter support; reduced transparency disables both selective blur layers and uses solid fills. No new JavaScript dependency, network request, rendering canvas or client state is introduced by the visual system.
 
 ## Navigation and command surface
 

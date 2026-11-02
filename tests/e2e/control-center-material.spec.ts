@@ -7,7 +7,7 @@ test("material pilot retains canonical Decision and passes contrast checks",asyn
 });
 
 test("4K composition centres and remains native vector UI",async({page})=>{
- await page.setViewportSize({width:3840,height:2160});await page.goto("/app?stay=1");const brief=await page.getByTestId("compact-control-center").boundingBox();expect(brief!.x+brief!.width/2).toBeCloseTo((3840+80)/2,0);expect(brief!.width).toBeLessThanOrEqual(1480);expect(await page.locator(".ep-graphs svg").count()).toBeGreaterThan(0);await expect(page.getByTestId("compact-control-center").locator("canvas")).toHaveCount(0);await expect(page.locator('.rs-brand img')).toHaveAttribute("src",/master-v4\.svg/);
+ await page.setViewportSize({width:3840,height:2160});await page.goto("/app?stay=1");const brief=await page.getByTestId("compact-control-center").boundingBox();expect(brief!.x+brief!.width/2).toBeCloseTo((3840+80)/2,0);expect(brief!.width).toBeLessThanOrEqual(1680);expect(await page.locator(".ep-graphs svg").count()).toBeGreaterThan(0);await expect(page.getByTestId("compact-control-center").locator("canvas")).toHaveCount(0);await expect(page.locator('.rs-brand img')).toHaveAttribute("src",/master-v4\.svg/);
 });
 
 test("material scope ends when leaving Control Center",async({page})=>{
