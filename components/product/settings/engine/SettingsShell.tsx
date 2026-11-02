@@ -280,7 +280,7 @@ export function SettingsShell() {
       />
 
       <div className="se-main">
-        <Heading eyebrow="Settings" title="Built around your operation." description="Your organization, team, preferences and decision guardrails." aside={<span className="se-save" data-status={saveStatus} role="status">{saveLabel}</span>} />
+        <Heading eyebrow="Settings" title="Your operation. Your guardrails." description="Manage your workspace, team and the boundaries of every decision." aside={<span className="se-save" data-status={saveStatus} role="status">{saveLabel} · on this device</span>} />
 
         <SettingsSummaryCards
           demo={demo}

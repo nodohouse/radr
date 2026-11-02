@@ -1,15 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useSyncExternalStore } from "react";
-import { useProduct } from "@/lib/product/store";
-import { useDemoOrg } from "../useDemoOrg";
-import { recordsForLocationSelection } from "@/lib/radr/product/selectedScope";
-import { locationDisplayName } from "@/lib/radr/product/demoOrg";
-import { decisionSummary } from "@/lib/radr/product/decisionSummary";
+import {useRecords} from "./useDecisionScope";
+import { useState } from "react";
 import { toCanonicalLocationId } from "@/lib/radr/product/locationIds";
-import { subscribeDecisionStore, getDecisionStoreSnapshot } from "@/lib/radr/decision/store";
-import { scopedDecisionsForDemo, recordAttention } from "@/lib/radr/product/roleScope";
+import { recordAttention } from "@/lib/radr/product/roleScope";
 import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
 import { buildValueOverview } from "@/lib/radr/product/valueProofEngine";
 import { buildMemoryOverview } from "@/lib/radr/product/memoryProofEngine";
@@ -33,14 +28,7 @@ import { Arrow, Chart, Heading, Metric, Panel, TextLink, detailHref } from "./Re
 
 function copy(value: string) { return value.replace(/\s*—\s*/g, ", "); }
 
-export function useRecords() {
-  const snap = useSyncExternalStore(subscribeDecisionStore,getDecisionStoreSnapshot,getDecisionStoreSnapshot);
-  const { roleView, locationScope, comparisonLocationIds, locationMode } = useProduct(); const { session } = useDemoOrg();
-  const selected = locationMode === "comparison" ? comparisonLocationIds : [];
-  const scopeLabel = selected.length >= 2 ? `${selected.length} selected locations` : locationScope === "all" ? "All locations" : locationScope.startsWith("region_") ? locationScope.replace("region_", "").replace(/_/g, " ") : locationDisplayName(toCanonicalLocationId(locationScope));
-  const records = recordsForLocationSelection(scopedDecisionsForDemo(Object.values(snap.records),roleView,session.vertical), locationScope, selected);
-  return { roleView, vertical: session.vertical, records, summary: decisionSummary(records), locationScope, scopeLabel, comparisonLocationIds: selected };
-}
+export {useRecords} from "./useDecisionScope";
 
 export function ReferenceValue() {
   const { roleView,vertical,records,scopeLabel } = useRecords(); const model=buildValueOverview(roleView,vertical,records); const agg=deriveValueAggregate(roleView,vertical,records);

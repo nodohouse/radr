@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useId, type ReactNode } from "react";
 import { NAV_ICONS } from "../shell/navIcons";
+import { WorkspaceFocus } from "./WorkspaceFocus";
+import type {DecisionRecord} from "@/lib/radr/decision/record";
 
 export function detailHref(href: string) {
   const [path,hash] = href.split("#");
@@ -11,10 +13,10 @@ export function detailHref(href: string) {
 export function Arrow() { return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 const SECTION_ICONS: Record<string,string> = {"Control Center":"control-center","Live Operations":"live","Decision record":"decisions","Operations":"service","Back of House":"house","Intelligence":"intelligence","Value":"value","Memory":"memory","Data Health":"data-health","Connections":"connections","Locations":"locations","Guest intelligence":"guests","Dashboards":"dashboards","Settings":"settings"};
 
-export function Heading({ eyebrow,title,description,aside }: { eyebrow: string; title: string; description: string; aside?: ReactNode }) {
+export function Heading({ eyebrow,title,description,aside,focusRecord }: { eyebrow: string; title: string; description: string; aside?: ReactNode; focusRecord?: DecisionRecord | null }) {
 
   const Icon = NAV_ICONS[SECTION_ICONS[eyebrow] || "control-center"];
-  return <header className="rs-heading"><div><p className="rs-eyebrow"><span className="rs-section-mark" aria-hidden="true"><Icon /></span>{eyebrow}</p><h1>{title}</h1><p className="rs-description">{description.replace(/\s*—\s*/g, ", ")}</p></div>{aside}</header>;
+  return <><header className="rs-heading"><div><p className="rs-eyebrow"><span className="rs-section-mark" aria-hidden="true"><Icon /></span>{eyebrow}</p><h1>{title}</h1><p className="rs-description">{description.replace(/\s*—\s*/g, ", ")}</p></div>{aside}</header><WorkspaceFocus eyebrow={eyebrow} focusRecord={focusRecord}/></>;
 }
 export function StatusPill({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "attention" | "healthy" | "watch" | "risk" }) {
   return <span className="rs-status-pill" data-tone={tone}><i aria-hidden="true" />{children}</span>;

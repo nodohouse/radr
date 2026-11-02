@@ -15,6 +15,7 @@ import {
 } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {WorkspaceFocus} from "../reference/WorkspaceFocus";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   floorStatusCounts,
@@ -496,6 +497,7 @@ export function HotelLiveShell() {
             </>
           )}
         </div>
+        <WorkspaceFocus eyebrow="Live Operations"/>
       </header>
 
       {level === "property" ? (
@@ -1527,6 +1529,7 @@ function ArrivalWave({
 
       <svg
         className="hl-wave-svg"
+        aria-label="Hotel arrival wave and room readiness over time"
         viewBox={`0 0 ${w} ${h}`}
         role="img"
         onClick={onChartClick}

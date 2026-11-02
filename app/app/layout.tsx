@@ -36,6 +36,7 @@ import "@/app/utility-polish.css";
 import "@/app/radr-app-system.css";
 import "@/app/radr-material-system.css";
 import "@/app/radr-navigation.css";
+import "@/app/radr-workspace-system.css";
 
 export const dynamic = "force-dynamic";
 

@@ -1,5 +1,5 @@
-/* RADR material system pilot. Only Control Center may activate these tokens.
-   Propagation requires explicit visual approval. No product or metric changes. */
+/* RADR Control Center reference material. The user approved product-wide
+   propagation on 2 November 2026; shared rules live in radr-workspace-system.css. */
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control-center] {
   --material-canvas:#f5f7f5;
   --material-working:#f8fbfa;

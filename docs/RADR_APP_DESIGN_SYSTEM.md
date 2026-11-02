@@ -104,3 +104,7 @@ Estate watch fills the heading's right-hand space with current-period peer excep
 ## Attention brief in the Control Center heading
 
 The remaining heading space contains Your attention: a compact count-based ring and shortcut into a native modal with the first three canonical scoped decisions. Keep expected money, horizons and confidence per record; do not sum incompatible decision values or invent a health score. Align it with Estate watch on desktop, place the greeting above both cards on tablet, and use a compact phone trigger. The modal has a sticky close header, Escape/focus restoration and readable decision metrics. See `RADR_ATTENTION_BRIEF_AUDIT.md` for validation and captures.
+
+## Approved product-wide rollout
+
+On 2 November 2026 the user explicitly requested the Control Center's visuals and product reasoning across all navigation sections and avatar settings. `radr-workspace-system.css` now supplies shared material, typography, action and engine tokens. `WorkspaceFocus` provides purpose → scoped focus → evidence/trust → next step without introducing a second record or financial model. Filtered Decisions and selected Intelligence signals pass their actual record into the focus. Source cohorts, unmeasured hotel integrations, local preference saving and action approval boundaries remain explicit. See `RADR_WORKSPACE_CONSISTENCY_AUDIT.md` for the section mapping, responsive corrections and review captures.

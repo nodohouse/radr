@@ -89,7 +89,7 @@ function ShellChrome({
       data-theme="daylight"
       data-surface="operating"
       data-page={
-        isControlCenter ? "control-center" : isLive ? "live" : undefined
+        isControlCenter ? "control-center" : isLive ? "live" : pathname.split("/")[2]
       }
       data-rail-pinned={pinned ? "true" : "false"}
       data-rail-overlay={overlayRail ? "true" : undefined}

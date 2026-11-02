@@ -194,7 +194,7 @@ export function BohShell() {
 
   return (
     <div className="boh-root" data-view={view} data-vertical={session.vertical}>
-      <Heading eyebrow="Back of House" title="Back of House" description="What is at risk behind today’s operation?" aside={<button type="button" className="rs-section-action" onClick={()=>selectView("captures")}>Review captures <Arrow /></button>} />
+      <Heading eyebrow="Back of House" title="Know what is ready. Catch what is missing." description="Stock, field captures and operating constraints behind today’s service." aside={<button type="button" className="rs-section-action" onClick={()=>selectView("captures")}>Review captures <Arrow /></button>} />
 
 
       <nav className="boh-nav" aria-label="Back of house views">

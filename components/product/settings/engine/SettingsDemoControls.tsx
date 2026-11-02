@@ -37,12 +37,11 @@ export function SettingsDemoControls({
         </p>
       </header>
 
-      <div className="se-persona-row" role="list">
+      <div className="se-persona-row" role="group" aria-label="Demo persona lens">
         {chips.map((c) => (
           <button
             key={c.personaId}
             type="button"
-            role="listitem"
             className="se-persona"
             data-persona={c.personaId}
             data-active={activeId === c.personaId ? "true" : undefined}
