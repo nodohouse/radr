@@ -711,3 +711,55 @@
 .hl-tile:has(.hl-guest-signals) {padding-top:18px;}
 @media(max-width:600px){.guest-signal-legend {gap:8px;font-size:9px;}.hl-guest-signals {right:2px;top:2px;gap:2px;}.hl-guest-signals>span {width:13px;height:13px;font-size:9px;}}
 .hl-root .hl-tile:has(.hl-guest-signals) {align-items:flex-start;padding:4px 7px;}
+
+/* Performance pulse: a readable financial instrument inside the daily brief. */
+.pt-market {border:1px solid #d9e4f3;border-radius:20px;background:linear-gradient(135deg,#fff 40%,#f3f8ff);padding:27px;min-width:0;box-shadow:0 12px 35px #173a7510;}
+.pt-header {display:flex;align-items:flex-start;justify-content:space-between;gap:20px;}
+.pt-eyebrow {display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:1.5px;color:#5b7596;font-weight:650;}
+.pt-eyebrow>i {width:6px;height:6px;background:#00c987;border-radius:50%;box-shadow:0 0 0 4px #00c98712;}
+.pt-header h2 {font-size:25px;letter-spacing:-.9px;color:#102b56;margin:11px 0 8px;font-weight:550;}
+.pt-header p,.pt-locations>div>p {font-size:11px;color:#6d819a;margin:0;line-height:1.6;}
+.pt-periods {display:flex;gap:4px;padding:4px;background:#eaf0fa;border-radius:10px;}
+.pt-periods button {border:0;background:transparent;padding:10px 17px;border-radius:7px;font:inherit;font-size:12px;color:#617694;cursor:pointer;}
+.pt-periods button[aria-pressed=true] {background:#1755ed;color:white;box-shadow:0 3px 8px #1755ed20;}
+.pt-toolbar {display:flex;align-items:center;flex-wrap:wrap;gap:14px;padding:22px 0;border-bottom:1px solid #e2eaf5;}
+.pt-toolbar label {display:flex;align-items:center;gap:10px;font-size:10px;color:#647a97;}
+.pt-toolbar select {max-width:300px;border:1px solid #d9e4f3;border-radius:8px;background:white;padding:9px 30px 9px 10px;font:inherit;font-size:11px;color:#264567;}
+.pt-compare-toggle {background:white;border:1px solid #d9e4f3;border-radius:8px;padding:10px 12px;color:#1755ed;font:inherit;font-size:11px;cursor:pointer;}
+.pt-compare-toggle[aria-pressed=true] {background:#eaf7f0;border-color:#aee2ce;color:#146a52;}
+.pt-compare-toggle span {margin-left:12px;}
+.pt-snapshot {margin-left:auto;font-size:10px;color:#788aa1;}
+.pt-metrics {display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;padding:26px 0;gap:20px;}
+.pt-metrics>div {display:grid;align-content:start;gap:10px;min-width:0;}
+.pt-metrics span {font-size:11px;color:#657e9b;}
+.pt-metrics strong {font-size:27px;font-weight:550;letter-spacing:-1px;color:#173b67;font-variant-numeric:tabular-nums;}
+.pt-metrics>div:first-child strong {font-size:34px;color:#0b2858;}
+.pt-metrics small {font-size:10px;line-height:1.6;color:#72849b;}
+.pt-up {color:#138366!important;}.pt-down {color:#b96932!important;}
+.pt-chart-heading {display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:10px;color:#72849d;}
+.pt-chart-legend {display:flex;align-items:center;gap:15px;flex-wrap:wrap;}
+.pt-chart-legend span,.pt-peer-legend span {display:inline-flex;align-items:center;gap:7px;font-size:10px;}
+.pt-chart-legend i,.pt-peer-legend i {display:inline-block;width:13px;height:3px;background:#1755ed;border-radius:4px;}
+.pt-chart-legend .pt-forecast {background:#94a5be;}.pt-chart-legend .pt-projection {background:#12a879;}
+.pt-chart-readout {display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding:20px 0 2px;font-size:11px;min-height:55px;color:#56718f;}
+.pt-chart-readout strong {font-size:12px;color:#193d68;}.pt-chart-readout small {color:#25866c;}
+.pt-chart {display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y;}
+.pt-scrubber {display:flex;align-items:center;gap:14px;font-size:10px;color:#7a8da3;margin:5px 0 22px;}
+.pt-scrubber input {width:100%;accent-color:#1755ed;min-height:24px;cursor:ew-resize;}
+.pt-locations {border-top:1px solid #dfe8f3;padding-top:20px;}
+.pt-locations>div>p {margin-top:6px;}
+.pt-location-tape {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:15px;}
+.pt-location-tape button {display:grid;grid-template-columns:1fr auto;gap:9px;position:relative;text-align:left;background:#ffffffab;border:1px solid #dfe8f3;border-radius:10px;padding:14px;font:inherit;cursor:pointer;overflow:hidden;min-width:0;}
+.pt-location-tape button[aria-pressed=true] {border-color:#94b7f5;background:#f2f7ff;}
+.pt-location-tape button>span {font-size:12px;color:#294b73;line-height:1.4;}
+.pt-location-tape button small {display:block;font-size:9px;font-weight:450;color:#7a8da3;margin-top:5px;line-height:1.4;}
+.pt-location-tape button strong {font-size:17px;font-weight:600;text-align:right;}
+.pt-location-tape svg {grid-column:1 / -1;width:100%;height:24px;}
+.pt-peer-legend {display:flex;flex-wrap:wrap;gap:17px;padding-top:17px;color:#647d98;}
+.pt-market footer {font-size:9px;color:#8493a7;line-height:1.7;border-top:1px solid #e3eaf4;padding-top:15px;margin-top:20px;}
+.pt-market button:focus-visible,.pt-market select:focus-visible,.pt-market input:focus-visible {outline:2px solid #1755ed;outline-offset:3px;}
+@media(max-width:1000px){.pt-metrics {grid-template-columns:1fr 1fr;gap:22px;}.pt-location-tape {grid-template-columns:1fr 1fr;}.pt-snapshot {margin-left:0;}.pt-chart-heading {align-items:flex-start;flex-direction:column;}}
+@media(max-width:600px){.pt-market {padding:20px 16px;border-radius:15px;}.pt-header {flex-direction:column;gap:17px;}.pt-header h2 {font-size:23px;}.pt-periods {width:100%;}.pt-periods button {flex:1;}.pt-toolbar label {flex-wrap:wrap;}.pt-toolbar select {max-width:100%;}.pt-metrics strong {font-size:23px;}.pt-metrics>div:first-child strong {font-size:29px;}.pt-location-tape {grid-template-columns:1fr;}.pt-chart-readout {gap:9px;font-size:10px;}.pt-chart {min-height:170px;}.pt-chart-legend {gap:10px;}.pt-scrubber {align-items:flex-start;flex-direction:column;gap:0;}}
+@media(prefers-reduced-motion:no-preference){.pt-market {animation:pt-appear .45s ease-out both;}@keyframes pt-appear {from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:translateY(0);}}}
+.pt-metrics strong {overflow-wrap:anywhere;}
+.pt-compare-toggle {display:inline-flex;align-items:center;gap:14px;}

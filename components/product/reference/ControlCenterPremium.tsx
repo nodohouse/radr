@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PerformanceTicker } from "./PerformanceTicker";
 import { useRecords } from "./ReferencePages";
 import { roleContextFor } from "@/lib/radr/product/personas";
 import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
@@ -108,6 +109,8 @@ export function ControlCenterPremium() {
         </> : <div className="cc-snapshot-empty"><span className="cc-line-mark"><NAV_ICONS.locations /></span><h3>No readiness snapshot for this selection.</h3><p>Decision records below remain scoped to your selection. Choose {hotel?.locationLabel || service.location} to explore its operating snapshot.</p><TextLink href="/app/locations">Review locations</TextLink></div>}
       </Panel>
     </div>
+
+    <PerformanceTicker vertical={vertical} scope={locationScope} comparison={comparisonLocationIds}/>
 
     <section className="cc-money-strip" aria-label="Decision value summary">
       <Link href="/app/decisions?band=needs_you"><span>Needs your judgment</span><strong>{needs.length}</strong><small>{aggregate.activeOpportunity > 0 ? `${formatDecisionMoney(aggregate.activeOpportunity, aggregate.currency)} expected value to create · not verified` : "Prioritized by role and location"}</small><Arrow /></Link>
