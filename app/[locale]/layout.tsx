@@ -1,6 +1,8 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { entryFont } from "@/components/onboarding/entryFont";
+import "@/app/radr-marketing-system.css";
 import { routing } from "@/i18n/routing";
 import type { Metadata, Viewport } from "next";
 
@@ -84,7 +86,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      {children}
+      <div className={entryFont.variable}>{children}</div>
     </NextIntlClientProvider>
   );
 }

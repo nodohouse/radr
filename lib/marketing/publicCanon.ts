@@ -6,7 +6,7 @@
  */
 
 export const PUBLIC_POSITIONING = {
-  category: "The operating intelligence system for hospitality",
+  category: "The adaptive decision system for hospitality",
   shortPromise:
     "RADR doesn’t tell hospitality operators what happened. It helps run what happens next.",
   systemsLine:
@@ -22,12 +22,12 @@ export const PUBLIC_POSITIONING = {
 
 /** Public system loop (compressed). */
 export const PUBLIC_LOOP = [
-  { id: "observe", label: "Observe" },
+  { id: "connect", label: "Connect" },
   { id: "understand", label: "Understand" },
+  { id: "futures", label: "Futures" },
   { id: "decide", label: "Decide" },
-  { id: "act", label: "Act" },
   { id: "verify", label: "Verify" },
-  { id: "learn", label: "Learn" },
+  { id: "remember", label: "Remember" },
 ] as const;
 
 /** Autonomy ladder — public wording (0–5). */

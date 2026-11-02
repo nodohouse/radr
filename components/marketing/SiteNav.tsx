@@ -13,6 +13,7 @@ import {
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
+import { entryFont } from "@/components/onboarding/entryFont";
 import { CTAS } from "@/lib/marketing/brand";
 import {
   COMPANY_LINKS,
@@ -363,7 +364,7 @@ export function SiteNav({ variant }: Props) {
                   key="rx-nav-panel"
                   ref={panelRef}
                   id={menu ? `rx-nav-panel-${menu}` : undefined}
-                  className="rx-nav-panel"
+                  className={`rx-nav-panel ${entryFont.variable}`}
                   data-menu={menu}
                   data-theme={navTheme}
                   role="region"

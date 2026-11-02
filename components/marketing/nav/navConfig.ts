@@ -21,10 +21,12 @@ export const PLATFORM_COLUMNS: PlatformColumn[] = [
       { href: "/product?surface=live", key: "live" },
       { href: "/product?surface=decisions", key: "decisions" },
       { href: "/product?surface=operations", key: "operations" },
+      { href: "/product?surface=house", key: "backOfHouse" },
       { href: "/product?surface=intelligence", key: "intelligence" },
       { href: "/product?surface=value", key: "value" },
       { href: "/product?surface=memory", key: "memorySurface" },
       { href: "/product?surface=health", key: "dataHealth" },
+      { href: "/product?surface=connections", key: "connections" },
     ],
   },
   {
@@ -48,7 +50,9 @@ export const PLATFORM_COLUMNS: PlatformColumn[] = [
 
 export const PLATFORM_DEFAULT_PREVIEW = "controlCenter" as const;
 
-export const PRODUCT_LINKS: DropLink[] = PLATFORM_COLUMNS.flatMap((c) => c.items);
+export const PRODUCT_LINKS: DropLink[] = PLATFORM_COLUMNS.flatMap(
+  (c) => c.items,
+);
 
 export function platformColumnForItem(
   itemKey: string,

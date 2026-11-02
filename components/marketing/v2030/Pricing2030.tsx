@@ -1,4 +1,5 @@
 "use client";
+import { MarketingHeroVisual } from "./MarketingHeroVisual";
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
@@ -60,7 +61,7 @@ const PILOT_STEPS = [
     body: "Align to structure, brands, and priorities.",
   },
   {
-    title: "Review first opportunities",
+    title: "Review the first Decisions",
     body: "Material Decisions with economics and confidence.",
   },
 ] as const;
@@ -155,7 +156,7 @@ export function Pricing2030() {
       <div className="rx30 rx30--mockup">
         <main>
           <section
-            className="rx30-bleed rx30-bleed--page"
+            className="rx30-bleed rx30-bleed--page rm-page-hero-grid"
             data-nav-theme="light"
             aria-labelledby="rx30-price-title"
           >
@@ -194,6 +195,7 @@ export function Pricing2030() {
                 </p>
               </motion.div>
             </div>
+          <MarketingHeroVisual kind="pricing" />
           </section>
 
           <section className="rx30-connect" data-nav-theme="light">

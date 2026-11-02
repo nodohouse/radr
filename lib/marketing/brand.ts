@@ -2,7 +2,7 @@
  * Canonical public category hierarchy — ONE set of labels.
  *
  * Commercial entry: Margin recovery / reconciliation
- * Customer-facing: The decision layer for hospitality
+ * Customer-facing: The adaptive decision system for hospitality
  * Investor / long-term: System of Decision Record for hospitality
  *
  * Other phrases are descriptors only — never competing categories.
@@ -12,7 +12,7 @@ export const CATEGORY = {
   /** Commercial entry — GTM / pilot language */
   commercialEntry: "Margin recovery / reconciliation.",
   /** Primary customer-facing platform language */
-  primary: "Hospitality Operating Intelligence.",
+  primary: "The adaptive decision system for hospitality.",
   /** Long-term / investor diligence language — use sparingly */
   systemOfDecisionRecord: "System of Decision Record for hospitality.",
   /** Alias for gradual migration */

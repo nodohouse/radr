@@ -1,5 +1,6 @@
 "use client";
 
+import { entryFont } from "@/components/onboarding/entryFont";
 import { useTranslations } from "next-intl";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
@@ -197,7 +198,7 @@ export function DevelopersShell({
   ));
 
   return (
-    <div className="radr rx-dev-root">
+    <div className={`radr rx-dev-root ${entryFont.variable}`}>
       <header className="rx-dev-top">
         <div className="rx-dev-top-inner">
           <div className="rx-dev-top-left">

@@ -1,4 +1,5 @@
 "use client";
+import { MarketingHeroVisual } from "./MarketingHeroVisual";
 
 import { motion, useReducedMotion } from "motion/react";
 import { Link } from "@/i18n/navigation";
@@ -72,7 +73,7 @@ export function Company2030() {
       <div className="rx30 rx30--mockup">
         <main>
           <section
-            className="rx30-bleed rx30-bleed--page"
+            className="rx30-bleed rx30-bleed--page rm-page-hero-grid"
             data-nav-theme="light"
             aria-labelledby="rx30-co-title"
           >
@@ -108,6 +109,7 @@ export function Company2030() {
                 </Link>
               </div>
             </motion.div>
+          <MarketingHeroVisual kind="company" />
           </section>
 
           <section className="rx30-pain rx30-founder" data-nav-theme="light">

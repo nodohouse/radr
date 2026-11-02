@@ -112,7 +112,8 @@ describe("capability status registry", () => {
 
 describe("category hierarchy", () => {
   it("locks customer-facing primary language", () => {
-    expect(CATEGORY.primary.toLowerCase()).toContain("decision layer");
+    expect(CATEGORY.primary).toBe("The adaptive decision system for hospitality.");
+    expect(CATEGORY.decisionLayer.toLowerCase()).toContain("decision layer");
     expect(CATEGORY.systemOfDecisionRecord.toLowerCase()).toContain(
       "system of decision record",
     );

@@ -1,10 +1,10 @@
 "use client";
+import { MarketingHeroVisual } from "./MarketingHeroVisual";
 
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
-import { CTAS } from "@/lib/marketing/brand";
 import { PUBLIC_SUPPLIER } from "@/lib/marketing/publicCanon";
 import { stageSwap } from "@/lib/marketing/motion";
 import { SilkAtmosphere } from "@/components/marketing/v2030/SilkAtmosphere";
@@ -129,21 +129,42 @@ type Props = {
   lens?: string;
 };
 
+const HASH_LEAK: Record<string, LeakId> = {
+  "supplier-ap": "supplier",
+  reconciliation: "recon",
+  "cost-variance": "cost",
+  procurement: "proc",
+  perishable: "perish",
+};
+
 function readLeak(lens?: string): LeakId {
   if (lens && LEAKS.some((l) => l.id === lens)) return lens as LeakId;
   if (typeof window === "undefined") return "supplier";
   const raw = new URLSearchParams(window.location.search).get("leak");
   if (raw && LEAKS.some((l) => l.id === raw)) return raw as LeakId;
-  return "supplier";
+  return HASH_LEAK[window.location.hash.slice(1)] ?? "supplier";
 }
 
 export function Solutions2030(props: Props = {}) {
   const reduced = useReducedMotion();
-  const [id, setId] = useState<LeakId>(() => readLeak(props.lens));
+  const [id, setId] = useState<LeakId>(() =>
+    LEAKS.some((l) => l.id === props.lens)
+      ? (props.lens as LeakId)
+      : "supplier",
+  );
   const leak = LEAKS.find((l) => l.id === id) ?? LEAKS[0]!;
 
   useEffect(() => {
-    setId(readLeak(props.lens));
+    const sync = () => {
+      setId(readLeak(props.lens));
+      if (HASH_LEAK[window.location.hash.slice(1)])
+        document
+          .getElementById("value-leaks")
+          ?.scrollIntoView({ block: "start" });
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
   }, [props.lens]);
 
   const select = useCallback((next: LeakId) => {
@@ -155,10 +176,7 @@ export function Solutions2030(props: Props = {}) {
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (
-        e.target instanceof HTMLInputElement ||
-        e.target instanceof HTMLTextAreaElement
-      )
+      if (!(e.target instanceof Element) || !e.target.closest(".rx30-leak-nav"))
         return;
       const idx = LEAKS.findIndex((l) => l.id === id);
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
@@ -189,7 +207,7 @@ export function Solutions2030(props: Props = {}) {
       <div className="rx30 rx30--mockup">
         <main>
           <section
-            className="rx30-bleed rx30-bleed--page"
+            className="rx30-bleed rx30-bleed--page rm-page-hero-grid"
             data-nav-theme="light"
             aria-labelledby="rx30-sol-title"
           >
@@ -219,9 +237,14 @@ export function Solutions2030(props: Props = {}) {
                 </Link>
               </div>
             </div>
+            <MarketingHeroVisual kind="solutions" />
           </section>
 
-          <section className="rx30-connect" data-nav-theme="light">
+          <section
+            id="value-leaks"
+            className="rx30-connect"
+            data-nav-theme="light"
+          >
             <div className="rx30-shell">
               <p className="rx30-kicker">Leak classes</p>
               <h2 className="rx30-h2">Five places value quietly leaves.</h2>

@@ -59,7 +59,7 @@
     },
     "solutions": {
       "title": "Solutions",
-      "lead": "Built across hospitality — restaurants, hotels, and groups.",
+      "lead": "Built across hospitality · restaurants, hotels, and groups.",
       "columns": {
         "classes": "WHERE VALUE LEAKS",
         "deeper": "Deeper",
@@ -93,7 +93,7 @@
       "deeper": {
         "lenses": {
           "label": "How RADR interprets the operation",
-          "desc": "BUY · LABOR · SELL · RECOVER — secondary lenses over the same Decision model."
+          "desc": "BUY · LABOR · SELL · RECOVER · secondary lenses over the same Decision model."
         }
       },
       "exploreAll": "Explore where value leaks",
@@ -265,7 +265,7 @@
       "title": "Platform",
       "featured": {
         "title": "See a Verified Recovery",
-        "desc": "One Margin Recovery Decision — from leak to verified value.",
+        "desc": "One Margin Recovery Decision · from leak to verified value.",
         "cta": "See a Verified Recovery"
       },
       "columns": {
@@ -282,7 +282,7 @@
             },
             "actions": {
               "label": "Prepared Actions",
-              "desc": "Ready for approval — not fake writes."
+              "desc": "Ready for approval · not fake writes."
             },
             "verifiedValue": {
               "label": "Verified Value",
@@ -303,7 +303,7 @@
             },
             "live": {
               "label": "Live",
-              "desc": "What is happening now — pressure, objects, intervene."
+              "desc": "What is happening now · pressure, objects, intervene."
             },
             "decisions": {
               "label": "Decisions",
@@ -315,7 +315,7 @@
             },
             "intelligence": {
               "label": "Intelligence",
-              "desc": "Why this is happening — drivers and economics."
+              "desc": "Why this is happening · drivers and economics."
             },
             "value": {
               "label": "Value",
@@ -328,6 +328,14 @@
             "dataHealth": {
               "label": "Data Health",
               "desc": "Evidence health gates allowed action."
+            },
+            "backOfHouse": {
+              "label": "Back of House",
+              "desc": "Field observations, stock, and readiness."
+            },
+            "connections": {
+              "label": "Connections",
+              "desc": "Evidence sources and integration readiness."
             }
           }
         },
@@ -340,7 +348,7 @@
             },
             "evidence": {
               "label": "Evidence & Data Health",
-              "desc": "Sources, freshness, confidence — gates allowed action."
+              "desc": "Sources, freshness, confidence · gates allowed action."
             },
             "verification": {
               "label": "Verification",

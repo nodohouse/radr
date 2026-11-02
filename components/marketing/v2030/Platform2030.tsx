@@ -1,4 +1,5 @@
 "use client";
+import { ProductBriefPreview } from "./ProductBriefPreview";
 
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
@@ -54,6 +55,16 @@ const MODULES: { id: SurfaceId; label: string; body: string }[] = [
     label: "Data Health",
     body: "Evidence health → confidence → Decision → allowed action.",
   },
+  {
+    id: "house",
+    label: "Back of House",
+    body: "Field evidence, inventory observations, and readiness checks. Camera and voice workflows are a preview.",
+  },
+  {
+    id: "connections",
+    label: "Connections",
+    body: "Understand source availability, freshness, and integration readiness before relying on a Decision.",
+  },
 ];
 
 const ARCHITECTURE = [
@@ -76,7 +87,7 @@ const ARCHITECTURE = [
 
 const DECISION_STEPS = [
   "Evidence",
-  "State",
+  "Understand",
   "Futures",
   "Recommendation",
   "Action",
@@ -135,7 +146,10 @@ export function Platform2030() {
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)
+      if (
+        !(e.target instanceof Element) ||
+        !e.target.closest(".rx30-module-rail")
+      )
         return;
       const idx = MODULES.findIndex((m) => m.id === mod);
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
@@ -157,7 +171,7 @@ export function Platform2030() {
       <div className="rx30 rx30--mockup">
         <main>
           <section
-            className="rx30-bleed rx30-bleed--page"
+            className="rx30-bleed rx30-bleed--page rm-page-hero-grid"
             data-nav-theme="light"
             aria-labelledby="rx30-plat-title"
           >
@@ -165,13 +179,14 @@ export function Platform2030() {
             <div className="rx30-shell rx30-bleed-copy rx30-bleed-copy--solo">
               <p className="rx30-kicker">Platform</p>
               <h1 id="rx30-plat-title" className="rx30-bleed-h1">
-                One intelligence layer for hospitality{" "}
-                <em>operations.</em>
+                Every signal.
+                <br />
+                One <em>decision layer.</em>
               </h1>
               <p className="rx30-bleed-lead">
-                Connect source systems. Understand the operating state. Prepare
-                better Decisions. Act with control. Verify what happened.
-                Remember what worked.
+                Connect source systems. Understand the operation. Prepare better
+                Decisions. Act with control. Verify what happened. Remember what
+                worked.
               </p>
               <div className="rx30-ctas">
                 <Link
@@ -188,12 +203,17 @@ export function Platform2030() {
                 </Link>
               </div>
             </div>
+            <aside className="rm-page-hero-visual">
+              <ProductBriefPreview />
+            </aside>
           </section>
 
           <section className="rx30-connect" data-nav-theme="light">
             <div className="rx30-shell">
               <p className="rx30-kicker">01 · Decision architecture</p>
-              <h2 className="rx30-h2">How evidence becomes operating context.</h2>
+              <h2 className="rx30-h2">
+                How evidence becomes operating context.
+              </h2>
               <div className="rx30-flow-grid" style={{ marginTop: "2rem" }}>
                 {ARCHITECTURE.map((f) => (
                   <article key={f.n}>
@@ -221,14 +241,20 @@ export function Platform2030() {
             </div>
           </section>
 
-          <section className="rx30-connect" data-nav-theme="light" id="surfaces">
+          <section
+            className="rx30-connect"
+            data-nav-theme="light"
+            id="surfaces"
+          >
             <div className="rx30-shell">
               <p className="rx30-kicker">03 · Product surfaces</p>
-              <h2 className="rx30-h2">One shell. Surfaces for every role that needs them.</h2>
+              <h2 className="rx30-h2">
+                One shell. Surfaces for every role that needs them.
+              </h2>
               <p className="rx30-lead">
-                Switch between Control Center, Live, Decisions, Operations,
-                Intelligence, Value, Memory, and Data Health. Same Decision
-                architecture underneath.
+                Switch between Control Center, Live, Decisions, Operations, Back
+                of House, Intelligence, Value, Memory, Data Health, and
+                Connections. Same Decision architecture underneath.
               </p>
               <div className="rx30-module-rail" role="tablist">
                 {MODULES.map((m) => (
@@ -247,7 +273,10 @@ export function Platform2030() {
               <div className="rx30-module-preview rx30-module-preview--morph rx30-plat-hero-shell">
                 <div className="rx30-plat-shell-head">
                   <p className="rx30-demo-label">{active.label}</p>
-                  <h3 className="rx30-h2" style={{ fontSize: "1.35rem", margin: 0 }}>
+                  <h3
+                    className="rx30-h2"
+                    style={{ fontSize: "1.35rem", margin: 0 }}
+                  >
                     {active.body}
                   </h3>
                 </div>
@@ -273,7 +302,10 @@ export function Platform2030() {
                     </div>
                   </>
                 ) : null}
-                <div className="rx30-plat-canvas" style={{ marginTop: "1.25rem" }}>
+                <div
+                  className="rx30-plat-canvas"
+                  style={{ marginTop: "1.25rem" }}
+                >
                   <PlatformSurfacePreview
                     surface={mod}
                     liveRenderer={renderer}
@@ -320,7 +352,9 @@ export function Platform2030() {
                 <article>
                   <em>03</em>
                   <strong>Verified</strong>
-                  <span>What evidence confirms, and Memory can learn from.</span>
+                  <span>
+                    What evidence confirms, and Memory can learn from.
+                  </span>
                 </article>
               </div>
             </div>
@@ -331,7 +365,9 @@ export function Platform2030() {
             data-nav-theme="light"
           >
             <div className="rx30-shell rx30-close-inner">
-              <h2 className="rx30-h2">See the Decision layer in your operation.</h2>
+              <h2 className="rx30-h2">
+                See the Decision layer in your operation.
+              </h2>
               <div className="rx30-ctas">
                 <Link
                   href={CTAS.seeInActionHref}

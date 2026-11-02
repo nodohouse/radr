@@ -1,19 +1,19 @@
 "use client";
 
 /**
- * RADR loop — Observe → Learn (public compression).
+ * RADR public decision loop.
  * One idea per viewport. Concrete stage lines. No abstract AI copy.
  */
 
 import { PUBLIC_LOOP } from "@/lib/marketing/publicCanon";
 
 const STAGE_BODIES: Record<(typeof PUBLIC_LOOP)[number]["id"], string> = {
-  observe: "Connected systems and operational evidence.",
+  connect: "Connected systems and operational evidence.",
   understand: "What matters · why · with confidence.",
   decide: "Compare futures · expected outcomes · approval.",
-  act: "Prepare, approve, execute within policy.",
-  verify: "Expected ≠ Observed ≠ Verified — with evidence.",
-  learn: "Calibration, patterns, and playbooks after enough evidence.",
+  futures: "Compare possible next moves before approving one.",
+  verify: "Expected ≠ Observed ≠ Verified, with evidence.",
+  remember: "Calibration, patterns, and playbooks after enough evidence.",
 };
 
 const STAGES = PUBLIC_LOOP.map((s) => ({

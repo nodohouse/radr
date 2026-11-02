@@ -1,239 +1,294 @@
 "use client";
 
-/**
- * Homepage — mockup fidelity spine.
- * Hero → Decision Gap → Connect → Signals → Product → Hospitality → Value → Close.
- */
-
+import Image from "next/image";
+import { MARKETING_IMAGES } from "@/lib/marketing/publicImagery";
 import { useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { CTAS } from "@/lib/marketing/brand";
-import { heroEnter } from "@/lib/marketing/motion";
-import { HeadlineRadr } from "@/components/brand/HeadlineRadr";
-import { RadrAtmosphere } from "@/components/marketing/v2030/RadrAtmosphere";
 import {
-  DecisionGapContinue,
-  HeroProductTheater,
-  type HeroVertical,
-} from "@/components/marketing/v2030/HeroProductTheater";
-import { SignalConvergence } from "@/components/marketing/v2030/SignalConvergence";
-import { HomeProductProof } from "@/components/marketing/v2030/HomeProductProof";
-import { HomeRestaurantHotel } from "@/components/marketing/v2030/HomeRestaurantHotel";
-import { HomeValueMap } from "@/components/marketing/v2030/HomeValueMap";
-import { HomeCloseCta } from "@/components/marketing/v2030/HomeCloseCta";
-import { IntegrationLogoMarquee } from "@/components/marketing/v2030/integrations/IntegrationLogoMarquee";
-import "@/app/marketing-2030.css";
-import "@/app/value-calculator.css";
-import "@/app/homepage-hero.css";
-import "@/app/brand-takeover.css";
-import "@/app/homepage-premium.css";
-import "@/app/homepage-mockup.css";
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
+import { ProductBriefPreview } from "./ProductBriefPreview";
+import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
+import { PUBLIC_LOOP } from "@/lib/marketing/publicCanon";
+import { CTAS } from "@/lib/marketing/brand";
+
+const forks = [
+  {
+    name: "Keep seating",
+    title: "More covers. More pressure.",
+    body: "Accept the next wave now. The kitchen remains the constraint, with greater service risk.",
+    result: "Baseline",
+    detail: "No incremental protected value assumed.",
+  },
+  {
+    name: "Pace 12 minutes",
+    title: "A little space. A better service.",
+    body: "Pace the next seating wave so the kitchen can absorb demand. Review the trade-off before approving.",
+    result: venue.expectedFormatted,
+    detail: "Expected protected tonight · 82% confidence",
+  },
+];
 
 export function Homepage2030() {
+  const [fork, setFork] = useState(1);
   const reduced = useReducedMotion();
-  const [vertical, setVertical] = useState<HeroVertical>("restaurant");
-  const gapRef = useRef<HTMLElement>(null);
-  const heroRef = useRef<HTMLElement>(null);
+  const hero = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
-    target: heroRef,
+    target: hero,
     offset: ["start start", "end start"],
   });
-  const stageOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0.35]);
-  const stageY = useTransform(scrollYProgress, [0, 0.55], [0, -28]);
-  const stageScale = useTransform(scrollYProgress, [0, 0.55], [1, 0.96]);
-
-  function scrollToHow() {
-    gapRef.current?.scrollIntoView({
-      behavior: reduced ? "auto" : "smooth",
-      block: "start",
-    });
-  }
-
+  const rotate = useTransform(scrollYProgress, [0, 1], [3, -2]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, -45]);
   return (
-    <div className="rx30 rx30--mockup rx30--board rx30--premium rx30--fidelity">
-      <RadrAtmosphere />
-
-      <section
-        ref={heroRef}
-        className="rx30-bleed rx30-bleed--hero-story rx30-bleed--premium rx-chapter"
-        data-nav-theme="light"
-        aria-labelledby="rx30-hero-title"
-      >
-        <div className="rx30-shell rx30-bleed-grid rx30-bleed-grid--story rx30-bleed-grid--fidelity">
-          <motion.div
-            className="rx30-bleed-copy"
-            initial={reduced ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={heroEnter}
-          >
-            <p className="rx30-kicker">Hospitality Operating Intelligence</p>
-            <h1
-              id="rx30-hero-title"
-              className="rx30-bleed-h1 rx30-bleed-h1--slogan rx30-bleed-h1--mark"
-            >
-              <span className="rx30-h1-line">NOTHING OFF</span>
-              <span className="rx30-h1-line">
-                THE <HeadlineRadr />
-                <span className="rx30-period">.</span>
-              </span>
-            </h1>
-            <p className="rx30-bleed-lead rx30-bleed-lead--canon rx30-bleed-lead--lines">
-              <span>RADR sits above the systems hospitality already runs,</span>
-              <span>turns live operating signals into decisions,</span>
-              <span>and proves what those decisions are worth.</span>
-            </p>
-            <div className="rx30-ctas">
-              <Link
-                href={CTAS.primarySalesHref}
-                className="rx30-btn rx30-btn-primary"
-              >
-                Book a demo <span aria-hidden="true">→</span>
-              </Link>
-              <button
-                type="button"
-                className="rx30-btn rx30-btn-ghost rx30-btn-ghost--solid rx30-btn-ghost--how"
-                onClick={scrollToHow}
-              >
-                <span className="rx30-play" aria-hidden />
-                See how it works
-              </button>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="rx30-bleed-stage rx30-bleed-stage--story"
-            style={
-              reduced
-                ? undefined
-                : { opacity: stageOpacity, y: stageY, scale: stageScale }
-            }
-          >
-            <HeroProductTheater vertical="restaurant" />
-          </motion.div>
-        </div>
-      </section>
-
-      <div className="rx-story-bridge rx-story-bridge--hero-gap" aria-hidden>
-        <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
-          <path
-            d="M200 0 C280 40 360 60 480 48 C620 32 740 8 900 20"
-            fill="none"
-            stroke="rgba(47,127,232,0.45)"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M520 8 C640 50 760 70 980 40"
-            fill="none"
-            stroke="rgba(0,230,118,0.4)"
-            strokeWidth="1.35"
-          />
-        </svg>
-      </div>
-
-      <section
-        ref={gapRef}
-        id="decision-gap"
-        className="rx-gap-story rx-gap-story--premium rx-chapter"
-        aria-labelledby="rx30-pain-title"
-      >
-        <div className="rx30-shell rx-gap-story-grid">
-          <div className="rx-gap-story-copy">
-            <p className="rx30-kicker">The Decision Gap</p>
-            <h2 id="rx30-pain-title" className="rx30-h2">
-              Hospitality already has the data.
-              <br />
-              <span className="rx30-h2-accent">The gap is the decision.</span>
-            </h2>
-            <p className="rx30-lead">
-              Reservations, POS, PMS, labor, payments and accounting each hold
-              part of the picture. RADR connects those signals. Then helps
-              teams decide what happens next.
-            </p>
-            <div className="rx-hpt-switch rx-hpt-switch--gap" role="group">
-              <button
-                type="button"
-                data-on={vertical === "restaurant" ? "true" : undefined}
-                onClick={() => setVertical("restaurant")}
-              >
-                Restaurants
-              </button>
-              <button
-                type="button"
-                data-on={vertical === "hotel" ? "true" : undefined}
-                onClick={() => setVertical("hotel")}
-              >
-                Hotels
-              </button>
-            </div>
-            <p className="rx-gap-one">
-              One RADR. Different hospitality operations.
-            </p>
-          </div>
-          <DecisionGapContinue vertical={vertical} />
-        </div>
-      </section>
-
-      <div className="rx-story-bridge rx-story-bridge--gap-connect" aria-hidden />
-
-      <section
-        className="rx30-connect rx30-connect--premium rx-chapter"
-        aria-labelledby="rx30-connect-title"
-      >
-        <div className="rx30-shell">
-          <p className="rx30-kicker">Connect</p>
-          <h2 id="rx30-connect-title" className="rx30-h2 rx30-h2--balance">
-            Works above the systems hospitality already runs.
-          </h2>
-          <p className="rx30-lead rx30-lead--connect">
-            Each system sees a fragment. RADR combines them into one operating
-            context. Then a Decision.
+    <div className="rm-home">
+      <section className="rm-hero rm-shell" ref={hero} data-nav-theme="light">
+        <div className="rm-hero-copy">
+          <p className="rm-eyebrow">
+            <span /> THE ADAPTIVE DECISION SYSTEM FOR HOSPITALITY
           </p>
-          <IntegrationLogoMarquee converge />
+          <h1>
+            See what matters.
+            <br />
+            <em>Make your move.</em>
+          </h1>
+          <p className="rm-lead">
+            Your systems know the numbers. RADR connects them to the next
+            decision, so you can protect the night, the margin, and the guest
+            experience.
+          </p>
+          <div className="rm-ctas">
+            <Link href="/demo" className="rm-button">
+              Explore the product <span>→</span>
+            </Link>
+            <Link
+              href={CTAS.primarySalesHref}
+              className="rm-button rm-button-secondary"
+            >
+              Talk to RADR →
+            </Link>
+          </div>
+          <p className="rm-caption">
+            Above your POS, PMS, labor, and reservation systems.
+            <br />
+            One decision layer. Your team stays in control.
+          </p>
+        </div>
+        <motion.div
+          className="rm-hero-product"
+          style={reduced ? undefined : { rotateZ: rotate, y }}
+        >
+          <ProductBriefPreview />
+          <div className="rm-floating-note">
+            <span>→</span>
+            <div>
+              From signal to decision.<small>Then back to evidence.</small>
+            </div>
+          </div>
+        </motion.div>
+        <div className="rm-loop" aria-label="The RADR decision loop">
+          {PUBLIC_LOOP.map((step, i) => (
+            <span key={step.id}>
+              <small>0{i + 1}</small>
+              {step.label}
+              {i < 5 && <b aria-hidden>→</b>}
+            </span>
+          ))}
         </div>
       </section>
-
-      <SignalConvergence />
-
-      <HomeProductProof />
-
-      <HomeRestaurantHotel />
-
-      <div className="rx-home-value-ramp" aria-hidden />
-
-      <section
-        className="rx-home-value rx-chapter"
-        aria-labelledby="vc-home-cta-title"
-      >
-        <div className="rx30-shell rx-home-value-inner">
-          <div className="rx-home-value-copy">
-            <p className="rx30-kicker">Value Calculator</p>
-            <h2 id="vc-home-cta-title" className="rx30-h2 rx-home-value-h2">
-              What is your operation
+      <section className="rm-section rm-shell" data-nav-theme="light">
+        <div className="rm-section-head">
+          <div>
+            <p className="rm-eyebrow">01 / SINCE YOUR LAST CHECK</p>
+            <h2>
+              The whole picture.
               <br />
-              leaving behind?
+              Without the whole morning.
             </h2>
-            <p className="rx30-lead">
-              Model where value may be hiding across labor, procurement, revenue
-              and operations. Then see what may be worth investigating first.
+          </div>
+          <p>
+            Attention is a scarce resource. Start with the decision that needs
+            you, then see what changed and what the evidence supports.
+          </p>
+        </div>
+        <div className="rm-update-grid">
+          <article className="rm-panel rm-update-main">
+            <span className="rm-tag">NEEDS YOU · {venue.decisionId}</span>
+            <h3>Twelve minutes can change tonight.</h3>
+            <p>
+              {venue.situation} Review seating pace before the next wave
+              arrives.
             </p>
-            <div className="rx30-ctas">
-              <Link
-                href="/value-calculator"
-                className="rx30-btn rx30-btn-primary"
-              >
-                Build my Value Map <span aria-hidden="true">→</span>
-              </Link>
+            <Link href="/product?surface=control">Open the Brief →</Link>
+          </article>
+          <article className="rm-panel">
+            <span className="rm-eyebrow">AFTER THE DECISION</span>
+            <strong className="rm-number">{venue.verifiedFormatted}</strong>
+            <h3>Protected tonight.</h3>
+            <p>
+              Illustrative completed-service outcome for {venue.decisionId}.
+              Expected and verified value stay separate.
+            </p>
+            <Link href="/product/value">Follow the proof →</Link>
+          </article>
+          <article className="rm-panel">
+            <span className="rm-eyebrow">ONE OPERATING PICTURE</span>
+            <h3>Guest experience meets economics.</h3>
+            <p>
+              Service pressure, labor, demand, and margin belong in the same
+              conversation.
+            </p>
+            <Link href="/industries">Restaurants, hotels & groups →</Link>
+          </article>
+        </div>
+      </section>
+      <section
+        className="rm-section rm-shell"
+        id="simulate"
+        data-nav-theme="light"
+      >
+        <div className="rm-fork">
+          <div className="rm-fork-copy">
+            <p className="rm-eyebrow">02 / SIMULATE ONE FORK</p>
+            <h2>
+              Before you act,
+              <br />
+              see the trade-off.
+            </h2>
+            <p className="rm-lead">
+              Same restaurant. Same dinner rush. Two possible next moves.
+            </p>
+            <div
+              className="rm-fork-tabs"
+              role="tablist"
+              aria-label="Compare seating options"
+            >
+              {forks.map((option, i) => (
+                <button
+                  key={option.name}
+                  role="tab"
+                  aria-selected={fork === i}
+                  aria-controls="fork-result"
+                  id={`fork-${i}`}
+                  onClick={() => setFork(i)}
+                >
+                  {option.name}
+                  <span>{i === 1 ? "Recommended" : "Alternative"}</span>
+                </button>
+              ))}
             </div>
-            <p className="vc-home-cta-micro">
-              Explore your modeled opportunity.
+            <p className="rm-caption">
+              Illustrative demo, not a promise of results. Execution requires
+              approval and a connected system.
             </p>
           </div>
-          <HomeValueMap />
+          <div
+            className="rm-fork-result"
+            id="fork-result"
+            role="tabpanel"
+            aria-labelledby={`fork-${fork}`}
+            aria-live="polite"
+          >
+            <Image
+              src={MARKETING_IMAGES.homeRestaurantEconomics.src}
+              alt={MARKETING_IMAGES.homeRestaurantEconomics.alt}
+              loading="eager"
+              width={1152}
+              height={864}
+              sizes="(max-width:720px) 100vw, 550px"
+            />
+            <div>
+              <span className="rm-tag">
+                {venue.displayName} · {venue.decisionId}
+              </span>
+              <h3>{forks[fork].title}</h3>
+              <p>{forks[fork].body}</p>
+              <strong>{forks[fork].result}</strong>
+              <small>{forks[fork].detail}</small>
+              <Link href="/product/futures">Inside a Decision →</Link>
+            </div>
+          </div>
         </div>
       </section>
-
-      <HomeCloseCta />
+      <section className="rm-section rm-shell" data-nav-theme="light">
+        <div className="rm-section-head">
+          <div>
+            <p className="rm-eyebrow">
+              03 / THE CONNECTION IS THE INTELLIGENCE
+            </p>
+            <h2>
+              One hidden signal.
+              <br />
+              Three parts of the business.
+            </h2>
+          </div>
+          <p>
+            A bestselling dish can have a healthy margin and still consume too
+            much kitchen capacity at peak. RADR connects buying, preparation
+            time, and service demand.
+          </p>
+        </div>
+        <div className="rm-hidden-signal">
+          <div className="rm-signal-image">
+            <Image
+              src={MARKETING_IMAGES.homeFoodPressure.src}
+              alt={MARKETING_IMAGES.homeFoodPressure.alt}
+              fill
+              loading="eager"
+              sizes="(max-width:720px) 100vw, 480px"
+            />
+            <span>BUY × LABOR × SELL</span>
+          </div>
+          <article className="rm-panel">
+            <p className="rm-eyebrow">INTELLIGENCE · D-7110</p>
+            <h3>
+              Your bestseller.
+              <br />A hidden service constraint.
+            </h3>
+            <div className="rm-evidence-chain">
+              <span>Supplier evidence</span>
+              <b>→</b>
+              <span>Preparation effort</span>
+              <b>→</b>
+              <span>Service economics</span>
+            </div>
+            <p>
+              D-7110 connects dish contribution with cold-station minutes and
+              ticket times. Compare keeping the mix with featuring a faster
+              alternative during the peak.
+            </p>
+            <Link href="/product?surface=intelligence" className="rm-button">
+              Explore Intelligence →
+            </Link>
+          </article>
+        </div>
+      </section>
+      <section className="rm-close rm-shell" data-nav-theme="light">
+        <p className="rm-eyebrow">
+          LESS TIME RECONSTRUCTING. MORE TIME DECIDING.
+        </p>
+        <h2>
+          Great hospitality.
+          <br />
+          <em>Better decisions behind it.</em>
+        </h2>
+        <div className="rm-ctas">
+          <Link href="/demo" className="rm-button">
+            Step inside RADR →
+          </Link>
+          <Link
+            href="/value-calculator"
+            className="rm-button rm-button-secondary"
+          >
+            Model your value →
+          </Link>
+        </div>
+        <p className="rm-caption">
+          Explore a clearly labeled demo. No connected system required.
+        </p>
+      </section>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { ProductBriefPreview } from "./ProductBriefPreview";
 
 /**
  * One large Platform preview — morphs by surface.
@@ -7,11 +8,7 @@
 
 import { useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import {
-  PUBLIC_HOTEL,
-  PUBLIC_RESTAURANT,
-  PUBLIC_SUPPLIER,
-} from "@/lib/marketing/publicCanon";
+import { PUBLIC_HOTEL, PUBLIC_SUPPLIER } from "@/lib/marketing/publicCanon";
 import { stageSwap } from "@/lib/marketing/motion";
 import { ProductDecisionCanvas } from "@/components/marketing/v2030/ProductDecisionCanvas";
 
@@ -23,7 +20,9 @@ export type SurfaceId =
   | "intelligence"
   | "value"
   | "memory"
-  | "health";
+  | "health"
+  | "house"
+  | "connections";
 
 type Props = {
   surface: SurfaceId;
@@ -116,7 +115,11 @@ function HealthDemo() {
   return (
     <Shell title="Data Health" meta="PMS feed · illustrative">
       <p className="rx30-demo-label">Evidence freshness</p>
-      <div className="rx30-health-toggles" role="tablist" aria-label="Feed health">
+      <div
+        className="rx30-health-toggles"
+        role="tablist"
+        aria-label="Feed health"
+      >
         {(Object.keys(HEALTH) as HealthKey[]).map((k) => (
           <button
             key={k}
@@ -198,6 +201,63 @@ export function PlatformSurfacePreview({
 
   let body: ReactNode;
   switch (surface) {
+    case "house":
+      body = (
+        <Shell title="Back of House" meta="Illustrative field workflow">
+          <div className="rm-field-preview">
+            <p className="rm-tag">OBSERVATION → REVIEW → OPERATING CONTEXT</p>
+            <h3>Bring the storeroom into the picture.</h3>
+            <p>
+              Capture an observation, attach source evidence, and route it for
+              review. Stock notes and room-readiness checks support the
+              operating model.
+            </p>
+            <div className="rm-evidence-chain">
+              <span>Record a stock note</span>
+              <b>→</b>
+              <span>Review evidence</span>
+              <b>→</b>
+              <span>Update context</span>
+            </div>
+            <small>
+              Camera and voice capture are a workflow preview. No inventory
+              change is posted from this illustration.
+            </small>
+          </div>
+        </Shell>
+      );
+      break;
+    case "connections":
+      body = (
+        <Shell title="Connections" meta="Evidence before execution">
+          <div className="rm-field-preview">
+            <p className="rm-tag">SOURCE READINESS</p>
+            <h3>Your systems. One evidence layer.</h3>
+            <p>
+              Connection health, freshness, and permissions determine how much a
+              Decision can rely on a source.
+            </p>
+            <div className="rm-lens-grid">
+              {[
+                "POS & payments",
+                "PMS & reservations",
+                "Labor & scheduling",
+                "Invoices & purchasing",
+              ].map((source) => (
+                <div key={source}>
+                  <strong>{source}</strong>
+                  <p>Review access, freshness, and available evidence.</p>
+                </div>
+              ))}
+            </div>
+            <small>
+              Representative system categories. Actual connector availability
+              and write permissions depend on the agreed setup.
+            </small>
+          </div>
+        </Shell>
+      );
+      break;
     case "live":
       body = <LiveSchematic mode={liveRenderer} />;
       break;
@@ -222,31 +282,7 @@ export function PlatformSurfacePreview({
       body = <ProductDecisionCanvas stage="understand" cinematic />;
       break;
     default:
-      body = (
-        <Shell
-          title={PUBLIC_RESTAURANT.displayName}
-          meta={PUBLIC_RESTAURANT.clockLine}
-        >
-          <p className="rx30-demo-label">Control Center</p>
-          <p className="rx30-decision-id">
-            {PUBLIC_RESTAURANT.decisionId} · Needs you
-          </p>
-          <h3 className="rx30-decision-verb">
-            {PUBLIC_RESTAURANT.actionLabel}
-          </h3>
-          <p className="rx30-decision-sit">{PUBLIC_RESTAURANT.situation}</p>
-          <div className="rx30-decision-meta">
-            <div>
-              <span>Expected</span>
-              <strong>{PUBLIC_RESTAURANT.expectedFormatted}</strong>
-            </div>
-            <div>
-              <span>Confidence</span>
-              <strong>{PUBLIC_RESTAURANT.confidencePct}%</strong>
-            </div>
-          </div>
-        </Shell>
-      );
+      body = <ProductBriefPreview />;
   }
 
   return (

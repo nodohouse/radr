@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Value Calculator V2 — guided operating-value diagnosis.
+ * Value Calculator V2 ; guided operating-value diagnosis.
  * Intro → Operation → Scale → Economics → Signals → Analyzing → Result
  */
 
@@ -71,7 +71,7 @@ const CURRENCIES: CurrencyCode[] = [
 
 const ANALYZE_LINES = [
   "Connecting inputs",
-  "Modeling opportunity classes",
+  "Modeling economic exposure",
   "Checking overlap",
   "Ranking evidence readiness",
   "Building Value Map",
@@ -266,7 +266,7 @@ export function ValueCalculatorApp() {
                   </h1>
                   <p className="rx30-bleed-lead">
                     Model where value may be hiding across labor, procurement,
-                    revenue and operations — then see what may be worth
+                    revenue and operations ; then see what may be worth
                     investigating first.
                   </p>
                   <p className="vc-disclaimer-inline">
@@ -328,7 +328,7 @@ export function ValueCalculatorApp() {
                     </ul>
                     <dl className="vc2-intro-sep">
                       <div>
-                        <dt>Modeled opportunity</dt>
+                        <dt>Modeled value range</dt>
                         <dd>Range</dd>
                       </div>
                       <div>
@@ -347,7 +347,7 @@ export function ValueCalculatorApp() {
               <div className="rx30-shell vc2-leave">
                 <p className="rx30-kicker">You’ll leave with</p>
                 <ul className="vc2-leave-list">
-                  <li>A modeled opportunity range</li>
+                  <li>A modeled value range</li>
                   <li>The areas worth investigating first</li>
                   <li>Confidence / evidence readiness</li>
                   <li>A transparent assumption trail</li>
@@ -640,7 +640,7 @@ export function ValueCalculatorApp() {
                                 });
                               }}
                             />
-                            <span>I’m not sure — scan everything</span>
+                            <span>I’m not sure ; scan everything</span>
                           </label>
                           <div className="vc2-pain">
                             {(journey.vertical
@@ -749,7 +749,7 @@ export function ValueCalculatorApp() {
                             ))}
                           </ul>
                           <p className="vc-disclaimer-inline">
-                            Deterministic model from your inputs — not generative
+                            Deterministic model from your inputs ; not generative
                             invention.
                           </p>
                         </motion.div>
@@ -775,7 +775,7 @@ export function ValueCalculatorApp() {
 
                       {step === "result" && !result ? (
                         <div className="vc2-card">
-                          <p>Missing inputs — edit to continue.</p>
+                          <p>Missing inputs ; edit to continue.</p>
                           <button
                             type="button"
                             className="rx30-btn rx30-btn-primary"

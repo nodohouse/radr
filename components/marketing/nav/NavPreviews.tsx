@@ -1,13 +1,8 @@
 "use client";
 
+import { PUBLIC_RESTAURANT } from "@/lib/marketing/publicCanon";
 import { platformHrefForItem } from "./navConfig";
-import {
-  BRIEF_ATTENTION,
-  CANON_ORPHAN,
-  CANON_OTA,
-  CANON_PEAK,
-  money,
-} from "@/data/demo";
+import { CANON_ORPHAN, CANON_OTA, CANON_PEAK, money } from "@/data/demo";
 import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 
 type PreviewRow = { label: string; value: string };
@@ -24,6 +19,26 @@ type PreviewModel = {
 const VERTICAL_HINT = ["Restaurant", "Hotel", "Aparthotel"] as const;
 
 const PREVIEWS: Record<string, PreviewModel> = {
+  backOfHouse: {
+    kicker: "Back of House",
+    title: "Operational context from the field.",
+    rows: [
+      { label: "Field evidence", value: "Stock & readiness" },
+      { label: "Camera & voice", value: "Workflow preview" },
+      { label: "Human review", value: "Before updating context" },
+    ],
+    cta: "Explore Back of House",
+  },
+  connections: {
+    kicker: "Connections",
+    title: "Know what the Decision can rely on.",
+    rows: [
+      { label: "Source evidence", value: "Freshness & access" },
+      { label: "Integration", value: "Readiness & permissions" },
+      { label: "Execution", value: "Within agreed policy" },
+    ],
+    cta: "Explore Connections",
+  },
   overview: {
     kicker: "Platform",
     title: "One loop. Three environments.",
@@ -57,14 +72,14 @@ const PREVIEWS: Record<string, PreviewModel> = {
   controlCenter: {
     kicker: "Control Center",
     title: "Only what needs you",
-    metric: String(BRIEF_ATTENTION.needsYou),
-    metricLabel: "need you",
+    metric: "1",
+    metricLabel: "Decision needs you · illustrative demo",
     rows: [
-      { label: "RADR handling", value: String(BRIEF_ATTENTION.handling) },
-      { label: "Watching", value: String(BRIEF_ATTENTION.watching) },
+      { label: "Decision", value: PUBLIC_RESTAURANT.decisionId },
+      { label: "Confidence", value: `${PUBLIC_RESTAURANT.confidencePct}%` },
       {
-        label: "Verified today",
-        value: money(BRIEF_ATTENTION.verifiedTodayEuro),
+        label: "Expected protected tonight",
+        value: PUBLIC_RESTAURANT.expectedFormatted,
       },
     ],
     cta: "Open Control Center",
@@ -136,15 +151,6 @@ const PREVIEWS: Record<string, PreviewModel> = {
       { label: "Pattern", value: "Shoulder sell-outs · 6 / 9" },
     ],
     cta: "Operating Memory",
-  },
-  connections: {
-    kicker: "Connect",
-    title: "Start with what you have",
-    rows: [
-      { label: "Files · APIs · systems", value: "Supported" },
-      { label: "Mature stack required", value: "No" },
-    ],
-    cta: "View connections",
   },
   operatingModel: {
     kicker: "Operating model",
@@ -235,7 +241,6 @@ PREVIEWS.evidence = {
 };
 PREVIEWS.verification = PREVIEWS.verifiedValue;
 PREVIEWS.overview = PREVIEWS.decision;
-
 
 const INTEL_SCENES = [
   {

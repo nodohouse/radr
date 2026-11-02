@@ -328,6 +328,14 @@
             "dataHealth": {
               "label": "Data Health",
               "desc": "Evidence health gates allowed action."
+            },
+            "backOfHouse": {
+              "label": "Back of House",
+              "desc": "Observaties, voorraad en gereedheid."
+            },
+            "connections": {
+              "label": "Verbindingen",
+              "desc": "Databronnen en integratiegereedheid."
             }
           }
         },
