@@ -100,3 +100,7 @@ Regression coverage includes pixel-identical rail captures before/after inversio
 The user-requested portfolio pass adds named hover/focus states, stable venue colours, directly inspectable curves/legends, all-location comparison and a larger performance-detail type scale. Comparison uses percentage pace with a dynamic range; tooltip money is explicitly local currency. The shared trend model now has deterministic fictional outlier/recovery profiles with positive cumulative interval weights and reconciled endpoints. It does not alter Decision economics or create verified outcomes.
 
 Estate watch fills the heading's right-hand space with current-period peer exceptions and opens the existing performance detail. Tab icons on product and marketing use a padded square wrapper around the unchanged approved v4 mark. Full review: [portfolio performance audit](RADR_PORTFOLIO_PERFORMANCE_AUDIT.md).
+
+## Attention brief in the Control Center heading
+
+The remaining heading space contains Your attention: a compact count-based ring and shortcut into a native modal with the first three canonical scoped decisions. Keep expected money, horizons and confidence per record; do not sum incompatible decision values or invent a health score. Align it with Estate watch on desktop, place the greeting above both cards on tablet, and use a compact phone trigger. The modal has a sticky close header, Escape/focus restoration and readable decision metrics. See `RADR_ATTENTION_BRIEF_AUDIT.md` for validation and captures.

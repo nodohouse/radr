@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { EstateWatch } from "./EstateWatch";
+import { AttentionBrief } from "./AttentionBrief";
 import { ExecutivePulse } from "./ExecutivePulse";
 import { useRecords } from "./ReferencePages";
 import { roleContextFor } from "@/lib/radr/product/personas";
@@ -88,7 +89,7 @@ export function ControlCenterPremium() {
   const cfo=roleView.includes("cfo");
   const importantFacts=snapshotFacts.filter(fact=>(hotel?(cfo?["Occupancy","Average daily rate","Revenue / available room","Rooms ready"]:["Rooms ready","Arrivals today","Inspection backlog","Occupancy"]):["Covers served","Occupancy","Kitchen load","Labor / revenue"]).includes(fact.label));
   return <div className="rs-page rs-center cc-command cc-executive" data-testid="compact-control-center">
-    <ExecutivePulse vertical={vertical} scope={locationScope} comparison={comparisonLocationIds} heading={(onOpen,period)=><Heading eyebrow="Control Center" title={`Your operating brief, ${context.firstName}.`} description={`${scopeLabel} · ${context.shortLabel} · ${aggregate.currencyLabel}`} aside={<div className="cc-heading-actions"><EstateWatch period={period} vertical={vertical} scope={locationScope} comparison={comparisonLocationIds} onReview={()=>onOpen("locations")}/></div>}/>}>
+    <ExecutivePulse vertical={vertical} scope={locationScope} comparison={comparisonLocationIds} heading={(onOpen,period)=><Heading eyebrow="Control Center" title={`Your operating brief, ${context.firstName}.`} description={`${scopeLabel} · ${context.shortLabel} · ${aggregate.currencyLabel}`} aside={<><AttentionBrief needs={needs} handling={handling} uncertain={uncertain.length} scopeLabel={scopeLabel}/><div className="cc-heading-actions"><EstateWatch period={period} vertical={vertical} scope={locationScope} comparison={comparisonLocationIds} onReview={()=>onOpen("locations")}/></div></>}/>}>
     <div className="cc-priority-grid">
       <section className="cc-priority" aria-labelledby="cc-priority-title"><header><span className="cc-section-label">YOUR NEXT MOVE</span><StatusPill tone={primary?"attention":"healthy"}>{needs.length?`${needs.length} awaiting judgment`:"No review pending"}</StatusPill></header>
        {primary?<><div className="cc-priority-meta"><span>{displayDecisionId(primary.id)} · {primary.property}</span><span>{primary.decisionDeadline||clean(primary.decisionHorizon.replaceAll("_"," ").toLowerCase())}</span></div><h2 id="cc-priority-title">{primary.title}</h2><p className="cc-priority-recommendation">{clean(primary.recommendationHeadline||primary.contextLine)}</p><div className="cc-decision-assurance"><span><i aria-hidden="true"/>{primary.confidence.userFacing.toLowerCase()} confidence</span><span>{primary.evidenceRefs.length} evidence items</span><span>{lifecycleLabel(primary.status)}</span></div><footer><div className="cc-compact-impact"><strong>{metric?.money||"Review impact"}</strong><small>{metric?.caption||"Evidence-linked decision"}</small></div><Link className="cc-primary-action" href={decisionHref(primary)}>Review decision <Arrow/></Link></footer></>:<div className="cc-priority-empty"><h2 id="cc-priority-title">No decisions awaiting judgment.</h2><TextLink href="/app/decisions">Explore decision record</TextLink></div>}
