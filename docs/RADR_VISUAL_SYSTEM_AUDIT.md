@@ -59,3 +59,12 @@ Stop at Control Center. Review this revised candidate with the user before apply
 The user identified content showing through the expanded sidebar and requested a more refined navigation. The shared rail now has a fully opaque material on every route, replacing the Control Center's translucent rail override. Product-page content remains scoped as before. The active destination gains a quiet descriptive line and a refined indicator; hover, keyboard focus, pinning, workspace links and mobile behavior retain the existing architecture.
 
 The opacity regression compares screenshots of the entire expanded rail before and after inverting the dashboard beneath it; they are byte-identical. The measured rail background is `rgb(237, 243, 247)` at opacity 1. Navigation Axe WCAG A/AA scan has no violations. Seven combined navigation and Control Center checks pass; TypeScript, targeted lint and whitespace checks pass. Screenshots are linked in the design-system document.
+
+
+## Follow-up: more visual Control Center
+
+The latest user request explicitly authorizes more graphics on Control Center. A full-period revenue/forecast/projection chart, labeled contribution ring, signed peer comparisons and readiness dials now use the existing trend, attribution and operating-snapshot data. No new data source or financial model. Negative peer pace is drawn left of the zero baseline, and future projection is clearly distinguished from recorded revenue. Hotel room-revenue context remains separate from all-department contribution.
+
+Desktop graphics are composed in one row; phone graphics are swipeable instead of stacked. The existing operating-area shortcuts remain available in the operating-context disclosure. The measured phone overview is approximately 2485px tall at 390px width, below the existing 2600px regression limit, with no horizontal document overflow. Escape/close restores page scrolling immediately as well as restoring keyboard focus.
+
+[Full visual overview](visual-qa/control-center-graphics.png). Updated desktop, QHD, 4K, mobile and double-density reflow captures are included. Full Control Center shell Axe WCAG A/AA scans report no violations. Fourteen regression checks cover canonical values, period changes, mobile graphic access, chart and financial drill-downs, hotel context, responsiveness, navigation opacity, focus and scroll restoration. TypeScript, targeted lint and whitespace checks pass.

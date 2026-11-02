@@ -61,7 +61,13 @@ Working borders are translucent white over a cool blue-gray support edge. Decisi
 
 ## Chart language
 
-Existing charts remain native SVG and retain their existing datasets and drill-down behavior. The compact revenue line is analytical blue, forecast is a fine muted dashed line. Avoid plot boxes and heavy gridlines. Contribution and location marks retain their existing data and semantic colors. The three compact entry points form one analytical strip; full evidence appears on request in the existing accessible performance dialog. No chart screenshots or new charts are introduced.
+The user explicitly requested more Control Center graphics after the glass and navigation revisions. The overview now uses native SVG revenue trajectories, a contribution ring, signed location pace bars and readiness instruments. These replace the three tiny analytical previews and extend existing KPI presentation; they introduce no new financial model or external data source.
+
+Revenue graphics distinguish recorded values (green solid line), forecast (muted dashed line) and projected future (blue dotted line). All three use the same scale and full period timeline; future points are not rendered as recorded observations. Hotel revenue charts explicitly identify room revenue. The contribution ring uses the existing product/department allocation and labels modeled contribution; product and channel dimensions are never added together. Location bars share a zero baseline, with negative pace drawn to the left and positive pace to the right. Period, scope and currency come from the existing trend/bridge layer.
+
+Readiness rings represent actual percentages or ready/due ratios only. Counts and currency facts use a simple icon/value, without invented progress denominators. MEDIUM confidence is not converted into a percentage. The main Decision remains the priority object.
+
+On desktop, three graphics share a composed row. On phones, they form a swipeable gallery with a visible next-card edge and keyboard-focus scrolling, avoiding a long stack. Each opens the original accessible performance detail. Duplicate operating-area shortcuts move into the existing operating-context disclosure to preserve compactness.
 
 ## Motion and performance
 
