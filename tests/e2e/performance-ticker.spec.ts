@@ -17,7 +17,7 @@ test("actuals stop at the snapshot and projections join actuals for every period
 });
 
 test("Control Center periods, comparison, location selection and timeline work",async({page})=>{
- const errors:string[]=[];page.on("pageerror",e=>errors.push(e.message));await page.goto("/app?stay=1");const panel=page.getByTestId("performance-ticker");await expect(panel).toBeVisible();
+ const errors:string[]=[];page.on("pageerror",e=>errors.push(e.message));await page.goto("/app?stay=1");await page.getByRole("button",{name:"Open revenue performance details",exact:true}).click();const panel=page.getByTestId("performance-ticker");await expect(panel).toBeVisible();
  const location=panel.getByLabel("Chart location");if(await location.locator('option[value="loc_berlin_mitte"]').count())await location.selectOption("loc_berlin_mitte");
  await expect(panel).toContainText("updates paused");await expect(panel).toContainText("Illustrative demo");
  await panel.getByRole("button",{name:"Week",exact:true}).click();await expect(panel).toContainText("Actual week to date");await panel.getByRole("button",{name:"Month",exact:true}).click();await expect(panel).toContainText("September 1–30");
@@ -30,6 +30,6 @@ test("Control Center periods, comparison, location selection and timeline work",
 
 test("hotel Control Center receives the same period and location charts",async({page})=>{
  await page.addInitScript(()=>sessionStorage.setItem("radr.demoOrg.v1",JSON.stringify({vertical:"hotel",orgId:"org_northstar_hotels"})));
- await page.goto("/app?stay=1");const panel=page.getByTestId("performance-ticker");await expect(panel).toBeVisible();await panel.getByRole("button",{name:"Week",exact:true}).click();await expect(panel).toContainText("Actual week to date");await expect(panel.locator(".pt-location-tape")).not.toContainText("Soho");
- await panel.getByRole("button",{name:"Compare locations",exact:false}).click();expect(await panel.locator("[data-peer-line]").count()).toBeGreaterThan(0);
+ await page.goto("/app?stay=1");await page.getByRole("button",{name:"Open revenue performance details",exact:true}).click();const panel=page.getByTestId("performance-ticker");await expect(panel).toBeVisible();await panel.getByRole("button",{name:"Week",exact:true}).click();await expect(panel).toContainText("Actual week to date");await panel.getByRole("button",{name:"Locations",exact:true}).click();await expect(panel.locator(".pt-location-tape")).not.toContainText("Soho");
+ expect(await panel.locator("[data-peer-line]").count()).toBeGreaterThan(0);
 });
