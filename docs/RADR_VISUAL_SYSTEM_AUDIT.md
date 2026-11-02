@@ -53,3 +53,9 @@ The three-material contract, colors, spacing, borders, motion, status semantics 
 ## Gate
 
 Stop at Control Center. Review this revised candidate with the user before applying it to other product pages.
+
+## Follow-up: shared navigation
+
+The user identified content showing through the expanded sidebar and requested a more refined navigation. The shared rail now has a fully opaque material on every route, replacing the Control Center's translucent rail override. Product-page content remains scoped as before. The active destination gains a quiet descriptive line and a refined indicator; hover, keyboard focus, pinning, workspace links and mobile behavior retain the existing architecture.
+
+The opacity regression compares screenshots of the entire expanded rail before and after inverting the dashboard beneath it; they are byte-identical. The measured rail background is `rgb(237, 243, 247)` at opacity 1. Navigation Axe WCAG A/AA scan has no violations. Seven combined navigation and Control Center checks pass; TypeScript, targeted lint and whitespace checks pass. Screenshots are linked in the design-system document.

@@ -17,6 +17,18 @@ const ITEMS = [
   ["memory", "Memory", "/app/memory"], ["data-health", "Data Health", "/app/data-health"], ["connections", "Connections", "/app/connections"],
 ] as const;
 function RoutePending(){const {pending}=useLinkStatus();return pending?<span className="rs-route-pending" role="status" aria-label="Opening section"/>:null;}
+const NAV_CONTEXT: Record<string, string> = {
+  "control-center": "What needs you now",
+  live: "Service as it happens",
+  decisions: "Evidence to action",
+  service: "Capacity and readiness",
+  house: "Behind the operation",
+  intelligence: "See the connections",
+  value: "Outcomes with proof",
+  memory: "Experience, retained",
+  "data-health": "Trust the evidence",
+  connections: "Your connected systems",
+};
 const WorkspaceIcon = NAV_ICONS.locations;
 const MORE = [["Floor plan editor", "/app/live/plan"], ["Locations", "/app/locations"], ["Guests", "/app/guests"], ["Dashboards", "/app/dashboards"], ["Settings", "/app/settings"]] as const;
 
@@ -40,7 +52,7 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
     <nav className="rs-nav-items" aria-label="Primary">{ITEMS.map(([id,label,href]) => {
       const active = id === "live" ? path.startsWith("/app/live")&&!path.startsWith("/app/live/plan") : href === "/app" ? path === href : path.startsWith(href);
       const Icon = NAV_ICONS[id];
-      return <Link key={id} href={href} aria-current={active ? "page" : undefined} data-active={active || undefined} aria-label={label} title={label} data-section={id==="intelligence"?"analysis":id==="data-health"?"system":undefined} onClick={onNavigate}><span className="rs-nav-icon"><Icon /></span><span className="rs-nav-label">{label}</span><RoutePending/></Link>;
+      return <Link key={id} href={href} aria-current={active ? "page" : undefined} data-active={active || undefined} aria-label={label} title={label} data-section={id==="intelligence"?"analysis":id==="data-health"?"system":undefined} onClick={onNavigate}><span className="rs-nav-icon"><Icon /></span><span className="rs-nav-copy"><span className="rs-nav-label">{label}</span>{active?<small className="rs-nav-context" aria-hidden="true">{NAV_CONTEXT[id]}</small>:null}</span><svg className="rs-nav-direction" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M3 8h9m-4-4 4 4-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg><RoutePending/></Link>;
     })}</nav>
     <Link href="/app/data-health" className="rs-connection-status" onClick={onNavigate}><i data-warning={!isHotel && health.attentionCount > 0 || undefined} /><span className="rs-status-label">{isHotel ? "Review evidence health" : health.attentionCount > 0 ? `${health.attentionCount} evidence ${health.attentionCount === 1 ? "source needs" : "sources need"} review` : "Evidence sources connected"}</span></Link>
   </aside>;

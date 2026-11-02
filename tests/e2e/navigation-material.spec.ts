@@ -1,0 +1,15 @@
+import {test,expect} from "playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+
+test("expanded navigation never reveals the dashboard beneath it",async({page})=>{
+ await page.emulateMedia({reducedMotion:"reduce"});await page.goto("/app?stay=1");await page.evaluate(()=>document.fonts.ready);await page.addStyleTag({content:"nextjs-portal {display:none!important;}"});const rail=page.getByRole("complementary",{name:"RADR workspace",exact:true});await rail.hover();await expect.poll(()=>rail.evaluate(e=>Math.round(e.getBoundingClientRect().width))).toBe(248);const before=await rail.screenshot();await page.addStyleTag({content:".rp-main-v2 {filter:invert(1)!important;}"});const after=await rail.screenshot();expect(after.equals(before)).toBeTruthy();expect(await rail.evaluate(e=>getComputedStyle(e).opacity)).toBe("1");
+ await page.goto("/app/connections?stay=1");await rail.hover();expect(await rail.evaluate(e=>getComputedStyle(e).backgroundColor)).toBe("rgb(237, 243, 247)");
+});
+
+test("hover, workspace menu, pinning and Escape preserve navigation behavior",async({page})=>{
+ await page.goto("/app?stay=1");const rail=page.getByRole("complementary",{name:"RADR workspace",exact:true});await rail.hover();await expect(rail.getByText("What needs you now",{exact:true})).toBeVisible();await expect(rail.getByRole("link",{name:"Live",exact:true})).toHaveAttribute("href","/app/live");await rail.getByRole("button",{name:"Workspace: Northstar Restaurants",exact:true}).click();await expect(rail.getByRole("link",{name:"Floor plan editor",exact:false})).toHaveAttribute("href","/app/live/plan");await rail.getByRole("button",{name:"Pin navigation open",exact:true}).click();await page.mouse.move(1100,400);await expect(rail).toHaveAttribute("data-pinned","true");await expect.poll(()=>rail.evaluate(e=>Math.round(e.getBoundingClientRect().width))).toBe(248);await rail.getByRole("button",{name:"Unpin navigation",exact:true}).focus();await page.keyboard.press("Escape");await expect(rail).not.toHaveAttribute("data-pinned");await expect.poll(()=>rail.evaluate(e=>Math.round(e.getBoundingClientRect().width))).toBe(80);
+});
+
+test("navigation has readable contrast and works with keyboard and a phone drawer",async({page})=>{
+ await page.goto("/app?stay=1");const rail=page.getByRole("complementary",{name:"RADR workspace",exact:true});await rail.getByRole("link",{name:"RADR Control Center",exact:true}).focus();await expect(rail.getByRole("button",{name:"Pin navigation open",exact:true})).toBeVisible();const a=await new AxeBuilder({page}).include(".rs-navigation").withTags(["wcag2a","wcag2aa"]).analyze();expect(a.violations).toEqual([]);await page.setViewportSize({width:390,height:900});await page.getByRole("button",{name:"Open navigation",exact:true}).click();await expect(rail.getByRole("link",{name:"Connections",exact:true})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();await page.screenshot({path:"/workspace/work/qa/navigation-mobile.png"});
+});

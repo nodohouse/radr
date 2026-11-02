@@ -80,3 +80,11 @@ The primary Decision reads: attention → ID/location/deadline → record title 
 Maintain explicit focus rings, native buttons/links, keyboard drill-downs, Escape dismissal and focus restoration. All information remains distinguishable without transparency. WCAG A/AA automation is part of the pilot review, alongside manual hierarchy and focus review. SVG marks, SVG charts, native text, borders and icons remain resolution independent. Check desktop, 2560×1440, 3840×2160, a 200%-equivalent reflow viewport and mobile; do not claim a screenshot itself proves every accessibility or device-performance property.
 
 Approval evidence and exact validation results: [visual system audit](RADR_VISUAL_SYSTEM_AUDIT.md).
+
+## Opaque shared navigation refinement
+
+The subsequent user request explicitly extends navigation refinement across the workspace, while the Control Center material approval gate still applies to other page content. `app/radr-navigation.css` is the shared navigation authority and replaces pilot-only rail styling. The rail uses a fully opaque `#edf3f7` surface, opacity 1, no backdrop filter and no background image. Expanded hover, keyboard focus and pinned states retain the same opaque material; the dashboard cannot show through.
+
+The rail retains its 80px collapsed / 248px expanded geometry and existing routes. Refined icon wells, a fine active edge, a quiet contextual line for the active destination, directional hover feedback, restrained workspace control and source-health footer create a deliberate hierarchy without new badges, invented telemetry or extra destinations. Labels reveal over 150–180ms; the width transition is 220ms without bounce. Reduced motion removes transitions. The workspace menu is also opaque. All icon art and the approved SVG logo remain unchanged.
+
+Regression coverage includes pixel-identical rail captures before/after inversion of the underlying dashboard, cross-route opacity, keyboard reveal, workspace links, pinning, Escape, mobile drawer, overflow and WCAG A/AA navigation contrast. Seven combined navigation/Control Center checks pass. Review captures: [expanded](visual-qa/navigation/expanded.png), [collapsed](visual-qa/navigation/collapsed.png), [workspace menu](visual-qa/navigation/workspace.png), [phone drawer](visual-qa/navigation/mobile.png).
