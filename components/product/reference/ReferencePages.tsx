@@ -13,7 +13,7 @@ import { scopedDecisionsForDemo, recordAttention } from "@/lib/radr/product/role
 import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
 import { buildValueOverview } from "@/lib/radr/product/valueProofEngine";
 import { buildMemoryOverview } from "@/lib/radr/product/memoryProofEngine";
-import { buildDataHealthOverview } from "@/lib/radr/product/dataHealthProofEngine";
+import { DataHealthPremium } from "./DataHealthPremium";
 import { allFindings, findingStateFromDecision } from "@/lib/radr/product/intelligenceEngine";
 import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { customerDecisionClass } from "@/lib/radr/product/decisionClass";
@@ -70,14 +70,8 @@ export function ReferenceIntelligence() {
 }
 
 export function ReferenceHealth() {
-  const { roleView,vertical }=useRecords();const model=buildDataHealthOverview(roleView,vertical);
-  if(vertical === "hotel") return <div className="rs-page"><Heading eyebrow="Data Health" title="A clear view of your evidence." description="Hotel evidence health" /><Panel title="Hotel source snapshot not available"><p className="rs-empty">This demo includes a restaurant source-health snapshot. Hotel decisions retain their own evidence and confidence; restaurant connection scores are not shown for hotel properties.</p><TextLink href="/app/connections">Review hotel connections</TextLink></Panel></div>;
-  const fresh=model.sourceTotal?Math.round(model.sources.reduce((s,r)=>s+r.freshnessScore,0)/model.sourceTotal):0;
-  return <div className="rs-page"><Heading eyebrow="Data Health" title={model.attentionCount ? "Your evidence, in focus." : "Your data is healthy."} description="Restaurant estate source health · 10 locations · independent of the current decision selection" aside={<span className="rs-pill" data-warning={model.attentionCount>0||undefined}><i />{model.attentionCount ? `${model.attentionCount} sources need review` : 'All sources healthy'}</span>} />
-    <div className="rs-metrics rs-four"><Metric value={model.sourceTotal} label="Connections" note="Evidence sources" /><Metric value={`${fresh}%`} label="Data freshness" note="Average source freshness score" /><Metric value={model.attentionCount} label="Open issues" note="Sources needing attention" /><Metric value={`${model.trustScore}%`} label="Evidence trust" note="Derived from source quality" /></div>
-    <div className="rs-two-columns"><Panel title="Source connections" action={<TextLink href="/app/connections">View all</TextLink>}><div className="rs-source-table"><div className="rs-table-labels"><span>Source</span><span>Status</span><span>Last update</span><span>Freshness</span></div>{model.sources.slice(0,5).map(s=><Link key={s.id} href={detailHref(`/app/data-health?source=${s.id}`)}><strong>{s.name}</strong><span className="rs-source-status" data-warning={s.status!=="HEALTHY"||undefined}><i />{s.status.toLowerCase()}</span><span>{s.lastSync}</span><span className="rs-tag">{s.freshnessLabel.toLowerCase()}</span></Link>)}</div></Panel><Panel title="Evidence quality"><div className="rs-quality"><div className="rs-donut" style={{background:`conic-gradient(#1755ed ${model.trustScore*3.6}deg,#e8eef6 0)`}}><span><strong>{model.trustScore}%</strong><small>Trust score</small></span></div><div><p><i />Healthy <b>{model.healthyCount}</b></p><p>Degraded <b>{model.degradedCount}</b></p><p>Stale <b>{model.staleCount}</b></p></div></div></Panel></div>
-    <div className="rs-two-columns"><Panel title="Decision impact"><div className="rs-check-list"><p>✓ {model.decisionsAffected} decisions affected by source quality</p><p>✓ {model.sourcesAffectingDecisions} sources feeding current decisions</p><p>✓ Required degraded sources limit confidence and require human approval</p></div><TextLink href={detailHref('/app/data-health')}>View details</TextLink></Panel><div className="rs-proof-strip rs-quality-note"><span className="rs-soft-icon">✧</span><div><h3>{model.attentionCount ? 'A clearer picture starts here.' : 'Good to go.'}</h3><p>{model.attentionCount ? 'Review the flagged sources before relying on affected decisions. Degraded evidence limits active recommendation confidence and permitted autonomy.' : 'Your evidence sources are connected and within the expected quality range.'}</p></div></div></div>
-  </div>;
+ const {roleView,vertical,records}=useRecords();
+ return <DataHealthPremium role={roleView} vertical={vertical} records={records}/>;
 }
 
 function ServiceSnapshotUnavailable({scopeLabel}:{scopeLabel:string}) { return <div className="rs-page"><Heading eyebrow="Service snapshot" title="The right evidence for this location." description={scopeLabel} /><Panel title="No service snapshot in this selection"><p className="rs-empty">The current restaurant demo includes a live service snapshot for Soho · New York. Choose Soho to explore its floor, demand, and operating pressure. Other locations keep their own decision records.</p><TextLink href="/app/decisions">Explore selected decisions</TextLink></Panel></div>; }

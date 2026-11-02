@@ -151,7 +151,7 @@ const SOURCE_INPUTS: SourceInput[] = [
     coverageLabel: "10 / 10 locations",
     locationCount: 10,
     locationTotal: 10,
-    evidenceInUse: "Affects settlement evidence freshness",
+    evidenceInUse: "Stale accounting evidence limits supplier and settlement proof",
     evidenceTags: ["D-4102"],
     required: true,
     inUseByDecisions: true,
@@ -159,7 +159,7 @@ const SOURCE_INPUTS: SourceInput[] = [
       {
         id: "dec_supplier_berlin",
         label: "D-4102",
-        title: "Settlement reconciliation",
+        title: "Contract vs invoice · contribution compression",
         impact: "High",
       },
       {
@@ -352,6 +352,8 @@ export function buildDataHealthOverview(
   _role: RoleView = "cfo",
   _vertical: DemoVerticalFamily = "restaurant",
 ): DataHealthOverviewModel {
+  // This fixture is a restaurant source cohort, not a role- or hotel-specific score.
+  void _role; void _vertical;
   const sources = buildSources();
   const healthyCount = sources.filter((s) => s.status === "HEALTHY").length;
   const degradedCount = sources.filter((s) => s.status === "DEGRADED").length;

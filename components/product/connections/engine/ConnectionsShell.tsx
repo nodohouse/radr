@@ -21,6 +21,7 @@ import { ConnectionsOverview } from "./ConnectionsOverview";
 import { ConnectionsDrawer } from "./ConnectionsDrawer";
 import { ConnectionsSetupModal } from "./ConnectionsSetupModal";
 import "./connections-engine.css";
+import { HotelSourceCatalog } from "../HotelSourceCatalog";
 
 function setupKindFor(entry: CatalogEntry): SetupKind {
   if (entry.status === "AVAILABLE") return "setup";
@@ -85,6 +86,7 @@ export function ConnectionsShell() {
     [pathname, router, search],
   );
 
+  if(isHotel)return <HotelSourceCatalog/>;
   return (
     <div
       className="ce-root"
