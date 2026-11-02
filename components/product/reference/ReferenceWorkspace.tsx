@@ -20,7 +20,7 @@ export function ReferenceWorkspace({children}:{children:ReactNode}) {
   if(path==='/app/decisions')return <ReferenceDecisions />;
   if(path==='/app/value'&&!search.get('view')&&!search.get('class'))return <ReferenceValue />;
   if(path==='/app/memory'&&!search.get('view')&&!search.get('learning')&&!search.get('playbook'))return <ReferenceMemory />;
-  if(path==='/app/intelligence'&&!search.get('finding')&&!search.get('domain'))return <ReferenceIntelligence />;
+  if(path==='/app/intelligence'&&!search.get('domain'))return <ReferenceIntelligence />;
   if(path==='/app/live'&&!isHotel&&!search.get('zone'))return <ReferenceLive />;
   if(path==='/app/service'&&!isHotel&&!search.get('view')&&!search.get('table'))return <ReferenceOperations />;
   if(path.startsWith('/app/decisions/')) {

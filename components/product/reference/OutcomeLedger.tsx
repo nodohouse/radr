@@ -1,0 +1,15 @@
+"use client";
+import {useState} from "react";
+import Link from "next/link";
+import type {DecisionRecord} from "@/lib/radr/decision/record";
+import type {RoleView} from "@/lib/product/types";
+import {moneyContext} from "@/lib/radr/product/demoMoney";
+import {formatDecisionMoney} from "@/lib/radr/decision/core";
+import {displayDecisionId} from "@/lib/radr/decision/ids";
+import {Arrow} from "./ReferenceUI";
+export function OutcomeLedger({records,role}:{records:DecisionRecord[];role:RoleView}){
+ const [filter,setFilter]=useState("verified");const [query,setQuery]=useState("");const money=moneyContext(records,role);
+ const rows=records.filter(r=>(filter==="all"||filter==="verified"&&!!r.verifiedValue||filter==="pending"&&!r.verifiedValue&&["EXECUTING","EXECUTED","VERIFYING","APPROVED","PREPARED"].some(status=>r.status.includes(status)))&&`${r.title} ${displayDecisionId(r.id)}`.toLowerCase().includes(query.toLowerCase()));
+ const value=(r:DecisionRecord,n:number)=>formatDecisionMoney(money.toDisplay(r,n),money.currency);
+ return <section className="wb-ledger" aria-label="Outcome evidence ledger" data-testid="outcome-ledger"><header><div><span className="pt-eyebrow">DECISION TO OUTCOME</span><h2>Follow the money back to its evidence.</h2></div><label><span className="sr-only">Search outcome records</span><input aria-label="Search outcome records" placeholder="Find an outcome" value={query} onChange={e=>setQuery(e.target.value)}/></label></header><div className="wb-lenses">{[["verified","Verified outcomes"],["pending","Awaiting verification"],["all","All records"]].map(([id,label])=><button type="button" key={id} aria-pressed={filter===id} onClick={()=>setFilter(id)}>{label}</button>)}</div><div className="wb-ledger-labels"><span>Decision / verification</span><span>Expected contribution</span><span>Observed contribution</span><span>Verified value</span></div>{rows.map(r=><Link key={r.id} href={`/app/decisions/${r.id}`} className="wb-ledger-row"><span><small>{displayDecisionId(r.id)} · {r.property}</small><strong>{r.title}</strong><em>{r.verificationMethod?.replaceAll("_"," ")||"Method not recorded"}</em></span><span>{value(r,r.expectedContributionImpact)}</span><span>{r.actualContributionImpact===undefined?"Not recorded":value(r,r.actualContributionImpact)}</span><strong data-state={!r.verifiedValue?"pending":r.verifiedValue.amount<0?"negative":"verified"}>{r.verifiedValue?value(r,r.verifiedValue.amount):"Pending"}<small>{r.verifiedValue?r.verifiedValue.kind:"Not verified"}</small><Arrow/></strong></Link>)}{!rows.length?<div className="wb-empty"><h3>No outcome records match this view.</h3><p>Try another status or search. Pending value remains separate from verified outcomes.</p></div>:null}<footer>{money.label} · Current scoped Decision records; the month-to-date trend also includes recorded history. Expected contribution, observed contribution and verified value are distinct measures. Open a Decision to inspect attribution and its verification method.</footer></section>;
+}

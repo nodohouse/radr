@@ -1,0 +1,9 @@
+"use client";
+import {useState} from "react";
+import Link from "next/link";
+import {getServiceCommand} from "@/lib/product/serviceCommand";
+import {Arrow,detailHref} from "./ReferenceUI";
+export function OperatingPressure(){
+ const model=getServiceCommand();const [selected,setSelected]=useState("hot");const current=model.pressure.find(p=>p.id===selected)||model.pressure[0];
+ return <section className="wb-pressure" aria-label="Operating pressure desk" data-testid="operating-pressure"><header><div><span className="pt-eyebrow">CAPACITY & CONSTRAINTS</span><h2>Where the operation needs room to move.</h2></div><small>Demo snapshot · {model.liveTime} · {model.location}</small></header><div className="wb-pressure-grid">{model.pressure.map(p=><button key={p.id} type="button" aria-pressed={current.id===p.id} onClick={()=>setSelected(p.id)}><span>{p.label}<small>{p.current>=85?"Under pressure":"Within current capacity"}</small></span><strong data-high={p.current>=85||undefined}>{p.current}%</strong><span className="wb-load-track"><i style={{width:`${Math.min(100,p.current)}%`}}/></span></button>)}</div><div className="wb-pressure-detail"><div><span>Constraint</span><h3>{current.cause}</h3><p>{current.recommendation}</p></div><div><span>Modeled comparison</span><strong>{current.current}% <small>current load</small> → {current.optimized}% <small>with response</small></strong><p>Scenario estimate, not observed capacity after execution.</p></div><Link className="wb-primary" href={detailHref(`/app/service?pressure=${current.id}`)}>Review response <Arrow/></Link></div><div className="wb-kitchen-feed">{model.kitchen.map(station=><div key={station.id}><span>{station.name}</span><strong>{station.queue} queued</strong><small>Oldest {station.oldest} · {station.load}% load</small></div>)}</div></section>;
+}

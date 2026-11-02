@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link, {useLinkStatus} from "next/link";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -10,14 +10,15 @@ import { useDemoOrg } from "../useDemoOrg";
 import { buildDataHealthOverview } from "@/lib/radr/product/dataHealthProofEngine";
 
 const ITEMS = [
-  ["control-center", "Control Center", "/app"], ["live", "Live & floor plan", "/app/live/plan"],
+  ["control-center", "Control Center", "/app"], ["live", "Live", "/app/live"],
   ["decisions", "Decisions", "/app/decisions"], ["service", "Operations", "/app/service"],
   ["house", "Back of House", "/app/house"],
   ["intelligence", "Intelligence", "/app/intelligence"], ["value", "Value", "/app/value"],
-  ["memory", "Memory", "/app/memory"], ["data-health", "Data Health", "/app/data-health"],
+  ["memory", "Memory", "/app/memory"], ["data-health", "Data Health", "/app/data-health"], ["connections", "Connections", "/app/connections"],
 ] as const;
+function RoutePending(){const {pending}=useLinkStatus();return pending?<span className="rs-route-pending" role="status" aria-label="Opening section"/>:null;}
 const WorkspaceIcon = NAV_ICONS.locations;
-const MORE = [["Connections", "/app/connections"], ["Locations", "/app/locations"], ["Guests", "/app/guests"], ["Dashboards", "/app/dashboards"], ["Settings", "/app/settings"]] as const;
+const MORE = [["Floor plan editor", "/app/live/plan"], ["Locations", "/app/locations"], ["Guests", "/app/guests"], ["Dashboards", "/app/dashboards"], ["Settings", "/app/settings"]] as const;
 
 export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) {
   const path = usePathname();
@@ -37,9 +38,9 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
     <button type="button" className="rs-workspace" onClick={() => setMore(v => !v)} aria-expanded={more} aria-label={`Workspace: ${org.name}`} aria-controls="rs-workspace-menu"><span className="rs-workspace-icon" aria-hidden="true"><WorkspaceIcon /></span><span className="rs-workspace-copy"><small>WORKSPACE</small><strong>{org.name}</strong></span><span className="rs-workspace-chevron" aria-hidden="true">⌄</span></button>
     {more ? <div className="rs-more" id="rs-workspace-menu">{MORE.map(([label,href]) => <Link key={href} href={href} onClick={() => { setMore(false); onNavigate(); }}>{label}<span aria-hidden="true">↗</span></Link>)}</div> : null}
     <nav className="rs-nav-items" aria-label="Primary">{ITEMS.map(([id,label,href]) => {
-      const active = id === "live" ? path.startsWith("/app/live") : href === "/app" ? path === href : path.startsWith(href);
+      const active = id === "live" ? path.startsWith("/app/live")&&!path.startsWith("/app/live/plan") : href === "/app" ? path === href : path.startsWith(href);
       const Icon = NAV_ICONS[id];
-      return <Link key={id} href={href} aria-current={active ? "page" : undefined} data-active={active || undefined} aria-label={label} title={label} onClick={onNavigate}><span className="rs-nav-icon"><Icon /></span><span className="rs-nav-label">{label}</span></Link>;
+      return <Link key={id} href={href} aria-current={active ? "page" : undefined} data-active={active || undefined} aria-label={label} title={label} data-section={id==="intelligence"?"analysis":id==="data-health"?"system":undefined} onClick={onNavigate}><span className="rs-nav-icon"><Icon /></span><span className="rs-nav-label">{label}</span><RoutePending/></Link>;
     })}</nav>
     <Link href="/app/data-health" className="rs-connection-status" onClick={onNavigate}><i data-warning={!isHotel && health.attentionCount > 0 || undefined} /><span className="rs-status-label">{isHotel ? "Review evidence health" : health.attentionCount > 0 ? `${health.attentionCount} evidence ${health.attentionCount === 1 ? "source needs" : "sources need"} review` : "Evidence sources connected"}</span></Link>
   </aside>;

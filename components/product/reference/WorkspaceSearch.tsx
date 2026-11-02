@@ -22,7 +22,7 @@ export default function WorkspaceSearch({ onClose }: { onClose: () => void }) {
   const items = [
     ...PAGES.map(([title,href])=>({title,href,kind:"Page",detail:"Workspace"})),
     ...records.map(record=>({title:record.title,href:`/app/decisions/${record.id}`,kind:"Decision",detail:`${displayDecisionId(record.id)} · ${record.property}`})),
-    ...allFindings().filter(f=>f.decisionId !== null && recordIds.has(f.decisionId)).map(f=>({title:f.title,href:`/app/intelligence?finding=${f.id}`,kind:"Signal",detail:f.summary})),
+    ...allFindings().filter(f=>f.decisionId !== null && recordIds.has(f.decisionId)).map(f=>({title:f.title,href:`/app/decisions/${f.decisionId}`,kind:"Signal",detail:records.find(record=>record.id===f.decisionId)?.recommendationHeadline||records.find(record=>record.id===f.decisionId)?.contextLine||f.summary})),
     ...memory.allLearnings.map(l=>({title:l.statement,href:l.href,kind:"Memory",detail:l.location})),
     ...org.locations.map(l=>({title:l.displayName||l.name,href:`/app/locations?location=${encodeURIComponent(l.id)}`,kind:"Location",detail:org.name})),
   ];
