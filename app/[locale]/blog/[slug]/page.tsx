@@ -1,3 +1,5 @@
+import { EditorialArtwork } from "@/components/marketing/reports/EditorialArtwork";
+import { ReportPromo } from "@/components/marketing/reports/ReportPromo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -31,8 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getBlogPost(slug);
   if (!post) return {};
   const t = await getTranslations({ locale, namespace: "blog" });
-  const title = t(`posts.${post.key}.metaTitle`);
-  const description = t(`posts.${post.key}.metaDescription`);
+  const title = post.content?.metaTitle ?? t(`posts.${post.key}.metaTitle`);
+  const description =
+    post.content?.metaDescription ?? t(`posts.${post.key}.metaDescription`);
   const path = `/blog/${slug}`;
   const heroMapId = BLOG_HERO_BY_SLUG[slug];
   const ogImage = heroMapId ? marketingImage(heroMapId).src : undefined;
@@ -40,7 +43,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     authors: [{ name: "RADR" }],
-    alternates: buildAlternatesForLocale(locale, path),
+    alternates: post.content
+      ? {
+          canonical: `https://radrup.com/en${path}`,
+          languages: { en: `https://radrup.com/en${path}` },
+        }
+      : buildAlternatesForLocale(locale, path),
     openGraph: {
       type: "article",
       title,
@@ -49,10 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.date,
       modifiedTime: post.updated ?? post.date,
       authors: ["RADR"],
-      tags: t.raw(`posts.${post.key}.tags`) as string[],
-      ...(ogImage
-        ? { images: [{ url: `https://radrup.com${ogImage}` }] }
-        : {}),
+      tags: post.content?.tags ?? (t.raw(`posts.${post.key}.tags`) as string[]),
+      ...(ogImage ? { images: [{ url: `https://radrup.com${ogImage}` }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
@@ -77,10 +83,14 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const t = await getTranslations("blog");
-  const tags = t.raw(`posts.${post.key}.tags`) as string[];
-  const sections = t.raw(`posts.${post.key}.sections`) as BlogSection[];
-  const title = t(`posts.${post.key}.title`);
-  const description = t(`posts.${post.key}.metaDescription`);
+  const tags =
+    post.content?.tags ?? (t.raw(`posts.${post.key}.tags`) as string[]);
+  const sections =
+    post.content?.sections ??
+    (t.raw(`posts.${post.key}.sections`) as BlogSection[]);
+  const title = post.content?.title ?? t(`posts.${post.key}.title`);
+  const description =
+    post.content?.metaDescription ?? t(`posts.${post.key}.metaDescription`);
   const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
   const heroMap = BLOG_HERO_BY_SLUG[slug];
   const hero = heroMap ? marketingImage(heroMap) : null;
@@ -107,10 +117,8 @@ export default async function BlogPostPage({ params }: Props) {
       "@id": `https://radrup.com/${locale}/blog/${slug}`,
     },
     keywords: tags.join(", "),
-    inLanguage: locale,
-    ...(hero
-      ? { image: [`https://radrup.com${hero.src}`] }
-      : {}),
+    inLanguage: post.content ? "en" : locale,
+    ...(hero ? { image: [`https://radrup.com${hero.src}`] } : {}),
   };
 
   const pull =
@@ -126,7 +134,11 @@ export default async function BlogPostPage({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <article className="rx-res-article" data-nav-theme="light">
+        <article
+          lang={post.content ? "en" : locale}
+          className="rx-res-article"
+          data-nav-theme="light"
+        >
           <div className="rx-shell rx-res-article-inner">
             <p className="rx-kicker">{pillarFromTerritory(post.territory)}</p>
             <div className="rx-res-card-meta">
@@ -143,7 +155,9 @@ export default async function BlogPostPage({ params }: Props) {
               <span>{t("byline")}</span>
             </div>
             <h1 className="rx-display rx-res-article-title">{title}</h1>
-            <p className="rx-res-deck">{t(`posts.${post.key}.excerpt`)}</p>
+            <p className="rx-res-deck">
+              {post.content?.excerpt ?? t(`posts.${post.key}.excerpt`)}
+            </p>
           </div>
 
           {hero ? (
@@ -166,6 +180,11 @@ export default async function BlogPostPage({ params }: Props) {
             </figure>
           ) : null}
 
+          {!hero && post.content ? (
+            <div className="rx-shell rx-res-article-art">
+              <EditorialArtwork slug={slug} />
+            </div>
+          ) : null}
           <div className="rx-shell rx-res-article-inner">
             {pull ? (
               <blockquote className="rx-res-pull">
@@ -213,6 +232,7 @@ export default async function BlogPostPage({ params }: Props) {
               ) : null}
             </div>
 
+            <ReportPromo />
             <Link href="/blog" className="rx-text-link">
               {t("backToBlog")}
             </Link>
@@ -237,8 +257,13 @@ export default async function BlogPostPage({ params }: Props) {
                         </em>
                         <time dateTime={item.date}>{item.date}</time>
                       </div>
-                      <h3>{t(`posts.${item.key}.title`)}</h3>
-                      <p>{t(`posts.${item.key}.excerpt`)}</p>
+                      <h3>
+                        {item.content?.title ?? t(`posts.${item.key}.title`)}
+                      </h3>
+                      <p>
+                        {item.content?.excerpt ??
+                          t(`posts.${item.key}.excerpt`)}
+                      </p>
                     </Link>
                   </li>
                 ))}

@@ -1,3 +1,5 @@
+import { EditorialArtwork } from "@/components/marketing/reports/EditorialArtwork";
+import { ReportPromo } from "@/components/marketing/reports/ReportPromo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -39,9 +41,14 @@ type SectionId = "recover" | "decisions" | "value" | "operations" | "field";
 function sectionFor(post: BlogPostMeta): SectionId {
   if (post.territory === "RECOVER") return "recover";
   if (post.territory === "VALUE") return "value";
-  if (post.territory === "BUY" || post.territory === "LABOR" || post.territory === "SELL")
+  if (
+    post.territory === "BUY" ||
+    post.territory === "LABOR" ||
+    post.territory === "SELL"
+  )
     return "operations";
-  if (post.key === "whyWeExist" || post.key === "marginIntelligence") return "decisions";
+  if (post.key === "whyWeExist" || post.key === "marginIntelligence")
+    return "decisions";
   return "field";
 }
 
@@ -57,9 +64,15 @@ function pillarLabel(post: BlogPostMeta): string {
   return SECTION_LABEL[sectionFor(post)];
 }
 
-function PostMedia({ slug, featured = false }: { slug: string; featured?: boolean }) {
+function PostMedia({
+  slug,
+  featured = false,
+}: {
+  slug: string;
+  featured?: boolean;
+}) {
   const id = BLOG_HERO_BY_SLUG[slug];
-  if (!id) return null;
+  if (!id) return <EditorialArtwork slug={slug} />;
   const img = marketingImage(id);
   const max = featured ? Math.min(img.cssMax, 520) : Math.min(img.cssMax, 360);
   return (
@@ -102,6 +115,7 @@ function PostCard({
       <PostMedia slug={post.slug} featured={featured} />
       <div className="rx-res-card-copy">
         <div className="rx-res-card-meta">
+          {post.content ? <span>English · Field guide</span> : null}
           <em className="rx-res-terr">{pillarLabel(post)}</em>
           <time dateTime={post.date}>{post.date}</time>
           <TextSep />
@@ -121,8 +135,7 @@ export default async function BlogIndexPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("blog");
-  const featured =
-    BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
+  const featured = BLOG_POSTS.find((p) => p.featured) ?? BLOG_POSTS[0];
   const rest = BLOG_POSTS.filter((p) => p.slug !== featured?.slug);
 
   const sections: SectionId[] = [
@@ -145,14 +158,22 @@ export default async function BlogIndexPage({ params }: Props) {
           </div>
         </section>
 
+        <div className="rx-shell">
+          <ReportPromo />
+        </div>
         <section className="rx-res-list" data-nav-theme="light">
           <div className="rx-shell-wide rx-res-pub-frame">
             {featured ? (
               <PostCard
                 post={featured}
                 featured
-                title={t(`posts.${featured.key}.title`)}
-                excerpt={t(`posts.${featured.key}.excerpt`)}
+                title={
+                  featured.content?.title ?? t(`posts.${featured.key}.title`)
+                }
+                excerpt={
+                  featured.content?.excerpt ??
+                  t(`posts.${featured.key}.excerpt`)
+                }
                 readLabel={t("read")}
                 minRead={t("minRead", { minutes: featured.readingMinutes })}
               />
@@ -169,8 +190,13 @@ export default async function BlogIndexPage({ params }: Props) {
                       <li key={post.slug}>
                         <PostCard
                           post={post}
-                          title={t(`posts.${post.key}.title`)}
-                          excerpt={t(`posts.${post.key}.excerpt`)}
+                          title={
+                            post.content?.title ?? t(`posts.${post.key}.title`)
+                          }
+                          excerpt={
+                            post.content?.excerpt ??
+                            t(`posts.${post.key}.excerpt`)
+                          }
                           readLabel={t("read")}
                           minRead={t("minRead", {
                             minutes: post.readingMinutes,

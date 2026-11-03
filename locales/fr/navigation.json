@@ -254,6 +254,14 @@
         },
         "blog": {
           "label": "Blog"
+        },
+        "journal": {
+          "label": "Journal",
+          "desc": "Articles pour les dirigeants de l’hôtellerie."
+        },
+        "report": {
+          "label": "Le Decision Playbook",
+          "desc": "Demander le guide pratique en PDF."
         }
       }
     },

@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
     nodeMiddleware: true,
   },
   // Local PGlite / uploads must not be traced into serverless bundles.
+  outputFileTracingIncludes: {
+    "/api/reports/download": [
+      "./private/reports/RADR-Hospitality-Decision-Playbook-2026.pdf",
+    ],
+  },
   outputFileTracingExcludes: {
     "*": ["./.data/**/*", "./.tmp/**/*"],
   },
@@ -50,7 +55,11 @@ const nextConfig: NextConfig = {
     return [
       // Fold methodology dual-story into Platform architecture
       { source: "/how", destination: "/product", permanent: true },
-      { source: "/:locale(en|de|fr|nl|es)/how", destination: "/:locale/product", permanent: true },
+      {
+        source: "/:locale(en|de|fr|nl|es)/how",
+        destination: "/:locale/product",
+        permanent: true,
+      },
       { source: "/how/:path*", destination: "/product", permanent: true },
       {
         source: "/:locale(en|de|fr|nl|es)/how/:path*",
@@ -67,13 +76,37 @@ const nextConfig: NextConfig = {
       { source: "/documents/:id", destination: "/app/data", permanent: false },
       { source: "/scan", destination: "/app/data", permanent: false },
       // Product aliases
-      { source: "/app/performance", destination: "/app/forecast", permanent: false },
-      { source: "/app/performance/:path*", destination: "/app/forecast", permanent: false },
+      {
+        source: "/app/performance",
+        destination: "/app/forecast",
+        permanent: false,
+      },
+      {
+        source: "/app/performance/:path*",
+        destination: "/app/forecast",
+        permanent: false,
+      },
       { source: "/app/team", destination: "/app/settings", permanent: false },
-      { source: "/app/signals", destination: "/app/findings", permanent: false },
-      { source: "/app/signals/:id", destination: "/app/findings/:id", permanent: false },
-      { source: "/app/integrations", destination: "/app/connections", permanent: false },
-      { source: "/app/integrations/:path*", destination: "/app/connections", permanent: false },
+      {
+        source: "/app/signals",
+        destination: "/app/findings",
+        permanent: false,
+      },
+      {
+        source: "/app/signals/:id",
+        destination: "/app/findings/:id",
+        permanent: false,
+      },
+      {
+        source: "/app/integrations",
+        destination: "/app/connections",
+        permanent: false,
+      },
+      {
+        source: "/app/integrations/:path*",
+        destination: "/app/connections",
+        permanent: false,
+      },
     ];
   },
   productionBrowserSourceMaps: false,

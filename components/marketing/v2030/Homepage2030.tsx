@@ -288,6 +288,12 @@ export function Homepage2030() {
         <p className="rm-caption">
           Explore a clearly labeled demo. No connected system required.
         </p>
+        <Link
+          href="/resources/hospitality-decision-playbook"
+          className="rm-caption"
+        >
+          Get the Hospitality Decision Playbook →
+        </Link>
       </section>
     </div>
   );

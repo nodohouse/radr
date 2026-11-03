@@ -258,6 +258,14 @@
         },
         "contact": {
           "label": "Contact"
+        },
+        "journal": {
+          "label": "Journal",
+          "desc": "Articles for hospitality leaders."
+        },
+        "report": {
+          "label": "The Decision Playbook",
+          "desc": "Request the practical PDF report."
         }
       }
     },

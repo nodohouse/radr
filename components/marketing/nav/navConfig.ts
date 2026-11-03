@@ -124,6 +124,8 @@ export const SOLUTIONS_TERRITORIES = [
 ] as const;
 
 export const COMPANY_LINKS: DropLink[] = [
+  { href: "/blog", key: "journal" },
+  { href: "/resources/hospitality-decision-playbook", key: "report" },
   { href: "/company", key: "about" },
   { href: "/why", key: "why" },
   { href: "/security", key: "security" },

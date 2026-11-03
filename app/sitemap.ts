@@ -8,6 +8,7 @@ const BASE = "https://radrup.com";
 const PATHS = [
   "/",
   "/blog",
+  "/resources/hospitality-decision-playbook",
   ...BLOG_POSTS.map((p) => `/blog/${p.slug}`),
   "/glossary",
   "/solutions",
@@ -53,19 +54,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   return PATHS.flatMap((path) => {
+    const englishOnly =
+      path === "/resources/hospitality-decision-playbook" ||
+      BLOG_POSTS.some((post) => post.content && path === `/blog/${post.slug}`);
+    const pageLocales = englishOnly ? ["en"] : routing.locales;
     const languages: Record<string, string> = {
       "x-default": localizedUrl(routing.defaultLocale, path),
     };
-    for (const locale of routing.locales) {
+    for (const locale of pageLocales) {
       languages[locale] = localizedUrl(locale, path);
     }
 
     const isBlog = path === "/blog" || path.startsWith("/blog/");
 
-    return routing.locales.map((locale) => ({
+    return pageLocales.map((locale) => ({
       url: localizedUrl(locale, path),
       lastModified: now,
-      changeFrequency: path === "/" || isBlog ? ("weekly" as const) : ("monthly" as const),
+      changeFrequency:
+        path === "/" || isBlog ? ("weekly" as const) : ("monthly" as const),
       priority: path === "/" ? 1 : isBlog ? 0.8 : 0.7,
       alternates: { languages },
     }));

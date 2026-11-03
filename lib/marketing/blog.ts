@@ -1,6 +1,11 @@
+import { EDITORIAL_2026, type EditorialContent } from "./editorial2026";
 /** Static blog catalog - SEO surfaces for humans and AI crawlers. */
 
 export type BlogSlug =
+  | "a-supplier-credit-is-not-recovered-money"
+  | "the-forecast-gap-needs-a-decision"
+  | "a-full-hotel-can-still-have-a-margin-problem"
+  | "the-hidden-cost-of-your-bestseller"
   | "credits-flagged-never-cashed"
   | "the-decision-gap"
   | "what-is-hospitality-margin-intelligence"
@@ -12,6 +17,10 @@ export type BlogSlug =
   | "ask-radr-operating-evidence";
 
 export type BlogPostKey =
+  | "recoveryEvidence"
+  | "cfoForecast"
+  | "hotelContribution"
+  | "peakCapacity"
   | "creditsFlagged"
   | "whyWeExist"
   | "marginIntelligence"
@@ -24,6 +33,7 @@ export type BlogPostKey =
 
 export type BlogPostMeta = {
   slug: BlogSlug;
+  content?: EditorialContent;
   /** Key under blog.posts.* */
   key: BlogPostKey;
   date: string;
@@ -41,13 +51,47 @@ export type BlogPostMeta = {
 /** Newest first. Featured = credits-flagged-never-cashed. */
 export const BLOG_POSTS: BlogPostMeta[] = [
   {
+    slug: "the-hidden-cost-of-your-bestseller",
+    key: "peakCapacity",
+    date: "2026-11-03",
+    readingMinutes: 5,
+    territory: "SELL",
+    content: EDITORIAL_2026.peakCapacity,
+    featured: true,
+  },
+  {
+    slug: "a-full-hotel-can-still-have-a-margin-problem",
+    key: "hotelContribution",
+    date: "2026-11-03",
+    readingMinutes: 5,
+    territory: "SELL",
+    content: EDITORIAL_2026.hotelContribution,
+  },
+  {
+    slug: "the-forecast-gap-needs-a-decision",
+    key: "cfoForecast",
+    date: "2026-11-03",
+    readingMinutes: 5,
+    territory: "ALL",
+    content: EDITORIAL_2026.cfoForecast,
+  },
+  {
+    slug: "a-supplier-credit-is-not-recovered-money",
+    key: "recoveryEvidence",
+    date: "2026-11-03",
+    readingMinutes: 5,
+    territory: "RECOVER",
+    content: EDITORIAL_2026.recoveryEvidence,
+  },
+
+  {
     slug: "credits-flagged-never-cashed",
     key: "creditsFlagged",
     date: "2026-09-18",
     updated: "2026-09-18",
     readingMinutes: 6,
     territory: "RECOVER",
-    featured: true,
+    featured: false,
   },
   {
     slug: "the-decision-gap",

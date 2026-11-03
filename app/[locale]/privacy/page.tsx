@@ -53,7 +53,6 @@ export default async function PrivacyPage({ params }: Props) {
       draftLabel={t("draftNotice")}
       notice={notice}
     >
-
       {showDevWarn ? (
         <LegalPending>
           <strong>Development notice:</strong> legal entity fields in{" "}
@@ -100,8 +99,8 @@ export default async function PrivacyPage({ params }: Props) {
             plaintext).
           </li>
           <li>
-            <strong>Organization data</strong>: company / group details
-            provided during onboarding (for example country, locations).
+            <strong>Organization data</strong>: company / group details provided
+            during onboarding (for example country, locations).
           </li>
           <li>
             <strong>Business documents</strong>: PDFs and images you upload
@@ -138,13 +137,40 @@ export default async function PrivacyPage({ params }: Props) {
         </p>
       </LegalSection>
 
+      <LegalSection title="4a. Report requests and optional updates">
+        <p>
+          When you request a RADR report and sales follow-up, we collect your
+          name, work email, company, role, and location count to deliver the
+          report and respond about RADR. The request is delivered to the
+          configured lead-handling service before the download is unlocked.
+        </p>
+        <p>
+          Newsletter and article updates are a separate, optional choice. They
+          are not required for the report. Optional cookie consent is also
+          independent of the report request. Any future marketing email must
+          provide an unsubscribe option.
+        </p>
+        <p>
+          A signed, HttpOnly access cookie enables the requested report download
+          in the same browser for 30 minutes. It contains a report identifier
+          and expiry, without your contact details.
+        </p>
+      </LegalSection>
+
       <LegalSection title="5. Cookies">
         <p>
           Essential cookies may be used for authenticated product sessions
           (Better Auth session cookies).
         </p>
         <p>
-          The marketing website currently loads no third-party analytics or advertising trackers. The cookie preference panel lets you reject optional cookies, accept them, or save individual choices. Optional tracking stays off before a valid choice. You can change or withdraw your choice through Cookie settings in the footer or on the sign-in page. Your preference is stored in this browser for up to 180 days. Essential sign-in and security cookies do not depend on optional consent.
+          The marketing website currently loads no third-party analytics or
+          advertising trackers. The cookie preference panel lets you reject
+          optional cookies, accept them, or save individual choices. Optional
+          tracking stays off before a valid choice. You can change or withdraw
+          your choice through Cookie settings in the footer or on the sign-in
+          page. Your preference is stored in this browser for up to 180 days.
+          Essential sign-in and security cookies do not depend on optional
+          consent.
         </p>
       </LegalSection>
 
@@ -172,9 +198,8 @@ export default async function PrivacyPage({ params }: Props) {
       <LegalSection title="7. Data processors">
         <p>
           Depending on configuration, RADR may use infrastructure providers for
-          authentication, database, and object storage. A confirmed
-          subprocessor list will be published here once the production stack is
-          finalized.
+          authentication, database, and object storage. A confirmed subprocessor
+          list will be published here once the production stack is finalized.
         </p>
         <LegalPending>
           Subprocessor list: pending production confirmation. Do not assume
@@ -196,13 +221,13 @@ export default async function PrivacyPage({ params }: Props) {
         <p>
           Access to documents and organization data requires authentication and
           server-side authorization checks. See also the{" "}
-          <Link href="/security">Security</Link> page for controls that are
-          live versus in development.
+          <Link href="/security">Security</Link> page for controls that are live
+          versus in development.
         </p>
         <p>
-          No security measure is perfect. We do not claim certifications (SOC
-          2, ISO, etc.) on this site unless independently verified and listed
-          with scope and date.
+          No security measure is perfect. We do not claim certifications (SOC 2,
+          ISO, etc.) on this site unless independently verified and listed with
+          scope and date.
         </p>
       </LegalSection>
 

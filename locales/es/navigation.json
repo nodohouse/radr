@@ -254,6 +254,14 @@
         },
         "blog": {
           "label": "Blog"
+        },
+        "journal": {
+          "label": "Journal",
+          "desc": "Artículos para líderes de hostelería."
+        },
+        "report": {
+          "label": "El Decision Playbook",
+          "desc": "Solicita el informe práctico en PDF."
         }
       }
     },

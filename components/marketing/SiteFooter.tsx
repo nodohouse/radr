@@ -51,6 +51,10 @@ export function SiteFooter() {
   ];
 
   const COMPANY_LINKS = [
+    {
+      href: "/resources/hospitality-decision-playbook" as const,
+      label: "The Decision Playbook",
+    },
     { href: "/company" as const, label: t("about") },
     { href: "/why" as const, label: t("why") },
     { href: "/blog" as const, label: t("blog") },

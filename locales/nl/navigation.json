@@ -254,6 +254,14 @@
         },
         "blog": {
           "label": "Blog"
+        },
+        "journal": {
+          "label": "Journal",
+          "desc": "Artikelen voor hospitalityleiders."
+        },
+        "report": {
+          "label": "Het Decision Playbook",
+          "desc": "Vraag de praktische PDF aan."
         }
       }
     },
