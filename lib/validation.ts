@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { inferFromCity } from "@/lib/onboarding/places";
 import { validTimezone } from "@/lib/onboarding/requiredFields";
 import {
   ALLOWED_EXTENSIONS,
@@ -83,13 +82,6 @@ export const onboardingSchema = z
   })
   .superRefine((value, ctx) => {
     if (value.path !== "first_value") return;
-    const city = value.locationCity ? inferFromCity(value.locationCity) : null;
-    if (city && city.countryCode !== value.country)
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["country"],
-        message: "The selected city and country do not match.",
-      });
     for (const field of [
       "fullName",
       "roleLens",

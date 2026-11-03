@@ -45,7 +45,7 @@ test("login and recovery cannot submit incomplete or malformed fields", async ({
   await expect(page.locator("button[type=submit]")).toBeEnabled();
 });
 
-test("onboarding requires explicit choices and a complete matching location", async ({
+test("onboarding requires explicit choices and a complete reviewed location", async ({
   page,
 }) => {
   await page.goto(base + "/onboarding/preview");
@@ -72,9 +72,13 @@ test("onboarding requires explicit choices and a complete matching location", as
   });
   await expect(location).toBeDisabled();
   await page.getByLabel("City", { exact: true }).fill("Amsterdam");
-  await location.click();
-  await expect(page.locator(".ob-error")).toContainText("do not match");
+  await expect(location).toBeDisabled();
   await page.getByLabel("Country", { exact: true }).selectOption("NL");
+  await page.getByLabel("Location timezone", { exact: true }).fill("Not/AZone");
+  await expect(location).toBeDisabled();
+  await page
+    .getByLabel("Location timezone", { exact: true })
+    .fill("Europe/Amsterdam");
   await location.click();
   await expect(next).toBeDisabled();
   await page.getByRole("button", { name: /Supplier \/ AP/ }).click();
@@ -153,7 +157,7 @@ test("server rejects malformed credentials and bypassed onboarding gates", async
     },
     headers: { origin: base },
   });
-  expect(invalid.status(),await invalid.text()).toBe(400);
+  expect(invalid.status(), await invalid.text()).toBe(400);
   const created = await request.post(base + "/api/onboarding", {
     data: {
       path: "first_value",

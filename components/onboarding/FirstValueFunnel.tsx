@@ -181,7 +181,7 @@ export function FirstValueFunnel({
   const [country, setCountry] = useState(
     workspace?.onboarding.locationCountry ??
       workspace?.onboarding.hqCountry ??
-      "DE",
+      "",
   );
   const [timezoneOverride, setTimezoneOverride] = useState<string | null>(
     workspace?.onboarding.locationTimezone ??
@@ -435,13 +435,6 @@ export function FirstValueFunnel({
     if (pending || !locationReady) {
       setError(
         "Add your name, role, organization, industry, location count, location name, city, and country before continuing.",
-      );
-      return;
-    }
-    const place = inferFromCity(locationCity);
-    if (place && place.countryCode !== country) {
-      setError(
-        "The selected city and country do not match. Correct them before continuing.",
       );
       return;
     }
@@ -1008,6 +1001,9 @@ export function FirstValueFunnel({
                     setTimezoneOverride(null);
                   }}
                 >
+                  <option value="" disabled>
+                    Choose a country
+                  </option>
                   {ONBOARDING_COUNTRIES.map((c) => (
                     <option key={c.code} value={c.code}>
                       {c.name}
