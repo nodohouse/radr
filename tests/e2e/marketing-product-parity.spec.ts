@@ -2,6 +2,21 @@ import { test, expect } from "playwright/test";
 
 const base = process.env.PUBLIC_QA_BASE_URL ?? "http://127.0.0.1:3002";
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "radr.cookie-preferences.v1",
+      JSON.stringify({
+        version: 1,
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        savedAt: new Date().toISOString(),
+      }),
+    ),
+  );
+});
+
 test("homepage compares the same D-1911 used in the product", async ({
   page,
 }) => {

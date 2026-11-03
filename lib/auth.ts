@@ -5,7 +5,9 @@ import { db } from "@/lib/db";
 import * as schema from "@/lib/db/schema";
 
 const baseURL =
-  (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ??
+  (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : undefined) ??
   process.env.BETTER_AUTH_URL ??
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ??
   process.env.NEXT_PUBLIC_APP_URL;
@@ -21,7 +23,9 @@ if (isProd && !process.env.BETTER_AUTH_SECRET) {
 export const auth = betterAuth({
   appName: "RADR",
   baseURL,
-  trustedOrigins: [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL].filter((host): host is string => Boolean(host)).map(host => `https://${host}`),
+  trustedOrigins: [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL]
+    .filter((host): host is string => Boolean(host))
+    .map((host) => `https://${host}`),
   secret: process.env.BETTER_AUTH_SECRET,
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -35,6 +39,8 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 10,
+    maxPasswordLength: 128,
+    revokeSessionsOnPasswordReset: true,
     resetPasswordTokenExpiresIn: 60 * 60,
     sendResetPassword: async ({ user, url }) => {
       // Never log reset URLs or tokens in production.
@@ -69,6 +75,12 @@ export const auth = betterAuth({
     enabled: true,
     window: 60,
     max: 100,
+    customRules: {
+      "/sign-in/email": { window: 60, max: 10 },
+      "/sign-up/email": { window: 60, max: 5 },
+      "/request-password-reset": { window: 60, max: 3 },
+      "/reset-password": { window: 60, max: 5 },
+    },
   },
   advanced: {
     useSecureCookies: isProd,

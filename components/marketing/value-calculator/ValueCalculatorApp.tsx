@@ -1,4 +1,5 @@
 "use client";
+import { analyticsAllowed } from "@/lib/privacy/consent";
 
 /**
  * Value Calculator V2 ; guided operating-value diagnosis.
@@ -78,7 +79,7 @@ const ANALYZE_LINES = [
 ] as const;
 
 function track(event: string, props?: Record<string, string | number | boolean>) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || !analyticsAllowed()) return;
   try {
     const w = window as Window & {
       dataLayer?: unknown[];

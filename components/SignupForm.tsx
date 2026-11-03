@@ -1,4 +1,5 @@
 "use client";
+import { useAuthFormValidity } from "@/components/useAuthFormValidity";
 
 import { useTranslations } from "next-intl";
 import { FormEvent, useState } from "react";
@@ -30,14 +31,25 @@ export function SignupForm({
   available = true,
 }: Props) {
   const t = useTranslations("auth");
+  const fields = useAuthFormValidity("signup");
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const dest = safeDemoNext(nextPath, intent === "demo" ? "/app/enter" : "/onboarding");
+  const dest = safeDemoNext(
+    nextPath,
+    intent === "demo" ? "/app/enter" : "/onboarding",
+  );
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (
+      pending ||
+      !available ||
+      !fields.valid ||
+      !event.currentTarget.reportValidity()
+    )
+      return;
     setPending(true);
     setError(null);
     trackOnboarding("signup_started");
@@ -46,15 +58,23 @@ export function SignupForm({
     const password = String(form.get("password") ?? "");
     const name = email.split("@")[0] || "Operator";
 
-    if (inviteEmail && email.trim().toLowerCase() !== inviteEmail.toLowerCase()) {
+    if (
+      inviteEmail &&
+      email.trim().toLowerCase() !== inviteEmail.toLowerCase()
+    ) {
       setPending(false);
       setError(t("errors.inviteEmailMismatch"));
       return;
     }
 
     let result;
-    try { result = await authClient.signUp.email({ name, email, password }); }
-    catch { setPending(false); setError(t("errors.generic")); return; }
+    try {
+      result = await authClient.signUp.email({ name, email, password });
+    } catch {
+      setPending(false);
+      setError(t("errors.generic"));
+      return;
+    }
 
     if (result.error) {
       setPending(false);
@@ -66,17 +86,25 @@ export function SignupForm({
 
     if (inviteToken) {
       let accept;
-      try { accept = await fetch("/api/invitations", {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ token: inviteToken }),
-      }); } catch { setPending(false); setError(t("errors.inviteFailed")); return; }
+      try {
+        accept = await fetch("/api/invitations", {
+          method: "PUT",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ token: inviteToken }),
+        });
+      } catch {
+        setPending(false);
+        setError(t("errors.inviteFailed"));
+        return;
+      }
       if (accept.ok) {
         router.push(dest);
         router.refresh();
         return;
       }
-      setPending(false); setError(t("errors.inviteFailed")); return;
+      setPending(false);
+      setError(t("errors.inviteFailed"));
+      return;
     }
 
     setPending(false);
@@ -85,12 +113,19 @@ export function SignupForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="ob-auth-form">
+    <form
+      ref={fields.ref}
+      onInput={fields.update}
+      onChange={fields.update}
+      onSubmit={onSubmit}
+      className="ob-auth-form"
+    >
       <div className="ob-field">
         <label htmlFor="email">{t("workEmail")}</label>
         <input
           id="email"
           name="email"
+          maxLength={254}
           type="email"
           autoComplete="email"
           required
@@ -105,6 +140,7 @@ export function SignupForm({
           <input
             id="password"
             name="password"
+            maxLength={128}
             type={showPassword ? "text" : "password"}
             autoComplete="new-password"
             required
@@ -129,8 +165,22 @@ export function SignupForm({
         </div>
       ) : null}
 
-      {!available ? <p className="ob-entry-availability" role="status">{t("entryUnavailable")} <NextLink href="/onboarding/preview">{t("entryWalkthrough")}</NextLink></p> : null}
-      <button type="submit" className="ob-btn ob-btn-primary" disabled={pending || !available}>
+      {!available ? (
+        <p className="ob-entry-availability" role="status">
+          {t("entryUnavailable")}{" "}
+          <NextLink href="/onboarding/preview">
+            {t("entryWalkthrough")}
+          </NextLink>
+        </p>
+      ) : null}
+      <p className="ob-field-hint" role="status">
+        {!fields.valid ? t("signupRequired") : null}
+      </p>
+      <button
+        type="submit"
+        className="ob-btn ob-btn-primary"
+        disabled={pending || !available || !fields.valid}
+      >
         {pending ? (
           t("creating")
         ) : (

@@ -4,6 +4,10 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { COMPANY } from "./config/company";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
+import {
+  CookiePreferences,
+  CookieSettingsButton,
+} from "@/components/privacy/CookiePreferences";
 import { SocialIcons } from "./SocialIcons";
 import "@/app/kinetic.css";
 
@@ -73,56 +77,64 @@ export function SiteFooter() {
   ] as const;
 
   return (
-    <footer className="rx-footer" data-nav-theme="light">
-      <div className="rx-footer-bg" aria-hidden="true">
-        <div className="rx-footer-atm" />
-      </div>
+    <>
+      <CookiePreferences />
+      <footer className="rx-footer" data-nav-theme="light">
+        <div className="rx-footer-bg" aria-hidden="true">
+          <div className="rx-footer-atm" />
+        </div>
 
-      <div className="rx-shell rx-footer-content">
-        <div className="rx-footer-top">
-          <div className="rx-footer-brand">
-            <Link href="/" aria-label={t("homeAria")} className="rx-footer-home">
-              <FrozenRadrLogo
-                variant="wordmark"
-                theme="dark"
-                size="sm"
-                className="rx-footer-mark"
-              />
-            </Link>
-          </div>
-
-          <div className="rx-footer-cols">
-            {COLUMNS.map((col) => (
-              <nav
-                key={col.key}
-                className="rx-footer-col"
-                aria-label={col.title}
+        <div className="rx-shell rx-footer-content">
+          <div className="rx-footer-top">
+            <div className="rx-footer-brand">
+              <Link
+                href="/"
+                aria-label={t("homeAria")}
+                className="rx-footer-home"
               >
-                <p className="rx-footer-col-title">{col.title}</p>
-                <ul>
-                  {col.items.map((l) => (
-                    <li
-                      key={`${col.key}-${l.label}-${typeof l.href === "string" ? l.href : l.href.hash ?? l.href.pathname}`}
-                    >
-                      <Link href={l.href}>{l.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            ))}
-          </div>
-        </div>
+                <FrozenRadrLogo
+                  variant="wordmark"
+                  theme="dark"
+                  size="sm"
+                  className="rx-footer-mark"
+                />
+              </Link>
+            </div>
 
-        <div className="rx-footer-bottom">
-          <div className="rx-footer-bottom-row">
-            <SocialIcons withLabels={false} className="rx-footer-socials" />
+            <div className="rx-footer-cols">
+              {COLUMNS.map((col) => (
+                <nav
+                  key={col.key}
+                  className="rx-footer-col"
+                  aria-label={col.title}
+                >
+                  <p className="rx-footer-col-title">{col.title}</p>
+                  <ul>
+                    {col.items.map((l) => (
+                      <li
+                        key={`${col.key}-${l.label}-${typeof l.href === "string" ? l.href : (l.href.hash ?? l.href.pathname)}`}
+                      >
+                        <Link href={l.href}>{l.label}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              ))}
+            </div>
           </div>
-          <div className="rx-footer-meta">
-            <p className="rx-footer-copy">{tc("copyright", { year })}</p>
-            <p className="rx-footer-domain">{COMPANY.domain}</p>
+
+          <div className="rx-footer-bottom">
+            <div className="rx-footer-bottom-row">
+              <CookieSettingsButton />
+              <SocialIcons withLabels={false} className="rx-footer-socials" />
+            </div>
+            <div className="rx-footer-meta">
+              <p className="rx-footer-copy">{tc("copyright", { year })}</p>
+              <p className="rx-footer-domain">{COMPANY.domain}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }

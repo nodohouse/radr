@@ -1,4 +1,5 @@
 "use client";
+import { useAuthFormValidity } from "@/components/useAuthFormValidity";
 
 import { useTranslations } from "next-intl";
 import { FormEvent, useState } from "react";
@@ -9,8 +10,9 @@ import { AuthSsoBlock } from "@/components/AuthSsoBlock";
 import { authClient } from "@/lib/auth-client";
 import { safeInternalPath } from "@/lib/security/safe-redirect";
 
-export function LoginForm({available = true}: {available?: boolean}) {
+export function LoginForm({ available = true }: { available?: boolean }) {
   const t = useTranslations("auth");
+  const fields = useAuthFormValidity("login");
   const router = useRouter();
   const searchParams = useSearchParams();
   // Post-auth destinations (/onboarding, /app) are outside the locale tree.
@@ -21,6 +23,13 @@ export function LoginForm({available = true}: {available?: boolean}) {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (
+      pending ||
+      !available ||
+      !fields.valid ||
+      !event.currentTarget.reportValidity()
+    )
+      return;
     setPending(true);
     setError(null);
     const form = new FormData(event.currentTarget);
@@ -28,8 +37,13 @@ export function LoginForm({available = true}: {available?: boolean}) {
     const password = String(form.get("password") ?? "");
 
     let result;
-    try { result = await authClient.signIn.email({ email, password }); }
-    catch { setPending(false); setError(t("errors.generic")); return; }
+    try {
+      result = await authClient.signIn.email({ email, password });
+    } catch {
+      setPending(false);
+      setError(t("errors.generic"));
+      return;
+    }
 
     if (result.error) {
       setPending(false);
@@ -60,12 +74,19 @@ export function LoginForm({available = true}: {available?: boolean}) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="ob-auth-form">
+    <form
+      ref={fields.ref}
+      onInput={fields.update}
+      onChange={fields.update}
+      onSubmit={onSubmit}
+      className="ob-auth-form"
+    >
       <div className="ob-field">
         <label htmlFor="email">{t("workEmail")}</label>
         <input
           id="email"
           name="email"
+          maxLength={254}
           type="email"
           autoComplete="email"
           required
@@ -84,6 +105,7 @@ export function LoginForm({available = true}: {available?: boolean}) {
           <input
             id="password"
             name="password"
+            maxLength={128}
             type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             required
@@ -108,8 +130,22 @@ export function LoginForm({available = true}: {available?: boolean}) {
         </div>
       ) : null}
 
-      {!available ? <p className="ob-entry-availability" role="status">{t("entryUnavailable")} <NextLink href="/onboarding/preview">{t("entryWalkthrough")}</NextLink></p> : null}
-      <button type="submit" className="ob-btn ob-btn-primary" disabled={pending || !available}>
+      {!available ? (
+        <p className="ob-entry-availability" role="status">
+          {t("entryUnavailable")}{" "}
+          <NextLink href="/onboarding/preview">
+            {t("entryWalkthrough")}
+          </NextLink>
+        </p>
+      ) : null}
+      <p className="ob-field-hint" role="status">
+        {!fields.valid ? t("loginRequired") : null}
+      </p>
+      <button
+        type="submit"
+        className="ob-btn ob-btn-primary"
+        disabled={pending || !available || !fields.valid}
+      >
         {pending ? (
           t("signingIn")
         ) : (

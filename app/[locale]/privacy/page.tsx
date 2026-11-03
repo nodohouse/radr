@@ -144,9 +144,7 @@ export default async function PrivacyPage({ params }: Props) {
           (Better Auth session cookies).
         </p>
         <p>
-          The marketing website does not set non-essential analytics or
-          advertising cookies at this time. Because of that, no cookie consent
-          banner is shown for marketing tracking.
+          The marketing website currently loads no third-party analytics or advertising trackers. The cookie preference panel lets you reject optional cookies, accept them, or save individual choices. Optional tracking stays off before a valid choice. You can change or withdraw your choice through Cookie settings in the footer or on the sign-in page. Your preference is stored in this browser for up to 180 days. Essential sign-in and security cookies do not depend on optional consent.
         </p>
       </LegalSection>
 

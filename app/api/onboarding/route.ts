@@ -1,3 +1,5 @@
+import { sameOriginMutation } from "@/lib/onboarding/requiredFields";
+import { progressError } from "@/lib/onboarding/progressValidation";
 import { NextResponse } from "next/server";
 import { getAuthIdentity } from "@/lib/identity/provider";
 import {
@@ -9,10 +11,7 @@ import {
 import { onboardingPatchSchema, onboardingSchema } from "@/lib/validation";
 import { trackOnboarding } from "@/lib/onboarding/analytics";
 import { CLIENT_ERRORS } from "@/lib/security/errors";
-import {
-  clientKeyFromRequest,
-  rateLimit,
-} from "@/lib/security/rate-limit";
+import { clientKeyFromRequest, rateLimit } from "@/lib/security/rate-limit";
 
 export async function GET() {
   const identity = await getAuthIdentity();
@@ -31,6 +30,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!sameOriginMutation(request))
+    return NextResponse.json(
+      { error: "Invalid request origin" },
+      { status: 403 },
+    );
   const rl = rateLimit({
     key: clientKeyFromRequest(request, "onboarding-post"),
     limit: 10,
@@ -85,6 +89,11 @@ export async function POST(request: Request) {
 }
 
 export async function PATCH(request: Request) {
+  if (!sameOriginMutation(request))
+    return NextResponse.json(
+      { error: "Invalid request origin" },
+      { status: 403 },
+    );
   const rl = rateLimit({
     key: clientKeyFromRequest(request, "onboarding-patch"),
     limit: 40,
@@ -150,9 +159,23 @@ export async function PATCH(request: Request) {
     );
   }
 
+  const safePatch = { ...parsed.data };
+  // Analysis results come only from the server analysis endpoint, never from UI flags.
+  delete safePatch.firstDecision;
+  const merged = { ...workspace.onboarding, ...safePatch } as Partial<
+    import("@/lib/onboarding/types").OnboardingState
+  >;
+  const issue = hasStructural
+    ? progressError(
+        merged,
+        parsed.data.completedAt ? "done" : parsed.data.step,
+        Boolean(workspace.onboarding.firstDecision),
+      )
+    : null;
+  if (issue) return NextResponse.json({ error: issue }, { status: 400 });
   const next = await patchOnboardingState(
     workspace.organizationId,
-    parsed.data as Partial<import("@/lib/onboarding/types").OnboardingState>,
+    safePatch as Partial<import("@/lib/onboarding/types").OnboardingState>,
   );
 
   if (parsed.data.demoEnabled) {

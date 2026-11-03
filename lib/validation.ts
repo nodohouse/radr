@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { inferFromCity } from "@/lib/onboarding/places";
+import { validTimezone } from "@/lib/onboarding/requiredFields";
 import {
   ALLOWED_EXTENSIONS,
   ALLOWED_MIME_TYPES,
@@ -12,42 +14,98 @@ const countryCodes = ONBOARDING_COUNTRIES.map((c) => c.code) as [
   ...string[],
 ];
 
-export const onboardingSchema = z.object({
-  fullName: z.string().trim().max(120).optional(),
-  industry: z.enum(["restaurant_group","hotel_group","bar_nightlife","serviced_apartments","mixed_hospitality","other"]).optional(),
-  roleLens: z.string().trim().max(50).optional(),
-  organizationName: z.string().trim().min(2).max(120),
-  locationName: z.string().trim().min(2).max(120),
-  country: z.enum(countryCodes),
-  currency: z.enum(CURRENCIES),
-  locationBand: z.enum(["1", "2-5", "6-20", "21-50", "50+", "51-100", "100+"]).optional(),
-  hqCity: z.string().trim().max(120).optional(),
-  locationCity: z.string().trim().max(120).optional(),
-  venueType: z
-    .enum([
-      "restaurant",
-      "bar",
-      "hotel",
-      "cafe",
-      "other",
-      "boutique_hotel",
-      "serviced_apartments",
-      "vacation_rental",
-      "spa",
-    ])
-    .optional(),
-  timezone: z.string().trim().max(80).optional(),
-  operateFamilies: z.array(z.string()).optional(),
-  operateSubtypes: z.array(z.string()).optional(),
-  operatingUnits: z.array(z.string()).optional(),
-  roomCount: z.number().int().positive().optional(),
-  role: z.string().optional(),
-  helpFocus: z.array(z.string()).optional(),
-  selectedKpis: z.array(z.string()).optional(),
-  operatingProfileId: z.string().optional(),
-  pendingSystem: z.string().trim().max(40).optional(),
-  pendingSystemLabel: z.string().trim().max(80).optional(),
-});
+export const onboardingSchema = z
+  .object({
+    path: z.enum(["first_value", "legacy"]).optional(),
+    fullName: z.string().trim().min(2).max(120).optional(),
+    industry: z
+      .enum([
+        "restaurant_group",
+        "hotel_group",
+        "bar_nightlife",
+        "serviced_apartments",
+        "mixed_hospitality",
+        "other",
+      ])
+      .optional(),
+    roleLens: z
+      .enum([
+        "owner",
+        "ceo",
+        "cfo",
+        "coo",
+        "regional_ops",
+        "gm",
+        "procurement",
+        "finance",
+        "it_data",
+        "other",
+      ])
+      .optional(),
+    organizationName: z.string().trim().min(2).max(120),
+    locationName: z.string().trim().min(2).max(120),
+    country: z.enum(countryCodes),
+    currency: z.enum(CURRENCIES),
+    locationBand: z
+      .enum(["1", "2-5", "6-20", "21-50", "50+", "51-100", "100+"])
+      .optional(),
+    hqCity: z.string().trim().max(120).optional(),
+    locationCity: z.string().trim().min(2).max(120).optional(),
+    venueType: z
+      .enum([
+        "restaurant",
+        "bar",
+        "hotel",
+        "cafe",
+        "other",
+        "boutique_hotel",
+        "serviced_apartments",
+        "vacation_rental",
+        "spa",
+      ])
+      .optional(),
+    timezone: z
+      .string()
+      .trim()
+      .max(80)
+      .refine(validTimezone, "Choose a valid IANA timezone")
+      .optional(),
+    operateFamilies: z.array(z.string()).optional(),
+    operateSubtypes: z.array(z.string()).optional(),
+    operatingUnits: z.array(z.string()).optional(),
+    roomCount: z.number().int().positive().optional(),
+    role: z.string().optional(),
+    helpFocus: z.array(z.string()).optional(),
+    selectedKpis: z.array(z.string()).optional(),
+    operatingProfileId: z.string().optional(),
+    pendingSystem: z.string().trim().max(40).optional(),
+    pendingSystemLabel: z.string().trim().max(80).optional(),
+  })
+  .superRefine((value, ctx) => {
+    if (value.path !== "first_value") return;
+    const city = value.locationCity ? inferFromCity(value.locationCity) : null;
+    if (city && city.countryCode !== value.country)
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["country"],
+        message: "The selected city and country do not match.",
+      });
+    for (const field of [
+      "fullName",
+      "roleLens",
+      "industry",
+      "locationBand",
+      "locationCity",
+      "timezone",
+    ] as const) {
+      if (!value[field])
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [field],
+          message: "This field is required before continuing.",
+        });
+    }
+  });
 
 export type OnboardingInput = z.infer<typeof onboardingSchema>;
 
@@ -99,18 +157,21 @@ export const onboardingPatchSchema = z.object({
   firstWelcomeSeen: z.boolean().optional(),
   pendingSystem: z.string().trim().max(40).optional(),
   pendingSystemLabel: z.string().trim().max(80).optional(),
-  completedAt: z.string().optional(),
+  completedAt: z.string().datetime().optional(),
   operateFamilies: z.array(z.string()).optional(),
   operateSubtypes: z.array(z.string()).optional(),
   operatingUnits: z.array(z.string()).optional(),
   roomCount: z.number().int().positive().optional(),
   role: z.string().optional(),
   roleLens: z.string().optional(),
-  fullName: z.string().trim().max(120).optional(),
+  fullName: z.string().trim().min(2).max(120).optional(),
   industry: z.string().optional(),
-  reportingCurrency: z.string().optional(),
-  locationTimezone: z.string().optional(),
-  localCurrency: z.string().optional(),
+  reportingCurrency: z.enum(CURRENCIES).optional(),
+  locationTimezone: z
+    .string()
+    .refine(validTimezone, "Choose a valid IANA timezone")
+    .optional(),
+  localCurrency: z.enum(CURRENCIES).optional(),
   decisionClass: z
     .enum([
       "supplier_ap",
@@ -129,19 +190,21 @@ export const onboardingPatchSchema = z.object({
   selectedKpis: z.array(z.string()).optional(),
   operatingProfileId: z.string().optional(),
   venueType: z.string().optional(),
-  organizationName: z.string().optional(),
-  locationName: z.string().optional(),
+  organizationName: z.string().trim().min(2).max(120).optional(),
+  locationName: z.string().trim().min(2).max(120).optional(),
   locationBand: z
     .enum(["1", "2-5", "6-20", "21-50", "50+", "51-100", "100+"])
     .optional(),
-  locationCity: z.string().optional(),
-  locationCountry: z.string().optional(),
+  locationCity: z.string().trim().min(2).max(120).optional(),
+  locationCountry: z.enum(countryCodes).optional(),
   hqCity: z.string().optional(),
-  currency: z.string().optional(),
-  timezone: z.string().optional(),
+  currency: z.enum(CURRENCIES).optional(),
+  timezone: z
+    .string()
+    .refine(validTimezone, "Choose a valid IANA timezone")
+    .optional(),
   startedAt: z.string().optional(),
 });
-
 
 export const uploadMetaSchema = z.object({
   organizationId: z.string().uuid(),
@@ -234,7 +297,9 @@ export function assertAllowedUpload(file: {
 
   if (
     file.type &&
-    !ALLOWED_MIME_TYPES.includes(file.type as (typeof ALLOWED_MIME_TYPES)[number])
+    !ALLOWED_MIME_TYPES.includes(
+      file.type as (typeof ALLOWED_MIME_TYPES)[number],
+    )
   ) {
     throw new Error("Unsupported file type");
   }
@@ -258,7 +323,10 @@ export function assertAllowedUploadBytes(params: {
     throw new Error("Empty or corrupt upload");
   }
 
-  if (params.size > MAX_UPLOAD_BYTES || params.bytes.length > MAX_UPLOAD_BYTES) {
+  if (
+    params.size > MAX_UPLOAD_BYTES ||
+    params.bytes.length > MAX_UPLOAD_BYTES
+  ) {
     throw new Error("File exceeds size limit");
   }
 
@@ -268,7 +336,9 @@ export function assertAllowedUploadBytes(params: {
   }
 
   if (
-    !ALLOWED_MIME_TYPES.includes(detected as (typeof ALLOWED_MIME_TYPES)[number])
+    !ALLOWED_MIME_TYPES.includes(
+      detected as (typeof ALLOWED_MIME_TYPES)[number],
+    )
   ) {
     throw new Error("Unsupported file type");
   }

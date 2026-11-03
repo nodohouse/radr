@@ -1,4 +1,5 @@
 "use client";
+import { useAuthFormValidity } from "@/components/useAuthFormValidity";
 
 import { useTranslations } from "next-intl";
 import { FormEvent, useState } from "react";
@@ -8,6 +9,7 @@ import { authClient } from "@/lib/auth-client";
 
 export function ResetPasswordForm() {
   const t = useTranslations("auth");
+  const fields = useAuthFormValidity("reset");
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token") ?? "";
@@ -17,6 +19,13 @@ export function ResetPasswordForm() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (
+      pending ||
+      !token ||
+      !fields.valid ||
+      !event.currentTarget.reportValidity()
+    )
+      return;
     if (!token) {
       setError(t("errors.invalidResetLink"));
       return;
@@ -34,8 +43,13 @@ export function ResetPasswordForm() {
     }
 
     let result;
-    try { result = await authClient.resetPassword({newPassword, token}); }
-    catch { setPending(false); setError(t("errors.generic")); return; }
+    try {
+      result = await authClient.resetPassword({ newPassword, token });
+    } catch {
+      setPending(false);
+      setError(t("errors.generic"));
+      return;
+    }
     setPending(false);
 
     if (result.error) {
@@ -48,7 +62,13 @@ export function ResetPasswordForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="ob-auth-form">
+    <form
+      ref={fields.ref}
+      onInput={fields.update}
+      onChange={fields.update}
+      onSubmit={onSubmit}
+      className="ob-auth-form"
+    >
       {!token ? (
         <p className="ob-error" role="alert">
           {t("errors.invalidResetLink")}
@@ -60,6 +80,7 @@ export function ResetPasswordForm() {
           <input
             id="password"
             name="password"
+            maxLength={128}
             type={showPassword ? "text" : "password"}
             autoComplete="new-password"
             required
@@ -95,10 +116,13 @@ export function ResetPasswordForm() {
           </p>
         </div>
       ) : null}
+      <p className="ob-field-hint" role="status">
+        {!fields.valid ? t("resetRequired") : null}
+      </p>
       <button
         type="submit"
         className="ob-btn ob-btn-primary"
-        disabled={pending || !token}
+        disabled={pending || !token || !fields.valid}
       >
         {pending ? (
           t("updating")

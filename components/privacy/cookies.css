@@ -1,0 +1,136 @@
+.radr-cookies {
+  position: fixed;
+  inset: auto 24px 24px auto;
+  margin: 0;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 28px;
+  border: 1px solid #fff;
+  border-radius: 22px;
+  background: linear-gradient(120deg, #fcfeff, #edf6f6);
+  color: #163c59;
+  font-family: var(--font-entry), Arial, sans-serif;
+  box-shadow: 0 25px 100px #12384e38;
+  z-index: 1000;
+}
+.radr-cookies::backdrop {
+  background: #102c4340;
+  backdrop-filter: blur(3px);
+}
+.radr-cookies-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #087653;
+  font-weight: 750;
+}
+.radr-cookies-head button {
+  background: none;
+  border: 0;
+  color: #163c59;
+  font-size: 26px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+.radr-cookies h2 {
+  font-size: 27px;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin: 15px 0;
+}
+.radr-cookies p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #48657a;
+}
+.radr-cookie-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 22px 0;
+}
+.radr-cookie-actions button {
+  flex: 1 1 140px;
+  background: #163e54;
+  color: #fff;
+  border: 1px solid #163e54;
+  border-radius: 10px;
+  min-height: 46px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.radr-cookie-actions button:last-child {
+  background: #fff;
+  color: #163c59;
+  border-color: #a8bfce;
+}
+.radr-cookies > a {
+  font-size: 12px;
+  color: #087653;
+}
+.radr-cookie-options {
+  border-block: 1px solid #cadbe2;
+  margin-top: 18px;
+}
+.radr-cookie-options > div,
+.radr-cookie-options > label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid #dce6eb;
+  font-size: 12px;
+}
+.radr-cookie-options > div {
+  flex-wrap: wrap;
+}
+.radr-cookie-options span {
+  flex: 1;
+}
+.radr-cookie-options small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #48657a;
+  margin-top: 5px;
+}
+.radr-cookie-options input {
+  width: 20px;
+  height: 20px;
+  accent-color: #087653;
+}
+.radr-cookie-options b {
+  color: #087653;
+  font-size: 10px;
+}
+.radr-cookie-settings {
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 8px 0;
+  text-decoration: underline;
+}
+.radr-cookies :is(button, input, a):focus-visible {
+  outline: 3px solid #225da2;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .radr-cookies {
+    inset: auto 16px 16px;
+    padding: 22px;
+  }
+  .radr-cookies h2 {
+    font-size: 25px;
+  }
+}
