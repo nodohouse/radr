@@ -377,3 +377,21 @@ html
   .rp-mobile-tab[data-active="true"]:after {
   background: var(--brand-jade);
 }
+html
+  body
+  .rp-premium
+  .rs-navigation
+  .rs-nav-items
+  > a[data-active="true"]
+  .rs-nav-context {
+  color: #dbeafa;
+}
+html
+  body
+  .rp-premium
+  .rs-navigation
+  .rs-nav-items
+  > a[data-active="true"]
+  .rs-nav-direction {
+  color: var(--brand-jade);
+}
