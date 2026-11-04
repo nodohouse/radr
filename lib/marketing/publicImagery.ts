@@ -40,6 +40,41 @@ const MKT = { w: 1280, h: 720 } as const;
  * Assignments are intentional and exclusive.
  */
 export const MARKETING_IMAGES = {
+  reportHospitalityScene: {
+    id: "reportHospitalityScene",
+    src: "/marketing/reports/hospitality-scene.jpg",
+    alt: "Illustrated restaurant opening into a hotel lobby at service time",
+    nativeWidth: 1536,
+    nativeHeight: 1024,
+    cssMax: 600,
+    focalX: "50%",
+    focalY: "50%",
+    route: "/en/resources/hospitality-decision-playbook",
+    usage: "Hospitality Decision Playbook / cover and publication invitation",
+    topic: "hospitality operating decisions",
+    vertical: "cross",
+    kind: "photo",
+    credit:
+      "AI-generated editorial illustration / fictional venue / RADR Editorial, November 2026",
+  },
+  reportKitchenService: {
+    id: "reportKitchenService",
+    src: "/marketing/reports/kitchen-service.jpg",
+    alt: "Illustrated chefs working during restaurant dinner service",
+    nativeWidth: 1536,
+    nativeHeight: 1024,
+    cssMax: 600,
+    focalX: "50%",
+    focalY: "50%",
+    route: "/en/resources/hospitality-decision-playbook",
+    usage: "Hospitality Decision Playbook / restaurant capacity example",
+    topic: "kitchen capacity",
+    vertical: "restaurant",
+    kind: "photo",
+    credit:
+      "AI-generated editorial illustration / fictional venue / RADR Editorial, November 2026",
+  },
+
   /* ── HOME evidence ───────────────────────────────── */
   homeRestaurantEconomics: {
     id: "homeRestaurantEconomics",
@@ -526,7 +561,9 @@ export function assertUniquePhotographicAssets(): string[] {
   const errors: string[] = [];
   for (const [src, ids] of photographicSrcOwners()) {
     if (ids.length > 1) {
-      errors.push(`${src} assigned to multiple editorial IDs: ${ids.join(", ")}`);
+      errors.push(
+        `${src} assigned to multiple editorial IDs: ${ids.join(", ")}`,
+      );
     }
   }
   return errors;

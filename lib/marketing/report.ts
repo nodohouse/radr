@@ -5,6 +5,6 @@ export const HOSPITALITY_REPORT = {
     "A practical field guide for CFOs, general managers, and hospitality operators.",
   edition: "November 2026",
   filename: "RADR-Hospitality-Decision-Playbook-2026.pdf",
-  pages: 11,
+  pages: 16,
   path: "/resources/hospitality-decision-playbook",
 } as const;

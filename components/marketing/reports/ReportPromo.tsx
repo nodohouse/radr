@@ -1,38 +1,17 @@
-import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { HOSPITALITY_REPORT as report } from "@/lib/marketing/report";
 import "./reports.css";
 export function ReportCover() {
   return (
-    <div
-      className="rr-cover"
-      aria-label="The Hospitality Decision Playbook, November 2026"
-    >
-      <div className="rr-cover-brand">
-        <FrozenRadrLogo variant="mark" theme="dark" width={28} />
-        <span>OPERATOR SERIES</span>
-      </div>
-      <div>
-        <small>THE HOSPITALITY</small>
-        <strong>
-          Decision
-          <br />
-          Playbook.
-        </strong>
-        <i>Evidence. Judgment. Action.</i>
-      </div>
-      <div className="rr-cover-loop" aria-hidden="true">
-        <b>CONNECT</b>
-        <b>UNDERSTAND</b>
-        <b>FUTURES</b>
-        <b>DECIDE</b>
-        <b>VERIFY</b>
-        <b>REMEMBER</b>
-      </div>
-      <footer>
-        <span>{report.edition}</span>
-        <span>FIELD GUIDE / 01</span>
-      </footer>
+    <div className="rr-cover rr-cover-real">
+      <Image
+        src="/marketing/reports/playbook-cover-preview.png"
+        alt="Actual report cover: The Hospitality Decision Playbook, with a restaurant and hotel interior"
+        width={778}
+        height={1100}
+        sizes="(max-width: 700px) 300px, 400px"
+      />
     </div>
   );
 }
@@ -42,12 +21,13 @@ export function ReportPromo() {
       <div>
         <span className="rm-eyebrow">THE RADR OPERATOR SERIES</span>
         <h2>
-          Better decisions.
-          <br />A practical place to start.
+          The margin you can still protect.
+          <br />A clearer place to start.
         </h2>
         <p>
           Get the {report.pages}-page Hospitality Decision Playbook, including
-          an evidence scorecard and a 30-day pilot plan.
+          six research sources, visual operating examples, a business-case
+          worksheet, and a 30-day pilot plan.
         </p>
         <Link href={report.path} className="rm-button">
           Request the report →
