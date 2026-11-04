@@ -125,7 +125,8 @@ def big(value,label,x,y,w=150):
  para(escape(label),x+15,y-55,w-30,'small')
 
 # 01 / Editorial cover
-c.setFillColor(INK);c.rect(0,0,W,H,fill=1,stroke=0)
+c.saveState();cover_clip=c.beginPath();cover_clip.rect(0,0,W,H);c.clipPath(cover_clip,stroke=0,fill=0)
+c.linearGradient(0,0,W,0,[HexColor(PALETTE['sapphire']),HexColor(PALETTE['ocean'])]);c.restoreState()
 photo('hospitality-scene.jpg',0,0,W,480)
 c.setFillColor(Color(.025,.12,.20,alpha=.75));c.rect(0,0,W,480,fill=1,stroke=0)
 c.setFillColor(MINT);c.rect(0,H-8,W,8,fill=1,stroke=0)

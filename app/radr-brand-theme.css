@@ -1,15 +1,16 @@
 /* Sapphire and ocean carry the brand. Neon jade earns attention at the point of action.
    Values are shared with editorial exports through lib/brand/palette.json. */
 :root {
-  --brand-atmosphere:
-    radial-gradient(ellipse 1100px 750px at 92% 4%, #244c911c, transparent 80%),
-    radial-gradient(ellipse 1000px 900px at 5% 70%, #176b7d13, transparent 85%),
-    linear-gradient(145deg, #f8fbff, #edf3fb 65%, #eff8fa);
+  --brand-atmosphere: linear-gradient(
+    90deg,
+    #e0e9f8 0%,
+    #e0edf5 50%,
+    #e0f0f3 100%
+  );
   --brand-depth: linear-gradient(
-    125deg,
-    var(--brand-deep),
-    var(--brand-sapphire) 55%,
-    var(--brand-ocean)
+    90deg,
+    var(--brand-sapphire) 0%,
+    var(--brand-ocean) 100%
   );
   --brand-focus: 0 0 0 3px #244c9140;
 }
@@ -394,4 +395,67 @@ html
   > a[data-active="true"]
   .rs-nav-direction {
   color: var(--brand-jade);
+}
+
+/* The signature is a continuous horizontal blue transition, with jade on top. */
+html body .radr:has(.rx-nav) .rm-hero {
+  position: relative;
+  isolation: isolate;
+}
+html body .radr:has(.rx-nav) .rm-hero:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  background: var(--brand-depth);
+}
+html body .radr:has(.rx-nav) .rx30-bleed.rm-page-hero-grid {
+  background: var(--brand-depth) !important;
+}
+html body .radr:has(.rx-nav) .rm-hero-copy :is(h1, .rm-lead, .rm-caption),
+html
+  body
+  .radr:has(.rx-nav)
+  .rm-page-hero-grid
+  .rx30-bleed-copy
+  :is(h1, .rx30-bleed-h1, .rx30-bleed-lead, .rx30-lead, .rx30-demo-label) {
+  color: #f4f9ff !important;
+}
+html body .radr:has(.rx-nav) .rm-hero-copy h1 em,
+html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-copy h1 em {
+  color: #d8f0ff !important;
+}
+html body .radr:has(.rx-nav) .rm-hero-copy .rm-eyebrow,
+html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-copy .rx30-kicker {
+  color: #d0f7ee !important;
+}
+html body .radr:has(.rx-nav) .rm-hero-copy .rm-eyebrow > span {
+  background: var(--brand-jade);
+}
+html
+  body
+  .radr:has(.rx-nav)
+  .rm-page-hero-grid
+  :is(.rx30-bleed-silk, .rx30-bleed-glow, .rx30-bleed-mesh) {
+  display: none;
+}
+html body .ob-auth .ob-entry-story,
+html body .ob-journey {
+  background: var(--brand-depth);
+}
+html body .radr:has(.rx-nav) .rm-hero .rm-loop {
+  border-color: #ffffff38;
+}
+html body .radr:has(.rx-nav) .rm-hero .rm-loop > span {
+  color: #f4f9ff;
+}
+html body .radr:has(.rx-nav) .rm-hero .rm-loop small {
+  color: #c5f8e8;
+}
+html body .radr:has(.rx-nav) .rm-hero .rm-loop b {
+  color: #d8f0ff;
 }

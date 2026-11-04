@@ -1,6 +1,6 @@
 # RADR color system / November 2026
 
-Two quiet foundations, one loud signal. The approved RADR v4 logo and its original green dot remain immutable.
+Two quiet foundations, one loud signal. The signature treatment is a smooth 90-degree gradient: sapphire at the left edge, ocean at the right edge. Neon jade sits above the gradient on actions and signals, never as a third gradient stop. The approved RADR v4 logo and its original green dot remain immutable.
 
 | Role | Color | Usage |
 | --- | --- | --- |
