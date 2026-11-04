@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   if (!parsed.success || parsed.data.website)
     return reply(
       {
-        error: "Please complete the required fields and confirm your request.",
+        error: "Please complete the required fields.",
       },
       400,
     );
@@ -78,13 +78,15 @@ export async function POST(request: Request) {
         },
         body: JSON.stringify({
           ...lead,
-          interest: "report-and-sales-follow-up",
+          interest: lead.requestContact
+            ? "report-and-sales-follow-up"
+            : "playbook-download",
           source: "radr-report",
           reportId: HOSPITALITY_REPORT.id,
           receivedAt: new Date().toISOString(),
           requestId,
-          privacyNoticeVersion: "2026-11-03",
-          followUpRequested: true,
+          privacyNoticeVersion: "2026-11-04",
+          followUpRequested: lead.requestContact,
         }),
         redirect: "error",
         signal: AbortSignal.timeout(10000),

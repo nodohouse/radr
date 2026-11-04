@@ -41,7 +41,7 @@ export function ReportLeadForm({ available }: { available: boolean }) {
           company: data.get("company"),
           role: data.get("role"),
           locations: data.get("locations"),
-          requestContact: data.get("requestContact") === "on",
+          requestContact: false,
           marketingOptIn: data.get("marketingOptIn") === "on",
           website: data.get("website") || "",
         }),
@@ -88,12 +88,9 @@ export function ReportLeadForm({ available }: { available: boolean }) {
   if (done)
     return (
       <div className="rr-form rr-success" role="status">
-        <span className="rm-eyebrow">YOUR REPORT IS READY</span>
-        <h2>Good decisions start here.</h2>
-        <p>
-          We received your report request and your request for a sales
-          follow-up. Download the English PDF below.
-        </p>
+        <span className="rm-eyebrow">YOUR PLAYBOOK IS READY</span>
+        <h2>Your playbook is ready.</h2>
+        <p>Download your English PDF below.</p>
         <button
           className="rm-button"
           type="button"
@@ -133,12 +130,9 @@ export function ReportLeadForm({ available }: { available: boolean }) {
       onChange={update}
       onInput={update}
     >
-      <span className="rm-eyebrow">GET THE PLAYBOOK + TALK TO RADR</span>
-      <h2>A smarter starting point for your operation.</h2>
-      <p>
-        Tell us a little about your business. We’ll unlock the report and follow
-        up about where RADR could fit.
-      </p>
+      <span className="rm-eyebrow">THE RADR OPERATOR SERIES</span>
+      <h2>Get the playbook.</h2>
+      <p>Fill in your details to unlock the complete 16-page guide.</p>
       <label>
         Full name
         <input
@@ -203,13 +197,6 @@ export function ReportLeadForm({ available }: { available: boolean }) {
         </label>
       </div>
       <label className="rr-check">
-        <input name="requestContact" type="checkbox" required />
-        <span>
-          I request the report and a sales follow-up about RADR. I have read the{" "}
-          <Link href="/privacy">privacy notice</Link>.
-        </span>
-      </label>
-      <label className="rr-check">
         <input name="marketingOptIn" type="checkbox" />
         <span>
           Also send me occasional RADR articles and updates. Optional; I can
@@ -224,8 +211,7 @@ export function ReportLeadForm({ available }: { available: boolean }) {
       </div>
       {!available ? (
         <p className="rr-availability" role="status">
-          Report requests open soon. Lead delivery is being connected; this form
-          is not accepting personal details yet.
+          Playbook downloads open soon. Please check back shortly.
         </p>
       ) : null}
       {error ? (
@@ -238,13 +224,12 @@ export function ReportLeadForm({ available }: { available: boolean }) {
         className="rm-button"
         disabled={!ready || pending || !available}
       >
-        {pending
-          ? "Sending your request…"
-          : "Request report & sales follow-up →"}
+        {pending ? "Sending your request…" : "Get the playbook →"}
       </button>
       <p className="rr-small">
-        Required fields must be complete. Newsletter signup and optional cookies
-        are not required to receive the report.
+        By requesting the playbook, you acknowledge our{" "}
+        <Link href="/privacy">privacy notice</Link>. Updates and optional
+        cookies are not required. No sales call is required.
       </p>
     </form>
   );

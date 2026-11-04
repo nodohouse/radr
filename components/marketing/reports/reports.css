@@ -2,8 +2,8 @@
   padding-top: 150px !important;
   padding-bottom: 50px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
+  grid-template-columns: minmax(0, 1.45fr) minmax(340px, 1fr);
+  gap: 56px;
   align-items: start;
 }
 .rr-page h1 {
@@ -674,12 +674,7 @@ html
 .rr-promo .rr-cover.rr-cover-real {
   padding: 0;
 }
-@media (min-width: 1000px) {
-  .rr-page > #request-report {
-    position: sticky;
-    top: 110px;
-  }
-}
+
 @media (max-width: 700px) {
   .rr-research-strip {
     grid-template-columns: 1fr;
@@ -701,5 +696,72 @@ html
   }
   .rr-book-stage {
     padding: 26px 20px;
+  }
+}
+
+/* Every editorial section stays in the left column. The form stays in normal flow. */
+.rr-report-copy,
+.rr-page > #request-report {
+  min-width: 0;
+}
+.rr-page > #request-report {
+  position: static;
+  align-self: start;
+  scroll-margin-top: 140px;
+}
+.rr-report-copy > :is(.rr-research-strip, .rr-spreads) {
+  margin-top: 48px;
+}
+.rr-report-copy .rr-research-strip {
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.rr-report-copy .rr-research-strip > div {
+  grid-column: 1 / -1;
+}
+.rr-report-copy .rr-spreads-heading {
+  align-items: flex-start;
+  flex-direction: column;
+}
+.rr-report-copy .rr-preview-grid {
+  grid-template-columns: 1fr;
+}
+.rr-form {
+  position: static;
+  width: 100%;
+  box-sizing: border-box;
+}
+.rr-form > label,
+.rr-form-row > label {
+  font-size: 14px;
+}
+.rr-form label.rr-check {
+  font-size: 13px;
+}
+.rr-form .rr-small {
+  font-size: 12px;
+}
+.rr-form .rr-small a {
+  color: #087653;
+  text-decoration: underline;
+}
+.rr-mobile-cta {
+  display: none;
+}
+@media (max-width: 950px) {
+  .rr-page {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+  .rr-mobile-cta {
+    display: inline-flex;
+  }
+  .rr-page > #request-report {
+    width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .rr-report-copy .rr-research-strip {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

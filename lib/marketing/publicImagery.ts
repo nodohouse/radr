@@ -1,5 +1,7 @@
 /**
  * Global public marketing imagery registry.
+ * Generated hospitality imagery must show spaces and equipment only.
+ * No AI-generated people, silhouettes, faces, hands, or human reflections.
  * HARD RULE: each photographic `src` may appear on at most one editorial ID.
  * Product screenshots / mockups may repeat intentionally.
  *
@@ -43,7 +45,7 @@ export const MARKETING_IMAGES = {
   reportHospitalityScene: {
     id: "reportHospitalityScene",
     src: "/marketing/reports/hospitality-scene.jpg",
-    alt: "Illustrated restaurant opening into a hotel lobby at service time",
+    alt: "Empty restaurant interior opening into a hotel lobby, with no people",
     nativeWidth: 1536,
     nativeHeight: 1024,
     cssMax: 600,
@@ -60,7 +62,7 @@ export const MARKETING_IMAGES = {
   reportKitchenService: {
     id: "reportKitchenService",
     src: "/marketing/reports/kitchen-service.jpg",
-    alt: "Illustrated chefs working during restaurant dinner service",
+    alt: "Empty commercial restaurant kitchen with stainless steel preparation surfaces and no people",
     nativeWidth: 1536,
     nativeHeight: 1024,
     cssMax: 600,

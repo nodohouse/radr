@@ -30,9 +30,11 @@ export function ReportPromo() {
           worksheet, and a 30-day pilot plan.
         </p>
         <Link href={report.path} className="rm-button">
-          Request the report →
+          Get the playbook →
         </Link>
-        <small>English PDF · Report request includes a sales follow-up.</small>
+        <small>
+          English PDF · Practical tools for your next operating review.
+        </small>
       </div>
       <ReportCover />
     </aside>

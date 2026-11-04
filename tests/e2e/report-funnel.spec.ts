@@ -54,7 +54,7 @@ test("PDF is gated, fields are required, and delivered leads unlock a real downl
   );
   await page.goto(base + "/en/resources/hospitality-decision-playbook");
   const submit = page.getByRole("button", {
-    name: "Request report & sales follow-up →",
+    name: "Get the playbook →",
     exact: true,
   });
   await expect(submit).toBeDisabled();
@@ -67,12 +67,11 @@ test("PDF is gated, fields are required, and delivered leads unlock a real downl
     .fill("Example Hospitality");
   await page.getByLabel("Your role", { exact: true }).selectOption("finance");
   await page.getByLabel("Locations", { exact: true }).selectOption("2-5");
-  await expect(submit).toBeDisabled();
-  await page.getByLabel(/I request the report/).check();
+  await expect(submit).toBeEnabled();
   await expect(page.getByLabel(/Also send me/)).not.toBeChecked();
   await submit.click();
   await expect(
-    page.getByRole("heading", { name: "Good decisions start here." }),
+    page.getByRole("heading", { name: "Your playbook is ready." }),
   ).toBeVisible();
   const downloadEvent = page.waitForEvent("download");
   await page
@@ -88,7 +87,8 @@ test("PDF is gated, fields are required, and delivered leads unlock a real downl
   expect(pdf.headers()["cache-control"]).toContain("no-store");
   const sink = await request.get("http://127.0.0.1:4100/status");
   const state = await sink.json();
-  expect(state.last.followUpRequested).toBe(true);
+  expect(state.last.followUpRequested).toBe(false);
+  expect(state.last.interest).toBe("playbook-download");
   expect(state.last.marketingOptIn).toBe(false);
   expect(state.last.source).toBe("radr-report");
 });
@@ -142,4 +142,43 @@ test("mobile report page stays readable and navigation exposes journal and repor
       .locator(".rx-nav-drawer")
       .getByRole("link", { name: "The Decision Playbook", exact: true }),
   ).toBeVisible();
+});
+
+test("report information and form occupy separate columns throughout scrolling", async ({
+  page,
+}) => {
+  for (const width of [1512, 1024]) {
+    await page.setViewportSize({ width, height: 982 });
+    await page.goto(base + "/en/resources/hospitality-decision-playbook");
+    const form = page.locator("#request-report");
+    await expect(
+      form.getByRole("heading", { name: "Get the playbook." }),
+    ).toBeVisible();
+    for (const target of [
+      ".rr-report-copy h1",
+      ".rr-contents",
+      ".rr-research-strip",
+      ".rr-spreads",
+    ]) {
+      await page.locator(target).scrollIntoViewIfNeeded();
+      const bounds = await page.evaluate((selector) => {
+        const content = document
+          .querySelector(selector)!
+          .getBoundingClientRect();
+        const form = document
+          .querySelector("#request-report")!
+          .getBoundingClientRect();
+        return {
+          contentRight: content.right,
+          formLeft: form.left,
+          overflow: document.documentElement.scrollWidth > innerWidth,
+          position: getComputedStyle(document.querySelector("#request-report")!)
+            .position,
+        };
+      }, target);
+      expect(bounds.contentRight).toBeLessThan(bounds.formLeft);
+      expect(bounds.overflow).toBe(false);
+      expect(bounds.position).toBe("static");
+    }
+  }
 });

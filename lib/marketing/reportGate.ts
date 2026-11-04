@@ -17,7 +17,7 @@ export const reportLeadSchema = z
       "other",
     ]),
     locations: z.enum(["1", "2-5", "6-20", "21-50", "50+"]),
-    requestContact: z.literal(true),
+    requestContact: z.boolean().default(false),
     marketingOptIn: z.boolean().default(false),
     website: z.string().max(200).optional().default(""),
   })

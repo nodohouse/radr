@@ -38,7 +38,7 @@ describe("report access boundary", () => {
     );
     expect(verifyReportGrant(grant, now)).toBe(false);
   });
-  it("requires the contact request but leaves newsletter opt-in optional", () => {
+  it("requires lead details without requiring sales or newsletter opt-in", () => {
     const data = {
       fullName: "Taylor Morgan",
       email: "taylor@example.test",
@@ -49,14 +49,11 @@ describe("report access boundary", () => {
     };
     expect(reportLeadSchema.safeParse(data).success).toBe(true);
     expect(reportLeadSchema.parse(data).marketingOptIn).toBe(false);
-    for (const field of [
-      "fullName",
-      "email",
-      "company",
-      "role",
-      "locations",
-      "requestContact",
-    ])
+    expect(
+      reportLeadSchema.parse({ ...data, requestContact: undefined })
+        .requestContact,
+    ).toBe(false);
+    for (const field of ["fullName", "email", "company", "role", "locations"])
       expect(
         reportLeadSchema.safeParse({ ...data, [field]: undefined }).success,
         field,
@@ -109,10 +106,8 @@ describe("lead submission failure boundaries", () => {
     expect(r.status).toBe(503);
     expect(r.headers.get("set-cookie")).toBeNull();
   });
-  it("rejects missing contact consent and filled honeypots before delivery", async () => {
-    expect((await POST(req({ ...data, requestContact: false }))).status).toBe(
-      400,
-    );
+  it("rejects incomplete lead details and filled honeypots before delivery", async () => {
+    expect((await POST(req({ ...data, company: "" }))).status).toBe(400);
     expect((await POST(req({ ...data, website: "spam.test" }))).status).toBe(
       400,
     );

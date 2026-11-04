@@ -139,10 +139,11 @@ export default async function PrivacyPage({ params }: Props) {
 
       <LegalSection title="4a. Report requests and optional updates">
         <p>
-          When you request a RADR report and sales follow-up, we collect your
-          name, work email, company, role, and location count to deliver the
-          report and respond about RADR. The request is delivered to the
-          configured lead-handling service before the download is unlocked.
+          When you request a RADR playbook, we collect your name, work email,
+          company, role, and location count to deliver the report and handle
+          your request. A sales follow-up is not required to receive the
+          playbook. The request is delivered to the configured lead-handling
+          service before the download is unlocked.
         </p>
         <p>
           Newsletter and article updates are a separate, optional choice. They

@@ -16,7 +16,7 @@ Page 6 is assumed arithmetic, not a forecast. D-1911 and D-7110 are synthetic pr
 
 ## Imagery
 
-`public/marketing/reports/hospitality-scene.jpg` and `kitchen-service.jpg` are original AI-generated editorial illustrations of fictional hospitality venues, generated for this publication on 4 November 2026. They are not customer photographs or evidence of a deployed venue. The original PNGs are retained in the execution workspace's generated-images directory; JPEGs are format conversions for distribution size. The cover uses the approved v4 white mark with its original paths and green dot.
+`public/marketing/reports/hospitality-scene.jpg` and `kitchen-service.jpg` are original AI-generated editorial illustrations of empty fictional hospitality venues without people, generated for this publication on 4 November 2026. They are not customer photographs or evidence of a deployed venue. The original PNGs are retained in the execution workspace's generated-images directory; JPEGs are format conversions for distribution size. The cover uses the approved v4 white mark with its original paths and green dot.
 
 ## Validation
 
