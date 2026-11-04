@@ -1,6 +1,11 @@
+import "@/app/radr-brand-theme.css";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-const productFont = Manrope({ subsets: ["latin"], variable: "--font-product", display: "swap" });
+const productFont = Manrope({
+  subsets: ["latin"],
+  variable: "--font-product",
+  display: "swap",
+});
 import { ProductShell } from "@/components/product/ProductShell";
 import "@/app/product.css";
 import "@/app/radr-product-tokens.css";
@@ -51,5 +56,9 @@ export default function ProductLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className={productFont.variable}><ProductShell>{children}</ProductShell></div>;
+  return (
+    <div className={productFont.variable}>
+      <ProductShell>{children}</ProductShell>
+    </div>
+  );
 }

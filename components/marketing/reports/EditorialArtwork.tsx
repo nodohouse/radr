@@ -33,7 +33,7 @@ export function EditorialArtwork({ slug }: { slug: string }) {
       <svg viewBox="0 0 600 180" aria-hidden="true">
         <defs>
           <linearGradient id={`art-${topic.kind}`} x2="1" y2="1">
-            <stop stopColor="#7ef0ba" />
+            <stop stopColor="#00e895" />
             <stop offset="1" stopColor="#b7d5ff" />
           </linearGradient>
         </defs>
@@ -43,7 +43,7 @@ export function EditorialArtwork({ slug }: { slug: string }) {
               <g key={i}>
                 <path
                   d={`M130 ${35 + i * 30}L300 ${12 + i * 30}L470 ${35 + i * 30}L300 ${60 + i * 30}Z`}
-                  fill={i === 2 ? "#7ef0ba22" : "#ffffff08"}
+                  fill={i === 2 ? "#00e89522" : "#ffffff08"}
                 />
                 <path
                   d={`M130 ${35 + i * 30}v20L300 ${80 + i * 30}L470 ${55 + i * 30}v-20`}
@@ -66,14 +66,14 @@ export function EditorialArtwork({ slug }: { slug: string }) {
                 />
                 <path
                   d={`M${83 + i * 180} 76h70m-70 17h45m-45 17h58`}
-                  stroke={i === 2 ? "#7ef0ba" : "#b4d4e4"}
+                  stroke={i === 2 ? "#00e895" : "#b4d4e4"}
                   strokeWidth="3"
                 />
                 {i < 2 ? (
                   <path
                     d={`M${192 + i * 180} 90h30m-8-7 8 7-8 7`}
                     fill="none"
-                    stroke="#7ef0ba"
+                    stroke="#00e895"
                     strokeWidth="2"
                   />
                 ) : null}
@@ -101,8 +101,8 @@ export function EditorialArtwork({ slug }: { slug: string }) {
                 width="180"
                 height="140"
                 rx="12"
-                fill="#7ef0ba10"
-                stroke="#7ef0ba55"
+                fill="#00e89510"
+                stroke="#00e89555"
               />
             ) : null}
           </g>

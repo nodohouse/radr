@@ -1,0 +1,379 @@
+/* Sapphire and ocean carry the brand. Neon jade earns attention at the point of action.
+   Values are shared with editorial exports through lib/brand/palette.json. */
+:root {
+  --brand-atmosphere:
+    radial-gradient(ellipse 1100px 750px at 92% 4%, #244c911c, transparent 80%),
+    radial-gradient(ellipse 1000px 900px at 5% 70%, #176b7d13, transparent 85%),
+    linear-gradient(145deg, #f8fbff, #edf3fb 65%, #eff8fa);
+  --brand-depth: linear-gradient(
+    125deg,
+    var(--brand-deep),
+    var(--brand-sapphire) 55%,
+    var(--brand-ocean)
+  );
+  --brand-focus: 0 0 0 3px #244c9140;
+}
+html body .radr:has(.rx-nav) {
+  --rm-ink: var(--brand-ink);
+  --rm-muted: var(--brand-muted);
+  --rm-blue: var(--brand-sapphire);
+  --rm-green: var(--brand-jade-ink);
+  background: var(--brand-atmosphere) !important;
+}
+html
+  body
+  .radr:has(.rx-nav)
+  :is(.rx30-h1, .rx30-bleed-h1, .rx-page-title, .rx-ch-title) {
+  color: var(--brand-ink) !important;
+}
+html
+  body
+  .radr:has(.rx-nav)
+  :is(.rx30-bleed-h1 em, .rx30-h1 em, .rr-page h1 em) {
+  color: var(--brand-sapphire) !important;
+}
+html
+  body
+  .radr:has(.rx-nav)
+  :is(
+    .rx30-btn-primary,
+    .rx-nav-cta,
+    .rx-btn-primary,
+    .rm-button:not(.rm-button-secondary),
+    .vc-res-act--primary
+  ) {
+  background: var(--brand-jade) !important;
+  color: var(--brand-ink) !important;
+  border-color: var(--brand-jade) !important;
+  box-shadow: 0 7px 24px #00e8951c !important;
+}
+html
+  body
+  .radr:has(.rx-nav)
+  :is(
+    .rx30-btn-primary,
+    .rx-nav-cta,
+    .rx-btn-primary,
+    .rm-button:not(.rm-button-secondary)
+  ):hover {
+  background: #31efa9 !important;
+  color: var(--brand-ink) !important;
+}
+html body .radr:has(.rx-nav) .rm-button-secondary {
+  background: #ffffffd9 !important;
+  color: var(--brand-sapphire) !important;
+  border-color: #c4d4e7 !important;
+}
+html body .radr .rx-nav {
+  background: #f7fafff5 !important;
+  border-color: #fff !important;
+  box-shadow: 0 14px 40px #102d5012 !important;
+}
+html body .rx-nav-panel {
+  background: #f5f9ff !important;
+  border-color: #d5e2f2 !important;
+}
+html body .rx-nav-panel .rx-np-item:hover {
+  background: var(--brand-sapphire-soft) !important;
+  color: var(--brand-sapphire) !important;
+}
+html body .rx-nav-panel .rx-np-platform-preview {
+  background: linear-gradient(
+    125deg,
+    var(--brand-sapphire-soft),
+    var(--brand-ocean-soft)
+  ) !important;
+}
+html body .radr .rx-footer {
+  background: var(--brand-depth) !important;
+  border-top: 2px solid var(--brand-jade);
+}
+html body .radr .rx-footer :is(a, p, span) {
+  color: #e8f2ff !important;
+}
+html body .radr .rx-footer a:hover {
+  color: var(--brand-jade) !important;
+}
+html body .radr .rx-footer .rx-footer-col-title {
+  color: #bcd6ee !important;
+}
+html body .radr :is(.rm-brief, .rr-article-art, .rx-res-pull) {
+  --signal: var(--brand-jade);
+}
+html body .radr :is(.rr-article-art, .rx-res-pull) {
+  background: var(--brand-depth) !important;
+}
+html body .radr .rm-brief-decision {
+  background: var(--brand-depth);
+  border-color: #b9cde6;
+}
+html body .radr .rm-brief-decision h4 {
+  color: #fff !important;
+}
+html body .radr .rm-brief-action {
+  border-color: #bacde1;
+}
+html body .radr .rr-book-stage,
+html body .radr .rr-preview-grid figure > div {
+  background: linear-gradient(
+    130deg,
+    var(--brand-sapphire-soft),
+    var(--brand-ocean-soft)
+  );
+}
+html body .radr .rr-form {
+  background: linear-gradient(120deg, #fffffff5, #f0f6fff0);
+}
+html body .radr .rr-promo {
+  background: linear-gradient(120deg, #ffffffed, var(--brand-ocean-soft));
+}
+/* The product retains its daylight glass and its red/amber operational meanings. */
+html body .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page] {
+  --workspace-ink: var(--brand-ink);
+  --workspace-secondary: var(--brand-muted);
+  --workspace-muted: var(--brand-muted);
+  --workspace-blue: var(--brand-sapphire);
+  --workspace-green: var(--brand-jade-ink);
+  --workspace-action: var(--brand-jade);
+  --material-ink: var(--brand-ink);
+  --material-secondary: var(--brand-muted);
+  --material-quiet: var(--brand-muted);
+  --material-blue: var(--brand-sapphire);
+  --material-green: var(--brand-jade-ink);
+  --material-canvas: var(--brand-canvas);
+  --material-decision: #e8f0fc;
+  --material-decision-border: #b7cce6;
+  --app-bg: var(--brand-canvas);
+  --app-ink: var(--brand-ink);
+  --app-muted: var(--brand-muted);
+  --app-blue: var(--brand-sapphire);
+  --app-blue-deep: var(--brand-deep);
+  --app-green: var(--brand-jade-ink);
+  --app-signal: var(--brand-jade);
+  --app-nav: #edf3fb;
+  --app-mint: var(--brand-jade-soft);
+  background: var(--brand-atmosphere) !important;
+  color: var(--brand-ink);
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .rs-navigation {
+  --rail-ink: var(--brand-ink);
+  --rail-action: var(--brand-ocean);
+  --rail-muted: var(--brand-muted);
+  background: #edf3fb !important;
+  border-right-color: #c6d7e9;
+  box-shadow: inset -1px 0 0 #fff;
+}
+html body .rp-premium .rs-navigation .rs-nav-items > a[data-active="true"] {
+  background: var(--brand-sapphire) !important;
+  color: #fff !important;
+  border-color: var(--brand-sapphire);
+  box-shadow: 0 5px 14px #244c911c;
+}
+html
+  body
+  .rp-premium
+  .rs-navigation
+  .rs-nav-items
+  > a[data-active="true"]
+  .rs-nav-icon {
+  background: #ffffff15;
+  color: var(--brand-jade);
+}
+html
+  body
+  .rp-premium
+  .rs-navigation
+  .rs-nav-items
+  > a[data-active="true"]
+  .rs-nav-label {
+  color: #fff;
+}
+html
+  body
+  .rp-premium
+  .rs-navigation
+  .rs-nav-items
+  > a[data-active="true"]:after {
+  background: var(--brand-jade);
+  width: 3px;
+}
+html
+  body
+  .rp-premium
+  .rs-navigation
+  .rs-nav-items
+  > a:hover:not([data-active="true"]) {
+  background: var(--brand-ocean-soft);
+  color: var(--brand-ink);
+}
+html body .rp-premium .rs-navigation .rs-workspace {
+  background: #e2ecf8;
+  border-color: #ccdaea;
+}
+html body .rp-premium .rs-navigation .rs-rail-pin[aria-pressed="true"] {
+  background: var(--brand-ocean-soft);
+  color: var(--brand-ocean);
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-executive
+  .cc-priority {
+  background: linear-gradient(115deg, #e7effcf5, #f3f9fcf5);
+  border-color: #b7cce6;
+  color: var(--brand-ink);
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-priority:before {
+  background: var(--brand-jade);
+  width: 4px;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-executive
+  .cc-priority
+  :is(h2, .cc-priority-recommendation) {
+  color: var(--brand-ink);
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-priority
+  .cc-section-label {
+  color: var(--brand-sapphire);
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-executive
+  .cc-primary-action {
+  background: var(--brand-jade) !important;
+  color: var(--brand-ink) !important;
+  border-color: var(--brand-jade);
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-executive
+  .cc-primary-action:hover {
+  background: #31efa9 !important;
+}
+html body .rp-premium .rp-goh-avatar {
+  background: var(--brand-sapphire) !important;
+}
+html body .ob-root {
+  color: var(--brand-ink);
+  background: var(--brand-atmosphere) !important;
+}
+html body .ob-auth .ob-entry-story,
+html body .ob-journey {
+  background: var(--brand-depth);
+  border-color: #527aa4;
+}
+html body .ob-root .ob-btn-primary {
+  background: var(--brand-jade);
+  color: var(--brand-ink);
+  border-color: var(--brand-jade);
+}
+html body .ob-root .ob-btn-primary:hover:not(:disabled) {
+  background: #31efa9;
+}
+html
+  body
+  .ob-setup
+  :is(.ob-choice, .ob-chip, .ob-goal):is(
+    [data-on="true"],
+    [aria-pressed="true"]
+  ) {
+  background: var(--brand-sapphire-soft);
+  border-color: #93b1d8;
+  color: var(--brand-sapphire);
+}
+html body .ob-root :is(a, button, input, select):focus-visible {
+  outline: 3px solid var(--brand-sapphire);
+  outline-offset: 3px;
+}
+/* One deep decision panel anchors the otherwise quiet daylight dashboard. */
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-executive
+  .cc-priority {
+  background: var(--brand-depth) !important;
+  color: #fff !important;
+  border-color: #557fa9;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-executive
+  .cc-priority
+  :is(h2, .cc-priority-recommendation) {
+  color: #fff !important;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-priority
+  :is(.cc-priority-meta, .cc-decision-assurance, .cc-compact-impact small) {
+  color: #dbeafa !important;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-priority
+  :is(.cc-section-label, .cc-compact-impact strong) {
+  color: var(--brand-jade) !important;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-priority
+  .rs-pill {
+  background: #ffffff14;
+  color: #e6f4ff;
+  border-color: #ffffff30;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-executive
+  .cc-priority
+  footer {
+  border-color: #ffffff26;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  :is(
+    .rs-primary-button,
+    .gi-btn-primary,
+    .db-btn-primary,
+    .wb-primary,
+    .hp-primary,
+    .boh-btn-primary,
+    .se-btn-primary
+  ) {
+  background: var(--brand-jade) !important;
+  color: var(--brand-ink) !important;
+  border-color: var(--brand-jade) !important;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .rp-mobile-tab[data-active="true"] {
+  color: var(--brand-sapphire) !important;
+  background: var(--brand-sapphire-soft) !important;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .rp-mobile-tab[data-active="true"]:after {
+  background: var(--brand-jade);
+}

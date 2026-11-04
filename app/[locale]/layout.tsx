@@ -1,3 +1,4 @@
+import "@/app/radr-brand-theme.css";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -9,7 +10,7 @@ import type { Metadata, Viewport } from "next";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#070807",
+  themeColor: "#102D50",
 };
 
 export function generateStaticParams() {

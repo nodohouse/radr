@@ -15,7 +15,9 @@ from fontTools.varLib.instancer import instantiateVariableFont
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'private/reports/RADR-Hospitality-Decision-Playbook-2026.pdf'
 W,H=595.28,841.89
-INK=HexColor('#163c59'); MUTED=HexColor('#48657a'); BLUE=HexColor('#225da2'); GREEN=HexColor('#087653'); MINT=HexColor('#7ef0ba'); LIGHT=HexColor('#edf4f8')
+import json
+PALETTE=json.loads((ROOT/'lib/brand/palette.json').read_text())
+INK=HexColor(PALETTE['ink']); MUTED=HexColor(PALETTE['muted']); BLUE=HexColor(PALETTE['sapphire']); GREEN=HexColor(PALETTE['ocean']); MINT=HexColor(PALETTE['jade']); LIGHT=HexColor(PALETTE['sapphire-soft'])
 # Reuse the website's downloaded Manrope Latin face when available.
 font_path=None
 for css in (ROOT/'.next/static/css').rglob('*.css'):
@@ -53,7 +55,7 @@ def para(text,x,y,width,style='body'):
 def header(number,chapter,title,deck):
  c.setFillColor(HexColor('#f4f8fc'));c.rect(0,0,W,H,fill=1,stroke=0)
  c.setFillColor(MINT);c.rect(0,H-9,W,9,fill=1,stroke=0)
- c.setFont('Bold',8);c.setFillColor(GREEN);c.drawString(46,H-45,'RADR  /  OPERATOR SERIES')
+ c.setFont('Bold',8);c.setFillColor(BLUE);c.drawString(46,H-45,'RADR  /  OPERATOR SERIES')
  c.setFont('Body',8);c.setFillColor(MUTED);c.drawRightString(W-46,H-45,f'{number:02} / {chapter.upper()}')
  y=para(escape(title),46,H-91,W-92,'heading')-18
  y=para(escape(deck),46,y,W-92)-22
@@ -66,7 +68,7 @@ def sub(title,text,y):
 
 def card(title,text,y,accent=False):
  p=Paragraph(escape(text),styles['card']);_,height=p.wrap(W-128,H);height+=66
- c.setFillColor(HexColor('#ddf2e9') if accent else white);c.setStrokeColor(white);c.roundRect(46,y-height,W-92,height,12,fill=1,stroke=1)
+ c.setFillColor(HexColor(PALETTE['ocean-soft']) if accent else white);c.setStrokeColor(white);c.roundRect(46,y-height,W-92,height,12,fill=1,stroke=1)
  para(escape(title),64,y-17,W-128,'sub');p.drawOn(c,64,y-48-(height-66));return y-height-16
 
 def rows(items,y,widths=(150,353)):
@@ -237,7 +239,7 @@ photo('hospitality-scene.jpg',46,y-195,W-92,195);y-=216
 c.setFont('Body',7);c.setFillColor(MUTED);c.drawString(46,y+7,'AI-generated editorial illustration / fictional venue')
 y=rows([('Bring the question','Which recurring choice is difficult to make or defend? Which location and trading horizon matter?'),('Bring the evidence map','Which POS, PMS, labor, purchasing, booking, and channel records are available? What is missing?'),('Bring the owners','Who runs the response? Who approves it? Who will review the economics and evidence?')],y)
 y=card('See RADR against your operating reality.','Use the playbook to structure a product discussion: one decision, connected evidence, practical alternatives, an approval boundary, and a record of what happened after.',y,True)
-y=para('<link href="https://radrup.com/en/contact" color="#087653">Start the conversation: radrup.com/en/contact</link>',46,y,W-92,'sub')-14
+y=para('<link href="https://radrup.com/en/contact" color="#176B7D">Start the conversation: radrup.com/en/contact</link>',46,y,W-92,'sub')-14
 note('Public product demos use illustrative data. Actual integrations, execution permissions, commercial scope, security requirements, and verification rules are agreed for each operation.',y);done()
 
 # 16 / Source ledger
@@ -251,7 +253,7 @@ refs=[
 ('6 / Champions 12.3 / WRI / WRAP / published 2018','The Business Case for Reducing Food Loss and Waste: Hotels, April 2018. 42 hotels, 15 countries. Average reported savings $7 per $1 invested; average kitchen waste weight reduction 21% in one year. Historical program findings, not RADR ROI.','https://champions123.org/publication/business-case-reducing-food-loss-and-waste-hotels')]
 for title,body,url in refs:
  y=para(escape(title),46,y,W-92,'sub')-5
- y=para(escape(body)+' <link href="'+url+'" color="#087653"><u>Open original source</u></link>',46,y,W-92,'small')-15
+ y=para(escape(body)+' <link href="'+url+'" color="#176B7D"><u>Open original source</u></link>',46,y,W-92,'small')-15
 note('Method: no cross-country financial totals are added or extrapolated. Charts start at zero; indices and rounded values are labeled. Page 6 is assumed arithmetic. D-1911 and D-7110 are synthetic product examples. Images are AI-generated editorial illustrations of fictional venues, not customer sites. Framework and worksheets: RADR Editorial. Publication provides operating guidance, not a guaranteed business outcome.',y-2)
 c.save()
 print(OUT)

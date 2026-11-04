@@ -6,6 +6,8 @@ The 16-page PDF is private and delivered only by the signed report-download rout
 
 Run `python scripts/generate-hospitality-report.py` with ReportLab, fontTools and Brotli installed. The generator uses the website's cached Manrope Latin face when available and Open Sans as a fallback. To reproduce the checked edition, build the website first so Manrope is present in `.next/static`.
 
+The PDF uses the same sapphire, ocean, and neon-jade palette as the website and product, read from `lib/brand/palette.json`.
+
 Generate the public previews with `pdftoppm`, using pages 1 (1100px), 4 (1000px), and 14 (1000px), PNG, singlefile. Keep `lib/marketing/report.ts` page count aligned with the publication.
 
 ## Research and claim boundaries

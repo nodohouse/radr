@@ -10,12 +10,12 @@
   font-size: clamp(2.8rem, 4.5vw, 4.6rem);
   line-height: 1.07;
   letter-spacing: -0.06em;
-  color: #102c43;
+  color: var(--brand-ink);
   font-weight: 650;
   margin: 0 0 24px;
 }
 .rr-page h1 em {
-  color: #225da2;
+  color: var(--brand-sapphire);
   font-style: normal;
 }
 .rr-report-meta {
@@ -30,11 +30,11 @@
   border: 1px solid #fff;
   border-radius: 8px;
   padding: 8px 10px;
-  color: #48657a;
+  color: var(--brand-muted);
 }
 .rr-cover {
   position: relative;
-  background: linear-gradient(130deg, #163e54, #1b584b);
+  background: linear-gradient(130deg, var(--brand-deep), var(--brand-ocean));
   color: #fff;
   border: 1px solid #ffffff90;
   box-shadow: 0 25px 70px #12384e24;
@@ -53,7 +53,7 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: 7px;
-  background: #7ef0ba;
+  background: var(--brand-jade);
 }
 .rr-cover > span {
   font-size: 9px;
@@ -104,18 +104,18 @@
 }
 .rr-contents h2 {
   font-size: 23px;
-  color: #163c59;
+  color: var(--brand-ink);
   letter-spacing: -0.035em;
 }
 .rr-contents ul {
   padding-left: 18px;
   font-size: 14px;
-  color: #48657a;
+  color: var(--brand-muted);
   line-height: 1.9;
 }
 .rr-contents > p {
   font-size: 11px;
-  color: #506e83;
+  color: var(--brand-muted);
   line-height: 1.8;
 }
 .rr-form {
@@ -123,19 +123,19 @@
   border: 1px solid white;
   border-radius: 22px;
   padding: 32px;
-  box-shadow: 0 20px 60px #163c5910;
+  box-shadow: 0 20px 60px color-mix(in srgb, var(--brand-ink) 6.27%, transparent);
 }
 .rr-form h2 {
   font-size: 29px;
   line-height: 1.2;
   letter-spacing: -0.04em;
-  color: #163c59;
+  color: var(--brand-ink);
   margin: 0 0 18px;
 }
 .rr-form > p {
   font-size: 13px;
   line-height: 1.8;
-  color: #48657a;
+  color: var(--brand-muted);
 }
 .rr-form > label,
 .rr-form-row > label {
@@ -144,7 +144,7 @@
   gap: 8px;
   font-size: 12px;
   font-weight: 650;
-  color: #163c59;
+  color: var(--brand-ink);
   margin: 19px 0;
 }
 .rr-form :is(input:not([type="checkbox"]), select) {
@@ -154,7 +154,7 @@
   border-radius: 10px;
   padding: 10px 12px;
   background: #fff;
-  color: #163c59;
+  color: var(--brand-ink);
   font: inherit;
   box-sizing: border-box;
 }
@@ -178,10 +178,10 @@
   width: 17px !important;
   height: 17px;
   margin-top: 3px;
-  accent-color: #087653;
+  accent-color: var(--brand-jade-ink);
 }
 .rr-check a {
-  color: #087653;
+  color: var(--brand-jade-ink);
   text-decoration: underline;
 }
 .rr-form .rm-button {
@@ -198,7 +198,7 @@
 .rr-form .rr-small {
   font-size: 10px;
   margin: 17px 0 0;
-  color: #506e83;
+  color: var(--brand-muted);
   line-height: 1.8;
 }
 .rr-error {
@@ -225,7 +225,7 @@
   border: 0;
   background: none;
   text-decoration: underline;
-  color: #163c59;
+  color: var(--brand-ink);
   font: inherit;
   font-size: 12px;
   cursor: pointer;
@@ -240,24 +240,24 @@
   padding: 36px;
   border-radius: 22px;
   margin: 35px 0;
-  color: #163c59;
+  color: var(--brand-ink);
 }
 .rr-promo h2 {
   font-size: clamp(25px, 3vw, 36px);
   letter-spacing: -0.045em;
   line-height: 1.15;
   margin: 0 0 18px !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 .rr-promo p {
   font-size: 14px;
-  color: #48657a;
+  color: var(--brand-muted);
   line-height: 1.8;
 }
 .rr-promo small {
   display: block;
   font-size: 10px;
-  color: #506e83;
+  color: var(--brand-muted);
   line-height: 1.7;
   margin-top: 18px;
 }
@@ -292,11 +292,11 @@ html
   .radr:has(.rx-nav)
   :is(.rx-res-hero, .rx-res-list, .rx-res-related, .rx-res-article) {
   background: transparent !important;
-  color: #163c59;
+  color: var(--brand-ink);
 }
 .radr .rx-res-title,
 .radr .rx-res-article-title {
-  color: #102c43 !important;
+  color: var(--brand-ink) !important;
   font-size: clamp(2.7rem, 5.1vw, 5rem);
   letter-spacing: -0.055em !important;
   line-height: 1.08 !important;
@@ -312,32 +312,32 @@ html
   background: linear-gradient(120deg, #ffffffe8, #f4f9fcbf) !important;
   border: 1px solid white !important;
   border-radius: 20px !important;
-  box-shadow: 0 15px 45px #163c590a !important;
+  box-shadow: 0 15px 45px color-mix(in srgb, var(--brand-ink) 3.92%, transparent) !important;
   overflow: hidden;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 .radr .rx-res-card :is(h2, h3) {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   letter-spacing: -0.035em;
   line-height: 1.25;
 }
 .radr .rx-res-card :is(p, .rx-res-card-meta) {
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
 }
 .radr .rx-res-body p {
   font-size: 17px !important;
   line-height: 1.95 !important;
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
 }
 .radr .rx-res-section h2 {
   font-size: 29px !important;
   line-height: 1.25 !important;
   letter-spacing: -0.035em;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   margin: 50px 0 22px;
 }
 .radr .rx-res-pull {
-  background: linear-gradient(120deg, #163e54, #1b584b) !important;
+  background: linear-gradient(120deg, var(--brand-deep), var(--brand-ocean)) !important;
   border: 1px solid white !important;
   border-radius: 18px !important;
   padding: 28px !important;
@@ -348,11 +348,11 @@ html
   line-height: 1.6 !important;
 }
 .radr .rx-res-deck {
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
   line-height: 1.8 !important;
 }
 .rr-page :is(a, button, input, select):focus-visible {
-  outline: 3px solid #225da2;
+  outline: 3px solid var(--brand-sapphire);
   outline-offset: 4px;
 }
 @media (max-width: 900px) {
@@ -554,7 +554,7 @@ html
   display: block;
   text-align: center;
   font-size: 11px;
-  color: #48657a;
+  color: var(--brand-muted);
   margin-top: 30px;
 }
 .rr-outcomes {
@@ -574,7 +574,7 @@ html
   left: 0;
   top: 20px;
   font-size: 12px;
-  color: #087653;
+  color: var(--brand-jade-ink);
   font-weight: 700;
 }
 .rr-outcomes b,
@@ -583,7 +583,7 @@ html
 }
 .rr-outcomes b {
   font-size: 16px;
-  color: #163c59;
+  color: var(--brand-ink);
 }
 .rr-outcomes span {
   line-height: 1.7;
@@ -602,31 +602,31 @@ html
 }
 .rr-research-strip h2,
 .rr-spreads h2 {
-  color: #163c59;
+  color: var(--brand-ink);
   font-size: clamp(27px, 3vw, 38px);
   letter-spacing: -0.045em;
   line-height: 1.15;
   margin: 0 0 20px;
 }
 .rr-research-strip p {
-  color: #48657a;
+  color: var(--brand-muted);
   font-size: 12px;
   line-height: 1.8;
 }
 .rr-research-strip strong {
-  color: #087653;
+  color: var(--brand-jade-ink);
   font-size: 57px;
   letter-spacing: -0.06em;
   font-weight: 650;
 }
 .rr-research-strip h3 {
-  color: #163c59;
+  color: var(--brand-ink);
   font-size: 17px;
   line-height: 1.45;
   margin: 12px 0;
 }
 .rr-research-strip a {
-  color: #225da2;
+  color: var(--brand-sapphire);
   text-decoration: underline;
   font-size: 11px;
   line-height: 1.8;
@@ -657,17 +657,17 @@ html
   display: block;
   width: 100%;
   height: auto;
-  box-shadow: 0 12px 30px #163c591c;
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--brand-ink) 10.98%, transparent);
 }
 .rr-preview-grid figcaption {
-  color: #48657a;
+  color: var(--brand-muted);
   line-height: 1.7;
   font-size: 13px;
   padding: 20px 5px;
 }
 .rr-preview-grid figcaption b {
   display: block;
-  color: #163c59;
+  color: var(--brand-ink);
   font-size: 17px;
   margin-bottom: 5px;
 }
@@ -742,7 +742,7 @@ html
   font-size: 12px;
 }
 .rr-form .rr-small a {
-  color: #087653;
+  color: var(--brand-jade-ink);
   text-decoration: underline;
 }
 .rr-mobile-cta {

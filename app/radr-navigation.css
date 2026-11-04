@@ -2,7 +2,7 @@
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .rs-navigation {
   --rail-ink:#25465b;
   --rail-muted:#536f80;
-  --rail-action:#126447;
+  --rail-action:var(--brand-ocean);
   background:#edf3f7!important;
   background-image:none!important;
   opacity:1;
@@ -18,7 +18,7 @@
 .rp-premium .rs-navigation .rs-rail-brand-row {min-height:42px;margin-bottom:17px;}
 .rp-premium .rs-navigation .rs-brand {filter:none;}
 .rp-premium .rs-navigation .rs-rail-pin {background:#f7fafc;border-color:#cbdbe4;color:#49687c;border-radius:8px;width:29px;height:29px;}
-.rp-premium .rs-navigation .rs-rail-pin:hover,.rp-premium .rs-navigation .rs-rail-pin[aria-pressed=true] {background:#dbede5;color:#126447;border-color:#a9c9bb;}
+.rp-premium .rs-navigation .rs-rail-pin:hover,.rp-premium .rs-navigation .rs-rail-pin[aria-pressed=true] {background:#dbede5;color:var(--brand-ocean);border-color:#a9c9bb;}
 .rp-premium .rs-navigation .rs-workspace {background:#e3ecf2;border:1px solid #d0dfe7;border-radius:10px;box-shadow:inset 0 1px 0 #ffffffb3;min-height:53px;color:#3b5c71;padding-inline:14px;gap:12px;}
 .rp-premium .rs-navigation .rs-workspace-copy small {font-size:8px;color:#486579;letter-spacing:1.45px;}
 .rp-premium .rs-navigation .rs-workspace-copy strong {color:#294c63;font-size:11px;font-weight:600;}

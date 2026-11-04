@@ -2,10 +2,10 @@
 html body .radr:has(.rx-nav) {
   --font-body: var(--font-entry), Arial, sans-serif;
   --font-display: var(--font-entry), Arial, sans-serif;
-  --rm-ink: #163c59;
-  --rm-muted: #48657a;
-  --rm-blue: #225da2;
-  --rm-green: #087653;
+  --rm-ink: var(--brand-ink);
+  --rm-muted: var(--brand-muted);
+  --rm-blue: var(--brand-sapphire);
+  --rm-green: var(--brand-jade-ink);
   color: var(--rm-ink);
   font-family: var(--font-body) !important;
   background:
@@ -38,7 +38,7 @@ html
   pointer-events: none;
 }
 html body .radr:has(.rx-nav) :is(.rx30-bleed-h1, .rx30-h2, .rx-legal-title) {
-  color: #102c43 !important;
+  color: var(--brand-ink) !important;
   font-weight: 650;
   letter-spacing: -0.055em;
   line-height: 1.08;
@@ -52,13 +52,13 @@ html body .radr:has(.rx-nav) .rx30-h2 {
   font-size: clamp(2rem, 3.4vw, 3.5rem);
 }
 html body .radr:has(.rx-nav) :is(.rx30-lead, .rx30-bleed-lead, .rx-legal-lead) {
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
   font-size: clamp(1rem, 1.35vw, 1.2rem);
   line-height: 1.75;
   max-width: 68ch;
 }
 html body .radr:has(.rx-nav) :is(.rx30-kicker, .rx30-demo-label) {
-  color: #087653 !important;
+  color: var(--brand-jade-ink) !important;
   font-size: 11px;
   letter-spacing: 0.13em;
   font-weight: 750;
@@ -79,18 +79,18 @@ html body .radr:has(.rx-nav) :is(.rx30-btn, .rx-nav-cta) {
   letter-spacing: 0;
 }
 html body .radr:has(.rx-nav) .rx30-btn-primary {
-  background: #163e54 !important;
+  background: var(--brand-deep) !important;
   color: #fff !important;
-  border: 1px solid #163e54 !important;
-  box-shadow: 0 8px 20px #163e541a !important;
+  border: 1px solid var(--brand-deep) !important;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--brand-deep) 10.2%, transparent) !important;
 }
 html body .radr:has(.rx-nav) .rx30-btn-primary:hover {
-  background: #087653 !important;
-  border-color: #087653 !important;
+  background: var(--brand-jade-ink) !important;
+  border-color: var(--brand-jade-ink) !important;
   transform: translateY(-2px);
 }
 html body .radr:has(.rx-nav) :is(.rx30-btn-ghost, .rx30-btn-ghost--solid) {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   border: 1px solid #a8c0ce !important;
   background: #ffffff99 !important;
 }
@@ -111,7 +111,7 @@ html
     .rx-legal-body
   ) {
   background: linear-gradient(115deg, #ffffffe3, #f5faffbf) !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   border: 1px solid #ffffff !important;
   border-radius: 22px !important;
   box-shadow:
@@ -132,14 +132,14 @@ html
     .rx30-principle span,
     .rx30-co-principle span
   ) {
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
   font-size: 15px;
   line-height: 1.7;
 }
 html body .radr:has(.rx-nav) :is(.rx30-module-rail button, .vc2-choice) {
   border: 1px solid #b7cbd7 !important;
   background: #ffffffb8 !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   border-radius: 12px !important;
 }
 html
@@ -150,12 +150,12 @@ html
     .vc2-choice[aria-pressed="true"],
     .vc2-choice[data-on="true"]
   ) {
-  background: #163e54 !important;
+  background: var(--brand-deep) !important;
   color: white !important;
-  border-color: #163e54 !important;
+  border-color: var(--brand-deep) !important;
 }
 html body .radr:has(.rx-nav) :is(input, select, textarea) {
-  color: #163c59;
+  color: var(--brand-ink);
   background: #ffffffe8;
   border-color: #a8bfce;
   border-radius: 10px;
@@ -166,32 +166,32 @@ html
   .radr:has(.rx-nav)
   :is(a, button, input, select, textarea):focus-visible,
 .rx-nav-panel :is(a, button):focus-visible {
-  outline: 3px solid #225da2 !important;
+  outline: 3px solid var(--brand-sapphire) !important;
   outline-offset: 4px;
 }
 /* Deliberately opaque navigation: no page content competes with menu labels. */
 html body .radr .rx-nav {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 html body .radr .rx-nav-bar {
   background: #f8fbfdf5 !important;
   backdrop-filter: blur(20px);
   border: 1px solid #fff !important;
   border-radius: 18px !important;
-  box-shadow: 0 12px 35px #163c5912 !important;
+  box-shadow: 0 12px 35px color-mix(in srgb, var(--brand-ink) 7.06%, transparent) !important;
   min-height: 68px;
 }
 html body .radr .rx-nav :is(.rx-nav-link, .rx-nav-signin) {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   font-size: 13px !important;
   font-weight: 650 !important;
 }
 html body .radr .rx-nav .rx-nav-link:hover {
   background: #e6f0f6 !important;
-  color: #087653 !important;
+  color: var(--brand-jade-ink) !important;
 }
 html body .radr .rx-nav .rx-nav-cta {
-  background: #163e54 !important;
+  background: var(--brand-deep) !important;
   color: white !important;
 }
 html body .radr .rx-nav-lockup--mark {
@@ -200,27 +200,27 @@ html body .radr .rx-nav-lockup--mark {
 }
 html body .rx-nav-panel {
   background: #f5f9fc !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   border: 1px solid white !important;
   border-radius: 20px !important;
-  box-shadow: 0 30px 80px #163c5926 !important;
+  box-shadow: 0 30px 80px color-mix(in srgb, var(--brand-ink) 14.9%, transparent) !important;
   font-family: var(--font-entry), Arial, sans-serif !important;
 }
 html body .rx-nav-panel :is(.rx-np, .rx-nav-panel-inner) {
   background: transparent !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 html body .rx-nav-panel .rx-np-item {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   border-radius: 9px;
   font-size: 13px !important;
 }
 html body .rx-nav-panel .rx-np-item:hover {
   background: #e4f0f4 !important;
-  color: #087653 !important;
+  color: var(--brand-jade-ink) !important;
 }
 html body .rx-nav-panel .rx-np-group-title {
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
   font-size: 10px !important;
   letter-spacing: 0.12em;
 }
@@ -228,15 +228,15 @@ html body .rx-nav-panel .rx-np-platform-preview {
   background: linear-gradient(135deg, #e5eff8, #e1f0e9) !important;
   border: 1px solid white !important;
   border-radius: 14px;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 html body .radr .rx-nav-drawer {
   background: #f4f8fc !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   backdrop-filter: none;
 }
 html body .radr .rx-nav-drawer a {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 html body .radr .rx-footer {
   background: linear-gradient(120deg, #12384e, #174b47) !important;
@@ -251,7 +251,7 @@ html body .radr .rx-footer :is(a, p, span) {
   color: #d0e1e8 !important;
 }
 html body .radr .rx-footer a:hover {
-  color: #7ef0ba !important;
+  color: var(--brand-jade) !important;
 }
 /* Homepage: the Decision loop, with the product's glass and visual hierarchy. */
 .rm-home {
@@ -274,7 +274,7 @@ html body .radr .rx-footer a:hover {
   font-size: 10px;
   letter-spacing: 0.14em;
   font-weight: 800;
-  color: #087653;
+  color: var(--brand-jade-ink);
   line-height: 1.7;
   margin: 0 0 24px;
   display: flex;
@@ -291,17 +291,17 @@ html body .radr .rx-footer a:hover {
   font-size: clamp(3rem, 5.15vw, 5rem);
   line-height: 1.04;
   letter-spacing: -0.065em;
-  color: #102c43;
+  color: var(--brand-ink);
   font-weight: 650;
   margin: 0 0 28px;
 }
 .rm-home em {
   font-style: normal;
-  color: #225da2;
+  color: var(--brand-sapphire);
 }
 .rm-lead {
   font-size: 17px;
-  color: #48657a;
+  color: var(--brand-muted);
   line-height: 1.8;
   max-width: 540px;
   margin: 0 0 28px;
@@ -320,7 +320,7 @@ html body .radr .rx-footer a:hover {
   min-height: 48px;
   padding: 14px 22px;
   border-radius: 12px;
-  background: #163e54;
+  background: var(--brand-deep);
   color: #fff !important;
   font-size: 13px;
   font-weight: 750;
@@ -328,15 +328,15 @@ html body .radr .rx-footer a:hover {
   transition:
     transform 0.2s,
     background 0.2s;
-  border: 1px solid #163e54;
+  border: 1px solid var(--brand-deep);
 }
 .rm-button:hover {
   transform: translateY(-2px);
-  background: #087653;
+  background: var(--brand-jade-ink);
 }
 .rm-button-secondary {
   background: #ffffffa8;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   border-color: #b8cbd6;
 }
 .rm-button-secondary:hover {
@@ -345,7 +345,7 @@ html body .radr .rx-footer a:hover {
 .rm-caption {
   font-size: 11px;
   line-height: 1.85;
-  color: #506e83;
+  color: var(--brand-muted);
   margin-top: 24px;
   max-width: 52ch;
 }
@@ -365,10 +365,10 @@ html body .radr .rx-footer a:hover {
   border-radius: 16px;
   border: 1px solid white;
   background: #fbfffdf5;
-  box-shadow: 0 15px 40px #163c591c;
+  box-shadow: 0 15px 40px color-mix(in srgb, var(--brand-ink) 10.98%, transparent);
   font-size: 12px;
   font-weight: 750;
-  color: #163c59;
+  color: var(--brand-ink);
 }
 .rm-floating-note > span {
   display: grid;
@@ -378,13 +378,13 @@ html body .radr .rx-footer a:hover {
   width: 34px;
   height: 34px;
   font-size: 20px;
-  color: #087653;
+  color: var(--brand-jade-ink);
 }
 .rm-floating-note small {
   display: block;
   font-size: 10px;
   font-weight: 500;
-  color: #48657a;
+  color: var(--brand-muted);
   margin-top: 5px;
 }
 .rm-loop {
@@ -405,7 +405,7 @@ html body .radr .rx-footer a:hover {
 }
 .rm-loop small {
   font-size: 9px;
-  color: #087653;
+  color: var(--brand-jade-ink);
 }
 .rm-loop b {
   color: #8aa3b0;
@@ -417,10 +417,10 @@ html body .radr .rx-footer a:hover {
   border: 1px solid white;
   border-radius: 22px;
   box-shadow:
-    0 35px 90px #163c5921,
+    0 35px 90px color-mix(in srgb, var(--brand-ink) 12.94%, transparent),
     inset 0 1px 0 white;
   padding: 22px;
-  color: #163c59;
+  color: var(--brand-ink);
   text-align: left;
   min-width: 0;
 }
@@ -438,7 +438,7 @@ html body .radr .rx-footer a:hover {
   margin-left: auto;
   font-size: 9px;
   letter-spacing: 0;
-  color: #087653;
+  color: var(--brand-jade-ink);
 }
 .rm-brief-heading {
   display: flex;
@@ -449,7 +449,7 @@ html body .radr .rx-footer a:hover {
 .rm-brief-heading small {
   font-size: 8px;
   letter-spacing: 0.13em;
-  color: #506e83;
+  color: var(--brand-muted);
 }
 .rm-brief-heading h3 {
   font-size: 25px;
@@ -459,7 +459,7 @@ html body .radr .rx-footer a:hover {
 }
 .rm-brief-heading p {
   font-size: 10px;
-  color: #506e83;
+  color: var(--brand-muted);
   margin: 0;
 }
 .rm-avatar {
@@ -486,7 +486,7 @@ html body .radr .rx-footer a:hover {
 }
 .rm-brief-metrics span {
   font-size: 9px;
-  color: #48657a;
+  color: var(--brand-muted);
   display: block;
 }
 .rm-brief-metrics strong {
@@ -503,11 +503,11 @@ html body .radr .rx-footer a:hover {
 .rm-brief-metrics small {
   display: block;
   font-size: 8px;
-  color: #506e83;
+  color: var(--brand-muted);
   line-height: 1.6;
 }
 .rm-brief-decision {
-  background: linear-gradient(125deg, #163e54, #1b584b);
+  background: linear-gradient(125deg, var(--brand-deep), var(--brand-ocean));
   color: #fff;
   border: 1px solid #ffffff70;
   border-radius: 16px;
@@ -555,8 +555,8 @@ html body .radr .rx-footer a:hover {
   gap: 12px;
 }
 .rm-brief-action > span {
-  background: #7ef0ba;
-  color: #103d2e;
+  background: var(--brand-jade);
+  color: var(--brand-ink);
   border-radius: 8px;
   padding: 10px 12px;
   font-size: 10px;
@@ -575,10 +575,10 @@ html body .radr .rx-footer a:hover {
   gap: 10px;
   margin-top: 16px;
   font-size: 8px;
-  color: #48657a;
+  color: var(--brand-muted);
 }
 .rm-brief-evidence strong {
-  color: #087653;
+  color: var(--brand-jade-ink);
   margin-left: auto;
   font-weight: 700;
 }
@@ -597,13 +597,13 @@ html body .radr .rx-footer a:hover {
   letter-spacing: -0.055em;
   line-height: 1.1;
   font-weight: 650;
-  color: #102c43;
+  color: var(--brand-ink);
   margin: 0;
 }
 .rm-section-head > p {
   font-size: 15px;
   line-height: 1.85;
-  color: #48657a;
+  color: var(--brand-muted);
   max-width: 390px;
   margin: 0;
 }
@@ -617,24 +617,24 @@ html body .radr .rx-footer a:hover {
   border: 1px solid white;
   border-radius: 22px;
   padding: 30px;
-  box-shadow: 0 16px 50px #163c5909;
+  box-shadow: 0 16px 50px color-mix(in srgb, var(--brand-ink) 3.53%, transparent);
 }
 .rm-panel h3 {
   font-size: 22px;
   letter-spacing: -0.035em;
   font-weight: 650;
   line-height: 1.3;
-  color: #163c59;
+  color: var(--brand-ink);
   margin: 15px 0;
 }
 .rm-panel p {
   font-size: 13px;
   line-height: 1.85;
-  color: #48657a;
+  color: var(--brand-muted);
 }
 .rm-panel > a:not(.rm-button) {
   font-size: 12px;
-  color: #087653;
+  color: var(--brand-jade-ink);
   font-weight: 750;
   display: inline-block;
   margin-top: 15px;
@@ -644,7 +644,7 @@ html body .radr .rx-footer a:hover {
   font-size: 9px;
   letter-spacing: 0.08em;
   font-weight: 750;
-  color: #087653;
+  color: var(--brand-jade-ink);
   background: #ddf5eb;
   padding: 7px 10px;
   border-radius: 6px;
@@ -653,10 +653,10 @@ html body .radr .rx-footer a:hover {
   font-size: 48px;
   font-weight: 650;
   letter-spacing: -0.065em;
-  color: #087653;
+  color: var(--brand-jade-ink);
 }
 .rm-update-main {
-  background: linear-gradient(125deg, #163e54, #1b584b);
+  background: linear-gradient(125deg, var(--brand-deep), var(--brand-ocean));
   color: #fff;
 }
 .rm-update-main h3 {
@@ -690,7 +690,7 @@ html body .radr .rx-footer a:hover {
   border-radius: 12px;
   border: 1px solid #b7cbd7;
   background: #ffffffb8;
-  color: #163c59;
+  color: var(--brand-ink);
   font-size: 13px;
   font-weight: 750;
   cursor: pointer;
@@ -702,16 +702,16 @@ html body .radr .rx-footer a:hover {
   margin-top: 8px;
 }
 .rm-fork-tabs button[aria-selected="true"] {
-  background: #163e54;
+  background: var(--brand-deep);
   color: #fff;
-  border-color: #163e54;
+  border-color: var(--brand-deep);
 }
 .rm-fork-result {
   background: #ffffffc9;
   border: 1px solid white;
   border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 25px 60px #163c5914;
+  box-shadow: 0 25px 60px color-mix(in srgb, var(--brand-ink) 7.84%, transparent);
 }
 .rm-fork-result img {
   width: 100%;
@@ -725,32 +725,32 @@ html body .radr .rx-footer a:hover {
 .rm-fork-result h3 {
   font-size: 26px;
   letter-spacing: -0.045em;
-  color: #163c59;
+  color: var(--brand-ink);
   margin: 20px 0 12px;
   line-height: 1.2;
 }
 .rm-fork-result p {
   font-size: 13px;
-  color: #48657a;
+  color: var(--brand-muted);
   line-height: 1.8;
   min-height: 70px;
 }
 .rm-fork-result strong {
   font-size: 42px;
-  color: #087653;
+  color: var(--brand-jade-ink);
   display: block;
   letter-spacing: -0.05em;
 }
 .rm-fork-result small {
   display: block;
-  color: #506e83;
+  color: var(--brand-muted);
   font-size: 10px;
   margin: 8px 0 22px;
 }
 .rm-fork-result a {
   font-size: 12px;
   font-weight: 750;
-  color: #163c59;
+  color: var(--brand-ink);
 }
 .rm-hidden-signal {
   display: grid;
@@ -799,7 +799,7 @@ html body .radr .rx-footer a:hover {
   border-radius: 9px;
 }
 .rm-evidence-chain b {
-  color: #087653;
+  color: var(--brand-jade-ink);
 }
 .rm-hidden-signal .rm-button {
   margin-top: 14px;
@@ -1026,7 +1026,7 @@ html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-silk {
   border-radius: 24px;
   overflow: hidden;
   min-height: 450px;
-  box-shadow: 0 25px 60px #163c591c;
+  box-shadow: 0 25px 60px color-mix(in srgb, var(--brand-ink) 10.98%, transparent);
   border: 1px solid white;
 }
 .rm-company-visual > img {
@@ -1059,13 +1059,13 @@ html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-silk {
   border-radius: 22px;
   padding: 32px;
   background: linear-gradient(125deg, #ffffffe8, #f0f8fbd9);
-  box-shadow: 0 20px 50px #163c5910;
+  box-shadow: 0 20px 50px color-mix(in srgb, var(--brand-ink) 6.27%, transparent);
 }
 .rm-scope-visual h3 {
   font-size: 38px;
   line-height: 1.15;
   letter-spacing: -0.05em;
-  color: #163c59;
+  color: var(--brand-ink);
   margin: 0 0 30px;
   font-weight: 650;
 }
@@ -1085,7 +1085,7 @@ html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-silk {
   place-items: center;
   align-self: flex-start;
   background: #d8f3e7;
-  color: #087653;
+  color: var(--brand-jade-ink);
   width: 32px;
   height: 32px;
   border-radius: 9px;
@@ -1093,18 +1093,18 @@ html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-silk {
 }
 .rm-scope-visual li strong {
   font-size: 14px;
-  color: #163c59;
+  color: var(--brand-ink);
 }
 .rm-scope-visual li p {
   font-size: 12px;
-  color: #48657a;
+  color: var(--brand-muted);
   line-height: 1.7;
   margin: 6px 0 0;
 }
 .rm-scope-visual > small {
   display: block;
   font-size: 10px;
-  color: #48657a;
+  color: var(--brand-muted);
   margin-top: 20px;
 }
 .rm-lens-grid {
@@ -1121,12 +1121,12 @@ html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-silk {
 .rm-lens-grid span {
   font-size: 10px;
   letter-spacing: 0.1em;
-  color: #087653;
+  color: var(--brand-jade-ink);
   font-weight: 750;
 }
 .rm-lens-grid p {
   font-size: 12px;
-  color: #48657a;
+  color: var(--brand-muted);
   line-height: 1.7;
   margin: 8px 0 0;
 }
@@ -1140,13 +1140,13 @@ html
     .rx-contact-rail
   ) {
   background: linear-gradient(115deg, #ffffffe3, #f5faffbf) !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   border: 1px solid #fff !important;
   border-radius: 20px !important;
-  box-shadow: 0 15px 45px #163c590a !important;
+  box-shadow: 0 15px 45px color-mix(in srgb, var(--brand-ink) 3.92%, transparent) !important;
 }
 html body .radr:has(.rx-nav) .rx30-journey > article[data-featured="true"] {
-  background: linear-gradient(125deg, #163e54, #1b584b) !important;
+  background: linear-gradient(125deg, var(--brand-deep), var(--brand-ocean)) !important;
   color: #fff !important;
 }
 html
@@ -1169,11 +1169,11 @@ html body .radr:has(.rx-nav) :is(.rx30-leak-nav button, .vc-samples button) {
   border-radius: 10px;
   border: 1px solid white;
   background: #ffffffc9;
-  color: #163c59;
+  color: var(--brand-ink);
   min-height: 38px;
 }
 html body .radr:has(.rx-nav) .rx30-leak-nav button[data-on="true"] {
-  background: #163e54;
+  background: var(--brand-deep);
   color: white;
 }
 html
@@ -1181,17 +1181,17 @@ html
   .radr:has(.rx-nav)
   :is(.rx-page-hero--mineral, .rx-contact--mineral, .rx-ch-hero, .rx-ch-body) {
   background: transparent !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 html body .radr:has(.rx-nav) :is(.rx-page-title, .rx-ch-title) {
-  color: #102c43 !important;
+  color: var(--brand-ink) !important;
   font-size: clamp(2.8rem, 5vw, 5rem);
   letter-spacing: -0.055em;
   line-height: 1.1;
   font-weight: 650;
 }
 html body .radr:has(.rx-nav) :is(.rx-lead, .rx-ch-lead) {
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
   line-height: 1.8;
 }
 html body .radr:has(.rx-nav) .rx-contact-form {
@@ -1202,40 +1202,40 @@ html body .radr:has(.rx-nav) .rx-contact-rail {
   align-self: start;
 }
 html body .radr:has(.rx-nav) :is(.rx-contact-form label, .rx-contact-rail li) {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 html body .radr:has(.rx-nav) .rx-btn-primary {
-  background: #163e54 !important;
+  background: var(--brand-deep) !important;
   color: white !important;
   border-radius: 12px !important;
-  border-color: #163e54 !important;
+  border-color: var(--brand-deep) !important;
 }
 html body .rx-dev-root {
   font-family: var(--font-entry), Arial, sans-serif !important;
   background:
     radial-gradient(ellipse at 90% 0, #d5e5f5, transparent 60%),
     linear-gradient(145deg, #f4f8fc, #e6eef4 65%, #eef6f3) !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 html body .rx-dev-root :is(h1, h2, h3, p, a, button) {
   font-family: var(--font-entry), Arial, sans-serif !important;
 }
 html body .rx-dev-root :is(.rx-dev-top, .rx-dev-side, .rx-dev-drawer-panel) {
   background: #f4f8fcf5 !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   border-color: #fff !important;
 }
 html body .rx-dev-root :is(h1, h2, h3) {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   letter-spacing: -0.04em;
 }
 html body .rx-dev-root .rx-dev-side a {
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
   border-radius: 8px;
 }
 html body .rx-dev-root .rx-dev-side a[data-active="true"] {
   background: #d4e9e6 !important;
-  color: #087653 !important;
+  color: var(--brand-jade-ink) !important;
 }
 html body .rx-dev-root :is(.rx-dev-card, .rx-dev-entry-card) {
   border: 1px solid white !important;
@@ -1279,7 +1279,7 @@ html body .radr:has(.rx-nav) .rm-page-hero-grid > .rx30-shell > div {
   opacity: 1 !important;
 }
 html body .radr:has(.rx-nav) .rx30-h1 {
-  color: #102c43 !important;
+  color: var(--brand-ink) !important;
   letter-spacing: -0.055em;
   line-height: 1.08;
   font-weight: 650;
@@ -1296,16 +1296,16 @@ html body .rx-nav-panel[data-menu] {
   max-height: min(calc(100dvh - 110px), 660px) !important;
 }
 html body .rx-nav-panel .rx-np-item span:not(.rx-np-item-signal) {
-  color: #48657a !important;
+  color: var(--brand-muted) !important;
   font-size: 11px;
   line-height: 1.6;
 }
 html body .rx-nav-panel .rx-np-item strong {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 .rm-field-preview {
   padding: 24px;
-  color: #163c59;
+  color: var(--brand-ink);
 }
 .rm-field-preview h3 {
   font-size: 28px;
@@ -1316,18 +1316,18 @@ html body .rx-nav-panel .rx-np-item strong {
 .rm-field-preview > p {
   font-size: 15px;
   line-height: 1.8;
-  color: #48657a;
+  color: var(--brand-muted);
 }
 .rm-field-preview > small {
   display: block;
   font-size: 11px;
   line-height: 1.8;
-  color: #506e83;
+  color: var(--brand-muted);
   margin-top: 24px;
 }
 .rm-brief-action > a {
-  background: #7ef0ba;
-  color: #103d2e !important;
+  background: var(--brand-jade);
+  color: var(--brand-ink) !important;
   border-radius: 8px;
   padding: 10px 12px;
   font-size: 10px;
@@ -1371,15 +1371,15 @@ html
   background: linear-gradient(115deg, #ffffffe3, #f5faffbf) !important;
   border: 1px solid white !important;
   border-radius: 18px !important;
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
 }
 html body .radr:has(.rx-nav) :is(.vc-res-head h1, .vc-res h2) {
-  color: #163c59 !important;
+  color: var(--brand-ink) !important;
   font-weight: 650;
   letter-spacing: -0.045em;
 }
 html body .radr:has(.rx-nav) :is(.vc-res-act, .vc-res-act--primary) {
-  background: #163e54;
+  background: var(--brand-deep);
   color: #fff;
   border-radius: 10px;
 }

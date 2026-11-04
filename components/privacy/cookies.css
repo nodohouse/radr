@@ -10,13 +10,13 @@
   border: 1px solid #fff;
   border-radius: 22px;
   background: linear-gradient(120deg, #fcfeff, #edf6f6);
-  color: #163c59;
+  color: var(--brand-ink);
   font-family: var(--font-entry), Arial, sans-serif;
   box-shadow: 0 25px 100px #12384e38;
   z-index: 1000;
 }
 .radr-cookies::backdrop {
-  background: #102c4340;
+  background: color-mix(in srgb, var(--brand-ink) 25.1%, transparent);
   backdrop-filter: blur(3px);
 }
 .radr-cookies-head {
@@ -25,13 +25,13 @@
   align-items: center;
   font-size: 10px;
   letter-spacing: 0.12em;
-  color: #087653;
+  color: var(--brand-jade-ink);
   font-weight: 750;
 }
 .radr-cookies-head button {
   background: none;
   border: 0;
-  color: #163c59;
+  color: var(--brand-ink);
   font-size: 26px;
   cursor: pointer;
   width: 40px;
@@ -46,7 +46,7 @@
 .radr-cookies p {
   font-size: 13px;
   line-height: 1.8;
-  color: #48657a;
+  color: var(--brand-muted);
 }
 .radr-cookie-actions {
   display: flex;
@@ -56,9 +56,9 @@
 }
 .radr-cookie-actions button {
   flex: 1 1 140px;
-  background: #163e54;
+  background: var(--brand-deep);
   color: #fff;
-  border: 1px solid #163e54;
+  border: 1px solid var(--brand-deep);
   border-radius: 10px;
   min-height: 46px;
   padding: 10px 12px;
@@ -68,12 +68,12 @@
 }
 .radr-cookie-actions button:last-child {
   background: #fff;
-  color: #163c59;
+  color: var(--brand-ink);
   border-color: #a8bfce;
 }
 .radr-cookies > a {
   font-size: 12px;
-  color: #087653;
+  color: var(--brand-jade-ink);
 }
 .radr-cookie-options {
   border-block: 1px solid #cadbe2;
@@ -99,16 +99,16 @@
   display: block;
   font-size: 11px;
   line-height: 1.7;
-  color: #48657a;
+  color: var(--brand-muted);
   margin-top: 5px;
 }
 .radr-cookie-options input {
   width: 20px;
   height: 20px;
-  accent-color: #087653;
+  accent-color: var(--brand-jade-ink);
 }
 .radr-cookie-options b {
-  color: #087653;
+  color: var(--brand-jade-ink);
   font-size: 10px;
 }
 .radr-cookie-settings {
@@ -122,7 +122,7 @@
   text-decoration: underline;
 }
 .radr-cookies :is(button, input, a):focus-visible {
-  outline: 3px solid #225da2;
+  outline: 3px solid var(--brand-sapphire);
   outline-offset: 3px;
 }
 @media (max-width: 600px) {

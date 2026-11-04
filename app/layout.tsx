@@ -6,6 +6,7 @@ import { locales, type AppLocale } from "@/i18n/routing";
 import "./globals.css";
 import "./radr.css";
 import "./motion.css";
+import "./radr-brand-theme.css";
 
 /**
  * Product typography is Geist Sans only.
@@ -24,7 +25,11 @@ const mono = IBM_Plex_Mono({
  * Do not call next-intl getLocale() here - it can resolve the first path
  * segment as a locale and make /app match [locale]=app.
  */
-export default async function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const jar = await cookies();
   const preferred = jar.get("radr_locale")?.value;
   const locale: AppLocale =

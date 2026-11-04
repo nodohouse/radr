@@ -1,21 +1,23 @@
+@import "./radr-palette.css";
+
 /**
  * RADR brand tokens — single source for /en and /app.
- * Identity: Geist Sans · A-mark · green-first · blue intelligence · daylight.
+ * Identity: Geist Sans · A-mark · sapphire / ocean foundations · neon jade signal · daylight.
  */
 
 :root {
   /* ——— Canonical brand palette (2026 A-mark system) ——— */
-  --radr-ink: #0b1512;
-  --radr-forest: #064d39;
-  --radr-green: #00d978;
-  --radr-green-bright: #19ea8a;
+  --radr-ink: var(--brand-ink);
+  --radr-forest: var(--brand-ocean);
+  --radr-green: var(--brand-jade);
+  --radr-green-bright: var(--brand-jade);
   --radr-mint: #dff9ee;
-  --radr-blue: #2777e8;
-  --radr-blue-soft: #ddebff;
+  --radr-blue: var(--brand-sapphire);
+  --radr-blue-soft: var(--brand-sapphire-soft);
   --radr-ice: #f1f7fc;
-  --radr-bg: #f8faf7;
+  --radr-bg: var(--brand-canvas);
   --radr-surface: #ffffff;
-  --radr-muted: #69746f;
+  --radr-muted: var(--brand-muted);
   --radr-border: rgba(11, 21, 18, 0.1);
 
   /* Motion */
@@ -44,7 +46,7 @@
   --color-canvas: var(--radr-bg);
   --color-canvas-elevated: #fbfdfc;
   --color-surface: var(--radr-surface);
-  --color-surface-subtle: #eef4f0;
+  --color-surface-subtle: var(--brand-ocean-soft);
   --color-surface-raised: #ffffff;
 
   /* Ink */
@@ -62,7 +64,7 @@
   --color-brand: var(--radr-green);
   --color-electric: var(--radr-green);
   --color-brand-muted: rgba(0, 217, 120, 0.12);
-  --color-brand-deep: var(--radr-forest);
+  --color-brand-deep: var(--brand-ocean);
   --color-intel: var(--radr-blue);
   --color-intel-soft: var(--radr-blue-soft);
 
@@ -95,8 +97,8 @@
 
   /* Chart series (light canvas only) */
   --chart-canvas: transparent;
-  --chart-primary: #0a0d0b;
-  --chart-brand: #00a85a;
+  --chart-primary: var(--brand-sapphire);
+  --chart-brand: var(--brand-ocean);
   --chart-compare: #9aa39c;
   --chart-forecast: #9aa39c;
   --chart-verified: #00a85a;

@@ -10,12 +10,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { PUBLIC_SUPPLIER } from "@/lib/marketing/publicCanon";
 import { stageSwap } from "@/lib/marketing/motion";
 
-export type LeakId =
-  | "supplier"
-  | "recon"
-  | "cost"
-  | "proc"
-  | "perish";
+export type LeakId = "supplier" | "recon" | "cost" | "proc" | "perish";
 
 type Props = {
   leak: LeakId;
@@ -43,10 +38,13 @@ function Frame({
 }
 
 function SupplierVisual({ reduced }: { reduced: boolean }) {
-  const [step, setStep] = useState(reduced ? 2 : 0);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced) {
+      setStep(2);
+      return;
+    }
     setStep(0);
     const t1 = window.setTimeout(() => setStep(1), 280);
     const t2 = window.setTimeout(() => setStep(2), 700);
@@ -71,7 +69,10 @@ function SupplierVisual({ reduced }: { reduced: boolean }) {
       <div className="rx30-leak-diff-line" aria-hidden="true">
         <i style={{ width: step >= 1 ? "100%" : "0%" }} />
       </div>
-      <div className="rx30-leak-exposure" data-on={step >= 2 ? "true" : undefined}>
+      <div
+        className="rx30-leak-exposure"
+        data-on={step >= 2 ? "true" : undefined}
+      >
         <span>Exposure · {PUBLIC_SUPPLIER.volumeL} L</span>
         <strong>{PUBLIC_SUPPLIER.verifiedFormatted}</strong>
       </div>
@@ -83,7 +84,7 @@ function SupplierVisual({ reduced }: { reduced: boolean }) {
 }
 
 function ReconVisual({ reduced }: { reduced: boolean }) {
-  const [diverge, setDiverge] = useState(reduced);
+  const [diverge, setDiverge] = useState(false);
 
   useEffect(() => {
     if (reduced) {
@@ -96,8 +97,15 @@ function ReconVisual({ reduced }: { reduced: boolean }) {
   }, [reduced]);
 
   return (
-    <div className="rx30-leak-recon" data-diverge={diverge ? "true" : undefined}>
-      <svg viewBox="0 0 280 100" role="img" aria-label="Expected vs actual settlement">
+    <div
+      className="rx30-leak-recon"
+      data-diverge={diverge ? "true" : undefined}
+    >
+      <svg
+        viewBox="0 0 280 100"
+        role="img"
+        aria-label="Expected vs actual settlement"
+      >
         <path
           className="rx30-leak-line rx30-leak-line--expected"
           d="M 10 50 H 270"
@@ -118,9 +126,10 @@ function ReconVisual({ reduced }: { reduced: boolean }) {
   );
 }
 
+const drivers = ["Supplier", "Yield", "Waste", "Mix"] as const;
+
 function CostVisual({ reduced }: { reduced: boolean }) {
-  const drivers = ["Supplier", "Yield", "Waste", "Mix"] as const;
-  const [n, setN] = useState(reduced ? drivers.length : 0);
+  const [n, setN] = useState(0);
 
   useEffect(() => {
     if (reduced) {
@@ -161,7 +170,11 @@ function ProcVisual() {
 
   return (
     <div className="rx30-leak-proc">
-      <svg viewBox="0 0 280 110" role="img" aria-label="Supplier price dispersion">
+      <svg
+        viewBox="0 0 280 110"
+        role="img"
+        aria-label="Supplier price dispersion"
+      >
         {cities.map((c) => (
           <g key={c.name}>
             <circle
@@ -181,14 +194,15 @@ function ProcVisual() {
   );
 }
 
+const marks = [
+  { t: "18h", v: 92 },
+  { t: "12h", v: 78 },
+  { t: "6h", v: 54 },
+  { t: "2h", v: 28 },
+] as const;
+
 function PerishVisual({ reduced }: { reduced: boolean }) {
-  const marks = [
-    { t: "18h", v: 92 },
-    { t: "12h", v: 78 },
-    { t: "6h", v: 54 },
-    { t: "2h", v: 28 },
-  ] as const;
-  const [i, setI] = useState(reduced ? marks.length - 1 : 0);
+  const [i, setI] = useState(0);
 
   useEffect(() => {
     if (reduced) {
@@ -220,7 +234,12 @@ function PerishVisual({ reduced }: { reduced: boolean }) {
           const y = 100 - m.v * 0.85;
           return (
             <g key={m.t}>
-              <circle cx={x} cy={y} r={5} data-on={idx === i ? "true" : undefined} />
+              <circle
+                cx={x}
+                cy={y}
+                r={5}
+                data-on={idx === i ? "true" : undefined}
+              />
               <text x={x} y={114} textAnchor="middle">
                 {m.t}
               </text>
@@ -238,7 +257,9 @@ function PerishVisual({ reduced }: { reduced: boolean }) {
         ) : null}
       </svg>
       {i >= 2 ? (
-        <p className="rx30-act-badge">Intervene before expiry · decision deadline</p>
+        <p className="rx30-act-badge">
+          Intervene before expiry · decision deadline
+        </p>
       ) : null}
     </div>
   );

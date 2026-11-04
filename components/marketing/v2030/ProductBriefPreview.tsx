@@ -68,7 +68,7 @@ export function ProductBriefPreview() {
             <path
               d="M0 39L24 35L48 37L72 22L96 26L120 19L144 25L168 8L192 13L216 4L240 10"
               fill="none"
-              stroke="#7ef0ba"
+              stroke="#00e895"
               strokeWidth="3"
             />
           </svg>
