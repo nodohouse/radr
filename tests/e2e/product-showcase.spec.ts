@@ -22,8 +22,8 @@ test("tablet review leads through evidence, futures and a qualified demo outcome
   const tablet = page.locator(".rsc-tablet");
   await tablet.getByRole("button", { name: "Review the decision" }).click();
   await expect(
-    tablet.getByRole("tab", { name: "Decisions", exact: true }),
-  ).toHaveAttribute("aria-selected", "true");
+    tablet.getByRole("button", { name: "Decisions", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
   await expect(tablet).toContainText(
     "Synthetic evidence, not a live prediction.",
   );
@@ -47,20 +47,29 @@ test("every scene fits and keeps the same tablet height on desktop, tablet and p
     await page.setViewportSize({ width, height: 982 });
     await page.goto(base + "/en");
     const heights: number[] = [];
-    for (const name of ["Control Center", "Decisions", "Futures", "Value"]) {
+    for (const name of [
+      "Control Center",
+      "Decisions",
+      "Intelligence",
+      "Value",
+    ]) {
       await page
         .locator(".rsc-tablet")
-        .getByRole("tab", { name, exact: true })
+        .getByRole("button", { name, exact: true })
         .click();
-      const size = await page
-        .locator(".rsc-tablet")
-        .evaluate((n) => ({
-          height: n.getBoundingClientRect().height,
-          overflow: document.documentElement.scrollWidth > innerWidth + 1,
-          clipped:
-            n.querySelector(".rsc-stage")!.scrollHeight >
-            n.querySelector(".rsc-stage")!.clientHeight + 1,
-        }));
+      const size = await page.locator(".rsc-tablet").evaluate((n) => ({
+        height: n.getBoundingClientRect().height,
+        width: n.getBoundingClientRect().width,
+        railLeft:
+          n.querySelector(".rsc-sidebar")!.getBoundingClientRect().right <=
+          n.querySelector(".rsc-stage")!.getBoundingClientRect().left + 1,
+        overflow: document.documentElement.scrollWidth > innerWidth + 1,
+        clipped:
+          n.querySelector(".rsc-stage")!.scrollHeight >
+          n.querySelector(".rsc-stage")!.clientHeight + 1,
+      }));
+      expect(size.width).toBeGreaterThan(size.height);
+      expect(size.railLeft).toBe(true);
       expect(size.overflow).toBe(false);
       expect(size.clipped).toBe(false);
       heights.push(size.height);
@@ -68,7 +77,7 @@ test("every scene fits and keeps the same tablet height on desktop, tablet and p
     expect(new Set(heights).size).toBe(1);
   }
 });
-test("tour advances automatically, then manual interaction stops it stealing focus", async ({
+test("tour continuously advances while hovered and after manual navigation, with no playback UI", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -76,20 +85,25 @@ test("tour advances automatically, then manual interaction stops it stealing foc
   await page.goto(base + "/en");
   const tablet = page.locator(".rsc-tablet");
   await expect(tablet).toHaveAttribute("data-running", "true");
-  await page.clock.runFor(7100);
+  await expect(tablet.locator(".rsc-play, .rsc-demo")).toHaveCount(0);
+  await expect(tablet).not.toContainText("19:48");
+  await page.clock.runFor(4300);
   await expect(
-    tablet.getByRole("tab", { name: "Decisions", exact: true }),
-  ).toHaveAttribute("aria-selected", "true");
+    tablet.getByRole("button", { name: "Decisions", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await tablet.hover();
+  await page.clock.runFor(4300);
+  await expect(
+    tablet.getByRole("button", { name: "Intelligence", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
   await tablet
-    .getByRole("tab", { name: "Control Center", exact: true })
+    .getByRole("button", { name: "Control Center", exact: true })
     .click();
-  await page.clock.runFor(15000);
+  await page.clock.runFor(4300);
   await expect(
-    tablet.getByRole("tab", { name: "Control Center", exact: true }),
-  ).toHaveAttribute("aria-selected", "true");
-  await expect(
-    tablet.getByRole("button", { name: "Play product tour" }),
-  ).toBeVisible();
+    tablet.getByRole("button", { name: "Decisions", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await expect(tablet).toHaveAttribute("data-running", "true");
 });
 test("reduced motion leaves graph stationary and tabs support arrow-key navigation", async ({
   page,
@@ -104,14 +118,14 @@ test("reduced motion leaves graph stationary and tabs support arrow-key navigati
       .evaluate((n) => getComputedStyle(n).animationName),
   ).toBe("none");
   await tablet
-    .getByRole("tab", { name: "Control Center", exact: true })
+    .getByRole("button", { name: "Control Center", exact: true })
     .focus();
-  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("ArrowDown");
   await expect(
-    tablet.getByRole("tab", { name: "Decisions", exact: true }),
+    tablet.getByRole("button", { name: "Decisions", exact: true }),
   ).toBeFocused();
   await page.keyboard.press("End");
   await expect(
-    tablet.getByRole("tab", { name: "Value", exact: true }),
+    tablet.getByRole("button", { name: "Value", exact: true }),
   ).toBeFocused();
 });

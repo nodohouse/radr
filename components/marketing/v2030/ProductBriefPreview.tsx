@@ -4,35 +4,39 @@ import { useEffect, useId, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
+import { NAV_ICONS } from "@/components/product/shell/navIcons";
 import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
 import "./product-showcase.css";
 
-const SECTIONS = ["Control Center", "Decisions", "Futures", "Value"] as const;
-const ICONS = [
-  "M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z",
-  "m5 12 4 4L19 6M4 21h16",
-  "M5 3v5c0 4 14 0 14 5v8M5 8v13m-3-3 3 3 3-3m8 0 3 3 3-3",
-  "m4 13 5 5L20 6",
-];
+const SECTIONS = [
+  "Control Center",
+  "Decisions",
+  "Intelligence",
+  "Value",
+] as const;
+const NAVIGATION = [
+  { id: "control-center", label: "Control Center", scene: 0 },
+  { id: "live", label: "Live", surface: "live" },
+  { id: "decisions", label: "Decisions", scene: 1 },
+  { id: "service", label: "Operations", surface: "operations" },
+  { id: "house", label: "Back of House", surface: "house" },
+  { id: "intelligence", label: "Intelligence", scene: 2 },
+  { id: "value", label: "Value", scene: 3 },
+  { id: "memory", label: "Memory", surface: "memory" },
+  { id: "data-health", label: "Data Health", surface: "health" },
+  { id: "connections", label: "Connections", surface: "connections" },
+] as const;
 
 /** A synthetic product tour, never a live feed or an executable approval flow. */
 export function ProductBriefPreview() {
   const [section, setSection] = useState(0);
   const [motionReady, setMotionReady] = useState(false);
-  const [playing, setPlaying] = useState(true);
-  const [engaged, setEngaged] = useState(false);
   const [visible, setVisible] = useState(false);
   const [documentVisible, setDocumentVisible] = useState(true);
   const reduced = useReducedMotion();
   const root = useRef<HTMLDivElement>(null);
   const id = useId();
-  const auto =
-    motionReady &&
-    playing &&
-    !engaged &&
-    visible &&
-    documentVisible &&
-    reduced === false;
+  const auto = motionReady && visible && documentVisible && reduced === false;
 
   useEffect(() => {
     setMotionReady(true);
@@ -53,13 +57,12 @@ export function ProductBriefPreview() {
     if (!auto) return;
     const timer = window.setInterval(
       () => setSection((s) => (s + 1) % SECTIONS.length),
-      7000,
+      4200,
     );
     return () => window.clearInterval(timer);
   }, [auto]);
   function select(next: number) {
     setSection(next);
-    setPlaying(false);
   }
 
   return (
@@ -68,84 +71,83 @@ export function ProductBriefPreview() {
       className="rsc-tablet"
       data-running={auto ? "true" : undefined}
       aria-label="RADR interactive product showcase, illustrative demo"
-      onMouseEnter={() => setEngaged(true)}
-      onMouseLeave={() => setEngaged(false)}
-      onFocusCapture={() => setEngaged(true)}
-      onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) setEngaged(false);
-      }}
     >
       <span className="rsc-camera" aria-hidden="true" />
       <div className="rsc-screen">
-        <div className="rsc-chrome">
-          <FrozenRadrLogo variant="mark" width={26} />
-          <strong>RADR</strong>
-          <span className="rsc-demo">Illustrative demo · {venue.clock}</span>
-        </div>
-        <div className="rsc-tourbar">
-          <div
-            className="rsc-tabs"
-            role="tablist"
-            aria-label="Product showcase sections"
-          >
-            {SECTIONS.map((label, i) => (
-              <button
-                key={label}
-                type="button"
-                role="tab"
-                id={`${id}-tab-${i}`}
-                aria-selected={section === i}
-                aria-controls={`${id}-panel`}
-                tabIndex={section === i ? 0 : -1}
-                onClick={() => select(i)}
-                onKeyDown={(e) => {
-                  if (
-                    !["ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)
-                  )
-                    return;
-                  e.preventDefault();
-                  const next =
-                    e.key === "Home"
-                      ? 0
-                      : e.key === "End"
-                        ? 3
-                        : (i + (e.key === "ArrowRight" ? 1 : 3)) % 4;
-                  select(next);
-                  document.getElementById(`${id}-tab-${next}`)?.focus();
-                }}
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d={ICONS[i]} />
-                </svg>
-                <span>{label}</span>
-              </button>
-            ))}
+        <aside className="rsc-sidebar" aria-label="RADR workspace preview">
+          <FrozenRadrLogo variant="mark" width={27} />
+          <div className="rsc-workspace">
+            <small>WORKSPACE</small>
+            <strong>Soho · New York</strong>
           </div>
-          <button
-            type="button"
-            className="rsc-play"
-            aria-label={
-              motionReady && reduced
-                ? "Automatic tour disabled for reduced motion"
-                : playing
-                  ? "Pause product tour"
-                  : "Play product tour"
-            }
-            aria-pressed={motionReady && reduced ? false : playing}
-            disabled={motionReady && reduced === true}
-            onClick={() => setPlaying((p) => !p)}
-          >
-            {motionReady && reduced ? "▷" : playing ? "Ⅱ" : "▷"}
-          </button>
+          <nav aria-label="Product showcase sections">
+            {NAVIGATION.map((item) => {
+              const Icon = NAV_ICONS[item.id];
+              const content = (
+                <>
+                  <Icon />
+                  <span>{item.label}</span>
+                </>
+              );
+              return "scene" in item ? (
+                <button
+                  key={item.id}
+                  type="button"
+                  id={`${id}-nav-${item.scene}`}
+                  data-scene={item.scene}
+                  aria-label={item.label}
+                  aria-pressed={section === item.scene}
+                  aria-controls={`${id}-panel`}
+                  onClick={() => select(item.scene)}
+                  onKeyDown={(event) => {
+                    if (
+                      !["ArrowDown", "ArrowUp", "Home", "End"].includes(
+                        event.key,
+                      )
+                    )
+                      return;
+                    event.preventDefault();
+                    const next =
+                      event.key === "Home"
+                        ? 0
+                        : event.key === "End"
+                          ? 3
+                          : (item.scene + (event.key === "ArrowDown" ? 1 : 3)) %
+                            4;
+                    select(next);
+                    document.getElementById(`${id}-nav-${next}`)?.focus();
+                  }}
+                >
+                  {content}
+                </button>
+              ) : (
+                <Link
+                  key={item.id}
+                  aria-label={`Explore ${item.label}`}
+                  href={`/product?surface=${item.surface}`}
+                >
+                  {content}
+                </Link>
+              );
+            })}
+          </nav>
+          <div className="rsc-sidebar-status">
+            <i /> Your operating picture
+          </div>
+        </aside>
+        <div className="rsc-chrome">
+          <strong>{SECTIONS[section]}</strong>
+          <span className="rsc-top-location">Soho · New York</span>
+          <span className="rsc-avatar">A</span>
         </div>
         <div
           className="rsc-stage"
-          role="tabpanel"
+          role="region"
           id={`${id}-panel`}
-          aria-labelledby={`${id}-tab-${section}`}
+          aria-label={`${SECTIONS[section]} preview`}
           tabIndex={0}
         >
-          <div key={section} className="rsc-scene">
+          <div key={section} className="rsc-scene" data-section={section}>
             <div className="rsc-heading">
               <div>
                 <p>{venue.displayName} · Dinner service</p>
@@ -160,7 +162,9 @@ export function ProductBriefPreview() {
                   }
                 </h3>
               </div>
-              <span className="rsc-avatar">A</span>
+              <span className="rsc-section-marker">
+                {String(section + 1).padStart(2, "0")} / 04
+              </span>
             </div>
             {section === 0 ? (
               <>
@@ -342,9 +346,11 @@ export function ProductBriefPreview() {
         </div>
         <div className="rsc-foot">
           <span>
-            <i /> Synthetic data · no system writes
+            <i /> Product preview · synthetic data
           </span>
-          <span>{String(section + 1).padStart(2, "0")} / 04</span>
+          <span className="rsc-tour-progress" aria-hidden="true">
+            <i key={section} />
+          </span>
         </div>
       </div>
     </div>

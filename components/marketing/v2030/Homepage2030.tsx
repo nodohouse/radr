@@ -99,12 +99,6 @@ export function Homepage2030() {
           }
         >
           <ProductBriefPreview />
-          <div className="rm-floating-note">
-            <span>→</span>
-            <div>
-              From signal to decision.<small>Then back to evidence.</small>
-            </div>
-          </div>
         </motion.div>
         <div className="rm-loop" aria-label="The RADR decision loop">
           {PUBLIC_LOOP.map((step, i) => (
