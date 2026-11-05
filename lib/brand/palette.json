@@ -1,12 +1,12 @@
 {
-  "sapphire": "#244C91",
-  "ocean": "#176B7D",
-  "jade": "#00E895",
+  "sapphire": "#1238F5",
+  "ocean": "#0068E8",
+  "jade": "#00F59A",
   "ink": "#122E4B",
   "muted": "#4C6378",
-  "canvas": "#F1F6FB",
-  "sapphire-soft": "#DFE9F8",
-  "ocean-soft": "#DFEFF3",
+  "canvas": "#F1F5FF",
+  "sapphire-soft": "#DFE7FF",
+  "ocean-soft": "#DEEDFF",
   "jade-soft": "#DDFBF0",
   "jade-ink": "#006747",
   "deep": "#102D50"

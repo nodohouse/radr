@@ -123,17 +123,28 @@ export function SiteNav({ variant }: Props) {
     const navRect = (
       navRef.current?.querySelector(".rx-nav-bar") ?? navRef.current
     )?.getBoundingClientRect();
+    const brand = navRef.current
+      ?.querySelector(".rx-nav-bar > .rx-nav-brand")
+      ?.getBoundingClientRect();
+    const actions = navRef.current
+      ?.querySelector(".rx-nav-right")
+      ?.getBoundingClientRect();
+    const safeLeft = Math.max(24, (brand?.right ?? 0) + 24);
+    const safeRight = Math.min(
+      window.innerWidth - 24,
+      (actions?.left ?? window.innerWidth) - 24,
+    );
     const widthMap: Record<MenuId, number> = {
-      platform: 1200,
-      solutions: 1100,
-      company: 560,
+      platform: 980,
+      solutions: 900,
+      company: 500,
     };
-    const width = Math.min(widthMap[id], Math.max(300, window.innerWidth - 48));
-    let left =
-      id === "company" || !navRect
+    const width = Math.min(widthMap[id], Math.max(0, safeRight - safeLeft));
+    const preferredLeft =
+      id === "company"
         ? rect.left + rect.width / 2 - width / 2
-        : navRect.left + (navRect.width - width) / 2;
-    left = Math.max(24, Math.min(left, window.innerWidth - width - 24));
+        : safeLeft + (safeRight - safeLeft - width) / 2;
+    const left = Math.max(safeLeft, Math.min(preferredLeft, safeRight - width));
     const top = (navRect?.bottom ?? rect.bottom) + 12;
     setPanelPos({ left, top, width });
   }, []);

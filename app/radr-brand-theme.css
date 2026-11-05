@@ -3,9 +3,9 @@
 :root {
   --brand-atmosphere: linear-gradient(
     90deg,
-    #e0e9f8 0%,
-    #e0edf5 50%,
-    #e0f0f3 100%
+    #dce5ff 0%,
+    #dcecff 50%,
+    #dcefff 100%
   );
   --brand-depth: linear-gradient(
     90deg,
@@ -57,7 +57,7 @@ html
     .rx-btn-primary,
     .rm-button:not(.rm-button-secondary)
   ):hover {
-  background: #31efa9 !important;
+  background: #36ffb0 !important;
   color: var(--brand-ink) !important;
 }
 html body .radr:has(.rx-nav) .rm-button-secondary {
@@ -263,7 +263,7 @@ html
   .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
   .cc-executive
   .cc-primary-action:hover {
-  background: #31efa9 !important;
+  background: #36ffb0 !important;
 }
 html body .rp-premium .rp-goh-avatar {
   background: var(--brand-sapphire) !important;
@@ -283,7 +283,7 @@ html body .ob-root .ob-btn-primary {
   border-color: var(--brand-jade);
 }
 html body .ob-root .ob-btn-primary:hover:not(:disabled) {
-  background: #31efa9;
+  background: #36ffb0;
 }
 html
   body
@@ -458,4 +458,26 @@ html body .radr:has(.rx-nav) .rm-hero .rm-loop small {
 }
 html body .radr:has(.rx-nav) .rm-hero .rm-loop b {
   color: #d8f0ff;
+}
+
+/* Vivid blue foundations with a larger, deliberately placed green signal. */
+html body .radr:has(.rx-nav) .rm-hero-copy h1 em,
+html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-copy h1 em {
+  color: var(--brand-jade) !important;
+}
+html body .radr .rx-footer {
+  border-top-width: 4px;
+}
+html body .radr .rx-footer a:hover {
+  color: #fff !important;
+  text-decoration: underline;
+  text-decoration-color: var(--brand-jade);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+html
+  body
+  .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
+  .cc-priority:before {
+  width: 6px;
 }

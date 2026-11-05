@@ -36,8 +36,15 @@ test("desktop dropdowns stay below the bar and descriptions never intersect titl
       const links = [
         ...document.querySelectorAll(".rx-nav-center .rx-nav-link"),
       ].map((n) => n.getBoundingClientRect());
-      return links.every(
-        (r) => r.left >= brand.right + 8 && r.right <= right.left - 8,
+      const glass = document
+        .querySelector(".rx-nav-center")!
+        .getBoundingClientRect();
+      return (
+        glass.left >= brand.right + 8 &&
+        glass.right <= right.left - 8 &&
+        links.every(
+          (r) => r.left >= brand.right + 8 && r.right <= right.left - 8,
+        )
       );
     });
     expect(barLayout).toBe(true);
@@ -52,12 +59,20 @@ test("desktop dropdowns stay below the bar and descriptions never intersect titl
               .querySelector(".rx-nav-bar")!
               .getBoundingClientRect();
           const items = [...n.querySelectorAll(".rx-np-item")];
+          const brand = document
+            .querySelector(".rx-nav-bar > .rx-nav-brand")!
+            .getBoundingClientRect();
+          const actions = document
+            .querySelector(".rx-nav-right")!
+            .getBoundingClientRect();
           return {
             below: r.top >= bar.bottom + 8,
             inside:
               r.left >= 0 &&
               r.right <= innerWidth + 1 &&
               r.bottom <= innerHeight + 1,
+            protectedSides:
+              r.left >= brand.right + 16 && r.right <= actions.left - 16,
             overlap: items.filter((item) => {
               const title = item.querySelector("strong"),
                 desc = item.querySelector("span:not(.rx-np-item-signal)");
@@ -72,7 +87,12 @@ test("desktop dropdowns stay below the bar and descriptions never intersect titl
         });
       await expect
         .poll(layout)
-        .toEqual({ below: true, inside: true, overlap: 0 });
+        .toEqual({
+          below: true,
+          inside: true,
+          protectedSides: true,
+          overlap: 0,
+        });
       await page.keyboard.press("Escape");
       await expect(panel).toBeHidden();
     }
