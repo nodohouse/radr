@@ -1,0 +1,55 @@
+/* Give the journal a generous editorial measure without stretching mobile copy. */
+.radr .rx-res-article .rx-res-article-inner,
+.radr .rx-res-article .rx-res-article-art {
+  width: calc(100% - 96px);
+  max-width: 1180px;
+  margin-inline: auto;
+}
+.radr .rx-res-article .rx-res-article-title {
+  max-width: 100%;
+  text-align: left;
+  text-wrap: balance;
+}
+.radr .rx-res-article .rx-res-deck {
+  max-width: 1040px;
+}
+.radr .rx-res-article .rx-res-body,
+.radr .rx-res-article .rx-res-pull {
+  max-width: none;
+}
+.radr .rx-res-article .rx-res-body p {
+  font-size: 18px !important;
+  line-height: 1.85 !important;
+}
+.radr .rx-res-hero .rx-res-title {
+  max-width: 26ch;
+  text-wrap: balance;
+}
+@media (min-width: 2200px) {
+  .radr .rx-res-article .rx-res-article-inner,
+  .radr .rx-res-article .rx-res-article-art {
+    max-width: 1440px;
+  }
+  .radr .rx-res-article .rx-res-deck {
+    max-width: 1200px;
+  }
+  .radr .rx-res-article .rx-res-body p {
+    font-size: 21px !important;
+  }
+}
+@media (max-width: 900px) {
+  .radr .rx-res-article .rx-res-article-inner,
+  .radr .rx-res-article .rx-res-article-art {
+    width: calc(100% - 48px);
+  }
+}
+@media (max-width: 600px) {
+  .radr .rx-res-article .rx-res-article-inner,
+  .radr .rx-res-article .rx-res-article-art {
+    width: calc(100% - 36px);
+  }
+  .radr .rx-res-article .rx-res-body p {
+    font-size: 17px !important;
+    line-height: 1.8 !important;
+  }
+}

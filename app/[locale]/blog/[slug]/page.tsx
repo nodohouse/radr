@@ -1,3 +1,4 @@
+import "@/components/marketing/reports/journal-layout.css";
 import { ResearchEvidence } from "@/components/marketing/reports/ResearchEvidence";
 import { EditorialArtwork } from "@/components/marketing/reports/EditorialArtwork";
 import { ReportPromo } from "@/components/marketing/reports/ReportPromo";

@@ -1,3 +1,4 @@
+import "@/components/marketing/reports/journal-layout.css";
 import { EditorialArtwork } from "@/components/marketing/reports/EditorialArtwork";
 import { ReportPromo } from "@/components/marketing/reports/ReportPromo";
 import type { Metadata } from "next";
