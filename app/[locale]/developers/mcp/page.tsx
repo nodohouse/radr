@@ -18,9 +18,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const EXAMPLE_CALL = `radr.get_decisions({
-  scope: "europe",
+  scope: "new-york",
   state: "needs_you",
-  min_exposure: 2000
+  min_exposure: 500
 })`;
 
 const EXAMPLE_RESPONSE = `{
@@ -28,15 +28,15 @@ const EXAMPLE_RESPONSE = `{
   "version": "2026.09.preview",
   "preview": true,
   "label": "COMING TO DEVELOPER PREVIEW",
-  "evidenceState": "OBSERVED",
+  "evidenceState": "DEMO",
   "data": {
-    "count": 2,
+    "count": 1,
     "decisions": [
       {
         "displayId": "D-1911",
         "title": "Peak capacity collision",
         "status": "RECOMMENDED",
-        "expectedContributionImpact": 620
+        "expectedProtected": { "amountMinor": 62000, "currency": "USD", "horizon": "tonight" }
       }
     ]
   }

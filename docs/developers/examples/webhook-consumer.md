@@ -1,9 +1,7 @@
-# Outbound webhook consumer
+# Proposed outbound webhook consumer
 
-1. Read raw body  
-2. Verify HMAC signature with your endpoint secret  
-3. Parse JSON  
-4. Deduplicate on `id`  
-5. Process asynchronously  
+Public webhook delivery is not live. The signing algorithm, headers, timestamp tolerance, retry policy and subscription mechanism must be finalized and published before a consumer can be treated as interoperable.
 
-Never skip signature verification.
+The design should verify the exact raw bytes and endpoint signature, validate freshness, deduplicate on a stable event ID, then parse and enqueue work safely. Acknowledge only according to the published delivery contract. Do not assume all providers use one HMAC header or scheme.
+
+Current event examples are proposals. This document is not an executable delivery contract or evidence of provider callbacks being received.

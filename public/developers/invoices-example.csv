@@ -1,0 +1,2 @@
+supplier,invoice_id,sku,quantity,unit,unit_price,currency,invoice_date
+Example Supplier,INV-EXAMPLE,OLIVE-OIL,420,L,7.45,USD,2026-10-30

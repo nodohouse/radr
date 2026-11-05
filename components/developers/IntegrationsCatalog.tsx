@@ -10,6 +10,7 @@ import {
   type IntegrationProvider,
   type IntegrationStatus,
 } from "@/lib/integrations/registry";
+import { ProviderMark } from "./ProviderMark";
 import { shortBlurb } from "@/lib/integrations/providerDetails";
 
 const CATEGORIES: Array<IntegrationCategory | "all"> = [
@@ -89,6 +90,7 @@ function ProviderCard({ p }: { p: IntegrationProvider }) {
       data-status={p.status}
     >
       <header className="rx-dev-card-head">
+        <ProviderMark id={p.id} name={p.name} />
         <h3>{p.name}</h3>
         <span className="rx-dev-status">{t(`labels.status.${p.status}`)}</span>
       </header>
@@ -129,8 +131,21 @@ export function IntegrationsCatalog() {
     });
   }, [q, category, status, capability, region]);
 
+  const hasFilters =
+    q.trim() ||
+    category !== "all" ||
+    status !== "all" ||
+    capability !== "all" ||
+    region !== "all";
+  const reset = () => {
+    setQ("");
+    setCategory("all");
+    setStatus("all");
+    setCapability("all");
+    setRegion("all");
+  };
   return (
-    <div className="rx-dev-catalog" id="integrations">
+    <div className="rx-dev-catalog" id="integration-catalog">
       <div className="rx-dev-filters">
         <label className="rx-dev-search">
           <span className="sr-only">{t("catalog.searchLabel")}</span>
@@ -208,7 +223,9 @@ export function IntegrationsCatalog() {
       <details className="rx-dev-legend">
         <summary>{t("catalog.legendSummary")}</summary>
         <p className="rx-dev-legend-note">
-          Status labels refer to integration availability — not product feature guarantees.
+          Available means a shipped RADR path. Provider API access and partner
+          approval do not mean a RADR adapter is connected. Logos identify
+          systems, not partnerships.
         </p>
         <ul>
           {LEGEND_STATUSES.map((s) => (
@@ -230,7 +247,16 @@ export function IntegrationsCatalog() {
         <span>{t("catalog.buildConnector")}</span>
       </Link>
 
-      <p className="rx-dev-count">{t("catalog.count", { count: filtered.length })}</p>
+      <div className="rx-dev-result-bar">
+        <p className="rx-dev-count" role="status" aria-live="polite">
+          {t("catalog.count", { count: filtered.length })}
+        </p>
+        {hasFilters && (
+          <button type="button" onClick={reset}>
+            Clear filters
+          </button>
+        )}
+      </div>
 
       <div className="rx-dev-grid">
         {filtered.map((p) => (

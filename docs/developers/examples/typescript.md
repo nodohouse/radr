@@ -1,23 +1,11 @@
-# TypeScript example
+# Runnable TypeScript reference
 
-```ts
-const response = await fetch(
-  `${process.env.RADR_API_BASE_URL}/v1/locations`,
-  {
-    headers: {
-      Authorization: `Bearer ${process.env.RADR_API_KEY}`,
-      Accept: "application/json",
-    },
-  },
-);
+From the RADR repository with dependencies installed:
 
-if (!response.ok) {
-  throw new Error(`RADR API error: ${response.status}`);
-}
-
-const locations = await response.json();
+```sh
+npx tsx scripts/demo-reference-ingestion.ts
 ```
 
-`RADR_API_BASE_URL` and `RADR_API_KEY` are **server** environment variables; never `NEXT_PUBLIC_*`.
+The source is `scripts/demo-reference-ingestion.ts`. It uses the implemented local `DemoReservationAdapter` and `normalizeExternalReservation`; the public quickstart renders that source directly. It produces two synthetic normalized reservations and reports provenance presence. It does not contact a provider or persist a Decision.
 
-**API status: PROPOSED** until handlers ship.
+The public `/v1` API and typed `RADR` client shown elsewhere are interface proposals. No public client package or API key issuance is documented. `https://api.example.invalid` is deliberately non-routable. Never put credentials in browser code or `NEXT_PUBLIC_*`.

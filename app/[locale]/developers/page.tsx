@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ProviderMark } from "@/components/developers/ProviderMark";
 import { CodeBlock } from "@/components/developers/CodeBlock";
 import { DevelopersLifecycleStrip } from "@/components/developers/DevelopersLifecycleStrip";
 import { DevelopersShell } from "@/components/developers/DevelopersShell";
@@ -59,9 +60,7 @@ export default async function DevelopersPage({ params }: Props) {
             <p className="rx-dev-badge" style={{ marginBottom: "0.75rem" }}>
               TECHNICAL PREVIEW · SANDBOX NOT LIVE
             </p>
-            <p className="rx-pilot-note" style={{ marginBottom: "0.85rem" }}>
-              Proposed API design. Handlers are not production-live.
-            </p>
+
             <h1 className="rx-page-title rx-dev-hero-title">
               {t("heroTitleLine1")}
               <br />
@@ -69,7 +68,10 @@ export default async function DevelopersPage({ params }: Props) {
             </h1>
             <p className="rx-lead-inv rx-lead-short">{t("heroLead")}</p>
             <div className="rx-dev-cta">
-              <Link className="rx-btn rx-btn-primary" href="/developers/quickstart">
+              <Link
+                className="rx-btn rx-btn-primary"
+                href="/developers/quickstart"
+              >
                 {t("getStarted")} <span aria-hidden>→</span>
               </Link>
               <Link className="rx-btn rx-btn-ghost" href="/developers/api">
@@ -82,7 +84,10 @@ export default async function DevelopersPage({ params }: Props) {
             <div className="rx-dev-arch">
               <div className="rx-dev-arch-sources">
                 {FLOW_SOURCES.map((s) => (
-                  <span key={s}>{s}</span>
+                  <span key={s}>
+                    <ProviderMark id={s.toLowerCase()} name={s} size={20} />
+                    {s}
+                  </span>
                 ))}
               </div>
               <div className="rx-dev-arch-join" aria-hidden>
@@ -149,23 +154,29 @@ export default async function DevelopersPage({ params }: Props) {
           </Link>
         </div>
         <div className="rx-dev-quick-code">
-          <p className="rx-dev-proposed">{t("hub.proposedApi")}</p>
+          <p className="rx-dev-proposed">{t("quickstart.proposedApi")}</p>
           <CodeBlock
-            language="typescript"
-            code={`const radr = new RADR({
-  baseUrl: process.env.RADR_API_BASE_URL,
-  apiKey: process.env.RADR_API_KEY,
-})
-
-// High-level typed SDK (Quickstart path)
-await radr.reservations.create({
-  location: "berlin-mitte",
-  partySize: 4,
-  serviceTime: "2026-08-24T20:00:00+02:00",
-})
-// maps onto generic: await radr.events.ingest({ type: "reservation.created", ... })`}
+            language="bash"
+            code="npx tsx scripts/demo-reference-ingestion.ts"
           />
-          <p className="rx-dev-fine">{t("architecture.ingestNote")}</p>
+          <CodeBlock
+            language="json"
+            code={JSON.stringify(
+              {
+                mode: "local-reference",
+                records: 2,
+                provider: "radr-demo-reservations",
+                statuses: ["confirmed", "cancelled"],
+                provenancePresent: true,
+              },
+              null,
+              2,
+            )}
+          />
+          <p className="rx-dev-fine">
+            Runs locally without credentials, network calls, stored Decisions or
+            provider writes. The quickstart includes the executable source.
+          </p>
         </div>
       </section>
 
@@ -230,8 +241,15 @@ await radr.reservations.create({
       <section className="rx-dev-block" id="capability-families">
         <p className="rx-kicker">{t("hub.capabilityFamiliesKicker")}</p>
         <h2>{t("hub.capabilityFamiliesTitle")}</h2>
-        <p className="rx-lead-inv rx-lead-short">{t("hub.capabilityFamiliesLead")}</p>
-        <div className="rx-dev-table-wrap">
+        <p className="rx-lead-inv rx-lead-short">
+          {t("hub.capabilityFamiliesLead")}
+        </p>
+        <div
+          className="rx-dev-table-wrap"
+          role="region"
+          aria-label="Conceptual hospitality entity families"
+          tabIndex={0}
+        >
           <table className="rx-dev-table">
             <thead>
               <tr>

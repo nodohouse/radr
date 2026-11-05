@@ -47,6 +47,68 @@ export default async function DevelopersApiPage({ params }: Props) {
         <p className="rx-lead-inv rx-lead-short">{t("api.lead")}</p>
       </header>
 
+      <section className="rx-dev-block" id="implemented-uploads">
+        <h2>Implemented workspace upload routes</h2>
+        <p>
+          These session-authenticated application routes are separate from the
+          proposed public /v1 API. Workspace membership and upload permission
+          are required. A public demo does not grant upload access.
+        </p>
+        <div
+          className="rx-dev-table-wrap"
+          role="region"
+          aria-label="Implemented upload routes"
+          tabIndex={0}
+        >
+          <table className="rx-dev-table">
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Accepted input</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <code>POST /api/documents/upload</code>
+                </td>
+                <td>
+                  Multipart file/files, organizationId, optional locationId and
+                  documentType. PDF/JPEG/PNG, 15 MB per file, at most 10 files.
+                </td>
+                <td>
+                  Private document storage and an UPLOADED record. Upload is not
+                  proof of extraction or a verified outcome.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <code>POST /api/onboarding/upload</code>
+                </td>
+                <td>
+                  Multipart file and documentType: CONTRACT or INVOICE. UTF-8
+                  CSV, up to 1 MB. Workspace scope comes from the session.
+                </td>
+                <td>
+                  Validated CSV document and row count for the onboarding
+                  analysis path.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="rx-dev-fine">
+          These are application validation limits; hosting request limits may be
+          lower. Without a valid session these routes return 401. Permission,
+          format and size checks may reject the upload. Their current error
+          responses are separate from the proposed public API error envelope
+          below.
+        </p>
+        <Link href="/developers/connectors#csv">
+          Read the exact formats and sample schemas →
+        </Link>
+      </section>
       <section className="rx-dev-block" id="authentication">
         <h2>{t("api.authTitle")}</h2>
         <p>{withCodeEnv(t("api.authBody"))}</p>
@@ -60,6 +122,18 @@ RADR_API_KEY=radr_test_your_test_api_key`}
 
       <section className="rx-dev-block" id="examples">
         <h2>{t("api.exampleTitle")}</h2>
+        <p className="rx-dev-fine">
+          The .invalid host is deliberately non-routable. The RADR class below
+          is interface pseudocode, not a package you can install today. Use the
+          quickstart for a runnable local example.
+        </p>
+        <a
+          className="rx-btn rx-btn-ghost"
+          href="/developers/radr-v1-preview.yaml"
+          download
+        >
+          Download proposed OpenAPI specification ↓
+        </a>
         <CodeBlock
           language="bash"
           code={`curl https://api.example.invalid/v1/locations \\
@@ -68,7 +142,7 @@ RADR_API_KEY=radr_test_your_test_api_key`}
         />
         <CodeBlock
           language="typescript"
-          code={`// Technical Preview · typed SDK (preferred Quickstart path)
+          code={`// Interface proposal only. No published SDK package.
 const radr = new RADR({
   baseUrl: process.env.RADR_API_BASE_URL,
   apiKey: process.env.RADR_API_KEY,
@@ -85,11 +159,11 @@ const locations = await radr.locations.list()
         <CodeBlock
           language="typescript"
           code={`// Technical Preview · generic event ingestion (lower-level)
-// Typed SDK methods such as radr.reservations.create(...) map onto this layer.
+// Proposed typed methods would map onto this proposed event layer.
 await radr.events.ingest({
   type: "reservation.created",
-  location: "berlin-mitte",
-  observedAt: "2026-08-24T20:00:00+02:00",
+  location: "demo-soho-new-york",
+  observedAt: "2026-08-24T20:00:00-04:00",
   payload: {
     partySize: 4,
     channel: "direct",
@@ -102,6 +176,11 @@ await radr.events.ingest({
 
       <section className="rx-dev-block">
         <h2>{t("api.resourcesTitle")}</h2>
+        <p className="rx-dev-fine">
+          The list describes broader proposed scope. The downloadable
+          specification is partial and declares its own paths; neither is a
+          shipped service contract.
+        </p>
         <ul className="rx-dev-bullets">
           {resources.map((r) => (
             <li key={r}>{r}</li>

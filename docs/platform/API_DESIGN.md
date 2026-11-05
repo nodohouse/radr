@@ -108,8 +108,9 @@ Adapters to *providers* use provider-specific policies, not one global throttle.
 
 ## Outbound webhooks (proposed)
 
-Events: `finding.created` · `finding.updated` · `action.created` ·
-`action.completed` · `verified_value.created` · `integration.stale`
+Proposed events: `finding.created`, `decision.detected`, `decision.recommended`,
+`decision.approved`, `action.prepared`, `action.executed`, `outcome.observed`,
+`value.verified` and `memory.updated`. These names are not live subscriptions.
 
 Signed with a per-endpoint secret. Include `id`, `type`, `created_at`, `data`.
 Retry with backoff; consumers must be idempotent on event `id`.

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   code: string;
@@ -11,14 +11,24 @@ type Props = {
 export function CodeBlock({ code, language = "bash" }: Props) {
   const t = useTranslations("developers");
   const [copied, setCopied] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    [],
+  );
 
   async function onCopy() {
     try {
+      setFailed(false);
       await navigator.clipboard.writeText(code);
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1600);
+      if (timer.current) clearTimeout(timer.current);
+      timer.current = setTimeout(() => setCopied(false), 1600);
     } catch {
-      /* ignore */
+      setFailed(true);
     }
   }
 
@@ -30,7 +40,12 @@ export function CodeBlock({ code, language = "bash" }: Props) {
           {copied ? t("copied") : t("copy")}
         </button>
       </div>
-      <pre>
+      {failed && (
+        <p role="status" className="rx-dev-copy-status">
+          Clipboard is unavailable. Select and copy the code below.
+        </p>
+      )}
+      <pre tabIndex={0} aria-label={`${language} code example`}>
         <code>{code}</code>
       </pre>
     </div>

@@ -52,27 +52,37 @@ export default async function DevelopersConnectorsPage({ params }: Props) {
 
       <section className="rx-dev-block" id="csv">
         <h2>{t("connectors.contractTitle")}</h2>
-        <p className="rx-dev-fine">
-          Upload → schema mapping → validation → normalization → data-quality
-          flags → operating state.
+        <p>
+          Document storage accepts PDF, JPG/JPEG and PNG up to 15 MB per file,
+          with at most 10 files per request. The onboarding analysis is a
+          separate path: one UTF-8 contract or invoice CSV up to 1 MB. Both
+          require a permitted workspace session.
         </p>
-        <CodeBlock
-          language="json"
-          code={`{
-  "externalId": "res_123",
-  "locationExternalId": "berlin-mitte",
-  "serviceTime": "2026-08-24T20:00:00+02:00",
-  "partySize": 4,
-  "status": "confirmed",
-  "sourceUpdatedAt": "2026-08-24T18:02:00+02:00"
-}`}
-        />
-        <p>{t("connectors.contractRecommended")}</p>
+        <h3>Contract CSV</h3>
         <CodeBlock
           language="csv"
-          code={`location_external_id,business_date,revenue,covers,labor_cost,currency
-berlin-mitte,2026-08-24,18420.00,142,4120.00,EUR`}
+          code={`supplier,sku,unit,contract_rate,currency
+Example Supplier,OLIVE-OIL,L,6.80,USD`}
         />
+        <a href="/developers/contracts-example.csv" download>
+          Download contract CSV ↓
+        </a>
+        <h3>Invoice CSV</h3>
+        <CodeBlock
+          language="csv"
+          code={`supplier,invoice_id,sku,quantity,unit,unit_price,currency,invoice_date
+Example Supplier,INV-EXAMPLE,OLIVE-OIL,420,L,7.45,USD,2026-10-30`}
+        />
+        <a href="/developers/invoices-example.csv" download>
+          Download invoice CSV ↓
+        </a>
+        <p>{t("connectors.contractRecommended")}</p>
+        <p className="rx-dev-fine">
+          Use decimal points without thousands separators. Each row needs an
+          explicit unit and three-letter currency code. Invalid rows are
+          rejected; data is not silently partially analyzed. Downloaded rows are
+          synthetic examples.
+        </p>
       </section>
 
       <section className="rx-dev-block" id="warehouse">

@@ -21,7 +21,10 @@ export default async function DevelopersQuickstartPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("developers");
-  const steps = t.raw("quickstart.steps") as Array<{ title: string; body: string }>;
+  const steps = t.raw("quickstart.steps") as Array<{
+    title: string;
+    body: string;
+  }>;
 
   return (
     <DevelopersShell activeHref="/developers/quickstart">

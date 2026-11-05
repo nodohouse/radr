@@ -35,7 +35,7 @@ export type AccessType =
   | "CUSTOM"
   | "SYNTHETIC";
 
-/** Template branch — prevents third-party provider prose on RADR-owned paths. */
+/** Template branch; prevents third-party provider prose on RADR-owned paths. */
 export type IntegrationType =
   | "THIRD_PARTY_API"
   | "RADR_REFERENCE"
@@ -144,8 +144,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     supportsWriteActions: false,
     writeActions: [],
     notes:
-      "RADR-provided reference data source for testing and demonstration. Generates reservation events for normalized ingestion, Findings / Decisions, and developer flows — without third-party provider access. Synthetic/reference only; not a production reservation platform.",
-    lastReviewed: "2026-09-17",
+      "RADR-provided reference data source for testing and demonstration. Returns local synthetic reservations for normalization and provenance checks. It does not persist Findings or Decisions, call a provider, or operate a production reservation platform.",
+    lastReviewed: "2026-11-05",
   },
   {
     id: "files-csv",
@@ -155,7 +155,7 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     accessType: "FILE_EXPORT",
     integrationType: "FILE_UPLOAD",
     authMethods: ["none"],
-    capabilities: ["files", "orders", "labor", "invoices", "reservations"],
+    capabilities: ["files", "invoices"],
     regions: ["global"],
     docsUrl: "/product/connections",
     apiAvailable: false,
@@ -163,8 +163,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     webhookSupport: false,
     dataEntities: ["files"],
     notes:
-      "Upload path works today: CSV and document upload → schema mapping → validation → normalization → data-quality flags → operating state. Structured mappings expand over time.",
-    lastReviewed: "2026-09-17",
+      "Application validation allows authenticated document upload of PDF, JPEG and PNG up to 15 MB per file, at most 10 files per request. The separate onboarding analysis accepts UTF-8 contract/invoice CSV up to 1 MB. XLSX and arbitrary CSV mappings are not supported by these paths. Upload does not establish a live provider connection. Hosting request limits may be lower than application limits.",
+    lastReviewed: "2026-11-05",
   },
   {
     id: "toast",
@@ -198,7 +198,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: true,
     webhookSupport: true,
     dataEntities: ["locations", "orders", "payments"],
-    notes: "Confirm current OAuth scopes and rate limits before implementation. Not built in RADR yet.",
+    notes:
+      "Confirm current OAuth scopes and rate limits before implementation. Not built in RADR yet.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -214,7 +215,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: false,
     dataEntities: ["locations", "orders"],
-    notes: "Confirm official API access path with Lightspeed before coding endpoints.",
+    notes:
+      "Confirm official API access path with Lightspeed before coding endpoints.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -230,7 +232,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: true,
     webhookSupport: true,
     dataEntities: ["locations", "orders", "payments"],
-    notes: "Partner / developer program details to be confirmed against official docs before adapter work.",
+    notes:
+      "Partner / developer program details to be confirmed against official docs before adapter work.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -246,7 +249,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: false,
     dataEntities: ["locations", "orders"],
-    notes: "Typically enterprise / partner access. Implementation path requires customer-supplied access details.",
+    notes:
+      "Typically enterprise / partner access. Implementation path requires customer-supplied access details.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -314,7 +318,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: false,
     dataEntities: ["reservations", "locations"],
-    notes: "Access model to be confirmed with Resy / customer. No public RADR adapter.",
+    notes:
+      "Access model to be confirmed with Resy / customer. No public RADR adapter.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -330,7 +335,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: false,
     dataEntities: ["reservations", "locations"],
-    notes: "Confirm official partner API availability by region before implementation.",
+    notes:
+      "Confirm official partner API availability by region before implementation.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -448,7 +454,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: true,
     webhookSupport: true,
     dataEntities: ["payments", "payouts"],
-    notes: "EU-focused payments. Confirm settlement objects against official docs.",
+    notes:
+      "EU-focused payments. Confirm settlement objects against official docs.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -464,7 +471,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: true,
     webhookSupport: true,
     dataEntities: ["orders", "payouts"],
-    notes: "Merchant / partner agreement typically required. Do not claim public API access.",
+    notes:
+      "Merchant / partner agreement typically required. Do not claim public API access.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -480,7 +488,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: false,
     dataEntities: ["orders", "payouts"],
-    notes: "Partner access required. Confirm region-specific programs before implementation.",
+    notes:
+      "Partner access required. Confirm region-specific programs before implementation.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -496,7 +505,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: true,
     webhookSupport: true,
     dataEntities: ["orders", "payouts"],
-    notes: "Partner / Drive / Marketplace programs; confirm official access path.",
+    notes:
+      "Partner / Drive / Marketplace programs; confirm official access path.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -530,7 +540,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: false,
     dataEntities: ["events"],
-    notes: "Commercial / partner terms may apply. Confirm licensing before production use.",
+    notes:
+      "Commercial / partner terms may apply. Confirm licensing before production use.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -547,7 +558,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: true,
     dataEntities: ["payments", "payouts"],
-    notes: "Open banking requires explicit end-user authorization and suitable legal basis. Not built.",
+    notes:
+      "Open banking requires explicit end-user authorization and suitable legal basis. Not built.",
     lastReviewed: "2026-08-24",
   },
   {
@@ -599,7 +611,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: true,
     dataEntities: ["locations", "reservations"],
-    notes: "Confirm current partner program and scopes before adapter work. Not built in RADR.",
+    notes:
+      "Confirm current partner program and scopes before adapter work. Not built in RADR.",
     lastReviewed: "2026-09-16",
   },
   {
@@ -649,7 +662,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: false,
     dataEntities: ["reservations", "locations", "forecasts"],
-    notes: "Confirm official distribution API access by property before implementation.",
+    notes:
+      "Confirm official distribution API access by property before implementation.",
     lastReviewed: "2026-09-16",
   },
   {
@@ -684,8 +698,7 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: true,
     webhookSupport: true,
     dataEntities: ["locations", "reservations"],
-    notes:
-      "STR / aparthotel PMS API documented. No RADR adapter shipped.",
+    notes: "STR / aparthotel PMS API documented. No RADR adapter shipped.",
     lastReviewed: "2026-09-16",
   },
   {
@@ -702,7 +715,8 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     realtimeSupport: false,
     webhookSupport: true,
     dataEntities: ["locations", "reservations"],
-    notes: "Confirm rate limits and scopes against official docs. Not built in RADR yet.",
+    notes:
+      "Confirm rate limits and scopes against official docs. Not built in RADR yet.",
     lastReviewed: "2026-09-16",
   },
   {
@@ -736,7 +750,7 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     webhookSupport: false,
     dataEntities: ["labor", "locations"],
     notes:
-      "Labor adapter planned. Prefer aggregate schedule / attendance signals — not employee scoring. Confirm scopes before implementation.",
+      "Labor adapter planned. Prefer aggregate schedule / attendance signals; not employee scoring. Confirm scopes before implementation.",
     lastReviewed: "2026-09-20",
   },
   {
@@ -857,7 +871,7 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     webhookSupport: false,
     dataEntities: ["forecasts"],
     notes:
-      "Search demand evidence. SEO is not an integration — Search Console is the source. OAuth required. Not built in RADR yet.",
+      "Search demand evidence. SEO is not an integration; Search Console is the source. OAuth required. Not built in RADR yet.",
     lastReviewed: "2026-09-20",
   },
   {
@@ -875,7 +889,7 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     webhookSupport: false,
     dataEntities: ["events"],
     notes:
-      "Contextual place / neighborhood data only. Do not claim Popular Times or live foot traffic — Places API is not a footfall API. Licensing and quotas apply.",
+      "Contextual place / neighborhood data only. Do not claim Popular Times or live foot traffic; Places API is not a footfall API. Licensing and quotas apply.",
     lastReviewed: "2026-09-20",
   },
   {
@@ -887,13 +901,14 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     authMethods: ["api_key"],
     capabilities: ["events"],
     regions: ["us", "eu", "other"],
-    docsUrl: "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/",
+    docsUrl:
+      "https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/",
     apiAvailable: true,
     realtimeSupport: false,
     webhookSupport: false,
     dataEntities: ["events"],
     notes:
-      "Event discovery context. Confirm API terms and rate limits before production use. Not a Decision alone — evidence for demand Futures.",
+      "Event discovery context. Confirm API terms and rate limits before production use. Not a Decision alone; evidence for demand Futures.",
     lastReviewed: "2026-09-20",
   },
   {
@@ -911,7 +926,7 @@ export const INTEGRATION_PROVIDERS: readonly IntegrationProvider[] = [
     webhookSupport: false,
     dataEntities: ["files"],
     notes:
-      "Scoped custom implementation. PostgreSQL, Snowflake, BigQuery, S3-compatible storage via connection-specific credentials — not one universal API_TOKEN. Architecture only; no auto-connect.",
+      "Scoped custom implementation. PostgreSQL, Snowflake, BigQuery, S3-compatible storage via connection-specific credentials; not one universal API_TOKEN. Architecture only; no auto-connect.",
     lastReviewed: "2026-09-17",
   },
 ] as const;

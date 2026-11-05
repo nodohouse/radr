@@ -1,11 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { DemoReservationAdapter } from "@/lib/integrations/demo/DemoReservationAdapter";
 import { normalizeExternalReservation } from "@/lib/integrations/normalize/reservation";
-import { getProvider, INTEGRATION_PROVIDERS } from "@/lib/integrations/registry";
+import {
+  getProvider,
+  INTEGRATION_PROVIDERS,
+} from "@/lib/integrations/registry";
 
 describe("integration registry", () => {
   it("marks only demo + files as available", () => {
-    const available = INTEGRATION_PROVIDERS.filter((p) => p.status === "available");
+    const available = INTEGRATION_PROVIDERS.filter(
+      (p) => p.status === "available",
+    );
     expect(available.map((p) => p.id).sort()).toEqual([
       "files-csv",
       "radr-demo-reservations",
@@ -33,6 +38,21 @@ describe("DemoReservationAdapter", () => {
       r.externalId.includes("cancelled"),
     );
     expect(cancelled?.status).toBe("cancelled");
+  });
+
+  it("keeps the New York reference location, currency and sample timestamps aligned", async () => {
+    const [location] = await adapter.listLocations(ctx);
+    expect(location.timezone).toBe("America/New_York");
+    expect(location.currency).toBe("USD");
+    const { reservations } = await adapter.syncReservations(ctx);
+    expect(
+      reservations.every(
+        (record) => record.locationExternalId === location.externalId,
+      ),
+    ).toBe(true);
+    expect(
+      reservations.every((record) => record.serviceTime.endsWith("-04:00")),
+    ).toBe(true);
   });
 
   it("normalizes to RADR reservation model", async () => {

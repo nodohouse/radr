@@ -24,6 +24,7 @@ import {
   showMissingOfficialDocs,
   syncSummary,
 } from "@/lib/integrations/providerDetails";
+import { ProviderMark } from "@/components/developers/ProviderMark";
 import { TextSep } from "@/components/TextSep";
 
 type Props = { params: Promise<{ locale: string; provider: string }> };
@@ -81,7 +82,10 @@ export default async function ProviderDetailPage({ params }: Props) {
 
       <header className="rx-dev-page-hero">
         <p className="rx-kicker">{t(`labels.category.${p.category}`)}</p>
-        <h1 className="rx-page-title">{p.name}</h1>
+        <div className="rx-dev-provider-title">
+          <ProviderMark id={p.id} name={p.name} size={44} />
+          <h1 className="rx-page-title">{p.name}</h1>
+        </div>
         <div className="rx-dev-meta">
           <div>
             <em>{t("provider.status")}</em>
@@ -92,7 +96,8 @@ export default async function ProviderDetailPage({ params }: Props) {
               </span>
             </strong>
             <p className="rx-dev-fine" style={{ marginTop: "0.35rem" }}>
-              Access: {accessStatusLabel(p)} · potential signals ≠ live receipt
+              Access: {accessStatusLabel(p)} · potential signals are not live
+              receipt
             </p>
           </div>
           <div>
@@ -145,7 +150,7 @@ export default async function ProviderDetailPage({ params }: Props) {
         <section className="rx-dev-block">
           <h2>Potential signals</h2>
           <p className="rx-dev-fine">
-            Fields an authorized connection could expose — not a claim that RADR
+            Fields an authorized connection could expose; not a claim that RADR
             currently receives them. Endpoints and scopes: to be confirmed.
           </p>
           <ul className="rx-dev-bullets">
@@ -186,12 +191,24 @@ export default async function ProviderDetailPage({ params }: Props) {
           ))}
         </ul>
         <CodeBlock language="env" code={env} />
-        <p className="rx-dev-fine">{t("provider.authFine")}</p>
+        <p className="rx-dev-fine">
+          {t("provider.authFine")} Variable names are illustrative. They are not
+          a shipped adapter configuration or confirmed provider field contract.
+        </p>
       </section>
 
       <section className="rx-dev-block">
         <h2>{t("provider.mappingTitle")}</h2>
-        <div className="rx-dev-table-wrap">
+        <p className="rx-dev-fine">
+          Entity-level mapping intent. This is not a field-by-field provider
+          contract or evidence of a working sync.
+        </p>
+        <div
+          className="rx-dev-table-wrap"
+          role="region"
+          aria-label="Entity mapping intent"
+          tabIndex={0}
+        >
           <table className="rx-dev-table">
             <thead>
               <tr>
@@ -265,9 +282,13 @@ const radr = normalizeExternalReservation(
       ) : null}
 
       <p className="rx-home-linkrow">
-        <Link href="/developers#integrations">{t("provider.allIntegrations")}</Link>
+        <Link href="/developers#integrations">
+          {t("provider.allIntegrations")}
+        </Link>
         <TextSep />
-        <Link href="/developers/connectors">{t("provider.buildConnector")}</Link>
+        <Link href="/developers/connectors">
+          {t("provider.buildConnector")}
+        </Link>
       </p>
     </DevelopersShell>
   );

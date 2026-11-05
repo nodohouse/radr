@@ -1,5 +1,5 @@
 {
-  "metaTitle": "Developers — RADR",
+  "metaTitle": "Developers · RADR",
   "metaDescription": "Give RADR operating truth. Events, files and systems become decisions.",
   "brandLabel": "Developers",
   "heroTitle": "Give RADR operating truth.",
@@ -39,20 +39,20 @@
     "sandboxComing": "Technical preview · sandbox not live"
   },
   "hub": {
-    "metaTitle": "Developers — RADR",
+    "metaTitle": "Developers · RADR",
     "metaDescription": "Give RADR operating truth. Events, files and systems become decisions.",
     "flowAria": "Vue d'ensemble du flux de données",
-    "flowDecorNote": "Noms de sources illustratifs — n'impliquent pas l'état de connexion ou d'intégration.",
+    "flowDecorNote": "Noms de sources illustratifs · n'impliquent pas l'état de connexion ou d'intégration.",
     "lifecycleStrip": {
       "aria": "Pipeline de décision RADR",
       "steps": {
         "event": {
           "label": "EVENT",
-          "hint": "Signaux opérationnels (POS, PMS, main-d'œuvre, canaux, fichiers) — ingestion normalisée."
+          "hint": "Signaux opérationnels (POS, PMS, main-d'œuvre, canaux, fichiers) · ingestion normalisée."
         },
         "state": {
           "label": "STATE",
-          "hint": "Events reconcile into the Operating Model — one cross-system view of what is true now."
+          "hint": "Events reconcile into the Operating Model · one cross-system view of what is true now."
         },
         "decision": {
           "label": "DECISION",
@@ -60,7 +60,7 @@
         },
         "outcome": {
           "label": "OUTCOME",
-          "hint": "Prepared Actions et choix humains produisent des résultats observables — prêts à vérifier."
+          "hint": "Prepared Actions et choix humains produisent des résultats observables · prêts à vérifier."
         },
         "memory": {
           "label": "MEMORY",
@@ -68,7 +68,7 @@
         },
         "finding": {
           "label": "FINDING",
-          "hint": "A detected relationship, anomaly, exposure, opportunity or pattern — not yet a Decision."
+          "hint": "A detected relationship, anomaly, exposure, opportunity or pattern · not yet a Decision."
         }
       }
     },
@@ -111,15 +111,15 @@
       }
     },
     "quickstartKicker": "Quickstart",
-    "quickstartTitle": "Connectez votre première source",
+    "quickstartTitle": "Exécuter la référence locale",
     "quickstartSteps": [
-      "Créer une clé API sandbox",
-      "Ajouter un établissement",
-      "Envoyer des données",
-      "Vérifier la normalisation",
-      "Recevoir des findings"
+      "Ouvrir le dépôt RADR",
+      "Exécuter l’adaptateur local",
+      "Examiner les données normalisées",
+      "Choisir le bon parcours de fichiers",
+      "Examiner les interfaces proposées"
     ],
-    "quickstartFine": "La création de clé sandbox n'est pas encore live. Utilisez le design d'API proposé et l'adaptateur de réservation démo pendant que la plateforme est livrée.",
+    "quickstartFine": "API publique, SDK, webhooks et MCP sont des contrats proposés, pas des services disponibles.",
     "startQuickstart": "Démarrer le quickstart",
     "proposedApi": "Proposed API",
     "archKicker": "Architecture",
@@ -158,7 +158,7 @@
     "matrixFine": "Cibles de capability vérifiées uniquement, pas une affirmation que RADR a livré l'adaptateur.",
     "capabilityFamiliesKicker": "Hospitality verticals",
     "capabilityFamiliesTitle": "Capability families (conceptual)",
-    "capabilityFamiliesLead": "Hotel, aparthotel, and restaurant integrations target different entity bundles. Families describe design intent — catalog status stays honest about what is shipped.",
+    "capabilityFamiliesLead": "Hotel, aparthotel, and restaurant integrations target different entity bundles. Families describe design intent · catalog status stays honest about what is shipped.",
     "capabilityFamilies": [
       {
         "vertical": "Hotel",
@@ -229,7 +229,7 @@
     "webhooksLink": "Webhooks →",
     "connectorLink": "Connecteur custom →",
     "advancedIngestTitle": "Advanced ingestion",
-    "advancedIngestBody": "Generic event ingestion is the lower-level architecture. Typed domain methods are the approachable Quickstart path — they are not a competing product model."
+    "advancedIngestBody": "Generic event ingestion is the lower-level architecture. Typed domain methods are the approachable Quickstart path · they are not a competing product model."
   },
   "webhooks": {
     "metaTitle": "Webhooks · Developers",
@@ -247,10 +247,10 @@
     ],
     "inboundFine": "N'inventez jamais un schéma de signature universel. Ne parsez jamais le JSON avant vérification si le provider a besoin du raw body.",
     "outboundTitle": "Outbound events (proposed)",
-    "outboundFine": "Proposed schema for Technical Preview — not live delivery. Event names may change before GA.",
+    "outboundFine": "Proposed schema for Technical Preview · not live delivery. Event names may change before GA.",
     "apiLink": "Référence API →",
     "overviewLink": "Vue d'ensemble →",
-    "outboundProposed": "Proposed schema — not live webhook delivery."
+    "outboundProposed": "Proposed schema · not live webhook delivery."
   },
   "connectors": {
     "metaTitle": "Connecteurs custom · Developers",
@@ -258,7 +258,7 @@
     "kicker": "Build",
     "title": "Construire un connecteur",
     "lead": "Si votre système expose des données opérationnelles utilisables, RADR peut être conçu pour les normaliser dans le modèle opérationnel.",
-    "pathsTitle": "Chemins supportés",
+    "pathsTitle": "Parcours actuels et proposés",
     "paths": [
       "REST API",
       "Webhooks",
@@ -278,7 +278,7 @@
     "contractTitle": "CSV / file mapping",
     "contractRecommended": "Les champs recommandés restent dans les docs de schéma en anglais.",
     "warehouseTitle": "Database / warehouse",
-    "warehouseBody": "Scoped custom implementation when needed. Authentication depends on the source — database credentials, service account, OAuth, warehouse role, access key, or signed credentials. Not one universal API_TOKEN. Prefer read-only access, restricted views, shares, or scheduled exports.",
+    "warehouseBody": "Scoped custom implementation when needed. Authentication depends on the source · database credentials, service account, OAuth, warehouse role, access key, or signed credentials. Not one universal API_TOKEN. Prefer read-only access, restricted views, shares, or scheduled exports.",
     "adaptersTitle": "Interfaces d'adaptateur",
     "adaptersBody": "Implémentez les adaptateurs de catégorie sous le répertoire integrations adapters. Voir le guide développeur adding-an-integration.",
     "sendDocs": "Envoyer la documentation API",
@@ -288,34 +288,34 @@
     "metaTitle": "Quickstart · Developers",
     "metaDescription": "Connectez votre première source à RADR. Création de clé sandbox à venir.",
     "kicker": "Quickstart",
-    "title": "Connectez votre première source",
-    "proposedApi": "Proposed API",
+    "title": "Exécuter la référence locale",
+    "proposedApi": "Exemple de référence locale",
     "steps": [
       {
-        "title": "Créer une clé API sandbox",
-        "body": "Pas encore live. Les clés seront hashées côté serveur une fois livrées."
+        "title": "Ouvrir le dépôt RADR",
+        "body": "Cet exemple utilise les imports du dépôt, pas un SDK publié."
       },
       {
-        "title": "Ajouter un établissement",
-        "body": "Lier l'ingest à un établissement tenant avec timezone + currency."
+        "title": "Exécuter l’adaptateur local",
+        "body": "La commande ne nécessite ni clé API, ni compte, ni accès fournisseur."
       },
       {
-        "title": "Send reservations or orders",
-        "body": "Start with the typed SDK (for example radr.reservations.create). It maps onto generic event ingestion."
+        "title": "Examiner les données normalisées",
+        "body": "Deux réservations synthétiques sont produites avec leur statut et leur provenance."
       },
       {
-        "title": "Vérifier les données normalisées",
-        "body": "Vérifiez provenance et source IDs, pas seulement les chiffres UI."
+        "title": "Choisir le bon parcours de fichiers",
+        "body": "Le dépôt de documents et l’analyse CSV ont des formats, limites et permissions distincts."
       },
       {
-        "title": "Commencer à recevoir des findings",
-        "body": "L'intelligence exige preuves + contexte opérationnel."
+        "title": "Examiner les interfaces proposées",
+        "body": "API publique, SDK, webhooks et MCP sont des contrats proposés, pas des services disponibles."
       }
     ],
     "browse": "Parcourir les intégrations",
     "apiPreview": "API design preview",
     "buildConnector": "Construire un connecteur",
-    "typedMapsNote": "Under the hood, typed SDK methods map to RADR’s generic ingestion / event layer.",
+    "typedMapsNote": "API publique, SDK, webhooks et MCP sont des contrats proposés, pas des services disponibles.",
     "advancedIngestionLink": "Advanced ingestion →"
   },
   "provider": {
@@ -343,12 +343,12 @@
     "allIntegrations": "← Toutes les intégrations",
     "buildConnector": "Construire un connecteur →",
     "fallbackTitle": "Integration",
-    "implAvailable": "This integration path is Available. Use present-tense setup for the entities listed above. Limitations stay in the notes — do not invent live provider calls beyond documented access.",
+    "implAvailable": "This integration path is Available. Use present-tense setup for the entities listed above. Limitations stay in the notes · do not invent live provider calls beyond documented access.",
     "internalDocs": "RADR docs:",
     "ingestFineAvailable": "Entities listed here work on this Available path today. Limitations stay in the notes.",
-    "implDemoBody": "RADR Demo Reservations is a RADR-provided reference data source for testing and demonstration. Use it to generate reservation events, test normalized reservation ingestion, exercise Findings / Decisions, and validate developer flows without third-party provider access. Synthetic/reference data — not a production reservation platform.",
+    "implDemoBody": "RADR Demo Reservations is a RADR-provided reference data source for testing and demonstration. Use it to generate reservation events, test normalized reservation ingestion, exercise Findings / Decisions, and validate developer flows without third-party provider access. Synthetic/reference data · not a production reservation platform.",
     "implCustom": "Scoped custom implementation. No generic plug-and-play adapter is currently provided. Deployment is scoped based on the customer’s systems, data model and security requirements.",
-    "implPlanned": "Planned — not implemented yet. Do not treat placeholders as a working integration path."
+    "implPlanned": "Planned · not implemented yet. Do not treat placeholders as a working integration path."
   },
   "catalog": {
     "searchLabel": "Rechercher des intégrations",
@@ -442,7 +442,7 @@
     ],
     "ingestNote": "High-level typed SDK calls such as radr.reservations.create(...) map onto the generic event ingestion layer radr.events.ingest(...). Quickstart uses the typed path; advanced docs show the generic event API.",
     "traceTitle": "Decision Trace model",
-    "traceBody": "Technical Preview · proposed conceptual schema. Not live API contracts. Every material Decision can expose a structured Trace — evidence, calculation, baseline, Futures, constraints, action, outcome, verification, Memory, audit — without generative economics.",
+    "traceBody": "Technical Preview · proposed conceptual schema. Not live API contracts. Every material Decision can expose a structured Trace · evidence, calculation, baseline, Futures, constraints, action, outcome, verification, Memory, audit · without generative economics.",
     "traceObjects": [
       "Decision",
       "EvidenceObject",
@@ -462,12 +462,12 @@
     "traceExample": "See demo Traces: D-4102 (verified recovery) and D-4188 (recommendation miss)."
   },
   "mcp": {
-    "metaTitle": "MCP — RADR Developer Preview",
+    "metaTitle": "MCP · RADR Developer Preview",
     "metaDescription": "Bring RADR hospitality intelligence into approved AI systems. Coming to developer preview.",
     "kicker": "MCP",
     "badge": "Coming to developer preview",
     "title": "Permissioned hospitality intelligence for approved AI systems.",
-    "lead": "RADR can expose operating pulse, Decisions, Futures, Verified Value, Data Health and Memory to enterprise AI workflows — through the same Tool Gateway the product uses. Actions stay governed by RADR permissions, approval policies and audit controls.",
+    "lead": "RADR can expose operating pulse, Decisions, Futures, Verified Value, Data Health and Memory to enterprise AI workflows · through the same Tool Gateway the product uses. Actions stay governed by RADR permissions, approval policies and audit controls.",
     "whatTitle": "What MCP unlocks",
     "what": [
       "Query group and location operating pulse",

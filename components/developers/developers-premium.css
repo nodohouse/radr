@@ -1,0 +1,1274 @@
+/* Developer counterpart of the shared product and marketing material system. */
+html body .radr.rx-dev-root {
+  --dev-bg: var(--brand-canvas);
+  --dev-surface: #f9fbff;
+  --dev-surface-raised: #edf3ff;
+  --dev-text: var(--brand-ink);
+  --dev-text-secondary: var(--brand-muted);
+  --dev-text-muted: var(--brand-muted);
+  --dev-border: #cddcef;
+  --dev-border-strong: #9eb9d8;
+  --dev-hover: #e1ebff;
+  --radr-green: var(--brand-jade-ink);
+  --radr-green-strong: var(--brand-sapphire);
+  --dev-code: #10274d;
+  --dev-band: #102c6d;
+  --dev-building: #34578a;
+  --dev-planned: #4c6378;
+  background: var(--brand-atmosphere) !important;
+  color: var(--brand-ink);
+  font-family: var(--font-entry), Arial, sans-serif !important;
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-x: clip;
+}
+html body .radr.rx-dev-root :is(h1, h2, h3, p, a, button, input, select) {
+  font-family: var(--font-entry), Arial, sans-serif !important;
+}
+html body .radr.rx-dev-root :is(h2, h3) {
+  color: var(--brand-ink) !important;
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+html body .radr.rx-dev-root h2 {
+  font-size: 26px;
+  font-weight: 650;
+  margin: 0 0 16px;
+}
+html body .radr.rx-dev-root h3 {
+  font-size: 19px;
+  font-weight: 650;
+}
+html body .radr.rx-dev-root :is(p, li) {
+  color: var(--brand-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+html body .radr.rx-dev-root :is(h2, [id]) {
+  scroll-margin-top: 108px;
+}
+html body .radr.rx-dev-root .rx-dev-top {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  background: #f3f8fff5 !important;
+  border-bottom: 1px solid #ffffffed;
+  backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: 0 8px 35px #1532740a;
+}
+html body .radr.rx-dev-root .rx-dev-top-inner {
+  max-width: 1460px;
+  min-height: 72px;
+  box-sizing: border-box;
+  padding: 12px 30px;
+  gap: 24px;
+}
+html body .radr.rx-dev-root .rx-dev-lockup {
+  gap: 12px;
+  padding: 0;
+  min-width: 0;
+  text-decoration: none !important;
+}
+html body .radr.rx-dev-root .rx-dev-lockup-label {
+  font-size: 14px;
+  letter-spacing: -0.025em;
+  text-transform: none;
+  color: var(--brand-ink);
+  font-weight: 650;
+}
+html body .radr.rx-dev-root .rx-dev-top-right {
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+html body .radr.rx-dev-root .rx-dev-top-right a {
+  font-size: 13px !important;
+  white-space: nowrap;
+}
+html body .radr.rx-dev-root .rx-dev-top-right .rx-dev-top-cta {
+  background: var(--brand-jade);
+  color: var(--brand-ink) !important;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 650 !important;
+}
+html body .radr.rx-dev-root .rx-dev-shell {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 38px;
+  max-width: 1460px;
+  padding: 28px 30px 70px;
+  margin: auto;
+  align-items: start;
+}
+html body .radr.rx-dev-root .rx-dev-side {
+  position: sticky;
+  top: 94px;
+  max-height: calc(100dvh - 116px);
+  overflow: auto;
+  padding: 20px 12px;
+  background: #f7faffc9 !important;
+  border: 1px solid #ffffffed;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px #183c7810;
+  backdrop-filter: blur(20px);
+}
+html body .radr.rx-dev-root .rx-dev-side-sec {
+  margin-bottom: 23px;
+}
+html body .radr.rx-dev-root .rx-dev-side-title {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 0 10px 8px;
+  color: #536b85;
+}
+html body .radr.rx-dev-root .rx-dev-side-sec ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+html body .radr.rx-dev-root .rx-dev-side-sec li {
+  margin: 0 !important;
+}
+html body .radr.rx-dev-root .rx-dev-side-sec a {
+  display: block;
+  padding: 8px 11px;
+  font-size: 12px !important;
+  line-height: 1.5;
+  color: var(--brand-muted) !important;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+html body .radr.rx-dev-root .rx-dev-side-sec a:hover {
+  background: #e1ebff !important;
+  color: var(--brand-sapphire) !important;
+}
+html body .radr.rx-dev-root .rx-dev-side-sec a[data-active="true"] {
+  background: linear-gradient(110deg, #0b256c, #164be5) !important;
+  color: #fff !important;
+  box-shadow: inset 3px 0 0 var(--brand-jade);
+  border-color: #1846ba;
+}
+html body .radr.rx-dev-root .rx-dev-main {
+  min-width: 0;
+  padding: 0;
+  max-width: none;
+}
+html body .radr.rx-dev-root .rx-dev-main-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  min-width: 0;
+  padding: 0;
+}
+html body .radr.rx-dev-root .rx-dev-availability {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 5px 18px;
+  align-items: start;
+  padding: 16px 20px;
+  background: #ffffffb8;
+  border: 1px solid #fff;
+  border-radius: 14px;
+  margin-bottom: 18px;
+}
+html body .radr.rx-dev-root .rx-dev-availability > span {
+  font-size: 10px;
+  background: #dce8ff;
+  color: #163ba1;
+  font-weight: 700;
+  padding: 5px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+html body .radr.rx-dev-root .rx-dev-availability p {
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 0;
+}
+html body .radr.rx-dev-root .rx-dev-availability a {
+  grid-column: 2;
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--brand-sapphire) !important;
+  text-decoration: none;
+}
+html body .radr.rx-dev-root .rx-dev-toc {
+  display: flex;
+  align-items: center;
+  gap: 8px 15px;
+  flex-wrap: wrap;
+  min-height: 40px;
+  padding: 0 4px;
+  margin: 0 0 18px;
+}
+html body .radr.rx-dev-root .rx-dev-toc > span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-muted);
+  font-weight: 700;
+}
+html body .radr.rx-dev-root .rx-dev-toc a {
+  font-size: 11px;
+  color: var(--brand-sapphire) !important;
+  text-decoration: none;
+}
+html body .radr.rx-dev-root .rx-dev-page-hero {
+  padding: 34px;
+  border: 1px solid #ffffff75;
+  border-radius: 23px;
+  background: var(--brand-depth) !important;
+  box-shadow: 0 18px 45px #102d501c;
+  margin: 0 0 26px;
+  overflow: hidden;
+  min-width: 0;
+}
+html body .radr.rx-dev-root .rx-dev-page-hero :is(h1, .rx-page-title) {
+  font-size: clamp(34px, 3.5vw, 52px);
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  color: #fff !important;
+  margin: 10px 0 20px;
+  text-wrap: balance;
+}
+html
+  body
+  .radr.rx-dev-root
+  .rx-dev-page-hero
+  :is(p, .rx-lead, .rx-lead-inv, .rx-lead-short, li) {
+  color: #e1efff !important;
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 65ch;
+}
+html body .radr.rx-dev-root .rx-dev-page-hero .rx-kicker {
+  color: #8dffd0 !important;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+html body .radr.rx-dev-root .rx-dev-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: #e1edff;
+  color: #17398c !important;
+  border: 1px solid #c4d6f0;
+  font-size: 10px !important;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  line-height: 1.5;
+  text-transform: none;
+  max-width: 100%;
+  white-space: normal;
+}
+html body .radr.rx-dev-root .rx-dev-page-hero .rx-dev-badge {
+  background: #ffffff20;
+  color: #e9f5ff !important;
+  border-color: #ffffff50;
+}
+html body .radr.rx-dev-root .rx-dev-hero-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 0.9fr);
+  gap: 28px;
+  align-items: center;
+}
+html body .radr.rx-dev-root .rx-dev-hero-grid > * {
+  min-width: 0;
+}
+html
+  body
+  .radr.rx-dev-root
+  :is(.rx-btn-primary, .rx-dev-page-hero .rx-btn-primary) {
+  background: var(--brand-jade) !important;
+  border-color: var(--brand-jade) !important;
+  color: var(--brand-ink) !important;
+  border-radius: 10px;
+}
+html body .radr.rx-dev-root .rx-btn {
+  font-size: 12px;
+  min-height: 42px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  white-space: normal;
+  text-align: left;
+}
+html body .radr.rx-dev-root .rx-btn-ghost {
+  border: 1px solid #b5cbea;
+  background: #ffffff90;
+  color: var(--brand-sapphire) !important;
+  border-radius: 10px;
+}
+html body .radr.rx-dev-root .rx-dev-page-hero .rx-btn-ghost {
+  color: #fff !important;
+  background: #ffffff12;
+  border-color: #ffffff65;
+}
+html body .radr.rx-dev-root .rx-dev-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+html
+  body
+  .radr.rx-dev-root
+  :is(
+    .rx-dev-block,
+    .rx-dev-entry,
+    .rx-dev-quick-split,
+    .rx-dev-security,
+    .rx-dev-capabilities
+  ) {
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid #fff;
+  background: #ffffffc2;
+  margin: 22px 0;
+  box-shadow: 0 12px 35px #173e7e09;
+  min-width: 0;
+}
+html body .radr.rx-dev-root .rx-dev-block > p {
+  max-width: 76ch;
+}
+html body .radr.rx-dev-root .rx-dev-quick-split {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.7fr) minmax(0, 1.3fr);
+  gap: 30px;
+  align-items: start;
+}
+html body .radr.rx-dev-root .rx-dev-quick-split > * {
+  min-width: 0;
+}
+html body .radr.rx-dev-root .rx-dev-steps {
+  padding-left: 22px;
+  margin: 0;
+}
+html body .radr.rx-dev-root .rx-dev-steps li {
+  padding: 0 0 18px 8px;
+  font-size: 13px;
+}
+html body .radr.rx-dev-root .rx-dev-steps strong {
+  color: var(--brand-ink);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 7px;
+}
+html body .radr.rx-dev-root .rx-dev-steps span {
+  font-size: 12px;
+  line-height: 1.7;
+}
+html body .radr.rx-dev-root .rx-dev-code {
+  background: #10274d;
+  border: 1px solid #29466e;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px #102d5018;
+  margin: 18px 0;
+  max-width: 100%;
+  min-width: 0;
+}
+html body .radr.rx-dev-root .rx-dev-code-bar {
+  padding: 10px 15px;
+  background: #16345d;
+  border-bottom: 1px solid #426188;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #dcecff;
+  font:
+    11px var(--font-mono),
+    monospace;
+}
+html body .radr.rx-dev-root .rx-dev-code-bar button {
+  border: 1px solid #7393b8;
+  background: #ffffff10;
+  color: #e6f1ff;
+  font-size: 11px;
+  padding: 6px 11px;
+  border-radius: 7px;
+  cursor: pointer;
+  min-height: 32px;
+}
+html body .radr.rx-dev-root .rx-dev-code pre {
+  background: transparent;
+  padding: 19px;
+  margin: 0;
+  overflow: auto;
+  max-width: 100%;
+  color: #e3efff;
+  border: 0;
+  font-size: 12px;
+  line-height: 1.8;
+  tab-size: 2;
+  white-space: pre;
+}
+html body .radr.rx-dev-root .rx-dev-code code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+html body .radr.rx-dev-root .rx-dev-code .rx-dev-copy-status {
+  color: #e3efff;
+  font-size: 11px;
+  padding: 0 18px;
+  margin: 10px 0 0;
+}
+html body .radr.rx-dev-root :is(.rx-dev-fine, .rx-dev-proposed) {
+  font-size: 12px;
+  color: var(--brand-muted);
+  line-height: 1.75;
+}
+html body .radr.rx-dev-root .rx-dev-table-wrap {
+  overflow: auto;
+  border: 1px solid #d3e0f0;
+  border-radius: 12px;
+  max-width: 100%;
+}
+html body .radr.rx-dev-root .rx-dev-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 0;
+}
+html body .radr.rx-dev-root .rx-dev-table :is(th, td) {
+  padding: 13px 16px;
+  line-height: 1.6;
+  text-align: left;
+  border-bottom: 1px solid #d6e3f2;
+  overflow-wrap: anywhere;
+}
+html body .radr.rx-dev-root .rx-dev-table th {
+  background: #e4edff;
+  color: #1c3b65;
+  font-size: 11px;
+}
+html body .radr.rx-dev-root .rx-dev-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+html body .radr.rx-dev-root .rx-dev-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px !important;
+  background: #ffffffd9 !important;
+  border: 1px solid #fff !important;
+  border-radius: 17px !important;
+  min-width: 0;
+  text-decoration: none;
+  box-shadow: 0 8px 26px #15326c0a;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+html body .radr.rx-dev-root .rx-dev-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px #15326c1a;
+  border-color: #a3bff2 !important;
+}
+html body .radr.rx-dev-root .rx-dev-card-head {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+html body .radr.rx-dev-root .rx-dev-card-head h3 {
+  font-size: 16px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+html body .radr.rx-dev-root .rx-dev-card-head .rx-dev-status {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 5px;
+}
+html body .radr.rx-dev-root .rx-dev-status {
+  background: #e6edfa;
+  color: #345278;
+  border: 1px solid #c3d5ed;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 650;
+  white-space: normal;
+}
+html
+  body
+  .radr.rx-dev-root
+  :is(
+    [data-status="available"] .rx-dev-status,
+    .rx-dev-status[data-status="available"]
+  ) {
+  background: #d5f9e9;
+  color: #006747;
+  border-color: #a3dfc5;
+}
+html
+  body
+  .radr.rx-dev-root
+  :is(
+    [data-status="partner_access"] .rx-dev-status,
+    .rx-dev-status[data-status="partner_access"]
+  ) {
+  background: #fff0d5;
+  color: #754709;
+  border-color: #e2c99c;
+}
+html
+  body
+  .radr.rx-dev-root
+  .rx-dev-card
+  :is(.rx-dev-card-cat, .rx-dev-card-note) {
+  font-size: 12px;
+  line-height: 1.7;
+}
+html body .radr.rx-dev-root .rx-dev-card-ents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+html body .radr.rx-dev-root .rx-dev-card-ents li {
+  background: #eaf0fc;
+  border: 1px solid #d3e1f4;
+  border-radius: 5px;
+  padding: 3px 7px;
+  font-size: 10px;
+  color: #365474;
+  line-height: 1.5;
+}
+html body .radr.rx-dev-root .rx-dev-card-cta {
+  margin-top: auto;
+  color: var(--brand-sapphire);
+  font-size: 11px;
+  font-weight: 650;
+  padding-top: 14px;
+}
+.rx-dev-provider-mark {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 11px;
+  background: #fff;
+  border: 1px solid #d5e2f3;
+  color: #183b74;
+  font-size: 12px;
+  font-weight: 700;
+  overflow: hidden;
+}
+.rx-dev-provider-mark .rp-vendor-logo {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+.rx-dev-provider-mark img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: none !important;
+}
+html body .radr.rx-dev-root .rx-dev-provider-title {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 14px 0 20px;
+}
+html body .radr.rx-dev-root .rx-dev-provider-title .rx-dev-provider-mark {
+  width: 64px;
+  height: 64px;
+  padding: 10px;
+  border-radius: 15px;
+}
+html body .radr.rx-dev-root .rx-dev-provider-title h1 {
+  margin: 0;
+}
+html body .radr.rx-dev-root .rx-dev-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: #ffffff12;
+  border: 1px solid #ffffff40;
+  border-radius: 13px;
+}
+html body .radr.rx-dev-root .rx-dev-meta :is(em, strong) {
+  display: block;
+  color: #eef6ff;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.6;
+}
+html body .radr.rx-dev-root .rx-dev-meta em {
+  color: #cfe3ff;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+html body .radr.rx-dev-root .rx-dev-meta .rx-dev-fine {
+  font-size: 11px;
+}
+html body .radr.rx-dev-root .rx-dev-official {
+  overflow-wrap: anywhere;
+  font-size: 12px !important;
+}
+html body .radr.rx-dev-root .rx-dev-page-hero .rx-dev-official a {
+  color: #fff !important;
+  text-decoration: underline;
+}
+html body .radr.rx-dev-root .rx-dev-filters {
+  background: #ffffffa8;
+  border: 1px solid #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 24px 0;
+}
+html body .radr.rx-dev-root .rx-dev-search input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #b9cce5;
+  border-radius: 10px;
+  background: #fff;
+  padding: 12px 15px;
+  min-height: 44px;
+  color: var(--brand-ink);
+  font: inherit;
+  font-size: 14px;
+}
+html body .radr.rx-dev-root .rx-dev-filter-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+html body .radr.rx-dev-root .rx-dev-filter-row label {
+  display: grid;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--brand-muted);
+  min-width: 0;
+}
+html body .radr.rx-dev-root .rx-dev-filter-row select {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  font-size: 12px;
+  color: var(--brand-ink);
+  background: #fff;
+  border: 1px solid #b9cce5;
+  border-radius: 8px;
+  padding: 8px;
+}
+html body .radr.rx-dev-root .rx-dev-result-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin: 20px 0 14px;
+}
+html body .radr.rx-dev-root .rx-dev-result-bar p {
+  margin: 0;
+  font-size: 12px;
+}
+html body .radr.rx-dev-root .rx-dev-result-bar button {
+  font: inherit;
+  font-size: 11px;
+  color: var(--brand-sapphire);
+  background: #fff;
+  border: 1px solid #b9cce5;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+html body .radr.rx-dev-root .rx-dev-legend {
+  background: #f5f9ff;
+  border: 1px solid #cbdcf0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 16px 0;
+}
+html body .radr.rx-dev-root .rx-dev-legend summary {
+  cursor: pointer;
+  font-size: 12px;
+  color: #173b80;
+  font-weight: 650;
+}
+html body .radr.rx-dev-root .rx-dev-yoursys {
+  background: linear-gradient(110deg, #e0eaff, #e1f8f3);
+  border: 1px solid #fff;
+  border-radius: 15px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  text-decoration: none;
+  margin: 20px 0;
+}
+html body .radr.rx-dev-root .rx-dev-yoursys p {
+  font-size: 12px;
+}
+html body .radr.rx-dev-root .rx-dev-flow-mini {
+  padding: 22px;
+  background: #ffffff12;
+  border: 1px solid #ffffff40;
+  border-radius: 18px;
+  min-width: 0;
+}
+html body .radr.rx-dev-root .rx-dev-arch-sources span {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  background: #ffffffed;
+  border: 1px solid #fff;
+  color: #193b72;
+  font-size: 10px;
+  line-height: 1.4;
+  padding: 5px 8px;
+  border-radius: 7px;
+}
+html body .radr.rx-dev-root .rx-dev-arch-sources .rx-dev-provider-mark {
+  display: grid;
+  padding: 1px;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  flex-shrink: 0;
+}
+html body .radr.rx-dev-root .rx-dev-arch-core {
+  background: var(--brand-jade);
+  color: var(--brand-ink);
+  font-size: 18px;
+  border-radius: 10px;
+}
+html body .radr.rx-dev-root .rx-dev-arch-out span {
+  background: #ffffff1a;
+  border-color: #ffffff40;
+  color: #e1efff;
+  font-size: 9px;
+}
+html body .radr.rx-dev-root .rx-dev-lifecycle {
+  background: #ffffffb8;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  margin: 0 0 22px;
+  padding: 18px;
+  overflow: hidden;
+}
+html body .radr.rx-dev-root .rx-dev-lifecycle-node {
+  color: var(--brand-ink);
+  font-size: 10px;
+  background: #e7f0ff;
+  border-radius: 8px;
+}
+html body .radr.rx-dev-root .rx-dev-lifecycle-hint {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--brand-muted);
+}
+html body .radr.rx-dev-root .rx-dev-foot {
+  background: linear-gradient(90deg, #102872, #064c9c);
+  padding: 28px 30px;
+  border-top: 1px solid #ffffff40;
+  color: #e3efff;
+}
+html body .radr.rx-dev-root .rx-dev-foot-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1400px;
+  margin: auto;
+}
+html body .radr.rx-dev-root .rx-dev-foot-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+html body .radr.rx-dev-root .rx-dev-foot .rx-dev-lockup-label,
+html body .radr.rx-dev-root .rx-dev-foot a {
+  color: #e3efff !important;
+  font-size: 12px;
+  text-decoration: none;
+}
+html body .radr.rx-dev-root .rx-dev-foot nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+html body .radr.rx-dev-root :is(a, button, input, select, pre):focus-visible {
+  outline: 3px solid #006747;
+  outline-offset: 3px;
+}
+html body .radr.rx-dev-root .rx-dev-page-hero :is(a, button):focus-visible {
+  outline-color: var(--brand-jade);
+}
+html body .radr.rx-dev-root .rx-dev-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: block;
+}
+html body .radr.rx-dev-root .rx-dev-drawer-scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #071d4d80;
+  backdrop-filter: blur(8px);
+}
+html body .radr.rx-dev-root .rx-dev-drawer-panel {
+  position: absolute;
+  inset: 12px auto 12px 12px;
+  width: min(340px, calc(100% - 24px));
+  max-height: calc(100dvh - 24px);
+  box-sizing: border-box;
+  overflow: auto;
+  background: #f5f9ff !important;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 25px 80px #061b4d40;
+}
+html body .radr.rx-dev-root .rx-dev-drawer-head {
+  position: sticky;
+  top: -20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: #f5f9fff5;
+  padding: 12px 0 18px;
+  z-index: 1;
+  margin-bottom: 16px;
+}
+html body .radr.rx-dev-root .rx-dev-drawer-close,
+html body .radr.rx-dev-root .rx-dev-menu-btn {
+  font: inherit;
+  font-size: 12px;
+  min-height: 38px;
+  border: 1px solid #b9cce5;
+  color: var(--brand-ink);
+  background: #fff;
+  border-radius: 9px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+@media (min-width: 1024px) {
+  html body .radr.rx-dev-root .rx-dev-menu-btn {
+    display: none;
+  }
+}
+@media (max-width: 1190px) {
+  html body .radr.rx-dev-root .rx-dev-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  html body .radr.rx-dev-root .rx-dev-hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  html body .radr.rx-dev-root .rx-dev-quick-split {
+    grid-template-columns: 1fr;
+  }
+  html body .radr.rx-dev-root .rx-dev-arch-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+@media (max-width: 1023px) {
+  html body .radr.rx-dev-root .rx-dev-shell {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 0;
+  }
+  html body .radr.rx-dev-root .rx-dev-side {
+    display: none;
+  }
+  html body .radr.rx-dev-root .rx-dev-top-right a:not(.rx-dev-top-cta) {
+    display: inline-flex;
+  }
+  html body .radr.rx-dev-root .rx-dev-top-inner {
+    padding-inline: 24px;
+  }
+  html body .radr.rx-dev-root .rx-dev-menu-btn {
+    display: inline-flex;
+  }
+}
+@media (max-width: 600px) {
+  html body .radr.rx-dev-root .rx-dev-top-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 12px 18px;
+    gap: 10px;
+  }
+  html body .radr.rx-dev-root .rx-dev-top-left {
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+  html body .radr.rx-dev-root .rx-dev-top-right {
+    justify-content: space-between;
+    gap: 12px;
+  }
+  html body .radr.rx-dev-root .rx-dev-top-right a {
+    font-size: 11px !important;
+  }
+  html body .radr.rx-dev-root .rx-dev-top-right .rx-dev-top-cta {
+    padding: 7px 10px;
+  }
+  html body .radr.rx-dev-root .rx-dev-shell {
+    padding: 18px 16px 40px;
+  }
+  html body .radr.rx-dev-root .rx-dev-page-hero {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+  html body .radr.rx-dev-root .rx-dev-page-hero h1 {
+    font-size: 34px !important;
+  }
+  html
+    body
+    .radr.rx-dev-root
+    :is(
+      .rx-dev-block,
+      .rx-dev-entry,
+      .rx-dev-quick-split,
+      .rx-dev-security,
+      .rx-dev-capabilities
+    ) {
+    padding: 20px;
+  }
+  html body .radr.rx-dev-root .rx-dev-grid {
+    grid-template-columns: 1fr;
+  }
+  html body .radr.rx-dev-root .rx-dev-filter-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  html body .radr.rx-dev-root .rx-dev-availability {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+  html body .radr.rx-dev-root .rx-dev-availability a {
+    grid-column: 1;
+  }
+  html body .radr.rx-dev-root .rx-dev-meta {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 15px;
+  }
+  html body .radr.rx-dev-root .rx-dev-provider-title {
+    gap: 12px;
+  }
+  html body .radr.rx-dev-root .rx-dev-provider-title h1 {
+    font-size: 32px !important;
+  }
+  html body .radr.rx-dev-root .rx-dev-table :is(th, td) {
+    padding: 10px;
+    font-size: 11px;
+  }
+  html body .radr.rx-dev-root .rx-dev-toc {
+    gap: 7px 12px;
+  }
+  html body .radr.rx-dev-root .rx-dev-yoursys {
+    display: block;
+  }
+  html body .radr.rx-dev-root .rx-dev-foot-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  html body .radr.rx-dev-root :is(h2, [id]) {
+    scroll-margin-top: 145px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body .radr.rx-dev-root * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+.rc-page {
+  padding-top: 0;
+}
+.rc-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  padding: 160px max(48px, calc((100vw - 1320px) / 2)) 70px;
+  background: var(--brand-depth);
+  align-items: center;
+}
+.radr .rc-hero h1 {
+  color: #fff;
+  font-size: clamp(42px, 4.5vw, 68px);
+  line-height: 1.08;
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  margin: 22px 0;
+}
+.radr .rc-hero h1 em {
+  font-style: normal;
+  color: var(--brand-jade);
+}
+.rc-hero > div > p:not(.rc-eyebrow) {
+  color: #e3efff;
+  max-width: 56ch;
+  line-height: 1.8;
+  font-size: 16px;
+}
+.rc-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--brand-sapphire);
+  margin: 0 0 18px;
+}
+.rc-hero .rc-eyebrow {
+  color: #a9ffda;
+}
+.rc-status-board {
+  background: #f4f9fff5;
+  border: 1px solid #fff;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow:
+    0 25px 65px #061b5e40,
+    inset 0 1px 0 #fff;
+}
+.rc-status-board > p {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--brand-muted);
+  margin: 0 0 22px;
+}
+.rc-status-board > div {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 18px 0;
+  border-top: 1px solid #cbdcef;
+}
+.rc-status-board strong {
+  font-size: 39px;
+  letter-spacing: -0.045em;
+  min-width: 58px;
+  color: var(--brand-sapphire);
+  font-weight: 650;
+}
+.rc-status-board span {
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--brand-ink);
+}
+.rc-status-board small {
+  display: block;
+  font-size: 11px;
+  font-weight: 450;
+  color: var(--brand-muted);
+  line-height: 1.7;
+  margin-top: 5px;
+}
+.rc-section {
+  width: min(1320px, calc(100% - 96px));
+  margin: 64px auto;
+}
+.radr .rc-section h2 {
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+  font-weight: 650;
+  color: var(--brand-ink);
+  margin: 0 0 28px;
+}
+.rc-paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.rc-paths article,
+.rc-checks article {
+  padding: 28px;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  background: #ffffffc9;
+  box-shadow: 0 15px 40px #1035660c;
+  min-width: 0;
+}
+.rc-path-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rc-path-head > span:last-child,
+.rc-tag {
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  color: #006747;
+  font-weight: 700;
+}
+.radr .rc-page h3 {
+  font-size: 22px;
+  letter-spacing: -0.035em;
+  color: var(--brand-ink);
+  font-weight: 650;
+  line-height: 1.3;
+  margin: 22px 0 12px;
+}
+.rc-paths p,
+.rc-checks p {
+  font-size: 14px;
+  color: var(--brand-muted);
+  line-height: 1.85;
+}
+.rc-paths a {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--brand-sapphire);
+  text-decoration: none;
+}
+.rc-checks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.rc-checks article > span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: #d5f9e9;
+  color: #006747;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.rc-fine {
+  font-size: 12px;
+  color: var(--brand-muted);
+  line-height: 1.8;
+  max-width: 90ch;
+  margin-top: 22px;
+}
+@media (max-width: 1000px) {
+  .rc-hero {
+    grid-template-columns: 1fr;
+    padding: 140px 24px 50px;
+    gap: 34px;
+  }
+  .rc-section {
+    width: calc(100% - 48px);
+  }
+  .rc-checks {
+    grid-template-columns: 1fr;
+  }
+  .rc-paths article,
+  .rc-checks article {
+    padding: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .rc-paths {
+    grid-template-columns: 1fr;
+  }
+  .rc-hero {
+    padding: 130px 18px 40px;
+  }
+  .rc-section {
+    width: calc(100% - 36px);
+    margin: 46px auto;
+  }
+  .rc-status-board {
+    padding: 22px;
+  }
+  .rc-status-board > div {
+    gap: 14px;
+  }
+  .rc-path-head > span:last-child {
+    line-height: 1.7;
+  }
+}
+.rx-dev-provider-mark {
+  width: 44px;
+  height: 44px;
+}
+.rx-dev-provider-mark :is(.rp-vendor-logo, .rp-vendor-fallback) {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  line-height: 1 !important;
+}
+html body .radr.rx-dev-root .rx-dev-card-head {
+  grid-template-columns: 44px minmax(0, 1fr);
+}
+.rc-path-head .rx-dev-provider-mark {
+  width: 48px;
+  height: 48px;
+  padding: 6px;
+}
+html body .radr.rx-dev-root .rx-dev-band {
+  background: var(--brand-depth);
+  border: 1px solid #ffffff80;
+  border-radius: 20px;
+  margin: 26px 0;
+  padding: 28px;
+}
+html body .radr.rx-dev-root .rx-dev-band :is(h2, p, span, li, strong) {
+  color: #edf5ff !important;
+  opacity: 1;
+}
+html body .radr.rx-dev-root .rx-dev-band em {
+  color: #8dffd0 !important;
+  opacity: 1;
+}
+html body .radr.rx-dev-root .rx-dev-table-wrap:focus-visible {
+  outline: 3px solid #006747;
+  outline-offset: 3px;
+}
+html:has(.radr.rx-dev-root),
+html:has(.radr.rx-dev-root) body {
+  background: #e3edff !important;
+}
+html body .radr.rx-dev-root :is(.rx-dev-main, .rx-dev-main-inner) {
+  background: transparent !important;
+}
+html body .radr.rx-dev-root .rx-dev-table {
+  table-layout: fixed;
+}
+html body .radr.rx-dev-root .rx-dev-table :is(th, td) {
+  white-space: normal !important;
+  vertical-align: top;
+}
+html body .radr.rx-dev-root .rx-dev-table code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  html body .radr.rx-dev-root .rx-dev-table {
+    min-width: 560px;
+  }
+}

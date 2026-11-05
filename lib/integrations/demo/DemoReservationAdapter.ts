@@ -14,10 +14,10 @@ import type {
 const PROVIDER_ID = "radr-demo-reservations";
 
 const DEMO_LOCATION: ExternalLocation = {
-  externalId: "demo-berlin-mitte",
+  externalId: "demo-soho-new-york",
   name: "Soho · New York (Demo)",
-  timezone: "Europe/Berlin",
-  currency: "EUR",
+  timezone: "America/New_York",
+  currency: "USD",
 };
 
 /**
@@ -80,8 +80,8 @@ export class DemoReservationAdapter implements ReservationAdapter {
       {
         externalId: "wl_demo_1",
         locationExternalId: DEMO_LOCATION.externalId,
-        requestedAt: "2026-08-24T18:30:00+02:00",
-        requestedServiceTime: "2026-08-24T20:00:00+02:00",
+        requestedAt: "2026-08-24T18:30:00-04:00",
+        requestedServiceTime: "2026-08-24T20:00:00-04:00",
         partySize: 3,
         status: "waiting",
         quotedWaitMinutes: 25,
@@ -116,7 +116,7 @@ export class DemoReservationAdapter implements ReservationAdapter {
       {
         externalId: "res_demo_confirmed",
         locationExternalId: DEMO_LOCATION.externalId,
-        serviceTime: "2026-08-24T19:00:00+02:00",
+        serviceTime: "2026-08-24T19:00:00-04:00",
         partySize: 2,
         status: "confirmed",
         bookingChannel: "direct",
@@ -127,13 +127,13 @@ export class DemoReservationAdapter implements ReservationAdapter {
       {
         externalId: "res_demo_cancelled",
         locationExternalId: DEMO_LOCATION.externalId,
-        serviceTime: "2026-08-24T20:00:00+02:00",
+        serviceTime: "2026-08-24T20:00:00-04:00",
         partySize: 4,
         status: "cancelled",
         bookingChannel: "demo",
         tableExternalId: "t14",
         section: "main",
-        cancelledAt: "2026-08-24T18:45:00+02:00",
+        cancelledAt: "2026-08-24T18:45:00-04:00",
         sourceUpdatedAt: now,
       },
     ].map((r) => ({

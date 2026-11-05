@@ -19,6 +19,8 @@ export function DevelopersLifecycleStrip() {
   const t = useTranslations("developers");
   const reduced = useReducedMotion();
   const { ref, inView } = useInView<HTMLElement>({ threshold: 0.4 });
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
   const [active, setActive] = useState<StepId>("event");
   const hintId = useId();
 
@@ -29,14 +31,14 @@ export function DevelopersLifecycleStrip() {
   }));
 
   useEffect(() => {
-    if (!inView || reduced) return;
+    if (!ready || !inView || reduced) return;
     let i = 0;
     const id = window.setInterval(() => {
       i = (i + 1) % STEP_IDS.length;
       setActive(STEP_IDS[i]!);
     }, 3800);
     return () => window.clearInterval(id);
-  }, [inView, reduced]);
+  }, [ready, inView, reduced]);
 
   const onSelect = useCallback((id: StepId) => setActive(id), []);
   const activeIndex = STEP_IDS.indexOf(active);
@@ -47,7 +49,7 @@ export function DevelopersLifecycleStrip() {
       className="rx-dev-lifecycle"
       aria-label={t("hub.lifecycleStrip.aria")}
       data-active={active}
-      data-on={inView ? "true" : "false"}
+      data-on={ready && inView ? "true" : "false"}
     >
       <div className="rx-dev-lifecycle-inner">
         <ol className="rx-dev-lifecycle-rail">
@@ -76,7 +78,7 @@ export function DevelopersLifecycleStrip() {
                     aria-hidden
                     initial={false}
                     animate={
-                      isActive && !reduced
+                      ready && isActive && !reduced
                         ? { scale: [1, 1.35, 1], opacity: [0.5, 0, 0.5] }
                         : { scale: 1, opacity: 0 }
                     }
