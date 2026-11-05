@@ -137,7 +137,7 @@ export default async function ReportPage({
                 <div>
                   <Image
                     src="/marketing/reports/playbook-research-preview.png"
-                    alt="Report page 4: labeled charts compare restaurant margins and hotel revenue versus cost growth, with source notes"
+                    alt="Research preview: labeled charts compare restaurant margins and hotel revenue versus cost growth, with source notes"
                     width={707}
                     height={1000}
                     sizes="(max-width: 700px) 90vw, 38vw"
@@ -152,7 +152,7 @@ export default async function ReportPage({
                 <div>
                   <Image
                     src="/marketing/reports/playbook-worksheet-preview.png"
-                    alt="Report page 14: printable decision worksheet for an owner, baseline, alternatives, approval, and verified outcome"
+                    alt="Preview: printable decision worksheet for an owner, baseline, alternatives, approval, and verified outcome"
                     width={707}
                     height={1000}
                     sizes="(max-width: 700px) 90vw, 38vw"

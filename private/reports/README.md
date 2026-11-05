@@ -26,6 +26,8 @@ Page 6 is assumed arithmetic, not a forecast. D-1911 and D-7110 are synthetic pr
 
 ## Homepage discovery and physical preview
 
-The owner requested a prominent feature near the bottom of the homepage. `HomePlaybookFeature` sits in the closing portion of the page, highlights the actual evidence scorecard (page 12), Decision worksheet (page 14) and 30-day pilot plan (page 13), and links to the existing lead-gated request page. The PDF was reviewed against extracted text before choosing those claims; it remains the same substantive 16-page edition.
+The owner requested a prominent feature near the bottom of the homepage. `HomePlaybookFeature` sits in the closing portion of the page, uses a curiosity-led research teaser (NRA 2.8% median pre-tax restaurant income / sales and CBRE 4.1% hotel expense growth versus 2.3% revenue growth), and links to the existing lead-gated request page. The PDF was reviewed against extracted text before choosing those claims; it remains the same substantive 16-page edition.
 
 `PlaybookBook` renders the actual public cover, research page and worksheet images as a CSS 3D book, on both the homepage and the report request page. Its ten-second cycle gently turns, opens to a spread, holds and closes. Fixed stage dimensions prevent scroll/layout shifts. Per the owner’s preference, motion runs continuously while visible with no play/pause controls and no hover or focus stop. It pauses only offscreen or in a hidden tab. Reduced motion shows a static open spread. The decorative pages are hidden from assistive technology; the surrounding text and labeled link describe the publication and request route. Public previews never bypass the full-PDF lead gate.
+
+Homepage teaser copy intentionally avoids page references or a contents list. Research hooks retain their geography, period, definitions and source links; they are not RADR performance claims.

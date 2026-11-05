@@ -20,10 +20,10 @@ test("homepage closing feature exposes real practical tools and the gated reques
   await page.goto(base + "/en");
   const section = page.locator("#hospitality-playbook");
   await section.scrollIntoViewIfNeeded();
-  await expect(section).toContainText("An evidence scorecard");
-  await expect(section).toContainText("A worksheet you can use tomorrow");
-  await expect(section).toContainText("Your first 30 days");
-  await expect(section).toContainText("16 pages");
+  await expect(section).toContainText("2.8%");
+  await expect(section).toContainText("4.1%");
+  await expect(section).toContainText("2024 vs 2023");
+  await expect(section).not.toContainText(/p\.(12|13|14)/);
   await expect(section.locator("img")).toHaveCount(3);
   await expect(section.locator("a.rm-button")).toHaveAttribute(
     "href",

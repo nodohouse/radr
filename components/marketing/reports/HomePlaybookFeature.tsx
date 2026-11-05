@@ -14,44 +14,39 @@ export function HomePlaybookFeature() {
       <div className="rm-playbook-copy">
         <p className="rm-eyebrow">THE HOSPITALITY DECISION PLAYBOOK</p>
         <h2 id="home-playbook-title">
-          Your next operating review.
+          Busy doesn’t mean profitable.
           <br />
-          <em>With a better playbook.</em>
+          <em>Know where to look next.</em>
         </h2>
         <p className="rm-playbook-lead">
-          Know where to look. Decide what to change. Prove what happened after.
-          A practical field guide for the people accountable for the night and
-          the numbers.
+          When costs outrun revenue, a busy operation can still lose ground. Get
+          the research, the operating examples and a practical place to start.
         </p>
-        <ul className="rm-playbook-tools">
+        <ul className="rm-playbook-tools rm-playbook-research">
           <li>
-            <span>p.12</span>
+            <span>2.8%</span>
             <div>
-              <strong>An evidence scorecard</strong>
+              <strong>How thin can the margin get?</strong>
               <p>
-                Check sources, freshness, uncertainty and authority before
-                backing a Decision.
+                Median pre-tax income relative to sales for U.S. full-service
+                restaurants, using 2024 survey data.
               </p>
+              <a href="https://restaurant.org/research-and-media/research/restaurant-economic-insights/analysis-commentary/new-association-report-helps-operators-gauge-their-restaurant-performance/">
+                National Restaurant Association, 2025 →
+              </a>
             </div>
           </li>
           <li>
-            <span>p.14</span>
+            <span>4.1%</span>
             <div>
-              <strong>A worksheet you can use tomorrow</strong>
+              <strong>Hotel costs grew faster than revenue.</strong>
               <p>
-                Put the owner, alternatives, expected value and outcome on one
-                Decision record.
+                Expenses above gross operating profit rose 4.1%, against 2.3%
+                total revenue growth. U.S. hotel sample, 2024 vs 2023.
               </p>
-            </div>
-          </li>
-          <li>
-            <span>p.13</span>
-            <div>
-              <strong>Your first 30 days, mapped out</strong>
-              <p>
-                Frame one problem. Review the evidence. Act through your
-                process. Verify before expanding.
-              </p>
+              <a href="https://www.cbre.com/insights/articles/all-eyes-on-operating-costs-in-2025-lessons-learned-in-2024">
+                CBRE, 2025 · 2,600 hotels →
+              </a>
             </div>
           </li>
         </ul>
@@ -60,14 +55,14 @@ export function HomePlaybookFeature() {
             Get the playbook <span aria-hidden="true">→</span>
           </Link>
           <span>
-            {report.pages} pages · English PDF
-            <br />6 linked research sources
+            English PDF
+            <br />
+            Research. Decisions. A plan to act.
           </span>
         </div>
         <p className="rm-playbook-note">
-          Request access with your business details. Sales follow-up and email
-          updates are optional. Examples and modeled figures are clearly
-          labeled.
+          Sign up to get the playbook. Sales follow-up and email updates are
+          optional. Research findings are not estimates of RADR returns.
         </p>
       </div>
       <div className="rm-playbook-visual">
