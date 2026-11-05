@@ -39,6 +39,7 @@ const PATHS = [
   "/developers/connectors",
   "/developers/quickstart",
   "/privacy",
+  "/cookies",
   "/terms",
   "/imprint",
   "/login",

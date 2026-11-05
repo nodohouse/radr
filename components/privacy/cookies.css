@@ -134,3 +134,190 @@
     font-size: 25px;
   }
 }
+/* Expanded privacy center uses the same navy, ocean and jade material. */
+.radr-cookies {
+  width: min(640px, calc(100vw - 32px));
+  color: #09264f;
+  background: linear-gradient(140deg, #fcfeff, #eef5ff);
+  border-color: #d2e2f5;
+}
+.radr-cookies h2 {
+  color: #09264f;
+  font-weight: 550;
+  font-size: 30px;
+}
+.radr-cookies p {
+  color: #485f7d;
+}
+.radr-cookies-head {
+  color: #126344;
+  font-size: 11px;
+}
+.radr-cookie-current {
+  border: 1px solid #cadff0;
+  background: linear-gradient(110deg, #edf6ff, #e6f8ef);
+  border-radius: 12px;
+  padding: 12px 15px;
+}
+.radr-cookie-current strong {
+  display: block;
+  color: #15365f;
+}
+.radr-cookie-options > div,
+.radr-cookie-options > label {
+  align-items: start;
+  padding: 20px 0;
+  font-size: 14px;
+}
+.radr-cookie-options > div > strong {
+  flex-basis: 100%;
+}
+.radr-cookie-options > div > span {
+  font-size: 12px;
+  line-height: 1.75;
+  color: #485f7d;
+}
+.radr-cookie-options small {
+  font-size: 12px;
+  color: #485f7d;
+}
+.radr-cookie-options input {
+  margin-top: 5px;
+  flex: 0 0 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #075be5;
+}
+.radr-cookie-options b {
+  color: #126344;
+  border: 1px solid #a9ddc7;
+  background: #e3f7ed;
+  border-radius: 20px;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+.radr-cookie-explainer {
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid #ccdff3;
+  border-radius: 12px;
+  background: #ffffff99;
+  font-size: 13px;
+}
+.radr-cookie-explainer p {
+  margin-bottom: 0;
+  font-size: 12px;
+}
+.radr-cookie-inventory {
+  border-top: 1px solid #d1dff0;
+  padding: 15px 0;
+}
+.radr-cookie-inventory summary {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.6;
+  color: #16385f;
+}
+.radr-cookie-inventory > p,
+.radr-cookie-inventory li p {
+  font-size: 12px;
+}
+.radr-cookie-inventory ul {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+.radr-cookie-inventory li {
+  border: 1px solid #cfdef0;
+  border-radius: 12px;
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+.radr-cookie-inventory :is(code, li > span, small) {
+  display: block;
+  line-height: 1.7;
+}
+.radr-cookie-inventory code {
+  color: #0756ce;
+  font-size: 12px;
+}
+.radr-cookie-inventory :is(li > span, small) {
+  color: #485f7d;
+  font-size: 11px;
+  margin-top: 5px;
+}
+.radr-cookies .radr-cookie-reviewed {
+  font-size: 11px;
+  color: #5a6d86;
+}
+.radr-cookie-actions button {
+  background: #092758;
+  border-color: #092758;
+  color: #fff;
+  font-size: 13px;
+}
+.radr-cookie-actions button:last-child {
+  color: #092758;
+  background: #fff;
+  border-color: #9fbbe0;
+}
+.radr-cookie-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+.radr-cookie-links a {
+  font-size: 12px;
+  color: #0756ce;
+}
+.radr-cookies :is(button, input, a, summary):focus-visible {
+  outline: 3px solid #0870ed;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .radr-cookies {
+    max-height: calc(100dvh - 32px);
+    padding: 22px;
+  }
+  .radr-cookies h2 {
+    font-size: 27px;
+  }
+}
+.radr-cookies-head {
+  position: sticky;
+  top: -28px;
+  z-index: 3;
+  padding: 12px 28px;
+  margin: -28px -28px 0;
+  background: #f6fafff5;
+  border-bottom: 1px solid #d8e5f2;
+  backdrop-filter: blur(12px);
+}
+.radr-cookie-controls {
+  position: sticky;
+  bottom: -28px;
+  z-index: 3;
+  margin: 16px -28px -28px;
+  padding: 16px 28px 22px;
+  background: #f4f8fff5;
+  border-top: 1px solid #c9dcf0;
+  backdrop-filter: blur(14px);
+}
+.radr-cookie-controls .radr-cookie-actions {
+  margin: 0 0 12px;
+}
+@media (max-width: 600px) {
+  .radr-cookies-head {
+    top: -22px;
+    margin: -22px -22px 0;
+    padding: 10px 22px;
+  }
+  .radr-cookie-controls {
+    bottom: -22px;
+    margin: 16px -22px -22px;
+    padding: 14px 22px 18px;
+  }
+}

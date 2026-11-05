@@ -45,3 +45,23 @@ export function analyticsAllowed() {
     return false;
   }
 }
+
+// Dismissal is a tab-level UI choice, never permission for optional tracking.
+export const CONSENT_PROMPT_KEY = "radr.cookie-prompt-dismissed.v1";
+let promptDismissedInThisTab = false;
+export function dismissCookiePrompt() {
+  promptDismissedInThisTab = true;
+  try {
+    sessionStorage.setItem(CONSENT_PROMPT_KEY, "1");
+  } catch {
+    /* In-memory dismissal still works for client navigation. */
+  }
+}
+export function cookiePromptDismissed() {
+  if (promptDismissedInThisTab) return true;
+  try {
+    return sessionStorage.getItem(CONSENT_PROMPT_KEY) === "1";
+  } catch {
+    return false;
+  }
+}

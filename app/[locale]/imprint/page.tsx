@@ -1,148 +1,119 @@
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import {
-  LegalConvenienceNotice,
   LegalPageShell,
-  LegalPending,
   LegalSection,
+  LegalPending,
 } from "@/components/marketing/LegalPageShell";
 import {
   COMPANY,
   displayOrPending,
-  hasValue,
-  isLegalEntityComplete,
 } from "@/components/marketing/config/company";
-
+import { buildAlternatesForLocale } from "@/i18n/seo";
 type Props = { params: Promise<{ locale: string }> };
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "legal" });
   return {
-    title: t("imprintPageTitle"),
-    description: t("metaImprintDescription"),
+    title: "Imprint | RADR",
+    description:
+      "RADR legal identity and publication status, registration details awaiting confirmation, contact limitations and related notices.",
+    alternates: buildAlternatesForLocale(locale, "/imprint"),
   };
 }
-
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rx-imprint-row">
-      <dt>{label}</dt>
-      <dd>{value}</dd>
-    </div>
-  );
-}
-
-export default async function ImprintPage({ params }: Props) {
+export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("legal");
-  const complete = isLegalEntityComplete();
-  const showDevWarn = process.env.NODE_ENV === "development" && !complete;
-  const notice =
-    locale !== "en" ? (
-      <LegalConvenienceNotice
-        message={t("convenienceNotice")}
-        linkLabel={t("officialEn")}
-        href="/imprint"
-      />
-    ) : null;
-
   return (
     <LegalPageShell
-      kicker={t("imprintKicker")}
-      title={t("imprintPageTitle")}
-      lead="Legal notice for radrup.com. Required company details are published here only when confirmed. Nothing below is invented."
-      updated={
-        COMPANY.imprintUpdated
-          ? t("lastUpdated", { date: COMPANY.imprintUpdated })
-          : undefined
+      kind="imprint"
+      kicker="RADR · Trust library"
+      title="Imprint"
+      lead="Company identity and publication details, shown only when confirmed. RADR’s registered entity information is not yet ready for publication."
+      notice={
+        locale !== "en" ? (
+          <p className="rx-legal-pending">
+            This document is currently available in English. Reviewed
+            translations are not yet published.
+          </p>
+        ) : undefined
       }
-      draftLabel={t("draftNotice")}
-      notice={notice}
     >
-
-      {showDevWarn ? (
-        <LegalPending>
-          <strong>Development notice:</strong> fill{" "}
-          <code>components/marketing/config/company.ts</code> before treating
-          this page as launch-ready.
-        </LegalPending>
-      ) : null}
-
-      {!complete ? (
-        <LegalPending>
-          Legal entity information is not yet published. Placeholder labels
-          below will be replaced with confirmed company details. They are not
-          fabricated values.
-        </LegalPending>
-      ) : null}
-
-      <LegalSection title="Company information">
-        <dl className="rx-legal-dl">
-          <Row
-            label="Legal company name"
-            value={displayOrPending(COMPANY.legalName)}
-          />
-          <Row
-            label="Legal form"
-            value={displayOrPending(COMPANY.legalForm)}
-          />
-          <Row
-            label="Registered address"
-            value={
-              hasValue(COMPANY.addressLines)
-                ? COMPANY.addressLines.join(", ")
-                : "To be published"
-            }
-          />
-          <Row label="Country" value={displayOrPending(COMPANY.country)} />
-          <Row
-            label="Managing director(s)"
-            value={displayOrPending(COMPANY.managingDirector)}
-          />
-          <Row
-            label="Commercial register"
-            value={displayOrPending(COMPANY.commercialRegister)}
-          />
-          <Row
-            label="Registration number"
-            value={displayOrPending(COMPANY.registrationNumber)}
-          />
-          <Row label="VAT ID" value={displayOrPending(COMPANY.vatId)} />
-          <Row
-            label="Responsible person"
-            value={displayOrPending(COMPANY.responsiblePerson)}
-          />
-          <Row
-            label="Contact email"
-            value={displayOrPending(COMPANY.email)}
-          />
-          <Row label="Website" value={COMPANY.domain} />
-        </dl>
-      </LegalSection>
-
-      <LegalSection title="Contact">
+      <LegalSection title="1. Publication status">
         <p>
-          For general inquiries use{" "}
-          <Link href="/contact">Contact</Link>
-          {hasValue(COMPANY.email) ? (
-            <>
-              {" "}
-              or{" "}
-              <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
-            </>
-          ) : null}
-          .
+          RADR is the brand used on radrup.com. The registered operating entity
+          and company-specific legal details are not ready for publication. This
+          page deliberately leaves those facts unconfirmed rather than
+          presenting invented company information.
+        </p>
+        <LegalPending>
+          This Imprint is not complete for a legal launch. Registered entity,
+          address, contact and applicable registration disclosures must be
+          supplied and reviewed before it can be finalized. A content-review
+          date is not company verification or legal approval.
+        </LegalPending>
+      </LegalSection>
+      <LegalSection title="2. Company and registration details">
+        <dl className="rx-legal-dl">
+          {[
+            ["Brand", COMPANY.brandName],
+            ["Website", COMPANY.domain],
+            ["Registered legal name", COMPANY.legalName],
+            ["Legal form", COMPANY.legalForm],
+            ["Registered address", COMPANY.addressLines.join(", ")],
+            ["Country of registration", COMPANY.country],
+            ["Authorized representative", COMPANY.managingDirector],
+            ["Register / registration authority", COMPANY.commercialRegister],
+            ["Registration number", COMPANY.registrationNumber],
+            ["VAT identification, if applicable", COMPANY.vatId],
+            [
+              "Editorially responsible person, if required",
+              COMPANY.responsiblePerson,
+            ],
+            ["Public business contact", COMPANY.email],
+            ["Privacy contact", COMPANY.privacyEmail],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd>{displayOrPending(value || "", "Awaiting confirmation")}</dd>
+            </div>
+          ))}
+        </dl>
+        <p>
+          Whether a register, VAT identification, supervisory authority,
+          professional-body disclosure, editorial contact or other
+          jurisdiction-specific statement is required depends on the confirmed
+          entity, activities and applicable law. An unfilled item is not a
+          statement that the requirement does not apply.
         </p>
       </LegalSection>
-
-      <LegalSection title="Related">
+      <LegalSection title="3. Contact and delivery">
         <p>
-          <Link href="/privacy">Privacy Policy</Link> ·{" "}
-          <Link href="/terms">Terms of Use</Link> ·{" "}
-          <Link href="/security">Security</Link>
+          General inquiries can use the available{" "}
+          <Link href="/contact">contact form</Link>. Its receiving service must
+          be configured before submission can be confirmed. A delivery failure
+          is not a received inquiry. Dedicated business, privacy and security
+          contacts remain to be confirmed.
+        </p>
+        <p>
+          The form does not substitute for a legally required published business
+          address or direct contact detail. Do not send confidential records
+          through an unarranged public inquiry channel.
+        </p>
+      </LegalSection>
+      <LegalSection title="4. Legal scope and related notices">
+        <p>
+          Read the <Link href="/terms">Terms of use</Link> for website and demo
+          scope, the <Link href="/privacy">Privacy policy</Link> for data
+          handling, <Link href="/cookies">Cookies &amp; storage</Link> for
+          browser records, and{" "}
+          <Link href="/security">Trust &amp; security</Link> for implementation
+          and readiness.
+        </p>
+        <p>
+          Governing law and dispute venue are awaiting confirmation. No
+          jurisdiction-specific dispute-resolution membership, regulated-service
+          authorization or legal certification is asserted by this draft.
         </p>
       </LegalSection>
     </LegalPageShell>

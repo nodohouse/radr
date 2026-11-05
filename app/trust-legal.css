@@ -1,0 +1,393 @@
+/* Trust library: same public typeface, sapphire/ocean material and jade signal. */
+html body .radr.radr-legal {
+  --rt-ink: #09264f;
+  --rt-muted: #485f7d;
+  color: var(--rt-ink);
+  background: #f4f8ff !important;
+  font-family: var(--font-entry), Arial, sans-serif;
+}
+.radr-legal .rx-legal {
+  padding: 0 0 90px;
+}
+.radr-legal .rt-hero {
+  padding: 156px 0 54px;
+  background:
+    radial-gradient(ellipse at 85% 10%, #159aff55, transparent 60%),
+    linear-gradient(110deg, #061738, #063eaf 65%, #087fe6);
+  color: #fff;
+}
+.radr-legal .rt-hero .rx-shell {
+  max-width: 1400px;
+}
+.radr-legal .rt-eyebrow {
+  color: #85f9bc;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.radr-legal .rt-hero h1 {
+  color: #fff;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 550;
+  letter-spacing: -0.05em;
+  line-height: 1.06;
+  margin: 20px 0;
+  text-wrap: balance;
+}
+.radr-legal .rt-lead {
+  color: #dceaff;
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.75;
+  max-width: 72ch;
+}
+.radr-legal .rt-review {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.radr-legal .rt-review span {
+  border: 1px solid #ffffff35;
+  border-radius: 30px;
+  padding: 8px 13px;
+  color: #e0edff;
+  font-size: 12px;
+  line-height: 1.6;
+  background: #ffffff09;
+}
+.radr-legal .rt-review span:last-child {
+  color: #99ffd0;
+}
+.radr-legal .rt-page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-block: 22px;
+  border-bottom: 1px solid #d6e2f2;
+}
+.radr-legal .rt-page-nav a {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 44px;
+  padding: 11px 17px;
+  color: #36506f;
+  background: #fff;
+  border: 1px solid #d1e0f2;
+  border-radius: 12px;
+  font-size: 14px;
+  text-decoration: none;
+}
+.radr-legal .rt-page-nav a[aria-current] {
+  background: #092758;
+  color: #fff;
+  border-color: #092758;
+  box-shadow: inset 3px 0 #19ea8a;
+}
+.radr-legal .rt-page-nav a span {
+  font-family: Arial, sans-serif !important;
+}
+.radr-legal .rt-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: clamp(30px, 5vw, 80px);
+  align-items: start;
+  margin-top: 42px;
+}
+.radr-legal .rt-toc {
+  position: sticky;
+  top: 116px;
+  max-height: calc(100dvh - 140px);
+  overflow: auto;
+  padding: 2px 12px 16px 0;
+}
+.radr-legal .rt-toc > p {
+  color: #536a87;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 650;
+  margin: 0 0 16px;
+}
+.radr-legal .rt-toc nav {
+  display: grid;
+  gap: 3px;
+}
+.radr-legal .rt-toc nav a {
+  color: #365473;
+  font-size: 13px;
+  line-height: 1.55;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 7px 10px;
+  border-left: 2px solid #d8e3f1;
+}
+.radr-legal .rt-toc nav a:hover {
+  background: #e3edfc;
+  color: #0756ce;
+  border-left-color: #075cff;
+}
+.radr-legal .rt-help {
+  margin-top: 25px;
+  background: linear-gradient(140deg, #fff, #e9f2ff);
+  border: 1px solid #d2e1f4;
+  padding: 20px;
+  border-radius: 16px;
+}
+.radr-legal .rt-help strong {
+  font-size: 14px;
+}
+.radr-legal .rt-help p {
+  color: #526783;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.radr-legal .rt-help a {
+  color: #0756ce;
+  font-size: 12px;
+  font-weight: 600;
+}
+html body .radr.radr-legal:has(.rx-nav) .rx-legal-body {
+  min-width: 0;
+  background: linear-gradient(140deg, #ffffffef, #f7faffdd) !important;
+  border: 1px solid #d6e2f3 !important;
+  border-radius: 26px !important;
+  padding: clamp(24px, 4vw, 58px);
+  box-shadow: 0 18px 55px #15396c0a !important;
+}
+.radr-legal .rx-legal-section {
+  scroll-margin-top: 115px;
+  padding: 0 0 30px;
+  margin: 0 0 30px;
+  border-bottom: 1px solid #dce6f4;
+}
+.radr-legal .rx-legal-section:last-of-type {
+  border-bottom: 0;
+}
+.radr-legal .rx-legal-section h2 {
+  font-size: clamp(22px, 2.1vw, 29px);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  color: #09264f;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+.radr-legal .rx-legal-section :is(p, li, dd) {
+  color: #485f7d;
+  font-size: 15px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+.radr-legal .rx-legal-section strong {
+  color: #15365f;
+}
+.radr-legal .rx-legal-section :is(ul, ol) {
+  padding-left: 22px;
+}
+.radr-legal .rx-legal-section li + li {
+  margin-top: 9px;
+}
+.radr-legal .rx-legal-section a {
+  color: #0756ce;
+  text-underline-offset: 3px;
+}
+.radr-legal .rx-legal-pending {
+  border: 1px solid #bdd3ef;
+  border-left: 3px solid #075cff;
+  background: #eaf2ff;
+  border-radius: 12px;
+  color: #365574;
+  padding: 16px 20px;
+  font-size: 13px;
+  line-height: 1.75;
+  margin: 20px 0;
+}
+.radr-legal .rt-hero .rx-legal-pending {
+  background: #ffffff0c;
+  color: #e0edff;
+  border-color: #ffffff40;
+  max-width: 75ch;
+}
+.radr-legal .rt-hero .rx-legal-pending a {
+  color: #99ffd0;
+}
+.radr-legal .rx-legal-dl {
+  margin: 24px 0;
+}
+.radr-legal .rx-legal-dl > div {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.7fr) minmax(0, 1.3fr);
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e9f5;
+}
+.radr-legal .rx-legal-dl dt {
+  color: #15365f;
+  font-size: 13px;
+  font-weight: 600;
+}
+.radr-legal .rx-legal-dl dd {
+  margin: 0;
+}
+.radr-legal .rt-inventory {
+  overflow-x: auto;
+  border: 1px solid #cfddf0;
+  border-radius: 16px;
+  margin: 24px 0;
+}
+.radr-legal .rt-inventory table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.7;
+  min-width: 620px;
+}
+.radr-legal .rt-inventory caption {
+  text-align: left;
+  padding: 16px 20px;
+  background: #edf4ff;
+  color: #415d80;
+  caption-side: bottom;
+  font-size: 12px;
+}
+.radr-legal .rt-inventory :is(th, td) {
+  padding: 18px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #dce6f4;
+  color: #415d80;
+  overflow-wrap: anywhere;
+}
+.radr-legal .rt-inventory thead th {
+  background: #092758;
+  color: #fff;
+  font-weight: 550;
+}
+.radr-legal .rt-inventory tbody th {
+  width: 30%;
+  font-weight: 500;
+  background: #f3f7ff;
+}
+.radr-legal .rt-inventory :is(span, small, strong) {
+  display: block;
+}
+.radr-legal .rt-inventory small {
+  margin-top: 8px;
+  font-size: 11px;
+}
+.radr-legal .rt-inventory code {
+  color: #0756ce;
+  font-size: 12px;
+}
+.radr-legal .rt-document-end {
+  padding: 26px;
+  background: linear-gradient(120deg, #eef5ff, #e6f6f0);
+  border: 1px solid #c9dfec;
+  border-radius: 18px;
+  font-size: 14px;
+}
+.radr-legal .rt-document-end p {
+  color: #485f7d;
+  line-height: 1.75;
+}
+.radr-legal .rt-document-end a {
+  color: #0756ce;
+  font-weight: 600;
+}
+.radr-legal :is(a, button, summary, [tabindex]):focus-visible {
+  outline: 3px solid #0870ed;
+  outline-offset: 4px;
+}
+.radr-legal .rt-status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.radr-legal .rt-status-card {
+  padding: 22px;
+  background: linear-gradient(135deg, #f0f6ff, #fff);
+  border: 1px solid #cbddf3;
+  border-radius: 16px;
+}
+.radr-legal .rt-status-card span {
+  display: inline-block;
+  background: #d9f7e8;
+  color: #0c6544;
+  padding: 5px 9px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 650;
+  margin-bottom: 14px;
+}
+.radr-legal .rt-status-card[data-state="pending"] span {
+  background: #e1ebff;
+  color: #174d98;
+}
+.radr-legal .rt-status-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #09264f;
+  line-height: 1.4;
+  margin: 0 0 10px;
+}
+.radr-legal .rt-status-card p {
+  font-size: 13px;
+  line-height: 1.75;
+  margin: 0;
+}
+@media (max-width: 1000px) {
+  .radr-legal .rt-layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 28px;
+  }
+}
+@media (max-width: 760px) {
+  .radr-legal .rt-hero {
+    padding: 126px 0 36px;
+  }
+  .radr-legal .rt-layout {
+    grid-template-columns: 1fr;
+    margin-top: 26px;
+  }
+  .radr-legal .rt-toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+  }
+  .radr-legal .rt-toc nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .radr-legal .rt-toc nav a {
+    border: 1px solid #cfdef0;
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+  .radr-legal .rt-help {
+    display: none;
+  }
+  .radr-legal .rt-page-nav a {
+    flex: 1 1 135px;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+  .radr-legal .rt-status-grid {
+    grid-template-columns: 1fr;
+  }
+  .radr-legal .rx-legal-dl > div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+.radr.radr-legal .rx-legal-dl dt {
+  font-family: var(--font-entry), Arial, sans-serif !important;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 13px;
+  line-height: 1.7;
+}

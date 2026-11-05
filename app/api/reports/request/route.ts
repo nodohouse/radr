@@ -9,6 +9,7 @@ import {
   REPORT_COOKIE,
   REPORT_TTL_SECONDS,
 } from "@/lib/marketing/reportGate";
+import { PRIVACY_NOTICE_VERSION } from "@/lib/privacy/disclosures";
 import { HOSPITALITY_REPORT } from "@/lib/marketing/report";
 export const runtime = "nodejs";
 const reply = (body: unknown, status: number) =>
@@ -85,7 +86,7 @@ export async function POST(request: Request) {
           reportId: HOSPITALITY_REPORT.id,
           receivedAt: new Date().toISOString(),
           requestId,
-          privacyNoticeVersion: "2026-11-04",
+          privacyNoticeVersion: PRIVACY_NOTICE_VERSION,
           followUpRequested: lead.requestContact,
         }),
         redirect: "error",

@@ -65,6 +65,7 @@ export function SiteFooter() {
   const TRUST_LEGAL = [
     { href: "/security" as const, label: t("security") },
     { href: "/privacy" as const, label: t("privacy") },
+    { href: "/cookies" as const, label: "Cookies & storage" },
     { href: "/terms" as const, label: t("terms") },
     { href: "/imprint" as const, label: t("imprint") },
   ];
