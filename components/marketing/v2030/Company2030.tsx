@@ -12,6 +12,7 @@ import { SilkAtmosphere } from "@/components/marketing/v2030/SilkAtmosphere";
 import "@/app/marketing-2030.css";
 import "@/app/company.css";
 import "@/app/brand-takeover.css";
+import "@/app/marketing-premium-pages.css";
 
 const PRINCIPLES = [
   {
@@ -32,11 +33,7 @@ const PRINCIPLES = [
   },
 ] as const;
 
-const CORE_TODAY = [
-  "Restaurants",
-  "Hotels",
-  "Multi-location groups",
-] as const;
+const CORE_TODAY = ["Restaurants", "Hotels", "Multi-location groups"] as const;
 
 const EXTENDS_TO = [
   "Serviced apartments",
@@ -68,7 +65,7 @@ export function Company2030() {
   const reduced = useReducedMotion();
 
   return (
-    <div className="radr radr-mineral">
+    <div className="radr radr-mineral rm-premium">
       <PublicNavbar />
       <div className="rx30 rx30--mockup">
         <main>
@@ -109,7 +106,7 @@ export function Company2030() {
                 </Link>
               </div>
             </motion.div>
-          <MarketingHeroVisual kind="company" />
+            <MarketingHeroVisual kind="company" />
           </section>
 
           <section className="rx30-pain rx30-founder" data-nav-theme="light">
@@ -120,14 +117,20 @@ export function Company2030() {
                 <br />
                 What I really wanted was to make hospitality work better.
               </h2>
-              <p className="rx30-lead rx30-founder-body" style={{ marginTop: "1.25rem" }}>
+              <p
+                className="rx30-lead rx30-founder-body"
+                style={{ marginTop: "1.25rem" }}
+              >
                 Hospitality already had software for sales, reservations,
-                staffing, inventory, purchasing, payments and accounting. What it
-                did not have was a system for the decisions between them: the
+                staffing, inventory, purchasing, payments and accounting. What
+                it did not have was a system for the decisions between them: the
                 ones that determine whether revenue becomes contribution, and
                 whether anyone can prove afterward that the call worked.
               </p>
-              <p className="rx30-lead rx30-founder-body" style={{ marginTop: "0.75rem" }}>
+              <p
+                className="rx30-lead rx30-founder-body"
+                style={{ marginTop: "0.75rem" }}
+              >
                 RADR is that Decision layer.
               </p>
             </RevealOnView>

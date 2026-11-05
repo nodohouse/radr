@@ -1,265 +1,319 @@
-"use client";
-import { MarketingHeroVisual } from "./MarketingHeroVisual";
-
-import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
-import { CTAS } from "@/lib/marketing/brand";
-import { heroEnter } from "@/lib/marketing/motion";
-import { pricingConfig } from "@/components/marketing/pricing/config";
-import { FeatureCompare } from "@/components/marketing/pricing/FeatureCompare";
-import { PricingFaq } from "@/components/marketing/pricing/PricingFaq";
-import { RevealOnView } from "@/components/marketing/motion/RevealOnView";
-import { usePrefersReducedMotion } from "@/components/marketing/motion/usePrefersReducedMotion";
-import { SilkAtmosphere } from "@/components/marketing/v2030/SilkAtmosphere";
+import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import "@/app/marketing-2030.css";
-import "@/app/pricing.css";
-import "@/app/kinetic.css";
 import "@/app/brand-takeover.css";
+import "@/app/marketing-premium-pages.css";
 
-const JOURNEY = [
+const PLANS = [
   {
     id: "start",
-    step: "Start",
-    name: "Start",
-    bestFor: "Prove one clear economic problem",
-    scope: "2–3 locations · focused Decision class",
-    unlocks: "Evidence packages · Verified Value trail · go / no-go",
-    commercial: "Scoped with you · paid from day one",
-    featured: false,
+    number: "01",
+    name: "Recovery Pilot",
+    tag: "Start focused",
+    headline: "One problem. A clear proof path.",
+    audience: "For operators evaluating RADR on a defined economic problem.",
+    scope: "2–3 locations · agreed Decision class",
+    focus: "Supplier / AP or reconciliation",
+    evidence: "A scoped evidence package and outcome review",
+    governance: "Named operator reviews each proposed action",
+    next: "A go / no-go review before expanding",
+    cta: "Discuss a pilot",
   },
   {
     id: "expand",
-    step: "Operating Intelligence",
-    name: "Operating Intelligence",
-    bestFor: "Make RADR the Decision layer across the estate",
-    scope: "More locations · more systems · broader operating surface",
-    unlocks: "Control Center · Decisions · Futures · Value · Memory",
-    commercial: "Priced by estate + scope + responsibility",
-    featured: true,
+    number: "02",
+    name: "Expand",
+    tag: "Broader operations",
+    headline: "One Decision layer. More of your operation.",
+    audience:
+      "For teams exploring ongoing coverage across more locations and systems.",
+    scope: "Multiple locations · broader operating scope",
+    focus: "Additional Decision classes, agreed together",
+    evidence: "Cross-system context and a continuing value trail",
+    governance: "Operating roles and approval rules scoped together",
+    next: "Broader coverage as evidence supports it",
+    cta: "Discuss Expand",
   },
   {
-    id: "scale",
-    step: "Enterprise",
+    id: "enterprise",
+    number: "03",
     name: "Enterprise",
-    bestFor: "Group scale with governed execution",
-    scope: "Multi-entity · multi-currency · portfolio view",
-    unlocks: "Policies · approvals · advanced controls · dedicated success",
-    commercial: "Portfolio / group pricing",
-    featured: false,
+    tag: "Group scope",
+    headline: "A shared picture. Local accountability.",
+    audience:
+      "For hospitality groups with multiple brands, entities or operating models.",
+    scope: "Portfolio · multi-entity requirements",
+    focus: "Group priorities and location-level accountability",
+    evidence: "Portfolio reporting requirements and audit needs",
+    governance: "Group policies and access requirements",
+    next: "A tailored rollout and governance plan",
+    cta: "Discuss Enterprise",
   },
 ] as const;
-
-const PILOT_STEPS = [
-  {
-    title: "Connect core systems",
-    body: "Securely link key evidence sources.",
-  },
-  {
-    title: "Configure operating context",
-    body: "Align to structure, brands, and priorities.",
-  },
-  {
-    title: "Review the first Decisions",
-    body: "Material Decisions with economics and confidence.",
-  },
+const ROWS = [
+  ["Operating footprint", "scope"],
+  ["Primary focus", "focus"],
+  ["Evidence & review", "evidence"],
+  ["Control & responsibility", "governance"],
+  ["What happens next", "next"],
 ] as const;
-
-function JourneyRail() {
-  const reduced = usePrefersReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const [on, setOn] = useState(reduced);
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    if (reduced) {
-      setOn(true);
-      setActive(JOURNEY.length - 1);
-      return;
-    }
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e?.isIntersecting) {
-          setOn(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.25 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [reduced]);
-
-  useEffect(() => {
-    if (!on || reduced) return;
-    const timers = JOURNEY.map((_, i) =>
-      window.setTimeout(() => setActive(i), 180 + i * 220),
-    );
-    return () => timers.forEach(window.clearTimeout);
-  }, [on, reduced]);
-
-  return (
-    <div
-      ref={ref}
-      className="rx30-journey-wrap"
-      data-on={on ? "true" : undefined}
-    >
-      <div className="rx30-journey-line" aria-hidden="true">
-        <i
-          style={{
-            width: on ? `${((active + 1) / JOURNEY.length) * 100}%` : "0%",
-          }}
-        />
-      </div>
-      <div className="rx30-journey rx30-journey--aligned">
-        {JOURNEY.map((j, i) => (
-          <article
-            key={j.id}
-            data-featured={j.featured ? "true" : undefined}
-            data-on={i <= active ? "true" : undefined}
-            onMouseEnter={() => setActive(i)}
-            onFocus={() => setActive(i)}
-            tabIndex={0}
-          >
-            <em>{j.step}</em>
-            <h3>{j.name}</h3>
-            <dl className="rx30-price-stage">
-              <div>
-                <dt>Best for</dt>
-                <dd>{j.bestFor}</dd>
-              </div>
-              <div>
-                <dt>Scope</dt>
-                <dd>{j.scope}</dd>
-              </div>
-              <div>
-                <dt>What you unlock</dt>
-                <dd>{j.unlocks}</dd>
-              </div>
-              <div>
-                <dt>Commercial</dt>
-                <dd>{j.commercial}</dd>
-              </div>
-            </dl>
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
+const FAQ = [
+  [
+    "How much does RADR cost?",
+    "Pricing is quoted after an initial scope review. There is no published monthly rate today. Your proposal defines the locations, evidence sources, responsibilities, delivery and commercial terms before you commit.",
+  ],
+  [
+    "Are these three different products?",
+    "No. These are three ways to scope a commercial conversation around the same RADR Decision layer. The main difference is the operating footprint and the governance you need.",
+  ],
+  [
+    "What can I try today?",
+    "You can explore the interactive product demo with synthetic data. Local reference ingestion and authenticated document and CSV upload paths exist. Commercial provider adapters and autonomous external execution are not production-ready.",
+  ],
+  [
+    "Are the scopes shown here available to buy immediately?",
+    "These are proposed engagement scopes, not a live feature entitlement list. Availability, integration feasibility and delivery milestones must be confirmed in writing with the team.",
+  ],
+  [
+    "Can we start with a pilot and expand later?",
+    "Yes, that is the intended progression. Define a focused problem first, agree how outcomes will be reviewed, then discuss a separate expansion scope if the evidence supports it. No savings or return is guaranteed.",
+  ],
+  [
+    "What should we prepare for a pricing conversation?",
+    "Bring your location count, operating model, current systems and one economic problem you want to examine. The Value Map can help structure that conversation; its modeled estimates are not a quote or verified savings.",
+  ],
+];
 
 export function Pricing2030() {
-  const reduced = useReducedMotion();
-
   return (
-    <div className="radr radr-mineral">
+    <div className="radr radr-mineral rm-premium rm-pricing">
       <PublicNavbar />
       <div className="rx30 rx30--mockup">
         <main>
           <section
-            className="rx30-bleed rx30-bleed--page rm-page-hero-grid"
+            className="rm-price-hero"
             data-nav-theme="light"
-            aria-labelledby="rx30-price-title"
+            aria-labelledby="pricing-title"
           >
-            <SilkAtmosphere className="rx30-bleed-silk" />
-            <div className="rx30-shell rx30-bleed-copy rx30-bleed-copy--solo">
-              <motion.div
-                initial={reduced ? false : { opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={heroEnter}
-              >
-                <p className="rx30-kicker">Pricing</p>
-                <h1 id="rx30-price-title" className="rx30-bleed-h1">
-                  Simple access to a complex <em>operating layer.</em>
-                </h1>
-                <p className="rx30-bleed-lead">
-                  Pricing scales with estate size, connected systems, operating
-                  scope, and Decision responsibility.
+            <div className="rx30-shell rm-price-hero-grid">
+              <div>
+                <p className="rx30-kicker">
+                  Pricing · one product, three scopes
                 </p>
-                <p className="rx30-demo-label rm-capability-note">
-                  Access and scope are agreed with the team. Product screens use
-                  demo data; commercial connectors and autonomous execution are
-                  planned.
+                <h1 id="pricing-title">
+                  Start focused.
+                  <br />
+                  Expand on <em>evidence.</em>
+                </h1>
+                <p className="rm-price-lead">
+                  A clear starting point for your operation. A commercial scope
+                  that grows with the work RADR is asked to do.
                 </p>
                 <div className="rx30-ctas">
-                  <Link
-                    href={CTAS.seeInActionHref}
-                    className="rx30-btn rx30-btn-primary"
-                  >
-                    Explore the demo <span aria-hidden="true">→</span>
+                  <Link href="#plans" className="rx30-btn rx30-btn-primary">
+                    Compare the scopes <span aria-hidden="true">↓</span>
                   </Link>
                   <Link
-                    href={pricingConfig.talkHref}
-                    className="rx30-btn rx30-btn-ghost rx30-btn-ghost--solid"
+                    href="/contact?intent=sales"
+                    className="rx30-btn rm-price-secondary"
                   >
-                    Talk to RADR
+                    Talk through pricing →
                   </Link>
                 </div>
-                <p className="rx30-price-quiet">
-                  Not sure where to start?{" "}
-                  <Link href="/value-calculator">Build your Value Map</Link>
+              </div>
+              <aside
+                className="rm-price-quote"
+                aria-label="How your quote is built"
+              >
+                <FrozenRadrLogo variant="mark" theme="dark" width={36} />
+                <p className="rm-price-overline">
+                  Your operation sets the scope
                 </p>
-              </motion.div>
+                <h2>
+                  Custom quote.
+                  <br />
+                  Clear agreement.
+                </h2>
+                <p>
+                  No published rate today. We agree the work, availability and
+                  terms with you first.
+                </p>
+                <ol>
+                  <li>
+                    <span>01</span>Locations & operating model
+                  </li>
+                  <li>
+                    <span>02</span>Evidence sources & Decision scope
+                  </li>
+                  <li>
+                    <span>03</span>Responsibilities & delivery milestones
+                  </li>
+                </ol>
+                <Link href="/value-calculator">
+                  Prepare your Value Map <span aria-hidden="true">→</span>
+                </Link>
+              </aside>
             </div>
-            <MarketingHeroVisual kind="pricing" />
           </section>
-
-          <section className="rx30-connect" data-nav-theme="light">
+          <section
+            className="rm-plan-section"
+            id="plans"
+            aria-labelledby="plan-title"
+            data-nav-theme="light"
+          >
             <div className="rx30-shell">
-              <p className="rx30-kicker">Journey</p>
-              <h2 className="rx30-h2">
-                How the commercial relationship expands
-              </h2>
-              <JourneyRail />
-            </div>
-          </section>
-
-          <section className="rx30-pain" data-nav-theme="light">
-            <RevealOnView className="rx30-shell">
-              <p className="rx30-kicker">How pilots start</p>
-              <h2 className="rx30-h2">Three steps. Honest scope.</h2>
-              <div className="rx30-flow-grid rx30-flow-grid--3">
-                {PILOT_STEPS.map((s, i) => (
-                  <article key={s.title}>
-                    <em>{String(i + 1).padStart(2, "0")}</em>
-                    <strong>{s.title}</strong>
-                    <span>{s.body}</span>
+              <div className="rm-section-heading">
+                <div>
+                  <p className="rx30-kicker">Find your starting point</p>
+                  <h2 id="plan-title" className="rx30-h2">
+                    Different scope.
+                    <br />
+                    The same Decision layer.
+                  </h2>
+                </div>
+                <p>
+                  Choose by operating need. All engagements require a scope and
+                  availability review.
+                </p>
+              </div>
+              <div className="rm-plan-grid">
+                {PLANS.map((plan) => (
+                  <article
+                    key={plan.id}
+                    className="rm-plan-card"
+                    data-featured={plan.id === "expand" ? "true" : undefined}
+                  >
+                    <div className="rm-plan-top">
+                      <span>{plan.number}</span>
+                      <span>{plan.tag}</span>
+                    </div>
+                    <h3>{plan.name}</h3>
+                    <p className="rm-plan-headline">{plan.headline}</p>
+                    <p className="rm-plan-audience">{plan.audience}</p>
+                    <div className="rm-plan-price">
+                      <strong>Custom quote</strong>
+                      <span>Scope & terms agreed with you</span>
+                    </div>
+                    <dl>
+                      <div>
+                        <dt>Footprint</dt>
+                        <dd>{plan.scope}</dd>
+                      </div>
+                      <div>
+                        <dt>Primary focus</dt>
+                        <dd>{plan.focus}</dd>
+                      </div>
+                      <div>
+                        <dt>Next step</dt>
+                        <dd>{plan.next}</dd>
+                      </div>
+                    </dl>
+                    <Link
+                      className="rx30-btn"
+                      href={`/contact?intent=sales&plan=${plan.id}`}
+                    >
+                      {plan.cta}
+                      <span aria-hidden="true">→</span>
+                    </Link>
                   </article>
                 ))}
               </div>
-            </RevealOnView>
+              <p className="rm-availability">
+                <strong>Where we are today</strong> The product uses demo data.
+                These are proposed engagement scopes. Commercial connectors and
+                autonomous external execution are planned, not production-ready.
+                Your agreement must confirm delivery and availability.
+              </p>
+            </div>
           </section>
-
-          <FeatureCompare defaultCollapsed />
-          <PricingFaq />
-
           <section
-            className="rx30-close rx30-close--saas"
+            className="rm-comparison-section"
+            id="compare"
             data-nav-theme="light"
           >
-            <div className="rx30-shell rx30-close-inner">
-              <h2 className="rx30-h2">Not sure where to start?</h2>
-              <p className="rx30-lead" style={{ margin: "0.75rem auto 0" }}>
-                Build your Value Map, or talk through your operating model with
-                RADR.
-              </p>
-              <div className="rx30-ctas">
-                <Link
-                  href="/value-calculator"
-                  className="rx30-btn rx30-btn-primary"
-                >
-                  Build my Value Map <span aria-hidden="true">→</span>
-                </Link>
-                <Link
-                  href={pricingConfig.talkHref}
-                  className="rx30-btn rx30-btn-ghost rx30-btn-ghost--solid"
-                >
-                  Talk to RADR
+            <div className="rx30-shell">
+              <p className="rx30-kicker">The differences, at a glance</p>
+              <h2 className="rx30-h2">Compare what changes.</h2>
+              <div
+                className="rm-compare-scroll"
+                role="region"
+                aria-label="Compare proposed engagement scopes"
+                tabIndex={0}
+              >
+                <table className="rm-compare-table">
+                  <caption>
+                    Proposed scope comparison. All capabilities and delivery
+                    subject to agreement.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Your operating need</th>
+                      {PLANS.map((p) => (
+                        <th key={p.id} scope="col">
+                          {p.name}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ROWS.map(([label, key]) => (
+                      <tr key={key}>
+                        <th scope="row">{label}</th>
+                        {PLANS.map((p) => (
+                          <td key={p.id}>{p[key]}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+          <section className="rm-pricing-faq" data-nav-theme="light">
+            <div className="rx30-shell rm-pricing-faq-grid">
+              <div>
+                <p className="rx30-kicker">Before we talk</p>
+                <h2 className="rx30-h2">
+                  Good questions.
+                  <br />
+                  Straight answers.
+                </h2>
+                <Link href="/developers#integrations">
+                  Check integration availability →
                 </Link>
               </div>
+              <div>
+                {FAQ.map(([q, a]) => (
+                  <details key={q}>
+                    <summary>
+                      {q}
+                      <span aria-hidden="true">+</span>
+                    </summary>
+                    <p>{a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
+          <section className="rm-price-close" data-nav-theme="light">
+            <div className="rx30-shell">
+              <p className="rx30-kicker">Start with the right problem</p>
+              <h2>
+                Let’s scope the work
+                <br />
+                that matters to you.
+              </h2>
+              <p>Your systems. Your locations. One focused conversation.</p>
+              <Link
+                href="/contact?intent=sales"
+                className="rx30-btn rx30-btn-primary"
+              >
+                Talk to RADR <span aria-hidden="true">→</span>
+              </Link>
+              <Link href="/demo" className="rm-close-demo">
+                Explore the demo →
+              </Link>
             </div>
           </section>
         </main>

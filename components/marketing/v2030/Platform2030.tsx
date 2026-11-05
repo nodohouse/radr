@@ -5,7 +5,10 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
 import { CTAS } from "@/lib/marketing/brand";
-import { PUBLIC_POSITIONING } from "@/lib/marketing/publicCanon";
+import {
+  PUBLIC_POSITIONING,
+  PUBLIC_RESTAURANT,
+} from "@/lib/marketing/publicCanon";
 import {
   PlatformSurfacePreview,
   type SurfaceId,
@@ -13,6 +16,7 @@ import {
 import { SilkAtmosphere } from "@/components/marketing/v2030/SilkAtmosphere";
 import "@/app/marketing-2030.css";
 import "@/app/brand-takeover.css";
+import "@/app/marketing-premium-pages.css";
 
 const MODULES: { id: SurfaceId; label: string; body: string }[] = [
   {
@@ -86,12 +90,54 @@ const ARCHITECTURE = [
 ] as const;
 
 const DECISION_STEPS = [
-  "Evidence",
-  "Understand",
-  "Futures",
-  "Recommendation",
-  "Action",
-  "Verification",
+  {
+    title: "Evidence",
+    heading: "Demand is ahead. Capacity is not.",
+    body: "The synthetic service example brings demand and kitchen pressure into the same picture, so a busy room is not mistaken for a healthy service.",
+    label: "The signal",
+    value: "Kitchen pressure",
+    foot: "Illustrative operating context",
+  },
+  {
+    title: "Understand",
+    heading: "Find the constraint behind the number.",
+    body: "The question is not simply how many covers are coming. It is whether the kitchen can absorb the next seating wave without eroding the service.",
+    label: "The constraint",
+    value: "Next seating wave",
+    foot: PUBLIC_RESTAURANT.displayName,
+  },
+  {
+    title: "Futures",
+    heading: "Compare the next move before making it.",
+    body: "Keep the seating pace, or give the kitchen room to recover. The demo makes the trade-off visible before an operator chooses a path.",
+    label: "One alternative",
+    value: "Pace by 12 min",
+    foot: "Illustrative scenario, not a guarantee",
+  },
+  {
+    title: "Recommendation",
+    heading: "A specific call. Economics attached.",
+    body: "Pace the next seating wave by 12 minutes. Keep the expected economic effect and confidence next to the recommendation, rather than buried in a separate dashboard.",
+    label: "Expected protected",
+    value: PUBLIC_RESTAURANT.expectedFormatted,
+    foot: `Tonight · modeled · ${PUBLIC_RESTAURANT.confidencePct}% confidence`,
+  },
+  {
+    title: "Action",
+    heading: "The operator stays in control.",
+    body: "Review the evidence and proposed response. This is a synthetic walkthrough: it does not write to a booking system, send a message or execute a change.",
+    label: "Your role",
+    value: "Review the call",
+    foot: "No external execution in this demo",
+  },
+  {
+    title: "Verification",
+    heading: "An expectation is not a verified outcome.",
+    body: "After service, compare the expectation with the evidence. A separate completed-service demo illustrates protected value; it is not a live result from this walkthrough.",
+    label: "Completed-service example",
+    value: PUBLIC_RESTAURANT.verifiedFormatted,
+    foot: "Protected tonight · illustrative evidence trail",
+  },
 ] as const;
 
 const GOVERNANCE = [
@@ -129,6 +175,8 @@ function readSurface(): SurfaceId {
 
 export function Platform2030() {
   const [mod, setMod] = useState<SurfaceId>("control");
+  const [beat, setBeat] = useState(0);
+  const story = DECISION_STEPS[beat]!;
   const [renderer, setRenderer] =
     useState<(typeof LIVE_RENDERERS)[number]>("Floor plan");
   const active = MODULES.find((m) => m.id === mod) ?? MODULES[0]!;
@@ -148,17 +196,28 @@ export function Platform2030() {
     function onKey(e: KeyboardEvent) {
       if (
         !(e.target instanceof Element) ||
-        !e.target.closest(".rx30-module-rail")
+        !e.target.closest('.rx30-module-rail[role="tablist"]')
       )
         return;
       const idx = MODULES.findIndex((m) => m.id === mod);
+      if (e.key === "Home" || e.key === "End") {
+        e.preventDefault();
+        const next =
+          e.key === "Home" ? MODULES[0]!.id : MODULES[MODULES.length - 1]!.id;
+        select(next);
+        document.getElementById(`surface-tab-${next}`)?.focus();
+      }
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
         e.preventDefault();
-        select(MODULES[(idx + 1) % MODULES.length]!.id);
+        const next = MODULES[(idx + 1) % MODULES.length]!.id;
+        select(next);
+        document.getElementById(`surface-tab-${next}`)?.focus();
       }
       if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         e.preventDefault();
-        select(MODULES[(idx - 1 + MODULES.length) % MODULES.length]!.id);
+        const next = MODULES[(idx - 1 + MODULES.length) % MODULES.length]!.id;
+        select(next);
+        document.getElementById(`surface-tab-${next}`)?.focus();
       }
     }
     window.addEventListener("keydown", onKey);
@@ -166,7 +225,7 @@ export function Platform2030() {
   }, [mod, select]);
 
   return (
-    <div className="radr radr-mineral">
+    <div className="radr radr-mineral rm-premium rm-platform">
       <PublicNavbar />
       <div className="rx30 rx30--mockup">
         <main>
@@ -233,15 +292,65 @@ export function Platform2030() {
           <section className="rx30-pain" data-nav-theme="light">
             <div className="rx30-shell">
               <p className="rx30-kicker">02 · The Decision</p>
-              <h2 className="rx30-h2">One object. Six beats.</h2>
-              <ol className="rx30-pain-list rx30-plat-decision-beats">
-                {DECISION_STEPS.map((s, i) => (
-                  <li key={s}>
-                    <em>{String(i + 1).padStart(2, "0")}</em>
-                    {s}
-                  </li>
-                ))}
-              </ol>
+              <h2 className="rx30-h2">
+                From the first signal to the final proof.
+              </h2>
+              <div className="rm-decision-story">
+                <div className="rm-decision-story-context">
+                  <span>
+                    {PUBLIC_RESTAURANT.decisionId} ·{" "}
+                    {PUBLIC_RESTAURANT.contextLine}
+                  </span>
+                  <span>Synthetic walkthrough</span>
+                </div>
+                <div
+                  className="rm-story-steps"
+                  role="group"
+                  aria-label="Follow a Decision"
+                >
+                  {DECISION_STEPS.map((step, i) => (
+                    <button
+                      key={step.title}
+                      type="button"
+                      aria-pressed={beat === i}
+                      onClick={() => setBeat(i)}
+                    >
+                      <span>{String(i + 1).padStart(2, "0")}</span>
+                      {step.title}
+                    </button>
+                  ))}
+                </div>
+                <div className="rm-story-content" key={beat}>
+                  <div>
+                    <p className="rm-story-label">{story.title}</p>
+                    <h3>{story.heading}</h3>
+                    <p>{story.body}</p>
+                  </div>
+                  <aside aria-label="Decision context">
+                    <div className="rm-story-chart" aria-hidden="true">
+                      <svg viewBox="0 0 300 95" fill="none">
+                        <path
+                          d="M0 76H300M0 43H300M0 10H300"
+                          stroke="#ffffff20"
+                        />
+                        <path
+                          d="M0 82L30 70L60 74L90 50L120 59L150 35L180 45L210 18L240 30L270 8L300 17"
+                          stroke="#41f6a1"
+                          strokeWidth="3"
+                        />
+                        <path
+                          d="M0 80L300 36"
+                          stroke="#82baff"
+                          strokeDasharray="5 6"
+                        />
+                      </svg>
+                    </div>
+                    <span>{story.label}</span>
+                    <strong>{story.value}</strong>
+                    <small>{story.foot}</small>
+                  </aside>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -253,19 +362,26 @@ export function Platform2030() {
             <div className="rx30-shell">
               <p className="rx30-kicker">03 · Product surfaces</p>
               <h2 className="rx30-h2">
-                One shell. Surfaces for every role that needs them.
+                Your operation. One connected picture.
               </h2>
               <p className="rx30-lead">
                 Switch between Control Center, Live, Decisions, Operations, Back
                 of House, Intelligence, Value, Memory, Data Health, and
                 Connections. Same Decision architecture underneath.
               </p>
-              <div className="rx30-module-rail" role="tablist">
+              <div
+                className="rx30-module-rail"
+                role="tablist"
+                aria-label="Explore the product surfaces"
+              >
                 {MODULES.map((m) => (
                   <button
                     key={m.id}
                     type="button"
                     role="tab"
+                    id={`surface-tab-${m.id}`}
+                    aria-controls="surface-preview"
+                    tabIndex={mod === m.id ? 0 : -1}
                     data-on={mod === m.id ? "true" : undefined}
                     aria-selected={mod === m.id}
                     onClick={() => select(m.id)}
@@ -274,7 +390,13 @@ export function Platform2030() {
                   </button>
                 ))}
               </div>
-              <div className="rx30-module-preview rx30-module-preview--morph rx30-plat-hero-shell">
+              <div
+                id="surface-preview"
+                role="tabpanel"
+                aria-labelledby={`surface-tab-${mod}`}
+                tabIndex={0}
+                className="rx30-module-preview rx30-module-preview--morph rx30-plat-hero-shell"
+              >
                 <div className="rx30-plat-shell-head">
                   <p className="rx30-demo-label">{active.label}</p>
                   <h3
@@ -297,6 +419,7 @@ export function Platform2030() {
                         <button
                           key={r}
                           type="button"
+                          aria-pressed={renderer === r}
                           data-on={renderer === r ? "true" : undefined}
                           onClick={() => setRenderer(r)}
                         >

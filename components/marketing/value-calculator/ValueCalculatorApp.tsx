@@ -46,6 +46,7 @@ import "@/app/marketing-2030.css";
 import "@/app/value-calculator.css";
 import "@/app/value-calculator-v2.css";
 import "@/app/brand-takeover.css";
+import "@/app/marketing-premium-pages.css";
 
 const STEPS: { id: JourneyStep; n: string; label: string }[] = [
   { id: "operation", n: "01", label: "Operation" },
@@ -78,7 +79,10 @@ const ANALYZE_LINES = [
   "Building Value Map",
 ] as const;
 
-function track(event: string, props?: Record<string, string | number | boolean>) {
+function track(
+  event: string,
+  props?: Record<string, string | number | boolean>,
+) {
   if (typeof window === "undefined" || !analyticsAllowed()) return;
   try {
     const w = window as Window & {
@@ -112,10 +116,7 @@ function SelectField({
   return (
     <label className="vc-field">
       <span>{label}</span>
-      <select
-        value={value ?? ""}
-        onChange={(e) => onChange(e.target.value)}
-      >
+      <select value={value ?? ""} onChange={(e) => onChange(e.target.value)}>
         <option value="" disabled>
           Choose…
         </option>
@@ -248,7 +249,7 @@ export function ValueCalculatorApp() {
     step !== "intro" && step !== "analyzing" && step !== "result";
 
   return (
-    <div className="radr radr-mineral">
+    <div className="radr radr-mineral rm-premium">
       <PublicNavbar />
       <div className="rx30 rx30--mockup vc2-page">
         <main>
@@ -267,7 +268,7 @@ export function ValueCalculatorApp() {
                   </h1>
                   <p className="rx30-bleed-lead">
                     Model where value may be hiding across labor, procurement,
-                    revenue and operations ; then see what may be worth
+                    revenue and operations, then see what may be worth
                     investigating first.
                   </p>
                   <p className="vc-disclaimer-inline">
@@ -284,7 +285,9 @@ export function ValueCalculatorApp() {
                     </button>
                   </div>
                   <div className="vc-samples">
-                    <p className="vc-samples-label">Try an illustrative example</p>
+                    <p className="vc-samples-label">
+                      Try an illustrative example
+                    </p>
                     <button
                       type="button"
                       onClick={() => startSample("restaurant")}
@@ -398,7 +401,10 @@ export function ValueCalculatorApp() {
                           key="operation"
                           className="vc2-card"
                           {...(reduced ? {} : slide)}
-                          transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{
+                            duration: 0.34,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
                         >
                           <h2>What do you operate?</h2>
                           <div className="vc2-choices">
@@ -464,7 +470,10 @@ export function ValueCalculatorApp() {
                           key="scale"
                           className="vc2-card"
                           {...(reduced ? {} : slide)}
-                          transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{
+                            duration: 0.34,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
                         >
                           <h2>How large is the operation?</h2>
                           <SelectField
@@ -534,7 +543,10 @@ export function ValueCalculatorApp() {
                           key="economics"
                           className="vc2-card"
                           {...(reduced ? {} : slide)}
-                          transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{
+                            duration: 0.34,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
                         >
                           <h2>How does the operation roughly perform?</h2>
                           {journey.vertical === "mixed" ? (
@@ -625,7 +637,10 @@ export function ValueCalculatorApp() {
                           key="signals"
                           className="vc2-card"
                           {...(reduced ? {} : slide)}
-                          transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{
+                            duration: 0.34,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
                         >
                           <h2>Where do you think value may be slipping?</h2>
                           <label className="vc-choice">
@@ -661,8 +676,13 @@ export function ValueCalculatorApp() {
                                 onClick={() => {
                                   const on = journey.painAreas.includes(p.id);
                                   const next = on
-                                    ? journey.painAreas.filter((x) => x !== p.id)
-                                    : [...journey.painAreas, p.id as CategoryId];
+                                    ? journey.painAreas.filter(
+                                        (x) => x !== p.id,
+                                      )
+                                    : [
+                                        ...journey.painAreas,
+                                        p.id as CategoryId,
+                                      ];
                                   patch({
                                     painUnsure: false,
                                     painAreas: next,
@@ -750,8 +770,8 @@ export function ValueCalculatorApp() {
                             ))}
                           </ul>
                           <p className="vc-disclaimer-inline">
-                            Deterministic model from your inputs ; not generative
-                            invention.
+                            Deterministic model from your inputs ; not
+                            generative invention.
                           </p>
                         </motion.div>
                       ) : null}
@@ -759,11 +779,12 @@ export function ValueCalculatorApp() {
                       {step === "result" && result ? (
                         <motion.div
                           key="result"
-                          initial={
-                            reduced ? false : { opacity: 0, y: 12 }
-                          }
+                          initial={reduced ? false : { opacity: 0, y: 12 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{
+                            duration: 0.7,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
                         >
                           <ValueMapResult
                             journey={journey}

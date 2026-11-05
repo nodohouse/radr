@@ -15,6 +15,7 @@ import {
 import "@/app/marketing-2030.css";
 import "@/app/value-calculator.css";
 import "@/app/brand-takeover.css";
+import "@/app/marketing-premium-pages.css";
 
 const LEAKS: {
   id: LeakId;
@@ -181,11 +182,15 @@ export function Solutions2030(props: Props = {}) {
       const idx = LEAKS.findIndex((l) => l.id === id);
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
         e.preventDefault();
-        select(LEAKS[(idx + 1) % LEAKS.length]!.id);
+        const next = LEAKS[(idx + 1) % LEAKS.length]!.id;
+        select(next);
+        document.getElementById(`leak-tab-${next}`)?.focus();
       }
       if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         e.preventDefault();
-        select(LEAKS[(idx - 1 + LEAKS.length) % LEAKS.length]!.id);
+        const next = LEAKS[(idx - 1 + LEAKS.length) % LEAKS.length]!.id;
+        select(next);
+        document.getElementById(`leak-tab-${next}`)?.focus();
       }
     }
     window.addEventListener("keydown", onKey);
@@ -202,7 +207,7 @@ export function Solutions2030(props: Props = {}) {
   ];
 
   return (
-    <div className="radr radr-mineral">
+    <div className="radr radr-mineral rm-premium">
       <PublicNavbar />
       <div className="rx30 rx30--mockup">
         <main>
@@ -248,12 +253,19 @@ export function Solutions2030(props: Props = {}) {
             <div className="rx30-shell">
               <p className="rx30-kicker">Leak classes</p>
               <h2 className="rx30-h2">Five places value quietly leaves.</h2>
-              <div className="rx30-leak-nav" role="tablist">
+              <div
+                className="rx30-leak-nav"
+                role="tablist"
+                aria-label="Explore economic problems"
+              >
                 {LEAKS.map((l) => (
                   <button
                     key={l.id}
                     type="button"
                     role="tab"
+                    id={`leak-tab-${l.id}`}
+                    aria-controls="leak-preview"
+                    tabIndex={id === l.id ? 0 : -1}
                     data-on={id === l.id ? "true" : undefined}
                     aria-selected={id === l.id}
                     onClick={() => select(l.id)}
@@ -263,7 +275,13 @@ export function Solutions2030(props: Props = {}) {
                 ))}
               </div>
 
-              <div className="rx30-split rx30-sol-econ">
+              <div
+                id="leak-preview"
+                role="tabpanel"
+                aria-labelledby={`leak-tab-${id}`}
+                tabIndex={0}
+                className="rx30-split rx30-sol-econ"
+              >
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={leak.id}
