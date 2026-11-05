@@ -78,7 +78,7 @@ export function ProductBriefPreview() {
           <Link href="/product/decisions">
             Review the decision <b>→</b>
           </Link>
-          <small>Approval stays with you</small>
+          <small>Demo only · no system writes</small>
         </div>
       </div>
       <div className="rm-brief-evidence">

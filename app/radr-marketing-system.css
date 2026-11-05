@@ -12,10 +12,10 @@ html body .radr:has(.rx-nav) {
     radial-gradient(ellipse 1250px 850px at 88% 7%, #a8c9ec63, transparent 82%),
     radial-gradient(
       ellipse 1100px 1000px at 12% 60%,
-      #8fd8bb3d,
+      #88b5ff26,
       transparent 85%
     ),
-    linear-gradient(145deg, #f4f8fc, #e6eef4 65%, #eef6f3) !important;
+    linear-gradient(145deg, #f4f8fc, #e6eef4 65%, #e9f2ff) !important;
 }
 html
   body
@@ -1214,7 +1214,7 @@ html body .rx-dev-root {
   font-family: var(--font-entry), Arial, sans-serif !important;
   background:
     radial-gradient(ellipse at 90% 0, #d5e5f5, transparent 60%),
-    linear-gradient(145deg, #f4f8fc, #e6eef4 65%, #eef6f3) !important;
+    linear-gradient(145deg, #f4f8fc, #e6eef4 65%, #e9f2ff) !important;
   color: var(--brand-ink) !important;
 }
 html body .rx-dev-root :is(h1, h2, h3, p, a, button) {

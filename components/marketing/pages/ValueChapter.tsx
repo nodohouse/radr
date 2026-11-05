@@ -190,10 +190,10 @@ export function ValueChapter() {
 
             <div className="rx-he-ctas" style={{ marginTop: "1.75rem" }}>
               <NextLink
-                href="/signup?intent=demo&next=/app/enter"
+                href={CTAS.seeInActionHref}
                 className="rx-btn rx-btn-primary"
               >
-                Open this in RADR <span aria-hidden="true">→</span>
+                Explore the interactive demo <span aria-hidden="true">→</span>
               </NextLink>
             </div>
 
@@ -419,10 +419,10 @@ export function ValueChapter() {
 
             <div className="rx-ch-ctas">
               <NextLink
-                href="/signup?intent=demo&next=/app/enter"
+                href={CTAS.seeInActionHref}
                 className="rx-btn rx-btn-primary"
               >
-                See this inside RADR <span aria-hidden="true">→</span>
+                Explore the interactive demo <span aria-hidden="true">→</span>
               </NextLink>
               <NextLink
                 href="/contact?intent=recovery-pilot"

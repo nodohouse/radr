@@ -318,8 +318,8 @@ export function IndustriesLock() {
         <section className="rx-ch-body" data-nav-theme="light">
           <div className="rx-shell">
             <div className="rx-ch-ctas">
-              <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-btn rx-btn-primary">
-                {CTAS.primaryProduct} <span aria-hidden="true">→</span>
+              <NextLink href="/demo" className="rx-btn rx-btn-primary">
+                {CTAS.seeInAction} <span aria-hidden="true">→</span>
               </NextLink>
               <Link href="/contact" className="rx-btn rx-btn-ghost">
                 {CTAS.primarySales}

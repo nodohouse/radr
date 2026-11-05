@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { RadrWordmark } from "@/components/radr/RadrWordmark";
-import { demoSignupHref } from "@/lib/marketing/demoAccess";
+import { CTAS } from "@/lib/marketing/brand";
 
 export type DevNavSection = {
   titleKey: string;
@@ -216,7 +216,7 @@ export function DevelopersShell({
           <nav className="rx-dev-top-right" aria-label="Developer utility">
             <Link href="/">{tCommon("mainSite")}</Link>
             <Link href="/login">{tCommon("signIn")}</Link>
-            <Link href={demoSignupHref()} className="rx-dev-top-cta">
+            <Link href={CTAS.seeInActionHref} className="rx-dev-top-cta">
               {tCommon("seeRadr")} →
             </Link>
           </nav>
@@ -243,9 +243,9 @@ export function DevelopersShell({
           </div>
         ) : null}
 
-        <div className="rx-dev-main">
+        <main className="rx-dev-main">
           <div className="rx-dev-main-inner">{children}</div>
-        </div>
+        </main>
       </div>
 
       <footer className="rx-dev-foot">

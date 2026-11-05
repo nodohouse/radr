@@ -122,7 +122,7 @@ export function ControlCenterChapter() {
 
             <div className="rx-ch-ctas">
               <NextLink
-                href="/signup?intent=demo&next=/app/enter"
+                href="/demo"
                 className="rx-btn rx-btn-primary"
               >
                 See RADR in action <span aria-hidden="true">→</span>

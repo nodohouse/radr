@@ -8,6 +8,7 @@ import {
   motion,
   useReducedMotion,
   useScroll,
+  useSpring,
   useTransform,
 } from "motion/react";
 import { ProductBriefPreview } from "./ProductBriefPreview";
@@ -40,8 +41,15 @@ export function Homepage2030() {
     target: hero,
     offset: ["start start", "end start"],
   });
-  const rotate = useTransform(scrollYProgress, [0, 1], [3, -2]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, -45]);
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 130,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  const rotate = useTransform(progress, [0, 0.7, 1], [1, -0.5, -0.5]);
+  const rotateX = useTransform(progress, [0, 0.7, 1], [3, 0, 0]);
+  const rotateY = useTransform(progress, [0, 0.7, 1], [-5, 1, 1]);
+  const y = useTransform(progress, [0, 0.7, 1], [0, -18, -18]);
   return (
     <div className="rm-home">
       <section className="rm-hero rm-shell" ref={hero} data-nav-theme="light">
@@ -71,14 +79,24 @@ export function Homepage2030() {
             </Link>
           </div>
           <p className="rm-caption">
-            Above your POS, PMS, labor, and reservation systems.
+            Interactive demo with synthetic operating data.
             <br />
-            One decision layer. Your team stays in control.
+            Commercial connectors and autonomous execution are planned.
           </p>
         </div>
         <motion.div
           className="rm-hero-product"
-          style={reduced ? undefined : { rotateZ: rotate, y }}
+          style={
+            reduced
+              ? undefined
+              : {
+                  rotateZ: rotate,
+                  rotateX,
+                  rotateY,
+                  y,
+                  transformPerspective: 1400,
+                }
+          }
         >
           <ProductBriefPreview />
           <div className="rm-floating-note">
@@ -180,8 +198,8 @@ export function Homepage2030() {
               ))}
             </div>
             <p className="rm-caption">
-              Illustrative demo, not a promise of results. Execution requires
-              approval and a connected system.
+              Illustrative demo, not a promise of results. This demo does not
+              execute actions in connected systems.
             </p>
           </div>
           <div
@@ -242,7 +260,7 @@ export function Homepage2030() {
             <span>BUY × LABOR × SELL</span>
           </div>
           <article className="rm-panel">
-            <p className="rm-eyebrow">INTELLIGENCE · D-7110</p>
+            <p className="rm-eyebrow">ILLUSTRATIVE INTELLIGENCE · D-7110</p>
             <h3>
               Your bestseller.
               <br />A hidden service constraint.

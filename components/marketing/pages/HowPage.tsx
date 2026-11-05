@@ -536,7 +536,7 @@ export function HowPage() {
             </ul>
             <p className="rx-howp-not-close">{t("notClose")}</p>
             <div className="rx-ctas">
-              <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-btn rx-btn-primary">
+              <NextLink href="/demo" className="rx-btn rx-btn-primary">
                 {t("ctaSecondary")} <span aria-hidden="true">→</span>
               </NextLink>
               <Link href="/contact" className="rx-btn rx-btn-ghost">

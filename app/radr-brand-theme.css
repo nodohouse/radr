@@ -460,13 +460,13 @@ html body .radr:has(.rx-nav) .rm-hero .rm-loop b {
   color: #d8f0ff;
 }
 
-/* Vivid blue foundations with a larger, deliberately placed green signal. */
+/* Blue carries the composition; jade is reserved for deliberate signals. */
 html body .radr:has(.rx-nav) .rm-hero-copy h1 em,
 html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-copy h1 em {
-  color: var(--brand-jade) !important;
+  color: #d8f0ff !important;
 }
 html body .radr .rx-footer {
-  border-top-width: 4px;
+  border-top-width: 1px;
 }
 html body .radr .rx-footer a:hover {
   color: #fff !important;
@@ -480,4 +480,105 @@ html
   .rp-root.rp-shell-v2.rp-premium[data-theme="daylight"][data-page]
   .cc-priority:before {
   width: 6px;
+}
+
+/* Keep the closing frame blue, including inherited decorative layers. */
+html body .radr:has(.rx-nav) .rx-footer {
+  background: linear-gradient(90deg, #102872, #064c9c) !important;
+  border-top-color: #ffffff30;
+}
+html body .radr:has(.rx-nav) .rx-footer::before,
+html body .radr:has(.rx-nav) .rx-footer::after {
+  display: none !important;
+}
+html
+  body
+  .radr:has(.rx-nav)
+  :is(.rm-close, .rm-hidden-signal)
+  .rm-button:not(.rm-button-secondary) {
+  background: var(--brand-depth) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 8px 24px #1238f51a;
+}
+html body .radr:has(.rx-nav) .rm-floating-note {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  width: fit-content;
+  margin: 18px 0 0 auto;
+  background: #f5f9ff;
+}
+html body .radr:has(.rx-nav) .rm-floating-note > span {
+  background: var(--brand-ocean-soft);
+  color: var(--brand-sapphire);
+}
+html body .radr:has(.rx-nav) .rm-hero-product {
+  perspective: none;
+  will-change: transform;
+}
+html body .radr:has(.rx-nav) .rm-caption {
+  font-size: 12px;
+}
+.rm-capability-note {
+  max-width: 58ch;
+  line-height: 1.7;
+  margin-top: 20px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html body .radr:has(.rx-nav) .rm-hero-product {
+    transform: none !important;
+    will-change: auto;
+  }
+}
+
+html body .radr:has(.rx-nav) :is(.rx30-silk-field--green, .rx30-bleed-glow) {
+  background: radial-gradient(ellipse, #0068e824, transparent 70%) !important;
+}
+html body .radr:has(.rx-nav) .rx-contact-form button:disabled {
+  background: #dbe4f0 !important;
+  color: #4c6378 !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
+/* The public interactive demo uses the same legible blue vocabulary. */
+html body .radr:has(.rx-nav) .rx-demo-kicker {
+  color: var(--brand-sapphire) !important;
+  font-size: 12px;
+}
+html
+  body
+  .radr:has(.rx-nav)
+  .rx-demo-futures
+  li[data-base="true"]
+  :is(span, small) {
+  color: var(--brand-muted) !important;
+}
+
+/* Defeat legacy route-level mint washes, regardless of stylesheet load order. */
+html body div.radr:has(header.rx-nav) {
+  background: var(--brand-atmosphere) !important;
+}
+html body .radr:has(.rx-nav) .rx30::before {
+  display: none !important;
+}
+html
+  body
+  .radr:has(.rx-nav)
+  :is(.rm-close, .rm-hidden-signal)
+  .rm-button:not(.rm-button-secondary) {
+  box-shadow: 0 8px 24px #1238f51a !important;
+}
+
+html body .radr:has(.rx-nav) :is(.px-m-group, .px-cell[data-s="yes"]) {
+  color: var(--brand-sapphire) !important;
+}
+html body .radr:has(.rx-nav) .px-m-group {
+  font-size: 12px !important;
+  line-height: 1.5;
+}
+html body .radr:has(.rx-nav) .px-compare-mobile .px-cell {
+  font-size: 12px !important;
+  line-height: 1.5;
 }

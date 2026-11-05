@@ -49,9 +49,9 @@ export const CTAS = {
   /** Public Verified Recovery story — never /app */
   secondaryProduct: "See a Verified Recovery",
   secondaryProductHref: "/product/value",
-  /** Unlock demo after signup */
+  /** Public interactive demo, no signup required */
   seeInAction: "See RADR in action",
-  seeInActionHref: "/signup?intent=demo&next=/app/enter",
+  seeInActionHref: "/demo",
   talkToRadr: "Talk to RADR",
   talkToRadrHref: "/contact?intent=sales",
   enterprise: "Talk to sales",

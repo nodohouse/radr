@@ -273,8 +273,8 @@ export function MemoryCalibrationChapter() {
             </div>
 
             <div className="rx-ch-ctas" style={{ marginTop: "2.5rem" }}>
-              <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-btn rx-btn-primary">
-                {CTAS.primaryProduct} <span aria-hidden="true">→</span>
+              <NextLink href="/demo" className="rx-btn rx-btn-primary">
+                {CTAS.seeInAction} <span aria-hidden="true">→</span>
               </NextLink>
               <NextLink href="/product/value" className="rx-btn rx-btn-ghost">
                 Verified Value

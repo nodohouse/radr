@@ -19,4 +19,6 @@ The PDF generator reads the same JSON. Rebuild the playbook with `scripts/genera
 
 Coverage: public navigation and marketing pages, journal and playbook funnel, login and onboarding, product shell and selected navigation, control center, shared workspace panels and primary actions. The playbook form remains separate from the information column, and sales/newsletter consent remain optional. Lead delivery requires its actual CRM/webhook configuration.
 
-Navigation glass surrounds the central links only. The brand mark and account/demo actions sit outside that capsule. Dropdowns stay within the horizontal space between those two protected areas.
+Navigation uses one shared, lightly frosted surface for the approved standalone mark, links and account actions. The mark keeps its native aspect ratio with no separate tile, background or recoloring. Dropdowns stay below the bar, between identity and account actions. Sapphire and ocean carry the hero and closing frame. Jade is reserved for the hero action, the immutable logo dot and a small number of decision signals, rather than a full-page wash or footer border.
+
+The homepage tablet uses bounded spring-smoothed perspective transforms only. Scrolling remains native, without pinning or wheel interception. Its annotation reserves normal-flow space; reduced-motion preferences render a stationary tablet.

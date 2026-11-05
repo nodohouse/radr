@@ -129,7 +129,8 @@ const ASK = [
   {
     q: "What happens if we do nothing?",
     constraint: "Cost of doing nothing",
-    impact: "Exposed contribution this service. shown before any recommendation",
+    impact:
+      "Exposed contribution this service. shown before any recommendation",
     confidence: "Range · illustrative",
     evidence: "Expected vs observed path · no action sealed",
   },
@@ -185,8 +186,7 @@ export function Trust2030() {
                 maxWidth: "14ch",
               }}
             >
-              Governed by policy, confidence and{" "}
-              <em>action risk.</em>
+              Governed by policy, confidence and <em>action risk.</em>
             </h1>
             <p className="rx30-lead" style={{ marginTop: "1.1rem" }}>
               Autonomy is governed by policy, confidence, and action risk. Not a
@@ -212,9 +212,11 @@ export function Trust2030() {
           <section className="rx30-pain" data-nav-theme="light">
             <div className="rx30-shell">
               <p className="rx30-kicker">Autonomy</p>
-              <h2 className="rx30-h2">
-                Earned per action class. Not blanket.
-              </h2>
+              <h2 className="rx30-h2">Earned per action class. Not blanket.</h2>
+              <p className="rx30-lead">
+                Governance design preview. Autonomous execution is planned; the
+                demo does not write to connected systems.
+              </p>
               <div
                 className="rx30-autonomy-rail"
                 role="tablist"
@@ -246,7 +248,11 @@ export function Trust2030() {
                   transition={stageSwap}
                 >
                   <div>
-                    <span>What RADR can do</span>
+                    <span>
+                      {autonomy >= 4
+                        ? "Planned capability"
+                        : "Illustrative capability"}
+                    </span>
                     <strong>{detail.can}</strong>
                   </div>
                   <div>
@@ -260,8 +266,9 @@ export function Trust2030() {
                 </motion.div>
               </AnimatePresence>
               <p className="rx30-global-note" style={{ marginTop: "1rem" }}>
-                Humans can approve, reject, change, pause, or override. Policies
-                determine allowed action.
+                The intended governance model keeps approval, rejection, pause,
+                and override with your team. Levels 4 and 5 are not available
+                for live execution.
               </p>
             </div>
           </section>
@@ -274,7 +281,10 @@ export function Trust2030() {
                 Every material Decision can be traced from source evidence to
                 verified outcome.
               </p>
-              <div className="rx30-lineage rx30-lineage--live" aria-label="Evidence lineage">
+              <div
+                className="rx30-lineage rx30-lineage--live"
+                aria-label="Evidence lineage"
+              >
                 {LINEAGE.map((s, i) => (
                   <button
                     key={s.id}
@@ -332,7 +342,9 @@ export function Trust2030() {
                   exit={reduced ? undefined : { opacity: 0, y: -4 }}
                   transition={stageSwap}
                 >
-                  <p className="rx30-demo-label">Illustrative effect · PMS feed</p>
+                  <p className="rx30-demo-label">
+                    Illustrative effect · PMS feed
+                  </p>
                   <div className="rx30-health-readout">
                     <div>
                       <span>Data Health</span>
@@ -415,7 +427,10 @@ export function Trust2030() {
                 certifications exist, they will be listed with dates and scope.
               </p>
               <div className="rx30-ctas">
-                <Link href="/privacy" className="rx30-btn rx30-btn-ghost rx30-btn-ghost--solid">
+                <Link
+                  href="/privacy"
+                  className="rx30-btn rx30-btn-ghost rx30-btn-ghost--solid"
+                >
                   Privacy Policy
                 </Link>
                 <Link

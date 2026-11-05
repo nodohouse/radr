@@ -108,7 +108,11 @@ function JourneyRail() {
       data-on={on ? "true" : undefined}
     >
       <div className="rx30-journey-line" aria-hidden="true">
-        <i style={{ width: on ? `${((active + 1) / JOURNEY.length) * 100}%` : "0%" }} />
+        <i
+          style={{
+            width: on ? `${((active + 1) / JOURNEY.length) * 100}%` : "0%",
+          }}
+        />
       </div>
       <div className="rx30-journey rx30-journey--aligned">
         {JOURNEY.map((j, i) => (
@@ -175,12 +179,17 @@ export function Pricing2030() {
                   Pricing scales with estate size, connected systems, operating
                   scope, and Decision responsibility.
                 </p>
+                <p className="rx30-demo-label rm-capability-note">
+                  Access and scope are agreed with the team. Product screens use
+                  demo data; commercial connectors and autonomous execution are
+                  planned.
+                </p>
                 <div className="rx30-ctas">
                   <Link
-                    href={CTAS.primaryProductHref}
+                    href={CTAS.seeInActionHref}
                     className="rx30-btn rx30-btn-primary"
                   >
-                    Get started <span aria-hidden="true">→</span>
+                    Explore the demo <span aria-hidden="true">→</span>
                   </Link>
                   <Link
                     href={pricingConfig.talkHref}
@@ -195,13 +204,15 @@ export function Pricing2030() {
                 </p>
               </motion.div>
             </div>
-          <MarketingHeroVisual kind="pricing" />
+            <MarketingHeroVisual kind="pricing" />
           </section>
 
           <section className="rx30-connect" data-nav-theme="light">
             <div className="rx30-shell">
               <p className="rx30-kicker">Journey</p>
-              <h2 className="rx30-h2">How the commercial relationship expands</h2>
+              <h2 className="rx30-h2">
+                How the commercial relationship expands
+              </h2>
               <JourneyRail />
             </div>
           </section>

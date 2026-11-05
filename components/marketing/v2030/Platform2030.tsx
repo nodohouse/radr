@@ -188,6 +188,10 @@ export function Platform2030() {
                 Decisions. Act with control. Verify what happened. Remember what
                 worked.
               </p>
+              <p className="rx30-demo-label rm-capability-note">
+                Interactive demo with synthetic data. Commercial connectors and
+                autonomous execution are planned.
+              </p>
               <div className="rx30-ctas">
                 <Link
                   href={CTAS.seeInActionHref}

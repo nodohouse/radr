@@ -9,7 +9,7 @@ import { useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
-import { demoSignupHref } from "@/lib/marketing/demoAccess";
+import { CTAS } from "@/lib/marketing/brand";
 import { ECON_D1911 } from "@/lib/marketing/publicDecisionEconomics";
 import "@/app/product-chapters.css";
 import "@/app/home.css";
@@ -178,10 +178,10 @@ export function FuturesChapter() {
 
             <div className="rx-he-ctas rx-fut-pub-ctas">
               <Link
-                href={demoSignupHref()}
+                href={CTAS.seeInActionHref}
                 className="rx-btn rx-btn-primary"
               >
-                See the full Decision in RADR <span aria-hidden="true">→</span>
+                Explore the interactive demo <span aria-hidden="true">→</span>
               </Link>
               <Link href="/product/value" className="rx-btn rx-btn-ghost">
                 See Verified Value

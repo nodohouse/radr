@@ -33,7 +33,9 @@ type FeatureCompareProps = {
   defaultCollapsed?: boolean;
 };
 
-export function FeatureCompare({ defaultCollapsed = true }: FeatureCompareProps) {
+export function FeatureCompare({
+  defaultCollapsed = true,
+}: FeatureCompareProps) {
   const t = useTranslations("pricing.compare");
   const [open, setOpen] = useState(!defaultCollapsed);
   const [mobilePlan, setMobilePlan] = useState<PlanKey>("core");
@@ -64,6 +66,12 @@ export function FeatureCompare({ defaultCollapsed = true }: FeatureCompareProps)
             <span aria-hidden="true">{open ? "↑" : "↓"}</span>
           </button>
         </header>
+        <p className="rx30-global-note" style={{ marginBottom: "1.5rem" }}>
+          Proposed package scope, not a statement of current availability.
+          Included features may be demo-only or planned. Commercial connectors
+          and autonomous execution are not production-ready; scope is confirmed
+          with the team before any agreement.
+        </p>
         <div
           id="px-compare-body"
           className="px-compare-body px-compare-body--always"

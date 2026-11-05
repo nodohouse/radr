@@ -68,7 +68,7 @@ export const INGEST_CHANNELS: readonly IngestChannel[] = [
     title: "Native integrations",
     body: "APIs into PMS, POS, procurement, workforce, accounting, payments, delivery and revenue-management systems.",
     examples: ["PMS", "POS", "Procurement", "Workforce", "Accounting"],
-    status: "EARLY ACCESS",
+    status: "PLANNED",
   },
   {
     id: "sftp",

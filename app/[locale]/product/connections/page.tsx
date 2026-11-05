@@ -37,6 +37,11 @@ export default async function ConnectionsPage({ params }: Props) {
 
         <section className="rx-home-sec" data-nav-theme="light">
           <div className="rx-shell">
+            <p className="rx-lead rx-lead-short" style={{ marginBottom: "1.5rem" }}>
+              Files can be uploaded in an authenticated workspace. Public operating
+              examples use synthetic data. Commercial native connectors are planned;
+              the demo does not receive live provider feeds.
+            </p>
             <div className="rx-conn-wrap">
               <table className="rx-conn-table">
                 <thead>

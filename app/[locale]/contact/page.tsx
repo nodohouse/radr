@@ -47,7 +47,10 @@ export default async function ContactPage({ params, searchParams }: Props) {
     <div className="radr radr-mineral">
       <SiteNav />
       <main>
-        <section className="rx-page-hero rx-page-hero--mineral" data-nav-theme="light">
+        <section
+          className="rx-page-hero rx-page-hero--mineral"
+          data-nav-theme="light"
+        >
           <div className="rx-shell rx-page-hero-inner">
             <p className="rx-kicker">{t("contactTitle")}</p>
             <h1 className="rx-page-title">Talk to RADR</h1>
@@ -58,7 +61,10 @@ export default async function ContactPage({ params, searchParams }: Props) {
           </div>
         </section>
 
-        <section className="rx-contact rx-contact--mineral" data-nav-theme="light">
+        <section
+          className="rx-contact rx-contact--mineral"
+          data-nav-theme="light"
+        >
           <div className="rx-shell rx-contact-split">
             <aside className="rx-contact-rail">
               <p className="rx-rec-k">Where value often leaks</p>
@@ -67,19 +73,26 @@ export default async function ContactPage({ params, searchParams }: Props) {
                   <li key={x}>{x}</li>
                 ))}
               </ul>
-              <p className="rx-rec-muted" style={{ marginTop: "1rem", fontSize: "0.9rem" }}>
+              <p
+                className="rx-rec-muted"
+                style={{ marginTop: "1rem", fontSize: "0.9rem" }}
+              >
                 Start where the economics are clearest. Expand as Verified Value
                 proves the Decision layer.
               </p>
             </aside>
             <div>
               <Suspense fallback={null}>
-                <ContactForm selectedPlan={selectedPlan} />
+                <ContactForm
+                  selectedPlan={selectedPlan}
+                  deliveryAvailable={Boolean(
+                    process.env.CONTACT_WEBHOOK_URL?.trim() || inbox,
+                  )}
+                />
               </Suspense>
               {inbox ? (
                 <p className="rx-contact-alt">
-                  {t("preferEmail")}{" "}
-                  <a href={`mailto:${inbox}`}>{inbox}</a>
+                  {t("preferEmail")} <a href={`mailto:${inbox}`}>{inbox}</a>
                 </p>
               ) : null}
             </div>

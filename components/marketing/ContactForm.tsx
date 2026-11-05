@@ -11,21 +11,9 @@ import {
 
 const initial: ContactResult | null = null;
 
-const LOCATION_OPTIONS = [
-  "1",
-  "2-5",
-  "6-15",
-  "16-50",
-  "50+",
-] as const;
+const LOCATION_OPTIONS = ["1", "2-5", "6-15", "16-50", "50+"] as const;
 
-const ROLE_OPTIONS = [
-  "owner",
-  "ops",
-  "finance",
-  "gm",
-  "other",
-] as const;
+const ROLE_OPTIONS = ["owner", "ops", "finance", "gm", "other"] as const;
 
 const INDUSTRY_OPTIONS = [
   "restaurants",
@@ -74,12 +62,17 @@ function parseIntentInterest(raw: string | null | undefined): string {
 
 export function ContactForm({
   selectedPlan,
+  deliveryAvailable = true,
 }: {
   selectedPlan?: SelectedPlan;
+  deliveryAvailable?: boolean;
 }) {
   const t = useTranslations("company.form");
   const searchParams = useSearchParams();
-  const [state, action, pending] = useActionState(submitContactInquiry, initial);
+  const [state, action, pending] = useActionState(
+    submitContactInquiry,
+    initial,
+  );
 
   const planFromUrl = parsePlan(searchParams.get("plan"));
   const activePlan = planFromUrl ?? selectedPlan;
@@ -97,15 +90,16 @@ export function ContactForm({
 
   const roleHints =
     role === "finance" || role === "owner"
-      ? ["Recovery / Reconciliation", "Multi-location economics", "Verified Value"]
+      ? [
+          "Recovery / Reconciliation",
+          "Multi-location economics",
+          "Verified Value",
+        ]
       : role === "gm" || role === "ops"
         ? ["Operations", "Perishable revenue", "Decisions"]
         : [];
 
-  const formKey = useMemo(
-    () => activePlan ?? "general",
-    [activePlan],
-  );
+  const formKey = useMemo(() => activePlan ?? "general", [activePlan]);
 
   useEffect(() => {
     if (state?.ok && state.mode === "mailto") {
@@ -114,12 +108,14 @@ export function ContactForm({
   }, [state]);
 
   return (
-    <form
-      className="rx-contact-form"
-      action={action}
-      noValidate
-      key={formKey}
-    >
+    <form className="rx-contact-form" action={action} key={formKey}>
+      {!deliveryAvailable && (
+        <p role="status" className="rx-contact-alt">
+          Sales contact is not connected in this preview. This form cannot send
+          an inquiry yet.{" "}
+          <Link href="/demo">Explore the public demo instead →</Link>
+        </p>
+      )}
       {activePlan ? (
         <input type="hidden" name="plan" value={activePlan} />
       ) : null}
@@ -263,12 +259,15 @@ export function ContactForm({
       <button
         type="submit"
         className="rx-btn rx-btn-primary"
-        disabled={pending}
+        disabled={pending || !deliveryAvailable}
       >
         {pending ? t("sending") : t("submit")}
       </button>
 
-      <p className="rx-contact-privacy" style={{ marginTop: "1rem", fontSize: "0.85rem", maxWidth: "36rem" }}>
+      <p
+        className="rx-contact-privacy"
+        style={{ marginTop: "1rem", fontSize: "0.85rem", maxWidth: "36rem" }}
+      >
         By submitting, you agree that RADR may use your business contact details
         to respond to this request. See <Link href="/privacy">Privacy</Link>.
       </p>
