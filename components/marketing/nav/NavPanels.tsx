@@ -44,6 +44,10 @@ export function PlatformPanel({
   const reduced = useReducedMotion();
   const [active, setActive] = useState<string>(PLATFORM_DEFAULT_PREVIEW);
   const previewHref = platformHrefForItem(active) ?? "/product";
+  const activeColumn =
+    PLATFORM_COLUMNS.find((col) =>
+      col.items.some((item) => item.key === active),
+    )?.key ?? "surfaces";
 
   return (
     <div className="rx-np rx-np-platform" data-theme={theme}>
@@ -66,9 +70,7 @@ export function PlatformPanel({
                   <strong>
                     {t(`columns.${col.key}.items.${item.key}.label`)}
                   </strong>
-                  <span>
-                    {t(`columns.${col.key}.items.${item.key}.desc`)}
-                  </span>
+                  <span>{t(`columns.${col.key}.items.${item.key}.desc`)}</span>
                 </Link>
               );
             })}
@@ -84,9 +86,16 @@ export function PlatformPanel({
             initial={reduced ? false : { opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 3 }}
-            transition={{ duration: reduced ? 0 : 0.14, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              duration: reduced ? 0 : 0.14,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
-            <NextLink href={previewHref} onClick={onNavigate}>
+            <NextLink
+              href={previewHref}
+              onClick={onNavigate}
+              aria-label={t(`columns.${activeColumn}.items.${active}.label`)}
+            >
               <PlatformLivePreview itemKey={active} />
             </NextLink>
           </motion.div>
@@ -168,7 +177,11 @@ export function SolutionsPanel({
         </div>
 
         <aside className="rx-np-platform-preview rx-np-solutions-preview">
-          <NextLink href="/solutions" onClick={onNavigate}>
+          <NextLink
+            href="/solutions"
+            onClick={onNavigate}
+            aria-label={t("exploreAll")}
+          >
             <IntelligenceLivePreview />
           </NextLink>
         </aside>
