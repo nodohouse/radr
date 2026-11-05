@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { SiteNav } from "@/components/marketing/SiteNav";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
-import { ReportCover } from "@/components/marketing/reports/ReportPromo";
+import { PlaybookBook } from "@/components/marketing/reports/PlaybookBook";
+import "@/components/marketing/reports/reports.css";
 import { ReportLeadForm } from "@/components/marketing/reports/ReportLeadForm";
 import { HOSPITALITY_REPORT as report } from "@/lib/marketing/report";
 import { reportDeliveryReady } from "@/lib/marketing/reportGate";
@@ -51,13 +52,7 @@ export default async function ReportPage({
           <a className="rm-button rr-mobile-cta" href="#request-report">
             Get the playbook →
           </a>
-          <div className="rr-book-stage">
-            <div className="rr-book-orbit" aria-hidden="true" />
-            <ReportCover />
-            <span className="rr-book-caption">
-              A field guide worth taking into your next meeting.
-            </span>
-          </div>
+          <PlaybookBook href="#request-report" />
           <section className="rr-contents">
             <p className="rm-eyebrow">READ THE PRESSURE. FIND YOUR RESPONSE.</p>
             <h2>Learn quickly. Leave with a plan.</h2>

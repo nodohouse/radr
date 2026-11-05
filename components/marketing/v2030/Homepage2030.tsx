@@ -4,6 +4,7 @@ import Image from "next/image";
 import { MARKETING_IMAGES } from "@/lib/marketing/publicImagery";
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { HomePlaybookFeature } from "@/components/marketing/reports/HomePlaybookFeature";
 import { ScrollTabletShowcase } from "./ScrollTabletShowcase";
 import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
 import { PUBLIC_LOOP } from "@/lib/marketing/publicCanon";
@@ -240,6 +241,7 @@ export function Homepage2030() {
           </article>
         </div>
       </section>
+      <HomePlaybookFeature />
       <section className="rm-close rm-shell" data-nav-theme="light">
         <p className="rm-eyebrow">
           LESS TIME RECONSTRUCTING. MORE TIME DECIDING.
@@ -263,12 +265,6 @@ export function Homepage2030() {
         <p className="rm-caption">
           Explore a clearly labeled demo. No connected system required.
         </p>
-        <Link
-          href="/resources/hospitality-decision-playbook"
-          className="rm-caption"
-        >
-          Get the Hospitality Decision Playbook →
-        </Link>
       </section>
     </div>
   );

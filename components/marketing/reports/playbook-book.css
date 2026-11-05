@@ -1,0 +1,400 @@
+/* Physical publication preview, scoped away from the homepage tablet. */
+.rm-playbook {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: clamp(30px, 5vw, 80px);
+  align-items: center;
+  padding-block: 72px;
+  border-top: 1px solid #bcd2f16e;
+}
+.rm-playbook h2 {
+  font-size: clamp(32px, 3.5vw, 52px);
+  letter-spacing: -0.045em;
+  font-weight: 550;
+  line-height: 1.12;
+  margin: 18px 0 24px;
+  color: #09264f;
+  text-wrap: balance;
+}
+.rm-playbook h2 em {
+  color: #075be5;
+  font-style: normal;
+}
+.rm-playbook-lead {
+  max-width: 58ch;
+  color: #485f7d;
+  font-size: 17px;
+  line-height: 1.75;
+}
+.rm-playbook-tools {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0;
+  display: grid;
+  gap: 18px;
+}
+.rm-playbook-tools li {
+  display: flex;
+  gap: 18px;
+  align-items: start;
+}
+.rm-playbook-tools li > span {
+  flex: 0 0 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #bfd5f0;
+  border-radius: 10px;
+  color: #0756ce;
+  background: #ffffffb5;
+  font-size: 12px;
+  font-weight: 600;
+}
+.rm-playbook-tools strong {
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: #15365f;
+}
+.rm-playbook-tools p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #485f7d;
+  margin: 5px 0 0;
+  max-width: 53ch;
+}
+.rm-playbook-ctas {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.rm-playbook-ctas > span {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #435f80;
+}
+.rm-playbook-note {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #526885;
+  max-width: 65ch;
+  margin-top: 18px;
+}
+.rm-playbook-visual {
+  min-width: 0;
+  padding: 20px 10px;
+  border: 1px solid #c8ddf2;
+  border-radius: 30px;
+  background:
+    radial-gradient(ellipse at 75% 15%, #ceeaff88, transparent 65%),
+    linear-gradient(145deg, #ffffffb8, #e7f1ffbb);
+  box-shadow:
+    0 20px 65px #1746810c,
+    inset 0 1px #fff;
+}
+.rm-playbook-preview-note {
+  text-align: center;
+  color: #526885;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 18px 16px 8px;
+}
+.rpb-figure {
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+}
+.rpb-stage {
+  display: block;
+  position: relative;
+  height: clamp(330px, 36vw, 480px);
+  perspective: 1300px;
+  isolation: isolate;
+  overflow: clip;
+  border-radius: 24px;
+  text-decoration: none;
+  color: inherit;
+}
+.rpb-halo {
+  position: absolute;
+  width: 80%;
+  height: 70%;
+  left: 10%;
+  top: 15%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #229aff22, transparent 65%);
+}
+.rpb-shadow {
+  position: absolute;
+  left: 20%;
+  bottom: 10%;
+  width: 65%;
+  height: 12%;
+  border-radius: 50%;
+  background: #06214b2a;
+  filter: blur(20px);
+  animation: rpb-shadow 10s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.rpb-book {
+  --rpb-width: clamp(170px, 20vw, 250px);
+  position: absolute;
+  width: var(--rpb-width);
+  aspect-ratio: 778/1100;
+  left: calc(50% + 24px);
+  top: 53%;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%) rotateX(7deg) rotateY(-18deg) rotateZ(-5deg);
+  animation: rpb-float 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-play-state: paused;
+}
+.rpb-back-cover {
+  position: absolute;
+  inset: -3px;
+  transform: translateZ(-13px);
+  background: #073786;
+  border-radius: 1px 6px 6px 1px;
+  box-shadow: 0 8px 22px #071b4530;
+}
+.rpb-page-block {
+  position: absolute;
+  inset: 3px -2px 3px 0;
+  transform: translateZ(-6px);
+  background: repeating-linear-gradient(to bottom, #f0eee7 0 1px, #fff 1px 3px);
+  border-radius: 1px 5px 5px 1px;
+  box-shadow:
+    5px 4px 0 #dadfdc,
+    6px 5px 0 #b7c8d9;
+}
+.rpb-page {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: translateZ(1px);
+  box-shadow: inset 12px 0 15px #0726541c;
+  overflow: hidden;
+  border-radius: 1px 4px 4px 1px;
+}
+.rpb-stage img {
+  object-fit: cover;
+  object-position: center;
+}
+.rpb-cover {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transform: translateZ(4px) rotateY(0deg);
+  animation: rpb-open 10s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+  animation-play-state: paused;
+}
+.rpb-cover-outside,
+.rpb-cover-inside {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 1px 5px 5px 1px;
+  background: #fff;
+}
+.rpb-cover-outside {
+  transform: translateZ(1px);
+  box-shadow: 2px 4px 12px #03163235;
+}
+.rpb-cover-outside i {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    #ffffff18,
+    transparent 35%,
+    #ffffff04 60%,
+    #ffffff35
+  );
+  border-left: 5px solid #041c4b45;
+}
+.rpb-cover-inside {
+  transform: rotateY(180deg) translateZ(1px);
+}
+.rpb-page-edge {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 12px 0 18px #09254b1f;
+}
+.rpb-spine {
+  position: absolute;
+  left: -9px;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  transform: rotateY(-90deg);
+  transform-origin: right;
+  background: linear-gradient(to right, #031a43, #1256bd);
+  border-radius: 3px;
+}
+.rpb-edition {
+  display: block;
+  width: 100%;
+  padding: 0 16px 8px;
+  text-align: center;
+  color: #36597c;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  font-weight: 550;
+}
+.rpb-edition i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: #00c875;
+  border-radius: 50%;
+  margin: 0 10px 2px;
+}
+.rpb-figure figcaption {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 22px 0;
+  color: #45617f;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.rpb-figure figcaption button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #365577;
+  border: 1px solid #b6cfe9;
+  background: #ffffffad;
+  border-radius: 30px;
+  font: inherit;
+  padding: 7px 11px;
+  cursor: pointer;
+  min-height: 36px;
+}
+.rpb-figure figcaption button span {
+  font-family: Arial, sans-serif;
+}
+.rpb-stage:focus-visible,
+.rpb-figure button:focus-visible {
+  outline: 3px solid #0870ed;
+  outline-offset: 4px;
+}
+.rpb-figure[data-running="true"] :is(.rpb-book, .rpb-cover, .rpb-shadow) {
+  animation-play-state: running;
+}
+@keyframes rpb-open {
+  0%,
+  14%,
+  100% {
+    transform: translateZ(4px) rotateY(0deg);
+  }
+  38%,
+  68% {
+    transform: translateZ(4px) rotateY(-137deg);
+  }
+  89% {
+    transform: translateZ(4px) rotateY(0deg);
+  }
+}
+@keyframes rpb-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotateX(7deg) rotateY(-18deg)
+      rotateZ(-5deg);
+  }
+  38%,
+  68% {
+    transform: translate(-30%, -50%) rotateX(9deg) rotateY(6deg) rotateZ(2deg);
+  }
+}
+@keyframes rpb-shadow {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.85);
+  }
+  40%,
+  70% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rpb-figure :is(.rpb-book, .rpb-cover, .rpb-shadow) {
+    animation: none !important;
+  }
+  .rpb-book {
+    transform: translate(-30%, -50%) rotateX(5deg) rotateY(0deg) rotateZ(0deg);
+  }
+  .rpb-cover {
+    transform: translateZ(4px) rotateY(-137deg);
+  }
+}
+@media (max-width: 900px) {
+  .rm-playbook {
+    gap: 28px;
+  }
+  .rm-playbook h2 {
+    font-size: 36px;
+  }
+}
+@media (max-width: 760px) {
+  .rm-playbook {
+    grid-template-columns: 1fr;
+    padding-block: 48px;
+  }
+  .rm-playbook h2 {
+    font-size: clamp(30px, 8vw, 40px);
+  }
+  .rm-playbook-lead {
+    font-size: 16px;
+  }
+  .rm-playbook-visual {
+    padding: 14px 0;
+  }
+  .rpb-stage {
+    height: 350px;
+  }
+  .rpb-book {
+    --rpb-width: clamp(166px, 42vw, 210px);
+    left: calc(50% + 24px);
+  }
+  .rpb-figure figcaption {
+    padding-inline: 16px;
+  }
+}
+@media (max-width: 380px) {
+  .rpb-book {
+    --rpb-width: 154px;
+  }
+  .rpb-stage {
+    height: 330px;
+  }
+}
+
+.rpb-figure button .rpb-pause-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    currentColor 0 3px,
+    transparent 3px 6px,
+    currentColor 6px 9px,
+    transparent 9px
+  );
+}
+.rpb-figure button .rpb-resume-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
