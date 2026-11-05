@@ -19,7 +19,7 @@ test("tablet review leads through evidence, futures and a qualified demo outcome
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(base + "/en");
-  const tablet = page.locator(".rsc-tablet");
+  const tablet = page.locator(".rsc-face-front .rsc-tablet");
   await tablet.getByRole("button", { name: "Review the decision" }).click();
   await expect(
     tablet.getByRole("button", { name: "Decisions", exact: true }),
@@ -54,10 +54,10 @@ test("every scene fits and keeps the same tablet height on desktop, tablet and p
       "Value",
     ]) {
       await page
-        .locator(".rsc-tablet")
+        .locator(".rsc-face-front .rsc-tablet")
         .getByRole("button", { name, exact: true })
         .click();
-      const size = await page.locator(".rsc-tablet").evaluate((n) => ({
+      const size = await page.locator(".rsc-face-front .rsc-tablet").evaluate((n) => ({
         height: n.getBoundingClientRect().height,
         width: n.getBoundingClientRect().width,
         railLeft:
@@ -83,7 +83,7 @@ test("tour continuously advances while hovered and after manual navigation, with
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.clock.install();
   await page.goto(base + "/en");
-  const tablet = page.locator(".rsc-tablet");
+  const tablet = page.locator(".rsc-face-front .rsc-tablet");
   await expect(tablet).toHaveAttribute("data-running", "true");
   await expect(tablet.locator(".rsc-play, .rsc-demo")).toHaveCount(0);
   await expect(tablet).not.toContainText("19:48");
@@ -110,7 +110,7 @@ test("reduced motion leaves graph stationary and tabs support arrow-key navigati
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(base + "/en");
-  const tablet = page.locator(".rsc-tablet");
+  const tablet = page.locator(".rsc-face-front .rsc-tablet");
   await expect(tablet).not.toHaveAttribute("data-running", "true");
   expect(
     await tablet

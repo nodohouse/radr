@@ -7,6 +7,7 @@ import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { NAV_ICONS } from "@/components/product/shell/navIcons";
 import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
 import "./product-showcase.css";
+import { OperationsShowcase } from "./OperationsShowcase";
 
 const SECTIONS = [
   "Control Center",
@@ -28,7 +29,14 @@ const NAVIGATION = [
 ] as const;
 
 /** A synthetic product tour, never a live feed or an executable approval flow. */
-export function ProductBriefPreview() {
+export function ProductBriefPreview({
+  variant = "decisions",
+  active = true,
+}: {
+  variant?: "decisions" | "operations";
+  active?: boolean;
+} = {}) {
+  const sections = variant === "operations" ? ["Live", "Operations"] : SECTIONS;
   const [section, setSection] = useState(0);
   const [motionReady, setMotionReady] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -36,7 +44,8 @@ export function ProductBriefPreview() {
   const reduced = useReducedMotion();
   const root = useRef<HTMLDivElement>(null);
   const id = useId();
-  const auto = motionReady && visible && documentVisible && reduced === false;
+  const auto =
+    active && motionReady && visible && documentVisible && reduced === false;
 
   useEffect(() => {
     setMotionReady(true);
@@ -56,11 +65,11 @@ export function ProductBriefPreview() {
   useEffect(() => {
     if (!auto) return;
     const timer = window.setInterval(
-      () => setSection((s) => (s + 1) % SECTIONS.length),
+      () => setSection((s) => (s + 1) % sections.length),
       4200,
     );
     return () => window.clearInterval(timer);
-  }, [auto]);
+  }, [auto, sections.length]);
   function select(next: number) {
     setSection(next);
   }
@@ -69,6 +78,7 @@ export function ProductBriefPreview() {
     <div
       ref={root}
       className="rsc-tablet"
+      data-variant={variant}
       data-running={auto ? "true" : undefined}
       aria-label="RADR interactive product showcase, illustrative demo"
     >
@@ -89,16 +99,27 @@ export function ProductBriefPreview() {
                   <span>{item.label}</span>
                 </>
               );
-              return "scene" in item ? (
+              const scene =
+                variant === "operations"
+                  ? (
+                      { live: 0, service: 1 } as Record<
+                        string,
+                        number | undefined
+                      >
+                    )[item.id]
+                  : "scene" in item
+                    ? item.scene
+                    : undefined;
+              return scene !== undefined ? (
                 <button
                   key={item.id}
                   type="button"
-                  id={`${id}-nav-${item.scene}`}
-                  data-scene={item.scene}
+                  id={`${id}-nav-${scene}`}
+                  data-scene={scene}
                   aria-label={item.label}
-                  aria-pressed={section === item.scene}
+                  aria-pressed={section === scene}
                   aria-controls={`${id}-panel`}
-                  onClick={() => select(item.scene)}
+                  onClick={() => select(scene)}
                   onKeyDown={(event) => {
                     if (
                       !["ArrowDown", "ArrowUp", "Home", "End"].includes(
@@ -111,9 +132,12 @@ export function ProductBriefPreview() {
                       event.key === "Home"
                         ? 0
                         : event.key === "End"
-                          ? 3
-                          : (item.scene + (event.key === "ArrowDown" ? 1 : 3)) %
-                            4;
+                          ? sections.length - 1
+                          : (scene +
+                              (event.key === "ArrowDown"
+                                ? 1
+                                : sections.length - 1)) %
+                            sections.length;
                     select(next);
                     document.getElementById(`${id}-nav-${next}`)?.focus();
                   }}
@@ -124,7 +148,7 @@ export function ProductBriefPreview() {
                 <Link
                   key={item.id}
                   aria-label={`Explore ${item.label}`}
-                  href={`/product?surface=${item.surface}`}
+                  href={`/product?surface=${"surface" in item ? item.surface : item.id === "control-center" ? "control" : item.id}`}
                 >
                   {content}
                 </Link>
@@ -136,7 +160,7 @@ export function ProductBriefPreview() {
           </div>
         </aside>
         <div className="rsc-chrome">
-          <strong>{SECTIONS[section]}</strong>
+          <strong>{sections[section]}</strong>
           <span className="rsc-top-location">Soho · New York</span>
           <span className="rsc-avatar">A</span>
         </div>
@@ -144,205 +168,216 @@ export function ProductBriefPreview() {
           className="rsc-stage"
           role="region"
           id={`${id}-panel`}
-          aria-label={`${SECTIONS[section]} preview`}
+          aria-label={`${sections[section]} preview`}
           tabIndex={0}
         >
-          <div key={section} className="rsc-scene" data-section={section}>
-            <div className="rsc-heading">
-              <div>
-                <p>{venue.displayName} · Dinner service</p>
-                <h3>
-                  {
-                    [
-                      "Your operation, in focus.",
-                      "One decision. The whole story.",
-                      "See the trade-off first.",
-                      "Expected is not verified.",
-                    ][section]
-                  }
-                </h3>
+          {variant === "operations" ? (
+            <OperationsShowcase section={section} />
+          ) : (
+            <div key={section} className="rsc-scene" data-section={section}>
+              <div className="rsc-heading">
+                <div>
+                  <p>{venue.displayName} · Dinner service</p>
+                  <h3>
+                    {
+                      [
+                        "Your operation, in focus.",
+                        "One decision. The whole story.",
+                        "See the trade-off first.",
+                        "Expected is not verified.",
+                      ][section]
+                    }
+                  </h3>
+                </div>
+                <span className="rsc-section-marker">
+                  {String(section + 1).padStart(2, "0")} / 04
+                </span>
               </div>
-              <span className="rsc-section-marker">
-                {String(section + 1).padStart(2, "0")} / 04
-              </span>
-            </div>
-            {section === 0 ? (
-              <>
-                <div className="rsc-metrics">
-                  <div>
-                    <span>Needs you</span>
-                    <strong>01</strong>
-                    <small>Decision to review</small>
+              {section === 0 ? (
+                <>
+                  <div className="rsc-metrics">
+                    <div>
+                      <span>Needs you</span>
+                      <strong>01</strong>
+                      <small>Decision to review</small>
+                    </div>
+                    <div>
+                      <span>Confidence</span>
+                      <strong>{venue.confidencePct}%</strong>
+                      <small>Illustrative estimate</small>
+                    </div>
+                    <div>
+                      <span>Expected protected</span>
+                      <strong>{venue.expectedFormatted}</strong>
+                      <small>Tonight · modeled</small>
+                    </div>
                   </div>
-                  <div>
-                    <span>Confidence</span>
-                    <strong>{venue.confidencePct}%</strong>
-                    <small>Illustrative estimate</small>
+                  <div className="rsc-chart">
+                    <div>
+                      <span>Service pressure</span>
+                      <span className="rsc-chart-key">
+                        <i /> Demand <b /> Capacity
+                      </span>
+                    </div>
+                    <svg
+                      viewBox="0 0 480 100"
+                      preserveAspectRatio="none"
+                      role="img"
+                      aria-label="Animated illustrative demand rising above planned kitchen capacity"
+                    >
+                      <path
+                        className="rsc-grid"
+                        d="M0 25H480M0 50H480M0 75H480"
+                      />
+                      <path className="rsc-capacity" d="M0 58H480" />
+                      <path
+                        className="rsc-area"
+                        d="M0 86 40 77 80 81 120 61 160 66 200 48 240 56 280 29 320 40 360 16 400 27 440 8 480 16V100H0Z"
+                      />
+                      <path
+                        pathLength="1"
+                        className="rsc-line"
+                        d="M0 86 40 77 80 81 120 61 160 66 200 48 240 56 280 29 320 40 360 16 400 27 440 8 480 16"
+                      />
+                      <circle
+                        className="rsc-chart-tip"
+                        cx="480"
+                        cy="16"
+                        r="4"
+                      />
+                    </svg>
+                    <div>
+                      <small>19:00</small>
+                      <small>19:30</small>
+                      <small>20:00 · modeled</small>
+                    </div>
                   </div>
-                  <div>
-                    <span>Expected protected</span>
-                    <strong>{venue.expectedFormatted}</strong>
-                    <small>Tonight · modeled</small>
-                  </div>
-                </div>
-                <div className="rsc-chart">
-                  <div>
-                    <span>Service pressure</span>
-                    <span className="rsc-chart-key">
-                      <i /> Demand <b /> Capacity
+                  <div className="rsc-decision">
+                    <span className="rsc-signal">
+                      NEEDS YOU · {venue.decisionId}
                     </span>
+                    <h4>Pace the next seating wave.</h4>
+                    <p>Demand is ahead of plan. Give the kitchen 12 minutes.</p>
+                    <button
+                      type="button"
+                      className="rsc-action"
+                      onClick={() => select(1)}
+                    >
+                      Review the decision <span>→</span>
+                    </button>
                   </div>
-                  <svg
-                    viewBox="0 0 480 100"
-                    preserveAspectRatio="none"
-                    role="img"
-                    aria-label="Animated illustrative demand rising above planned kitchen capacity"
-                  >
-                    <path
-                      className="rsc-grid"
-                      d="M0 25H480M0 50H480M0 75H480"
-                    />
-                    <path className="rsc-capacity" d="M0 58H480" />
-                    <path
-                      className="rsc-area"
-                      d="M0 86 40 77 80 81 120 61 160 66 200 48 240 56 280 29 320 40 360 16 400 27 440 8 480 16V100H0Z"
-                    />
-                    <path
-                      pathLength="1"
-                      className="rsc-line"
-                      d="M0 86 40 77 80 81 120 61 160 66 200 48 240 56 280 29 320 40 360 16 400 27 440 8 480 16"
-                    />
-                    <circle className="rsc-chart-tip" cx="480" cy="16" r="4" />
-                  </svg>
-                  <div>
-                    <small>19:00</small>
-                    <small>19:30</small>
-                    <small>20:00 · modeled</small>
+                </>
+              ) : section === 1 ? (
+                <>
+                  <div className="rsc-decision">
+                    <span className="rsc-signal">
+                      EVIDENCE · {venue.decisionId}
+                    </span>
+                    <h4>Twelve minutes to protect tonight.</h4>
+                    <p>
+                      Seating demand and kitchen capacity point to the same
+                      constraint. Review the evidence before choosing a
+                      response.
+                    </p>
                   </div>
-                </div>
-                <div className="rsc-decision">
-                  <span className="rsc-signal">
-                    NEEDS YOU · {venue.decisionId}
-                  </span>
-                  <h4>Pace the next seating wave.</h4>
-                  <p>Demand is ahead of plan. Give the kitchen 12 minutes.</p>
+                  <div className="rsc-evidence">
+                    <div>
+                      <span>01</span>
+                      <div>
+                        <strong>Reservations</strong>
+                        <p>The next seating wave is approaching.</p>
+                      </div>
+                    </div>
+                    <div>
+                      <span>02</span>
+                      <div>
+                        <strong>Kitchen capacity</strong>
+                        <p>The kitchen is the service constraint.</p>
+                      </div>
+                    </div>
+                    <div>
+                      <span>03</span>
+                      <div>
+                        <strong>
+                          Decision confidence · {venue.confidencePct}%
+                        </strong>
+                        <p>Synthetic evidence, not a live prediction.</p>
+                      </div>
+                    </div>
+                  </div>
                   <button
                     type="button"
                     className="rsc-action"
-                    onClick={() => select(1)}
+                    onClick={() => select(2)}
                   >
-                    Review the decision <span>→</span>
+                    Compare the two futures <span>→</span>
                   </button>
-                </div>
-              </>
-            ) : section === 1 ? (
-              <>
-                <div className="rsc-decision">
-                  <span className="rsc-signal">
-                    EVIDENCE · {venue.decisionId}
-                  </span>
-                  <h4>Twelve minutes to protect tonight.</h4>
-                  <p>
-                    Seating demand and kitchen capacity point to the same
-                    constraint. Review the evidence before choosing a response.
+                </>
+              ) : section === 2 ? (
+                <>
+                  <p className="rsc-intro">
+                    Same restaurant. Same dinner rush. Two possible next moves.
                   </p>
-                </div>
-                <div className="rsc-evidence">
-                  <div>
-                    <span>01</span>
+                  <div className="rsc-futures">
                     <div>
-                      <strong>Reservations</strong>
-                      <p>The next seating wave is approaching.</p>
+                      <span>Alternative</span>
+                      <h4>Keep seating</h4>
+                      <p>Accept the next wave. Kitchen pressure remains.</p>
+                      <strong>Baseline</strong>
+                      <small>No incremental protected value assumed.</small>
+                      <i style={{ width: "44%" }} />
+                    </div>
+                    <div data-recommended="true">
+                      <span>Recommended · demo</span>
+                      <h4>Pace 12 minutes</h4>
+                      <p>Give the kitchen room to absorb the next wave.</p>
+                      <strong>{venue.expectedFormatted}</strong>
+                      <small>
+                        Expected protected tonight · {venue.confidencePct}%
+                        confidence
+                      </small>
+                      <i style={{ width: "86%" }} />
                     </div>
                   </div>
-                  <div>
-                    <span>02</span>
-                    <div>
-                      <strong>Kitchen capacity</strong>
-                      <p>The kitchen is the service constraint.</p>
-                    </div>
-                  </div>
-                  <div>
-                    <span>03</span>
-                    <div>
-                      <strong>
-                        Decision confidence · {venue.confidencePct}%
-                      </strong>
-                      <p>Synthetic evidence, not a live prediction.</p>
-                    </div>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="rsc-action"
-                  onClick={() => select(2)}
-                >
-                  Compare the two futures <span>→</span>
-                </button>
-              </>
-            ) : section === 2 ? (
-              <>
-                <p className="rsc-intro">
-                  Same restaurant. Same dinner rush. Two possible next moves.
-                </p>
-                <div className="rsc-futures">
-                  <div>
-                    <span>Alternative</span>
-                    <h4>Keep seating</h4>
-                    <p>Accept the next wave. Kitchen pressure remains.</p>
-                    <strong>Baseline</strong>
-                    <small>No incremental protected value assumed.</small>
-                    <i style={{ width: "44%" }} />
-                  </div>
-                  <div data-recommended="true">
-                    <span>Recommended · demo</span>
-                    <h4>Pace 12 minutes</h4>
-                    <p>Give the kitchen room to absorb the next wave.</p>
-                    <strong>{venue.expectedFormatted}</strong>
-                    <small>
-                      Expected protected tonight · {venue.confidencePct}%
-                      confidence
-                    </small>
-                    <i style={{ width: "86%" }} />
-                  </div>
-                </div>
-                <p className="rsc-note">
-                  A modeled comparison, not a promise of results. No action is
-                  executed.
-                </p>
-                <button
-                  type="button"
-                  className="rsc-action"
-                  onClick={() => select(3)}
-                >
-                  See the illustrative outcome <span>→</span>
-                </button>
-              </>
-            ) : (
-              <>
-                <p className="rsc-intro">
-                  A separate completed-service example for {venue.decisionId}.
-                  Expected and verified value stay distinct.
-                </p>
-                <div className="rsc-value">
-                  <span>Illustrative completed-service outcome</span>
-                  <strong>{venue.verifiedFormatted}</strong>
-                  <h4>Protected tonight.</h4>
-                  <p>
-                    Demo outcome only. This is not evidence of customer results.
+                  <p className="rsc-note">
+                    A modeled comparison, not a promise of results. No action is
+                    executed.
                   </p>
-                </div>
-                <div className="rsc-proof">
-                  <span>Decision recorded</span>
-                  <span>Outcome compared</span>
-                  <span>Demo evidence trail</span>
-                </div>
-                <Link href="/demo" className="rsc-action">
-                  Explore the interactive demo <span>↗</span>
-                </Link>
-              </>
-            )}
-          </div>
+                  <button
+                    type="button"
+                    className="rsc-action"
+                    onClick={() => select(3)}
+                  >
+                    See the illustrative outcome <span>→</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="rsc-intro">
+                    A separate completed-service example for {venue.decisionId}.
+                    Expected and verified value stay distinct.
+                  </p>
+                  <div className="rsc-value">
+                    <span>Illustrative completed-service outcome</span>
+                    <strong>{venue.verifiedFormatted}</strong>
+                    <h4>Protected tonight.</h4>
+                    <p>
+                      Demo outcome only. This is not evidence of customer
+                      results.
+                    </p>
+                  </div>
+                  <div className="rsc-proof">
+                    <span>Decision recorded</span>
+                    <span>Outcome compared</span>
+                    <span>Demo evidence trail</span>
+                  </div>
+                  <Link href="/demo" className="rsc-action">
+                    Explore the interactive demo <span>↗</span>
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
         </div>
         <div className="rsc-foot">
           <span>

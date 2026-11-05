@@ -29,3 +29,8 @@ The hero depth now moves from deep navy-blue (#081C70), through sapphire, into b
 The product tablet is a compact landscape projection of the current product shell, reusing the product's navigation icons and left-side section order. Four cinematic scenes cover Control Center, Decisions, Intelligence (including Futures), and Value. Other rail entries lead to their public product previews. The visible timestamp and playback controls are removed.
 
 The tour advances continuously every 4.2 seconds, including during hover and after manual navigation. It stops rendering motion only when outside the viewport, when the document is hidden, or when the visitor requests reduced motion. The fixed landscape screen dimensions prevent page jumps between scenes. A quiet footer identifies synthetic data; no provider actions are executed and no demo outcome is presented as a real customer result.
+
+
+Homepage scroll turn: the same landscape tablet has two physical CSS 3D faces. Native scrolling drives a spring-smoothed 180-degree turn with a small roll, depth tilt and bounded vertical drift. The reverse face contains Live and Operations previews, using `getServiceCommand()` table coordinates, table states and kitchen loads from the current product demo. No wheel interception, sticky pinning or new homepage section is introduced.
+
+Only the visible face is interactive and eligible to autoplay. The concealed face is inert and hidden from assistive technology. Document height stays constant during the turn and on the return scroll. The initial scroll cue clears once the operating face is revealed. Visitors requesting reduced motion get a stationary tablet with an instant view switch instead of the turn.

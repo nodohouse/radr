@@ -2,16 +2,9 @@
 
 import Image from "next/image";
 import { MARKETING_IMAGES } from "@/lib/marketing/publicImagery";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "@/i18n/navigation";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "motion/react";
-import { ProductBriefPreview } from "./ProductBriefPreview";
+import { ScrollTabletShowcase } from "./ScrollTabletShowcase";
 import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
 import { PUBLIC_LOOP } from "@/lib/marketing/publicCanon";
 import { CTAS } from "@/lib/marketing/brand";
@@ -35,24 +28,9 @@ const forks = [
 
 export function Homepage2030() {
   const [fork, setFork] = useState(1);
-  const reduced = useReducedMotion();
-  const hero = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: hero,
-    offset: ["start start", "end start"],
-  });
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 130,
-    damping: 30,
-    restDelta: 0.001,
-  });
-  const rotate = useTransform(progress, [0, 0.7, 1], [1, -0.5, -0.5]);
-  const rotateX = useTransform(progress, [0, 0.7, 1], [3, 0, 0]);
-  const rotateY = useTransform(progress, [0, 0.7, 1], [-5, 1, 1]);
-  const y = useTransform(progress, [0, 0.7, 1], [0, -18, -18]);
   return (
     <div className="rm-home">
-      <section className="rm-hero rm-shell" ref={hero} data-nav-theme="light">
+      <section className="rm-hero rm-shell" data-nav-theme="light">
         <div className="rm-hero-copy">
           <p className="rm-eyebrow">
             <span /> THE ADAPTIVE DECISION SYSTEM FOR HOSPITALITY
@@ -84,22 +62,7 @@ export function Homepage2030() {
             Commercial connectors and autonomous execution are planned.
           </p>
         </div>
-        <motion.div
-          className="rm-hero-product"
-          style={
-            reduced
-              ? undefined
-              : {
-                  rotateZ: rotate,
-                  rotateX,
-                  rotateY,
-                  y,
-                  transformPerspective: 1400,
-                }
-          }
-        >
-          <ProductBriefPreview />
-        </motion.div>
+        <ScrollTabletShowcase />
         <div className="rm-loop" aria-label="The RADR decision loop">
           {PUBLIC_LOOP.map((step, i) => (
             <span key={step.id}>
