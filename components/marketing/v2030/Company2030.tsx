@@ -180,6 +180,30 @@ export function Company2030() {
           </section>
 
           <CompanyGlobalStory />
+          <section className="rx30-connect" data-nav-theme="light">
+            <RevealOnView className="rx30-shell">
+              <p className="rx30-kicker">Our perspective</p>
+              <h2 className="rx30-h2">
+                Understand the pressure. Then make the decision.
+              </h2>
+              <p className="rx30-lead">
+                Restaurant profitability, hotel channel economics, and kitchen
+                waste require different evidence. Our journal makes the
+                research, assumptions and calculations visible.
+              </p>
+              <div className="rx30-ctas">
+                <Link href="/blog" className="rx30-btn rx30-btn-primary">
+                  Read the free journal →
+                </Link>
+                <Link
+                  href="/resources/hospitality-decision-playbook"
+                  className="rx30-btn rx30-btn-ghost rx30-btn-ghost--solid"
+                >
+                  Get the playbook →
+                </Link>
+              </div>
+            </RevealOnView>
+          </section>
 
           <section className="rx30-pain" data-nav-theme="light">
             <RevealOnView className="rx30-shell">

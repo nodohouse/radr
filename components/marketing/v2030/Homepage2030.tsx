@@ -1,5 +1,7 @@
 "use client";
 
+import { ResearchDiscover } from "@/components/marketing/reports/ResearchDiscover";
+import "./ultra-polish.css";
 import Image from "next/image";
 import { MARKETING_IMAGES } from "@/lib/marketing/publicImagery";
 import { useState } from "react";
@@ -244,6 +246,7 @@ export function Homepage2030() {
           </article>
         </div>
       </section>
+      <ResearchDiscover />
       <HomePlaybookFeature />
       <section className="rm-close rm-shell" data-nav-theme="light">
         <p className="rm-eyebrow">

@@ -64,16 +64,35 @@ describe("report access boundary", () => {
   });
 });
 describe("editorial quality boundaries", () => {
-  it("has four substantive original articles without fabricated statistics or em dashes", () => {
+  it("publishes substantive articles without em dashes and scopes research sources", () => {
     const posts = BLOG_POSTS.filter((p) => p.content);
-    expect(posts).toHaveLength(4);
+    expect(posts.length).toBeGreaterThanOrEqual(7);
     for (const post of posts) {
-      const text = post
-        .content!.sections.flatMap((s) => s.paragraphs)
-        .join(" ");
+      const content = post.content!;
+      const text = [
+        ...content.sections.flatMap((s) => s.paragraphs),
+        ...(content.research
+          ? [
+              content.research.title,
+              content.research.caption,
+              ...Object.values(content.research.calculation),
+              ...content.research.sources.map((source) => source.scope),
+            ]
+          : []),
+      ].join(" ");
       expect(text.split(/\s+/).length).toBeGreaterThan(350);
       expect(text).not.toContain("—");
-      expect(post.date).toBe("2026-11-03");
+      expect(post.date).toMatch(/^2026-11-0[35]$/);
+      if (post.content?.research) {
+        expect(post.content.research.sources.length).toBeGreaterThanOrEqual(2);
+        for (const source of post.content.research.sources) {
+          expect(new URL(source.url).protocol).toBe("https:");
+          expect(source.scope.length).toBeGreaterThan(30);
+        }
+        expect(post.content.research.calculation.assumptions).toContain(
+          "Illustrative assumptions",
+        );
+      }
     }
   });
   it("keeps the report outside public static assets", () => {

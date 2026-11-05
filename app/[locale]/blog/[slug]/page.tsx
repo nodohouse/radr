@@ -1,3 +1,4 @@
+import { ResearchEvidence } from "@/components/marketing/reports/ResearchEvidence";
 import { EditorialArtwork } from "@/components/marketing/reports/EditorialArtwork";
 import { ReportPromo } from "@/components/marketing/reports/ReportPromo";
 import type { Metadata } from "next";
@@ -207,6 +208,10 @@ export default async function BlogPostPage({ params }: Props) {
                 </section>
               ))}
             </div>
+
+            {post.content?.research ? (
+              <ResearchEvidence research={post.content.research} />
+            ) : null}
 
             <div className="rx-res-article-cta">
               {post.territory === "RECOVER" ? (

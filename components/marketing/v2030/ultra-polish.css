@@ -1,0 +1,151 @@
+/* Native HTML, SVG and type remain resolution independent; no rasterized tablet video. */
+.rm-home .rsc-tablet {
+  background: linear-gradient(
+    135deg,
+    #f1fffcdf,
+    #76bbff8c 42%,
+    #00f59a9c 82%,
+    #effffade
+  );
+  border-color: #c6fff0;
+}
+.rm-home .rm-panel {
+  background: linear-gradient(145deg, #ffffffed, #f0f7ffef 76%, #eafff5e8);
+  border-color: #c1d9f4;
+  box-shadow:
+    0 20px 60px #0a3c8e0a,
+    inset 0 1px 0 #fff;
+}
+.rm-home .rm-evidence-chain {
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+.rm-home .rm-signal-image img {
+  object-fit: cover;
+}
+.rm-home .rm-section-head em,
+.rm-home .rm-close h2 em {
+  font-style: normal;
+  background: linear-gradient(100deg, #0733a6, #087cf0 74%, #009d75);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media (min-width: 2200px) {
+  html body .radr.radr-launch .rm-shell {
+    max-width: 1900px;
+    width: calc(100% - 192px);
+  }
+  html body .radr.radr-launch .rm-hero {
+    gap: 96px;
+    padding-top: 210px;
+    min-height: 1080px;
+  }
+  html body .radr.radr-launch .rm-hero h1 {
+    font-size: clamp(80px, 3.1vw, 116px);
+    line-height: 1.04;
+    letter-spacing: -0.06em;
+  }
+  html body .radr.radr-launch .rm-hero .rm-lead {
+    font-size: 23px;
+    line-height: 1.7;
+    max-width: 650px;
+  }
+  html body .radr.radr-launch .rm-hero .rm-caption {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  html body .radr.radr-launch .rsc-tablet {
+    zoom: 1.3;
+  }
+  html body .radr.radr-launch .rsc-scroll-stage {
+    perspective: 2400px;
+    padding-bottom: 150px;
+  }
+  html body .radr.radr-launch .rm-section {
+    padding-block: 95px;
+  }
+  html body .radr.radr-launch .rm-section-head h2 {
+    font-size: 62px;
+    line-height: 1.08;
+  }
+  html body .radr.radr-launch .rm-section-head > p {
+    font-size: 19px;
+    max-width: 480px;
+  }
+  html body .radr.radr-launch .rm-panel {
+    padding: 42px;
+    border-radius: 28px;
+  }
+  html body .radr.radr-launch .rm-panel h3 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+  html body .radr.radr-launch .rm-panel > p {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  html body .radr.radr-launch .rm-eyebrow {
+    font-size: 13px;
+  }
+  html body .radr.radr-launch .rm-button {
+    font-size: 16px;
+    padding: 18px 25px;
+  }
+  html body .radr.radr-launch .rm-research-grid h3 {
+    font-size: 30px;
+  }
+  html
+    body
+    .radr.radr-launch
+    .rm-research-grid
+    article
+    > p:not(.rm-research-tag) {
+    font-size: 18px;
+  }
+  html body .radr.radr-launch .rm-research-grid small {
+    font-size: 13px;
+  }
+  html body .radr.radr-launch .rm-research-grid a {
+    font-size: 16px;
+  }
+  html body .radr.radr-launch .rm-research-number {
+    font-size: 68px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rm-home .rsc-flip-rig {
+    will-change: auto;
+  }
+}
+.rm-home .rm-panel.rm-update-main {
+  background: linear-gradient(125deg, #062a85, #0868d8);
+  border-color: #377ee8;
+}
+.rm-home .rm-update-main h3 {
+  color: #fff;
+}
+.rm-home .rm-update-main > p {
+  color: #e2efff;
+}
+.rm-home .rm-update-main a {
+  color: #6bffbf;
+}
+@media (min-width: 2200px) {
+  html body .radr.radr-launch .rx-nav {
+    max-width: 1660px;
+    width: calc(100% - 192px);
+  }
+  html body .radr.radr-launch .rx-nav :is(.rx-nav-link, .rx-nav-signin) {
+    font-size: 16px !important;
+  }
+  html body .radr.radr-launch .rx-nav-bar {
+    min-height: 78px;
+  }
+  html body .radr.radr-launch .rx-nav-lockup--mark {
+    width: 40px !important;
+  }
+  .rm-research-track span {
+    font-size: 18px;
+    padding-block: 28px;
+  }
+}

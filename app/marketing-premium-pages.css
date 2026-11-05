@@ -1026,3 +1026,29 @@ html body .radr.rm-premium:has(.rx-nav) #surfaces {
     grid-template-columns: 1fr;
   }
 }
+/* Wide displays get a composed reading area rather than stretched body copy. */
+@media (min-width: 2200px) {
+  html body .radr.rm-premium .rx30 {
+    --rx30-shell: min(1660px, calc(100% - 192px));
+  }
+  html body .radr.rm-premium .rx30 .rx30-shell {
+    width: var(--rx30-shell);
+  }
+  html body .radr.rm-premium .rx30 .rx30-bleed-h1 {
+    font-size: 88px;
+    line-height: 1.06;
+  }
+  html body .radr.rm-premium .rx30 .rx30-lead,
+  html body .radr.rm-premium .rx30 .rx30-bleed-lead {
+    font-size: 22px;
+  }
+  html body .radr.rm-premium .rm-plan-card {
+    padding: 36px;
+  }
+  html body .radr.rm-premium .rm-plan-card h3 {
+    font-size: 34px;
+  }
+  html body .radr.rm-premium .rm-compare-table {
+    font-size: 17px;
+  }
+}

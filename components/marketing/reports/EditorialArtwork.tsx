@@ -1,5 +1,20 @@
 const topics: Record<string, { label: string; words: string[]; kind: string }> =
   {
+    "restaurant-profitability-beyond-revenue": {
+      label: "SALES → COSTS → CONTRIBUTION",
+      words: ["SERVICE", "COST", "CONTRIBUTION"],
+      kind: "capacity",
+    },
+    "hotel-distribution-contribution": {
+      label: "THE ECONOMICS OF EVERY STAY",
+      words: ["ROOM", "CHANNEL", "CONTRIBUTION"],
+      kind: "hotel",
+    },
+    "kitchen-waste-measured-value": {
+      label: "MEASURE → DECIDE → VERIFY",
+      words: ["BUY", "PREPARE", "PROTECT"],
+      kind: "recovery",
+    },
     "the-hidden-cost-of-your-bestseller": {
       label: "WHEN DEMAND MEETS CAPACITY",
       words: ["BUY", "LABOR", "SELL"],

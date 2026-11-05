@@ -116,7 +116,11 @@ function SelectField({
   return (
     <label className="vc-field">
       <span>{label}</span>
-      <select value={value ?? ""} onChange={(e) => onChange(e.target.value)}>
+      <select
+        aria-label={label}
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value)}
+      >
         <option value="" disabled>
           Choose…
         </option>

@@ -5,6 +5,19 @@ export type EditorialContent = {
   metaDescription: string;
   tags: string[];
   sections: { heading: string; paragraphs: string[] }[];
+  research?: {
+    title: string;
+    caption: string;
+    rows: { label: string; value: number; display: string }[];
+    sources: { title: string; url: string; scope: string }[];
+    calculation: {
+      title: string;
+      assumptions: string;
+      formula: string;
+      result: string;
+      limitation: string;
+    };
+  };
 };
 export const EDITORIAL_2026: Record<string, EditorialContent> = {
   peakCapacity: {

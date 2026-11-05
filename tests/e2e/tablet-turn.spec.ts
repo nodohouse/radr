@@ -18,8 +18,8 @@ test("native scroll reveals the readable reverse face and returns to the front w
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  for (const width of [1512, 820, 390]) {
-    await page.setViewportSize({ width, height: 982 });
+  for (const width of [3840, 1920, 1512, 820, 390]) {
+    await page.setViewportSize({ width, height: width === 3840 ? 2160 : 982 });
     await page.goto(base + "/en");
     const stage = page.locator(".rsc-scroll-stage");
     await expect(stage).toHaveAttribute("data-ready", "true");

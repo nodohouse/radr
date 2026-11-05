@@ -1,7 +1,11 @@
+import { RESEARCH_2026 } from "./research2026";
 import { EDITORIAL_2026, type EditorialContent } from "./editorial2026";
 /** Static blog catalog - SEO surfaces for humans and AI crawlers. */
 
 export type BlogSlug =
+  | "restaurant-profitability-beyond-revenue"
+  | "hotel-distribution-contribution"
+  | "kitchen-waste-measured-value"
   | "a-supplier-credit-is-not-recovered-money"
   | "the-forecast-gap-needs-a-decision"
   | "a-full-hotel-can-still-have-a-margin-problem"
@@ -17,6 +21,9 @@ export type BlogSlug =
   | "ask-radr-operating-evidence";
 
 export type BlogPostKey =
+  | "restaurantEconomics"
+  | "hotelDistribution"
+  | "kitchenWaste"
   | "recoveryEvidence"
   | "cfoForecast"
   | "hotelContribution"
@@ -51,13 +58,39 @@ export type BlogPostMeta = {
 /** Newest first. Featured = credits-flagged-never-cashed. */
 export const BLOG_POSTS: BlogPostMeta[] = [
   {
+    slug: "restaurant-profitability-beyond-revenue",
+    key: "restaurantEconomics",
+    date: "2026-11-05",
+    readingMinutes: 6,
+    territory: "LABOR",
+    content: RESEARCH_2026.restaurantEconomics,
+    featured: true,
+  },
+  {
+    slug: "hotel-distribution-contribution",
+    key: "hotelDistribution",
+    date: "2026-11-05",
+    readingMinutes: 6,
+    territory: "SELL",
+    content: RESEARCH_2026.hotelDistribution,
+  },
+  {
+    slug: "kitchen-waste-measured-value",
+    key: "kitchenWaste",
+    date: "2026-11-05",
+    readingMinutes: 6,
+    territory: "BUY",
+    content: RESEARCH_2026.kitchenWaste,
+  },
+
+  {
     slug: "the-hidden-cost-of-your-bestseller",
     key: "peakCapacity",
     date: "2026-11-03",
     readingMinutes: 5,
     territory: "SELL",
     content: EDITORIAL_2026.peakCapacity,
-    featured: true,
+    featured: false,
   },
   {
     slug: "a-full-hotel-can-still-have-a-margin-problem",
