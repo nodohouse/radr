@@ -265,24 +265,7 @@
   font-size: 11px;
   line-height: 1.7;
 }
-.rpb-figure figcaption button {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  color: #365577;
-  border: 1px solid #b6cfe9;
-  background: #ffffffad;
-  border-radius: 30px;
-  font: inherit;
-  padding: 7px 11px;
-  cursor: pointer;
-  min-height: 36px;
-}
-.rpb-figure figcaption button span {
-  font-family: Arial, sans-serif;
-}
-.rpb-stage:focus-visible,
-.rpb-figure button:focus-visible {
+.rpb-stage:focus-visible {
   outline: 3px solid #0870ed;
   outline-offset: 4px;
 }
@@ -377,24 +360,4 @@
   .rpb-stage {
     height: 330px;
   }
-}
-
-.rpb-figure button .rpb-pause-icon {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: linear-gradient(
-    to right,
-    currentColor 0 3px,
-    transparent 3px 6px,
-    currentColor 6px 9px,
-    transparent 9px
-  );
-}
-.rpb-figure button .rpb-resume-icon {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: currentColor;
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }

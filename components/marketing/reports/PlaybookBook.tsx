@@ -14,7 +14,6 @@ export function PlaybookBook({ href = report.path }: { href?: string }) {
   const reduced = useReducedMotion();
   const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(true);
-  const [paused, setPaused] = useState(false);
   useEffect(() => {
     setReady(true);
     const sync = () => setVisible(document.visibilityState === "visible");
@@ -22,7 +21,7 @@ export function PlaybookBook({ href = report.path }: { href?: string }) {
     document.addEventListener("visibilitychange", sync);
     return () => document.removeEventListener("visibilitychange", sync);
   }, []);
-  const running = ready && inView && visible && !paused && !reduced;
+  const running = ready && inView && visible && !reduced;
   return (
     <figure
       ref={stage}
@@ -80,24 +79,7 @@ export function PlaybookBook({ href = report.path }: { href?: string }) {
       </span>
       <figcaption>
         <span>Actual pages. A closer look inside.</span>
-        {ready && !reduced ? (
-          <button
-            type="button"
-            aria-pressed={paused}
-            onClick={() => setPaused((value) => !value)}
-            aria-label={
-              paused ? "Resume book animation" : "Pause book animation"
-            }
-          >
-            {paused ? "Resume motion" : "Pause motion"}
-            <span
-              aria-hidden="true"
-              className={paused ? "rpb-resume-icon" : "rpb-pause-icon"}
-            />
-          </button>
-        ) : (
-          <span>Research · decision worksheet</span>
-        )}
+        <span>Research · decision worksheet</span>
       </figcaption>
     </figure>
   );

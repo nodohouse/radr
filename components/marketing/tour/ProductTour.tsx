@@ -127,14 +127,9 @@ const BEATS: Beat[] = [
   },
 ];
 
-function ProductTourOverlay({
-  onClose,
-}: {
-  onClose: () => void;
-}) {
+function ProductTourOverlay({ onClose }: { onClose: () => void }) {
   const reduced = useReducedMotionSafe();
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const beat = BEATS[index]!;
   const isLast = index === BEATS.length - 1;
 
@@ -148,19 +143,18 @@ function ProductTourOverlay({
       if (e.key === "ArrowLeft") {
         setIndex((i) => Math.max(i - 1, 0));
       }
-      if (e.key === "p" || e.key === "P") setPaused((p) => !p);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
   useEffect(() => {
-    if (reduced || paused || isLast) return;
+    if (reduced) return;
     const t = window.setTimeout(() => {
-      setIndex((i) => Math.min(i + 1, BEATS.length - 1));
+      setIndex((i) => (i + 1) % BEATS.length);
     }, beat.dwell);
     return () => clearTimeout(t);
-  }, [index, paused, reduced, isLast, beat.dwell]);
+  }, [index, reduced, beat.dwell]);
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -180,15 +174,6 @@ function ProductTourOverlay({
       <div className="rx-tour-chrome">
         <span>RADR · Product story · Illustrative</span>
         <div className="rx-tour-chrome-actions">
-          {!reduced ? (
-            <button
-              type="button"
-              className="rx-tour-btn"
-              onClick={() => setPaused((p) => !p)}
-            >
-              {paused ? "Play" : "Pause"}
-            </button>
-          ) : null}
           <button type="button" className="rx-tour-btn" onClick={onClose}>
             Close · Esc
           </button>
@@ -196,17 +181,27 @@ function ProductTourOverlay({
       </div>
 
       <div className="rx-tour-stage">
-        <div className="rx-tour-media rx-tour-media--mineral" aria-hidden="true" />
+        <div
+          className="rx-tour-media rx-tour-media--mineral"
+          aria-hidden="true"
+        />
         <div className="rx-tour-copy">
           <p className="rx-tour-beat">{beat.beat}</p>
           <h2 className="rx-tour-line">{beat.line}</h2>
           {beat.sub ? (
-            <p className="rx-tour-sub" data-green={beat.green ? "true" : undefined}>
+            <p
+              className="rx-tour-sub"
+              data-green={beat.green ? "true" : undefined}
+            >
               {beat.sub}
             </p>
           ) : null}
           {isLast ? (
-            <NextLink href="/signup?intent=demo&next=/app/enter" className="rx-tour-close-cta" onClick={onClose}>
+            <NextLink
+              href="/signup?intent=demo&next=/app/enter"
+              className="rx-tour-close-cta"
+              onClick={onClose}
+            >
               Put one operating problem on RADR →
             </NextLink>
           ) : null}

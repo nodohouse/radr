@@ -36,7 +36,7 @@ test("homepage closing feature exposes real practical tools and the gated reques
     (await page.request.get(base + "/api/reports/download")).status(),
   ).toBe(403);
 });
-test("book opens and turns, pauses on request and stops when offscreen without layout jumps", async ({
+test("book loops without playback controls or hover stops and stops only when offscreen", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -55,18 +55,10 @@ test("book opens and turns, pauses on request and stops when offscreen without l
     .locator(".rpb-cover")
     .evaluate((e) => getComputedStyle(e).transform);
   expect(first).not.toBe(second);
-  await figure.getByRole("button", { name: "Pause book animation" }).click();
-  await expect(figure).toHaveAttribute("data-running", "false");
-  const paused = await page
-    .locator(".rpb-cover")
-    .evaluate((e) => getComputedStyle(e).transform);
-  await page.waitForTimeout(400);
-  expect(
-    await page
-      .locator(".rpb-cover")
-      .evaluate((e) => getComputedStyle(e).transform),
-  ).toBe(paused);
-  await figure.getByRole("button", { name: "Resume book animation" }).click();
+  await expect(figure.getByRole("button")).toHaveCount(0);
+  await figure.hover();
+  await expect(figure).toHaveAttribute("data-running", "true");
+  await figure.locator("a").focus();
   await expect(figure).toHaveAttribute("data-running", "true");
   expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBe(
     height,
