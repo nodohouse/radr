@@ -168,15 +168,55 @@
     "heroLine1": "The decision layer.",
     "heroLine2": "Every system underneath.",
     "lead": "Your operation leaves signals. RADR turns them into decisions",
+    "lock": "Dein Betrieb liefert Signale. RADR macht daraus Entscheidungen.",
+    "openBrief": "So entscheidet RADR",
     "contact": "Demo buchen",
     "flowLabel": "How RADR sits on your stack",
-    "flow": {
-      "sources": "Sources",
-      "radr": "RADR",
-      "findings": "Findings",
-      "actions": "Actions",
-      "value": "Verified Value"
+    "systemsCaption": "Sie erfassen",
+    "decidesCaption": "RADR entscheidet",
+    "humansCaption": "Menschen gestalten Gastfreundschaft",
+    "decision": {
+      "phase": "Abendservice · Soho · New York",
+      "headline": "Leere Tische ≠ freie Kapazität.",
+      "exposed": "620 USD",
+      "exposedLabel": "Deckungsbeitrag gefährdet · heute Abend",
+      "action": "12 Minuten warten. Noch keine neuen Gäste platzieren.",
+      "deadline": "Vor der nächsten Reservierungswelle prüfen"
     },
+    "attention": {
+      "needs": "Braucht dich",
+      "handling": "In Bearbeitung",
+      "verified": "Verifiziert"
+    },
+    "example": {
+      "kicker": "Eine Entscheidung",
+      "title": "Vom Signal zum verifizierten Wert.",
+      "lead": "Entscheidung D-1911 · Soho · New York. Illustrative Produktdaten.",
+      "traceAria": "Entscheidungspfad von Quellsystemen zum verifizierten Wert",
+      "steps": {
+        "event": {
+          "label": "Ereignis im POS und beim Lieferanten",
+          "detail": "Gastraum 78 % · 38 erwartete Gäste · Küche 92 % · Lieferung +31 %."
+        },
+        "exposure": {
+          "label": "Gefährdeter Wert",
+          "detail": "620 USD Deckungsbeitrag gegenüber sofortiger Platzierung bei einem Kapazitätsengpass."
+        },
+        "prepared": {
+          "label": "Entscheidung vorbereitet",
+          "detail": "Die nächste Reservierungswelle um 12 Minuten verschieben. Vor Freigabe prüfen; keine externe Ausführung."
+        },
+        "approve": {
+          "label": "Freigeben",
+          "detail": "Menschliche Prüfung erforderlich. Vorbereitete Aktionen werden nicht ins POS zurückgeschrieben."
+        },
+        "verified": {
+          "label": "Illustrativer abgeschlossener Service",
+          "detail": "590 USD heute Abend geschützt. Ein separates Beispiel für einen abgeschlossenen Service, keine Live-Ausführung."
+        }
+      }
+    },
+    "surfaceKicker": "Zentrale Ansicht",
     "chaptersTitle": "Explore",
     "chapters": {
       "controlCenter": {
@@ -204,6 +244,7 @@
         "desc": "What the week is heading toward."
       }
     },
+    "depthLine": "Eine Ansicht: das Briefing. Verbindungen und Betriebsmodell versorgen den digitalen Zwilling im Hintergrund.",
     "linkConnections": "Connections →",
     "linkModel": "Operating model →",
     "linkHow": "How it works →",

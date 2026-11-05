@@ -13,7 +13,7 @@ export function securityHeaders(): { key: string; value: string }[] {
     "frame-ancestors 'none'",
     "form-action 'self'",
     // Next.js requires inline scripts/styles in App Router; tighten further when nonces land.
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+    `script-src 'self' 'unsafe-inline'${isProd ? "" : " 'unsafe-eval'"}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https:",
     "font-src 'self' data:",

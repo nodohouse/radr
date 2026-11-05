@@ -1,6 +1,9 @@
 {
   "product": "Platform",
+  "platform": "Platform",
   "solutions": "Solutions",
+  "valueCalculator": "Calculateur de valeur",
+  "controlCenter": "Control Center",
   "industries": "Secteurs",
   "how": "How it works",
   "pricing": "Pricing",
@@ -20,6 +23,7 @@
   "why": "Why RADR",
   "approach": "Our approach",
   "about": "About RADR",
+  "blog": "Blog",
   "developers": "Developers",
   "security": "Trust & Security",
   "contact": "Contact",
@@ -218,6 +222,10 @@
           "label": "About RADR",
           "desc": "The company and the idea behind it."
         },
+        "blog": {
+          "label": "Blog",
+          "desc": "Field notes on the Decision Gap and hospitality economics."
+        },
         "developers": {
           "label": "Developers",
           "desc": "APIs, connectors and how to build on RADR."
@@ -229,10 +237,6 @@
         "contact": {
           "label": "Contact",
           "desc": "Talk to us."
-        },
-        "blog": {
-          "label": "Blog",
-          "desc": "Field notes on the Decision Gap and hospitality economics."
         }
       },
       "brandLine": "Conçu pour celles et ceux qui font tourner l’hospitalité.",
@@ -243,6 +247,9 @@
         "why": {
           "label": "Pourquoi RADR"
         },
+        "blog": {
+          "label": "Blog"
+        },
         "security": {
           "label": "Trust & Security"
         },
@@ -251,9 +258,6 @@
         },
         "contact": {
           "label": "Contact"
-        },
-        "blog": {
-          "label": "Blog"
         },
         "journal": {
           "label": "Journal",
@@ -305,25 +309,13 @@
               "label": "Control Center",
               "desc": "What needs you · what RADR handles."
             },
-            "decisions": {
-              "label": "Decisions",
-              "desc": "One primary Decision at a time."
-            },
-            "floor": {
-              "label": "RADR Floor",
-              "desc": "Decision layer reaches FOH — not a POS."
-            },
-            "value": {
-              "label": "Value",
-              "desc": "Identified → Verified lifecycle."
-            },
-            "memorySurface": {
-              "label": "Memory",
-              "desc": "Patterns that earn Autopilot."
-            },
             "live": {
               "label": "Live",
               "desc": "What is happening now — pressure, objects, intervene."
+            },
+            "decisions": {
+              "label": "Decisions",
+              "desc": "One primary Decision at a time."
             },
             "operations": {
               "label": "Operations",
@@ -332,6 +324,14 @@
             "intelligence": {
               "label": "Intelligence",
               "desc": "Why this is happening — drivers and economics."
+            },
+            "value": {
+              "label": "Value",
+              "desc": "Identified → Verified lifecycle."
+            },
+            "memorySurface": {
+              "label": "Memory",
+              "desc": "Patterns that earn Autopilot."
             },
             "dataHealth": {
               "label": "Data Health",
@@ -482,10 +482,6 @@
       }
     }
   },
-  "platform": "Platform",
   "resources": "Ressources",
-  "controlCenter": "Control Center",
-  "blog": "Blog",
-  "footerValueLeaks": "Where value leaks",
-  "valueCalculator": "Calculateur de valeur"
+  "footerValueLeaks": "Where value leaks"
 }

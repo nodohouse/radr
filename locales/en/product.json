@@ -176,12 +176,12 @@
     "decidesCaption": "RADR decides",
     "humansCaption": "Humans provide the hospitality",
     "decision": {
-      "phase": "Pre-shift · Dinner · Soho · New York",
+      "phase": "Dinner service · Soho · New York",
       "headline": "Empty tables ≠ available capacity.",
       "exposed": "$620",
       "exposedLabel": "contribution exposed · tonight",
       "action": "Wait 12 minutes. Don't seat yet.",
-      "deadline": "Decide by 18:53"
+      "deadline": "Review before the next seating wave"
     },
     "attention": {
       "needs": "Needs you",
@@ -190,7 +190,7 @@
     },
     "example": {
       "kicker": "One Decision",
-      "title": "From signal to verified euros.",
+      "title": "From signal to verified value.",
       "lead": "Decision D-1911 · Soho · New York. Illustrative product data.",
       "traceAria": "Decision trace from systems of record to verified value",
       "steps": {
@@ -204,15 +204,15 @@
         },
         "prepared": {
           "label": "Decision prepared",
-          "detail": "Wait 12 min · throttle delivery · feature fast dish. Resume seating at 18:54."
+          "detail": "Pace the next seating wave by 12 minutes. Review before approval; no external execution."
         },
         "approve": {
           "label": "Approve",
-          "detail": "Manager approves. Prepared — not written back to POS."
+          "detail": "Human review required. Prepared actions are not written back to the POS."
         },
         "verified": {
-          "label": "Next-day verified",
-          "detail": "$1,590 protected. Feature swap executed. Variance −$50."
+          "label": "Illustrative completed service",
+          "detail": "$590 protected tonight. A separate completed-service example, not live execution."
         }
       }
     },
@@ -244,7 +244,7 @@
         "desc": "Predict inputs inside a Decision — not a Platform surface."
       }
     },
-    "depthLine": "One surface: the brief. Connections and the operating model feed the twin — quietly.",
+    "depthLine": "One surface: the brief. Connections and the operating model feed the twin, quietly.",
     "linkConnections": "Connections →",
     "linkModel": "Operating model →",
     "linkHow": "How it works →",

@@ -142,7 +142,7 @@ export const onboardingPatchSchema = z.object({
       "first_decision",
     ])
     .optional(),
-  milestones: z.record(z.string()).optional(),
+  milestones: z.record(z.string(), z.string()).optional(),
   demoEnabled: z.boolean().optional(),
   tourDismissed: z.boolean().optional(),
   checklistDismissed: z.boolean().optional(),

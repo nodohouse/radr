@@ -6,6 +6,8 @@
 type Bucket = { count: number; resetAt: number };
 
 const buckets = new Map<string, Bucket>();
+const MAX_BUCKETS = 10000;
+let lastSweepAt = 0;
 
 export type RateLimitResult = {
   ok: boolean;
@@ -19,9 +21,16 @@ export function rateLimit(opts: {
   windowMs: number;
 }): RateLimitResult {
   const now = Date.now();
+  if (now - lastSweepAt >= 60000) {
+    for (const [key, bucket] of buckets)
+      if (bucket.resetAt <= now) buckets.delete(key);
+    lastSweepAt = now;
+  }
   const existing = buckets.get(opts.key);
 
   if (!existing || existing.resetAt <= now) {
+    if (!existing && buckets.size >= MAX_BUCKETS)
+      return { ok: false, remaining: 0, retryAfterSec: 60 };
     buckets.set(opts.key, { count: 1, resetAt: now + opts.windowMs });
     return { ok: true, remaining: opts.limit - 1, retryAfterSec: 0 };
   }
@@ -55,4 +64,5 @@ export function clientKeyFromRequest(req: Request, prefix: string): string {
 /** Test helper - clear buckets between tests. */
 export function resetRateLimitBuckets(): void {
   buckets.clear();
+  lastSweepAt = 0;
 }

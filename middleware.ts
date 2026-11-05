@@ -21,10 +21,16 @@ const protectedPrefixes = [
 
 const authPages = ["/login", "/signup", "/forgot-password", "/reset-password"];
 
-function stripLocale(pathname: string): { locale: string | null; path: string } {
+function stripLocale(pathname: string): {
+  locale: string | null;
+  path: string;
+} {
   const parts = pathname.split("/").filter(Boolean);
   const maybe = parts[0];
-  if (maybe && routing.locales.includes(maybe as (typeof routing.locales)[number])) {
+  if (
+    maybe &&
+    routing.locales.includes(maybe as (typeof routing.locales)[number])
+  ) {
     const rest = "/" + parts.slice(1).join("/");
     return { locale: maybe, path: rest === "/" ? "/" : rest };
   }
@@ -85,14 +91,20 @@ function repairLeakedLocaleRewrite(
 }
 
 /** Unauthenticated /app → signup (demo unlock). Other protected → login. */
-function redirectToAuth(request: NextRequest, nextPath: string, preferSignup: boolean) {
+function redirectToAuth(
+  request: NextRequest,
+  nextPath: string,
+  preferSignup: boolean,
+) {
   const preferred =
     request.cookies.get("radr_locale")?.value || routing.defaultLocale;
-  const locale =
-    (routing.locales as readonly string[]).includes(preferred)
-      ? preferred
-      : routing.defaultLocale;
-  const safeNext = safeDemoNext(nextPath, preferSignup ? "/app/enter" : "/onboarding");
+  const locale = (routing.locales as readonly string[]).includes(preferred)
+    ? preferred
+    : routing.defaultLocale;
+  const safeNext = safeDemoNext(
+    nextPath,
+    preferSignup ? "/app/enter" : "/onboarding",
+  );
   const authPath = preferSignup ? "signup" : "login";
   const url = new URL(`/${locale}/${authPath}`, request.url);
   if (preferSignup) {
@@ -110,6 +122,7 @@ export function middleware(request: NextRequest) {
     const sessionCookie = getSessionCookie(request);
     // Local / CI product QA only — never set RADR_E2E_UNLOCK on public prod.
     const e2eUnlock =
+      process.env.NODE_ENV !== "production" &&
       process.env.RADR_E2E_UNLOCK === "1" &&
       (request.cookies.get("radr_e2e")?.value === "1" ||
         request.headers.get("x-radr-e2e") === "1");
@@ -126,8 +139,7 @@ export function middleware(request: NextRequest) {
       process.env.NEXT_PUBLIC_RADR_REQUIRE_AUTH === "true" ||
       radrEnv === "LIVE" ||
       radrEnv === "SANDBOX";
-    const isProtected =
-      isProtectedPrefix || (isAppPath && requireAuth);
+    const isProtected = isProtectedPrefix || (isAppPath && requireAuth);
 
     if (isProtected && !sessionCookie && !e2eUnlock) {
       const full = `${pathname}${request.nextUrl.search}`;
@@ -155,12 +167,17 @@ export function middleware(request: NextRequest) {
   );
 
   if (isAuthPage && sessionCookie) {
-    const fallback = request.nextUrl.searchParams.get("intent") === "workspace" ? "/onboarding" : "/app/enter";
+    const fallback =
+      request.nextUrl.searchParams.get("intent") === "workspace"
+        ? "/onboarding"
+        : "/app/enter";
     const next = safeDemoNext(
       request.nextUrl.searchParams.get("next"),
       fallback,
     );
-    return withSecurityHeaders(NextResponse.redirect(new URL(next, request.url)));
+    return withSecurityHeaders(
+      NextResponse.redirect(new URL(next, request.url)),
+    );
   }
 
   const response = repairLeakedLocaleRewrite(request, intlMiddleware(request));

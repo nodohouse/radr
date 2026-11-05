@@ -168,15 +168,55 @@
     "heroLine1": "The decision layer.",
     "heroLine2": "Every system underneath.",
     "lead": "Your operation leaves signals. RADR turns them into decisions",
+    "lock": "Je operatie geeft signalen. RADR maakt er beslissingen van.",
+    "openBrief": "Zo beslist RADR",
     "contact": "Demo boeken",
     "flowLabel": "How RADR sits on your stack",
-    "flow": {
-      "sources": "Sources",
-      "radr": "RADR",
-      "findings": "Findings",
-      "actions": "Actions",
-      "value": "Verified Value"
+    "systemsCaption": "Zij registreren",
+    "decidesCaption": "RADR beslist",
+    "humansCaption": "Mensen zorgen voor gastvrijheid",
+    "decision": {
+      "phase": "Avondservice · Soho · New York",
+      "headline": "Lege tafels ≠ beschikbare capaciteit.",
+      "exposed": "620 USD",
+      "exposedLabel": "contributiemarge blootgesteld · vanavond",
+      "action": "Wacht 12 minuten. Plaats nog geen nieuwe gasten.",
+      "deadline": "Beoordeel vóór de volgende reserveringsgolf"
     },
+    "attention": {
+      "needs": "Heeft je nodig",
+      "handling": "In behandeling",
+      "verified": "Geverifieerd"
+    },
+    "example": {
+      "kicker": "Eén beslissing",
+      "title": "Van signaal naar geverifieerde waarde.",
+      "lead": "Beslissing D-1911 · Soho · New York. Illustratieve productdata.",
+      "traceAria": "Beslissingsspoor van bronsystemen naar geverifieerde waarde",
+      "steps": {
+        "event": {
+          "label": "Gebeurtenis in POS en bij leverancier",
+          "detail": "Zaal 78% · 38 verwachte gasten · keuken 92% · bezorging +31%."
+        },
+        "exposure": {
+          "label": "Blootgestelde waarde",
+          "detail": "620 USD contributiemarge ten opzichte van direct plaatsen tijdens een capaciteitsknelpunt."
+        },
+        "prepared": {
+          "label": "Beslissing voorbereid",
+          "detail": "Stel de volgende reserveringsgolf 12 minuten uit. Beoordeel vóór goedkeuring; geen externe uitvoering."
+        },
+        "approve": {
+          "label": "Goedkeuren",
+          "detail": "Menselijke beoordeling vereist. Voorbereide acties worden niet teruggeschreven naar het POS."
+        },
+        "verified": {
+          "label": "Illustratieve afgeronde service",
+          "detail": "590 USD beschermd vanavond. Een afzonderlijk voorbeeld van een afgeronde service, geen live uitvoering."
+        }
+      }
+    },
+    "surfaceKicker": "Primaire weergave",
     "chaptersTitle": "Explore",
     "chapters": {
       "controlCenter": {
@@ -204,6 +244,7 @@
         "desc": "What the week is heading toward."
       }
     },
+    "depthLine": "Eén weergave: de briefing. Verbindingen en het operationele model voeden de digitale tweeling op de achtergrond.",
     "linkConnections": "Connections →",
     "linkModel": "Operating model →",
     "linkHow": "How it works →",

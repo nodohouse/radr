@@ -433,5 +433,11 @@
         "body": "Files, APIs, or a mature stack — RADR meets you there."
       }
     ]
+  },
+  "gtmBridge": {
+    "kicker": "Wo wir beginnen",
+    "title": "Zuerst die Wirtschaftlichkeit belegen.",
+    "body": "RADR beginnt dort, wo sich der wirtschaftliche Nutzen am schnellsten belegen lässt: Rückgewinnung und Abstimmung.",
+    "close": "Rückgewinnung ist der Anfang, nicht die Grenze."
   }
 }

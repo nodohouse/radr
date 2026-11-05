@@ -121,10 +121,34 @@ async function visit(page: Page, path: string) {
     "overflow " + path,
   ).toBe(false);
 }
-for (const [index, prospect] of prospects.entries())
-  test(`${index + 1}. ${prospect.role}: explore, calculate, compare, read`, async ({
+for (const [index, profile] of prospects.entries())
+  test(`${index + 1}. ${profile.role}: explore, calculate, compare, read`, async ({
     page,
   }, testInfo) => {
+    const variant = testInfo.repeatEachIndex;
+    const matrix = process.env.RADR_RELEASE_MATRIX === "1";
+    const prospect = {
+      ...profile,
+      ...(matrix
+        ? {
+            width: [390, 820, 1280, 1920, 3840][variant % 5],
+            currency: (["USD", "EUR", "GBP", "AED", "SGD", "AUD"] as const)[
+              (index + variant) % 6
+            ],
+            revenue: [
+              "u2",
+              "2_5",
+              "5_10",
+              "10_25",
+              "25_50",
+              "50_100",
+              "100_250",
+              "250_500",
+              "500_plus",
+            ][(index + variant) % 9],
+          }
+        : {}),
+    };
     const errors: string[] = [];
     page.on("pageerror", (e) =>
       errors.push(`${page.url()}: ${e.stack || e.message}`),
@@ -140,9 +164,10 @@ for (const [index, prospect] of prospects.entries())
       "animation-name",
       "none",
     );
-    if (index === 2)
+    if (index === 2 && variant < 5)
       await page.screenshot({
-        path: testInfo.outputPath("homepage-4k.png"),
+        timeout: 60000,
+        path: testInfo.outputPath(`homepage-${prospect.width}.png`),
         fullPage: true,
       });
     await visit(page, "/product");
@@ -251,6 +276,18 @@ for (const [index, prospect] of prospects.entries())
       formatMoneyIntl(result.total.modeled, prospect.currency),
     );
     await expect(page.locator(".vc-res-value")).toContainText("per year");
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth > innerWidth + 1,
+      ),
+      "Calculated result must fit the viewport",
+    ).toBe(false);
+    expect(
+      await page
+        .locator(".vc-res-value p")
+        .evaluate((node) => node.scrollWidth > node.clientWidth + 1),
+      "Annual value range must remain readable",
+    ).toBe(false);
     await expect(page.locator("main")).toContainText(/modeled/i);
     await testInfo.attach("modeled-calculation", {
       body: JSON.stringify(
@@ -294,6 +331,7 @@ for (const [index, prospect] of prospects.entries())
     );
     if (index === 5)
       await page.screenshot({
+        timeout: 60000,
         path: testInfo.outputPath("article-mobile.png"),
         fullPage: true,
       });

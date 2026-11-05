@@ -75,7 +75,7 @@ function PostMedia({
   const id = BLOG_HERO_BY_SLUG[slug];
   if (!id) return <EditorialArtwork slug={slug} />;
   const img = marketingImage(id);
-  const max = featured ? Math.min(img.cssMax, 520) : Math.min(img.cssMax, 360);
+  const max = featured ? Math.min(img.cssMax, 720) : Math.min(img.cssMax, 480);
   return (
     <figure className="rx-res-card-media">
       <Image
@@ -159,9 +159,6 @@ export default async function BlogIndexPage({ params }: Props) {
           </div>
         </section>
 
-        <div className="rx-shell">
-          <ReportPromo />
-        </div>
         <section className="rx-res-list" data-nav-theme="light">
           <div className="rx-shell-wide rx-res-pub-frame">
             {featured ? (
@@ -186,7 +183,10 @@ export default async function BlogIndexPage({ params }: Props) {
               return (
                 <div key={sec} className="rx-res-section">
                   <h2 className="rx-res-section-title">{SECTION_LABEL[sec]}</h2>
-                  <ul className="rx-res-grid rx-res-grid-editorial">
+                  <ul
+                    className="rx-res-grid rx-res-grid-editorial"
+                    data-count={posts.length}
+                  >
                     {posts.map((post) => (
                       <li key={post.slug}>
                         <PostCard
@@ -210,15 +210,13 @@ export default async function BlogIndexPage({ params }: Props) {
               );
             })}
 
+            <ReportPromo />
             <div className="rx-res-cta-band">
-              <Link
-                href="/contact?intent=recovery-pilot"
-                className="rx-btn rx-btn-primary"
-              >
-                {t("ctaPilot")} <span aria-hidden="true">→</span>
+              <Link href="/product" className="rx-btn rx-btn-primary">
+                Explore the platform <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/solutions" className="rx-btn rx-btn-ghost">
-                {t("ctaRecover")}
+              <Link href="/value-calculator" className="rx-btn rx-btn-ghost">
+                Model your operation
               </Link>
             </div>
           </div>

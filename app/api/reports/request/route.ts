@@ -1,4 +1,8 @@
 import { NextResponse } from "next/server";
+import {
+  readJsonWithinLimit,
+  RequestBodyError,
+} from "@/lib/security/request-body";
 import { randomUUID } from "node:crypto";
 import { sameOriginMutation } from "@/lib/onboarding/requiredFields";
 import { clientKeyFromRequest, rateLimit } from "@/lib/security/rate-limit";
@@ -33,15 +37,12 @@ export async function POST(request: Request) {
         },
       },
     );
-  if (Number(request.headers.get("content-length") || 0) > 12000)
-    return reply({ error: "The request is too large." }, 413);
   let body: unknown;
   try {
-    const raw = await request.text();
-    if (raw.length > 12000)
+    body = await readJsonWithinLimit(request, 12000);
+  } catch (error) {
+    if (error instanceof RequestBodyError && error.status === 413)
       return reply({ error: "The request is too large." }, 413);
-    body = JSON.parse(raw);
-  } catch {
     return reply({ error: "Please check the required fields." }, 400);
   }
   const parsed = reportLeadSchema.safeParse(body);

@@ -53,3 +53,325 @@
     line-height: 1.8 !important;
   }
 }
+
+/* One shared grid for the journal header, lead story, cards and article. */
+.radr .rx-res-pub > .rx-res-hero > .rx-shell,
+.radr .rx-res-pub > .rx-shell,
+.radr .rx-res-pub .rx-res-pub-frame {
+  width: calc(100% - 96px);
+  max-width: 1240px;
+  margin-inline: auto;
+}
+.radr .rx-res-pub .rx-res-list {
+  padding-top: 32px;
+}
+.radr .rx-res-pub .rx-res-pub-frame {
+  gap: 48px;
+}
+.radr .rx-res-pub-frame > .rx-res-section {
+  margin: 0;
+}
+.radr .rx-res-pub .rx-res-section-title {
+  margin: 0 0 20px !important;
+  font-size: 17px !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.radr .rx-res-pub .rx-res-grid-editorial {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.radr .rx-res-pub .rx-res-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 !important;
+  border: 1px solid #dbe6f2 !important;
+  border-radius: 20px !important;
+  min-width: 0;
+}
+.radr .rx-res-pub .rx-res-card-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px;
+  flex: 1;
+  min-width: 0;
+}
+.radr .rx-res-pub .rx-res-card-copy h2,
+.radr .rx-res-pub .rx-res-card-copy h3 {
+  margin: 0 !important;
+  font-size: 23px !important;
+  line-height: 1.25 !important;
+  max-width: none;
+  letter-spacing: -0.035em;
+}
+.radr .rx-res-pub .rx-res-card-copy > p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.radr .rx-res-pub .rx-res-read {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 11px;
+}
+.radr .rx-res-pub .rx-res-card-meta {
+  font-size: 10px;
+  line-height: 1.6;
+  gap: 6px 10px;
+}
+.radr .rx-res-pub .rx-res-card-media,
+.radr .rx-res-pub .rx-res-card > .rr-article-art {
+  margin: 0;
+  width: 100%;
+  height: 200px;
+  min-height: 0;
+  max-height: none;
+  flex-shrink: 0;
+  border-radius: 0;
+  padding: 22px;
+  box-sizing: border-box;
+}
+.radr .rx-res-pub .rx-res-card-media {
+  padding: 0;
+}
+.radr .rx-res-pub .rx-res-card-media img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  min-height: 0;
+  object-fit: cover;
+}
+.radr .rx-res-pub .rx-res-card > .rr-article-art svg {
+  height: 100px;
+  margin-block: 8px;
+}
+.radr .rx-res-pub .rx-res-card > .rr-article-art b {
+  font-size: 7px;
+  padding: 5px;
+}
+.radr .rx-res-pub .rx-res-card--feature {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  margin: 0;
+}
+.radr .rx-res-pub .rx-res-card--feature > .rr-article-art,
+.radr .rx-res-pub .rx-res-card--feature > .rx-res-card-media {
+  height: 100%;
+  min-height: 300px;
+}
+.radr .rx-res-pub .rx-res-card--feature > .rr-article-art svg {
+  height: 150px;
+}
+.radr .rx-res-pub .rx-res-card--feature .rx-res-card-copy {
+  padding: 36px;
+  justify-content: center;
+}
+.radr .rx-res-pub .rx-res-card--feature h2 {
+  font-size: 32px !important;
+}
+.radr .rx-res-pub .rx-res-card--feature .rx-res-read {
+  margin-top: 0;
+}
+/* A broad composition with a readable text measure and a useful evidence rail. */
+.radr .rx-res-article .rx-res-article-inner,
+.radr .rx-res-article .rx-res-article-art {
+  max-width: 1240px;
+}
+.radr .rx-res-article .rx-res-body {
+  max-width: 880px;
+}
+.radr .rx-res-article .rx-res-article-title {
+  max-width: 23ch;
+  font-size: clamp(40px, 4.3vw, 72px);
+}
+.radr .rx-res-article .rx-res-pull {
+  max-width: none;
+  padding: 28px 32px !important;
+}
+.radr .rx-res-article .rx-res-pull p {
+  font-size: clamp(18px, 1.6vw, 23px) !important;
+  line-height: 1.65 !important;
+}
+.radr .rx-res-article .rr-article-art {
+  min-height: 0;
+  padding: 28px;
+  height: 270px;
+  box-sizing: border-box;
+}
+.radr .rx-res-article .rr-article-art svg {
+  height: 140px;
+  margin-block: 12px;
+}
+.radr .rx-res-article .rr-evidence {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 24px;
+}
+.radr .rx-res-article .rr-evidence-sources {
+  grid-column: 1/-1;
+}
+.radr .rx-res-article .rr-evidence-chart,
+.radr .rx-res-article .rr-evidence-model {
+  padding: 28px;
+}
+.radr .rx-res-article .rr-evidence h2 {
+  font-size: 27px;
+}
+@media (min-width: 2200px) {
+  .radr .rx-res-pub > .rx-res-hero > .rx-shell,
+  .radr .rx-res-pub > .rx-shell,
+  .radr .rx-res-pub .rx-res-pub-frame,
+  .radr .rx-res-article .rx-res-article-inner,
+  .radr .rx-res-article .rx-res-article-art {
+    max-width: 1440px;
+  }
+  .radr .rx-res-article .rx-res-body {
+    max-width: 980px;
+  }
+}
+@media (max-width: 1050px) {
+  .radr .rx-res-pub .rx-res-grid-editorial {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .radr .rx-res-article .rr-evidence {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 900px) {
+  .radr .rx-res-pub > .rx-res-hero > .rx-shell,
+  .radr .rx-res-pub > .rx-shell,
+  .radr .rx-res-pub .rx-res-pub-frame {
+    width: calc(100% - 48px);
+  }
+  .radr .rx-res-pub .rx-res-card--feature .rx-res-card-copy {
+    padding: 26px;
+  }
+  .radr .rx-res-pub .rx-res-card--feature h2 {
+    font-size: 27px !important;
+  }
+}
+@media (max-width: 650px) {
+  .radr .rx-res-pub > .rx-res-hero > .rx-shell,
+  .radr .rx-res-pub > .rx-shell,
+  .radr .rx-res-pub .rx-res-pub-frame {
+    width: calc(100% - 36px);
+  }
+  .radr .rx-res-pub .rx-res-grid-editorial,
+  .radr .rx-res-pub .rx-res-card--feature {
+    grid-template-columns: 1fr;
+  }
+  .radr .rx-res-pub .rx-res-card--feature > .rr-article-art,
+  .radr .rx-res-pub .rx-res-card--feature > .rx-res-card-media {
+    height: 200px;
+    min-height: 0;
+  }
+  .radr .rx-res-pub .rx-res-card--feature > .rr-article-art svg {
+    height: 100px;
+  }
+  .radr .rx-res-pub .rx-res-pub-frame {
+    gap: 36px;
+  }
+  .radr .rx-res-article .rx-res-pull {
+    padding: 22px !important;
+  }
+  .radr .rx-res-article .rr-article-art {
+    height: 240px;
+    padding: 22px;
+  }
+  .radr .rx-res-article .rr-evidence-chart,
+  .radr .rx-res-article .rr-evidence-model {
+    padding: 22px;
+  }
+}
+.radr .rx-res-pub .rx-res-card-meta,
+.radr .rx-res-pub .rx-res-read {
+  font-size: 12px;
+}
+.radr .rx-res-pub .rx-res-terr {
+  color: #15477d !important;
+  border-color: #c6dbf3 !important;
+  background: #edf5ff !important;
+  opacity: 1;
+}
+@media (min-width: 1051px) {
+  .radr .rx-res-article .rx-res-body {
+    max-width: none;
+    gap: 44px;
+  }
+  .radr .rx-res-article .rx-res-body > .rx-res-section {
+    display: grid;
+    grid-template-columns: minmax(200px, 0.36fr) minmax(0, 1fr);
+    column-gap: 48px;
+    row-gap: 14px;
+    align-items: start;
+  }
+  .radr .rx-res-article .rx-res-body > .rx-res-section > h2 {
+    grid-column: 1;
+    margin: 0 !important;
+    font-size: 26px !important;
+  }
+  .radr .rx-res-article .rx-res-body > .rx-res-section > p {
+    grid-column: 2;
+    margin: 0;
+  }
+  .radr .rx-res-article .rx-res-body > .rx-res-section > h2 + p {
+    grid-row: 1;
+  }
+}
+/* Sparse topics keep a composed row rather than an orphan card and empty columns. */
+.radr .rx-res-pub .rx-res-grid-editorial[data-count="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.radr .rx-res-pub .rx-res-grid-editorial[data-count="1"] {
+  grid-template-columns: 1fr;
+}
+.radr .rx-res-pub .rx-res-grid-editorial[data-count="1"] .rx-res-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+}
+.radr
+  .rx-res-pub
+  .rx-res-grid-editorial[data-count="1"]
+  .rx-res-card
+  > .rx-res-card-media,
+.radr
+  .rx-res-pub
+  .rx-res-grid-editorial[data-count="1"]
+  .rx-res-card
+  > .rr-article-art {
+  height: 100%;
+  min-height: 240px;
+}
+.radr .rx-res-pub .rx-res-grid-editorial[data-count="1"] .rx-res-card-copy {
+  justify-content: center;
+  padding: 32px;
+}
+.radr .rx-res-pub .rx-res-grid-editorial[data-count="1"] .rx-res-read {
+  margin-top: 0;
+}
+@media (max-width: 650px) {
+  .radr .rx-res-pub .rx-res-grid-editorial[data-count="2"],
+  .radr .rx-res-pub .rx-res-grid-editorial[data-count="1"] .rx-res-card {
+    grid-template-columns: 1fr;
+  }
+  .radr
+    .rx-res-pub
+    .rx-res-grid-editorial[data-count="1"]
+    .rx-res-card
+    > .rx-res-card-media,
+  .radr
+    .rx-res-pub
+    .rx-res-grid-editorial[data-count="1"]
+    .rx-res-card
+    > .rr-article-art {
+    height: 200px;
+    min-height: 0;
+  }
+  .radr .rx-res-pub .rx-res-grid-editorial[data-count="1"] .rx-res-card-copy {
+    padding: 24px;
+  }
+}

@@ -13,10 +13,6 @@ const nextConfig: NextConfig = {
   // Avoid flaky webpack-runtime prerender races under parallel static generation.
   experimental: {
     cpus: 1,
-    // Anonymous Vercel temp deploys reject Edge middleware.
-    // Flag exists at runtime on Next 15.5; types lag behind.
-    // @ts-expect-error nodeMiddleware not yet on ExperimentalConfig
-    nodeMiddleware: true,
   },
   // Local PGlite / uploads must not be traced into serverless bundles.
   outputFileTracingIncludes: {

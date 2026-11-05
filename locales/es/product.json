@@ -168,15 +168,55 @@
     "heroLine1": "The decision layer.",
     "heroLine2": "Every system underneath.",
     "lead": "Your operation leaves signals. RADR turns them into decisions",
+    "lock": "Tu operación genera señales. RADR las convierte en decisiones.",
+    "openBrief": "Cómo decide RADR",
     "contact": "Reservar una demo",
     "flowLabel": "How RADR sits on your stack",
-    "flow": {
-      "sources": "Sources",
-      "radr": "RADR",
-      "findings": "Findings",
-      "actions": "Actions",
-      "value": "Verified Value"
+    "systemsCaption": "Ellos registran",
+    "decidesCaption": "RADR decide",
+    "humansCaption": "Las personas crean la hospitalidad",
+    "decision": {
+      "phase": "Servicio de cena · Soho · Nueva York",
+      "headline": "Mesas vacías ≠ capacidad disponible.",
+      "exposed": "620 USD",
+      "exposedLabel": "margen de contribución expuesto · esta noche",
+      "action": "Esperar 12 minutos. No sentar a nuevos clientes todavía.",
+      "deadline": "Revisar antes de la próxima oleada de reservas"
     },
+    "attention": {
+      "needs": "Te necesita",
+      "handling": "En curso",
+      "verified": "Verificado"
+    },
+    "example": {
+      "kicker": "Una decisión",
+      "title": "De la señal al valor verificado.",
+      "lead": "Decisión D-1911 · Soho · Nueva York. Datos ilustrativos del producto.",
+      "traceAria": "Trazabilidad de la decisión desde los sistemas de origen hasta el valor verificado",
+      "steps": {
+        "event": {
+          "label": "Evento en el POS y el proveedor",
+          "detail": "Sala 78 % · 38 clientes previstos · cocina 92 % · reparto +31 %."
+        },
+        "exposure": {
+          "label": "Valor expuesto",
+          "detail": "620 USD de margen de contribución frente a sentar inmediatamente durante una limitación de capacidad."
+        },
+        "prepared": {
+          "label": "Decisión preparada",
+          "detail": "Retrasar la próxima oleada de reservas 12 minutos. Revisar antes de aprobar; sin ejecución externa."
+        },
+        "approve": {
+          "label": "Aprobar",
+          "detail": "Se requiere revisión humana. Las acciones preparadas no se escriben en el POS."
+        },
+        "verified": {
+          "label": "Servicio finalizado ilustrativo",
+          "detail": "590 USD protegidos esta noche. Un ejemplo independiente de un servicio finalizado, sin ejecución en directo."
+        }
+      }
+    },
+    "surfaceKicker": "Vista principal",
     "chaptersTitle": "Explore",
     "chapters": {
       "controlCenter": {
@@ -204,6 +244,7 @@
         "desc": "What the week is heading toward."
       }
     },
+    "depthLine": "Una vista: el briefing. Las conexiones y el modelo operativo alimentan el gemelo digital en segundo plano.",
     "linkConnections": "Connections →",
     "linkModel": "Operating model →",
     "linkHow": "How it works →",

@@ -13,6 +13,11 @@
 
 import { NextResponse } from "next/server";
 import {
+  readJsonWithinLimit,
+  RequestBodyError,
+} from "@/lib/security/request-body";
+import { sameOriginMutation } from "@/lib/onboarding/requiredFields";
+import {
   getPrimaryOrganizationForUser,
   getSessionOrNull,
   listAccessibleLocationIds,
@@ -25,14 +30,16 @@ import {
   correlationId,
   logServerError,
 } from "@/lib/security/errors";
-import {
-  clientKeyFromRequest,
-  rateLimit,
-} from "@/lib/security/rate-limit";
+import { clientKeyFromRequest, rateLimit } from "@/lib/security/rate-limit";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
+  if (!sameOriginMutation(req))
+    return NextResponse.json(
+      { error: "Invalid request origin." },
+      { status: 403 },
+    );
   const rl = rateLimit({
     key: clientKeyFromRequest(req, "ask-radr"),
     limit: 30,
@@ -50,14 +57,20 @@ export async function POST(req: Request) {
 
   let body: unknown;
   try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ error: CLIENT_ERRORS.badRequest }, { status: 400 });
+    body = await readJsonWithinLimit(req, 32000);
+  } catch (error) {
+    return NextResponse.json(
+      { error: CLIENT_ERRORS.badRequest },
+      { status: error instanceof RequestBodyError ? error.status : 400 },
+    );
   }
 
   const parsed = askRequestSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: CLIENT_ERRORS.badRequest }, { status: 400 });
+    return NextResponse.json(
+      { error: CLIENT_ERRORS.badRequest },
+      { status: 400 },
+    );
   }
 
   const session = await getSessionOrNull();
@@ -114,7 +127,9 @@ export async function POST(req: Request) {
     async start(controller) {
       const send = (event: string, payload: unknown) => {
         controller.enqueue(
-          encoder.encode(`event: ${event}\ndata: ${JSON.stringify(payload)}\n\n`),
+          encoder.encode(
+            `event: ${event}\ndata: ${JSON.stringify(payload)}\n\n`,
+          ),
         );
       };
 

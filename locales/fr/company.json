@@ -433,5 +433,11 @@
         "body": "Files, APIs, or a mature stack — RADR meets you there."
       }
     ]
+  },
+  "gtmBridge": {
+    "kicker": "Notre point de départ",
+    "title": "Prouver d’abord les résultats économiques.",
+    "body": "RADR commence là où les résultats économiques peuvent être démontrés le plus rapidement : récupération et rapprochement.",
+    "close": "La récupération est le début, pas la limite."
   }
 }
