@@ -83,12 +83,12 @@ test("reduced motion provides an instant operating-view alternative and uses the
     "data-face",
     "back",
   );
-  await expect(back).toContainText("See the floor behind the signal.");
+  await expect(back).toContainText("Every table, understood.");
   await back
     .getByRole("button", { name: "Table 6, Turning", exact: true })
     .click();
-  await expect(back.locator(".rso-table-detail")).toContainText("Table 6");
-  await expect(back.locator(".rso-table-detail")).toContainText("4 / 4 guests");
+  await expect(back.locator(".rhl-inspector")).toContainText("Table 6");
+  await expect(back.locator(".rhl-inspector")).toContainText("$262 paid");
   await back.getByRole("button", { name: "Operations", exact: true }).click();
   await expect(back.locator(".rso-stations")).toContainText("96%");
   await expect(back.locator(".rso-stations")).toContainText("78%");

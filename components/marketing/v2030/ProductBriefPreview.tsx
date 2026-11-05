@@ -5,6 +5,7 @@ import { useReducedMotion } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { NAV_ICONS } from "@/components/product/shell/navIcons";
+import { PUBLIC_HOTEL } from "@/lib/marketing/publicCanon";
 import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
 import "./product-showcase.css";
 import { OperationsShowcase } from "./OperationsShowcase";
@@ -36,7 +37,10 @@ export function ProductBriefPreview({
   variant?: "decisions" | "operations";
   active?: boolean;
 } = {}) {
-  const sections = variant === "operations" ? ["Live", "Operations"] : SECTIONS;
+  const sections =
+    variant === "operations"
+      ? ["Restaurant Live", "Hotel Live", "Operations"]
+      : SECTIONS;
   const [section, setSection] = useState(0);
   const [motionReady, setMotionReady] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -66,10 +70,14 @@ export function ProductBriefPreview({
     if (!auto) return;
     const timer = window.setInterval(
       () => setSection((s) => (s + 1) % sections.length),
-      4200,
+      variant === "operations" ? 6500 : 4200,
     );
     return () => window.clearInterval(timer);
-  }, [auto, sections.length]);
+  }, [auto, sections.length, variant]);
+  const location =
+    variant === "operations" && section === 1
+      ? PUBLIC_HOTEL.displayName
+      : venue.displayName;
   function select(next: number) {
     setSection(next);
   }
@@ -88,7 +96,7 @@ export function ProductBriefPreview({
           <FrozenRadrLogo variant="mark" width={27} />
           <div className="rsc-workspace">
             <small>WORKSPACE</small>
-            <strong>Soho · New York</strong>
+            <strong>{location}</strong>
           </div>
           <nav aria-label="Product showcase sections">
             {NAVIGATION.map((item) => {
@@ -102,7 +110,7 @@ export function ProductBriefPreview({
               const scene =
                 variant === "operations"
                   ? (
-                      { live: 0, service: 1 } as Record<
+                      { live: 0, service: 2 } as Record<
                         string,
                         number | undefined
                       >
@@ -117,7 +125,12 @@ export function ProductBriefPreview({
                   id={`${id}-nav-${scene}`}
                   data-scene={scene}
                   aria-label={item.label}
-                  aria-pressed={section === scene}
+                  aria-pressed={
+                    section === scene ||
+                    (variant === "operations" &&
+                      item.id === "live" &&
+                      section === 1)
+                  }
                   aria-controls={`${id}-panel`}
                   onClick={() => select(scene)}
                   onKeyDown={(event) => {
@@ -128,16 +141,21 @@ export function ProductBriefPreview({
                     )
                       return;
                     event.preventDefault();
+                    const navScenes =
+                      variant === "operations" ? [0, 2] : [0, 1, 2, 3];
+                    const position = navScenes.indexOf(scene);
                     const next =
                       event.key === "Home"
-                        ? 0
+                        ? navScenes[0]!
                         : event.key === "End"
-                          ? sections.length - 1
-                          : (scene +
-                              (event.key === "ArrowDown"
-                                ? 1
-                                : sections.length - 1)) %
-                            sections.length;
+                          ? navScenes[navScenes.length - 1]!
+                          : navScenes[
+                              (position +
+                                (event.key === "ArrowDown"
+                                  ? 1
+                                  : navScenes.length - 1)) %
+                                navScenes.length
+                            ]!;
                     select(next);
                     document.getElementById(`${id}-nav-${next}`)?.focus();
                   }}
@@ -161,7 +179,7 @@ export function ProductBriefPreview({
         </aside>
         <div className="rsc-chrome">
           <strong>{sections[section]}</strong>
-          <span className="rsc-top-location">Soho · New York</span>
+          <span className="rsc-top-location">{location}</span>
           <span className="rsc-avatar">A</span>
         </div>
         <div
@@ -172,7 +190,7 @@ export function ProductBriefPreview({
           tabIndex={0}
         >
           {variant === "operations" ? (
-            <OperationsShowcase section={section} />
+            <OperationsShowcase section={section} onSectionChange={select} />
           ) : (
             <div key={section} className="rsc-scene" data-section={section}>
               <div className="rsc-heading">

@@ -57,6 +57,9 @@ export function Homepage2030() {
               Talk to RADR →
             </Link>
           </div>
+          <p className="rm-caption rm-hospitality-scope">
+            Restaurants · Hotels · Hospitality groups
+          </p>
           <p className="rm-caption">
             Interactive demo with synthetic operating data.
             <br />
