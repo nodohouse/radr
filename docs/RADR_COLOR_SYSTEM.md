@@ -22,3 +22,8 @@ Coverage: public navigation and marketing pages, journal and playbook funnel, lo
 Navigation uses one shared, lightly frosted surface for the approved standalone mark, links and account actions. The mark keeps its native aspect ratio with no separate tile, background or recoloring. Dropdowns stay below the bar, between identity and account actions. Sapphire and ocean carry the hero and closing frame. Jade is reserved for the hero action, the immutable logo dot and a small number of decision signals, rather than a full-page wash or footer border.
 
 The homepage tablet uses bounded spring-smoothed perspective transforms only. Scrolling remains native, without pinning or wheel interception. Its annotation reserves normal-flow space; reduced-motion preferences render a stationary tablet.
+
+
+The hero depth now moves from deep navy-blue (#081C70), through sapphire, into bright ocean-blue (#006EF0), left to right. Jade appears more prominently in hero emphasis, the glass tablet edge, selected product signals and primary closing action. Lower-page backgrounds remain blue rather than mint.
+
+The product tablet is an interactive synthetic showcase with Control Center, Decisions, Futures and Value. It advances every seven seconds while visible, and pauses for hover/focus, hidden documents, or reduced-motion preferences. Choosing a section or reviewing a Decision stops autoplay until explicitly resumed. The fixed screen height prevents page jumps between scenes. All outcomes remain illustrative and no provider actions are executed.

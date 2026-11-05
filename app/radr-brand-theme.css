@@ -9,8 +9,9 @@
   );
   --brand-depth: linear-gradient(
     90deg,
-    var(--brand-sapphire) 0%,
-    var(--brand-ocean) 100%
+    #081c70 0%,
+    var(--brand-sapphire) 48%,
+    #006ef0 100%
   );
   --brand-focus: 0 0 0 3px #244c9140;
 }
@@ -581,4 +582,15 @@ html body .radr:has(.rx-nav) .px-m-group {
 html body .radr:has(.rx-nav) .px-compare-mobile .px-cell {
   font-size: 12px !important;
   line-height: 1.5;
+}
+
+/* Jade is the luminous edge and action color, never a full-page wash. */
+html body .radr:has(.rx-nav) .rm-hero-copy h1 em,
+html body .radr:has(.rx-nav) .rm-page-hero-grid .rx30-bleed-copy h1 em {
+  color: var(--brand-jade) !important;
+}
+html body .radr:has(.rx-nav) .rm-close .rm-button:not(.rm-button-secondary) {
+  background: var(--brand-jade) !important;
+  color: var(--brand-ink) !important;
+  box-shadow: 0 8px 28px #00f59a30 !important;
 }
