@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { SeeHowDemo } from "@/components/marketing/pages/SeeHowDemo";
+import { RadrGateway } from "@/components/product/enter/RadrGateway";
 import { buildAlternatesForLocale } from "@/i18n/seo";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -8,9 +8,9 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: "See how RADR decides — Interactive demo",
+    title: "RADR",
     description:
-      "Hotel, restaurant, and aparthotel Decisions — system evidence, constraints, futures. No login.",
+      "Choose the RADR hotel or restaurant demo. Explore fictional hospitality operations, decisions and evidence without a login.",
     alternates: buildAlternatesForLocale(locale, "/demo"),
   };
 }
@@ -18,5 +18,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DemoPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <SeeHowDemo />;
+  return <RadrGateway preselect={null} autoEnter={false} />;
 }

@@ -1,18 +1,24 @@
 /* RADR Gateway — premium operating-world chooser. Scoped; does not touch /app shell. */
 
 .rgw-root {
-  --rgw-ink: #0a0d0b;
-  --rgw-ink-soft: #2a322e;
-  --rgw-muted: #5c6560;
+  --rgw-ink: #102f55;
+  --rgw-ink-soft: #294d74;
+  --rgw-muted: #4c6280;
   --rgw-quiet: #8a928d;
-  --rgw-canvas: #f6f4ef;
+  --rgw-canvas: #f2f7ff;
   --rgw-surface: #ffffff;
   --rgw-green: #00a85a;
   --rgw-green-live: #00d978;
-  --rgw-action: #0a3d32;
-  --rgw-action-hover: #072e26;
+  --rgw-action: #075be5;
+  --rgw-action-hover: #0647b2;
   --rgw-radius: 20px;
-  --rgw-font: var(--font-body, var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif);
+  --rgw-font: var(
+    --font-body,
+    var(--font-geist-sans),
+    ui-sans-serif,
+    system-ui,
+    sans-serif
+  );
 
   position: relative;
   isolation: isolate;
@@ -23,7 +29,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background: var(--rgw-canvas);
+  background:
+    radial-gradient(ellipse at 15% 0%, #d3e5ff, transparent 55%),
+    radial-gradient(ellipse at 90% 30%, #d7fff0, transparent 45%),
+    var(--rgw-canvas);
 }
 
 /* Kill any inherited product text-shadow / filter ghosts */
@@ -56,11 +65,11 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(246, 244, 239, 0.55) 0%,
-    rgba(246, 244, 239, 0.72) 22%,
-    rgba(246, 244, 239, 0.92) 48%,
-    #f6f4ef 62%,
-    #f6f4ef 100%
+    rgba(242, 247, 255, 0.55) 0%,
+    rgba(242, 247, 255, 0.72) 22%,
+    rgba(242, 247, 255, 0.92) 48%,
+    #f2f7ff 62%,
+    #f2f7ff 100%
   );
 }
 
@@ -488,7 +497,9 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   cursor: pointer;
-  transition: background 160ms ease, transform 160ms ease;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
 }
 
 .rgw-cta:hover {
@@ -592,5 +603,21 @@
 
   .rgw-card:hover {
     transform: none;
+  }
+}
+
+@media (max-width: 920px) {
+  .rgw-top {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .rgw-top-aside {
+    display: inline-flex;
+    position: static;
+    align-items: center;
+    min-height: 44px;
+    max-width: none;
+    text-align: center;
   }
 }
