@@ -52,13 +52,108 @@ const PLANS = [
     cta: "Plan a group evaluation",
   },
 ] as const;
-const ROWS = [
-  ["Operating footprint", "scope"],
-  ["Primary focus", "focus"],
-  ["Evidence & review", "evidence"],
-  ["Control & responsibility", "governance"],
-  ["What happens next", "next"],
-] as const;
+type Inclusion = { status: "included" | "scoped" | "excluded"; label: string };
+const included = (label = "Included"): Inclusion => ({
+  status: "included",
+  label,
+});
+const scoped = (label = "Agreed at setup"): Inclusion => ({
+  status: "scoped",
+  label,
+});
+const excluded: Inclusion = { status: "excluded", label: "Not included" };
+const COMPARISON: {
+  label: string;
+  description: string;
+  cells: [Inclusion, Inclusion, Inclusion];
+}[] = [
+  {
+    label: "Decision workflow",
+    description: "Review a priority, its evidence and the proposed next step.",
+    cells: [included("Focused trial scope"), included(), included()],
+  },
+  {
+    label: "Evidence review",
+    description: "Examine the source records behind a Decision.",
+    cells: [included(), included(), included()],
+  },
+  {
+    label: "Human review of actions",
+    description: "Keep an operator responsible for reviewing proposed actions.",
+    cells: [included(), included(), included()],
+  },
+  {
+    label: "Ongoing coverage",
+    description: "Continue using RADR beyond the two-week trial.",
+    cells: [excluded, included("Paid agreement"), included("Paid agreement")],
+  },
+  {
+    label: "Multiple locations",
+    description: "Cover more of your operating estate.",
+    cells: [scoped("Trial locations agreed"), included(), included()],
+  },
+  {
+    label: "Broader Decision scope",
+    description: "Extend beyond the first operating priority.",
+    cells: [
+      excluded,
+      included("Scope agreed together"),
+      included("Group priorities"),
+    ],
+  },
+  {
+    label: "Roles and approval rules",
+    description: "Define who reviews and approves work across the operation.",
+    cells: [
+      scoped("Named trial operator"),
+      scoped(),
+      scoped("Group requirements"),
+    ],
+  },
+  {
+    label: "Multi-brand and entity scope",
+    description: "Plan coverage across different brands or legal entities.",
+    cells: [excluded, excluded, included("Tailored scope")],
+  },
+  {
+    label: "Portfolio rollout planning",
+    description: "Agree a group rollout and governance plan.",
+    cells: [excluded, excluded, included()],
+  },
+  {
+    label: "System integrations",
+    description:
+      "Confirm compatibility, data access and delivery before setup.",
+    cells: [scoped(), scoped(), scoped()],
+  },
+];
+
+function InclusionCell({ value }: { value: Inclusion }) {
+  return (
+    <div className="rm-inclusion" data-status={value.status}>
+      <span className="rm-inclusion-icon" aria-hidden="true">
+        {value.status === "included" ? (
+          <svg viewBox="0 0 20 20" width="18" height="18">
+            <path
+              d="m5 10 3.2 3.2L15 6.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ) : value.status === "scoped" ? (
+          "○"
+        ) : (
+          "×"
+        )}
+      </span>
+      <span>{value.label}</span>
+    </div>
+  );
+}
+
 const FAQ = [
   [
     "How much does RADR cost?",
@@ -248,7 +343,19 @@ export function Pricing2030() {
           >
             <div className="rx30-shell">
               <p className="rx30-kicker">The differences, at a glance</p>
-              <h2 className="rx30-h2">Compare what changes.</h2>
+              <h2 className="rx30-h2">What’s included. Side by side.</h2>
+              <p className="rm-compare-intro">
+                A focused free trial, ongoing operating coverage, or a
+                portfolio-wide agreement. See the differences before choosing
+                your next step.
+              </p>
+              <div className="rm-compare-legend" aria-label="Comparison key">
+                <InclusionCell
+                  value={included("Included in the package scope")}
+                />
+                <InclusionCell value={scoped("Scope confirmed together")} />
+                <InclusionCell value={excluded} />
+              </div>
               <p className="rm-compare-hint" id="scope-scroll-hint">
                 Swipe across to compare all three scopes{" "}
                 <span aria-hidden="true">↔</span>
@@ -256,14 +363,15 @@ export function Pricing2030() {
               <div
                 className="rm-compare-scroll"
                 role="region"
-                aria-label="Compare proposed engagement scopes"
+                aria-label="Compare package inclusions"
                 aria-describedby="scope-scroll-hint"
                 tabIndex={0}
               >
                 <table className="rm-compare-table">
                   <caption>
-                    Proposed scope comparison. All capabilities and delivery
-                    subject to agreement.
+                    Checkmarks describe package scope. Integration availability
+                    and delivery are confirmed before setup. The free trial
+                    lasts 14 days; paid continuation is agreed separately.
                   </caption>
                   <thead>
                     <tr>
@@ -271,16 +379,28 @@ export function Pricing2030() {
                       {PLANS.map((p) => (
                         <th key={p.id} scope="col">
                           {p.name}
+                          <span className="rm-compare-price">
+                            {p.id === "start"
+                              ? "Free for 14 days"
+                              : "Custom quote"}
+                          </span>
                         </th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {ROWS.map(([label, key]) => (
-                      <tr key={key}>
-                        <th scope="row">{label}</th>
-                        {PLANS.map((p) => (
-                          <td key={p.id}>{p[key]}</td>
+                    {COMPARISON.map((row) => (
+                      <tr key={row.label}>
+                        <th scope="row">
+                          {row.label}
+                          <span className="rm-compare-description">
+                            {row.description}
+                          </span>
+                        </th>
+                        {row.cells.map((cell, index) => (
+                          <td key={PLANS[index].id}>
+                            <InclusionCell value={cell} />
+                          </td>
                         ))}
                       </tr>
                     ))}

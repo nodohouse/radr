@@ -1236,3 +1236,77 @@ html body .radr.rm-premium:has(.rx-nav) #surfaces {
     gap: 24px;
   }
 }
+
+/* Compact, accessible package inclusion comparison. */
+.rm-pricing .rm-compare-intro {
+  max-width: 68ch;
+  margin: 18px 0;
+  color: #45617f;
+  line-height: 1.7;
+}
+.rm-pricing .rm-compare-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin: 22px 0 28px;
+}
+.rm-pricing .rm-inclusion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #173a64;
+}
+.rm-pricing .rm-inclusion-icon {
+  display: inline-flex;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #dcfff0;
+  color: #006b45;
+  font-size: 21px;
+  line-height: 1;
+}
+.rm-pricing .rm-inclusion[data-status="scoped"] .rm-inclusion-icon {
+  background: #e6efff;
+  color: #1258bb;
+}
+.rm-pricing .rm-inclusion[data-status="excluded"] {
+  color: #5b6b80;
+}
+.rm-pricing .rm-inclusion[data-status="excluded"] .rm-inclusion-icon {
+  background: #edf1f6;
+  color: #627187;
+}
+.rm-pricing .rm-compare-table :is(th, td) {
+  vertical-align: middle;
+  padding: 20px 24px;
+}
+.rm-pricing .rm-compare-description {
+  display: block;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #526a87;
+  font-weight: 400;
+  margin-top: 6px;
+}
+.rm-pricing .rm-compare-price {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #daebff;
+  margin-top: 8px;
+}
+@media (max-width: 640px) {
+  .rm-pricing .rm-compare-table :is(th, td) {
+    padding: 18px;
+  }
+  .rm-pricing .rm-compare-legend {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
