@@ -752,4 +752,22 @@
     line-height: 1.2;
   }
 }
-.rm-home .rm-hospitality-scope { font-size:13px; font-weight:600; color:#a4ffcf; margin-bottom:8px; letter-spacing:.015em; }
+.rm-home .rm-hospitality-scope {
+  font-size: 13px;
+  font-weight: 600;
+  color: #a4ffcf;
+  margin-bottom: 8px;
+  letter-spacing: 0.015em;
+}
+@container (min-width: 541px) {
+  .rhl-object-state,
+  .rhl-object-meta {
+    font-size: 8px;
+  }
+  .rhl-object-alert {
+    font-size: 7px;
+  }
+  .rhl-inspector-head b {
+    font-size: 6px;
+  }
+}

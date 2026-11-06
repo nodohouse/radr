@@ -11,6 +11,7 @@ import {
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { ProductBriefPreview } from "./ProductBriefPreview";
 import "./scroll-tablet.css";
+import { Link } from "@/i18n/navigation";
 
 /** Native-scroll turn with two real, non-mirrored faces. No scroll capture or pinning. */
 export function ScrollTabletShowcase() {
@@ -128,6 +129,9 @@ export function ScrollTabletShowcase() {
           <span aria-hidden="true">↗</span>
         </button>
       )}
+      <Link href="/demo" className="rsc-full-demo">
+        Explore the full-size demo →
+      </Link>
       <span className="rsc-turn-cue" aria-hidden="true">
         {showingBack
           ? "The operation behind the decision"

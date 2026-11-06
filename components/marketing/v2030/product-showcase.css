@@ -1029,3 +1029,26 @@
 .rsc-screen {
   position: relative;
 }
+/* Prioritize the labels a visitor needs to understand the preview. */
+@container (min-width: 541px) {
+  .rsc-heading p,
+  .rsc-metrics span {
+    font-size: 9px;
+  }
+  .rsc-chart-key,
+  .rsc-chart small {
+    font-size: 8px;
+  }
+  .rsc-evidence p,
+  .rsc-action {
+    font-size: 10px;
+  }
+}
+@container (max-width: 400px) {
+  .rsc-action {
+    font-size: 8px;
+  }
+  .rsc-metrics span {
+    font-size: 7px;
+  }
+}

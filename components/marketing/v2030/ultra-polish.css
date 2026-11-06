@@ -201,3 +201,97 @@ html body .radr.radr-launch .rm-hero h1.rm-slogan {
     font-size: clamp(80px, 3.1vw, 116px);
   }
 }
+/* Less repeated framing and less empty scroll on compact screens. */
+.rm-home .rm-update-grid > .rm-panel:last-child {
+  border-radius: 0;
+  border: 0;
+  border-left: 1px solid #b5cde9;
+  box-shadow: none;
+  background: transparent;
+}
+.rsc-full-demo {
+  display: none;
+}
+@media (max-width: 720px) {
+  html body .radr.radr-launch .rm-section {
+    padding-block: 48px;
+  }
+  .rm-home .rm-section-head {
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .rm-home .rm-update-grid {
+    gap: 16px;
+  }
+  .rm-home .rm-update-grid > .rm-panel {
+    padding: 24px;
+  }
+  .rm-home .rm-update-grid > .rm-panel:last-child {
+    padding: 18px 4px 4px;
+    border-left: 0;
+    border-top: 1px solid #b5cde9;
+  }
+  .rm-home .rm-update-grid > .rm-panel h3 {
+    font-size: 25px;
+  }
+  .rm-home .rm-update-grid > .rm-panel p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .rm-home .rm-research {
+    margin-bottom: 40px;
+  }
+  .rm-home .rm-research-grid {
+    gap: 0;
+  }
+  .rm-home .rm-research-grid article {
+    padding: 26px 0;
+    border: 0;
+    border-top: 1px solid #b5cde9;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  .rm-home .rm-research-number {
+    font-size: 38px;
+    margin: 12px 0;
+  }
+  .rm-home .rm-research-grid h3 {
+    font-size: 23px;
+  }
+  .rm-home .rm-close {
+    padding-block: 48px 24px;
+  }
+  .rsc-full-demo {
+    display: inline-flex;
+    margin-top: 14px;
+    min-height: 44px;
+    align-items: center;
+    color: #d8fff0;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+@media (max-width: 720px) {
+  html body .radr.radr-launch:has(.rx-nav) .rsc-scroll-stage {
+    padding-bottom: 220px;
+  }
+  .rsc-full-demo {
+    position: absolute;
+    left: 0;
+    bottom: 12px;
+    z-index: 3;
+    margin: 0;
+  }
+}
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  html body .radr.radr-launch:has(.rx-nav) .rsc-scroll-stage {
+    padding-bottom: 120px;
+  }
+  .rsc-scroll-stage .rsc-reduced-switch {
+    bottom: 68px;
+  }
+}
