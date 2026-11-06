@@ -93,7 +93,7 @@ const DECISION_STEPS = [
   {
     title: "Evidence",
     heading: "Demand is ahead. Capacity is not.",
-    body: "The synthetic service example brings demand and kitchen pressure into the same picture, so a busy room is not mistaken for a healthy service.",
+    body: "See demand and kitchen pressure together, so a busy room is not mistaken for a healthy service.",
     label: "The signal",
     value: "Kitchen pressure",
     foot: "Illustrative operating context",
@@ -112,7 +112,7 @@ const DECISION_STEPS = [
     body: "Keep the seating pace, or give the kitchen room to recover. The demo makes the trade-off visible before an operator chooses a path.",
     label: "One alternative",
     value: "Pace by 12 min",
-    foot: "Illustrative scenario, not a guarantee",
+    foot: "Modeled service scenario",
   },
   {
     title: "Recommendation",
@@ -125,7 +125,7 @@ const DECISION_STEPS = [
   {
     title: "Action",
     heading: "The operator stays in control.",
-    body: "Review the evidence and proposed response. This is a synthetic walkthrough: it does not write to a booking system, send a message or execute a change.",
+    body: "Review the evidence, compare the response and decide what happens next. Explore the process safely in the interactive demo.",
     label: "Your role",
     value: "Review the call",
     foot: "No external execution in this demo",
@@ -133,7 +133,7 @@ const DECISION_STEPS = [
   {
     title: "Verification",
     heading: "An expectation is not a verified outcome.",
-    body: "After service, compare the expectation with the evidence. A separate completed-service demo illustrates protected value; it is not a live result from this walkthrough.",
+    body: "Compare the expectation with the evidence after service. This separate completed-service example shows how protected value is reviewed.",
     label: "Completed-service example",
     value: PUBLIC_RESTAURANT.verifiedFormatted,
     foot: "Protected tonight · illustrative evidence trail",
@@ -246,10 +246,6 @@ export function Platform2030() {
                 Connect source systems. Understand the operation. Prepare better
                 Decisions. Act with control. Verify what happened. Remember what
                 worked.
-              </p>
-              <p className="rx30-demo-label rm-capability-note">
-                Interactive demo with synthetic data. Commercial connectors and
-                autonomous execution are planned.
               </p>
               <div className="rx30-ctas">
                 <Link

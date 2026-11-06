@@ -214,8 +214,8 @@ export function Trust2030() {
               <p className="rx30-kicker">Autonomy</p>
               <h2 className="rx30-h2">Earned per action class. Not blanket.</h2>
               <p className="rx30-lead">
-                Governance design preview. Autonomous execution is planned; the
-                demo does not write to connected systems.
+                Explore how permissions and approvals shape each action.
+                This governance preview makes no changes to connected systems.
               </p>
               <div
                 className="rx30-autonomy-rail"

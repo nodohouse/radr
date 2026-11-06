@@ -155,10 +155,6 @@ export function Homepage2030() {
                 </button>
               ))}
             </div>
-            <p className="rm-caption">
-              Illustrative demo, not a promise of results. This demo does not
-              execute actions in connected systems.
-            </p>
           </div>
           <div
             className="rm-fork-result"

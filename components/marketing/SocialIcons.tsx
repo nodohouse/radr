@@ -93,8 +93,8 @@ export function SocialIcons({ withLabels = true, className = "" }: Props) {
               <span
                 className="rx-social-link rx-social-link--pending"
                 role="img"
-                title={`${link.label}: URL not configured yet`}
-                aria-label={`${link.label}: coming soon`}
+                title={link.label}
+                aria-label={link.label}
               >
                 {inner}
               </span>

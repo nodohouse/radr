@@ -81,9 +81,8 @@ export default async function ReportPage({
               </li>
             </ol>
             <p>
-              RADR Editorial · External research is separate from assumed
-              arithmetic and clearly labeled synthetic product examples. Imagery
-              illustrates fictional hospitality venues.
+              RADR Editorial · Sourced research, practical calculations and
+              clearly labeled operating examples.
             </p>
           </section>
           <section

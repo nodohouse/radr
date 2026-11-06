@@ -319,7 +319,7 @@ export function ProductBriefPreview({
                         <strong>
                           Decision confidence · {venue.confidencePct}%
                         </strong>
-                        <p>Synthetic evidence, not a live prediction.</p>
+                        <p>Confidence based on the demo evidence.</p>
                       </div>
                     </div>
                   </div>
@@ -358,8 +358,7 @@ export function ProductBriefPreview({
                     </div>
                   </div>
                   <p className="rsc-note">
-                    A modeled comparison, not a promise of results. No action is
-                    executed.
+                    Compare modeled outcomes before choosing a response.
                   </p>
                   <button
                     type="button"
@@ -380,8 +379,7 @@ export function ProductBriefPreview({
                     <strong>{venue.verifiedFormatted}</strong>
                     <h4>Protected tonight.</h4>
                     <p>
-                      Demo outcome only. This is not evidence of customer
-                      results.
+                      Completed-service example · demo data.
                     </p>
                   </div>
                   <div className="rsc-proof">

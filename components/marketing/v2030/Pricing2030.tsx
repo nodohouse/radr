@@ -69,11 +69,11 @@ const FAQ = [
   ],
   [
     "What can I try today?",
-    "You can explore the interactive product demo with synthetic data. Local reference ingestion and authenticated document and CSV upload paths exist. Commercial provider adapters and autonomous external execution are not production-ready.",
+    "Explore the interactive demo, compare decisions and review the evidence behind them. The demo uses sample data and does not change connected systems. Ask the team to confirm integration availability for your operation.",
   ],
   [
     "Are the scopes shown here available to buy immediately?",
-    "These are proposed engagement scopes, not a live feature entitlement list. Availability, integration feasibility and delivery milestones must be confirmed in writing with the team.",
+    "Start with a scope conversation. We confirm availability, integration feasibility and delivery milestones in your agreement before you commit.",
   ],
   [
     "Can we start with a pilot and expand later?",
@@ -220,10 +220,9 @@ export function Pricing2030() {
                 ))}
               </div>
               <p className="rm-availability">
-                <strong>Where we are today</strong> The product uses demo data.
-                These are proposed engagement scopes. Commercial connectors and
-                autonomous external execution are planned, not production-ready.
-                Your agreement must confirm delivery and availability.
+                <strong>Agree the scope first</strong> Confirm integration
+                availability, delivery milestones and responsibilities with the
+                team before you commit. Explore the product through the demo.
               </p>
             </div>
           </section>
