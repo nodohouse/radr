@@ -39,14 +39,13 @@ export function Homepage2030() {
             <span /> THE ADAPTIVE DECISION SYSTEM FOR HOSPITALITY
           </p>
           <h1>
-            See what matters.
+            Nothing off
             <br />
-            <em>Make your move.</em>
+            <em>the RADR.</em>
           </h1>
           <p className="rm-lead">
-            Your systems know the numbers. RADR connects them to the next
-            decision, so you can protect the night, the margin, and the guest
-            experience.
+            See where your hospitality operation is losing money, decide what
+            to do next, and track the result.
           </p>
           <div className="rm-ctas">
             <Link href="/demo" className="rm-button">
