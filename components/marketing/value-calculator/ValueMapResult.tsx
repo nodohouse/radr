@@ -8,6 +8,7 @@ import { CTAS } from "@/lib/marketing/brand";
 import { ValueOpportunityMap } from "@/components/marketing/value-calculator/ValueOpportunityMap";
 import {
   categoryDisplayLabel,
+  categoryExplanation,
   categoryTone,
   evidenceLabel,
   effortLabel,
@@ -226,6 +227,10 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
         <section className="vc-res-col vc-res-col--left" aria-label="Breakdown">
           <div className="vc-res-card">
             <h2>Opportunity breakdown</h2>
+            <p className="vc-category-intro">
+              Annual estimates by operating area. Select a category to explore
+              it; the guide below explains the terminology.
+            </p>
             <div className="vc-res-bars">
               {result.categories.slice(0, 6).map((c, i) => (
                 <button
@@ -332,6 +337,9 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
                 <span className="vc-res-start-badge">#1 recommendation</span>
               </div>
               <h2>{categoryDisplayLabel(start, journey.vertical)}</h2>
+              <p className="vc-category-intro">
+                {categoryExplanation(start.id, journey.vertical).meaning}
+              </p>
               <p className="vc-res-start-range">
                 {formatRangeIntl(start.low, start.modeled, result.currency)}
                 <em> / year</em>
@@ -442,6 +450,50 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
         </aside>
       </div>
 
+      <section
+        className="vc-category-guide"
+        aria-labelledby="vc-category-title"
+      >
+        <p className="rx30-kicker">Your guide to the categories</p>
+        <h2 id="vc-category-title">What these operating areas mean</h2>
+        <p>
+          These are areas to investigate, not confirmed losses. Open a category
+          for a practical example and the records needed to check it. Categories
+          can overlap, so their individual estimates should not be added
+          together.
+        </p>
+        <div className="vc-category-grid">
+          {result.categories.map((category) => {
+            const explanation = categoryExplanation(
+              category.id,
+              journey.vertical,
+            );
+            return (
+              <details key={category.id}>
+                <summary>
+                  {categoryDisplayLabel(category, journey.vertical)}
+                </summary>
+                <p>{explanation.meaning}</p>
+                <p>
+                  <strong>For example:</strong> {explanation.example}
+                </p>
+                <p>
+                  <strong>Records to check:</strong>{" "}
+                  {category.evidenceNeeded.join(", ")}.
+                </p>
+              </details>
+            );
+          })}
+        </div>
+        <p>
+          <strong>Reading the result:</strong> Potential value is the broad
+          estimate. Modeled opportunity adjusts for overlap and evidence
+          readiness. Capture is the share you choose to model as realized.
+          Verified Value stays at zero here because this calculator has not
+          checked actual outcomes.
+        </p>
+      </section>
+
       <section className="vc-res-below">
         <div className="vc2-futures">
           <h2>Compare futures</h2>
@@ -457,7 +509,7 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
               <strong>Detected → Reviewed → Actioned → Verified</strong>
               <em>
                 At {Math.round(result.captureScenario.rate * 100)}% modeled
-                capture — illustrative
+                capture, illustrative
               </em>
             </article>
           </div>
@@ -533,10 +585,10 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
 
       <section className="vc-res-cta">
         <div className="rx30-shell">
-          <h2>Want to know which of this is real?</h2>
+          <h2>Turn an estimate into an evidence-led evaluation</h2>
           <p>
-            RADR uses source evidence to determine what is actionable and
-            ultimately verifiable.
+            Choose an operating area, review the source records and agree how an
+            outcome would be measured. Start with a focused evaluation plan.
           </p>
           <div className="rx30-ctas">
             <Link

@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
 import { SilkAtmosphere } from "@/components/marketing/v2030/SilkAtmosphere";
+import { categoryExplanation } from "@/components/marketing/value-calculator/valueMapSemantics";
 import { LiveModelPreview } from "@/components/marketing/value-calculator/LiveModelPreview";
 import { ValueMapResult } from "@/components/marketing/value-calculator/ValueMapResult";
 import {
@@ -661,7 +662,7 @@ export function ValueCalculatorApp() {
                                 });
                               }}
                             />
-                            <span>I’m not sure ; scan everything</span>
+                            <span>I’m not sure. Scan everything.</span>
                           </label>
                           <div className="vc2-pain">
                             {(journey.vertical
@@ -694,7 +695,15 @@ export function ValueCalculatorApp() {
                                   });
                                 }}
                               >
-                                {p.label}
+                                <strong>{p.label}</strong>
+                                <small>
+                                  {
+                                    categoryExplanation(
+                                      p.id as CategoryId,
+                                      journey.vertical,
+                                    ).meaning
+                                  }
+                                </small>
                               </button>
                             ))}
                           </div>

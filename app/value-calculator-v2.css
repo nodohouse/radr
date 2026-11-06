@@ -120,7 +120,9 @@
   font: inherit;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: border-color 200ms ease, background 200ms ease;
+  transition:
+    border-color 200ms ease,
+    background 200ms ease;
 }
 
 .vc2-choice:hover:not(:disabled) {
@@ -306,7 +308,11 @@
   border-radius: 20px;
   border: 1px solid var(--rx30-border, #e2e8e4);
   background:
-    radial-gradient(ellipse at 12% 0%, rgba(0, 217, 120, 0.12), transparent 55%),
+    radial-gradient(
+      ellipse at 12% 0%,
+      rgba(0, 217, 120, 0.12),
+      transparent 55%
+    ),
     #fff;
 }
 
@@ -667,8 +673,16 @@
   height: 22rem;
   z-index: 0;
   background:
-    radial-gradient(ellipse 55% 70% at 92% 8%, rgba(74, 122, 184, 0.07), transparent 70%),
-    radial-gradient(ellipse 45% 60% at 8% 70%, rgba(0, 217, 120, 0.05), transparent 65%);
+    radial-gradient(
+      ellipse 55% 70% at 92% 8%,
+      rgba(74, 122, 184, 0.07),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 45% 60% at 8% 70%,
+      rgba(0, 217, 120, 0.05),
+      transparent 65%
+    );
 }
 
 .vc-res > *:not(.vc-res-atmosphere) {
@@ -991,8 +1005,16 @@
 .vc-res-card--map {
   padding: 0.85rem 0.85rem 1.05rem;
   background:
-    radial-gradient(ellipse at 50% 45%, rgba(0, 217, 120, 0.08), transparent 55%),
-    radial-gradient(ellipse at 80% 20%, rgba(74, 122, 184, 0.06), transparent 50%),
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(0, 217, 120, 0.08),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(74, 122, 184, 0.06),
+      transparent 50%
+    ),
     #fff;
   overflow: visible;
 }
@@ -1076,7 +1098,10 @@
   box-shadow: 0 8px 18px rgba(8, 24, 40, 0.06);
   display: grid;
   gap: 0.12rem;
-  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
 }
 
 .vc-omap-card[data-slot="top"] {
@@ -1202,8 +1227,16 @@
   padding: 1.1rem 1.15rem 1.2rem;
   border-color: rgba(0, 168, 90, 0.35);
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(0, 217, 120, 0.12), transparent 55%),
-    radial-gradient(ellipse at 0% 100%, rgba(74, 122, 184, 0.05), transparent 50%),
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(0, 217, 120, 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 0% 100%,
+      rgba(74, 122, 184, 0.05),
+      transparent 50%
+    ),
     #fff;
   display: grid;
   gap: 0.35rem;
@@ -1430,7 +1463,9 @@
   font: inherit;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: border-color 180ms ease, background 180ms ease;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease;
 }
 
 .vc2-capture-presets button[data-on="true"] {
@@ -1680,8 +1715,16 @@
   border-radius: 18px;
   border: 1px solid rgba(10, 13, 11, 0.08);
   background:
-    radial-gradient(90% 70% at 78% 18%, rgba(47, 127, 232, 0.14), transparent 60%),
-    radial-gradient(80% 70% at 18% 78%, rgba(0, 230, 118, 0.16), transparent 62%),
+    radial-gradient(
+      90% 70% at 78% 18%,
+      rgba(47, 127, 232, 0.14),
+      transparent 60%
+    ),
+    radial-gradient(
+      80% 70% at 18% 78%,
+      rgba(0, 230, 118, 0.16),
+      transparent 62%
+    ),
     #fff;
   box-shadow: 0 18px 40px rgba(8, 28, 22, 0.06);
 }
@@ -1831,4 +1874,122 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
+}
+
+/* Keep result controls and education legible against the shared brand theme. */
+.radr .vc2-page .vc-res-act {
+  padding: 10px 15px;
+  min-height: 44px;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.45;
+  border: 1px solid #b7cce5;
+  border-radius: 12px;
+  background: #f5f9ff;
+  color: #123b70;
+}
+.radr .vc2-page .vc-res-act:hover {
+  background: #e7f0ff;
+  color: #08264f;
+}
+.radr .vc2-page .vc-res-cta {
+  background: linear-gradient(115deg, #08295e, #075bc2);
+  color: #fff;
+  padding: clamp(24px, 4vw, 48px);
+}
+.radr .vc2-page .vc-res-cta > .rx30-shell {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+html body .radr.rm-premium .vc2-page main .vc-res-cta h2 {
+  color: #fff !important;
+  max-width: 28ch;
+  line-height: 1.15;
+}
+html body .radr.rm-premium .vc2-page main .vc-res-cta p {
+  color: #e3efff !important;
+  max-width: 65ch;
+  line-height: 1.65;
+}
+.radr .vc2-page .vc-res-cta .rx30-btn-ghost--solid {
+  background: #ffffff14;
+  color: #fff;
+  border-color: #ffffff70;
+}
+.radr .vc2-page .vc-res-cta .rx30-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.radr .vc2-page .vc-category-intro {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #45617f;
+  margin: 10px 0 18px;
+}
+.radr .vc2-page .vc-category-guide {
+  margin: 28px 0;
+  padding: clamp(20px, 3vw, 32px);
+  background: #ffffffd9;
+  border: 1px solid #cbdcf0;
+  border-radius: 22px;
+}
+.radr .vc2-page .vc-category-guide h2 {
+  color: #102f55;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.2;
+  margin: 10px 0;
+}
+.radr .vc2-page .vc-category-guide p {
+  color: #45617f;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 12px 0;
+  max-width: 90ch;
+}
+.radr .vc2-page .vc-category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 22px 0;
+  align-items: start;
+}
+.radr .vc2-page .vc-category-grid details {
+  min-width: 0;
+  padding: 18px;
+  background: #f5f9ff;
+  border: 1px solid #d4e1f1;
+  border-radius: 14px;
+}
+.radr .vc2-page .vc-category-grid summary {
+  cursor: pointer;
+  color: #123b70;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.radr .vc2-page .vc-category-grid summary:focus-visible,
+.radr .vc2-page .vc-res-act:focus-visible {
+  outline: 3px solid #0875e9;
+  outline-offset: 4px;
+}
+.radr .vc2-page .vc2-pain .vc2-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+  white-space: normal;
+}
+.radr .vc2-page .vc2-pain .vc2-choice small {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: inherit;
+}
+@media (max-width: 640px) {
+  .radr .vc2-page .vc-category-grid {
+    grid-template-columns: 1fr;
+  }
 }
