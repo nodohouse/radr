@@ -21,7 +21,7 @@ const PRINCIPLES = [
   },
   {
     title: "Human judgment first",
-    body: "Augment operators. Never fake autonomous execution.",
+    body: "Give operators the evidence and context to make the call.",
   },
   {
     title: "Evidence before action",
@@ -29,7 +29,7 @@ const PRINCIPLES = [
   },
   {
     title: "Verified outcomes",
-    body: "Expected ≠ Observed ≠ Verified. Memory only after enough evidence.",
+    body: "Keep expected, observed and verified outcomes distinct. Learn from the evidence.",
   },
 ] as const;
 
@@ -49,7 +49,7 @@ const TRUST = [
   },
   {
     title: "Governed autonomy",
-    body: "Policy · confidence · action risk, per Decision type. Material actions stay approval-gated unless you permit otherwise.",
+    body: "The governance model puts permissions, confidence and action risk around each Decision type. Explore the design and current implementation on the security page.",
   },
   {
     title: "Auditability",
@@ -57,7 +57,7 @@ const TRUST = [
   },
   {
     title: "Works above systems of record",
-    body: "Integrate POS, PMS, labor, AP. Do not rebuild them.",
+    body: "A Decision layer above POS, PMS, labor and AP. Confirm source availability with the team.",
   },
 ] as const;
 
