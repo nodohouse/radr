@@ -3,6 +3,7 @@
 import { ResearchDiscover } from "@/components/marketing/reports/ResearchDiscover";
 import "./ultra-polish.css";
 import Image from "next/image";
+import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { MARKETING_IMAGES } from "@/lib/marketing/publicImagery";
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
@@ -38,10 +39,22 @@ export function Homepage2030() {
           <p className="rm-eyebrow">
             <span /> THE ADAPTIVE DECISION SYSTEM FOR HOSPITALITY
           </p>
-          <h1>
-            Nothing off
-            <br />
-            <em>the RADR.</em>
+          <h1 className="rm-slogan" aria-label="NOTHING OFF THE RADR.">
+            <span className="rm-slogan-first">NOTHING OFF</span>
+            <span className="rm-slogan-line">
+              <span>THE</span>
+              <span className="rm-slogan-wordmark">
+                <FrozenRadrLogo
+                  variant="wordmark"
+                  theme="dark"
+                  width={360}
+                  priority
+                />
+              </span>
+              <span className="rm-slogan-period" aria-hidden="true">
+                .
+              </span>
+            </span>
           </h1>
           <p className="rm-lead">
             See where your hospitality operation is losing money, decide what to
