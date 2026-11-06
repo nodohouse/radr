@@ -374,14 +374,14 @@
     }
   },
   "customers": {
-    "metaTitle": "Historias de clientes · Próximamente",
-    "metaDescription": "Operaciones reales. Findings reales. Valor real. Los casos de clientes RADR llegan pronto.",
-    "kicker": "Historias de clientes",
-    "heroLine1": "Operaciones reales.",
-    "heroLine2": "Findings reales.",
-    "heroLine3": "Valor real.",
-    "heroLead": "Casos de estudio próximamente. Cuando lleguen, cada uno seguirá la misma forma que el producto: operación, problema, finding, acción, Verified Value.",
-    "ctaTalk": "Hablar con RADR →",
+    "metaTitle": "Evidencia y ejemplos operativos | RADR",
+    "metaDescription": "Explore ejemplos operativos y la evaluación de resultados. Las demostraciones no constituyen evidencia de clientes.",
+    "kicker": "Evidencia y ejemplos",
+    "heroLine1": "Una decisión clara.",
+    "heroLine2": "Un resultado visible.",
+    "heroLine3": "Evidencia de ambos.",
+    "heroLead": "Explore ejemplos operativos claramente identificados. Todavía no hay casos de clientes publicados. Los futuros casos distinguirán el valor esperado de los resultados respaldados por evidencia.",
+    "ctaTalk": "Hablar sobre una evaluación →",
     "ctaProduct": "Ver el producto"
   },
   "decisionsKicker": "Why we exist",

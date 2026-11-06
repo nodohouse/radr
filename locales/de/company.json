@@ -374,14 +374,14 @@
     }
   },
   "customers": {
-    "metaTitle": "Kundengeschichten · Demnächst",
-    "metaDescription": "Echte Betriebe. Echte Findings. Echter Wert. RADR-Kundenfallstudien folgen in Kürze.",
-    "kicker": "Kundengeschichten",
-    "heroLine1": "Echte Betriebe.",
-    "heroLine2": "Echte Findings.",
-    "heroLine3": "Echter Wert.",
-    "heroLead": "Fallstudien folgen in Kürze. Wenn sie erscheinen, folgen sie derselben Form wie das Produkt selbst: Betrieb, Problem, Finding, Aktion, Verified Value.",
-    "ctaTalk": "Mit RADR sprechen →",
+    "metaTitle": "Nachweise und Betriebsbeispiele | RADR",
+    "metaDescription": "Betriebsbeispiele und die Bewertung von Ergebnissen mit RADR. Demonstrationen sind keine Kundennachweise.",
+    "kicker": "Nachweise & Betriebsbeispiele",
+    "heroLine1": "Eine klare Entscheidung.",
+    "heroLine2": "Ein sichtbares Ergebnis.",
+    "heroLine3": "Nachweise für beides.",
+    "heroLead": "Erkunden Sie klar gekennzeichnete Betriebsbeispiele. Veröffentlichte Kundenfallstudien sind noch nicht verfügbar. Künftige Fallstudien werden erwarteten Wert und belegte Ergebnisse unterscheiden.",
+    "ctaTalk": "Eine Bewertung besprechen →",
     "ctaProduct": "Produkt ansehen"
   },
   "decisionsKicker": "Why we exist",

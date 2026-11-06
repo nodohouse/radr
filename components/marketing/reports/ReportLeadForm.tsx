@@ -85,6 +85,24 @@ export function ReportLeadForm({ available }: { available: boolean }) {
       setDownloading(false);
     }
   }
+  if (!available)
+    return (
+      <section className="rr-form" aria-labelledby="playbook-preview-heading">
+        <span className="rm-eyebrow">THE RADR OPERATOR SERIES</span>
+        <h2 id="playbook-preview-heading">Explore the playbook.</h2>
+        <p>
+          Start with the research charts and decision worksheet below.
+          The complete guide is not available for download yet.
+        </p>
+        <a className="rm-button" href="#report-preview-title">
+          Read the preview <span aria-hidden="true">↓</span>
+        </a>
+        <p className="rr-small">No signup needed to explore the sample pages.</p>
+        <Link className="rr-text-button" href="/blog">
+          Read the free journal →
+        </Link>
+      </section>
+    );
   if (done)
     return (
       <div className="rr-form rr-success" role="status">

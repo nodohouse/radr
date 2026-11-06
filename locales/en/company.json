@@ -405,14 +405,14 @@
     }
   },
   "customers": {
-    "metaTitle": "Customer stories · Coming soon",
-    "metaDescription": "Real operations. Real findings. Real value. RADR customer case studies are coming soon.",
-    "kicker": "Customer stories",
-    "heroLine1": "Real operations.",
-    "heroLine2": "Real findings.",
-    "heroLine3": "Real value.",
-    "heroLead": "Case studies coming soon. When they land, each one will follow the same shape as the product itself: operation, problem, finding, action, verified value.",
-    "ctaTalk": "Scope my recovery pilot →",
+    "metaTitle": "Evidence and operating examples | RADR",
+    "metaDescription": "Explore RADR operating examples and how outcomes are evaluated. Demonstrations are separate from customer evidence.",
+    "kicker": "Evidence & operating examples",
+    "heroLine1": "A clear decision.",
+    "heroLine2": "A visible outcome.",
+    "heroLine3": "Evidence behind both.",
+    "heroLead": "Explore the product through clearly labeled operating examples. Published customer case studies are not yet available. Every future case study will distinguish expected value from evidenced outcomes.",
+    "ctaTalk": "Discuss an evaluation →",
     "ctaProduct": "See the product"
   },
   "founder": {

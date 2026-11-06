@@ -374,14 +374,14 @@
     }
   },
   "customers": {
-    "metaTitle": "Témoignages clients · Bientôt",
-    "metaDescription": "Des exploitations réelles. Des findings réels. De la valeur réelle. Les études de cas RADR arrivent bientôt.",
-    "kicker": "Témoignages clients",
-    "heroLine1": "Des exploitations réelles.",
-    "heroLine2": "Des findings réels.",
-    "heroLine3": "De la valeur réelle.",
-    "heroLead": "Études de cas à venir. Quand elles arriveront, chacune suivra la même forme que le produit : exploitation, problème, finding, action, Verified Value.",
-    "ctaTalk": "Parler à RADR →",
+    "metaTitle": "Preuves et exemples opérationnels | RADR",
+    "metaDescription": "Découvrez les exemples opérationnels et la mesure des résultats. Les démonstrations sont distinctes des preuves clients.",
+    "kicker": "Preuves et exemples",
+    "heroLine1": "Une décision claire.",
+    "heroLine2": "Un résultat visible.",
+    "heroLine3": "Des preuves pour les deux.",
+    "heroLead": "Explorez des exemples opérationnels clairement identifiés. Aucune étude de cas client publiée n’est encore disponible. Les futures études distingueront la valeur attendue des résultats étayés.",
+    "ctaTalk": "Discuter d’une évaluation →",
     "ctaProduct": "Voir le produit"
   },
   "decisionsKicker": "Why we exist",
