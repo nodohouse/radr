@@ -41,9 +41,9 @@ export const CATEGORY = {
 } as const;
 
 export const CTAS = {
-  /** Paid product entry — signup, not a free recovery pilot */
-  primaryProduct: "Get started",
-  primaryProductHref: "/signup",
+  /** Public product entry. Account creation is not required for exploration. */
+  primaryProduct: "Explore the product",
+  primaryProductHref: "/demo",
   primarySales: "Talk to sales",
   primarySalesHref: "/contact?intent=sales",
   /** Public Verified Recovery story — never /app */
@@ -92,7 +92,12 @@ export const DECISION_OUTCOME_LOOP = [
   "MEMORY",
 ] as const;
 
-export const LIFECYCLE_SHORT = ["CONNECT", "DECIDE", "VERIFY", "REMEMBER"] as const;
+export const LIFECYCLE_SHORT = [
+  "CONNECT",
+  "DECIDE",
+  "VERIFY",
+  "REMEMBER",
+] as const;
 
 export const VALUE_KINDS_PUBLIC = [
   "RECOVERED",

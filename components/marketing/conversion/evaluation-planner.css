@@ -1,0 +1,96 @@
+.rm-evaluation {
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid #c8dcf2;
+  border-radius: 26px;
+  background: linear-gradient(140deg, #fff, #edf6ff);
+  box-shadow: 0 18px 50px #123b7710;
+  color: #102d50;
+  min-width: 0;
+}
+.rm-evaluation-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 11px !important;
+  font-weight: 650;
+  color: #006747 !important;
+}
+.rm-evaluation h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 12px 0 18px;
+}
+.rm-evaluation p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #48617c;
+}
+.rm-evaluation form {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+.rm-evaluation label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.rm-evaluation select {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid #a5bedb;
+  border-radius: 10px;
+  background: white;
+  font: inherit;
+  color: #102d50;
+}
+.rm-evaluation :is(button, select, a):focus-visible {
+  outline: 3px solid #075be5;
+  outline-offset: 4px;
+}
+.rm-evaluation button {
+  width: 100%;
+  min-height: 48px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.rm-evaluation button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.rm-evaluation-result {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #c7dcf0;
+}
+.rm-evaluation-result h3 {
+  font-size: 24px;
+  letter-spacing: -0.03em;
+}
+.rm-evaluation-result ol {
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.rm-evaluation-result li {
+  margin-bottom: 14px;
+}
+.rm-evaluation-note {
+  font-size: 12px !important;
+}
+.rm-evaluation-next {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 24px;
+}
+.rm-evaluation-next a {
+  color: #075be5;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

@@ -1,69 +1,53 @@
 import { ImageResponse } from "next/og";
-
-export const alt = "RADR · Nothing off the RADR.";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+export const alt =
+  "RADR. Nothing off the RADR. The adaptive decision system for hospitality.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-
-/** OG share: near-black, A-mark wordmark, slogan. */
-export default function OpenGraphImage() {
+export default async function Image() {
+  const logo = await readFile(
+    join(process.cwd(), "public/brand/radr-wordmark-master-v4-white.svg"),
+  );
   return new ImageResponse(
     (
       <div
         style={{
-          width: "100%",
-          height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#050705",
-          color: "#F5F2EB",
+          justifyContent: "space-between",
+          width: "100%",
+          height: "100%",
+          padding: "68px 76px",
+          color: "white",
+          background: "linear-gradient(110deg, #081d62, #075fff)",
           fontFamily: "sans-serif",
         }}
       >
+        <img
+          src={`data:image/svg+xml;base64,${logo.toString("base64")}`}
+          width={220}
+          height={48}
+          alt="RADR"
+        />
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: 8,
-            fontSize: 96,
+            flexDirection: "column",
+            fontSize: 92,
             fontWeight: 700,
-            letterSpacing: "-0.05em",
+            letterSpacing: -5,
+            lineHeight: 1.05,
           }}
         >
-          <span>R</span>
-          <svg width="72" height="90" viewBox="0 0 80 100" fill="none">
-            <path
-              d="M29 12 L10 90"
-              stroke="#FFFFFF"
-              strokeWidth="14"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M51 12 L70 90"
-              stroke="#FFFFFF"
-              strokeWidth="14"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="40" cy="56" r="7.25" fill="#00D978" />
-          </svg>
-          <span>DR</span>
+          <span>Nothing off</span>
+          <span style={{ color: "#00f59a" }}>the RADR.</span>
         </div>
-        <div
-          style={{
-            marginTop: 28,
-            fontSize: 26,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            color: "rgba(245,242,235,0.5)",
-          }}
-        >
-          Nothing off the RADR.
+        <div style={{ display: "flex", fontSize: 27, color: "#e6f2ff" }}>
+          The adaptive decision system for hospitality.
         </div>
       </div>
     ),
-    { ...size },
+    size,
   );
 }

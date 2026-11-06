@@ -9,7 +9,7 @@ const PATHS = [
   "/",
   "/blog",
   "/resources/hospitality-decision-playbook",
-  ...BLOG_POSTS.map((p) => `/blog/${p.slug}`),
+  ...BLOG_POSTS.filter((p) => !p.noindex).map((p) => `/blog/${p.slug}`),
   "/glossary",
   "/solutions",
   "/solutions/recover",
@@ -42,8 +42,12 @@ const PATHS = [
   "/cookies",
   "/terms",
   "/imprint",
-  "/login",
-  "/forgot-password",
+  "/demo",
+  "/value-calculator",
+  "/value-calculator/methodology",
+  "/product/futures",
+  "/product/memory",
+  "/radr-explained",
 ] as const;
 
 function localizedUrl(locale: string, path: string): string {
@@ -52,10 +56,9 @@ function localizedUrl(locale: string, path: string): string {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-
   return PATHS.flatMap((path) => {
     const englishOnly =
+      path === "/radr-explained" ||
       path === "/resources/hospitality-decision-playbook" ||
       BLOG_POSTS.some((post) => post.content && path === `/blog/${post.slug}`);
     const pageLocales = englishOnly ? ["en"] : routing.locales;
@@ -67,10 +70,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
 
     const isBlog = path === "/blog" || path.startsWith("/blog/");
+    const post = BLOG_POSTS.find((post) => path === `/blog/${post.slug}`);
 
     return pageLocales.map((locale) => ({
       url: localizedUrl(locale, path),
-      lastModified: now,
+      ...(post ? { lastModified: post.updated ?? post.date } : {}),
       changeFrequency:
         path === "/" || isBlog ? ("weekly" as const) : ("monthly" as const),
       priority: path === "/" ? 1 : isBlog ? 0.8 : 0.7,

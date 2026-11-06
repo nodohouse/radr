@@ -53,10 +53,10 @@ export default async function ContactPage({ params, searchParams }: Props) {
         >
           <div className="rx-shell rx-page-hero-inner">
             <p className="rx-kicker">{t("contactTitle")}</p>
-            <h1 className="rx-page-title">Talk to RADR</h1>
+            <h1 className="rx-page-title">Plan your next move.</h1>
             <p className="rx-lead rx-lead-short">
-              Tell us about your estate. We will scope access and pricing
-              honestly.
+              Explore the product, choose one operating priority and prepare a
+              focused evaluation for your team.
             </p>
           </div>
         </section>

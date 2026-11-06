@@ -56,6 +56,7 @@ export function SiteFooter() {
       label: "The Decision Playbook",
     },
     { href: "/company" as const, label: t("about") },
+    { href: "/radr-explained" as const, label: "What is RADR?" },
     { href: "/why" as const, label: t("why") },
     { href: "/blog" as const, label: t("blog") },
     { href: "/developers" as const, label: t("developers") },

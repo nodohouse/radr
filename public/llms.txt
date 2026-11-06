@@ -1,0 +1,22 @@
+# RADR
+
+> RADR is the adaptive decision system for hospitality. Nothing off the RADR.
+
+RADR is designed to connect operating evidence, compare decisions and track outcomes for restaurants, hotels and hospitality groups. It is a decision layer above systems of record, not a replacement for a POS or PMS.
+
+## Start here
+- [RADR explained](https://radrup.com/en/radr-explained): plain-language answers, current boundaries and evaluation guidance.
+- [Platform](https://radrup.com/en/product): operating examples and the decision workflow.
+- [Public demo](https://radrup.com/en/demo): no-login examples using sample data.
+- [Value Map](https://radrup.com/en/value-calculator): modeled assumptions, not verified customer savings.
+- [Pricing](https://radrup.com/en/pricing): proposed engagement scopes; quotes require review.
+- [Evaluation](https://radrup.com/en/contact): prepare a local evaluation brief when sales delivery is unavailable.
+
+## Evidence and availability
+- [Connections](https://radrup.com/en/product/connections): distinguish source availability from live provider integrations.
+- [Trust and security](https://radrup.com/en/security): implemented controls and production boundaries.
+- [Developer documentation](https://radrup.com/en/developers): implemented versus proposed interfaces.
+- [Research journal](https://radrup.com/en/blog): articles with sources, scope and dates.
+
+## Interpretation
+Demo data is illustrative. Expected, observed and verified outcomes are distinct. Calculator estimates are not customer results or guaranteed savings. Provider logos do not establish an available integration. No published customer results or certifications should be inferred. Company legal disclosures remain subject to confirmation.

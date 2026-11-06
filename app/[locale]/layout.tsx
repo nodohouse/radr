@@ -6,6 +6,7 @@ import { entryFont } from "@/components/onboarding/entryFont";
 import "@/app/radr-marketing-system.css";
 import { routing } from "@/i18n/routing";
 import type { Metadata, Viewport } from "next";
+import { MarketingEntityData } from "@/components/marketing/MarketingEntityData";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -46,11 +47,20 @@ export async function generateMetadata({
                 ? "fr_FR"
                 : "es_ES",
       siteName: "RADR",
+      images: [
+        {
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: "RADR. Nothing off the RADR. Hospitality decision intelligence.",
+        },
+      ],
       title: messages.siteTitle,
       description: messages.siteDescription,
     },
     twitter: {
       card: "summary_large_image",
+      images: ["/opengraph-image"],
       title: messages.siteTitle,
       description: messages.siteDescription,
     },
@@ -87,6 +97,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
+      <MarketingEntityData />
       <div className={entryFont.variable}>{children}</div>
     </NextIntlClientProvider>
   );

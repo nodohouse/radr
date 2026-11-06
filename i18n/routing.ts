@@ -30,6 +30,7 @@ export const routing = defineRouting({
 /** Paths that stay outside locale routing (product demo, auth-gated app, APIs). */
 export const NON_LOCALIZED_PREFIXES = [
   "/api",
+  "/opengraph-image",
   "/app",
   "/home",
   "/scan",

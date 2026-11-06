@@ -14,6 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: buildAlternatesForLocale(locale, "/pricing"),
     openGraph: {
       type: "website",
+      images: ["/opengraph-image"],
       title: t("metaTitle"),
       description: t("metaDescription"),
       url: `https://radrup.com/${locale}/pricing`,

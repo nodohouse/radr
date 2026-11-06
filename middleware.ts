@@ -190,7 +190,7 @@ export const config = {
     // Localized marketing + auth (all locales prefixed, including en)
     "/",
     "/(en|de|nl|fr|es)/:path*",
-    "/((?!api|app|home|scan|sources|cases|money|controls|documents|onboarding|select-org|invite|dev|mockups|_next|_vercel|.*\\..*).*)",
+    "/((?!api|opengraph-image|app|home|scan|sources|cases|money|controls|documents|onboarding|select-org|invite|dev|mockups|_next|_vercel|.*\\..*).*)",
     // Non-localized authenticated surfaces (auth gate only)
     "/app",
     "/app/:path*",

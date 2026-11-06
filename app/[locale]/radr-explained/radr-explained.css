@@ -1,0 +1,96 @@
+.rm-explained {
+  max-width: 1200px;
+  margin: auto;
+  padding: 150px 32px 90px;
+  color: #102d50;
+}
+.rm-explained header {
+  padding-bottom: 48px;
+  border-bottom: 1px solid #c9dcef;
+}
+.rm-explained h1 {
+  font-size: clamp(38px, 5vw, 72px);
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+  margin: 20px 0;
+}
+.rm-explained h1 em {
+  font-style: normal;
+  color: #075be5;
+}
+.rm-explained header > p:last-of-type {
+  max-width: 65ch;
+  font-size: 20px;
+  line-height: 1.7;
+  color: #48617c;
+}
+.rm-explained-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+.rm-explained section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 40px 0;
+}
+.rm-explained article {
+  padding: 30px;
+  background: linear-gradient(145deg, #fff, #f0f7ff);
+  border: 1px solid #d2e1f2;
+  border-radius: 20px;
+}
+.rm-explained h2 {
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin: 0 0 14px;
+}
+.rm-explained article p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #435e79;
+  margin: 0;
+}
+.rm-explained aside {
+  background: #09295a;
+  color: white;
+  padding: 32px;
+  border-radius: 22px;
+}
+.rm-explained-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 24px;
+}
+.rm-explained-links a {
+  color: #a1ffda;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.rm-explained a:focus-visible {
+  outline: 3px solid #00bb80;
+  outline-offset: 5px;
+}
+@media (max-width: 700px) {
+  .rm-explained {
+    padding: 120px 20px 48px;
+  }
+  .rm-explained section,
+  .rm-explained-links {
+    grid-template-columns: 1fr;
+  }
+  .rm-explained article {
+    padding: 24px;
+  }
+  .rm-explained header > p:last-of-type {
+    font-size: 17px;
+  }
+  .rm-explained-actions > a {
+    width: 100%;
+    justify-content: center;
+  }
+}

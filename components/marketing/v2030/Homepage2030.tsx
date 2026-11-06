@@ -44,8 +44,8 @@ export function Homepage2030() {
             <em>the RADR.</em>
           </h1>
           <p className="rm-lead">
-            See where your hospitality operation is losing money, decide what
-            to do next, and track the result.
+            See where your hospitality operation is losing money, decide what to
+            do next, and track the result.
           </p>
           <div className="rm-ctas">
             <Link href="/demo" className="rm-button">
@@ -55,7 +55,7 @@ export function Homepage2030() {
               href={CTAS.primarySalesHref}
               className="rm-button rm-button-secondary"
             >
-              Talk to RADR →
+              Plan your evaluation →
             </Link>
           </div>
           <p className="rm-caption rm-hospitality-scope">

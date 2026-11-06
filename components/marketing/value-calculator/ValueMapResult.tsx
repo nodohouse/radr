@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { Link } from "@/i18n/navigation";
 import { CTAS } from "@/lib/marketing/brand";
 import { ValueOpportunityMap } from "@/components/marketing/value-calculator/ValueOpportunityMap";
@@ -59,28 +60,7 @@ function IconEdit() {
     </svg>
   );
 }
-function IconMail() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden>
-      <rect
-        x="2"
-        y="3.5"
-        width="12"
-        height="9"
-        rx="1.2"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-      <path
-        d="M2.5 4.5L8 9l5.5-4.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-    </svg>
-  );
-}
+
 function IconDownload() {
   return (
     <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden>
@@ -96,14 +76,13 @@ function IconDownload() {
 }
 
 export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionSafe();
   const [activeId, setActiveId] = useState<string>(
     result.startingOpportunity ?? result.categories[0]?.id ?? "",
   );
   const [how, setHow] = useState(false);
   const [sens, setSens] = useState(false);
   const [tighten, setTighten] = useState(false);
-  const [email, setEmail] = useState(false);
 
   const loc = optionById(LOCATION_OPTIONS, journey.locationsId);
   const rev = optionById(REVENUE_OPTIONS_USD, journey.revenueId);
@@ -119,9 +98,7 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
   const start = result.categories.find(
     (c) => c.id === result.startingOpportunity,
   );
-  const startAssumption = start
-    ? assumptionByCategory(start.id)
-    : undefined;
+  const startAssumption = start ? assumptionByCategory(start.id) : undefined;
 
   const maxModeled = useMemo(
     () => Math.max(...result.categories.map((c) => c.modeled), 1),
@@ -158,19 +135,18 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
           <button type="button" className="vc-res-act" onClick={onEdit}>
             <IconEdit /> Edit inputs
           </button>
-          <button
-            type="button"
+          <Link
+            href={`/contact?intent=pricing&context=${journey.vertical}`}
             className="vc-res-act"
-            onClick={() => setEmail(true)}
           >
-            <IconMail /> Email my Value Map
-          </button>
+            <IconEdit /> Prepare an evaluation
+          </Link>
           <button
             type="button"
             className="vc-res-act"
             onClick={() => window.print()}
           >
-            <IconDownload /> Download Value Map
+            <IconDownload /> Print / save Value Map
           </button>
         </div>
       </header>
@@ -261,9 +237,7 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
                   onClick={() => setActiveId(c.id)}
                 >
                   <div className="vc-res-bar-meta">
-                    <strong>
-                      {categoryDisplayLabel(c, journey.vertical)}
-                    </strong>
+                    <strong>{categoryDisplayLabel(c, journey.vertical)}</strong>
                     <span>
                       {formatRangeIntl(c.low, c.modeled, result.currency)}
                     </span>
@@ -368,14 +342,17 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
                   {evidenceLabel(start.evidenceReadiness)} evidence availability
                 </li>
                 <li>
-                  {proveLabel(startAssumption?.timeToProve ?? 0.5)} time to prove
+                  {proveLabel(startAssumption?.timeToProve ?? 0.5)} time to
+                  prove
                 </li>
                 <li>
                   {effortLabel(startAssumption?.effort ?? 0.5)} operational
                   disruption
                 </li>
               </ul>
-              <p className="vc-res-start-why-label">Typical systems / evidence</p>
+              <p className="vc-res-start-why-label">
+                Typical systems / evidence
+              </p>
               <ul className="vc-chips">
                 {start.evidenceNeeded.slice(0, 5).map((e) => (
                   <li key={e}>{e}</li>
@@ -522,8 +499,8 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
                 </strong>
               </div>
               <p className="vc-roi-hint">
-                ROI = (modeled captured − investment) / investment. No guaranteed
-                payback.
+                ROI = (modeled captured − investment) / investment. No
+                guaranteed payback.
               </p>
             </div>
           ) : (
@@ -534,10 +511,18 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
         </div>
 
         <div className="vc2-result-actions">
-          <button type="button" className="vc-res-act" onClick={() => setSens(true)}>
+          <button
+            type="button"
+            className="vc-res-act"
+            onClick={() => setSens(true)}
+          >
             Adjust assumptions
           </button>
-          <button type="button" className="vc-res-act" onClick={() => setHow(true)}>
+          <button
+            type="button"
+            className="vc-res-act"
+            onClick={() => setHow(true)}
+          >
             How was this calculated?
           </button>
           <Link href="/value-calculator/methodology" className="vc-res-act">
@@ -555,10 +540,10 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
           </p>
           <div className="rx30-ctas">
             <Link
-              href={CTAS.primaryProductHref}
+              href={`/contact?intent=pricing&context=${journey.vertical}`}
               className="rx30-btn rx30-btn-primary"
             >
-              Start a recovery pilot <span aria-hidden>→</span>
+              Plan your evaluation <span aria-hidden>→</span>
             </Link>
             <Link
               href={CTAS.seeInActionHref}
@@ -609,7 +594,9 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
               Overlap adjustment:{" "}
               {result.methodology.overlapGroupsApplied.join(", ") || "none"}.
               Portfolio cap:{" "}
-              {result.methodology.portfolioCapApplied ? "applied" : "not needed"}
+              {result.methodology.portfolioCapApplied
+                ? "applied"
+                : "not needed"}
               .
             </p>
           </div>
@@ -626,8 +613,7 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
               </button>
             </header>
             {OPPORTUNITY_ASSUMPTIONS.filter(
-              (a) =>
-                journey.vertical && a.verticals.includes(journey.vertical),
+              (a) => journey.vertical && a.verticals.includes(journey.vertical),
             ).map((a) => {
               const ov = journey.rateOverrides?.[a.id]?.base;
               const val = Math.round((ov ?? a.rates.base) * 1000) / 10;
@@ -734,42 +720,6 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
               onClick={() => setTighten(false)}
             >
               Update model
-            </button>
-          </div>
-        </div>
-      ) : null}
-
-      {email ? (
-        <div className="vc-drawer" role="dialog" aria-modal="true">
-          <div className="vc-drawer-panel">
-            <header>
-              <h2>Email my Value Map</h2>
-              <button type="button" onClick={() => setEmail(false)}>
-                Close
-              </button>
-            </header>
-            <p>Optional. No phone required.</p>
-            <label className="vc-field">
-              <span>Name</span>
-              <input type="text" autoComplete="name" />
-            </label>
-            <label className="vc-field">
-              <span>Work email</span>
-              <input type="email" autoComplete="email" />
-            </label>
-            <label className="vc-field">
-              <span>Company</span>
-              <input type="text" autoComplete="organization" />
-            </label>
-            <button
-              type="button"
-              className="rx30-btn rx30-btn-primary"
-              onClick={() => {
-                window.print();
-                setEmail(false);
-              }}
-            >
-              Print / save Value Map
             </button>
           </div>
         </div>

@@ -18,7 +18,7 @@ const PLANS = [
     evidence: "A scoped evidence package and outcome review",
     governance: "Named operator reviews each proposed action",
     next: "A go / no-go review before expanding",
-    cta: "Discuss a pilot",
+    cta: "Plan a pilot",
   },
   {
     id: "expand",
@@ -33,7 +33,7 @@ const PLANS = [
     evidence: "Cross-system context and a continuing value trail",
     governance: "Operating roles and approval rules scoped together",
     next: "Broader coverage as evidence supports it",
-    cta: "Discuss Expand",
+    cta: "Plan your expansion",
   },
   {
     id: "enterprise",
@@ -48,7 +48,7 @@ const PLANS = [
     evidence: "Portfolio reporting requirements and audit needs",
     governance: "Group policies and access requirements",
     next: "A tailored rollout and governance plan",
-    cta: "Discuss Enterprise",
+    cta: "Plan a group evaluation",
   },
 ] as const;
 const ROWS = [
@@ -118,7 +118,7 @@ export function Pricing2030() {
                     href="/contact?intent=sales"
                     className="rx30-btn rm-price-secondary"
                   >
-                    Talk through pricing →
+                    Prepare your evaluation →
                   </Link>
                 </div>
               </div>

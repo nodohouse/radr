@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
   },
   // Local PGlite / uploads must not be traced into serverless bundles.
   outputFileTracingIncludes: {
+    "/opengraph-image": ["./public/brand/radr-wordmark-master-v4-white.svg"],
     "/api/reports/download": [
       "./private/reports/RADR-Hospitality-Decision-Playbook-2026.pdf",
     ],

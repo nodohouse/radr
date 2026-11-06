@@ -370,8 +370,8 @@ export function SiteNav({ variant }: Props) {
             <Link href="/login" className="rx-nav-signin">
               {t("signIn")}
             </Link>
-            <Link href={CTAS.primarySalesHref} className="rx-nav-cta">
-              Book a demo
+            <Link href={CTAS.seeInActionHref} className="rx-nav-cta">
+              Explore demo
             </Link>
             <button
               type="button"
