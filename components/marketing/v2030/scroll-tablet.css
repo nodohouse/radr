@@ -385,3 +385,38 @@ html body .radr:has(.rx-nav) .rsc-scroll-stage {
 .rsc-scroll-stage[data-face="back"] .rsc-turn-cue {
   visibility: hidden;
 }
+
+/* Individual transforms compose with the native-scroll flip, preserving both faces. */
+.rsc-flip-rig {
+  animation: rsc-gentle-wiggle 7.2s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.rsc-scroll-stage[data-moving="true"] .rsc-flip-rig {
+  animation-play-state: running;
+}
+@keyframes rsc-gentle-wiggle {
+  0%,
+  100% {
+    rotate: -0.6deg;
+    translate: 0 -3px;
+  }
+  25% {
+    rotate: 0.3deg;
+    translate: 3px 1px;
+  }
+  50% {
+    rotate: 0.8deg;
+    translate: 0 4px;
+  }
+  75% {
+    rotate: -0.2deg;
+    translate: -3px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rsc-flip-rig {
+    animation: none;
+    rotate: none;
+    translate: none;
+  }
+}

@@ -17,6 +17,7 @@ export function ScrollTabletShowcase() {
   const stage = useRef<HTMLDivElement>(null);
   const [start, setStart] = useState(0);
   const [ready, setReady] = useState(false);
+  const [moving, setMoving] = useState(false);
   const [back, setBack] = useState(false);
   const [manualBack, setManualBack] = useState(false);
   const previousBack = useRef(false);
@@ -60,12 +61,22 @@ export function ScrollTabletShowcase() {
         );
     };
     measure();
+    let visible = false;
+    const syncMotion = () => setMoving(visible && !document.hidden);
+    const visibility = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      syncMotion();
+    });
+    if (stage.current) visibility.observe(stage.current);
+    document.addEventListener("visibilitychange", syncMotion);
     const observer = new ResizeObserver(measure);
     if (stage.current) observer.observe(stage.current);
     window.addEventListener("resize", measure);
     document.fonts.ready.then(measure);
     return () => {
       observer.disconnect();
+      visibility.disconnect();
+      document.removeEventListener("visibilitychange", syncMotion);
       window.removeEventListener("resize", measure);
     };
   }, []);
@@ -76,6 +87,7 @@ export function ScrollTabletShowcase() {
       className="rm-hero-product rsc-scroll-stage"
       data-face={showingBack ? "back" : "front"}
       data-ready={ready || undefined}
+      data-moving={moving}
     >
       <motion.div
         className="rsc-flip-rig"
