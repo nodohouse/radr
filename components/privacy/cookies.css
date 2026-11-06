@@ -1,9 +1,9 @@
 .radr-cookies {
   position: fixed;
-  inset: auto 24px 24px auto;
-  margin: 0;
-  width: min(560px, calc(100vw - 32px));
-  max-height: calc(100dvh - 48px);
+  inset: 0;
+  margin: auto;
+  width: min(880px, calc(100vw - 32px));
+  max-height: min(800px, calc(100dvh - 48px));
   overflow: auto;
   box-sizing: border-box;
   padding: 28px;
@@ -127,7 +127,6 @@
 }
 @media (max-width: 600px) {
   .radr-cookies {
-    inset: auto 16px 16px;
     padding: 22px;
   }
   .radr-cookies h2 {
@@ -136,7 +135,6 @@
 }
 /* Expanded privacy center uses the same navy, ocean and jade material. */
 .radr-cookies {
-  width: min(640px, calc(100vw - 32px));
   color: #09264f;
   background: linear-gradient(140deg, #fcfeff, #eef5ff);
   border-color: #d2e2f5;
