@@ -9,7 +9,6 @@ import { PUBLIC_HOTEL } from "@/lib/marketing/publicCanon";
 import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
 import "./product-showcase.css";
 import { OperationsShowcase } from "./OperationsShowcase";
-import { ShowcaseCursor } from "./ShowcaseCursor";
 
 const SECTIONS = [
   "Control Center",
@@ -67,6 +66,14 @@ export function ProductBriefPreview({
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
+  useEffect(() => {
+    if (!auto) return;
+    const timer = window.setTimeout(
+      () => setSection((current) => (current + 1) % (variant === "operations" ? 3 : 4)),
+      variant === "operations" ? 6500 : 4200,
+    );
+    return () => window.clearTimeout(timer);
+  }, [auto, section, variant]);
   const location =
     variant === "operations" && section === 1
       ? PUBLIC_HOTEL.displayName
@@ -85,13 +92,6 @@ export function ProductBriefPreview({
     >
       <span className="rsc-camera" aria-hidden="true" />
       <div className="rsc-screen">
-        <ShowcaseCursor
-          root={root}
-          running={auto}
-          section={section}
-          variant={variant}
-          onSectionChange={setSection}
-        />
         <aside className="rsc-sidebar" aria-label="RADR workspace preview">
           <FrozenRadrLogo variant="mark" width={27} />
           <div className="rsc-workspace">
