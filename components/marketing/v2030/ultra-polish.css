@@ -150,50 +150,61 @@
   }
 }
 
-/* The frozen wordmark's 100-unit ink height matches the surrounding cap height. */
+/* A typographic headline with the unchanged frozen mark in the A position. */
 html body .radr.radr-launch .rm-hero h1.rm-slogan {
   font-weight: 750;
   letter-spacing: -0.045em;
-  line-height: 1.12;
+  line-height: 0.98;
   text-shadow: 0 3px 24px #061a491a;
 }
 .rm-slogan-first {
   display: block;
   white-space: nowrap;
+  word-spacing: 0.07em;
 }
 .rm-slogan-line {
   display: flex;
   align-items: baseline;
-  gap: 0.18em;
-  margin-top: 0.07em;
+  gap: 0.22em;
+  margin-top: 0;
   white-space: nowrap;
   color: #00f59a;
 }
-.rm-slogan-wordmark {
+.rm-slogan-name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.025em;
+  color: #f4f9ff;
+  font: inherit;
+  letter-spacing: inherit;
+}
+.rm-slogan-mark {
   display: inline-block;
   position: relative;
-  width: 4.1em;
+  width: 0.965em;
   height: 0.722em;
   flex: 0 0 auto;
 }
-.rm-slogan-wordmark > img.radr-logo {
+.rm-slogan-mark > img.radr-logo {
   position: absolute;
-  top: -0.0722em;
-  left: 0;
-  width: 100% !important;
+  top: -0.084em;
+  left: -0.096em;
+  width: 1.155em !important;
   height: auto !important;
   max-width: none !important;
 }
 .rm-slogan-period {
-  margin-left: -0.19em;
+  color: #00f59a;
 }
 @supports (height: 1cap) {
-  .rm-slogan-wordmark {
-    width: 5.68cap;
+  .rm-slogan-mark {
+    width: 1.337cap;
     height: 1cap;
   }
-  .rm-slogan-wordmark > img.radr-logo {
-    top: -0.1cap;
+  .rm-slogan-mark > img.radr-logo {
+    width: 1.6cap !important;
+    top: -0.116cap;
+    left: -0.133cap;
   }
 }
 @media (min-width: 2200px) {

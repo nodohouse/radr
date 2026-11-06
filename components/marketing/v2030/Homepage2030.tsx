@@ -43,16 +43,20 @@ export function Homepage2030() {
             <span className="rm-slogan-first">NOTHING OFF</span>
             <span className="rm-slogan-line">
               <span>THE</span>
-              <span className="rm-slogan-wordmark">
-                <FrozenRadrLogo
-                  variant="wordmark"
-                  theme="dark"
-                  width={360}
-                  priority
-                />
-              </span>
-              <span className="rm-slogan-period" aria-hidden="true">
-                .
+              <span className="rm-slogan-name">
+                <span>R</span>
+                <span className="rm-slogan-mark">
+                  <FrozenRadrLogo
+                    variant="mark"
+                    theme="dark"
+                    width={120}
+                    decorative
+                    priority
+                  />
+                </span>
+                <span>
+                  DR<span className="rm-slogan-period">.</span>
+                </span>
               </span>
             </span>
           </h1>
