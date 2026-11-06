@@ -62,11 +62,6 @@ export function Homepage2030() {
           <p className="rm-caption rm-hospitality-scope">
             Restaurants · Hotels · Hospitality groups
           </p>
-          <p className="rm-caption">
-            Interactive demo with synthetic operating data.
-            <br />
-            Commercial connectors and autonomous execution are planned.
-          </p>
         </div>
         <ScrollTabletShowcase />
         <div className="rm-loop" aria-label="The RADR decision loop">
