@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { Link } from "@/i18n/navigation";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { NAV_ICONS } from "@/components/product/shell/navIcons";
@@ -9,6 +9,7 @@ import { PUBLIC_HOTEL } from "@/lib/marketing/publicCanon";
 import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
 import "./product-showcase.css";
 import { OperationsShowcase } from "./OperationsShowcase";
+import { ShowcaseCursor } from "./ShowcaseCursor";
 
 const SECTIONS = [
   "Control Center",
@@ -45,7 +46,7 @@ export function ProductBriefPreview({
   const [motionReady, setMotionReady] = useState(false);
   const [visible, setVisible] = useState(false);
   const [documentVisible, setDocumentVisible] = useState(true);
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionSafe();
   const root = useRef<HTMLDivElement>(null);
   const id = useId();
   const auto =
@@ -66,14 +67,6 @@ export function ProductBriefPreview({
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
-  useEffect(() => {
-    if (!auto) return;
-    const timer = window.setInterval(
-      () => setSection((s) => (s + 1) % sections.length),
-      variant === "operations" ? 6500 : 4200,
-    );
-    return () => window.clearInterval(timer);
-  }, [auto, sections.length, variant]);
   const location =
     variant === "operations" && section === 1
       ? PUBLIC_HOTEL.displayName
@@ -92,6 +85,13 @@ export function ProductBriefPreview({
     >
       <span className="rsc-camera" aria-hidden="true" />
       <div className="rsc-screen">
+        <ShowcaseCursor
+          root={root}
+          running={auto}
+          section={section}
+          variant={variant}
+          onSectionChange={setSection}
+        />
         <aside className="rsc-sidebar" aria-label="RADR workspace preview">
           <FrozenRadrLogo variant="mark" width={27} />
           <div className="rsc-workspace">

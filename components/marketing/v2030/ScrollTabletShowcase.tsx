@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
 } from "motion/react";
+import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { ProductBriefPreview } from "./ProductBriefPreview";
 import "./scroll-tablet.css";
 
@@ -21,7 +21,7 @@ export function ScrollTabletShowcase() {
   const [back, setBack] = useState(false);
   const [manualBack, setManualBack] = useState(false);
   const previousBack = useRef(false);
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionSafe();
   const { scrollY } = useScroll();
   const target = useTransform(scrollY, [start, start + 240], [0, 1], {
     clamp: true,

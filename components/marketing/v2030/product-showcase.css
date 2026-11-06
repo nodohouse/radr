@@ -1027,3 +1027,55 @@
 .rsc-tablet:not([data-running="true"]) .rsc-chart::after {
   animation-play-state: paused;
 }
+
+.rsc-screen {
+  position: relative;
+}
+.rsc-demo-pointer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 21px;
+  height: 26px;
+  z-index: 20;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px #06245540);
+}
+.rsc-demo-pointer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.rsc-demo-pointer i {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #00df94;
+  border-radius: 50%;
+  background: #00f59a25;
+  opacity: 0;
+  animation: rsc-pointer-click 0.55s ease-out;
+}
+@keyframes rsc-pointer-click {
+  0% {
+    opacity: 0.95;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+@container (max-width: 400px) {
+  .rsc-demo-pointer {
+    width: 17px;
+    height: 21px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rsc-demo-pointer {
+    display: none;
+  }
+}
