@@ -257,19 +257,21 @@ export default async function BlogPostPage({ params }: Props) {
                       className="rx-res-card"
                       data-terr={item.territory}
                     >
-                      <div className="rx-res-card-meta">
-                        <em className="rx-res-terr">
-                          {pillarFromTerritory(item.territory)}
-                        </em>
-                        <time dateTime={item.date}>{item.date}</time>
+                      <div className="rx-res-card-copy">
+                        <div className="rx-res-card-meta">
+                          <em className="rx-res-terr">
+                            {pillarFromTerritory(item.territory)}
+                          </em>
+                          <time dateTime={item.date}>{item.date}</time>
+                        </div>
+                        <h3>
+                          {item.content?.title ?? t(`posts.${item.key}.title`)}
+                        </h3>
+                        <p>
+                          {item.content?.excerpt ??
+                            t(`posts.${item.key}.excerpt`)}
+                        </p>
                       </div>
-                      <h3>
-                        {item.content?.title ?? t(`posts.${item.key}.title`)}
-                      </h3>
-                      <p>
-                        {item.content?.excerpt ??
-                          t(`posts.${item.key}.excerpt`)}
-                      </p>
                     </Link>
                   </li>
                 ))}
