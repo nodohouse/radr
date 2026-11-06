@@ -27,8 +27,8 @@ export async function generateMetadata({
   return {
     metadataBase: new URL("https://radrup.com"),
     title: {
-      default: messages.siteTitle,
-      template: "%s",
+      default: "RADR",
+      template: "RADR",
     },
     description: messages.siteDescription,
     applicationName: "RADR",
