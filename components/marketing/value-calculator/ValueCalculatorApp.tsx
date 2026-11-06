@@ -7,7 +7,8 @@ import { analyticsAllowed } from "@/lib/privacy/consent";
  */
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
 import { SilkAtmosphere } from "@/components/marketing/v2030/SilkAtmosphere";
 import { LiveModelPreview } from "@/components/marketing/value-calculator/LiveModelPreview";
@@ -135,7 +136,7 @@ function SelectField({
 }
 
 export function ValueCalculatorApp() {
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionSafe();
   const [step, setStep] = useState<JourneyStep>("intro");
   const [journey, setJourney] = useState<JourneyState>(emptyJourney);
   const [analyzeIdx, setAnalyzeIdx] = useState(0);

@@ -1,7 +1,8 @@
 "use client";
 import { MarketingHeroVisual } from "./MarketingHeroVisual";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { Link } from "@/i18n/navigation";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
 import { CTAS } from "@/lib/marketing/brand";
@@ -62,7 +63,7 @@ const TRUST = [
 ] as const;
 
 export function Company2030() {
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionSafe();
 
   return (
     <div className="radr radr-mineral rm-premium rm-company">

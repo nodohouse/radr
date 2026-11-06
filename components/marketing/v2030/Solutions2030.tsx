@@ -2,7 +2,8 @@
 import { MarketingHeroVisual } from "./MarketingHeroVisual";
 
 import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { Link } from "@/i18n/navigation";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
 import { PUBLIC_SUPPLIER } from "@/lib/marketing/publicCanon";
@@ -147,7 +148,7 @@ function readLeak(lens?: string): LeakId {
 }
 
 export function Solutions2030(props: Props = {}) {
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionSafe();
   const [id, setId] = useState<LeakId>(() =>
     LEAKS.some((l) => l.id === props.lens)
       ? (props.lens as LeakId)
