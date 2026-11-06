@@ -207,7 +207,7 @@
   display: grid;
   grid-template-columns: 1.08fr 1fr;
   gap: 11px;
-  animation: rsc-enter 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: rsc-enter 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   min-width: 0;
 }
 .rsc-heading {
@@ -635,14 +635,12 @@
 }
 @keyframes rsc-enter {
   from {
-    opacity: 0.15;
-    filter: blur(3px);
-    transform: translate3d(9px, 4px, 0) scale(0.985);
+    opacity: 0.72;
+    transform: translateY(3px);
   }
   to {
     opacity: 1;
-    filter: blur(0);
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translateY(0);
   }
 }
 @keyframes rsc-bar {
@@ -1035,43 +1033,33 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 21px;
-  height: 26px;
+  width: 16px;
+  height: 21px;
   z-index: 20;
   pointer-events: none;
-  filter: drop-shadow(0 2px 3px #06245540);
+  transform-origin: 2px 1px;
+  filter: drop-shadow(0 1px 1px #06245538);
 }
 .rsc-demo-pointer svg {
   display: block;
   width: 100%;
   height: 100%;
 }
-.rsc-demo-pointer i {
-  position: absolute;
-  top: -15px;
-  left: -15px;
-  width: 30px;
-  height: 30px;
-  border: 2px solid #00df94;
-  border-radius: 50%;
-  background: #00f59a25;
-  opacity: 0;
-  animation: rsc-pointer-click 0.55s ease-out;
+.rsc-screen [data-tour-hover] {
+  box-shadow:
+    0 0 0 1px #25c8a55c,
+    0 2px 8px #073b7c12;
+  transition:
+    box-shadow 0.2s ease,
+    filter 0.14s ease;
 }
-@keyframes rsc-pointer-click {
-  0% {
-    opacity: 0.95;
-    transform: scale(0.3);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.6);
-  }
+.rsc-screen [data-tour-press] {
+  filter: brightness(0.94);
 }
-@container (max-width: 400px) {
+@container (max-width:400px) {
   .rsc-demo-pointer {
-    width: 17px;
-    height: 21px;
+    width: 14px;
+    height: 18px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
