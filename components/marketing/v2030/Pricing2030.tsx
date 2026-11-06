@@ -9,16 +9,17 @@ const PLANS = [
   {
     id: "start",
     number: "01",
-    name: "Recovery Pilot",
-    tag: "Start focused",
-    headline: "One problem. A clear proof path.",
-    audience: "For operators evaluating RADR on a defined economic problem.",
-    scope: "2–3 locations · agreed Decision class",
-    focus: "Supplier / AP or reconciliation",
-    evidence: "A scoped evidence package and outcome review",
+    name: "14-day free trial",
+    tag: "Two weeks. No trial fee.",
+    headline: "See how RADR fits your operation.",
+    audience:
+      "For hospitality teams exploring RADR before choosing an ongoing plan.",
+    scope: "14 days · locations and data access agreed at setup",
+    focus: "One operating priority, selected with your team",
+    evidence: "Review the available source records and Decision workflow",
     governance: "Named operator reviews each proposed action",
-    next: "A go / no-go review before expanding",
-    cta: "Plan a pilot",
+    next: "Review the trial, then choose whether to continue on agreed paid terms",
+    cta: "Request your free trial",
   },
   {
     id: "expand",
@@ -61,7 +62,7 @@ const ROWS = [
 const FAQ = [
   [
     "How much does RADR cost?",
-    "Pricing is quoted after an initial scope review. There is no published monthly rate today. Your proposal defines the locations, evidence sources, responsibilities, delivery and commercial terms before you commit.",
+    "The 14-day trial is free. Ongoing paid pricing is quoted after a scope review. There is no published monthly rate today. Your proposal defines the locations, evidence sources, responsibilities, delivery and commercial terms before you commit.",
   ],
   [
     "Are these three different products?",
@@ -76,8 +77,8 @@ const FAQ = [
     "Start with a scope conversation. We confirm availability, integration feasibility and delivery milestones in your agreement before you commit.",
   ],
   [
-    "Can we start with a pilot and expand later?",
-    "Yes, that is the intended progression. Define a focused problem first, agree how outcomes will be reviewed, then discuss a separate expansion scope if the evidence supports it. No savings or return is guaranteed.",
+    "How does the two-week free trial work?",
+    "Request a 14-day free trial. We confirm your start date, setup, available data sources and trial scope with you. The trial itself is free. Any paid continuation is agreed separately; the trial is not a promise of savings or a requirement to expand.",
   ],
   [
     "What should we prepare for a pricing conversation?",
@@ -99,26 +100,27 @@ export function Pricing2030() {
             <div className="rx30-shell rm-price-hero-grid">
               <div>
                 <p className="rx30-kicker">
-                  Pricing · one product, three scopes
+                  Pricing · try RADR free for 14 days
                 </p>
                 <h1 id="pricing-title">
-                  Start focused.
+                  Start with two weeks.
                   <br />
                   Expand on <em>evidence.</em>
                 </h1>
                 <p className="rm-price-lead">
-                  A clear starting point for your operation. A commercial scope
-                  that grows with the work RADR is asked to do.
+                  Explore RADR with a 14-day free trial. Then choose the ongoing
+                  scope that fits your locations, systems and operating
+                  priorities.
                 </p>
                 <div className="rx30-ctas">
                   <Link href="#plans" className="rx30-btn rx30-btn-primary">
                     Compare the scopes <span aria-hidden="true">↓</span>
                   </Link>
                   <Link
-                    href="/contact?intent=sales"
+                    href="/contact?intent=sales&context=14-day-free-trial"
                     className="rx30-btn rm-price-secondary"
                   >
-                    Prepare your evaluation →
+                    Request your free trial →
                   </Link>
                 </div>
               </div>
@@ -131,13 +133,13 @@ export function Pricing2030() {
                   Your operation sets the scope
                 </p>
                 <h2>
-                  Custom quote.
+                  Free trial first.
                   <br />
-                  Clear agreement.
+                  Clear pricing after.
                 </h2>
                 <p>
-                  No published rate today. We agree the work, availability and
-                  terms with you first.
+                  Your first 14 days are free. Before any paid continuation, we
+                  agree the scope, availability and commercial terms with you.
                 </p>
                 <ol>
                   <li>
@@ -193,8 +195,16 @@ export function Pricing2030() {
                     <p className="rm-plan-headline">{plan.headline}</p>
                     <p className="rm-plan-audience">{plan.audience}</p>
                     <div className="rm-plan-price">
-                      <strong>Custom quote</strong>
-                      <span>Scope & terms agreed with you</span>
+                      <strong>
+                        {plan.id === "start"
+                          ? "Free for 14 days"
+                          : "Custom quote"}
+                      </strong>
+                      <span>
+                        {plan.id === "start"
+                          ? "Start date and setup confirmed together"
+                          : "Scope & terms agreed with you"}
+                      </span>
                     </div>
                     <dl>
                       <div>
@@ -212,7 +222,11 @@ export function Pricing2030() {
                     </dl>
                     <Link
                       className="rx30-btn"
-                      href={`/contact?intent=sales&plan=${plan.id}`}
+                      href={
+                        plan.id === "start"
+                          ? "/contact?intent=sales&context=14-day-free-trial"
+                          : `/contact?intent=sales&plan=${plan.id}`
+                      }
                     >
                       {plan.cta}
                       <span aria-hidden="true">→</span>
@@ -305,16 +319,16 @@ export function Pricing2030() {
             <div className="rx30-shell">
               <p className="rx30-kicker">Start with the right problem</p>
               <h2>
-                Let’s scope the work
+                Try RADR for 14 days
                 <br />
-                that matters to you.
+                with your operation.
               </h2>
-              <p>Your systems. Your locations. One focused conversation.</p>
+              <p>A free trial first. Paid scope and terms agreed separately.</p>
               <Link
-                href="/contact?intent=sales"
+                href="/contact?intent=sales&context=14-day-free-trial"
                 className="rx30-btn rx30-btn-primary"
               >
-                Talk to RADR <span aria-hidden="true">→</span>
+                Request your free trial <span aria-hidden="true">→</span>
               </Link>
               <Link href="/demo" className="rm-close-demo">
                 Explore the demo →
