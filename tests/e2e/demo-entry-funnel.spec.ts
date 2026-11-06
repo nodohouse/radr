@@ -38,6 +38,15 @@ for (const world of ["restaurant", "hotel"] as const) {
       .click();
     await expect(page).toHaveURL(/\/app\?stay=1/);
     await expect(
+      page.getByRole("button", {
+        name:
+          world === "hotel"
+            ? "Workspace: Northstar Hotels"
+            : "Workspace: Northstar Restaurants",
+        exact: true,
+      }),
+    ).toBeVisible();
+    await expect(
       page.getByRole("heading", { name: /Your operating brief/ }),
     ).toBeVisible();
     expect(

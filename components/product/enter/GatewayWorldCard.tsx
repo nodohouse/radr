@@ -12,6 +12,7 @@ import { GatewayPerformanceGlass } from "@/components/product/enter/GatewayPerfo
 
 type Props = {
   world: EnterWorld;
+  disabled: boolean;
   selected: boolean;
   lastVisited: boolean;
   onSelect: () => void;
@@ -20,6 +21,7 @@ type Props = {
 
 export function GatewayWorldCard({
   world,
+  disabled,
   selected,
   lastVisited,
   onSelect,
@@ -87,6 +89,7 @@ export function GatewayWorldCard({
 
           <button
             type="button"
+            disabled={disabled}
             className="rgw-cta"
             aria-label={groupLabel}
             onClick={onEnter}

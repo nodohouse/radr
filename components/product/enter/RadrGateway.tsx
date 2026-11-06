@@ -107,6 +107,7 @@ type Props = {
 
 export function RadrGateway({ preselect, autoEnter }: Props) {
   const titleId = useId();
+  const [ready, setReady] = useState(false);
   const [selected, setSelected] = useState<DemoVerticalFamily | null>(
     preselect,
   );
@@ -114,6 +115,7 @@ export function RadrGateway({ preselect, autoEnter }: Props) {
   const [didAuto, setDidAuto] = useState(false);
 
   useEffect(() => {
+    setReady(true);
     try {
       if (sessionStorage.getItem(DEMO_ORG_KEY))
         setLast(readDemoOrgSession().vertical);
@@ -171,6 +173,7 @@ export function RadrGateway({ preselect, autoEnter }: Props) {
             <GatewayWorldCard
               key={world.id}
               world={world}
+              disabled={!ready}
               selected={selected === world.id}
               lastVisited={last === world.id}
               onSelect={() => setSelected(world.id)}
