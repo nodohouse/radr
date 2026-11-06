@@ -1068,3 +1068,30 @@ html body .radr.rm-premium:has(.rx-nav) #surfaces {
   padding: 16px 18px;
   border-radius: 12px;
 }
+
+.rm-compare-hint {
+  display: none;
+}
+@media (max-width: 760px) {
+  .rm-compare-hint {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 18px 0 -14px;
+    color: #34516f;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .rm-compare-hint span {
+    color: #075be5;
+    font-size: 22px;
+  }
+  .rm-compare-table caption {
+    position: sticky;
+    left: 0;
+    width: calc(100vw - 40px);
+    box-sizing: border-box;
+    white-space: normal;
+  }
+}

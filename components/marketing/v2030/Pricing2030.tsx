@@ -235,10 +235,14 @@ export function Pricing2030() {
             <div className="rx30-shell">
               <p className="rx30-kicker">The differences, at a glance</p>
               <h2 className="rx30-h2">Compare what changes.</h2>
+              <p className="rm-compare-hint" id="scope-scroll-hint">
+                Swipe across to compare all three scopes <span aria-hidden="true">↔</span>
+              </p>
               <div
                 className="rm-compare-scroll"
                 role="region"
                 aria-label="Compare proposed engagement scopes"
+                aria-describedby="scope-scroll-hint"
                 tabIndex={0}
               >
                 <table className="rm-compare-table">
