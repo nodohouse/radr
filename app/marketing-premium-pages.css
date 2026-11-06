@@ -1052,3 +1052,19 @@ html body .radr.rm-premium:has(.rx-nav) #surfaces {
     font-size: 17px;
   }
 }
+
+/* Keep the calculator's blue introduction readable and its preview framed. */
+.rm-premium .rx30 .vc2-leave {
+  border-top-color: #ffffff30;
+}
+.rm-premium .rx30 .vc2-leave-list li {
+  color: #edf5ff;
+}
+.rm-premium .rx30 .vc2-intro-preview > .rx30-demo-label {
+  margin: 0;
+  padding: 16px 22px 0;
+}
+.rm-premium .rx30 .vc2-intro-map-center {
+  padding: 16px 18px;
+  border-radius: 12px;
+}

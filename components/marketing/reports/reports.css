@@ -765,3 +765,14 @@ html
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Show both practical extracts together without extending the desktop page. */
+@media (min-width: 1200px) {
+  .rr-report-copy .rr-preview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .rr-report-copy .rr-preview-grid figure > div {
+    padding: 12px;
+  }
+}
