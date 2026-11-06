@@ -173,8 +173,9 @@ export function Pricing2030() {
                   </h2>
                 </div>
                 <p>
-                  Choose by operating need. All engagements require a scope and
-                  availability review.
+                  The demo shows the broader operating vision. Begin with one
+                  measurable problem, such as supplier credits or
+                  reconciliation. Expand only after reviewing the evidence.
                 </p>
               </div>
               <div className="rm-plan-grid">
@@ -235,7 +236,8 @@ export function Pricing2030() {
               <p className="rx30-kicker">The differences, at a glance</p>
               <h2 className="rx30-h2">Compare what changes.</h2>
               <p className="rm-compare-hint" id="scope-scroll-hint">
-                Swipe across to compare all three scopes <span aria-hidden="true">↔</span>
+                Swipe across to compare all three scopes{" "}
+                <span aria-hidden="true">↔</span>
               </p>
               <div
                 className="rm-compare-scroll"

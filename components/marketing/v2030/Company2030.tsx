@@ -65,7 +65,7 @@ export function Company2030() {
   const reduced = useReducedMotion();
 
   return (
-    <div className="radr radr-mineral rm-premium">
+    <div className="radr radr-mineral rm-premium rm-company">
       <PublicNavbar />
       <div className="rx30 rx30--mockup">
         <main>
@@ -110,29 +110,37 @@ export function Company2030() {
           </section>
 
           <section className="rx30-pain rx30-founder" data-nav-theme="light">
-            <RevealOnView className="rx30-shell">
-              <p className="rx30-kicker">Founder</p>
-              <h2 className="rx30-h2 rx30-founder-quote">
-                I thought I wanted to open a restaurant.
-                <br />
-                What I really wanted was to make hospitality work better.
-              </h2>
-              <p
-                className="rx30-lead rx30-founder-body"
-                style={{ marginTop: "1.25rem" }}
-              >
-                Hospitality already had software for sales, reservations,
-                staffing, inventory, purchasing, payments and accounting. What
-                it did not have was a system for the decisions between them: the
-                ones that determine whether revenue becomes contribution, and
-                whether anyone can prove afterward that the call worked.
-              </p>
-              <p
-                className="rx30-lead rx30-founder-body"
-                style={{ marginTop: "0.75rem" }}
-              >
-                RADR is that Decision layer.
-              </p>
+            <RevealOnView className="rx30-shell rm-founder-grid">
+              <div>
+                <p className="rx30-kicker">Founder</p>
+                <h2 className="rx30-h2 rx30-founder-quote">
+                  I thought I wanted to open a restaurant.
+                  <br />
+                  What I really wanted was to make hospitality work better.
+                </h2>
+                <p className="rm-founder-attribution">
+                  Daniel Do <span>Founder, RADR</span>
+                </p>
+              </div>
+              <div className="rm-founder-context">
+                <p className="rx30-lead rx30-founder-body">
+                  Hospitality already had software for sales, reservations,
+                  staffing, inventory, purchasing, payments and accounting. What
+                  it did not have was a system for the decisions between them:
+                  the ones that determine whether revenue becomes contribution,
+                  and whether anyone can prove afterward that the call worked.
+                </p>
+                <p
+                  className="rx30-lead rx30-founder-body"
+                  style={{ marginTop: "0.75rem" }}
+                >
+                  RADR connects those signals, helps an operator choose the next
+                  move, and records the evidence of what happened afterward.
+                </p>
+                <Link href="/product" className="rm-founder-link">
+                  Follow a decision from signal to outcome →
+                </Link>
+              </div>
             </RevealOnView>
           </section>
 
@@ -156,11 +164,11 @@ export function Company2030() {
 
           <section className="rx30-pain" data-nav-theme="light">
             <RevealOnView className="rx30-shell">
-              <p className="rx30-kicker">Where it landed</p>
+              <p className="rx30-kicker">Where RADR fits</p>
               <h2 className="rx30-h2">Built for hospitality operations.</h2>
               <div className="rx30-co-formats">
                 <div>
-                  <p className="rx30-demo-label">Core today</p>
+                  <p className="rx30-demo-label">Primary operating examples</p>
                   <ul className="rx30-co-format-list">
                     {CORE_TODAY.map((f) => (
                       <li key={f}>{f}</li>
@@ -168,7 +176,9 @@ export function Company2030() {
                   </ul>
                 </div>
                 <div>
-                  <p className="rx30-demo-label">Architecture extends to</p>
+                  <p className="rx30-demo-label">
+                    Broader hospitality contexts
+                  </p>
                   <ul className="rx30-co-format-list rx30-co-format-list--muted">
                     {EXTENDS_TO.map((f) => (
                       <li key={f}>{f}</li>

@@ -107,6 +107,27 @@ export function ContactForm({
     }
   }, [state]);
 
+  if (!deliveryAvailable)
+    return (
+      <section
+        className="rx-contact-form"
+        aria-labelledby="contact-preview-title"
+      >
+        <h2 id="contact-preview-title">Explore RADR at your own pace.</h2>
+        <p className="rx-contact-alt">
+          Sales inquiries are not enabled on this preview. You can explore the
+          product and prepare a Value Map without sharing personal details.
+        </p>
+        <div className="rx-ctas">
+          <Link href="/demo" className="rx-btn rx-btn-primary">
+            Explore the demo →
+          </Link>
+          <Link href="/value-calculator" className="rx-btn rx-btn-ghost">
+            Build a Value Map →
+          </Link>
+        </div>
+      </section>
+    );
   return (
     <form className="rx-contact-form" action={action} key={formKey}>
       {!deliveryAvailable && (

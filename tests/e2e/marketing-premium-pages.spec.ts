@@ -33,7 +33,7 @@ test("pricing makes all three proposed scopes visible and keeps sales intent", a
     );
   }
   await expect(page.locator(".rm-availability")).toContainText(
-    "not production-ready",
+    "Confirm integration availability",
   );
   await expect(page.locator(".rm-compare-table tbody tr")).toHaveCount(5);
   const question = page

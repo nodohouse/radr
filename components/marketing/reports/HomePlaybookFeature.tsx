@@ -52,7 +52,7 @@ export function HomePlaybookFeature() {
         </ul>
         <div className="rm-playbook-ctas">
           <Link href={report.path} className="rm-button">
-            Get the playbook <span aria-hidden="true">→</span>
+            Explore the playbook <span aria-hidden="true">→</span>
           </Link>
           <span>
             English PDF
@@ -61,8 +61,9 @@ export function HomePlaybookFeature() {
           </span>
         </div>
         <p className="rm-playbook-note">
-          Sign up to get the playbook. Sales follow-up and email updates are
-          optional. Research findings are not estimates of RADR returns.
+          Explore the research and sample pages. Download availability is shown
+          on the playbook page. Research findings are not estimates of RADR
+          returns.
         </p>
       </div>
       <div className="rm-playbook-visual">
