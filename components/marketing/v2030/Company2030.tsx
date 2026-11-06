@@ -113,23 +113,20 @@ export function Company2030() {
           <section className="rx30-pain rx30-founder" data-nav-theme="light">
             <RevealOnView className="rx30-shell rm-founder-grid">
               <div>
-                <p className="rx30-kicker">Founder</p>
+                <p className="rx30-kicker">Why RADR exists</p>
                 <h2 className="rx30-h2 rx30-founder-quote">
-                  I thought I wanted to open a restaurant.
+                  Better decisions.
                   <br />
-                  What I really wanted was to make hospitality work better.
+                  Stronger hospitality.
                 </h2>
-                <p className="rm-founder-attribution">
-                  Daniel Do <span>Founder, RADR</span>
-                </p>
               </div>
               <div className="rm-founder-context">
                 <p className="rx30-lead rx30-founder-body">
-                  Hospitality already had software for sales, reservations,
-                  staffing, inventory, purchasing, payments and accounting. What
-                  it did not have was a system for the decisions between them:
-                  the ones that determine whether revenue becomes contribution,
-                  and whether anyone can prove afterward that the call worked.
+                  Hospitality teams use systems for sales, reservations,
+                  staffing, inventory, purchasing, payments and accounting.
+                  Decisions often span several of those systems. Understanding
+                  how they affect contribution, and reviewing the outcome,
+                  requires the evidence to come together.
                 </p>
                 <p
                   className="rx30-lead rx30-founder-body"
