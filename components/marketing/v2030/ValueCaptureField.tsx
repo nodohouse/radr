@@ -2,58 +2,10 @@
 
 import { useEffect, useId, useRef } from "react";
 import "./value-capture-field.css";
-
-// Decorative exposure examples. No running total or verified-savings claim.
-const SIGNALS = [
-  {
-    amount: "$184",
-    x: 12,
-    catchY: 448,
-    delay: -0.8,
-    duration: 7.8,
-    anchor: "start",
-  },
-  {
-    amount: "$620",
-    x: 250,
-    catchY: 492,
-    delay: -4.8,
-    duration: 8.4,
-    anchor: "middle",
-  },
-  {
-    amount: "$280",
-    x: 470,
-    catchY: 520,
-    delay: -2.9,
-    duration: 8.1,
-    anchor: "middle",
-  },
-  {
-    amount: "$168",
-    x: 740,
-    catchY: 510,
-    delay: -6.2,
-    duration: 8.8,
-    anchor: "middle",
-  },
-  {
-    amount: "$350",
-    x: 950,
-    catchY: 474,
-    delay: -3.8,
-    duration: 7.6,
-    anchor: "middle",
-  },
-  {
-    amount: "$420",
-    x: 1188,
-    catchY: 438,
-    delay: -1.9,
-    duration: 8.2,
-    anchor: "end",
-  },
-] as const;
+import {
+  CAPTURE_SIGNALS as SIGNALS,
+  type CapturedSignal,
+} from "./captureSignals";
 
 // Align every color change and pulse to its own path's interception point.
 function captureFraction(x: number, y: number) {
@@ -85,9 +37,11 @@ function captureFraction(x: number, y: number) {
 export function ValueCaptureField({
   moving,
   reduced,
+  onCapture,
 }: {
   moving: boolean;
   reduced: boolean;
+  onCapture?: (capture: CapturedSignal) => void;
 }) {
   const svg = useRef<SVGSVGElement>(null);
   const field = useRef<HTMLDivElement>(null);
@@ -120,6 +74,30 @@ export function ValueCaptureField({
     if (moving && !reduced) node.unpauseAnimations();
     else node.pauseAnimations();
   }, [moving, reduced]);
+  useEffect(() => {
+    const node = svg.current;
+    if (!node || !moving || reduced || !onCapture) return;
+    let previous = node.getCurrentTime();
+    let frame = 0;
+    const tick = () => {
+      const time = node.getCurrentTime();
+      // Read the same pausable SVG clock as the falling values, avoiding timer drift.
+      // Skip historical catches after a seek or a long suspended browser frame.
+      if (time >= previous && time - previous < 1) {
+        SIGNALS.forEach((signal, index) => {
+          const cycle = Math.floor((time - signal.captureAt) / signal.duration);
+          const caughtAt = signal.captureAt + cycle * signal.duration;
+          if (cycle >= 0 && caughtAt > previous && caughtAt <= time) {
+            onCapture({ index, cycle });
+          }
+        });
+      }
+      previous = time;
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [moving, reduced, onCapture]);
   return (
     <div
       ref={field}
@@ -194,10 +172,7 @@ export function ValueCaptureField({
             };
             const path = `M ${signal.x} -55 L ${signal.x} ${signal.catchY} C ${signal.x} ${signal.catchY + 80} ${signal.x < 600 ? 350 : 850} 595 615 555`;
             return (
-              <g
-                key={signal.amount}
-                className={`rvc-signal rvc-signal-${index}`}
-              >
+              <g key={signal.id} className={`rvc-signal rvc-signal-${index}`}>
                 <g>
                   <animateMotion
                     {...timing}
@@ -208,7 +183,7 @@ export function ValueCaptureField({
                     calcMode="spline"
                     keySplines=".42 0 .7 1;.16 .7 .25 1"
                   />
-                  <g className="rvc-value" fill="#e1f1ff">
+                  <g className="rvc-value" fill="#e1f1ff" opacity="0">
                     <animate
                       {...timing}
                       attributeName="opacity"
@@ -225,7 +200,7 @@ export function ValueCaptureField({
                       {signal.amount}
                     </text>
                     <text textAnchor={signal.anchor} className="rvc-state">
-                      EXPOSED
+                      {signal.amount.startsWith("$") ? "EXPOSED" : "DETECTED"}
                       <animate
                         {...timing}
                         attributeName="opacity"
@@ -250,10 +225,12 @@ export function ValueCaptureField({
                       textAnchor={signal.anchor}
                       className="rvc-state rvc-horizon"
                     >
-                      TONIGHT
+                      {signal.amount.startsWith("$")
+                        ? "TONIGHT"
+                        : signal.source.toUpperCase()}
                     </text>
                   </g>
-                  <circle cy="-12" r="3" fill="#00f59a">
+                  <circle cy="-12" r="3" fill="#00f59a" opacity="0">
                     <animate
                       {...timing}
                       attributeName="opacity"

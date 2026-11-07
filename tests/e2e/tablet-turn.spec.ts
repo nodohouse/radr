@@ -28,10 +28,6 @@ test("native scroll reveals the readable reverse face and returns to the front w
     await expect(
       page.getByText("Scroll to see the other side", { exact: true }),
     ).toHaveCount(0);
-    const peek = page.locator(".rsc-operation-peek");
-    await expect(peek).toContainText("Hotel · Room 310");
-    await expect(peek).toContainText("Shellfish allergy");
-    await expect(peek).toContainText("Incoming guest · 15:20");
     const before = await stage.evaluate((n) => ({
       height: document.documentElement.scrollHeight,
       start: Math.max(
@@ -62,9 +58,6 @@ test("native scroll reveals the readable reverse face and returns to the front w
           document.querySelector(".rx-nav")!.getBoundingClientRect().bottom,
       ),
     ).toBeGreaterThan(12);
-    await expect
-      .poll(() => peek.evaluate((n) => Number(getComputedStyle(n).opacity)))
-      .toBeLessThan(0.01);
     await expect(page.locator(".rsc-face-front")).toHaveAttribute("inert", "");
     await expect(page.locator(".rsc-face-back")).not.toHaveAttribute(
       "inert",

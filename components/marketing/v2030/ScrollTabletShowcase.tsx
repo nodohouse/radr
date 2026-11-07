@@ -13,7 +13,8 @@ import { ProductBriefPreview } from "./ProductBriefPreview";
 import { ValueCaptureField } from "./ValueCaptureField";
 import "./scroll-tablet.css";
 import "./tablet-cinema.css";
-import { HOTEL_OBJECTS } from "@/lib/marketing/hospitalityShowcase";
+import { CaptureInsights } from "./CaptureInsights";
+import type { CapturedSignal } from "./captureSignals";
 import { Link } from "@/i18n/navigation";
 
 /** Native-scroll turn with two real, non-mirrored faces. No scroll capture or pinning. */
@@ -25,6 +26,11 @@ export function ScrollTabletShowcase() {
   const [moving, setMoving] = useState(false);
   const [back, setBack] = useState(false);
   const [manualBack, setManualBack] = useState(false);
+  const [capture, setCapture] = useState<CapturedSignal | null>(null);
+  const [captureFace, setCaptureFace] = useState<"front" | "back" | "turning">(
+    "front",
+  );
+  const previousCaptureFace = useRef("front");
   const previousBack = useRef(false);
   const reduced = useReducedMotionSafe();
   const { scrollY } = useScroll();
@@ -41,16 +47,15 @@ export function ScrollTabletShowcase() {
   const rotateZ = useTransform(progress, [0, 0.5, 1], [1, -8, -1]);
   const y = useTransform(progress, [0, 1], [0, turnLift]);
   const scale = useTransform(progress, [0, 0.5, 1], [1, 0.95, 1]);
-  const peekOpacity = useTransform(
-    progress,
-    [0, 0.25, 0.48, 1],
-    [1, 0.9, 0, 0],
-  );
-  const arrival = HOTEL_OBJECTS.find((room) => room.id === "room_310")!;
   const showingBack = ready && reduced ? manualBack : back;
   const stationary = !ready || reduced === true;
 
   useMotionValueEvent(progress, "change", (value) => {
+    const phase = value < 0.02 ? "front" : value > 0.98 ? "back" : "turning";
+    if (phase !== previousCaptureFace.current) {
+      previousCaptureFace.current = phase;
+      setCaptureFace(phase);
+    }
     const next = value >= 0.52;
     if (next !== previousBack.current) {
       previousBack.current = next;
@@ -101,20 +106,17 @@ export function ScrollTabletShowcase() {
       data-ready={ready || undefined}
       data-moving={moving}
     >
-      <ValueCaptureField moving={moving} reduced={reduced === true} />
-      <motion.div
-        className="rsc-operation-peek"
-        aria-hidden="true"
-        data-nosnippet=""
-        style={{ opacity: stationary ? (showingBack ? 0 : 1) : peekOpacity }}
-      >
-        <span>
-          <i />
-          {`Hotel · ${arrival.label}`}
-        </span>
-        <strong>{arrival.allergy} allergy</strong>
-        <small>Incoming guest · {arrival.next.split(" · ")[0]}</small>
-      </motion.div>
+      <ValueCaptureField
+        moving={moving}
+        reduced={reduced === true}
+        onCapture={setCapture}
+      />
+      <CaptureInsights
+        capture={capture}
+        moving={moving}
+        reduced={reduced === true}
+        face={stationary ? (showingBack ? "back" : "front") : captureFace}
+      />
       <motion.div
         className="rsc-flip-rig"
         style={

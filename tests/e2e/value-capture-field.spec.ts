@@ -164,7 +164,7 @@ test("falling values never touch hero copy through a complete desktop cycle", as
         rectangles.push(...range.getClientRects());
       }
       const collisions: string[] = [];
-      for (let time = 0; time < 8; time += 0.25) {
+      for (let time = 0; time < 18; time += 0.25) {
         svg.setCurrentTime(time);
         await new Promise<void>((resolve) =>
           requestAnimationFrame(() => resolve()),
@@ -190,5 +190,69 @@ test("falling values never touch hero copy through a complete desktop cycle", as
       return collisions;
     });
     expect(overlaps, `hero copy at ${width}px`).toEqual([]);
+  }
+});
+
+test("stacked layouts keep the complete falling labels inside the viewport and below hero text", async ({
+  page,
+}) => {
+  for (const width of [390, 820]) {
+    await page.setViewportSize({ width, height: 1100 });
+    await page.goto("/en");
+    await expect(page.locator(".rsc-scroll-stage")).toHaveAttribute(
+      "data-ready",
+      "true",
+    );
+    await page.evaluate(() => document.fonts.ready);
+    const failures = await page.evaluate(async () => {
+      const svg = document.querySelector<SVGSVGElement>(".rvc-field svg")!;
+      svg.pauseAnimations();
+      const field = svg.parentElement!.getBoundingClientRect();
+      const walker = document.createTreeWalker(
+        document.querySelector(".rm-hero-copy")!,
+        NodeFilter.SHOW_TEXT,
+      );
+      const textRects: DOMRect[] = [];
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        if (!node.textContent?.trim()) continue;
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        textRects.push(...range.getClientRects());
+      }
+      const failures: string[] = [];
+      for (let time = 0; time < 18; time += 0.25) {
+        svg.setCurrentTime(time);
+        await new Promise<void>((resolve) =>
+          requestAnimationFrame(() => resolve()),
+        );
+        for (const label of document.querySelectorAll(".rvc-amount")) {
+          if (
+            getComputedStyle(label.closest(".rvc-signal")!).display ===
+              "none" ||
+            Number(getComputedStyle(label.parentElement!).opacity) < 0.25
+          )
+            continue;
+          const r = label.getBoundingClientRect();
+          const top = Math.max(r.top, field.top),
+            bottom = Math.min(r.bottom, field.bottom);
+          if (bottom <= top) continue;
+          if (r.left < 12 || r.right > innerWidth - 12)
+            failures.push(`clipped ${label.textContent}`);
+          if (
+            textRects.some(
+              (copy) =>
+                r.left < copy.right &&
+                r.right > copy.left &&
+                top < copy.bottom &&
+                bottom > copy.top,
+            )
+          )
+            failures.push(`copy overlap ${label.textContent}`);
+        }
+      }
+      svg.unpauseAnimations();
+      return failures;
+    });
+    expect(failures, `falling label clearance at ${width}px`).toEqual([]);
   }
 });
