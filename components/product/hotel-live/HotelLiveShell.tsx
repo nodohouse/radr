@@ -13,6 +13,7 @@ import {
   useState,
   type MouseEvent,
 } from "react";
+import { useHotelPlanGestures } from "./useHotelPlanGestures";
 import Image from "next/image";
 import Link from "next/link";
 import {WorkspaceFocus} from "../reference/WorkspaceFocus";
@@ -110,6 +111,7 @@ export function HotelLiveShell() {
   const [simulating, setSimulating] = useState(false);
   const planRef = useRef<HTMLDivElement | null>(null);
   const debugGeometry = search.get("debugGeometry") === "1";
+  const planGestures = useHotelPlanGestures(planRef, zoom, setZoom, `${level}:${floor}:${mode}`);
 
   const writeUrl = useCallback(
     (next: {
@@ -618,7 +620,7 @@ export function HotelLiveShell() {
             type="button"
             className="hl-icon-btn"
             aria-label="Fit floor"
-            onClick={() => setZoom(1)}
+            onClick={planGestures.reset}
           >
             Fit
           </button>
@@ -665,10 +667,14 @@ export function HotelLiveShell() {
           <div
             className="hl-plan"
             ref={planRef}
+            role="region"
+            aria-label="Hotel floor. Drag to pan; scroll or pinch to zoom; select a room for details."
+            tabIndex={0}
+            data-dragging={planGestures.dragging || undefined}
             data-mode={mode}
             data-lens={viewLens}
             data-debug-geometry={debugGeometry ? "1" : undefined}
-            style={{ ["--hl-zoom" as string]: String(zoom) }}
+            style={{ ...planGestures.style, ["--hl-zoom" as string]: String(zoom) }}
           >
             {mode === "staff" ? (
               <StaffCapacity />
@@ -1145,7 +1151,7 @@ function FloorPlan({
     <div
       className="hl-plan-stage"
       style={{
-        transform: `scale(${zoom})`,
+        transform: `translate(var(--hl-pan-x, 0px), var(--hl-pan-y, 0px)) scale(${zoom})`,
         ["--hl-zoom" as string]: String(zoom),
       }}
     >

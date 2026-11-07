@@ -370,7 +370,7 @@ html
   gap: 12px;
   flex-wrap: wrap;
   border-top: 1px solid #ccdaea;
-  padding-top: 14px;
+  padding: 12px 24px;
   color: #49647e;
   font-size: 12px;
   line-height: 1.7;
@@ -403,3 +403,7 @@ html body .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control
 .rp-premium .px-skip:focus-visible{clip-path:none;top:12px;width:auto;height:auto;overflow:visible;padding:12px 20px}
 @media(max-width:700px){html body .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control-center] .cc-revenue-graphic text{font-size:24px}html body .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control-center] .cc-revenue-graphic .cc-chart-current{font-size:25px}}
 html body .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control-center] .cc-priority-rationale{font-size:14px;line-height:1.65;color:#e0eaff;max-width:62ch;margin:14px 0 18px}
+
+@media (max-width: 760px) {
+  .rp-premium .ws-source-quality { padding: 12px 20px; }
+}

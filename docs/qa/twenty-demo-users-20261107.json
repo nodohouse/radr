@@ -1,0 +1,208 @@
+{
+  "date": "2026-11-07",
+  "type": "Automated fictional-persona simulations, not human user research",
+  "coverage": {
+    "restaurantUsers": 10,
+    "hotelUsers": 10,
+    "viewportWidths": [
+      390,
+      430,
+      768,
+      820,
+      1024,
+      1280,
+      1440,
+      1512,
+      1920,
+      3840
+    ],
+    "roles": [
+      "general manager",
+      "CFO",
+      "COO",
+      "owner"
+    ],
+    "surfaces": [
+      "Demo chooser",
+      "Control Center",
+      "Performance detail",
+      "Locations",
+      "Decisions",
+      "Operations",
+      "Live",
+      "Back of House",
+      "Intelligence",
+      "Value",
+      "Memory",
+      "Data Health",
+      "Connections",
+      "Data import",
+      "Floor plan editor",
+      "Settings"
+    ],
+    "interactions": [
+      "navigation expansion and links",
+      "scrolling",
+      "hovering visible controls",
+      "financial detail tabs",
+      "forecast sensitivity slider",
+      "decision sorting, search and workbench",
+      "economic lenses",
+      "table and room guest context",
+      "outcome filters",
+      "example data validation",
+      "furniture dragging and undo",
+      "settings sections"
+    ],
+    "layoutChecks": [
+      "document horizontal overflow",
+      "unexpected clipping in headings, paragraphs and controls",
+      "sibling module collisions",
+      "captured screenshot review",
+      "uncaught browser exceptions"
+    ]
+  },
+  "journeys": [
+    {
+      "journey": "restaurant \u00b7 Alex \u00b7 gm \u00b7 1512px \u00b7 brief",
+      "status": "passed",
+      "durationMs": 55185
+    },
+    {
+      "journey": "restaurant \u00b7 Jordan \u00b7 cfo \u00b7 1440px \u00b7 performance",
+      "status": "passed",
+      "durationMs": 26871
+    },
+    {
+      "journey": "restaurant \u00b7 Morgan \u00b7 coo \u00b7 1280px \u00b7 decisions",
+      "status": "passed",
+      "durationMs": 27229
+    },
+    {
+      "journey": "restaurant \u00b7 Taylor \u00b7 owner \u00b7 1024px \u00b7 intelligence",
+      "status": "passed",
+      "durationMs": 19648
+    },
+    {
+      "journey": "restaurant \u00b7 Casey \u00b7 gm \u00b7 820px \u00b7 live",
+      "status": "passed",
+      "durationMs": 49409
+    },
+    {
+      "journey": "restaurant \u00b7 Riley \u00b7 gm \u00b7 768px \u00b7 house",
+      "status": "passed",
+      "durationMs": 16982
+    },
+    {
+      "journey": "restaurant \u00b7 Avery \u00b7 cfo \u00b7 430px \u00b7 value",
+      "status": "passed",
+      "durationMs": 16908
+    },
+    {
+      "journey": "restaurant \u00b7 Quinn \u00b7 gm \u00b7 390px \u00b7 intake",
+      "status": "passed",
+      "durationMs": 18145
+    },
+    {
+      "journey": "restaurant \u00b7 Cameron \u00b7 gm \u00b7 1920px \u00b7 layout",
+      "status": "passed",
+      "durationMs": 36426
+    },
+    {
+      "journey": "restaurant \u00b7 Robin \u00b7 owner \u00b7 3840px \u00b7 settings",
+      "status": "passed",
+      "durationMs": 32708
+    },
+    {
+      "journey": "hotel \u00b7 Alex \u00b7 gm \u00b7 1512px \u00b7 brief",
+      "status": "passed",
+      "durationMs": 18898
+    },
+    {
+      "journey": "hotel \u00b7 Jordan \u00b7 cfo \u00b7 1440px \u00b7 performance",
+      "status": "passed",
+      "durationMs": 29569
+    },
+    {
+      "journey": "hotel \u00b7 Morgan \u00b7 coo \u00b7 1280px \u00b7 decisions",
+      "status": "passed",
+      "durationMs": 30069
+    },
+    {
+      "journey": "hotel \u00b7 Taylor \u00b7 owner \u00b7 1024px \u00b7 intelligence",
+      "status": "passed",
+      "durationMs": 19600
+    },
+    {
+      "journey": "hotel \u00b7 Casey \u00b7 gm \u00b7 820px \u00b7 live",
+      "status": "passed",
+      "durationMs": 24141
+    },
+    {
+      "journey": "hotel \u00b7 Riley \u00b7 gm \u00b7 768px \u00b7 house",
+      "status": "passed",
+      "durationMs": 18607
+    },
+    {
+      "journey": "hotel \u00b7 Avery \u00b7 cfo \u00b7 430px \u00b7 value",
+      "status": "passed",
+      "durationMs": 16900
+    },
+    {
+      "journey": "hotel \u00b7 Quinn \u00b7 gm \u00b7 390px \u00b7 intake",
+      "status": "passed",
+      "durationMs": 19730
+    },
+    {
+      "journey": "hotel \u00b7 Cameron \u00b7 gm \u00b7 1920px \u00b7 layout",
+      "status": "passed",
+      "durationMs": 19714
+    },
+    {
+      "journey": "hotel \u00b7 Robin \u00b7 owner \u00b7 3840px \u00b7 settings",
+      "status": "passed",
+      "durationMs": 31479
+    }
+  ],
+  "findings": [
+    {
+      "issue": "Hotel live floor did not respond to scroll zoom or pointer panning",
+      "fix": "Added wheel zoom, drag pan, touch pinch, keyboard controls and reset, with room-click protection after dragging"
+    },
+    {
+      "issue": "Adjacent guest remarks appeared as joined text in the restaurant table inspector",
+      "fix": "Rendered each remark on its own line with consistent spacing"
+    },
+    {
+      "issue": "Evidence strip content sat against card edges",
+      "fix": "Added responsive internal gutters aligned to the card content"
+    }
+  ],
+  "infrastructureNote": "First run was interrupted by shared-environment memory exhaustion while browser and TypeScript ran together. The first four passed journeys were retained; all remaining 16 were rerun serially and passed. Interrupted and connection-refused attempts are not counted as passes.",
+  "limitations": [
+    "Browser coverage samples the tested paths and viewports; it is not proof that every possible state is defect-free.",
+    "No live customer data, supplier writes, production accounts or external integrations were exercised.",
+    "Touch gestures are simulated in Chromium; real iOS/Safari and Android device verification remain separate."
+  ],
+  "additionalRegressionChecks": {
+    "passed": 11,
+    "coverage": [
+      "all eight Back of House views in both verticals",
+      "hotel wheel zoom, pointer pan, Home reset, keyboard pan, touch pinch and deliberate room selection",
+      "restaurant wheel zoom, pan, fit and separated allergy/booking remarks",
+      "furniture movement and reload persistence",
+      "palette drag and Undo",
+      "touch furniture and palette dragging",
+      "post-fix restaurant Live and Value journeys",
+      "stronger Back of House journeys in both demos"
+    ]
+  },
+  "checks": {
+    "appTypeScript": "passed",
+    "changedSourceAndTestESLint": "passed",
+    "gitDiffCheck": "passed",
+    "spatialCameraUnitChecks": {
+      "passed": 6
+    }
+  }
+}

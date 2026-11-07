@@ -1537,3 +1537,8 @@
     width: 100%;
   }
 }
+
+.hl-plan[role=region]{touch-action:none;cursor:grab;overscroll-behavior:contain}
+.hl-plan[data-dragging=true]{cursor:grabbing;user-select:none}
+.hl-plan[data-dragging=true] .hl-plan-stage{transition:none}
+.hl-plan:focus-visible{outline:3px solid #1265e7;outline-offset:3px}
