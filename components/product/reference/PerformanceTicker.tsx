@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import {ForecastSensitivity} from "./DataMeaning";
 import {ContributionFlow} from "./ContributionFlow";
 import {useId,useState,useSyncExternalStore} from "react";
 import {aggregateTrend,locationTrend,trendEstate,trendScope,type TrendPeriod,type TrendSeries} from "@/lib/product/performanceTrend";
@@ -61,6 +62,7 @@ export function PerformanceTicker({vertical,scope,comparison,initialView,initial
 
 
   </>:null}
+  {series ? <ForecastSensitivity series={series}/> : null}
   <footer>Illustrative demo trajectories, not a live market feed. Daily featured-venue endpoints use existing demo pacing; week/month and peer series are synthetic. {series.id==="selection"&&series.currency==="USD"&&allowed.length>1?"Group totals use demo FX to USD. ":""}Venue-local reporting periods; comparisons use percentages, not mixed-currency totals.</footer>
  </section>;
 }

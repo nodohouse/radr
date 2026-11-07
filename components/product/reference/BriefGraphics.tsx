@@ -1,5 +1,6 @@
 "use client";
 
+import { contributionPresentation } from "@/lib/product/contributionPresentation";
 import { useId } from "react";
 import type { TrendSeries } from "@/lib/product/performanceTrend";
 import type { revenueBridge } from "@/lib/product/revenueBridge";
@@ -20,9 +21,10 @@ export function BriefGraphics({series,bridge,peers,isHotel,onOpen}:{series:Trend
  const actual=series.points.map((p,i)=>({p,i})).filter(({p})=>p.actual!==null);
  const last=actual.at(-1);
  const area=last?`${line("actual")} L${x(last.i)},170 L48,170 Z`:"";
- const positiveTotal=bridge.products.reduce((sum,p)=>sum+Math.max(0,p.contribution),0);
+ const mix=contributionPresentation(bridge.products);
+ const hasLosses=mix.mode==="signed";
  let offset=0;
- const segments=bridge.products.map((p,i)=>{const share=positiveTotal?Math.max(0,p.contribution)/positiveTotal:0;const segment={...p,share,offset,color:COLORS[i%COLORS.length]};offset+=share;return segment;});
+ const segments=mix.products.map((p,i)=>{const share=p.share??0;const segment={...p,share,offset,color:COLORS[i%COLORS.length]};offset+=share;return segment;});
  const extent=Math.max(5,...peers.map(p=>Math.abs(p.delta)));
  return <><section className="cc-visuals" aria-label="Performance graphics">
   <button type="button" className="cc-visual cc-trend-visual" onClick={()=>onOpen("revenue")} aria-label="Open revenue performance details">
@@ -37,8 +39,9 @@ export function BriefGraphics({series,bridge,peers,isHotel,onOpen}:{series:Trend
   </button>
   <button type="button" className="cc-visual cc-mix-visual" onClick={()=>onOpen("contribution")} aria-label="Open contribution details">
    <header><span><small>WHERE VALUE COMES FROM</small><strong>Contribution mix</strong></span><Arrow/></header>
-   <div className="cc-donut-wrap"><svg viewBox="0 0 160 160" role="img" aria-label={`${money(bridge.contribution)} modeled contribution, split by ${isHotel?"department":"product"}.`}><circle cx="80" cy="80" r="60" fill="none" stroke="#dce8eb" strokeWidth="15"/>{segments.map(s=><circle key={s.id} cx="80" cy="80" r="60" pathLength="100" fill="none" stroke={s.color} strokeWidth="15" strokeDasharray={`${s.share*100} ${100-s.share*100}`} strokeDashoffset={-s.offset*100} transform="rotate(-90 80 80)"><title>{`${s.label}: ${money(s.contribution)}, ${Math.round(s.share*100)}%`}</title></circle>)}</svg><div><strong>{compactMoney(bridge.contribution)}</strong><small>Modeled contribution</small></div></div>
-   <ul className="cc-mix-legend">{segments.map(s=><li key={s.id}><span><i style={{background:s.color}}/>{s.label}</span><b>{Math.round(s.share*100)}%</b></li>)}</ul>
+   {hasLosses?<div className="cc-mix-losses"><p>Contribution includes losses. Compare the signed amounts below.</p>{bridge.products.map(p=><div key={p.id}><span>{p.label}</span><strong>{money(p.contribution)}</strong></div>)}</div>:<><div className="cc-donut-wrap"><svg viewBox="0 0 160 160" role="img" aria-label={`${money(bridge.contribution)} modeled contribution, split by ${isHotel?"department":"product"}.`}><circle cx="80" cy="80" r="60" fill="none" stroke="#dce8eb" strokeWidth="15"/>{segments.map(s=><circle key={s.id} cx="80" cy="80" r="60" pathLength="100" fill="none" stroke={s.color} strokeWidth="15" strokeDasharray={`${s.share*100} ${100-s.share*100}`} strokeDashoffset={-s.offset*100} transform="rotate(-90 80 80)"><title>{`${s.label}: ${money(s.contribution)}, ${Math.round(s.share*100)}%`}</title></circle>)}</svg><div><strong>{compactMoney(bridge.contribution)}</strong><small>Modeled contribution</small></div></div>
+   <ul className="cc-mix-legend">{segments.map(s=><li key={s.id}><span><i style={{background:s.color}}/>{s.label}</span><b>{money(s.contribution)} <small>· {Math.round(s.share*100)}%</small></b></li>)}</ul></>}
+   <p className="cc-visual-provenance">Allocated costs included · inspect the calculation</p>
   </button>
   <button type="button" className="cc-visual cc-peer-visual" onClick={()=>onOpen("locations")} aria-label="Open location comparisons"><header><span><small>ACROSS YOUR LOCATIONS</small><strong>Pace vs forecast</strong></span><Arrow/></header><div className="cc-peer-list">{peers.slice(0,5).map(p=><div className="cc-peer-row" key={p.id}><div><span>{p.label}</span><b data-negative={p.delta<0||undefined}>{p.delta>=0?"+":""}{p.delta.toFixed(1)}%</b></div><div className="cc-peer-track"><i className="cc-peer-zero"/><i className="cc-peer-fill" data-negative={p.delta<0||undefined} style={{left:`${p.delta<0?50-Math.abs(p.delta)/extent*48:50}%`,width:`${Math.abs(p.delta)/extent*48}%`}}/></div></div>)}</div><p className="cc-visual-provenance">Same-period pace · 0% baseline · illustrative peers</p></button>
  </section><p className="cc-graphics-hint">Swipe graphics to explore · tap for the full detail</p></>;

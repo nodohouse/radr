@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { evidenceNeedsReview } from "@/lib/product/evidencePresentation";
 import {usePathname} from "next/navigation";
 import {useRecords} from "./useDecisionScope";
 import {formatPrimaryMetric} from "@/lib/radr/product/primaryMetric";
@@ -34,11 +35,13 @@ export function WorkspaceFocus({eyebrow,focusRecord}: {eyebrow: string; focusRec
   const record = focusRecord === undefined ? candidates[0] : focusRecord;
   const outcome = view.mode === "outcome" || Boolean(record?.verifiedValue);
   const metric = record ? formatPrimaryMetric(record) : null;
+  const evidenceConcern = Boolean(record && evidenceNeedsReview(record));
   const Icon = NAV_ICONS[key === "service" ? "service" : key] || NAV_ICONS.decisions;
   const href = record ? `/app/decisions/${record.id}` : view.mode === "settings" ? "/app/settings?section=autonomy" : view.mode === "trust" ? key === "connections" ? "/app/data-health" : "/app/connections" : outcome ? "/app/decisions?band=resolved" : "/app/decisions";
   const action = record ? outcome ? "Inspect outcome" : "Review decision" : view.mode === "settings" ? "Review autonomy & approvals" : view.mode === "trust" ? key === "connections" ? "Review evidence quality" : "Review connections" : "Open scoped decisions";
   return <section className="ws-focus" aria-label={`${eyebrow} decision context`} data-testid="workspace-focus" data-mode={view.mode || "decision"} data-negative={Boolean(record?.verifiedValue && record.verifiedValue.amount < 0) || undefined}>
     <div className="ws-focus-main"><div className="ws-focus-label"><Icon/><span>{view.intent}</span><small>{outcome ? "OUTCOME TO EVIDENCE" : view.mode === "settings" ? "GOVERNANCE" : view.mode === "trust" ? "EVIDENCE BEFORE ACTION" : "YOUR FOCUS"}</small></div><h2>{record ? clean(record.title) : view.question}</h2><p>{record ? `${displayDecisionId(record.id)} · ${record.property} · ${outcome ? "Recorded outcome" : record.decisionDeadline || clean(record.decisionHorizon.replaceAll("_", " ").toLowerCase())}` : `${scopeLabel} · ${view.mode === "settings" ? "Demo workspace preferences" : view.mode === "trust" ? "Source cohorts are labelled separately below" : "Review the current filters and scoped decisions"}`}</p><Link href={href}>{action}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg></Link></div>
     <div className="ws-focus-proof">{record && metric ? <><span>{outcome ? "Recorded value" : "Decision impact"}</span><strong>{metric.money}</strong><small>{metric.caption}</small><p>{record.confidence.userFacing.toLowerCase()} confidence · {record.evidenceRefs.length} evidence items</p></> : <><span>{view.mode === "settings" ? "DESIGNED FOR CONTROL" : "BEFORE YOU ACT"}</span><strong className="ws-proof-title">{view.mode === "settings" ? "Human judgment stays visible." : outcome ? "No verified outcome in this scope yet." : "Keep the evidence in view."}</strong></>}<p className="ws-focus-note">{view.note}</p></div>
+    {record ? <div className="ws-source-quality" data-warning={evidenceConcern || undefined}><span><strong>{evidenceConcern ? "Evidence needs review" : "Source context"}</strong> · {record.evidenceRefs.length} evidence items · {record.confidence.userFacing.toLowerCase()} decision confidence</span><Link href="/app/data-health">Inspect evidence quality →</Link></div> : null}
   </section>;
 }

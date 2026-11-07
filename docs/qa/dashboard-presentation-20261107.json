@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-07",
+  "scope": "Dashboard and shared data presentation",
+  "changes": [
+    "Explicit recorded/modelled/projected labels beside financial KPIs",
+    "Expandable definitions with location, currency and period context",
+    "Removed mixed-horizon money sum from the decision summary",
+    "Primary impact meaning derived from canonical metric type; expected value visually distinct from verified value",
+    "Readiness notes, review threshold and text warning; non-target ratios no longer use a progress gauge",
+    "Interactive what-if range varies remaining modeled revenue only; explicitly not a prediction interval",
+    "Signed contribution-loss fallback and amounts alongside category shares",
+    "Shared evidence quality annotation and unified missing/low/stale evidence rule",
+    "Larger supporting text and responsive SVG chart labels",
+    "Keyboard skip-link hiding and focus treatment"
+  ],
+  "verification": {
+    "unitChecks": 21,
+    "mainDashboardConfigurations": 8,
+    "relatedRouteChecks": 40,
+    "accessibility": "Zero Axe violations in scoped dashboard at 390px and 1512px, including expanded definitions",
+    "applicationTypes": "pass",
+    "changedSourceLint": "pass"
+  },
+  "limits": [
+    "Demos remain synthetic; no calibrated forecast confidence interval is claimed",
+    "This is not a 10/10 certification or a claim that every possible dataset and interaction has been validated"
+  ]
+}
