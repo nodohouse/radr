@@ -1,7 +1,7 @@
 "use client";
 
 import Link, {useLinkStatus} from "next/link";
-import { getRadrEnvironment } from "@/lib/radr/env";
+import { useRecords } from "./useDecisionScope";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -40,7 +40,9 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
   const { roleView } = useProduct();
   const { session, isHotel, org } = useDemoOrg();
   const health = buildDataHealthOverview(roleView, session.vertical);
-  const demo = getRadrEnvironment() === "DEMO";
+  const { summary, scopeLabel } = useRecords();
+  const needs = summary.groups.needs_you.length;
+  const handling = summary.groups.handling.length;
   return <aside className="rs-navigation" aria-label="RADR workspace" data-pinned={pinned || undefined}
     onKeyDown={event=>{if(event.key==="Escape"){setMore(false);setPinned(false);onNavigate();document.getElementById("product-content")?.focus();}}}
     onMouseLeave={event=>{if(!event.currentTarget.querySelector(":focus-visible")){setMore(false);if(event.currentTarget.contains(document.activeElement))document.getElementById("product-content")?.focus();}}}
@@ -48,8 +50,11 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
     <div className="rs-rail-brand-row">
     <Link className="rs-brand" href="/app" onClick={onNavigate} aria-label="RADR Control Center"><FrozenRadrLogo variant="mark" theme="light" width={44} priority /></Link>
     <div className="rs-rail-context">
-      <span>{demo ? (isHotel ? "Hotel demo" : "Restaurant demo") : "Workspace"}</span>
-      {demo ? <Link href="/app/enter" onClick={onNavigate} className="rs-rail-switch">Switch demo <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg></Link> : <strong>Decision intelligence</strong>}
+      <Link href="/app/decisions?band=needs_you" onClick={onNavigate} className="rs-rail-attention" aria-label={`Review ${needs} ${needs === 1 ? "decision" : "decisions"} requiring your attention in ${scopeLabel}`}>
+        <span>{needs} {needs === 1 ? "needs" : "need"} you</span>
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </Link>
+      <span>{handling} in motion</span>
     </div>
     <button type="button" className="rs-rail-pin" aria-label={pinned?"Unpin navigation":"Pin navigation open"} aria-pressed={pinned} onClick={()=>setPinned(value=>!value)} title={pinned?"Unpin navigation":"Keep navigation open"}><svg viewBox="0 0 20 20" width="17" height="17" fill="none" aria-hidden="true"><path d="m12 3 5 5-2 1-2 4-3-3-4 4-1-1 4-4-3-3 4-2 2-1Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/><path d="m6 14-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg></button>
     </div>

@@ -103,7 +103,7 @@
   line-height: 1.4;
   text-decoration: none;
 }
-.rp-premium .rs-navigation .rs-rail-switch:hover { color: #075be5; text-decoration: underline; text-underline-offset: 3px; }
+.rp-premium .rs-navigation .rs-rail-attention:hover { color: #075be5; text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
   .rp-premium .rs-navigation .rs-rail-brand-row { grid-template-columns: 44px minmax(0, 1fr) 30px; }
   .rp-premium .rs-navigation .rs-rail-pin { margin: 0; }
