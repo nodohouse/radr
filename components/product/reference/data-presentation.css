@@ -362,26 +362,6 @@ html
   font-weight: 400;
   color: #526b83;
 }
-.rp-premium .ws-source-quality {
-  grid-column: 1/-1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  border-top: 1px solid #ccdaea;
-  padding: 12px 24px;
-  color: #49647e;
-  font-size: 12px;
-  line-height: 1.7;
-}
-.rp-premium .ws-source-quality[data-warning="true"] strong {
-  color: #87500e;
-}
-.rp-premium .ws-source-quality a {
-  color: #1759b5;
-  font-weight: 600;
-}
 .rp-premium .rs-metric :is(small, .rs-metric-label) {
   font-size: 12px;
   line-height: 1.7;
@@ -403,7 +383,3 @@ html body .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control
 .rp-premium .px-skip:focus-visible{clip-path:none;top:12px;width:auto;height:auto;overflow:visible;padding:12px 20px}
 @media(max-width:700px){html body .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control-center] .cc-revenue-graphic text{font-size:24px}html body .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control-center] .cc-revenue-graphic .cc-chart-current{font-size:25px}}
 html body .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=control-center] .cc-priority-rationale{font-size:14px;line-height:1.65;color:#e0eaff;max-width:62ch;margin:14px 0 18px}
-
-@media (max-width: 760px) {
-  .rp-premium .ws-source-quality { padding: 12px 20px; }
-}

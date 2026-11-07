@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-07",
+  "scope": "Shared workspace evidence strip spacing and wrapping",
+  "changes": [
+    "Shared styles now live beside the workspace card styles in the global product layout stylesheet",
+    "Separated status label, evidence details and action into distinct layout items",
+    "Added 16px vertical gutters, aligned horizontal gutters and a single-column layout on narrow screens",
+    "Singular evidence counts read 1 evidence item in the strip and proof summary"
+  ],
+  "verification": {
+    "routes": [
+      "live",
+      "decisions",
+      "service",
+      "house",
+      "intelligence",
+      "value",
+      "memory"
+    ],
+    "verticals": [
+      "restaurant",
+      "hotel"
+    ],
+    "widths": [
+      390,
+      820,
+      1512
+    ],
+    "directRouteLoads": 42,
+    "visibleStripsChecked": 36,
+    "browserCasesPassed": 6,
+    "assertions": [
+      "Text remains inside safe gutters",
+      "Link remains inside safe gutters",
+      "Summary and action do not overlap",
+      "No internal overflow",
+      "Padding on every side"
+    ],
+    "eslint": "passed",
+    "diffCheck": "passed",
+    "appTypeScript": "passed"
+  },
+  "notes": [
+    "The initial local run overlapped development hot reload; it was interrupted and replaced with a complete clean six-case run.",
+    "The hotel compact Live header omits the focus card on narrow screens, so no evidence strip is rendered there.",
+    "These checks target the shared evidence strips and do not claim an exhaustive audit of every product state."
+  ]
+}

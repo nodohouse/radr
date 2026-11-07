@@ -53,6 +53,46 @@
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight]:not([data-page=control-center]) :is(.wb-primary,.hp-primary,.boh-btn-primary,.se-btn-primary):hover {background:var(--brand-jade);color:var(--brand-ink);}
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight]:not([data-page=control-center]) .wb-secondary {border-color:#b4c9d2;padding-top:18px;}
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight]:not([data-page=control-center]) .wb-secondary>summary {font-size:13px;color:#385e73;}
+/* Evidence is shared by every workspace route, including direct page loads. */
+.rp-premium .ws-focus > .ws-source-quality {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px 24px;
+  min-width: 0;
+  padding: 16px 26px;
+  border-top: 1px solid #ccdaea;
+  color: #49647e;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.rp-premium .ws-source-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.rp-premium .ws-source-summary > span { min-width: 0; }
+.rp-premium .ws-source-quality[data-warning="true"] strong { color: #87500e; }
+.rp-premium .ws-source-quality > a {
+  justify-self: start;
+  max-width: 100%;
+  padding-block: 2px;
+  color: #1759b5;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .rp-premium .ws-focus > .ws-source-quality {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px 20px;
+    gap: 8px;
+  }
+}
+
 /* A compact answer to what matters, why it matters and where to inspect it. */
 .rp-premium .ws-focus {display:grid;grid-template-columns:minmax(0,1.6fr) minmax(250px,1fr);border:1px solid #ffffffe6;border-radius:18px;overflow:hidden;box-shadow:var(--workspace-shadow);margin:0 0 8px;isolation:isolate;}
 .rp-premium .ws-focus-main {padding:23px 26px;background:linear-gradient(115deg,#153f55f2,#215c50f0);color:#effff9;min-width:0;}
