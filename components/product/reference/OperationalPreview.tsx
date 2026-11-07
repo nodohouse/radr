@@ -5,8 +5,8 @@ import { guestSignals } from "@/lib/product/guestSignals";
 import { GuestNeeds } from "../guest-context/GuestNeeds";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { getServiceCommand, type ZoneKey } from "@/lib/product/serviceCommand";
-import { PlanCanvas } from "../layout-studio/PlanCanvas";
-import type { CameraBridge } from "../layout-studio/LayoutScene";
+import { HospitalityWorld } from "../hospitality-world/HospitalityWorld";
+import type { SpatialCamera, SpatialEntity } from "../hospitality-world/types";
 import type { LayoutDraft } from "@/lib/radr/live/layoutDraft";
 import { tableExperiences } from "@/lib/product/serviceCommand/tableExperience";
 import { Arrow, detailHref } from "./ReferenceUI";
@@ -25,7 +25,7 @@ export function OperationalPreview({compact=false,immersive=false}:{compact?:boo
   useEffect(()=>{if(opened&&!dialog.current?.open)dialog.current?.showModal();else if(!opened&&dialog.current?.open)dialog.current.close();},[opened]);
   const openTable=(id:string)=>{setSelection(id);setTableTab("guest");setOpened(true);};
 
-  const bridge=useRef<CameraBridge|null>(null);
+  const bridge=useRef<SpatialCamera|null>(null);
   const tables=model.tables.filter(t=>t.zone===zone);
   const current=tables.find(t=>t.id===selection)||tables.find(t=>t.tone==="wait")||tables[0];
   const detail=current?model.tableDetails[current.id]:undefined;
@@ -42,12 +42,13 @@ export function OperationalPreview({compact=false,immersive=false}:{compact?:boo
     <div className="simp-live-attention" aria-label="Current service pressure">{model.pressure.filter(p=>p.current>=85).map(p=><Link key={p.id} href={detailHref(`/app/service?pressure=${p.id}`)}><strong>{p.label} · {p.current}%</strong><span>{p.cause}</span><b>Review pressure →</b></Link>)}</div>
     <div className="rp-preview-content"><div className="rp-preview-world"><div className="rp-preview-zone-tabs" aria-label="Floor zones">{ZONES.map(z=><button type="button" key={z.id} aria-pressed={zone===z.id} onClick={()=>{setZone(z.id);}}>{z.label}</button>)}</div>
       {immersive?<>
-        <div className="rp-live-gesture-stage" tabIndex={0} role="region" aria-label="Live floor. Drag to pan; scroll or pinch to zoom; click a table for evidence." onKeyDown={e=>{if(e.target!==e.currentTarget)return;if(["+","=","-","0"].includes(e.key)){e.preventDefault();if(e.key==="0")bridge.current?.reset();else bridge.current?.zoom(e.key==="-"?1.15:.87);}}}>
-          <PlanCanvas draft={draft} floor={`live-${zone}`} selected={current?.id||null} editing={false} reference={null} revision={0} onSelect={id=>{if(id){openTable(id);}}} onInspect={()=>{}} onFloor={()=>{}} onMove={()=>{}} onAdd={()=>{}} onGestureStart={()=>{}} bridge={bridge} readOnly liveStates={liveStates}/>
+        <div className="rp-live-gesture-stage hw-live-stage">
+          <HospitalityWorld kind="restaurant" label={ZONES.find(z=>z.id===zone)?.label||"Dining room"} width={24} depth={16} selected={current?.id||null} cameraRef={bridge} onSelect={openTable}
+            entities={draft.floors[0].items.map(item=>({id:item.id,label:item.label,number:item.label.replace("Table ",""),x:item.x,z:item.z,width:item.width,depth:item.depth,seats:tables.find(t=>t.id===item.id)?.seats,tone:liveStates[item.id].tone,status:liveStates[item.id].label,detail:liveStates[item.id].detail,signals:liveStates[item.id].signals})) as SpatialEntity[]}/>
         </div>
-        <div className="rp-live-gesture-help">Drag to shift around · Scroll or pinch to zoom · Double-click to fit</div>
+        <div className="rp-live-gesture-help">Drag to orbit · Shift + drag to pan · Scroll or pinch to zoom · Select a table for details</div>
       </>:<div className="rp-preview-floor" aria-label={`${ZONES.find(z=>z.id===zone)?.label} table schematic`}>{tables.map(t=><button type="button" key={t.id} className="rp-preview-table" data-tone={t.tone} data-selected={current?.id===t.id||undefined} style={{left:`${t.x}%`,top:`${t.y}%`}} aria-label={`Table ${t.n}, ${STATUS[t.tone]}`} aria-pressed={current?.id===t.id} onClick={()=>openTable(t.id)}><strong>{t.n}</strong></button>)}</div>}
-      <div className="guest-signal-legend"><span>! Allergy</span><span>★ Occasion</span><span>≡ Booking notes</span><span>Dashed markers = next booking</span></div><footer className="rp-preview-legend"><span><i data-tone="seated"/>Seated</span><span><i data-tone="wait"/>Needs attention</span><span><i data-tone="turning"/>Turning</span><span className="rp-preview-schematic">Operating schematic</span></footer>
+      <div className="guest-signal-legend"><span>! Allergy</span><span>★ Occasion</span><span>≡ Booking notes</span><span>Current and upcoming bookings</span></div><footer className="rp-preview-legend"><span><i data-tone="seated"/>Seated</span><span><i data-tone="wait"/>Needs attention</span><span><i data-tone="turning"/>Turning</span><span className="rp-preview-schematic">Spatial operating model</span></footer>
     </div><dialog ref={dialog} className="simp-live-dialog" aria-labelledby="simp-table-title" onClose={()=>setOpened(false)} onClick={e=>{if(e.target===e.currentTarget)setOpened(false);}}>
     <header className="simp-drawer-header"><span className="rs-eyebrow">TABLE CONTEXT</span><button type="button" onClick={()=>setOpened(false)} aria-label="Close table details">Close ×</button></header>
     <aside className="rp-preview-inspector" data-testid="table-service-details">{current ? <>

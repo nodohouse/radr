@@ -13,7 +13,8 @@ import {
   useState,
   type MouseEvent,
 } from "react";
-import { useHotelPlanGestures } from "./useHotelPlanGestures";
+import { HospitalityWorld } from "../hospitality-world/HospitalityWorld";
+import type { SpatialCamera } from "../hospitality-world/types";
 import Image from "next/image";
 import Link from "next/link";
 import {WorkspaceFocus} from "../reference/WorkspaceFocus";
@@ -40,16 +41,12 @@ import {
   type HotelLiveTimeOffset,
   type LiveRoomState,
 } from "@/lib/radr/product/hotelLive";
-import {
-  clampLiveZoom,
-  validateSpatialAnchors,
-  type SpatialAnchor,
-} from "@/lib/radr/live/spatialCamera";
 import { displayDecisionId } from "@/lib/radr/decision/ids";
 import "./hotel-live.css";
-import { guestSignals, signalDescription } from "@/lib/product/guestSignals";
+import { guestSignals } from "@/lib/product/guestSignals";
 import { hotelGuestNeeds } from "@/lib/product/hotelGuestNeeds";
 import { RoomGuestBrief } from "./RoomGuestBrief";
+import { formatCurrency, formatVenueCurrency } from "@/lib/radr/currency";
 
 type StatusFilter = "all" | LiveRoomState;
 type ViewLens = "operational" | "financial" | "readiness" | "guest";
@@ -103,15 +100,14 @@ export function HotelLiveShell() {
   );
   const [timeOffset, setTimeOffset] = useState<HotelLiveTimeOffset>(urlTime);
   const [viewLens, setViewLens] = useState<ViewLens>("operational");
-  const [zoom, setZoom] = useState(1);
+
   const [prioritized, setPrioritized] = useState<Record<string, boolean>>({});
   const [confirmPrioritize, setConfirmPrioritize] = useState(false);
   const [reassignOpen, setReassignOpen] = useState(false);
   const [actionNote, setActionNote] = useState<string | null>(null);
   const [simulating, setSimulating] = useState(false);
-  const planRef = useRef<HTMLDivElement | null>(null);
-  const debugGeometry = search.get("debugGeometry") === "1";
-  const planGestures = useHotelPlanGestures(planRef, zoom, setZoom, `${level}:${floor}:${mode}`);
+  const spatialCamera = useRef<SpatialCamera | null>(null);
+
 
   const writeUrl = useCallback(
     (next: {
@@ -167,16 +163,6 @@ export function HotelLiveShell() {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps -- mount seed only
   }, []);
-
-  useEffect(() => {
-    const el = planRef.current;
-    if (!el || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver(() => {
-      /* Chrome width changed — keep zoom; stage % layout reflows without mutating world. */
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [level]);
 
   // Follow browser back/forward.
   useEffect(() => {
@@ -398,7 +384,7 @@ export function HotelLiveShell() {
               ? "Where pressure is building across the portfolio."
               : "Live hotel operations. Rooms. People. Readiness."}
           </p>
-          {level === "property"?<div className="guest-signal-legend"><span>! Allergy</span><span>★ Occasion</span><span>≡ Booking notes</span><span>Dashed = next stay</span></div>:null}
+          {level === "property"?<div className="guest-signal-legend"><span>! Allergy</span><span>★ Occasion</span><span>≡ Booking notes</span><span>Current and next stay details</span></div>:null}
         </div>
         <div className="hl-kpis" aria-label="Live metrics">
           {level === "estate" ? (
@@ -415,7 +401,7 @@ export function HotelLiveShell() {
               </button>
               <button type="button" className="hl-kpi" data-tone="neg">
                 <em>Exposure</em>
-                <strong>€{estate.exposureEuro.toLocaleString("en-GB")}</strong>
+                <strong>{formatCurrency(estate.exposureEuro,"USD",{cents:false,locale:"en-US"})}</strong>
                 <span>portfolio</span>
               </button>
               <button type="button" className="hl-kpi">
@@ -489,10 +475,7 @@ export function HotelLiveShell() {
               >
                 <em>Exposure</em>
                 <strong>
-                  €
-                  {(simulating ? 360 : model.exposureEuro).toLocaleString(
-                    "en-GB",
-                  )}
+                  {formatVenueCurrency(simulating ? 360 : model.exposureEuro,model.propertyId,{cents:false})}
                 </strong>
                 <span>{simulating ? "SIMULATION" : "if unchanged"}</span>
               </Link>
@@ -600,9 +583,7 @@ export function HotelLiveShell() {
             type="button"
             className="hl-icon-btn"
             aria-label="Zoom in"
-            onClick={() =>
-              setZoom((z) => clampLiveZoom(+(z + 0.12).toFixed(2)))
-            }
+            onClick={() => spatialCamera.current?.zoom(.87)}
           >
             +
           </button>
@@ -610,9 +591,7 @@ export function HotelLiveShell() {
             type="button"
             className="hl-icon-btn"
             aria-label="Zoom out"
-            onClick={() =>
-              setZoom((z) => clampLiveZoom(+(z - 0.12).toFixed(2)))
-            }
+            onClick={() => spatialCamera.current?.zoom(1.15)}
           >
             −
           </button>
@@ -620,7 +599,7 @@ export function HotelLiveShell() {
             type="button"
             className="hl-icon-btn"
             aria-label="Fit floor"
-            onClick={planGestures.reset}
+            onClick={() => spatialCamera.current?.reset()}
           >
             Fit
           </button>
@@ -664,30 +643,10 @@ export function HotelLiveShell() {
                         : "Guest impact"}
             </span>
           </div>
-          <div
-            className="hl-plan"
-            ref={planRef}
-            role="region"
-            aria-label="Hotel floor. Drag to pan; scroll or pinch to zoom; select a room for details."
-            tabIndex={0}
-            data-dragging={planGestures.dragging || undefined}
-            data-mode={mode}
-            data-lens={viewLens}
-            data-debug-geometry={debugGeometry ? "1" : undefined}
-            style={{ ...planGestures.style, ["--hl-zoom" as string]: String(zoom) }}
-          >
-            {mode === "staff" ? (
-              <StaffCapacity />
-            ) : (
-              <FloorPlan
-                rooms={visible}
-                selectedId={selected?.id ?? null}
-                onSelect={selectRoom}
-                mode={mode}
-                viewLens={viewLens}
-                zoom={zoom}
-                debugGeometry={debugGeometry}
-              />
+          <div className="hl-spatial-plan">
+            {mode === "staff" ? <StaffCapacity /> : (
+              <HospitalityWorld kind="hotel" label={`Floor ${floor}`} width={28} depth={20} selected={selected?.id ?? null} onSelect={selectRoom} cameraRef={spatialCamera}
+                entities={visible.map(room=>({id:room.id,label:`Room ${room.number}`,number:room.number,x:(room.x+room.w/2-50)*.28,z:(room.y+room.h/2-50)*.2,width:room.w*.28,depth:room.h*.2,tone:room.state,status:roomStateLabel(room.state),detail:roomModelDetail(room,mode,viewLens,model.propertyId),signals:guestSignals(hotelGuestNeeds(room),"incoming")}))}/>
             )}
           </div>
           <nav className="hl-floor-rail" aria-label="Floors">
@@ -753,7 +712,7 @@ export function HotelLiveShell() {
                 Ready by {selected.expectedReadyAt ?? "14:58"}
               </li>
               <li>22 min buffer before arrival</li>
-              <li>€{selected.exposureEuro || 280} exposure protected</li>
+              <li>{formatVenueCurrency(selected.exposureEuro || 280,model.propertyId,{cents:false})} exposure protected</li>
             </ul>
             <div className="hl-modal-actions">
               <button
@@ -950,8 +909,7 @@ function IncidentsPanel({
                 </strong>
                 <span>{inc.detail}</span>
                 <em>
-                  {inc.nextArrival ? `Next arrival ${inc.nextArrival} · ` : ""}€
-                  {inc.exposureEuro} · {inc.action}
+                  {inc.nextArrival ? `Next arrival ${inc.nextArrival} · ` : ""}{formatVenueCurrency(inc.exposureEuro,"loc_canal_house",{cents:false})} · {inc.action}
                 </em>
               </button>
             </li>
@@ -1010,7 +968,7 @@ function EstateMap({
               data-selected={selected ? "true" : undefined}
               tabIndex={0}
               role="button"
-              aria-label={`${p.name}, ${p.city}, ${p.status}, €${p.exposureEuro} exposure`}
+              aria-label={`${p.name}, ${p.city}, ${p.status}, ${formatVenueCurrency(p.exposureEuro,p.id,{cents:false})} exposure`}
               onClick={() => onSelect(p.id)}
               onDoubleClick={() => onEnter(p)}
               onKeyDown={(e) => {
@@ -1022,7 +980,7 @@ function EstateMap({
                 {p.name}
               </text>
               <text x={p.x + 4} y={p.y + 3.5} className="hl-estate-meta">
-                {p.occupancyPct}% · €{p.exposureEuro}
+                {p.occupancyPct}% · {formatVenueCurrency(p.exposureEuro,p.id,{cents:false})}
               </text>
             </g>
           );
@@ -1068,7 +1026,7 @@ function EstateInspector({
         <div className="hl-guest-card">
           <em>Constraint</em>
           <strong>{property.driver}</strong>
-          <span>Exposure €{property.exposureEuro.toLocaleString("en-GB")}</span>
+          <span>Exposure {formatVenueCurrency(property.exposureEuro,property.id,{cents:false})}</span>
         </div>
         {property.decisionId ? (
           <Link
@@ -1091,137 +1049,14 @@ function EstateInspector({
   );
 }
 
-function roomIcon(room: HotelLiveRoom, mode: HotelLiveMode, viewLens: ViewLens) {
-  if (viewLens === "financial" && room.exposureEuro > 0) return "€";
-  if (mode === "housekeeping" && room.assigned) return "HK";
-  switch (room.state) {
-    case "dirty":
-      return "!";
-    case "cleaning":
-      return "◇";
-    case "inspection":
-      return "◎";
-    case "ooo":
-      return "⊘";
-    case "ready":
-      return "▣";
-    default:
-      return "·";
-  }
-}
-
-function FloorPlan({
-  rooms,
-  selectedId,
-  onSelect,
-  mode,
-  viewLens,
-  zoom,
-  debugGeometry = false,
-}: {
-  rooms: HotelLiveRoom[];
-  selectedId: string | null;
-  onSelect: (id: string) => void;
-  mode: HotelLiveMode;
-  viewLens: ViewLens;
-  zoom: number;
-  debugGeometry?: boolean;
-}) {
-  useEffect(() => {
-    if (process.env.NODE_ENV === "production") return;
-    const anchors: SpatialAnchor[] = rooms.map((room) => ({
-      entityId: room.id,
-      space: "planPct",
-      bounds: { x: room.x, y: room.y, w: room.w, h: room.h },
-      centroid: {
-        x: room.x + room.w / 2,
-        y: room.y + room.h / 2,
-      },
-      labelAnchor: {
-        x: room.x + room.w / 2,
-        y: room.y + room.h / 2,
-      },
-    }));
-    validateSpatialAnchors(anchors);
-  }, [rooms]);
-
-  const showLabels = zoom >= 0.95 || Boolean(selectedId);
-
-  return (
-    <div
-      className="hl-plan-stage"
-      style={{
-        transform: `translate(var(--hl-pan-x, 0px), var(--hl-pan-y, 0px)) scale(${zoom})`,
-        ["--hl-zoom" as string]: String(zoom),
-      }}
-    >
-      <div className="hl-arch" aria-hidden>
-        <div className="hl-arch-frame" />
-        <div className="hl-arch-corridor" />
-        <div className="hl-arch-lift">LIFT</div>
-        <div className="hl-arch-service">SERVICE</div>
-        <div className="hl-arch-stair" />
-      </div>
-      {rooms.map((room) => {
-        const selected = room.id === selectedId;
-        const signals=guestSignals(hotelGuestNeeds(room),"incoming");
-        const tip = [
-          `Room ${room.number}`,
-          roomStateLabel(room.state),
-          signalDescription(signals),
-          room.arrivalAt ? `Arrival ${room.arrivalAt}` : null,
-          room.priority === "high" ? "Priority High" : null,
-          room.expectedReadyAt ? `Expected ${room.expectedReadyAt}` : null,
-          room.exposureEuro ? `$${room.exposureEuro} exposure` : null,
-        ]
-          .filter(Boolean)
-          .join(" · ");
-        const showNum = showLabels || selected;
-        return (
-          <button
-            key={room.id}
-            type="button"
-            className="hl-tile"
-            data-state={room.state}
-            data-selected={selected ? "true" : undefined}
-            data-arrival={
-              mode === "arrivals" && room.arrivalAt ? "true" : undefined
-            }
-            data-vip={room.vip ? "true" : undefined}
-            style={{
-              left: `${room.x}%`,
-              top: `${room.y}%`,
-              width: `${room.w}%`,
-              height: `${room.h}%`,
-            }}
-            title={tip}
-            aria-label={`Room ${room.number}, ${roomStateLabel(room.state)}. ${signalDescription(signals)}${
-              room.arrivalAt ? `, arrival ${room.arrivalAt}` : ""
-            }${room.exposureEuro ? `, $${room.exposureEuro} exposure` : ""}`}
-            onClick={() => onSelect(room.id)}
-          >
-            {showNum ? (
-              <span className="hl-tile-num">{room.number}</span>
-            ) : (
-              <span className="hl-tile-num" data-dot="true" aria-hidden>
-                ·
-              </span>
-            )}
-            <span className="hl-tile-icon" aria-hidden>
-              {roomIcon(room, mode, viewLens)}
-            </span>
-            {mode === "housekeeping" && room.assigned ? (
-              <span className="hl-tile-meta">{room.assigned.split(" ")[0]}</span>
-            ) : null}
-            {signals.length?<span className="hl-guest-signals" data-testid="room-guest-signals">{signals.map(signal=><span key={signal.kind} data-guest-signal={signal.kind} data-scope={signal.scope} title={`Next booking: ${signal.detail}`} aria-hidden="true">{signal.kind==="allergy"?"!":signal.kind==="occasion"?"★":"≡"}</span>)}</span>:null}
-            {debugGeometry ? (
-              <span className="hl-debug-cross" aria-hidden />
-            ) : null}
-          </button>
-        );
-      })}
-    </div>
-  );
+function roomModelDetail(room:HotelLiveRoom,mode:HotelLiveMode,lens:ViewLens,locationId:string) {
+  return [
+    lens==="financial" ? `${formatVenueCurrency(room.exposureEuro,locationId,{cents:false})} exposure` : null,
+    mode==="housekeeping" ? room.assigned ? `Assigned: ${room.assigned}` : "Unassigned" : null,
+    mode==="guests" || lens==="guest" ? room.guestName || "Guest not linked" : room.type,
+    room.arrivalAt ? `Arrival ${room.arrivalAt}` : null,
+    room.expectedReadyAt ? `Expected ready ${room.expectedReadyAt}` : null,
+  ].filter(Boolean).join(" · ");
 }
 
 function RoomInspector({

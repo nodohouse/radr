@@ -1,0 +1,100 @@
+{
+  "date": "2026-11-07",
+  "scope": "Restaurant and hotel Live spatial operating models",
+  "implementation": [
+    "Demand-rendered Three.js scenes with locally loaded oak texture, soft shadows and studio environment lighting",
+    "Modeled restaurant tables, seating, place settings, counter, pendant lights, windows and planting",
+    "Hotel cutaway rooms with beds, linen, side tables, lighting, seating and floor selection",
+    "Orbit, shift-drag pan, wheel/pinch zoom, top view, reset and keyboard controls",
+    "Projected labels adapt to camera density; selected entities and allergy alerts get priority",
+    "Existing guest, order, booking, allergy and timeline records remain in the original table/room detail surfaces",
+    "Phone hotel floor selector moves below the model to preserve canvas width",
+    "Interactive isometric fallback preserves selection and camera controls without WebGL",
+    "Hotel money labels use canonical property currency formatting; no financial values were recalculated",
+    "Allergy, occasion and booking-remark badges coexist, with scoped current/next occasion notes in the context card"
+  ],
+  "dataIntegrity": {
+    "tablePositions": "Existing service command table positions and IDs",
+    "hotelPositions": "Existing hotel live floor geometry and room IDs",
+    "guestSignals": "Existing guestSignals, tableExperiences and hotelGuestNeeds sources",
+    "externalWrites": false,
+    "uploadedOrScannedBuildingClaim": false,
+    "layoutEditing": "Remains in the dedicated floor plan editor; Live gestures move the camera"
+  },
+  "reviewFindingsFixed": [
+    "Flat live geometry replaced with actual 3D meshes",
+    "Orbit event target now includes projected table and room markers",
+    "Arrival wave is placed after the enlarged hotel model in document flow",
+    "Label placement avoids overlap and reserves space for interface overlays",
+    "Current and upcoming allergy information uses separate lines",
+    "Rounded furniture radii are bounded by geometry dimensions"
+  ],
+  "verification": {
+    "uniqueBrowserFlowsPassed": 14,
+    "browserTestExecutionsPassed": 16,
+    "coverage": [
+      "Restaurant and hotel at 390, 820, 1512 and 3840px",
+      "Orbit, wheel zoom, reset, top view and table/room selection",
+      "Two-finger zoom, keyboard pan and shift-drag pan in both demos",
+      "Guest allergies, next booking and restaurant timeline",
+      "Hotel arrival chart is below the model",
+      "No detected label collisions or document overflow",
+      "Non-WebGL fallback selection",
+      "Existing layout editor furniture drag, persistence, palette drop, Undo and touch drag"
+    ],
+    "finalGuestMarkerChecks": [
+      {
+        "kind": "restaurant",
+        "width": 390,
+        "signals": [
+          "allergy",
+          "occasion",
+          "remark"
+        ],
+        "overlaps": [],
+        "errors": []
+      },
+      {
+        "kind": "restaurant",
+        "width": 1512,
+        "signals": [
+          "allergy",
+          "occasion",
+          "remark"
+        ],
+        "overlaps": [],
+        "errors": []
+      },
+      {
+        "kind": "hotel",
+        "width": 390,
+        "signals": [
+          "allergy",
+          "occasion",
+          "remark"
+        ],
+        "overlaps": [],
+        "errors": []
+      },
+      {
+        "kind": "hotel",
+        "width": 1512,
+        "signals": [
+          "allergy",
+          "occasion",
+          "remark"
+        ],
+        "overlaps": [],
+        "errors": []
+      }
+    ],
+    "appTypeScript": "passed",
+    "changedSourceESLint": "passed",
+    "gitDiffCheck": "passed"
+  },
+  "limits": [
+    "Architectural geometry is illustrative demo geometry, not a reconstruction or surveyed floor plan",
+    "Automated touch and WebGL checks run in Chromium with software GPU emulation; physical-device performance has not been measured",
+    "No external hospitality system, customer tenant or live guest feed was used"
+  ]
+}
