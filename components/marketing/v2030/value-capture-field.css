@@ -1,0 +1,73 @@
+/* The value field stays behind the tablet and never intercepts scrolling or clicks. */
+.rvc-field {
+  position: absolute;
+  inset: -65px -84px 35px -70px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    #000 12%,
+    #000 95%,
+    transparent 100%
+  );
+  contain: paint;
+}
+.rvc-field > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.rvc-amount {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--rvc-amount-size, 32px);
+  font-weight: 550;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+.rvc-state {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--rvc-state-size, 10px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  transform: translateY(var(--rvc-state-one, 19px));
+}
+.rsc-scroll-stage > .rsc-flip-rig {
+  position: relative;
+  z-index: 2;
+}
+.rsc-scroll-stage > .rsc-full-demo,
+.rsc-scroll-stage > .rsc-turn-cue {
+  z-index: 3;
+}
+.rvc-field[data-reduced="true"] .rvc-signals {
+  display: none;
+}
+.rvc-field[data-reduced="true"] .rvc-rings {
+  opacity: 0.3;
+}
+@media (max-width: 720px) {
+  .rvc-field {
+    inset: -38px -18px 160px -18px;
+    opacity: 0.8;
+  }
+  .rvc-signal-0,
+  .rvc-signal-3,
+  .rvc-signal-5 {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rvc-field .rvc-signals {
+    display: none;
+  }
+  .rvc-rings {
+    opacity: 0.3;
+  }
+}
+
+.rvc-horizon {
+  transform: translateY(var(--rvc-state-two, 30px));
+}

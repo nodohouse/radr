@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
 import { ProductBriefPreview } from "./ProductBriefPreview";
+import { ValueCaptureField } from "./ValueCaptureField";
 import "./scroll-tablet.css";
 import { Link } from "@/i18n/navigation";
 
@@ -90,6 +91,7 @@ export function ScrollTabletShowcase() {
       data-ready={ready || undefined}
       data-moving={moving}
     >
+      <ValueCaptureField moving={moving} reduced={reduced === true} />
       <motion.div
         className="rsc-flip-rig"
         style={

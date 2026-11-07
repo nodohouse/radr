@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-07",
+  "scope": "Homepage value-capture animation behind the existing tablet",
+  "concept": "Illustrative exposure values descend, turn jade at interception, and move into the product view. This does not claim verified recovery.",
+  "implementation": [
+    "Native SVG motion paths and capture pulses; no animation-frame JavaScript loop",
+    "Eight-second staggered cycles with no playback controls",
+    "Ambient layer behind the tablet with pointer events disabled and no document-flow changes",
+    "Responsive typography and fewer signals on phones",
+    "Animation pauses outside the viewport or when the tab is hidden",
+    "Reduced-motion preference hides falling amounts and pauses the SVG timeline"
+  ],
+  "verification": {
+    "browserCasesPassed": 8,
+    "widths": [
+      390,
+      820,
+      1512,
+      1920,
+      3840
+    ],
+    "checks": [
+      "Motion advances while the tablet is visible",
+      "Animation pauses off-screen",
+      "Responsive amount type stays between 15 and 26 CSS pixels",
+      "No horizontal document overflow",
+      "Decorative content is hidden from assistive technology",
+      "Native tablet flip remains readable in both directions without changing page height",
+      "Tablet controls and the reduced-motion view switch remain usable",
+      "All six value paths reach their capture points within one SVG unit of the pulse timing"
+    ],
+    "appTypeScript": "passed",
+    "changedSourceAndTestESLint": "passed",
+    "diffCheck": "passed"
+  },
+  "claimGuardrails": [
+    "Amounts are decorative exposure examples, not customer results",
+    "No accumulated total, verified-value label or automatic-recovery promise was added"
+  ]
+}
