@@ -50,23 +50,6 @@ html body .radr:has(.rx-nav) .rsc-scroll-stage {
     #c5fff936
   );
 }
-.rsc-turn-cue {
-  position: absolute;
-  bottom: 24px;
-  right: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 10px;
-  letter-spacing: 0.02em;
-  color: #fff;
-  pointer-events: none;
-}
-.rsc-turn-cue i {
-  width: 30px;
-  height: 1px;
-  background: var(--brand-jade);
-}
 .rsc-reduced-switch {
   position: absolute;
   bottom: 47px;
@@ -374,16 +357,9 @@ html body .radr:has(.rx-nav) .rsc-scroll-stage {
   .rsc-flip-rig {
     will-change: auto;
   }
-  .rsc-turn-cue {
-    display: none;
-  }
   .rsc-face .rsc-tablet * {
     animation: none !important;
   }
-}
-
-.rsc-scroll-stage[data-face="back"] .rsc-turn-cue {
-  visibility: hidden;
 }
 
 /* Individual transforms compose with the native-scroll flip, preserving both faces. */

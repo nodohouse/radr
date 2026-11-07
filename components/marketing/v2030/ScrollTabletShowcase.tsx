@@ -12,12 +12,15 @@ import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMo
 import { ProductBriefPreview } from "./ProductBriefPreview";
 import { ValueCaptureField } from "./ValueCaptureField";
 import "./scroll-tablet.css";
+import "./tablet-cinema.css";
+import { HOTEL_OBJECTS } from "@/lib/marketing/hospitalityShowcase";
 import { Link } from "@/i18n/navigation";
 
 /** Native-scroll turn with two real, non-mirrored faces. No scroll capture or pinning. */
 export function ScrollTabletShowcase() {
   const stage = useRef<HTMLDivElement>(null);
   const [start, setStart] = useState(0);
+  const [turnLift, setTurnLift] = useState(140);
   const [ready, setReady] = useState(false);
   const [moving, setMoving] = useState(false);
   const [back, setBack] = useState(false);
@@ -25,7 +28,7 @@ export function ScrollTabletShowcase() {
   const previousBack = useRef(false);
   const reduced = useReducedMotionSafe();
   const { scrollY } = useScroll();
-  const target = useTransform(scrollY, [start, start + 240], [0, 1], {
+  const target = useTransform(scrollY, [start, start + 180], [0, 1], {
     clamp: true,
   });
   const progress = useSpring(target, {
@@ -36,8 +39,14 @@ export function ScrollTabletShowcase() {
   const rotateY = useTransform(progress, [0, 1], [-6, 180]);
   const rotateX = useTransform(progress, [0, 0.5, 1], [3, 10, 0]);
   const rotateZ = useTransform(progress, [0, 0.5, 1], [1, -8, -1]);
-  const y = useTransform(progress, [0, 1], [0, 140]);
-  const scale = useTransform(progress, [0, 0.5, 1], [1, 0.92, 0.97]);
+  const y = useTransform(progress, [0, 1], [0, turnLift]);
+  const scale = useTransform(progress, [0, 0.5, 1], [1, 0.95, 1]);
+  const peekOpacity = useTransform(
+    progress,
+    [0, 0.25, 0.48, 1],
+    [1, 0.9, 0, 0],
+  );
+  const arrival = HOTEL_OBJECTS.find((room) => room.id === "room_310")!;
   const showingBack = ready && reduced ? manualBack : back;
   const stationary = !ready || reduced === true;
 
@@ -52,6 +61,7 @@ export function ScrollTabletShowcase() {
     setReady(true);
     const measure = () => {
       const node = stage.current;
+      setTurnLift(window.innerWidth > 1100 ? 140 : 38);
       if (node)
         setStart(
           Math.max(
@@ -92,6 +102,19 @@ export function ScrollTabletShowcase() {
       data-moving={moving}
     >
       <ValueCaptureField moving={moving} reduced={reduced === true} />
+      <motion.div
+        className="rsc-operation-peek"
+        aria-hidden="true"
+        data-nosnippet=""
+        style={{ opacity: stationary ? (showingBack ? 0 : 1) : peekOpacity }}
+      >
+        <span>
+          <i />
+          {`Hotel · ${arrival.label}`}
+        </span>
+        <strong>{arrival.allergy} allergy</strong>
+        <small>Incoming guest · {arrival.next.split(" · ")[0]}</small>
+      </motion.div>
       <motion.div
         className="rsc-flip-rig"
         style={
@@ -134,12 +157,6 @@ export function ScrollTabletShowcase() {
       <Link href="/demo" className="rsc-full-demo">
         Explore the full-size demo →
       </Link>
-      <span className="rsc-turn-cue" aria-hidden="true">
-        {showingBack
-          ? "The operation behind the decision"
-          : "Scroll to see the other side"}
-        <i />
-      </span>
     </div>
   );
 }

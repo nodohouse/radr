@@ -41,7 +41,7 @@ export function ProductBriefPreview({
     variant === "operations"
       ? ["Restaurant Live", "Hotel Live", "Operations"]
       : SECTIONS;
-  const [section, setSection] = useState(0);
+  const [section, setSection] = useState(variant === "operations" ? 1 : 0);
   const [motionReady, setMotionReady] = useState(false);
   const [visible, setVisible] = useState(false);
   const [documentVisible, setDocumentVisible] = useState(true);
@@ -69,7 +69,10 @@ export function ProductBriefPreview({
   useEffect(() => {
     if (!auto) return;
     const timer = window.setTimeout(
-      () => setSection((current) => (current + 1) % (variant === "operations" ? 3 : 4)),
+      () =>
+        setSection(
+          (current) => (current + 1) % (variant === "operations" ? 3 : 4),
+        ),
       variant === "operations" ? 6500 : 4200,
     );
     return () => window.clearTimeout(timer);
@@ -378,9 +381,7 @@ export function ProductBriefPreview({
                     <span>Illustrative completed-service outcome</span>
                     <strong>{venue.verifiedFormatted}</strong>
                     <h4>Protected tonight.</h4>
-                    <p>
-                      Completed-service example · demo data.
-                    </p>
+                    <p>Completed-service example · demo data.</p>
                   </div>
                   <div className="rsc-proof">
                     <span>Decision recorded</span>

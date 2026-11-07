@@ -25,6 +25,13 @@ test("native scroll reveals the readable reverse face and returns to the front w
     await expect(stage).toHaveAttribute("data-ready", "true");
     await page.evaluate(() => document.fonts.ready);
     await expect(stage).toHaveAttribute("data-face", "front");
+    await expect(
+      page.getByText("Scroll to see the other side", { exact: true }),
+    ).toHaveCount(0);
+    const peek = page.locator(".rsc-operation-peek");
+    await expect(peek).toContainText("Hotel · Room 310");
+    await expect(peek).toContainText("Shellfish allergy");
+    await expect(peek).toContainText("Incoming guest · 15:20");
     const before = await stage.evaluate((n) => ({
       height: document.documentElement.scrollHeight,
       start: Math.max(
@@ -32,7 +39,7 @@ test("native scroll reveals the readable reverse face and returns to the front w
         n.getBoundingClientRect().top + scrollY - innerHeight * 0.3,
       ),
     }));
-    await page.evaluate((y) => scrollTo(0, y), before.start + 240);
+    await page.evaluate((y) => scrollTo(0, y), before.start + 210);
     await expect(stage).toHaveAttribute("data-face", "back");
     await expect
       .poll(() =>
@@ -47,6 +54,17 @@ test("native scroll reveals the readable reverse face and returns to the front w
     expect(
       await page.evaluate(() => document.documentElement.scrollHeight),
     ).toBe(before.height);
+    // The completed reveal must be readable below the fixed navigation.
+    expect(
+      await stage.evaluate(
+        (n) =>
+          n.querySelector(".rsc-face-back")!.getBoundingClientRect().top -
+          document.querySelector(".rx-nav")!.getBoundingClientRect().bottom,
+      ),
+    ).toBeGreaterThan(12);
+    await expect
+      .poll(() => peek.evaluate((n) => Number(getComputedStyle(n).opacity)))
+      .toBeLessThan(0.01);
     await expect(page.locator(".rsc-face-front")).toHaveAttribute("inert", "");
     await expect(page.locator(".rsc-face-back")).not.toHaveAttribute(
       "inert",
@@ -83,6 +101,13 @@ test("reduced motion provides an instant operating-view alternative and uses the
     "data-face",
     "back",
   );
+  await expect(back).toContainText("Every arrival, considered.");
+  await expect(back.locator(".rhl-inspector")).toContainText("Room 310");
+  await expect(back.locator(".rhl-inspector")).toContainText(
+    "Shellfish allergy",
+  );
+  await expect(back.locator(".rhl-inspector")).toContainText("15:20");
+  await back.getByRole("button", { name: "Restaurant", exact: true }).click();
   await expect(back).toContainText("Every table, understood.");
   await back
     .getByRole("button", { name: "Table 6, Turning", exact: true })

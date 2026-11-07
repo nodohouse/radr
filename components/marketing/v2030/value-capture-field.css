@@ -38,8 +38,7 @@
   position: relative;
   z-index: 2;
 }
-.rsc-scroll-stage > .rsc-full-demo,
-.rsc-scroll-stage > .rsc-turn-cue {
+.rsc-scroll-stage > .rsc-full-demo {
   z-index: 3;
 }
 .rvc-field[data-reduced="true"] .rvc-signals {

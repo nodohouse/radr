@@ -137,10 +137,10 @@ export function ValueCaptureField({
       >
         <defs>
           <linearGradient id={`${id}-rim`} x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#63aaff" stopOpacity=".05" />
-            <stop offset=".3" stopColor="#64caff" stopOpacity=".38" />
-            <stop offset=".72" stopColor="#00f59a" stopOpacity=".7" />
-            <stop offset="1" stopColor="#00f59a" stopOpacity=".08" />
+            <stop offset="0" stopColor="#63aaff" stopOpacity=".18" />
+            <stop offset=".3" stopColor="#64caff" stopOpacity=".58" />
+            <stop offset=".72" stopColor="#00f59a" stopOpacity=".9" />
+            <stop offset="1" stopColor="#00f59a" stopOpacity=".2" />
           </linearGradient>
           <radialGradient id={`${id}-aura`}>
             <stop stopColor="#00edaa" stopOpacity=".17" />
@@ -208,17 +208,17 @@ export function ValueCaptureField({
                     calcMode="spline"
                     keySplines=".42 0 .7 1;.16 .7 .25 1"
                   />
-                  <g className="rvc-value" fill="#b9dcff">
+                  <g className="rvc-value" fill="#e1f1ff">
                     <animate
                       {...timing}
                       attributeName="opacity"
-                      values="0;.65;.65;1;0;0"
+                      values="0;.86;.86;1;0;0"
                       keyTimes="0;.1;.56;.65;.86;1"
                     />
                     <animate
                       {...timing}
                       attributeName="fill"
-                      values="#b9dcff;#b9dcff;#00f59a;#00f59a"
+                      values="#e1f1ff;#e1f1ff;#00f59a;#00f59a"
                       keyTimes="0;.56;.64;1"
                     />
                     <text textAnchor={signal.anchor} className="rvc-amount">
