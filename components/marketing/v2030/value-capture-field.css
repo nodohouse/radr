@@ -71,3 +71,29 @@
 .rvc-horizon {
   transform: translateY(var(--rvc-state-two, 30px));
 }
+
+/* Reserve the narrow desktop gutter for a complete value label. */
+.rvc-field {
+  left: -40px;
+}
+.rvc-signal-0 .rvc-amount {
+  font-size: calc(var(--rvc-amount-size, 32px) * 0.75);
+}
+@media (min-width: 1101px) and (max-width: 1899px) {
+  .rsc-scroll-stage > .rsc-flip-rig {
+    margin-left: 20px;
+  }
+}
+@media (min-width: 1900px) {
+  .rvc-field {
+    left: -70px;
+  }
+  .rvc-signal-0 .rvc-amount {
+    font-size: var(--rvc-amount-size, 32px);
+  }
+}
+@media (max-width: 720px) {
+  .rvc-field {
+    left: -18px;
+  }
+}

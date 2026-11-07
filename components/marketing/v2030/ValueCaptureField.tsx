@@ -125,6 +125,7 @@ export function ValueCaptureField({
       ref={field}
       className="rvc-field"
       aria-hidden="true"
+      data-nosnippet=""
       data-running={moving && !reduced}
       data-reduced={reduced}
     >

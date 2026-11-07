@@ -8,13 +8,17 @@
     "Ambient layer behind the tablet with pointer events disabled and no document-flow changes",
     "Responsive typography and fewer signals on phones",
     "Animation pauses outside the viewport or when the tab is hidden",
-    "Reduced-motion preference hides falling amounts and pauses the SVG timeline"
+    "Reduced-motion preference hides falling amounts and pauses the SVG timeline",
+    "Decorative value field carries data-nosnippet to keep sample amounts out of search snippets"
   ],
   "verification": {
-    "browserCasesPassed": 8,
+    "browserCasesPassed": 9,
     "widths": [
       390,
       820,
+      1101,
+      1280,
+      1366,
       1512,
       1920,
       3840
@@ -27,7 +31,8 @@
       "Decorative content is hidden from assistive technology",
       "Native tablet flip remains readable in both directions without changing page height",
       "Tablet controls and the reduced-motion view switch remain usable",
-      "All six value paths reach their capture points within one SVG unit of the pulse timing"
+      "All six value paths reach their capture points within one SVG unit of the pulse timing",
+      "Full-cycle monetary-text collision sweep at 1101, 1280, 1366 and 1512px passes after a desktop gutter correction"
     ],
     "appTypeScript": "passed",
     "changedSourceAndTestESLint": "passed",

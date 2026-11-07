@@ -38,7 +38,7 @@ for (const width of [390, 820, 1512, 3840])
       .poll(() => svg.evaluate((el: SVGSVGElement) => el.getCurrentTime()))
       .toBeGreaterThan(before + 0.1);
     const physicalFont = await field
-      .locator(".rvc-amount")
+      .locator(".rvc-amount:visible")
       .first()
       .evaluate(
         (el) =>
@@ -135,5 +135,60 @@ test("jade capture coincides with each value reaching the interception point", a
   for (const result of results) {
     expect(result.xError).toBeLessThan(1);
     expect(result.yError).toBeLessThan(1);
+  }
+});
+
+test("falling values never touch hero copy through a complete desktop cycle", async ({
+  page,
+}) => {
+  for (const width of [1101, 1280, 1366, 1512]) {
+    await page.setViewportSize({ width, height: 1100 });
+    await page.goto("/en");
+    await expect(page.locator(".rvc-field")).toHaveAttribute(
+      "data-running",
+      "true",
+    );
+    await page.evaluate(() => document.fonts.ready);
+    const overlaps = await page.evaluate(async () => {
+      const svg = document.querySelector<SVGSVGElement>(".rvc-field svg")!;
+      svg.pauseAnimations();
+      const walker = document.createTreeWalker(
+        document.querySelector(".rm-hero-copy")!,
+        NodeFilter.SHOW_TEXT,
+      );
+      const rectangles: DOMRect[] = [];
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        if (!node.textContent?.trim()) continue;
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        rectangles.push(...range.getClientRects());
+      }
+      const collisions: string[] = [];
+      for (let time = 0; time < 8; time += 0.25) {
+        svg.setCurrentTime(time);
+        await new Promise<void>((resolve) =>
+          requestAnimationFrame(() => resolve()),
+        );
+        for (const el of document.querySelectorAll(".rvc-amount")) {
+          if (
+            +getComputedStyle(el.parentElement!).opacity < 0.25 ||
+            getComputedStyle(el).display === "none"
+          )
+            continue;
+          const a = el.getBoundingClientRect();
+          if (
+            rectangles.some(
+              (b) =>
+                Math.min(a.right, b.right) - Math.max(a.left, b.left) > 2 &&
+                Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 2,
+            )
+          )
+            collisions.push(el.textContent || "value");
+        }
+      }
+      svg.unpauseAnimations();
+      return collisions;
+    });
+    expect(overlaps, `hero copy at ${width}px`).toEqual([]);
   }
 });
