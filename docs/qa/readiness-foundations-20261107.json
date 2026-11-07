@@ -1,0 +1,46 @@
+{
+  "reviewedAt": "2026-11-07",
+  "scope": "Structured intake preview and outcome/trial production foundations",
+  "implemented": [
+    "Browser-only CSV, TSV, JSON and JSON Lines preview with six dataset schemas",
+    "Explicit editable column mapping and no silent import of unmapped fields",
+    "Row validation, duplicate detection, UTF-8/binary guards, 2 MB/10,000-row limits",
+    "Evidence-required supported verification; estimates carry zero verified value",
+    "Single-tenant, single-currency, retry-safe ledger sums in minor currency units",
+    "Database-backed operator-reviewed outcomes with authenticated, scope-checked API",
+    "Atomic source-identity retries, conflicting-claim rollback, persisted evidence claims",
+    "Stored 14-day expiry on new workspaces and expiry checks in protected permission paths"
+  ],
+  "validation": {
+    "baseline": {
+      "passed": 920,
+      "failed": 27
+    },
+    "current": {
+      "passed": 944,
+      "failed": 27,
+      "newFailures": 0
+    },
+    "migration": "All migrations exercised in isolated PGlite; no shared database migrated",
+    "persistence": "Outcome records survive database close/reopen; replay/conflict/tenant/evidence tests pass",
+    "browser": "12 template/viewport combinations pass at 390px and 1512px; invalid calendar dates and malformed JSON explained; clean final run made no POST requests. Screenshots inspected and table-header contrast corrected."
+  },
+  "releaseRequirements": [
+    "Apply migration 0004 before enabling customer account or outcome paths",
+    "Configure durable PostgreSQL; production outcome endpoint rejects temporary storage",
+    "Customer signup remains disabled pending configured account and recovery services"
+  ],
+  "notImplementedOrNotValidated": [
+    "OCR and document/image extraction",
+    "Camera/audio/video capture and extraction",
+    "XLSX and nested JSON flattening",
+    "Persisted generic import jobs and server-side replay of client validation",
+    "Automatic column/value transformations and locale conversion",
+    "Commercial connector ingestion and sync recovery",
+    "Complete UI wiring from persisted outcomes into every demo-led product surface",
+    "Distributed throttling and autonomous execution",
+    "Customer-data calibration of forecasts and memory",
+    "Resolution of 27 unchanged baseline test failures"
+  ],
+  "claim": "This release is not a 10/10 certification or a completed production transformation."
+}

@@ -41,8 +41,7 @@ export async function createOrganizationWithLocation(params: {
   const countryMeta = ONBOARDING_COUNTRIES.find(
     (c) => c.code === params.input.country,
   );
-  const timezone =
-    params.input.timezone ?? countryMeta?.timezone ?? "UTC";
+  const timezone = params.input.timezone ?? countryMeta?.timezone ?? "UTC";
 
   const organizationId = newId();
   const locationId = newId();
@@ -73,12 +72,17 @@ export async function createOrganizationWithLocation(params: {
     locationCity: params.input.locationCity,
     locationCountry: params.input.country,
     venueType: params.input.venueType,
-    operateFamilies: params.input.operateFamilies as OnboardingState["operateFamilies"],
-    operateSubtypes: params.input.operateSubtypes as OnboardingState["operateSubtypes"],
-    operatingUnits: params.input.operatingUnits as OnboardingState["operatingUnits"],
+    operateFamilies: params.input
+      .operateFamilies as OnboardingState["operateFamilies"],
+    operateSubtypes: params.input
+      .operateSubtypes as OnboardingState["operateSubtypes"],
+    operatingUnits: params.input
+      .operatingUnits as OnboardingState["operatingUnits"],
     roomCount: params.input.roomCount,
     role: params.input.role as OnboardingState["role"],
-    roleLens: ((params.input.roleLens ?? params.input.role) as OnboardingState["roleLens"]) ?? undefined,
+    roleLens:
+      ((params.input.roleLens ??
+        params.input.role) as OnboardingState["roleLens"]) ?? undefined,
     helpFocus: params.input.helpFocus as OnboardingState["helpFocus"],
     selectedKpis: params.input.selectedKpis,
     operatingProfileId: params.input.operatingProfileId,
@@ -104,7 +108,8 @@ export async function createOrganizationWithLocation(params: {
     currency: params.input.currency,
     timezone,
     status: "active",
-    plan: "pilot",
+    plan: "trial",
+    trialEndsAt: new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000),
     onboarding,
     createdAt: now,
     updatedAt: now,
@@ -160,7 +165,10 @@ export async function createOrganizationWithLocation(params: {
     action: "ORGANIZATION_CREATED",
     resourceType: "organization",
     resourceId: organizationId,
-    metadata: { country: params.input.country, currency: params.input.currency },
+    metadata: {
+      country: params.input.country,
+      currency: params.input.currency,
+    },
   });
 
   await writeAuditLog({
@@ -172,7 +180,11 @@ export async function createOrganizationWithLocation(params: {
     metadata: { name: params.input.locationName },
   });
 
-  trackOnboarding("business_created", { country: params.input.country }, organizationId);
+  trackOnboarding(
+    "business_created",
+    { country: params.input.country },
+    organizationId,
+  );
   trackOnboarding(
     "location_created",
     { venueType: params.input.venueType ?? null },

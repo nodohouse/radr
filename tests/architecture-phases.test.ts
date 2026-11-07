@@ -1,8 +1,15 @@
 import { describe, expect, it, beforeEach } from "vitest";
 import { pctVsForecast, occupancyPct, laborCostPct } from "@/lib/radr/calc";
-import { findingsForScope, runFindingEngine, dedupeFindings } from "@/lib/radr/findings";
+import {
+  findingsForScope,
+  runFindingEngine,
+  dedupeFindings,
+} from "@/lib/radr/findings";
 import { getDemoOperatingContext } from "@/lib/radr/ports/demoOperatingContext";
-import { computeForecast, laborDemandFromForecast } from "@/lib/radr/forecast/service";
+import {
+  computeForecast,
+  laborDemandFromForecast,
+} from "@/lib/radr/forecast/service";
 import {
   buildLocationMorningBrief,
   buildGroupMorningBrief,
@@ -85,6 +92,7 @@ describe("phase 5 actions + verification", () => {
       observedValue: 148,
       attribution: "RADR_RECOMMENDED",
       method: "POS close",
+      evidenceIds: ["pos-close-1"],
     });
     expect(v.verifiedValue).toBe(148);
     expect(conservativeVerifiedValue(200, 50)).toBe(50);
@@ -205,9 +213,9 @@ describe("phase 10–11 ingest + reconcile", () => {
       ],
     );
     expect(link?.confidence).toBe("HIGH");
-    expect(explicitLink({ reservationId: "r", posOrderId: "p" }).confidence).toBe(
-      "EXPLICIT",
-    );
+    expect(
+      explicitLink({ reservationId: "r", posOrderId: "p" }).confidence,
+    ).toBe("EXPLICIT");
   });
 });
 
@@ -251,9 +259,11 @@ describe("phase 12–17 platform", () => {
     const health = demoDataHealth();
     expect(health.overall).toBe("STALE");
     expect(health.confidenceMultiplier).toBe(0.85);
-    expect(health.sources.some((s) => s.sourceKey === "labor" && s.status === "STALE")).toBe(
-      true,
-    );
+    expect(
+      health.sources.some(
+        (s) => s.sourceKey === "labor" && s.status === "STALE",
+      ),
+    ).toBe(true);
     const note = draftFindingNotification({
       userId: "u1",
       urgency: "ACT_NOW",

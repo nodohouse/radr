@@ -70,6 +70,7 @@ describe("canonical domain schemas", () => {
       currency: "EUR",
       attribution: "RADR_RECOMMENDED",
       method: "Waitlist seated + POS close",
+      evidenceIds: ["pos-close-1"],
     });
     expect(v.verifiedValue).toBe(148);
   });

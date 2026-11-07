@@ -71,7 +71,10 @@ export function transitionAction(
   actionId: string,
   status: Action["status"],
   patch?: Partial<
-    Pick<Action, "assignedToUserId" | "startedAt" | "completedAt" | "executionMode">
+    Pick<
+      Action,
+      "assignedToUserId" | "startedAt" | "completedAt" | "executionMode"
+    >
   >,
 ): Action | null {
   const result = transitionActionSafe(actionId, status, patch);
@@ -82,7 +85,10 @@ export function transitionActionSafe(
   actionId: string,
   status: Action["status"],
   patch?: Partial<
-    Pick<Action, "assignedToUserId" | "startedAt" | "completedAt" | "executionMode">
+    Pick<
+      Action,
+      "assignedToUserId" | "startedAt" | "completedAt" | "executionMode"
+    >
   >,
 ): TransitionActionResult {
   const existing = memoryActions.get(actionId);
@@ -103,11 +109,11 @@ export function transitionActionSafe(
     updatedAt: new Date().toISOString(),
     startedAt:
       status === "IN_PROGRESS"
-        ? patch?.startedAt ?? new Date().toISOString()
+        ? (patch?.startedAt ?? new Date().toISOString())
         : existing.startedAt,
     completedAt:
       status === "COMPLETED"
-        ? patch?.completedAt ?? new Date().toISOString()
+        ? (patch?.completedAt ?? new Date().toISOString())
         : existing.completedAt,
   };
   memoryActions.set(actionId, next);
@@ -132,6 +138,7 @@ export function verifyOutcome(input: {
   method: string;
   notes?: string;
   strength?: Verification["strength"];
+  evidenceIds?: string[];
 }): Verification {
   if (input.strength === "ESTIMATED") {
     throw new Error(
@@ -151,7 +158,16 @@ export function verifyOutcome(input: {
     strength: input.strength ?? "SUPPORTED",
     method: input.method,
     notes: input.notes,
+    evidenceIds: input.evidenceIds,
   });
+  const prior = memoryVerifications.get(verification.id);
+  if (prior) {
+    const stable = (value: Verification) =>
+      JSON.stringify({ ...value, createdAt: "", updatedAt: "" });
+    if (stable(prior) !== stable(verification))
+      throw new Error("Conflicting verification ID");
+    return prior;
+  }
   memoryVerifications.set(verification.id, verification);
   return verification;
 }
@@ -161,12 +177,63 @@ export function verifiedValueLedger(verifications: Verification[]): {
   verified: number;
   byTerritory: Record<string, number>;
 } {
-  const verified = verifications
-    .filter((v) => v.strength !== "ESTIMATED")
-    .reduce((s, v) => s + v.verifiedValue, 0);
+  const unique = new Map<string, Verification>();
+  const outcomes = new Set<string>();
+  for (const v of verifications) {
+    const parsed = buildVerification({ ...v, now: v.createdAt });
+    if (parsed.verifiedValue !== v.verifiedValue)
+      throw new Error("Invalid verified amount");
+    const prior = unique.get(v.id);
+    if (prior) {
+      if (JSON.stringify(prior) !== JSON.stringify(v))
+        throw new Error("Conflicting verification ID");
+      continue;
+    }
+    if (v.strength !== "ESTIMATED") {
+      for (const evidenceId of new Set(v.evidenceIds)) {
+        const key = JSON.stringify([
+          v.organizationId,
+          v.locationId,
+          v.findingId,
+          evidenceId,
+        ]);
+        if (outcomes.has(key))
+          throw new Error("Evidence already counted for this outcome");
+        outcomes.add(key);
+      }
+    }
+    unique.set(v.id, v);
+  }
+  const rows = [...unique.values()];
+  if (new Set(rows.map((v) => v.organizationId)).size > 1)
+    throw new Error("Cannot combine tenant ledgers");
+  if (new Set(rows.map((v) => v.currency)).size > 1)
+    throw new Error(
+      "Cannot combine currencies without an explicit conversion policy",
+    );
+  const digits = rows.length
+    ? (new Intl.NumberFormat("en", {
+        style: "currency",
+        currency: rows[0].currency,
+      }).resolvedOptions().maximumFractionDigits ?? 2)
+    : 2;
+  const factor = 10 ** digits;
+  const sumMoney = (field: "expectedValue" | "verifiedValue") => {
+    let minorTotal = 0;
+    for (const row of rows) {
+      const scaled = row[field] * factor;
+      const minor = Math.round(scaled);
+      if (!Number.isSafeInteger(minor) || Math.abs(scaled - minor) > 0.00001)
+        throw new Error("Amount exceeds currency precision or safe range");
+      minorTotal += minor;
+      if (!Number.isSafeInteger(minorTotal))
+        throw new Error("Ledger total exceeds safe range");
+    }
+    return minorTotal / factor;
+  };
   return {
-    identified: verifications.reduce((s, v) => s + v.expectedValue, 0),
-    verified,
+    identified: sumMoney("expectedValue"),
+    verified: sumMoney("verifiedValue"),
     byTerritory: {},
   };
 }

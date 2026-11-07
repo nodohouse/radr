@@ -20,10 +20,7 @@ import {
   type Organization,
   type OrganizationMember,
 } from "@/lib/db/schema";
-import {
-  getAuthIdentity,
-  type AuthIdentity,
-} from "@/lib/identity/provider";
+import { getAuthIdentity, type AuthIdentity } from "@/lib/identity/provider";
 import { ACTIVE_ORG_COOKIE } from "@/lib/identity/orgCookie";
 import {
   legacyRoleToRoleId,
@@ -219,10 +216,39 @@ export async function requirePermission(
     }
   }
 
+  const trialGated: Permission[] = [
+    "decision.approve",
+    "decision.execute",
+    "document.upload",
+    "location.edit",
+    "integration.manage",
+  ];
+  if (trialGated.includes(permission)) {
+    const [org] = await db
+      .select({
+        plan: organizations.plan,
+        trialEndsAt: organizations.trialEndsAt,
+      })
+      .from(organizations)
+      .where(eq(organizations.id, organizationId))
+      .limit(1);
+    if (
+      !org ||
+      (org.plan === "trial" &&
+        (!org.trialEndsAt || org.trialEndsAt.getTime() <= Date.now()))
+    ) {
+      throw new AuthzError(
+        "Trial expired. Read access remains available; contact RADR to continue.",
+        403,
+      );
+    }
+  }
   return { membership, roleId, locationIds };
 }
 
-export async function listMembershipsForUser(userId: string): Promise<
+export async function listMembershipsForUser(
+  userId: string,
+): Promise<
   Array<{ organization: Organization; membership: OrganizationMember }>
 > {
   return db
@@ -245,7 +271,10 @@ export async function listMembershipsForUser(userId: string): Promise<
 
 export async function getPrimaryOrganizationForUser(
   userId: string,
-): Promise<{ organization: Organization; membership: OrganizationMember } | null> {
+): Promise<{
+  organization: Organization;
+  membership: OrganizationMember;
+} | null> {
   const rows = await listMembershipsForUser(userId);
   return rows[0] ?? null;
 }
@@ -253,7 +282,10 @@ export async function getPrimaryOrganizationForUser(
 /** Validate active-org cookie against membership; fall back to primary. */
 export async function resolveActiveOrganization(
   userId: string,
-): Promise<{ organization: Organization; membership: OrganizationMember } | null> {
+): Promise<{
+  organization: Organization;
+  membership: OrganizationMember;
+} | null> {
   const jar = await cookies();
   const requested = jar.get(ACTIVE_ORG_COOKIE)?.value ?? null;
   const memberships = await listMembershipsForUser(userId);

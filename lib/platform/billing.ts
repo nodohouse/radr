@@ -24,9 +24,31 @@ export type OrganizationSubscription = {
   stripeSubscriptionId?: string | null;
 };
 
-export function canAddLocation(sub: OrganizationSubscription): boolean {
-  if (sub.status === "canceled") return false;
-  return sub.locationCount < sub.locationLimit;
+/** Exact expiry boundary; missing or malformed entitlement dates fail closed. */
+export function subscriptionAllowsWrites(
+  sub: OrganizationSubscription,
+  now = new Date(),
+): boolean {
+  if (!Number.isFinite(now.getTime())) return false;
+  const end =
+    sub.status === "trialing" ? sub.trialEndsAt : sub.currentPeriodEnd;
+  if (sub.status !== "trialing" && sub.status !== "active") return false;
+  return Boolean(
+    end && Number.isFinite(Date.parse(end)) && Date.parse(end) > now.getTime(),
+  );
+}
+
+export function canAddLocation(
+  sub: OrganizationSubscription,
+  now = new Date(),
+): boolean {
+  if (!subscriptionAllowsWrites(sub, now)) return false;
+  return (
+    Number.isInteger(sub.locationCount) &&
+    sub.locationCount >= 0 &&
+    Number.isInteger(sub.locationLimit) &&
+    sub.locationLimit > sub.locationCount
+  );
 }
 
 export function defaultTrialSubscription(

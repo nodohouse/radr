@@ -19,8 +19,12 @@ export const user = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });
 
 export const session = pgTable(
@@ -29,8 +33,12 @@ export const session = pgTable(
     id: text("id").primaryKey(),
     expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
     token: text("token").notNull().unique(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
     ipAddress: text("ip_address"),
     userAgent: text("user_agent"),
     userId: text("user_id")
@@ -52,12 +60,20 @@ export const account = pgTable(
     accessToken: text("access_token"),
     refreshToken: text("refresh_token"),
     idToken: text("id_token"),
-    accessTokenExpiresAt: timestamp("access_token_expires_at", { withTimezone: true }),
-    refreshTokenExpiresAt: timestamp("refresh_token_expires_at", { withTimezone: true }),
+    accessTokenExpiresAt: timestamp("access_token_expires_at", {
+      withTimezone: true,
+    }),
+    refreshTokenExpiresAt: timestamp("refresh_token_expires_at", {
+      withTimezone: true,
+    }),
     scope: text("scope"),
     password: text("password"),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [index("account_user_id_idx").on(table.userId)],
 );
@@ -67,8 +83,12 @@ export const verification = pgTable("verification", {
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
   expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });
 
 /** Domain enums */
@@ -199,27 +219,36 @@ export const waitlistStatusEnum = pgEnum("waitlist_status", [
 
 /** Domain tables */
 
-export const organizations = pgTable("organizations", {
-  id: text("id").primaryKey(),
-  name: text("name").notNull(),
-  slug: text("slug").notNull(),
-  country: text("country").notNull(),
-  currency: text("currency").notNull(),
-  timezone: text("timezone").notNull().default("UTC"),
-  status: orgStatusEnum("status").notNull().default("active"),
-  plan: text("plan").notNull().default("pilot"),
-  fiscalYearStart: integer("fiscal_year_start"),
-  /**
-   * Onboarding progress / UI state only — not settings SSOT.
-   * Shape: { schemaVersion, flowVersion, completedStepIds, skippedStepIds, currentStepId, … }
-   */
-  onboarding: jsonb("onboarding")
-    .$type<Record<string, unknown>>()
-    .notNull()
-    .default({}),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
-}, (table) => [uniqueIndex("organizations_slug_uidx").on(table.slug)]);
+export const organizations = pgTable(
+  "organizations",
+  {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+    slug: text("slug").notNull(),
+    country: text("country").notNull(),
+    currency: text("currency").notNull(),
+    timezone: text("timezone").notNull().default("UTC"),
+    status: orgStatusEnum("status").notNull().default("active"),
+    plan: text("plan").notNull().default("trial"),
+    trialEndsAt: timestamp("trial_ends_at", { withTimezone: true }),
+    fiscalYearStart: integer("fiscal_year_start"),
+    /**
+     * Onboarding progress / UI state only — not settings SSOT.
+     * Shape: { schemaVersion, flowVersion, completedStepIds, skippedStepIds, currentStepId, … }
+     */
+    onboarding: jsonb("onboarding")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [uniqueIndex("organizations_slug_uidx").on(table.slug)],
+);
 
 /** System + custom roles. System roles seeded from lib/platform/rbac.ts */
 export const roles = pgTable(
@@ -232,8 +261,12 @@ export const roles = pgTable(
     organizationId: text("organization_id").references(() => organizations.id, {
       onDelete: "cascade",
     }),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     uniqueIndex("roles_key_org_uidx").on(table.key, table.organizationId),
@@ -279,8 +312,12 @@ export const organizationMembers = pgTable(
     }),
     joinedAt: timestamp("joined_at", { withTimezone: true }),
     lastActiveAt: timestamp("last_active_at", { withTimezone: true }),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     uniqueIndex("organization_members_org_user_uidx").on(
@@ -301,8 +338,12 @@ export const locationGroups = pgTable(
       .notNull()
       .references(() => organizations.id, { onDelete: "cascade" }),
     name: text("name").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("location_groups_organization_id_idx").on(table.organizationId),
@@ -321,8 +362,12 @@ export const locationAccess = pgTable(
       onDelete: "set null",
     }),
     locationIds: jsonb("location_ids").$type<string[]>().notNull().default([]),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     uniqueIndex("location_access_membership_uidx").on(table.membershipId),
@@ -356,8 +401,12 @@ export const invitations = pgTable(
     expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
     acceptedAt: timestamp("accepted_at", { withTimezone: true }),
     revokedAt: timestamp("revoked_at", { withTimezone: true }),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     uniqueIndex("invitations_token_hash_uidx").on(table.tokenHash),
@@ -375,9 +424,16 @@ export const authenticationPolicies = pgTable("authentication_policies", {
     .unique(),
   mfaRequired: boolean("mfa_required").notNull().default(false),
   ssoEnforced: boolean("sso_enforced").notNull().default(false),
-  allowedDomains: jsonb("allowed_domains").$type<string[]>().notNull().default([]),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  allowedDomains: jsonb("allowed_domains")
+    .$type<string[]>()
+    .notNull()
+    .default([]),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });
 
 /** RADR profile fields beyond better-auth user table. */
@@ -389,8 +445,12 @@ export const userProfiles = pgTable("user_profiles", {
   timezone: text("timezone"),
   status: text("status").notNull().default("active"),
   lastLoginAt: timestamp("last_login_at", { withTimezone: true }),
-  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });
 
 export const locations = pgTable(
@@ -418,8 +478,12 @@ export const locations = pgTable(
       "operating_margin_definition",
     ).$type<unknown>(),
     laborCostDefinition: jsonb("labor_cost_definition").$type<unknown>(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [index("locations_organization_id_idx").on(table.organizationId)],
 );
@@ -465,7 +529,9 @@ export const findings = pgTable(
     urgency: findingUrgencyEnum("urgency").notNull().default("WATCH"),
     priorityScore: integer("priority_score").notNull().default(0),
     confidenceScore: integer("confidence_score").notNull().default(0),
-    confidenceBand: confidenceBandEnum("confidence_band").notNull().default("MEDIUM"),
+    confidenceBand: confidenceBandEnum("confidence_band")
+      .notNull()
+      .default("MEDIUM"),
     confidenceExplanation: text("confidence_explanation").notNull().default(""),
     timeframeStart: timestamp("timeframe_start", { withTimezone: true }),
     timeframeEnd: timestamp("timeframe_end", { withTimezone: true }),
@@ -483,8 +549,12 @@ export const findings = pgTable(
     sourceIds: jsonb("source_ids").$type<string[]>().notNull().default([]),
     dedupeKey: text("dedupe_key").notNull(),
     presentation: jsonb("presentation").$type<Record<string, unknown>>(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("findings_organization_id_idx").on(table.organizationId),
@@ -525,8 +595,12 @@ export const actions = pgTable(
     createdBy: text("created_by")
       .notNull()
       .references(() => user.id, { onDelete: "restrict" }),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("actions_finding_id_idx").on(table.findingId),
@@ -559,8 +633,12 @@ export const verifications = pgTable(
     method: text("method").notNull(),
     notes: text("notes"),
     evidenceIds: jsonb("evidence_ids").$type<string[]>().notNull().default([]),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("verifications_finding_id_idx").on(table.findingId),
@@ -596,8 +674,12 @@ export const reservations = pgTable(
     waitlistSourceId: text("waitlist_source_id"),
     expectedSpendPerCover: integer("expected_spend_per_cover"),
     expectedBookingValue: integer("expected_booking_value"),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("reservations_location_id_idx").on(table.locationId),
@@ -635,8 +717,12 @@ export const waitlistEntries = pgTable(
     ),
     expectedValue: integer("expected_value"),
     convertProbability: integer("convert_probability"),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("waitlist_entries_location_id_idx").on(table.locationId),
@@ -656,8 +742,12 @@ export const suppliers = pgTable(
       .references(() => organizations.id, { onDelete: "cascade" }),
     name: text("name").notNull(),
     externalReference: text("external_reference"),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [index("suppliers_organization_id_idx").on(table.organizationId)],
 );
@@ -678,14 +768,20 @@ export const documents = pgTable(
     uploadedBy: text("uploaded_by")
       .notNull()
       .references(() => user.id, { onDelete: "restrict" }),
-    documentType: documentTypeEnum("document_type").notNull().default("UNKNOWN"),
+    documentType: documentTypeEnum("document_type")
+      .notNull()
+      .default("UNKNOWN"),
     originalFilename: text("original_filename").notNull(),
     storagePath: text("storage_path").notNull(),
     mimeType: text("mime_type").notNull(),
     fileSize: integer("file_size").notNull(),
     status: documentStatusEnum("status").notNull().default("UPLOADED"),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("documents_organization_id_idx").on(table.organizationId),
@@ -707,7 +803,9 @@ export const auditLogs = pgTable(
     resourceType: text("resource_type").notNull(),
     resourceId: text("resource_id").notNull(),
     metadata: jsonb("metadata").$type<Record<string, unknown>>().default({}),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("audit_logs_organization_id_idx").on(table.organizationId),
@@ -845,12 +943,21 @@ export const dashboards = pgTable(
       .references(() => user.id, { onDelete: "cascade" }),
     name: text("name").notNull(),
     description: text("description"),
-    visibility: dashboardVisibilityEnum("visibility").default("PRIVATE").notNull(),
+    visibility: dashboardVisibilityEnum("visibility")
+      .default("PRIVATE")
+      .notNull(),
     roleTemplate: text("role_template"),
     defaultPeriod: text("default_period"),
-    layout: jsonb("layout").$type<Record<string, unknown>>().default({}).notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    layout: jsonb("layout")
+      .$type<Record<string, unknown>>()
+      .default({})
+      .notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
   (table) => [
     index("dashboards_org_idx").on(table.organizationId),
@@ -870,7 +977,9 @@ export const dashboardWidgets = pgTable(
     y: integer("y").notNull().default(0),
     width: integer("width").notNull().default(6),
     height: integer("height").notNull().default(2),
-    configuration: jsonb("configuration").$type<Record<string, unknown>>().default({}),
+    configuration: jsonb("configuration")
+      .$type<Record<string, unknown>>()
+      .default({}),
     scopeOverride: text("scope_override"),
     periodOverride: text("period_override"),
     sortOrder: integer("sort_order").notNull().default(0),
@@ -897,3 +1006,63 @@ export const userDashboardPins = pgTable(
 
 export type DashboardRow = typeof dashboards.$inferSelect;
 export type DashboardWidgetRow = typeof dashboardWidgets.$inferSelect;
+
+/** Reviewed outcomes: append-only through the outcome service, with retry-safe source identity. */
+export const outcomeRecords = pgTable(
+  "outcome_records",
+  {
+    id: text("id").primaryKey(),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organizations.id),
+    locationId: text("location_id")
+      .notNull()
+      .references(() => locations.id),
+    findingId: text("finding_id")
+      .notNull()
+      .references(() => findings.id),
+    sourceOutcomeId: text("source_outcome_id").notNull(),
+    recordedBy: text("recorded_by")
+      .notNull()
+      .references(() => user.id),
+    payload: jsonb("payload").$type<Record<string, unknown>>().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex("outcome_records_source_uidx").on(
+      table.organizationId,
+      table.sourceOutcomeId,
+    ),
+    index("outcome_records_scope_idx").on(
+      table.organizationId,
+      table.locationId,
+    ),
+  ],
+);
+
+export const outcomeEvidenceClaims = pgTable(
+  "outcome_evidence_claims",
+  {
+    outcomeId: text("outcome_id")
+      .notNull()
+      .references(() => outcomeRecords.id),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organizations.id),
+    findingId: text("finding_id")
+      .notNull()
+      .references(() => findings.id),
+    evidenceId: text("evidence_id")
+      .notNull()
+      .references(() => documents.id),
+  },
+  (table) => [
+    uniqueIndex("outcome_evidence_claims_uidx").on(
+      table.organizationId,
+      table.findingId,
+      table.evidenceId,
+    ),
+  ],
+);

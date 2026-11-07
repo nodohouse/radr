@@ -93,7 +93,7 @@ export function ConnectionsShell() {
       data-connections-engine="true"
       data-drawer={selectedDetail ? "true" : undefined}
     >
-      <Heading eyebrow="Connections" title="Build the evidence behind every decision." description="Your connected systems, coverage and source limits, in one place." aside={<TextLink href="/app/data-health">Review evidence health</TextLink>} />
+      <Heading eyebrow="Connections" title="Build the evidence behind every decision." description="Your connected systems, coverage and source limits, in one place." aside={<div style={{display:"flex",gap:16,flexWrap:"wrap"}}><TextLink href="/app/connections/import">Check a data export</TextLink><TextLink href="/app/data-health">Review evidence health</TextLink></div>} />
 
       <ConnectionsOverview
         model={model}
