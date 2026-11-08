@@ -79,9 +79,49 @@ function placeCard(
         rect.bottom <= innerHeight - 12
       );
     });
-  const fresh = candidates.filter((candidate) => candidate.slot !== previous);
-  const choices = fresh.length ? fresh : candidates;
+  const labelNodes = Array.from(
+    stage.querySelectorAll<SVGGElement>(".rvc-label"),
+  );
+  const visibleLabels = labelNodes
+    .filter(
+      (node) =>
+        Number(getComputedStyle(node.closest(".rvc-clearance")!).opacity) >
+          0.1 &&
+        Number(getComputedStyle(node.querySelector(".rvc-value")!).opacity) >
+          0.1,
+    )
+    .map((node) => node.getBoundingClientRect());
+  const quiet = candidates.filter(
+    (candidate) =>
+      !visibleLabels.some((label) =>
+        intersects(
+          {
+            ...candidate,
+            right: candidate.left + width,
+            bottom: candidate.top + height,
+          },
+          label,
+          32,
+        ),
+      ),
+  );
+  const available = quiet.length ? quiet : candidates;
+  const fresh = available.filter((candidate) => candidate.slot !== previous);
+  const choices = fresh.length ? fresh : available;
   const chosen = choices[Math.floor(Math.random() * choices.length)];
+  if (chosen) {
+    const reservation = {
+      ...chosen,
+      right: chosen.left + width,
+      bottom: chosen.top + height,
+    };
+    // Reserve space before the popup starts its entrance, including its fade-out later.
+    labelNodes.forEach((label) => {
+      if (intersects(label.getBoundingClientRect(), reservation, 48)) {
+        label.closest<SVGGElement>(".rvc-clearance")!.style.opacity = "0";
+      }
+    });
+  }
   return chosen
     ? {
         left: chosen.left - origin.left,
@@ -145,7 +185,10 @@ export function CaptureInsights({
       data-running={moving && !reduced}
     >
       {reduced && face === "front" && (
-        <div className="rsc-operation-peek rsc-capture-static">
+        <div
+          className="rsc-operation-peek rsc-capture-static"
+          data-tone={allergy.tone}
+        >
           <span>
             <i />
             Guest note · {allergy.source}
@@ -160,6 +203,7 @@ export function CaptureInsights({
             key={`${card.index}-${card.cycle}`}
             className="rsc-operation-peek rsc-capture-card"
             data-signal={signal.id}
+            data-tone={signal.tone}
             data-slot={card.slot}
             style={{ left: card.left, top: card.top }}
             initial={{ opacity: 0, y: 12, scale: 0.96 }}

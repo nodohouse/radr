@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import "./value-capture-field.css";
+import { createSignalClearance } from "./signalClearance";
 import {
   CAPTURE_SIGNALS as SIGNALS,
   type CapturedSignal,
@@ -46,22 +47,24 @@ export function ValueCaptureField({
   const svg = useRef<SVGSVGElement>(null);
   const field = useRef<HTMLDivElement>(null);
   const id = useId().replace(/:/g, "");
+  const [layout, setLayout] = useState<"compact" | "narrow" | "wide">("wide");
+  const compact = layout === "compact";
   useEffect(() => {
     const node = field.current;
     if (!node) return;
     const measure = () => {
-      const scale = 1200 / Math.max(1, node.clientWidth);
-      const mobile = window.matchMedia("(max-width:720px)").matches;
-      node.style.setProperty(
-        "--rvc-amount-size",
-        `${(mobile ? 18 : 24) * scale}px`,
+      setLayout(
+        window.innerWidth <= 720
+          ? "compact"
+          : window.innerWidth < 2200
+            ? "narrow"
+            : "wide",
       );
-      node.style.setProperty(
-        "--rvc-state-size",
-        `${(mobile ? 7 : 8) * scale}px`,
-      );
-      node.style.setProperty("--rvc-state-one", `${18 * scale}px`);
-      node.style.setProperty("--rvc-state-two", `${30 * scale}px`);
+      const width = Math.max(1, node.clientWidth);
+      const height = Math.max(1, node.clientHeight);
+      node.style.setProperty("--rvc-label-x", String(1200 / width));
+      node.style.setProperty("--rvc-label-y", String(720 / height));
+      node.dataset.sized = "true";
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -76,10 +79,12 @@ export function ValueCaptureField({
   }, [moving, reduced]);
   useEffect(() => {
     const node = svg.current;
-    if (!node || !moving || reduced || !onCapture) return;
+    if (!node || !moving || reduced) return;
     let previous = node.getCurrentTime();
     let frame = 0;
-    const tick = () => {
+    const updateClearance = createSignalClearance(field.current!);
+    const tick = (now: number) => {
+      updateClearance(now);
       const time = node.getCurrentTime();
       // Read the same pausable SVG clock as the falling values, avoiding timer drift.
       // Skip historical catches after a seek or a long suspended browser frame.
@@ -88,7 +93,7 @@ export function ValueCaptureField({
           const cycle = Math.floor((time - signal.captureAt) / signal.duration);
           const caughtAt = signal.captureAt + cycle * signal.duration;
           if (cycle >= 0 && caughtAt > previous && caughtAt <= time) {
-            onCapture({ index, cycle });
+            onCapture?.({ index, cycle });
           }
         });
       }
@@ -165,72 +170,91 @@ export function ValueCaptureField({
         </g>
         <g className="rvc-signals">
           {SIGNALS.map((signal, index) => {
+            const x = compact
+              ? signal.mobileX
+              : layout === "narrow" && signal.anchor === "end"
+                ? 1199
+                : signal.x;
+            const anchor = compact ? "middle" : signal.anchor;
+            const ringSize = Math.max(0, Math.min(36, x - 2, 1198 - x));
+            const ringRadii = [6, 6, 20, 36, 36]
+              .map((radius) => Math.min(radius, ringSize))
+              .join(";");
+            const glowSize = Math.max(0, Math.min(10, x - 10, 1190 - x));
             const timing = {
               dur: `${signal.duration}s`,
               begin: `${signal.delay}s`,
               repeatCount: "indefinite",
             };
-            const path = `M ${signal.x} -55 L ${signal.x} ${signal.catchY} C ${signal.x} ${signal.catchY + 80} ${signal.x < 600 ? 350 : 850} 595 615 555`;
+            const path = `M ${x} -55 L ${x} ${signal.catchY} C ${x} ${signal.catchY + 80} ${x < 600 ? 350 : 850} 595 615 555`;
             return (
-              <g key={signal.id} className={`rvc-signal rvc-signal-${index}`}>
+              <g
+                key={signal.id}
+                className={`rvc-signal rvc-signal-${index}`}
+                data-signal={signal.id}
+                data-tone={signal.tone}
+              >
                 <g>
                   <animateMotion
                     {...timing}
                     path={path}
                     rotate="0"
-                    keyPoints={`0;${captureFraction(signal.x, signal.catchY)};1`}
+                    keyPoints={`0;${captureFraction(x, signal.catchY)};1`}
                     keyTimes="0;.64;1"
                     calcMode="spline"
                     keySplines=".42 0 .7 1;.16 .7 .25 1"
                   />
-                  <g className="rvc-value" fill="#e1f1ff" opacity="0">
-                    <animate
-                      {...timing}
-                      attributeName="opacity"
-                      values="0;.86;.86;1;0;0"
-                      keyTimes="0;.1;.56;.65;.86;1"
-                    />
-                    <animate
-                      {...timing}
-                      attributeName="fill"
-                      values="#e1f1ff;#e1f1ff;#00f59a;#00f59a"
-                      keyTimes="0;.56;.64;1"
-                    />
-                    <text textAnchor={signal.anchor} className="rvc-amount">
-                      {signal.amount}
-                    </text>
-                    <text textAnchor={signal.anchor} className="rvc-state">
-                      {signal.amount.startsWith("$") ? "EXPOSED" : "DETECTED"}
-                      <animate
-                        {...timing}
-                        attributeName="opacity"
-                        values="1;1;0;0"
-                        keyTimes="0;.56;.64;1"
-                      />
-                    </text>
-                    <text
-                      textAnchor={signal.anchor}
-                      className="rvc-state"
-                      opacity="0"
-                    >
-                      IN VIEW
-                      <animate
-                        {...timing}
-                        attributeName="opacity"
-                        values="0;0;1;1"
-                        keyTimes="0;.56;.64;1"
-                      />
-                    </text>
-                    <text
-                      textAnchor={signal.anchor}
-                      className="rvc-state rvc-horizon"
-                    >
-                      {signal.amount.startsWith("$")
-                        ? "TONIGHT"
-                        : signal.source.toUpperCase()}
-                    </text>
+                  <g className="rvc-clearance" style={{ opacity: 0 }}>
+                    <g className="rvc-label">
+                      <g className="rvc-value" fill={signal.color} opacity="0">
+                        <animate
+                          {...timing}
+                          attributeName="opacity"
+                          values="0;.96;.96;1;0;0"
+                          keyTimes="0;.1;.56;.65;.86;1"
+                        />
+                        <animate
+                          {...timing}
+                          attributeName="fill"
+                          values={`${signal.color};${signal.color};#00f59a;#00f59a`}
+                          keyTimes="0;.56;.64;1"
+                        />
+                        <text textAnchor={anchor} className="rvc-amount">
+                          {signal.amount}
+                        </text>
+                        <text textAnchor={anchor} className="rvc-state">
+                          {signal.caption}
+                          <animate
+                            {...timing}
+                            attributeName="opacity"
+                            values="1;1;0;0"
+                            keyTimes="0;.56;.64;1"
+                          />
+                        </text>
+                        <text
+                          textAnchor={anchor}
+                          className="rvc-state"
+                          opacity="0"
+                        >
+                          {signal.amount.startsWith("$")
+                            ? "IN VIEW TONIGHT"
+                            : "IN VIEW"}
+                          <animate
+                            {...timing}
+                            attributeName="opacity"
+                            values="0;0;1;1"
+                            keyTimes="0;.56;.64;1"
+                          />
+                        </text>
+                      </g>
+                    </g>
                   </g>
-                  <circle cy="-12" r="3" fill="#00f59a" opacity="0">
+                  <circle
+                    cy="-12"
+                    r={Math.min(3, x, 1200 - x)}
+                    fill="#00f59a"
+                    opacity="0"
+                  >
                     <animate
                       {...timing}
                       attributeName="opacity"
@@ -240,9 +264,10 @@ export function ValueCaptureField({
                   </circle>
                 </g>
                 <circle
-                  cx={signal.x}
+                  className="rvc-catch-ring"
+                  cx={x}
                   cy={signal.catchY}
-                  r="8"
+                  r={Math.min(8, ringSize)}
                   fill="none"
                   stroke="#00f59a"
                   strokeWidth="1.2"
@@ -257,14 +282,14 @@ export function ValueCaptureField({
                   <animate
                     {...timing}
                     attributeName="r"
-                    values="6;6;20;36;36"
+                    values={ringRadii}
                     keyTimes="0;.55;.64;.85;1"
                   />
                 </circle>
                 <circle
-                  cx={signal.x}
+                  cx={x}
                   cy={signal.catchY}
-                  r="10"
+                  r={glowSize}
                   fill="#00f59a"
                   opacity="0"
                   filter={`url(#${id}-glow)`}

@@ -32,9 +32,6 @@ html body .radr.radr-launch:has(.rx-nav) .rm-hero::after {
   stroke: #07172a28;
   stroke-width: 0.4px;
 }
-.rsc-scroll-stage .rvc-horizon {
-  opacity: 0.72;
-}
 .rsc-scroll-stage[data-face="back"] .rvc-field::before {
   background: radial-gradient(ellipse at 55% 50%, #00f5aa42, transparent 65%);
 }
@@ -197,4 +194,39 @@ html body .radr.radr-launch:has(.rx-nav) .rm-hero::after {
   .rsc-capture-card {
     display: none;
   }
+}
+
+/* Color reinforces the written issue type; jade continues to mark interception. */
+.rsc-operation-peek {
+  --insight-accent: #8be7ff;
+}
+.rsc-operation-peek[data-tone="cost"] {
+  --insight-accent: #ffd58c;
+}
+.rsc-operation-peek[data-tone="guest"] {
+  --insight-accent: #ffb5a4;
+}
+.rsc-operation-peek[data-tone="pressure"] {
+  --insight-accent: #ffc991;
+}
+.rsc-operation-peek[data-tone="readiness"] {
+  --insight-accent: #afd5ff;
+}
+.rsc-operation-peek[data-tone="channel"] {
+  --insight-accent: #9fe8e5;
+}
+.rsc-operation-peek::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 17px;
+  bottom: 17px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--insight-accent);
+  box-shadow: 0 0 14px
+    color-mix(in srgb, var(--insight-accent) 38%, transparent);
+}
+.rsc-operation-peek > span {
+  color: var(--insight-accent);
 }

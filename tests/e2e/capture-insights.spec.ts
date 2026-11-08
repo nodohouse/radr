@@ -53,6 +53,10 @@ for (const width of [390, 820, 1101, 1512, 3840]) {
     ]) {
       const card = layer.locator(`[data-signal="${id}"]`);
       await expect(card).toHaveCSS("opacity", "1", { timeout: 25000 });
+      const tone = await card.getAttribute("data-tone");
+      await expect(
+        page.locator(`.rvc-signal[data-signal="${id}"]`),
+      ).toHaveAttribute("data-tone", tone!);
       const measurement = await card.evaluate((n) => {
         const r = n.getBoundingClientRect();
         const overlap = (b: DOMRect) =>

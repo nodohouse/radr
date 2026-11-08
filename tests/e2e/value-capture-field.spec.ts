@@ -14,7 +14,7 @@ test.beforeEach(async ({ page }) => {
     ),
   );
 });
-for (const width of [390, 820, 1512, 3840])
+for (const width of [390, 820, 1512, 2200, 3840])
   test(`value capture at ${width}px stays behind the tablet and pauses off-screen`, async ({
     page,
   }) => {
@@ -45,8 +45,17 @@ for (const width of [390, 820, 1512, 3840])
           parseFloat(getComputedStyle(el).fontSize) *
           (el as SVGGraphicsElement).getScreenCTM()!.a,
       );
-    expect(physicalFont).toBeGreaterThan(15);
-    expect(physicalFont).toBeLessThan(26);
+    expect(physicalFont).toBeGreaterThan(19);
+    expect(physicalFont).toBeLessThan(40);
+    if (width === 3840) expect(physicalFont).toBeGreaterThan(32);
+    const aspect = await field
+      .locator(".rvc-amount:visible")
+      .first()
+      .evaluate((el) => {
+        const matrix = (el as SVGGraphicsElement).getScreenCTM()!;
+        return Math.hypot(matrix.a, matrix.b) / Math.hypot(matrix.c, matrix.d);
+      });
+    expect(aspect).toBeCloseTo(1, 2);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - innerWidth,
@@ -111,7 +120,9 @@ test("jade capture coincides with each value reaching the interception point", a
         if (time < 0) time += duration;
         node.setCurrentTime(time);
         await new Promise<void>((resolve) =>
-          requestAnimationFrame(() => resolve()),
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+          ),
         );
         const path = motion.getAttribute("path")!;
         const match = path.match(/L ([\d.]+) ([\d.]+)/)!;
@@ -123,7 +134,12 @@ test("jade capture coincides with each value reaching the interception point", a
               motion.parentElement as unknown as SVGGraphicsElement
             ).getScreenCTM()!,
           );
+        const ring = (
+          signal.querySelector(".rvc-catch-ring") as SVGGraphicsElement
+        ).getBBox();
         rows.push({
+          ringLeft: ring.x,
+          ringRight: ring.x + ring.width,
           xError: Math.abs(matrix.e - Number(match[1])),
           yError: Math.abs(matrix.f - Number(match[2])),
         });
@@ -135,6 +151,8 @@ test("jade capture coincides with each value reaching the interception point", a
   for (const result of results) {
     expect(result.xError).toBeLessThan(1);
     expect(result.yError).toBeLessThan(1);
+    expect(result.ringLeft).toBeGreaterThanOrEqual(0);
+    expect(result.ringRight).toBeLessThanOrEqual(1200);
   }
 });
 
@@ -167,11 +185,14 @@ test("falling values never touch hero copy through a complete desktop cycle", as
       for (let time = 0; time < 18; time += 0.25) {
         svg.setCurrentTime(time);
         await new Promise<void>((resolve) =>
-          requestAnimationFrame(() => resolve()),
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+          ),
         );
         for (const el of document.querySelectorAll(".rvc-amount")) {
           if (
             +getComputedStyle(el.parentElement!).opacity < 0.25 ||
+            +getComputedStyle(el.closest(".rvc-clearance")!).opacity < 0.1 ||
             getComputedStyle(el).display === "none"
           )
             continue;
@@ -223,13 +244,17 @@ test("stacked layouts keep the complete falling labels inside the viewport and b
       for (let time = 0; time < 18; time += 0.25) {
         svg.setCurrentTime(time);
         await new Promise<void>((resolve) =>
-          requestAnimationFrame(() => resolve()),
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+          ),
         );
         for (const label of document.querySelectorAll(".rvc-amount")) {
           if (
             getComputedStyle(label.closest(".rvc-signal")!).display ===
               "none" ||
-            Number(getComputedStyle(label.parentElement!).opacity) < 0.25
+            Number(getComputedStyle(label.parentElement!).opacity) < 0.25 ||
+            Number(getComputedStyle(label.closest(".rvc-clearance")!).opacity) <
+              0.1
           )
             continue;
           const r = label.getBoundingClientRect();
