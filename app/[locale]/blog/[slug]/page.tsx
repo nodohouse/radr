@@ -5,7 +5,7 @@ import { ReportPromo } from "@/components/marketing/reports/ReportPromo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
@@ -83,6 +83,7 @@ export default async function BlogPostPage({ params }: Props) {
   setRequestLocale(locale);
   const post = getBlogPost(slug);
   if (!post) notFound();
+  if (post.content && locale !== "en") redirect(`/en/blog/${post.slug}`);
 
   const t = await getTranslations("blog");
   const tags =
