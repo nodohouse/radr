@@ -191,7 +191,7 @@ function DecisionCard({ show }: { show: boolean }) {
         </li>
         <li>
           <span>Confidence</span>
-          <strong>{r.confidencePct}%</strong>
+          <strong>{r.confidenceLabel}</strong>
         </li>
       </ul>
       <p className="rx-sig-dec-note">Illustrative RADR demo.</p>

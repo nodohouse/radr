@@ -55,7 +55,7 @@ describe("Business pulse + contribution bridge", () => {
     });
 
     expect(reading.leadTone).toBe("neg");
-    expect(reading.leadValue).toMatch(/−€/);
+    expect(reading.leadValue).toMatch(/−\$/);
     expect(reading.drivers.length).toBe(
       CONNECTED_PILOT_MTD.bridge.drivers.length,
     );

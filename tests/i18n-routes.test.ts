@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import { englishEditorialOnly } from "@/i18n/contentAvailability";
 import { locales, routing } from "@/i18n/routing";
 import { buildAlternates, buildAlternatesForLocale } from "@/i18n/seo";
 
@@ -71,17 +72,14 @@ describe("i18n routing config", () => {
       const languages = alts.languages as Record<string, string>;
       expect(languages["x-default"]).toMatch(/^https:\/\/radrup\.com\/en/);
       expect(languages.en).toBe(languages["x-default"]);
-      expect(languages.de).toContain("/de");
-      expect(languages.nl).toContain("/nl");
-      expect(languages.fr).toContain("/fr");
-      expect(languages.es).toContain("/es");
-
-      const deCanon = buildAlternatesForLocale("de", pathName);
-      if (pathName === "/") {
-        expect(deCanon.canonical).toBe("https://radrup.com/de");
-      } else {
-        expect(deCanon.canonical).toBe(`https://radrup.com/de${pathName}`);
+      const onlyEnglish = englishEditorialOnly(pathName);
+      for(const locale of ["de","nl","fr","es"]) {
+        if(onlyEnglish) expect(languages[locale]).toBeUndefined();
+        else expect(languages[locale]).toContain(`/${locale}`);
       }
+      const deCanon = buildAlternatesForLocale("de", pathName);
+      const suffix = pathName === "/" ? "" : pathName;
+      expect(deCanon.canonical).toBe(`https://radrup.com/${onlyEnglish ? "en" : "de"}${suffix}`);
 
       const enCanon = buildAlternatesForLocale("en", pathName);
       if (pathName === "/") {

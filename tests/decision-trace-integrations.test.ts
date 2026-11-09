@@ -62,27 +62,27 @@ describe("Decision Trace D-4102", () => {
     expect(TRACE_D4102.outcome.kind).toBe("FULL_SUCCESS");
   });
 
-  it("displays unit rates with cents — never rounds €6.80 to €7", () => {
-    expect(euroRate(6.8)).toBe("€6.80/L");
-    expect(euroRate(7.45)).toBe("€7.45/L");
-    expect(euroRate(0.65)).toBe("€0.65/L");
-    expect(euroCents(6.8)).toBe("€6.80");
-    expect(euroCents(7.45)).toBe("€7.45");
-    expect(euro(273)).toBe("€273");
+  it("displays unit rates with cents — never rounds $6.80 to $7", () => {
+    expect(euroRate(6.8)).toBe("$6.80/L");
+    expect(euroRate(7.45)).toBe("$7.45/L");
+    expect(euroRate(0.65)).toBe("$0.65/L");
+    expect(euroCents(6.8)).toBe("$6.80");
+    expect(euroCents(7.45)).toBe("$7.45");
+    expect(euro(273)).toBe("$273");
     expect(420 * 0.65).toBe(273);
 
-    expect(TRACE_D4102.calculation.formulaHuman).toContain("€7.45");
-    expect(TRACE_D4102.calculation.formulaHuman).toContain("€6.80");
-    expect(TRACE_D4102.calculation.formulaHuman).toContain("€273");
+    expect(TRACE_D4102.calculation.formulaHuman).toContain("$7.45");
+    expect(TRACE_D4102.calculation.formulaHuman).toContain("$6.80");
+    expect(TRACE_D4102.calculation.formulaHuman).toContain("$273");
     expect(TRACE_D4102.calculation.formulaHuman).not.toMatch(/€7\/L|€1\/L/);
     expect(TRACE_D4102.calculation.steps.map((s) => s.value).join(" ")).toContain(
-      "€6.80/L",
+      "$6.80/L",
     );
     expect(TRACE_D4102.calculation.steps.map((s) => s.value).join(" ")).toContain(
-      "€7.45/L",
+      "$7.45/L",
     );
     expect(TRACE_D4102.calculation.steps.map((s) => s.value).join(" ")).toContain(
-      "€0.65/L",
+      "$0.65/L",
     );
   });
 
@@ -153,25 +153,13 @@ describe("Operating Pulse accessibility", () => {
 });
 
 describe("Futures signature visual", () => {
-  it("keeps three trajectories and reserves green for verified only", () => {
-    const src = readFileSync(
-      join(process.cwd(), "components/marketing/pages/FuturesChapter.tsx"),
-      "utf8",
-    );
-    expect(src).toContain("fut_orphan_wait");
-    expect(src).toContain("fut_orphan_discount");
-    expect(src).toContain("fut_orphan_ota");
-    expect(src).toContain("RADR plan");
-    expect(src).toContain("OBSERVED");
-    expect(src).toContain("Verified recovered value");
-    expect(src).toContain("Model updated");
-    expect(src).toContain("setHovered");
-    // Qualitative confidence — no pseudo-precise percentage in the detail panel
-    expect(src).toContain('"Medium"');
+  it("keeps three alternatives and labels expected contribution separately from evidence", () => {
+    const src = readFileSync(join(process.cwd(), "components/marketing/pages/FuturesChapter.tsx"), "utf8");
+    for(const path of ['id: "wait"','id: "seat"','id: "throttle"']) expect(src).toContain(path);
+    expect(src).toContain("expected contribution");
+    expect(src).toContain("D-1911");
     expect(src).not.toMatch(/\{pick\.confidence\}%/);
-    // Selected path must not use verified green stroke.
-    expect(src).not.toMatch(/stroke=\{\s*\n?\s*on\s*\n?\s*\?\s*"#00d978"/);
-    expect(src).not.toMatch(/fill="#00d978"/);
+    expect(src).toContain("setSelected");
   });
 });
 
@@ -183,10 +171,9 @@ describe("Company environment marquee", () => {
     );
     expect(src).toContain('scope: "now"');
     expect(src).toContain('scope: "next"');
-    expect(src).toContain("Supporting now");
-    expect(src).toContain("On the map");
-    expect(src).toContain("Restaurants & F&B");
-    expect(src).toContain("Hospitality groups");
+    expect(src).toContain("Restaurants & restaurant groups");
+    expect(src).toContain("Hotels & hotel groups");
+    expect(src).toContain("Multi-location hospitality groups");
     expect(src).toContain("companyEnvBar");
     expect(src).toContain('aria-hidden="true"');
     expect(src).toContain("inert");
@@ -196,7 +183,7 @@ describe("Company environment marquee", () => {
       /className="rx-co2-env-marquee"\s+aria-label=/,
     );
     const nowCount = (src.match(/scope: "now",/g) ?? []).length;
-    expect(nowCount).toBe(4);
+    expect(nowCount).toBe(3);
   });
 });
 

@@ -80,7 +80,7 @@
     "interests": {
       "demo": "Productdemo",
       "pricing": "Prijzen",
-      "package-pilot": "Recovery Pilot",
+      "package-pilot": "gratis proefperiode van 14 dagen",
       "package-core": "Expand",
       "package-control": "Enterprise",
       "multi-location": "Multi-locatie rollout",
@@ -88,7 +88,7 @@
       "other": "Iets anders"
     },
     "messagePlaceholder": "Wat moeten we weten voor het gesprek?",
-    "submit": "Scope my recovery pilot →",
+    "submit": "Scope my gratis proefperiode van 14 dagen →",
     "sending": "Verzenden…",
     "okWebhook": "We hebben uw bericht ontvangen. We nemen contact op via uw werk-e-mail.",
     "okMailto": "We hebben uw bericht ontvangen. We nemen contact op via uw werk-e-mail.",

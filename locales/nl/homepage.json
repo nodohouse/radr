@@ -638,7 +638,7 @@
     "title": "See RADR make a decision.",
     "lead": "One location. One operating problem. One set of systems.",
     "line": "Humans provide the hospitality.",
-    "ctaPrimary": "Start a 14-day recovery pilot",
+    "ctaPrimary": "Start a 14-day gratis proefperiode van 14 dagen",
     "ctaSecondary": "See a Verified Recovery"
   },
   "loop": {
@@ -1737,7 +1737,7 @@
       "statesNote": "States: Available · Demo · Partner access · Building · Planned."
     },
     "pilot": {
-      "kicker": "Recovery Pilot",
+      "kicker": "gratis proefperiode van 14 dagen",
       "title": "14 days to find and action recoverable value",
       "lead": "Open cases remain on RADR until resolved, verified, or closed.",
       "scope": "Start where the economics are clearest.",
@@ -1750,7 +1750,7 @@
       "d3": "Cases actioned",
       "d4": "Value pending",
       "d5": "Value verified",
-      "cta": "Start a recovery pilot"
+      "cta": "Start a gratis proefperiode van 14 dagen"
     },
     "expansion": {
       "kicker": "Platform",
@@ -1770,14 +1770,14 @@
       "a3": "Not unless explicitly permitted by policy. Material external actions stay approval-gated.",
       "q4": "How does RADR define Verified Value?",
       "a4": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice.",
-      "q5": "What does a successful recovery pilot measure?",
+      "q5": "What does a successful gratis proefperiode van 14 dagen measure?",
       "a5": "Economically material findings, evidence Finance accepts, cases actioned, verified outcomes where settlement completes, time saved, and time to first Decision. No promised minimum recovery."
     },
     "footer": {
       "brand": "Nothing off the RADR.",
       "title": "Ready to see what your operation is leaving behind?",
       "body": "Start with the value already slipping through.",
-      "cta": "Start a recovery pilot",
+      "cta": "Start a gratis proefperiode van 14 dagen",
       "secondary": "Contact Sales"
     }
   }

@@ -10,6 +10,8 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { PUBLIC_RESTAURANT } from "@/lib/marketing/publicCanon";
 
+const r = PUBLIC_RESTAURANT;
+
 type Tab = "control" | "live" | "decisions" | "value";
 
 const TABS: { id: Tab; label: string }[] = [
@@ -22,7 +24,6 @@ const TABS: { id: Tab; label: string }[] = [
 export function HomeProductProof() {
   const reduced = useReducedMotion();
   const [tab, setTab] = useState<Tab>("control");
-  const r = PUBLIC_RESTAURANT;
 
   return (
     <section
@@ -88,7 +89,6 @@ export function HomeProductProof() {
 }
 
 function ControlPane() {
-  const r = PUBLIC_RESTAURANT;
   return (
     <div className="rx-proof-brief">
       <aside className="rx-proof-brief-rail">
@@ -115,7 +115,7 @@ function ControlPane() {
           <p className="rx-proof-label">What needs you</p>
           <strong>{r.actionCompact}</strong>
           <span>
-            {r.decisionId} · {r.expectedFormatted} expected · {r.confidencePct}% confidence
+            {r.decisionId} · {r.expectedFormatted} expected · {r.confidenceLabel} confidence
           </span>
         </article>
         <div className="rx-proof-brief-row">
@@ -136,7 +136,6 @@ function ControlPane() {
 }
 
 function LivePane() {
-  const r = PUBLIC_RESTAURANT;
   return (
     <div className="rx-proof-grid rx-proof-grid--live">
       <div className="rx-proof-live-meta">
@@ -182,7 +181,6 @@ function LivePane() {
 }
 
 function DecisionsPane() {
-  const r = PUBLIC_RESTAURANT;
   return (
     <article className="rx-proof-decision">
       <header>
@@ -198,7 +196,7 @@ function DecisionsPane() {
         </div>
         <div>
           <span>Confidence</span>
-          <strong>{r.confidencePct}%</strong>
+          <strong>{r.confidenceLabel}</strong>
         </div>
         <div>
           <span>Evidence</span>
@@ -214,7 +212,6 @@ function DecisionsPane() {
 }
 
 function ValuePane() {
-  const r = PUBLIC_RESTAURANT;
   return (
     <div className="rx-proof-value">
       <ol>

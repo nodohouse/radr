@@ -55,7 +55,7 @@ import "@/app/radr-workspace-system.css";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "RADR · Hospitality operating intelligence",
+  title: "RADR",
   description: "Verified Decision Intelligence for hospitality.",
   robots: { index: false, follow: false },
 };

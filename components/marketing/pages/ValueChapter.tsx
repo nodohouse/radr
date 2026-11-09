@@ -428,7 +428,7 @@ export function ValueChapter() {
                 href="/contact?intent=recovery-pilot"
                 className="rx-btn rx-btn-ghost"
               >
-                Start a recovery pilot
+                Explore the 14-day trial
               </NextLink>
             </div>
           </div>

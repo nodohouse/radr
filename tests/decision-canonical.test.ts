@@ -13,7 +13,6 @@ import {
   CANON_BY_ID,
   canonChosen,
   canonRecommended,
-  formatCanonVariance,
 } from "@/lib/radr/decision/demo/canonical";
 import { buildTunaDecisionRecord } from "@/lib/radr/decision/demos/tuna";
 import { HERO_VERTICAL_SCENARIOS } from "@/components/marketing/data/homepageVerticalDemos";
@@ -42,7 +41,7 @@ describe("Flagship restaurant D-1911", () => {
   it("matches hero restaurant pre/after economics", () => {
     const pre = HERO_VERTICAL_SCENARIOS.restaurant.frames.pre.critical!;
     expect(pre.stakeValue).toBe(CANON_PEAK.exposureEuro);
-    expect(pre.protectedAmount).toBe("€620");
+    expect(pre.protectedAmount).toBe("$620");
     expect(pre.recommends.primary).toMatch(/Wait 12/i);
     expect(pre.recommends.primary).not.toMatch(/Truffle|rush 6/i);
     const after = HERO_VERTICAL_SCENARIOS.restaurant.frames.after.verified;

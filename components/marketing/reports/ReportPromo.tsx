@@ -27,7 +27,7 @@ export function ReportPromo() {
         <p>
           Get the {report.pages}-page Hospitality Decision Playbook, including
           six research sources, visual operating examples, a business-case
-          worksheet, and a 30-day pilot plan.
+          worksheet, and a 30-day operating plan.
         </p>
         <Link href={report.path} className="rm-button">
           Get the playbook →

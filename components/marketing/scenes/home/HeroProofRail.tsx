@@ -6,7 +6,7 @@
 
 export function HeroProofRail() {
   return (
-    <p className="rx-he-proof" aria-label="Recovery pilot principles">
+    <p className="rx-he-proof" aria-label="Evaluation principles">
       <span>14-day pilot</span>
       <span aria-hidden="true">·</span>
       <span>Secure exports to start</span>

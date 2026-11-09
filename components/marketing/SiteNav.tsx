@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import {
   useCallback,
@@ -70,6 +70,7 @@ export function SiteNav({ variant }: Props) {
             ? "company"
             : null;
 
+  const locale = useLocale();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -370,9 +371,9 @@ export function SiteNav({ variant }: Props) {
             <Link href="/login" className="rx-nav-signin">
               {t("signIn")}
             </Link>
-            <Link href={CTAS.seeInActionHref} className="rx-nav-cta">
+            <a href={`/${locale}/demo`} className="rx-nav-cta">
               Explore demo
-            </Link>
+            </a>
             <button
               type="button"
               className="rx-nav-menu"

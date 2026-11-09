@@ -54,7 +54,7 @@ describe("world isolation P0", () => {
   it("location_exposure restaurant copy has no Canal or Chiado", () => {
     const report = getLocationExposure("restaurant");
     expect(report.comparisonValue).not.toMatch(/Canal|Chiado/i);
-    expect(report.comparisonValue).toMatch(/Berlin|Hamburg|Kreuzberg|Frankfurt|München|Köln|Düsseldorf|Stuttgart/i);
+    expect(report.comparisonValue).toMatch(/Soho|West Hollywood|Roma Norte|Shoreditch|DIFC|Tanjong Pagar/i);
   });
 });
 
@@ -68,7 +68,7 @@ describe("raw ID display prohibition", () => {
   });
 
   it("locationDisplayName humanizes unknown loc_ ids", () => {
-    expect(locationDisplayName("loc_berlin_kreuzberg")).toBe("Berlin Kreuzberg");
+    expect(locationDisplayName("loc_berlin_kreuzberg")).toBe("West Hollywood · Los Angeles");
     expect(locationDisplayName("loc_totally_unknown_venue")).toBe(
       "Totally Unknown Venue",
     );

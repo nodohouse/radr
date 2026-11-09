@@ -61,8 +61,8 @@ export function ReferenceIntelligence() {
 }
 
 export function ReferenceHealth() {
- const {roleView,vertical,records}=useRecords();
- return <DataHealthPremium role={roleView} vertical={vertical} records={records}/>;
+ const {roleView,vertical}=useRecords();
+ return <DataHealthPremium role={roleView} vertical={vertical}/>;
 }
 
 function ServiceSnapshotUnavailable({scopeLabel}:{scopeLabel:string}) { return <div className="rs-page"><Heading eyebrow="Service snapshot" title="The right evidence for this location." description={scopeLabel} /><Panel title="No service snapshot in this selection"><p className="rs-empty">The current restaurant demo includes a live service snapshot for Soho · New York. Choose Soho to explore its floor, demand, and operating pressure. Other locations keep their own decision records.</p><TextLink href="/app/decisions">Explore selected decisions</TextLink></Panel></div>; }

@@ -52,8 +52,8 @@ describe("canonical product consistency",()=>{
   const h=buildDataHealthOverview();const affected=new Set(h.sources.flatMap(source=>source.affectedDecisions.map(d=>d.label)));
   expect(affected.size).toBe(h.decisionsAffected);expect(h.healthyCount+h.degradedCount+h.staleCount).toBe(h.sourceTotal);
  });
- it("derives non-Control-Center document titles from their route",()=>{
-  expect(appPageTitle("/app/value")).toBe("RADR · Value");expect(appPageTitle("/app/data-health")).toBe("RADR · Data Health");
-  expect(appPageTitle("/app/decisions/dec_peak_berlin")).toBe("RADR · Decision D-1911");
+ it("keeps browser tabs branded RADR across workspace routes",()=>{
+  expect(appPageTitle("/app/value")).toBe("RADR");expect(appPageTitle("/app/data-health")).toBe("RADR");
+  expect(appPageTitle("/app/decisions/dec_peak_berlin")).toBe("RADR");
  });
 });

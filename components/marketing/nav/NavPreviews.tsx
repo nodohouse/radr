@@ -76,7 +76,7 @@ const PREVIEWS: Record<string, PreviewModel> = {
     metricLabel: "Decision needs you · illustrative demo",
     rows: [
       { label: "Decision", value: PUBLIC_RESTAURANT.decisionId },
-      { label: "Confidence", value: `${PUBLIC_RESTAURANT.confidencePct}%` },
+      { label: "Confidence", value: `${PUBLIC_RESTAURANT.confidenceLabel}` },
       {
         label: "Expected protected tonight",
         value: PUBLIC_RESTAURANT.expectedFormatted,

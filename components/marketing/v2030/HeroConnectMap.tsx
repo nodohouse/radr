@@ -51,7 +51,7 @@ const LOOP_MS = 7200;
 
 type Props = { vertical: HeroConnectVertical };
 
-export function HeroConnectMap({ vertical: _vertical }: Props) {
+export function HeroConnectMap({ vertical }: Props) {
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState<Phase>(reduced ? "hold" : "systems");
   const r = PUBLIC_RESTAURANT;
@@ -84,6 +84,7 @@ export function HeroConnectMap({ vertical: _vertical }: Props) {
   return (
     <div
       className="rx-hcm rx-hcm--grid rx-hcm--mock"
+      data-vertical={vertical}
       data-phase={phase}
       aria-label="RADR turns systems into decisions"
     >
@@ -179,7 +180,7 @@ export function HeroConnectMap({ vertical: _vertical }: Props) {
             </div>
             <div>
               <span>Confidence</span>
-              <strong>{r.confidencePct}%</strong>
+              <strong>{r.confidenceLabel}</strong>
             </div>
           </div>
           <a className="rx-hcm-dec-cta" href="#decision-gap">

@@ -80,7 +80,7 @@
     "interests": {
       "demo": "Demo del producto",
       "pricing": "Precios",
-      "package-pilot": "Recovery Pilot",
+      "package-pilot": "prueba gratuita de 14 días",
       "package-core": "Expand",
       "package-control": "Enterprise",
       "multi-location": "Despliegue multi-local",
@@ -88,7 +88,7 @@
       "other": "Otra cosa"
     },
     "messagePlaceholder": "¿Qué debemos saber antes de hablar?",
-    "submit": "Scope my recovery pilot →",
+    "submit": "Scope my prueba gratuita de 14 días →",
     "sending": "Enviando…",
     "okWebhook": "Hemos recibido su mensaje. Le responderemos a su correo de trabajo.",
     "okMailto": "Hemos recibido su mensaje. Le responderemos a su correo de trabajo.",

@@ -161,8 +161,8 @@ export default async function Page({ params }: Props) {
       </LegalSection>
       <LegalSection title="8. Pricing and customer agreements">
         <p>
-          Recovery Pilot, Expand and Enterprise describe proposed engagement
-          scopes for discussion. Pricing is by custom quote; no monthly rate is
+          A 14-day free trial supports evaluation. Expand and Enterprise describe
+          engagement scopes for discussion. Paid pricing is by custom quote; no monthly rate is
           published. The website is not an offer to supply every displayed
           capability immediately.
         </p>

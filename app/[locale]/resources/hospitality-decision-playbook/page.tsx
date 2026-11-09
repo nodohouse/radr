@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     },
   },
   description:
-    "A practical field guide for hospitality CFOs and operators. Request the PDF with an evidence scorecard, decision record worksheet and 30-day pilot plan.",
+    "A practical field guide for hospitality CFOs and operators. Request the PDF with an evidence scorecard, decision record worksheet and 30-day operating plan.",
 };
 export default async function ReportPage({
   params,
@@ -76,7 +76,7 @@ export default async function ReportPage({
                 <b>Build your own case.</b>
                 <span>
                   Use the contribution calculator, evidence scorecard, decision
-                  worksheet, and 30-day pilot plan with your own team.
+                  worksheet, and 30-day operating plan with your own team.
                 </span>
               </li>
             </ol>

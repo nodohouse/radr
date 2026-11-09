@@ -1,6 +1,6 @@
 /**
  * RADR commercial packaging — public pricing page.
- * Motions: Start (Recovery Pilot) · Expand (RADR) · Enterprise (group scale).
+ * Motions: Start (14-day free trial) · Expand (RADR) · Enterprise (group scale).
  */
 
 export type PlanId = "pilot" | "core" | "control";
@@ -8,7 +8,7 @@ export type PlanId = "pilot" | "core" | "control";
 export const pricingConfig = {
   pilot: {
     id: "pilot" as const,
-    name: "Recovery Pilot",
+    name: "14-day free trial",
     verb: "Prove",
     cta: { href: "/signup?plan=start", label: "Get started" },
   },
@@ -53,7 +53,7 @@ export const expansionSteps = [
     id: "prove",
     label: "Start",
     title: "Prove recoverable value.",
-    body: "A Recovery Pilot on one defined scope — measurable Verified outcomes.",
+    body: "A 14-day free trial on one defined scope — measurable Verified outcomes.",
   },
   {
     id: "deploy",
@@ -114,6 +114,6 @@ export function cellLabel(tag: CellTag): string {
   if (tag === "yes") return "Yes";
   if (tag === "early") return "Early access";
   if (tag === "selected") return "Selected";
-  if (tag === "pilot") return "Pilot scope";
+  if (tag === "pilot") return "Free trial";
   return "—";
 }

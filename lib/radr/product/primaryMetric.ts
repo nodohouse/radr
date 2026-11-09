@@ -280,12 +280,12 @@ function rawPrimaryMetricOf(r: DecisionRecord): MetricPresentation | null {
         r.exposedContribution ??
         0;
       return {
-        type: "EXPOSURE",
+        type: verified != null ? "VERIFIED_INCREMENTAL_CONTRIBUTION" : r.expectedContributionImpact != null ? "EXPECTED_INCREMENTAL_CONTRIBUTION" : "EXPOSURE",
         value: amount,
         currency: "EUR",
-        label: "Contribution",
+        label: verified != null ? "Verified contribution" : r.expectedContributionImpact != null ? "Expected contribution" : "Exposed contribution",
         scopeLabel: r.property,
-        horizonLabel: "",
+        horizonLabel: r.decisionHorizon.replaceAll("_", " ").toLowerCase(),
       };
     }
   }

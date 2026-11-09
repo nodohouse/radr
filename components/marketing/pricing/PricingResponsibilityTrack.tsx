@@ -13,7 +13,7 @@ const STAGES = [
   {
     id: "start",
     label: "Start",
-    name: "Recovery Pilot",
+    name: "14-day free trial",
     body: "Prove recoverable value. Supplier/AP, Reconciliation, or both. Evidence, cases, verification — file-first.",
     status: "early_access" as const,
   },

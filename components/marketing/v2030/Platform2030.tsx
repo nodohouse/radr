@@ -61,7 +61,7 @@ const DECISION_STEPS = [
     body: "Pace the next seating wave by 12 minutes. Keep the expected economic effect and confidence next to the recommendation, rather than buried in a separate dashboard.",
     label: "Expected protected",
     value: PUBLIC_RESTAURANT.expectedFormatted,
-    foot: `Tonight · modeled · ${PUBLIC_RESTAURANT.confidencePct}% confidence`,
+    foot: `Tonight · modeled · ${PUBLIC_RESTAURANT.confidenceLabel} confidence`,
   },
   {
     title: "Action",

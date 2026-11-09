@@ -182,7 +182,7 @@ export function EvaluationPlanner({ context }: { context?: string | null }) {
         </div>
       ) : null}
       <div className="rm-evaluation-next">
-        <Link href="/demo">Explore the no-login demo →</Link>
+        <Link href="/demo">Explore the demo →</Link>
         <Link href="/value-calculator">Model your operating value →</Link>
       </div>
     </section>

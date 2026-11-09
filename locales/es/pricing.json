@@ -26,14 +26,14 @@
     }
   },
   "pilot": {
-    "kicker": "Recovery Pilot",
+    "kicker": "prueba gratuita de 14 días",
     "verb": "Prove",
     "title": "Choose your first recovery scope.",
     "lead": "14 days to find and action recoverable value. Open cases stay on RADR until resolved, verified, or closed.",
     "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
-    "priceLabel": "Recovery Pilot",
+    "priceLabel": "prueba gratuita de 14 días",
     "priceSub": "Scoped with you",
-    "cta": "Start a recovery pilot",
+    "cta": "Start a prueba gratuita de 14 días",
     "points": [
       "Supplier / AP · Reconciliation · or both",
       "2–3 locations",
@@ -88,7 +88,7 @@
       "prove": {
         "label": "Start",
         "title": "Prove recoverable value.",
-        "body": "A Recovery Pilot on Supplier/AP and/or Reconciliation — measurable Verified outcomes."
+        "body": "A prueba gratuita de 14 días on Supplier/AP and/or Reconciliation — measurable Verified outcomes."
       },
       "deploy": {
         "label": "Expand",
@@ -181,7 +181,7 @@
       },
       {
         "q": "Can we start with one recovery scope?",
-        "a": "Yes. The Margin Recovery Pilot is the preferred starting point — often 2–3 locations on a defined financial problem."
+        "a": "Yes. The Margin prueba gratuita de 14 días is the preferred starting point — often 2–3 locations on a defined financial problem."
       },
       {
         "q": "Do we need all our systems connected first?",
@@ -199,9 +199,9 @@
   },
   "ready": "Start with one recovery scope.",
   "readyLead": "Tell us what you run, where margin disappears, and which systems hold the evidence. We will scope the right place to start.",
-  "readyCta": "Start a recovery pilot",
+  "readyCta": "Start a prueba gratuita de 14 días",
   "readySecondary": "See a Verified Recovery",
-  "contactSales": "Start a recovery pilot",
+  "contactSales": "Start a prueba gratuita de 14 días",
   "bookDemo": "See a Verified Recovery",
   "progression": {
     "kicker": "How to start",

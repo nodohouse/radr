@@ -20,6 +20,8 @@ html body header.rx-nav[data-material="glass"] {
 }
 html body .rx-nav[data-material="glass"] .rx-nav-bar {
   width: 100%;
+  max-width: none !important;
+  margin-inline: 0 !important;
   height: 72px;
   min-height: 72px;
   box-sizing: border-box;

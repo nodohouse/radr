@@ -10,10 +10,9 @@ import {buildDataHealthOverview} from "@/lib/radr/product/dataHealthProofEngine"
 import {sourceImprovement} from "@/lib/product/dataHealthActions";
 import type {RoleView} from "@/lib/product/types";
 import type {DemoVerticalFamily} from "@/lib/radr/vertical/experienceProfile";
-import type {DecisionRecord} from "@/lib/radr/decision/record";
 import {Arrow,Heading,TextLink} from "./ReferenceUI";
 
-export function DataHealthPremium({role,vertical,records}:{role:RoleView;vertical:DemoVerticalFamily;records:DecisionRecord[]}){
+export function DataHealthPremium({role,vertical}:{role:RoleView;vertical:DemoVerticalFamily}){
  const inspectorRef=useRef<HTMLElement>(null);
  const router=useRouter();const search=useSearchParams();
  const [filter,setFilter]=useState(search.get("status")==="healthy"?"healthy":search.get("status")==="stale"||search.get("status")==="degraded"?"attention":"all");const [query,setQuery]=useState(search.get("search")||"");
@@ -21,7 +20,7 @@ export function DataHealthPremium({role,vertical,records}:{role:RoleView;vertica
  const current=model.sources.find(s=>s.id===search.get("source"))||linked||model.sources[0];const plan=sourceImprovement(current);
  const tab=search.get("tab")==="fix"?"fix":search.get("tab")==="impact"?"impact":"quality";
  const select=(id:string,nextTab:"quality"|"fix"|"impact"="quality")=>{const params=new URLSearchParams(search.toString());params.set("source",id);params.delete("decision");if(nextTab==="quality")params.delete("tab");else params.set("tab",nextTab);router.replace(`/app/data-health?${params}`,{scroll:false});if(window.matchMedia("(max-width:760px)").matches)requestAnimationFrame(()=>{inspectorRef.current?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"});});};
- if(vertical==="hotel")return <div className="rs-page hp-page" data-testid="data-health-premium"><Heading eyebrow="Data Health" title="Know what your decisions can trust." description="Hotel evidence · provider checks not yet measured" aside={<TextLink href="/app/connections">Hotel connections</TextLink>}/><div className="hp-stats"><div><span>Source trust</span><strong>Unmeasured</strong><small>No hotel source-health snapshot</small></div><div><span>Verified source checks</span><strong>Not recorded</strong><small>No restaurant scores reused</small></div><div><span>Decision records</span><strong>{records.length}</strong><small>In your selected hotel scope</small></div></div><HotelSourceCatalog embedded/><section className="hp-hotel-evidence"><h2>Review evidence in context</h2><p>Connection status is unmeasured. Individual hotel Decisions retain their own evidence, freshness and confidence.</p>{records.slice(0,3).map(record=><Link key={record.id} href={`/app/decisions/${record.id}`}><span>{record.title}<small>{record.evidenceRefs.length} evidence references · {record.confidence.userFacing.toLowerCase()} confidence</small></span><Arrow/></Link>)}</section></div>;
+ if(vertical==="hotel")return <div className="rs-page hp-page" data-testid="data-health-premium"><Heading eyebrow="Data Health" title="Know what your decisions can trust." description="Hotel evidence, quality checks and the next review step" aside={<TextLink href="/app/connections">Hotel connections</TextLink>}/><HotelSourceCatalog embedded/></div>;
  const sources=model.sources.filter(s=>(filter!=="attention"||s.status!=="HEALTHY")&&(filter!=="healthy"||s.status==="HEALTHY")&&`${s.name} ${s.domain} ${s.datasets.join(" ")}`.toLowerCase().includes(query.toLowerCase()));
  const attention=model.sources.filter(s=>s.status!=="HEALTHY");
 

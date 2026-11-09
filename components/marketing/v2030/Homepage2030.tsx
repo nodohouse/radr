@@ -26,7 +26,7 @@ const forks = [
     title: "A little space. A better service.",
     body: "Pace the next seating wave so the kitchen can absorb demand. Review the trade-off before approving.",
     result: venue.expectedFormatted,
-    detail: "Expected protected tonight · 82% confidence",
+    detail: "Expected protected tonight · medium confidence",
   },
 ];
 

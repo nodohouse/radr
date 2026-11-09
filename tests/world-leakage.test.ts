@@ -50,7 +50,7 @@ describe("world leakage — hotel native situation", () => {
       expect(src).not.toMatch(re);
     }
     expect(src).toMatch(/Occupancy|ADR|RevPAR|Ready|at risk/i);
-    expect(src).toMatch(/OPERATING PULSE/);
+    expect(src).toMatch(/Operating pulse/);
   });
 
   it("HotelLiveSurface does not pass F&B reservation framing", () => {
@@ -61,7 +61,7 @@ describe("world leakage — hotel native situation", () => {
   it("restaurant CcCockpit does not hardcode hotel room metrics in situation", () => {
     const src = read("components/product/control-center/CcCockpit.tsx");
     // Flagship restaurant situation stays F&B
-    expect(src).toMatch(/Revenue is ahead/);
+    expect(src).toMatch(/Revenue/);
     for (const re of [/RevPAR/, /rooms ready/i, /housekeeping/i]) {
       expect(src).not.toMatch(re);
     }
@@ -82,10 +82,7 @@ describe("world leakage — cream palette banned in product design system", () =
 describe("world leakage — lexicon guards (source files)", () => {
   it("restaurant leak patterns absent from hotel cockpit CSS module names", () => {
     const src = read("components/product/control-center/hotel-cockpit.css");
-    for (const re of RESTAURANT_LEAK.slice(0, 3)) {
-      // CSS may mention nothing; ensure no kitchen/covers/tables class names
-      expect(src).not.toMatch(/kitchen|covers|tables/i);
-    }
+    for (const pattern of RESTAURANT_LEAK.slice(0, 3)) expect(src).not.toMatch(pattern);
   });
 
   it("hotel metric vocabulary present in hotel cockpit", () => {

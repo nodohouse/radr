@@ -105,9 +105,8 @@ describe("THE RADR LOOP", () => {
       join(process.cwd(), "components/marketing/scenes/home/HomepageSpine.tsx"),
       "utf8",
     );
-    expect(spine).toContain("Hero");
-    expect(spine).toContain("LeakMapPanel");
-    expect(spine).toContain("RecoveryStoryObject");
-    expect(spine).toContain("ConnectionOriginSection");
+    expect(spine).toContain("Homepage2030");
+    const home = readFileSync(join(process.cwd(), "components/marketing/v2030/Homepage2030.tsx"), "utf8");
+    for (const part of ["PUBLIC_LOOP", "id=\"simulate\"", "HomePlaybookFeature", "ResearchDiscover", "ScrollTabletShowcase"]) expect(home).toContain(part);
   });
 });

@@ -21,6 +21,8 @@ import { AskAnswer } from "./AskAnswer";
 import { useAskRadr } from "./AskRadrContext";
 import { getRadrEnvironment, isSyntheticData } from "@/lib/radr/env";
 import { toCanonicalLocationId } from "@/lib/radr/product/locationIds";
+import { scopedDemoAnswer } from "@/lib/product/scopedDemoAnswer";
+import { useRecords } from "../reference/useDecisionScope";
 import { ProductBrand } from "../ProductBrand";
 import { useDemoOrg } from "../useDemoOrg";
 import { findingsForScope } from "@/lib/radr/findings";
@@ -61,6 +63,7 @@ const CFO_SUGGESTIONS = [
 export function AskRadr() {
   const router = useRouter();
   const { org } = useDemoOrg();
+  const { records: scopedRecords, scopeLabel } = useRecords();
   const pathname = usePathname();
   const {
     locationScope,
@@ -133,8 +136,14 @@ export function AskRadr() {
   ]);
 
   const opening = useMemo(() => buildButlerOpening(butlerCtx), [butlerCtx]);
-  const suggestions =
-    roleView === "cfo" || roleView === "owner" || role === "group_cfo"
+  const suggestions = org.id === "org_northstar_hotels"
+    ? [
+        { id: "rooms", label: "Which rooms need attention?", query: "Which rooms need attention before arrivals?" },
+        { id: "guests", label: "What guest needs matter now?", query: "What guest needs should the team reconfirm?" },
+        { id: "decisions", label: "What needs my decision?", query: "Which decisions need my attention?" },
+        { id: "proof", label: "What value has evidence?", query: "What value has been verified?" },
+      ]
+    : roleView === "cfo" || roleView === "owner" || role === "group_cfo"
       ? [...CFO_SUGGESTIONS]
       : opening.suggestions.slice(0, 4);
   const roleShort = getRoleProfile(migrateRoleView(roleView)).shortLabel;
@@ -192,8 +201,11 @@ export function AskRadr() {
 
       if (isSyntheticData(getRadrEnvironment()) && (org.id !== "org_northstar_restaurants" || toCanonicalLocationId(locationScope) !== "loc_berlin_mitte")) {
         setAskedQuery(query);
+        setShowCommands(false);
+        setConfirmWrite(false);
+        setAnalysisForced(false);
         setThinking(false);
-        setResponse({title:"Choose a supported demo location",summary:"The public Ask demo is scoped to Soho · New York. Select Soho to review its Decisions. Other locations are not connected to this Ask demo.",answer:"No answer was generated for a different location.",actions:[],evidence:[],toolUsed:"none",topic:"general"});
+        setResponse(scopedDemoAnswer(query, scopedRecords, scopeLabel, org.id === "org_northstar_hotels", toCanonicalLocationId(locationScope)));
         return;
       }
       setShowCommands(false);
@@ -301,7 +313,7 @@ export function AskRadr() {
         setThinking(false);
       }
     },
-    [butlerCtx, org.id, session, locationScope, period, pathname, role, seed, lens, serviceTime, selectedFindingId],
+    [butlerCtx, org.id, scopedRecords, scopeLabel, session, locationScope, period, pathname, role, seed, lens, serviceTime, selectedFindingId],
   );
 
   useEffect(() => {

@@ -9,7 +9,7 @@ import { toCatalogLocationId } from "@/lib/radr/product/locationIds";
 import { locationDisplayName } from "@/lib/radr/product/demoOrg";
 import { NORTHSTAR_RESTAURANTS, NORTHSTAR_HOTELS } from "@/lib/radr/demo/organizations";
 import { LOCATIONS } from "@/lib/product/demo/catalog";
-import { DEMO_FX_TO_EUR } from "@/lib/radr/currency";
+import { DEMO_FX_TO_USD } from "@/lib/radr/demo/estateRegistry";
 import { getVenueProfile, type CurrencyCode } from "@/lib/radr/venueProfiles";
 
 export type CompareMetric =
@@ -46,7 +46,7 @@ export type LocationComparisonResult =
       ok: true;
       locationIds: string[];
       locations: CompareLocationRow[];
-      reportingCurrency: "EUR";
+      reportingCurrency: "USD";
       sameCity: boolean;
       cityLabel: string | null;
       cityAvgMargin: number | null;
@@ -209,11 +209,11 @@ export function getLocationComparison(input: {
     const catalogId = toCatalogLocationId(id);
     const dash = getDashboard(catalogId, period);
     const currency =
-      getVenueProfile(catalogId).currency ??
       getVenueProfile(id).currency ??
+      getVenueProfile(catalogId).currency ??
       CURRENCY_BY_COUNTRY[loc.country] ??
       "EUR";
-    const fx = DEMO_FX_TO_EUR[currency];
+    const fx = DEMO_FX_TO_USD[currency];
     const revenueLocal = dash.today.revenue;
     const revenue = Math.round(revenueLocal * fx);
     const covers = Math.round(revenueLocal / (58 + i * 3));
@@ -270,7 +270,7 @@ export function getLocationComparison(input: {
     ok: true,
     locationIds: unique,
     locations,
-    reportingCurrency: "EUR",
+    reportingCurrency: "USD",
     sameCity,
     cityLabel,
     cityAvgMargin,

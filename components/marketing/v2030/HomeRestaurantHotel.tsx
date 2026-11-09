@@ -205,7 +205,7 @@ export function HomeRestaurantHotel() {
                         </li>
                         <li>
                           <span>Confidence</span>
-                          <em>{r.confidencePct}%</em>
+                          <em>{r.confidenceLabel}</em>
                         </li>
                       </ul>
                     </>

@@ -72,6 +72,7 @@ export const PUBLIC_RESTAURANT = {
   verifiedProtected: 590,
   verifiedFormatted: "$590",
   confidencePct: 82,
+  confidenceLabel: "Medium",
   situation:
     "Demand ahead of plan. Kitchen becomes the constraint.",
 } as const;

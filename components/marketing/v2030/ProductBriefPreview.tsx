@@ -224,7 +224,7 @@ export function ProductBriefPreview({
                     </div>
                     <div>
                       <span>Confidence</span>
-                      <strong>{venue.confidencePct}%</strong>
+                      <strong>{venue.confidenceLabel}</strong>
                       <small>Illustrative estimate</small>
                     </div>
                     <div>
@@ -320,7 +320,7 @@ export function ProductBriefPreview({
                       <span>03</span>
                       <div>
                         <strong>
-                          Decision confidence · {venue.confidencePct}%
+                          Decision confidence · {venue.confidenceLabel}
                         </strong>
                         <p>Confidence based on the demo evidence.</p>
                       </div>
@@ -354,7 +354,7 @@ export function ProductBriefPreview({
                       <p>Give the kitchen room to absorb the next wave.</p>
                       <strong>{venue.expectedFormatted}</strong>
                       <small>
-                        Expected protected tonight · {venue.confidencePct}%
+                        Expected protected tonight · {venue.confidenceLabel}
                         confidence
                       </small>
                       <i style={{ width: "86%" }} />

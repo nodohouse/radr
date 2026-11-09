@@ -31,7 +31,7 @@ describe("revenue pacing", () => {
   it("group day pace ranks location exceptions", () => {
     const p = getGroupDayPace("restaurant");
     expect(p.locations.length).toBe(3);
-    expect(p.locations[0]?.label).toMatch(/Berlin/);
+    expect(p.locations[0]?.label).toMatch(/Soho/);
     expect(p.locations.every((l) => !/Canal|Chiado/i.test(l.label))).toBe(true);
   });
 

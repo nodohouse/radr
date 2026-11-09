@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { BLOG_POSTS } from "@/lib/marketing/blog";
+import { englishEditorialOnly } from "@/i18n/contentAvailability";
 
 const BASE = "https://radrup.com";
 
@@ -58,6 +59,7 @@ function localizedUrl(locale: string, path: string): string {
 export default function sitemap(): MetadataRoute.Sitemap {
   return PATHS.flatMap((path) => {
     const englishOnly =
+      englishEditorialOnly(path) ||
       path === "/radr-explained" ||
       path === "/resources/hospitality-decision-playbook" ||
       BLOG_POSTS.some((post) => post.content && path === `/blog/${post.slug}`);

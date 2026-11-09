@@ -353,7 +353,7 @@ export function ProductDecisionCanvas({
                   <div>
                     <span>Confidence</span>
                     <strong className="rx30-count-up">
-                      {PUBLIC_RESTAURANT.confidencePct}%
+                      {PUBLIC_RESTAURANT.confidenceLabel}
                     </strong>
                   </div>
                   <div>
@@ -479,7 +479,7 @@ export function ProductDecisionCanvas({
                 <div>
                   <span>Confidence</span>
                   <strong>
-                    {r ? `${PUBLIC_RESTAURANT.confidencePct}%` : "79%"}
+                    {r ? `${PUBLIC_RESTAURANT.confidenceLabel}` : "79%"}
                   </strong>
                 </div>
               </div>

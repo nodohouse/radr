@@ -52,7 +52,7 @@ const answers = [
   ],
   [
     "How does pricing work?",
-    "RADR describes three proposed engagement scopes: Recovery Pilot, Expand and Enterprise. Pricing is quoted after reviewing locations, the operating problem, evidence sources, responsibilities and delivery milestones. There is no published self-service subscription price.",
+    "RADR describes three engagement scopes: 14-day free trial, Expand and Enterprise. Pricing is quoted after reviewing locations, the operating problem, evidence sources, responsibilities and delivery milestones. There is no published self-service subscription price.",
   ],
   [
     "How should a team evaluate RADR?",

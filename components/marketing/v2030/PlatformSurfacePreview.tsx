@@ -32,17 +32,17 @@ type Props = {
 const HEALTH = {
   healthy: {
     label: "Healthy",
-    confidence: 82,
+    confidence: "Medium",
     action: "Recommend / request approval",
   },
   degraded: {
     label: "Degraded",
-    confidence: 61,
+    confidence: "Low",
     action: "Prepare only · human required",
   },
   stale: {
     label: "Stale",
-    confidence: 48,
+    confidence: "Low",
     action: "High-risk action blocked",
   },
 } as const;
@@ -105,7 +105,7 @@ function HealthDemo() {
       <div className="rx30-health-readout">
         <div>
           <span>Confidence</span>
-          <strong>{h.confidence}%</strong>
+          <strong>{h.confidence}</strong>
         </div>
         <div>
           <span>Allowed action</span>

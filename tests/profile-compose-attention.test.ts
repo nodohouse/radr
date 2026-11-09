@@ -143,18 +143,10 @@ describe("Attention score + budget + bands", () => {
 describe("Onboarding 8-step + connect gate", () => {
   it("PRIMARY_ONBOARDING_STEPS is the connect-before-insight path", () => {
     expect(PRIMARY_ONBOARDING_STEPS).toEqual([
-      "organization",
-      "operate",
-      "location",
-      "units",
-      "role",
-      "priorities",
-      "system",
-      "insight",
+      "welcome", "who", "organization", "location", "goal", "evidence", "upload", "data_health", "analyzing", "reveal", "complete",
     ]);
-    expect(PRIMARY_ONBOARDING_STEPS.indexOf("system")).toBeLessThan(
-      PRIMARY_ONBOARDING_STEPS.indexOf("insight"),
-    );
+    expect(PRIMARY_ONBOARDING_STEPS.indexOf("evidence")).toBeLessThan(PRIMARY_ONBOARDING_STEPS.indexOf("reveal"));
+    expect(PRIMARY_ONBOARDING_STEPS.indexOf("data_health")).toBeLessThan(PRIMARY_ONBOARDING_STEPS.indexOf("reveal"));
   });
 
   it("blocks insight until a system (or DEMO) is chosen", () => {

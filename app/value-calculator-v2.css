@@ -40,7 +40,7 @@
 .vc2-progress > button em {
   font-style: normal;
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.06em;
   color: inherit;
 }
@@ -61,7 +61,7 @@
 .vc2-progress-mobile {
   display: none;
   margin: 0;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -221,7 +221,7 @@
 }
 
 .vc2-preview-block > span {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -242,7 +242,7 @@
 }
 
 .vc2-chips li {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   padding: 0.22rem 0.5rem;
   border-radius: 999px;
   background: rgba(0, 217, 120, 0.12);
@@ -270,7 +270,7 @@
 }
 
 .vc2-preview-conf span {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -330,7 +330,7 @@
 
 .vc2-result-kicker {
   margin: 0.65rem 0 0;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -363,7 +363,7 @@
 
 .vc2-result-summary h3 {
   margin: 0;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -396,7 +396,7 @@
 }
 
 .vc2-states span {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -408,7 +408,7 @@
 
 .vc2-states em {
   font-style: normal;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--rx30-muted, #626a65);
 }
 
@@ -432,7 +432,7 @@
 }
 
 .vc2-band span {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -466,7 +466,7 @@
 .vc2-next em {
   font-style: normal;
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--rx30-muted, #626a65);
 }
 
@@ -509,7 +509,7 @@
 }
 
 .vc2-futures-grid article span {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -552,7 +552,7 @@
 .vc2-payback em {
   font-style: normal;
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   color: var(--rx30-muted, #626a65);
 }
@@ -775,7 +775,7 @@
 }
 
 .vc-res-value > span {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -792,7 +792,7 @@
 
 .vc-res-value > p em {
   font-style: normal;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 550;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -821,7 +821,7 @@
 }
 
 .vc-res-tri span {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -851,7 +851,7 @@
 }
 
 .vc-res-ops span {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--vc-blue);
@@ -883,7 +883,7 @@
 .vc-res-below h2,
 .vc-res-map-kicker {
   margin: 0 0 0.75rem;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -925,7 +925,7 @@
 .vc-res-bar-meta span {
   color: var(--rx30-muted, #626a65);
   white-space: nowrap;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
 }
 
 .vc-res-bar-track {
@@ -978,7 +978,7 @@
 }
 
 .vc-res-states span {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -990,14 +990,14 @@
 
 .vc-res-states p {
   margin: 0;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--rx30-muted, #626a65);
   line-height: 1.35;
 }
 
 .vc-res-states-arrow {
   text-align: center;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: rgba(0, 168, 90, 0.5);
   line-height: 1;
 }
@@ -1128,7 +1128,7 @@
 }
 
 .vc-omap-card strong {
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 650;
   line-height: 1.25;
   display: -webkit-box;
@@ -1138,7 +1138,7 @@
 }
 
 .vc-omap-card > span {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   color: var(--vc-forest);
   font-weight: 600;
 }
@@ -1151,7 +1151,7 @@
   font-style: normal;
   font-weight: 500;
   color: var(--rx30-muted, #626a65);
-  font-size: 0.58rem;
+  font-size: 0.75rem;
 }
 
 .vc-omap-card:hover,
@@ -1250,7 +1250,7 @@
 }
 
 .vc-res-start-badge {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--vc-blue);
@@ -1279,14 +1279,14 @@
 
 .vc-res-start-range em {
   font-style: normal;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--rx30-muted, #626a65);
 }
 
 .vc-res-start-why-label {
   margin: 0.4rem 0 0;
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -1318,7 +1318,7 @@
 }
 
 .vc-chips li {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   padding: 0.22rem 0.5rem;
   border-radius: 999px;
   background: rgba(0, 217, 120, 0.12);
@@ -1372,7 +1372,7 @@
   inset: 0;
   display: grid;
   place-items: center;
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #0a0d0b;
@@ -1380,7 +1380,7 @@
 
 .vc-res-conf > div > span {
   display: block;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -1393,7 +1393,7 @@
   list-style: none;
   display: grid;
   gap: 0.28rem;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   color: var(--rx30-muted, #626a65);
 }
 
@@ -1430,7 +1430,7 @@
 
 .vc-res-capture > label > span {
   display: block;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -1439,7 +1439,7 @@
 
 .vc-res-capture > p {
   margin: 0;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   color: var(--rx30-muted, #626a65);
   line-height: 1.4;
 }
@@ -1509,7 +1509,7 @@
 }
 
 .vc2-futures-grid article span {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -1517,7 +1517,7 @@
 
 .vc2-futures-grid em {
   font-style: normal;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   color: var(--rx30-muted, #626a65);
 }
 
@@ -1553,7 +1553,7 @@
 }
 
 .vc-roi-out span {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -1570,7 +1570,7 @@
 
 .vc-roi-hint {
   margin: 0.35rem 0 0;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   color: var(--rx30-muted, #626a65);
 }
 
@@ -1766,7 +1766,7 @@
 .vc2-intro-map > ul em {
   font-style: normal;
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--rx30-green-dark, #007a42);
 }
@@ -1786,7 +1786,7 @@
 }
 
 .vc2-intro-sep dt {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);
@@ -1870,7 +1870,7 @@
 .vc-samples-label {
   flex: 0 0 100%;
   margin: 0 0 0.15rem;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--rx30-muted, #626a65);

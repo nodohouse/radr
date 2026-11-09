@@ -103,7 +103,7 @@ export const PUBLIC_CAPABILITIES = {
     id: "filesCsv",
     label: "Files / CSV / Documents",
     status: "available",
-    note: "Primary first-pilot ingestion path.",
+    note: "Structured file review and upload path.",
   },
   demoReservations: {
     id: "demoReservations",
@@ -113,9 +113,9 @@ export const PUBLIC_CAPABILITIES = {
   },
   recoveryPilot: {
     id: "recoveryPilot",
-    label: "Recovery pilot",
+    label: "14-day free trial",
     status: "early_access",
-    note: "File-first commercial entry — secure exports before large API projects.",
+    note: "File-first evaluation — secure exports before large API projects.",
   },
 } as const satisfies Record<string, PublicCapability>;
 

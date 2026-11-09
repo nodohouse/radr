@@ -59,8 +59,8 @@ describe("RC P0 invariants", () => {
         "loc_hamburg_hafen",
         "loc_berlin_mitte",
       ]);
-      expect(result.locations[0]?.name).toMatch(/Hamburg/i);
-      expect(result.locations[1]?.name).toMatch(/Berlin/i);
+      expect(result.locations[0]?.name).toMatch(/Roma Norte/i);
+      expect(result.locations[1]?.name).toMatch(/Soho/i);
     }
   });
 

@@ -5,7 +5,7 @@ import { resolveButlerQuery } from "@/lib/radr/butler/tools";
 describe("operatingSnapshot", () => {
   it("returns berlin tonight + attention from one source", () => {
     const snap = getOperatingSnapshot("loc_ber", "yesterday");
-    expect(snap.locationName).toMatch(/Berlin/i);
+    expect(snap.locationName).toMatch(/Soho/i);
     expect(snap.tonight).not.toBeNull();
     expect(snap.tonight!.reservations).toBeGreaterThan(0);
     expect(snap.trading.revenue).toBeGreaterThan(0);

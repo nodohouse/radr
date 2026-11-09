@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { routing, type AppLocale } from "./routing";
+import { englishEditorialOnly } from "./contentAvailability";
 
 const SITE_URL = "https://radrup.com";
 
@@ -18,7 +19,7 @@ export function buildAlternates(path: string): NonNullable<Metadata["alternates"
     "x-default": `${SITE_URL}${localizedPath(routing.defaultLocale, path)}`,
   };
 
-  for (const locale of routing.locales) {
+  for (const locale of englishEditorialOnly(path) ? ["en"] : routing.locales) {
     languages[locale] = `${SITE_URL}${localizedPath(locale, path)}`;
   }
 
@@ -34,7 +35,7 @@ export function buildAlternatesForLocale(
   path: string,
 ): NonNullable<Metadata["alternates"]> {
   const base = buildAlternates(path);
-  const safe =
+  const safe = englishEditorialOnly(path) ? "en" :
     (routing.locales as readonly string[]).includes(locale)
       ? (locale as AppLocale)
       : routing.defaultLocale;

@@ -56,33 +56,12 @@ type Props = {
 export function DecisionLayerPreview({ animateIn = false }: Props) {
   const reduced = useReducedMotion();
   const [hover, setHover] = useState<string | null>(null);
-  const [confidence, setConfidence] = useState(
-    reduced || !animateIn ? PUBLIC_RESTAURANT.confidencePct : 0,
-  );
   const [swept, setSwept] = useState(false);
 
   useEffect(() => {
-    if (reduced || !animateIn) {
-      setConfidence(PUBLIC_RESTAURANT.confidencePct);
-      return;
-    }
-    let frame = 0;
-    const start = performance.now();
-    const duration = 700;
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setConfidence(Math.round(PUBLIC_RESTAURANT.confidencePct * eased));
-      if (t < 1) frame = requestAnimationFrame(tick);
-    };
-    const delay = window.setTimeout(() => {
-      frame = requestAnimationFrame(tick);
-      setSwept(true);
-    }, 420);
-    return () => {
-      window.clearTimeout(delay);
-      cancelAnimationFrame(frame);
-    };
+    if (reduced || !animateIn) return;
+    const delay = window.setTimeout(() => setSwept(true), 420);
+    return () => window.clearTimeout(delay);
   }, [animateIn, reduced]);
 
   const active =
@@ -133,7 +112,7 @@ export function DecisionLayerPreview({ animateIn = false }: Props) {
         </article>
         <article className="rx30-dl-card">
           <span>Confidence</span>
-          <strong>{confidence}%</strong>
+          <strong>{PUBLIC_RESTAURANT.confidenceLabel}</strong>
           <em>Sample · Friday peaks</em>
         </article>
         <article className="rx30-dl-card">

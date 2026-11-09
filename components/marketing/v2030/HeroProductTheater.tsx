@@ -139,7 +139,7 @@ export function DecisionGapContinue({
                   <li>
                     <strong>{r.expectedFormatted} expected</strong>
                   </li>
-                  <li>{r.confidencePct}% confidence</li>
+                  <li>{r.confidenceLabel} confidence</li>
                 </>
               ) : (
                 <>

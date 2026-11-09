@@ -396,7 +396,8 @@ export function HotelBuildingExplorer({
             </div>
             {!ready ? (
               <div className="hb-loading" role="status">
-                Preparing your property
+                {webgl ? <BuildingFallback spec={spec} highlighted={highlighted} /> : null}
+                <span className="hb-loading-caption">Preparing your 3D property</span>
               </div>
             ) : null}
             <div className="hb-scene-foot">

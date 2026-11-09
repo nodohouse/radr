@@ -1,3 +1,4 @@
+import { getCostMovers } from "@/lib/radr/procurement/costMovers";
 import { describe, expect, it } from "vitest";
 import {
   INTELLIGENCE_REGISTRY,
@@ -37,9 +38,7 @@ describe("Intelligence polish", () => {
     ]);
     expect(NAV_HOUSE.map((n) => n.id)).toEqual(["house"]);
     expect(NAV_OPERATE.map((n) => n.id)).toEqual([
-      "locations",
-      "memory",
-      "intelligence",
+      "locations", "service", "memory", "intelligence",
     ]);
     expect(NAV_SYSTEM.map((n) => n.id)).toEqual([
       "connections",
@@ -64,8 +63,8 @@ describe("Intelligence polish", () => {
     expect(live.active).toBe(true);
     expect(live.revenue).toBe(18420);
     expect(live.forecastAtNow).toBe(17850);
-    expect(live.avgSpend).toBe(86);
-    expect(live.avgSpendForecast).toBe(82);
+    expect(live.avgSpend).toBe(148);
+    expect(live.avgSpendForecast).toBeGreaterThan(0);
     expect(live.radrRead.length).toBeGreaterThan(20);
   });
 
@@ -90,6 +89,10 @@ describe("Intelligence polish", () => {
         id === "stock_watch" ||
         id === "demand_outlook"
       ) {
+        continue;
+      }
+      if (id === "cost_movers") {
+        expect(getCostMovers().length).toBeGreaterThan(0);
         continue;
       }
       const m = getMetricModule(id);

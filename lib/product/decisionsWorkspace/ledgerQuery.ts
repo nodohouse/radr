@@ -55,7 +55,7 @@ export function matchesQuery(
 
 export function matchesProperty(filter: PropertyFilter, locationsShort: string): boolean {
   if (filter === "all") return true;
-  return /canal/i.test(locationsShort);
+  return /canal|mercer/i.test(locationsShort);
 }
 
 export function matchesDriver(filter: DriverFilter, driverKind: string, driverLabel: string): boolean {

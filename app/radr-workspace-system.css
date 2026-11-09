@@ -95,21 +95,21 @@
 
 /* A compact answer to what matters, why it matters and where to inspect it. */
 .rp-premium .ws-focus {display:grid;grid-template-columns:minmax(0,1.6fr) minmax(250px,1fr);border:1px solid #ffffffe6;border-radius:18px;overflow:hidden;box-shadow:var(--workspace-shadow);margin:0 0 8px;isolation:isolate;}
-.rp-premium .ws-focus-main {padding:23px 26px;background:linear-gradient(115deg,#153f55f2,#215c50f0);color:#effff9;min-width:0;}
+.rp-premium .ws-focus-main {padding:18px 22px;background:linear-gradient(115deg,#153f55f2,#215c50f0);color:#effff9;min-width:0;}
 .rp-premium .ws-focus-label {display:flex;align-items:center;gap:9px;color:#bdebd8;font-size:12px;line-height:1.5;}
 .rp-premium .ws-focus-label>svg {width:17px;height:17px;flex-shrink:0;}
 .rp-premium .ws-focus-label>small {margin-left:auto;font-size:9px;letter-spacing:1.3px;white-space:nowrap;}
-.rp-premium .ws-focus-main h2 {font-size:24px;font-weight:550;line-height:1.3;letter-spacing:-.65px;margin:12px 0 9px;color:#f4fffc;max-width:780px;text-wrap:balance;}
-.rp-premium .ws-focus-main>p {font-size:12px;line-height:1.65;color:#c4dedb;margin:0 0 16px;}
+.rp-premium .ws-focus-main h2 {font-size:21px;font-weight:550;line-height:1.3;letter-spacing:-.65px;margin:8px 0 7px;color:#f4fffc;max-width:780px;text-wrap:balance;}
+.rp-premium .ws-focus-main>p {font-size:13px;line-height:1.6;color:#d3e9e7;margin:0 0 12px;}
 .rp-premium .ws-focus-main>a {display:inline-flex;align-items:center;gap:18px;background:var(--brand-jade);border:1px solid #a4f6ce;border-radius:9px;padding:10px 14px;font-size:12px;font-weight:550;color:var(--brand-ink);min-height:40px;transition:background .18s;}
 .rp-premium .ws-focus-main>a:hover {background:var(--brand-jade);}
-.rp-premium .ws-focus-proof {padding:23px 26px;background:linear-gradient(125deg,#f4fffbdd,#f3faffce);display:flex;flex-direction:column;justify-content:center;min-width:0;}
+.rp-premium .ws-focus-proof {padding:18px 22px;background:linear-gradient(125deg,#f4fffbdd,#f3faffce);display:flex;flex-direction:column;justify-content:center;min-width:0;}
 .rp-premium .ws-focus-proof>span {font-size:10px;letter-spacing:1.2px;color:#4b6c80;text-transform:uppercase;}
 .rp-premium .ws-focus-proof>strong {font-size:32px;font-weight:550;line-height:1.2;letter-spacing:-.8px;color:var(--brand-jade-ink);margin:8px 0 5px;}
 .rp-premium .ws-focus-proof>strong.ws-proof-title {font-size:19px;color:#244c64;letter-spacing:-.4px;}
 .rp-premium .ws-focus-proof>small {font-size:12px;line-height:1.5;color:#45647a;}
 .rp-premium .ws-focus-proof>p {font-size:11px;color:#45647a;line-height:1.65;margin:8px 0 0;}
-.rp-premium .ws-focus-proof>p.ws-focus-note {font-size:12px;border-top:1px solid #c5d8e373;padding-top:10px;margin-top:12px;}
+.rp-premium .ws-focus-proof>p.ws-focus-note {font-size:12px;line-height:1.65;margin:10px 0 0;}
 .rp-premium .ws-focus[data-mode=trust] .ws-focus-main,.rp-premium .ws-focus[data-mode=settings] .ws-focus-main {background:linear-gradient(115deg,color-mix(in srgb, var(--brand-ink) 94.9%, transparent),#225b70ee);}
 .rp-premium :is(.hr-head,.ce-page-head)>.ws-focus {flex:1 1 100%;}
 .rp-premium :is(.boh-root,.ce-root)>.ws-focus {margin:20px 0 22px;}
@@ -190,16 +190,16 @@
 
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .hl-root { --hl-canvas:transparent;--hl-surface:#f9fcffbd;--hl-ink:var(--brand-ink);--hl-ink-soft:#365b6e;--hl-muted:var(--brand-muted);--hl-quiet:var(--brand-muted);--hl-line:#c5d8e373;--hl-line-strong:#c5d8e3;--hl-green:var(--brand-jade-ink);--hl-green-deep:#146247;--hl-action:#146247;--hl-mint:#e2f3ec;--hl-violet:var(--brand-sapphire);--hl-violet-wash:#e6f0fc;--hl-font:var(--font-product),Manrope,system-ui,sans-serif;--hl-shadow:var(--workspace-shadow);}
 /* Live keeps the operation visible; its orientation is a compact decision strip. */
-.rp-root.rp-premium[data-page=live] .ws-focus {grid-template-columns:minmax(0,1.7fr) minmax(240px,1fr);}
-.rp-root.rp-premium[data-page=live] .ws-focus-main {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 18px;padding:18px 22px;}
-.rp-root.rp-premium[data-page=live] .ws-focus-label {grid-column:1/-1;font-size:11px;}
-.rp-root.rp-premium[data-page=live] .ws-focus-label>small {display:none;}
-.rp-root.rp-premium[data-page=live] .ws-focus-main h2 {font-size:21px;margin:0;}
-.rp-root.rp-premium[data-page=live] .ws-focus-main>p {margin:0;}
-.rp-root.rp-premium[data-page=live] .ws-focus-main>a {grid-column:2;grid-row:2/4;align-self:center;}
-.rp-root.rp-premium[data-page=live] .ws-focus-proof {padding:16px 22px;}
-.rp-root.rp-premium[data-page=live] .ws-focus-proof>p.ws-focus-note {display:none;}
-.rp-root.rp-premium[data-page=live] .rs-metric {min-height:110px;padding:18px 22px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus {grid-template-columns:minmax(0,1.7fr) minmax(240px,1fr);}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 18px;padding:18px 22px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-label {grid-column:1/-1;font-size:11px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-label>small {display:none;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main h2 {font-size:21px;margin:0;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main>p {margin:0;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main>a {grid-column:2;grid-row:2/4;align-self:center;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-proof {padding:16px 22px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-proof>p.ws-focus-note {display:none;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .rs-metric {min-height:110px;padding:18px 22px;}
 .rp-premium .hl-top {flex-wrap:wrap;}
 .rp-premium .hl-top>.ws-focus {flex:1 1 100%;margin:0;}
 .rp-premium .hl-top .ws-focus-main h2 {font-size:18px;}
@@ -209,10 +209,10 @@
 .rp-premium .hl-top .ws-focus-label {display:none;}
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight]:not([data-page=control-center]) .rs-heading {border:0;}
 @media(max-width:760px) {
- .rp-root.rp-premium[data-page=live] .ws-focus {grid-template-columns:1fr;}
- .rp-root.rp-premium[data-page=live] .ws-focus-main {display:block;padding:18px 20px;}
- .rp-root.rp-premium[data-page=live] .ws-focus-main h2 {margin:9px 0;}
- .rp-root.rp-premium[data-page=live] .ws-focus-main>p {margin-bottom:12px;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus {grid-template-columns:1fr;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main {display:block;padding:18px 20px;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main h2 {margin:9px 0;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main>p {margin-bottom:12px;}
  .rp-premium .hl-top>.ws-focus {display:none;}
 }
 /* Operating snapshots use the same material as the larger evidence workspaces. */
@@ -244,7 +244,7 @@
 .rp-root.rp-shell-v2.rp-premium[data-theme=daylight] .se-nav-item[data-active=true] {border-left-color:#1b9469;}
 .rp-premium .ws-focus[data-negative] .ws-focus-proof>strong {color:#a44853;}
 /* The hotel twin already has a financial/readiness header. Keep its linked decision to one line. */
-.rp-premium .hl-top>.ws-focus {grid-template-columns:1fr;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .hl-top>.ws-focus {grid-template-columns:minmax(0,1fr);}
 .rp-premium .hl-top .ws-focus-proof {display:none;}
 .rp-premium .hl-top .ws-focus-main {display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 18px;}
 .rp-premium .hl-top .ws-focus-main h2 {font-size:17px;margin:0;text-wrap:initial;}
@@ -265,3 +265,52 @@
  .rp-root.rp-shell-v2.rp-premium[data-page=live] .hl-wave {height:auto;min-height:200px;}
 }
 @media(max-width:760px) {.rp-premium .ws-focus-proof>p.ws-focus-note {display:none;}}
+
+/* Shared working typography. Decorative SVGs and the marketing showcase retain their own scale. */
+.rp-root.rp-shell-v2.rp-premium :is(small,.rs-meta,.rs-eyebrow,.pt-eyebrow,.rp-preview-eyebrow,.rp-preview-time,.rs-nav-context,.rs-status-label) {font-size:12px!important;line-height:1.6;}
+.rp-root.rp-shell-v2.rp-premium :is(input,select,textarea) {font-size:14px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight] :is(.ep-overview .pt-periods button,.pt-periods button) {font-size:13px;min-height:36px;}
+.rp-root.rp-shell-v2.rp-premium .ws-focus-label>small {font-size:11px!important;letter-spacing:.8px;}
+.rp-root.rp-shell-v2.rp-premium .ws-focus-proof>span {font-size:12px;letter-spacing:.8px;}
+.rp-root.rp-shell-v2.rp-premium .ws-focus-main>a {font-size:13px;font-weight:650;min-height:42px;}
+.rp-root.rp-shell-v2.rp-premium :is(.ws-focus[data-mode=trust],.ws-focus[data-mode=settings]) {grid-template-columns:minmax(0,1fr);background:#f4faff;}
+.rp-root.rp-shell-v2.rp-premium :is(.ws-focus[data-mode=trust],.ws-focus[data-mode=settings]) .ws-focus-main {display:flex;align-items:center;gap:18px;padding:16px 20px;}
+.rp-root.rp-shell-v2.rp-premium :is(.ws-focus[data-mode=trust],.ws-focus[data-mode=settings]) .ws-focus-main h2 {font-size:18px;margin:0;flex:1;}
+.rp-root.rp-shell-v2.rp-premium :is(.ws-focus[data-mode=trust],.ws-focus[data-mode=settings]) :is(.ws-focus-label,.ws-focus-main>p,.ws-focus-proof) {display:none;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page {gap:16px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-heading {gap:14px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-heading h1 {font-size:30px;margin-bottom:5px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-metrics {gap:10px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-metric {min-height:0;padding:14px 18px;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:3px 16px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-metric>strong {font-size:27px;grid-row:1/3;margin:0;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-metric :is(.rs-metric-label,small) {margin:0;font-size:12px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main {padding:14px 18px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-proof {padding:14px 18px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main h2 {font-size:19px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-proof>strong {font-size:28px;margin-block:4px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-label {display:none;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-focus-main>a {grid-row:1/3;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .ws-source-quality {padding:10px 18px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .simp-live-attention {display:flex;gap:20px;padding:12px 18px;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .simp-live-attention>a {display:flex;align-items:center;gap:12px;min-width:0;flex:1;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .simp-live-attention>a>span {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .rp-preview-operational>header {padding:16px 20px;}
+.se-audit-controls {display:flex;align-items:end;gap:14px;flex-wrap:wrap;margin:8px 0 20px;}
+.se-audit-controls .se-audit-field {display:grid;gap:7px;font-size:13px;min-width:0;}
+.se-audit-controls .se-audit-field:first-child {flex:1;min-width:180px;}
+.se-audit-controls :is(input,select) {font:inherit;color:inherit;background:#fff;border:1px solid #cbdce8;border-radius:9px;padding:11px 12px;min-height:44px;}
+.se-audit-controls>span {font-size:12px;padding:12px;color:#48677c;}
+.se-audit-table td small {display:block;color:#48677c;margin-top:5px;}
+.se-audit-note {font-size:12px;line-height:1.75;color:#48677c;margin:18px 0 0;}
+@media(max-width:760px) {
+ .rp-root.rp-shell-v2.rp-premium :is(input,select,textarea) {font-size:16px;}
+ .rp-root.rp-shell-v2.rp-premium :is(.ws-focus[data-mode=trust],.ws-focus[data-mode=settings]) .ws-focus-main {align-items:flex-start;flex-direction:column;gap:12px;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-metrics {grid-template-columns:repeat(3,minmax(0,1fr));}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-metric {display:flex;flex-direction:column;align-items:flex-start;padding:12px 10px;gap:6px;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-metric>strong {font-size:23px;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .wb-live-page .rs-metric>small {display:none;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .simp-live-attention {flex-direction:column;gap:8px;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .simp-live-attention>a>span {display:none;}
+ .rp-root.rp-shell-v2.rp-premium[data-theme=daylight][data-page=live] .simp-live-attention>a {justify-content:space-between;}
+ .se-audit-controls .se-audit-field {flex:1;}
+}

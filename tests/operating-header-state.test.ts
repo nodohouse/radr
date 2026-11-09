@@ -115,7 +115,7 @@ describe("operatingHeaderState SSOT", () => {
     const value = deriveValueAggregate("gm", "restaurant");
     expect(header.verified.formatted).toBe(brief.verifiedFormatted);
     expect(value.verifiedTotal).toBeGreaterThan(0);
-    expect(header.verified.formatted).toMatch(/€/);
+    expect(header.verified.formatted).toMatch(/\$/);
     // Digits in header match rounded aggregate (ignore separators)
     const digits = header.verified.formatted.replace(/[^\d]/g, "");
     expect(digits).toContain(String(Math.round(value.verifiedTotal)));

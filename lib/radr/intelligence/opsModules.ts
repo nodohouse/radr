@@ -1,3 +1,4 @@
+import { getHotelRoomReadinessModule, getHotelPickupModule, getHotelOccAdrRevparModule, getHotelHkModule, getHotelChannelModule, getHotelCancelModule } from "./hotelModules";
 /**
  * Intelligence ops selectors — real fixture metrics per module.
  * Never return empty “—” placeholders when demo data exists.
@@ -379,6 +380,12 @@ export function getMetricModule(
   vertical: DemoVerticalFamily = "restaurant",
 ): MetricModuleReport | null {
   switch (moduleId) {
+    case "room_readiness": return getHotelRoomReadinessModule();
+    case "hotel_pickup": return getHotelPickupModule();
+    case "hotel_occ_adr_revpar": return getHotelOccAdrRevparModule();
+    case "hk_productivity": return getHotelHkModule();
+    case "hotel_channel_mix": return getHotelChannelModule();
+    case "hotel_cancellation": return getHotelCancelModule();
     case "revenue_vs_forecast":
       return getRevenueVsForecast();
     case "covers_vs_forecast":

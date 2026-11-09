@@ -4,12 +4,13 @@ import { getSessionCookie } from "better-auth/cookies";
 import { routing, isNonLocalizedPath } from "./i18n/routing";
 import { productRequiresSession } from "./lib/identity/productAccess";
 import { safeDemoNext } from "./lib/marketing/demoAccess";
+import { englishEditorialOnly } from "./i18n/contentAvailability";
 import {
   DEMO_ACCESS_COOKIE,
   verifyDemoGrant,
 } from "./lib/identity/demoSession";
 
-const intlMiddleware = createMiddleware(routing);
+const intlMiddleware = createMiddleware({ ...routing, alternateLinks: false });
 
 const protectedPrefixes = [
   "/home",
@@ -168,7 +169,12 @@ export function middleware(request: NextRequest) {
     return withSecurityHeaders(NextResponse.next());
   }
 
-  const { path } = stripLocale(pathname);
+  const { path, locale: publicLocale } = stripLocale(pathname);
+  if (publicLocale && publicLocale !== "en" && englishEditorialOnly(path) && (request.method === "GET" || request.method === "HEAD")) {
+    const english = request.nextUrl.clone();
+    english.pathname = `/en${path === "/" ? "" : path}`;
+    return withSecurityHeaders(NextResponse.redirect(english));
+  }
   const sessionCookie = getSessionCookie(request);
   const isAuthPage = authPages.some(
     (prefix) => path === prefix || path.startsWith(`${prefix}/`),

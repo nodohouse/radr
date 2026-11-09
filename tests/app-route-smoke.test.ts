@@ -48,6 +48,6 @@ describe("location ID namespace integrity", () => {
   });
 
   it("legacy loc_ber still resolves", () => {
-    expect(locationById("loc_ber")?.name).toMatch(/Berlin/i);
+    expect(locationById("loc_ber")?.name).toMatch(/Soho/i);
   });
 });

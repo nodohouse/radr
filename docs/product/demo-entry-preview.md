@@ -11,3 +11,13 @@ The demo opens without a pricing banner or plan prompt. A small non-modal invita
 The animated entry showcase remains continuous, with reduced-motion support and no playback controls. Required-field errors are associated with their inputs. Policy links open in another tab so they do not discard form work.
 
 Before real activation: provision persistent account storage, persist registration profiles, enable an actual verification email service, enforce verified identity and completed profile on server routes, and connect approved commercial activation/checkout. Do not turn the limited preview grant into real workspace authentication or present its completion as account creation.
+
+## Shared presentation contract
+
+The product uses the RADR-only browser-tab title and a shared working type scale. Shared metadata and evidence labels use a 12px base; the decorative marketing tablet retains its own display scale. Live uses a compact context strip so the spatial operation remains accessible without a stack of repeated summary panels. Financial impact captions name the economic status, location and horizon. Public D-1911 confidence is qualitative, matching the product record rather than presenting an uncalibrated percentage.
+
+Hotel Ask answers are grounded in the current selected Decision records and, for Mercer House, its existing room/stay snapshot. Another property does not inherit Mercer guest needs. Answers are read-only and link to the evidence or room workflow. Hotel Connections and Data Health expose provider-specific quality criteria, identifiers, review steps and current Decision evidence without inventing connected-source scores. Settings audit examples follow the selected world and show that they are illustrative review history.
+
+Editorial pages whose current copy is English-only resolve to their English URL. Canonicals, sitemap entries and language alternates follow that publication policy; translated account-entry routes remain available. A locale-shaped URL does not certify a translation. Real service activation, external data validation and company legal identity remain separate launch work.
+
+Regression coverage includes `tests/e2e/scoped-workspace.spec.ts` for hotel Ask, audit filters and provider-specific evidence review. Live camera, layout dragging, generated-building validation and no-WebGL fallback remain covered by their existing browser suites. The building shows its elevation while the 3D renderer initializes, then hands over to the interactive scene.

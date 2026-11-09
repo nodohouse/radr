@@ -28,12 +28,12 @@
   "pilot": {
     "kicker": "Start",
     "verb": "Prove",
-    "title": "Recovery Pilot",
+    "title": "14-day free trial",
     "lead": "Prove the economics. 14 days to find and action recoverable value.",
     "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
     "priceLabel": "Scoped with you",
     "priceSub": "Open cases until resolved, verified, or closed",
-    "cta": "Start a recovery pilot",
+    "cta": "Start a 14-day free trial",
     "points": [
       "Supplier / AP · Reconciliation · or both",
       "2–3 locations",
@@ -95,7 +95,7 @@
       "prove": {
         "label": "Start",
         "title": "Prove recoverable value.",
-        "body": "A Recovery Pilot on Supplier/AP and/or Reconciliation — measurable Verified outcomes."
+        "body": "A 14-day free trial on Supplier/AP and/or Reconciliation — measurable Verified outcomes."
       },
       "deploy": {
         "label": "Expand",
@@ -118,14 +118,14 @@
       "yes": "Included",
       "early": "Early access",
       "selected": "Selected scope",
-      "pilot": "Pilot scope",
+      "pilot": "Free trial",
       "no": "Not in package"
     },
     "status": {
       "yes": "Yes",
       "early": "Early access",
       "selected": "Selected",
-      "pilot": "Pilot scope",
+      "pilot": "Free trial",
       "no": "—"
     },
     "columns": {
@@ -202,8 +202,8 @@
   },
   "ready": "Start with one recovery scope.",
   "readyLead": "Tell us what you run, where margin disappears, and which systems hold the evidence. We will scope the right place to start.",
-  "readyCta": "Start a recovery pilot",
+  "readyCta": "Start a 14-day free trial",
   "readySecondary": "See a Verified Recovery",
-  "contactSales": "Start a recovery pilot",
+  "contactSales": "Start a 14-day free trial",
   "bookDemo": "See a Verified Recovery"
 }

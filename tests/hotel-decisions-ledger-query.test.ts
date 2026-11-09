@@ -30,7 +30,7 @@ describe("hotel decisions ledger query", () => {
     expect(hits.some((h) => h.id === hotel.defaultDecisionId)).toBe(true);
   });
 
-  it("Canal House property filter keeps flagship", () => {
+  it("Mercer House property filter keeps flagship", () => {
     expect(
       matchesProperty("canal", hotel.judgment[0]!.locationsShort),
     ).toBe(true);

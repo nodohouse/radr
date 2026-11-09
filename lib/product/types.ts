@@ -48,6 +48,7 @@ export type RoleView =
 
 /** Migrate persisted demo prefs from pre-role-aware ids. Preserve distinct lenses. */
 export function migrateRoleView(raw: unknown): RoleView {
+  if (raw === "chef") return "head_chef";
   if (raw === "procurement") return "finance";
   if (raw === "operations") return "coo";
   if (
