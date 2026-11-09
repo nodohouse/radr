@@ -1,5 +1,6 @@
 "use client";
 import { ProductBriefPreview } from "./ProductBriefPreview";
+import dynamic from "next/dynamic";
 
 /**
  * One large Platform preview — morphs by surface.
@@ -8,7 +9,7 @@ import { ProductBriefPreview } from "./ProductBriefPreview";
 
 import { useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { PUBLIC_HOTEL, PUBLIC_SUPPLIER } from "@/lib/marketing/publicCanon";
+import { PUBLIC_SUPPLIER } from "@/lib/marketing/publicCanon";
 import { stageSwap } from "@/lib/marketing/motion";
 import { ProductDecisionCanvas } from "@/components/marketing/v2030/ProductDecisionCanvas";
 
@@ -26,7 +27,6 @@ export type SurfaceId =
 
 type Props = {
   surface: SurfaceId;
-  liveRenderer?: string;
 };
 
 const HEALTH = {
@@ -69,44 +69,14 @@ function Shell({
   );
 }
 
-function LiveSchematic({ mode }: { mode: string }) {
-  return (
-    <Shell title="Live · Mercer House" meta={`${mode} · illustrative`}>
-      <p className="rx30-demo-label">Hotel readiness</p>
-      <svg
-        className="rx30-live-schematic"
-        viewBox="0 0 320 160"
-        role="img"
-        aria-label="Simplified live spatial schematic"
-      >
-        <rect x="12" y="20" width="90" height="56" rx="8" data-state="ready" />
-        <rect
-          x="114"
-          y="20"
-          width="90"
-          height="56"
-          rx="8"
-          data-state="pressure"
-        />
-        <rect x="216" y="20" width="90" height="56" rx="8" data-state="ready" />
-        <rect
-          x="12"
-          y="90"
-          width="90"
-          height="56"
-          rx="8"
-          data-state="blocked"
-        />
-        <rect x="114" y="90" width="90" height="56" rx="8" data-state="ready" />
-        <rect x="216" y="90" width="90" height="56" rx="8" data-state="watch" />
-        <circle cx="159" cy="48" r="5" className="rx30-live-pulse-node" />
-      </svg>
-      <p className="rx30-global-note">
-        {PUBLIC_HOTEL.actionLabel} · {PUBLIC_HOTEL.expectedFormatted} exposed
-      </p>
-    </Shell>
-  );
-}
+const LivePreview = dynamic(() => import("./PlatformLivePreview"), {
+  loading: () => (
+    <div className="psw-loading" role="status">
+      <span />
+      Opening the operating view
+    </div>
+  ),
+});
 
 function HealthDemo() {
   const [state, setState] = useState<HealthKey>("healthy");
@@ -117,16 +87,15 @@ function HealthDemo() {
       <p className="rx30-demo-label">Evidence freshness</p>
       <div
         className="rx30-health-toggles"
-        role="tablist"
+        role="group"
         aria-label="Feed health"
       >
         {(Object.keys(HEALTH) as HealthKey[]).map((k) => (
           <button
             key={k}
             type="button"
-            role="tab"
             data-on={state === k ? "true" : undefined}
-            aria-selected={state === k}
+            aria-pressed={state === k}
             onClick={() => setState(k)}
           >
             {HEALTH[k].label}
@@ -193,10 +162,7 @@ function MemoryDemo() {
   );
 }
 
-export function PlatformSurfacePreview({
-  surface,
-  liveRenderer = "Floor plan",
-}: Props) {
+export function PlatformSurfacePreview({ surface }: Props) {
   const reduced = useReducedMotion();
 
   let body: ReactNode;
@@ -259,7 +225,7 @@ export function PlatformSurfacePreview({
       );
       break;
     case "live":
-      body = <LiveSchematic mode={liveRenderer} />;
+      body = <LivePreview />;
       break;
     case "value":
       body = <ValueDemo />;
@@ -282,7 +248,7 @@ export function PlatformSurfacePreview({
       body = <ProductDecisionCanvas stage="understand" cinematic />;
       break;
     default:
-      body = <ProductBriefPreview />;
+      body = <ProductBriefPreview active={false} />;
   }
 
   return (
@@ -290,12 +256,9 @@ export function PlatformSurfacePreview({
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={surface}
-          layout
-          initial={reduced ? false : { opacity: 0, y: 8, filter: "blur(3px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          exit={
-            reduced ? undefined : { opacity: 0, y: -6, filter: "blur(2px)" }
-          }
+          initial={reduced ? false : { opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduced ? undefined : { opacity: 0, y: -4 }}
           transition={{
             ...stageSwap,
             duration: reduced ? 0 : 0.38,

@@ -1,75 +1,16 @@
 "use client";
 import { ProductBriefPreview } from "./ProductBriefPreview";
 
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
 import { CTAS } from "@/lib/marketing/brand";
-import {
-  PUBLIC_POSITIONING,
-  PUBLIC_RESTAURANT,
-} from "@/lib/marketing/publicCanon";
-import {
-  PlatformSurfacePreview,
-  type SurfaceId,
-} from "@/components/marketing/v2030/PlatformSurfacePreview";
+import { PUBLIC_RESTAURANT } from "@/lib/marketing/publicCanon";
+import { PlatformWorkspaceShowcase } from "./PlatformWorkspaceShowcase";
 import { SilkAtmosphere } from "@/components/marketing/v2030/SilkAtmosphere";
 import "@/app/marketing-2030.css";
 import "@/app/brand-takeover.css";
 import "@/app/marketing-premium-pages.css";
-
-const MODULES: { id: SurfaceId; label: string; body: string }[] = [
-  {
-    id: "control",
-    label: "Control Center",
-    body: "What needs you now: attention, top Decision, verified since last check.",
-  },
-  {
-    id: "live",
-    label: "Live",
-    body: "What is happening now: pressure, objects, intervene.",
-  },
-  {
-    id: "decisions",
-    label: "Decisions",
-    body: "Evidence → futures → recommendation → approval → verification.",
-  },
-  {
-    id: "operations",
-    label: "Operations",
-    body: "Can we run today successfully: service, kitchen, readiness, labor.",
-  },
-  {
-    id: "intelligence",
-    label: "Intelligence",
-    body: "Why this is happening: ranked findings, drivers, confidence, economics.",
-  },
-  {
-    id: "value",
-    label: "Value",
-    body: "Expected · Observed · Verified. Proof path, not vanity totals.",
-  },
-  {
-    id: "memory",
-    label: "Memory",
-    body: "Calibration and playbooks after sufficient comparable evidence.",
-  },
-  {
-    id: "health",
-    label: "Data Health",
-    body: "Evidence health → confidence → Decision → allowed action.",
-  },
-  {
-    id: "house",
-    label: "Back of House",
-    body: "Field evidence, inventory observations, and readiness checks. Camera and voice workflows are a preview.",
-  },
-  {
-    id: "connections",
-    label: "Connections",
-    body: "Understand source availability, freshness, and integration readiness before relying on a Decision.",
-  },
-];
 
 const ARCHITECTURE = [
   {
@@ -159,70 +100,9 @@ const GOVERNANCE = [
   },
 ] as const;
 
-const LIVE_RENDERERS = [
-  "Spatial",
-  "Floor plan",
-  "Schematic",
-  "Operational grid",
-] as const;
-
-function readSurface(): SurfaceId {
-  if (typeof window === "undefined") return "control";
-  const raw = new URLSearchParams(window.location.search).get("surface");
-  if (MODULES.some((m) => m.id === raw)) return raw as SurfaceId;
-  return "control";
-}
-
 export function Platform2030() {
-  const [mod, setMod] = useState<SurfaceId>("control");
   const [beat, setBeat] = useState(0);
   const story = DECISION_STEPS[beat]!;
-  const [renderer, setRenderer] =
-    useState<(typeof LIVE_RENDERERS)[number]>("Floor plan");
-  const active = MODULES.find((m) => m.id === mod) ?? MODULES[0]!;
-
-  useEffect(() => {
-    setMod(readSurface());
-  }, []);
-
-  const select = useCallback((id: SurfaceId) => {
-    setMod(id);
-    const url = new URL(window.location.href);
-    url.searchParams.set("surface", id);
-    window.history.replaceState(null, "", url.toString());
-  }, []);
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (
-        !(e.target instanceof Element) ||
-        !e.target.closest('.rx30-module-rail[role="tablist"]')
-      )
-        return;
-      const idx = MODULES.findIndex((m) => m.id === mod);
-      if (e.key === "Home" || e.key === "End") {
-        e.preventDefault();
-        const next =
-          e.key === "Home" ? MODULES[0]!.id : MODULES[MODULES.length - 1]!.id;
-        select(next);
-        document.getElementById(`surface-tab-${next}`)?.focus();
-      }
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-        e.preventDefault();
-        const next = MODULES[(idx + 1) % MODULES.length]!.id;
-        select(next);
-        document.getElementById(`surface-tab-${next}`)?.focus();
-      }
-      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-        e.preventDefault();
-        const next = MODULES[(idx - 1 + MODULES.length) % MODULES.length]!.id;
-        select(next);
-        document.getElementById(`surface-tab-${next}`)?.focus();
-      }
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [mod, select]);
 
   return (
     <div className="radr radr-mineral rm-premium rm-platform">
@@ -350,93 +230,7 @@ export function Platform2030() {
             </div>
           </section>
 
-          <section
-            className="rx30-connect"
-            data-nav-theme="light"
-            id="surfaces"
-          >
-            <div className="rx30-shell">
-              <p className="rx30-kicker">03 · Product surfaces</p>
-              <h2 className="rx30-h2">
-                Your operation. One connected picture.
-              </h2>
-              <p className="rx30-lead">
-                Switch between Control Center, Live, Decisions, Operations, Back
-                of House, Intelligence, Value, Memory, Data Health, and
-                Connections. Same Decision architecture underneath.
-              </p>
-              <div
-                className="rx30-module-rail"
-                role="tablist"
-                aria-label="Explore the product surfaces"
-              >
-                {MODULES.map((m) => (
-                  <button
-                    key={m.id}
-                    type="button"
-                    role="tab"
-                    id={`surface-tab-${m.id}`}
-                    aria-controls="surface-preview"
-                    tabIndex={mod === m.id ? 0 : -1}
-                    data-on={mod === m.id ? "true" : undefined}
-                    aria-selected={mod === m.id}
-                    onClick={() => select(m.id)}
-                  >
-                    {m.label}
-                  </button>
-                ))}
-              </div>
-              <div
-                id="surface-preview"
-                role="tabpanel"
-                aria-labelledby={`surface-tab-${mod}`}
-                tabIndex={0}
-                className="rx30-module-preview rx30-module-preview--morph rx30-plat-hero-shell"
-              >
-                <div className="rx30-plat-shell-head">
-                  <p className="rx30-demo-label">{active.label}</p>
-                  <h3
-                    className="rx30-h2"
-                    style={{ fontSize: "1.35rem", margin: 0 }}
-                  >
-                    {active.body}
-                  </h3>
-                </div>
-                {mod === "live" ? (
-                  <>
-                    <p className="rx30-lead" style={{ marginTop: "0.75rem" }}>
-                      {PUBLIC_POSITIONING.livePrinciple}
-                    </p>
-                    <div
-                      className="rx30-module-rail"
-                      style={{ marginTop: "1rem" }}
-                    >
-                      {LIVE_RENDERERS.map((r) => (
-                        <button
-                          key={r}
-                          type="button"
-                          aria-pressed={renderer === r}
-                          data-on={renderer === r ? "true" : undefined}
-                          onClick={() => setRenderer(r)}
-                        >
-                          {r}
-                        </button>
-                      ))}
-                    </div>
-                  </>
-                ) : null}
-                <div
-                  className="rx30-plat-canvas"
-                  style={{ marginTop: "1.25rem" }}
-                >
-                  <PlatformSurfacePreview
-                    surface={mod}
-                    liveRenderer={renderer}
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
+          <PlatformWorkspaceShowcase />
 
           <section className="rx30-pain" data-nav-theme="light">
             <div className="rx30-shell">
