@@ -181,7 +181,7 @@ export function RadrGateway({
           <h1 id={titleId}>Choose your operating world</h1>
           <p>
             {requireSignup
-              ? "Choose a hotel or restaurant, complete a short introduction and explore with fictional data. No account or password needed."
+              ? "Choose a hotel or restaurant, then complete registration to explore its fictional operation. This site currently previews the registration journey."
               : "Explore the control center, live operations and decisions using fictional hotel and restaurant data."}
           </p>
         </section>

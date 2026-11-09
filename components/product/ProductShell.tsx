@@ -14,10 +14,8 @@ import { LocationSwitcher } from "./LocationSwitcher";
 import { useDemoServicePhase } from "./useDemoServicePhase";
 import { ProductProvider, useProduct } from "@/lib/product/store";
 import { RoutePeriodSync } from "@/lib/product/radrContext/RoutePeriodSync";
-import {
-  getRadrEnvironment,
-  isSyntheticData,
-} from "@/lib/radr/env";
+import { getRadrEnvironment, isSyntheticData } from "@/lib/radr/env";
+import { DemoConversionBar } from "./DemoConversionBar";
 import { MobileTabBar } from "./MobileTabBar";
 import { useShellNavMode } from "./shell/useShellBreakpoint";
 
@@ -35,7 +33,8 @@ function ShellChrome({
   const isLiveV2 = pathname.startsWith("/app/lab/live-v2");
   /** Other lab surfaces stay bare; Live V2 uses the real product shell. */
   const isLab = pathname.startsWith("/app/lab") && !isLiveV2;
-  const isEnter = pathname === "/app/enter" || pathname.startsWith("/app/enter/");
+  const isEnter =
+    pathname === "/app/enter" || pathname.startsWith("/app/enter/");
   const isControlCenter = pathname === "/app" || pathname === "/app/";
   const isLive =
     isLiveV2 ||
@@ -89,7 +88,11 @@ function ShellChrome({
       data-theme="daylight"
       data-surface="operating"
       data-page={
-        isControlCenter ? "control-center" : isLive ? "live" : pathname.split("/")[2]
+        isControlCenter
+          ? "control-center"
+          : isLive
+            ? "live"
+            : pathname.split("/")[2]
       }
       data-rail-pinned={pinned ? "true" : "false"}
       data-rail-overlay={overlayRail ? "true" : undefined}
@@ -114,8 +117,16 @@ function ShellChrome({
             navMode={navMode}
             showHamburger={showHamburger}
           />
-          <a className="px-skip" href="#product-content">Skip to content</a>
-          <main id="product-content" className="rp-content-v2" tabIndex={-1}><ReferenceWorkspace>{children}</ReferenceWorkspace><p className="px-workspace-note">ILLUSTRATIVE DEMO · No external system writes</p></main>
+          <a className="px-skip" href="#product-content">
+            Skip to content
+          </a>
+          <main id="product-content" className="rp-content-v2" tabIndex={-1}>
+            <DemoConversionBar />
+            <ReferenceWorkspace>{children}</ReferenceWorkspace>
+            <p className="px-workspace-note">
+              ILLUSTRATIVE DEMO · No external system writes
+            </p>
+          </main>
           {showMobileTabs ? (
             <MobileTabBar onOpenMore={() => setMobileNav(true)} />
           ) : null}

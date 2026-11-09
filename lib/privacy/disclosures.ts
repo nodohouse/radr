@@ -6,9 +6,9 @@ export const STORAGE_INVENTORY = [
     name: "radr_demo_access",
     type: "HTTP-only cookie",
     provider: "RADR · first party",
-    purpose: "Signed permission to explore fictional demo screens. Contains a demo scope, random nonce and expiry, with no contact details or account identity. Does not grant workspace or API access.",
+    purpose: "Signed permission to explore fictional demo screens after preview registration. Contains a demo scope, random nonce and expiry, with no contact details or account identity. Does not grant workspace or API access.",
     duration: "8 hours",
-    when: "Opening the fictional demo from its introduction form",
+    when: "Completing the registration preview to open a fictional demo",
     category: "Essential / requested demo",
   },
   {

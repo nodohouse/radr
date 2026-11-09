@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import { registrationDetailsSchema } from "@/lib/marketing/registration";
 import {
   DEMO_ACCESS_COOKIE,
   DEMO_ACCESS_SECONDS,
@@ -14,13 +14,10 @@ import {
 import { sameOriginMutation } from "@/lib/onboarding/requiredFields";
 
 export const runtime = "nodejs";
-const accessSchema = z
-  .object({ vertical: z.enum(["restaurant", "hotel"]) })
-  .strict();
 const reply = (body: unknown, status: number) =>
   NextResponse.json(body, { status, headers: { "Cache-Control": "no-store" } });
 
-/** Preview-only entry: contact details never leave the browser or create an account. */
+/** Validate the registration prototype. Never store contact details or accept passwords. */
 export async function POST(request: Request) {
   if (!request.headers.get("origin") || !sameOriginMutation(request))
     return reply({ error: "Invalid request origin." }, 403);
@@ -42,16 +39,22 @@ export async function POST(request: Request) {
     );
   let body: unknown;
   try {
-    body = await readJsonWithinLimit(request, 2000);
+    body = await readJsonWithinLimit(request, 5000);
   } catch (error) {
     return reply(
       { error: "Check your demo selection." },
       error instanceof RequestBodyError ? error.status : 400,
     );
   }
-  const parsed = accessSchema.safeParse(body);
+  const parsed = registrationDetailsSchema.safeParse(body);
   if (!parsed.success)
-    return reply({ error: "Choose a hotel or restaurant demo." }, 400);
+    return reply(
+      {
+        error: "Complete the required registration fields with valid details.",
+        code: "INVALID_REGISTRATION",
+      },
+      400,
+    );
   if (!demoSessionReady())
     return reply(
       {

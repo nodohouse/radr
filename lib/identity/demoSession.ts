@@ -31,7 +31,7 @@ export function createDemoGrant(now = Date.now()) {
   // No name, email, company, workspace ID or identity privileges in this cookie.
   const data = Buffer.from(
     JSON.stringify({
-      scope: "fictional-demo",
+      scope: "registration-preview:v2",
       expires: now + DEMO_ACCESS_SECONDS * 1000,
       nonce: randomUUID(),
     }),
@@ -52,7 +52,7 @@ export function verifyDemoGrant(token: string | undefined, now = Date.now()) {
       return false;
     const body = JSON.parse(Buffer.from(data, "base64url").toString());
     return (
-      body.scope === "fictional-demo" &&
+      body.scope === "registration-preview:v2" &&
       typeof body.nonce === "string" &&
       Number.isFinite(body.expires) &&
       body.expires > now &&

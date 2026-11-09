@@ -556,3 +556,134 @@
     stroke-dashoffset: 0;
   }
 }
+
+/* Required registration fields and a clear, labeled prototype journey. */
+.ob-registration-steps {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0;
+  margin: 0 0 8px;
+}
+.ob-registration-steps li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #4a6680;
+}
+.ob-registration-steps li > span {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid #b9ccdf;
+  font-size: 10px;
+}
+.ob-registration-steps li[aria-current] {
+  color: #006e4e;
+  font-weight: 700;
+}
+.ob-registration-steps li[aria-current] > span {
+  background: #00ed94;
+  border-color: #00b678;
+  color: #063b33;
+}
+.ob-registration-preview {
+  padding: 13px 14px;
+  border: 1px solid #bad0e4;
+  background: #edf5fc;
+  border-radius: 10px;
+}
+.ob-registration-preview strong {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #254f76;
+}
+.ob-registration-preview p {
+  font-size: 11px;
+  line-height: 1.65;
+  color: #45657f;
+  margin: 5px 0 0;
+}
+.ob-registration-form .ob-registration-error {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #9b2835;
+  margin: 3px 0 0;
+}
+.ob-registration-form [aria-invalid="true"] {
+  border-color: #b94956 !important;
+}
+.ob-registration-help,
+.ob-registration-required {
+  font-size: 11px;
+  line-height: 1.65;
+  color: #496580;
+  margin: 0;
+}
+.ob-registration-required {
+  color: #075c47;
+  min-height: 18px;
+}
+.ob-registration-form .ob-registration-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #304e69;
+}
+.ob-registration-terms input {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  accent-color: #087c58;
+  margin: 3px 0 0;
+}
+.ob-registration-terms a {
+  color: #075aaf;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ob-registration-plan {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0;
+  color: #315774;
+  padding: 10px 13px;
+  border: 1px solid #a5d2bd;
+  background: #eaf8f1;
+  border-radius: 9px;
+}
+.ob-registration-plan strong {
+  color: #006f4f;
+}
+.ob-auth .ob-auth-layout:has(.ob-registration-form) > .ob-auth-card {
+  align-self: stretch;
+}
+@media (max-width: 420px) {
+  .ob-registration-steps {
+    gap: 7px;
+  }
+  .ob-registration-steps li {
+    gap: 5px;
+    font-size: 10px;
+  }
+}
+.ob-registration-steps li[data-completed] {
+  color: #087253;
+}
+.ob-registration-steps li[data-completed] > span {
+  border-color: #78bba1;
+  background: #e1f7ee;
+  color: #08674a;
+}
+.ob-registration-form .ob-field {
+  align-content: start;
+}

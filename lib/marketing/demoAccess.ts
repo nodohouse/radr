@@ -1,6 +1,6 @@
 /**
  * Public → fictional demo access helpers.
- * Marketing shows RADR; the demo lead form issues a limited guest grant.
+ * Marketing shows RADR; the validated registration preview issues a limited fictional-data grant.
  */
 
 import { safeInternalPath } from "@/lib/security/safe-redirect";

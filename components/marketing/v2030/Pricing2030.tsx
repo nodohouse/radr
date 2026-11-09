@@ -1,6 +1,14 @@
 import { Link } from "@/i18n/navigation";
+import NextLink from "next/link";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
+import {
+  planRegistrationHref,
+  planSetupPreviewHref,
+  type PublicPlanId,
+  type DemoWorld,
+} from "@/lib/marketing/conversionJourney";
+import "@/app/pricing-journey.css";
 import "@/app/marketing-2030.css";
 import "@/app/brand-takeover.css";
 import "@/app/marketing-premium-pages.css";
@@ -181,12 +189,40 @@ const FAQ = [
   ],
 ];
 
-export function Pricing2030() {
+export function Pricing2030({
+  fromDemo = false,
+  vertical = "restaurant",
+}: {
+  fromDemo?: boolean;
+  vertical?: DemoWorld;
+}) {
+  const PlanLink = fromDemo ? NextLink : Link;
+  const nextHref = (plan: PublicPlanId) =>
+    fromDemo
+      ? planSetupPreviewHref(plan, vertical)
+      : planRegistrationHref(plan);
   return (
     <div className="radr radr-mineral rm-premium rm-pricing">
       <PublicNavbar />
       <div className="rx30 rx30--mockup">
         <main>
+          {fromDemo ? (
+            <div className="rx30-shell">
+              <aside className="rm-demo-return">
+                <div>
+                  <small>YOUR NEXT STEP</small>
+                  <strong>
+                    From the {vertical} demo to your own operation.
+                  </strong>
+                  <p>
+                    Choose a plan to preview setup. Your plan choice carries
+                    into the setup preview. No subscription starts here.
+                  </p>
+                </div>
+                <NextLink href="/app?stay=1">Back to the demo →</NextLink>
+              </aside>
+            </div>
+          ) : null}
           <section
             className="rm-price-hero"
             data-nav-theme="light"
@@ -211,12 +247,12 @@ export function Pricing2030() {
                   <Link href="#plans" className="rx30-btn rx30-btn-primary">
                     Compare the scopes <span aria-hidden="true">↓</span>
                   </Link>
-                  <Link
-                    href="/contact?intent=sales&context=14-day-free-trial"
+                  <PlanLink
+                    href={nextHref("start")}
                     className="rx30-btn rm-price-secondary"
                   >
-                    Request your free trial →
-                  </Link>
+                    Choose the 14-day trial →
+                  </PlanLink>
                 </div>
               </div>
               <aside
@@ -315,17 +351,12 @@ export function Pricing2030() {
                         <dd>{plan.next}</dd>
                       </div>
                     </dl>
-                    <Link
-                      className="rx30-btn"
-                      href={
-                        plan.id === "start"
-                          ? "/contact?intent=sales&context=14-day-free-trial"
-                          : `/contact?intent=sales&plan=${plan.id}`
-                      }
-                    >
-                      {plan.cta}
+                    <PlanLink className="rx30-btn" href={nextHref(plan.id)}>
+                      {plan.id === "start"
+                        ? "Choose the free trial"
+                        : `Continue with ${plan.name}`}
                       <span aria-hidden="true">→</span>
-                    </Link>
+                    </PlanLink>
                   </article>
                 ))}
               </div>
@@ -444,12 +475,12 @@ export function Pricing2030() {
                 with your operation.
               </h2>
               <p>A free trial first. Paid scope and terms agreed separately.</p>
-              <Link
-                href="/contact?intent=sales&context=14-day-free-trial"
+              <PlanLink
+                href={nextHref("start")}
                 className="rx30-btn rx30-btn-primary"
               >
-                Request your free trial <span aria-hidden="true">→</span>
-              </Link>
+                Choose the free trial <span aria-hidden="true">→</span>
+              </PlanLink>
               <Link href="/demo" className="rm-close-demo">
                 Explore the demo →
               </Link>

@@ -198,12 +198,14 @@ export default async function Page({ params }: Props) {
       </LegalSection>
       <LegalSection title="5. Contact, report and marketing choices">
         <p>
-          The current demo introduction is a visual form preview. Its name,
-          email, company, role and location-count fields stay on that page;
-          they are not saved or transmitted to RADR or a CRM. Only the selected
-          fictional hotel or restaurant is sent to open the demo. A signed,
-          HTTP-only cookie grants eight hours of fictional demo access. This
-          does not create an account or grant access to a real workspace.
+          The registration journey is currently a visual preview. Contact and
+          operation fields are sent for validation only, then discarded. They
+          are not saved or delivered to a CRM. Preview passwords stay in your
+          browser and are never sent. Do not use a real password. Completing the
+          form creates no account and verifies no email address. A signed,
+          HTTP-only cookie grants eight hours of fictional demo access, with no
+          contact details or account identity inside it. Plan choices open setup
+          previews; no trial, charge or subscription starts.
         </p>
         <p>
           Report access requires delivery of the request to the configured

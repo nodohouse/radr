@@ -53,6 +53,7 @@ type Props = {
   workspace: WorkspaceSnapshot;
   preview?: boolean;
   userId?: string;
+  previewVertical?: "hotel" | "restaurant";
 };
 
 const ROLE_LENSES: { id: RoleLens; label: string }[] = [
@@ -143,6 +144,7 @@ export function FirstValueFunnel({
   userEmail,
   workspace,
   preview = false,
+  previewVertical,
   userId,
 }: Props) {
   const router = useRouter();
@@ -157,7 +159,8 @@ export function FirstValueFunnel({
     workspace?.onboarding.organizationName ?? workspace?.name ?? "",
   );
   const [industry, setIndustry] = useState<IndustryKind>(
-    workspace?.onboarding.industry ?? "restaurant_group",
+    workspace?.onboarding.industry ??
+      (previewVertical === "hotel" ? "hotel_group" : "restaurant_group"),
   );
   const [band, setBand] = useState<LocationBand>(
     (workspace?.onboarding.locationBand as LocationBand) ?? "2-5",
@@ -260,7 +263,7 @@ export function FirstValueFunnel({
   const stateRef = useRef<OnboardingState>(
     workspace?.onboarding ?? { step: "welcome", path: "first_value" },
   );
-  const draftKey = `radr.setupDraft.v2:${preview ? "preview" : userId || userEmail || "session"}`;
+  const draftKey = `radr.setupDraft.v2:${preview ? `preview${previewVertical ? `:${previewVertical}` : ""}` : userId || userEmail || "session"}`;
   const [draftReady, setDraftReady] = useState(false);
   useEffect(() => {
     if (!workspace) {
@@ -284,7 +287,7 @@ export function FirstValueFunnel({
           }
           if (ROLE_LENSES.some((r) => r.id === raw.roleLens))
             setRoleLens(raw.roleLens);
-          if (INDUSTRIES.some((r) => r.id === raw.industry))
+          if (!previewVertical && INDUSTRIES.some((r) => r.id === raw.industry))
             setIndustry(raw.industry);
           if (BANDS.some((r) => r.id === raw.band)) setBand(raw.band);
           if (["EUR", "GBP", "USD", "CHF", "AED", "SGD"].includes(raw.currency))
@@ -320,7 +323,7 @@ export function FirstValueFunnel({
       }
     }
     setDraftReady(true);
-  }, [draftKey, workspace]);
+  }, [draftKey, workspace, previewVertical]);
   useEffect(() => {
     if (!draftReady) return;
     try {
