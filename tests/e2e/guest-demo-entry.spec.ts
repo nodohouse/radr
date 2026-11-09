@@ -159,8 +159,8 @@ for (const world of ["restaurant", "hotel"])
       }),
     ).toBeVisible();
     await expect(
-      page.getByRole("complementary", { name: "Demo preview and plans" }),
-    ).toContainText("No account or subscription has been created");
+      page.getByRole("complementary", { name: "Optional next step" }),
+    ).toHaveCount(0);
     const cookies = await context.cookies();
     expect(cookies.find((c) => c.name === "radr_demo_access")?.httpOnly).toBe(
       true,
@@ -184,7 +184,32 @@ for (const world of ["restaurant", "hotel"])
     });
     if (world === "hotel")
       await page.setViewportSize({ width: 1512, height: 1100 });
-    await page.getByRole("link", { name: "View plans", exact: true }).click();
+    // Simulate a guest returning after active exploration; fresh arrivals see no upsell.
+    await page.evaluate(() =>
+      sessionStorage.setItem(
+        "radr.demo.invitation.v1",
+        JSON.stringify({
+          version: 1,
+          activeMs: 240000,
+          interacted: true,
+          shown: false,
+          dismissed: false,
+          areas: ["control-center", "live", "decisions"],
+        }),
+      ),
+    );
+    await page.reload();
+    await expect(
+      page.locator(".rp-root[data-context-ready=true]"),
+    ).toBeVisible();
+    await page.clock.install();
+    await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
+    await page.clock.runFor(10000);
+    await expect(
+      page.getByRole("complementary", { name: "Optional next step" }),
+    ).toBeVisible();
+    await page.clock.resume();
+    await page.getByRole("link", { name: /Explore plans/ }).click();
     await expect(page).toHaveURL(
       new RegExp(`pricing\\?from=demo&vertical=${world}`),
     );

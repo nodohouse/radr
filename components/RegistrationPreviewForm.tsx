@@ -135,27 +135,22 @@ export function RegistrationPreviewForm({
       onSubmit={submit}
     >
       <ol className="ob-registration-steps" aria-label={t("journey")}>
-        {(purpose === "workspace" && plan
+        {(purpose === "demo"
           ? [
-              { label: t("stepChoose"), complete: true, current: false },
               { label: t("stepRegister"), complete: false, current: true },
-              { label: t("stepSetup"), complete: false, current: false },
+              { label: t("stepExplore"), complete: false, current: false },
             ]
-          : [
-              { label: t("stepRegister"), complete: false, current: true },
-              {
-                label:
-                  purpose === "workspace" ? t("stepChoose") : t("stepExplore"),
-                complete: false,
-                current: false,
-              },
-              {
-                label:
-                  purpose === "workspace" ? t("stepSetup") : t("stepChoose"),
-                complete: false,
-                current: false,
-              },
-            ]
+          : plan
+            ? [
+                { label: t("stepChoose"), complete: true, current: false },
+                { label: t("stepRegister"), complete: false, current: true },
+                { label: t("stepSetup"), complete: false, current: false },
+              ]
+            : [
+                { label: t("stepRegister"), complete: false, current: true },
+                { label: t("stepChoose"), complete: false, current: false },
+                { label: t("stepSetup"), complete: false, current: false },
+              ]
         ).map((step, index) => (
           <li
             key={step.label}

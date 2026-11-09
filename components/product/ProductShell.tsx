@@ -15,7 +15,7 @@ import { useDemoServicePhase } from "./useDemoServicePhase";
 import { ProductProvider, useProduct } from "@/lib/product/store";
 import { RoutePeriodSync } from "@/lib/product/radrContext/RoutePeriodSync";
 import { getRadrEnvironment, isSyntheticData } from "@/lib/radr/env";
-import { DemoConversionBar } from "./DemoConversionBar";
+import { DemoPlanInvitation } from "./DemoPlanInvitation";
 import { MobileTabBar } from "./MobileTabBar";
 import { useShellNavMode } from "./shell/useShellBreakpoint";
 
@@ -121,7 +121,7 @@ function ShellChrome({
             Skip to content
           </a>
           <main id="product-content" className="rp-content-v2" tabIndex={-1}>
-            <DemoConversionBar />
+            <DemoPlanInvitation />
             <ReferenceWorkspace>{children}</ReferenceWorkspace>
             <p className="px-workspace-note">
               ILLUSTRATIVE DEMO · No external system writes
