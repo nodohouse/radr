@@ -16,20 +16,22 @@ test.beforeEach(async ({ page }) => {
 });
 
 for (const world of ["restaurant", "hotel"] as const) {
-  test(`public chooser opens ${world} and preserves unrelated preferences`, async ({
+  test(`internal chooser opens ${world} and preserves unrelated preferences`, async ({
     page,
   }) => {
-    await page.goto("/en/demo");
+    await page.addInitScript(() => {
+      if (!localStorage.getItem("radr.prefs.v1")) {
+        localStorage.setItem(
+          "radr.prefs.v1",
+          JSON.stringify({ timeFormat: "24h" }),
+        );
+      }
+    });
+    await page.goto("/app/enter");
     await expect(
       page.getByRole("heading", { name: "Choose your operating world" }),
     ).toBeVisible();
     await expect(page.locator('[data-last="true"]')).toHaveCount(0);
-    await page.evaluate(() =>
-      localStorage.setItem(
-        "radr.prefs.v1",
-        JSON.stringify({ timeFormat: "24h" }),
-      ),
-    );
     await page
       .getByRole("button", {
         name: world === "hotel" ? "Hotel group" : "Restaurant group",

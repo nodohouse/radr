@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useState } from "react";
 import Link from "next/link";
+import { demoSignupHref } from "@/lib/marketing/demoAccess";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import {
   ENTER_MAP_CITIES,
@@ -103,9 +104,16 @@ function GatewayMap() {
 type Props = {
   preselect: DemoVerticalFamily | null;
   autoEnter: boolean;
+  requireSignup?: boolean;
+  signupLocale?: string;
 };
 
-export function RadrGateway({ preselect, autoEnter }: Props) {
+export function RadrGateway({
+  preselect,
+  autoEnter,
+  requireSignup = false,
+  signupLocale = "en",
+}: Props) {
   const titleId = useId();
   const [ready, setReady] = useState(false);
   const [selected, setSelected] = useState<DemoVerticalFamily | null>(
@@ -128,9 +136,18 @@ export function RadrGateway({ preselect, autoEnter }: Props) {
     if (preselect) setSelected(preselect);
   }, [preselect]);
 
-  const handleEnter = useCallback((vertical: DemoVerticalFamily) => {
-    enterWorld(vertical);
-  }, []);
+  const handleEnter = useCallback(
+    (vertical: DemoVerticalFamily) => {
+      if (requireSignup) {
+        window.location.assign(
+          `/${signupLocale}${demoSignupHref(`/app/enter?vertical=${vertical}&go=1`)}`,
+        );
+        return;
+      }
+      enterWorld(vertical);
+    },
+    [requireSignup, signupLocale],
+  );
 
   useEffect(() => {
     if (!autoEnter || !preselect || didAuto) return;
@@ -163,8 +180,9 @@ export function RadrGateway({ preselect, autoEnter }: Props) {
         <section className="rgw-hero" aria-labelledby={titleId}>
           <h1 id={titleId}>Choose your operating world</h1>
           <p>
-            Choose a hotel or restaurant demo. Explore the control center, live
-            operations and decisions using fictional data. No login required.
+            {requireSignup
+              ? "Choose a hotel or restaurant demo, then sign up to explore the control center, live operations and decisions using fictional data."
+              : "Explore the control center, live operations and decisions using fictional hotel and restaurant data."}
           </p>
         </section>
 
@@ -174,6 +192,9 @@ export function RadrGateway({ preselect, autoEnter }: Props) {
               key={world.id}
               world={world}
               disabled={!ready}
+              ctaLabel={
+                requireSignup ? `Get ${world.id} demo access` : undefined
+              }
               selected={selected === world.id}
               lastVisited={last === world.id}
               onSelect={() => setSelected(world.id)}

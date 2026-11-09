@@ -1,6 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import Image from "next/image";
+import { useReducedMotion } from "motion/react";
+import {
+  PLATFORM_GALLERY,
+  type PlatformSurfaceId as SurfaceId,
+} from "@/lib/marketing/platformGallery";
+import { demoSignupHref } from "@/lib/marketing/demoAccess";
 import { Link } from "@/i18n/navigation";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import {
@@ -15,10 +22,6 @@ import {
   IconHealth,
   IconConnections,
 } from "@/components/product/shell/navIcons";
-import {
-  PlatformSurfacePreview,
-  type SurfaceId,
-} from "./PlatformSurfacePreview";
 import "./platform-workspace.css";
 import { TourArrow } from "./PlatformTourIcons";
 
@@ -107,17 +110,73 @@ function readSurface(): SurfaceId {
 }
 
 export function PlatformWorkspaceShowcase() {
-  const [selected, setSelected] = useState<SurfaceId>("control");
+  const [slide, setSlide] = useState(0);
+  const [previous, setPrevious] = useState<number | null>(null);
+  const [loadedImage, setLoadedImage] = useState<string | null>(null);
+  const [pageVisible, setPageVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const reduced = useReducedMotion();
+  const workspace = useRef<HTMLDivElement>(null);
+  const current = PLATFORM_GALLERY[slide]!;
+  const imageReady = loadedImage === current.image;
+  const activeImage = useRef<string>(current.image);
+  activeImage.current = current.image;
+  const selected = current.surface;
+  const signup = demoSignupHref();
   const rail = useRef<HTMLElement>(null);
   const active = SURFACES.find((surface) => surface.id === selected)!;
   useEffect(() => {
-    const sync = () => setSelected(readSurface());
+    const sync = () => {
+      setSlide(
+        Math.max(
+          0,
+          PLATFORM_GALLERY.findIndex(
+            (frame) => frame.surface === readSurface(),
+          ),
+        ),
+      );
+      setPrevious(null);
+    };
     sync();
     window.addEventListener("popstate", sync);
     return () => window.removeEventListener("popstate", sync);
   }, []);
+  useEffect(() => {
+    const node = workspace.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(!!entry?.isIntersecting),
+      { threshold: 0.15 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!visible || reduced || !pageVisible) return;
+    const timer = window.setTimeout(() => {
+      if (!document.hidden) {
+        setPrevious(slide);
+        setSlide((slide + 1) % PLATFORM_GALLERY.length);
+      }
+    }, 6200);
+    return () => window.clearTimeout(timer);
+  }, [slide, reduced, visible, pageVisible]);
+  useEffect(() => {
+    const sync = () => setPageVisible(!document.hidden);
+    document.addEventListener("visibilitychange", sync);
+    sync();
+    return () => document.removeEventListener("visibilitychange", sync);
+  }, []);
   function select(id: SurfaceId) {
-    setSelected(id);
+    const next = PLATFORM_GALLERY.findIndex((frame) => frame.surface === id);
+    if (next === slide) return;
+    setPrevious(slide);
+    setSlide(
+      Math.max(
+        0,
+        PLATFORM_GALLERY.findIndex((frame) => frame.surface === id),
+      ),
+    );
     const url = new URL(window.location.href);
     url.searchParams.set("surface", id);
     window.history.replaceState(null, "", url);
@@ -163,18 +222,18 @@ export function PlatformWorkspaceShowcase() {
           </div>
           <div>
             <p>
-              Start with what needs you. Move from the operation to its
-              evidence, decisions and results.
+              A closer look at RADR. See the operating brief, the evidence
+              behind it and the decisions that follow.
             </p>
-            <Link href="/demo">
-              Explore the interactive demos{" "}
+            <Link href={signup}>
+              Sign up to explore the demos{" "}
               <span aria-hidden="true">
                 <TourArrow />
               </span>
             </Link>
           </div>
         </div>
-        <div className="psw-workspace">
+        <div className="psw-workspace" ref={workspace} data-preview="images">
           <div className="psw-chrome">
             <div>
               <FrozenRadrLogo
@@ -183,21 +242,21 @@ export function PlatformWorkspaceShowcase() {
                 width={24}
                 decorative
               />
-              <span>THE CONNECTED WORKSPACE</span>
+              <span>INSIDE RADR</span>
             </div>
             <span className="psw-demo-badge">
               <i />
-              Demo data
+              Product preview
             </span>
           </div>
           <div className="psw-layout">
             <aside className="psw-sidebar">
-              <span className="psw-nav-label">Explore the platform</span>
+              <span className="psw-nav-label">Inside the platform</span>
               <nav
                 ref={rail}
                 className="psw-nav"
                 role="tablist"
-                aria-label="Explore the product surfaces"
+                aria-label="Choose a product preview"
                 aria-orientation="vertical"
                 onKeyDown={navigate}
               >
@@ -222,15 +281,15 @@ export function PlatformWorkspaceShowcase() {
               </nav>
               <div className="psw-sidebar-note">
                 <i />
-                <strong>One operating model.</strong>
+                <strong>See it here. Explore it in your demo.</strong>
                 <p>
-                  Follow the context from a signal to a decision and its
-                  outcome.
+                  Screens from fictional operations. Sign up for hands-on access
+                  to the full workflow.
                 </p>
               </div>
             </aside>
             <label className="psw-mobile-select">
-              <span>Explore the platform</span>
+              <span>Choose a preview</span>
               <select
                 aria-label="Choose a product surface"
                 value={selected}
@@ -256,16 +315,62 @@ export function PlatformWorkspaceShowcase() {
                 <h3>{active.title}</h3>
                 <p>{active.body}</p>
               </header>
-              <div className="psw-screen">
-                <PlatformSurfacePreview surface={selected} />
+              <div
+                className="psw-gallery"
+                aria-label="RADR product image showcase"
+                aria-live="off"
+                data-slide={slide}
+              >
+                <div className="psw-gallery-media" data-ready={imageReady}>
+                  {!imageReady && previous === null ? (
+                    <span className="psw-gallery-loading" role="status">
+                      Opening the product preview
+                    </span>
+                  ) : null}
+                  {previous !== null && previous !== slide ? (
+                    <Image
+                      className="psw-gallery-previous"
+                      src={`/platform-showcase/${PLATFORM_GALLERY[previous]!.image}.webp`}
+                      alt=""
+                      fill
+                      sizes="(max-width: 760px) 90vw, 1200px"
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                  <Image
+                    key={current.image}
+                    className="psw-gallery-current"
+                    style={{
+                      animationPlayState: imageReady ? "running" : "paused",
+                    }}
+                    onLoad={() => {
+                      if (activeImage.current === current.image)
+                        setLoadedImage(current.image);
+                    }}
+                    src={`/platform-showcase/${current.image}.webp`}
+                    alt={current.alt}
+                    fill
+                    sizes="(max-width: 760px) 90vw, (min-width: 2200px) 1600px, 1200px"
+                    priority={slide === 0}
+                  />
+                </div>
+                <div className="psw-gallery-caption">
+                  <p>{current.caption}</p>
+                  <span
+                    aria-label={`Image ${slide + 1} of ${PLATFORM_GALLERY.length}`}
+                  >
+                    {String(slide + 1).padStart(2, "0")} <i>/</i>{" "}
+                    {String(PLATFORM_GALLERY.length).padStart(2, "0")}
+                  </span>
+                </div>
               </div>
               <footer className="psw-panel-footer">
                 <span>
                   <i />
-                  Evidence stays connected.
+                  Ready to make it your own?
                 </span>
-                <Link href="/demo">
-                  Explore the full product{" "}
+                <Link href={signup}>
+                  Get demo access{" "}
                   <span aria-hidden="true">
                     <TourArrow />
                   </span>

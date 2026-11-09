@@ -52,6 +52,7 @@ function BuildingFallback({
   highlighted: number | null;
 }) {
   const floors = buildingFloors(spec);
+  const groundY = Math.max(15, 240 - spec.floors * 23) + spec.floors * 23 + 63;
   return (
     <svg
       className="hb-elevation"
@@ -64,14 +65,18 @@ function BuildingFallback({
           <stop offset="1" stopColor="#143653" />
         </linearGradient>
       </defs>
-      <ellipse
-        cx="224"
-        cy={spec.floors * 23 + 81}
-        rx="154"
-        ry="20"
-        fill="#163954"
-        opacity=".1"
-      />
+      <ellipse cx="220" cy={groundY} rx="178" ry="28" fill="#c9dacc" />
+      {[52, 95, 340, 375].map((x, i) => (
+        <g key={x} transform={`translate(${x} ${groundY - (i % 2) * 12})`}>
+          <path d="M0 0v-35" stroke="#938573" strokeWidth="4" />
+          <ellipse
+            cy="-43"
+            rx={i % 2 ? 15 : 19}
+            ry={i % 2 ? 22 : 27}
+            fill={i % 2 ? "#678d77" : "#507e6b"}
+          />
+        </g>
+      ))}
       <g transform={`translate(52 ${Math.max(15, 240 - spec.floors * 23)})`}>
         {floors.map((f) => {
           const y = (spec.floors - f.number) * 23 + 35;

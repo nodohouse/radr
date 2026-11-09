@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "RADR",
     description:
-      "Choose the RADR hotel or restaurant demo. Explore fictional hospitality operations, decisions and evidence without a login.",
+      "Choose your RADR hotel or restaurant demo, then sign up to explore fictional hospitality operations, decisions and evidence.",
     alternates: buildAlternatesForLocale(locale, "/demo"),
   };
 }
@@ -18,5 +18,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function DemoPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <RadrGateway preselect={null} autoEnter={false} />;
+  return (
+    <RadrGateway
+      preselect={null}
+      autoEnter={false}
+      requireSignup
+      signupLocale={locale}
+    />
+  );
 }

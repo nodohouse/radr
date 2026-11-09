@@ -57,13 +57,17 @@ Columns only — no MFA/SSO enforcement wired. Do not claim SSO is active.
 
 ## `/app` gate
 
-| `NEXT_PUBLIC_RADR_ENV` | `/app` |
-|------------------------|--------|
-| `DEMO` (default) | Public Northstar demo |
-| `LIVE` / `SANDBOX` | Session cookie required |
-| Any + `NEXT_PUBLIC_RADR_REQUIRE_AUTH=true` | Session required |
+Hosted `/app` routes require a registered session in every environment, including DEMO. Marketing shows static product images; the public hotel/restaurant chooser sends visitors to signup and retains their chosen vertical for entry after registration.
 
-Cookie presence ≠ authorization. APIs still call `requirePermission`.
+| Runtime | `/app` |
+|---------|--------|
+| Production / hosted preview, any RADR environment | Session required; no public-demo bypass |
+| Local development, DEMO | Fictional-data QA available locally |
+| Local development + LIVE, SANDBOX or `NEXT_PUBLIC_RADR_REQUIRE_AUTH=true` | Session required |
+
+Middleware checks cookie presence for fast redirects. The server product layout verifies identity through the existing provider before rendering product content. A forged cookie never authorizes entry. Hosted account storage must be available; unavailable identity storage or identity services fail closed. The existing middleware E2E shortcut does not bypass the server identity check when session protection is required.
+
+Signup availability and lead delivery are separate: this gate does not provision a database, enable hosted accounts or configure a CRM. Never report details as collected when their receiving service is unavailable. Product APIs retain their identity, membership and permission checks.
 
 ## Sessions
 

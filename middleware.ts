@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { getSessionCookie } from "better-auth/cookies";
 import { routing, isNonLocalizedPath } from "./i18n/routing";
+import { productRequiresSession } from "./lib/identity/productAccess";
 import { safeDemoNext } from "./lib/marketing/demoAccess";
 
 const intlMiddleware = createMiddleware(routing);
@@ -132,13 +133,11 @@ export function middleware(request: NextRequest) {
       protectedPrefixes.some(
         (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
       ) && !isOnboardingPreview;
-    // DEMO Northstar is public (AUTH_SECURITY_MODEL). LIVE/SANDBOX or
-    // NEXT_PUBLIC_RADR_REQUIRE_AUTH=true require a session for /app.
-    const radrEnv = (process.env.NEXT_PUBLIC_RADR_ENV ?? "DEMO").toUpperCase();
-    const requireAuth =
-      process.env.NEXT_PUBLIC_RADR_REQUIRE_AUTH === "true" ||
-      radrEnv === "LIVE" ||
-      radrEnv === "SANDBOX";
+    const requireAuth = productRequiresSession({
+      nodeEnv: process.env.NODE_ENV,
+      requireAuth: process.env.NEXT_PUBLIC_RADR_REQUIRE_AUTH,
+      radrEnv: process.env.NEXT_PUBLIC_RADR_ENV,
+    });
     const isProtected = isProtectedPrefix || (isAppPath && requireAuth);
 
     if (isProtected && !sessionCookie && !e2eUnlock) {

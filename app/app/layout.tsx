@@ -1,4 +1,8 @@
 import "@/app/radr-brand-theme.css";
+import { redirect } from "next/navigation";
+import { productRequiresSession } from "@/lib/identity/productAccess";
+import { accountStorageReady } from "@/lib/identity/accountAvailability";
+import { demoSignupHref } from "@/lib/marketing/demoAccess";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 const productFont = Manrope({
@@ -51,11 +55,28 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function ProductLayout({
+export default async function ProductLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  if (
+    productRequiresSession({
+      nodeEnv: process.env.NODE_ENV,
+      requireAuth: process.env.NEXT_PUBLIC_RADR_REQUIRE_AUTH,
+      radrEnv: process.env.NEXT_PUBLIC_RADR_ENV,
+    })
+  ) {
+    if (!accountStorageReady()) redirect(demoSignupHref());
+    let identity = null;
+    try {
+      const { getAuthIdentity } = await import("@/lib/identity/provider");
+      identity = await getAuthIdentity();
+    } catch {
+      /* Failed identity services never unlock a hosted product preview. */
+    }
+    if (!identity) redirect(demoSignupHref());
+  }
   return (
     <div className={productFont.variable}>
       <ProductShell>{children}</ProductShell>

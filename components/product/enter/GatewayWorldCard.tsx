@@ -17,6 +17,7 @@ type Props = {
   lastVisited: boolean;
   onSelect: () => void;
   onEnter: () => void;
+  ctaLabel?: string;
 };
 
 export function GatewayWorldCard({
@@ -26,6 +27,7 @@ export function GatewayWorldCard({
   lastVisited,
   onSelect,
   onEnter,
+  ctaLabel,
 }: Props) {
   const groupLabel =
     world.id === "restaurant" ? "Restaurant group" : "Hotel group";
@@ -94,7 +96,7 @@ export function GatewayWorldCard({
             aria-label={groupLabel}
             onClick={onEnter}
           >
-            {world.cta}
+            {ctaLabel || world.cta}
           </button>
         </div>
       </article>

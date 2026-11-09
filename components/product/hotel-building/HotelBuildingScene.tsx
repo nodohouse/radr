@@ -26,6 +26,131 @@ type Props = {
   onReady: () => void;
   onFailure: () => void;
 };
+function Tree({
+  x,
+  z,
+  scale = 1,
+  tone = "#4e7868",
+}: {
+  x: number;
+  z: number;
+  scale?: number;
+  tone?: string;
+}) {
+  return (
+    <group position={[x, 0.25, z]} scale={scale}>
+      <mesh position={[0, 1, 0]} castShadow>
+        <cylinderGeometry args={[0.09, 0.14, 2, 9]} />
+        <meshStandardMaterial color="#817b68" roughness={1} />
+      </mesh>
+      {[
+        [0, 2.45, 0, 0.92],
+        [0.47, 2.13, 0.12, 0.68],
+        [-0.4, 2.16, -0.14, 0.72],
+        [0.05, 2.8, -0.08, 0.63],
+      ].map(([a, b, c, r], i) => (
+        <mesh key={i} position={[a!, b!, c!]} castShadow receiveShadow>
+          <sphereGeometry args={[r!, 20, 14]} />
+          <meshStandardMaterial color={tone} roughness={0.95} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+function Landscape({ width, depth }: { width: number; depth: number }) {
+  return (
+    <group>
+      <RoundedBox
+        args={[width + 12, 0.14, depth + 11]}
+        position={[0, 0.06, 0]}
+        radius={0.5}
+        receiveShadow
+      >
+        <meshStandardMaterial color="#c6d1c7" roughness={1} />
+      </RoundedBox>
+      <RoundedBox
+        args={[width + 8, 0.17, depth + 7]}
+        position={[0, 0.12, 0]}
+        radius={0.3}
+        receiveShadow
+      >
+        <meshStandardMaterial color="#e5e7df" roughness={0.9} />
+      </RoundedBox>
+      <mesh position={[0, 0.22, depth / 2 + 4.2]} receiveShadow>
+        <boxGeometry args={[width + 14, 0.04, 1.35]} />
+        <meshStandardMaterial color="#c7cfce" roughness={1} />
+      </mesh>
+      {[-1, 1].flatMap((side) =>
+        [-1, 1].map((end) => (
+          <Tree
+            key={`${side}-${end}`}
+            x={side * (width / 2 + 3.7)}
+            z={end * (depth / 2 + 2)}
+            scale={end < 0 ? 1.18 : 0.9}
+            tone={side < 0 ? "#587a67" : "#3e7065"}
+          />
+        )),
+      )}
+      {[-1, 1].map((side) => (
+        <Tree
+          key={side}
+          x={side * (width / 2 + 3.8)}
+          z={0}
+          scale={0.85}
+          tone="#658372"
+        />
+      ))}
+      {[-1, 1].map((side) => (
+        <group
+          key={side}
+          position={[side * (width / 2 + 1.5), 0.24, depth / 2 + 2.4]}
+        >
+          <mesh position={[0, 0.3, 0]} castShadow>
+            <boxGeometry args={[2, 0.11, 0.7]} />
+            <meshStandardMaterial color="#9a8c72" roughness={0.8} />
+          </mesh>
+          {[-0.7, 0.7].map((x) => (
+            <mesh key={x} position={[x, 0.13, 0]}>
+              <boxGeometry args={[0.12, 0.25, 0.52]} />
+              <meshStandardMaterial
+                color="#51626a"
+                metalness={0.4}
+                roughness={0.6}
+              />
+            </mesh>
+          ))}
+        </group>
+      ))}
+      {[-1, 1].map((side) => (
+        <group
+          key={side}
+          position={[side * (width / 2 + 2.6), 0.24, depth / 2 + 0.3]}
+        >
+          <mesh position={[0, 1.2, 0]} castShadow>
+            <cylinderGeometry args={[0.04, 0.06, 2.4, 8]} />
+            <meshStandardMaterial
+              color="#52666e"
+              metalness={0.5}
+              roughness={0.5}
+            />
+          </mesh>
+          <mesh position={[0, 2.4, 0]}>
+            <boxGeometry args={[0.45, 0.1, 0.45]} />
+            <meshStandardMaterial
+              color="#e9f2ee"
+              emissive="#d9edda"
+              emissiveIntensity={0.2}
+            />
+          </mesh>
+        </group>
+      ))}
+      <mesh position={[0, 0.25, depth / 2 + 2.2]} receiveShadow>
+        <boxGeometry args={[2.5, 0.02, 3.2]} />
+        <meshStandardMaterial color="#f3f0e6" roughness={0.8} />
+      </mesh>
+    </group>
+  );
+}
 function Architecture({ spec, highlighted, onHover, onEnter }: Props) {
   const floors = buildingFloors(spec);
   const width = Math.max(9, Math.min(18, (spec.rooms / spec.floors) * 0.42));
@@ -41,6 +166,7 @@ function Architecture({ spec, highlighted, onHover, onEnter }: Props) {
         <planeGeometry args={[160, 160]} />
         <meshStandardMaterial color="#dce7ed" roughness={0.9} />
       </mesh>
+      <Landscape width={width} depth={depth} />
       <RoundedBox
         args={[width + 6, 0.25, depth + 6]}
         position={[0, 0.12, 0]}
