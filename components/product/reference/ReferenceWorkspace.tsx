@@ -5,7 +5,7 @@ import { useSyncExternalStore, type ReactNode } from "react";
 import { useDemoOrg } from "../useDemoOrg";
 import { resolveCanonicalDecisionId } from "@/lib/radr/decision/aliases";
 import { getDecisionRecord,getDecisionStoreSnapshot,subscribeDecisionStore } from "@/lib/radr/decision/store";
-import { ReferenceValue,ReferenceMemory,ReferenceHealth,ReferenceIntelligence,ReferenceLive,ReferenceOperations,ReferenceSupplier } from "./ReferencePages";
+import { ReferenceValue,ReferenceMemory,ReferenceHealth,ReferenceIntelligence,ReferenceOperations,ReferenceSupplier } from "./ReferencePages";
 
 import { ControlCenterPremium } from "./ControlCenterPremium";
 import { ReferenceDecisions } from "./ReferenceDecisions";
@@ -21,7 +21,6 @@ export function ReferenceWorkspace({children}:{children:ReactNode}) {
   if(path==='/app/value'&&!search.get('view')&&!search.get('class'))return <ReferenceValue />;
   if(path==='/app/memory'&&!search.get('view')&&!search.get('learning')&&!search.get('playbook'))return <ReferenceMemory />;
   if(path==='/app/intelligence'&&!search.get('domain'))return <ReferenceIntelligence />;
-  if(path==='/app/live'&&!isHotel&&!search.get('zone'))return <ReferenceLive />;
   if(path==='/app/service'&&!isHotel&&!search.get('view')&&!search.get('table'))return <ReferenceOperations />;
   if(path.startsWith('/app/decisions/')) {
     const id=resolveCanonicalDecisionId(path.split('/').pop()||'');const record=getDecisionRecord(id);

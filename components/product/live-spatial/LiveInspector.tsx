@@ -364,11 +364,11 @@ export function LiveInspector({
   const isKitchen = zone === "kitchen" && !table && !stationData;
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {open ? (
         <motion.aside
           key={`${zone}-${station}-${tableId}`}
-          className="ls-panel ls-venue-panel"
+          className="ls-panel ls-venue-panel ls-inspector"
           data-testid="ls-inspector"
           initial={{ opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}

@@ -628,3 +628,6 @@ html
     font-size: 8px;
   }
 }
+
+.hw-loading-overlay{position:absolute;inset:0;z-index:25;background:linear-gradient(135deg,#eaf3faf5,#e1eef6f5);pointer-events:none}
+.hw-camera-tools button:disabled{opacity:.45;cursor:wait}

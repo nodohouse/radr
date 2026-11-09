@@ -287,6 +287,7 @@ export function HospitalityWorld(props: HospitalityWorldProps) {
     >
       <div
         className="hw-stage"
+        aria-busy={!camera}
         tabIndex={0}
         role="region"
         aria-label={`${props.label}. Drag to rotate, shift-drag to pan, scroll or pinch to zoom. Select a ${props.kind === "hotel" ? "room" : "table"} for details.`}
@@ -311,12 +312,7 @@ export function HospitalityWorld(props: HospitalityWorldProps) {
           }
         }}
       >
-        {capable === null ? (
-          <div className="hw-loading">
-            <span />
-            <p>Opening your operation</p>
-          </div>
-        ) : capable ? (
+        {capable === null ? null : capable ? (
           <SceneBoundary
             fallback={fallback}
             onFailure={() => setCapable(false)}
@@ -331,6 +327,12 @@ export function HospitalityWorld(props: HospitalityWorldProps) {
         ) : (
           fallback
         )}
+        {!camera ? (
+          <div className="hw-loading hw-loading-overlay" role="status">
+            <span />
+            <p>Opening your operation</p>
+          </div>
+        ) : null}
       </div>
       <div className="hw-heading">
         <span className="hw-kicker">
@@ -345,6 +347,7 @@ export function HospitalityWorld(props: HospitalityWorldProps) {
       <div className="hw-camera-tools">
         <button
           type="button"
+          disabled={!camera}
           onClick={() => bridge.current?.top()}
           aria-label="View from above"
           title="View from above"
@@ -360,6 +363,7 @@ export function HospitalityWorld(props: HospitalityWorldProps) {
         </button>
         <button
           type="button"
+          disabled={!camera}
           onClick={() => bridge.current?.reset()}
           aria-label="Reset spatial view"
           title="Reset view"

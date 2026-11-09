@@ -1,11 +1,10 @@
 "use client";
 
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import {
   STATION_HITS,
   TABLE_POSITIONS,
   TABLES,
-  ZONE_CAMERA,
   ZONE_LABEL_AT,
   ZONE_ORDER,
   type LiveLens,
@@ -14,17 +13,6 @@ import {
   type LiveZoneId,
   type ZoneLens,
 } from "./liveSpatialData";
-
-const VENUE_ART = {
-  master: "/live/venue/venue-berlin-master.jpg?v=4k4",
-};
-
-const ZONE_DETAIL: Partial<Record<LiveZoneId, string>> = {
-  main: "/live/venue/detail-dining.jpg?v=4k4",
-  kitchen: "/live/venue/detail-kitchen.jpg?v=4k4",
-  terrace: "/live/venue/detail-terrace.jpg?v=4k4",
-  bar: "/live/venue/detail-terrace.jpg?v=4k4",
-};
 
 type Props = {
   lens: LiveLens;
@@ -247,13 +235,6 @@ function VenueWorldInner({
   onSelectStation,
   onSelectTable,
 }: Props) {
-  const [artMissing, setArtMissing] = useState(false);
-  useEffect(() => {
-    const image = new window.Image();
-    image.onerror = () => setArtMissing(true);
-    image.src = VENUE_ART.master;
-    return () => { image.onerror = null; };
-  }, []);
   const focus = selectedZone ?? hoverZone;
   const ls = Number.isFinite(labelScale) && labelScale > 0 ? labelScale : 1;
   const kitchenSev: LiveSeverity =
@@ -264,8 +245,6 @@ function VenueWorldInner({
     simCalm && selectedZone === "delivery" ? "watch" : zones.delivery.severity;
   const expandedId = selectedZone ?? hoverZone;
   const kitchenFocused = selectedZone === "kitchen";
-  const detailHref = selectedZone ? ZONE_DETAIL[selectedZone] : undefined;
-  const detailCam = selectedZone ? ZONE_CAMERA[selectedZone] : null;
 
   return (
     <g className="ls-venue-root" data-lens={lens} data-pass="4">
@@ -284,37 +263,12 @@ function VenueWorldInner({
         </filter>
       </defs>
 
-      {/* 4K master — never stretch a 1280 source across Retina + zoom */}
-      {artMissing ? <g aria-label="Schematic venue view">
-        <rect x="0" y="20" width="960" height="640" rx="22" fill="#f0f6fd" />
-        {ZONE_ORDER.map(id => <path key={id} d={ZONE_PATH[id]} fill={id === "kitchen" ? "#e6effb" : "#e9f4ef"} stroke="#bed1e7" strokeWidth="2" />)}
-        <text x="40" y="615" fontSize="12" fill="#7089a7" letterSpacing="2">DEMO VENUE · SCHEMATIC VIEW</text>
-      </g> : <image
-        onError={() => setArtMissing(true)}
-        href={VENUE_ART.master}
-        x={0}
-        y={20}
-        width={960}
-        height={640}
-        preserveAspectRatio="xMidYMid slice"
-        className="ls-venue-art"
-        style={{ pointerEvents: "none" }}
-      />}
-
-      {/* Zone detail plate — native tile fills camera so focus stays sharp */}
-      {!artMissing && detailHref && detailCam ? (
-        <image
-          href={detailHref}
-          x={detailCam.x}
-          y={detailCam.y}
-          width={detailCam.w}
-          height={detailCam.h}
-          preserveAspectRatio="xMidYMid slice"
-          className="ls-venue-detail"
-          opacity={selectedZone ? 1 : 0.92}
-          style={{ pointerEvents: "none" }}
-        />
-      ) : null}
+      <g aria-label="Operating area schematic">
+        <defs><pattern id="lsOverviewOak" width="180" height="180" patternUnits="userSpaceOnUse"><image href="/layout-materials/restaurant-oak-floor.webp" width="180" height="180" preserveAspectRatio="xMidYMid slice"/></pattern></defs>
+        <rect x="0" y="20" width="960" height="640" rx="22" fill="#edf4fc" />
+        {ZONE_ORDER.map(id => <path key={id} d={ZONE_PATH[id]} fill={id === "main" ? "url(#lsOverviewOak)" : id === "kitchen" ? "#dbe8f6" : "#e1eee8"} stroke="#adc7dd" strokeWidth="2" />)}
+        <text x="40" y="615" fontSize="12" fill="#4a6b85" letterSpacing="2">OPERATING AREAS · SCHEMATIC</text>
+      </g>
 
       {/* Spatial pressure — kitchen Hot/Pass (not a red polygon) */}
       {(kitchenSev === "pressure" || kitchenSev === "intervene") && !simCalm ? (
