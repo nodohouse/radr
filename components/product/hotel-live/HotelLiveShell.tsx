@@ -13,12 +13,13 @@ import {
   useState,
   type MouseEvent,
 } from "react";
+import { HotelBuildingExplorer } from "../hotel-building/HotelBuildingExplorer";
 import { HospitalityWorld } from "../hospitality-world/HospitalityWorld";
 import type { SpatialCamera } from "../hospitality-world/types";
 import Image from "next/image";
 import Link from "next/link";
 import {WorkspaceFocus} from "../reference/WorkspaceFocus";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   floorStatusCounts,
   formatClock,
@@ -69,7 +70,6 @@ const TIME_SCRUBS: { id: HotelLiveTimeOffset; label: string }[] = [
 
 export function HotelLiveShell() {
   const model = useMemo(() => hotelLivePropertyModel(), []);
-  const router = useRouter();
   const pathname = usePathname();
   const search = useSearchParams();
 
@@ -80,6 +80,8 @@ export function HotelLiveShell() {
   const urlTime = parseTimeOffset(search.get("time"));
   const urlLevel = parseLevel(search.get("level"));
 
+  const [generatedBuilding, setGeneratedBuilding] = useState(false);
+  const [buildingView, setBuildingView] = useState(search.get("view") === "building" || !search.get("room"));
   const [level, setLevel] = useState<HotelLiveLevel>(urlLevel);
   const [estateSelectedId, setEstateSelectedId] = useState<string>(
     "loc_canal_house",
@@ -117,6 +119,7 @@ export function HotelLiveShell() {
       mode?: HotelLiveMode;
       time?: HotelLiveTimeOffset;
       property?: string;
+      view?: "building" | "floor";
     }) => {
       const params = new URLSearchParams(search.toString());
       const lv = next.level ?? level;
@@ -127,11 +130,13 @@ export function HotelLiveShell() {
           (lv === "estate" ? "northstar" : HOTEL_LIVE_PROPERTY_SLUG),
       );
       if (lv === "estate") {
+        params.delete("view");
         params.delete("floor");
         params.delete("room");
         params.delete("mode");
         params.delete("time");
       } else {
+        if (next.view) params.set("view", next.view);
         const f = next.floor ?? floor;
         params.set("floor", String(f));
         const m = next.mode ?? mode;
@@ -147,9 +152,9 @@ export function HotelLiveShell() {
         }
       }
       const qs = params.toString();
-      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      window.history.replaceState(null, "", qs ? `${pathname}?${qs}` : pathname);
     },
-    [floor, level, mode, pathname, router, search, selectedId, timeOffset],
+    [floor, level, mode, pathname, search, selectedId, timeOffset],
   );
 
   // Seed canonical URL once on mount.
@@ -160,7 +165,8 @@ export function HotelLiveShell() {
     params.set("property", HOTEL_LIVE_PROPERTY_SLUG);
     params.set("floor", String(model.selectedFloor));
     params.set("room", "310");
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    params.set("view", buildingView ? "building" : "floor");
+    window.history.replaceState(null, "", `${pathname}?${params.toString()}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- mount seed only
   }, []);
 
@@ -168,6 +174,7 @@ export function HotelLiveShell() {
   useEffect(() => {
     if (!search.get("level")) return;
     setLevel(parseLevel(search.get("level")));
+    setBuildingView(search.get("view") === "building" || (!search.get("room") && search.get("view") !== "floor"));
     const f = Number(search.get("floor") || model.selectedFloor);
     if (Number.isFinite(f) && f >= 1 && f <= 8) setFloor(f);
     setMode(parseMode(search.get("mode")));
@@ -241,15 +248,16 @@ export function HotelLiveShell() {
     : model.clockLabel;
 
   const selectFloor = (f: number) => {
+    setBuildingView(false);
     setFloor(f);
     const still = selectedId
       ? liveRooms.find((r) => r.id === selectedId && r.floor === f)
       : null;
     if (!still) {
       setSelectedId(null);
-      writeUrl({ floor: f, room: null });
+      writeUrl({ floor: f, room: null, view: "floor" });
     } else {
-      writeUrl({ floor: f });
+      writeUrl({ floor: f, view: "floor" });
     }
   };
 
@@ -265,7 +273,7 @@ export function HotelLiveShell() {
     if (!room) return;
     setSelectedId(id);
     setFloor(room.floor);
-    writeUrl({ floor: room.floor, room: room.number });
+    writeUrl({ floor: room.floor, room: room.number, view: "floor" });
   };
 
   const clearRoom = () => {
@@ -292,6 +300,7 @@ export function HotelLiveShell() {
   };
 
   const enterProperty = (prop: HotelEstateProperty) => {
+    setBuildingView(true);
     setLevel("property");
     setEstateSelectedId(prop.id);
     const isHero =
@@ -305,6 +314,7 @@ export function HotelLiveShell() {
       property: prop.slug,
       floor: isHero ? 3 : 1,
       room: isHero ? "310" : null,
+      view: "building",
     });
   };
 
@@ -365,10 +375,12 @@ export function HotelLiveShell() {
                 aria-selected={level === "property"}
                 className={level === "property" ? "is-active" : undefined}
                 onClick={() => {
+                  setBuildingView(true);
                   setLevel("property");
                   writeUrl({
                     level: "property",
                     property: HOTEL_LIVE_PROPERTY_SLUG,
+                    view: "building",
                   });
                 }}
               >
@@ -377,16 +389,16 @@ export function HotelLiveShell() {
             </div>
           </div>
           <h1 className="hl-title">
-            {level === "estate" ? estate.orgLabel : "Property live"}
+            {level === "estate" ? estate.orgLabel : buildingView ? "Property explorer" : "Property live"}
           </h1>
           <p className="hl-sub">
             {level === "estate"
               ? "Where pressure is building across the portfolio."
               : "Live hotel operations. Rooms. People. Readiness."}
           </p>
-          {level === "property"?<div className="guest-signal-legend"><span>! Allergy</span><span>★ Occasion</span><span>≡ Booking notes</span><span>Current and next stay details</span></div>:null}
+          {level === "property" && !buildingView?<div className="guest-signal-legend"><span>! Allergy</span><span>★ Occasion</span><span>≡ Booking notes</span><span>Current and next stay details</span></div>:null}
         </div>
-        <div className="hl-kpis" aria-label="Live metrics">
+        <div className="hl-kpis" aria-label="Live metrics" hidden={level === "property" && buildingView && generatedBuilding}>
           {level === "estate" ? (
             <>
               <button type="button" className="hl-kpi">
@@ -485,7 +497,7 @@ export function HotelLiveShell() {
         <WorkspaceFocus eyebrow="Live Operations"/>
       </header>
 
-      {level === "property" ? (
+      {level === "property" && !buildingView ? (
         <div className="hl-modes" role="tablist" aria-label="Live modes">
           {MODES.map((m) => (
             <button
@@ -524,8 +536,11 @@ export function HotelLiveShell() {
             onEnter={() => enterProperty(estateProp)}
           />
         </div>
+      ) : buildingView ? (
+        <HotelBuildingExplorer storageKey={`radr.building.v1.${model.propertyId}`} onPreviewChange={setGeneratedBuilding} onEnterFloor={selectFloor} />
       ) : (
       <>
+      <button type="button" className="hl-building-back" onClick={() => { setBuildingView(true); writeUrl({ view: "building" }); }}>← Whole building</button>
       <div className="hl-toolbar">
         <div className="hl-floor-nav">
           <button

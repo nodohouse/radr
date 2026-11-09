@@ -37,28 +37,13 @@ for (const width of [390, 820, 1512, 3840]) {
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto("/en/product?surface=live#surfaces");
     const workspace = page.locator(".psw-workspace");
-    await expect(page.locator(".ps-live-inspector")).toContainText(
-      "Shellfish allergy",
-    );
-    await expect(page.locator(".ps-live-inspector")).toContainText(
-      "Ready target 14:58",
-    );
-    await expect(page.locator(".ps-live-inspector")).toContainText("15:20");
-    await expect(page.locator(".ps-live-inspector")).toContainText(
-      "Birthday stay",
-    );
-    await expect(page.locator(".hw-root")).toHaveAttribute(
-      "data-renderer",
-      /webgl|isometric/,
-    );
-    await expect(page.locator(".ps-live-viewport")).toHaveAttribute(
+    await expect(page.locator(".hb-scene")).toHaveAttribute(
       "data-ready",
       "true",
     );
-    await expect(page.locator(".hw-root")).not.toHaveAttribute(
-      "data-camera",
-      "",
-    );
+    await expect(
+      page.getByRole("button", { name: "Enter floor 3", exact: true }),
+    ).toBeVisible();
     await page.evaluate(() => document.fonts.ready);
     expect(
       await page.evaluate(
@@ -72,11 +57,9 @@ for (const width of [390, 820, 1512, 3840]) {
       const toolbar = node
         .querySelector(".ps-live-toolbar")!
         .getBoundingClientRect();
-      const scene = node
-        .querySelector(".ps-live-visual")!
-        .getBoundingClientRect();
+      const scene = node.querySelector(".hb-scene")!.getBoundingClientRect();
       const inspector = node
-        .querySelector(".ps-live-inspector")!
+        .querySelector(".hb-floor-panel")!
         .getBoundingClientRect();
       const collide =
         scene.left < inspector.right &&
@@ -85,7 +68,7 @@ for (const width of [390, 820, 1512, 3840]) {
         scene.bottom > inspector.top;
       const clipped: string[] = [];
       for (const el of node.querySelectorAll<HTMLElement>(
-        ".psw-panel-head > *, .ps-live-metrics > div, .ps-live-inspector > *, .ps-live-entities button",
+        ".psw-panel-head > *, .hb-head > *, .hb-panel-title > *, .hb-floor-list button",
       )) {
         if (el.scrollWidth > el.clientWidth + 2)
           clipped.push(el.textContent || el.tagName);
@@ -190,25 +173,26 @@ test("hotel and restaurant selections keep current and incoming guest requiremen
   page,
 }) => {
   await page.goto("/en/product?surface=live#surfaces");
-  const inspector = page.locator(".ps-live-inspector");
-  await expect(inspector).toContainText("Shellfish allergy");
-  await expect(inspector).toContainText("Incoming guest");
-  await expect(page.locator(".ps-live-viewport")).toHaveAttribute(
-    "data-ready",
-    "true",
-  );
-  await page.getByRole("button", { name: "Hotel", exact: true }).click();
-  await expect(page.locator(".ps-live-viewport")).toHaveAttribute(
-    "data-ready",
-    "true",
-  );
   await page
-    .getByRole("group", { name: "Rooms in focus" })
-    .getByRole("button", { name: "Room 308", exact: true })
+    .getByRole("button", { name: "Enter floor 3", exact: true })
     .click();
-  await expect(inspector.locator("header > span")).toHaveText("Room 308");
-  await expect(inspector).toContainText("15:35");
-  await expect(inspector).not.toContainText("Shellfish allergy");
+  await expect(page.locator(".hb-room-details")).toContainText(
+    "Shellfish allergy",
+  );
+  await expect(page.locator(".hb-room-details")).toContainText(
+    "Incoming guest",
+  );
+  await expect(page.locator(".hb-room-details")).toContainText("14:58");
+  await expect(page.locator(".hb-room-details")).toContainText("Birthday stay");
+  await page
+    .getByRole("group", { name: "Rooms on selected floor" })
+    .getByRole("button", { name: /^308/ })
+    .click();
+  await expect(page.locator(".hb-room-details")).toContainText("15:35");
+  await expect(page.locator(".hb-room-details")).not.toContainText(
+    "Shellfish allergy",
+  );
+  const inspector = page.locator(".ps-live-inspector");
   await page.getByRole("button", { name: "Restaurant", exact: true }).click();
   await expect(inspector.locator("header > span")).toHaveText("Table 8");
   await expect(inspector.locator(".ps-live-safety")).toContainText(
@@ -240,6 +224,7 @@ test("the spatial view preserves page scrolling until activated and releases it 
 }) => {
   await page.setViewportSize({ width: 1512, height: 1100 });
   await page.goto("/en/product?surface=live#surfaces");
+  await page.getByRole("button", { name: "Restaurant", exact: true }).click();
   const viewport = page.locator(".ps-live-viewport");
   await expect(page.locator(".hw-root")).toHaveAttribute(
     "data-renderer",
@@ -296,17 +281,23 @@ test("the hotel remains usable without WebGL", async ({ page }) => {
     });
   });
   await page.goto("/en/product?surface=live#surfaces");
+  await expect(page.locator(".hb-scene")).toHaveAttribute(
+    "data-renderer",
+    "elevation",
+  );
+  await expect(page.locator(".hb-elevation")).toBeVisible();
+  await page
+    .getByRole("button", { name: "Enter floor 3", exact: true })
+    .click();
   await expect(page.locator(".hw-root")).toHaveAttribute(
     "data-renderer",
     "isometric",
   );
   await page
-    .getByRole("group", { name: "Rooms in focus" })
-    .getByRole("button", { name: "Room 312", exact: true })
+    .getByRole("group", { name: "Rooms on selected floor" })
+    .getByRole("button", { name: /^312/ })
     .click();
-  await expect(page.locator(".ps-live-inspector header > span")).toHaveText(
-    "Room 312",
-  );
+  await expect(page.locator(".hb-room-details")).toContainText("ROOM 312");
   await page.screenshot({
     path: test.info().outputPath("spatial-fallback.png"),
   });
@@ -317,7 +308,10 @@ test("reduced motion preserves the tour and its guest data", async ({
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/en/product?surface=live#surfaces");
-  await expect(page.locator(".ps-live-inspector")).toContainText(
+  await page
+    .getByRole("button", { name: "Enter floor 3", exact: true })
+    .click();
+  await expect(page.locator(".hb-room-details")).toContainText(
     "Shellfish allergy",
   );
   await page.getByRole("tab", { name: "Value", exact: true }).click();
@@ -333,7 +327,7 @@ test("workspace controls and guest context pass accessibility checks on desktop 
   for (const width of [1512, 390]) {
     await page.setViewportSize({ width, height: 1100 });
     await page.goto("/en/product?surface=live#surfaces");
-    await expect(page.locator(".ps-live-viewport")).toHaveAttribute(
+    await expect(page.locator(".hb-scene")).toHaveAttribute(
       "data-ready",
       "true",
     );

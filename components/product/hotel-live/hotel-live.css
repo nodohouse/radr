@@ -1542,3 +1542,7 @@
 .hl-plan[data-dragging=true]{cursor:grabbing;user-select:none}
 .hl-plan[data-dragging=true] .hl-plan-stage{transition:none}
 .hl-plan:focus-visible{outline:3px solid #1265e7;outline-offset:3px}
+
+.hl-building-back{font:inherit;font-size:12px;font-weight:600;padding:10px 14px;margin-bottom:12px;border:1px solid #bad0df;border-radius:9px;background:#fff;color:#143957;cursor:pointer}
+.hl-building-back:focus-visible{outline:3px solid #0478db;outline-offset:3px}
+.hl-kpis[hidden]{display:none}
