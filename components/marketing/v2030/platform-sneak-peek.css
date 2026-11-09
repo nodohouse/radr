@@ -1,0 +1,257 @@
+.ps-teaser {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  align-items: center;
+  gap: clamp(32px, 4vw, 64px);
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.ps-teaser-copy {
+  max-width: 390px;
+}
+html body .radr.rm-platform .ps-teaser-copy h2 {
+  font: inherit;
+  font-size: clamp(32px, 3.2vw, 44px);
+  font-weight: 550;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  color: #103454;
+  margin: 16px 0 20px;
+  max-width: 11ch;
+}
+.ps-teaser-lead {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #385875;
+  margin: 0 0 15px;
+}
+.ps-teaser-invite {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #526e87;
+  margin: 0 0 25px;
+}
+.ps-teaser-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 48px;
+  padding: 13px 20px;
+  border: 1px solid #00ca8b;
+  border-radius: 11px;
+  background: #00e99b;
+  color: #073b43;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration: none;
+  box-shadow: 0 7px 20px #00c99015;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.ps-teaser-cta:hover {
+  background: #19f5ad;
+  transform: translateY(-2px);
+}
+.ps-teaser-cta:focus-visible {
+  outline: 3px solid #076fe2;
+  outline-offset: 5px;
+}
+.ps-teaser-cta svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+.ps-teaser-frame {
+  margin: 0;
+  min-width: 0;
+  border: 1px solid #bed5e9;
+  border-radius: 18px;
+  background: #f8fcff;
+  overflow: hidden;
+  box-shadow:
+    0 22px 60px #17467716,
+    0 2px 8px #17467708;
+  isolation: isolate;
+  cursor: default;
+}
+.ps-teaser-chrome {
+  padding: 14px 17px;
+  border-bottom: 1px solid #cddfeb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(110deg, #f7fbff, #ebf4ff);
+  color: #315772;
+}
+.ps-teaser-chrome > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  font-weight: 650;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.ps-teaser-chrome .ps-teaser-badge {
+  font-size: 8px;
+  letter-spacing: 0.11em;
+  color: #326e65;
+}
+.ps-teaser-badge i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00b985;
+  box-shadow: 0 0 8px #00d99545;
+}
+.ps-teaser-media {
+  position: relative;
+  aspect-ratio: 1.6;
+  background: linear-gradient(120deg, #e6f0ff, #edf8fc);
+  pointer-events: none;
+  user-select: none;
+}
+.ps-teaser-media img {
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+.ps-teaser-current {
+  z-index: 1;
+  animation: ps-teaser-reveal 0.75s ease-out both;
+}
+.ps-teaser-previous {
+  z-index: 0;
+}
+.ps-teaser-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  font-size: 12px;
+  color: #426580;
+}
+.ps-teaser-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 17px;
+  border-top: 1px solid #d0e1ee;
+  color: #254d6c;
+  background: #f8fcff;
+}
+.ps-teaser-caption > span {
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+.ps-teaser-caption small {
+  font-size: 10px;
+  color: #59778d;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+@keyframes ps-teaser-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (min-width: 2200px) {
+  .ps-teaser {
+    max-width: 1280px;
+    gap: 72px;
+  }
+  .ps-teaser-copy {
+    max-width: 420px;
+  }
+  .ps-teaser-lead {
+    font-size: 18px;
+  }
+  .ps-teaser-invite {
+    font-size: 16px;
+  }
+  .ps-teaser-caption > span {
+    font-size: 14px;
+  }
+}
+@media (max-width: 900px) {
+  .ps-teaser {
+    gap: 28px;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+  .ps-teaser-lead {
+    font-size: 14px;
+  }
+  .ps-teaser-invite {
+    font-size: 13px;
+  }
+  .ps-teaser-caption small {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .ps-teaser {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    max-width: 500px;
+  }
+  .ps-teaser-copy {
+    max-width: 100%;
+  }
+  html body .radr.rm-platform .ps-teaser-copy h2 {
+    font-size: 34px;
+    max-width: 15ch;
+    margin-top: 13px;
+    margin-bottom: 16px;
+  }
+  .ps-teaser-lead {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  .ps-teaser-invite {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .ps-teaser-cta {
+    font-size: 13px;
+    min-height: 46px;
+  }
+  .ps-teaser-frame {
+    border-radius: 14px;
+  }
+  .ps-teaser-chrome {
+    padding: 12px 14px;
+  }
+  .ps-teaser-caption {
+    padding: 12px 14px;
+  }
+  .ps-teaser-caption > span {
+    font-size: 11px;
+  }
+  .ps-teaser-caption small {
+    display: inline;
+    font-size: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ps-teaser-current {
+    animation: none;
+  }
+  .ps-teaser-cta {
+    transition: none;
+  }
+  .ps-teaser-cta:hover {
+    transform: none;
+  }
+}

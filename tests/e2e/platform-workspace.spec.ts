@@ -1,17 +1,6 @@
 import { test, expect } from "playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-const surfaces = [
-  "Control Center",
-  "Live",
-  "Decisions",
-  "Operations",
-  "Back of House",
-  "Intelligence",
-  "Value",
-  "Memory",
-  "Data Health",
-  "Connections",
-];
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() =>
     localStorage.setItem(
@@ -26,220 +15,151 @@ test.beforeEach(async ({ page }) => {
     ),
   );
 });
-for (const width of [390, 820, 1512, 3840])
-  test(`image showcase is aligned at ${width}px and contains no product controls`, async ({
-    page,
-  }) => {
+for (const width of [390, 820, 1512, 3840]) {
+  test(`compact passive sneak peek at ${width}px`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.setViewportSize({ width, height: width === 3840 ? 2160 : 1200 });
+    await page.setViewportSize({ width, height: width === 3840 ? 2160 : 1100 });
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
-    await page.goto("/en/product?surface=live#surfaces");
-    const gallery = page.locator(".psw-gallery");
-    await expect(gallery).toHaveAttribute("data-slide", "1");
-    await expect
-      .poll(() =>
-        page
-          .locator(".psw-gallery-current")
-          .evaluate(
-            (image: HTMLImageElement) =>
-              image.complete && image.naturalWidth > 0,
-          ),
-      )
-      .toBe(true);
+    await page.goto("/en/product#surfaces");
+    const section = page.locator("#surfaces");
     await expect(
-      page.locator(
-        ".psw-workspace canvas, .psw-workspace .hw-root, .psw-workspace .hb-root, .psw-workspace form",
+      section.locator(
+        "button, select, input, form, canvas, [role=tab], [role=tablist], [tabindex]",
       ),
     ).toHaveCount(0);
-    await expect(
-      page.locator(".psw-gallery button, .psw-gallery input, .psw-gallery a"),
-    ).toHaveCount(0);
+    await expect(section.getByRole("link")).toHaveCount(1);
+    await expect(section.getByRole("link")).toHaveText("Explore the demo");
+    await expect(section.locator(".ps-teaser-media")).toHaveAttribute(
+      "data-ready",
+      "true",
+    );
+    const figure = section.locator("figure");
+    const box = (await figure.boundingBox())!;
+    expect(box.height).toBeLessThan(width < 760 ? 340 : 580);
+    expect(box.width).toBeLessThan(760);
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth - innerWidth,
       ),
     ).toBeLessThanOrEqual(1);
-    const clipped = await page.locator(".psw-workspace").evaluate((node) =>
-      Array.from(
-        node.querySelectorAll<HTMLElement>(
-          ".psw-panel-head>*, .psw-gallery-caption>*, .psw-panel-footer>*",
-        ),
+    const layout = await section.evaluate((node) => {
+      const a = node.querySelector(".ps-teaser-copy")!.getBoundingClientRect(),
+        b = node.querySelector("figure")!.getBoundingClientRect();
+      const overlap =
+        a.left < b.right &&
+        a.right > b.left &&
+        a.top < b.bottom &&
+        a.bottom > b.top;
+      const clipped = Array.from(
+        node.querySelectorAll<HTMLElement>(".ps-teaser-copy>*,figcaption>*"),
       )
-        .filter((el) => el.scrollWidth > el.clientWidth + 2)
-        .map((el) => el.textContent),
-    );
-    expect(clipped).toEqual([]);
-    await expect(page.locator(".psw-gallery-media")).toHaveAttribute(
-      "data-ready",
-      "true",
-    );
+        .filter((n) => n.scrollWidth > n.clientWidth + 2)
+        .map((n) => n.textContent);
+      return { overlap, clipped };
+    });
+    expect(layout).toEqual({ overlap: false, clipped: [] });
+    await section.scrollIntoViewIfNeeded();
     await page.evaluate(
       () =>
         new Promise((resolve) =>
           requestAnimationFrame(() => requestAnimationFrame(resolve)),
         ),
     );
-    await gallery.scrollIntoViewIfNeeded();
     await page.screenshot({
-      path: test.info().outputPath(`gallery-${width}.png`),
+      path: test.info().outputPath(`sneak-peek-${width}.png`),
     });
     expect(errors).toEqual([]);
   });
-test("all ten selectors change images only and keep URL and keyboard aligned", async ({
+}
+test("clicking or dragging the preview cannot navigate or open product UI", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.setViewportSize({ width: 1512, height: 1100 });
   await page.goto("/en/product#surfaces");
-  const tabs = page
-    .getByRole("tablist", { name: "Choose a product preview" })
-    .getByRole("tab");
-  await expect(tabs).toHaveCount(10);
-  for (const name of surfaces) {
-    const tab = tabs.filter({ hasText: name });
-    await tab.click();
-    await expect(tab).toHaveAttribute("aria-selected", "true");
-    await expect(page.locator(".psw-panel-head>span")).toHaveText(name);
-    await expect
-      .poll(() =>
-        page
-          .locator(".psw-gallery-current")
-          .evaluate(
-            (image: HTMLImageElement) =>
-              image.complete && image.naturalWidth > 0,
-          ),
-      )
-      .toBe(true);
-  }
-  await tabs.first().click();
-  await page.keyboard.press("ArrowDown");
-  await expect(
-    page.getByRole("tab", { name: "Live", exact: true }),
-  ).toBeFocused();
-  await expect(page).toHaveURL(/surface=live/);
-  await page.keyboard.press("End");
-  await expect(tabs.last()).toBeFocused();
-  await expect(page.locator(".psw-workspace canvas")).toHaveCount(0);
-});
-test("the visible showcase advances automatically without playback buttons", async ({
-  page,
-}) => {
-  await page.goto("/en/product?surface=live#surfaces");
-  const gallery = page.locator(".psw-gallery");
-  await gallery.scrollIntoViewIfNeeded();
-  await expect(gallery).toHaveAttribute("data-slide", "1");
-  await expect(gallery).toHaveAttribute("data-slide", "2", { timeout: 10000 });
-  await expect(page.locator(".psw-gallery-current")).toHaveAttribute(
-    "alt",
-    /shellfish allergy/,
+  const frame = page.locator(".ps-teaser-frame");
+  await expect(page.locator(".ps-teaser-media")).toHaveAttribute(
+    "data-ready",
+    "true",
   );
-  await expect(gallery).toHaveAttribute("data-slide", "3", { timeout: 10000 });
-  await expect(page.locator(".psw-gallery-current")).toHaveAttribute(
-    "alt",
-    /Restaurant service/,
-  );
-  await expect(
-    page.getByRole("button", { name: /pause|play slideshow|stop animation/i }),
-  ).toHaveCount(0);
-});
-test("reduced motion keeps images stable and phone selectors remain usable", async ({
-  page,
-}) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/en/product?surface=live#surfaces");
-  const select = page.getByLabel("Choose a product surface");
-  for (const name of surfaces) {
-    await select.selectOption({ label: name });
-    await expect(page.locator(".psw-panel-head>span")).toHaveText(name);
-  }
-  const before = await page.locator(".psw-gallery").getAttribute("data-slide");
-  await page.waitForTimeout(6600);
-  await expect(page.locator(".psw-gallery")).toHaveAttribute(
-    "data-slide",
-    before!,
-  );
-});
-test("gallery clicks do not perform product actions and the CTA goes to signup", async ({
-  page,
-}) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  const writes: string[] = [];
-  page.on("request", (request) => {
-    if (request.method() !== "GET") writes.push(request.url());
+  await frame.scrollIntoViewIfNeeded();
+  const url = page.url();
+  const before = await frame.getAttribute("data-slide");
+  await frame.click({ position: { x: 160, y: 140 } });
+  const box = (await frame.boundingBox())!;
+  await page.mouse.move(box.x + box.width * 0.6, box.y + box.height * 0.6);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.4, box.y + box.height * 0.5, {
+    steps: 8,
   });
-  await page.goto("/en/product?surface=live#surfaces");
-  const gallery = page.locator(".psw-gallery");
-  await gallery.click({ position: { x: 200, y: 200 } });
-  await expect(page.locator(".hb-dialog, .hb-root, .hw-root")).toHaveCount(0);
-  expect(writes).toEqual([]);
-  const cta = page.locator(".psw-panel-footer a");
-  await expect(cta).toHaveAttribute("href", /signup\?intent=demo/);
-  await cta.click();
-  await expect(page).toHaveURL(/signup\?intent=demo/);
-  expect(new URL(page.url()).searchParams.get("next")).toBe("/app/enter");
+  await page.mouse.up();
+  await expect(frame).toHaveAttribute("data-slide", before!);
+  expect(page.url()).toBe(url);
+  await expect(page.locator(".hb-root,.hw-root,.hb-dialog")).toHaveCount(0);
+  await page.locator(".ps-teaser-cta").focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/demo$/);
+  await expect(
+    page.getByRole("heading", { name: "Choose your operating world" }),
+  ).toBeVisible();
 });
-test("image previews remain available without WebGL and pass accessibility checks", async ({
+test("the four-frame sneak peek runs automatically without playback or selector controls", async ({
   page,
 }) => {
-  await page.addInitScript(() => {
-    const original = HTMLCanvasElement.prototype.getContext;
-    Object.defineProperty(HTMLCanvasElement.prototype, "getContext", {
-      value: function (
-        this: HTMLCanvasElement,
-        type: string,
-        options?: unknown,
-      ) {
-        return type.includes("webgl")
-          ? null
-          : Reflect.apply(original, this, [type, options]);
-      },
+  await page.goto("/en/product#surfaces");
+  const frame = page.locator(".ps-teaser-frame");
+  await frame.scrollIntoViewIfNeeded();
+  for (const [index, alt] of [
+    [0, /Control Center/],
+    [1, /hotel exterior/],
+    [2, /Restaurant service/],
+    [3, /Decisions screen/],
+  ] as const) {
+    await expect(frame).toHaveAttribute("data-slide", String(index), {
+      timeout: 10000,
     });
-  });
+    await expect(frame.locator(".ps-teaser-current")).toHaveAttribute(
+      "alt",
+      alt,
+    );
+  }
+  await expect(frame).toHaveAttribute("data-slide", "0", { timeout: 10000 });
+  await expect(page.locator("#surfaces button,#surfaces select")).toHaveCount(
+    0,
+  );
+});
+test("reduced motion keeps the preview stable", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/en/product#surfaces");
+  const frame = page.locator(".ps-teaser-frame");
+  await frame.scrollIntoViewIfNeeded();
+  await expect(page.locator(".ps-teaser-media")).toHaveAttribute(
+    "data-ready",
+    "true",
+  );
+  await page.waitForTimeout(5000);
+  await expect(frame).toHaveAttribute("data-slide", "0");
+});
+test("the passive preview and demo CTA pass desktop and phone accessibility checks", async ({
+  page,
+}) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const width of [1512, 390]) {
     await page.setViewportSize({ width, height: 1100 });
-    await page.goto("/en/product?surface=live#surfaces");
-    await expect
-      .poll(() =>
-        page
-          .locator(".psw-gallery-current")
-          .evaluate(
-            (image: HTMLImageElement) =>
-              image.complete && image.naturalWidth > 0,
-          ),
-      )
-      .toBe(true);
-    const results = await new AxeBuilder({ page })
+    await page.goto("/en/product#surfaces");
+    await expect(page.locator(".ps-teaser-media")).toHaveAttribute(
+      "data-ready",
+      "true",
+    );
+    const r = await new AxeBuilder({ page })
       .include("#surfaces")
       .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
       .analyze();
     expect(
-      results.violations.map((v) => ({
+      r.violations.map((v) => ({
         id: v.id,
         nodes: v.nodes.map((n) => n.target),
       })),
     ).toEqual([]);
   }
 });
-for (const world of ["hotel", "restaurant"])
-  test(`public ${world} choice leads to signup before demo entry`, async ({
-    page,
-  }) => {
-    await page.goto("/en/demo");
-    await page
-      .getByRole("button", {
-        name: world === "hotel" ? "Hotel group" : "Restaurant group",
-        exact: true,
-      })
-      .click();
-    await expect(page).toHaveURL(/\/en\/signup\?/);
-    expect(new URL(page.url()).searchParams.get("next")).toBe(
-      `/app/enter?vertical=${world}&go=1`,
-    );
-    expect(
-      await page.evaluate(() => sessionStorage.getItem("radr.demoEntered.v1")),
-    ).toBeNull();
-    await expect(page.locator('button[type="submit"]')).toBeDisabled();
-  });
