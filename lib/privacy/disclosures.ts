@@ -3,6 +3,15 @@ export const PRIVACY_NOTICE_VERSION = "2026-11-05";
 export const PRIVACY_REVIEW_DATE = "5 November 2026";
 export const STORAGE_INVENTORY = [
   {
+    name: "radr_demo_access",
+    type: "HTTP-only cookie",
+    provider: "RADR · first party",
+    purpose: "Signed permission to explore fictional demo screens. Contains a demo scope, random nonce and expiry, with no contact details or account identity. Does not grant workspace or API access.",
+    duration: "8 hours",
+    when: "Opening the fictional demo from its introduction form",
+    category: "Essential / requested demo",
+  },
+  {
     name: "radr.cookie-preferences.v1",
     type: "Local storage",
     provider: "RADR · first party",

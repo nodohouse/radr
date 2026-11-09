@@ -7,23 +7,30 @@ import {
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
-import NextLink from "next/link";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { TextSep } from "@/components/TextSep";
 import { entryFont } from "@/components/onboarding/entryFont";
+import { AuthEntryShowcase } from "@/components/AuthEntryShowcase";
 import "@/app/onboarding/onboarding.css";
+import "@/app/onboarding/entry-preview.css";
 
 type Props = {
   title: string;
   subtitle?: string;
   children: ReactNode;
+  showPaths?: boolean;
 };
 
 /**
  * Mineral light auth shell — atmospheric canvas + white card + signal green.
  * Login / signup / recovery.
  */
-export function LightAuthShell({ title, subtitle, children }: Props) {
+export function LightAuthShell({
+  title,
+  subtitle,
+  children,
+  showPaths = true,
+}: Props) {
   const tNav = useTranslations("navigation");
   const t = useTranslations("auth");
 
@@ -52,38 +59,12 @@ export function LightAuthShell({ title, subtitle, children }: Props) {
         <main className="ob-auth-layout">
           <section className="ob-entry-story" aria-label={t("entryEyebrow")}>
             <span className="ob-entry-eyebrow">{t("entryEyebrow")}</span>
-            <h2>{t("entryHeadline")}</h2>
+            <h2>
+              {t("entryHeadline")}
+              <em>{t("entryHeadlineAccent")}</em>
+            </h2>
             <p>{t("entryLead")}</p>
-            <div className="ob-entry-graphic" aria-hidden="true">
-              <div className="ob-entry-orbit">
-                <FrozenRadrLogo
-                  variant="mark"
-                  theme="dark"
-                  width={52}
-                  decorative
-                />
-              </div>
-              <span className="ob-entry-signal">
-                <i />
-                {t("entryEvidence")}
-              </span>
-              <div className="ob-entry-decision">
-                <small>RADR</small>
-                <strong>{t("entryDecision")}</strong>
-                <svg viewBox="0 0 240 66" fill="none">
-                  <path
-                    d="M0 55C30 55 27 40 50 42S85 56 110 29 150 41 170 18 209 24 240 4"
-                    stroke="#8ff2c4"
-                    strokeWidth="2"
-                  />
-                  <path d="M0 58H240" stroke="#c5e7ed" strokeOpacity=".25" />
-                </svg>
-                <span>
-                  {t("entryProof")}
-                  <i />
-                </span>
-              </div>
-            </div>
+            <AuthEntryShowcase />
             <p className="ob-entry-trust">{t("entryTrust")}</p>
           </section>
           <div className="ob-auth-card">
@@ -93,16 +74,18 @@ export function LightAuthShell({ title, subtitle, children }: Props) {
               {subtitle ? <p className="ob-auth-sub">{subtitle}</p> : null}
             </header>
             {children}
-            <nav className="ob-auth-paths" aria-label={t("entryPaths")}>
-              <Link href="/signup?intent=workspace">
-                {t("entrySetup")}
-                <span aria-hidden="true">→</span>
-              </Link>
-              <NextLink href="/app/enter">
-                {t("entryPreview")}
-                <span aria-hidden="true">→</span>
-              </NextLink>
-            </nav>
+            {showPaths ? (
+              <nav className="ob-auth-paths" aria-label={t("entryPaths")}>
+                <Link href="/signup?intent=workspace">
+                  {t("entrySetup")}
+                  <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/demo">
+                  {t("entryPreview")}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </nav>
+            ) : null}
           </div>
         </main>
 

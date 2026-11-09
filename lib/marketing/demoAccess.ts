@@ -1,6 +1,6 @@
 /**
- * Public → authenticated demo access helpers.
- * Marketing may SHOW RADR. Only signup unlocks /app.
+ * Public → fictional demo access helpers.
+ * Marketing shows RADR; the demo lead form issues a limited guest grant.
  */
 
 import { safeInternalPath } from "@/lib/security/safe-redirect";
@@ -28,7 +28,7 @@ export function safeDemoNext(
 }
 
 /**
- * Localized signup URL that unlocks the demo after account creation.
+ * Entry form for a fictional demo without creating a workspace account.
  * Use from marketing CTAs instead of linking /app directly.
  */
 export function demoSignupHref(next: string = DEMO_ENTRY_DEFAULT): string {

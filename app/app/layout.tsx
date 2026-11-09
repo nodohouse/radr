@@ -2,6 +2,11 @@ import "@/app/radr-brand-theme.css";
 import { redirect } from "next/navigation";
 import { productRequiresSession } from "@/lib/identity/productAccess";
 import { accountStorageReady } from "@/lib/identity/accountAvailability";
+import { cookies } from "next/headers";
+import {
+  DEMO_ACCESS_COOKIE,
+  verifyDemoGrant,
+} from "@/lib/identity/demoSession";
 import { demoSignupHref } from "@/lib/marketing/demoAccess";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
@@ -60,7 +65,11 @@ export default async function ProductLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const demoGuest = verifyDemoGrant(
+    (await cookies()).get(DEMO_ACCESS_COOKIE)?.value,
+  );
   if (
+    !demoGuest &&
     productRequiresSession({
       nodeEnv: process.env.NODE_ENV,
       requireAuth: process.env.NEXT_PUBLIC_RADR_REQUIRE_AUTH,

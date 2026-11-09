@@ -28,7 +28,7 @@ describe("public ↔ demo access boundary", () => {
     expect(demoSignupHref("/app")).not.toMatch(/^\/app/);
   });
 
-  it("middleware always protects /app (not DEMO-gated)", () => {
+  it("middleware keeps unauthenticated entry gated and product screens unindexed", () => {
     const mw = read("middleware.ts");
     expect(mw).toContain("isAppPath");
     expect(mw).not.toContain("appRequiresAuth");

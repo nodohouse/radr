@@ -198,6 +198,14 @@ export default async function Page({ params }: Props) {
       </LegalSection>
       <LegalSection title="5. Contact, report and marketing choices">
         <p>
+          The current demo introduction is a visual form preview. Its name,
+          email, company, role and location-count fields stay on that page;
+          they are not saved or transmitted to RADR or a CRM. Only the selected
+          fictional hotel or restaurant is sent to open the demo. A signed,
+          HTTP-only cookie grants eight hours of fictional demo access. This
+          does not create an account or grant access to a real workspace.
+        </p>
+        <p>
           Report access requires delivery of the request to the configured
           lead-handling service. If delivery is unavailable or fails, the form
           reports the failure and does not unlock a download. A successful

@@ -1,4 +1,4 @@
-/** Hosted interactive demos require signup; local fictional-data QA stays available. */
+/** Hosted product routes require an account or a separately verified fictional-demo grant. */
 export function productRequiresSession(runtime: {
   nodeEnv?: string;
   requireAuth?: string;

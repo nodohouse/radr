@@ -4,6 +4,10 @@ import { getSessionCookie } from "better-auth/cookies";
 import { routing, isNonLocalizedPath } from "./i18n/routing";
 import { productRequiresSession } from "./lib/identity/productAccess";
 import { safeDemoNext } from "./lib/marketing/demoAccess";
+import {
+  DEMO_ACCESS_COOKIE,
+  verifyDemoGrant,
+} from "./lib/identity/demoSession";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -140,7 +144,12 @@ export function middleware(request: NextRequest) {
     });
     const isProtected = isProtectedPrefix || (isAppPath && requireAuth);
 
-    if (isProtected && !sessionCookie && !e2eUnlock) {
+    // A lead-form grant opens only fictional /app screens. It is never an
+    // account session and is not accepted by workspace/API authorization.
+    const demoGuest =
+      isAppPath &&
+      verifyDemoGrant(request.cookies.get(DEMO_ACCESS_COOKIE)?.value);
+    if (isProtected && !sessionCookie && !e2eUnlock && !demoGuest) {
       const full = `${pathname}${request.nextUrl.search}`;
       const nextTarget =
         isAppPath && (pathname === "/app" || pathname === "/app/")

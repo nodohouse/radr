@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "RADR",
     description:
-      "Choose your RADR hotel or restaurant demo, then sign up to explore fictional hospitality operations, decisions and evidence.",
+      "Choose a RADR hotel or restaurant demo and explore fictional hospitality operations, decisions and evidence without creating an account.",
     alternates: buildAlternatesForLocale(locale, "/demo"),
   };
 }
