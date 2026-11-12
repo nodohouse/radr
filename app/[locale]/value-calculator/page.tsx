@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "RADR Value Map | Hospitality Operating Value Calculator",
     description:
-      "Guided diagnosis of where value may be leaking across your hospitality operation, with modeled ranges, evidence readiness, not guaranteed savings.",
+      "Explore modeled hospitality exposure with exact or range inputs, transparent assumptions, capture scenarios, evidence checks and an optional budget. No guaranteed savings.",
     alternates: buildAlternatesForLocale(locale, "/value-calculator"),
   };
 }

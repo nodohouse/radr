@@ -32,13 +32,13 @@ Never: `revenue × random %` as the headline story.
 | `vertical` | `restaurant` · `hotel` · `mixed` · `other` |
 | `otherKind` | resort / apartments / bar / multi-venue / other (conservative generic model) |
 | `locations` | sites / properties / venues |
-| `annualRevenue` | total **or** derived from avg × locations |
+| `annualRevenue` | combined annual revenue across all selected locations; never multiplied by sites |
 | `currency` | reporting currency code |
-| Operating metrics | labor %, COGS/food %, delivery mix, occupancy, ADR, OTA mix, purchasing — optional |
+| Operating metrics | labor %, food cost %, purchasing %, delivery share, room-revenue share and OTA mix; optional |
 | `unknownFields` | every advanced field may be “I don’t know” → ASSUMED |
 | `painAreas` | selected opportunity classes (or “not sure” → all applicable) |
 | Maturity | system count · reconcile cadence · manual recon · decision standardization |
-| `captureRate` | default conservative (~20%) |
+| `captureRate` | default 20%; a user-selected scenario, not a conservative forecast |
 | `annualInvestment` | optional — enables ROI |
 
 ---
@@ -52,8 +52,7 @@ Never: `revenue × random %` as the headline story.
   categories: CategoryResult[],
   confidence: "low" | "medium" | "high",
   confidenceReasons: string[],
-  evidenceReadiness: Record<CategoryId, number>, // 0–1
-  startingOpportunity: CategoryId,
+  startingOpportunity: CategoryId | null,
   startingWhy: string[],
   captureScenario: { rate, capturedLow, capturedModeled },
   roi: null | { netLow, netModeled, roiLow, roiModeled, paybackMonthsModeled },
@@ -81,10 +80,10 @@ Relevant bases (examples):
 | supplier_ap | purchasing spend (or assumed % of revenue) |
 | procurement | same purchasing base |
 | reconciliation | revenue (settlement / payment volume proxy) |
-| perishable | restaurant: contribution proxy; hotel: room revenue |
+| perishable | restaurant: revenue adjusted for delivery share; hotel: room revenue |
 | food_waste | food/COGS spend |
 | channel_mix | hotel room / OTA-exposed revenue |
-| readiness | hotel labor or rooms × ADR proxy |
+| readiness | annual room revenue proxy |
 | revenue_pricing | revenue |
 | guest_experience | revenue (small rate — diagnostic only) |
 
@@ -119,7 +118,7 @@ Reasons list which fields were supplied vs assumed. Not “AI confidence.”
 
 ## Evidence readiness
 
-Per category 0–1 from maturity (systems connected, reconcile cadence, manual recon inverse, standardization). Used in ranking:
+Per category 0–1 from maturity (self-reported system count, reconcile cadence, manual recon and standardization). Used in ranking:
 
 ```
 priority = modeledValue × evidenceReadiness × timeToProveScore × (1 / effortScore)
@@ -157,7 +156,7 @@ Label: **Illustrative ROI.**
 
 ## Currency
 
-All math in selected reporting currency. No FX conversion in V1 (user enters figures already in that currency). Display with currency symbol map.
+All math in selected reporting currency. No FX conversion. Revenue bands and their resolved numerical bases use the same selected currency. Exact revenue and optional annual budget are supported. OTHER uses plain currency units, never an implicit USD symbol.
 
 ---
 
@@ -176,3 +175,16 @@ Always **0** in calculator output until real product evidence seals value.
 ## Unit tests
 
 Cover: restaurant · hotel · mixed · zeros · unknowns · currencies · 1 vs 100 sites · high/low revenue · no/all pain · overlap · capture · ROI with/without investment · no NaN/Infinity · non-negative totals.
+
+
+## Premium guided experience, 2026-11-12
+
+The current public UI uses four input steps and a two-column result with every applicable category. Questions for covers, room counts, occupancy, ADR and mixed-portfolio balance were removed from the flow because they did not change the monetary model. Their legacy state keys remain compatibility fields. The optional room-revenue share does feed hotel/channel/readiness financial bases. Explicit zero inputs are distinct from model defaults; a zero OTA share produces zero channel-mix exposure.
+
+A range uses its midpoint; an exact revenue amount must be positive, finite and at most one trillion currency units. Unknown revenue resolves to zero as a missing base, never a fabricated ten-million business. Its result displays categories without monetary estimates, ROI or a recommended monetary priority. Financial input coverage is a count of relevant supplied inputs, not an outcome probability. The old decorative confidence percentage is not displayed.
+
+Each category carries an annual calculation trace: relevant base, rate triple, pre-adjustment central value, overlap multiplier and portfolio multiplier. Methodology includes a rounded raw-central total, overlap reduction and portfolio reduction that reconcile to the displayed central total. Only multi-category groups are recorded as overlap adjustments. Duplicate category IDs are deduplicated; non-finite sensitivity rates and capture values fall back to safe defaults. Central cap rounding cannot push the displayed total above the configured central guardrail.
+
+Monthly mode divides annual exposure and capture by twelve, without claiming seasonality. ROI and the user-entered budget always remain annual. Negative net return and ROI are shown. Payback is displayed in months and assumes a steady capture rate without implementation ramp-up. The annual budget is a user scenario input, not a RADR price; prices remain pending.
+
+Native details replace modal drawers, retaining keyboard behavior without focus traps or scroll locking. Print styles and a local CSV export include the scenario, category values, inputs, evidence requirements and assumptions. No financial profile is persisted, sent to APIs or included in consented step analytics. A sample remains labeled illustrative after edits. The CSV always uses an annual horizon, irrespective of the display toggle. Formula-like string cells are escaped for spreadsheet safety; numeric negative ROI values remain numeric.

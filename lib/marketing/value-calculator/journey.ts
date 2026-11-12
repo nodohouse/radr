@@ -8,6 +8,7 @@ import {
   DELIVERY_OPTIONS,
   INVESTMENT_OPTIONS,
   LOCATION_OPTIONS,
+  ROOM_REVENUE_OPTIONS,
   MIXED_BALANCE_OPTIONS,
   OCCUPANCY_OPTIONS,
   optionById,
@@ -39,6 +40,11 @@ export type JourneyState = {
   otherKind: OtherKind | null;
   locationsId: string | null;
   revenueId: string | null;
+  revenueMode?: "range" | "exact";
+  revenueExact?: number | null;
+  investmentExact?: number | null;
+  roomRevenueShareId?: string | null;
+  example?: "restaurant" | "hotel" | "mixed";
   currency: CurrencyCode;
   coversId: string | null;
   roomsId: string | null;
@@ -96,13 +102,23 @@ function mid(r: NumericRange | null | undefined): number | undefined {
 export function resolveEngineInput(
   j: JourneyState,
 ): ValueCalculatorInput | null {
-  if (!j.vertical || !j.locationsId || !j.revenueId) return null;
+  if (!j.vertical || !j.locationsId) return null;
+  if (j.revenueMode === "exact") {
+    if (
+      j.revenueExact == null ||
+      !Number.isFinite(j.revenueExact) ||
+      j.revenueExact <= 0 ||
+      j.revenueExact > 1e12
+    )
+      return null;
+  } else if (!optionById(REVENUE_OPTIONS_USD, j.revenueId)) return null;
 
   const loc = optionById(LOCATION_OPTIONS, j.locationsId);
   const rev = optionById(REVENUE_OPTIONS_USD, j.revenueId);
   if (!loc?.range) return null;
 
-  const revenueBase = rev?.range?.base ?? 10_000_000;
+  const revenueBase =
+    j.revenueMode === "exact" ? j.revenueExact! : (rev?.range?.base ?? 0);
 
   const labor = optionById(PCT_OPTIONS, j.laborId);
   const food = optionById(PCT_OPTIONS, j.foodId);
@@ -129,8 +145,9 @@ export function resolveEngineInput(
     purchasingPct: mid(purchasing?.range ?? null),
     occupancy: mid(occupancy?.range ?? null),
     otaMixPct: mid(ota?.range ?? null),
-    roomRevenueShare:
-      j.vertical === "hotel" || j.vertical === "mixed" ? 0.65 : undefined,
+    roomRevenueShare: mid(
+      optionById(ROOM_REVENUE_OPTIONS, j.roomRevenueShareId)?.range,
+    ),
     restaurantShare: mixed?.restaurantShare,
     hotelShare: mixed ? 1 - mixed.restaurantShare : undefined,
     painAreas:
@@ -143,7 +160,7 @@ export function resolveEngineInput(
     decisionStandardization:
       (j.stdId as ValueCalculatorInput["decisionStandardization"]) ?? "medium",
     captureRate: j.captureRate,
-    annualInvestment: invest?.range?.base,
+    annualInvestment: j.investmentExact ?? invest?.range?.base,
     rateOverrides: j.rateOverrides,
   };
 }
@@ -210,9 +227,9 @@ export function previewConfidence(j: JourneyState): {
 export function verticalLabel(v: VerticalId | null): string {
   switch (v) {
     case "restaurant":
-      return "Restaurant group";
+      return "Restaurants";
     case "hotel":
-      return "Hotel portfolio";
+      return "Hotels";
     case "mixed":
       return "Mixed hospitality portfolio";
     case "other":
@@ -229,6 +246,7 @@ export function sampleJourney(
   if (kind === "restaurant") {
     return {
       ...base,
+      example: kind,
       vertical: "restaurant",
       locationsId: "6_10",
       revenueId: "25_50",
@@ -248,6 +266,7 @@ export function sampleJourney(
   if (kind === "hotel") {
     return {
       ...base,
+      example: kind,
       vertical: "hotel",
       locationsId: "4_5",
       revenueId: "50_100",
@@ -267,6 +286,7 @@ export function sampleJourney(
   }
   return {
     ...base,
+    example: kind,
     vertical: "mixed",
     locationsId: "11_20",
     revenueId: "100_250",

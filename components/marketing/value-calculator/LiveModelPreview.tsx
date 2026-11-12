@@ -1,95 +1,72 @@
 "use client";
-
+import {
+  financialInputs,
+  revenueDescription,
+} from "@/lib/marketing/value-calculator/presentation";
 import {
   LOCATION_OPTIONS,
   optionById,
-  PAIN_BY_VERTICAL,
-  PCT_OPTIONS,
-  previewConfidence,
-  REVENUE_OPTIONS_USD,
   verticalLabel,
   type JourneyState,
 } from "@/lib/marketing/value-calculator";
 
-type Props = { journey: JourneyState };
-
-export function LiveModelPreview({ journey }: Props) {
-  const conf = previewConfidence(journey);
+export function LiveModelPreview({ journey }: { journey: JourneyState }) {
+  const inputs = financialInputs(journey);
+  const supplied = inputs.filter((i) => i.supplied).length;
   const loc = optionById(LOCATION_OPTIONS, journey.locationsId);
-  const rev = optionById(REVENUE_OPTIONS_USD, journey.revenueId);
-  const labor = optionById(PCT_OPTIONS, journey.laborId);
-  const food = optionById(PCT_OPTIONS, journey.foodId);
-  const pains =
-    journey.vertical && !journey.painUnsure
-      ? PAIN_BY_VERTICAL[journey.vertical].filter((p) =>
-          journey.painAreas.includes(p.id),
-        )
-      : [];
-
   return (
-    <aside className="vc2-preview" aria-live="polite">
-      <p className="rx30-kicker">Live model preview</p>
-      <h2 className="vc2-preview-title">Your Value Map is forming.</h2>
-      <p className="vc2-preview-note">
-        Complete your inputs to see a modeled annual range.
+    <aside className="vc3-preview" aria-label="Your model inputs">
+      <span className="vc3-eyebrow">Your model, taking shape</span>
+      <h2>
+        Every input
+        <br />
+        has a role.
+      </h2>
+      <dl>
+        <div>
+          <dt>Operation</dt>
+          <dd>
+            {journey.vertical
+              ? verticalLabel(journey.vertical)
+              : "Choose your operation"}
+          </dd>
+        </div>
+        <div>
+          <dt>Location context</dt>
+          <dd>{loc ? `${loc.label} locations` : "Add your location count"}</dd>
+        </div>
+        <div>
+          <dt>Combined annual revenue</dt>
+          <dd>{revenueDescription(journey)}</dd>
+        </div>
+      </dl>
+      <div className="vc3-coverage">
+        <div>
+          <span>Financial input coverage</span>
+          <strong>
+            {supplied} / {inputs.length}
+          </strong>
+        </div>
+        <span className="vc3-coverage-track">
+          <i style={{ width: `${(supplied / inputs.length) * 100}%` }} />
+        </span>
+        <p>
+          Coverage describes supplied inputs, not the probability of a financial
+          outcome.
+        </p>
+      </div>
+      <ul className="vc3-input-status">
+        {inputs.slice(1).map((i) => (
+          <li key={i.label} data-supplied={i.supplied}>
+            <span>{i.label}</span>
+            <b>{i.supplied ? "Supplied" : "Model default"}</b>
+          </li>
+        ))}
+      </ul>
+      <p className="vc3-privacy">
+        Your financial inputs stay in this browser. Nothing is sent to a sales
+        form.
       </p>
-
-      <div className="vc2-preview-block">
-        <span>Operation</span>
-        <strong>
-          {journey.vertical ? verticalLabel(journey.vertical) : "Choose an operation"}
-        </strong>
-      </div>
-
-      <div className="vc2-preview-block">
-        <span>Scale</span>
-        <strong>
-          {loc ? `${loc.label} locations` : "Add your location count"}
-          {rev ? ` · ${rev.label}` : ""}
-        </strong>
-      </div>
-
-      <div className="vc2-preview-block">
-        <span>Economics</span>
-        <ul className="vc2-chips">
-          {labor && labor.id !== "unknown" ? (
-            <li>Labor {labor.label}</li>
-          ) : labor?.id === "unknown" ? (
-            <li data-assumed>Labor assumed</li>
-          ) : (
-            <li data-empty>Labor</li>
-          )}
-          {journey.vertical === "restaurant" || journey.vertical === "mixed" ? (
-            food && food.id !== "unknown" ? (
-              <li>Food {food.label}</li>
-            ) : food?.id === "unknown" ? (
-              <li data-assumed>Food assumed</li>
-            ) : (
-              <li data-empty>Food cost</li>
-            )
-          ) : null}
-        </ul>
-      </div>
-
-      <div className="vc2-preview-block">
-        <span>Signals to examine</span>
-        {journey.painUnsure ? (
-          <strong>Scan everything</strong>
-        ) : pains.length ? (
-          <ul className="vc2-chips">
-            {pains.map((p) => (
-              <li key={p.id}>{p.label}</li>
-            ))}
-          </ul>
-        ) : (
-          <strong>Select an operating focus</strong>
-        )}
-      </div>
-
-      <div className="vc2-preview-conf" data-level={conf.level}>
-        <span>Model confidence</span>
-        <strong>{conf.level}</strong>
-      </div>
     </aside>
   );
 }

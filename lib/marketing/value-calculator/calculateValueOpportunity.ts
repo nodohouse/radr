@@ -43,7 +43,7 @@ function resolvePain(
 ): CategoryId[] {
   const all = applicableCategories(vertical);
   if (pain === "unsure" || !pain.length) return all;
-  return pain.filter((id) => all.includes(id));
+  return [...new Set(pain)].filter((id) => all.includes(id));
 }
 
 type ResolvedOps = {
@@ -78,7 +78,11 @@ function resolveOperating(input: ValueCalculatorInput): ResolvedOps {
 
   return {
     laborPct: pick("Labor %", input.laborPct, d.laborPctOfRevenue),
-    foodCogsPct: pick("Food / COGS %", input.foodCogsPct, d.foodCogsPctOfRevenue),
+    foodCogsPct: pick(
+      "Food / COGS %",
+      input.foodCogsPct,
+      d.foodCogsPctOfRevenue,
+    ),
     purchasingPct: pick(
       "Purchasing %",
       input.purchasingPct,
@@ -112,9 +116,7 @@ function categoryBase(
   const purchasing = revenue * ops.purchasingPct;
   const roomRev = revenue * ops.roomRevenueShare;
   const perishableBase =
-    vertical === "hotel"
-      ? roomRev
-      : revenue * (1 - ops.deliveryMixPct * 0.35);
+    vertical === "hotel" ? roomRev : revenue * (1 - ops.deliveryMixPct * 0.35);
 
   switch (id) {
     case "labor":
@@ -135,11 +137,13 @@ function categoryBase(
     case "perishable":
       return {
         base: perishableBase,
-        assumedBase: ops.assumed.includes("Room revenue share"),
+        assumedBase: ops.assumed.includes(
+          vertical === "hotel" ? "Room revenue share" : "Delivery mix %",
+        ),
       };
     case "channel_mix":
       return {
-        base: roomRev * Math.max(ops.otaMixPct, 0.15),
+        base: roomRev * ops.otaMixPct,
         assumedBase:
           ops.assumed.includes("Room revenue share") ||
           ops.assumed.includes("OTA mix %"),
@@ -194,7 +198,7 @@ function confidenceFrom(
 ): { level: ConfidenceLevel; reasons: string[] } {
   const reasons: string[] = [];
   let score = 0.25;
-  if (input.annualRevenue > 0) {
+  if (Number.isFinite(input.annualRevenue) && input.annualRevenue > 0) {
     score += 0.25;
     reasons.push("Revenue supplied");
   } else {
@@ -215,7 +219,7 @@ function confidenceFrom(
   }
   score += evidenceReadiness(input) * 0.15;
 
-  if (input.annualRevenue <= 0) {
+  if (!Number.isFinite(input.annualRevenue) || input.annualRevenue <= 0) {
     score = Math.min(score, 0.35);
   }
 
@@ -251,11 +255,11 @@ function applyOverlap(raw: RawCat[]): {
   const groups: string[] = [];
 
   for (const [group, items] of byGroup) {
-    groups.push(group);
     if (items.length === 1) {
       adjusted.push(items[0]!);
       continue;
     }
+    groups.push(group);
     const sorted = [...items].sort((a, b) => b.modeled - a.modeled);
     const primary = sorted[0]!;
     adjusted.push(primary);
@@ -294,22 +298,29 @@ function applyPortfolioCap(
 export function calculateValueOpportunity(
   input: ValueCalculatorInput,
 ): ValueCalculatorResult {
-  const locations = Math.max(0, Math.floor(finite(input.locations)));
-  const revenue = finite(input.annualRevenue);
+  const revenue = Math.min(finite(input.annualRevenue), 1e12);
   const ops = resolveOperating(input);
   const pain = resolvePain(input.vertical, input.painAreas);
   const readiness = evidenceReadiness(input);
   const { level, reasons } = confidenceFrom(input, ops);
 
+  const traces = new Map<
+    CategoryId,
+    NonNullable<CategoryResult["calculation"]>
+  >();
   const raw: RawCat[] = [];
   for (const id of pain) {
     const a = assumptionByCategory(id);
     if (!a) continue;
     const override = input.rateOverrides?.[a.id];
+    const validRate = (value: number | undefined, fallback: number) =>
+      Number.isFinite(value) ? clamp(value!, 0, 1) : fallback;
+    const low = validRate(override?.low, a.rates.low);
+    const high = Math.max(low, validRate(override?.high, a.rates.high));
     const rates = {
-      low: override?.low ?? a.rates.low,
-      base: override?.base ?? a.rates.base,
-      high: override?.high ?? a.rates.high,
+      low,
+      base: clamp(validRate(override?.base, a.rates.base), low, high),
+      high,
     };
     const { base, assumedBase } = categoryBase(
       id,
@@ -317,6 +328,13 @@ export function calculateValueOpportunity(
       ops,
       input.vertical,
     );
+    traces.set(id, {
+      base,
+      rates,
+      rawModeled: Math.round(base * rates.base),
+      overlapFactor: 1,
+      portfolioFactor: 1,
+    });
     raw.push({
       id,
       low: finite(base * rates.low),
@@ -332,14 +350,24 @@ export function calculateValueOpportunity(
 
   const { adjusted, groups } = applyOverlap(raw);
   const capped = applyPortfolioCap(adjusted, revenue);
+  const sumModeled = (cats: RawCat[]) =>
+    cats.reduce((s, c) => s + Math.round(c.modeled), 0);
+  const rawModeledTotal = sumModeled(raw);
+  const afterOverlap = sumModeled(adjusted);
+  for (const c of capped.cats) {
+    const trace = traces.get(c.id)!;
+    const source = raw.find((r) => r.id === c.id)!;
+    const overlap = adjusted.find((r) => r.id === c.id)!;
+    trace.overlapFactor =
+      source.modeled > 0 ? overlap.modeled / source.modeled : 1;
+    trace.portfolioFactor =
+      overlap.modeled > 0 ? c.modeled / overlap.modeled : 1;
+  }
 
   const categories: CategoryResult[] = capped.cats
     .map((c) => {
       const priority =
-        c.modeled *
-        readiness *
-        c.timeToProve *
-        (1 / Math.max(0.15, c.effort));
+        c.modeled * readiness * c.timeToProve * (1 / Math.max(0.15, c.effort));
       return {
         id: c.id,
         label: CATEGORY_LABEL[c.id],
@@ -351,10 +379,23 @@ export function calculateValueOpportunity(
         evidenceNeeded: EVIDENCE_BY_CATEGORY[c.id],
         assumptionId: c.assumptionId,
         assumedBase: c.assumedBase,
+        calculation: traces.get(c.id),
       };
     })
     .sort((a, b) => b.priority - a.priority);
 
+  if (capped.applied && categories.length) {
+    const excess =
+      categories.reduce((s, c) => s + c.modeled, 0) -
+      Math.round(revenue * PORTFOLIO.portfolioCapRate);
+    if (excess > 0) {
+      const largest = categories.reduce((a, b) =>
+        a.modeled >= b.modeled ? a : b,
+      );
+      largest.modeled = Math.max(0, largest.modeled - excess);
+      largest.low = Math.min(largest.low, largest.modeled);
+    }
+  }
   const total = {
     low: Math.round(categories.reduce((s, c) => s + c.low, 0)),
     modeled: Math.round(categories.reduce((s, c) => s + c.modeled, 0)),
@@ -362,16 +403,18 @@ export function calculateValueOpportunity(
   };
 
   const captureRate = clamp(
-    input.captureRate ?? PORTFOLIO.defaultCaptureRate,
+    Number.isFinite(input.captureRate)
+      ? input.captureRate!
+      : PORTFOLIO.defaultCaptureRate,
     PORTFOLIO.captureRateMin,
     PORTFOLIO.captureRateMax,
   );
   const capturedLow = Math.round(total.low * captureRate);
   const capturedModeled = Math.round(total.modeled * captureRate);
 
-  const investment = finite(input.annualInvestment ?? 0);
+  const investment = Math.min(finite(input.annualInvestment ?? 0), 1e12);
   let roi: ValueCalculatorResult["roi"] = null;
-  if (investment > 0) {
+  if (investment > 0 && revenue > 0) {
     const netLow = capturedLow - investment;
     const netModeled = capturedModeled - investment;
     roi = {
@@ -387,7 +430,8 @@ export function calculateValueOpportunity(
     };
   }
 
-  const start = categories[0] ?? null;
+  const start =
+    revenue > 0 ? (categories.find((c) => c.modeled > 0) ?? null) : null;
   const startingWhy: string[] = [];
   if (start) {
     startingWhy.push(
@@ -426,6 +470,9 @@ export function calculateValueOpportunity(
       assumptionIds: categories.map((c) => c.assumptionId),
       overlapGroupsApplied: groups,
       portfolioCapApplied: capped.applied,
+      rawModeledTotal,
+      overlapReduction: rawModeledTotal - afterOverlap,
+      portfolioReduction: afterOverlap - total.modeled,
     },
   };
 }

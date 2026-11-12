@@ -1,40 +1,27 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
-import { CTAS } from "@/lib/marketing/brand";
-import { ValueOpportunityMap } from "@/components/marketing/value-calculator/ValueOpportunityMap";
+import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
+import { categoryDisplayLabel, categoryExplanation } from "./valueMapSemantics";
 import {
-  categoryDisplayLabel,
-  categoryExplanation,
-  categoryTone,
-  evidenceLabel,
-  effortLabel,
-  proveLabel,
-  reasonKind,
-} from "@/components/marketing/value-calculator/valueMapSemantics";
-import {
-  CATEGORY_LABEL,
-  DELIVERY_OPTIONS,
-  DISCLAIMER,
-  INVESTMENT_OPTIONS,
   LOCATION_OPTIONS,
   OPPORTUNITY_ASSUMPTIONS,
-  PCT_OPTIONS,
   PORTFOLIO,
-  PURCHASING_OPTIONS,
-  REVENUE_OPTIONS_USD,
-  assumptionByCategory,
+  optionById,
+  resolveEngineInput,
   formatMoneyIntl,
   formatRangeIntl,
-  optionById,
   verticalLabel,
   type CategoryId,
   type JourneyState,
   type ValueCalculatorResult,
 } from "@/lib/marketing/value-calculator";
+import {
+  financialInputs,
+  revenueDescription,
+  valueMapCsv,
+} from "@/lib/marketing/value-calculator/presentation";
 
 type Props = {
   journey: JourneyState;
@@ -43,739 +30,719 @@ type Props = {
   onPatch: (p: Partial<JourneyState>) => void;
 };
 
-function confidenceRing(level: ValueCalculatorResult["confidence"]) {
-  if (level === "high") return 82;
-  if (level === "medium") return 58;
-  return 34;
-}
-
-function IconEdit() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden>
-      <path
-        d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-    </svg>
-  );
-}
-
-function IconDownload() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden>
-      <path
-        d="M8 2.5v8M5 8l3 3 3-3M3 13.5h10"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
+  const heading = useRef<HTMLHeadingElement>(null);
+  const detail = useRef<HTMLElement>(null);
+  const detailHeading = useRef<HTMLHeadingElement>(null);
   const reduced = useReducedMotionSafe();
-  const [activeId, setActiveId] = useState<string>(
+  const [activeId, setActiveId] = useState(
     result.startingOpportunity ?? result.categories[0]?.id ?? "",
   );
-  const [how, setHow] = useState(false);
-  const [sens, setSens] = useState(false);
-  const [tighten, setTighten] = useState(false);
-
-  const loc = optionById(LOCATION_OPTIONS, journey.locationsId);
-  const rev = optionById(REVENUE_OPTIONS_USD, journey.revenueId);
-  const labor = optionById(PCT_OPTIONS, journey.laborId);
-  const food = optionById(PCT_OPTIONS, journey.foodId);
-  const delivery = optionById(DELIVERY_OPTIONS, journey.deliveryId);
-
+  const [period, setPeriod] = useState<"annual" | "monthly">("annual");
+  const [budgetText, setBudgetText] = useState(
+    journey.investmentExact ? String(journey.investmentExact) : "",
+  );
+  const [notice, setNotice] = useState("");
+  const hasRevenue = (resolveEngineInput(journey)?.annualRevenue ?? 0) > 0;
+  const inputs = financialInputs(journey);
+  const supplied = inputs.filter((i) => i.supplied).length;
   const active =
-    result.categories.find((c) => c.id === activeId) ??
-    result.categories.find((c) => c.id === result.startingOpportunity) ??
-    result.categories[0];
+    result.categories.find((c) => c.id === activeId) ?? result.categories[0];
+  const explanation = active
+    ? categoryExplanation(active.id, journey.vertical)
+    : null;
+  const divisor = period === "monthly" ? 12 : 1;
+  const horizon = period === "monthly" ? "per month" : "per year";
+  const money = (n: number) => formatMoneyIntl(n / divisor, result.currency);
+  const range = (low: number, high: number) =>
+    formatRangeIntl(low / divisor, high / divisor, result.currency);
+  const max = Math.max(...result.categories.map((c) => c.modeled), 1);
+  const assumptions = OPPORTUNITY_ASSUMPTIONS.flatMap((assumption) => {
+    const category = result.categories.find(
+      (c) => c.id === assumption.categoryId,
+    );
+    return category ? [{ assumption, category }] : [];
+  });
+  const loc = optionById(LOCATION_OPTIONS, journey.locationsId);
+  const budgetInvalid =
+    budgetText !== "" &&
+    (!Number.isFinite(Number(budgetText)) ||
+      Number(budgetText) <= 0 ||
+      Number(budgetText) > 1e12);
+  useEffect(() => {
+    heading.current?.focus({ preventScroll: true });
+  }, []);
 
-  const start = result.categories.find(
-    (c) => c.id === result.startingOpportunity,
-  );
-  const startAssumption = start ? assumptionByCategory(start.id) : undefined;
-
-  const maxModeled = useMemo(
-    () => Math.max(...result.categories.map((c) => c.modeled), 1),
-    [result.categories],
-  );
-
-  const ring = confidenceRing(result.confidence);
+  function selectCategory(id: CategoryId) {
+    setActiveId(id);
+    if (window.matchMedia("(max-width: 900px)").matches) {
+      requestAnimationFrame(() => {
+        detailHeading.current?.focus({ preventScroll: true });
+        detail.current?.scrollIntoView({
+          block: "start",
+          behavior: reduced ? "instant" : "smooth",
+        });
+      });
+    }
+  }
+  function backToAreas() {
+    const title = document.getElementById("vc3-breakdown-title");
+    title?.focus({ preventScroll: true });
+    title?.scrollIntoView({
+      block: "start",
+      behavior: reduced ? "instant" : "smooth",
+    });
+  }
+  function download() {
+    const url = URL.createObjectURL(
+      new Blob([valueMapCsv(journey, result)], {
+        type: "text/csv;charset=utf-8",
+      }),
+    );
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "RADR-value-map.csv";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setNotice(
+      "Your annual Value Map was downloaded with its inputs and assumptions.",
+    );
+  }
 
   return (
-    <motion.div
-      className="vc-res"
-      initial={reduced ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <div className="vc-res-atmosphere" aria-hidden />
-
-      <header className="vc-res-head">
-        <div className="vc-res-head-copy">
-          <p className="rx30-kicker">Your RADR Value Map</p>
-          <h1>
-            Here is what may be worth
+    <div className="vc3-result vc-res">
+      <header className="vc3-result-head vc-res-head">
+        <div>
+          <span className="vc3-eyebrow">
+            {journey.example
+              ? `Illustrative ${journey.example} example`
+              : "Your RADR Value Map"}
+          </span>
+          <h1 ref={heading} tabIndex={-1}>
+            A clearer view of
             <br />
-            <em>investigating in your operation.</em>
+            <em>what needs a closer look.</em>
           </h1>
-          <p className="vc-res-sub">
-            Modeled from the information you provided.
-          </p>
-          <p className="vc-disclaimer-inline">
-            Illustrative estimate · Not a guaranteed outcome.
+          <p>
+            {journey.example
+              ? "Example inputs remain illustrative, including any edits you make."
+              : "A financial scenario from your inputs and adjustable assumptions."}
           </p>
         </div>
-        <div className="vc-res-head-actions">
-          <button type="button" className="vc-res-act" onClick={onEdit}>
-            <IconEdit /> Edit inputs
+        <div className="vc3-result-actions">
+          <button className="vc3-btn vc3-btn--light" onClick={onEdit}>
+            Edit inputs
           </button>
-          <Link
-            href={`/contact?intent=pricing&context=${journey.vertical}`}
-            className="vc-res-act"
-          >
-            <IconEdit /> Prepare an evaluation
-          </Link>
+          <button className="vc3-btn vc3-btn--light" onClick={download}>
+            Download CSV ↓
+          </button>
           <button
-            type="button"
-            className="vc-res-act"
+            className="vc3-btn vc3-btn--light"
             onClick={() => window.print()}
           >
-            <IconDownload /> Print / save Value Map
+            Print / save Value Map
           </button>
         </div>
       </header>
-
-      <div className="vc-res-hero-band">
-        <div className="vc-res-value">
-          <span>Modeled value worth investigating</span>
-          <p>
-            {formatRangeIntl(
-              result.headline.low,
-              result.headline.modeled,
-              result.currency,
-            )}
-            <em> per year</em>
-          </p>
-          <div className="vc-res-tri">
-            <div>
-              <span>Conservative</span>
-              <strong>
-                {formatMoneyIntl(result.total.low, result.currency)}
-              </strong>
-            </div>
-            <div data-on>
-              <span>Modeled</span>
-              <strong>
-                {formatMoneyIntl(result.total.modeled, result.currency)}
-              </strong>
-            </div>
-            <div>
-              <span>Upside</span>
-              <strong>
-                {formatMoneyIntl(result.total.high, result.currency)}
-              </strong>
-            </div>
-          </div>
-        </div>
-
-        <div className="vc-res-ops" aria-label="Operation summary">
-          <div>
-            <span>Operation</span>
-            <strong>{verticalLabel(journey.vertical)}</strong>
-          </div>
-          <div>
-            <span>
-              {journey.vertical === "hotel" ? "Properties" : "Locations"}
-            </span>
-            <strong>{loc?.label ?? "Not provided"}</strong>
-          </div>
-          <div>
-            <span>Annual revenue</span>
-            <strong>
-              {rev?.label ?? "Not provided"} · {journey.currency}
-            </strong>
-          </div>
-          {labor ? (
-            <div>
-              <span>Labor</span>
-              <strong>{labor.label}</strong>
-            </div>
-          ) : null}
-          {food && journey.vertical !== "hotel" ? (
-            <div>
-              <span>Food / COGS</span>
-              <strong>{food.label}</strong>
-            </div>
-          ) : null}
-          {delivery && journey.vertical === "restaurant" ? (
-            <div>
-              <span>Delivery</span>
-              <strong>{delivery.label}</strong>
-            </div>
-          ) : null}
+      <div className="vc3-result-context">
+        <span>
+          {verticalLabel(journey.vertical)} · {loc?.label}{" "}
+          {journey.vertical === "hotel" ? "properties" : "locations"}
+        </span>
+        <span>{revenueDescription(journey)}</span>
+        <span>
+          {journey.currency === "OTHER" ? "Currency units" : journey.currency} ·
+          all locations combined
+        </span>
+      </div>
+      <div className="vc3-period">
+        <p>Read the same scenario over your preferred horizon.</p>
+        <div role="group" aria-label="Result horizon">
+          {(["annual", "monthly"] as const).map((p) => (
+            <button
+              key={p}
+              aria-pressed={period === p}
+              onClick={() => setPeriod(p)}
+            >
+              {p === "annual" ? "Annual" : "Monthly"}
+            </button>
+          ))}
         </div>
       </div>
 
-      <div className="vc-res-main">
-        <section className="vc-res-col vc-res-col--left" aria-label="Breakdown">
-          <div className="vc-res-card">
-            <h2>Opportunity breakdown</h2>
-            <p className="vc-category-intro">
-              Annual estimates by operating area. Select a category to explore
-              it; the guide below explains the terminology.
-            </p>
-            <div className="vc-res-bars">
-              {result.categories.slice(0, 6).map((c, i) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  className="vc-res-bar"
-                  data-tone={categoryTone(c.id)}
-                  data-on={activeId === c.id ? "true" : undefined}
-                  onClick={() => setActiveId(c.id)}
+      <section className="vc3-summary" aria-label="Modeled exposure summary">
+        <div className="vc3-summary-main">
+          <span className="vc3-eyebrow">Modeled exposure to investigate</span>
+          <strong data-testid="exposure-range">
+            {hasRevenue
+              ? range(result.total.low, result.total.modeled)
+              : "Add revenue to see a range"}
+          </strong>
+          <p>
+            {hasRevenue
+              ? `${horizon} · adjusted for overlapping categories`
+              : "Explore the categories below. No revenue amount has been invented for your operation."}
+          </p>
+          <div className="vc3-scenarios">
+            {[
+              ["Lower", result.total.low],
+              ["Central", result.total.modeled],
+              ["Higher", result.total.high],
+            ].map(([label, amount]) => (
+              <div key={label}>
+                <span>{label} scenario</span>
+                <b
+                  data-testid={
+                    label === "Central" ? "central-exposure" : undefined
+                  }
                 >
-                  <div className="vc-res-bar-meta">
-                    <strong>{categoryDisplayLabel(c, journey.vertical)}</strong>
-                    <span>
-                      {formatRangeIntl(c.low, c.modeled, result.currency)}
-                    </span>
-                  </div>
-                  <span className="vc-res-bar-track">
-                    <i
-                      style={{
-                        width: `${Math.max(
-                          8,
-                          (c.modeled / maxModeled) * 100,
-                        )}%`,
-                        transitionDelay: reduced ? "0ms" : `${i * 40}ms`,
-                      }}
-                    />
-                  </span>
-                </button>
-              ))}
-            </div>
+                  {hasRevenue ? money(Number(amount)) : "Revenue needed"}
+                </b>
+              </div>
+            ))}
           </div>
-
-          <div className="vc-res-states">
-            <article data-kind="potential">
-              <span>Potential value</span>
-              <strong>
-                {formatRangeIntl(
-                  result.total.low,
-                  result.total.high,
-                  result.currency,
-                )}
-              </strong>
-              <p>
-                Theoretical opportunity from supplied inputs and assumptions.
-              </p>
-            </article>
-            <div className="vc-res-states-arrow" aria-hidden>
-              ↓
-            </div>
-            <article data-kind="modeled">
-              <span>Modeled RADR opportunity</span>
-              <strong>
-                {formatRangeIntl(
-                  result.headline.low,
-                  result.headline.modeled,
-                  result.currency,
-                )}
-              </strong>
-              <p>
-                Adjusted for applicability, overlap
-                {result.methodology.overlapGroupsApplied.length
-                  ? ` (${result.methodology.overlapGroupsApplied.length} groups)`
-                  : ""}
-                , and evidence readiness.
-              </p>
-            </article>
-            <div className="vc-res-states-arrow" aria-hidden>
-              ↓
-            </div>
-            <article data-kind="verified">
-              <span>Verified Value</span>
-              <strong>{formatMoneyIntl(0, result.currency)}</strong>
-              <p>
-                RADR only counts value as Verified after the outcome is observed
-                and verification criteria are satisfied.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section className="vc-res-col vc-res-col--map" aria-label="Value Map">
-          <div className="vc-res-card vc-res-card--map">
-            <p className="vc-res-map-kicker">Where value may sit</p>
-            <ValueOpportunityMap
-              categories={result.categories}
-              currency={result.currency}
-              vertical={journey.vertical}
-              activeId={active?.id ?? null}
-              onSelect={setActiveId}
+          <small>
+            These are assumption scenarios, not statistical confidence intervals
+            or confirmed losses.
+          </small>
+        </div>
+        <div className="vc3-summary-capture">
+          <span className="vc3-eyebrow">Your capture scenario</span>
+          <h2>
+            What if you capture
+            <br />
+            {Math.round(result.captureScenario.rate * 100)}%?
+          </h2>
+          <strong data-testid="capture-range">
+            {hasRevenue
+              ? range(
+                  result.captureScenario.capturedLow,
+                  result.captureScenario.capturedModeled,
+                )
+              : "Revenue needed"}
+          </strong>
+          <p>{horizon} · illustrative captured value</p>
+          <label className="vc3-capture-slider">
+            <span>Adjust modeled capture</span>
+            <input
+              aria-label="Modeled capture percentage"
+              type="range"
+              min="5"
+              max="50"
+              step="1"
+              value={Math.round(result.captureScenario.rate * 100)}
+              onChange={(e) =>
+                onPatch({ captureRate: Number(e.target.value) / 100 })
+              }
             />
+            <span>
+              <b>5%</b>
+              <b>50%</b>
+            </span>
+          </label>
+          <p>
+            Capture is the share of modeled exposure you choose to realize in
+            this scenario. It is not a RADR performance claim.
+          </p>
+        </div>
+      </section>
+
+      <div className="vc3-analysis-grid">
+        <section
+          className="vc3-panel vc3-breakdown"
+          aria-labelledby="vc3-breakdown-title"
+        >
+          <div className="vc3-panel-top">
+            <div>
+              <span className="vc3-eyebrow">Follow the contribution</span>
+              <h2 id="vc3-breakdown-title" tabIndex={-1}>
+                Where the model points.
+              </h2>
+            </div>
+            <span className="vc3-count">{result.categories.length} areas</span>
+          </div>
+          <p>
+            Select an area to see what it means, the calculation and the records
+            to check.
+          </p>
+          <div className="vc3-category-bars">
+            {result.categories.map((c) => (
+              <button
+                key={c.id}
+                aria-pressed={active?.id === c.id}
+                onClick={() => selectCategory(c.id)}
+              >
+                <span>
+                  <strong>{categoryDisplayLabel(c, journey.vertical)}</strong>
+                  <b>
+                    {hasRevenue ? range(c.low, c.modeled) : "Revenue needed"}
+                  </b>
+                </span>
+                <span className="vc3-bar-track">
+                  <i
+                    aria-hidden
+                    style={{
+                      width: hasRevenue ? `${(c.modeled / max) * 100}%` : "0%",
+                    }}
+                  />
+                </span>
+                <small>
+                  {c.id === result.startingOpportunity
+                    ? "Suggested first check · "
+                    : ""}
+                  {hasRevenue && result.total.modeled > 0
+                    ? `${Math.round((c.modeled / result.total.modeled) * 100)}% of the central model`
+                    : "Select to understand this area"}
+                </small>
+              </button>
+            ))}
+          </div>
+          <p className="vc3-small">
+            Bars show central scenario amounts. The adjusted category amounts
+            add to the displayed total. All monetary values here are {horizon}.
+          </p>
+        </section>
+        <section
+          className="vc3-panel vc3-category-detail"
+          aria-label="Selected category details"
+          ref={detail}
+          data-category={active?.id}
+        >
+          {active && explanation ? (
+            <>
+              <button
+                className="vc3-text-button vc3-mobile-back"
+                onClick={backToAreas}
+              >
+                ↑ Back to operating areas
+              </button>
+              <span className="vc3-eyebrow">Understand this area</span>
+              <h2 ref={detailHeading} tabIndex={-1}>
+                {categoryDisplayLabel(active, journey.vertical)}
+              </h2>
+              <p className="vc3-detail-meaning">{explanation.meaning}</p>
+              <div className="vc3-example">
+                <span>For example</span>
+                <p>{explanation.example}</p>
+              </div>
+              <div className="vc3-detail-value">
+                <span>Adjusted exposure · {horizon}</span>
+                <strong>
+                  {hasRevenue
+                    ? range(active.low, active.modeled)
+                    : "Add revenue to quantify"}
+                </strong>
+              </div>
+              <h3>Your first evidence check</h3>
+              <ol className="vc3-evidence-steps">
+                <li>
+                  <b>Gather the records.</b>
+                  <span>{active.evidenceNeeded.join(", ")}.</span>
+                </li>
+                <li>
+                  <b>Compare like with like.</b>
+                  <span>
+                    Use the same locations, service period and accounting basis.
+                  </span>
+                </li>
+                <li>
+                  <b>Review the difference.</b>
+                  <span>
+                    Identify an owner and confirm the cause before treating it
+                    as recoverable value.
+                  </span>
+                </li>
+              </ol>
+              <details className="vc3-detail-formula">
+                <summary>Show this category’s calculation</summary>
+                {hasRevenue && active.calculation ? (
+                  <>
+                    <p>
+                      <b>
+                        {formatMoneyIntl(
+                          active.calculation.base,
+                          result.currency,
+                        )}
+                      </b>{" "}
+                      annual base ×{" "}
+                      <b>
+                        {(active.calculation.rates.base * 100).toLocaleString(
+                          "en",
+                          { maximumFractionDigits: 2 },
+                        )}
+                        %
+                      </b>{" "}
+                      central rate ={" "}
+                      <b>
+                        {formatMoneyIntl(
+                          active.calculation.rawModeled,
+                          result.currency,
+                        )}
+                      </b>{" "}
+                      before adjustments.
+                    </p>
+                    <p>
+                      Overlap multiplier:{" "}
+                      {active.calculation.overlapFactor.toFixed(2)}. Portfolio
+                      multiplier:{" "}
+                      {active.calculation.portfolioFactor.toFixed(2)}. Amounts
+                      are rounded after adjustment.
+                    </p>
+                    <p>
+                      {active.assumedBase
+                        ? "This base uses a model default for an unanswered financial input."
+                        : "This base is derived from the revenue and financial choices supplied."}
+                    </p>
+                  </>
+                ) : (
+                  <p>
+                    A revenue input is needed to calculate the financial base.
+                  </p>
+                )}
+                <p>
+                  Rates are internal modeling assumptions. You can change the
+                  central rates in the assumptions panel below.
+                </p>
+              </details>
+            </>
+          ) : (
+            <p>Select an applicable operating area.</p>
+          )}
+        </section>
+      </div>
+
+      <div className="vc3-secondary-grid">
+        <section className="vc3-panel">
+          <span className="vc3-eyebrow">Make the assumptions visible</span>
+          <h2>Your inputs. The model’s defaults.</h2>
+          <div className="vc3-coverage">
+            <div>
+              <span>Financial inputs supplied</span>
+              <strong>
+                {supplied} / {inputs.length}
+              </strong>
+            </div>
+            <span className="vc3-coverage-track">
+              <i style={{ width: `${(supplied / inputs.length) * 100}%` }} />
+            </span>
+          </div>
+          <p>
+            Input coverage is not a measure of outcome certainty. The calculator
+            has not inspected source records.
+          </p>
+          <dl className="vc3-input-ledger">
+            {inputs.map((r) => (
+              <div key={r.label}>
+                <dt>
+                  {r.label}
+                  <small>
+                    {r.supplied ? "Supplied input" : "Model default / missing"}
+                  </small>
+                </dt>
+                <dd>{r.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <button className="vc3-text-button" onClick={onEdit}>
+            Refine your inputs →
+          </button>
+        </section>
+        <section className="vc3-panel">
+          <span className="vc3-eyebrow">A scenario you control</span>
+          <h2>Compare capture levels.</h2>
+          <p>
+            Exposure stays the same. This changes the share you choose to model
+            as captured value.
+          </p>
+          <div className="vc3-capture-comparison">
+            {[0.1, 0.2, 0.3].map((rate) => (
+              <button
+                key={rate}
+                aria-pressed={Math.abs(journey.captureRate - rate) < 0.001}
+                onClick={() => onPatch({ captureRate: rate })}
+              >
+                <span>{Math.round(rate * 100)}% capture</span>
+                <i aria-hidden style={{ width: `${(rate / 0.5) * 100}%` }} />
+                <strong>
+                  {hasRevenue
+                    ? money(result.total.modeled * rate)
+                    : "Revenue needed"}
+                </strong>
+              </button>
+            ))}
+          </div>
+          <div className="vc3-budget">
+            <label>
+              <strong>Your annual budget (optional)</strong>
+              <small>
+                Enter your own annual evaluation budget in{" "}
+                {journey.currency === "OTHER"
+                  ? "currency units"
+                  : journey.currency}
+                . This is not a RADR quote; plan prices remain pending.
+              </small>
+              <input
+                aria-label="Your annual budget"
+                type="number"
+                min="0"
+                max="1000000000000"
+                step="any"
+                inputMode="decimal"
+                value={budgetText}
+                aria-invalid={budgetInvalid}
+                onChange={(e) => {
+                  setBudgetText(e.target.value);
+                  const n = Number(e.target.value);
+                  onPatch({
+                    investmentId: null,
+                    investmentExact:
+                      e.target.value !== "" &&
+                      Number.isFinite(n) &&
+                      n > 0 &&
+                      n <= 1e12
+                        ? n
+                        : null,
+                  });
+                }}
+              />
+            </label>
+            {budgetInvalid ? (
+              <p className="vc3-error" role="alert">
+                Enter a positive budget up to 1 trillion, or leave this blank.
+              </p>
+            ) : null}
+            {!budgetInvalid && result.roi ? (
+              <div
+                className="vc3-roi-results"
+                data-negative={result.roi.netLow < 0 ? "true" : undefined}
+              >
+                <div>
+                  <span>Illustrative annual net return</span>
+                  <strong data-testid="net-return">
+                    {formatRangeIntl(
+                      result.roi.netLow,
+                      result.roi.netModeled,
+                      result.currency,
+                    )}
+                  </strong>
+                </div>
+                <div>
+                  <span>Illustrative annual ROI</span>
+                  <strong>
+                    {Math.round(result.roi.roiLow * 100)}% to{" "}
+                    {Math.round(result.roi.roiModeled * 100)}%
+                  </strong>
+                </div>
+                <div>
+                  <span>Central scenario payback</span>
+                  <strong>
+                    {result.roi.paybackMonthsModeled == null
+                      ? "Not available"
+                      : result.roi.paybackMonthsModeled < 0.1
+                        ? "Less than 0.1 month"
+                        : `${result.roi.paybackMonthsModeled} months`}
+                  </strong>
+                </div>
+                <p>
+                  ROI = (annual modeled capture − annual budget) / annual
+                  budget. Payback assumes a steady monthly capture rate and has
+                  no implementation ramp-up. Revenue-based category estimates
+                  are proxies, not confirmed profit.
+                </p>
+              </div>
+            ) : (
+              <p className="vc3-small">
+                Add a budget and revenue to model net return and payback. The
+                budget and ROI always use an annual horizon.
+              </p>
+            )}
           </div>
         </section>
-
-        <aside className="vc-res-col vc-res-col--right">
-          {start ? (
-            <motion.section
-              className="vc-res-start"
-              initial={reduced ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: reduced ? 0 : 0.35 }}
-            >
-              <div className="vc-res-start-top">
-                <p className="rx30-kicker">Start here</p>
-                <span className="vc-res-start-badge">#1 recommendation</span>
-              </div>
-              <h2>{categoryDisplayLabel(start, journey.vertical)}</h2>
-              <p className="vc-category-intro">
-                {categoryExplanation(start.id, journey.vertical).meaning}
-              </p>
-              <p className="vc-res-start-range">
-                {formatRangeIntl(start.low, start.modeled, result.currency)}
-                <em> / year</em>
-              </p>
-              <p className="vc-res-start-why-label">Why start here</p>
-              <ul className="vc-res-start-why">
-                <li>
-                  {evidenceLabel(start.evidenceReadiness)} evidence availability
-                </li>
-                <li>
-                  {proveLabel(startAssumption?.timeToProve ?? 0.5)} time to
-                  prove
-                </li>
-                <li>
-                  {effortLabel(startAssumption?.effort ?? 0.5)} operational
-                  disruption
-                </li>
-              </ul>
-              <p className="vc-res-start-why-label">
-                Typical systems / evidence
-              </p>
-              <ul className="vc-chips">
-                {start.evidenceNeeded.slice(0, 5).map((e) => (
-                  <li key={e}>{e}</li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                className="rx30-btn rx30-btn-primary vc-res-start-cta"
-                onClick={() => setActiveId(start.id)}
-              >
-                Explore this opportunity <span aria-hidden>→</span>
-              </button>
-            </motion.section>
-          ) : null}
-
-          <section
-            className="vc-res-conf"
-            data-level={result.confidence}
-            aria-label="Model confidence"
-          >
-            <div
-              className="vc-res-conf-meter"
-              style={{ ["--p" as string]: String(ring) }}
-            >
-              <i aria-hidden />
-              <strong>{result.confidence}</strong>
-            </div>
-            <div>
-              <span>Model confidence</span>
-              <ul>
-                {result.confidenceReasons.slice(0, 5).map((r) => (
-                  <li key={r} data-kind={reasonKind(r)}>
-                    {r}
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                className="vc-res-act"
-                onClick={() => setTighten(true)}
-              >
-                Tighten my estimate →
-              </button>
-            </div>
-          </section>
-
-          <section className="vc-res-capture">
-            <label>
-              <span>Modeled value capture</span>
-              <div className="vc2-capture-presets">
-                {[0.1, 0.2, 0.3, 0.4].map((r) => (
-                  <button
-                    key={r}
-                    type="button"
-                    data-on={journey.captureRate === r ? "true" : undefined}
-                    onClick={() => onPatch({ captureRate: r })}
-                  >
-                    {Math.round(r * 100)}%
-                  </button>
-                ))}
-              </div>
-            </label>
-            <p>
-              Not every identified opportunity becomes realized value. Capture
-              depends on evidence, approval, execution, and follow-through.
-            </p>
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={result.captureScenario.rate}
-                className="vc-res-capture-out"
-                initial={reduced ? false : { opacity: 0.35, y: 3 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.28 }}
-              >
-                Modeled captured{" "}
-                <strong>
-                  {formatRangeIntl(
-                    result.captureScenario.capturedLow,
-                    result.captureScenario.capturedModeled,
-                    result.currency,
-                  )}
-                </strong>{" "}
-                / year
-              </motion.p>
-            </AnimatePresence>
-          </section>
-        </aside>
       </div>
 
       <section
-        className="vc-category-guide"
-        aria-labelledby="vc-category-title"
+        className="vc3-panel vc3-methodology"
+        aria-labelledby="vc3-methodology-title"
       >
-        <p className="rx30-kicker">Your guide to the categories</p>
-        <h2 id="vc-category-title">What these operating areas mean</h2>
-        <p>
-          These are areas to investigate, not confirmed losses. Open a category
-          for a practical example and the records needed to check it. Categories
-          can overlap, so their individual estimates should not be added
-          together.
-        </p>
-        <div className="vc-category-grid">
-          {result.categories.map((category) => {
-            const explanation = categoryExplanation(
-              category.id,
-              journey.vertical,
-            );
-            return (
-              <details key={category.id}>
-                <summary>
-                  {categoryDisplayLabel(category, journey.vertical)}
-                </summary>
-                <p>{explanation.meaning}</p>
-                <p>
-                  <strong>For example:</strong> {explanation.example}
-                </p>
-                <p>
-                  <strong>Records to check:</strong>{" "}
-                  {category.evidenceNeeded.join(", ")}.
-                </p>
-              </details>
-            );
-          })}
-        </div>
-        <p>
-          <strong>Reading the result:</strong> Potential value is the broad
-          estimate. Modeled opportunity adjusts for overlap and evidence
-          readiness. Capture is the share you choose to model as realized.
-          Verified Value stays at zero here because this calculator has not
-          checked actual outcomes.
-        </p>
-      </section>
-
-      <section className="vc-res-below">
-        <div className="vc2-futures">
-          <h2>Compare futures</h2>
-          <div className="vc2-futures-grid">
-            <article data-kind="current">
-              <span>Current course</span>
-              <strong>
-                Opportunity remains untested or partially realized
-              </strong>
-            </article>
-            <article data-on>
-              <span>With RADR</span>
-              <strong>Detected → Reviewed → Actioned → Verified</strong>
-              <em>
-                At {Math.round(result.captureScenario.rate * 100)}% modeled
-                capture, illustrative
-              </em>
-            </article>
-          </div>
-        </div>
-
-        <div className="vc-roi">
-          <p className="rx30-kicker">Want to model payback?</p>
-          <label className="vc-field">
-            <span>Expected annual RADR investment</span>
-            <select
-              value={journey.investmentId ?? ""}
-              onChange={(e) =>
-                onPatch({ investmentId: e.target.value || null })
-              }
-            >
-              <option value="">Talk to sales / leave blank</option>
-              {INVESTMENT_OPTIONS.map((o) => (
-                <option key={o.id} value={o.id}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          {result.roi ? (
-            <div className="vc-roi-out">
-              <div data-kind="roi">
-                <span>Illustrative ROI</span>
-                <strong>
-                  {Math.round(result.roi.roiLow * 100)}–
-                  {Math.round(result.roi.roiModeled * 100)}%
-                </strong>
-              </div>
-              <div data-kind="payback">
-                <span>Modeled payback</span>
-                <strong>
-                  {result.roi.paybackMonthsModeled != null
-                    ? `${(result.roi.paybackMonthsModeled / 12).toFixed(1)} years`
-                    : "Not available"}
-                </strong>
-              </div>
-              <p className="vc-roi-hint">
-                ROI = (modeled captured − investment) / investment. No
-                guaranteed payback.
-              </p>
-            </div>
-          ) : (
-            <p className="vc-roi-hint">
-              ROI appears only when investment is supplied.
-            </p>
-          )}
-        </div>
-
-        <div className="vc2-result-actions">
-          <button
-            type="button"
-            className="vc-res-act"
-            onClick={() => setSens(true)}
-          >
-            Adjust assumptions
-          </button>
-          <button
-            type="button"
-            className="vc-res-act"
-            onClick={() => setHow(true)}
-          >
-            How was this calculated?
-          </button>
-          <Link href="/value-calculator/methodology" className="vc-res-act">
-            Methodology →
-          </Link>
-        </div>
-      </section>
-
-      <section className="vc-res-cta">
-        <div className="rx30-shell">
-          <h2>Turn an estimate into an evidence-led evaluation</h2>
+        <div>
+          <span className="vc3-eyebrow">Open the model</span>
+          <h2 id="vc3-methodology-title">See how the numbers connect.</h2>
           <p>
-            Choose an operating area, review the source records and agree how an
-            outcome would be measured. Start with a focused evaluation plan.
+            No industry loss rate is presented as a proven fact. The default
+            rates are adjustable modeling assumptions.
           </p>
-          <div className="rx30-ctas">
-            <Link
-              href={`/contact?intent=pricing&context=${journey.vertical}`}
-              className="rx30-btn rx30-btn-primary"
-            >
-              Plan your evaluation <span aria-hidden>→</span>
-            </Link>
-            <Link
-              href={CTAS.seeInActionHref}
-              className="rx30-btn rx30-btn-ghost rx30-btn-ghost--solid"
-            >
-              {CTAS.seeInAction}
-            </Link>
-          </div>
         </div>
-      </section>
-
-      <p className="vc-disclaimer-inline vc-res-foot">{DISCLAIMER}</p>
-
-      {how ? (
-        <div className="vc-drawer" role="dialog" aria-modal="true">
-          <div className="vc-drawer-panel">
-            <header>
-              <h2>How was this calculated?</h2>
-              <button type="button" onClick={() => setHow(false)}>
-                Close
-              </button>
-            </header>
-            <p>{DISCLAIMER}</p>
-            <ul>
-              {result.methodology.assumptionIds.map((id) => {
-                const a = OPPORTUNITY_ASSUMPTIONS.find((x) => x.id === id);
-                if (!a) return null;
-                const cat = result.categories.find(
-                  (c) => c.id === a.categoryId,
-                );
-                return (
-                  <li key={id}>
-                    <strong>
-                      {CATEGORY_LABEL[a.categoryId as CategoryId]}
-                    </strong>
-                    <span>
-                      Pool × {(a.rates.low * 100).toFixed(1)}–
-                      {(a.rates.high * 100).toFixed(1)}% · {a.sourceType}
-                      {cat
-                        ? ` → ${formatRangeIntl(cat.low, cat.modeled, result.currency)}`
-                        : ""}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-            <p>
-              Overlap adjustment:{" "}
-              {result.methodology.overlapGroupsApplied.join(", ") || "none"}.
-              Portfolio cap:{" "}
-              {result.methodology.portfolioCapApplied
-                ? "applied"
-                : "not needed"}
-              .
-            </p>
-          </div>
-        </div>
-      ) : null}
-
-      {sens ? (
-        <div className="vc-drawer" role="dialog" aria-modal="true">
-          <div className="vc-drawer-panel">
-            <header>
-              <h2>Adjust assumptions</h2>
-              <button type="button" onClick={() => setSens(false)}>
-                Close
-              </button>
-            </header>
-            {OPPORTUNITY_ASSUMPTIONS.filter(
-              (a) => journey.vertical && a.verticals.includes(journey.vertical),
-            ).map((a) => {
-              const ov = journey.rateOverrides?.[a.id]?.base;
-              const val = Math.round((ov ?? a.rates.base) * 1000) / 10;
+        <details>
+          <summary>How was this calculated?</summary>
+          <ol className="vc3-math-ledger">
+            <li>
+              <span>Raw central exposure from selected categories</span>
+              <b>
+                {hasRevenue
+                  ? formatMoneyIntl(
+                      result.methodology.rawModeledTotal ??
+                        result.total.modeled,
+                      result.currency,
+                    )
+                  : "Revenue needed"}
+              </b>
+            </li>
+            <li>
+              <span>Reduction for overlapping categories</span>
+              <b>
+                {hasRevenue
+                  ? formatMoneyIntl(
+                      -(result.methodology.overlapReduction ?? 0),
+                      result.currency,
+                    )
+                  : "Revenue needed"}
+              </b>
+            </li>
+            <li>
+              <span>Reduction from central-case portfolio limit</span>
+              <b>
+                {hasRevenue
+                  ? formatMoneyIntl(
+                      -(result.methodology.portfolioReduction ?? 0),
+                      result.currency,
+                    )
+                  : "Revenue needed"}
+              </b>
+            </li>
+            <li>
+              <span>Adjusted central exposure per year</span>
+              <b>
+                {hasRevenue
+                  ? formatMoneyIntl(result.total.modeled, result.currency)
+                  : "Revenue needed"}
+              </b>
+            </li>
+          </ol>
+          <p>
+            Related categories share an overlap group: the largest central
+            amount is retained and secondary amounts use a{" "}
+            {Math.round(PORTFOLIO.overlapCorrelationFactor * 100)}% multiplier.
+            If the adjusted central sum exceeds{" "}
+            {PORTFOLIO.portfolioCapRate * 100}% of revenue, the model scales
+            category scenarios down together. This is a modeling guardrail, not
+            a proven industry ceiling.
+          </p>
+          <p>
+            Financial-process answers guide the review context and ranking,
+            rather than reducing the exposure total. Monthly figures are annual
+            figures divided by twelve, not a seasonal forecast.
+          </p>
+        </details>
+        <details>
+          <summary>Adjust central rate assumptions</summary>
+          <p>
+            Change rates only when you have a reason. Each slider stays within
+            its category’s existing lower and higher assumptions.
+          </p>
+          <div className="vc3-rate-grid">
+            {assumptions.map(({ assumption: a, category: c }) => {
+              const value =
+                (journey.rateOverrides?.[a.id]?.base ?? a.rates.base) * 100;
               return (
-                <label key={a.id} className="vc-field">
+                <label key={a.id} data-assumption-id={a.id}>
                   <span>
-                    {CATEGORY_LABEL[a.categoryId]} · low{" "}
-                    {Math.round(a.rates.low * 1000) / 10}% · base {val}% · high{" "}
-                    {Math.round(a.rates.high * 1000) / 10}% · {a.sourceType}
+                    {categoryDisplayLabel(c, journey.vertical)}
+                    <b>
+                      {value.toLocaleString("en", { maximumFractionDigits: 2 })}
+                      %
+                    </b>
                   </span>
                   <input
+                    aria-label={`${categoryDisplayLabel(c, journey.vertical)} central rate`}
                     type="range"
-                    min={Math.round(a.rates.low * 1000) / 10}
-                    max={Math.round(a.rates.high * 1000) / 10}
-                    step={0.1}
-                    value={val}
-                    onChange={(e) => {
-                      const base = Number(e.target.value) / 100;
+                    min={a.rates.low * 100}
+                    max={a.rates.high * 100}
+                    step="0.01"
+                    value={value}
+                    onChange={(e) =>
                       onPatch({
                         rateOverrides: {
                           ...journey.rateOverrides,
                           [a.id]: {
-                            low: a.rates.low,
-                            base,
-                            high: a.rates.high,
+                            ...a.rates,
+                            base: Number(e.target.value) / 100,
                           },
                         },
-                      });
-                    }}
+                      })
+                    }
                   />
+                  <small>
+                    {a.rates.low * 100}% lower · {a.rates.high * 100}% higher ·
+                    internal model
+                  </small>
                 </label>
               );
             })}
-            <p className="vc-disclaimer-inline">
-              Default capture {PORTFOLIO.defaultCaptureRate * 100}% · internal
-              modeling assumptions unless marked otherwise
-            </p>
           </div>
-        </div>
-      ) : null}
+          <button
+            className="vc3-text-button"
+            onClick={() => onPatch({ rateOverrides: undefined })}
+          >
+            Reset category rates to defaults
+          </button>
+        </details>
+        <details>
+          <summary>Your record-review context</summary>
+          <p>
+            Review cadence: {journey.reconcileId ?? "Not provided"}. Manual
+            matching: {journey.manualId ?? "Not provided"}. Cross-site
+            consistency: {journey.stdId ?? "Not provided"}.
+          </p>
+          <p>
+            {journey.manualId === "high"
+              ? "Start with one complete settlement or supplier sample and document how it is matched before widening the review."
+              : "Use a consistent source export and review window so differences can be checked across systems."}{" "}
+            These are self-reported process answers, not a source-quality
+            assessment.
+          </p>
+        </details>
+        <Link href="/value-calculator/methodology">
+          Read the full methodology →
+        </Link>
+      </section>
 
-      {tighten ? (
-        <div className="vc-drawer" role="dialog" aria-modal="true">
-          <div className="vc-drawer-panel">
-            <header>
-              <h2>Tighten my estimate</h2>
-              <button type="button" onClick={() => setTighten(false)}>
-                Close
-              </button>
-            </header>
-            <p>
-              Add specifics without restarting. Unknowns stay assumed until you
-              choose a range.
-            </p>
-            {journey.vertical !== "hotel" ? (
-              <label className="vc-field">
-                <span>Food / COGS %</span>
-                <select
-                  value={journey.foodId ?? ""}
-                  onChange={(e) => onPatch({ foodId: e.target.value || null })}
-                >
-                  <option value="">Leave as-is</option>
-                  {PCT_OPTIONS.map((o) => (
-                    <option key={o.id} value={o.id}>
-                      {o.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ) : null}
-            <label className="vc-field">
-              <span>Labor %</span>
-              <select
-                value={journey.laborId ?? ""}
-                onChange={(e) => onPatch({ laborId: e.target.value || null })}
-              >
-                <option value="">Leave as-is</option>
-                {PCT_OPTIONS.map((o) => (
-                  <option key={o.id} value={o.id}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="vc-field">
-              <span>Purchasing / supplier spend</span>
-              <select
-                value={journey.purchasingId ?? ""}
-                onChange={(e) =>
-                  onPatch({ purchasingId: e.target.value || null })
-                }
-              >
-                <option value="">Leave as-is</option>
-                {PURCHASING_OPTIONS.map((o) => (
-                  <option key={o.id} value={o.id}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button
-              type="button"
-              className="rx30-btn rx30-btn-primary"
-              onClick={() => setTighten(false)}
-            >
-              Update model
-            </button>
-          </div>
+      <section className="vc3-close">
+        <div>
+          <span className="vc3-eyebrow">Make the next step practical</span>
+          <h2>
+            Find the evidence.
+            <br />
+            Then decide what matters.
+          </h2>
+          <p>
+            Your team can use this map to choose the first records to review.
+            The calculator verifies no outcomes and does not create confirmed
+            savings.
+          </p>
         </div>
-      ) : null}
-    </motion.div>
+        <div>
+          <Link
+            href={`/contact?intent=pricing&context=${journey.vertical}`}
+            className="vc3-btn vc3-btn--jade"
+          >
+            Prepare an evaluation
+          </Link>
+          <Link href="/demo" className="vc3-btn vc3-btn--glass">
+            Explore the free demo →
+          </Link>
+        </div>
+      </section>
+      <p className="vc3-result-foot">
+        Illustrative model. No financial inputs are uploaded or saved by this
+        calculator. CSV amounts are annual; print follows the displayed horizon.
+        Verified value from this calculation:{" "}
+        {formatMoneyIntl(0, result.currency)}.
+      </p>
+      <p className="vc3-sr-only" role="status">
+        {notice}
+      </p>
+    </div>
   );
 }

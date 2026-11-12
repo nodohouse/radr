@@ -26,21 +26,77 @@ export const LOCATION_OPTIONS: RangeOption[] = [
   { id: "100_plus", label: "100+", range: { low: 100, base: 150, high: 200 } },
 ];
 
-/** Revenue bands in USD; scaled for other currencies via FX factors (reporting only). */
+/** Numeric bands are denominated in the selected currency. No FX conversion. */
 export const REVENUE_OPTIONS_USD: RangeOption[] = [
-  { id: "u2", label: "Under $2M", range: { low: 500_000, base: 1_250_000, high: 2_000_000 } },
-  { id: "2_5", label: "$2–5M", range: { low: 2_000_000, base: 3_500_000, high: 5_000_000 } },
-  { id: "5_10", label: "$5–10M", range: { low: 5_000_000, base: 7_500_000, high: 10_000_000 } },
-  { id: "10_25", label: "$10–25M", range: { low: 10_000_000, base: 17_500_000, high: 25_000_000 } },
-  { id: "25_50", label: "$25–50M", range: { low: 25_000_000, base: 37_500_000, high: 50_000_000 } },
-  { id: "50_100", label: "$50–100M", range: { low: 50_000_000, base: 75_000_000, high: 100_000_000 } },
-  { id: "100_250", label: "$100–250M", range: { low: 100_000_000, base: 175_000_000, high: 250_000_000 } },
-  { id: "250_500", label: "$250–500M", range: { low: 250_000_000, base: 375_000_000, high: 500_000_000 } },
-  { id: "500_plus", label: "$500M+", range: { low: 500_000_000, base: 750_000_000, high: 1_000_000_000 } },
+  {
+    id: "u250k",
+    label: "Under $250K",
+    range: { low: 0, base: 125_000, high: 250_000 },
+  },
+  {
+    id: "250_500k",
+    label: "$250–500K",
+    range: { low: 250_000, base: 375_000, high: 500_000 },
+  },
+  {
+    id: "500k_1m",
+    label: "$500K–1M",
+    range: { low: 500_000, base: 750_000, high: 1_000_000 },
+  },
+  {
+    id: "1_2m",
+    label: "$1–2M",
+    range: { low: 1_000_000, base: 1_500_000, high: 2_000_000 },
+  },
+  {
+    id: "u2",
+    label: "Under $2M",
+    range: { low: 500_000, base: 1_250_000, high: 2_000_000 },
+  },
+  {
+    id: "2_5",
+    label: "$2–5M",
+    range: { low: 2_000_000, base: 3_500_000, high: 5_000_000 },
+  },
+  {
+    id: "5_10",
+    label: "$5–10M",
+    range: { low: 5_000_000, base: 7_500_000, high: 10_000_000 },
+  },
+  {
+    id: "10_25",
+    label: "$10–25M",
+    range: { low: 10_000_000, base: 17_500_000, high: 25_000_000 },
+  },
+  {
+    id: "25_50",
+    label: "$25–50M",
+    range: { low: 25_000_000, base: 37_500_000, high: 50_000_000 },
+  },
+  {
+    id: "50_100",
+    label: "$50–100M",
+    range: { low: 50_000_000, base: 75_000_000, high: 100_000_000 },
+  },
+  {
+    id: "100_250",
+    label: "$100–250M",
+    range: { low: 100_000_000, base: 175_000_000, high: 250_000_000 },
+  },
+  {
+    id: "250_500",
+    label: "$250–500M",
+    range: { low: 250_000_000, base: 375_000_000, high: 500_000_000 },
+  },
+  {
+    id: "500_plus",
+    label: "$500M+",
+    range: { low: 500_000_000, base: 750_000_000, high: 1_000_000_000 },
+  },
   { id: "unknown", label: "I’m not sure", range: null },
 ];
 
-/** Approximate FX vs USD for displaying range labels only; user figures stay in selected currency. */
+/** Legacy reference factors; never used by the current calculator or its labels. */
 export const FX_VS_USD: Record<CurrencyCode, number> = {
   USD: 1,
   EUR: 0.92,
@@ -57,26 +113,45 @@ export const FX_VS_USD: Record<CurrencyCode, number> = {
 };
 
 export const PCT_OPTIONS: RangeOption[] = [
+  { id: "none", label: "None (0%)", range: { low: 0, base: 0, high: 0 } },
   { id: "u20", label: "Under 20%", range: { low: 0.1, base: 0.15, high: 0.2 } },
   { id: "20_24", label: "20–24%", range: { low: 0.2, base: 0.22, high: 0.24 } },
-  { id: "25_29", label: "25–29%", range: { low: 0.25, base: 0.27, high: 0.29 } },
+  {
+    id: "25_29",
+    label: "25–29%",
+    range: { low: 0.25, base: 0.27, high: 0.29 },
+  },
   { id: "30_34", label: "30–34%", range: { low: 0.3, base: 0.32, high: 0.34 } },
-  { id: "35_39", label: "35–39%", range: { low: 0.35, base: 0.37, high: 0.39 } },
+  {
+    id: "35_39",
+    label: "35–39%",
+    range: { low: 0.35, base: 0.37, high: 0.39 },
+  },
   { id: "40_plus", label: "40%+", range: { low: 0.4, base: 0.45, high: 0.55 } },
   { id: "unknown", label: "I don’t know", range: null },
 ];
 
 export const DELIVERY_OPTIONS: RangeOption[] = [
+  { id: "none", label: "None (0%)", range: { low: 0, base: 0, high: 0 } },
   { id: "0_5", label: "0–5%", range: { low: 0, base: 0.025, high: 0.05 } },
   { id: "6_15", label: "6–15%", range: { low: 0.06, base: 0.105, high: 0.15 } },
   { id: "16_30", label: "16–30%", range: { low: 0.16, base: 0.23, high: 0.3 } },
-  { id: "31_50", label: "31–50%", range: { low: 0.31, base: 0.405, high: 0.5 } },
+  {
+    id: "31_50",
+    label: "31–50%",
+    range: { low: 0.31, base: 0.405, high: 0.5 },
+  },
   { id: "50_plus", label: "50%+", range: { low: 0.5, base: 0.6, high: 0.75 } },
   { id: "unknown", label: "I don’t know", range: null },
 ];
 
 export const PURCHASING_OPTIONS: RangeOption[] = [
-  { id: "u10", label: "Under 10% of revenue", range: { low: 0.05, base: 0.075, high: 0.1 } },
+  { id: "none", label: "None (0%)", range: { low: 0, base: 0, high: 0 } },
+  {
+    id: "u10",
+    label: "Under 10% of revenue",
+    range: { low: 0.05, base: 0.075, high: 0.1 },
+  },
   { id: "10_20", label: "10–20%", range: { low: 0.1, base: 0.15, high: 0.2 } },
   { id: "20_30", label: "20–30%", range: { low: 0.2, base: 0.25, high: 0.3 } },
   { id: "30_40", label: "30–40%", range: { low: 0.3, base: 0.35, high: 0.4 } },
@@ -86,28 +161,69 @@ export const PURCHASING_OPTIONS: RangeOption[] = [
 
 export const OCCUPANCY_OPTIONS: RangeOption[] = [
   { id: "u50", label: "Under 50%", range: { low: 0.3, base: 0.4, high: 0.5 } },
-  { id: "50_59", label: "50–59%", range: { low: 0.5, base: 0.545, high: 0.59 } },
-  { id: "60_69", label: "60–69%", range: { low: 0.6, base: 0.645, high: 0.69 } },
-  { id: "70_79", label: "70–79%", range: { low: 0.7, base: 0.745, high: 0.79 } },
-  { id: "80_89", label: "80–89%", range: { low: 0.8, base: 0.845, high: 0.89 } },
+  {
+    id: "50_59",
+    label: "50–59%",
+    range: { low: 0.5, base: 0.545, high: 0.59 },
+  },
+  {
+    id: "60_69",
+    label: "60–69%",
+    range: { low: 0.6, base: 0.645, high: 0.69 },
+  },
+  {
+    id: "70_79",
+    label: "70–79%",
+    range: { low: 0.7, base: 0.745, high: 0.79 },
+  },
+  {
+    id: "80_89",
+    label: "80–89%",
+    range: { low: 0.8, base: 0.845, high: 0.89 },
+  },
   { id: "90_plus", label: "90%+", range: { low: 0.9, base: 0.93, high: 0.98 } },
   { id: "unknown", label: "I don’t know", range: null },
 ];
 
 export const ADR_OPTIONS_USD: RangeOption[] = [
   { id: "u100", label: "Under $100", range: { low: 50, base: 75, high: 100 } },
-  { id: "100_149", label: "$100–149", range: { low: 100, base: 124.5, high: 149 } },
-  { id: "150_199", label: "$150–199", range: { low: 150, base: 174.5, high: 199 } },
-  { id: "200_299", label: "$200–299", range: { low: 200, base: 249.5, high: 299 } },
-  { id: "300_499", label: "$300–499", range: { low: 300, base: 399.5, high: 499 } },
+  {
+    id: "100_149",
+    label: "$100–149",
+    range: { low: 100, base: 124.5, high: 149 },
+  },
+  {
+    id: "150_199",
+    label: "$150–199",
+    range: { low: 150, base: 174.5, high: 199 },
+  },
+  {
+    id: "200_299",
+    label: "$200–299",
+    range: { low: 200, base: 249.5, high: 299 },
+  },
+  {
+    id: "300_499",
+    label: "$300–499",
+    range: { low: 300, base: 399.5, high: 499 },
+  },
   { id: "500_plus", label: "$500+", range: { low: 500, base: 650, high: 900 } },
   { id: "unknown", label: "I don’t know", range: null },
 ];
 
 export const OTA_OPTIONS: RangeOption[] = [
-  { id: "u10", label: "Under 10%", range: { low: 0.02, base: 0.06, high: 0.1 } },
+  { id: "none", label: "None (0%)", range: { low: 0, base: 0, high: 0 } },
+  {
+    id: "u10",
+    label: "Under 10%",
+    range: { low: 0.02, base: 0.06, high: 0.1 },
+  },
   { id: "10_20", label: "10–20%", range: { low: 0.1, base: 0.15, high: 0.2 } },
-  { id: "21_35", label: "21–35%", range: { low: 0.21, base: 0.28, high: 0.35 } },
+  {
+    id: "21_35",
+    label: "21–35%",
+    range: { low: 0.21, base: 0.28, high: 0.35 },
+  },
   { id: "36_50", label: "36–50%", range: { low: 0.36, base: 0.43, high: 0.5 } },
   { id: "50_plus", label: "50%+", range: { low: 0.5, base: 0.6, high: 0.75 } },
   { id: "unknown", label: "I don’t know", range: null },
@@ -115,20 +231,52 @@ export const OTA_OPTIONS: RangeOption[] = [
 
 export const COVERS_OPTIONS: RangeOption[] = [
   { id: "u100", label: "Under 100", range: { low: 40, base: 70, high: 100 } },
-  { id: "100_250", label: "100–250", range: { low: 100, base: 175, high: 250 } },
-  { id: "250_500", label: "250–500", range: { low: 250, base: 375, high: 500 } },
-  { id: "500_1000", label: "500–1,000", range: { low: 500, base: 750, high: 1000 } },
-  { id: "1000_plus", label: "1,000+", range: { low: 1000, base: 1500, high: 2500 } },
+  {
+    id: "100_250",
+    label: "100–250",
+    range: { low: 100, base: 175, high: 250 },
+  },
+  {
+    id: "250_500",
+    label: "250–500",
+    range: { low: 250, base: 375, high: 500 },
+  },
+  {
+    id: "500_1000",
+    label: "500–1,000",
+    range: { low: 500, base: 750, high: 1000 },
+  },
+  {
+    id: "1000_plus",
+    label: "1,000+",
+    range: { low: 1000, base: 1500, high: 2500 },
+  },
   { id: "unknown", label: "I don’t know", range: null },
 ];
 
 export const ROOMS_OPTIONS: RangeOption[] = [
   { id: "u50", label: "Under 50", range: { low: 20, base: 35, high: 50 } },
   { id: "50_100", label: "50–100", range: { low: 50, base: 75, high: 100 } },
-  { id: "101_200", label: "101–200", range: { low: 101, base: 150, high: 200 } },
-  { id: "201_400", label: "201–400", range: { low: 201, base: 300, high: 400 } },
-  { id: "401_800", label: "401–800", range: { low: 401, base: 600, high: 800 } },
-  { id: "800_plus", label: "800+", range: { low: 800, base: 1100, high: 1600 } },
+  {
+    id: "101_200",
+    label: "101–200",
+    range: { low: 101, base: 150, high: 200 },
+  },
+  {
+    id: "201_400",
+    label: "201–400",
+    range: { low: 201, base: 300, high: 400 },
+  },
+  {
+    id: "401_800",
+    label: "401–800",
+    range: { low: 401, base: 600, high: 800 },
+  },
+  {
+    id: "800_plus",
+    label: "800+",
+    range: { low: 800, base: 1100, high: 1600 },
+  },
   { id: "unknown", label: "I don’t know", range: null },
 ];
 
@@ -165,12 +313,36 @@ export const STD_OPTIONS = [
 ] as const;
 
 export const INVESTMENT_OPTIONS: RangeOption[] = [
-  { id: "u10", label: "Under $10K", range: { low: 5_000, base: 7_500, high: 10_000 } },
-  { id: "10_25", label: "$10–25K", range: { low: 10_000, base: 17_500, high: 25_000 } },
-  { id: "25_50", label: "$25–50K", range: { low: 25_000, base: 37_500, high: 50_000 } },
-  { id: "50_100", label: "$50–100K", range: { low: 50_000, base: 75_000, high: 100_000 } },
-  { id: "100_250", label: "$100–250K", range: { low: 100_000, base: 175_000, high: 250_000 } },
-  { id: "250_plus", label: "$250K+", range: { low: 250_000, base: 350_000, high: 500_000 } },
+  {
+    id: "u10",
+    label: "Under $10K",
+    range: { low: 5_000, base: 7_500, high: 10_000 },
+  },
+  {
+    id: "10_25",
+    label: "$10–25K",
+    range: { low: 10_000, base: 17_500, high: 25_000 },
+  },
+  {
+    id: "25_50",
+    label: "$25–50K",
+    range: { low: 25_000, base: 37_500, high: 50_000 },
+  },
+  {
+    id: "50_100",
+    label: "$50–100K",
+    range: { low: 50_000, base: 75_000, high: 100_000 },
+  },
+  {
+    id: "100_250",
+    label: "$100–250K",
+    range: { low: 100_000, base: 175_000, high: 250_000 },
+  },
+  {
+    id: "250_plus",
+    label: "$250K+",
+    range: { low: 250_000, base: 350_000, high: 500_000 },
+  },
 ];
 
 export const CAPTURE_PRESETS = [0.1, 0.2, 0.3, 0.4] as const;
@@ -252,22 +424,47 @@ export function formatRevenueLabel(
   currency: CurrencyCode,
 ): string {
   if (!opt.range) return opt.label;
-  if (currency === "USD") return opt.label;
-  const fx = FX_VS_USD[currency] || 1;
-  const fmt = (n: number) => {
-    const v = Math.round((n * fx) / 1_000_000);
-    return `${v}M`;
+  const compact = (n: number) => {
+    const options: Intl.NumberFormatOptions = {
+      notation: "compact",
+      maximumFractionDigits: 1,
+      ...(currency === "OTHER" ? {} : { style: "currency", currency }),
+    };
+    return new Intl.NumberFormat("en", options).format(n);
   };
-  if (opt.id === "u2") return `Under ${fmt(2_000_000)} ${currency}`;
-  if (opt.id === "500_plus") return `${fmt(500_000_000)}+ ${currency}`;
-  return `${fmt(opt.range.low)}–${fmt(opt.range.high)} ${currency}`;
+  const suffix = currency === "OTHER" ? " units" : "";
+  if (opt.id.startsWith("u"))
+    return `Under ${compact(opt.range.high)}${suffix}`;
+  if (opt.id.endsWith("plus")) return `${compact(opt.range.low)}+${suffix}`;
+  return `${compact(opt.range.low)}–${compact(opt.range.high)}${suffix}`;
 }
+
+export const ROOM_REVENUE_OPTIONS: RangeOption[] = [
+  { id: "none", label: "None (0%)", range: { low: 0, base: 0, high: 0 } },
+  { id: "u25", label: "Under 25%", range: { low: 0, base: 0.125, high: 0.25 } },
+  {
+    id: "25_49",
+    label: "25–49%",
+    range: { low: 0.25, base: 0.37, high: 0.49 },
+  },
+  { id: "50_74", label: "50–74%", range: { low: 0.5, base: 0.62, high: 0.74 } },
+  {
+    id: "75_100",
+    label: "75–100%",
+    range: { low: 0.75, base: 0.875, high: 1 },
+  },
+  { id: "unknown", label: "I don’t know", range: null },
+];
 
 export function formatMoneyIntl(
   amount: number,
   currency: CurrencyCode,
 ): string {
-  const code = currency === "OTHER" ? "USD" : currency;
+  if (currency === "OTHER")
+    return new Intl.NumberFormat("en", { maximumFractionDigits: 0 }).format(
+      Math.round(amount),
+    );
+  const code = currency;
   try {
     return new Intl.NumberFormat("en", {
       style: "currency",

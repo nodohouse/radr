@@ -51,14 +51,11 @@ export type ValueCalculatorInput = {
   decisionStandardization: DecisionStandardization;
   /** 0.05–0.5, default 0.2 */
   captureRate?: number;
-  /** Optional annual RADR investment — enables ROI */
+  /** Visitor-supplied annual evaluation budget, not a RADR price. Enables ROI. */
   annualInvestment?: number;
   /** Optional rate overrides (sensitivity) keyed by assumption id */
   rateOverrides?: Partial<
-    Record<
-      string,
-      { low?: number; base?: number; high?: number }
-    >
+    Record<string, { low?: number; base?: number; high?: number }>
   >;
 };
 
@@ -73,6 +70,13 @@ export type CategoryResult = {
   evidenceNeeded: string[];
   assumptionId: string;
   assumedBase: boolean;
+  calculation?: {
+    base: number;
+    rates: { low: number; base: number; high: number };
+    rawModeled: number;
+    overlapFactor: number;
+    portfolioFactor: number;
+  };
 };
 
 export type ConfidenceLevel = "low" | "medium" | "high";
@@ -105,6 +109,9 @@ export type ValueCalculatorResult = {
     assumptionIds: string[];
     overlapGroupsApplied: string[];
     portfolioCapApplied: boolean;
+    rawModeledTotal?: number;
+    overlapReduction?: number;
+    portfolioReduction?: number;
   };
 };
 
