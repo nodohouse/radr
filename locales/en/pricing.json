@@ -1,15 +1,15 @@
 {
   "metaTitle": "Pricing | RADR",
-  "metaDescription": "Try RADR free for 14 days. Compare ongoing Expand and Enterprise scopes, with paid pricing based on your locations, data sources and operating requirements.",
+  "metaDescription": "Compare RADR Core, Expand and Enterprise. Annual subscriptions with agreed location coverage and usage, separately priced onboarding and a free fictional demo.",
   "kicker": "Pricing",
-  "heroTitleLine1": "Start where the value is clearest.",
+  "heroTitleLine1": "One platform. A clear agreement.",
   "heroTitleLine2": "",
-  "heroLead": "Start where the economic problem is clearest. Expand as Verified Value proves the economics.",
-  "heroSupport": "Choose Supplier / AP, Reconciliation, or both.",
+  "heroLead": "Explore the fictional demo for free. Roll out on an annual subscription with agreed location coverage, usage and separately priced setup.",
+  "heroSupport": "Core, Expand or Enterprise. Scope and delivery confirmed before commitment.",
   "how": {
     "kicker": "How pricing works",
     "title": "Price follows the operating surface.",
-    "lead": "Not seats. Not tokens. Not per-Decision credits."
+    "lead": "A platform minimum, named locations and an agreed usage allowance. Setup is priced separately."
   },
   "dimensions": {
     "locations": {
@@ -21,25 +21,25 @@
       "body": "The operational complexity RADR is responsible for understanding."
     },
     "responsibility": {
-      "title": "Decision responsibility",
-      "body": "Whether RADR recommends, prepares, or governs."
+      "title": "Usage and support",
+      "body": "Included processing, refresh frequency and support are defined in the quote."
     }
   },
   "pilot": {
-    "kicker": "Start",
-    "verb": "Prove",
-    "title": "14-day free trial",
-    "lead": "Prove the economics. 14 days to find and action recoverable value.",
-    "body": "Choose Supplier/AP, Reconciliation, or both. 2–3 locations. Evidence from the systems you already run.",
-    "priceLabel": "Scoped with you",
-    "priceSub": "Open cases until resolved, verified, or closed",
-    "cta": "Start a 14-day free trial",
+    "kicker": "Focused rollout",
+    "verb": "Core",
+    "title": "Core",
+    "lead": "One operating priority. A complete Decision loop.",
+    "body": "Named locations, source evidence, human review and outcome tracking. Integration availability is confirmed before setup.",
+    "priceLabel": "Annual subscription",
+    "priceSub": "Platform minimum + agreed location coverage",
+    "cta": "Plan with Core",
     "points": [
-      "Supplier / AP · Reconciliation · or both",
-      "2–3 locations",
-      "14-day discovery / action window",
-      "Evidence packages · Verified Value trace",
-      "You can stop after the pilot"
+      "One agreed operating priority",
+      "Named locations and usage allowance",
+      "Evidence, human review and outcome tracking",
+      "Separately priced onboarding",
+      "Written scope and delivery milestones"
     ]
   },
   "core": {
@@ -47,7 +47,7 @@
     "verb": "RADR",
     "line": "More Decision classes. More locations. More systems. Operating Memory.",
     "audience": "One product — RADR — across the operation.",
-    "priceLabel": "Priced by location + operating scope",
+    "priceLabel": "Annual platform + location coverage",
     "cta": "Discuss Expand",
     "features": [
       "Cross-system Decisions",
@@ -59,9 +59,9 @@
   },
   "progression": {
     "kicker": "One company · one product · RADR",
-    "title": "Start → Expand → Enterprise.",
-    "lead": "How do I start? What does the pilot measure? How does pricing scale?",
-    "recover": "Start",
+    "title": "Core → Expand → Enterprise.",
+    "lead": "Compare operating scope, location coverage and portfolio requirements.",
+    "recover": "Core",
     "decide": "Expand",
     "govern": "Enterprise"
   },
@@ -87,15 +87,15 @@
     "body": "For larger groups we can scope SSO / SAML, custom RBAC, warehouse connections, custom APIs, security review, data policies, custom onboarding, dedicated support, SLA and multi-entity deployment.",
     "cta": "Talk to us"
   },
-  "packagesNote": "Start, Expand, and Enterprise are scoped to your operation.",
+  "packagesNote": "Core, Expand and Enterprise are annual scopes. Onboarding and custom work are priced separately.",
   "expansion": {
     "kicker": "How expansion works",
-    "title": "Start → Expand → Enterprise.",
+    "title": "Core → Expand → Enterprise.",
     "steps": {
       "prove": {
-        "label": "Start",
-        "title": "Prove recoverable value.",
-        "body": "A 14-day free trial on Supplier/AP and/or Reconciliation — measurable Verified outcomes."
+        "label": "Core",
+        "title": "Start with one priority.",
+        "body": "An annual subscription on an agreed operating priority, with separately priced onboarding."
       },
       "deploy": {
         "label": "Expand",
@@ -118,19 +118,19 @@
       "yes": "Included",
       "early": "Early access",
       "selected": "Selected scope",
-      "pilot": "Free trial",
+      "pilot": "Agreed scope",
       "no": "Not in package"
     },
     "status": {
       "yes": "Yes",
       "early": "Early access",
       "selected": "Selected",
-      "pilot": "Free trial",
+      "pilot": "Agreed scope",
       "no": "—"
     },
     "columns": {
       "feature": "Capability",
-      "pilot": "Start",
+      "pilot": "Core",
       "core": "Expand",
       "control": "Enterprise"
     },
@@ -168,42 +168,42 @@
     "items": [
       {
         "q": "How is RADR priced?",
-        "a": "Pricing scales with estate size, connected systems, operating scope, and Decision responsibility. Not seats or tokens."
+        "a": "An annual subscription with a platform minimum, named locations and an agreed usage allowance. Your quote states the total and billing schedule. Onboarding and custom work are priced separately."
+      },
+      {
+        "q": "Can I explore before committing?",
+        "a": "Register for the free fictional hotel or restaurant demo. A rollout with your own data is a separately scoped paid engagement."
       },
       {
         "q": "What affects price?",
-        "a": "How many locations RADR covers, which systems feed evidence, how broad the operating surface is, and whether RADR recommends, prepares, or governs."
+        "a": "Location coverage, operating priorities, source complexity, data volume, refresh frequency, processing and support requirements."
       },
       {
-        "q": "Do I need all systems connected first?",
-        "a": "No. Start with the evidence sources that unlock the clearest economic problem. Expand as more systems come online."
+        "q": "Is setup included?",
+        "a": "Onboarding is separately priced. Data mapping, training, custom integrations and historical backfill are itemized before work starts."
       },
       {
         "q": "Can I start small?",
-        "a": "Yes. A typical starting scope is 2–3 locations focused on one defined economic problem."
+        "a": "Core starts with one operating priority and named locations. Expand adds location comparisons and several agreed priorities. Enterprise addresses portfolio requirements."
       },
       {
-        "q": "Can I expand later?",
-        "a": "Yes. The same Decision layer expands into broader operating coverage, Futures, Verified Value, Memory, and enterprise governance."
+        "q": "What if our estate or usage grows?",
+        "a": "Additional locations, usage or work require an approved scope and price change. The agreement defines how limits are handled."
       },
       {
-        "q": "Is implementation included?",
-        "a": "Scoped onboarding is part of the commercial conversation: connect core systems, configure operating context, and review first material Decisions."
+        "q": "Do you take a percentage of savings?",
+        "a": "The standard model is a subscription. Modeled or expected savings do not create a charge."
       },
       {
-        "q": "Do you offer enterprise terms?",
-        "a": "Yes. Larger groups can scope advanced controls, security review, custom integrations, multi-entity deployment, and SLA terms where agreed."
-      },
-      {
-        "q": "What does a pilot / starting scope look like?",
-        "a": "A paid Start engagement on a defined economic problem. Clear go / no-go, evidence packages, and Verified Value where evidence supports it."
+        "q": "What commercial terms apply?",
+        "a": "The written agreement confirms fees, billing, start date, term, renewal, cancellation, support and delivery. No subscription starts by exploring this website."
       }
     ]
   },
-  "ready": "Start with one recovery scope.",
+  "ready": "See the operation. Then decide.",
   "readyLead": "Tell us what you run, where margin disappears, and which systems hold the evidence. We will scope the right place to start.",
-  "readyCta": "Start a 14-day free trial",
+  "readyCta": "Plan your rollout",
   "readySecondary": "See a Verified Recovery",
-  "contactSales": "Start a 14-day free trial",
+  "contactSales": "Plan your rollout",
   "bookDemo": "See a Verified Recovery"
 }

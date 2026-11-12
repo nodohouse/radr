@@ -89,7 +89,7 @@ export async function submitContactInquiry(
   if (inbox) {
     const planLabel =
       payload.plan === "pilot"
-        ? "14-day free trial"
+        ? "Core"
         : payload.plan === "core"
           ? "Expand"
           : payload.plan === "control"

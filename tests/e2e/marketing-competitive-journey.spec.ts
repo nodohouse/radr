@@ -95,10 +95,64 @@ test("homepage entry, hotel context and pricing scope remain clear", async ({
   await page.goto("/en/pricing");
   await expect(
     page.locator('.rm-plan-card[data-featured="true"] h3'),
-  ).toHaveText("14-day free trial");
+  ).toHaveText("Expand");
   await expect(page.locator(".rm-plan-highlights")).toHaveCount(3);
   await expect(page.locator(".rm-compare-table tbody tr")).toHaveCount(10);
   await expect(
     page.locator(".rm-plan-card").first().getByRole("link"),
   ).toHaveAttribute("href", /signup/);
+});
+
+test("pricing separates free exploration from paid scope, setup and usage", async ({
+  page,
+}) => {
+  await page.goto("/en/pricing");
+  await expect(page.locator("main")).not.toContainText(/free trial|14.day/i);
+  await expect(page.locator(".rm-plan-card h3")).toHaveText([
+    "Core",
+    "Expand",
+    "Enterprise",
+  ]);
+  await expect(page.locator(".rm-price-quote")).toContainText(
+    "One-time onboarding + any custom work",
+  );
+  await expect(page.locator(".rm-price-quote")).toContainText(
+    "Included processing + support allowance",
+  );
+  const demo = page.locator(".rm-price-hero").getByRole("link", {
+    name: "Explore the free demo",
+  });
+  await expect(demo).toHaveAttribute("href", "/en/demo");
+  for (const [index, id] of ["start", "expand", "enterprise"].entries()) {
+    await expect(
+      page.locator(".rm-plan-card").nth(index).getByRole("link"),
+    ).toHaveAttribute("href", `/en/signup?intent=workspace&plan=${id}`);
+  }
+  for (const [question, answer] of [
+    ["Why an annual agreement?", "renewal and cancellation terms"],
+    ["What does onboarding cover?", "separately priced setup scope"],
+    [
+      "What happens if our usage or estate grows?",
+      "approved scope change and price",
+    ],
+    [
+      "Do you take a percentage of our savings?",
+      "not a share of modeled or expected savings",
+    ],
+  ]) {
+    const detail = page.locator("details").filter({
+      has: page.locator("summary", { hasText: question }),
+    });
+    await detail.locator("summary").click();
+    await expect(detail.locator("p")).toBeVisible();
+    await expect(detail.locator("p")).toContainText(answer);
+  }
+  await demo.click();
+  await expect(page).toHaveURL(/\/en\/demo$/);
+  await page.getByRole("button", { name: "Hotel group", exact: true }).click();
+  await expect(page).toHaveURL(/signup\?intent=demo/);
+  await expect(page.locator(".ob-registration-plan")).toHaveCount(0);
+  await expect(
+    page.getByLabel("Choose your demo", { exact: true }),
+  ).toHaveValue("hotel");
 });

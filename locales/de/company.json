@@ -80,7 +80,7 @@
     "interests": {
       "demo": "Produktdemo",
       "pricing": "Preise",
-      "package-pilot": "14-tägige kostenlose Testphase",
+      "package-pilot": "Core",
       "package-core": "Expand",
       "package-control": "Enterprise",
       "multi-location": "Multi-Standort-Rollout",
@@ -88,7 +88,7 @@
       "other": "Etwas anderes"
     },
     "messagePlaceholder": "Was sollten wir vor dem Gespräch wissen?",
-    "submit": "Scope my 14-tägige kostenlose Testphase →",
+    "submit": "Einführung besprechen →",
     "sending": "Senden…",
     "okWebhook": "Wir haben Ihre Nachricht erhalten. Wir melden uns an Ihrer geschäftlichen E-Mail.",
     "okMailto": "Wir haben Ihre Nachricht erhalten. Wir melden uns an Ihrer geschäftlichen E-Mail.",

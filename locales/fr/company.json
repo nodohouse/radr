@@ -80,7 +80,7 @@
     "interests": {
       "demo": "Démo produit",
       "pricing": "Tarifs",
-      "package-pilot": "essai gratuit de 14 jours",
+      "package-pilot": "Core",
       "package-core": "Expand",
       "package-control": "Enterprise",
       "multi-location": "Déploiement multi-sites",
@@ -88,7 +88,7 @@
       "other": "Autre chose"
     },
     "messagePlaceholder": "Que devons-nous savoir avant d’échanger ?",
-    "submit": "Scope my essai gratuit de 14 jours →",
+    "submit": "Discuter du déploiement →",
     "sending": "Envoi…",
     "okWebhook": "Nous avons bien reçu votre message. Nous vous répondrons à votre e-mail professionnel.",
     "okMailto": "Nous avons bien reçu votre message. Nous vous répondrons à votre e-mail professionnel.",

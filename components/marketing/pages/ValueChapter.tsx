@@ -425,10 +425,10 @@ export function ValueChapter() {
                 Explore the interactive demo <span aria-hidden="true">→</span>
               </NextLink>
               <NextLink
-                href="/contact?intent=recovery-pilot"
+                href="/contact?intent=pricing"
                 className="rx-btn rx-btn-ghost"
               >
-                Explore the 14-day trial
+                Plan your rollout
               </NextLink>
             </div>
           </div>

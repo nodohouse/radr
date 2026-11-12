@@ -9,7 +9,7 @@ export function publicPlan(value: unknown): PublicPlanId | null {
 }
 export function planName(plan: PublicPlanId) {
   return plan === "start"
-    ? "14-day free trial"
+    ? "Core"
     : plan === "expand"
       ? "Expand"
       : "Enterprise";

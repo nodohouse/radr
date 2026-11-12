@@ -44,7 +44,7 @@ const answers = [
   ],
   [
     "What can I try without an account?",
-    "The public demo, platform walkthrough, research journal and Value Map are available without an account. You can prepare and save a local evaluation brief without submitting contact information.",
+    "The passive platform preview, research journal and Value Map are available publicly. Exploring the fictional hotel or restaurant demo requires the registration preview. You can prepare and save a local evaluation brief without submitting contact information.",
   ],
   [
     "Are all integrations and autonomous actions available?",
@@ -52,7 +52,7 @@ const answers = [
   ],
   [
     "How does pricing work?",
-    "RADR describes three engagement scopes: 14-day free trial, Expand and Enterprise. Pricing is quoted after reviewing locations, the operating problem, evidence sources, responsibilities and delivery milestones. There is no published self-service subscription price.",
+    "RADR offers Core, Expand and Enterprise as proposed annual subscription scopes. The fictional demo is free; rollout with your data is paid. A platform minimum, location coverage and usage allowance form the recurring quote. Onboarding and custom work are priced separately. Commercial terms and delivery are agreed before commitment.",
   ],
   [
     "How should a team evaluate RADR?",

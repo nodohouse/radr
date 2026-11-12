@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Pricing responsibility — Start → Expand → Enterprise.
+ * Pricing responsibility — Core → Expand → Enterprise.
  * One brand. One product. RADR.
  */
 
@@ -12,8 +12,8 @@ import "@/app/kinetic.css";
 const STAGES = [
   {
     id: "start",
-    label: "Start",
-    name: "14-day free trial",
+    label: "Core",
+    name: "Core",
     body: "Prove recoverable value. Supplier/AP, Reconciliation, or both. Evidence, cases, verification — file-first.",
     status: "early_access" as const,
   },
@@ -45,10 +45,10 @@ export function PricingResponsibilityTrack() {
       <div className="rx-shell">
         <p className="rx-rec-k">One company · one product · RADR</p>
         <h2 className="rx-rec-h" style={{ maxWidth: "28rem" }}>
-          Start → Expand → Enterprise
+          Core → Expand → Enterprise
         </h2>
         <p className="rx-rec-p" style={{ maxWidth: "40rem" }}>
-          How do I start? What does the pilot measure? How does pricing scale
+          How do I start? What does the agreed scope cover? How does pricing scale
           with locations and Decision coverage?
         </p>
 

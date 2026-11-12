@@ -33,9 +33,9 @@ export default async function OnboardingPreviewPage({
             <strong>{planName(plan)}</strong>
             <p>
               Your {vertical || "hospitality"} setup preview carries this
-              selection. No account, free-trial period or paid subscription has
-              started. Activation will require account services and agreed
-              commercial terms.
+              selection. No account, payment or paid subscription has started.
+              Activation will require account services and agreed commercial
+              terms.
             </p>
           </div>
           <Link

@@ -475,20 +475,20 @@
           "heading": "Who this is for",
           "paragraphs": [
             "Margin Recovery is for multi-location hospitality groups, with Finance or Procurement as sponsor.",
-            "A 14-day pilot finds recoverable margin and prepares action. Open cases stay on RADR until the value is applied or the case is closed."
+            "Start with a defined recovery priority and an agreed review window. Track open cases within the written scope, keeping expected value separate from verified receipts."
           ]
         },
         {
-          "heading": "Start a 14-day free trial",
+          "heading": "Explore the workflow. Plan the rollout.",
           "paragraphs": [
             "If credits keep showing up on screen and never as cash, start there.",
-            "See one Verified recovery on the Recover demo, or start a 14-day free trial with Finance / Purchasing.",
+            "Explore the fictional recovery example, then agree a paid rollout scope with Finance and Purchasing. A modeled amount is not a verified customer result.",
             "The same Decision system later extends into service and capacity, after recovery is proven."
           ]
         }
       ]
     }
   },
-  "ctaPilot": "Start a 14-day free trial",
+  "ctaPilot": "Plan your rollout",
   "ctaRecover": "See a Verified Recovery"
 }

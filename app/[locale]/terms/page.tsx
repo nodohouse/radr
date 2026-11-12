@@ -161,10 +161,13 @@ export default async function Page({ params }: Props) {
       </LegalSection>
       <LegalSection title="8. Pricing and customer agreements">
         <p>
-          A 14-day free trial supports evaluation. Expand and Enterprise describe
-          engagement scopes for discussion. Paid pricing is by custom quote; no monthly rate is
-          published. The website is not an offer to supply every displayed
-          capability immediately.
+          Core, Expand and Enterprise describe proposed annual subscription
+          scopes. The fictional demo is free to explore after registration.
+          Customer-data rollout is paid, with onboarding and custom work
+          separately scoped. Fees, usage allowances and location coverage are
+          confirmed by written quote; no self-service rate is published. The
+          website is not an offer to supply every displayed capability
+          immediately.
         </p>
         <p>
           A written customer agreement must specify the contracting parties,

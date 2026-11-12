@@ -638,7 +638,7 @@
     "title": "Systems record. RADR decides.",
     "lead": "Humans provide the hospitality.",
     "line": "One location. One operating problem. One decision layer.",
-    "ctaPrimary": "Start a 14-day free trial",
+    "ctaPrimary": "Plan your rollout",
     "ctaSecondary": "See a Verified Recovery"
   },
   "loop": {
@@ -1737,8 +1737,8 @@
       "statesNote": "States: Available · Demo · Partner access · Building · Planned."
     },
     "pilot": {
-      "kicker": "14-day free trial",
-      "title": "14 days to find and action recoverable value.",
+      "kicker": "Core rollout",
+      "title": "Start with one agreed recovery priority.",
       "lead": "Open cases stay on RADR until resolved, verified or closed.",
       "scope": "",
       "opt1": "Supplier / AP",
@@ -1750,7 +1750,7 @@
       "d3": "Cases actioned",
       "d4": "Value pending",
       "d5": "Value verified",
-      "cta": "Start a 14-day free trial"
+      "cta": "Plan with Core"
     },
     "expansion": {
       "kicker": "Platform",
@@ -1762,22 +1762,22 @@
     "faq": {
       "kicker": "FAQ",
       "title": "Straight answers",
-      "q1": "What if a supplier takes longer than 14 days?",
-      "a1": "RADR keeps open cases active until they resolve or are closed. The 14-day period covers discovery and action, not supplier settlement timelines.",
+      "q1": "What if supplier settlement takes longer than the review period?",
+      "a1": "Agree the review window and case ownership before starting. A review period is not a supplier settlement guarantee; ongoing tracking follows the written scope.",
       "q2": "Do we have to replace our accounting or procurement stack?",
       "a2": "No. RADR works across the systems already in use.",
       "q3": "Does RADR send disputes automatically?",
       "a3": "Not unless explicitly permitted by policy. Material external actions stay approval-gated.",
       "q4": "How does RADR define Verified Value?",
       "a4": "Only when downstream evidence supports the economic outcome — for example a credit applied and matched to the original invoice.",
-      "q5": "What does a successful 14-day free trial measure?",
+      "q5": "What does a successful rollout measure?",
       "a5": "Economically material findings, evidence Finance accepts, cases actioned, verified outcomes where settlement completes, time saved, and time to first Decision. No promised minimum recovery."
     },
     "footer": {
       "brand": "Nothing off the RADR.",
       "title": "Ready to see what your operation is leaving behind?",
       "body": "Start with the value already slipping through.",
-      "cta": "Start a 14-day free trial",
+      "cta": "Plan your rollout",
       "secondary": "Contact Sales"
     }
   }

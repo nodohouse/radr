@@ -474,14 +474,14 @@
           "heading": "Who this is for on day zero",
           "paragraphs": [
             "ICP for Margin Recovery: multi-location hospitality groups, with CFO / COO / Finance or Procurement as sponsor, not a line-level GM buying a new operating system.",
-            "A 14-day pilot uncovers recoverable margin and prepares action. RADR keeps tracing open cases until value is applied or the case is closed. Clean exit. No rip-replace commitment."
+            "Start with a defined recovery priority and an agreed review window. Track open cases within the written scope, keeping expected value separate from verified receipts."
           ]
         },
         {
-          "heading": "Start a 14-day recover pilot",
+          "heading": "Explore the workflow. Plan the rollout.",
           "paragraphs": [
             "If credits keep showing up on screen and never as cash, that is the commercial D0.",
-            "See one sealed credit → Trace on the Recover lab seed, or start a 14-day recover pilot with Finance / Purchasing. Clean exit. No second GL.",
+            "Explore the fictional recovery example, then agree a paid rollout scope with Finance and Purchasing. A modeled amount is not a verified customer result.",
             "Later, below the fold, not the lead, Hospitality Autopilot may cover overnight briefs and weather. Today we cash credits."
           ]
         }
@@ -489,6 +489,6 @@
     }
   },
   "updatedLabel": "Updated {date}",
-  "ctaPilot": "Start a 14-day prueba gratuita de 14 días",
+  "ctaPilot": "Plan your rollout",
   "ctaRecover": "See a Verified Recovery"
 }

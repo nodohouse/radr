@@ -223,7 +223,7 @@ for (const world of ["restaurant", "hotel"])
     for (const plan of ["start", "expand", "enterprise"]) {
       const name =
         plan === "start"
-          ? "14-day free trial"
+          ? "Core"
           : plan === "expand"
             ? "Expand"
             : "Enterprise";
@@ -235,7 +235,7 @@ for (const world of ["restaurant", "hotel"])
         `/onboarding/preview?plan=${plan}&vertical=${world}`,
       );
     }
-    const chosen = world === "hotel" ? "Expand" : "14-day free trial";
+    const chosen = world === "hotel" ? "Expand" : "Core";
     await page
       .locator(".rm-plan-card")
       .filter({ has: page.getByRole("heading", { name: chosen, exact: true }) })
@@ -248,7 +248,7 @@ for (const world of ["restaurant", "hotel"])
     await expect(
       page.getByRole("complementary", { name: "Selected plan" }),
     ).toContainText(
-      "No account, free-trial period or paid subscription has started",
+      "No account, payment or paid subscription has started",
     );
     await expect(page.locator("input[type=password]")).toHaveCount(0);
   });

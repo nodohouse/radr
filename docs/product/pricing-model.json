@@ -1,0 +1,132 @@
+{
+  "reviewedAt": "2026-11-12",
+  "status": "Proposed commercial architecture. No approved numeric price list, billing activation or measured unit economics.",
+  "decision": "Free fictional demo; paid annual Core, Expand and Enterprise subscriptions; separately priced onboarding and custom work.",
+  "rationale": [
+    "A fixed two-week customer-data trial can consume delivery work before enough evidence exists to judge value.",
+    "A free fictional demo supports evaluation without committing RADR to unpaid data integration or ongoing processing.",
+    "A platform minimum protects the fixed cost of serving an account. Named locations allow expansion without seat friction.",
+    "An explicit usage allowance protects against unbounded processing, refresh and support costs.",
+    "Onboarding and custom work need their own scope and economics rather than an implied unlimited inclusion.",
+    "Keep evidence and human review common to every scope. Package by operational coverage, not by withholding trust.",
+    "Do not charge a percentage of modeled savings. Subscription fees and customer-value estimates are different quantities."
+  ],
+  "recurringQuote": {
+    "structure": "Annual platform minimum + contracted location coverage + scoped processing/support requirements",
+    "restaurantBasis": "Named operating locations, selected priorities, source complexity and usage",
+    "hotelBasis": "Named properties, room/data scale, selected priorities, source complexity and usage",
+    "includedAllowanceMustDefine": [
+      "Named locations and operating priorities",
+      "Evidence sources and data volumes",
+      "Refresh cadence and historical retention",
+      "Processing and media workloads where applicable",
+      "Support scope and service responsibilities"
+    ],
+    "term": "Annual; billing schedule, renewal and cancellation agreed in writing",
+    "growth": "New sites, higher usage or additional work require approved scope and price changes. No automatic overage billing is implemented."
+  },
+  "oneTimeQuote": {
+    "items": [
+      "Data mapping and configuration",
+      "Training and launch review",
+      "Any required data cleanup",
+      "Historical backfill",
+      "Non-standard integration work"
+    ],
+    "rules": [
+      "State included hours/deliverables, dependencies and acceptance criteria",
+      "Price custom development separately",
+      "Approve changes before work",
+      "Do not discount setup below its cost without recording an explicit acquisition investment"
+    ]
+  },
+  "costFloor": {
+    "recurring": "minimum monthly-equivalent subscription = monthly direct delivery cost / (1 - target recurring gross margin)",
+    "recurringCostInputs": [
+      "Hosting and storage",
+      "Model/API and processing usage",
+      "Third-party data costs",
+      "Direct support and customer-success labor",
+      "Direct operational service cost"
+    ],
+    "setup": "minimum setup fee = direct setup delivery cost / (1 - target setup gross margin)",
+    "cacPaybackMonths": "(acquisition cost + unrecovered setup cost) / monthly recurring gross profit",
+    "grossProfit": "Subscription revenue less direct recurring delivery costs. This excludes R&D, general overhead and taxes and is not net profit.",
+    "constraint": "The price must also pass willingness-to-pay and evidenced customer-value validation; a cost floor alone does not prove demand or profitability."
+  },
+  "sensitivityExamples": {
+    "label": "Illustrative arithmetic in arbitrary currency units. These are invented cost scenarios, not RADR costs, quotes or customer results.",
+    "targetRecurringGrossMargin": 0.8,
+    "monthlyExamples": [
+      {
+        "directCost": 75,
+        "minimumRevenue": 375,
+        "grossProfit": 300
+      },
+      {
+        "directCost": 150,
+        "minimumRevenue": 750,
+        "grossProfit": 600
+      },
+      {
+        "directCost": 300,
+        "minimumRevenue": 1500,
+        "grossProfit": 1200
+      }
+    ],
+    "setupExample": {
+      "directCost": 1200,
+      "targetGrossMargin": 0.5,
+      "minimumFee": 2400
+    },
+    "acquisitionExample": {
+      "cac": 6000,
+      "unrecoveredSetupCost": 0,
+      "monthlyGrossProfit": 600,
+      "paybackMonths": 10
+    }
+  },
+  "validationBeforeNumericPricing": [
+    "Measure direct delivery costs for representative restaurant and hotel scopes, including heavy usage.",
+    "Estimate setup labor and custom-source maintenance without hiding them in gross margin.",
+    "Test quote acceptance and objections with qualified prospects, then track activation, support load and renewal intent.",
+    "Compare realized contribution and acquisition payback by scope; revise the minimum or included allowance when costs change.",
+    "Do not describe these assumptions as maximized profit, validated willingness to pay or a guaranteed return."
+  ],
+  "marketEvidence": [
+    {
+      "provider": "Tenzo",
+      "url": "https://support.gotenzo.com/docs/how-much-does-it-cost-to-have-a-tenzo-subscription/",
+      "observation": "Quotes depend on module selection and customer requirements."
+    },
+    {
+      "provider": "Mews",
+      "url": "https://www.mews.com/en/pricing",
+      "observation": "Per-room basis and tailored quotes; some add-ons and payment processing are separate."
+    },
+    {
+      "provider": "SevenRooms",
+      "url": "https://sevenrooms.com/pricing/",
+      "observation": "Starter, Growth and Premium packages with quote CTAs and separately described add-ons."
+    },
+    {
+      "provider": "MarketMan",
+      "url": "https://www.marketman.com/pricing-for-restaurant-inventory-management-system",
+      "observation": "Public tier ladder with defined invoice/integration allowances and priced add-ons."
+    },
+    {
+      "provider": "Restaurant365",
+      "url": "https://www.restaurant365.com/pricing/",
+      "observation": "Custom quote based on the selected restaurant software scope."
+    }
+  ],
+  "evidenceLimits": "Public pricing pages only; no access to competitor contracts, discounts, margins or internal costs. No claim that all providers prohibit trials.",
+  "quoteReviewRules": [
+    "Prefer annual prepayment for cash flow; state any agreed installment schedule explicitly.",
+    "Do not offer a blanket annual or volume discount before checking the resulting gross margin and acquisition payback.",
+    "Only reduce the location rate where scale reduces delivery cost or the approved commercial case supports the reduction.",
+    "Cost a high-usage case as well as the typical case; do not promise unlimited processing, media ingestion or support.",
+    "Treat any waived onboarding as acquisition investment with a named budget, not as zero delivery cost.",
+    "Review customer acceptance and retention alongside margin; a higher headline price or longer contract does not by itself maximize profit."
+  ]
+}

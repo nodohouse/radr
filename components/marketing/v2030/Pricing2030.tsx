@@ -17,61 +17,49 @@ const PLANS = [
   {
     id: "start",
     number: "01",
-    name: "14-day free trial",
-    tag: "Two weeks. No trial fee.",
-    headline: "See how RADR fits your operation.",
+    name: "Core",
+    tag: "Focused rollout",
+    headline: "One priority. A complete Decision loop.",
     audience:
-      "For hospitality teams exploring RADR before choosing an ongoing plan.",
-    scope: "14 days · locations and data access agreed at setup",
-    focus: "One operating priority, selected with your team",
-    evidence: "Review the available source records and Decision workflow",
-    governance: "Named operator reviews each proposed action",
-    next: "Review the trial, then choose whether to continue on agreed paid terms",
-    cta: "Request your free trial",
+      "For a hospitality team starting with a defined operating problem and named locations.",
+    price: "Annual subscription",
+    priceNote: "Platform minimum + agreed location coverage",
     highlights: [
-      "One operating priority",
-      "Evidence and Decision review",
-      "Named operator approval",
+      "One agreed operating priority",
+      "Evidence, review and outcome tracking",
+      "Named locations and usage allowance",
     ],
   },
   {
     id: "expand",
     number: "02",
     name: "Expand",
-    tag: "Broader operations",
-    headline: "One Decision layer. More of your operation.",
+    tag: "Multi-location",
+    headline: "Connect the decisions across your estate.",
     audience:
-      "For teams exploring ongoing coverage across more locations and systems.",
-    scope: "Multiple locations · broader operating scope",
-    focus: "Additional Decision classes, agreed together",
-    evidence: "Cross-system context and a continuing value trail",
-    governance: "Operating roles and approval rules scoped together",
-    next: "Broader coverage as evidence supports it",
-    cta: "Plan your expansion",
+      "For teams comparing locations and managing several operating priorities together.",
+    price: "Annual subscription",
+    priceNote: "Platform + multi-location coverage",
     highlights: [
-      "Multi-location coverage",
-      "Broader Decision scope",
-      "Shared operating context",
+      "Everything in Core, across locations",
+      "Several agreed operating priorities",
+      "Location comparisons and shared context",
     ],
   },
   {
     id: "enterprise",
     number: "03",
     name: "Enterprise",
-    tag: "Group scope",
-    headline: "A shared picture. Local accountability.",
+    tag: "Portfolio scope",
+    headline: "Group direction. Local accountability.",
     audience:
-      "For hospitality groups with multiple brands, entities or operating models.",
-    scope: "Portfolio · multi-entity requirements",
-    focus: "Group priorities and location-level accountability",
-    evidence: "Portfolio reporting requirements and audit needs",
-    governance: "Group policies and access requirements",
-    next: "A tailored rollout and governance plan",
-    cta: "Plan a group evaluation",
+      "For groups coordinating multiple brands, entities and more complex rollout requirements.",
+    price: "Portfolio agreement",
+    priceNote: "Annual minimum + tailored estate scope",
     highlights: [
+      "Everything in Expand",
       "Multi-brand and entity scope",
-      "Group governance requirements",
-      "Portfolio rollout planning",
+      "Governance and rollout requirements",
     ],
   },
 ] as const;
@@ -80,7 +68,7 @@ const included = (label = "Included"): Inclusion => ({
   status: "included",
   label,
 });
-const scoped = (label = "Agreed at setup"): Inclusion => ({
+const scoped = (label = "Quoted separately"): Inclusion => ({
   status: "scoped",
   label,
 });
@@ -93,60 +81,68 @@ const COMPARISON: {
   {
     label: "Decision workflow",
     description: "Review a priority, its evidence and the proposed next step.",
-    cells: [included("Focused trial scope"), included(), included()],
+    cells: [included(), included(), included()],
   },
   {
-    label: "Evidence review",
-    description: "Examine the source records behind a Decision.",
+    label: "Evidence and outcome tracking",
+    description: "Keep the source evidence and follow what happened afterward.",
     cells: [included(), included(), included()],
   },
   {
     label: "Human review of actions",
-    description: "Keep an operator responsible for reviewing proposed actions.",
+    description: "An operator reviews proposed actions in every scope.",
     cells: [included(), included(), included()],
   },
   {
-    label: "Ongoing coverage",
-    description: "Continue using RADR beyond the two-week trial.",
-    cells: [excluded, included("Paid agreement"), included("Paid agreement")],
-  },
-  {
-    label: "Multiple locations",
-    description: "Cover more of your operating estate.",
-    cells: [scoped("Trial locations agreed"), included(), included()],
-  },
-  {
-    label: "Broader Decision scope",
-    description: "Extend beyond the first operating priority.",
+    label: "Operating priorities",
+    description:
+      "The problems RADR is scoped to examine, such as reconciliation or service pressure.",
     cells: [
-      excluded,
-      included("Scope agreed together"),
+      included("One agreed priority"),
+      included("Several agreed priorities"),
       included("Group priorities"),
     ],
   },
   {
-    label: "Roles and approval rules",
-    description: "Define who reviews and approves work across the operation.",
+    label: "Location coverage",
+    description: "The named restaurants, hotels or properties in your agreement.",
     cells: [
-      scoped("Named trial operator"),
-      scoped(),
-      scoped("Group requirements"),
+      included("Focused rollout"),
+      included("Multi-location"),
+      included("Portfolio-wide scope"),
     ],
   },
   {
-    label: "Multi-brand and entity scope",
-    description: "Plan coverage across different brands or legal entities.",
-    cells: [excluded, excluded, included("Tailored scope")],
+    label: "Location comparisons",
+    description: "Review differences and trends across your estate.",
+    cells: [excluded, included(), included()],
   },
   {
-    label: "Portfolio rollout planning",
-    description: "Agree a group rollout and governance plan.",
+    label: "Multi-brand and entity scope",
+    description:
+      "Coordinate the requirements of several brands or legal entities.",
     cells: [excluded, excluded, included()],
   },
   {
-    label: "System integrations",
+    label: "Group governance and rollout",
     description:
-      "Confirm compatibility, data access and delivery before setup.",
+      "Agree portfolio policies, responsibilities and rollout milestones.",
+    cells: [excluded, excluded, included("Tailored requirements")],
+  },
+  {
+    label: "Usage allowance",
+    description:
+      "Data volume, refresh frequency and processing limits are defined in your quote.",
+    cells: [
+      included("Defined allowance"),
+      included("Estate allowance"),
+      included("Tailored allowance"),
+    ],
+  },
+  {
+    label: "Onboarding and custom work",
+    description:
+      "Data mapping, training and any non-standard integration work are scoped before setup.",
     cells: [scoped(), scoped(), scoped()],
   },
 ];
@@ -180,27 +176,35 @@ function InclusionCell({ value }: { value: Inclusion }) {
 const FAQ = [
   [
     "How much does RADR cost?",
-    "The 14-day trial is free. Ongoing paid pricing is quoted after a scope review. There is no published monthly rate today. Your proposal defines the locations, evidence sources, responsibilities, delivery and commercial terms before you commit.",
+    "RADR is quoted as an annual subscription with a platform minimum and agreed location coverage. Your quote states the total, billing schedule, included usage and support. Onboarding and any custom work are itemized separately. There is no published self-service rate or automatic charge on this website.",
   ],
   [
-    "Are these three different products?",
-    "No. These are three ways to scope a commercial conversation around the same RADR Decision layer. The main difference is the operating footprint and the governance you need.",
+    "Can I explore RADR before committing?",
+    "Yes. Register to explore the free restaurant or hotel demo at your own pace. It uses fictional data and does not connect your systems. A rollout using your own data is scoped and priced separately.",
   ],
   [
-    "What can I try today?",
-    "Explore the interactive demo, compare decisions and review the evidence behind them. The demo uses sample data and does not change connected systems. Ask the team to confirm integration availability for your operation.",
+    "Why an annual agreement?",
+    "Connecting evidence, reviewing decisions and tracking outcomes is an ongoing operating process. An annual scope gives your team a defined budget and a rollout plan. The start date, billing schedule, renewal and cancellation terms are stated in the written agreement before you commit.",
   ],
   [
-    "Are the scopes shown here available to buy immediately?",
-    "Start with a scope conversation. We confirm availability, integration feasibility and delivery milestones in your agreement before you commit.",
+    "What does onboarding cover?",
+    "A separately priced setup scope covers the agreed data mapping, configuration, training and launch review. Any data cleanup, custom integration or historical backfill is itemized before work begins. Compatibility and delivery dates are confirmed first.",
   ],
   [
-    "How does the two-week free trial work?",
-    "Request a 14-day free trial. We confirm your start date, setup, available data sources and trial scope with you. The trial itself is free. Any paid continuation is agreed separately; the trial is not a promise of savings or a requirement to expand.",
+    "What happens if our usage or estate grows?",
+    "Your quote defines named locations, evidence sources, data volumes, refresh frequency and processing allowances. Additional locations or work require an approved scope change and price. The agreement sets how a limit is handled; this website does not enable automatic overage billing.",
   ],
   [
-    "What should we prepare for a pricing conversation?",
-    "Bring your location count, operating model, current systems and one economic problem you want to examine. The Value Map can help structure that conversation; its modeled estimates are not a quote or verified savings.",
+    "Do you take a percentage of our savings?",
+    "The standard model is a subscription, not a share of modeled or expected savings. A value estimate is not a billable outcome. Any alternative commercial arrangement would require a separate written agreement and an accepted verification method.",
+  ],
+  [
+    "Are all integrations available immediately?",
+    "Availability, source access, permissions and delivery milestones are confirmed before commitment. Package checkmarks describe the proposed commercial scope, not a promise that every provider connection or enterprise requirement is already available.",
+  ],
+  [
+    "Can we start with a smaller scope?",
+    "Yes. Core starts with one operating priority and named locations. Expand adds multi-location comparisons and several agreed priorities. Enterprise addresses portfolio requirements. Evidence, human review and outcome tracking remain part of every scope.",
   ],
 ];
 
@@ -246,28 +250,25 @@ export function Pricing2030({
             <div className="rx30-shell rm-price-hero-grid">
               <div>
                 <p className="rx30-kicker">
-                  Pricing · try RADR free for 14 days
+                  Pricing · built around your operation
                 </p>
                 <h1 id="pricing-title">
-                  Start with two weeks.
+                  One platform.
                   <br />
-                  Expand on <em>evidence.</em>
+                  A clear <em>agreement.</em>
                 </h1>
                 <p className="rm-price-lead">
-                  Explore RADR with a 14-day free trial. Then choose the ongoing
-                  scope that fits your locations, systems and operating
-                  priorities.
+                  Explore the demo for free. When you are ready for your own
+                  operation, agree an annual subscription, location coverage
+                  and a clearly priced setup.
                 </p>
                 <div className="rx30-ctas">
                   <Link href="#plans" className="rx30-btn rx30-btn-primary">
-                    Compare the scopes <span aria-hidden="true">↓</span>
+                    Compare the plans <span aria-hidden="true">↓</span>
                   </Link>
-                  <PlanLink
-                    href={nextHref("start")}
-                    className="rx30-btn rm-price-secondary"
-                  >
-                    Choose the 14-day trial →
-                  </PlanLink>
+                  <Link href="/demo" className="rx30-btn rm-price-secondary">
+                    Explore the free demo →
+                  </Link>
                 </div>
               </div>
               <aside
@@ -276,26 +277,26 @@ export function Pricing2030({
               >
                 <FrozenRadrLogo variant="mark" theme="dark" width={36} />
                 <p className="rm-price-overline">
-                  Your operation sets the scope
+                  Your quote, clearly separated
                 </p>
                 <h2>
-                  Free trial first.
+                  Know the scope.
                   <br />
-                  Clear pricing after.
+                  Know the cost.
                 </h2>
                 <p>
-                  Your first 14 days are free. Before any paid continuation, we
-                  agree the scope, availability and commercial terms with you.
+                  One recurring subscription. One separately scoped setup.
+                  The price and delivery are agreed before work begins.
                 </p>
                 <ol>
                   <li>
-                    <span>01</span>Locations & operating model
+                    <span>01</span>Annual platform + location coverage
                   </li>
                   <li>
-                    <span>02</span>Evidence sources & Decision scope
+                    <span>02</span>Included processing + support allowance
                   </li>
                   <li>
-                    <span>03</span>Responsibilities & delivery milestones
+                    <span>03</span>One-time onboarding + any custom work
                   </li>
                 </ol>
                 <Link href="/value-calculator">
@@ -321,9 +322,9 @@ export function Pricing2030({
                   </h2>
                 </div>
                 <p>
-                  The demo shows the broader operating vision. Begin with one
-                  measurable problem, such as supplier credits or
-                  reconciliation. Expand only after reviewing the evidence.
+                  Choose how much of your operation to cover. Every scope
+                  includes evidence, human review and outcome tracking.
+                  Locations, usage and delivery are agreed in your proposal.
                 </p>
               </div>
               <div className="rm-plan-grid">
@@ -331,7 +332,7 @@ export function Pricing2030({
                   <article
                     key={plan.id}
                     className="rm-plan-card"
-                    data-featured={plan.id === "start" ? "true" : undefined}
+                    data-featured={plan.id === "expand" ? "true" : undefined}
                   >
                     <div className="rm-plan-top">
                       <span>{plan.number}</span>
@@ -349,16 +350,8 @@ export function Pricing2030({
                     <p className="rm-plan-headline">{plan.headline}</p>
                     <p className="rm-plan-audience">{plan.audience}</p>
                     <div className="rm-plan-price">
-                      <strong>
-                        {plan.id === "start"
-                          ? "Free for 14 days"
-                          : "Custom quote"}
-                      </strong>
-                      <span>
-                        {plan.id === "start"
-                          ? "Start date and setup confirmed together"
-                          : "Scope & terms agreed with you"}
-                      </span>
+                      <strong>{plan.price}</strong>
+                      <span>{plan.priceNote}</span>
                     </div>
                     <ul
                       className="rm-plan-highlights"
@@ -381,18 +374,17 @@ export function Pricing2030({
                       ))}
                     </ul>
                     <PlanLink className="rx30-btn" href={nextHref(plan.id)}>
-                      {plan.id === "start"
-                        ? "Choose the free trial"
-                        : `Continue with ${plan.name}`}
+                      {`Plan with ${plan.name}`}
                       <span aria-hidden="true">→</span>
                     </PlanLink>
                   </article>
                 ))}
               </div>
               <p className="rm-availability">
-                <strong>Agree the scope first</strong> Confirm integration
-                availability, delivery milestones and responsibilities with the
-                team before you commit. Explore the product through the demo.
+                <strong>Choosing a scope starts a preview</strong> Review setup
+                without starting a subscription. A written proposal confirms
+                fees, source availability, delivery and responsibilities before
+                any commitment.
               </p>
             </div>
           </section>
@@ -405,15 +397,15 @@ export function Pricing2030({
               <p className="rx30-kicker">The differences, at a glance</p>
               <h2 className="rx30-h2">What’s included. Side by side.</h2>
               <p className="rm-compare-intro">
-                A focused free trial, ongoing operating coverage, or a
-                portfolio-wide agreement. See the differences before choosing
-                your next step.
+                A focused rollout, connected multi-location decisions, or
+                portfolio requirements. The scope grows; the evidence and
+                review standard stays.
               </p>
               <div className="rm-compare-legend" aria-label="Comparison key">
                 <InclusionCell
                   value={included("Included in the package scope")}
                 />
-                <InclusionCell value={scoped("Scope confirmed together")} />
+                <InclusionCell value={scoped("Separately priced work")} />
                 <InclusionCell value={excluded} />
               </div>
               <p className="rm-compare-hint" id="scope-scroll-hint">
@@ -429,9 +421,9 @@ export function Pricing2030({
               >
                 <table className="rm-compare-table">
                   <caption>
-                    Checkmarks describe package scope. Integration availability
-                    and delivery are confirmed before setup. The free trial
-                    lasts 14 days; paid continuation is agreed separately.
+                    Checkmarks describe proposed package scope. Every plan has an
+                    agreed usage allowance. Onboarding, non-standard integrations
+                    and delivery are confirmed and priced before setup.
                   </caption>
                   <thead>
                     <tr>
@@ -440,9 +432,9 @@ export function Pricing2030({
                         <th key={p.id} scope="col">
                           {p.name}
                           <span className="rm-compare-price">
-                            {p.id === "start"
-                              ? "Free for 14 days"
-                              : "Custom quote"}
+                            {p.id === "enterprise"
+                              ? "Portfolio quote"
+                              : "Annual quote"}
                           </span>
                         </th>
                       ))}
@@ -499,19 +491,19 @@ export function Pricing2030({
             <div className="rx30-shell">
               <p className="rx30-kicker">Start with the right problem</p>
               <h2>
-                Try RADR for 14 days
+                See the operation.
                 <br />
-                with your operation.
+                Then decide.
               </h2>
-              <p>A free trial first. Paid scope and terms agreed separately.</p>
-              <PlanLink
-                href={nextHref("start")}
-                className="rx30-btn rx30-btn-primary"
-              >
-                Choose the free trial <span aria-hidden="true">→</span>
-              </PlanLink>
-              <Link href="/demo" className="rm-close-demo">
-                Explore the demo →
+              <p>
+                Explore the free demo. Build a rollout around what matters to
+                you.
+              </p>
+              <Link href="/demo" className="rx30-btn rx30-btn-primary">
+                Explore the free demo <span aria-hidden="true">→</span>
+              </Link>
+              <Link href="/contact?intent=pricing" className="rm-close-demo">
+                Prepare your rollout brief →
               </Link>
             </div>
           </section>

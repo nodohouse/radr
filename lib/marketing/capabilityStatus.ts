@@ -113,9 +113,9 @@ export const PUBLIC_CAPABILITIES = {
   },
   recoveryPilot: {
     id: "recoveryPilot",
-    label: "14-day free trial",
+    label: "Core rollout",
     status: "early_access",
-    note: "File-first evaluation — secure exports before large API projects.",
+    note: "Paid rollout scope; data sources and delivery confirmed before commitment.",
   },
 } as const satisfies Record<string, PublicCapability>;
 
