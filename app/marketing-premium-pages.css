@@ -1263,7 +1263,8 @@ html body .radr.rm-premium:has(.rx-nav) #surfaces {
   font-size: 21px;
   line-height: 1;
 }
-.rm-pricing .rm-inclusion[data-status="scoped"] .rm-inclusion-icon {
+.rm-pricing .rm-inclusion:is([data-status="scoped"], [data-status="pending"])
+  .rm-inclusion-icon {
   background: #e6efff;
   color: #1258bb;
 }

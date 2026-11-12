@@ -1,6 +1,6 @@
 /**
  * RADR commercial packaging — public pricing page.
- * Scopes: Core · Expand · Enterprise. Demo exploration is free; customer-data rollout is paid.
+ * Packages: Core · Expand · Portfolio. Demo exploration is free; customer-data rollout is paid.
  */
 
 export type PlanId = "pilot" | "core" | "control";
@@ -16,13 +16,13 @@ export const pricingConfig = {
     id: "core" as const,
     name: "Expand",
     verb: "RADR",
-    cta: { href: "/contact?plan=core", label: "Discuss Expand" },
+    cta: { href: "/signup?intent=workspace&plan=expand", label: "Choose Expand" },
   },
   control: {
     id: "control" as const,
-    name: "Enterprise",
-    verb: "Group scale",
-    cta: { href: "/contact?plan=control", label: "Discuss Enterprise" },
+    name: "Portfolio",
+    verb: "Portfolio view",
+    cta: { href: "/signup?intent=workspace&plan=enterprise", label: "Choose Portfolio" },
   },
   talkHref: "/contact?intent=sales" as const,
   demoHref: "/demo" as const,
@@ -47,13 +47,13 @@ export const pricingDimensions = [
   },
 ] as const;
 
-/** Core → Expand → Enterprise */
+/** Core → Expand → Portfolio */
 export const expansionSteps = [
   {
     id: "prove",
     label: "Core",
     title: "Prove recoverable value.",
-    body: "An annual subscription on one agreed priority, with separately priced onboarding.",
+    body: "A standard monthly package with guided setup and a defined data allowance.",
   },
   {
     id: "deploy",
@@ -63,7 +63,7 @@ export const expansionSteps = [
   },
   {
     id: "scale",
-    label: "Enterprise",
+    label: "Portfolio",
     title: "RADR at group scale.",
     body: "Policies, approvals, governance, and enterprise controls across locations.",
   },

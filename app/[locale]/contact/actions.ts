@@ -93,7 +93,7 @@ export async function submitContactInquiry(
         : payload.plan === "core"
           ? "Expand"
           : payload.plan === "control"
-            ? "Enterprise"
+            ? "Portfolio"
             : null;
     const subject = encodeURIComponent(
       planLabel

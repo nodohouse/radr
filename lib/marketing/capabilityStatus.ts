@@ -113,9 +113,9 @@ export const PUBLIC_CAPABILITIES = {
   },
   recoveryPilot: {
     id: "recoveryPilot",
-    label: "Core rollout",
+    label: "Core setup",
     status: "early_access",
-    note: "Paid rollout scope; data sources and delivery confirmed before commitment.",
+    note: "Standard guided setup preview; supported file requirements are documented.",
   },
 } as const satisfies Record<string, PublicCapability>;
 

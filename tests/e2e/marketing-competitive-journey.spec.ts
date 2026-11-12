@@ -103,7 +103,7 @@ test("homepage entry, hotel context and pricing scope remain clear", async ({
   ).toHaveAttribute("href", /signup/);
 });
 
-test("pricing separates free exploration from paid scope, setup and usage", async ({
+test("standard packages keep prices pending and setup self-guided", async ({
   page,
 }) => {
   await page.goto("/en/pricing");
@@ -111,14 +111,26 @@ test("pricing separates free exploration from paid scope, setup and usage", asyn
   await expect(page.locator(".rm-plan-card h3")).toHaveText([
     "Core",
     "Expand",
-    "Enterprise",
+    "Portfolio",
   ]);
   await expect(page.locator(".rm-price-quote")).toContainText(
-    "One-time onboarding + any custom work",
+    "Guided setup, without a setup fee",
   );
   await expect(page.locator(".rm-price-quote")).toContainText(
-    "Included processing + support allowance",
+    "Defined structured data allowance",
   );
+  await expect(page.locator(".rm-plan-price strong")).toHaveText([
+    "Pricing coming soon",
+    "Pricing coming soon",
+    "Pricing coming soon",
+  ]);
+  await expect(page.locator(".rm-availability")).toContainText(
+    "Prices and usage limits will be published before paid activation",
+  );
+  await expect(page.locator("main")).not.toContainText(/€\s*[\d,]+/);
+  await expect(
+    page.locator(".rm-price-hero a[href*='contact'],.rm-plan-card a[href*='contact']"),
+  ).toHaveCount(0);
   const demo = page.locator(".rm-price-hero").getByRole("link", {
     name: "Explore the free demo",
   });
@@ -129,15 +141,15 @@ test("pricing separates free exploration from paid scope, setup and usage", asyn
     ).toHaveAttribute("href", `/en/signup?intent=workspace&plan=${id}`);
   }
   for (const [question, answer] of [
-    ["Why an annual agreement?", "renewal and cancellation terms"],
-    ["What does onboarding cover?", "separately priced setup scope"],
+    ["When will pricing be available?", "without requesting a custom quote"],
+    ["Is there a separate setup fee?", "part of the proposed packages"],
     [
-      "What happens if our usage or estate grows?",
-      "approved scope change and price",
+      "Do I need a sales call or an onboarding specialist?",
+      "Your team owns its data and reviews proposed actions",
     ],
     [
       "Do you take a percentage of our savings?",
-      "not a share of modeled or expected savings",
+      "No percentage of modeled or expected savings",
     ],
   ]) {
     const detail = page.locator("details").filter({

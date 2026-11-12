@@ -1,111 +1,108 @@
 {
   "metaTitle": "Pricing | RADR",
-  "metaDescription": "Compare RADR Core, Expand and Enterprise. Annual subscriptions with agreed location coverage and usage, separately priced onboarding and a free fictional demo.",
+  "metaDescription": "Compare RADR Core, Expand and Portfolio: proposed monthly packages for 1, 5 or 20 locations, with guided setup, defined data allowances and a free fictional demo.",
   "kicker": "Pricing",
-  "heroTitleLine1": "One platform. A clear agreement.",
+  "heroTitleLine1": "One platform. Clear pricing.",
   "heroTitleLine2": "",
-  "heroLead": "Explore the fictional demo for free. Roll out on an annual subscription with agreed location coverage, usage and separately priced setup.",
-  "heroSupport": "Core, Expand or Enterprise. Scope and delivery confirmed before commitment.",
+  "heroLead": "Choose a monthly package by location capacity. Follow guided setup and explore the free fictional demo before deciding.",
+  "heroSupport": "Core, Expand or Portfolio. Standard packages with guided setup.",
   "how": {
     "kicker": "How pricing works",
-    "title": "Price follows the operating surface.",
-    "lead": "A platform minimum, named locations and an agreed usage allowance. Setup is priced separately."
+    "title": "Choose your location capacity.",
+    "lead": "A standard monthly package with defined structured data allowances. Guided setup is included."
   },
   "dimensions": {
     "locations": {
       "title": "Locations",
-      "body": "How much of the operation RADR covers."
+      "body": "One location, up to five, or up to twenty operating venues."
     },
     "scope": {
-      "title": "Operating scope",
-      "body": "The operational complexity RADR is responsible for understanding."
+      "title": "Product coverage",
+      "body": "Every package includes evidence, Decisions and outcome tracking."
     },
     "responsibility": {
-      "title": "Usage and support",
-      "body": "Included processing, refresh frequency and support are defined in the quote."
+      "title": "Data allowance",
+      "body": "A defined monthly structured-record allowance shared across the account."
     }
   },
   "pilot": {
-    "kicker": "Focused rollout",
+    "kicker": "One location",
     "verb": "Core",
     "title": "Core",
-    "lead": "One operating priority. A complete Decision loop.",
-    "body": "Named locations, source evidence, human review and outcome tracking. Integration availability is confirmed before setup.",
-    "priceLabel": "Annual subscription",
-    "priceSub": "Platform minimum + agreed location coverage",
-    "cta": "Plan with Core",
+    "lead": "Your daily operation. One clear picture.",
+    "body": "For an independent restaurant, hotel or hospitality venue. Follow the standard guided setup with your own supported data files.",
+    "priceLabel": "Pricing coming soon",
+    "priceSub": "Monthly plan · 1 location",
+    "cta": "Preview Core",
     "points": [
-      "One agreed operating priority",
-      "Named locations and usage allowance",
-      "Evidence, human review and outcome tracking",
-      "Separately priced onboarding",
-      "Written scope and delivery milestones"
+      "One location",
+      "Supported structured data imports",
+      "Evidence, Decisions and outcome tracking",
+      "Guided setup included",
+      "Documentation and file requirements"
     ]
   },
   "core": {
     "name": "Expand",
-    "verb": "RADR",
-    "line": "More Decision classes. More locations. More systems. Operating Memory.",
-    "audience": "One product — RADR — across the operation.",
-    "priceLabel": "Annual platform + location coverage",
-    "cta": "Discuss Expand",
+    "verb": "Expand",
+    "line": "Up to five locations, shared context and location comparisons.",
+    "audience": "For growing hospitality groups.",
+    "priceLabel": "Pricing coming soon",
+    "cta": "Preview Expand",
     "features": [
-      "Cross-system Decisions",
-      "Broader operating coverage",
-      "Futures — Early Access",
-      "Verified Value",
-      "Operating Memory — Early Access"
+      "Everything in Core, across five locations",
+      "Location comparisons",
+      "Shared operating context",
+      "Guided setup",
+      "Documentation and file requirements"
     ]
   },
   "progression": {
     "kicker": "One company · one product · RADR",
-    "title": "Core → Expand → Enterprise.",
-    "lead": "Compare operating scope, location coverage and portfolio requirements.",
+    "title": "Core → Expand → Portfolio.",
+    "lead": "Choose your location capacity. The standard setup stays the same.",
     "recover": "Core",
     "decide": "Expand",
-    "govern": "Enterprise"
+    "govern": "Portfolio"
   },
   "control": {
-    "name": "Enterprise",
-    "verb": "Group scale",
-    "line": "Policies. Approvals. Governance. Custom integrations. Enterprise controls.",
-    "audience": "RADR at group scale across locations.",
-    "priceLabel": "Portfolio / group pricing",
-    "cta": "Discuss Enterprise",
+    "name": "Portfolio",
+    "verb": "Portfolio view",
+    "line": "Up to twenty locations and a consolidated portfolio view.",
+    "audience": "For larger hospitality groups.",
+    "priceLabel": "Pricing coming soon",
+    "cta": "Preview Portfolio",
     "features": [
-      "Everything in Expand",
-      "Prepared Actions and approval workflows",
-      "Multi-location / multi-entity governance",
-      "Regional and group permissions",
-      "Governed execution within policy",
-      "Portfolio Verified Value",
-      "Advanced controls and custom integration"
+      "Everything in Expand, across twenty locations",
+      "A consolidated portfolio view",
+      "The same guided setup",
+      "Documentation and file requirements"
     ]
   },
   "enterprise": {
-    "kicker": "Need enterprise controls?",
-    "body": "For larger groups we can scope SSO / SAML, custom RBAC, warehouse connections, custom APIs, security review, data policies, custom onboarding, dedicated support, SLA and multi-entity deployment.",
-    "cta": "Talk to us"
+    "kicker": "Managing more locations?",
+    "body": "Portfolio previews capacity for up to twenty locations. Bespoke implementation, custom integration development and dedicated account management are not part of these standard packages.",
+    "cta": "Compare packages"
   },
-  "packagesNote": "Core, Expand and Enterprise are annual scopes. Onboarding and custom work are priced separately.",
+  "packagesNote": "Standard monthly packages. Prices and usage limits are being finalized. Guided setup is included. No payment starts in this preview.",
   "expansion": {
     "kicker": "How expansion works",
-    "title": "Core → Expand → Enterprise.",
+    "title": "Core → Expand → Portfolio.",
     "steps": {
       "prove": {
         "label": "Core",
-        "title": "Start with one priority.",
-        "body": "An annual subscription on an agreed operating priority, with separately priced onboarding."
+        "title": "Start with one location.",
+        "body": "Core provides the Decision workflow, evidence review and guided setup."
       },
       "deploy": {
         "label": "Expand",
-        "title": "Make RADR the Decision layer.",
-        "body": "More locations, Decision classes, and connected evidence — with Verified Value and Memory."
+        "title": "Compare your locations.",
+        "body": "Expand covers up to five locations with a shared view and location comparisons."
       },
       "scale": {
-        "label": "Enterprise",
-        "title": "RADR at group scale.",
-        "body": "Policies, approvals, governance, and enterprise controls across the group."
+        "label": "Portfolio",
+        "title": "See the wider estate.",
+        "body": "Portfolio covers up to twenty locations with a consolidated view and the same standard setup."
       }
     }
   },
@@ -132,14 +129,14 @@
       "feature": "Capability",
       "pilot": "Core",
       "core": "Expand",
-      "control": "Enterprise"
+      "control": "Portfolio"
     },
     "groups": {
       "scope": "Operating scope",
       "intelligence": "Decisions",
       "proof": "Proof",
       "action": "Action",
-      "scale": "Enterprise"
+      "scale": "Portfolio"
     },
     "planAria": "Package",
     "rows": [
@@ -167,43 +164,43 @@
     "title": "Straight answers",
     "items": [
       {
-        "q": "How is RADR priced?",
-        "a": "An annual subscription with a platform minimum, named locations and an agreed usage allowance. Your quote states the total and billing schedule. Onboarding and custom work are priced separately."
+        "q": "When will pricing be available?",
+        "a": "Monthly prices and numeric usage allowances are being finalized. They will be published before paid activation, so you can compare standard packages without requesting a custom quote. Selecting a plan here previews setup; it does not start a payment or subscription."
       },
       {
-        "q": "Can I explore before committing?",
-        "a": "Register for the free fictional hotel or restaurant demo. A rollout with your own data is a separately scoped paid engagement."
+        "q": "Can I explore RADR before choosing a plan?",
+        "a": "Yes. Register for the free fictional restaurant or hotel demo and explore at your own pace. There is no immediate pricing prompt or automatic conversion to a paid plan."
       },
       {
-        "q": "What affects price?",
-        "a": "Location coverage, operating priorities, source complexity, data volume, refresh frequency, processing and support requirements."
+        "q": "Do I need a sales call or an onboarding specialist?",
+        "a": "The standard setup path is self-guided: choose your operation, follow the checklist and prepare supported data files. Your team owns its data and reviews proposed actions. The packages do not include a dedicated account manager, data-cleaning service or bespoke implementation."
       },
       {
-        "q": "Is setup included?",
-        "a": "Onboarding is separately priced. Data mapping, training, custom integrations and historical backfill are itemized before work starts."
+        "q": "Is there a separate setup fee?",
+        "a": "Guided setup and documentation are part of the proposed packages, rather than a separately sold implementation service. Final subscription terms will be published before paid activation. There is no setup charge on this preview."
       },
       {
-        "q": "Can I start small?",
-        "a": "Core starts with one operating priority and named locations. Expand adds location comparisons and several agreed priorities. Enterprise addresses portfolio requirements."
+        "q": "What does a location mean?",
+        "a": "A location is one restaurant, hotel or operating venue. Core is designed for one location, Expand for up to five and Portfolio for up to twenty. A hotel's rooms are part of that hotel's location, rather than separate locations."
       },
       {
-        "q": "What if our estate or usage grows?",
-        "a": "Additional locations, usage or work require an approved scope and price change. The agreement defines how limits are handled."
+        "q": "What if I need more locations or data?",
+        "a": "Choose a larger standard package when its location capacity fits. Data and processing limits, capacity upgrades and billing terms will be published before paid activation. No automatic overage charge is enabled in this preview."
       },
       {
-        "q": "Do you take a percentage of savings?",
-        "a": "The standard model is a subscription. Modeled or expected savings do not create a charge."
+        "q": "Can RADR connect to any system automatically?",
+        "a": "Check the documented file requirements and provider availability first. A provider logo does not guarantee a live connection. The packages do not include building custom integrations or a managed data-migration service."
       },
       {
-        "q": "What commercial terms apply?",
-        "a": "The written agreement confirms fees, billing, start date, term, renewal, cancellation, support and delivery. No subscription starts by exploring this website."
+        "q": "Do you take a percentage of our savings?",
+        "a": "No percentage of modeled or expected savings is part of these packages. The proposed model is a standard subscription. Expected value remains separate from an evidenced, verified outcome."
       }
     ]
   },
   "ready": "See the operation. Then decide.",
-  "readyLead": "Tell us what you run, where margin disappears, and which systems hold the evidence. We will scope the right place to start.",
-  "readyCta": "Plan your rollout",
+  "readyLead": "Explore the fictional demo, then choose the location capacity your operation needs.",
+  "readyCta": "Compare plans",
   "readySecondary": "See a Verified Recovery",
-  "contactSales": "Plan your rollout",
+  "contactSales": "Compare plans",
   "bookDemo": "See a Verified Recovery"
 }

@@ -52,7 +52,7 @@ const answers = [
   ],
   [
     "How does pricing work?",
-    "RADR offers Core, Expand and Enterprise as proposed annual subscription scopes. The fictional demo is free; rollout with your data is paid. A platform minimum, location coverage and usage allowance form the recurring quote. Onboarding and custom work are priced separately. Commercial terms and delivery are agreed before commitment.",
+    "RADR previews three standard monthly packages: Core for one location, Expand for up to five and Portfolio for up to twenty. Prices and numeric data allowances are being finalized. Standard guided setup and documentation are included; bespoke implementation and dedicated account management are not offered in these packages. The fictional demo is free after registration. Plan selection is a setup preview and does not start a subscription.",
   ],
   [
     "How should a team evaluate RADR?",

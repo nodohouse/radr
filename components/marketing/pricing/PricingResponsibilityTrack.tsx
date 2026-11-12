@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Pricing responsibility — Core → Expand → Enterprise.
+ * Pricing responsibility — Core → Expand → Portfolio.
  * One brand. One product. RADR.
  */
 
@@ -26,9 +26,9 @@ const STAGES = [
   },
   {
     id: "enterprise",
-    label: "Enterprise",
+    label: "Portfolio",
     name: "RADR at group scale",
-    body: "Policies. Approvals. Governance. Custom integrations. Security and enterprise controls.",
+    body: "A consolidated location view, standard guided setup and documented file requirements.",
     status: "planned" as const,
   },
 ] as const;
@@ -45,7 +45,7 @@ export function PricingResponsibilityTrack() {
       <div className="rx-shell">
         <p className="rx-rec-k">One company · one product · RADR</p>
         <h2 className="rx-rec-h" style={{ maxWidth: "28rem" }}>
-          Core → Expand → Enterprise
+          Core → Expand → Portfolio
         </h2>
         <p className="rx-rec-p" style={{ maxWidth: "40rem" }}>
           How do I start? What does the agreed scope cover? How does pricing scale

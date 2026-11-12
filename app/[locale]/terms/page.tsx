@@ -161,13 +161,15 @@ export default async function Page({ params }: Props) {
       </LegalSection>
       <LegalSection title="8. Pricing and customer agreements">
         <p>
-          Core, Expand and Enterprise describe proposed annual subscription
-          scopes. The fictional demo is free to explore after registration.
-          Customer-data rollout is paid, with onboarding and custom work
-          separately scoped. Fees, usage allowances and location coverage are
-          confirmed by written quote; no self-service rate is published. The
-          website is not an offer to supply every displayed capability
-          immediately.
+          Core, Expand and Portfolio describe proposed standard monthly
+          packages. Prices, numeric usage allowances and final subscription
+          terms are being finalized and will be published before paid
+          activation. The fictional demo is free after registration. Guided
+          setup is part of the proposed
+          subscription; custom implementation and managed data migration are
+          not included. No payment or subscription starts on this preview.
+          Availability and final billing terms must be confirmed before paid
+          activation.
         </p>
         <p>
           A written customer agreement must specify the contracting parties,

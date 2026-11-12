@@ -13,65 +13,61 @@ import "@/app/marketing-2030.css";
 import "@/app/brand-takeover.css";
 import "@/app/marketing-premium-pages.css";
 
+// Proposed launch packages. Selection remains a setup preview, not checkout.
 const PLANS = [
   {
     id: "start",
     number: "01",
     name: "Core",
-    tag: "Focused rollout",
-    headline: "One priority. A complete Decision loop.",
-    audience:
-      "For a hospitality team starting with a defined operating problem and named locations.",
-    price: "Annual subscription",
-    priceNote: "Platform minimum + agreed location coverage",
+    tag: "One location",
+    headline: "Your daily operation. One clear picture.",
+    audience: "For an independent restaurant, hotel or hospitality venue.",
+    price: "Pricing coming soon",
+    priceNote: "Monthly plan · 1 location",
     highlights: [
-      "One agreed operating priority",
-      "Evidence, review and outcome tracking",
-      "Named locations and usage allowance",
+      "Evidence, Decisions and outcome tracking",
+      "Supported structured data imports",
+      "Guided setup and documentation",
     ],
   },
   {
     id: "expand",
     number: "02",
     name: "Expand",
-    tag: "Multi-location",
-    headline: "Connect the decisions across your estate.",
+    tag: "Up to 5 locations",
+    headline: "See the differences. Connect the decisions.",
     audience:
-      "For teams comparing locations and managing several operating priorities together.",
-    price: "Annual subscription",
-    priceNote: "Platform + multi-location coverage",
+      "For growing groups that want a shared view across their locations.",
+    price: "Pricing coming soon",
+    priceNote: "Monthly plan · up to 5 locations",
     highlights: [
-      "Everything in Core, across locations",
-      "Several agreed operating priorities",
+      "Everything in Core, across 5 locations",
+      "A shared operating picture",
       "Location comparisons and shared context",
     ],
   },
   {
     id: "enterprise",
     number: "03",
-    name: "Enterprise",
-    tag: "Portfolio scope",
-    headline: "Group direction. Local accountability.",
-    audience:
-      "For groups coordinating multiple brands, entities and more complex rollout requirements.",
-    price: "Portfolio agreement",
-    priceNote: "Annual minimum + tailored estate scope",
+    name: "Portfolio",
+    tag: "Up to 20 locations",
+    headline: "A wider view. The same simple setup.",
+    audience: "For larger hospitality groups managing a broader location estate.",
+    price: "Pricing coming soon",
+    priceNote: "Monthly plan · up to 20 locations",
     highlights: [
-      "Everything in Expand",
-      "Multi-brand and entity scope",
-      "Governance and rollout requirements",
+      "Everything in Expand, across 20 locations",
+      "The same guided setup and documentation",
+      "A consolidated portfolio view",
     ],
   },
 ] as const;
-type Inclusion = { status: "included" | "scoped" | "excluded"; label: string };
+type Inclusion = { status: "included" | "pending" | "excluded"; label: string };
 const included = (label = "Included"): Inclusion => ({
   status: "included",
   label,
 });
-const scoped = (label = "Quoted separately"): Inclusion => ({
-  status: "scoped",
-  label,
-});
+const pending: Inclusion = { status: "pending", label: "Published before launch" };
 const excluded: Inclusion = { status: "excluded", label: "Not included" };
 const COMPARISON: {
   label: string;
@@ -79,71 +75,66 @@ const COMPARISON: {
   cells: [Inclusion, Inclusion, Inclusion];
 }[] = [
   {
+    label: "Location capacity",
+    description: "A location is one restaurant, hotel or operating venue.",
+    cells: [
+      included("1 location"),
+      included("Up to 5 locations"),
+      included("Up to 20 locations"),
+    ],
+  },
+  {
     label: "Decision workflow",
-    description: "Review a priority, its evidence and the proposed next step.",
+    description: "Review priorities, evidence and proposed next steps.",
     cells: [included(), included(), included()],
   },
   {
     label: "Evidence and outcome tracking",
-    description: "Keep the source evidence and follow what happened afterward.",
+    description: "Follow what happened, with source evidence attached.",
     cells: [included(), included(), included()],
   },
   {
-    label: "Human review of actions",
-    description: "An operator reviews proposed actions in every scope.",
+    label: "Your team stays in control",
+    description: "Your operators review proposed actions in the product.",
     cells: [included(), included(), included()],
   },
   {
-    label: "Operating priorities",
+    label: "Guided setup",
     description:
-      "The problems RADR is scoped to examine, such as reconciliation or service pressure.",
-    cells: [
-      included("One agreed priority"),
-      included("Several agreed priorities"),
-      included("Group priorities"),
-    ],
+      "Follow the product checklist and prepare your own supported data files.",
+    cells: [included(), included(), included()],
   },
   {
-    label: "Location coverage",
-    description: "The named restaurants, hotels or properties in your agreement.",
-    cells: [
-      included("Focused rollout"),
-      included("Multi-location"),
-      included("Portfolio-wide scope"),
-    ],
+    label: "Documentation",
+    description:
+      "Use setup guidance, file requirements and integration availability notes.",
+    cells: [included(), included(), included()],
   },
   {
     label: "Location comparisons",
-    description: "Review differences and trends across your estate.",
+    description: "Compare performance and operating context across your locations.",
     cells: [excluded, included(), included()],
   },
   {
-    label: "Multi-brand and entity scope",
-    description:
-      "Coordinate the requirements of several brands or legal entities.",
+    label: "Portfolio overview",
+    description: "A consolidated view for a larger location estate.",
     cells: [excluded, excluded, included()],
   },
   {
-    label: "Group governance and rollout",
+    label: "Structured data allowance",
     description:
-      "Agree portfolio policies, responsibilities and rollout milestones.",
-    cells: [excluded, excluded, included("Tailored requirements")],
+      "Numeric data and processing limits will be published with final pricing.",
+    cells: [pending, pending, pending],
   },
   {
-    label: "Usage allowance",
+    label: "Setup fee",
     description:
-      "Data volume, refresh frequency and processing limits are defined in your quote.",
+      "The proposed packages use the same guided setup, without a separate implementation engagement.",
     cells: [
-      included("Defined allowance"),
-      included("Estate allowance"),
-      included("Tailored allowance"),
+      included("No setup fee"),
+      included("No setup fee"),
+      included("No setup fee"),
     ],
-  },
-  {
-    label: "Onboarding and custom work",
-    description:
-      "Data mapping, training and any non-standard integration work are scoped before setup.",
-    cells: [scoped(), scoped(), scoped()],
   },
 ];
 
@@ -162,7 +153,7 @@ function InclusionCell({ value }: { value: Inclusion }) {
               strokeLinejoin="round"
             />
           </svg>
-        ) : value.status === "scoped" ? (
+        ) : value.status === "pending" ? (
           "○"
         ) : (
           "×"
@@ -175,36 +166,36 @@ function InclusionCell({ value }: { value: Inclusion }) {
 
 const FAQ = [
   [
-    "How much does RADR cost?",
-    "RADR is quoted as an annual subscription with a platform minimum and agreed location coverage. Your quote states the total, billing schedule, included usage and support. Onboarding and any custom work are itemized separately. There is no published self-service rate or automatic charge on this website.",
+    "When will pricing be available?",
+    "Monthly prices and numeric usage allowances are being finalized. They will be published before paid activation, so you can compare standard packages without requesting a custom quote. Selecting a plan here previews setup; it does not start a payment or subscription.",
   ],
   [
-    "Can I explore RADR before committing?",
-    "Yes. Register to explore the free restaurant or hotel demo at your own pace. It uses fictional data and does not connect your systems. A rollout using your own data is scoped and priced separately.",
+    "Can I explore RADR before choosing a plan?",
+    "Yes. Register for the free fictional restaurant or hotel demo and explore at your own pace. There is no immediate pricing prompt or automatic conversion to a paid plan.",
   ],
   [
-    "Why an annual agreement?",
-    "Connecting evidence, reviewing decisions and tracking outcomes is an ongoing operating process. An annual scope gives your team a defined budget and a rollout plan. The start date, billing schedule, renewal and cancellation terms are stated in the written agreement before you commit.",
+    "Do I need a sales call or an onboarding specialist?",
+    "The standard setup path is self-guided: choose your operation, follow the checklist and prepare supported data files. Your team owns its data and reviews proposed actions. The packages do not include a dedicated account manager, data-cleaning service or bespoke implementation.",
   ],
   [
-    "What does onboarding cover?",
-    "A separately priced setup scope covers the agreed data mapping, configuration, training and launch review. Any data cleanup, custom integration or historical backfill is itemized before work begins. Compatibility and delivery dates are confirmed first.",
+    "Is there a separate setup fee?",
+    "Guided setup and documentation are part of the proposed packages, rather than a separately sold implementation service. Final subscription terms will be published before paid activation. There is no setup charge on this preview.",
   ],
   [
-    "What happens if our usage or estate grows?",
-    "Your quote defines named locations, evidence sources, data volumes, refresh frequency and processing allowances. Additional locations or work require an approved scope change and price. The agreement sets how a limit is handled; this website does not enable automatic overage billing.",
+    "What does a location mean?",
+    "A location is one restaurant, hotel or operating venue. Core is designed for one location, Expand for up to five and Portfolio for up to twenty. A hotel's rooms are part of that hotel's location, rather than separate locations.",
+  ],
+  [
+    "What if I need more locations or data?",
+    "Choose a larger standard package when its location capacity fits. Data and processing limits, capacity upgrades and billing terms will be published before paid activation. No automatic overage charge is enabled in this preview.",
+  ],
+  [
+    "Can RADR connect to any system automatically?",
+    "Check the documented file requirements and provider availability first. A provider logo does not guarantee a live connection. The packages do not include building custom integrations or a managed data-migration service.",
   ],
   [
     "Do you take a percentage of our savings?",
-    "The standard model is a subscription, not a share of modeled or expected savings. A value estimate is not a billable outcome. Any alternative commercial arrangement would require a separate written agreement and an accepted verification method.",
-  ],
-  [
-    "Are all integrations available immediately?",
-    "Availability, source access, permissions and delivery milestones are confirmed before commitment. Package checkmarks describe the proposed commercial scope, not a promise that every provider connection or enterprise requirement is already available.",
-  ],
-  [
-    "Can we start with a smaller scope?",
-    "Yes. Core starts with one operating priority and named locations. Expand adds multi-location comparisons and several agreed priorities. Enterprise addresses portfolio requirements. Evidence, human review and outcome tracking remain part of every scope.",
+    "No percentage of modeled or expected savings is part of these packages. The proposed model is a standard subscription. Expected value remains separate from an evidenced, verified outcome.",
   ],
 ];
 
@@ -250,17 +241,17 @@ export function Pricing2030({
             <div className="rx30-shell rm-price-hero-grid">
               <div>
                 <p className="rx30-kicker">
-                  Pricing · built around your operation
+                  Pricing · standard monthly packages
                 </p>
                 <h1 id="pricing-title">
                   One platform.
                   <br />
-                  A clear <em>agreement.</em>
+                  Simple <em>plans.</em>
                 </h1>
                 <p className="rm-price-lead">
-                  Explore the demo for free. When you are ready for your own
-                  operation, agree an annual subscription, location coverage
-                  and a clearly priced setup.
+                  Choose the location capacity you need. Follow the guided
+                  setup at your own pace. Explore the free demo before
+                  deciding which plan fits.
                 </p>
                 <div className="rx30-ctas">
                   <Link href="#plans" className="rx30-btn rx30-btn-primary">
@@ -273,30 +264,30 @@ export function Pricing2030({
               </div>
               <aside
                 className="rm-price-quote"
-                aria-label="How your quote is built"
+                aria-label="How the packages work"
               >
                 <FrozenRadrLogo variant="mark" theme="dark" width={36} />
                 <p className="rm-price-overline">
-                  Your quote, clearly separated
+                  Built for self-guided setup
                 </p>
                 <h2>
-                  Know the scope.
+                  Choose a plan.
                   <br />
-                  Know the cost.
+                  Make your move.
                 </h2>
                 <p>
-                  One recurring subscription. One separately scoped setup.
-                  The price and delivery are agreed before work begins.
+                  One subscription for the product. Guided setup and clear
+                  documentation, with your team in control.
                 </p>
                 <ol>
                   <li>
-                    <span>01</span>Annual platform + location coverage
+                    <span>01</span>Clear monthly location capacity
                   </li>
                   <li>
-                    <span>02</span>Included processing + support allowance
+                    <span>02</span>Defined structured data allowance
                   </li>
                   <li>
-                    <span>03</span>One-time onboarding + any custom work
+                    <span>03</span>Guided setup, without a setup fee
                   </li>
                 </ol>
                 <Link href="/value-calculator">
@@ -316,15 +307,15 @@ export function Pricing2030({
                 <div>
                   <p className="rx30-kicker">Find your starting point</p>
                   <h2 id="plan-title" className="rx30-h2">
-                    Different scope.
+                    Your size.
                     <br />
                     The same Decision layer.
                   </h2>
                 </div>
                 <p>
-                  Choose how much of your operation to cover. Every scope
-                  includes evidence, human review and outcome tracking.
-                  Locations, usage and delivery are agreed in your proposal.
+                  Every package includes evidence, Decisions and outcome
+                  tracking. Larger plans add location capacity and comparisons,
+                  rather than a consulting engagement.
                 </p>
               </div>
               <div className="rm-plan-grid">
@@ -355,7 +346,7 @@ export function Pricing2030({
                     </div>
                     <ul
                       className="rm-plan-highlights"
-                      aria-label={`${plan.name} scope highlights`}
+                      aria-label={`${plan.name} package highlights`}
                     >
                       {plan.highlights.map((highlight) => (
                         <li key={highlight}>
@@ -374,17 +365,17 @@ export function Pricing2030({
                       ))}
                     </ul>
                     <PlanLink className="rx30-btn" href={nextHref(plan.id)}>
-                      {`Plan with ${plan.name}`}
+                      {`Preview ${plan.name}`}
                       <span aria-hidden="true">→</span>
                     </PlanLink>
                   </article>
                 ))}
               </div>
               <p className="rm-availability">
-                <strong>Choosing a scope starts a preview</strong> Review setup
-                without starting a subscription. A written proposal confirms
-                fees, source availability, delivery and responsibilities before
-                any commitment.
+                <strong>Monthly pricing is being finalized</strong> Prices and
+                usage limits will be published before paid activation. Explore
+                the packages and preview setup now. No payment or subscription
+                starts here.
               </p>
             </div>
           </section>
@@ -397,19 +388,18 @@ export function Pricing2030({
               <p className="rx30-kicker">The differences, at a glance</p>
               <h2 className="rx30-h2">What’s included. Side by side.</h2>
               <p className="rm-compare-intro">
-                A focused rollout, connected multi-location decisions, or
-                portfolio requirements. The scope grows; the evidence and
-                review standard stays.
+                One location, a growing group or a wider portfolio. Compare
+                the capacity and product features in each standard package.
               </p>
               <div className="rm-compare-legend" aria-label="Comparison key">
                 <InclusionCell
-                  value={included("Included in the package scope")}
+                  value={included("Included in the package")}
                 />
-                <InclusionCell value={scoped("Separately priced work")} />
+                <InclusionCell value={pending} />
                 <InclusionCell value={excluded} />
               </div>
               <p className="rm-compare-hint" id="scope-scroll-hint">
-                Swipe across to compare all three scopes{" "}
+                Swipe across to compare all three plans{" "}
                 <span aria-hidden="true">↔</span>
               </p>
               <div
@@ -421,9 +411,9 @@ export function Pricing2030({
               >
                 <table className="rm-compare-table">
                   <caption>
-                    Checkmarks describe proposed package scope. Every plan has an
-                    agreed usage allowance. Onboarding, non-standard integrations
-                    and delivery are confirmed and priced before setup.
+                    Proposed standard packages with guided setup and documentation.
+                    Monthly prices and usage limits are pending. Provider
+                    availability follows the documented connection status.
                   </caption>
                   <thead>
                     <tr>
@@ -432,9 +422,7 @@ export function Pricing2030({
                         <th key={p.id} scope="col">
                           {p.name}
                           <span className="rm-compare-price">
-                            {p.id === "enterprise"
-                              ? "Portfolio quote"
-                              : "Annual quote"}
+                            Price pending
                           </span>
                         </th>
                       ))}
@@ -464,7 +452,7 @@ export function Pricing2030({
           <section className="rm-pricing-faq" data-nav-theme="light">
             <div className="rx30-shell rm-pricing-faq-grid">
               <div>
-                <p className="rx30-kicker">Before we talk</p>
+                <p className="rx30-kicker">Before you choose</p>
                 <h2 className="rx30-h2">
                   Good questions.
                   <br />
@@ -496,14 +484,14 @@ export function Pricing2030({
                 Then decide.
               </h2>
               <p>
-                Explore the free demo. Build a rollout around what matters to
-                you.
+                Explore at your own pace. Choose the capacity your operation
+                needs.
               </p>
               <Link href="/demo" className="rx30-btn rx30-btn-primary">
                 Explore the free demo <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/contact?intent=pricing" className="rm-close-demo">
-                Prepare your rollout brief →
+              <Link href="#plans" className="rm-close-demo">
+                Compare the plans ↑
               </Link>
             </div>
           </section>

@@ -12,7 +12,7 @@ export function planName(plan: PublicPlanId) {
     ? "Core"
     : plan === "expand"
       ? "Expand"
-      : "Enterprise";
+      : "Portfolio";
 }
 export function planRegistrationHref(plan: PublicPlanId) {
   return `/signup?intent=workspace&plan=${plan}`;

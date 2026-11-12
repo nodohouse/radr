@@ -226,7 +226,7 @@ for (const world of ["restaurant", "hotel"])
           ? "Core"
           : plan === "expand"
             ? "Expand"
-            : "Enterprise";
+            : "Portfolio";
       const card = page
         .locator(".rm-plan-card")
         .filter({ has: page.getByRole("heading", { name, exact: true }) });
@@ -259,13 +259,13 @@ test("public plan choice is retained through required workspace registration", a
   await page
     .locator(".rm-plan-card")
     .filter({
-      has: page.getByRole("heading", { name: "Enterprise", exact: true }),
+      has: page.getByRole("heading", { name: "Portfolio", exact: true }),
     })
     .getByRole("link")
     .click();
   await expect(page).toHaveURL(/signup\?intent=workspace&plan=enterprise/);
   await expect(page.locator(".ob-registration-plan")).toContainText(
-    "Enterprise",
+    "Portfolio",
   );
   await fill(page, "hotel");
   const response = page.waitForResponse(
@@ -279,7 +279,7 @@ test("public plan choice is retained through required workspace registration", a
   );
   await expect(
     page.getByRole("complementary", { name: "Selected plan" }),
-  ).toContainText("Enterprise");
+  ).toContainText("Portfolio");
 });
 test("registration accessibility and terms links preserve the current form", async ({
   page,
