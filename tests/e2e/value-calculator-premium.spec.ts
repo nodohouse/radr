@@ -261,7 +261,7 @@ for (const width of [390, 820, 1512, 3840])
         "color",
         "rgb(255, 255, 255)",
       );
-      await expect(page.locator(".vc3-close h2")).toHaveCSS(
+      await expect(page.locator(".vc4-path--demo h3")).toHaveCSS(
         "color",
         "rgb(255, 255, 255)",
       );

@@ -188,3 +188,31 @@ Each category carries an annual calculation trace: relevant base, rate triple, p
 Monthly mode divides annual exposure and capture by twelve, without claiming seasonality. ROI and the user-entered budget always remain annual. Negative net return and ROI are shown. Payback is displayed in months and assumes a steady capture rate without implementation ramp-up. The annual budget is a user scenario input, not a RADR price; prices remain pending.
 
 Native details replace modal drawers, retaining keyboard behavior without focus traps or scroll locking. Print styles and a local CSV export include the scenario, category values, inputs, evidence requirements and assumptions. No financial profile is persisted, sent to APIs or included in consented step analytics. A sample remains labeled illustrative after edits. The CSV always uses an annual horizon, irrespective of the display toggle. Formula-like string cells are escaped for spreadsheet safety; numeric negative ROI values remain numeric.
+
+## Result stories and next steps
+
+The restaurant, hotel and mixed-operation results have distinct operating copy.
+`resultStory.ts` resolves the registration destination for a known operation;
+portfolio visitors choose between the existing hotel and restaurant demos.
+All demo links retain the existing registration gate. No financial amounts or
+calculator answers are included in the destination URL or persisted for signup.
+
+The lens chart assigns each adjusted category to exactly one primary economic
+lens for display. It is a visual grouping, not an additional calculation or a
+claim that a Decision cannot span lenses. Amounts reconcile to the central model;
+monthly display divides those same amounts by twelve. Zero revenue never becomes
+a percentage share. A lens outside the selected scope is explicitly labeled.
+Lens selection and category selection share the same active category.
+
+The category story explains a question, a response to compare, and the evidence
+needed to verify the outcome. It describes an investigation rather than claiming
+that the calculator found a real discrepancy or executed a change. The primary
+next step is the relevant fictional demo. The closing section offers the existing
+playbook request page and package comparison as alternative research paths;
+prices and payment remain pending. The report receiving service is unchanged.
+
+Optional `calculator_next_step` dataLayer events require analytics consent and
+contain only destination and placement. There is no new tracker or network call.
+These events identify intent clicks, not completed accounts, downloads or sales.
+Actual conversion lift needs measurement after analytics and receiving services
+are configured; it cannot be established from synthetic browser checks.

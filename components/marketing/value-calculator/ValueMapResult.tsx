@@ -3,6 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { useReducedMotionSafe } from "@/components/marketing/motion/useReducedMotionSafe";
+import {
+  ValueLensChart,
+  ValueDecisionBridge,
+  ValueDecisionExample,
+  ValueNextSteps,
+} from "./ValueResultStory";
+import { resultStory } from "@/lib/marketing/value-calculator/resultStory";
 import { categoryDisplayLabel, categoryExplanation } from "./valueMapSemantics";
 import {
   LOCATION_OPTIONS,
@@ -63,6 +70,7 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
     );
     return category ? [{ assumption, category }] : [];
   });
+  const story = resultStory(journey);
   const loc = optionById(LOCATION_OPTIONS, journey.locationsId);
   const budgetInvalid =
     budgetText !== "" &&
@@ -121,9 +129,9 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
               : "Your RADR Value Map"}
           </span>
           <h1 ref={heading} tabIndex={-1}>
-            A clearer view of
+            {story.title}
             <br />
-            <em>what needs a closer look.</em>
+            <em>{story.subtitle}</em>
           </h1>
           <p>
             {journey.example
@@ -249,6 +257,13 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
         </div>
       </section>
 
+      <ValueDecisionBridge
+        journey={journey}
+        active={active}
+        hasRevenue={hasRevenue}
+        divisor={divisor}
+      />
+
       <div className="vc3-analysis-grid">
         <section
           className="vc3-panel vc3-breakdown"
@@ -267,6 +282,13 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
             Select an area to see what it means, the calculation and the records
             to check.
           </p>
+          <ValueLensChart
+            categories={result.categories}
+            active={active}
+            journey={journey}
+            divisor={divisor}
+            onSelect={selectCategory}
+          />
           <div className="vc3-category-bars">
             {result.categories.map((c) => (
               <button
@@ -335,6 +357,7 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
                     : "Add revenue to quantify"}
                 </strong>
               </div>
+              <ValueDecisionExample journey={journey} category={active} />
               <h3>Your first evidence check</h3>
               <ol className="vc3-evidence-steps">
                 <li>
@@ -708,32 +731,7 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
         </Link>
       </section>
 
-      <section className="vc3-close">
-        <div>
-          <span className="vc3-eyebrow">Make the next step practical</span>
-          <h2>
-            Find the evidence.
-            <br />
-            Then decide what matters.
-          </h2>
-          <p>
-            Your team can use this map to choose the first records to review.
-            The calculator verifies no outcomes and does not create confirmed
-            savings.
-          </p>
-        </div>
-        <div>
-          <Link
-            href={`/contact?intent=pricing&context=${journey.vertical}`}
-            className="vc3-btn vc3-btn--jade"
-          >
-            Prepare an evaluation
-          </Link>
-          <Link href="/demo" className="vc3-btn vc3-btn--glass">
-            Explore the free demo →
-          </Link>
-        </div>
-      </section>
+      <ValueNextSteps journey={journey} />
       <p className="vc3-result-foot">
         Illustrative model. No financial inputs are uploaded or saved by this
         calculator. CSV amounts are annual; print follows the displayed horizon.
