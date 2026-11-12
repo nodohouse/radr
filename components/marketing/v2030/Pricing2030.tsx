@@ -28,6 +28,11 @@ const PLANS = [
     governance: "Named operator reviews each proposed action",
     next: "Review the trial, then choose whether to continue on agreed paid terms",
     cta: "Request your free trial",
+    highlights: [
+      "One operating priority",
+      "Evidence and Decision review",
+      "Named operator approval",
+    ],
   },
   {
     id: "expand",
@@ -43,6 +48,11 @@ const PLANS = [
     governance: "Operating roles and approval rules scoped together",
     next: "Broader coverage as evidence supports it",
     cta: "Plan your expansion",
+    highlights: [
+      "Multi-location coverage",
+      "Broader Decision scope",
+      "Shared operating context",
+    ],
   },
   {
     id: "enterprise",
@@ -58,6 +68,11 @@ const PLANS = [
     governance: "Group policies and access requirements",
     next: "A tailored rollout and governance plan",
     cta: "Plan a group evaluation",
+    highlights: [
+      "Multi-brand and entity scope",
+      "Group governance requirements",
+      "Portfolio rollout planning",
+    ],
   },
 ] as const;
 type Inclusion = { status: "included" | "scoped" | "excluded"; label: string };
@@ -316,11 +331,19 @@ export function Pricing2030({
                   <article
                     key={plan.id}
                     className="rm-plan-card"
-                    data-featured={plan.id === "expand" ? "true" : undefined}
+                    data-featured={plan.id === "start" ? "true" : undefined}
                   >
                     <div className="rm-plan-top">
                       <span>{plan.number}</span>
                       <span>{plan.tag}</span>
+                    </div>
+                    <div className="rm-plan-scale" aria-hidden="true">
+                      {[0, 1, 2].map((level) => (
+                        <i
+                          key={level}
+                          data-on={level <= PLANS.indexOf(plan) || undefined}
+                        />
+                      ))}
                     </div>
                     <h3>{plan.name}</h3>
                     <p className="rm-plan-headline">{plan.headline}</p>
@@ -337,20 +360,26 @@ export function Pricing2030({
                           : "Scope & terms agreed with you"}
                       </span>
                     </div>
-                    <dl>
-                      <div>
-                        <dt>Footprint</dt>
-                        <dd>{plan.scope}</dd>
-                      </div>
-                      <div>
-                        <dt>Primary focus</dt>
-                        <dd>{plan.focus}</dd>
-                      </div>
-                      <div>
-                        <dt>Next step</dt>
-                        <dd>{plan.next}</dd>
-                      </div>
-                    </dl>
+                    <ul
+                      className="rm-plan-highlights"
+                      aria-label={`${plan.name} scope highlights`}
+                    >
+                      {plan.highlights.map((highlight) => (
+                        <li key={highlight}>
+                          <svg viewBox="0 0 20 20" aria-hidden="true">
+                            <path
+                              d="m5 10 3.2 3.2L15 6.5"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
                     <PlanLink className="rx30-btn" href={nextHref(plan.id)}>
                       {plan.id === "start"
                         ? "Choose the free trial"

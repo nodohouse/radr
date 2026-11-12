@@ -17,16 +17,16 @@ export const PLATFORM_COLUMNS: PlatformColumn[] = [
   {
     key: "surfaces",
     items: [
-      { href: "/product?surface=control", key: "controlCenter" },
-      { href: "/product?surface=live", key: "live" },
-      { href: "/product?surface=decisions", key: "decisions" },
-      { href: "/product?surface=operations", key: "operations" },
-      { href: "/product?surface=house", key: "backOfHouse" },
-      { href: "/product?surface=intelligence", key: "intelligence" },
-      { href: "/product?surface=value", key: "value" },
-      { href: "/product?surface=memory", key: "memorySurface" },
-      { href: "/product?surface=health", key: "dataHealth" },
-      { href: "/product?surface=connections", key: "connections" },
+      { href: "/product?surface=control#surfaces", key: "controlCenter" },
+      { href: "/product?surface=live#surfaces", key: "live" },
+      { href: "/product?surface=decisions#surfaces", key: "decisions" },
+      { href: "/product?surface=operations#surfaces", key: "operations" },
+      { href: "/product?surface=house#surfaces", key: "backOfHouse" },
+      { href: "/product?surface=intelligence#surfaces", key: "intelligence" },
+      { href: "/product?surface=value#surfaces", key: "value" },
+      { href: "/product?surface=memory#surfaces", key: "memorySurface" },
+      { href: "/product?surface=health#surfaces", key: "dataHealth" },
+      { href: "/product?surface=connections#surfaces", key: "connections" },
     ],
   },
   {
@@ -73,20 +73,40 @@ export function platformHrefForItem(itemKey: string): string {
 
 /** Five economic leak classes — Solutions mega-nav. */
 export const VALUE_LEAK_CLASSES: DropLink[] = [
-  { href: "/solutions?leak=supplier", key: "supplier" },
-  { href: "/solutions?leak=recon", key: "reconciliation" },
-  { href: "/solutions?leak=cost", key: "cost" },
-  { href: "/solutions?leak=proc", key: "procurement" },
-  { href: "/solutions?leak=perish", key: "perishable" },
+  { href: "/solutions?leak=supplier#value-leaks", key: "supplier" },
+  { href: "/solutions?leak=recon#value-leaks", key: "reconciliation" },
+  { href: "/solutions?leak=cost#value-leaks", key: "cost" },
+  { href: "/solutions?leak=proc#value-leaks", key: "procurement" },
+  { href: "/solutions?leak=perish#value-leaks", key: "perishable" },
 ];
 
 /** Path + query for next-intl Link. */
 export const VALUE_LEAK_HREF = {
-  supplier: { pathname: "/solutions" as const, query: { leak: "supplier" } },
-  reconciliation: { pathname: "/solutions" as const, query: { leak: "recon" } },
-  cost: { pathname: "/solutions" as const, query: { leak: "cost" } },
-  procurement: { pathname: "/solutions" as const, query: { leak: "proc" } },
-  perishable: { pathname: "/solutions" as const, query: { leak: "perish" } },
+  supplier: {
+    pathname: "/solutions" as const,
+    query: { leak: "supplier" },
+    hash: "value-leaks",
+  },
+  reconciliation: {
+    pathname: "/solutions" as const,
+    query: { leak: "recon" },
+    hash: "value-leaks",
+  },
+  cost: {
+    pathname: "/solutions" as const,
+    query: { leak: "cost" },
+    hash: "value-leaks",
+  },
+  procurement: {
+    pathname: "/solutions" as const,
+    query: { leak: "proc" },
+    hash: "value-leaks",
+  },
+  perishable: {
+    pathname: "/solutions" as const,
+    query: { leak: "perish" },
+    hash: "value-leaks",
+  },
 } as const;
 
 export const VALUE_LEAK_DEEPER: DropLink[] = [

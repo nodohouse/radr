@@ -21,3 +21,9 @@ Hotel Ask answers are grounded in the current selected Decision records and, for
 Editorial pages whose current copy is English-only resolve to their English URL. Canonicals, sitemap entries and language alternates follow that publication policy; translated account-entry routes remain available. A locale-shaped URL does not certify a translation. Real service activation, external data validation and company legal identity remain separate launch work.
 
 Regression coverage includes `tests/e2e/scoped-workspace.spec.ts` for hotel Ask, audit filters and provider-specific evidence review. Live camera, layout dragging, generated-building validation and no-WebGL fallback remain covered by their existing browser suites. The building shows its elevation while the 3D renderer initializes, then hands over to the interactive scene.
+
+## Marketing preview links
+
+Platform navigation uses `/product?surface=<id>#surfaces`. The passive gallery opens on the requested surface, including after a client navigation between two surface links. Unknown values fall back to the Control Center. It then continues its visible-page film sequence, with a static selection under reduced motion. The only action inside the gallery is the demo link; no product controls, canvases or workspace sessions are mounted on the marketing page. Solutions links similarly carry their selected leak and the `value-leaks` anchor.
+
+Marketing frames are captures of the current fictional hotel and restaurant product. They include the current Data Health and Connections workbenches. `PLATFORM_GALLERY_REVISION` changes with refreshed assets so image optimization caches cannot serve the older frames. The source files under `public/platform-showcase/` remain raster previews; they never imply a connected customer system. The marketing navigation regression covers every public surface and a client transition between two feature links.

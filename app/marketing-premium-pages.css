@@ -348,7 +348,7 @@
   font-size: 12px;
   font-weight: 600;
   color: #315078;
-  margin-bottom: 26px;
+  margin-bottom: 18px;
 }
 .rm-plan-top span:last-child {
   background: #e4edfa;
@@ -378,14 +378,14 @@
   font-size: 15px;
   line-height: 1.65;
   color: #4c5d77;
-  min-height: 76px;
+  min-height: 64px;
   margin: 0;
 }
 .rm-plan-price {
   display: grid;
   gap: 8px;
-  padding: 24px 0;
-  margin-top: 20px;
+  padding: 20px 0;
+  margin-top: 14px;
   border-top: 1px solid #d5e1ef;
   border-bottom: 1px solid #d5e1ef;
 }
@@ -398,23 +398,15 @@
   font-size: 13px;
   color: #4c5d77;
 }
-.rm-plan-card dl {
-  margin: 24px 0 30px;
-  display: grid;
-  gap: 22px;
-  flex: 1;
-}
-.rm-plan-card dt {
-  font-size: 12px;
-  font-weight: 650;
-  color: #4c5d77;
-  margin-bottom: 6px;
-}
-.rm-plan-card dd {
-  font-size: 15px;
-  line-height: 1.6;
-  margin: 0;
-}
+.rm-plan-scale {display:flex;align-items:end;gap:5px;height:25px;margin-bottom:18px;}
+.rm-plan-scale i {width:24px;height:10px;border-radius:3px;background:#dce7f3;}
+.rm-plan-scale i:nth-child(2) {height:17px;}
+.rm-plan-scale i:nth-child(3) {height:25px;}
+.rm-plan-scale i[data-on] {background:linear-gradient(150deg,#163f9a,#107dda);}
+.rm-plan-card[data-featured=true] .rm-plan-scale i[data-on] {background:#087455;}
+.rm-plan-highlights {display:grid;align-content:start;gap:13px;margin:22px 0 28px;padding:0;list-style:none;flex:1;}
+.rm-plan-highlights li {display:flex;align-items:start;gap:10px;font-size:14px;line-height:1.65;color:#315078;}
+.rm-plan-highlights svg {width:18px;height:22px;flex-shrink:0;color:#087455;}
 .rm-pricing .rm-plan-card > a {
   display: flex;
   justify-content: space-between;
@@ -488,7 +480,7 @@
   font-size: 16px;
   font-weight: 550;
 }
-.rm-compare-table thead th:nth-child(3) {
+.rm-compare-table thead th:nth-child(2) {
   background: #075be5;
 }
 .rm-compare-table tbody th {
@@ -496,7 +488,7 @@
   color: #16365f;
   background: #f8faff;
 }
-.rm-compare-table td:nth-child(3) {
+.rm-compare-table td:nth-child(2) {
   background: #f0f6ff;
 }
 .rm-pricing-faq-grid {

@@ -1,4 +1,6 @@
 /** Images of fictional RADR operations. Marketing never mounts the product UI. */
+export const PLATFORM_GALLERY_REVISION = "20261112";
+
 export type PlatformSurfaceId =
   | "control"
   | "live"

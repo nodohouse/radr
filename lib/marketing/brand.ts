@@ -41,15 +41,15 @@ export const CATEGORY = {
 } as const;
 
 export const CTAS = {
-  /** Public product entry. Account creation is not required for exploration. */
-  primaryProduct: "Explore the product",
+  /** Public product entry. Registration preview is required for demo access. */
+  primaryProduct: "Explore the demo",
   primaryProductHref: "/demo",
   primarySales: "Talk to sales",
   primarySalesHref: "/contact?intent=sales",
   /** Public Verified Recovery story — never /app */
   secondaryProduct: "See a Verified Recovery",
   secondaryProductHref: "/product/value",
-  /** Public interactive demo, no signup required */
+  /** Public demo entry; required registration follows the environment choice. */
   seeInAction: "See RADR in action",
   seeInActionHref: "/demo",
   talkToRadr: "Talk to RADR",

@@ -185,7 +185,10 @@ for (const world of ["restaurant", "hotel"])
     if (world === "hotel")
       await page.setViewportSize({ width: 1512, height: 1100 });
     // Simulate a guest returning after active exploration; fresh arrivals see no upsell.
-    await page.evaluate(() =>
+    // Seed on the next document, after the previous page has saved its progress.
+    await page.addInitScript(() => {
+      const marker = "radr.qa.invitation-seeded";
+      if (sessionStorage.getItem(marker)) return;
       sessionStorage.setItem(
         "radr.demo.invitation.v1",
         JSON.stringify({
@@ -196,13 +199,17 @@ for (const world of ["restaurant", "hotel"])
           dismissed: false,
           areas: ["control-center", "live", "decisions"],
         }),
-      ),
-    );
+      );
+      sessionStorage.setItem(marker, "1");
+    });
+    // Install the test clock before remounting the interval-based invitation.
+    await page.clock.install();
     await page.reload();
     await expect(
       page.locator(".rp-root[data-context-ready=true]"),
     ).toBeVisible();
-    await page.clock.install();
+    await page.bringToFront();
+    await page.getByRole("heading", { name: /Your operating brief/ }).click();
     await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
     await page.clock.runFor(10000);
     await expect(

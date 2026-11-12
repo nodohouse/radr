@@ -1,27 +1,44 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useReducedMotion } from "motion/react";
-import { PLATFORM_GALLERY } from "@/lib/marketing/platformGallery";
+import { PLATFORM_GALLERY, PLATFORM_GALLERY_REVISION } from "@/lib/marketing/platformGallery";
 import { Link } from "@/i18n/navigation";
 import { FrozenRadrLogo } from "@/components/brand/FrozenRadrLogo";
 import { TourArrow } from "./PlatformTourIcons";
 import "./platform-sneak-peek.css";
 
-const PEEKS = [
-  { image: "control", label: "The operating brief" },
-  { image: "live-hotel", label: "Your hotel, in perspective" },
-  { image: "live-restaurant", label: "Every service moment" },
-  { image: "decisions", label: "The next decision, in focus" },
-].map((peek) => ({
-  ...peek,
-  alt: PLATFORM_GALLERY.find((frame) => frame.image === peek.image)!.alt,
+const PEEKS = PLATFORM_GALLERY.map((frame) => ({
+  ...frame,
+  label: frame.caption.split(". ")[0],
 }));
 
 /** A small, passive film. The only interaction is the link to the demo. */
 export function PlatformWorkspaceShowcase() {
-  const [slide, setSlide] = useState(0);
+  return (
+    <Suspense fallback={<PlatformWorkspaceFilm requested={null} />}>
+      <RequestedPlatformFilm />
+    </Suspense>
+  );
+}
+
+function RequestedPlatformFilm() {
+  const params = useSearchParams();
+  const requested = params.get("surface");
+  return (
+    <PlatformWorkspaceFilm key={requested || "control"} requested={requested} />
+  );
+}
+
+function PlatformWorkspaceFilm({ requested }: { requested: string | null }) {
+  const [slide, setSlide] = useState(() =>
+    Math.max(
+      0,
+      PEEKS.findIndex((peek) => peek.surface === requested),
+    ),
+  );
   const [previous, setPrevious] = useState<number | null>(null);
   const [loadedImage, setLoadedImage] = useState<string | null>(null);
   const [pageVisible, setPageVisible] = useState(true);
@@ -91,6 +108,7 @@ export function PlatformWorkspaceShowcase() {
             className="ps-teaser-frame"
             aria-label="RADR product sneak peek"
             data-slide={slide}
+            data-surface={current.surface}
           >
             <div className="ps-teaser-chrome" aria-hidden="true">
               <span>
@@ -115,7 +133,7 @@ export function PlatformWorkspaceShowcase() {
               {previous !== null && previous !== slide ? (
                 <Image
                   className="ps-teaser-previous"
-                  src={`/platform-showcase/${PEEKS[previous]!.image}.webp`}
+                  src={`/platform-showcase/${PEEKS[previous]!.image}.webp?v=${PLATFORM_GALLERY_REVISION}`}
                   alt=""
                   fill
                   sizes="(max-width: 760px) 90vw, 680px"
@@ -133,7 +151,7 @@ export function PlatformWorkspaceShowcase() {
                   if (activeImage.current === current.image)
                     setLoadedImage(current.image);
                 }}
-                src={`/platform-showcase/${current.image}.webp`}
+                src={`/platform-showcase/${current.image}.webp?v=${PLATFORM_GALLERY_REVISION}`}
                 alt={current.alt}
                 fill
                 sizes="(max-width: 760px) 90vw, 680px"

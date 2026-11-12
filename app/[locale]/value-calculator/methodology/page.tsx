@@ -49,59 +49,66 @@ export default async function ValueCalculatorMethodologyPage({
 
               <h2>Inputs</h2>
               <p>
-                Vertical, locations, annual revenue, currency, optional operating
-                metrics, pain areas, and maturity. Any advanced field may be
-                marked “I don’t know” and is then labeled ASSUMED.
+                Vertical, locations, annual revenue, currency, optional
+                operating metrics, pain areas, and maturity. Any advanced field
+                may be marked “I don’t know” and is then labeled ASSUMED.
               </p>
 
               <h2>Assumptions</h2>
               <p>
-                Rates live in a central registry (
-                <code>lib/marketing/value-calculator/assumptions.ts</code>
-                ). Prefer internal modeling assumptions — not invented industry
-                benchmarks. See{" "}
-                <Link href="/value-calculator">How was this calculated?</Link>{" "}
-                in the calculator for live assumption IDs.
+                Each operating area uses an explicit modeling assumption. Open
+                How was this calculated? in your result to inspect the rates,
+                inputs and source references. Assumptions are identified as
+                such; they are not presented as measured customer results or
+                industry benchmarks. You can adjust them to reflect your
+                operation.
               </p>
 
               <h2>Overlap protection</h2>
               <p>
-                Categories in the same overlap group are not summed blindly.
-                Primary keeps full weight; others are scaled by a correlation
-                factor. A portfolio cap limits total modeled value vs revenue.
+                One issue can affect several operating areas. The model reduces
+                overlapping estimates so the same potential effect is not
+                counted in full twice. It also limits the combined estimate
+                relative to revenue.
               </p>
 
               <h2>Confidence</h2>
               <p>
                 Derived from how many inputs are known vs assumed, specificity,
-                and maturity — not “AI confidence.”
+                and how well they describe your operation. This describes input
+                quality, not a probability that savings will occur.
               </p>
 
               <h2>Capture rate & ROI</h2>
               <p>
-                Default capture is conservative (20%). ROI and payback appear
-                only when annual investment is entered. Label: Illustrative ROI.
+                The default capture scenario is 20% of the modeled range. This
+                is an adjustable assumption. Illustrative ROI and payback appear
+                only when you supply an annual investment.
               </p>
 
               <h2>Expected ≠ Verified</h2>
               <p>
-                Calculator Verified Value is always $0 until real operational
-                evidence seals an outcome in the product.
+                A calculated estimate is not Verified Value. Verification
+                requires operational evidence of an outcome in the product.
               </p>
 
               <h2>Limitations</h2>
               <p>
-                Not financial advice. Not a promise. Currency is reporting
-                currency as entered — no FX conversion in V1. Client-side
-                calculation by default.
+                Results are illustrative estimates, not financial advice or a
+                promise of savings. Amounts stay in your selected reporting
+                currency; the calculator does not convert exchange rates. A
+                proper evaluation uses your own source records.
               </p>
 
               <p>
-                Full model:{" "}
-                <code>docs/VALUE_CALCULATOR_MODEL.md</code>
+                Use Adjust assumptions in your results to review and change the
+                model. Keep a copy of your inputs when comparing scenarios.
               </p>
 
-              <Link href="/value-calculator" className="rx30-btn rx30-btn-primary">
+              <Link
+                href="/value-calculator"
+                className="rx30-btn rx30-btn-primary"
+              >
                 Back to Value Calculator <span aria-hidden="true">→</span>
               </Link>
             </article>

@@ -97,7 +97,7 @@ export function Company2030() {
                   href={CTAS.seeInActionHref}
                   className="rx30-btn rx30-btn-primary"
                 >
-                  See RADR in action <span aria-hidden="true">→</span>
+                  Explore the demo <span aria-hidden="true">→</span>
                 </Link>
                 <Link
                   href="/security"
@@ -247,7 +247,7 @@ export function Company2030() {
                   href={CTAS.seeInActionHref}
                   className="rx30-btn rx30-btn-primary"
                 >
-                  See RADR in action <span aria-hidden="true">→</span>
+                  Explore the demo <span aria-hidden="true">→</span>
                 </Link>
                 <Link
                   href="/security"

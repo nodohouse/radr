@@ -10,8 +10,8 @@ import { Link } from "@/i18n/navigation";
 import { HomePlaybookFeature } from "@/components/marketing/reports/HomePlaybookFeature";
 import { ScrollTabletShowcase } from "./ScrollTabletShowcase";
 import { PUBLIC_RESTAURANT as venue } from "@/lib/marketing/publicCanon";
+import { PUBLIC_HOTEL } from "@/lib/marketing/publicCanon";
 import { PUBLIC_LOOP } from "@/lib/marketing/publicCanon";
-import { CTAS } from "@/lib/marketing/brand";
 
 const forks = [
   {
@@ -66,18 +66,23 @@ export function Homepage2030() {
           </p>
           <div className="rm-ctas">
             <Link href="/demo" className="rm-button">
-              Explore the product <span>→</span>
+              Explore the demo <span>→</span>
             </Link>
-            <Link
-              href={CTAS.primarySalesHref}
-              className="rm-button rm-button-secondary"
-            >
-              Plan your evaluation →
+            <Link href="/product" className="rm-button rm-button-secondary">
+              See the platform →
             </Link>
           </div>
           <p className="rm-caption rm-hospitality-scope">
             Restaurants · Hotels · Hospitality groups
           </p>
+          <ul
+            className="rm-hero-assurance"
+            aria-label="How RADR supports a decision"
+          >
+            <li>Evidence attached</li>
+            <li>Human review</li>
+            <li>Outcomes tracked</li>
+          </ul>
         </div>
         <ScrollTabletShowcase />
         <div className="rm-loop" aria-label="The RADR decision loop">
@@ -113,26 +118,50 @@ export function Homepage2030() {
               {venue.situation} Review seating pace before the next wave
               arrives.
             </p>
-            <Link href="/product?surface=control">Open the Brief →</Link>
+            <dl className="rm-focus-facts">
+              <div>
+                <dt>Expected tonight</dt>
+                <dd>{venue.expectedFormatted}</dd>
+              </div>
+              <div>
+                <dt>Confidence</dt>
+                <dd>{venue.confidenceLabel}</dd>
+              </div>
+            </dl>
+            <Link href="/product?surface=control#surfaces">
+              Preview the Control Center →
+            </Link>
           </article>
           <article className="rm-panel">
             <span className="rm-eyebrow">AFTER THE DECISION</span>
             <strong className="rm-number">{venue.verifiedFormatted}</strong>
-            <h3>Protected tonight.</h3>
+            <h3>Protected after service.</h3>
             <p>
               Illustrative completed-service outcome for {venue.decisionId}.
               Expected and verified value stay separate.
             </p>
             <Link href="/product/value">Follow the proof →</Link>
           </article>
-          <article className="rm-panel">
-            <span className="rm-eyebrow">ONE OPERATING PICTURE</span>
-            <h3>Guest experience meets economics.</h3>
-            <p>
-              Service pressure, labor, demand, and margin belong in the same
-              conversation.
-            </p>
-            <Link href="/industries">Restaurants, hotels & groups →</Link>
+          <article className="rm-panel rm-home-hotel">
+            <Image
+              src={MARKETING_IMAGES.industriesHotel.src}
+              alt="An empty hotel suite, ready for the next arrival"
+              width={640}
+              height={360}
+              sizes="(max-width:720px) 100vw, 380px"
+            />
+            <div>
+              <span className="rm-eyebrow">HOTELS, JUST AS CONNECTED</span>
+              <h3>Every room. The same decision layer.</h3>
+              <p>
+                Readiness, incoming guest needs and housekeeping capacity meet
+                in one operating picture.
+              </p>
+              <small>{PUBLIC_HOTEL.displayName} · Demo property</small>
+              <Link href="/product?surface=live#surfaces">
+                Preview the hotel operation →
+              </Link>
+            </div>
           </article>
         </div>
       </section>
@@ -200,57 +229,62 @@ export function Homepage2030() {
           </div>
         </div>
       </section>
-      <section className="rm-section rm-shell" data-nav-theme="light">
-        <div className="rm-section-head">
-          <div>
-            <p className="rm-eyebrow">
-              03 / THE CONNECTION IS THE INTELLIGENCE
-            </p>
-            <h2>
-              One hidden signal.
-              <br />
-              Three parts of the business.
-            </h2>
-          </div>
-          <p>
-            A bestselling dish can have a healthy margin and still consume too
-            much kitchen capacity at peak. RADR connects buying, preparation
-            time, and service demand.
-          </p>
-        </div>
-        <div className="rm-hidden-signal">
-          <div className="rm-signal-image">
-            <Image
-              src={MARKETING_IMAGES.homeFoodPressure.src}
-              alt={MARKETING_IMAGES.homeFoodPressure.alt}
-              fill
-              loading="eager"
-              sizes="(max-width:720px) 100vw, 480px"
-            />
-            <span>BUY × LABOR × SELL</span>
-          </div>
-          <article className="rm-panel">
-            <p className="rm-eyebrow">ILLUSTRATIVE INTELLIGENCE · D-7110</p>
-            <h3>
-              Your bestseller.
-              <br />A hidden service constraint.
-            </h3>
-            <div className="rm-evidence-chain">
-              <span>Supplier evidence</span>
-              <b>→</b>
-              <span>Preparation effort</span>
-              <b>→</b>
-              <span>Service economics</span>
+      <section className="rm-section rm-signal-section" data-nav-theme="dark">
+        <div className="rm-shell">
+          <div className="rm-section-head">
+            <div>
+              <p className="rm-eyebrow">
+                03 / THE CONNECTION IS THE INTELLIGENCE
+              </p>
+              <h2>
+                One hidden signal.
+                <br />
+                Three parts of the business.
+              </h2>
             </div>
             <p>
-              D-7110 connects dish contribution with cold-station minutes and
-              ticket times. Compare keeping the mix with featuring a faster
-              alternative during the peak.
+              A bestselling dish can have a healthy margin and still consume too
+              much kitchen capacity at peak. RADR connects buying, preparation
+              time, and service demand.
             </p>
-            <Link href="/product?surface=intelligence" className="rm-button">
-              Explore Intelligence →
-            </Link>
-          </article>
+          </div>
+          <div className="rm-hidden-signal">
+            <div className="rm-signal-image">
+              <Image
+                src={MARKETING_IMAGES.homeFoodPressure.src}
+                alt={MARKETING_IMAGES.homeFoodPressure.alt}
+                fill
+                loading="eager"
+                sizes="(max-width:720px) 100vw, 480px"
+              />
+              <span>BUY × LABOR × SELL</span>
+            </div>
+            <article className="rm-panel">
+              <p className="rm-eyebrow">ILLUSTRATIVE INTELLIGENCE · D-7110</p>
+              <h3>
+                Your bestseller.
+                <br />A hidden service constraint.
+              </h3>
+              <div className="rm-evidence-chain">
+                <span>Supplier evidence</span>
+                <b>→</b>
+                <span>Preparation effort</span>
+                <b>→</b>
+                <span>Service economics</span>
+              </div>
+              <p>
+                D-7110 connects dish contribution with cold-station minutes and
+                ticket times. Compare keeping the mix with featuring a faster
+                alternative during the peak.
+              </p>
+              <Link
+                href="/product?surface=intelligence#surfaces"
+                className="rm-button"
+              >
+                Explore Intelligence →
+              </Link>
+            </article>
+          </div>
         </div>
       </section>
       <ResearchDiscover />
@@ -266,7 +300,7 @@ export function Homepage2030() {
         </h2>
         <div className="rm-ctas">
           <Link href="/demo" className="rm-button">
-            Step inside RADR →
+            Explore the demo →
           </Link>
           <Link
             href="/value-calculator"

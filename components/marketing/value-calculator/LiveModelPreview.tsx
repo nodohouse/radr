@@ -31,20 +31,20 @@ export function LiveModelPreview({ journey }: Props) {
       <p className="rx30-kicker">Live model preview</p>
       <h2 className="vc2-preview-title">Your Value Map is forming.</h2>
       <p className="vc2-preview-note">
-        Full financial results appear after you finish — not before.
+        Complete your inputs to see a modeled annual range.
       </p>
 
       <div className="vc2-preview-block">
         <span>Operation</span>
         <strong>
-          {journey.vertical ? verticalLabel(journey.vertical) : "—"}
+          {journey.vertical ? verticalLabel(journey.vertical) : "Choose an operation"}
         </strong>
       </div>
 
       <div className="vc2-preview-block">
         <span>Scale</span>
         <strong>
-          {loc ? `${loc.label} locations` : "—"}
+          {loc ? `${loc.label} locations` : "Add your location count"}
           {rev ? ` · ${rev.label}` : ""}
         </strong>
       </div>
@@ -72,7 +72,7 @@ export function LiveModelPreview({ journey }: Props) {
       </div>
 
       <div className="vc2-preview-block">
-        <span>Opportunity signals</span>
+        <span>Signals to examine</span>
         {journey.painUnsure ? (
           <strong>Scan everything</strong>
         ) : pains.length ? (
@@ -82,7 +82,7 @@ export function LiveModelPreview({ journey }: Props) {
             ))}
           </ul>
         ) : (
-          <strong>—</strong>
+          <strong>Select an operating focus</strong>
         )}
       </div>
 

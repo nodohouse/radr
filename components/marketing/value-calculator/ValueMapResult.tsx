@@ -194,12 +194,12 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
             <span>
               {journey.vertical === "hotel" ? "Properties" : "Locations"}
             </span>
-            <strong>{loc?.label ?? "—"}</strong>
+            <strong>{loc?.label ?? "Not provided"}</strong>
           </div>
           <div>
             <span>Annual revenue</span>
             <strong>
-              {rev?.label ?? "—"} · {journey.currency}
+              {rev?.label ?? "Not provided"} · {journey.currency}
             </strong>
           </div>
           {labor ? (
@@ -547,7 +547,7 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
                 <strong>
                   {result.roi.paybackMonthsModeled != null
                     ? `${(result.roi.paybackMonthsModeled / 12).toFixed(1)} years`
-                    : "—"}
+                    : "Not available"}
                 </strong>
               </div>
               <p className="vc-roi-hint">
