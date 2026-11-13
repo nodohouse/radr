@@ -65,44 +65,135 @@ export const COUNTRY_CODES =
   );
 const countries = new Set(COUNTRY_CODES);
 const noPostcode = new Set(["AE", "HK", "MO", "QA"]);
+const placeholderText = new Set([
+  "test",
+  "testing",
+  "test company",
+  "test business",
+  "test person",
+  "example",
+  "example company",
+  "sample",
+  "sample company",
+  "dummy",
+  "fake",
+  "none",
+  "unknown",
+  "n a",
+  "your name",
+  "full name",
+  "first last",
+  "company name",
+  "business name",
+  "your company",
+  "your business",
+  "address",
+  "your address",
+  "test address",
+  "street address",
+  "city",
+  "asdf",
+  "asdfgh",
+  "qwerty",
+  "lorem ipsum",
+]);
+const blockedCheckoutDomains = [
+  "example.com",
+  "example.org",
+  "example.net",
+  "test.com",
+  "mailinator.com",
+  "yopmail.com",
+  "guerrillamail.com",
+  "guerrillamail.net",
+  "10minutemail.com",
+  "10minutemail.net",
+  "temp-mail.org",
+  "temp-mail.io",
+  "tempmail.com",
+  "throwawaymail.com",
+  "sharklasers.com",
+  "maildrop.cc",
+  "getnada.com",
+  "tempail.com",
+  "mohmal.com",
+  "dispostable.com",
+  "mailnesia.com",
+  "trashmail.com",
+];
+
+/** Conservative format checks, never evidence of identity or company ownership. */
+function credibleCheckoutText(value: string) {
+  if (
+    /[<>\p{Cc}\p{Cf}]/u.test(value) ||
+    /https?:\/\/|www\.|@/i.test(value) ||
+    /(.)\1{4,}/u.test(value)
+  )
+    return false;
+  const base = value
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[.'’/_-]/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+  const withoutLegalSuffix = base.replace(
+    /\s+(?:gmbh|ug|ltd|limited|llc|inc|incorporated|bv|ag|sarl|sas|oy)$/u,
+    "",
+  );
+  return !placeholderText.has(base) && !placeholderText.has(withoutLegalSuffix);
+}
+export function credibleCheckoutEmail(value: string) {
+  if (!plausibleRegistrationEmail(value) || /[\p{Cc}\p{Cf}]/u.test(value))
+    return false;
+  const domain = value.trim().split("@")[1]?.toLowerCase() || "";
+  return !blockedCheckoutDomains.some(
+    (blocked) => domain === blocked || domain.endsWith(`.${blocked}`),
+  );
+}
 const text = (min: number, max: number, message: string) =>
   z
     .string()
     .trim()
     .min(min, message)
     .max(max, message)
-    .refine((v) => !/[<>\p{Cc}]/u.test(v), message);
+    .refine(credibleCheckoutText, message);
 export const checkoutCompanySchema = z
   .object({
     fullName: z
       .string()
       .trim()
       .refine(
-        (v) => meaningfulRegistrationText(v, "name"),
+        (v) => meaningfulRegistrationText(v, "name") && credibleCheckoutText(v),
         "Enter your full name.",
       ),
     email: z
       .string()
       .trim()
       .refine(
-        plausibleRegistrationEmail,
+        credibleCheckoutEmail,
         "Enter a valid business email. Temporary and example addresses are not accepted.",
       ),
     company: z
       .string()
       .trim()
       .refine(
-        (v) => meaningfulRegistrationText(v, "company"),
+        (v) =>
+          meaningfulRegistrationText(v, "company") && credibleCheckoutText(v),
         "Enter your legal business name.",
       ),
     registrationNumber: text(
       3,
       80,
       "Enter your business registration or tax reference.",
-    ).refine(
-      (v) => /^[\p{L}\p{N}\s./-]+$/u.test(v) && /\p{N}/u.test(v),
-      "Use the registration or tax reference issued to your business.",
-    ),
+    ).refine((v) => {
+      const compact = v.replace(/[\s./-]/g, "");
+      return (
+        /^[\p{L}\p{N}\s./-]+$/u.test(v) &&
+        /\p{N}/u.test(v) &&
+        !/^(.)\1{3,}$/u.test(compact) &&
+        !/^0+$/u.test(compact)
+      );
+    }, "Use the registration or tax reference issued to your business."),
     country: z
       .string()
       .refine((v) => countries.has(v), "Select your business country."),

@@ -276,6 +276,65 @@
   font-size: 12px;
   line-height: 1.6;
 }
+.ck-required-note {
+  font-size: 12px;
+  line-height: 1.75;
+  color: #45617c;
+  margin: -12px 0 22px;
+}
+.ck-required-status {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbdff0;
+  background: #eff6fd;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #365c7d;
+  margin: 14px 0 10px;
+}
+.ck-verification {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid #cadfed;
+  border-radius: 12px;
+  background: #f0f6fd;
+}
+.ck-verification h3 {
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 600;
+  margin: 0 0 5px;
+  color: #244867;
+}
+.ck-verification > p {
+  font-size: 12px;
+  line-height: 1.75;
+  color: #4a6682;
+  margin: 0 0 12px;
+}
+.ck-verification dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+.ck-verification dl > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 18px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.ck-verification dt {
+  color: #45617b;
+}
+.ck-verification dd {
+  color: #6f4c11;
+  font-weight: 550;
+  margin: 0;
+  text-align: right;
+  flex-shrink: 0;
+}
 .ck-schedules {
   border: 0;
   padding: 0;

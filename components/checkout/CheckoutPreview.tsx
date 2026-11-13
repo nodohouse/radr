@@ -143,6 +143,7 @@ export function CheckoutPreview({
           onChange={(event) => {
             setCompany((v) => ({ ...v, [name]: event.target.value }));
             setTerms(false);
+            setAccountPreviewed(false);
           }}
           onBlur={() => setTouched((v) => ({ ...v, [name]: true }))}
           aria-invalid={Boolean(error)}
@@ -160,6 +161,17 @@ export function CheckoutPreview({
     event.preventDefault();
     if (!companyResult.success || !event.currentTarget.reportValidity()) return;
     setStep(2);
+  }
+
+  function navigateToStep(index: number) {
+    // A disabled control is only a UI hint. Recheck the transition in its handler.
+    if (index > step) return;
+    if (index >= 2 && !checkoutCompanySchema.safeParse(company).success) {
+      setStep(1);
+      return;
+    }
+    if (index === 3 && !accountPreviewed) return;
+    setStep(index);
   }
 
   return (
@@ -227,7 +239,7 @@ export function CheckoutPreview({
                 <button
                   type="button"
                   key={label}
-                  onClick={() => setStep(index)}
+                  onClick={() => navigateToStep(index)}
                   disabled={index > step}
                   aria-current={index === step ? "step" : undefined}
                 >
@@ -407,6 +419,10 @@ export function CheckoutPreview({
                       Use the legal business and billing details that would
                       appear on your invoice.
                     </p>
+                    <p className="ck-required-note">
+                      All fields are required unless marked Optional. Use the
+                      details issued to your business.
+                    </p>
                     <div className="ck-form-grid">
                       {field("fullName", "Your full name", {
                         autocomplete: "name",
@@ -439,6 +455,7 @@ export function CheckoutPreview({
                               country: event.target.value,
                             }));
                             setTerms(false);
+                            setAccountPreviewed(false);
                           }}
                           onBlur={() =>
                             setTouched((v) => ({ ...v, country: true }))
@@ -489,16 +506,23 @@ export function CheckoutPreview({
                       <input
                         type="checkbox"
                         checked={company.authorized}
-                        onChange={(event) =>
+                        onChange={(event) => {
                           setCompany((v) => ({
                             ...v,
                             authorized: event.target.checked,
-                          }))
-                        }
+                          }));
+                          setTerms(false);
+                          setAccountPreviewed(false);
+                        }}
                         required
                       />
                       <span>I am authorized to act for this business.</span>
                     </label>
+                    <p className="ck-required-status" role="status">
+                      {companyResult.success
+                        ? "Required details complete. Identity and business verification are still pending."
+                        : "Complete every required field with valid details and confirm your authority to continue."}
+                    </p>
                     <p className="ck-small">
                       These checks validate format and completeness. They do not
                       verify company registration, identity or VAT status.
@@ -643,6 +667,30 @@ export function CheckoutPreview({
                         Edit details
                       </button>
                     </div>
+                    <section
+                      className="ck-verification"
+                      aria-label="Verification status"
+                    >
+                      <h3>Verification is still required.</h3>
+                      <p>
+                        Complete fields do not prove identity or ownership. A
+                        real purchase must also pass these checks.
+                      </p>
+                      <dl>
+                        <div>
+                          <dt>Email ownership</dt>
+                          <dd>Not verified</dd>
+                        </div>
+                        <div>
+                          <dt>Business and representative</dt>
+                          <dd>Not verified</dd>
+                        </div>
+                        <div>
+                          <dt>Payment authorization</dt>
+                          <dd>Not connected</dd>
+                        </div>
+                      </dl>
+                    </section>
                     <div className="ck-payment-review">
                       <CardIcon />
                       <div>

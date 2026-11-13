@@ -170,7 +170,30 @@
       "Recompute amounts server-side and reject browser price/currency input",
       "Use provider-hosted card collection; do not send raw PAN/CVC to RADR",
       "Verify signed, idempotent payment webhooks before granting entitlements",
-      "Finalize merchant identity, limits, taxes, renewal/cancellation/refund and contract consent terms"
-    ]
+      "Finalize merchant identity, limits, taxes, renewal/cancellation/refund and contract consent terms",
+      "Verify business email ownership through an expiring server-issued link; repeating an address or matching a domain is not proof",
+      "Match legal name, registration/tax reference and address to an authoritative register or reviewed business evidence; send mismatches to manual review",
+      "Verify representative authority; never trust the authority checkbox alone as evidence",
+      "Use provider risk assessment, payment authentication such as 3-D Secure when required, attempt limits and monitoring; no promise of zero fraud",
+      "Enforce all validation and purchase prerequisites on the server; a forged browser value or client verification flag must never authorize payment"
+    ],
+    "mandatoryFields": [
+      "Full name",
+      "Business email",
+      "Legal business name",
+      "Business registration or tax reference",
+      "Country",
+      "Billing street address",
+      "City",
+      "Postal code where applicable",
+      "Authority confirmation"
+    ],
+    "optionalFields": [
+      "VAT ID for businesses that are not VAT-registered",
+      "Postal code in the explicitly supported countries without postcodes"
+    ],
+    "inputQualityChecks": "Reject known placeholders including common legal-suffix variants, repeated junk/all-zero references, URLs in identity/address fields, hidden formatting characters, known disposable or reserved email domains and their subdomains. Conservative checks do not prove identity.",
+    "transitionGuards": "Step navigation and company submission recheck prerequisites in their handlers, independently of disabled/required HTML attributes. These are preview checks, not a server authorization boundary.",
+    "verificationStatus": "Payment review explicitly shows email ownership and business/representative as not verified, and payment authorization as not connected."
   }
 }

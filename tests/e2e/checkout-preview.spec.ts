@@ -131,6 +131,11 @@ for (const [width, height] of [
     await expect(
       page.getByLabel("Card number", { exact: true }),
     ).toBeDisabled();
+    await expect(page.locator(".ck-verification dd")).toHaveText([
+      "Not verified",
+      "Not verified",
+      "Not connected",
+    ]);
     await expect(
       page.getByLabel("Expiry date", { exact: true }),
     ).toBeDisabled();
@@ -250,4 +255,102 @@ test("empty, removed and invalid baskets recover without inventing an order", as
   }
   await page.goto("/en/checkout?plan=enterprise");
   await expect(page).toHaveURL(/contact\?plan=enterprise/);
+});
+
+test("every required company field and authority confirmation blocks advancement when removed", async ({
+  page,
+}) => {
+  await page.goto("/en/checkout?plan=start&billing=annual&locations=1");
+  await page
+    .getByRole("button", { name: "Continue to company details" })
+    .click();
+  await fillCompany(page);
+  const next = page.getByRole("button", { name: "Continue to account" });
+  for (const [id, value] of [
+    ["fullName", "Elena Nord"],
+    ["email", "elena@northstar-hospitality.com"],
+    ["company", "Northstar Hospitality GmbH"],
+    ["registrationNumber", "HRB 45123"],
+    ["address", "Seestrasse 24"],
+    ["city", "Berlin"],
+    ["postalCode", "10115"],
+  ]) {
+    const input = page.locator(`#ck-${id}`);
+    await expect(input).toHaveAttribute("required", "");
+    await input.fill(" ");
+    await expect(next).toBeDisabled();
+    await input.fill(value);
+    await expect(next).toBeEnabled();
+  }
+  await page.locator("#ck-country").selectOption("");
+  await expect(next).toBeDisabled();
+  await page.locator("#ck-country").selectOption("DE");
+  const authority = page.getByRole("checkbox", {
+    name: "I am authorized to act for this business.",
+  });
+  await authority.uncheck();
+  await expect(next).toBeDisabled();
+  await authority.check();
+  await expect(next).toBeEnabled();
+  await expect(page.locator("#ck-vatId")).not.toHaveAttribute("required", "");
+  for (const [id, junk, valid] of [
+    ["company", "Test Company GmbH", "Northstar Hospitality GmbH"],
+    ["email", "buyer@sub.mailinator.com", "elena@northstar-hospitality.com"],
+    ["registrationNumber", "000000", "HRB 45123"],
+    ["address", "https://fake.example", "Seestrasse 24"],
+  ]) {
+    await page.locator(`#ck-${id}`).fill(junk);
+    await expect(next).toBeDisabled();
+    await page.locator(`#ck-${id}`).fill(valid);
+    await expect(next).toBeEnabled();
+  }
+  await next.click();
+  await page.getByRole("button", { name: "Preview payment step" }).click();
+  await page.locator(".ck-check input").check();
+  await page.getByRole("button", { name: "Edit details" }).click();
+  await page.locator("#ck-email").fill("changed@northstar-hospitality.com");
+  await expect(page.locator(".ck-steps small")).toHaveCount(0);
+  await page.getByRole("button", { name: "Continue to account" }).click();
+  await expect(page.getByLabel("Account email")).toHaveValue(
+    "changed@northstar-hospitality.com",
+  );
+  await page.getByRole("button", { name: "Preview payment step" }).click();
+  await expect(page.locator(".ck-check input")).not.toBeChecked();
+});
+
+test("removing disabled and required attributes cannot skip the preview checks", async ({
+  page,
+}) => {
+  const errors: string[] = [],
+    posts: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("request", (request) => {
+    if (request.method() === "POST") posts.push(request.url());
+  });
+  await page.goto("/en/checkout?plan=start&billing=annual&locations=1");
+  for (const index of [2, 3]) {
+    const control = page.locator(".ck-steps button").nth(index);
+    await control.evaluate(
+      (node) => ((node as HTMLButtonElement).disabled = false),
+    );
+    await control.click();
+    await expect(page.locator("#ck-step-title")).toHaveText("Your basket.");
+  }
+  await page
+    .getByRole("button", { name: "Continue to company details" })
+    .click();
+  await page.locator(".ck-main form").evaluate((node) => {
+    const form = node as HTMLFormElement;
+    form.noValidate = true;
+    form
+      .querySelectorAll("[required]")
+      .forEach((field) => field.removeAttribute("required"));
+    (
+      form.querySelector('button[type="submit"]') as HTMLButtonElement
+    ).disabled = false;
+  });
+  await page.getByRole("button", { name: "Continue to account" }).click();
+  await expect(page.locator("#ck-step-title")).toHaveText("Your company.");
+  expect(posts).toEqual([]);
+  expect(errors).toEqual([]);
 });

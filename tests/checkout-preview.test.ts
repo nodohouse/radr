@@ -82,6 +82,43 @@ describe("Checkout preview boundaries", () => {
           .success,
       ).toBe(false);
   });
+  it.each([
+    { company: "Test Company GmbH" },
+    { company: "Example Ltd" },
+    { company: "Northstar\u200b Hospitality" },
+    { fullName: "Elena\u202e Nord" },
+    { address: "aaaaaa" },
+    { address: "https://billing.example" },
+    { city: "www.fake-city.com" },
+    { registrationNumber: "000-000" },
+    { registrationNumber: "11111111" },
+    { email: "buyer@sub.mailinator.com" },
+    { email: "buyer@sub.example.com" },
+    { email: "buyer@sharklasers.com" },
+  ])(
+    "rejects an obvious placeholder or obscured identity field: %j",
+    (changes) => {
+      expect(
+        checkoutCompanySchema.safeParse({ ...company, ...changes }).success,
+      ).toBe(false);
+    },
+  );
+  it("does not mistake a plausible format for proof or reject legitimate names containing test", () => {
+    expect(
+      checkoutCompanySchema.safeParse({
+        ...company,
+        company: "Test Kitchen Ltd",
+        email: "director@ops.northstar-hospitality.com",
+      }).success,
+    ).toBe(true);
+    // A small operator may legitimately use a public email service. Ownership still needs verification.
+    expect(
+      checkoutCompanySchema.safeParse({
+        ...company,
+        email: "elena.nord@gmail.com",
+      }).success,
+    ).toBe(true);
+  });
   it("requires a coherent allowlisted basket rather than repairing a tampered plan silently", () => {
     expect(parseBasketSelection({ plan: "start" })).toEqual({
       plan: "start",
