@@ -13,6 +13,7 @@ import "@/app/pricing-journey.css";
 import "@/app/marketing-2030.css";
 import "@/app/brand-takeover.css";
 import "@/app/marketing-premium-pages.css";
+import "@/app/pricing-compact.css";
 
 // Proposed launch packages. Selection remains a setup preview, not checkout.
 const PLANS = [
@@ -250,54 +251,21 @@ export function Pricing2030({
                   Pricing · standard monthly packages
                 </p>
                 <h1 id="pricing-title">
-                  One platform.
-                  <br />
-                  Simple <em>plans.</em>
+                  One platform. <em>Simple plans.</em>
                 </h1>
                 <p className="rm-price-lead">
-                  Choose the location capacity you need. Follow the guided setup
-                  at your own pace. Explore the free demo before deciding which
-                  plan fits.
+                  Choose your location capacity. Every package includes
+                  evidence, Decisions and outcome tracking.
                 </p>
-                <div className="rx30-ctas">
-                  <Link href="#plans" className="rx30-btn rx30-btn-primary">
-                    Compare the plans <span aria-hidden="true">↓</span>
-                  </Link>
-                  <Link href="/demo" className="rx30-btn rm-price-secondary">
-                    Explore the free demo →
-                  </Link>
-                </div>
               </div>
-              <aside
-                className="rm-price-quote"
-                aria-label="How the packages work"
-              >
-                <FrozenRadrLogo variant="mark" theme="dark" width={36} />
-                <p className="rm-price-overline">Built for self-guided setup</p>
-                <h2>
-                  Choose a plan.
-                  <br />
-                  Make your move.
-                </h2>
-                <p>
-                  One subscription for the product. Guided setup and clear
-                  documentation, with your team in control.
-                </p>
-                <ol>
-                  <li>
-                    <span>01</span>Clear monthly location capacity
-                  </li>
-                  <li>
-                    <span>02</span>Defined structured data allowance
-                  </li>
-                  <li>
-                    <span>03</span>Guided setup, without a setup fee
-                  </li>
-                </ol>
-                <Link href="/value-calculator">
-                  Prepare your Value Map <span aria-hidden="true">→</span>
+              <nav className="rm-price-jumps" aria-label="Pricing shortcuts">
+                <Link href="#compare">
+                  Compare all features <span aria-hidden="true">↓</span>
                 </Link>
-              </aside>
+                <Link href="/demo">
+                  Explore the free demo <span aria-hidden="true">→</span>
+                </Link>
+              </nav>
             </div>
           </section>
           <section
@@ -307,22 +275,9 @@ export function Pricing2030({
             data-nav-theme="light"
           >
             <div className="rx30-shell">
-              <div className="rm-section-heading">
-                <div>
-                  <p className="rx30-kicker">Find your starting point</p>
-                  <h2 id="plan-title" className="rx30-h2">
-                    Your size.
-                    <br />
-                    The same Decision layer.
-                  </h2>
-                </div>
-                <p>
-                  Every package includes evidence, Decisions and outcome
-                  tracking. Larger plans add location capacity and comparisons,
-                  rather than a consulting engagement.
-                </p>
-              </div>
-              <PricingFitGuide />
+              <h2 id="plan-title" className="rm-plans-label">
+                Choose your package
+              </h2>
               <div className="rm-plan-grid">
                 {PLANS.map((plan) => (
                   <article
@@ -332,44 +287,45 @@ export function Pricing2030({
                     data-featured={plan.id === "expand" ? "true" : undefined}
                   >
                     <div className="rm-plan-top">
-                      <span>{plan.number}</span>
+                      <h3>{plan.name}</h3>
                       <span>{plan.tag}</span>
                     </div>
-                    <div className="rm-plan-scale" aria-hidden="true">
-                      {[0, 1, 2].map((level) => (
-                        <i
-                          key={level}
-                          data-on={level <= PLANS.indexOf(plan) || undefined}
-                        />
-                      ))}
-                    </div>
-                    <h3>{plan.name}</h3>
                     <p className="rm-plan-headline">{plan.headline}</p>
-                    <p className="rm-plan-audience">{plan.audience}</p>
                     <div className="rm-plan-price">
                       <strong>{plan.price}</strong>
                       <span>{plan.priceNote}</span>
                     </div>
-                    <ul
-                      className="rm-plan-highlights"
-                      aria-label={`${plan.name} package highlights`}
-                    >
-                      {plan.highlights.map((highlight) => (
-                        <li key={highlight}>
-                          <svg viewBox="0 0 20 20" aria-hidden="true">
-                            <path
-                              d="m5 10 3.2 3.2L15 6.5"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.8"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="rm-plan-quick-feature">
+                      {plan.id === "start"
+                        ? plan.highlights[0]
+                        : plan.highlights[2]}
+                    </p>
+                    <details className="rm-plan-inclusions">
+                      <summary>
+                        What’s included <span aria-hidden="true">+</span>
+                      </summary>
+                      <ul
+                        className="rm-plan-highlights"
+                        aria-label={`${plan.name} package highlights`}
+                      >
+                        {plan.highlights.map((highlight) => (
+                          <li key={highlight}>
+                            <svg viewBox="0 0 20 20" aria-hidden="true">
+                              <path
+                                d="m5 10 3.2 3.2L15 6.5"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.8"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                            {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="rm-plan-audience">{plan.audience}</p>
+                    </details>
                     <PlanLink className="rx30-btn" href={nextHref(plan.id)}>
                       {`Preview ${plan.name}`}
                       <span aria-hidden="true">→</span>
@@ -383,6 +339,53 @@ export function Pricing2030({
                 the packages and preview setup now. No payment or subscription
                 starts here.
               </p>
+              <div className="rm-price-tools">
+                <details className="rm-price-tool-fit">
+                  <summary>
+                    Help me choose by location count{" "}
+                    <span aria-hidden="true">+</span>
+                  </summary>
+                  <PricingFitGuide />
+                </details>
+                <details className="rm-price-tool-setup">
+                  <summary>
+                    How the packages and setup work{" "}
+                    <span aria-hidden="true">+</span>
+                  </summary>
+                  <aside
+                    className="rm-price-quote"
+                    aria-label="How the packages work"
+                  >
+                    <FrozenRadrLogo variant="mark" theme="dark" width={36} />
+                    <p className="rm-price-overline">
+                      Built for self-guided setup
+                    </p>
+                    <h2>
+                      Choose a plan.
+                      <br />
+                      Make your move.
+                    </h2>
+                    <p>
+                      One subscription for the product. Guided setup and clear
+                      documentation, with your team in control.
+                    </p>
+                    <ol>
+                      <li>
+                        <span>01</span>Clear monthly location capacity
+                      </li>
+                      <li>
+                        <span>02</span>Defined structured data allowance
+                      </li>
+                      <li>
+                        <span>03</span>Guided setup, without a setup fee
+                      </li>
+                    </ol>
+                    <Link href="/value-calculator">
+                      Prepare your Value Map <span aria-hidden="true">→</span>
+                    </Link>
+                  </aside>
+                </details>
+              </div>
             </div>
           </section>
           <section

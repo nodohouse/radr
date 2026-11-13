@@ -71,6 +71,7 @@ test("a buyer matches location capacity without being quoted a price", async ({
   page,
 }) => {
   await page.goto("/en/pricing");
+  await page.locator(".rm-price-tool-fit > summary").click();
   const input = page.getByLabel("Number of operating locations");
   for (const [count, copy] of [
     ["1", "Core fits 1 location"],
