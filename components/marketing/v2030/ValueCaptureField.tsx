@@ -129,6 +129,17 @@ export function ValueCaptureField({
             <stop stopColor="#00edaa" stopOpacity=".17" />
             <stop offset="1" stopColor="#00edaa" stopOpacity="0" />
           </radialGradient>
+          <radialGradient id={`${id}-scan-fill`}>
+            <stop offset="0" stopColor="#51d8ff" stopOpacity="0" />
+            <stop offset=".35" stopColor="#168eff" stopOpacity=".08" />
+            <stop offset=".76" stopColor="#1aafff" stopOpacity=".22" />
+            <stop offset="1" stopColor="#45e9dc" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id={`${id}-scan-edge`} x1="0" y1="1" x2="1" y2="0">
+            <stop stopColor="#00f59a" stopOpacity="0" />
+            <stop offset=".55" stopColor="#00f59a" stopOpacity=".58" />
+            <stop offset="1" stopColor="#8cefff" stopOpacity="0" />
+          </linearGradient>
           <filter
             id={`${id}-glow`}
             x="-100%"
@@ -139,6 +150,43 @@ export function ValueCaptureField({
             <feGaussianBlur stdDeviation="3" />
           </filter>
         </defs>
+        <g className="rvc-radar" data-radar-scan="ambient">
+          <g className="rvc-radar-grid" fill="none" stroke="#7dcaff">
+            <circle cx="615" cy="360" r="170" />
+            <circle cx="615" cy="360" r="330" />
+            <circle cx="615" cy="360" r="500" />
+            <circle cx="615" cy="360" r="510" strokeDasharray="1 27" />
+            <path d="M115 360H1115M615 -140V860" />
+          </g>
+          <g className="rvc-radar-sweep">
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="0 615 360"
+              to="360 615 360"
+              dur="14s"
+              repeatCount="indefinite"
+            />
+            <path
+              d="M615 360L703.56 -142.25A510 510 0 0 1 1077.22 144.46Z"
+              fill={`url(#${id}-scan-fill)`}
+            />
+            <path
+              className="rvc-radar-leading"
+              d="M615 360L1077.22 144.46"
+              fill="none"
+              stroke={`url(#${id}-scan-edge)`}
+              strokeWidth="2"
+            />
+            <path
+              d="M1039.62 114.84A490 490 0 0 1 1059.09 152.91"
+              fill="none"
+              stroke="#00f59a"
+              strokeWidth="2"
+              opacity=".55"
+            />
+          </g>
+        </g>
         <ellipse
           cx="615"
           cy="550"

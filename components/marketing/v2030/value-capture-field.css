@@ -122,3 +122,37 @@
     --rvc-caption-offset: 27px;
   }
 }
+
+/* Vector radar shares the pausable SVG clock with the falling signals. */
+.rvc-radar {
+  pointer-events: none;
+}
+.rvc-radar-grid {
+  stroke-width: 0.7;
+  opacity: 0.18;
+}
+.rvc-radar-grid circle:last-of-type {
+  opacity: 0.65;
+}
+.rvc-radar-grid path {
+  opacity: 0.24;
+}
+.rvc-field[data-reduced="true"] .rvc-radar-sweep {
+  display: none;
+}
+.rvc-field[data-reduced="true"] .rvc-radar-grid {
+  opacity: 0.1;
+}
+@media (max-width: 720px) {
+  .rvc-radar-grid {
+    opacity: 0.13;
+  }
+  .rvc-radar-sweep {
+    opacity: 0.8;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rvc-radar-sweep {
+    display: none;
+  }
+}
