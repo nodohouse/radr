@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Pricing2030 } from "@/components/marketing/v2030/Pricing2030";
+import { billingChoice } from "@/lib/marketing/publicPricing";
 import { buildAlternatesForLocale } from "@/i18n/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ from?: string; vertical?: string }>;
+  searchParams: Promise<{ from?: string; vertical?: string; billing?: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -31,6 +32,7 @@ export default async function PricingPage({ params, searchParams }: Props) {
   const search = await searchParams;
   return (
     <Pricing2030
+      billing={billingChoice(search.billing)}
       fromDemo={search.from === "demo"}
       vertical={search.vertical === "hotel" ? "hotel" : "restaurant"}
     />

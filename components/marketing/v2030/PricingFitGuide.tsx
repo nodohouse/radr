@@ -5,15 +5,20 @@ import { planForLocations, planName } from "@/lib/marketing/conversionJourney";
 import {
   standardPlanQuote,
   formatPublicPrice,
+  type BillingChoice,
 } from "@/lib/marketing/publicPricing";
 import "@/app/buyer-guide.css";
-export function PricingFitGuide() {
+export function PricingFitGuide({
+  billing = "annual",
+}: {
+  billing?: BillingChoice;
+}) {
   const id = useId();
   const [text, setText] = useState("");
   const count = /^\d{1,5}$/.test(text) ? Number(text) : NaN;
   const valid = Number.isSafeInteger(count) && count >= 1;
   const plan = valid ? planForLocations(count) : null;
-  const quote = valid ? standardPlanQuote(count) : null;
+  const quote = valid ? standardPlanQuote(count, billing) : null;
   return (
     <section className="br-plan-fit" aria-labelledby={`${id}-title`}>
       <div>
@@ -54,7 +59,10 @@ export function PricingFitGuide() {
                 {count === 1 ? "location" : "locations"}.
               </strong>
               <p>
-                {formatPublicPrice(quote.monthlyTotal)}/month, billed monthly.{" "}
+                {formatPublicPrice(quote.monthlyTotal)}/month
+                {billing === "annual"
+                  ? " equivalent, paid yearly upfront."
+                  : ", billed monthly."}{" "}
                 {formatPublicPrice(quote.commitmentTotal)} over the 12-month
                 commitment, excluding VAT. Usage limits apply.
               </p>

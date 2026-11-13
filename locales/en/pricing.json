@@ -1,6 +1,6 @@
 {
   "metaTitle": "Pricing | RADR",
-  "metaDescription": "RADR Core €249/month for one location. Expand €199/location/month for 2–5 locations, minimum €398/month. 12-month commitment, billed monthly, excluding VAT. Enterprise: contact sales.",
+  "metaDescription": "RADR Core €249/month equivalent paid yearly (€2,988 upfront), or €299/month. Expand €199/location/month equivalent paid yearly, or €239 monthly. Both options: 12-month commitment, excluding VAT. Enterprise: contact sales.",
   "kicker": "Pricing",
   "heroTitleLine1": "One platform. Clear pricing.",
   "heroTitleLine2": "",
@@ -31,8 +31,8 @@
     "title": "Core",
     "lead": "Your daily operation. One clear picture.",
     "body": "For an independent restaurant, hotel or hospitality venue. Follow the standard guided setup with your own supported data files.",
-    "priceLabel": "€249/month",
-    "priceSub": "12-month commitment · €2,988 total · excl. VAT",
+    "priceLabel": "€249/month equivalent paid yearly, or €299/month",
+    "priceSub": "12-month commitment · €2,988 paid upfront or €3,588 in monthly instalments · excl. VAT",
     "cta": "Preview Core",
     "points": [
       "One location",
@@ -47,7 +47,7 @@
     "verb": "Expand",
     "line": "Up to five locations, shared context and location comparisons.",
     "audience": "For growing hospitality groups.",
-    "priceLabel": "€199/location/month · minimum 2",
+    "priceLabel": "€199/location/month equivalent paid yearly, or €239 monthly · minimum 2",
     "cta": "Preview Expand",
     "features": [
       "Everything in Core, across five locations",

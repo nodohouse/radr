@@ -31,6 +31,48 @@
   gap: 8px 20px;
   padding-bottom: 2px;
 }
+.radr.rm-pricing .rx30 .rm-price-actions {
+  display: grid;
+  gap: 9px;
+  justify-items: end;
+}
+.radr.rm-pricing .rx30 .rm-billing-choice {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: #ffffff12;
+  border: 1px solid #ffffff40;
+  border-radius: 12px;
+}
+.radr.rm-pricing .rx30 .rm-billing-choice a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  color: #e9f5ff;
+  padding: 10px 13px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 550;
+  text-decoration: none;
+  line-height: 1.5;
+}
+.radr.rm-pricing .rx30 .rm-billing-choice a[aria-current="true"] {
+  background: #f3f9ff;
+  color: #143b66;
+}
+.radr.rm-pricing .rx30 .rm-billing-choice span {
+  background: #baf5dc;
+  color: #07513a;
+  border-radius: 10px;
+  padding: 2px 6px;
+  font-size: 9px;
+}
+.radr.rm-pricing .rx30 .rm-billing-choice a:focus-visible {
+  outline: 3px solid #9affd1;
+  outline-offset: 3px;
+}
 .radr.rm-pricing .rx30 .rm-price-jumps a {
   display: inline-flex;
   align-items: center;
@@ -107,6 +149,8 @@
   gap: 4px;
   min-height: 132px;
   align-content: start;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
 }
 .radr.rm-pricing .rx30 .rm-plan-price strong {
   font-size: 34px;
@@ -118,6 +162,9 @@
   font-size: 12px;
   line-height: 1.5;
   color: #47627f;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .radr.rm-pricing .rx30 .rm-plan-price .rm-plan-term {
   font-weight: 600;
@@ -256,6 +303,9 @@
   border-radius: 8px;
 }
 @media (max-width: 1100px) {
+  .radr.rm-pricing .rx30 .rm-price-actions {
+    justify-items: start;
+  }
   .radr.rm-pricing .rx30 .rm-price-hero-grid {
     grid-template-columns: 1fr;
     gap: 10px;

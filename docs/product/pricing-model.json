@@ -1,7 +1,7 @@
 {
   "reviewedAt": "2026-11-13",
-  "status": "Published Core and Expand prices with a 12-month commitment, billed monthly. Enterprise is contact sales. Payments, accounts and paid entitlements remain inactive.",
-  "decision": "Core €249/month for one location; Expand €199/location/month for 2–5 locations (minimum €398/month); Enterprise contact sales for 6+ locations or requirements outside standard usage. All prices exclude VAT. Twelve-month commitment, paid in monthly instalments. No annual-prepayment discount advertised.",
+  "status": "Published yearly-upfront and higher monthly-instalment prices. Both options require 12 months. Authorized interactive basket/checkout preview; accounts, payment and entitlements remain inactive.",
+  "decision": "Core: €2,988 paid yearly (€249/month equivalent), or €299/month for 12 months (€3,588). Expand: €2,388/location paid yearly (€199/location/month equivalent), or €239/location/month for 12 months, minimum two locations. Enterprise contact sales. Prices exclude VAT.",
   "rationale": [
     "Free fictional exploration supports evaluation without unpaid implementation work.",
     "Two publicly priced plans support self-guided adoption. Larger footprints require a sales discussion without promising bespoke implementation or a staffed service.",
@@ -9,7 +9,7 @@
     "Guided setup and documentation are included; managed setup, migration and custom development are not offered as add-ons in these packages.",
     "Evidence review and customer control remain common to every plan.",
     "Usage and processing costs need explicit budgets. No unlimited media processing or support is promised.",
-    "The user requested visible pricing and an annual commitment with monthly payments on 2026-11-13, superseding the earlier pending-price instruction. Published prices follow the preceding €249/€199 recommendation; market and cost validation are still required."
+    "The user explicitly authorized a browser-only checkout preview and confirmed both schedules have a 12-month commitment, with yearly upfront payments cheaper. Yearly rates preserve the preceding prices; monthly instalments increase to €299 Core and €239/location Expand."
   ],
   "costFloor": {
     "recurring": "minimum monthly-equivalent subscription = monthly direct delivery cost / (1 - target recurring gross margin)",
@@ -84,7 +84,7 @@
     "Validate cost per account and per included location at typical and high usage.",
     "Do not treat founder support or setup time as zero because there is no employee payroll.",
     "Record allowance alone does not control model, media or refresh costs. Enforce resource budgets before paid activation.",
-    "No extra annual-prepayment discount is advertised. The published prices already require a 12-month commitment; confirm renewal and cancellation terms before real purchase.",
+    "Yearly upfront pricing is lower than monthly instalments. Show the full upfront amount, minimum locations, 12-month commitment, total contract value, VAT treatment and actual monetary savings before purchase.",
     "Do not add bespoke support or implementation promises to close a sale without revising the operating model.",
     "Measure conversion, setup completion and support requests alongside margin."
   ],
@@ -100,7 +100,13 @@
       "minimumMonthlyTotal": 249,
       "minimumCommitmentTotal": 2988,
       "commitmentMonths": 12,
-      "monthlyStructuredRecords": null
+      "monthlyStructuredRecords": null,
+      "yearlyUpfrontPerLocation": 2988,
+      "monthlyInstalmentPerLocation": 299,
+      "minimumMonthlyInstalment": 299,
+      "minimumInstalmentCommitmentTotal": 3588,
+      "defaultBilling": "annual",
+      "monthlyPricePerLocationMeaning": "Monthly equivalent for yearly upfront payment"
     },
     {
       "id": "expand",
@@ -112,7 +118,13 @@
       "minimumMonthlyTotal": 398,
       "minimumCommitmentTotal": 4776,
       "commitmentMonths": 12,
-      "monthlyStructuredRecords": null
+      "monthlyStructuredRecords": null,
+      "yearlyUpfrontPerLocation": 2388,
+      "monthlyInstalmentPerLocation": 239,
+      "minimumMonthlyInstalment": 478,
+      "minimumInstalmentCommitmentTotal": 5736,
+      "defaultBilling": "annual",
+      "monthlyPricePerLocationMeaning": "Monthly equivalent for yearly upfront payment"
     },
     {
       "id": "enterprise",
@@ -125,7 +137,7 @@
   ],
   "recurringModel": {
     "structure": "Per-location subscription with two publicly priced plans; Enterprise scope and price agreed with sales.",
-    "billing": "12-month commitment with monthly instalments. Prices exclude VAT; no additional annual-prepayment discount.",
+    "billing": "Both options: 12-month commitment. Yearly upfront at €249 Core/month equivalent and €199 Expand/location/month equivalent. Monthly instalments at €299 Core and €239/location Expand. No cancel-monthly plan is offered.",
     "setup": "Standard guided setup included without a setup fee",
     "support": "Documentation and product guidance. No CSM, staffed onboarding or SLA promise.",
     "growth": "Expand charges €199 per contracted location/month for 2–5 locations. Enterprise is contact sales for 6+ or nonstandard usage. Contract, upgrade, renewal and cancellation rules require review before activation.",
@@ -137,5 +149,28 @@
     "expandMonthlyDirectCostCeilingPerLocationEUR": 39.8,
     "meaning": "Illustrative cost ceilings at the target gross margin, including usage, infrastructure, payment fees and valued delivery/support time; not measured costs or guaranteed profit.",
     "commercialReadiness": "Usage allowances, merchant identity, contract terms, real authentication, email and payment services must be ready before paid activation."
+  },
+  "checkoutPreview": {
+    "authorizedByUser": true,
+    "flow": [
+      "Basket",
+      "Company",
+      "Account preview",
+      "Payment preview"
+    ],
+    "personalDetailsStorage": "In current tab React memory only; never sent to an API, localStorage or sessionStorage. Cleared on reload or removal. URL persists only plan, billing, locations and optional demo vertical.",
+    "accountState": "Not signed in. Create/sign-in controls are illustrated, password inputs disabled. No account or session is created.",
+    "cardState": "Disabled fields. No card collection, no payment request, no order or entitlement. Purchase button always disabled.",
+    "businessValidation": "Completeness and conservative format validation, not company registry, identity or VAT verification.",
+    "activationRequirements": [
+      "Connect persistent identity storage and email verification",
+      "Connect Stripe and configure server-owned prices for both schedules",
+      "Verify real session, verified email, organization membership and purchasing permission server-side",
+      "Validate company identity and VAT treatment as applicable",
+      "Recompute amounts server-side and reject browser price/currency input",
+      "Use provider-hosted card collection; do not send raw PAN/CVC to RADR",
+      "Verify signed, idempotent payment webhooks before granting entitlements",
+      "Finalize merchant identity, limits, taxes, renewal/cancellation/refund and contract consent terms"
+    ]
   }
 }

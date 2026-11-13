@@ -106,7 +106,7 @@ test("homepage entry, hotel context and pricing scope remain clear", async ({
   await expect(page.locator(".rm-compare-table tbody tr")).toHaveCount(10);
   await expect(
     page.locator(".rm-plan-card").first().getByRole("link"),
-  ).toHaveAttribute("href", /signup/);
+  ).toHaveAttribute("href", /checkout/);
 });
 
 test("standard packages publish annual commitment prices and keep setup self-guided", async ({
@@ -131,7 +131,7 @@ test("standard packages publish annual commitment prices and keep setup self-gui
     "Contact sales",
   ]);
   await expect(page.locator(".rm-availability")).toContainText(
-    "12 months. Clear monthly payments.",
+    "Two ways to pay. One 12-month commitment.",
   );
   await expect(
     page.locator(
@@ -145,12 +145,15 @@ test("standard packages publish annual commitment prices and keep setup self-gui
   for (const [index, id] of ["start", "expand"].entries()) {
     await expect(
       page.locator(".rm-plan-card").nth(index).getByRole("link"),
-    ).toHaveAttribute("href", `/en/signup?intent=workspace&plan=${id}`);
+    ).toHaveAttribute(
+      "href",
+      `/en/checkout?plan=${id}&billing=annual&locations=${id === "start" ? 1 : 2}`,
+    );
   }
   for (const [question, answer] of [
     [
-      "How does annual commitment with monthly billing work?",
-      "Monthly billing does not mean a cancel-anytime monthly contract",
+      "How do yearly and monthly payments compare?",
+      "Monthly instalments do not mean a cancel-anytime monthly contract",
     ],
     ["Is there a separate setup fee?", "included in Core and Expand"],
     [

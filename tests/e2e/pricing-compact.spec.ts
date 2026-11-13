@@ -109,13 +109,11 @@ test("all package inclusions are permanently displayed with their plan actions",
     await expect(card.locator(".rm-plan-highlights")).toBeVisible();
     await expect(
       card.getByRole("link", {
-        name: name === "Enterprise" ? "Contact sales" : `Preview ${name}`,
+        name: name === "Enterprise" ? "Contact sales" : `Add ${name} to basket`,
       }),
     ).toHaveAttribute(
       "href",
-      name === "Enterprise"
-        ? /contact\?plan=enterprise/
-        : /signup\?intent=workspace&plan=/,
+      name === "Enterprise" ? /contact\?plan=enterprise/ : /checkout\?plan=/,
     );
     await expect(card.locator(".rm-plan-audience")).toBeVisible();
   }
@@ -185,17 +183,17 @@ test("annual totals and the two-location minimum are visible before choosing a p
   await page.goto("/en/pricing");
   const cards = page.locator(".rm-plan-card");
   await expect(cards.nth(0).locator(".rm-plan-annual")).toHaveText(
-    "€2,988 total over 12 months · excl. VAT",
+    "€2,988 billed yearly · save €600/year · excl. VAT",
   );
   await expect(cards.nth(1).locator(".rm-plan-price-note")).toHaveText(
     "€199 per location/month · minimum 2",
   );
   await expect(cards.nth(1).locator(".rm-plan-annual")).toHaveText(
-    "From €4,776 total over 12 months · excl. VAT",
+    "From €4,776 billed yearly · save €960/year · excl. VAT",
   );
   for (const index of [0, 1])
     await expect(cards.nth(index).locator(".rm-plan-term")).toHaveText(
-      "12-month commitment · billed monthly",
+      "12-month commitment · paid upfront",
     );
   await expect(
     cards.nth(2).getByRole("link", { name: "Contact sales" }),

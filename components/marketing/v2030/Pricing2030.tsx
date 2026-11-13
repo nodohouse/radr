@@ -7,13 +7,13 @@ import {
   PUBLIC_PRICING,
   standardPlanQuote,
   formatPublicPrice,
+  type BillingChoice,
 } from "@/lib/marketing/publicPricing";
 import {
-  planRegistrationHref,
-  planSetupPreviewHref,
   type PublicPlanId,
   type DemoWorld,
 } from "@/lib/marketing/conversionJourney";
+import { planCheckoutHref } from "@/lib/marketing/checkoutPreview";
 import "@/app/pricing-journey.css";
 import "@/app/marketing-2030.css";
 import "@/app/brand-takeover.css";
@@ -21,60 +21,74 @@ import "@/app/marketing-premium-pages.css";
 import "@/app/pricing-compact.css";
 
 // Published pricing. Selection remains a setup preview while payments are inactive.
-const coreQuote = standardPlanQuote(1)!;
-const expandQuote = standardPlanQuote(PUBLIC_PRICING.expandMinimumLocations)!;
-const PLANS = [
-  {
-    id: "start",
-    number: "01",
-    name: "Core",
-    tag: "One location",
-    headline: "Your daily operation. One clear picture.",
-    audience: "For an independent restaurant, hotel or hospitality venue.",
-    price: formatPublicPrice(coreQuote.monthlyTotal),
-    priceNote: "per month · 1 location",
-    annualTotal: `${formatPublicPrice(coreQuote.commitmentTotal)} total over 12 months`,
-    highlights: [
-      "Evidence, Decisions and outcome tracking",
-      "Supported structured data imports",
-      "Guided setup and documentation",
-    ],
-  },
-  {
-    id: "expand",
-    number: "02",
-    name: "Expand",
-    tag: "2–5 locations",
-    headline: "See the differences. Connect the decisions.",
-    audience:
-      "For growing groups that want a shared view across their locations.",
-    price: `From ${formatPublicPrice(expandQuote.monthlyTotal)}`,
-    priceNote: `${formatPublicPrice(PUBLIC_PRICING.expandPerLocation)} per location/month · minimum 2`,
-    annualTotal: `From ${formatPublicPrice(expandQuote.commitmentTotal)} total over 12 months`,
-    highlights: [
-      "Everything in Core, across 2–5 locations",
-      "A shared operating picture",
-      "Location comparisons and shared context",
-    ],
-  },
-  {
-    id: "enterprise",
-    number: "03",
-    name: "Enterprise",
-    tag: "6+ locations",
-    headline: "A wider view. The same simple setup.",
-    audience:
-      "For larger hospitality groups managing a broader location estate.",
-    price: "Contact sales",
-    priceNote: "Pricing and scope agreed before purchase",
-    annualTotal: "For larger groups or requirements beyond standard usage",
-    highlights: [
-      "Group requirements reviewed together",
-      "The same guided setup and documentation",
-      "A consolidated portfolio view",
-    ],
-  },
-] as const;
+function pricingPlans(billing: BillingChoice) {
+  const coreQuote = standardPlanQuote(1, billing)!;
+  const expandQuote = standardPlanQuote(
+    PUBLIC_PRICING.expandMinimumLocations,
+    billing,
+  )!;
+  return [
+    {
+      id: "start",
+      number: "01",
+      name: "Core",
+      tag: "One location",
+      headline: "Your daily operation. One clear picture.",
+      audience: "For an independent restaurant, hotel or hospitality venue.",
+      price: formatPublicPrice(coreQuote.monthlyTotal),
+      priceNote:
+        billing === "annual"
+          ? "per month equivalent · 1 location"
+          : "per month · 1 location",
+      annualTotal:
+        billing === "annual"
+          ? `${formatPublicPrice(coreQuote.commitmentTotal)} billed yearly · save ${formatPublicPrice(coreQuote.annualSaving)}/year`
+          : `${formatPublicPrice(coreQuote.commitmentTotal)} total over 12 months`,
+      highlights: [
+        "Evidence, Decisions and outcome tracking",
+        "Supported structured data imports",
+        "Guided setup and documentation",
+      ],
+    },
+    {
+      id: "expand",
+      number: "02",
+      name: "Expand",
+      tag: "2–5 locations",
+      headline: "See the differences. Connect the decisions.",
+      audience:
+        "For growing groups that want a shared view across their locations.",
+      price: `From ${formatPublicPrice(expandQuote.monthlyTotal)}`,
+      priceNote: `${formatPublicPrice(expandQuote.perLocation)} per location/month · minimum 2`,
+      annualTotal:
+        billing === "annual"
+          ? `From ${formatPublicPrice(expandQuote.commitmentTotal)} billed yearly · save ${formatPublicPrice(expandQuote.annualSaving)}/year`
+          : `From ${formatPublicPrice(expandQuote.commitmentTotal)} total over 12 months`,
+      highlights: [
+        "Everything in Core, across 2–5 locations",
+        "A shared operating picture",
+        "Location comparisons and shared context",
+      ],
+    },
+    {
+      id: "enterprise",
+      number: "03",
+      name: "Enterprise",
+      tag: "6+ locations",
+      headline: "A wider view. The same simple setup.",
+      audience:
+        "For larger hospitality groups managing a broader location estate.",
+      price: "Contact sales",
+      priceNote: "Pricing and scope agreed before purchase",
+      annualTotal: "For larger groups or requirements beyond standard usage",
+      highlights: [
+        "Group requirements reviewed together",
+        "The same guided setup and documentation",
+        "A consolidated portfolio view",
+      ],
+    },
+  ] as const;
+}
 type Inclusion = { status: "included" | "pending" | "excluded"; label: string };
 const included = (label = "Included"): Inclusion => ({
   status: "included",
@@ -183,8 +197,8 @@ function InclusionCell({ value }: { value: Inclusion }) {
 
 const FAQ = [
   [
-    "How does annual commitment with monthly billing work?",
-    "Core is €249 per month for one location: €2,988 over the 12-month commitment. Expand is €199 per location per month for 2–5 locations, starting at €398 per month and €4,776 over 12 months. Prices exclude VAT. You pay in monthly instalments under an annual agreement. Monthly billing does not mean a cancel-anytime monthly contract. Renewal, cancellation and usage terms must be presented before purchase. This preview does not take payment or start a contract.",
+    "How do yearly and monthly payments compare?",
+    "Both options have a 12-month commitment. Pay yearly: Core is €2,988 upfront (€249/month equivalent); Expand is €2,388 per location upfront (€199/location/month equivalent), with a minimum of 2 locations. Pay monthly: Core is €299/month (€3,588 total); Expand is €239/location/month, starting at €478/month (€5,736 total for 2 locations). All prices exclude VAT. Monthly instalments do not mean a cancel-anytime monthly contract. Renewal, cancellation and usage terms must be shown before a real purchase. This checkout is an interactive preview and cannot create an account, contract or charge.",
   ],
   [
     "Can I explore RADR before choosing a plan?",
@@ -204,7 +218,7 @@ const FAQ = [
   ],
   [
     "What if I need more locations or data?",
-    "For Expand, 2 locations cost €398 per month, 3 cost €597, 4 cost €796 and 5 cost €995, excluding VAT, with a 12-month commitment. Contact sales for 6+ locations or higher processing requirements. Usage allowances must be confirmed before purchase. No automatic overage charge is enabled in this preview.",
+    "Expand is charged per location for 2–5 locations: €199/location/month equivalent when paid yearly, or €239/location/month in monthly instalments. Both options require 12 months. Your basket shows the full amount and annual total for your chosen location count. Contact sales for 6+ locations or requirements outside standard usage. No automatic overage charge is enabled in this preview.",
   ],
   [
     "Can RADR connect to any system automatically?",
@@ -219,15 +233,29 @@ const FAQ = [
 export function Pricing2030({
   fromDemo = false,
   vertical = "restaurant",
+  billing = "annual",
 }: {
   fromDemo?: boolean;
   vertical?: DemoWorld;
+  billing?: BillingChoice;
 }) {
   const PlanLink = fromDemo ? NextLink : Link;
+  const PLANS = pricingPlans(billing);
   const nextHref = (plan: PublicPlanId) =>
-    fromDemo
-      ? planSetupPreviewHref(plan, vertical)
-      : planRegistrationHref(plan);
+    planCheckoutHref(
+      plan,
+      billing,
+      plan === "start" ? 1 : 2,
+      fromDemo ? vertical : undefined,
+    );
+  const scheduleHref = (choice: BillingChoice) => {
+    const query = new URLSearchParams({ billing: choice });
+    if (fromDemo) {
+      query.set("from", "demo");
+      query.set("vertical", vertical);
+    }
+    return `/pricing?${query.toString()}`;
+  };
   return (
     <div className="radr radr-mineral rm-premium rm-pricing">
       <PublicNavbar />
@@ -242,8 +270,8 @@ export function Pricing2030({
                     From the {vertical} demo to your own operation.
                   </strong>
                   <p>
-                    Choose a plan to preview setup. Your plan choice carries
-                    into the setup preview. No subscription starts here.
+                    Choose a plan and review your basket. No subscription starts
+                    in this checkout preview.
                   </p>
                 </div>
                 <NextLink href="/app?stay=1">Back to the demo →</NextLink>
@@ -258,7 +286,7 @@ export function Pricing2030({
             <div className="rx30-shell rm-price-hero-grid">
               <div>
                 <p className="rx30-kicker">
-                  Pricing · annual commitment, monthly payments
+                  Pricing · one clear 12-month commitment
                 </p>
                 <h1 id="pricing-title">
                   One platform. <em>Simple plans.</em>
@@ -268,14 +296,35 @@ export function Pricing2030({
                   locations.
                 </p>
               </div>
-              <nav className="rm-price-jumps" aria-label="Pricing shortcuts">
-                <Link href="#compare">
-                  Compare all features <span aria-hidden="true">↓</span>
-                </Link>
-                <Link href="/demo">
-                  Explore the free demo <span aria-hidden="true">→</span>
-                </Link>
-              </nav>
+              <div className="rm-price-actions">
+                <nav
+                  className="rm-billing-choice"
+                  aria-label="Payment schedule"
+                >
+                  <Link
+                    href={scheduleHref("annual")}
+                    scroll={false}
+                    aria-current={billing === "annual" ? "true" : undefined}
+                  >
+                    Pay yearly <span>Lower price</span>
+                  </Link>
+                  <Link
+                    href={scheduleHref("monthly")}
+                    scroll={false}
+                    aria-current={billing === "monthly" ? "true" : undefined}
+                  >
+                    Pay monthly
+                  </Link>
+                </nav>
+                <nav className="rm-price-jumps" aria-label="Pricing shortcuts">
+                  <Link href="#compare">
+                    Compare all features <span aria-hidden="true">↓</span>
+                  </Link>
+                  <Link href="/demo">
+                    Explore the free demo <span aria-hidden="true">→</span>
+                  </Link>
+                </nav>
+              </div>
             </div>
           </section>
           <section
@@ -306,7 +355,9 @@ export function Pricing2030({
                       <p className="rm-plan-term">
                         {plan.id === "enterprise"
                           ? "Contact sales for your group"
-                          : "12-month commitment · billed monthly"}
+                          : billing === "annual"
+                            ? "12-month commitment · paid upfront"
+                            : "12-month commitment · billed monthly"}
                       </p>
                       <p className="rm-plan-annual">
                         {plan.annualTotal}
@@ -349,17 +400,18 @@ export function Pricing2030({
                     >
                       {plan.id === "enterprise"
                         ? "Contact sales"
-                        : `Preview ${plan.name}`}
+                        : `Add ${plan.name} to basket`}
                       <span aria-hidden="true">→</span>
                     </PlanLink>
                   </article>
                 ))}
               </div>
               <p className="rm-availability">
-                <strong>12 months. Clear monthly payments.</strong> Core and
-                Expand prices exclude VAT. Usage allowances and full terms must
-                be confirmed before purchase. Explore the demo or preview setup;
-                payments are not active yet.
+                <strong>Two ways to pay. One 12-month commitment.</strong> Core
+                and Expand prices exclude VAT. Usage allowances and full terms
+                must be confirmed before purchase. Your basket shows the payment
+                schedule and full contract total. Checkout is a preview; real
+                accounts and payments are not active yet.
               </p>
               <div className="rm-price-tools">
                 <details className="rm-price-tool-fit">
@@ -367,7 +419,7 @@ export function Pricing2030({
                     Help me choose by location count{" "}
                     <span aria-hidden="true">+</span>
                   </summary>
-                  <PricingFitGuide />
+                  <PricingFitGuide billing={billing} />
                 </details>
                 <details className="rm-price-tool-setup">
                   <summary>
@@ -393,7 +445,8 @@ export function Pricing2030({
                     </p>
                     <ol>
                       <li>
-                        <span>01</span>12-month commitment, paid monthly
+                        <span>01</span>12-month commitment, yearly or monthly
+                        payments
                       </li>
                       <li>
                         <span>02</span>Usage allowances confirmed before
@@ -441,10 +494,11 @@ export function Pricing2030({
               >
                 <table className="rm-compare-table">
                   <caption>
-                    Core and Expand: 12-month commitment, billed monthly,
-                    excluding VAT. Expand totals depend on location count, with
-                    a minimum of two. Enterprise pricing and scope are agreed
-                    with sales. Usage limits must be confirmed before purchase.
+                    Core and Expand: 12-month commitment, paid yearly upfront or
+                    in monthly instalments, excluding VAT. Expand totals depend
+                    on location count, with a minimum of two. Enterprise pricing
+                    and scope are agreed with sales. Usage limits must be
+                    confirmed before purchase.
                   </caption>
                   <thead>
                     <tr>
