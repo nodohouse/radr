@@ -67,7 +67,7 @@ test("a finance manager can check every problem class before opening a demo", as
     page.getByRole("tab", { name: "Reconciliation", exact: true }),
   ).toBeFocused();
 });
-test("a buyer matches location capacity without being quoted a price", async ({
+test("a buyer matches location capacity and sees annual commitment pricing", async ({
   page,
 }) => {
   await page.goto("/en/pricing");
@@ -76,9 +76,9 @@ test("a buyer matches location capacity without being quoted a price", async ({
   for (const [count, copy] of [
     ["1", "Core fits 1 location"],
     ["5", "Expand fits 5 locations"],
-    ["6", "Portfolio fits 6 locations"],
-    ["20", "Portfolio fits 20 locations"],
-    ["21", "above the standard packages"],
+    ["6", "Enterprise fits 6 locations"],
+    ["20", "Enterprise fits 20 locations"],
+    ["21", "Enterprise fits 21 locations"],
     ["0", "whole number"],
     ["1.5", "whole number"],
     ["abc", "whole number"],
@@ -97,9 +97,9 @@ test("a buyer matches location capacity without being quoted a price", async ({
     .evaluate((el) => el.getBoundingClientRect().bottom);
   expect(top).toBeGreaterThanOrEqual(bottom);
   await expect(page.locator(".rm-plan-price strong")).toHaveText([
-    "Pricing coming soon",
-    "Pricing coming soon",
-    "Pricing coming soon",
+    "€249",
+    "From €398",
+    "Contact sales",
   ]);
 });
 test("a board reviewer can separate an expected result from completed-service proof", async ({

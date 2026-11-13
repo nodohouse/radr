@@ -59,7 +59,10 @@ test("desktop menu changes an existing Platform preview and routes a solution to
     "health",
   );
   await expect(page.locator(".rx-nav")).toHaveAttribute("data-ready", "true");
-  await page.locator(".rx-nav").getByRole("link", { name: "Platform", exact: true }).hover();
+  await page
+    .locator(".rx-nav")
+    .getByRole("link", { name: "Platform", exact: true })
+    .hover();
   await page.locator('.rx-nav-panel a[href*="surface=connections"]').click();
   await expect(page.locator(".ps-teaser-frame")).toHaveAttribute(
     "data-surface",
@@ -69,7 +72,10 @@ test("desktop menu changes an existing Platform preview and routes a solution to
     "data-ready",
     "true",
   );
-  await page.locator(".rx-nav").getByRole("link", { name: "Solutions", exact: true }).hover();
+  await page
+    .locator(".rx-nav")
+    .getByRole("link", { name: "Solutions", exact: true })
+    .hover();
   await page.locator('.rx-nav-panel a[href*="leak=recon"]').first().click();
   await expect(
     page.locator('.rx30-leak-nav button[data-on="true"]'),
@@ -103,7 +109,7 @@ test("homepage entry, hotel context and pricing scope remain clear", async ({
   ).toHaveAttribute("href", /signup/);
 });
 
-test("standard packages keep prices pending and setup self-guided", async ({
+test("standard packages publish annual commitment prices and keep setup self-guided", async ({
   page,
 }) => {
   await page.goto("/en/pricing");
@@ -111,38 +117,42 @@ test("standard packages keep prices pending and setup self-guided", async ({
   await expect(page.locator(".rm-plan-card h3")).toHaveText([
     "Core",
     "Expand",
-    "Portfolio",
+    "Enterprise",
   ]);
   await expect(page.locator(".rm-price-quote")).toContainText(
     "Guided setup, without a setup fee",
   );
   await expect(page.locator(".rm-price-quote")).toContainText(
-    "Defined structured data allowance",
+    "Usage allowances confirmed before purchase",
   );
   await expect(page.locator(".rm-plan-price strong")).toHaveText([
-    "Pricing coming soon",
-    "Pricing coming soon",
-    "Pricing coming soon",
+    "€249",
+    "From €398",
+    "Contact sales",
   ]);
   await expect(page.locator(".rm-availability")).toContainText(
-    "Prices and usage limits will be published before paid activation",
+    "12 months. Clear monthly payments.",
   );
-  await expect(page.locator("main")).not.toContainText(/€\s*[\d,]+/);
   await expect(
-    page.locator(".rm-price-hero a[href*='contact'],.rm-plan-card a[href*='contact']"),
-  ).toHaveCount(0);
+    page.locator(
+      ".rm-price-hero a[href*='contact'],.rm-plan-card a[href*='contact']",
+    ),
+  ).toHaveCount(1);
   const demo = page.locator(".rm-price-hero").getByRole("link", {
     name: "Explore the free demo",
   });
   await expect(demo).toHaveAttribute("href", "/en/demo");
-  for (const [index, id] of ["start", "expand", "enterprise"].entries()) {
+  for (const [index, id] of ["start", "expand"].entries()) {
     await expect(
       page.locator(".rm-plan-card").nth(index).getByRole("link"),
     ).toHaveAttribute("href", `/en/signup?intent=workspace&plan=${id}`);
   }
   for (const [question, answer] of [
-    ["When will pricing be available?", "without requesting a custom quote"],
-    ["Is there a separate setup fee?", "part of the proposed packages"],
+    [
+      "How does annual commitment with monthly billing work?",
+      "Monthly billing does not mean a cancel-anytime monthly contract",
+    ],
+    ["Is there a separate setup fee?", "included in Core and Expand"],
     [
       "Do I need a sales call or an onboarding specialist?",
       "Your team owns its data and reviews proposed actions",

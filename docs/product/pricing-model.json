@@ -1,15 +1,15 @@
 {
-  "reviewedAt": "2026-11-12",
-  "status": "Standard monthly packages with prices pending, as explicitly requested by the user. No payment, paid entitlement or numeric usage allowance is activated.",
-  "decision": "Free fictional demo; standard Core, Expand and Portfolio packages with guided setup and documentation. Prices stay pending. No custom quote, paid implementation or CSM offering.",
+  "reviewedAt": "2026-11-13",
+  "status": "Published Core and Expand prices with a 12-month commitment, billed monthly. Enterprise is contact sales. Payments, accounts and paid entitlements remain inactive.",
+  "decision": "Core €249/month for one location; Expand €199/location/month for 2–5 locations (minimum €398/month); Enterprise contact sales for 6+ locations or requirements outside standard usage. All prices exclude VAT. Twelve-month commitment, paid in monthly instalments. No annual-prepayment discount advertised.",
   "rationale": [
     "Free fictional exploration supports evaluation without unpaid implementation work.",
-    "A standard monthly package replaces individually negotiated delivery scope and an annual sales process.",
+    "Two publicly priced plans support self-guided adoption. Larger footprints require a sales discussion without promising bespoke implementation or a staffed service.",
     "Package differences reflect location capacity, comparisons and data allowances, rather than consulting hours or account management.",
     "Guided setup and documentation are included; managed setup, migration and custom development are not offered as add-ons in these packages.",
     "Evidence review and customer control remain common to every plan.",
     "Usage and processing costs need explicit budgets. No unlimited media processing or support is promised.",
-    "Publish fixed package prices only after cost validation. The user declined the suggested draft prices; do not reinstate them without a new instruction."
+    "The user requested visible pricing and an annual commitment with monthly payments on 2026-11-13, superseding the earlier pending-price instruction. Published prices follow the preceding €249/€199 recommendation; market and cost validation are still required."
   ],
   "costFloor": {
     "recurring": "minimum monthly-equivalent subscription = monthly direct delivery cost / (1 - target recurring gross margin)",
@@ -46,7 +46,7 @@
     ]
   },
   "validationBeforeNumericPricing": [
-    "Keep prices pending until the user requests published rates; validate direct costs and willingness to pay first.",
+    "Confirm willingness to pay and direct delivery costs at the published rates before paid activation.",
     "Measure processing, model, storage, payment and founder-time costs under the included allowances.",
     "Set and enforce model-request, media and refresh budgets separately from imported-row limits.",
     "Confirm upgrade, limit, cancellation and renewal behavior before live subscriptions.",
@@ -84,7 +84,7 @@
     "Validate cost per account and per included location at typical and high usage.",
     "Do not treat founder support or setup time as zero because there is no employee payroll.",
     "Record allowance alone does not control model, media or refresh costs. Enforce resource budgets before paid activation.",
-    "Avoid annual or volume discounts until the standard monthly package economics are measured.",
+    "No extra annual-prepayment discount is advertised. The published prices already require a 12-month commitment; confirm renewal and cancellation terms before real purchase.",
     "Do not add bespoke support or implementation promises to close a sale without revising the operating model.",
     "Measure conversion, setup completion and support requests alongside margin."
   ],
@@ -94,33 +94,48 @@
       "id": "start",
       "name": "Core",
       "currency": "EUR",
-      "monthlyPrice": null,
-      "locationCapacity": 1,
+      "monthlyPricePerLocation": 249,
+      "minimumLocations": 1,
+      "maximumLocations": 1,
+      "minimumMonthlyTotal": 249,
+      "minimumCommitmentTotal": 2988,
+      "commitmentMonths": 12,
       "monthlyStructuredRecords": null
     },
     {
       "id": "expand",
       "name": "Expand",
       "currency": "EUR",
-      "monthlyPrice": null,
-      "locationCapacity": 5,
+      "monthlyPricePerLocation": 199,
+      "minimumLocations": 2,
+      "maximumLocations": 5,
+      "minimumMonthlyTotal": 398,
+      "minimumCommitmentTotal": 4776,
+      "commitmentMonths": 12,
       "monthlyStructuredRecords": null
     },
     {
       "id": "enterprise",
-      "name": "Portfolio",
+      "name": "Enterprise",
       "currency": "EUR",
-      "monthlyPrice": null,
-      "locationCapacity": 20,
-      "monthlyStructuredRecords": null
+      "pricing": "Contact sales",
+      "minimumLocations": 6,
+      "scope": "Larger footprint or requirements outside standard usage; agreed before purchase."
     }
   ],
   "recurringModel": {
-    "structure": "Standard account subscription with included location capacity and structured-record allowance",
-    "billing": "Proposed monthly; no annual discount or commitment advertised",
+    "structure": "Per-location subscription with two publicly priced plans; Enterprise scope and price agreed with sales.",
+    "billing": "12-month commitment with monthly instalments. Prices exclude VAT; no additional annual-prepayment discount.",
     "setup": "Standard guided setup included without a setup fee",
     "support": "Documentation and product guidance. No CSM, staffed onboarding or SLA promise.",
-    "growth": "Larger standard packages, with usage controls and upgrade handling implemented before real paid activation. No automatic overage billing in the preview.",
+    "growth": "Expand charges €199 per contracted location/month for 2–5 locations. Enterprise is contact sales for 6+ or nonstandard usage. Contract, upgrade, renewal and cancellation rules require review before activation.",
     "limits": "Numeric allowances are pending. Document and enforce them before paid activation; a package preview is not a processing benchmark."
+  },
+  "profitabilityGuardrails": {
+    "targetRecurringGrossMargin": 0.8,
+    "coreMonthlyDirectCostCeilingEUR": 49.8,
+    "expandMonthlyDirectCostCeilingPerLocationEUR": 39.8,
+    "meaning": "Illustrative cost ceilings at the target gross margin, including usage, infrastructure, payment fees and valued delivery/support time; not measured costs or guaranteed profit.",
+    "commercialReadiness": "Usage allowances, merchant identity, contract terms, real authentication, email and payment services must be ready before paid activation."
   }
 }

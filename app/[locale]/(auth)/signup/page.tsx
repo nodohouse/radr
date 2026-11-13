@@ -7,6 +7,7 @@ import { publicPlan } from "@/lib/marketing/conversionJourney";
 import { getPendingInvitationByToken } from "@/lib/identity/invitations";
 import { safeDemoNext } from "@/lib/marketing/demoAccess";
 import { accountStorageReady } from "@/lib/identity/accountAvailability";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -33,6 +34,10 @@ export default async function SignupPage({ params, searchParams }: Props) {
   const { invite, intent, next, plan: requestedPlan } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("auth");
+
+  if (intent === "workspace" && publicPlan(requestedPlan) === "enterprise") {
+    redirect(`/${locale}/contact?plan=enterprise`);
+  }
 
   const token = invite?.trim() ?? "";
   if (token && accountStorageReady()) {

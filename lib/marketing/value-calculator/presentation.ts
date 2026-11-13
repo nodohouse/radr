@@ -176,7 +176,8 @@ export function valueMapCsv(j: JourneyState, result: ValueCalculatorResult) {
     ],
     [
       "Annual budget, supplied by visitor",
-      result.roi?.investment ?? "Not supplied; RADR prices remain pending",
+      result.roi?.investment ??
+        "Not supplied; see published RADR pricing separately",
     ],
     [
       "Illustrative net return, annual",

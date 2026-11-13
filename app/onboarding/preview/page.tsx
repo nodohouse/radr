@@ -3,6 +3,7 @@ import { publicPlan, planName } from "@/lib/marketing/conversionJourney";
 import Link from "next/link";
 import "../onboarding.css";
 import "@/app/pricing-journey.css";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -18,6 +19,7 @@ export default async function OnboardingPreviewPage({
 }) {
   const search = await searchParams;
   const plan = publicPlan(search.plan);
+  if (plan === "enterprise") redirect("/contact?plan=enterprise");
   const vertical =
     search.vertical === "hotel"
       ? "hotel"

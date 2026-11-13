@@ -2,6 +2,10 @@
 import { useId, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { planForLocations, planName } from "@/lib/marketing/conversionJourney";
+import {
+  standardPlanQuote,
+  formatPublicPrice,
+} from "@/lib/marketing/publicPricing";
 import "@/app/buyer-guide.css";
 export function PricingFitGuide() {
   const id = useId();
@@ -9,6 +13,7 @@ export function PricingFitGuide() {
   const count = /^\d{1,5}$/.test(text) ? Number(text) : NaN;
   const valid = Number.isSafeInteger(count) && count >= 1;
   const plan = valid ? planForLocations(count) : null;
+  const quote = valid ? standardPlanQuote(count) : null;
   return (
     <section className="br-plan-fit" aria-labelledby={`${id}-title`}>
       <div>
@@ -42,26 +47,27 @@ export function PricingFitGuide() {
             <p>Enter your location count to find the matching capacity.</p>
           ) : !valid ? (
             <p>Enter a whole number of at least 1.</p>
-          ) : plan ? (
+          ) : plan && quote ? (
             <>
               <strong>
                 {planName(plan)} fits {count}{" "}
                 {count === 1 ? "location" : "locations"}.
               </strong>
               <p>
-                This matches location capacity. Prices and usage allowances
-                remain pending.
+                {formatPublicPrice(quote.monthlyTotal)}/month, billed monthly.{" "}
+                {formatPublicPrice(quote.commitmentTotal)} over the 12-month
+                commitment, excluding VAT. Usage limits apply.
               </p>
               <Link href={`#plan-${plan}`}>Review {planName(plan)} →</Link>
             </>
           ) : (
             <>
-              <strong>Your footprint is above the standard packages.</strong>
+              <strong>Enterprise fits {count} locations. Contact sales.</strong>
               <p>
-                The published package scope stops at 20 locations. Explore the
-                demo to assess the product; larger capacity is not offered here.
+                For 6+ locations or requirements outside standard usage, discuss
+                pricing and scope before choosing a subscription.
               </p>
-              <Link href="/demo">Explore the demo →</Link>
+              <Link href="/contact?plan=enterprise">Contact sales →</Link>
             </>
           )}
         </div>

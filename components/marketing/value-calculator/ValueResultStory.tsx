@@ -309,8 +309,8 @@ export function ValueNextSteps({ journey }: { journey: JourneyState }) {
             Room to grow.
           </h3>
           <p>
-            Compare Core, Expand and Portfolio by location coverage and included
-            capabilities.
+            Compare Core, Expand and Enterprise by location coverage and
+            included capabilities.
           </p>
           <ul className="vc4-plan-list">
             <li>
@@ -319,11 +319,11 @@ export function ValueNextSteps({ journey }: { journey: JourneyState }) {
             </li>
             <li>
               <b>Expand</b>
-              <span>Up to 5</span>
+              <span>2–5 locations</span>
             </li>
             <li>
-              <b>Portfolio</b>
-              <span>Up to 20</span>
+              <b>Enterprise</b>
+              <span>6+ · Contact sales</span>
             </li>
           </ul>
           <Link
@@ -334,7 +334,9 @@ export function ValueNextSteps({ journey }: { journey: JourneyState }) {
             Compare packages
             <Arrow />
           </Link>
-          <small>Prices are pending. No payment is activated.</small>
+          <small>
+            Published prices, 12-month commitment. Payments are not active yet.
+          </small>
         </article>
       </div>
     </section>

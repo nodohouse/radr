@@ -20,9 +20,9 @@ describe("Buyer guidance boundaries", () => {
       "expand",
       "enterprise",
       "enterprise",
-      null,
+      "enterprise",
     ]);
-    expect(planName(planForLocations(20)!)).toBe("Portfolio");
+    expect(planName(planForLocations(20)!)).toBe("Enterprise");
   });
   it("does not recommend a plan for invalid or fractional counts", () => {
     for (const n of [0, -1, 1.5, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1])

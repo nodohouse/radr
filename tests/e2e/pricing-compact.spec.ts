@@ -45,7 +45,7 @@ for (const [width, height] of [
         bottom: el.getBoundingClientRect().bottom,
       })),
     );
-    expect(heads.map((h) => h.text)).toEqual(["Core", "Expand", "Portfolio"]);
+    expect(heads.map((h) => h.text)).toEqual(["Core", "Expand", "Enterprise"]);
     for (const h of width > 760 ? heads : heads.slice(0, 1)) {
       expect(h.top).toBeGreaterThan(navBottom);
       expect(h.bottom).toBeLessThan(height);
@@ -68,6 +68,12 @@ for (const [width, height] of [
         );
       for (const bottom of bottoms) expect(bottom).toBeLessThan(height);
       expect(Math.max(...bottoms) - Math.min(...bottoms)).toBeLessThan(2);
+      const cardBottoms = await page
+        .locator(".rm-plan-card")
+        .evaluateAll((nodes) =>
+          nodes.map((el) => el.getBoundingClientRect().bottom),
+        );
+      for (const bottom of cardBottoms) expect(bottom).toBeLessThan(height);
     }
     expect(
       await page.evaluate(
@@ -96,14 +102,21 @@ test("all package inclusions are permanently displayed with their plan actions",
   page,
 }) => {
   await page.goto("/en/pricing");
-  for (const [i, name] of ["Core", "Expand", "Portfolio"].entries()) {
+  for (const [i, name] of ["Core", "Expand", "Enterprise"].entries()) {
     const card = page.locator(".rm-plan-card").nth(i);
     await expect(card.locator("summary, details")).toHaveCount(0);
     await expect(card.locator(".rm-plan-highlights li")).toHaveCount(3);
     await expect(card.locator(".rm-plan-highlights")).toBeVisible();
     await expect(
-      card.getByRole("link", { name: `Preview ${name}` }),
-    ).toHaveAttribute("href", /signup\?intent=workspace&plan=/);
+      card.getByRole("link", {
+        name: name === "Enterprise" ? "Contact sales" : `Preview ${name}`,
+      }),
+    ).toHaveAttribute(
+      "href",
+      name === "Enterprise"
+        ? /contact\?plan=enterprise/
+        : /signup\?intent=workspace&plan=/,
+    );
     await expect(card.locator(".rm-plan-audience")).toBeVisible();
   }
   await expect(page.locator(".rm-compare-table tbody tr")).toHaveCount(10);
@@ -164,4 +177,55 @@ test("clicking Pricing from a scrolled page lands directly on the packages", asy
     );
   expect(bottoms).toHaveLength(3);
   for (const bottom of bottoms) expect(bottom).toBeLessThan(768);
+});
+
+test("annual totals and the two-location minimum are visible before choosing a plan", async ({
+  page,
+}) => {
+  await page.goto("/en/pricing");
+  const cards = page.locator(".rm-plan-card");
+  await expect(cards.nth(0).locator(".rm-plan-annual")).toHaveText(
+    "€2,988 total over 12 months · excl. VAT",
+  );
+  await expect(cards.nth(1).locator(".rm-plan-price-note")).toHaveText(
+    "€199 per location/month · minimum 2",
+  );
+  await expect(cards.nth(1).locator(".rm-plan-annual")).toHaveText(
+    "From €4,776 total over 12 months · excl. VAT",
+  );
+  for (const index of [0, 1])
+    await expect(cards.nth(index).locator(".rm-plan-term")).toHaveText(
+      "12-month commitment · billed monthly",
+    );
+  await expect(
+    cards.nth(2).getByRole("link", { name: "Contact sales" }),
+  ).toHaveAttribute("href", /contact\?plan=enterprise/);
+  await page.locator(".rm-price-tool-fit > summary").click();
+  const input = page.getByLabel("Number of operating locations");
+  for (const [count, monthly, annual] of [
+    ["2", "€398/month", "€4,776"],
+    ["5", "€995/month", "€11,940"],
+  ]) {
+    await input.fill(count);
+    await expect(page.locator(".br-plan-fit-answer")).toContainText(monthly);
+    await expect(page.locator(".br-plan-fit-answer")).toContainText(annual);
+  }
+  await input.fill("6");
+  await page
+    .locator(".br-plan-fit-answer")
+    .getByRole("link", { name: "Contact sales" })
+    .click();
+  await expect(page).toHaveURL(/contact\?plan=enterprise/);
+});
+
+test("old Enterprise self-service links now lead to sales", async ({
+  page,
+}) => {
+  for (const path of [
+    "/en/signup?intent=workspace&plan=enterprise",
+    "/onboarding/preview?plan=enterprise&vertical=hotel",
+  ]) {
+    await page.goto(path);
+    await expect(page).toHaveURL(/contact\?plan=enterprise/);
+  }
 });

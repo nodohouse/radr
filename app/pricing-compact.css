@@ -71,7 +71,7 @@
   border-radius: 22px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto 1fr auto;
+  grid-template-rows: auto auto 1fr auto;
   gap: 0;
   min-width: 0;
 }
@@ -105,14 +105,24 @@
   padding: 12px 0;
   margin: 0;
   gap: 4px;
+  min-height: 132px;
+  align-content: start;
 }
 .radr.rm-pricing .rx30 .rm-plan-price strong {
-  font-size: 21px;
-  line-height: 1.3;
+  font-size: 34px;
+  line-height: 1.2;
+  color: #102f59;
 }
-.radr.rm-pricing .rx30 .rm-plan-price span {
+.radr.rm-pricing .rx30 .rm-plan-price p {
+  margin: 0;
   font-size: 12px;
   line-height: 1.5;
+  color: #47627f;
+}
+.radr.rm-pricing .rx30 .rm-plan-price .rm-plan-term {
+  font-weight: 600;
+  color: #183e69;
+  margin-top: 3px;
 }
 .radr.rm-pricing .rx30 .rm-plan-inclusions {
   min-width: 0;
@@ -265,7 +275,7 @@
     font-size: 24px;
   }
   .radr.rm-pricing .rx30 .rm-plan-price strong {
-    font-size: 18px;
+    font-size: 28px;
   }
 }
 @media (max-width: 760px) {
@@ -322,17 +332,12 @@
   .radr.rm-pricing .rx30 .rm-plan-price {
     grid-column: 1/-1;
     border: 0;
-    padding: 0;
+    padding: 8px 0;
+    min-height: 0;
   }
   .radr.rm-pricing .rx30 .rm-plan-price strong {
-    font-size: 14px;
-    font-weight: 550;
-    line-height: 1.5;
-    color: #526b84;
-    letter-spacing: 0;
-  }
-  .radr.rm-pricing .rx30 .rm-plan-price > span {
-    display: none;
+    font-size: 30px;
+    line-height: 1.2;
   }
   .radr.rm-pricing .rx30 .rm-plan-inclusions {
     grid-column: 1/-1;

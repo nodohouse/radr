@@ -194,9 +194,7 @@ describe("validated registration preview without real account services", () => {
     expect(publicPlan("expand")).toBe("expand");
     expect(publicPlan("https://evil.example")).toBeNull();
     expect(publicPlan("__proto__")).toBeNull();
-    expect(planRegistrationHref("enterprise")).toBe(
-      "/signup?intent=workspace&plan=enterprise",
-    );
+    expect(planRegistrationHref("enterprise")).toBe("/contact?plan=enterprise");
     expect(planSetupPreviewHref("expand", "hotel")).toBe(
       "/onboarding/preview?plan=expand&vertical=hotel",
     );

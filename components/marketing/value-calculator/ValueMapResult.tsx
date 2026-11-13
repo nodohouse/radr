@@ -504,7 +504,8 @@ export function ValueMapResult({ journey, result, onEdit, onPatch }: Props) {
                 {journey.currency === "OTHER"
                   ? "currency units"
                   : journey.currency}
-                . This is not a RADR quote; plan prices remain pending.
+                . This is your evaluation budget, rather than a subscription
+                quote. See pricing for RADR plans and the 12-month commitment.
               </small>
               <input
                 aria-label="Your annual budget"

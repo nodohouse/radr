@@ -42,7 +42,7 @@ describe("Value Map explanations and local export", () => {
     expect(csv).toContain("Annual; all selected locations combined");
     expect(csv).toContain("Internal modeling assumptions");
     expect(csv).toContain("Records to check");
-    expect(csv).toContain("RADR prices remain pending");
+    expect(csv).toContain("see published RADR pricing separately");
   });
   it("does not export a fabricated positive estimate for missing revenue", () => {
     const j = { ...sampleJourney("restaurant"), revenueId: "unknown" };

@@ -1,6 +1,6 @@
 {
   "metaTitle": "Pricing | RADR",
-  "metaDescription": "Compare RADR Core, Expand and Portfolio: proposed monthly packages for 1, 5 or 20 locations, with guided setup, defined data allowances and a free fictional demo.",
+  "metaDescription": "RADR Core €249/month for one location. Expand €199/location/month for 2–5 locations, minimum €398/month. 12-month commitment, billed monthly, excluding VAT. Enterprise: contact sales.",
   "kicker": "Pricing",
   "heroTitleLine1": "One platform. Clear pricing.",
   "heroTitleLine2": "",
@@ -31,8 +31,8 @@
     "title": "Core",
     "lead": "Your daily operation. One clear picture.",
     "body": "For an independent restaurant, hotel or hospitality venue. Follow the standard guided setup with your own supported data files.",
-    "priceLabel": "Pricing coming soon",
-    "priceSub": "Monthly plan · 1 location",
+    "priceLabel": "€249/month",
+    "priceSub": "12-month commitment · €2,988 total · excl. VAT",
     "cta": "Preview Core",
     "points": [
       "One location",
@@ -47,7 +47,7 @@
     "verb": "Expand",
     "line": "Up to five locations, shared context and location comparisons.",
     "audience": "For growing hospitality groups.",
-    "priceLabel": "Pricing coming soon",
+    "priceLabel": "€199/location/month · minimum 2",
     "cta": "Preview Expand",
     "features": [
       "Everything in Core, across five locations",
@@ -66,12 +66,12 @@
     "govern": "Portfolio"
   },
   "control": {
-    "name": "Portfolio",
+    "name": "Enterprise",
     "verb": "Portfolio view",
     "line": "Up to twenty locations and a consolidated portfolio view.",
     "audience": "For larger hospitality groups.",
-    "priceLabel": "Pricing coming soon",
-    "cta": "Preview Portfolio",
+    "priceLabel": "Contact sales",
+    "cta": "Contact sales",
     "features": [
       "Everything in Expand, across twenty locations",
       "A consolidated portfolio view",
@@ -201,6 +201,6 @@
   "readyLead": "Explore the fictional demo, then choose the location capacity your operation needs.",
   "readyCta": "Compare plans",
   "readySecondary": "See a Verified Recovery",
-  "contactSales": "Compare plans",
+  "contactSales": "Contact sales",
   "bookDemo": "See a Verified Recovery"
 }

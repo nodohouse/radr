@@ -8,18 +8,23 @@ export function publicPlan(value: unknown): PublicPlanId | null {
     : null;
 }
 export function planName(plan: PublicPlanId) {
-  return plan === "start" ? "Core" : plan === "expand" ? "Expand" : "Portfolio";
+  return plan === "start"
+    ? "Core"
+    : plan === "expand"
+      ? "Expand"
+      : "Enterprise";
 }
 export function planRegistrationHref(plan: PublicPlanId) {
+  if (plan === "enterprise") return "/contact?plan=enterprise";
   return `/signup?intent=workspace&plan=${plan}`;
 }
 export function planSetupPreviewHref(plan: PublicPlanId, vertical: DemoWorld) {
+  if (plan === "enterprise") return "/contact?plan=enterprise";
   return `/onboarding/preview?plan=${plan}&vertical=${vertical}`;
 }
 
-/** Package capacity only; never infers prices or an undocumented larger plan. */
+/** Larger footprints require a sales discussion, rather than a fixed capacity offer. */
 export function planForLocations(locations: number): PublicPlanId | null {
-  if (!Number.isSafeInteger(locations) || locations < 1 || locations > 20)
-    return null;
+  if (!Number.isSafeInteger(locations) || locations < 1) return null;
   return locations === 1 ? "start" : locations <= 5 ? "expand" : "enterprise";
 }
