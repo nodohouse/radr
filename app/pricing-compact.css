@@ -64,13 +64,14 @@
 }
 .radr.rm-pricing .rx30 .rm-plan-grid {
   gap: 18px;
-  align-items: start;
+  align-items: stretch;
 }
 .radr.rm-pricing .rx30 .rm-plan-card {
   padding: 22px;
   border-radius: 22px;
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto 1fr auto;
   gap: 0;
   min-width: 0;
 }
@@ -113,36 +114,18 @@
   font-size: 12px;
   line-height: 1.5;
 }
-.radr.rm-pricing .rx30 .rm-plan-quick-feature {
-  font-size: 14px;
-  line-height: 1.6;
-  font-weight: 550;
-  color: #214b78;
-  margin: 14px 0 6px;
-  min-height: 45px;
-}
 .radr.rm-pricing .rx30 .rm-plan-inclusions {
   min-width: 0;
-  margin: 0 0 12px;
+  margin: 14px 0 12px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
-.radr.rm-pricing .rx30 .rm-plan-inclusions summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  min-height: 38px;
+.radr.rm-pricing .rx30 .rm-plan-inclusions-label {
+  margin: 0;
   font-size: 13px;
   line-height: 1.5;
   font-weight: 550;
-  color: #0755bb;
-  cursor: pointer;
-  list-style: none;
-}
-.radr.rm-pricing .rx30 .rm-plan-inclusions summary::-webkit-details-marker {
-  display: none;
-}
-.radr.rm-pricing .rx30 .rm-plan-inclusions[open] summary > span {
-  transform: rotate(45deg);
+  color: #214b78;
 }
 .radr.rm-pricing .rx30 .rm-plan-highlights {
   margin: 10px 0 16px;
@@ -257,10 +240,7 @@
 .radr.rm-pricing:has(.rm-demo-return) .rx30 .rm-price-hero {
   padding-top: 22px;
 }
-.radr.rm-pricing
-  .rx30
-  :is(.rm-plan-inclusions, .rm-price-tools)
-  summary:focus-visible {
+.radr.rm-pricing .rx30 .rm-price-tools summary:focus-visible {
   outline: 3px solid #0871e9;
   outline-offset: 3px;
   border-radius: 8px;
@@ -318,8 +298,7 @@
   .radr.rm-pricing .rx30 .rm-plan-card {
     padding: 14px 16px;
     border-radius: 17px;
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
   }
   .radr.rm-pricing .rx30 .rm-plan-card[data-featured="true"] {
     padding: 13px 15px;
@@ -355,35 +334,16 @@
   .radr.rm-pricing .rx30 .rm-plan-price > span {
     display: none;
   }
-  .radr.rm-pricing .rx30 .rm-plan-quick-feature {
-    grid-column: 1/-1;
-    min-height: 0;
-    font-size: 13px;
-    line-height: 1.5;
-    margin: 6px 0 8px;
-  }
   .radr.rm-pricing .rx30 .rm-plan-inclusions {
-    grid-column: 1;
-    margin: 0;
-    align-self: center;
-  }
-  .radr.rm-pricing .rx30 .rm-plan-inclusions summary {
-    min-height: 44px;
-    font-size: 12px;
-    gap: 12px;
-  }
-  .radr.rm-pricing .rx30 .rm-plan-inclusions[open] {
     grid-column: 1/-1;
+    margin: 12px 0 4px;
   }
   .radr.rm-pricing .rx30 .rm-plan-card > a {
-    grid-column: 2;
+    grid-column: 1/-1;
     min-height: 44px;
     font-size: 12px;
     padding: 8px 12px;
     white-space: nowrap;
-  }
-  .radr.rm-pricing .rx30 .rm-plan-inclusions[open] + a {
-    grid-column: 1/-1;
   }
   .radr.rm-pricing .rx30 .rm-availability {
     display: block;

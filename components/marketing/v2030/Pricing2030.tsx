@@ -295,15 +295,10 @@ export function Pricing2030({
                       <strong>{plan.price}</strong>
                       <span>{plan.priceNote}</span>
                     </div>
-                    <p className="rm-plan-quick-feature">
-                      {plan.id === "start"
-                        ? plan.highlights[0]
-                        : plan.highlights[2]}
-                    </p>
-                    <details className="rm-plan-inclusions">
-                      <summary>
-                        What’s included <span aria-hidden="true">+</span>
-                      </summary>
+                    <div className="rm-plan-inclusions">
+                      <p className="rm-plan-inclusions-label">
+                        What’s included
+                      </p>
                       <ul
                         className="rm-plan-highlights"
                         aria-label={`${plan.name} package highlights`}
@@ -325,7 +320,7 @@ export function Pricing2030({
                         ))}
                       </ul>
                       <p className="rm-plan-audience">{plan.audience}</p>
-                    </details>
+                    </div>
                     <PlanLink className="rx30-btn" href={nextHref(plan.id)}>
                       {`Preview ${plan.name}`}
                       <span aria-hidden="true">→</span>

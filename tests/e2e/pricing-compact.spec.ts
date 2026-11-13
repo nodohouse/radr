@@ -22,7 +22,7 @@ for (const [width, height] of [
   [1512, 982],
   [3840, 2160],
 ] as const) {
-  test(`pricing packages are immediately visible at ${width}x${height}`, async ({
+  test(`pricing inclusions are visible without interaction at ${width}x${height}`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height });
@@ -46,9 +46,19 @@ for (const [width, height] of [
       })),
     );
     expect(heads.map((h) => h.text)).toEqual(["Core", "Expand", "Portfolio"]);
-    for (const h of heads) {
+    for (const h of width > 760 ? heads : heads.slice(0, 1)) {
       expect(h.top).toBeGreaterThan(navBottom);
       expect(h.bottom).toBeLessThan(height);
+    }
+    await expect(page.locator(".rm-plan-card details")).toHaveCount(0);
+    for (const card of await page.locator(".rm-plan-card").all()) {
+      await expect(card.locator(".rm-plan-inclusions-label")).toHaveText(
+        "What’s included",
+      );
+      await expect(card.locator(".rm-plan-highlights li")).toHaveCount(3);
+      for (const item of await card.locator(".rm-plan-highlights li").all()) {
+        await expect(item).toBeVisible();
+      }
     }
     if (width >= 1100) {
       const bottoms = await page
@@ -82,23 +92,19 @@ for (const [width, height] of [
     expect(errors).toEqual([]);
   });
 }
-test("all package inclusions remain available, with keyboard operable details", async ({
+test("all package inclusions are permanently displayed with their plan actions", async ({
   page,
 }) => {
   await page.goto("/en/pricing");
   for (const [i, name] of ["Core", "Expand", "Portfolio"].entries()) {
     const card = page.locator(".rm-plan-card").nth(i);
-    const summary = card.locator("summary");
-    await summary.focus();
-    await page.keyboard.press("Enter");
-    await expect(card.locator("details")).toHaveAttribute("open", "");
+    await expect(card.locator("summary, details")).toHaveCount(0);
     await expect(card.locator(".rm-plan-highlights li")).toHaveCount(3);
     await expect(card.locator(".rm-plan-highlights")).toBeVisible();
     await expect(
       card.getByRole("link", { name: `Preview ${name}` }),
     ).toHaveAttribute("href", /signup\?intent=workspace&plan=/);
-    await summary.click();
-    await expect(card.locator(".rm-plan-highlights")).toBeHidden();
+    await expect(card.locator(".rm-plan-audience")).toBeVisible();
   }
   await expect(page.locator(".rm-compare-table tbody tr")).toHaveCount(10);
 });
