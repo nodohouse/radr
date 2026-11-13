@@ -6,12 +6,7 @@ import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { SiteNav } from "@/components/marketing/SiteNav";
-import {
-  CANON_PEAK,
-  CANON_OTA,
-  CANON_ORPHAN,
-  money,
-} from "@/data/demo";
+import { CANON_PEAK, CANON_OTA, CANON_ORPHAN, money } from "@/data/demo";
 import { CANON_PLAYBOOK } from "@/lib/radr/decision/demo/canonical";
 import { CTAS } from "@/lib/marketing/brand";
 import { marketingImage } from "@/lib/marketing/publicImagery";
@@ -133,9 +128,9 @@ const INDUSTRIES: IndustryStory[] = [
       { label: "Operating hours", value: "Local reactive repeats" },
     ],
     decision: "LOCAL DECISION → VERIFIED → PLAYBOOK → GROUP ROLLOUT.",
-    consequence: "Recurring drivers · Operating Memory rolls the fix",
+    consequence: "Recurring drivers · Response prepared for review",
     principle:
-      "RADR does not rank locations. It finds why similar revenue produces different profit — then rolls the fix.",
+      "Compare why similar revenue can leave different contribution, then prepare a response for review.",
     exposure: CANON_PLAYBOOK.exposureEuro,
     exposureLabel: "structural / month",
     displayId: CANON_PLAYBOOK.displayId,
@@ -185,7 +180,10 @@ export function IndustriesLock() {
     <div className="radr radr-mineral rx-ch-light">
       <SiteNav />
       <main>
-        <section className="rx-ch-hero rx-ind-hero-compact" data-nav-theme="light">
+        <section
+          className="rx-ch-hero rx-ind-hero-compact"
+          data-nav-theme="light"
+        >
           <div className="rx-shell">
             <p className="rx-ch-kicker">Industries · DEMO · ILLUSTRATIVE</p>
             <h1 className="rx-ch-title">
@@ -228,7 +226,11 @@ export function IndustriesLock() {
           </div>
 
           <div className="rx-shell rx-ind-cinema-inner">
-            <div className="rx-ind-cinema-rail" role="tablist" aria-label="Vertical">
+            <div
+              className="rx-ind-cinema-rail"
+              role="tablist"
+              aria-label="Vertical"
+            >
               {INDUSTRIES.map((i) => (
                 <button
                   key={i.id}
@@ -252,7 +254,10 @@ export function IndustriesLock() {
               </h2>
 
               {story.groupCompare ? (
-                <div className="rx-ind-group-split" aria-label="Location comparison">
+                <div
+                  className="rx-ind-group-split"
+                  aria-label="Location comparison"
+                >
                   <div>
                     <strong>{story.groupCompare.left.site}</strong>
                     <span>{story.groupCompare.left.adr}</span>
@@ -322,7 +327,7 @@ export function IndustriesLock() {
                 {CTAS.seeInAction} <span aria-hidden="true">→</span>
               </NextLink>
               <Link href="/contact" className="rx-btn rx-btn-ghost">
-                {CTAS.primarySales}
+                Prepare an evaluation
               </Link>
             </div>
           </div>

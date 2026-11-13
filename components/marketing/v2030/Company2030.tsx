@@ -1,4 +1,5 @@
 "use client";
+import { EvaluationChecklist } from "./BuyerGuide";
 import { MarketingHeroVisual } from "./MarketingHeroVisual";
 
 import { motion } from "motion/react";
@@ -18,7 +19,7 @@ import "@/app/marketing-premium-pages.css";
 const PRINCIPLES = [
   {
     title: "Clarity over noise",
-    body: "Turn complex evidence into clear Decisions. Not more charts.",
+    body: "Turn complex evidence into clear Decisions. Keep the context and next step together.",
   },
   {
     title: "Human judgment first",
@@ -58,7 +59,7 @@ const TRUST = [
   },
   {
     title: "Works above systems of record",
-    body: "A Decision layer above POS, PMS, labor and AP. Confirm source availability with the team.",
+    body: "A Decision layer above POS, PMS, labor and AP. Check the documented source availability.",
   },
 ] as const;
 
@@ -187,6 +188,7 @@ export function Company2030() {
             </RevealOnView>
           </section>
 
+          <EvaluationChecklist company />
           <CompanyGlobalStory />
           <section className="rx30-connect" data-nav-theme="light">
             <RevealOnView className="rx30-shell">

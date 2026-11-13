@@ -1,5 +1,10 @@
 "use client";
-import { ProductBriefPreview } from "./ProductBriefPreview";
+import { EvaluationChecklist } from "./BuyerGuide";
+import Image from "next/image";
+import {
+  PLATFORM_GALLERY,
+  PLATFORM_GALLERY_REVISION,
+} from "@/lib/marketing/platformGallery";
 
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
@@ -26,7 +31,7 @@ const ARCHITECTURE = [
   {
     n: "03",
     title: "Decisions become outcomes",
-    body: "Prepare or act within policy. Seal Verified Value only when evidence supports it.",
+    body: "Prepare or act within policy. Verify an outcome only when the source evidence supports it.",
   },
 ] as const;
 
@@ -142,8 +147,19 @@ export function Platform2030() {
                 </Link>
               </div>
             </div>
-            <aside className="rm-page-hero-visual">
-              <ProductBriefPreview />
+            <aside className="rm-page-hero-visual br-platform-preview">
+              <Image
+                src={`/platform-showcase/control.webp?v=${PLATFORM_GALLERY_REVISION}`}
+                alt={PLATFORM_GALLERY[0].alt}
+                width={1600}
+                height={1000}
+                sizes="(max-width: 900px) 90vw, 48vw"
+                priority
+              />
+              <p>Fictional hotel Control Center · Product preview</p>
+              <Link href="/demo" className="br-inline-link">
+                Explore the full demo →
+              </Link>
             </aside>
           </section>
 
@@ -206,20 +222,34 @@ export function Platform2030() {
                     <div className="rm-story-chart" aria-hidden="true">
                       <svg viewBox="0 0 300 95" fill="none">
                         <path
-                          d="M0 76H300M0 43H300M0 10H300"
-                          stroke="#ffffff20"
+                          d="M18 46H282"
+                          stroke="#82baff55"
+                          strokeWidth="2"
                         />
-                        <path
-                          d="M0 82L30 70L60 74L90 50L120 59L150 35L180 45L210 18L240 30L270 8L300 17"
-                          stroke="#41f6a1"
-                          strokeWidth="3"
-                        />
-                        <path
-                          d="M0 80L300 36"
-                          stroke="#82baff"
-                          strokeDasharray="5 6"
-                        />
+                        {DECISION_STEPS.map((step, index) => (
+                          <g key={step.title}>
+                            <circle
+                              cx={18 + index * 52.8}
+                              cy="46"
+                              r={index === beat ? 9 : 6}
+                              fill={index <= beat ? "#41f6a1" : "#4b76ba"}
+                            />
+                            <text
+                              x={18 + index * 52.8}
+                              y="76"
+                              textAnchor="middle"
+                              fill="#d5e9ff"
+                              fontSize="11"
+                            >
+                              {index + 1}
+                            </text>
+                          </g>
+                        ))}
                       </svg>
+                      <span className="br-story-caption">
+                        Decision path · Step {beat + 1} of{" "}
+                        {DECISION_STEPS.length}
+                      </span>
                     </div>
                     <span>{story.label}</span>
                     <strong>{story.value}</strong>
@@ -231,6 +261,7 @@ export function Platform2030() {
           </section>
 
           <PlatformWorkspaceShowcase />
+          <EvaluationChecklist />
 
           <section className="rx30-pain" data-nav-theme="light">
             <div className="rx30-shell">
@@ -252,7 +283,7 @@ export function Platform2030() {
               <p className="rx30-kicker">05 · Verified outcomes</p>
               <h2 className="rx30-h2">Expected · Observed · Verified.</h2>
               <p className="rx30-lead">
-                RADR never blurs the three. Verified Value seals only when
+                RADR never blurs the three. Value is verified only when
                 downstream evidence supports the economic outcome.
               </p>
               <div className="rx30-flow-grid" style={{ marginTop: "1.75rem" }}>

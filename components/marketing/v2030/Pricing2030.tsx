@@ -1,3 +1,4 @@
+import { PricingFitGuide } from "./PricingFitGuide";
 import { Link } from "@/i18n/navigation";
 import NextLink from "next/link";
 import { PublicFooter, PublicNavbar } from "@/components/marketing/PublicShell";
@@ -52,7 +53,8 @@ const PLANS = [
     name: "Portfolio",
     tag: "Up to 20 locations",
     headline: "A wider view. The same simple setup.",
-    audience: "For larger hospitality groups managing a broader location estate.",
+    audience:
+      "For larger hospitality groups managing a broader location estate.",
     price: "Pricing coming soon",
     priceNote: "Monthly plan · up to 20 locations",
     highlights: [
@@ -67,7 +69,10 @@ const included = (label = "Included"): Inclusion => ({
   status: "included",
   label,
 });
-const pending: Inclusion = { status: "pending", label: "Published before launch" };
+const pending: Inclusion = {
+  status: "pending",
+  label: "Published before launch",
+};
 const excluded: Inclusion = { status: "excluded", label: "Not included" };
 const COMPARISON: {
   label: string;
@@ -112,7 +117,8 @@ const COMPARISON: {
   },
   {
     label: "Location comparisons",
-    description: "Compare performance and operating context across your locations.",
+    description:
+      "Compare performance and operating context across your locations.",
     cells: [excluded, included(), included()],
   },
   {
@@ -249,9 +255,9 @@ export function Pricing2030({
                   Simple <em>plans.</em>
                 </h1>
                 <p className="rm-price-lead">
-                  Choose the location capacity you need. Follow the guided
-                  setup at your own pace. Explore the free demo before
-                  deciding which plan fits.
+                  Choose the location capacity you need. Follow the guided setup
+                  at your own pace. Explore the free demo before deciding which
+                  plan fits.
                 </p>
                 <div className="rx30-ctas">
                   <Link href="#plans" className="rx30-btn rx30-btn-primary">
@@ -267,9 +273,7 @@ export function Pricing2030({
                 aria-label="How the packages work"
               >
                 <FrozenRadrLogo variant="mark" theme="dark" width={36} />
-                <p className="rm-price-overline">
-                  Built for self-guided setup
-                </p>
+                <p className="rm-price-overline">Built for self-guided setup</p>
                 <h2>
                   Choose a plan.
                   <br />
@@ -318,10 +322,12 @@ export function Pricing2030({
                   rather than a consulting engagement.
                 </p>
               </div>
+              <PricingFitGuide />
               <div className="rm-plan-grid">
                 {PLANS.map((plan) => (
                   <article
                     key={plan.id}
+                    id={`plan-${plan.id}`}
                     className="rm-plan-card"
                     data-featured={plan.id === "expand" ? "true" : undefined}
                   >
@@ -388,13 +394,11 @@ export function Pricing2030({
               <p className="rx30-kicker">The differences, at a glance</p>
               <h2 className="rx30-h2">What’s included. Side by side.</h2>
               <p className="rm-compare-intro">
-                One location, a growing group or a wider portfolio. Compare
-                the capacity and product features in each standard package.
+                One location, a growing group or a wider portfolio. Compare the
+                capacity and product features in each standard package.
               </p>
               <div className="rm-compare-legend" aria-label="Comparison key">
-                <InclusionCell
-                  value={included("Included in the package")}
-                />
+                <InclusionCell value={included("Included in the package")} />
                 <InclusionCell value={pending} />
                 <InclusionCell value={excluded} />
               </div>
@@ -411,9 +415,10 @@ export function Pricing2030({
               >
                 <table className="rm-compare-table">
                   <caption>
-                    Proposed standard packages with guided setup and documentation.
-                    Monthly prices and usage limits are pending. Provider
-                    availability follows the documented connection status.
+                    Proposed standard packages with guided setup and
+                    documentation. Monthly prices and usage limits are pending.
+                    Provider availability follows the documented connection
+                    status.
                   </caption>
                   <thead>
                     <tr>

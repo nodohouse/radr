@@ -74,14 +74,16 @@ export function FuturesChapter() {
             <p className="rx-fut-pub-kicker">
               Futures · D-1911 · Soho · New York · Dinner · DEMO
             </p>
-            <h1 className="rx-fut-pub-title">PACE NEXT SEATING WAVE · 12 MIN</h1>
+            <h1 className="rx-fut-pub-title">
+              PACE NEXT SEATING WAVE · 12 MIN
+            </h1>
             <p className="rx-fut-pub-econ">
               <strong>+$620</strong>
-              <span>expected contribution</span>
+              <span>expected protected tonight · modeled</span>
             </p>
             <p className="rx-fut-pub-lead">
-              Compare paths before you act. Same Decision architecture —
-              different outcomes.
+              Compare paths before you act. The same Decision architecture
+              compares different outcomes.
             </p>
 
             <ul className="rx-fut-pub-signals" aria-label="Why now">
@@ -106,7 +108,11 @@ export function FuturesChapter() {
             </p>
             <h2 className="rx-fut-pub-h2">Three paths. One recommendation.</h2>
 
-            <ul className="rx-fut-pub-paths" role="listbox" aria-label="Futures">
+            <ul
+              className="rx-fut-pub-paths"
+              role="listbox"
+              aria-label="Futures"
+            >
               {FUTURES.map((f) => (
                 <li key={f.id}>
                   <button
@@ -122,9 +128,7 @@ export function FuturesChapter() {
                     <div className="rx-fut-pub-path-top">
                       <span className="rx-fut-pub-path-lab">
                         {f.label}
-                        {f.preferred ? (
-                          <em>Recommended</em>
-                        ) : null}
+                        {f.preferred ? <em>Recommended</em> : null}
                       </span>
                       <strong>{f.value}</strong>
                     </div>
@@ -147,13 +151,13 @@ export function FuturesChapter() {
               <dl className="rx-fut-pub-meta">
                 <div>
                   <dt>No-action baseline</dt>
-                  <dd>Seat pressure · kitchen stays elevated · second turn burns</dd>
+                  <dd>
+                    Seat pressure · kitchen stays elevated · second turn burns
+                  </dd>
                 </div>
                 <div>
                   <dt>Expected effect</dt>
-                  <dd>
-                    {pick.value} contribution vs seat-now path
-                  </dd>
+                  <dd>{pick.value} contribution vs seat-now path</dd>
                 </div>
                 <div>
                   <dt>Key assumption</dt>

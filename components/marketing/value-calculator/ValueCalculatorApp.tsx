@@ -447,6 +447,7 @@ export function ValueCalculatorApp() {
                                   })
                                 }
                                 options={OTHER_KIND_OPTIONS}
+                                help="Other formats use general hospitality assumptions. Choose Hotel for room and channel economics, or Restaurant for a restaurant-led operation."
                               />
                             ) : null}
                           </>

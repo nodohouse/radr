@@ -65,7 +65,7 @@ export function MarketingHeroVisual({ kind }: Props) {
       </aside>
     );
   return (
-    <aside id="lenses" className="rm-page-hero-visual rm-scope-visual">
+    <aside className="rm-page-hero-visual rm-scope-visual">
       <p className="rm-eyebrow">ONE CONNECTED ECONOMIC PICTURE</p>
       <h3>
         Find the leak.

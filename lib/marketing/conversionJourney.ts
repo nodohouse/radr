@@ -8,15 +8,18 @@ export function publicPlan(value: unknown): PublicPlanId | null {
     : null;
 }
 export function planName(plan: PublicPlanId) {
-  return plan === "start"
-    ? "Core"
-    : plan === "expand"
-      ? "Expand"
-      : "Portfolio";
+  return plan === "start" ? "Core" : plan === "expand" ? "Expand" : "Portfolio";
 }
 export function planRegistrationHref(plan: PublicPlanId) {
   return `/signup?intent=workspace&plan=${plan}`;
 }
 export function planSetupPreviewHref(plan: PublicPlanId, vertical: DemoWorld) {
   return `/onboarding/preview?plan=${plan}&vertical=${vertical}`;
+}
+
+/** Package capacity only; never infers prices or an undocumented larger plan. */
+export function planForLocations(locations: number): PublicPlanId | null {
+  if (!Number.isSafeInteger(locations) || locations < 1 || locations > 20)
+    return null;
+  return locations === 1 ? "start" : locations <= 5 ? "expand" : "enterprise";
 }

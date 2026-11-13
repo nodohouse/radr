@@ -1,0 +1,170 @@
+{
+  "date": "2026-11-13",
+  "scope": "English Platform, Solutions, Value Calculator, Pricing, Company and all public navigation destinations",
+  "method": "One editorial and implementation review using multiple stakeholder perspectives, source inspection, automated Chromium journeys and manual screenshot review. These are simulated tasks, not interviews with real users or an independent board review.",
+  "investment_context": "A high-stakes investor presentation standard. This review does not establish a valuation or investment suitability.",
+  "perspectives": [
+    {
+      "role": "Board / investor",
+      "question": "Is the category clear, and are expectations separated from evidence?",
+      "coverage": "Decision walkthrough, company evaluation standard, explicit illustrative examples"
+    },
+    {
+      "role": "CFO",
+      "question": "Can the economics, assumptions, adjustments and proof be reviewed?",
+      "coverage": "Calculator formulas and exports; supplier invoice arithmetic; credit versus cash distinction"
+    },
+    {
+      "role": "General manager",
+      "question": "Does the page explain a useful next operating decision?",
+      "coverage": "Evidence, response, ownership, review window and outcome steps"
+    },
+    {
+      "role": "Hotel revenue manager",
+      "question": "Does room demand get evaluated after channel and service costs?",
+      "coverage": "SELL guide, hotel calculator example and matching demo gate"
+    },
+    {
+      "role": "Chef / service manager",
+      "question": "Are staffing, kitchen constraints, waste and service consequences connected?",
+      "coverage": "LABOR and cost-variance guides"
+    },
+    {
+      "role": "Procurement lead",
+      "question": "Are quantities, units, terms and comparable inputs made explicit?",
+      "coverage": "BUY guide and supplier/procurement field notes"
+    },
+    {
+      "role": "Portfolio leader",
+      "question": "Are location scope and package boundaries understandable?",
+      "coverage": "Interactive package fit at 1/5/20 boundaries; no invented larger package"
+    },
+    {
+      "role": "Engineering / data lead",
+      "question": "Are supported records and provider readiness explained before activation?",
+      "coverage": "Platform evaluation checklist and developer requirements links"
+    },
+    {
+      "role": "Privacy reviewer",
+      "question": "Are optional choices respected and financial inputs kept out of conversion events?",
+      "coverage": "Consent rejection/reopen and calculator consent-gated intent events"
+    },
+    {
+      "role": "First-time buyer",
+      "question": "Can someone learn before registering?",
+      "coverage": "Problem field notes, four distinct lens guides, free reading and example calculations"
+    },
+    {
+      "role": "Keyboard user",
+      "question": "Can the menu, problem tabs and page links be used and dismissed?",
+      "coverage": "Desktop menu focus/Escape, problem tab keys and pricing anchors"
+    },
+    {
+      "role": "Phone buyer",
+      "question": "Are controls, navigation, text and decisions usable on a narrow screen?",
+      "coverage": "Phone drawer, responsive calculator and pricing; 390-to-3840px sweep"
+    }
+  ],
+  "resolved_findings": [
+    {
+      "area": "Solutions",
+      "finding": "All four economic-lens deep routes fell back to the generic supplier explorer.",
+      "change": "Distinct BUY, LABOR, SELL and RECOVER pages with relevant evidence, comparisons, responses, verification and reading paths."
+    },
+    {
+      "area": "Solutions navigation",
+      "finding": "The lenses anchor existed on a small hero visual rather than substantive explanatory content.",
+      "change": "Moved the anchor to a four-lens guide and retained exactly one target."
+    },
+    {
+      "area": "Solutions",
+      "finding": "Jargon did not tell an operator which records to gather or which legitimate differences to rule out.",
+      "change": "Added contextual field notes for all five problem classes and simplified reconciliation/cost language."
+    },
+    {
+      "area": "Platform",
+      "finding": "The hero mounted an interactive showcase despite the desired passive marketing/demo boundary.",
+      "change": "Uses a passive product image and a clear link to gated demo entry."
+    },
+    {
+      "area": "Platform",
+      "finding": "A decorative trend line did not represent the selected decision stage.",
+      "change": "Replaced it with a six-step diagram reflecting the current walkthrough step."
+    },
+    {
+      "area": "Platform",
+      "finding": "Architecture needed a practical evaluation method.",
+      "change": "Added comparable-record requirements, an end-to-end decision test and a proof-before-action checklist."
+    },
+    {
+      "area": "Pricing",
+      "finding": "Capacity was explained but visitors had no simple way to apply it to their footprint.",
+      "change": "Added a location-count guide with validation, documented boundaries and links to the matching card. Rates remain pending."
+    },
+    {
+      "area": "Company",
+      "finding": "Principles offered limited practical value to a reader assessing any decision system.",
+      "change": "Added four evidence, alternative, control and outcome questions; retained anonymous company positioning and illustrative footprint labels."
+    },
+    {
+      "area": "Value Calculator",
+      "finding": "Other-format results could call a single venue a portfolio without explaining the general model.",
+      "change": "Uses neutral operating copy and explains the general assumptions and relevant hotel/restaurant alternatives."
+    },
+    {
+      "area": "Supporting pages",
+      "finding": "Some copy implied automatic rollout, and three visible em dashes remained.",
+      "change": "Uses prepared-for-review wording, clarifies the matched credit proof and removes those em dashes."
+    },
+    {
+      "area": "Visual review",
+      "finding": "The new Platform preview caption had poor contrast on the blue hero; automatic scans did not flag the gradient case.",
+      "change": "Added an opaque light preview surface and an explicit text contrast check."
+    }
+  ],
+  "page_assessment": {
+    "platform": "A buyer can follow the decision loop, distinguish expected from completed-service proof and prepare a meaningful evaluation.",
+    "solutions": "A reader can investigate a specific economic problem, identify the required evidence and understand the response and proof.",
+    "value_calculator": "The model explains relevant inputs, scenario amounts, category contributions, capture assumptions, ROI boundaries and local exports. It does not verify customer savings.",
+    "pricing": "Capacity, inclusions, self-guided setup and pending rates are explicit. This remains a proposed package comparison, not active checkout.",
+    "company": "The category, operating focus, evaluation principles and public reading paths are clearer. No customer footprint or personal founder story was invented."
+  },
+  "validation": {
+    "unitTestsPassed": 52,
+    "extremeInputScenariosRetained": 128,
+    "fullBrowserJourneysPassed": 54,
+    "fullBrowserRetries": 0,
+    "baselineRouteViewportStates": 62,
+    "uniquePublicDestinations": 39,
+    "mainPageAccessibilityScans": 10,
+    "economicLensAccessibilityScans": 8,
+    "readingDestinationsChecked": 4,
+    "cookieChoiceViewports": [
+      390,
+      1512
+    ],
+    "productionDependencyAdvisories": 0,
+    "appTypecheck": "passed",
+    "localeBundleParity": "17 namespaces passed",
+    "internalLinkCheck": "passed",
+    "finalContrastRegression": "passed: preview captions and links meet 4.5:1 against their opaque surface",
+    "releaseBuild": "passed",
+    "finalRouteViewportStates": 71,
+    "finalFocusedBrowserJourneysPassed": 22,
+    "finalFocusedBrowserRetries": 0,
+    "detectedLayoutBrowserOrAxeIssues": 0
+  },
+  "remaining_diligence": [
+    "Real customer adoption, retention, revenue and independently reviewable outcomes were not available; no traction or savings claims were created.",
+    "Subscription rates, numeric usage allowances and final commercial terms remain pending by instruction.",
+    "Production account storage, verification email and report lead delivery remain unconfigured; preview flows do not constitute production activation.",
+    "Registered entity and company-specific legal details remain pending; none were invented.",
+    "Production connector validation, tenant isolation, operational recovery and ongoing support capacity require operational evidence beyond a marketing-site review."
+  ],
+  "limits": [
+    "English page content was reviewed. Locale bundle parity is not proof of complete translated body copy.",
+    "Automated accessibility and dependency checks are not an independent accessibility certification, penetration test or security audit.",
+    "No claim of measured conversion lift or full browser/device exhaustiveness is made.",
+    "Production domains, live billing, service provisioning and external communications were not changed."
+  ]
+}

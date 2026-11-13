@@ -1,4 +1,7 @@
 "use client";
+import { EconomicLensPage } from "./EconomicLensPage";
+import { SolutionFieldNotes, EconomicLensOverview } from "./BuyerGuide";
+import { economicGuideId } from "@/lib/marketing/buyerGuide";
 import { MarketingHeroVisual } from "./MarketingHeroVisual";
 
 import { useCallback, useEffect, useState } from "react";
@@ -51,13 +54,13 @@ const LEAKS: {
   {
     id: "recon",
     label: "Reconciliation",
-    title: "Settlement streams diverge",
+    title: "When sales and settlements do not match",
     signal: "POS expectation and payment settlement disagree.",
     cause: "Unexplained gap ages before anyone owns it.",
     exposure: "Material unexplained gap",
-    decision: "Isolate gap and prepare credit or write-off path.",
-    recovery: "Close the stream with a governed disposition.",
-    verification: "Gap explained · disposition sealed",
+    decision: "Match the sales, fees, refunds and expected receipt.",
+    recovery: "Assign an owner to explain or resolve the remaining difference.",
+    verification: "Receipt or adjustment matched to the original records",
     economics: [
       { label: "POS expected", value: "Modelled" },
       { label: "Settled", value: "Modelled" },
@@ -68,19 +71,20 @@ const LEAKS: {
   {
     id: "cost",
     label: "Cost variance",
-    title: "Margin drivers decompose",
+    title: "Understand what changed the food cost",
     signal: "Food cost and yield drift vs plan.",
-    cause: "Material SKU / prep drivers ranked by economics.",
+    cause: "Separate changes in purchase price, portion size, yield and waste.",
     exposure: "Margin at risk this period",
-    decision: "Prepare SKU or prep response with confidence.",
-    recovery: "Act on the ranked driver. Not another BI chart.",
+    decision:
+      "Compare a purchasing or preparation change and its service impact.",
+    recovery: "Review the proposed change before applying it to the operation.",
     verification: "Observed cost vs expected after action",
     economics: [
       { label: "Plan", value: "Baseline" },
       { label: "Actual", value: "Drift" },
       { label: "Driver", value: "Ranked" },
     ],
-    outcome: "Prepared SKU / prep response",
+    outcome: "Purchasing or preparation response compared",
   },
   {
     id: "proc",
@@ -88,7 +92,7 @@ const LEAKS: {
     title: "Supplier price dispersion",
     signal: "Same item, different cities, different unit economics.",
     cause: "Material dispersion across the estate.",
-    exposure: "Negotiation headroom",
+    exposure: "Comparable purchasing cost this period",
     decision: "Prepare negotiation package across locations.",
     recovery: "Align rates or switch where policy allows.",
     verification: "Rate change matched to subsequent invoices",
@@ -106,9 +110,12 @@ const LEAKS: {
     signal: "Room nights and covers lose value as the deadline approaches.",
     cause: "Cost of doing nothing rises with the clock.",
     exposure: "Tonight / this week at risk",
-    decision: "Compare pace / rate / channel futures.",
-    recovery: "Choose the fork with clearest economics.",
-    verification: "Observed revenue vs Expected after the night",
+    decision:
+      "Compare timing, pricing and channel responses, including doing nothing.",
+    recovery:
+      "Review the contribution and operating constraints of each response.",
+    verification:
+      "Recorded contribution compared with the expectation after service",
     economics: [
       { label: "Available", value: "Now" },
       { label: "Deadline", value: "Tonight" },
@@ -148,6 +155,15 @@ function readLeak(lens?: string): LeakId {
 }
 
 export function Solutions2030(props: Props = {}) {
+  const lens = economicGuideId(props.lens);
+  return lens ? (
+    <EconomicLensPage lens={lens} />
+  ) : (
+    <SolutionsOverview {...props} />
+  );
+}
+
+function SolutionsOverview(props: Props) {
   const reduced = useReducedMotionSafe();
   const [id, setId] = useState<LeakId>(() =>
     LEAKS.some((l) => l.id === props.lens)
@@ -324,8 +340,11 @@ export function Solutions2030(props: Props = {}) {
                   />
                 </div>
               </div>
+              <SolutionFieldNotes id={leak.id} />
             </div>
           </section>
+
+          <EconomicLensOverview />
 
           <section
             className="rx30-close rx30-close--saas"

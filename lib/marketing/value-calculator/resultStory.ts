@@ -60,7 +60,10 @@ export function resultStory(j: JourneyState) {
         "Which purchasing and service choices deserve your attention first?",
     };
   return {
-    title: "One portfolio. A connected picture.",
+    title:
+      j.vertical === "mixed"
+        ? "One portfolio. A connected picture."
+        : "Your operation. A clearer financial picture.",
     subtitle: "Find the decisions behind contribution.",
     focus:
       "Look across food, rooms, staffing and settlements without losing the operating context.",

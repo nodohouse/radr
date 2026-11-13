@@ -27,10 +27,7 @@ import {
   MONEY_D1911_VERIFIED,
   formatPublicMoney,
 } from "@/lib/marketing/publicMoney";
-import {
-  euro,
-  ECON_D4102,
-} from "@/lib/marketing/publicDecisionEconomics";
+import { euro, ECON_D4102 } from "@/lib/marketing/publicDecisionEconomics";
 import {
   GROUP_LEDGER_THIS_MONTH,
   GROUP_METRICS,
@@ -175,8 +172,8 @@ export function ValueChapter() {
                 />
               </div>
               <p style={{ marginTop: "0.85rem" }}>
-                Credit matched to INV-88421 · AP-POST-991. A recommendation is
-                not value — this trail is.
+                Credit matched to INV-88421 · AP-POST-991. The outcome is
+                supported by the matched credit and accounting entry.
               </p>
               <p style={{ marginTop: "0.85rem" }}>
                 <NextLink
@@ -222,7 +219,10 @@ export function ValueChapter() {
             <p className="rx-ch-kicker" style={{ marginTop: "7.5rem" }}>
               Verified Value · all locations · this month
             </p>
-            <div className="rx-rso-hero-num" style={{ marginBottom: "1.25rem" }}>
+            <div
+              className="rx-rso-hero-num"
+              style={{ marginBottom: "1.25rem" }}
+            >
               <strong className="rx-pub-num" data-tone="verified">
                 {euro(
                   locationScope === "all"
@@ -262,8 +262,12 @@ export function ValueChapter() {
                 </div>
               </div>
             ) : null}
-            <p className="rx-value-stream-note" style={{ marginBottom: "1rem" }}>
-              DEMO · derived from sealed Decision fixtures · not customer results
+            <p
+              className="rx-value-stream-note"
+              style={{ marginBottom: "1rem" }}
+            >
+              DEMO · derived from sealed Decision fixtures · not customer
+              results
             </p>
 
             <div

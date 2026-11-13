@@ -8,9 +8,9 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: "Platform — RADR",
+    title: "RADR",
     description:
-      "One Decision. From first signal to lasting memory. Systems record what happened — RADR decides what matters and proves what came back.",
+      "Explore RADR’s hospitality decision layer. Review source evidence, compare responses and follow expected, observed and verified outcomes.",
     alternates: buildAlternatesForLocale(locale, "/product"),
   };
 }

@@ -36,7 +36,9 @@ test("evaluation brief requires choices, downloads useful evidence steps and nev
     await page
       .getByRole("combobox", { name: "Operating context", exact: true })
       .selectOption(context);
-    await page.getByRole("combobox", { name: "Locations", exact: true }).selectOption("2–5");
+    await page
+      .getByRole("combobox", { name: "Locations", exact: true })
+      .selectOption("2–5");
     await expect(
       page.getByRole("button", { name: "Prepare my brief →" }),
     ).toBeDisabled();
@@ -102,9 +104,13 @@ test("primary navigation opens the public demo and calculator results offer an h
     page.getByRole("button", { name: "Print / save Value Map", exact: true }),
   ).toBeVisible();
   await page
-    .getByRole("link", { name: "Prepare an evaluation", exact: true })
+    .locator(".vc4-bridge")
+    .getByRole("link", { name: "Explore the hotel demo" })
     .click();
-  await expect(page.locator(".rm-evaluation")).toBeVisible();
+  await expect(page).toHaveURL(/\/en\/signup\?intent=demo/);
+  await expect(
+    page.getByLabel("Choose your demo", { exact: true }),
+  ).toHaveValue("hotel");
 });
 test("discovery endpoints expose coherent schema, sitemap and social imagery", async ({
   page,
