@@ -205,7 +205,7 @@ export function GuestOverview({
               See all segments →
             </button>
           </div>
-          <div className="gi-table-wrap">
+          <div className="gi-table-wrap" tabIndex={0} role="region" aria-label="Guest opportunities table">
             <table className="gi-table">
               <thead>
                 <tr>

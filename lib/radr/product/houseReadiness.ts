@@ -326,7 +326,7 @@ export function houseReadinessModel(): HouseReadinessModel {
     ready,
     due,
     gap,
-    arrivalsToday: 42,
+    arrivalsToday: HOTEL_LIVE_SCENARIO.arrivalsToday,
     recoverableEuro: 3780,
     kpis: [
       {

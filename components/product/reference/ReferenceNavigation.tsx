@@ -9,14 +9,9 @@ import { NAV_ICONS } from "../shell/navIcons";
 import { useProduct } from "@/lib/product/store";
 import { useDemoOrg } from "../useDemoOrg";
 import { buildDataHealthOverview } from "@/lib/radr/product/dataHealthProofEngine";
+import { WORKSPACE_PRIMARY_NAV, WORKSPACE_SECONDARY_LINKS } from "@/lib/product/appNav";
 
-const ITEMS = [
-  ["control-center", "Control Center", "/app"], ["live", "Live", "/app/live"],
-  ["decisions", "Decisions", "/app/decisions"], ["service", "Operations", "/app/service"],
-  ["house", "Back of House", "/app/house"],
-  ["intelligence", "Intelligence", "/app/intelligence"], ["value", "Value", "/app/value"],
-  ["memory", "Memory", "/app/memory"], ["data-health", "Data Health", "/app/data-health"], ["connections", "Connections", "/app/connections"],
-] as const;
+const ITEMS = WORKSPACE_PRIMARY_NAV;
 function RoutePending(){const {pending}=useLinkStatus();return pending?<span className="rs-route-pending" role="status" aria-label="Opening section"/>:null;}
 const NAV_CONTEXT: Record<string, string> = {
   "control-center": "What needs you now",
@@ -31,9 +26,9 @@ const NAV_CONTEXT: Record<string, string> = {
   connections: "Your connected systems",
 };
 const WorkspaceIcon = NAV_ICONS.locations;
-const MORE = [["Floor plan editor", "/app/live/plan"], ["Locations", "/app/locations"], ["Guests", "/app/guests"], ["Dashboards", "/app/dashboards"], ["Settings", "/app/settings"]] as const;
+const MORE = WORKSPACE_SECONDARY_LINKS;
 
-export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) {
+export function ReferenceNavigation({ onNavigate, modal = false }: { onNavigate: () => void; modal?: boolean }) {
   const path = usePathname();
   const [more, setMore] = useState(false);
   const [pinned, setPinned] = useState(false);
@@ -43,7 +38,7 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
   const { summary, scopeLabel } = useRecords();
   const needs = summary.groups.needs_you.length;
   const handling = summary.groups.handling.length;
-  return <aside className="rs-navigation" aria-label="RADR workspace" data-pinned={pinned || undefined}
+  return <aside id="radr-workspace-navigation" className="rs-navigation" aria-label="RADR workspace" role={modal ? "dialog" : undefined} aria-modal={modal || undefined} data-pinned={pinned || undefined}
     onKeyDown={event=>{if(event.key==="Escape"){setMore(false);setPinned(false);onNavigate();document.getElementById("product-content")?.focus();}}}
     onMouseLeave={event=>{if(!event.currentTarget.querySelector(":focus-visible")){setMore(false);if(event.currentTarget.contains(document.activeElement))document.getElementById("product-content")?.focus();}}}
     onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setMore(false);}}>
@@ -56,7 +51,8 @@ export function ReferenceNavigation({ onNavigate }: { onNavigate: () => void }) 
       </Link>
       <span>{handling} in motion</span>
     </div>
-    <button type="button" className="rs-rail-pin" aria-label={pinned?"Unpin navigation":"Pin navigation open"} aria-pressed={pinned} onClick={()=>setPinned(value=>!value)} title={pinned?"Unpin navigation":"Keep navigation open"}><svg viewBox="0 0 20 20" width="17" height="17" fill="none" aria-hidden="true"><path d="m12 3 5 5-2 1-2 4-3-3-4 4-1-1 4-4-3-3 4-2 2-1Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/><path d="m6 14-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg></button>
+    {modal ? <button type="button" className="rs-rail-pin rs-rail-close" aria-label="Close navigation" onClick={onNavigate}><svg viewBox="0 0 20 20" width="17" height="17" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg></button>
+      : <button type="button" className="rs-rail-pin" aria-label={pinned?"Unpin navigation":"Pin navigation open"} aria-pressed={pinned} onClick={()=>setPinned(value=>!value)} title={pinned?"Unpin navigation":"Keep navigation open"}><svg viewBox="0 0 20 20" width="17" height="17" fill="none" aria-hidden="true"><path d="m12 3 5 5-2 1-2 4-3-3-4 4-1-1 4-4-3-3 4-2 2-1Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/><path d="m6 14-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg></button>}
     </div>
     <button type="button" className="rs-workspace" onClick={() => setMore(v => !v)} aria-expanded={more} aria-label={`Workspace: ${org.name}`} aria-controls="rs-workspace-menu"><span className="rs-workspace-icon" aria-hidden="true"><WorkspaceIcon /></span><span className="rs-workspace-copy"><small>WORKSPACE</small><strong>{org.name}</strong></span><span className="rs-workspace-chevron" aria-hidden="true">⌄</span></button>
     {more ? <div className="rs-more" id="rs-workspace-menu">{MORE.map(([label,href]) => <Link key={href} href={href} onClick={() => { setMore(false); onNavigate(); }}>{label}<span aria-hidden="true">↗</span></Link>)}</div> : null}

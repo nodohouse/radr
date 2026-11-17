@@ -6,6 +6,7 @@
 import type { DecisionRecord } from "../record";
 import { DECISION_IDS } from "../ids";
 import { CANON_OTA } from "../demo/canonical";
+import { HOTEL_LIVE_SCENARIO } from "@/lib/radr/demoClock";
 
 const PAYLOAD =
   "Prepared — not written back to POS/PMS/channel. Operator confirms in the system of record.";
@@ -102,7 +103,7 @@ export function buildOtaDecisionRecord(
     currentState: "89% occupancy · direct 48% vs 59% target · OTA +11 pts",
     property: "Mercer House · New York",
     phaseLabel: "Start of day · House",
-    contextLine: "89% occupancy · 12 arrivals",
+    contextLine: `89% occupancy · ${HOTEL_LIVE_SCENARIO.arrivalsToday} arrivals today`,
     triggerEvents: ["ota_share_drift", "high_occupancy"],
     evidenceRefs: [
       {
@@ -262,7 +263,7 @@ export function buildOtaDecisionRecord(
       {
         epistemic: "OBSERVED",
         title: "Mix leak",
-        body: "Nearly sold out (89% · 12 arrivals). Direct share 48% vs 59% target. OTA share 11 pts above target.",
+        body: `Nearly sold out (89% · ${HOTEL_LIVE_SCENARIO.arrivalsToday} arrivals today). Direct share 48% vs 59% target. OTA share 11 pts above target.`,
       },
       {
         epistemic: "ESTIMATED",

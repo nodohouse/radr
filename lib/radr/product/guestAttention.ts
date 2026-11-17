@@ -1,6 +1,6 @@
 /**
  * Guest Intelligence — operating model for Overview / Floor / Segments / Profile.
- * Deterministic demo · fictional guests · no Math.random().
+ * Deterministic Soho demo · fictional guests · USD amounts · no Math.random().
  */
 
 import { DEMO_GUEST_TONIGHT_AGG } from "@/lib/radr/guest/demoTonight";
@@ -136,14 +136,14 @@ export const GUEST_OVERVIEW: GuestOverviewModel = {
     {
       id: "check",
       label: "Expected check / cover",
-      value: "€52",
+      value: "$52",
       delta: `+${agg.returningRevenueSharePct}% from returners`,
       tone: "pos",
     },
     {
       id: "recoverable",
       label: "Recoverable guest value",
-      value: "€460",
+      value: "$460",
       delta: "from active recovery opportunities",
       tone: "watch",
     },
@@ -162,12 +162,12 @@ export const GUEST_OVERVIEW: GuestOverviewModel = {
   compare: {
     doNothing: {
       ticket: "+12 min",
-      recoverable: "€120",
+      recoverable: "$120",
       repeat: "−4pp",
     },
     radrAction: {
       ticket: "within target",
-      recoverable: "€460",
+      recoverable: "$460",
       repeat: "+6pp",
     },
   },
@@ -177,7 +177,7 @@ export const GUEST_OVERVIEW: GuestOverviewModel = {
       name: "Regulars & loyalty",
       share: "38%",
       satisfaction: "4.8 / 5",
-      avgSpend: "€62",
+      avgSpend: "$62",
       repeatLikelihood: "72%",
       takeaway:
         "Peak value 20:10–20:40. Protect terrace tables. Keep ticket time controlled.",
@@ -187,7 +187,7 @@ export const GUEST_OVERVIEW: GuestOverviewModel = {
       name: "First visit",
       share: "14%",
       satisfaction: "4.2 / 5",
-      avgSpend: "€41",
+      avgSpend: "$41",
       repeatLikelihood: "28%",
       takeaway:
         "Ticket time drives satisfaction — kitchen load is the lever.",
@@ -197,7 +197,7 @@ export const GUEST_OVERVIEW: GuestOverviewModel = {
       name: "Corporate & groups",
       share: "21%",
       satisfaction: "4.6 / 5",
-      avgSpend: "€78",
+      avgSpend: "$78",
       repeatLikelihood: "56%",
       takeaway: "Allergy protocols must be confirmed before service.",
     },
@@ -206,7 +206,7 @@ export const GUEST_OVERVIEW: GuestOverviewModel = {
       name: "Tourist & transient",
       share: "17%",
       satisfaction: "4.4 / 5",
-      avgSpend: "€48",
+      avgSpend: "$48",
       repeatLikelihood: "18%",
       takeaway: "Terrace + wine · weather-sensitive — hold recovery for regulars.",
     },
@@ -215,7 +215,7 @@ export const GUEST_OVERVIEW: GuestOverviewModel = {
       name: "Occasion dining",
       share: "10%",
       satisfaction: "4.7 / 5",
-      avgSpend: "€71",
+      avgSpend: "$71",
       repeatLikelihood: "64%",
       takeaway: "Birthday / anniversary gestures convert when timing is calm.",
     },
@@ -380,7 +380,7 @@ export const GUEST_FLOOR_TABLES: GuestFloorTable[] = [
     signal: "VIP",
     guestId: "gst_elena",
     segment: "Regulars & loyalty",
-    spendPotential: "€300–€380",
+    spendPotential: "$300–$380",
     seatedLabel: "Turning",
     stage: "Pre-bus",
     satisfaction: "4.7 / 5",
@@ -397,7 +397,7 @@ export const GUEST_FLOOR_TABLES: GuestFloorTable[] = [
     seatedLabel: "43 min",
     stage: "Starters",
     recommendation: "Offer drink / manage expectation",
-    recValue: "€80",
+    recValue: "$80",
   },
   { id: "8", n: 8, x: 49.2, y: 48.2, party: 4, tone: "ok", signal: "Birthday", seatedLabel: "68 min", stage: "Waiting mains", occasion: "Birthday" },
   { id: "9", n: 9, x: 67.8, y: 46.7, party: 4, tone: "watch", signal: "Wait", seatedLabel: "16 min", stage: "Waiting mains" },
@@ -413,7 +413,7 @@ export const GUEST_FLOOR_TABLES: GuestFloorTable[] = [
     seatedLabel: "33 min",
     stage: "Starters",
     recommendation: "Dessert / loyalty capture",
-    recValue: "€60",
+    recValue: "$60",
   },
   {
     id: "12",
@@ -425,7 +425,7 @@ export const GUEST_FLOOR_TABLES: GuestFloorTable[] = [
     signal: "Allergy",
     guestId: "guest_sofia_meyer",
     segment: "Regulars & loyalty",
-    spendPotential: "€300–€420",
+    spendPotential: "$300–$420",
     seatedLabel: "1h 10m",
     stage: "Course 2/5",
     satisfaction: "4.8 / 5",
@@ -434,18 +434,18 @@ export const GUEST_FLOOR_TABLES: GuestFloorTable[] = [
     occasion: "Business dinner",
     notes: ["Prefers terrace", "Wine enthusiast", "Quiet service"],
     recommendation:
-      "Offer Riesling pairing for next course — historically followed by +€60 on similar visits.",
-    recValue: "€60",
+      "Offer Riesling pairing for next course — historically followed by +$60 on similar visits.",
+    recValue: "$60",
   },
   { id: "13", n: 13, x: 86.5, y: 52.9, party: 2, tone: "ok", signal: "Seated", seatedLabel: "53 min", stage: "Mains" },
-  { id: "14", n: 14, x: 50.8, y: 70.2, party: 4, tone: "attention", signal: "Wait 18m", seatedLabel: "18 min wait", stage: "VIP hold", recValue: "€180" },
+  { id: "14", n: 14, x: 50.8, y: 70.2, party: 4, tone: "attention", signal: "Wait 18m", seatedLabel: "18 min wait", stage: "VIP hold", recValue: "$180" },
 ];
 
 export const GUEST_FLOOR_KPIS = [
   { id: "covers", label: "Covers in house", value: "118", delta: "42 returning · 31 first visit", tone: "neutral" as const },
-  { id: "pace", label: "Avg ticket pace", value: "€52", delta: "+32% vs last 4 weeks", tone: "pos" as const },
+  { id: "pace", label: "Avg ticket pace", value: "$52", delta: "+32% vs last 4 weeks", tone: "pos" as const },
   { id: "vips", label: "VIPs seated", value: "4", delta: "1 upcoming · 3 in house", tone: "pos" as const },
-  { id: "recovery", label: "Recovery value", value: "€460", delta: "from 3 opportunities", tone: "watch" as const },
+  { id: "recovery", label: "Recovery value", value: "$460", delta: "from 3 opportunities", tone: "watch" as const },
   { id: "sat", label: "Guest satisfaction", value: "4.6 / 5.0", delta: "+0.2 vs last 4 weeks", tone: "pos" as const },
 ];
 
@@ -490,11 +490,11 @@ export const SOFIA_PROFILE: GuestProfileModel = {
   tags: ["Regulars & loyalty", "Wine enthusiast", "Dinner guest", "Shellfish allergy"],
   initials: "SM",
   metrics: [
-    { label: "Lifetime value", value: "€1,240", delta: "+28% vs last 6 months", tone: "pos" },
+    { label: "Lifetime value", value: "$1,240", delta: "+28% vs last 6 months", tone: "pos" },
     { label: "Visit frequency", value: "8 visits", delta: "~1 every 6 weeks", tone: "neutral" },
-    { label: "Average spend", value: "€155", delta: "+22% vs similar guests", tone: "pos" },
+    { label: "Average spend", value: "$155", delta: "+22% vs similar guests", tone: "pos" },
     { label: "Next visit likelihood", value: "87%", delta: "Likely in next 4 weeks", tone: "pos" },
-    { label: "Predicted spend tonight", value: "€160–€190", delta: "Based on last 5 comparable visits", tone: "watch" },
+    { label: "Predicted spend tonight", value: "$160–$190", delta: "Based on last 5 comparable visits", tone: "watch" },
   ],
   contact: {
     phone: "+49 · · · · 4421",
@@ -522,15 +522,15 @@ export const SOFIA_PROFILE: GuestProfileModel = {
   ],
   tonight: [
     { text: "Hold terrace table 20:10–20:40", why: "Observed seating preference", value: "Protect experience", confidence: "High" },
-    { text: "Suggest Riesling pairing", why: "Wine affinity on last 5 visits", value: "+€40–€60", confidence: "72%" },
+    { text: "Suggest Riesling pairing", why: "Wine affinity on last 5 visits", value: "+$40–$60", confidence: "72%" },
     { text: "Recommend truffle pasta", why: "Menu affinity", value: "Satisfaction", confidence: "Medium" },
     { text: "Acknowledge birthday with a small gesture", why: "Occasion history", value: "Repeat likelihood", confidence: "High" },
   ],
   visits: [
-    { date: "26 Sep", guests: 2, occasion: "Dinner", spend: "€168", experience: "4.9" },
-    { date: "12 Aug", guests: 4, occasion: "Birthday", spend: "€412", experience: "5.0" },
-    { date: "03 Jul", guests: 2, occasion: "Business", spend: "€186", experience: "4.7" },
-    { date: "18 May", guests: 2, occasion: "Dinner", spend: "€142", experience: "4.8" },
+    { date: "26 Sep", guests: 2, occasion: "Dinner", spend: "$168", experience: "4.9" },
+    { date: "12 Aug", guests: 4, occasion: "Birthday", spend: "$412", experience: "5.0" },
+    { date: "03 Jul", guests: 2, occasion: "Business", spend: "$186", experience: "4.7" },
+    { date: "18 May", guests: 2, occasion: "Dinner", spend: "$142", experience: "4.8" },
   ],
   feedback: [
     { date: "26 Sep", score: "4.9 / 5", quote: "Terrace felt perfect — wine pairing was thoughtful." },
@@ -563,7 +563,7 @@ export function guestProfile(id: string): GuestProfileModel | undefined {
 
 export const GUEST_SEGMENT_KPIS = [
   { id: "returner", label: "Returner share", value: "36%", delta: "+6pp vs last 4 weeks", tone: "pos" as const },
-  { id: "loyalty", label: "Loyalty revenue", value: "€2,480", delta: "32% of tonight’s revenue", tone: "pos" as const },
+  { id: "loyalty", label: "Loyalty revenue", value: "$2,480", delta: "32% of tonight’s revenue", tone: "pos" as const },
   { id: "conversion", label: "First-visit conversion", value: "42%", delta: "+8pp vs last 4 weeks", tone: "pos" as const },
   { id: "repeat", label: "Repeat booking rate", value: "28%", delta: "+6pp vs last 4 weeks", tone: "pos" as const },
   { id: "sat", label: "Guest satisfaction", value: "4.6 / 5.0", delta: "Stable vs last 4 weeks", tone: "neutral" as const },

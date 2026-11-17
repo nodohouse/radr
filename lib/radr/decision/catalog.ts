@@ -6,6 +6,7 @@ import type { Decision, DecisionVertical } from "./core";
 import { DECISION_IDS } from "./ids";
 import { getDecisionRecord } from "./store";
 import { projectDecision } from "./project";
+import { HOTEL_LIVE_SCENARIO } from "@/lib/radr/demoClock";
 
 export { DECISION_IDS };
 
@@ -58,7 +59,7 @@ const hotelWhy = {
     {
       epistemic: "OBSERVED" as const,
       title: "Mix leak",
-      body: "Nearly sold out (89% · 12 arrivals). Direct share 48% vs 59% target. OTA share 11 pts above target.",
+      body: `Nearly sold out (89% · ${HOTEL_LIVE_SCENARIO.arrivalsToday} arrivals today). Direct share 48% vs 59% target. OTA share 11 pts above target.`,
     },
     {
       epistemic: "ESTIMATED" as const,
@@ -188,7 +189,7 @@ export const HERO_BY_VERTICAL: Record<DecisionVertical, Decision> = {
     property: "Mercer House · New York",
     phase: "pre",
     phaseLabel: "Start of day · House",
-    contextLine: "89% occupancy · 12 arrivals",
+    contextLine: `89% occupancy · ${HOTEL_LIVE_SCENARIO.arrivalsToday} arrivals today`,
     headline: "You’re nearly sold out —\nbut giving too much away to OTAs.",
     soWhat: "High demand is still leaking through expensive channels.",
     exposed: { amount: 4200, kind: "exposed", horizon: "tonight" },

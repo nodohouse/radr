@@ -38,6 +38,10 @@ export function GuestShell() {
   const [table, setTable] = useState(() => search.get("table"));
   const [segment, setSegment] = useState(() => search.get("segment"));
 
+  useEffect(() => {
+    if (isHotel) router.replace("/app/live?mode=guests&view=floor&floor=3", { scroll: false });
+  }, [isHotel, router]);
+
   const model = guestOverviewModel();
 
   const pushState = useCallback(
@@ -127,6 +131,8 @@ export function GuestShell() {
       />
     );
   }
+
+  if (isHotel) return <div className="rs-page" role="status">Opening hotel guest details…</div>;
 
   return (
     <div className="gi-root" data-view={view} data-vertical={isHotel ? "hotel" : "restaurant"}>

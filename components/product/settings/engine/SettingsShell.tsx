@@ -2,7 +2,7 @@
 
 import { Heading } from "../../reference/ReferenceUI";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useDemoOrg } from "@/components/product/useDemoOrg";
 import { useProduct } from "@/lib/product/store";
@@ -20,11 +20,8 @@ import {
 } from "@/lib/radr/product/personas";
 import { controlCenterLensFor } from "@/lib/radr/product/controlCenterLens";
 import {
-  DEFAULT_DEMO_SETTINGS,
-  DEMO_SETTINGS_KEY,
-  DEMO_USERS_HOTEL,
-  DEMO_USERS_RESTAURANT,
   readDemoSettings,
+  defaultDemoSettings,
   writeDemoSettings,
   type DemoSettingsState,
 } from "@/lib/radr/product/demoSettings";
@@ -93,27 +90,30 @@ export function SettingsShell() {
     () => searchParams.get("policy"),
   );
   const [navQuery, setNavQuery] = useState("");
-  const [demo, setDemo] = useState<DemoSettingsState>(DEFAULT_DEMO_SETTINGS);
+  const [demo, setDemo] = useState<DemoSettingsState>(() => readDemoSettings());
   const [saveStatus, setSaveStatus] = useState<"saved" | "unsaved" | "saving">(
     "saved",
   );
   const writtenQueryRef = useRef<string | null>(null);
   const saveTimer = useRef<number | null>(null);
+  const pendingSave = useRef<{ state: DemoSettingsState; vertical: DemoVerticalFamily } | null>(null);
 
-  useEffect(() => {
-    const saved = readDemoSettings();
-    // Demo-world switches use the canonical organization, while custom names survive.
-    const defaultName = ["Northstar Restaurants", "Northstar Hotels"].includes(saved.orgName);
-    let hasSavedPreferences = true;
-    try { hasSavedPreferences = Boolean(localStorage.getItem(DEMO_SETTINGS_KEY)); } catch { /* preserve defaults when storage is unavailable */ }
-    const home = org.locations.find(location => location.id === primaryLocationId(org)) ?? org.locations[0];
-    setDemo({
-      ...saved,
-      ...(!hasSavedPreferences ? { currency: home?.currency ?? "USD", timezone: home?.timezone ?? "America/New_York" } : {}),
-      ...(defaultName ? { orgName: org.name, operatingModel: session.vertical === "hotel" ? "hotel_model" : "restaurant_model" } : {}),
-      ...(defaultName && saved.orgName !== org.name ? { users: session.vertical === "hotel" ? DEMO_USERS_HOTEL : DEMO_USERS_RESTAURANT } : {}),
-    });
-  }, [session.vertical, org]);
+  useLayoutEffect(() => {
+    if (saveTimer.current) window.clearTimeout(saveTimer.current);
+    if (pendingSave.current) {
+      writeDemoSettings(pendingSave.current.state, pendingSave.current.vertical);
+      pendingSave.current = null;
+    }
+    setDemo(readDemoSettings(session.vertical));
+    setSaveStatus("saved");
+  }, [session.vertical]);
+
+  useEffect(() => () => {
+    if (saveTimer.current) window.clearTimeout(saveTimer.current);
+    if (pendingSave.current) {
+      writeDemoSettings(pendingSave.current.state, pendingSave.current.vertical);
+    }
+  }, []);
 
   const select = useCallback(
     (id: SettingsSectionId, policy?: string | null) => {
@@ -152,12 +152,15 @@ export function SettingsShell() {
     setDemo(next);
     setSaveStatus("unsaved");
     if (saveTimer.current) window.clearTimeout(saveTimer.current);
+    const vertical = session.vertical;
+    pendingSave.current = { state: next, vertical };
     saveTimer.current = window.setTimeout(() => {
       setSaveStatus("saving");
-      writeDemoSettings(next);
+      writeDemoSettings(next, vertical);
+      pendingSave.current = null;
       setSaveStatus("saved");
     }, 500);
-  }, []);
+  }, [session.vertical]);
 
   const onPatch = useCallback(
     (partial: Partial<DemoSettingsState>) => {
@@ -180,18 +183,6 @@ export function SettingsShell() {
         setDefaultLocationId,
         setPeriod,
       );
-      const nextName =
-        vertical === "hotel" ? "Northstar Hotels" : "Northstar Restaurants";
-      const nextModel =
-        vertical === "hotel" ? "hotel_model" : "restaurant_model";
-      const current = readDemoSettings();
-      persist({
-        ...current,
-        orgName: nextName,
-        operatingModel: nextModel,
-        users:
-          vertical === "hotel" ? DEMO_USERS_HOTEL : DEMO_USERS_RESTAURANT,
-      });
     },
     [
       session.vertical,
@@ -200,7 +191,6 @@ export function SettingsShell() {
       setRoleView,
       setDefaultLocationId,
       setPeriod,
-      persist,
     ],
   );
 
@@ -296,9 +286,10 @@ export function SettingsShell() {
           roleView={roleView}
           onPersona={(role) => setRoleView(role)}
           onReset={() => {
-            const home = org.locations.find(location => location.id === primaryLocationId(org)) ?? org.locations[0];
-            const reset = { ...DEFAULT_DEMO_SETTINGS, orgName: org.name, operatingModel: session.vertical === "hotel" ? "hotel_model" : "restaurant_model", users: session.vertical === "hotel" ? DEMO_USERS_HOTEL : DEMO_USERS_RESTAURANT, currency: home?.currency ?? "USD", timezone: home?.timezone ?? "America/New_York" };
-            writeDemoSettings(reset);
+            if (saveTimer.current) window.clearTimeout(saveTimer.current);
+            pendingSave.current = null;
+            const reset = defaultDemoSettings(session.vertical);
+            writeDemoSettings(reset, session.vertical);
             setDemo(reset);
             setRoleView("cfo");
             setLocationScope("all");

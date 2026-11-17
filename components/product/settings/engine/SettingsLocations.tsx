@@ -78,7 +78,7 @@ export function SettingsLocations({ org, demo, onPatch }: Props) {
           </div>
         </header>
 
-        <div className="se-table-wrap">
+        <div className="se-table-wrap" tabIndex={0} role="region" aria-label="Location settings table">
           <table className="se-table" aria-label="Locations">
             <thead>
               <tr>

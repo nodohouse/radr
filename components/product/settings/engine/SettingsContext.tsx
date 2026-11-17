@@ -80,6 +80,7 @@ export function SettingsContextPanel({ demo, onPatch }: Props) {
                   key={m.id}
                   type="button"
                   data-active={demo[s.key] === m.id ? "true" : undefined}
+                  aria-pressed={demo[s.key] === m.id}
                   onClick={() => onPatch({ [s.key]: m.id })}
                 >
                   {m.label}
@@ -92,14 +93,14 @@ export function SettingsContextPanel({ demo, onPatch }: Props) {
 
       <div className="se-form" style={{ marginTop: 18 }}>
         <div className="se-field">
-          <label>Locale</label>
-          <small>Reporting language and number formats.</small>
-          <input value="de-DE · Germany" readOnly aria-readonly />
+          <label htmlFor="context-locale">Demo locale</label>
+          <small>Language and number formats used in this demo.</small>
+          <input id="context-locale" value="en-US · English (United States)" readOnly aria-readonly />
         </div>
         <div className="se-field">
-          <label>Business calendar</label>
+          <label htmlFor="context-calendar">Business calendar</label>
           <small>Aligns service periods with fiscal and local calendars.</small>
-          <input value="Follow fiscal calendar + public holidays" readOnly />
+          <input id="context-calendar" value="Follow fiscal calendar + public holidays" readOnly />
         </div>
       </div>
     </section>

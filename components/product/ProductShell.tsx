@@ -17,6 +17,7 @@ import { RoutePeriodSync } from "@/lib/product/radrContext/RoutePeriodSync";
 import { getRadrEnvironment, isSyntheticData } from "@/lib/radr/env";
 import { DemoPlanInvitation } from "./DemoPlanInvitation";
 import { MobileTabBar } from "./MobileTabBar";
+import { WorkspacePending } from "./WorkspacePending";
 import { useShellNavMode } from "./shell/useShellBreakpoint";
 
 function ShellChrome({
@@ -66,6 +67,39 @@ function ShellChrome({
     if (navMode === "desktop") setMobileNav(false);
   }, [navMode, setMobileNav]);
 
+  useEffect(() => {
+    if (!contextReady || !mobileNav || navMode === "desktop") return;
+    const rail = document.getElementById("radr-workspace-navigation");
+    if (!rail) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    const focusable = () => Array.from(rail.querySelectorAll<HTMLElement>(
+      'a[href],button:not(:disabled),[tabindex="0"]',
+    )).filter(element => element.getClientRects().length > 0);
+    document.body.style.overflow = "hidden";
+    (rail.querySelector<HTMLElement>('[aria-label="Close navigation"]') ?? focusable()[0])?.focus();
+    function trap(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileNav(false);
+      } else if (event.key === "Tab") {
+        const elements = focusable();
+        const first = elements[0], last = elements.at(-1);
+        if (event.shiftKey && (document.activeElement === first || !rail!.contains(document.activeElement))) {
+          event.preventDefault(); last?.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !rail!.contains(document.activeElement))) {
+          event.preventDefault(); first?.focus();
+        }
+      }
+    }
+    document.addEventListener("keydown", trap);
+    return () => {
+      document.removeEventListener("keydown", trap);
+      document.body.style.overflow = previousOverflow;
+      if (previous?.isConnected) previous.focus();
+    };
+  }, [contextReady, mobileNav, navMode, setMobileNav]);
+
   if (isLab || isEnter) {
     return (
       <div
@@ -80,6 +114,8 @@ function ShellChrome({
       </div>
     );
   }
+
+  if (!contextReady) return <WorkspacePending />;
 
   return (
     <div
@@ -109,13 +145,14 @@ function ShellChrome({
           <div className="rp-rail-spacer" aria-hidden="true" />
         ) : null}
         {showSidebar ? (
-          <ReferenceNavigation onNavigate={() => setMobileNav(false)} />
+            <ReferenceNavigation modal={showHamburger && mobileNav} onNavigate={() => setMobileNav(false)} />
         ) : null}
-        <div className="rp-main-v2">
+        <div className="rp-main-v2" inert={showHamburger && mobileNav || undefined}>
           <GlobalOperatingHeader
             onOpenNav={() => setMobileNav(true)}
             navMode={navMode}
             showHamburger={showHamburger}
+            navOpen={mobileNav}
           />
           <a className="px-skip" href="#product-content">
             Skip to content

@@ -317,7 +317,7 @@ export function hotelLivePropertyModel(): HotelLivePropertyModel {
     ready: live.ready,
     due: 42,
     atRisk: live.atRiskArrivals,
-    arrivalsToday: 42,
+    arrivalsToday: HOTEL_LIVE_SCENARIO.arrivalsToday,
     inHouse: 136,
     exposureEuro: live.exposureEuro,
     floors: [8, 7, 6, 5, 4, 3, 2, 1].map(floorMeta),

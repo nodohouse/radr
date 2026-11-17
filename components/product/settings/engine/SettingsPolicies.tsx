@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   DEMO_POLICIES,
+  settingsCurrencySymbol,
   type DemoPolicy,
   type DemoSettingsState,
   type PolicyCategory,
@@ -61,6 +62,7 @@ export function SettingsPolicies({
     return [...set];
   }, [policies]);
 
+  const symbol = settingsCurrencySymbol(demo);
   return (
     <div className="se-policies" data-settings-policies="true">
       <section className="se-panel">
@@ -81,7 +83,7 @@ export function SettingsPolicies({
               Supplier / spend under this amount: GM may approve alone.
             </small>
             <div className="se-field-row">
-              <span className="se-suffix">€</span>
+              <span className="se-suffix">{symbol}</span>
               <input
                 id="gm-max"
                 type="number"
@@ -97,11 +99,12 @@ export function SettingsPolicies({
             </div>
           </div>
           <div className="se-field">
-            <label>Coverage</label>
+            <label htmlFor="policy-coverage">Coverage</label>
             <small>
               {policies.length} active · {categories.length} categories
             </small>
             <input
+              id="policy-coverage"
               readOnly
               value={categories.map((c) => CATEGORY_LABEL[c]).join(" · ")}
             />
@@ -121,7 +124,7 @@ export function SettingsPolicies({
               <em>{CATEGORY_LABEL[p.category]}</em>
               <strong>{p.name}</strong>
               <span>{p.scope}</span>
-              <p>{p.threshold}</p>
+              <p>{p.threshold.replaceAll("€", symbol)}</p>
               <footer>
                 <span>Owner · {p.owner}</span>
                 <span className="se-pill" data-tone="override">
@@ -133,12 +136,12 @@ export function SettingsPolicies({
         </div>
       </section>
 
-      {selected ? <PolicyDetail policy={selected} /> : null}
+      {selected ? <PolicyDetail policy={selected} symbol={symbol} /> : null}
     </div>
   );
 }
 
-function PolicyDetail({ policy }: { policy: DemoPolicy }) {
+function PolicyDetail({ policy, symbol }: { policy: DemoPolicy; symbol: string }) {
   return (
     <aside
       className="se-panel se-detail"
@@ -157,7 +160,7 @@ function PolicyDetail({ policy }: { policy: DemoPolicy }) {
       <dl className="se-dl">
         <div>
           <dt>Current rule</dt>
-          <dd>{policy.threshold}</dd>
+          <dd>{policy.threshold.replaceAll("€", symbol)}</dd>
         </div>
         <div>
           <dt>Approvers</dt>

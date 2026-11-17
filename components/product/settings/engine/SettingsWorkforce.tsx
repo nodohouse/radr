@@ -31,7 +31,7 @@ export function SettingsWorkforce({ isHotel }: Props) {
         </div>
       </header>
 
-      <div className="se-table-wrap">
+      <div className="se-table-wrap" tabIndex={0} role="region" aria-label="Workforce settings table">
         <table className="se-table" aria-label="Workforce roles">
           <thead>
             <tr>

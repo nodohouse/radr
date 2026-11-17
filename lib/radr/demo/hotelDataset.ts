@@ -6,6 +6,7 @@
  */
 
 import { NORTHSTAR_HOTELS, DEMO_SNAPSHOT_ISO } from "@/lib/radr/demo/organizations";
+import { HOTEL_LIVE_SCENARIO } from "@/lib/radr/demoClock";
 
 export type RoomStatus =
   | "available"
@@ -123,7 +124,7 @@ export function canalHouseLive(): HotelLiveSnapshot {
     clockLabel: "14:20",
     phase: "CHECK_IN_WAVE",
     occupancyPct: 89,
-    arrivals: 42,
+    arrivals: HOTEL_LIVE_SCENARIO.arrivalsToday,
     departuresDue: 42,
     departed: 38,
     cleaning: 24,

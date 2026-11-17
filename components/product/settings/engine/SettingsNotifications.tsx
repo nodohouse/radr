@@ -61,7 +61,9 @@ export function SettingsNotifications({ demo, onPatch }: Props) {
                 className="se-toggle"
                 data-on={on ? "true" : undefined}
                 data-testid={`notify-${r.key}`}
-                aria-pressed={on}
+                role="switch"
+                aria-label={r.title}
+                aria-checked={on}
                 onClick={() => onPatch({ [r.key]: !on })}
               />
             </div>
@@ -72,19 +74,19 @@ export function SettingsNotifications({ demo, onPatch }: Props) {
       <h3 className="se-subhead">Briefings</h3>
       <div className="se-form" style={{ marginTop: 8 }}>
         <div className="se-field">
-          <label>CFO</label>
+          <label htmlFor="briefing-cfo">CFO</label>
           <small>Weekday morning executive brief.</small>
-          <input readOnly value="08:00 weekdays" />
+          <input id="briefing-cfo" readOnly value="08:00 weekdays" />
         </div>
         <div className="se-field">
-          <label>GM</label>
+          <label htmlFor="briefing-gm">GM</label>
           <small>Pre-service operating brief.</small>
-          <input readOnly value="2h before dinner" />
+          <input id="briefing-gm" readOnly value="2h before dinner" />
         </div>
         <div className="se-field">
-          <label>Head Chef</label>
+          <label htmlFor="briefing-chef">Head Chef</label>
           <small>Prep + stock brief.</small>
-          <input readOnly value="90m before service" />
+          <input id="briefing-chef" readOnly value="90m before service" />
         </div>
       </div>
     </section>

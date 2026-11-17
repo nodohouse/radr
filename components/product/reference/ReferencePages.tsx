@@ -4,6 +4,7 @@ import Link from "next/link";
 import {useRecords} from "./useDecisionScope";
 import { useState } from "react";
 import { toCanonicalLocationId } from "@/lib/radr/product/locationIds";
+import { locationInSelection } from "@/lib/radr/product/selectedScope";
 import { recordAttention } from "@/lib/radr/product/roleScope";
 import { deriveValueAggregate } from "@/lib/radr/product/valueAggregate";
 import { buildValueOverview } from "@/lib/radr/product/valueProofEngine";
@@ -69,7 +70,7 @@ function ServiceSnapshotUnavailable({scopeLabel}:{scopeLabel:string}) { return <
 
 export function ReferenceLive() {
   const {locationScope,comparisonLocationIds,scopeLabel}=useRecords();
-  const snapshotVisible = comparisonLocationIds.length>=2 ? comparisonLocationIds.map(toCanonicalLocationId).includes('loc_berlin_mitte') : locationScope==='all' || toCanonicalLocationId(locationScope)==='loc_berlin_mitte';
+  const snapshotVisible = locationInSelection('loc_berlin_mitte', locationScope, comparisonLocationIds);
   const model=getServiceCommand();const state=BERLIN_GM_LIVE_STATE;
   if(!snapshotVisible) return <ServiceSnapshotUnavailable scopeLabel={scopeLabel} />;
   const alerts=model.pressure.filter(p=>p.current>=85);
@@ -84,7 +85,7 @@ export function ReferenceLive() {
 
 export function ReferenceOperations() {
   const {locationScope,comparisonLocationIds,scopeLabel}=useRecords();
-  const snapshotVisible = comparisonLocationIds.length>=2 ? comparisonLocationIds.map(toCanonicalLocationId).includes('loc_berlin_mitte') : locationScope==='all' || toCanonicalLocationId(locationScope)==='loc_berlin_mitte';
+  const snapshotVisible = locationInSelection('loc_berlin_mitte', locationScope, comparisonLocationIds);
   const model=getServiceCommand();const [filter,setFilter]=useState('All areas');
   if(!snapshotVisible) return <ServiceSnapshotUnavailable scopeLabel={scopeLabel} />;
   const rows=filter==='All areas'?model.staff:model.staff.filter(s=>`${s.role} ${s.task}`.toLowerCase().includes(filter.toLowerCase()));
@@ -101,8 +102,8 @@ export function ReferenceSupplier({ record }: { record: DecisionRecord }) {
   const metric=formatPrimaryMetric(record);const resolved=!!record.verifiedValue;const band=recordAttention(record);
   return <div className="rs-page rs-supplier"><DecisionContextSync decisionId={record.id} record={record} /><p className="rs-eyebrow">Decisions / {customerDecisionClass(record)}</p><div className="rs-supplier-banner"><span className="rs-document-icon">▤</span><div><p>Evidence connected · {displayDecisionId(record.id)}</p><h1>{record.title}</h1><span>{record.property}</span></div><span className="rs-pill">{lifecycleLabel(record.status)}</span></div>
     <div className="rs-metrics rs-four"><Metric value={metric?.money||formatDecisionMoney(record.expectedContributionImpact)} label={resolved?'Verified contribution':'Expected value'} note={metric?.caption||'Pending review'} positive={resolved} /><Metric value={<span className="rs-word-value">{record.confidence.userFacing}</span>} label="Confidence" note="Decision evidence confidence" /><Metric value={record.evidenceRefs.length} label="Evidence items" note={record.property} /><Metric value={<span className="rs-word-value">{resolved?'Verified':band==='needs_you'?'Review':band==='handling'?'In progress':'Watching'}</span>} label="Decision status" note={record.decisionDeadline||record.contextLine} /></div>
-    <section className="wb-decision-direction"><div><span>{resolved?"Recorded outcome":"Recommended response"}</span><h2>{record.recommendationHeadline||record.title}</h2><p>{record.decisionDeadline} · {resolved?"Review the attribution evidence":`Approval role: ${record.requiredRole}`}</p></div><Link className="wb-primary" href={detailHref(`/app/decisions/${record.id}#${resolved?"verification":"action"}`)}>{resolved?"Review verification":"Review prepared action"}<Arrow/></Link></section>
+    <section className="wb-decision-direction"><div><span>{resolved?"Recorded outcome":"Recommended response"}</span><h2>{record.recommendationHeadline||record.title}</h2><p>{record.decisionDeadline} · {resolved?"Review the attribution evidence":`Approval role: ${record.requiredRole}`}</p></div><Link className="wb-primary" href={detailHref(`/app/decisions/${record.id}#${resolved?"verify":"actions"}`)}>{resolved?"Review verification":"Review prepared action"}<Arrow/></Link></section>
     <DecisionWorkbench key={record.id} record={record}/>
-    <nav className="rs-lifecycle" aria-label="Decision lifecycle">{['Evidence','Context','Futures','Recommendation','Action','Verification'].map((s,i)=><Link key={s} href={detailHref(`/app/decisions/${record.id}#${s==='Context'?'state':s.toLowerCase()}`)} data-active={i===0||undefined}>{s}</Link>)}</nav>
+    <nav className="rs-lifecycle" aria-label="Decision lifecycle">{['Evidence','Context','Futures','Recommendation','Action','Verification'].map((s,i)=><Link key={s} href={detailHref(`/app/decisions/${record.id}#${s==='Context'?'context':s==='Action'?'actions':s==='Verification'?(resolved?'verify':'policy'):s.toLowerCase()}`)} data-active={i===0||undefined}>{s==='Verification'&&!resolved?'Approval policy':s}</Link>)}</nav>
   </div>;
 }

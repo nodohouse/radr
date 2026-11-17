@@ -342,7 +342,7 @@ export function LocationsBubbleChart({ rows, selectedId, onSelect }: Props) {
       <svg
         viewBox={`0 0 ${W} ${H}`}
         className="le-bubble-svg"
-        role="img"
+        role="group"
         aria-label="Contribution vs plan by active exposure"
       >
         <defs>

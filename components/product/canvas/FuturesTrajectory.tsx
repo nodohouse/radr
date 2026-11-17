@@ -472,7 +472,8 @@ function ScenarioTrajectory({
           <polyline
             key={tr.key}
             points={tr.points}
-            className="rp-traj-line"
+            className="rp-traj-path"
+            fill="none"
             data-selected={activeId === tr.key ? "true" : undefined}
             data-rec={tr.recommended ? "true" : undefined}
             data-dim={focusId && focusId !== tr.key ? "true" : undefined}

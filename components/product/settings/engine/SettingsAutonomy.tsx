@@ -102,6 +102,7 @@ export function SettingsAutonomy({ demo, onPatch, isHotel }: Props) {
   const ops = OPERATORS.filter((o) => (o.hotelOnly ? isHotel : true));
   const [selectedId, setSelectedId] = useState(ops[0]?.id ?? "service");
   const selected = ops.find((o) => o.id === selectedId) ?? ops[0]!;
+  const [pausedOperator, setPausedOperator] = useState<string | null>(null);
 
   const setClass = (key: string, level: AutonomyLadder) => {
     if (level === "auto") {
@@ -113,6 +114,7 @@ export function SettingsAutonomy({ demo, onPatch, isHotel }: Props) {
     onPatch({
       autonomyByClass: { ...demo.autonomyByClass, [key]: level },
     });
+    setPausedOperator(null);
   };
 
   return (
@@ -169,8 +171,8 @@ export function SettingsAutonomy({ demo, onPatch, isHotel }: Props) {
         </header>
 
         <p className="se-detail-note">
-          Pause operator or raise levels only with confirmation. Level 5 global
-          autonomy is not offered.
+          Pausing sets this operator&apos;s action classes to Observe. Execution
+          levels require confirmation. Level 5 global autonomy is not offered.
         </p>
 
         <div className="se-form se-form-stack">
@@ -202,14 +204,19 @@ export function SettingsAutonomy({ demo, onPatch, isHotel }: Props) {
             className="se-btn-secondary"
             data-testid="pause-operator"
             onClick={() => {
-              window.alert(
-                `${selected.name} paused for this demo session (no execute).`,
-              );
+              onPatch({ autonomyByClass: {
+                ...demo.autonomyByClass,
+                ...Object.fromEntries(selected.actionKeys.map(key => [key, "observe" as const])),
+              } });
+              setPausedOperator(selected.id);
             }}
           >
             Pause operator
           </button>
         </div>
+        {pausedOperator === selected.id ? <p className="se-callout" role="status">
+          {selected.name} is observing only in this demo. Its action classes have been updated; no external system was changed.
+        </p> : null}
       </aside>
     </div>
   );

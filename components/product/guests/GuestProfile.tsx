@@ -192,7 +192,7 @@ export function GuestProfile({ profile }: Props) {
               View all →
             </Link>
           </div>
-          <div className="gi-table-wrap">
+          <div className="gi-table-wrap" tabIndex={0} role="region" aria-label="Guest visit history">
             <table className="gi-table">
               <thead>
                 <tr>

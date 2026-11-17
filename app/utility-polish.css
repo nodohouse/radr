@@ -54,12 +54,12 @@
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-brand .product-brand { display:block; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-ctx { color:#8290a6; font-size:10px; margin-top:8px; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-close { color:#63758f; background:#eef3fb; border-radius:9px; padding:8px 10px; border:1px solid #dde7f3; }
-.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-eyebrow { color:#13967b; letter-spacing:1.5px; font-size:9px; margin:0 0 20px; font-weight:650; }
+.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-eyebrow { color:#08765d; letter-spacing:1.5px; font-size:11px; margin:0 0 20px; font-weight:650; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-scroll-open { padding:38px 30px 24px; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-greeting { font-size:32px; line-height:1.2; letter-spacing:-1.2px; font-weight:550; color:#142d53; margin:0 0 16px; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-subline { color:#8794a8; font-size:12px; line-height:1.7; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-suggest { margin-top:32px; }
-.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-label { color:#8c9ab0; text-transform:uppercase; letter-spacing:1.1px; font-size:9px; }
+.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-label { color:#4f657b; text-transform:uppercase; letter-spacing:1.1px; font-size:11px; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-suggest ul { display:grid; gap:10px; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-suggest li { border:0; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-suggest button { border:1px solid #d9e5f3; border-radius:13px; background:#fff; color:#314b70; padding:18px 16px; font-size:12px; text-align:left; box-shadow:0 3px 10px #17345603; }
@@ -96,5 +96,7 @@
 /* Legacy daylight tokens live inside the shell; portal surfaces use explicit colors. */
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-panel { background:#f7faff!important; background-color:#f7faff!important; color:#163054!important; border:1px solid #cfdeef!important; box-shadow:0 35px 100px #12325933!important; width:min(570px,calc(100vw - 32px))!important; }
 .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-greeting { font-size:32px!important; line-height:1.2!important; }
-.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-ctx { color:#74879c!important; }
+.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-ctx { color:#49647b!important;font-size:12px!important; }
+.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-close {color:#36536f;}
+.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-close kbd {opacity:1;color:inherit;}
 @media(max-width:800px) { .rp-ask[role="dialog"][aria-modal="true"] .rp-ask-panel { width:auto!important; }.rp-ask[role="dialog"][aria-modal="true"] .rp-ask-greeting { font-size:29px!important; } }

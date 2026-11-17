@@ -18,6 +18,7 @@ type Props = {
 };
 
 export function SettingsAccess({ vertical, demo, onPatch }: Props) {
+  const [inviteNotice, setInviteNotice] = useState(false);
   const roster = useMemo(() => {
     const base =
       vertical === "hotel" ? DEMO_USERS_HOTEL : DEMO_USERS_RESTAURANT;
@@ -48,16 +49,18 @@ export function SettingsAccess({ vertical, demo, onPatch }: Props) {
             type="button"
             className="se-docs"
             data-testid="invite-user"
-            onClick={() => {
-              window.alert(
-                "Invite flow is demo-only. Production invites ship with auth.",
-              );
-            }}
+            aria-expanded={inviteNotice}
+            aria-controls={inviteNotice ? "se-invitation-status" : undefined}
+            onClick={() => setInviteNotice(value => !value)}
           >
             Invite user
           </button>
         </header>
 
+        {inviteNotice ? <div id="se-invitation-status" className="se-callout" role="status">
+          <strong>Invitations are not connected in this demo.</strong>
+          <p>No email has been sent. Explore the access roles and location scopes below; real invitations require account services.</p>
+        </div> : null}
         <div className="se-callout" style={{ marginTop: 0, marginBottom: 14 }}>
           <strong>Persona ≠ access</strong>
           <p>
@@ -66,7 +69,7 @@ export function SettingsAccess({ vertical, demo, onPatch }: Props) {
           </p>
         </div>
 
-        <div className="se-table-wrap">
+        <div className="se-table-wrap" tabIndex={0} role="region" aria-label="Users and access table">
           <table className="se-table" aria-label="Users">
             <thead>
               <tr>
@@ -87,7 +90,7 @@ export function SettingsAccess({ vertical, demo, onPatch }: Props) {
                 >
                   <td>
                     <strong>{u.name}</strong>
-                    <div style={{ fontSize: 11.5, color: "#8a928d" }}>
+                    <div className="se-user-email">
                       {u.email}
                     </div>
                   </td>

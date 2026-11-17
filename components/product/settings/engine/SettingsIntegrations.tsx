@@ -38,7 +38,7 @@ export function SettingsIntegrations() {
         </div>
       </header>
 
-      <div className="se-table-wrap">
+      <div className="se-table-wrap" tabIndex={0} role="region" aria-label="Integration governance table">
         <table className="se-table" aria-label="Integration permissions">
           <thead>
             <tr>

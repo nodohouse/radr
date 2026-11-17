@@ -157,7 +157,7 @@ export function FuturesChapter() {
                 </div>
                 <div>
                   <dt>Expected effect</dt>
-                  <dd>{pick.value} contribution vs seat-now path</dd>
+                  <dd>{pick.value} expected contribution vs seat-now path</dd>
                 </div>
                 <div>
                   <dt>Key assumption</dt>

@@ -90,7 +90,7 @@ export function GuestSegments({
           <div className="gi-panel-head">
             <h3>Guest segments</h3>
           </div>
-          <div className="gi-table-wrap">
+          <div className="gi-table-wrap" tabIndex={0} role="region" aria-label="Guest segments table">
             <table className="gi-table">
               <thead>
                 <tr>

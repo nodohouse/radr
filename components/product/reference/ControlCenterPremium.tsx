@@ -13,7 +13,7 @@ import { formatDecisionMoney } from "@/lib/radr/decision/core";
 import { formatPrimaryMetric, primaryMetricOf } from "@/lib/radr/product/primaryMetric";
 import { displayDecisionId } from "@/lib/radr/decision/ids";
 import { lifecycleLabel } from "@/lib/radr/decision/lifecycle";
-import { toCanonicalLocationId } from "@/lib/radr/product/locationIds";
+import { locationInSelection } from "@/lib/radr/product/selectedScope";
 import { BERLIN_GM_LIVE_STATE } from "@/lib/radr/product/restaurantGmControlCenterCanon";
 import { sourceCurrency } from "@/lib/radr/product/demoMoney";
 import { hotelGmPerformance } from "@/lib/radr/product/hotelGmDashboardCanon";
@@ -69,9 +69,7 @@ export function ControlCenterPremium() {
   const service = getServiceCommand();
   const hotel = vertical === "hotel" ? houseReadinessModel() : null;
   const snapshotId = hotel?.locationId || BERLIN_GM_LIVE_STATE.locationId;
-  const snapshotAvailable = comparisonLocationIds.length >= 2
-    ? comparisonLocationIds.map(toCanonicalLocationId).includes(toCanonicalLocationId(snapshotId))
-    : locationScope === "all" || toCanonicalLocationId(locationScope) === toCanonicalLocationId(snapshotId);
+  const snapshotAvailable = locationInSelection(snapshotId, locationScope, comparisonLocationIds);
   const snapshotCurrency = sourceCurrency(snapshotId);
   const performance = hotel ? hotelGmPerformance() : null;
   const snapshotFacts = hotel && performance ? [

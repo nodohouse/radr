@@ -1,6 +1,7 @@
 "use client";
 
 import type { DemoSettingsState } from "@/lib/radr/product/demoSettings";
+import { settingsCurrencySymbol } from "@/lib/radr/product/demoSettings";
 
 type Props = {
   demo: DemoSettingsState;
@@ -8,6 +9,7 @@ type Props = {
 };
 
 export function SettingsAttention({ demo, onPatch }: Props) {
+  const symbol = settingsCurrencySymbol(demo);
   return (
     <section className="se-panel" data-settings-attention="true">
       <header className="se-panel-head">
@@ -24,10 +26,10 @@ export function SettingsAttention({ demo, onPatch }: Props) {
         <div className="se-field">
           <label htmlFor="att-mat">Minimum materiality</label>
           <small>
-            Findings below this € threshold go to briefing, not interrupt.
+            Findings below this {demo.currency} threshold go to briefing, not interrupt.
           </small>
           <div className="se-field-row">
-            <span className="se-suffix">€</span>
+            <span className="se-suffix">{symbol}</span>
             <input
               id="att-mat"
               type="number"
@@ -43,11 +45,12 @@ export function SettingsAttention({ demo, onPatch }: Props) {
           </div>
         </div>
         <div className="se-field">
-          <label>CFO interrupt example</label>
+          <label htmlFor="attention-example">CFO interrupt example</label>
           <small>Deterministic demo rule — not a live alert engine.</small>
           <input
+            id="attention-example"
             readOnly
-            value="Exposure >€2,500 · confidence >75% · deadline <2h"
+            value={`Exposure >${symbol}2,500 · confidence >75% · deadline <2h`}
           />
         </div>
       </div>

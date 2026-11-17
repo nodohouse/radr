@@ -1,11 +1,20 @@
 /**
  * Demo settings — shared between Settings UI and product behavior.
- * Persistence: localStorage `radr.demoSettings.v1` (demo only).
+ * Persistence is isolated by demo world. The old shared key is read only for
+ * the world it belonged to, so existing preferences can be retained safely.
  *
  * Policies are the source of GM ≤ €250 / GM+CFO €250–€2k copy.
  */
 
+import { DEMO_ORG_EVENT, readDemoOrgSession } from "@/lib/radr/demo/demoOrgSession";
+import { demoOrgForVertical } from "@/lib/radr/demo/organizations";
+import type { DemoVerticalFamily } from "@/lib/radr/vertical/experienceProfile";
+
 export const DEMO_SETTINGS_KEY = "radr.demoSettings.v1";
+
+export function demoSettingsKey(vertical = readDemoOrgSession().vertical) {
+  return `${DEMO_SETTINGS_KEY}.${vertical}`;
+}
 
 export type AutonomyLadder =
   | "observe"
@@ -615,16 +624,36 @@ export const DEFAULT_DEMO_SETTINGS: DemoSettingsState = {
   users: DEMO_USERS_RESTAURANT,
 };
 
+const WORLD_DEFAULTS = Object.fromEntries(
+  (["restaurant", "hotel"] as const).map((vertical) => {
+    const org = demoOrgForVertical(vertical);
+    const home = org.locations[0];
+    return [vertical, {
+      ...DEFAULT_DEMO_SETTINGS,
+      orgName: org.name,
+      currency: home?.currency ?? "USD",
+      timezone: home?.timezone ?? "America/New_York",
+      operatingModel: vertical === "hotel" ? "hotel_model" : "restaurant_model",
+      users: vertical === "hotel" ? DEMO_USERS_HOTEL : DEMO_USERS_RESTAURANT,
+    }];
+  }),
+) as Record<DemoVerticalFamily, DemoSettingsState>;
+
+export function defaultDemoSettings(vertical = readDemoOrgSession().vertical) {
+  return WORLD_DEFAULTS[vertical];
+}
+
 function mergeSettings(
   partial: Partial<DemoSettingsState>,
+  defaults: DemoSettingsState,
 ): DemoSettingsState {
   // Always refresh policy catalog from DEMO_POLICIES so enrichment ships;
   // persisted approvalGmMax / autonomy remain on the settings object.
   return {
-    ...DEFAULT_DEMO_SETTINGS,
+    ...defaults,
     ...partial,
     locationOverrides: {
-      ...DEFAULT_DEMO_SETTINGS.locationOverrides,
+      ...defaults.locationOverrides,
       ...(partial.locationOverrides ?? {}),
     },
     autonomyByClass: {
@@ -634,7 +663,7 @@ function mergeSettings(
     policies: DEMO_POLICIES,
     users: (partial.users?.length
       ? partial.users
-      : DEFAULT_DEMO_SETTINGS.users
+      : defaults.users
     ).map((u) => ({
       ...u,
       email: u.email ?? `${u.id}@northstar.demo`,
@@ -670,20 +699,41 @@ export function effectiveLocationConfig(
   };
 }
 
-export function readDemoSettings(): DemoSettingsState {
-  if (typeof window === "undefined") return DEFAULT_DEMO_SETTINGS;
+// useSyncExternalStore consumers require the same object until storage changes.
+const settingsSnapshots = new Map<string, { raw: string | null; value: DemoSettingsState }>();
+
+export function readDemoSettings(
+  vertical = readDemoOrgSession().vertical,
+): DemoSettingsState {
+  const defaults = WORLD_DEFAULTS[vertical];
+  if (typeof window === "undefined") return defaults;
   try {
-    const raw = localStorage.getItem(DEMO_SETTINGS_KEY);
-    if (!raw) return DEFAULT_DEMO_SETTINGS;
-    return mergeSettings(JSON.parse(raw) as Partial<DemoSettingsState>);
+    const key = demoSettingsKey(vertical);
+    const scopedRaw = localStorage.getItem(key);
+    const raw = scopedRaw ?? localStorage.getItem(DEMO_SETTINGS_KEY);
+    const identity = `${scopedRaw === null ? "legacy" : "scoped"}:${raw ?? ""}`;
+    const cached = settingsSnapshots.get(key);
+    if (cached?.raw === identity) return cached.value;
+    let value = defaults;
+    if (raw) {
+      const partial = JSON.parse(raw) as Partial<DemoSettingsState>;
+      const legacyWorld = partial.operatingModel === "hotel_model" || partial.orgName === "Northstar Hotels"
+        ? "hotel" : "restaurant";
+      if (scopedRaw !== null || legacyWorld === vertical) value = mergeSettings(partial, defaults);
+    }
+    settingsSnapshots.set(key, { raw: identity, value });
+    return value;
   } catch {
-    return DEFAULT_DEMO_SETTINGS;
+    return defaults;
   }
 }
 
-export function writeDemoSettings(next: DemoSettingsState): void {
+export function writeDemoSettings(
+  next: DemoSettingsState,
+  vertical = readDemoOrgSession().vertical,
+): void {
   try {
-    localStorage.setItem(DEMO_SETTINGS_KEY, JSON.stringify(next));
+    localStorage.setItem(demoSettingsKey(vertical), JSON.stringify(next));
     window.dispatchEvent(
       new CustomEvent("radr:demo-settings", { detail: next }),
     );
@@ -692,7 +742,15 @@ export function writeDemoSettings(next: DemoSettingsState): void {
   }
 }
 
-/** Who must approve a euro amount under current policy. */
+/** Display the unit of a configured policy limit without implying FX conversion. */
+export function settingsCurrencySymbol(settings: Pick<DemoSettingsState, "currency">) {
+  try {
+    return new Intl.NumberFormat("en-US", { style: "currency", currency: settings.currency })
+      .formatToParts(0).find(part => part.type === "currency")?.value ?? settings.currency;
+  } catch { return settings.currency || "Currency"; }
+}
+
+/** Who must approve an amount in the current policy currency. */
 export function approvalAuthorityFor(
   amountEuro: number,
   settings: DemoSettingsState = readDemoSettings(),
@@ -702,17 +760,18 @@ export function approvalAuthorityFor(
   gmMax: number;
 } {
   const gmMax = settings.approvalGmMax;
+  const symbol = settingsCurrencySymbol(settings);
   if (amountEuro <= gmMax) {
-    return { label: `GM may approve (≤ €${gmMax})`, level: "gm", gmMax };
+    return { label: `GM may approve (≤ ${symbol}${gmMax})`, level: "gm", gmMax };
   }
   if (amountEuro <= 2000) {
     return {
-      label: `GM + CFO (€${gmMax}–€2,000)`,
+      label: `GM + CFO (${symbol}${gmMax}–${symbol}2,000)`,
       level: "gm_cfo",
       gmMax,
     };
   }
-  return { label: "Executive approval (> €2,000)", level: "executive", gmMax };
+  return { label: `Executive approval (> ${symbol}2,000)`, level: "executive", gmMax };
 }
 
 export function policyById(
@@ -759,13 +818,15 @@ export function autonomyLadderLabel(level: AutonomyLadder): string {
 export function subscribeDemoSettings(cb: () => void): () => void {
   if (typeof window === "undefined") return () => {};
   const onStorage = (e: StorageEvent) => {
-    if (e.key === DEMO_SETTINGS_KEY) cb();
+    if (e.key === null || e.key === DEMO_SETTINGS_KEY || e.key === demoSettingsKey()) cb();
   };
   const onCustom = () => cb();
   window.addEventListener("storage", onStorage);
   window.addEventListener("radr:demo-settings", onCustom);
+  window.addEventListener(DEMO_ORG_EVENT, onCustom);
   return () => {
     window.removeEventListener("storage", onStorage);
     window.removeEventListener("radr:demo-settings", onCustom);
+    window.removeEventListener(DEMO_ORG_EVENT, onCustom);
   };
 }

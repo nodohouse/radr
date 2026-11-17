@@ -9,6 +9,7 @@ import NextLink from "next/link";
 import { AuthSsoBlock } from "@/components/AuthSsoBlock";
 import { authClient } from "@/lib/auth-client";
 import { safeInternalPath } from "@/lib/security/safe-redirect";
+import { postLoginDestination } from "@/lib/identity/postLoginDestination";
 
 export function LoginForm({ available = true }: { available?: boolean }) {
   const t = useTranslations("auth");
@@ -60,7 +61,7 @@ export function LoginForm({ available = true }: { available?: boolean }) {
         };
         const dest = data.destination?.path;
         if (dest) {
-          router.push(safeInternalPath(dest, next));
+          router.push(postLoginDestination(searchParams.get("next"), dest));
           router.refresh();
           return;
         }

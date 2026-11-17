@@ -38,7 +38,7 @@ export function SettingsOrganization({
           </div>
           <a
             className="se-docs"
-            href="/en/docs"
+            href="/en/developers"
             target="_blank"
             rel="noreferrer"
           >

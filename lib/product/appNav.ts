@@ -20,6 +20,20 @@ export type AppNavSection = {
   items: AppNavItem[];
 };
 
+/** The current workspace rail and command search share the same destinations. */
+export const WORKSPACE_PRIMARY_NAV = [
+  ["control-center", "Control Center", "/app"], ["live", "Live", "/app/live"],
+  ["decisions", "Decisions", "/app/decisions"], ["service", "Operations", "/app/service"],
+  ["house", "Back of House", "/app/house"], ["intelligence", "Intelligence", "/app/intelligence"],
+  ["value", "Value", "/app/value"], ["memory", "Memory", "/app/memory"],
+  ["data-health", "Data Health", "/app/data-health"], ["connections", "Connections", "/app/connections"],
+] as const;
+
+export const WORKSPACE_SECONDARY_LINKS = [
+  ["Floor plan editor", "/app/live/plan"], ["Locations", "/app/locations"],
+  ["Guests", "/app/guests"], ["Dashboards", "/app/dashboards"], ["Settings", "/app/settings"],
+] as const;
+
 /** CONTROL — attention + judgment */
 export const NAV_CONTROL: AppNavItem[] = [
   {

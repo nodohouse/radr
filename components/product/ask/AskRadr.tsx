@@ -369,16 +369,12 @@ export function AskRadr() {
     const onEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
-        if (isAnalysis && response) {
-          setAnalysisForced(false);
-          return;
-        }
         resetClose();
       }
     };
     window.addEventListener("keydown", onEsc);
     return () => window.removeEventListener("keydown", onEsc);
-  }, [open, resetClose, isAnalysis, response]);
+  }, [open, resetClose]);
 
   useEffect(() => {
     if (!open || !panelRef.current) return;

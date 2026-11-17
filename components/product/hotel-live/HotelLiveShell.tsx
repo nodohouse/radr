@@ -81,7 +81,7 @@ export function HotelLiveShell() {
   const urlLevel = parseLevel(search.get("level"));
 
   const [generatedBuilding, setGeneratedBuilding] = useState(false);
-  const [buildingView, setBuildingView] = useState(search.get("view") === "building" || !search.get("room"));
+  const [buildingView, setBuildingView] = useState(search.get("view") === "building" || (!search.get("view") && !search.get("room")));
   const [level, setLevel] = useState<HotelLiveLevel>(urlLevel);
   const [estateSelectedId, setEstateSelectedId] = useState<string>(
     "loc_canal_house",

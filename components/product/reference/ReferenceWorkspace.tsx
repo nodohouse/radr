@@ -9,10 +9,19 @@ import { ReferenceValue,ReferenceMemory,ReferenceHealth,ReferenceIntelligence,Re
 
 import { ControlCenterPremium } from "./ControlCenterPremium";
 import { ReferenceDecisions } from "./ReferenceDecisions";
+import { useProduct } from "@/lib/product/store";
+import { locationInSelection } from "@/lib/radr/product/selectedScope";
+import { ScopedSnapshotUnavailable } from "./ScopedSnapshotUnavailable";
 
 export function ReferenceWorkspace({children}:{children:ReactNode}) {
   const path=usePathname();const search=useSearchParams();const {isHotel}=useDemoOrg();
+  const { locationScope, comparisonLocationIds } = useProduct();
   useSyncExternalStore(subscribeDecisionStore,getDecisionStoreSnapshot,getDecisionStoreSnapshot);
+  const snapshotId = isHotel ? "loc_canal_house" : "loc_berlin_mitte";
+  if ((["/app/live", "/app/service", "/app/house"].includes(path) || path === "/app/guests" && !isHotel) &&
+    !locationInSelection(snapshotId, locationScope, comparisonLocationIds)) {
+    return <ScopedSnapshotUnavailable locationId={snapshotId} />;
+  }
   if(path==='/app/data-health')return <ReferenceHealth />;
   // Existing detailed screens remain the destination for filters, records and actions.
   if(search.get('layout')==='detail')return <>{children}</>;

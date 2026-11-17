@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { DecisionRecord } from "@/lib/radr/decision/record";
 import {
   lifecycleLabel,
@@ -226,6 +226,29 @@ export function DecisionRecordView({ record, onChange }: Props) {
   const [ctxOpen, setCtxOpen] = useState(false);
   const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [deepOpen, setDeepOpen] = useState(false);
+  useEffect(() => {
+    let frame = 0;
+    const openLinkedSection = () => {
+      let id: string;
+      try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+      if (!id) return;
+      if (id === "action") id = "actions";
+      if (id === "state") id = "context";
+      if (id === "verification") id = "verify";
+      if (id === "evidence" || id === "context" || id === "deep" || id.startsWith("evidence-")) {
+        setDeepOpen(true);
+        if (id === "evidence" || id.startsWith("evidence-")) setEvidenceOpen(true);
+      }
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "start" }));
+    };
+    openLinkedSection();
+    window.addEventListener("hashchange", openLinkedSection);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", openLinkedSection);
+    };
+  }, [record.id]);
   const [surface, setSurface] = useState<"current" | "replay">("current");
 
   const canon = CANON_BY_ID[record.id];

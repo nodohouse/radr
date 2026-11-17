@@ -82,6 +82,7 @@ type Props = {
   /** desktop = rail · drawer/mobile = hamburger opens rail sheet */
   navMode?: "desktop" | "drawer" | "mobile";
   showHamburger?: boolean;
+  navOpen?: boolean;
 };
 
 function PeriodSwitcher() {
@@ -506,6 +507,7 @@ export function GlobalOperatingHeader({
   onOpenNav,
   navMode = "desktop",
   showHamburger = false,
+  navOpen = false,
 }: Props) {
   const pathname = usePathname() || "/app";
   const {
@@ -634,6 +636,8 @@ export function GlobalOperatingHeader({
               type="button"
               className="rp-goh-navbtn"
               aria-label="Open navigation"
+              aria-expanded={navOpen}
+              aria-controls={navOpen ? "radr-workspace-navigation" : undefined}
               onClick={onOpenNav}
             >
               <span className="rp-goh-menu-bars" aria-hidden="true">
